@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Physics C: Mechanics — Unit 3: Work, Energy, and Power | Dingrui Scholars</title>
+<meta name="description" content="AP Physics C: Mechanics — Unit 3: Work, Energy, and Power | Dingrui Scholars. Polished AP Physics C notes from Dingrui Scholars with worked examples, interactive review, quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-logo { height: 36px; width: auto; border-radius: 0; object-fit: contain; display: block; flex-shrink: 0; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display); font-size: 0.95rem;
+  padding: 0 20px 12px; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border); margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px; color: var(--text-secondary);
+  text-decoration: none; font-size: 0.85rem;
+  border-left: 3px solid transparent; transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+/* ─── MAIN ─── */
+.main-wrap { margin: 80px 24px 120px; padding: 0 24px;
+  margin-left: calc(var(--toc-w) + 24px);
+}
+@media (max-width: 700px) {
+  .main-wrap { margin-left: auto; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius); margin-bottom: 40px;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58,24,32,0.4) 0%, transparent 100%); }
+.hero-overline {
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+}
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; }
+.hero-sub { font-size: 1.05rem; color: var(--text-secondary); max-width: 560px; margin: 0 auto 24px; line-height: 1.65; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600; padding: 6px 16px;
+  border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; }
+
+/* ─── CONCEPT BOX ─── */
+.concept-box {
+  border-left: 5px solid var(--accent); background: var(--bg-card);
+  padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0; box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box.gold { border-left-color: var(--gold); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+/* ─── FORMULA BOX ─── */
+.formula-box {
+  background: var(--bg-card); border-top: 4px solid var(--accent);
+  border-radius: var(--radius); padding: 24px 32px; margin: 24px 0;
+  text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .formula-sub {
+  font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+/* ─── CODE / PRE ─── */
+pre {
+  background: var(--bg-code); color: #CDD6F4;
+  padding: 20px 24px; border-radius: var(--radius);
+  overflow-x: auto; font-family: var(--font-mono);
+  font-size: 0.88rem; line-height: 1.65; margin: 16px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  white-space: pre-wrap;
+}
+code { font-family: var(--font-mono); font-size: 0.9em; }
+:not(pre) > code {
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 6px; border-radius: 4px; font-weight: 500;
+}
+.cm { color: #A6ADC8; font-style: italic; }
+.num { color: #FAB387; }
+.str { color: #A6E3A1; }
+.kw { color: #CBA6F7; }
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── DETAILS / ACCORDION ─── */
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+summary::-webkit-details-marker { display: none; }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.quiz-q { font-weight: 600; margin-bottom: 16px; font-size: 1.05rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px;
+  cursor: pointer; font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+}
+.quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeIn 0.3s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── QUICK REF ─── */
+.qref { background: var(--bg-card); border: 2px dashed var(--accent); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+.qref-title { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; text-align: center; }
+
+/* ─── FLASHCARDS ─── */
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+.flashcard { perspective: 800px; height: 180px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; text-align: center; font-size: 0.95rem; box-shadow: var(--shadow);
+}
+.flashcard-front { background: var(--bg-card); font-weight: 600; color: var(--accent); }
+.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.6; border: 2px solid var(--accent); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 28px; margin: 20px 0;
+  box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-accent { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+/* ─── SEPARATOR ─── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+/* ═══ FORMULA EXPLORER ═══ */
+.formula-explorer {
+  background: var(--bg-card); border: 2px solid var(--accent);
+  border-radius: var(--radius); padding: 28px; margin: 28px 0;
+  box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden;
+}
+.formula-explorer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--green), var(--orange), var(--accent));
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+.explorer-title {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 8px; text-align: center;
+}
+.explorer-subtitle {
+  text-align: center; font-size: 14px; color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.explorer-sliders {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;
+}
+@media (max-width: 600px) {
+  .top-nav { padding: 0 16px; } .explorer-sliders { grid-template-columns: 1fr; } }
+.slider-group { display: flex; flex-direction: column; gap: 6px; }
+.slider-group label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--text-secondary); display: flex; justify-content: space-between;
+}
+.slider-group label .val { color: var(--accent); font-weight: 700; }
+.slider-group input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px; background: var(--border);
+  border-radius: 3px; outline: none; cursor: pointer;
+}
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.slider-group input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); cursor: pointer; border: none;
+}
+.explorer-results {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px; margin-top: 20px;
+}
+.result-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.result-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.result-card .result-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.result-card .result-value {
+  font-family: var(--font-mono); font-size: 1.2em; font-weight: 700;
+  color: var(--accent);
+}
+.result-card .result-unit {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);
+}
+.explorer-canvas-wrap {
+  margin-top: 16px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.explorer-canvas-wrap canvas { display: block; width: 100%; height: auto; }
+
+/* ═══ CONFETTI ═══ */
+.confetti-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+.confetti-piece {
+  position: absolute; width: 10px; height: 10px; top: -10px;
+  animation: confettiFall 3s linear forwards;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ═══ ANIMATE IN ═══ */
+.animate-in {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center; padding: 48px 24px 32px;
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--text-secondary); letter-spacing: 0.04em;
+}
+
+/* ─── RESPONSIVE ─── */
+/* sidebar layout: overlay toggle (no always-visible on wide screens) */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  pre { font-size: 0.8rem; padding: 16px; }
+  .flashcard-grid { grid-template-columns: 1fr; }
+  .formula-box { padding: 16px; }
+}
+@media print {
+  .top-nav, .progress-track, .sidebar, .nav-right { display: none !important; }
+  .main-wrap { margin: 0 auto; }
+  body { font-size: 11pt; background: white; color: black; }
+  pre { border: 1px solid #ccc; white-space: pre-wrap; }
+  .card, .formula-box, .concept-box { break-inside: avoid; border: 1px solid #000; box-shadow: none; }
+}
+
+/* ─── KATEX TWEAKS ─── */
+.katex-display { margin: 16px 0 !important; overflow-x: auto; overflow-y: hidden; }
+.katex { font-size: 1.1em; }
+
+/* ─── SCORE TRACKER ─── */
+.score-bar {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 20px; font-family: var(--font-mono);
+  font-size: 0.85rem; color: var(--text-secondary);
+}
+.score-bar .score-num { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+
+
+/* ─── FINAL POLISH ─── */
+:root { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+::selection { background: var(--accent-light); color: var(--accent-dark); }
+a { color: var(--accent); }
+a:hover { color: var(--accent-dark); }
+button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: absolute; left: 16px; top: -48px; z-index: 2000;
+  background: var(--accent); color: #fff; text-decoration: none;
+  padding: 10px 14px; border-radius: 10px; font-weight: 700;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+.backtotop {
+  position: fixed; right: 18px; bottom: 18px; z-index: 120;
+  width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--accent);
+  box-shadow: var(--shadow-lg); font-size: 1.05rem; font-weight: 700; cursor: pointer;
+  opacity: 0; transform: translateY(10px); pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.backtotop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.backtotop:hover { background: var(--accent-light); }
+.site-footer {
+  max-width: var(--max-w, 900px); margin: 64px auto 32px; padding: 0 24px;
+}
+.site-footer-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 22px 24px;
+}
+.site-footer-top {
+  display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;
+}
+.site-footer-title {
+  font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 4px;
+}
+.site-footer-copy {
+  color: var(--text-secondary); font-size: 0.95rem; max-width: 720px;
+}
+.utility-pills {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+}
+.utility-pill {
+  border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary);
+  border-radius: 999px; padding: 6px 12px; font-size: 0.82rem; font-weight: 600;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+
+/* ═══════════ WORKED EXAMPLES (Polished KaTeX) ═══════════ */
+.worked-problem {
+  color: var(--text-secondary);
+  margin-bottom: 16px; padding: 14px 18px;
+  background: var(--accent-light); border-radius: 8px;
+  line-height: 1.7; font-size: 0.97rem;
+  border-left: 3px solid var(--accent);
+}
+.worked-steps {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.worked-step {
+  padding: 10px 18px;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-light) 0%, transparent 80%);
+  border-radius: 0 8px 8px 0;
+}
+[data-theme="dark"] .worked-step {
+  background: linear-gradient(90deg, rgba(200,112,112,0.08) 0%, transparent 80%);
+}
+.step-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 2px;
+}
+.step-math {
+  font-size: 1.05rem; line-height: 2.0;
+  overflow-x: auto; padding: 2px 0;
+}
+.step-math .katex-display { margin: 2px 0; }
+.step-text {
+  font-size: 0.95rem; line-height: 1.6;
+  padding: 2px 0; color: var(--text);
+}
+.step-comment {
+  font-size: 0.85rem; color: var(--text-secondary);
+  font-style: italic; margin-top: 4px;
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ═══ TOP NAV ═══ -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFKAuoDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAEGBwgFBAID/8QAaxAAAQMDAQUBCAcQCwwHBgcAAQACAwQFEQYHEiExQRMIFCIyUWFxgRUXN5GUsbMWIzM2QlJUYnJ0dZOhstLTJDRVVnOCkpW0w9ElNThFU1djg4SiwdQmJ0NERmV2KGSFhqTwGEhmo8Lh9f/EABkBAQADAQEAAAAAAAAAAAAAAAABAgQDBf/EADQRAQACAgAEAwUHBAIDAAAAAAABAgMRBBIhMTJBURMzYXGBFCI0kaGx0SNSU/BCQ2PB4f/aAAwDAQACEQMRAD8A6jREWV1EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARREFREKAiIgIomfMgqZRT8qBniqiICIiAiBEBERAREygJlTgqgZRAiAiic0FTKiIKinxK9UBFFUBFECCooqgIiICZU9SvqQEUVQEQogIiICIiAiKIKmfMiiCoonrQVMoiAiIgIoqgIiICIiAiIgJ6kRARPUiAiJ0QEREBERAREQEyoqgIiICIiAiIgIiICIiAiIgIiICKKoCKZRBUURBURRAVREBFOHmX4q54aSAz1c0dPEOb5XBrR6zwQf0RYzdNf6JtkZfVaotpxzZBL27v5Me8fyLF6vbhoyLPYQ3esxyMdM1gP4xzT+RNutcOS3astmotP0O3qzPqZG1unrlBB/2b4po5XH0tO6B/KKyC2bYtCVkojluNTQuOMd9UjwD62BzR6yo3C08NljvVsFReVQam03XvDKHUFqqnuOA2Ksjc4nyboOfyL13BzfGaR6QpcZiY7vyiqIhEREDoiJ6kFCnrT0IgqdVEKCqInqQOXFPOr05KIKinmVQRE9SflQVFEPRBUREBEU9aAUREBVREFUREFRFEDqicccU6ICqIgnRERBVFUQFDzQ8lUBREQVF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CIiqCZRE6IKiBRBUUwqgKJyRBVE6J1QEREFUToiCqBEKAqpkeVBxQVFEQOKInVBVEQIHNEVQQoqogIiYQVREQFeSiBBRlREQFVB5kQE69UKdED1omUwgIiICIiAqoiAr51MKoIUTogQMIhRBVFVEBERARMcUQPWiFEBECICqiIBRECAEKIgoQophACqZTKAiIgIiICIiAiIgiqIgiqKdEBE5qoJ5kRVBEVRBEVU9KCqIiC8UUTzoKor1UKAEREBVREBOKeVOqAiqiAgREF64UKKoJyRCFUETqhCo8qCIqp0QVFEQFVEQOqKqIBTmiICeZVTqgIivVBCiIgBERARVRA6IPIqogdVeaiqCInmRAREQERCgBERAREQMomEQEVUQEQKoCiIEDHBPSidEBAiIHpTqieYIKinJOKCphQKoCIiAiIgIiICFEQTor1REDqpw44VRBCqiIHVERAREQEREBQKogiqIgKKogdEREBERBFURBFURBFURBCnVVEERVEEVREBERAUKqIInDCqIIiqIInVVEERVEBERBFURAKiqICIiAp6lUQTgiqFBOqoROXVBOSKlMIIipQIIiqBBETCqCJyVQoIiuEwgiqhTCAiqYQFFR6EQFFUQEQqICvJROiBhVMIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAohVQAiKBBUUCpQEQckQRUlCoguEygU6oKiIgIgRBCqiICIp1QVCUU6oKhRCggVQclOqCoURA4oiJI/9k=" class="nav-logo" alt="Dingrui Scholars logo">
+    <span class="nav-badge">UNIT 3</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<!-- ═══ PROGRESS BAR ═══ -->
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s3-1">3.1 Translational Kinetic Energy</a>
+  <a href="#s3-2">3.2 Work</a>
+  <a href="#s3-3">3.3 Potential Energy</a>
+  <a href="#s3-4">3.4 Conservation of Energy</a>
+  <a href="#s3-5">3.5 Power</a>
+  <a href="#exam-strategy">Exam Strategy</a>
+  <a href="#common-mistakes">Common Mistakes</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-wrap" id="main-content">
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-overline">AP Physics C: Mechanics</div>
+  <h1>Work, Energy, &amp; Power</h1>
+  <p class="hero-sub">Conservation as a foundational principle of physics, with work as the primary agent of change for energy. Master scalar quantities, integral formulations, and graphical techniques the AP exam demands.</p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon"><strong>15–25%</strong> Exam Weight</span>
+    <span class="chip chip-green"><strong>~12/~17</strong> Class Periods</span>
+    <span class="chip chip-gold"><strong>5</strong> Topics</span>
+  </div>
+</div>
+
+<!-- ═══════════════ 3.1 ═══════════════ -->
+<section class="section" id="s3-1">
+  <div class="section-label">Topic 3.1</div>
+  <h2>Translational Kinetic Energy</h2>
+
+  <p>Kinetic energy is the energy an object possesses because it is moving. In AP Physics C: Mechanics, we focus on <em>translational</em> kinetic energy — the energy associated with an object's center-of-mass motion through space (rotational kinetic energy appears in Unit 6).</p>
+
+  <p>The quantity depends on two things: mass and speed. Because velocity is <strong>squared</strong>, even modest increases in speed produce large increases in kinetic energy. Doubling the speed quadruples the kinetic energy.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Translational Kinetic Energy</div>
+    $$K = \frac{1}{2}mv^2$$
+    <div class="formula-sub">where <em>m</em> is mass (kg) and <em>v</em> is speed (m/s). Units: Joules (J = kg·m²/s²)</div>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Key Insight</strong>
+    Kinetic energy is a <em>scalar</em> — it has no direction. It is always non-negative because both mass and the square of velocity are non-negative. Two objects moving in opposite directions at the same speed have the same kinetic energy.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Frame Dependence</strong>
+    Different observers may disagree on the kinetic energy of the same object. A passenger sitting still on a train has zero kinetic energy in the train's frame, but may have enormous kinetic energy in the ground frame. Kinetic energy is frame-dependent, even though the laws of physics are the same in all inertial frames.
+  </div>
+
+  <details>
+    <summary>Worked Example — Comparing Kinetic Energies</summary>
+    <div class="detail-body">
+      <p>A 1200 kg car moves at 15 m/s. A 0.005 kg bullet moves at 900 m/s. Which has greater kinetic energy?</p>
+      <p class="worked-problem">// Car:</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$K_car = 0.5 \times 1200 \times (15)^2$$</div>
+          <div class="step-math">$$= 0.5 \times 1200 \times 225 = 135,000\;\text{J} = 135 kJ$$</div>
+          <div class="step-text">// Bullet:</div>
+          <div class="step-math">$$K_bullet = 0.5 \times 0.005 \times (900)^2$$</div>
+          <div class="step-math">$$= 0.5 \times 0.005 \times 810000 = 2,025\;\text{J} \approx 2.0 kJ$$</div>
+          <div class="step-text">// The car has ~67× more KE, despite being much slower,</div>
+          <div class="step-text">// because of its far greater mass.</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">Object A has twice the mass and half the speed of Object B. What is the ratio $K_A / K_B$?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 2</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 1</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 1/2</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 1/4</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Let B have mass $m$ and speed $v$: $K_B = \tfrac{1}{2}mv^2$. Then A has mass $2m$ and speed $v/2$: $K_A = \tfrac{1}{2}(2m)(v/2)^2 = \tfrac{1}{4}mv^2$. So $K_A/K_B = 1/2$. The squared dependence on speed wins over the linear dependence on mass.</div>
+    <div class="quiz-explain wrong-exp">Doubling mass multiplies $K$ by 2, but halving speed multiplies by $(1/2)^2 = 1/4$. Net factor: $2 \times 1/4 = 1/2$. The answer is (C).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 3.2 ═══════════════ -->
+<section class="section" id="s3-2">
+  <div class="section-label">Topic 3.2</div>
+  <h2>Work</h2>
+
+  <p>Work is the mechanism by which energy is transferred into or out of a system by a force acting over a displacement. Forces cause accelerations (Unit 2), but they also cause energy changes — and work is the bridge between force and energy.</p>
+
+  <p>Work is a scalar quantity. It can be positive (energy flows <em>into</em> the system), negative (energy flows <em>out</em>), or zero (no energy transfer). The sign depends on the angle between the force and displacement.</p>
+
+  <h3>The Dot Product and Constant-Force Work</h3>
+
+  <p>When a constant force $\vec{F}$ acts on an object undergoing displacement $\vec{d}$, the work done is the dot product of the two vectors. Only the component of force <em>parallel</em> to the displacement transfers energy. The perpendicular component changes direction without changing speed — think of centripetal force in circular motion.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Work by a Constant Force</div>
+    $$W = \vec{F} \cdot \vec{d} = Fd\cos\theta$$
+    <div class="formula-sub">where $\theta$ is the angle between $\vec{F}$ and $\vec{d}$</div>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Sign Convention</strong>
+    When $\theta < 90°$: force has a component along displacement → $W > 0$ (positive work). When $\theta = 90°$: force is perpendicular → $W = 0$. When $\theta > 90°$: force opposes displacement → $W < 0$ (negative work). This is exactly what cosine does.
+  </div>
+
+  <h3>Work by a Variable Force: Integration</h3>
+
+  <p>In AP Physics C, forces are often not constant — springs, gravity at large distances, and many applied forces vary with position. When force depends on position, we must <em>integrate</em> along the path. This is one of the signature calculus applications in the course.</p>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Work by a Variable Force</div>
+    $$W = \int_a^b \vec{F}(\vec{r}) \cdot d\vec{r}$$
+    <div class="formula-sub">In 1D: $W = \int_{x_a}^{x_b} F(x)\,dx$. Graphically, work = area under $F_\parallel$ vs. displacement curve.</div>
+  </div>
+
+  <!-- ═══ INTERACTIVE: WORK BY VARIABLE FORCE ═══ -->
+  <div class="formula-explorer" id="workExplorer">
+    <div class="explorer-title">Interactive — Work by a Variable Force</div>
+    <div class="explorer-subtitle">Adjust the force function $F(x) = ax^n$ and see the work as the shaded area under the curve</div>
+    <div class="explorer-sliders">
+      <div class="slider-group">
+        <label>Coefficient a <span class="val" id="work_a_val">3</span> N/m<sup>n</sup></label>
+        <input type="range" id="workA" min="1" max="10" step="0.5" value="3" oninput="drawWork()">
+      </div>
+      <div class="slider-group">
+        <label>Exponent n <span class="val" id="work_n_val">2</span></label>
+        <input type="range" id="workN" min="0" max="3" step="1" value="2" oninput="drawWork()">
+      </div>
+      <div class="slider-group">
+        <label>From x₁ <span class="val" id="work_x1_val">1</span> m</label>
+        <input type="range" id="workX1" min="0" max="4" step="0.5" value="1" oninput="drawWork()">
+      </div>
+      <div class="slider-group">
+        <label>To x₂ <span class="val" id="work_x2_val">4</span> m</label>
+        <input type="range" id="workX2" min="1" max="6" step="0.5" value="4" oninput="drawWork()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">Work Done</div><div class="result-value" id="work_W">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">F(x₁)</div><div class="result-value" id="work_F1">—</div><div class="result-unit">N</div></div>
+      <div class="result-card"><div class="result-label">F(x₂)</div><div class="result-value" id="work_F2">—</div><div class="result-unit">N</div></div>
+      <div class="result-card"><div class="result-label">Avg Force</div><div class="result-value" id="work_Favg">—</div><div class="result-unit">N</div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="workCanvas"></canvas>
+    </div>
+  </div>
+
+  <details>
+    <summary>Worked Example — Work Done by a Position-Dependent Force</summary>
+    <div class="detail-body">
+      <p>A force $F(x) = 3x^2 + 2$ (N) is applied as an object moves from $x = 1$ m to $x = 4$ m. Find the work done.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$W = \int _1^4 (3x^2 + 2) dx$$</div>
+          <div class="step-text">// Integrate term by term:</div>
+          <div class="step-math">$$= [x^3 + 2x] from 1 to 4$$</div>
+          <div class="step-math">$$// At x = 4: (4)^3 + 2(4) = 64 + 8 = 72$$</div>
+          <div class="step-math">$$// At x = 1: (1)^3 + 2(1) = 1 + 2 = 3$$</div>
+          <div class="step-math">$$W = 72 − 3 = 69\;\text{J}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <h3>The Work–Energy Theorem</h3>
+
+  <p>The <em>net</em> work done on an object — by <em>all</em> forces combined — equals the change in that object's kinetic energy. This exact theorem is derivable from Newton's second law via calculus and gives you a powerful alternative to $\vec{F} = m\vec{a}$ for solving problems.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Work–Energy Theorem</div>
+    $$\Delta K = \sum W_i = \sum F_{\parallel,i}\, d_i$$
+    <div class="formula-sub">The net work equals $K_f - K_i$.</div>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Why It Matters</strong>
+    When you care about speeds rather than accelerations, or when force varies with position, energy methods are often far easier than $\vec{F} = m\vec{a}$. The AP exam tests your ability to choose the best approach.
+  </div>
+
+  <p>When friction is present, the energy dissipated equals the friction force times the total <em>path length</em> (not displacement). This energy leaves the mechanical system as thermal energy and sound.</p>
+
+  <div class="formula-box" style="border-top-color: var(--orange);">
+    <div class="formula-label" style="color: var(--orange);">Energy Dissipated by Friction</div>
+    $$|\Delta E_\text{mech}| = F_f \cdot d\cos\theta$$
+    <div class="formula-sub">where $d$ is the path length and $F_f$ is the friction force magnitude</div>
+  </div>
+
+  <h3>Conservative vs. Nonconservative Forces</h3>
+
+  <p><strong>Conservative forces</strong> do work that depends only on starting and ending positions — not on the path taken. A round trip gives zero net work. Gravity, spring forces, and electrostatic forces are conservative. Because their work is path-independent, we can define a <em>potential energy</em> for each.</p>
+
+  <p><strong>Nonconservative forces</strong> do path-dependent work. The most common are friction and air resistance. A box sliding back and forth loses energy on every pass — friction's work is always negative and accumulates. You cannot define a potential energy for friction.</p>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">Exam Insight</strong>
+    The AP exam often asks whether a force is conservative or nonconservative, and what this implies about path independence and potential energy. Remember: potential energies can <em>only</em> be defined for conservative forces.
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">A block is pulled 5 m across a rough floor by a rope at $30°$ above horizontal with tension 40 N. Kinetic friction is 12 N. What is the net work done on the block?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 200 J</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 113 J</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 173 J</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 60 J</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct. $W_T = 40 \times 5 \times \cos 30° \approx 173$ J. $W_f = -12 \times 5 = -60$ J. Normal and gravity are perpendicular → zero work. Net = $173 - 60 = 113$ J.</div>
+    <div class="quiz-explain wrong-exp">Tension work: $W_T = Fd\cos\theta = 40(5)\cos 30° \approx 173$ J. Friction: $W_f = -60$ J. Net = $113$ J. Answer: (B).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 3.3 ═══════════════ -->
+<section class="section" id="s3-3">
+  <div class="section-label">Topic 3.3</div>
+  <h2>Potential Energy</h2>
+
+  <p>Potential energy is the energy stored in a system by virtue of the positions or configurations of the objects within it. Unlike kinetic energy, potential energy is a property of a <em>system</em> of interacting objects. A ball held above the ground has gravitational PE, but that energy belongs to the ball–Earth system, not the ball alone.</p>
+
+  <p>Potential energy is scalar. Its value depends on position, and the observer gets to choose where PE is zero. Only <em>changes</em> in PE matter physically — pick the reference that makes the math simplest.</p>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">System Thinking</strong>
+    A common misconception: "the ball has potential energy." Strictly, a single isolated object cannot have PE. Potential energy arises from the interaction between objects (ball and Earth, block and spring). The AP exam may test this distinction.
+  </div>
+
+  <h3>The Force–Potential Energy Relationship</h3>
+
+  <p>The deep connection between conservative forces and potential energy runs in both directions. If you know the force, integrate to find PE; if you know PE, differentiate to find force. This reciprocal relationship is one of the most powerful tools in physics.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Potential Energy from Force</div>
+    $$\Delta U = -\int_a^b \vec{F}_{cf}(\vec{r}) \cdot d\vec{r}$$
+    <div class="formula-sub">The negative sign means a conservative force in the direction of displacement <em>decreases</em> PE.</div>
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Force from Potential Energy (1D)</div>
+    $$F_x = -\frac{dU(x)}{dx}$$
+    <div class="formula-sub">Force equals the negative slope of the $U(x)$ curve — always points toward decreasing $U$.</div>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Watch the Negative Sign</strong>
+    Students frequently lose the negative sign in $F = -dU/dx$. This sign is essential: it tells you forces point "downhill" on the PE landscape. If $U$ increases to the right, the force points left.
+  </div>
+
+  <h3>Equilibrium and $U(x)$ Graphs</h3>
+
+  <p>At any position where $dU/dx = 0$, the force is zero and the system is in equilibrium. <strong>Stable equilibrium</strong> occurs at a local <em>minimum</em> (valleys) — displaced objects get pushed back. <strong>Unstable equilibrium</strong> occurs at a local <em>maximum</em> (peaks) — displaced objects get pushed away.</p>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">AP Exam Trap</strong>
+    On a $U(x)$ graph, the <em>force</em> is the <em>negative slope</em>, not the value of $U$. High $U$ with zero slope means zero force. Low $U$ with steep slope means large force. Don't confuse "high potential energy" with "large force."
+  </div>
+
+  <!-- ═══ INTERACTIVE: U(x) EXPLORER ═══ -->
+  <div class="formula-explorer" id="uxExplorer">
+    <div class="explorer-title">Interactive — Potential Energy Landscape</div>
+    <div class="explorer-subtitle">Explore $U(x) = ax^4 - bx^2 + c$ — identify equilibrium points and the force at any position</div>
+    <div class="explorer-sliders">
+      <div class="slider-group">
+        <label>a (x⁴ coeff) <span class="val" id="ux_a_val">1.0</span></label>
+        <input type="range" id="uxA" min="0.2" max="3" step="0.2" value="1.0" oninput="drawUx()">
+      </div>
+      <div class="slider-group">
+        <label>b (x² coeff) <span class="val" id="ux_b_val">4.0</span></label>
+        <input type="range" id="uxB" min="0" max="8" step="0.5" value="4.0" oninput="drawUx()">
+      </div>
+      <div class="slider-group">
+        <label>c (offset) <span class="val" id="ux_c_val">5.0</span> J</label>
+        <input type="range" id="uxC" min="0" max="10" step="0.5" value="5.0" oninput="drawUx()">
+      </div>
+      <div class="slider-group">
+        <label>Particle position x <span class="val" id="ux_xpos_val">1.0</span> m</label>
+        <input type="range" id="uxXpos" min="-3" max="3" step="0.1" value="1.0" oninput="drawUx()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">U(x)</div><div class="result-value" id="ux_U">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">F(x) = −dU/dx</div><div class="result-value" id="ux_F">—</div><div class="result-unit">N</div></div>
+      <div class="result-card"><div class="result-label">d²U/dx²</div><div class="result-value" id="ux_d2U">—</div><div class="result-unit">J/m²</div></div>
+      <div class="result-card"><div class="result-label">Equilibrium</div><div class="result-value" id="ux_eq">—</div><div class="result-unit"></div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="uxCanvas"></canvas>
+    </div>
+  </div>
+
+  <h3>Common Potential Energies</h3>
+
+  <div class="formula-box">
+    <div class="formula-label">Gravitational PE (Near Surface)</div>
+    $$\Delta U_g = mg\Delta y$$
+    <div class="formula-sub">Valid when $g$ is approximately constant (near Earth's surface)</div>
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--purple);">
+    <div class="formula-label" style="color: var(--purple);">Gravitational PE (General)</div>
+    $$U_g = -\frac{Gm_1 m_2}{r}$$
+    <div class="formula-sub">Two masses separated by $r$. Note the negative sign — zero is at $r = \infty$.</div>
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--orange);">
+    <div class="formula-label" style="color: var(--orange);">Elastic (Spring) PE</div>
+    $$U_s = \frac{1}{2}k(\Delta x)^2$$
+    <div class="formula-sub">where $\Delta x$ is the displacement from the spring's natural length</div>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Multi-Object Systems</strong>
+    When a system contains more than two objects, the total PE is the sum of every <em>pair's</em> PE. For three masses: $U_{12} + U_{13} + U_{23}$.
+  </div>
+
+  <details>
+    <summary>Worked Example — Finding Speed from Potential Energy</summary>
+    <div class="detail-body">
+      <p>A spring ($k = 800$ N/m) compressed 0.15 m launches a 0.25 kg ball horizontally. Find the launch speed (ignore friction).</p>
+      <p class="worked-problem">// Conservation of energy: spring PE → kinetic energy</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$\frac{1}{2}k(\Delta x)^2 + 0 = 0 + \frac{1}{2}mv^2$$</div>
+          <div class="step-math">$$v = \sqrt(k(\Delta x)^2 / m)$$</div>
+          <div class="step-math">$$v = \sqrt(800 \times (0.15)^2 / 0.25)$$</div>
+          <div class="step-math">$$v = \sqrt(800 \times 0.0225 / 0.25)$$</div>
+          <div class="step-math">$$v = \sqrt(72) = 8.49\;\text{m/s}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">A particle moves where $U(x) = 4x^3 - 6x$ (SI units). At which position is it in stable equilibrium?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; $x = +\frac{1}{\sqrt{2}}$ m</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; $x = -\frac{1}{\sqrt{2}}$ m</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; $x = 0$</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; No equilibrium exists.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $dU/dx = 12x^2 - 6 = 0 \Rightarrow x = \pm 1/\sqrt{2}$. Then $d^2U/dx^2 = 24x$. At $x = +1/\sqrt{2}$: positive → local min → stable. At $x = -1/\sqrt{2}$: negative → local max → unstable.</div>
+    <div class="quiz-explain wrong-exp">Set $dU/dx = 12x^2 - 6 = 0$, giving $x = \pm 1/\sqrt{2}$. Check $d^2U/dx^2 = 24x$. Positive at $+1/\sqrt{2}$ → stable. Answer: (A).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 3.4 ═══════════════ -->
+<section class="section" id="s3-4">
+  <div class="section-label">Topic 3.4</div>
+  <h2>Conservation of Energy</h2>
+
+  <p>Energy conservation is one of the most profound principles in all of science. The total energy of an isolated system never changes — energy can be transformed and transferred, but never created or destroyed.</p>
+
+  <p>In AP Physics C: Mechanics, we focus on <em>mechanical energy</em> — the sum of kinetic and potential energies. The conservation law takes different forms depending on your system choice:</p>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">System Choice Matters</strong>
+    A single-object system can have KE but not PE (PE requires interacting objects). By choosing a larger system, you can treat internal forces as conservative and use PE rather than computing work. The AP exam often rewards smart system choices.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Mechanical Energy</div>
+    $$E_\text{mech} = K + U$$
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Conservation of Mechanical Energy</div>
+    $$K_i + U_i = K_f + U_f$$
+    <div class="formula-sub">Valid when $W_\text{ext} = 0$ and no nonconservative forces act within the system.</div>
+  </div>
+
+  <p>When nonconservative forces are present (typically friction), mechanical energy is <em>not</em> conserved — some converts to thermal energy:</p>
+
+  <div class="formula-box" style="border-top-color: var(--orange);">
+    <div class="formula-label" style="color: var(--orange);">Energy with Nonconservative Forces</div>
+    $$K_i + U_i + W_\text{nc} = K_f + U_f$$
+    <div class="formula-sub">$W_\text{nc}$ is the work done by nonconservative forces (usually negative for friction)</div>
+  </div>
+
+  <!-- ═══ INTERACTIVE: SPRING LAUNCHER ═══ -->
+  <div class="formula-explorer" id="springExplorer">
+    <div class="explorer-title"> Interactive — Spring Launch Speed Calculator</div>
+    <div class="explorer-subtitle">See conservation of energy in action: spring PE → kinetic energy (with optional friction)</div>
+    <div class="explorer-sliders">
+      <div class="slider-group">
+        <label>Spring constant k <span class="val" id="spr_k_val">500</span> N/m</label>
+        <input type="range" id="sprK" min="50" max="2000" step="50" value="500" oninput="drawSpring()">
+      </div>
+      <div class="slider-group">
+        <label>Compression Δx <span class="val" id="spr_dx_val">0.20</span> m</label>
+        <input type="range" id="sprDx" min="0.01" max="0.5" step="0.01" value="0.20" oninput="drawSpring()">
+      </div>
+      <div class="slider-group">
+        <label>Mass m <span class="val" id="spr_m_val">0.50</span> kg</label>
+        <input type="range" id="sprM" min="0.05" max="5" step="0.05" value="0.50" oninput="drawSpring()">
+      </div>
+      <div class="slider-group">
+        <label>Friction force <span class="val" id="spr_f_val">0</span> N</label>
+        <input type="range" id="sprF" min="0" max="20" step="0.5" value="0" oninput="drawSpring()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">Spring PE</div><div class="result-value" id="spr_PE">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">Friction Loss</div><div class="result-value" id="spr_Wf">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">Final KE</div><div class="result-value" id="spr_KE">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">Launch Speed</div><div class="result-value" id="spr_v">—</div><div class="result-unit">m/s</div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="springCanvas"></canvas>
+    </div>
+  </div>
+
+  <details>
+    <summary>Worked Example — Roller Coaster with Friction</summary>
+    <div class="detail-body">
+      <p>A 500 kg coaster starts from rest at 40 m high, climbs a 25 m hill. 50,000 J lost to friction. Find speed at the second hill.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$// Ground = h = 0. System: coaster + Earth.$$</div>
+          <div class="step-math">$$K_i + U_i + W_f = K_f + U_f$$</div>
+          <div class="step-math">$$0 + mgh_i + W_f = \frac{1}{2}mv_f^2 + mgh_f$$</div>
+          <div class="step-math">$$0 + (500)(9.8)(40) + (-50000) = \frac{1}{2}(500)v_f^2 + (500)(9.8)(25)$$</div>
+          <div class="step-math">$$196000 − 50000 = 250v_f^2 + 122500$$</div>
+          <div class="step-math">$$23500 = 250v_f^2$$</div>
+          <div class="step-math">$$v_f = 9.70\;\text{m/s}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">A pendulum swings from height $h$ above its lowest point. At the lowest point, which statement is correct about the system (bob + Earth)?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; KE = $mgh$ and PE = $mgh$</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; KE = 0 and PE = $mgh$</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; KE = $mgh$ and PE = 0 (choosing lowest point as reference)</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; Total mechanical energy = 0</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct. Setting $U = 0$ at the bottom, all initial gravitational PE ($mgh$) converts to KE there. So $K = mgh$ and $U = 0$.</div>
+    <div class="quiz-explain wrong-exp">At the top: all energy is PE = $mgh$. At the bottom ($U = 0$ there): all PE → KE. So $K = mgh$. Answer: (C).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 3.5 ═══════════════ -->
+<section class="section" id="s3-5">
+  <div class="section-label">Topic 3.5</div>
+  <h2>Power</h2>
+
+  <p>Power measures how <em>quickly</em> energy is transferred or converted. Two machines might do the same total work, but the faster one delivers more power. The SI unit is the Watt (W = J/s). One horsepower ≈ 746 W.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Average Power</div>
+    $$P_\text{avg} = \frac{\Delta E}{\Delta t} = \frac{W}{\Delta t}$$
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Instantaneous Power</div>
+    $$P_\text{inst} = \frac{dW}{dt}$$
+  </div>
+
+  <p>A particularly useful derived formula connects power directly to force and velocity:</p>
+
+  <div class="formula-box" style="border-top-color: var(--purple);">
+    <div class="formula-label" style="color: var(--purple);">Power from Force and Velocity</div>
+    $$P = \vec{F} \cdot \vec{v} = Fv\cos\theta$$
+    <div class="formula-sub">where $\theta$ is the angle between $\vec{F}$ and $\vec{v}$</div>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Terminal Velocity Connection</strong>
+    At terminal velocity, net force is zero and KE doesn't change. All power from the driving force is dissipated by resistance. Common AP setup: $P_\text{engine} = F_\text{drag} \cdot v_\text{terminal}$.
+  </div>
+
+  <details>
+    <summary>Worked Example — Power Delivered by a Car Engine</summary>
+    <div class="detail-body">
+      <p>A 1400 kg car accelerates from rest with constant net force 5000 N. What is the instantaneous power at $t = 4$ s?</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$// Velocity at t = 4\;\text{s}:$$</div>
+          <div class="step-math">$$a = F/m = 5000/1400 = 3.57\;\text{m/s}^2$$</div>
+          <div class="step-math">$$v = v_0 + at = 0 + 3.57 \times 4 = 14.29\;\text{m/s}$$</div>
+          <div class="step-math">$$// Power = F \cdot v (parallel):$$</div>
+          <div class="step-math">$$P = 5000 \times 14.29 = 71,400\;\text{W} \approx 71.4 kW$$</div>
+          <div class="step-text">// Power increases linearly with time because</div>
+          <div class="step-text">// v increases linearly while F is constant.</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">An engine delivers constant power $P$ to a car of mass $m$ starting from rest on a frictionless surface. After time $t$, the speed is proportional to:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; $t$</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; $t^2$</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; $\sqrt[3]{t}$</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; $\sqrt{t}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct. $P = dW/dt$ so $W = Pt$. Work–energy theorem: $Pt = \frac{1}{2}mv^2$, giving $v = \sqrt{2Pt/m} \propto \sqrt{t}$.</div>
+    <div class="quiz-explain wrong-exp">$P$ constant → $W = Pt$. Then $Pt = \frac{1}{2}mv^2 \Rightarrow v \propto \sqrt{t}$. Answer: (D).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Exam Preparation</div>
+  <h2>Exam Strategy</h2>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-accent">MC</div>
+      <div class="card-title">Multiple-Choice Questions</div>
+    </div>
+    <p>MCQs test your ability to compare kinetic energies using $v^2$ dependence, determine the sign of work from force–displacement angles, read $U(x)$ graphs to identify equilibrium and turning points, and apply conservation to two-state problems. Many are "conceptual calculus" — asking what happens when you integrate or differentiate. Practice quickly identifying whether a problem is best solved with energy methods or Newton's laws.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-green">FR</div>
+      <div class="card-title">Free-Response Questions</div>
+    </div>
+    <p>The Mathematical Routines (MR) question often draws from this unit. You'll derive symbolic expressions (e.g., speed at the bottom of a ramp), justify whether a force is conservative, sketch $K$, $U$, $E$ vs. position graphs, and write coherent paragraph-length analyses. Show every step of your calculus — the AP exam awards points for correct integration setup even if algebra has errors.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ COMMON MISTAKES ═══════════════ -->
+<section class="section" id="common-mistakes">
+  <div class="section-label">Pitfalls</div>
+  <h2>Common Mistakes</h2>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top Point-Losing Errors</strong>
+    <p style="margin-top:8px"><strong>1. Confusing force and energy on $U(x)$ graphs.</strong> Force is the <em>negative slope</em> of $U(x)$, not $U$ itself.</p>
+    <p><strong>2. Forgetting the negative sign in $F = -dU/dx$.</strong> Without it, forces point uphill instead of downhill.</p>
+    <p><strong>3. Using displacement instead of path length for friction.</strong> Friction dissipates energy proportional to total distance, not net displacement.</p>
+    <p><strong>4. Applying $\Delta U_g = mg\Delta h$ at planetary scales.</strong> This only works near Earth's surface. For orbits, use $U = -Gm_1m_2/r$.</p>
+    <p><strong>5. Forgetting to square velocity in KE.</strong> Writing $K = \frac{1}{2}mv$ instead of $\frac{1}{2}mv^2$ is fatal.</p>
+    <p><strong>6. Confusing power and work.</strong> Work is total energy transferred; power is the <em>rate</em>.</p>
+    <p><strong>7. Inconsistent $U = 0$ reference.</strong> The choice is arbitrary, but you must be consistent throughout the problem.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+  <p>Click a card to flip it.</p>
+
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Translational Kinetic Energy</div>
+        <div class="flashcard-back">$$K = \frac{1}{2}mv^2$$<br>Scalar, always ≥ 0, frame-dependent</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Work by a Variable Force</div>
+        <div class="flashcard-back">$$W = \int_a^b \vec{F} \cdot d\vec{r}$$<br>Area under $F_\parallel$ vs. $x$ curve</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Work–Energy Theorem</div>
+        <div class="flashcard-back">$$\Delta K = W_\text{net}$$<br>Net work = change in KE</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Force from $U(x)$</div>
+        <div class="flashcard-back">$$F_x = -\frac{dU}{dx}$$<br>Force points toward decreasing $U$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Elastic Potential Energy</div>
+        <div class="flashcard-back">$$U_s = \frac{1}{2}k(\Delta x)^2$$<br>Always ≥ 0, zero at natural length</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Gravitational PE (General)</div>
+        <div class="flashcard-back">$$U_g = -\frac{Gm_1 m_2}{r}$$<br>Always negative, zero at $r = \infty$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Instantaneous Power</div>
+        <div class="flashcard-back">$$P = \vec{F} \cdot \vec{v} = Fv\cos\theta$$<br>Rate of energy transfer by a force</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Stable vs. Unstable Equilibrium</div>
+        <div class="flashcard-back">Stable: $U(x)$ local minimum<br>Unstable: $U(x)$ local maximum<br>Both have $dU/dx = 0$</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit Quiz</h2>
+
+  <div class="score-bar" id="scoreBar">
+    Score: <span class="score-num" id="quizScore">0</span> / <span id="quizTotal">5</span>
+  </div>
+
+  <div class="quiz unit-quiz-q" data-answer="1">
+    <div class="quiz-q"><strong>Q1.</strong> A spring ($k = 200$ N/m) is compressed 0.3 m and launches a 0.5 kg block on a frictionless surface. What is the block's speed?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 3.0 m/s</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 6.0 m/s</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 4.2 m/s</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 18.0 m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">$\frac{1}{2}k(\Delta x)^2 = \frac{1}{2}mv^2 \Rightarrow v = \Delta x\sqrt{k/m} = 0.3\sqrt{400} = 6.0$ m/s.</div>
+    <div class="quiz-explain wrong-exp">$\frac{1}{2}(200)(0.09) = \frac{1}{2}(0.5)v^2 \Rightarrow 9 = 0.25v^2 \Rightarrow v = 6.0$ m/s. Answer: (B).</div>
+  </div>
+
+  <div class="quiz unit-quiz-q" data-answer="2">
+    <div class="quiz-q"><strong>Q2.</strong> A force $F(x) = 5x$ (N) acts from $x = 0$ to $x = 4$ m. The work done is:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 20 J</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 50 J</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 40 J</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 80 J</div>
+    </div>
+    <div class="quiz-explain correct-exp">$W = \int_0^4 5x\,dx = \frac{5}{2}x^2\big|_0^4 = \frac{5}{2}(16) = 40$ J.</div>
+    <div class="quiz-explain wrong-exp">$W = \frac{5x^2}{2}\big|_0^4 = 40$ J. Answer: (C).</div>
+  </div>
+
+  <div class="quiz unit-quiz-q" data-answer="0">
+    <div class="quiz-q"><strong>Q3.</strong> A 2 kg ball drops from rest at 5 m. Using $g = 10$ m/s², what is its KE just before hitting the ground?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 100 J</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 50 J</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 200 J</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 10 J</div>
+    </div>
+    <div class="quiz-explain correct-exp">All PE converts to KE: $K = mgh = 2(10)(5) = 100$ J.</div>
+    <div class="quiz-explain wrong-exp">$K_f = mgh = 100$ J. Answer: (A).</div>
+  </div>
+
+  <div class="quiz unit-quiz-q" data-answer="1">
+    <div class="quiz-q"><strong>Q4.</strong> A motor lifts a 200 kg crate 10 m at constant speed in 8 s. The power output is approximately:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 1600 W</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 2450 W</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 19600 W</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 250 W</div>
+    </div>
+    <div class="quiz-explain correct-exp">$P = W/\Delta t = mgh/\Delta t = 200(9.8)(10)/8 = 2450$ W.</div>
+    <div class="quiz-explain wrong-exp">$P = mgh/t = 19600/8 = 2450$ W. Answer: (B).</div>
+  </div>
+
+  <div class="quiz unit-quiz-q" data-answer="3">
+    <div class="quiz-q"><strong>Q5.</strong> The potential energy $U(x) = 8x^2 - 2x^4$. How many equilibrium positions exist?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 1</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 2</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 4</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 3</div>
+    </div>
+    <div class="quiz-explain correct-exp">$dU/dx = 16x - 8x^3 = 8x(2 - x^2) = 0$. Solutions: $x = 0, \pm\sqrt{2}$. Three equilibrium positions. At $x = 0$: stable ($d^2U/dx^2 > 0$). At $x = \pm\sqrt{2}$: unstable ($d^2U/dx^2 < 0$).</div>
+    <div class="quiz-explain wrong-exp">$8x(2 - x^2) = 0$ gives $x = 0, \pm\sqrt{2}$ — three equilibria. Answer: (D).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
+<section class="section">
+  <div class="qref">
+    <div class="qref-title">Unit 3 Formula Quick Reference</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size:0.92rem;">
+      <div>$K = \tfrac{1}{2}mv^2$</div>
+      <div>$W = Fd\cos\theta$</div>
+      <div>$W = \int_a^b \vec{F}\cdot d\vec{r}$</div>
+      <div>$\Delta K = W_\text{net}$</div>
+      <div>$\Delta U = -\int \vec{F}_{cf}\cdot d\vec{r}$</div>
+      <div>$F_x = -dU/dx$</div>
+      <div>$U_s = \tfrac{1}{2}k(\Delta x)^2$</div>
+      <div>$U_g = -Gm_1 m_2 / r$</div>
+      <div>$\Delta U_g = mg\Delta y$</div>
+      <div>$P = \Delta E / \Delta t$</div>
+      <div>$P = dW/dt$</div>
+      <div>$P = Fv\cos\theta$</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  Dingrui Scholars · AP Physics C: Mechanics · Unit 3: Work, Energy, and Power · 2025
+</div>
+
+</div><!-- /main-wrap -->
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+// ═══ HELPERS ═══
+function getColors() {
+  var style = getComputedStyle(document.documentElement);
+  var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return {
+    bg: style.getPropertyValue('--bg-card').trim(),
+    text: style.getPropertyValue('--text').trim(),
+    textSec: style.getPropertyValue('--text-secondary').trim(),
+    accent: style.getPropertyValue('--accent').trim(),
+    green: style.getPropertyValue('--green').trim(),
+    orange: style.getPropertyValue('--orange').trim(),
+    red: style.getPropertyValue('--red').trim(),
+    purple: style.getPropertyValue('--purple').trim(),
+    grid: dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+    axis: dark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.25)',
+    fill: dark ? 'rgba(200,112,128,0.15)' : 'rgba(107,45,62,0.10)',
+    fillGreen: dark ? 'rgba(92,184,138,0.15)' : 'rgba(46,107,79,0.10)',
+    curve: style.getPropertyValue('--accent').trim()
+  };
+}
+
+function setupCanvas(canvas, W, H) {
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, lw) {
+  var angle = Math.atan2(y2 - y1, x2 - x1);
+  var len = 8;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lw || 2;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - len * Math.cos(angle - 0.4), y2 - len * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - len * Math.cos(angle + 0.4), y2 - len * Math.sin(angle + 0.4));
+  ctx.closePath();
+  ctx.fill();
+}
+
+// ═══ THEME ═══
+document.getElementById('themeToggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  var dark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', dark ? '' : 'dark');
+  this.textContent = dark ? 'Dark' : 'Light';
+  drawWork(); drawUx(); drawSpring();
+});
+
+// ═══ SIDEBAR ═══
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+  const isOpen = sidebar.classList.contains('open');
+  const btn = document.getElementById('tocToggle');
+  if (btn) btn.classList.toggle('active', isOpen);
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.querySelectorAll('.sidebar a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    if (window.innerWidth <= 800) {
+      document.getElementById('sidebar').classList.remove('open');
+      var btn = document.getElementById('tocToggle');
+      if (btn) btn.classList.remove('active');
+      }
+  });
+});
+
+// ═══ PROGRESS BAR ═══
+window.addEventListener('scroll', function() {
+  var scroll = document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progressFill').style.width = (scroll / height * 100) + '%';
+});
+
+// ═══ ACTIVE TOC ═══
+var sections = document.querySelectorAll('.section[id]');
+var sideLinks = document.querySelectorAll('.sidebar a');
+var tocObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      sideLinks.forEach(function(l) { l.classList.remove('active'); });
+      var active = document.querySelector('.sidebar a[href="#' + e.target.id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -75% 0px' });
+sections.forEach(function(s) { tocObs.observe(s); });
+
+// ═══ QUIZ LOGIC ═══
+document.querySelectorAll('.quiz').forEach(function(quiz) {
+  var correct = parseInt(quiz.dataset.answer);
+  var opts = quiz.querySelectorAll('.quiz-opt');
+  var cExp = quiz.querySelector('.correct-exp');
+  var wExp = quiz.querySelector('.wrong-exp');
+  opts.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      if (opt.classList.contains('disabled')) return;
+      var idx = parseInt(opt.dataset.idx);
+      opts.forEach(function(o) {
+        o.classList.add('disabled');
+        if (parseInt(o.dataset.idx) === correct) o.classList.add('correct');
+      });
+      if (idx === correct) {
+        cExp.classList.add('show');
+        // Track score for unit quiz
+        if (quiz.classList.contains('unit-quiz-q') && !quiz.dataset.answered) {
+          quiz.dataset.answered = '1';
+          unitQuizCorrect++;
+          updateScore();
+        }
+      } else {
+        opt.classList.add('wrong');
+        wExp.classList.add('show');
+        if (quiz.classList.contains('unit-quiz-q') && !quiz.dataset.answered) {
+          quiz.dataset.answered = '1';
+          updateScore();
+        }
+      }
+    });
+  });
+});
+
+// ═══ UNIT QUIZ SCORE + CONFETTI ═══
+var unitQuizCorrect = 0;
+function updateScore() {
+  document.getElementById('quizScore').textContent = unitQuizCorrect;
+  var total = document.querySelectorAll('.unit-quiz-q').length;
+  var answered = document.querySelectorAll('.unit-quiz-q[data-answered]').length;
+  if (answered === total && unitQuizCorrect === total) {
+    launchConfetti();
+  }
+}
+
+function launchConfetti() {
+  var container = document.createElement('div');
+  container.className = 'confetti-container';
+  document.body.appendChild(container);
+  var colors = ['#7A2E2E','#2E6B4F','#A65E1A','#5E3D7A','#C4956A','#B03030'];
+  for (var i = 0; i < 60; i++) {
+    var piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (Math.random() * 100) + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = (Math.random() * 1.5) + 's';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (6 + Math.random() * 8) + 'px';
+    container.appendChild(piece);
+  }
+  setTimeout(function() { container.remove(); }, 4000);
+}
+
+// ═══ CANVAS: WORK BY VARIABLE FORCE ═══
+function drawWork() {
+  var canvas = document.getElementById('workCanvas');
+  if (!canvas) return;
+  var W = 800, H = 400, ctx = setupCanvas(canvas, W, H), c = getColors();
+  var a = parseFloat(document.getElementById('workA').value);
+  var n = parseInt(document.getElementById('workN').value);
+  var x1 = parseFloat(document.getElementById('workX1').value);
+  var x2 = parseFloat(document.getElementById('workX2').value);
+  if (x2 <= x1) x2 = x1 + 0.5;
+
+  document.getElementById('work_a_val').textContent = a;
+  document.getElementById('work_n_val').textContent = n;
+  document.getElementById('work_x1_val').textContent = x1;
+  document.getElementById('work_x2_val').textContent = x2;
+
+  var F = function(x) { return a * Math.pow(x, n); };
+  // Analytical integral of a*x^n
+  var work = a * (Math.pow(x2, n + 1) - Math.pow(x1, n + 1)) / (n + 1);
+  var f1 = F(x1), f2 = F(x2);
+  var favg = work / (x2 - x1);
+
+  document.getElementById('work_W').textContent = work.toFixed(1);
+  document.getElementById('work_F1').textContent = f1.toFixed(1);
+  document.getElementById('work_F2').textContent = f2.toFixed(1);
+  document.getElementById('work_Favg').textContent = favg.toFixed(1);
+
+  var pad = { l: 70, r: 30, t: 30, b: 55 };
+  var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+  var xMax = 6.5, yMax = Math.max(F(xMax) * 1.1, 10);
+  var sx = pw / xMax, sy = ph / yMax;
+
+  ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = c.grid; ctx.lineWidth = 1;
+  for (var xi = 0; xi <= xMax; xi += 1) {
+    var xp = pad.l + xi * sx;
+    ctx.beginPath(); ctx.moveTo(xp, pad.t); ctx.lineTo(xp, H - pad.b); ctx.stroke();
+    ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'center';
+    ctx.fillText(String(xi), xp, H - pad.b + 18);
+  }
+  var yStep = Math.max(1, Math.ceil(yMax / 8));
+  for (var yi = 0; yi <= yMax; yi += yStep) {
+    var yp = H - pad.b - yi * sy;
+    ctx.beginPath(); ctx.moveTo(pad.l, yp); ctx.lineTo(W - pad.r, yp); ctx.stroke();
+    ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'right';
+    ctx.fillText(yi.toFixed(0), pad.l - 10, yp + 4);
+  }
+
+  // Axes
+  ctx.strokeStyle = c.axis; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H - pad.b); ctx.lineTo(W - pad.r, H - pad.b); ctx.stroke();
+
+  ctx.fillStyle = c.text; ctx.font = '13px "Source Sans 3"'; ctx.textAlign = 'center';
+  ctx.fillText('Position x (m)', W / 2, H - 10);
+  ctx.save(); ctx.translate(18, H / 2); ctx.rotate(-Math.PI / 2); ctx.fillText('F(x) (N)', 0, 0); ctx.restore();
+
+  // Shaded area (work)
+  ctx.beginPath(); ctx.fillStyle = c.fill;
+  ctx.moveTo(pad.l + x1 * sx, H - pad.b);
+  for (var i = 0; i <= 200; i++) {
+    var x = x1 + (i / 200) * (x2 - x1);
+    var y = Math.min(yMax, F(x));
+    ctx.lineTo(pad.l + x * sx, H - pad.b - y * sy);
+  }
+  ctx.lineTo(pad.l + x2 * sx, H - pad.b);
+  ctx.closePath(); ctx.fill();
+
+  // Curve
+  ctx.beginPath(); ctx.strokeStyle = c.curve; ctx.lineWidth = 3;
+  for (var i = 0; i <= 300; i++) {
+    var x = (i / 300) * xMax;
+    var y = Math.min(yMax, F(x));
+    var px = pad.l + x * sx, py = H - pad.b - y * sy;
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Boundary lines
+  ctx.setLineDash([6, 4]);
+  ctx.strokeStyle = c.green; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(pad.l + x1 * sx, H - pad.b); ctx.lineTo(pad.l + x1 * sx, H - pad.b - Math.min(yMax, f1) * sy); ctx.stroke();
+  ctx.strokeStyle = c.red;
+  ctx.beginPath(); ctx.moveTo(pad.l + x2 * sx, H - pad.b); ctx.lineTo(pad.l + x2 * sx, H - pad.b - Math.min(yMax, f2) * sy); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.fillStyle = c.accent; ctx.font = 'bold 13px "Source Sans 3"'; ctx.textAlign = 'center';
+  var midX = (x1 + x2) / 2;
+  var midY = F(midX);
+  ctx.fillText('W = ' + work.toFixed(1) + ' J', pad.l + midX * sx, H - pad.b - Math.min(yMax, midY) * sy / 2);
+
+  ctx.font = '12px "Source Sans 3"';
+  ctx.fillStyle = c.text; ctx.textAlign = 'right';
+  ctx.fillText('F(x) = ' + a + 'x' + (n === 0 ? '⁰' : n === 1 ? '' : n === 2 ? '²' : '³'), W - pad.r, pad.t + 16);
+}
+
+// ═══ CANVAS: U(x) POTENTIAL ENERGY ═══
+function drawUx() {
+  var canvas = document.getElementById('uxCanvas');
+  if (!canvas) return;
+  var W = 800, H = 420, ctx = setupCanvas(canvas, W, H), c = getColors();
+
+  var a = parseFloat(document.getElementById('uxA').value);
+  var b = parseFloat(document.getElementById('uxB').value);
+  var cVal = parseFloat(document.getElementById('uxC').value);
+  var xpos = parseFloat(document.getElementById('uxXpos').value);
+
+  document.getElementById('ux_a_val').textContent = a.toFixed(1);
+  document.getElementById('ux_b_val').textContent = b.toFixed(1);
+  document.getElementById('ux_c_val').textContent = cVal.toFixed(1);
+  document.getElementById('ux_xpos_val').textContent = xpos.toFixed(1);
+
+  var U = function(x) { return a * Math.pow(x, 4) - b * Math.pow(x, 2) + cVal; };
+  var dUdx = function(x) { return 4 * a * Math.pow(x, 3) - 2 * b * x; };
+  var d2Udx2 = function(x) { return 12 * a * Math.pow(x, 2) - 2 * b; };
+
+  var uVal = U(xpos);
+  var fVal = -dUdx(xpos);
+  var d2Val = d2Udx2(xpos);
+  var isEq = Math.abs(dUdx(xpos)) < 0.3;
+
+  document.getElementById('ux_U').textContent = uVal.toFixed(2);
+  document.getElementById('ux_F').textContent = fVal.toFixed(2);
+  document.getElementById('ux_d2U').textContent = d2Val.toFixed(2);
+  document.getElementById('ux_eq').textContent = isEq ? (d2Val > 0 ? 'Stable' : d2Val < 0 ? 'Unstable' : 'Neutral') : '—';
+
+  var pad = { l: 70, r: 30, t: 30, b: 55 };
+  var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+  var xRange = 3.2;
+  // Find y range
+  var yMin = Infinity, yMax2 = -Infinity;
+  for (var i = -320; i <= 320; i++) {
+    var x = (i / 100) * xRange / 3.2;
+    var u = U(x);
+    if (u < yMin) yMin = u;
+    if (u > yMax2) yMax2 = u;
+  }
+  yMin = Math.min(yMin, -2); yMax2 = Math.max(yMax2, 10);
+  var yPad = (yMax2 - yMin) * 0.1;
+  yMin -= yPad; yMax2 += yPad;
+
+  var sx = pw / (2 * xRange), sy = ph / (yMax2 - yMin);
+  var toX = function(x) { return pad.l + (x + xRange) * sx; };
+  var toY = function(y) { return H - pad.b - (y - yMin) * sy; };
+
+  ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = c.grid; ctx.lineWidth = 1;
+  for (var xi = Math.ceil(-xRange); xi <= Math.floor(xRange); xi++) {
+    ctx.beginPath(); ctx.moveTo(toX(xi), pad.t); ctx.lineTo(toX(xi), H - pad.b); ctx.stroke();
+    ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'center';
+    ctx.fillText(String(xi), toX(xi), H - pad.b + 18);
+  }
+
+  // Zero line
+  if (yMin < 0 && yMax2 > 0) {
+    ctx.strokeStyle = c.axis; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad.l, toY(0)); ctx.lineTo(W - pad.r, toY(0)); ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = c.axis; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H - pad.b); ctx.lineTo(W - pad.r, H - pad.b); ctx.stroke();
+
+  ctx.fillStyle = c.text; ctx.font = '13px "Source Sans 3"'; ctx.textAlign = 'center';
+  ctx.fillText('Position x (m)', W / 2, H - 10);
+  ctx.save(); ctx.translate(18, H / 2); ctx.rotate(-Math.PI / 2); ctx.fillText('U(x) (J)', 0, 0); ctx.restore();
+
+  // U(x) curve
+  ctx.beginPath(); ctx.strokeStyle = c.curve; ctx.lineWidth = 3;
+  for (var i = 0; i <= 400; i++) {
+    var x = -xRange + (i / 400) * 2 * xRange;
+    var u = U(x);
+    var px = toX(x), py = toY(u);
+    if (py < pad.t - 20 || py > H - pad.b + 20) continue;
+    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Find equilibria (where dU/dx ≈ 0)
+  // For ax^4 - bx^2 + c: dU/dx = 4ax^3 - 2bx = 2x(2ax^2 - b)
+  // Roots: x=0 and x = ±√(b/(2a)) if b > 0
+  var eqs = [0];
+  if (b > 0 && b / (2 * a) > 0) {
+    var xeq = Math.sqrt(b / (2 * a));
+    if (xeq <= xRange) { eqs.push(xeq); eqs.push(-xeq); }
+  }
+  eqs.forEach(function(xe) {
+    var ue = U(xe);
+    var d2 = d2Udx2(xe);
+    var color = d2 > 0 ? c.green : c.red;
+    var label = d2 > 0 ? 'stable' : 'unstable';
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.arc(toX(xe), toY(ue), 6, 0, Math.PI * 2); ctx.fill();
+    ctx.font = 'bold 11px "Source Sans 3"'; ctx.textAlign = 'center';
+    ctx.fillText(label, toX(xe), toY(ue) - 12);
+  });
+
+  // Particle dot
+  var pxP = toX(xpos), pyP = toY(uVal);
+  ctx.fillStyle = c.orange;
+  ctx.beginPath(); ctx.arc(pxP, pyP, 8, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = c.bg; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(pxP, pyP, 8, 0, Math.PI * 2); ctx.stroke();
+
+  // Force arrow at particle
+  if (Math.abs(fVal) > 0.3) {
+    var arrowLen = Math.min(50, Math.abs(fVal) * 5);
+    var dir = fVal > 0 ? 1 : -1;
+    drawArrow(ctx, pxP, pyP, pxP + dir * arrowLen, pyP, c.purple, 2.5);
+    ctx.fillStyle = c.purple; ctx.font = 'bold 11px "Source Sans 3"'; ctx.textAlign = dir > 0 ? 'left' : 'right';
+    ctx.fillText('F', pxP + dir * (arrowLen + 8), pyP + 4);
+  }
+
+  // Label
+  ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'right';
+  ctx.fillText('U(x) = ' + a.toFixed(1) + 'x⁴ − ' + b.toFixed(1) + 'x² + ' + cVal.toFixed(1), W - pad.r, pad.t + 16);
+}
+
+// ═══ CANVAS: SPRING LAUNCHER ═══
+function drawSpring() {
+  var canvas = document.getElementById('springCanvas');
+  if (!canvas) return;
+  var W = 800, H = 320, ctx = setupCanvas(canvas, W, H), c = getColors();
+
+  var k = parseFloat(document.getElementById('sprK').value);
+  var dx = parseFloat(document.getElementById('sprDx').value);
+  var m = parseFloat(document.getElementById('sprM').value);
+  var fric = parseFloat(document.getElementById('sprF').value);
+
+  document.getElementById('spr_k_val').textContent = k;
+  document.getElementById('spr_dx_val').textContent = dx.toFixed(2);
+  document.getElementById('spr_m_val').textContent = m.toFixed(2);
+  document.getElementById('spr_f_val').textContent = fric;
+
+  var pe = 0.5 * k * dx * dx;
+  var wf = fric * dx; // friction over compression distance
+  var ke = Math.max(0, pe - wf);
+  var v = Math.sqrt(2 * ke / m);
+
+  document.getElementById('spr_PE').textContent = pe.toFixed(1);
+  document.getElementById('spr_Wf').textContent = wf.toFixed(1);
+  document.getElementById('spr_KE').textContent = ke.toFixed(1);
+  document.getElementById('spr_v').textContent = v.toFixed(2);
+
+  ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
+
+  // Energy bar chart
+  var barW = 100, barMaxH = 200, barY = H - 50;
+  var maxE = pe;
+  if (maxE <= 0) maxE = 1;
+
+  // Spring PE bar
+  var h1 = (pe / maxE) * barMaxH;
+  ctx.fillStyle = c.accent;
+  ctx.fillRect(150 - barW / 2, barY - h1, barW, h1);
+  ctx.fillStyle = c.text; ctx.font = 'bold 12px "Source Sans 3"'; ctx.textAlign = 'center';
+  ctx.fillText('Spring PE', 150, barY + 18);
+  ctx.fillText(pe.toFixed(1) + ' J', 150, barY - h1 - 8);
+
+  // Friction loss bar
+  var h2 = (wf / maxE) * barMaxH;
+  ctx.fillStyle = c.red;
+  ctx.fillRect(350 - barW / 2, barY - h2, barW, h2);
+  ctx.fillStyle = c.text;
+  ctx.fillText('Friction', 350, barY + 18);
+  ctx.fillText(wf.toFixed(1) + ' J', 350, barY - h2 - 8);
+
+  // KE bar
+  var h3 = (ke / maxE) * barMaxH;
+  ctx.fillStyle = c.green;
+  ctx.fillRect(550 - barW / 2, barY - h3, barW, h3);
+  ctx.fillStyle = c.text;
+  ctx.fillText('Final KE', 550, barY + 18);
+  ctx.fillText(ke.toFixed(1) + ' J', 550, barY - h3 - 8);
+
+  // Speed result
+  ctx.fillStyle = c.accent; ctx.font = 'bold 20px "Source Sans 3"'; ctx.textAlign = 'center';
+  ctx.fillText('v = ' + v.toFixed(2) + ' m/s', 700, H / 2);
+  ctx.font = '12px "Source Sans 3"'; ctx.fillStyle = c.textSec;
+  ctx.fillText('Launch speed', 700, H / 2 + 20);
+
+  // Arrows
+  drawArrow(ctx, 210, H / 2, 290, H / 2, c.red, 2);
+  drawArrow(ctx, 410, H / 2, 490, H / 2, c.green, 2);
+
+  // Title
+  ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'left';
+  ctx.fillText('½kΔx² = ½mv² + F_f·Δx', 30, 24);
+}
+
+// ═══ SCROLL ANIMATIONS ═══
+var animObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.formula-explorer').forEach(function(el) {
+  el.classList.add('animate-in'); animObserver.observe(el);
+});
+
+// ═══ THEME OBSERVER FOR CANVAS REDRAW ═══
+var themeObs = new MutationObserver(function() { drawWork(); drawUx(); drawSpring(); });
+themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ═══ KATEX FALLBACK ═══
+window.addEventListener('load', function() {
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(document.body, {
+      delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+      throwOnError: false
+    });
+  }
+});
+
+// ═══ INIT ═══
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(function() { drawWork(); drawUx(); drawSpring(); });
+} else {
+  setTimeout(function() { drawWork(); drawUx(); drawSpring(); }, 300);
+}
+
+
+(function finalPolish(){
+  var main = document.querySelector('main, .main, .main-wrap');
+  if (main && !document.querySelector('.skip-link')) {
+    if (!main.id) main.id = 'main-content';
+    var skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#' + main.id;
+    skip.textContent = 'Skip to content';
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
+  document.querySelectorAll('.quiz-opt').forEach(function(opt){
+    opt.setAttribute('role', 'button');
+    opt.setAttribute('tabindex', '0');
+    opt.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        opt.click();
+      }
+    });
+  });
+
+  var topBtn = document.getElementById('backToTop');
+  if (topBtn) {
+    var syncTopBtn = function(){
+      if (window.scrollY > 500) topBtn.classList.add('show');
+      else topBtn.classList.remove('show');
+    };
+    window.addEventListener('scroll', syncTopBtn, { passive: true });
+    syncTopBtn();
+    topBtn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+})();
+
+</script>
+</body>
+</html>

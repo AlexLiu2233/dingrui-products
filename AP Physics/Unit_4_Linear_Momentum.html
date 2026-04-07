@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Physics C: Mechanics — Unit 4: Linear Momentum | Dingrui Scholars</title>
+<meta name="description" content="AP Physics C: Mechanics — Unit 4: Linear Momentum | Dingrui Scholars. Polished AP Physics C notes from Dingrui Scholars with worked examples, interactive review, quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-logo { height: 36px; width: auto; border-radius: 0; object-fit: contain; display: block; flex-shrink: 0; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display); font-size: 0.95rem;
+  padding: 0 20px 12px; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border); margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px; color: var(--text-secondary);
+  text-decoration: none; font-size: 0.85rem;
+  border-left: 3px solid transparent; transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+/* ─── MAIN ─── */
+.main-wrap { margin: 80px 24px 120px; padding: 0 24px;
+  margin-left: calc(var(--toc-w) + 24px);
+}
+@media (max-width: 700px) {
+  .main-wrap { margin-left: auto; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius); margin-bottom: 40px;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58,24,32,0.4) 0%, transparent 100%); }
+.hero-overline {
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
+}
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600; padding: 6px 16px;
+  border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; }
+
+/* ─── CONCEPT BOX ─── */
+.concept-box {
+  border-left: 5px solid var(--accent); background: var(--bg-card);
+  padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0; box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box.gold { border-left-color: var(--gold); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+/* ─── FORMULA BOX ─── */
+.formula-box {
+  background: var(--bg-card); border-top: 4px solid var(--accent);
+  border-radius: var(--radius); padding: 24px 32px; margin: 24px 0;
+  text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+/* ─── CODE / PRE ─── */
+pre {
+  background: var(--bg-code); color: #CDD6F4;
+  padding: 20px 24px; border-radius: var(--radius);
+  overflow-x: auto; font-family: var(--font-mono);
+  font-size: 0.88rem; line-height: 1.65; margin: 16px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+code { font-family: var(--font-mono); font-size: 0.9em; }
+:not(pre) > code {
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 6px; border-radius: 4px; font-weight: 500;
+}
+.cm { color: #A6ADC8; font-style: italic; }
+.num { color: #FAB387; }
+.str { color: #A6E3A1; }
+.kw { color: #CBA6F7; }
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── DETAILS / ACCORDION ─── */
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.quiz-q { font-weight: 600; margin-bottom: 16px; font-size: 1.05rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px;
+  cursor: pointer; font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+}
+.quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeIn 0.3s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── QUICK REF ─── */
+.qref { background: var(--bg-card); border: 2px dashed var(--accent); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+.qref-title { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; text-align: center; }
+
+/* ─── FLASHCARDS ─── */
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+.flashcard { perspective: 800px; height: 180px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; text-align: center; font-size: 0.95rem; box-shadow: var(--shadow);
+}
+.flashcard-front { background: var(--bg-card); font-weight: 600; color: var(--accent); }
+.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.6; border: 2px solid var(--accent); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 28px; margin: 20px 0;
+  box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-weight: 700; font-size: 1.05rem; }
+
+/* ─── SEPARATOR ─── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+/* ═══════════ FORMULA EXPLORER ═══════════ */
+.formula-explorer {
+  background: var(--bg-card); border: 2px solid var(--accent);
+  border-radius: var(--radius); padding: 28px; margin: 28px 0;
+  box-shadow: var(--shadow-lg);
+  position: relative; overflow: hidden;
+}
+.formula-explorer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--green), var(--orange), var(--accent));
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer { 0% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
+.explorer-title {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+  color: var(--accent); text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 8px; text-align: center;
+}
+.explorer-subtitle {
+  text-align: center; font-size: 14px; color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.explorer-sliders {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;
+}
+@media (max-width: 600px) {
+  .top-nav { padding: 0 16px; } .explorer-sliders { grid-template-columns: 1fr; } }
+.slider-group { display: flex; flex-direction: column; gap: 6px; }
+.slider-group label {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--text-secondary); display: flex; justify-content: space-between;
+}
+.slider-group label .val { color: var(--accent); font-weight: 700; }
+.slider-group input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px; background: var(--border);
+  border-radius: 3px; outline: none; cursor: pointer;
+}
+.slider-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.slider-group input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); cursor: pointer; border: none;
+}
+.explorer-results {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px; margin-top: 20px;
+}
+.result-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.result-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.result-card .result-label {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.result-card .result-value {
+  font-family: var(--font-mono); font-size: 1.2em; font-weight: 700;
+  color: var(--accent);
+}
+.result-card .result-unit {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);
+}
+.explorer-canvas-wrap { margin-top: 16px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.explorer-canvas-wrap canvas { display: block; width: 100%; height: auto; }
+
+/* ─── COLLISION TYPE SELECTOR ─── */
+.type-selector { display: flex; gap: 8px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+.type-btn {
+  font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
+  padding: 8px 16px; border-radius: 20px; border: 2px solid var(--border);
+  background: var(--bg); cursor: pointer; transition: all 0.2s;
+  color: var(--text-secondary);
+}
+.type-btn:hover { border-color: var(--accent); color: var(--accent); }
+.type-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── ANIMATE IN ─── */
+.animate-in {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center; padding: 40px 20px;
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--text-secondary); border-top: 1px solid var(--border);
+}
+
+/* ─── RESPONSIVE ─── */
+/* sidebar layout: overlay toggle (no always-visible on wide screens) */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  pre { font-size: 0.8rem; padding: 16px; }
+  .flashcard-grid { grid-template-columns: 1fr; }
+  .formula-box { padding: 16px; }
+}
+@media print {
+  .top-nav, .progress-track, .sidebar, .nav-right, canvas { display: none !important; }
+  .main-wrap { margin: 0 auto; }
+  body { font-size: 11pt; background: white; color: black; }
+  pre { border: 1px solid #ccc; white-space: pre-wrap; }
+  .card, .formula-box, .concept-box { break-inside: avoid; border: 1px solid #000; box-shadow: none; }
+}
+
+
+/* ─── FINAL POLISH ─── */
+:root { color-scheme: light; }
+[data-theme="dark"] { color-scheme: dark; }
+::selection { background: var(--accent-light); color: var(--accent-dark); }
+a { color: var(--accent); }
+a:hover { color: var(--accent-dark); }
+button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:focus-visible, a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: absolute; left: 16px; top: -48px; z-index: 2000;
+  background: var(--accent); color: #fff; text-decoration: none;
+  padding: 10px 14px; border-radius: 10px; font-weight: 700;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+.backtotop {
+  position: fixed; right: 18px; bottom: 18px; z-index: 120;
+  width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--accent);
+  box-shadow: var(--shadow-lg); font-size: 1.05rem; font-weight: 700; cursor: pointer;
+  opacity: 0; transform: translateY(10px); pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.backtotop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.backtotop:hover { background: var(--accent-light); }
+.site-footer {
+  max-width: var(--max-w, 900px); margin: 64px auto 32px; padding: 0 24px;
+}
+.site-footer-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 22px 24px;
+}
+.site-footer-top {
+  display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;
+}
+.site-footer-title {
+  font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 4px;
+}
+.site-footer-copy {
+  color: var(--text-secondary); font-size: 0.95rem; max-width: 720px;
+}
+.utility-pills {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+}
+.utility-pill {
+  border: 1px solid var(--border); background: var(--bg); color: var(--text-secondary);
+  border-radius: 999px; padding: 6px 12px; font-size: 0.82rem; font-weight: 600;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+
+/* ═══════════ WORKED EXAMPLES (Polished KaTeX) ═══════════ */
+.worked-problem {
+  color: var(--text-secondary);
+  margin-bottom: 16px; padding: 14px 18px;
+  background: var(--accent-light); border-radius: 8px;
+  line-height: 1.7; font-size: 0.97rem;
+  border-left: 3px solid var(--accent);
+}
+.worked-steps {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.worked-step {
+  padding: 10px 18px;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(90deg, var(--accent-light) 0%, transparent 80%);
+  border-radius: 0 8px 8px 0;
+}
+[data-theme="dark"] .worked-step {
+  background: linear-gradient(90deg, rgba(200,112,112,0.08) 0%, transparent 80%);
+}
+.step-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 2px;
+}
+.step-math {
+  font-size: 1.05rem; line-height: 2.0;
+  overflow-x: auto; padding: 2px 0;
+}
+.step-math .katex-display { margin: 2px 0; }
+.step-text {
+  font-size: 0.95rem; line-height: 1.6;
+  padding: 2px 0; color: var(--text);
+}
+.step-comment {
+  font-size: 0.85rem; color: var(--text-secondary);
+  font-style: italic; margin-top: 4px;
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFKAuoDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAEGBwgFBAID/8QAaxAAAQMDAQUBCAcQCwwHBgcAAQACAwQFEQYHEiExQRMIFCIyUWFxgRUXN5GUsbMWIzM2QlJUYnJ0dZOhstLTJDRVVnOCkpW0w9ElNThFU1djg4SiwdQmJ0NERmV2KGSFhqTwGEhmo8Lh9f/EABkBAQADAQEAAAAAAAAAAAAAAAABAgQDBf/EADQRAQACAgAEAwUHBAIDAAAAAAABAgMRBBIhMTJBURMzYXGBFCI0kaGx0SNSU/BCQ2PB4f/aAAwDAQACEQMRAD8A6jREWV1EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARREFREKAiIgIomfMgqZRT8qBniqiICIiAiBEBERAREygJlTgqgZRAiAiic0FTKiIKinxK9UBFFUBFECCooqgIiICZU9SvqQEUVQEQogIiICIiAiKIKmfMiiCoonrQVMoiAiIgIoqgIiICIiAiIgJ6kRARPUiAiJ0QEREBERAREQEyoqgIiICIiAiIgIiICIiAiIgIiICKKoCKZRBUURBURRAVREBFOHmX4q54aSAz1c0dPEOb5XBrR6zwQf0RYzdNf6JtkZfVaotpxzZBL27v5Me8fyLF6vbhoyLPYQ3esxyMdM1gP4xzT+RNutcOS3astmotP0O3qzPqZG1unrlBB/2b4po5XH0tO6B/KKyC2bYtCVkojluNTQuOMd9UjwD62BzR6yo3C08NljvVsFReVQam03XvDKHUFqqnuOA2Ksjc4nyboOfyL13BzfGaR6QpcZiY7vyiqIhEREDoiJ6kFCnrT0IgqdVEKCqInqQOXFPOr05KIKinmVQRE9SflQVFEPRBUREBEU9aAUREBVREFUREFRFEDqicccU6ICqIgnRERBVFUQFDzQ8lUBREQVF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CIiqCZRE6IKiBRBUUwqgKJyRBVE6J1QEREFUToiCqBEKAqpkeVBxQVFEQOKInVBVEQIHNEVQQoqogIiYQVREQFeSiBBRlREQFVB5kQE69UKdED1omUwgIiICIiAqoiAr51MKoIUTogQMIhRBVFVEBERARMcUQPWiFEBECICqiIBRECAEKIgoQophACqZTKAiIgIiICIiAiIgiqIgiqKdEBE5qoJ5kRVBEVRBEVU9KCqIiC8UUTzoKor1UKAEREBVREBOKeVOqAiqiAgREF64UKKoJyRCFUETqhCo8qCIqp0QVFEQFVEQOqKqIBTmiICeZVTqgIivVBCiIgBERARVRA6IPIqogdVeaiqCInmRAREQERCgBERAREQMomEQEVUQEQKoCiIEDHBPSidEBAiIHpTqieYIKinJOKCphQKoCIiAiIgIiICFEQTor1REDqpw44VRBCqiIHVERAREQEREBQKogiqIgKKogdEREBERBFURBFURBFURBCnVVEERVEEVREBERAUKqIInDCqIIiqIInVVEERVEBERBFURAKiqICIiAp6lUQTgiqFBOqoROXVBOSKlMIIipQIIiqBBETCqCJyVQoIiuEwgiqhTCAiqYQFFR6EQFFUQEQqICvJROiBhVMIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAohVQAiKBBUUCpQEQckQRUlCoguEygU6oKiIgIgRBCqiICIp1QVCUU6oKhRCggVQclOqCoURA4oiJI/9k=" class="nav-logo" alt="Dingrui Scholars logo">
+    <span class="nav-badge">UNIT 4</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s4-1">4.1 Linear Momentum</a>
+  <a href="#s4-2">4.2 Change in Momentum & Impulse</a>
+  <a href="#s4-3">4.3 Conservation of Momentum</a>
+  <a href="#s4-4">4.4 Elastic & Inelastic Collisions</a>
+  <a href="#exam-strategy">Exam Strategy</a>
+  <a href="#common-mistakes">Common Mistakes</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<main class="main-wrap" id="main-content">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Physics C: Mechanics</div>
+  <h1>Unit 4: Linear Momentum</h1>
+  <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
+    Impulse, collisions, and the conservation law that governs every interaction. Master the vector nature of momentum and learn when energy methods fail but momentum methods succeed.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">10–20% of AP Exam</span>
+    <span class="chip chip-green">~11–15 Class Periods</span>
+    <span class="chip chip-gold">4 Topics</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 4.1 ═══════════════ -->
+<section class="section" id="s4-1">
+  <div class="section-label">Topic 4.1</div>
+  <h2>Linear Momentum</h2>
+
+  <p>Momentum is the quantity that captures how much "motion" an object has — and in what direction. Unlike kinetic energy, momentum is a <em>vector</em>. Two identical cars traveling at the same speed in opposite directions have the same kinetic energy but <em>opposite</em> momenta. This distinction is essential for collision analysis — it's why momentum, not energy, captures the full picture of a system's state of motion.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Definition of Linear Momentum</div>
+    $$\vec{p} = m\vec{v}$$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Units: kg·m/s. Direction: same as $\vec{v}$.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Vector Nature</strong>
+    Because momentum is a vector, you must assign a sign convention (or use components) when adding momenta. In one dimension, choosing rightward as positive, an object moving left has <em>negative</em> momentum. This is where many students first make errors in collision problems — always define your positive direction before you start.
+  </div>
+
+  <h3>Collisions and Explosions</h3>
+  <p>Momentum provides the natural language for describing two important classes of interactions. A <em>collision</em> is a model for an interaction in which the forces between the colliding objects are much larger than any external forces during the brief interaction time. Because of this, external forces can be neglected and momentum is approximately conserved. An <em>explosion</em> is the reverse: internal forces push objects within a system apart. The same conservation principle applies.</p>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Why Momentum Works for Collisions</strong>
+    When we analyze a collision, we only compare the "immediately before" and "immediately after" states. During the collision itself, the forces can be wildly complicated, but we don't need to know the details — conservation of momentum handles the bookkeeping. This is what makes momentum methods so powerful: they bypass the need to know the force during the interaction.
+  </div>
+
+  <details>
+    <summary>Worked Example — Explosion from Rest</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A 3 kg cannon sits on a frictionless surface and fires<br>a 0.5 kg ball at 20 m/s to the right. Find the cannon's recoil velocity.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">System: cannon + ball. No external horizontal forces.</div>
+          <div class="step-math">$$p_initial = 0 (both at rest)$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Conservation of momentum</div>
+          <div class="step-math">$$0 = m_ball \times v_ball + m_cannon \times v_cannon$$</div>
+          <div class="step-math">$$0 = (0.5)(20) + (3)(v_cannon)$$</div>
+          <div class="step-math">$$v_cannon = −10/3 = −3.33\;\text{m/s}$$</div>
+          <div class="step-text">The cannon recoils at 3.33 m/s to the left.</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">A 4 kg object moves at 3 m/s to the right and a 2 kg object moves at 6 m/s to the left. What is the total momentum of the system? (Take rightward as positive.)</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$24$ kg·m/s</div>
+      <div class="quiz-opt" data-idx="1">$0$ kg·m/s</div>
+      <div class="quiz-opt" data-idx="2">$−12$ kg·m/s</div>
+      <div class="quiz-opt" data-idx="3">$12$ kg·m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $p = (4)(3) + (2)(-6) = 12 - 12 = 0$ kg·m/s. The momenta cancel exactly.</div>
+    <div class="quiz-explain wrong-exp">Use $\vec{p}_\text{total} = m_1 v_1 + m_2 v_2 = (4)(3) + (2)(-6) = 12 - 12 = 0$ kg·m/s. Answer: (B).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 4.2 ═══════════════ -->
+<section class="section" id="s4-2">
+  <div class="section-label">Topic 4.2</div>
+  <h2>Change in Momentum and Impulse</h2>
+
+  <h3>Newton's Second Law: The Momentum Form</h3>
+  <p>Newton's second law is often written as $\vec{F} = m\vec{a}$, but this is actually a special case that assumes constant mass. Newton himself stated the law in terms of momentum: the net external force on a system equals the rate of change of that system's momentum. This more general formulation handles situations like rockets (where mass changes) and collisions (where force varies rapidly).</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Newton's Second Law — General Form</div>
+    $$\vec{F}_\text{net} = \frac{d\vec{p}}{dt}$$
+  </div>
+
+  <h3>The Impulse–Momentum Theorem</h3>
+  <p>Integrating both sides of Newton's second law over a time interval gives the <strong>impulse–momentum theorem</strong>: the impulse delivered to an object equals its change in momentum. Impulse is defined as the integral of force over time — it's a vector quantity with the same direction as the net force.</p>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Impulse Definition</div>
+    $$\vec{J} = \int_{t_1}^{t_2} \vec{F}_\text{net}(t)\,dt$$
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--orange);">
+    <div class="formula-label" style="color: var(--orange);">Impulse–Momentum Theorem</div>
+    $$\vec{J} = \int_{t_1}^{t_2} \vec{F}_\text{net}(t)\,dt = \Delta\vec{p} = \vec{p}_f - \vec{p}_0$$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Change in Momentum</div>
+    $$\Delta\vec{p} = \vec{p}_f - \vec{p}_0$$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Real-World Application — Safety Engineering</strong>
+    The impulse–momentum theorem is the reason airbags and crumple zones work. In a car crash, the change in momentum (and hence the impulse) is fixed — the car must come to rest. But by increasing the collision <em>time</em>, the average force is reduced: $\vec{F}_\text{avg} = \Delta\vec{p} / \Delta t$. A longer stopping time means a smaller peak force on the passengers.
+  </div>
+
+  <h3>Graphical Interpretation</h3>
+  <p>On a <strong>force vs. time</strong> graph, the impulse delivered to a system is the area under the curve. On a <strong>momentum vs. time</strong> graph, the net external force at any instant is the slope of the curve. These graphical connections are heavily tested on the AP exam.</p>
+
+  <div class="qref">
+    <div class="qref-title">Graph ↔ Calculus Connections for Momentum</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>From</th><th>To</th><th>Operation</th><th>On the Graph</th></tr>
+        <tr><td>$F(t)$</td><td>$J$ (impulse)</td><td>$J = \int F\,dt$</td><td>Area under $F$-$t$ curve</td></tr>
+        <tr><td>$p(t)$</td><td>$F_\text{net}$</td><td>$F = dp/dt$</td><td>Slope of $p$-$t$ graph</td></tr>
+        <tr><td>$J$</td><td>$\Delta p$</td><td>$J = \Delta p$</td><td>Area = change in $p$</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ IMPULSE EXPLORER ═══ -->
+  <div class="formula-explorer" id="impulseExplorer">
+    <div class="explorer-title">Impulse Explorer — F(t) Graph</div>
+    <div class="explorer-subtitle">Adjust the force profile. The shaded area equals the impulse = change in momentum. Axes remain fixed for comparison.</div>
+    <div class="explorer-sliders">
+      <div class="slider-group">
+        <label>Peak Force <span class="val" id="imp_F_val">12</span> N</label>
+        <input type="range" id="impF" min="2" max="24" step="1" value="12" oninput="drawImpulse()">
+      </div>
+      <div class="slider-group">
+        <label>Duration <span class="val" id="imp_dt_val">3</span> s</label>
+        <input type="range" id="impDt" min="1" max="6" step="0.5" value="3" oninput="drawImpulse()">
+      </div>
+      <div class="slider-group">
+        <label>Mass <span class="val" id="imp_m_val">2</span> kg</label>
+        <input type="range" id="impM" min="0.5" max="5" step="0.5" value="2" oninput="drawImpulse()">
+      </div>
+      <div class="slider-group">
+        <label>Initial Velocity <span class="val" id="imp_v0_val">0</span> m/s</label>
+        <input type="range" id="impV0" min="-5" max="5" step="0.5" value="0" oninput="drawImpulse()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">Impulse J</div><div class="result-value" id="imp_J">—</div><div class="result-unit">N·s</div></div>
+      <div class="result-card"><div class="result-label">Δv</div><div class="result-value" id="imp_dv">—</div><div class="result-unit">m/s</div></div>
+      <div class="result-card"><div class="result-label">v final</div><div class="result-value" id="imp_vf">—</div><div class="result-unit">m/s</div></div>
+      <div class="result-card"><div class="result-label">F avg</div><div class="result-value" id="imp_Favg">—</div><div class="result-unit">N</div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="impulseCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Exam Tip — Bouncing vs. Stopping</strong>
+    A ball that bounces off a wall receives a <em>larger</em> impulse than one that sticks. The bouncing ball reverses direction, so $\Delta p = m v_f - m(-v_i)$ — the magnitudes add. This is a classic AP question: a bouncing ball can deliver nearly twice the impulse of a ball that stops.
+  </div>
+
+  <h3>Variable-Mass Systems</h3>
+  <p>When an object's mass changes with time (such as a rocket expelling fuel), the impulse–momentum theorem in its general form still applies. If velocity is constant but mass changes:</p>
+
+  <div class="formula-box" style="border-top-color: var(--purple);">
+    <div class="formula-label" style="color: var(--purple);">Variable-Mass Form</div>
+    $$\vec{F}_\text{net} = \frac{d\vec{p}}{dt} = \frac{dm}{dt}\vec{v}$$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Valid when velocity is constant but mass changes (e.g., sand falling onto a conveyor belt).</p>
+  </div>
+
+  <p>For a rocket, the general form is $\vec{F}_\text{net} = m\frac{d\vec{v}}{dt} + \frac{dm}{dt}\vec{v}_\text{exhaust}$. The AP exam occasionally tests this — know the concept even if you aren't asked to derive the full rocket equation.</p>
+
+  <details>
+    <summary>Worked Example — Impulse from a Variable Force</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A force F(t) = 6t N acts on a 3 kg object from rest<br>for t = 0 to t = 4 s. Find the impulse and final speed.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-label">Step 1</div>
+          <div class="step-text">Impulse</div>
+          <div class="step-math">$$J = \int _0^4 6t dt = 3t^2 |_0^4 = 3(16) − 0 = 48\;\text{N}\cdot s$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Step 2</div>
+          <div class="step-text">Apply impulse–momentum theorem</div>
+          <div class="step-math">$$J = \Delta p = m \times \Delta v$$</div>
+          <div class="step-math">$$48 = 3 \times (v_f − 0)$$</div>
+          <div class="step-math">$$v_f = 16\;\text{m/s}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Impulse from F(t) Graph (Triangle)</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A triangular F(t) profile: F rises linearly from 0 to 20 N<br>over 0.5 s, then drops back to 0 over the next 0.5 s.<br>The object has mass 4 kg and is initially at rest.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-math">$$Impulse = area under F-t curve:$$</div>
+          <div class="step-math">$$Area of triangle = \frac{1}{2} \times base \times height$$</div>
+          <div class="step-math">$$J = \frac{1}{2} \times 1.0\;\text{s} \times 20\;\text{N} = 10\;\text{N}\cdot s$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Final velocity</div>
+          <div class="step-math">$$v_f = J/m = 10/4 = 2.5\;\text{m/s}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">A 0.15 kg ball moving at 10 m/s to the right bounces off a wall and returns at 8 m/s to the left. What is the impulse delivered by the wall? (Rightward = positive.)</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.3$ N·s to the left</div>
+      <div class="quiz-opt" data-idx="1">$1.5$ N·s to the left</div>
+      <div class="quiz-opt" data-idx="2">$1.5$ N·s to the right</div>
+      <div class="quiz-opt" data-idx="3">$2.7$ N·s to the left</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $J = \Delta p = m v_f - m v_i = 0.15(-8) - 0.15(10) = -1.2 - 1.5 = -2.7$ N·s. The impulse is 2.7 N·s to the left (negative direction).</div>
+    <div class="quiz-explain wrong-exp">$J = \Delta p = 0.15(-8) - 0.15(+10) = -1.2 - 1.5 = -2.7$ N·s. The direction reversal means the magnitudes add. Answer: (D).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 4.3 ═══════════════ -->
+<section class="section" id="s4-3">
+  <div class="section-label">Topic 4.3</div>
+  <h2>Conservation of Linear Momentum</h2>
+
+  <p>Conservation of momentum is one of the most fundamental principles in all of physics. During the brief instant of a collision, external forces like gravity and friction are dwarfed by the enormous contact forces between the colliding objects. So we model the system as having zero net external force during the collision, and momentum is conserved.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Conservation of Linear Momentum</div>
+    $$\sum \vec{p}_\text{before} = \sum \vec{p}_\text{after}$$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">When $\vec{F}_\text{ext,net} = 0$ on the system.</p>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">Key Principle</strong>
+    Momentum is conserved in <em>all</em> interactions, provided you choose the right system. If external forces act, expand your system to include the source of those forces, or recognize that momentum is transferred between the system and its environment via impulse: $\vec{J}_\text{ext} = \Delta\vec{p}_\text{system}$.
+  </div>
+
+  <h3>Center-of-Mass Velocity</h3>
+  <p>A collection of objects with individual momenta can be described as one system with one center-of-mass velocity. This velocity is constant whenever the net external force on the system is zero — even if objects within the system are bouncing off each other chaotically.</p>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Center-of-Mass Velocity</div>
+    $$\vec{v}_\text{cm} = \frac{\sum m_i \vec{v}_i}{\sum m_i} = \frac{\vec{p}_\text{total}}{M_\text{total}}$$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Powerful Shortcut</strong>
+    In any collision with no external forces, $\vec{v}_\text{cm}$ is the same before and after. For a perfectly inelastic collision (objects stick together), the final velocity of the combined object <em>is</em> $\vec{v}_\text{cm}$. This gives you the answer instantly without setting up equations.
+  </div>
+
+  <h3>System Selection</h3>
+  <p>Whether momentum is conserved depends on <em>what you choose as your system</em>. A bullet hitting a block has external forces if you analyze the bullet alone (the block pushes on it), but if you analyze the bullet + block system, the collision forces become internal and momentum is conserved. Choosing the right system is a critical skill.</p>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">System Selection Rules</strong>
+    <span style="display:block; margin-top: 8px;">If $\vec{F}_\text{ext,net} = 0$ on the system → total momentum is constant.</span>
+    <span style="display:block; margin-top: 4px;">If $\vec{F}_\text{ext,net} \neq 0$ → momentum transfers between the system and the environment via $\vec{J} = \Delta\vec{p}$.</span>
+    <span style="display:block; margin-top: 4px;">Newton's third law guarantees that internal forces always cancel. The impulse exerted by object A on B is equal and opposite to the impulse exerted by B on A.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Two-Cart Explosion</summary>
+    <div class="detail-body">
+      <p class="worked-problem">Two carts are on a frictionless track, held together by a compressed spring.<br>Cart A (2 kg) and Cart B (3 kg). The spring releases.<br>After the explosion, Cart A moves at 6 m/s to the left. Find Cart B's velocity.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">System: Cart A + Cart B. No external horizontal forces.</div>
+          <div class="step-math">$$p_initial = 0 (both at rest)$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Conservation of momentum</div>
+          <div class="step-math">$$0 = m_A v_A + m_B v_B$$</div>
+          <div class="step-math">$$0 = (2)(−6) + (3)(v_B)$$</div>
+          <div class="step-math">$$v_B = 12/3 = +4\;\text{m/s} (to the right)$$</div>
+          <div class="step-text">Check with v_cm:</div>
+          <div class="step-math">$$v_cm = 0 before \to must be 0 after$$</div>
+          <div class="step-math">$$v_cm = [2(−6) + 3(4)] / 5 = [−12 + 12] / 5 = 0 ✓$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">A 5 kg block at rest on frictionless ice is hit by a 1 kg ball moving at 12 m/s. The ball sticks to the block. What is the velocity of the center of mass before and after the collision?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$12$ m/s before, $2$ m/s after</div>
+      <div class="quiz-opt" data-idx="1">$6$ m/s before, $6$ m/s after</div>
+      <div class="quiz-opt" data-idx="2">$2$ m/s before, $2$ m/s after</div>
+      <div class="quiz-opt" data-idx="3">$2.4$ m/s before, $2$ m/s after</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $v_\text{cm} = (1)(12) / (1+5) = 12/6 = 2$ m/s, both before and after. The center-of-mass velocity is always conserved when external forces are zero.</div>
+    <div class="quiz-explain wrong-exp">$v_\text{cm} = \sum m_i v_i / \sum m_i = (1)(12)/(1+5) = 2$ m/s. This doesn't change because no external forces act. Answer: (C).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ 4.4 ═══════════════ -->
+<section class="section" id="s4-4">
+  <div class="section-label">Topic 4.4</div>
+  <h2>Elastic and Inelastic Collisions</h2>
+
+  <p>Momentum is conserved in <em>all</em> collisions (provided no external forces act). But kinetic energy is not necessarily conserved — and the amount of kinetic energy retained is what distinguishes different types of collisions.</p>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Collision Taxonomy</strong>
+    <span style="display:block; margin-top: 8px;"><strong>Elastic:</strong> Both momentum and kinetic energy are conserved. $K_i = K_f$.</span>
+    <span style="display:block; margin-top: 4px;"><strong>Inelastic:</strong> Momentum is conserved, but kinetic energy decreases. $K_f < K_i$. Some KE is transformed into heat, sound, or deformation.</span>
+    <span style="display:block; margin-top: 4px;"><strong>Perfectly inelastic:</strong> Objects stick together. Maximum KE loss (consistent with momentum conservation). $v_f = (m_1 v_1 + m_2 v_2) / (m_1 + m_2)$.</span>
+  </div>
+
+  <h3>Perfectly Inelastic Collisions</h3>
+  <p>In a perfectly inelastic collision, the objects stick together and move with a common final velocity. This gives the simplest algebra — one equation, one unknown.</p>
+
+  <div class="formula-box" style="border-top-color: var(--red);">
+    <div class="formula-label" style="color: var(--red);">Perfectly Inelastic Collision</div>
+    $$m_1 v_{1i} + m_2 v_{2i} = (m_1 + m_2)\,v_f$$
+  </div>
+
+  <details>
+    <summary>Worked Example — Ballistic Pendulum</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A 10 g bullet embeds in a 2 kg pendulum bob.<br>The combined mass rises to a height of 0.45 m.<br>Find the bullet's initial speed.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">Stage 1 — Energy (after collision → rise):</div>
+          <div class="step-math">$$\frac{1}{2}(m+M)v_f^2 = (m+M)gh$$</div>
+          <div class="step-math">$$v_f = \sqrt(2gh) = \sqrt(2 \times 10 \times 0.45) = 3\;\text{m/s}$$</div>
+          <div class="step-text">Stage 2 — Momentum (collision):</div>
+          <div class="step-math">$$m \times v_bullet = (m + M) \times v_f$$</div>
+          <div class="step-math">$$0.01 \times v_bullet = 2.01 \times 3$$</div>
+          <div class="step-math">$$v_bullet = 6.03 / 0.01 = 603\;\text{m/s}$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <h3>Elastic Collisions</h3>
+  <p>Elastic collisions conserve both momentum and kinetic energy, giving you two equations. For the special case of a 1D elastic collision where object 2 is initially at rest:</p>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">1D Elastic Collision (Target at Rest)</div>
+    $$v_{1f} = \frac{m_1 - m_2}{m_1 + m_2}\,v_{1i} \qquad v_{2f} = \frac{2m_1}{m_1 + m_2}\,v_{1i}$$
+  </div>
+
+  <div class="concept-box gold">
+    <strong style="color: var(--gold);">Elegant Shortcut — Relative Velocity</strong>
+    For elastic collisions, the relative speed of approach equals the relative speed of separation: $v_{1i} - v_{2i} = -(v_{1f} - v_{2f})$. This replaces the kinetic energy equation and is much easier to use because it's linear rather than quadratic.
+  </div>
+
+  <div class="qref">
+    <div class="qref-title">Special Cases — Elastic Collisions (Target at Rest)</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Case</th><th>After Collision</th><th>Example</th></tr>
+        <tr><td>$m_1 = m_2$</td><td>Ball 1 stops; Ball 2 takes its velocity</td><td>Newton's cradle</td></tr>
+        <tr><td>$m_1 \gg m_2$</td><td>Ball 1 barely slows; Ball 2 flies at $\approx 2v_{1i}$</td><td>Bowling ball → tennis ball</td></tr>
+        <tr><td>$m_1 \ll m_2$</td><td>Ball 1 bounces back at $\approx -v_{1i}$; Ball 2 barely moves</td><td>Tennis ball → wall</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ COLLISION EXPLORER ═══ -->
+  <div class="formula-explorer" id="collisionExplorer" style="border-color: var(--green);">
+    <div class="explorer-title" style="color: var(--green);"> Collision Explorer</div>
+    <div class="explorer-subtitle">Compare elastic, perfectly inelastic, and custom collisions. Axes stay fixed so you can compare scenarios.</div>
+    <div class="type-selector">
+      <button class="type-btn active" onclick="setCollisionType('elastic')">Elastic</button>
+      <button class="type-btn" onclick="setCollisionType('inelastic')">Perfectly Inelastic</button>
+    </div>
+    <div class="explorer-sliders">
+      <div class="slider-group">
+        <label>m₁ <span class="val" id="col_m1_val">2</span> kg</label>
+        <input type="range" id="colM1" min="0.5" max="8" step="0.5" value="2" oninput="drawCollision()">
+      </div>
+      <div class="slider-group">
+        <label>m₂ <span class="val" id="col_m2_val">2</span> kg</label>
+        <input type="range" id="colM2" min="0.5" max="8" step="0.5" value="2" oninput="drawCollision()">
+      </div>
+      <div class="slider-group">
+        <label>v₁ᵢ <span class="val" id="col_v1_val">5</span> m/s</label>
+        <input type="range" id="colV1" min="0" max="10" step="0.5" value="5" oninput="drawCollision()">
+      </div>
+      <div class="slider-group">
+        <label>v₂ᵢ <span class="val" id="col_v2_val">0</span> m/s</label>
+        <input type="range" id="colV2" min="-5" max="5" step="0.5" value="0" oninput="drawCollision()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">v₁ final</div><div class="result-value" id="col_v1f">—</div><div class="result-unit">m/s</div></div>
+      <div class="result-card"><div class="result-label">v₂ final</div><div class="result-value" id="col_v2f">—</div><div class="result-unit">m/s</div></div>
+      <div class="result-card"><div class="result-label">KE retained</div><div class="result-value" id="col_KE">—</div><div class="result-unit">%</div></div>
+      <div class="result-card"><div class="result-label">v_cm</div><div class="result-value" id="col_vcm">—</div><div class="result-unit">m/s</div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="collisionCanvas"></canvas>
+    </div>
+  </div>
+
+  <h3>Two-Dimensional Collisions</h3>
+  <p>In 2D collisions, momentum is conserved independently in each direction — this gives you two equations (one for $x$, one for $y$). The AP exam expects you to handle these by decomposing all velocity vectors into components.</p>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">2D Collision Strategy</strong>
+    Always set up a coordinate system where one axis aligns with the initial direction of motion. Write $\sum p_x^\text{before} = \sum p_x^\text{after}$ and $\sum p_y^\text{before} = \sum p_y^\text{after}$ as two separate equations. If one object is initially at rest, the initial $y$-momentum is zero, which means the $y$-momenta of the two objects after the collision must cancel.
+  </div>
+
+  <details>
+    <summary>Worked Example — 2D Collision</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A 2 kg puck at 5 m/s in +x hits a stationary 3 kg puck.<br>After: the 2 kg puck moves at 3 m/s at 30° above x-axis.<br>Find the 3 kg puck's velocity.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">x-momentum:</div>
+          <div class="step-math">$$(2)(5) + 0 = (2)(3cos30°) + (3)(v_2_x)$$</div>
+          <div class="step-math">$$10 = 5.196 + 3v_2_x$$</div>
+          <div class="step-math">$$v_2_x = 1.601\;\text{m/s}$$</div>
+          <div class="step-text">y-momentum:</div>
+          <div class="step-math">$$0 = (2)(3sin30°) + (3)(v_2ᵧ)$$</div>
+          <div class="step-math">$$0 = 3 + 3v_2ᵧ$$</div>
+          <div class="step-math">$$v_2ᵧ = −1\;\text{m/s}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Magnitude and direction</div>
+          <div class="step-math">$$v_2 = \sqrt(1.601^2 + 1^2) = 1.89\;\text{m/s}$$</div>
+          <div class="step-math">$$\theta = arctan(−1/1.601) = −32° (below x-axis)$$</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">A 3 kg ball at 4 m/s hits a stationary 1 kg ball elastically. Using the elastic collision formulas, what is the speed of the 1 kg ball after the collision?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$6$ m/s</div>
+      <div class="quiz-opt" data-idx="1">$4$ m/s</div>
+      <div class="quiz-opt" data-idx="2">$3$ m/s</div>
+      <div class="quiz-opt" data-idx="3">$8$ m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $v_{2f} = \frac{2m_1}{m_1+m_2}v_{1i} = \frac{2(3)}{3+1}(4) = \frac{6}{4}(4) = 6$ m/s.</div>
+    <div class="quiz-explain wrong-exp">$v_{2f} = \frac{2m_1}{m_1+m_2}v_{1i} = \frac{6}{4}(4) = 6$ m/s. Answer: (A).</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">In a head-on elastic collision, a 1 kg ball moving at 4 m/s hits a stationary 1 kg ball. What are the final velocities?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) Both at 2 m/s</div>
+      <div class="quiz-opt" data-idx="1">(B) Ball 1: 0 m/s, Ball 2: 4 m/s</div>
+      <div class="quiz-opt" data-idx="2">(C) Ball 1: 4 m/s, Ball 2: 0 m/s</div>
+      <div class="quiz-opt" data-idx="3">(D) Ball 1: −2 m/s, Ball 2: 6 m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct. For equal masses in an elastic collision with the target at rest, the projectile stops and the target takes on the projectile's original velocity. $v_{1f} = \frac{m_1-m_2}{m_1+m_2}v_{1i} = 0$ and $v_{2f} = \frac{2m_1}{m_1+m_2}v_{1i} = v_{1i} = 4$ m/s.</div>
+    <div class="quiz-explain wrong-exp">With $m_1 = m_2$, the elastic formulas give $v_{1f} = 0$ and $v_{2f} = v_{1i} = 4$ m/s. The first ball stops; the second moves at 4 m/s. Answer: (B).</div>
+  </div>
+
+  <!-- ═══ ENERGY LOSS EXPLORER ═══ -->
+  <div class="formula-explorer" id="energyExplorer" style="border-color: var(--orange);">
+    <div class="explorer-title" style="color: var(--orange);"> Energy Loss in Collisions</div>
+    <div class="explorer-subtitle">See how the mass ratio affects the fraction of kinetic energy lost in a perfectly inelastic collision (target at rest).</div>
+    <div class="explorer-sliders" style="grid-template-columns: 1fr;">
+      <div class="slider-group">
+        <label>Mass Ratio m₁/m₂ <span class="val" id="en_ratio_val">1.0</span></label>
+        <input type="range" id="enRatio" min="0.1" max="10" step="0.1" value="1" oninput="drawEnergy()">
+      </div>
+    </div>
+    <div class="explorer-results">
+      <div class="result-card"><div class="result-label">KE Retained</div><div class="result-value" id="en_kept">—</div><div class="result-unit">%</div></div>
+      <div class="result-card"><div class="result-label">KE Lost</div><div class="result-value" id="en_lost">—</div><div class="result-unit">%</div></div>
+      <div class="result-card"><div class="result-label">v_f / v₁ᵢ</div><div class="result-value" id="en_vfrac">—</div><div class="result-unit"></div></div>
+    </div>
+    <div class="explorer-canvas-wrap">
+      <canvas id="energyCanvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Exam Preparation</div>
+  <h2>Exam Strategy</h2>
+
+  <div class="card">
+    <div class="card-header">✎ Multiple-Choice Questions</div>
+    <p>MCQs in this unit test your ability to compute impulse from $F(t)$ graphs (area under the curve), compare momenta and impulses in different scenarios, determine whether a collision is elastic or inelastic from given data, and apply momentum conservation in 1D and 2D. Always assign a sign convention first, and watch for questions where a bouncing object delivers more impulse than a stopping one. Many questions can be answered quickly using the special-case elastic collision results (equal masses, heavy-on-light, light-on-heavy).</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">✎ Free-Response — Experimental Design (FRQ 3)</div>
+    <p>The third FRQ on the AP exam is an Experimental Design and Analysis question, which frequently draws from this unit. You may be asked to design an experiment to verify momentum conservation using carts on a track, or to determine an unknown mass using a collision. Key skills: describe what measurements you'd take (masses, velocities before and after), explain how you'd use them to test conservation, discuss sources of error (friction, imprecise timing, rotational effects), and linearize your data for graphing.</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">FRQ Step-by-Step</strong>
+    <span style="display:block; margin-top: 8px;">1. <strong>Identify the system</strong> and state that you assume external forces are negligible.</span>
+    <span style="display:block; margin-top: 4px;">2. <strong>Write conservation of momentum</strong> in component form if 2D.</span>
+    <span style="display:block; margin-top: 4px;">3. <strong>Check elastic vs. inelastic</strong> — if the problem says "sticks together," it's perfectly inelastic; use the simpler equation.</span>
+    <span style="display:block; margin-top: 4px;">4. <strong>Show units</strong> and box your final answer.</span>
+    <span style="display:block; margin-top: 4px;">5. For experimental design, describe the procedure <em>sequentially</em>, list all measurements, explain how to use them, and discuss at least one source of error.</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ COMMON MISTAKES ═══════════════ -->
+<section class="section" id="common-mistakes">
+  <div class="section-label">Pitfalls</div>
+  <h2>Common Mistakes</h2>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top Point-Losing Errors</strong>
+    <p style="margin-top:8px"><strong>1. Forgetting that momentum is a vector.</strong> You must assign signs or use components. Simply adding magnitudes is wrong whenever objects move in different directions.</p>
+    <p><strong>2. Confusing elastic and perfectly inelastic.</strong> "Elastic" conserves KE. "Perfectly inelastic" means they stick together. Many students swap these under time pressure.</p>
+    <p><strong>3. Assuming KE is always conserved.</strong> Kinetic energy is conserved only in elastic collisions. Momentum is conserved in all collisions (when external forces are negligible). Don't conflate the two.</p>
+    <p><strong>4. Using the wrong equation.</strong> $v_f = (m_1 v_1 + m_2 v_2)/(m_1 + m_2)$ is only valid for perfectly inelastic collisions. Don't use it for elastic collisions.</p>
+    <p><strong>5. Ignoring direction change in impulse.</strong> A ball bouncing back has a <em>larger</em> $|\Delta p|$ than a ball that stops. The reversal of direction doubles the momentum change.</p>
+    <p><strong>6. Applying momentum conservation when external forces are significant.</strong> If a collision occurs on an incline or with friction over a long time, external forces matter.</p>
+    <p><strong>7. Mixing up impulse and momentum.</strong> Impulse is the <em>change</em> in momentum ($\vec{J} = \Delta\vec{p}$), not the momentum itself.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+  <p>Click a card to flip it.</p>
+
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Linear Momentum</div>
+        <div class="flashcard-back">$$\vec{p} = m\vec{v}$$<br>Vector, same direction as $\vec{v}$<br>Units: kg·m/s</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Newton's 2nd Law<br>(Momentum Form)</div>
+        <div class="flashcard-back">$$\vec{F}_\text{net} = \frac{d\vec{p}}{dt}$$<br>Force = rate of change of momentum</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Impulse–Momentum<br>Theorem</div>
+        <div class="flashcard-back">$$\vec{J} = \int \vec{F}\,dt = \Delta\vec{p}$$<br>Area under $F(t)$ curve = $\Delta p$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Conservation of<br>Momentum</div>
+        <div class="flashcard-back">$$\sum \vec{p}_\text{before} = \sum \vec{p}_\text{after}$$<br>When $\vec{F}_\text{ext,net} = 0$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Perfectly Inelastic<br>Collision</div>
+        <div class="flashcard-back">Objects stick together<br>$$v_f = \frac{m_1 v_1 + m_2 v_2}{m_1 + m_2}$$<br>Max KE loss; momentum conserved</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Elastic Collision<br>(Equal Masses)</div>
+        <div class="flashcard-back">Projectile stops; target takes its velocity.<br>Both $\vec{p}$ and $K$ conserved.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Relative Velocity Rule<br>(Elastic Only)</div>
+        <div class="flashcard-back">$$v_{1i} - v_{2i} = -(v_{1f} - v_{2f})$$<br>Approach speed = Separation speed</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Center-of-Mass<br>Velocity</div>
+        <div class="flashcard-back">$$\vec{v}_\text{cm} = \frac{\sum m_i \vec{v}_i}{\sum m_i}$$<br>Constant when $F_\text{ext} = 0$</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit Quiz</h2>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q"><strong>Q1.</strong> A 60 kg person jumps off a 200 kg boat (both initially at rest on frictionless water). If the person's velocity is 3 m/s relative to the dock, the boat's velocity is:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 3 m/s in the same direction</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 1.2 m/s opposite</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 0.9 m/s opposite</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 0.6 m/s opposite</div>
+    </div>
+    <div class="quiz-explain correct-exp">$0 = 60(3) + 200(v_b)$, so $v_b = -180/200 = -0.9$ m/s. The boat moves at 0.9 m/s opposite to the person.</div>
+    <div class="quiz-explain wrong-exp">Conservation of momentum: $0 = m_p v_p + m_b v_b \Rightarrow v_b = -60(3)/200 = -0.9$ m/s. Answer: (C).</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q"><strong>Q2.</strong> A force $F(t) = 6t$ N acts on a 3 kg object from $t = 0$ to $t = 4$ s. If the object starts from rest, its final speed is:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 8 m/s</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 16 m/s</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 24 m/s</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 48 m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">$J = \int_0^4 6t\,dt = 3t^2\big|_0^4 = 48$ N·s. $\Delta p = J = 48$ kg·m/s. $v_f = 48/3 = 16$ m/s.</div>
+    <div class="quiz-explain wrong-exp">Impulse $= \int_0^4 6t\,dt = 3(16) = 48$ N·s. By impulse–momentum theorem, $v_f = J/m = 48/3 = 16$ m/s. Answer: (B).</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q"><strong>Q3.</strong> A 2 kg ball moving at 5 m/s collides elastically with a 6 kg ball at rest. What is the velocity of the 2 kg ball after the collision?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; +1.25 m/s</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 0 m/s</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; −1.25 m/s</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; −2.5 m/s</div>
+    </div>
+    <div class="quiz-explain correct-exp">$v_{1f} = \frac{m_1 - m_2}{m_1 + m_2}v_{1i} = \frac{2-6}{2+6}(5) = \frac{-4}{8}(5) = -2.5$ m/s. The ball bounces back.</div>
+    <div class="quiz-explain wrong-exp">$v_{1f} = \frac{m_1-m_2}{m_1+m_2}v_{1i} = \frac{-4}{8}(5) = -2.5$ m/s (bounces back). Answer: (D).</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q"><strong>Q4.</strong> Two identical objects undergo a perfectly inelastic collision. Object 1 moves at $v$ and Object 2 is at rest. What fraction of the initial kinetic energy remains?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 1/2</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 1/4</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 3/4</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 0</div>
+    </div>
+    <div class="quiz-explain correct-exp">$v_f = mv/(m+m) = v/2$. $K_i = \frac{1}{2}mv^2$. $K_f = \frac{1}{2}(2m)(v/2)^2 = \frac{1}{4}mv^2$. Fraction: $K_f/K_i = 1/2$.</div>
+    <div class="quiz-explain wrong-exp">$v_f = v/2$. $K_f = \frac{1}{2}(2m)(v/2)^2 = \frac{mv^2}{4}$. $K_i = \frac{mv^2}{2}$. Ratio = $1/2$. Answer: (A).</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q"><strong>Q5.</strong> A 0.2 kg ball hits the floor at 8 m/s and bounces up at 6 m/s. The impulse delivered by the floor is (take upward as positive):</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">(A) &nbsp; 0.4 kg·m/s upward</div>
+      <div class="quiz-opt" data-idx="1">(B) &nbsp; 1.2 kg·m/s downward</div>
+      <div class="quiz-opt" data-idx="2">(C) &nbsp; 2.8 kg·m/s upward</div>
+      <div class="quiz-opt" data-idx="3">(D) &nbsp; 2.8 kg·m/s downward</div>
+    </div>
+    <div class="quiz-explain correct-exp">$p_i = 0.2(-8) = -1.6$ kg·m/s (downward). $p_f = 0.2(+6) = +1.2$ kg·m/s (upward). $J = p_f - p_i = 1.2 - (-1.6) = +2.8$ kg·m/s (upward).</div>
+    <div class="quiz-explain wrong-exp">With up positive: $\Delta p = 0.2(6) - 0.2(-8) = 1.2 + 1.6 = 2.8$ kg·m/s upward. Answer: (C).</div>
+  </div>
+</section>
+
+<!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
+<section>
+  <div class="qref">
+    <div class="qref-title">Unit 4 Formula Quick Reference</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size:0.88rem;">
+      <div>$\vec{p} = m\vec{v}$</div>
+      <div>$\vec{F}_\text{net} = d\vec{p}/dt$</div>
+      <div>$\vec{J} = \int \vec{F}\,dt = \Delta\vec{p}$</div>
+      <div>$\vec{F}_\text{avg} = \Delta\vec{p}/\Delta t$</div>
+      <div>$\sum \vec{p}_i = \sum \vec{p}_f$</div>
+      <div>$\vec{v}_\text{cm} = \sum m_i\vec{v}_i / \sum m_i$</div>
+      <div>$v_f = \frac{m_1 v_1 + m_2 v_2}{m_1+m_2}$ <span style="font-size:0.75rem;color:var(--text-secondary)">(perf. inelastic)</span></div>
+      <div>$v_{1f} = \frac{m_1-m_2}{m_1+m_2}v_{1i}$ <span style="font-size:0.75rem;color:var(--text-secondary)">(elastic, $v_{2i}=0$)</span></div>
+      <div>$v_{2f} = \frac{2m_1}{m_1+m_2}v_{1i}$ <span style="font-size:0.75rem;color:var(--text-secondary)">(elastic, $v_{2i}=0$)</span></div>
+      <div>$F_\text{net} = \frac{dm}{dt}v$ <span style="font-size:0.75rem;color:var(--text-secondary)">(variable mass)</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p style="font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px;">鼎睿学苑 · Dingrui Scholars</p>
+  AP Physics C: Mechanics · Unit 4: Linear Momentum · 2025
+</footer>
+
+</main>
+
+<script>
+// ═══ THEME ═══
+function toggleTheme() {
+  var html = document.documentElement;
+  var dark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', dark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = dark ? 'Dark' : 'Light';
+  drawImpulse(); drawCollision(); drawEnergy();
+}
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = 'Light';
+}
+
+// ═══ SIDEBAR ═══
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+  const isOpen = sidebar.classList.contains('open');
+  const btn = document.getElementById('tocToggle');
+  if (btn) btn.classList.toggle('active', isOpen);
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.querySelectorAll('.sidebar a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    if (window.innerWidth <= 1100) document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+// ═══ PROGRESS BAR ═══
+window.addEventListener('scroll', function() {
+  var scroll = document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  document.getElementById('progressFill').style.width = (scroll / height * 100) + '%';
+});
+
+// ═══ ACTIVE TOC ═══
+var sections = document.querySelectorAll('.section[id]');
+var sideLinks = document.querySelectorAll('.sidebar a');
+var tocObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      sideLinks.forEach(function(l) { l.classList.remove('active'); });
+      var id = entry.target.id;
+      var active = document.querySelector('.sidebar a[href="#' + id + '"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -75% 0px', threshold: 0 });
+sections.forEach(function(s) { tocObserver.observe(s); });
+
+// ═══ QUIZ ═══
+document.querySelectorAll('.quiz').forEach(function(quiz) {
+  var correct = parseInt(quiz.dataset.answer);
+  var opts = quiz.querySelectorAll('.quiz-opt');
+  var correctExp = quiz.querySelector('.correct-exp');
+  var wrongExp = quiz.querySelector('.wrong-exp');
+  opts.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      if (opt.classList.contains('disabled')) return;
+      var idx = parseInt(opt.dataset.idx);
+      opts.forEach(function(o) { o.classList.add('disabled'); if (parseInt(o.dataset.idx) === correct) o.classList.add('correct'); });
+      if (idx === correct) { correctExp.classList.add('show'); } else { opt.classList.add('wrong'); wrongExp.classList.add('show'); }
+    });
+  });
+});
+
+// ═══ ANIMATE IN ═══
+var animObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.animate-in').forEach(function(el) { animObserver.observe(el); });
+
+// ═══ CANVAS UTILITIES ═══
+function getColors() {
+  var s = getComputedStyle(document.documentElement);
+  return {
+    bg: s.getPropertyValue('--bg').trim(),
+    card: s.getPropertyValue('--bg-card').trim(),
+    text: s.getPropertyValue('--text').trim(),
+    textSec: s.getPropertyValue('--text-secondary').trim(),
+    accent: s.getPropertyValue('--accent').trim(),
+    green: s.getPropertyValue('--green').trim(),
+    orange: s.getPropertyValue('--orange').trim(),
+    red: s.getPropertyValue('--red').trim(),
+    purple: s.getPropertyValue('--purple').trim(),
+    border: s.getPropertyValue('--border').trim(),
+    accentLight: s.getPropertyValue('--accent-light').trim()
+  };
+}
+
+function setupCanvas(canvas, W, H) {
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, lw) {
+  var angle = Math.atan2(y2 - y1, x2 - x1);
+  var len = 8;
+  ctx.strokeStyle = color; ctx.lineWidth = lw || 2;
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  ctx.fillStyle = color; ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - len * Math.cos(angle - 0.4), y2 - len * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - len * Math.cos(angle + 0.4), y2 - len * Math.sin(angle + 0.4));
+  ctx.closePath(); ctx.fill();
+}
+
+// ═══════════════════════════════════════════════
+// IMPULSE EXPLORER
+// ═══════════════════════════════════════════════
+function drawImpulse() {
+  var Fpk = parseFloat(document.getElementById('impF').value);
+  var dt = parseFloat(document.getElementById('impDt').value);
+  var m = parseFloat(document.getElementById('impM').value);
+  var v0 = parseFloat(document.getElementById('impV0').value);
+
+  document.getElementById('imp_F_val').textContent = Fpk;
+  document.getElementById('imp_dt_val').textContent = dt;
+  document.getElementById('imp_m_val').textContent = m;
+  document.getElementById('imp_v0_val').textContent = v0;
+
+  // Triangular impulse
+  var J = 0.5 * Fpk * dt;
+  var dv = J / m;
+  var vf = v0 + dv;
+  var Favg = J / dt;
+
+  document.getElementById('imp_J').textContent = J.toFixed(1);
+  document.getElementById('imp_dv').textContent = dv.toFixed(1);
+  document.getElementById('imp_vf').textContent = vf.toFixed(1);
+  document.getElementById('imp_Favg').textContent = Favg.toFixed(1);
+
+  var canvas = document.getElementById('impulseCanvas');
+  if (!canvas) return;
+  var W = 800, H = 380, ctx = setupCanvas(canvas, W, H), c = getColors();
+
+  // Fixed axes: t from 0 to 7s, F from 0 to 28N
+  var tMax = 7, FMax = 28;
+  var pad = { l: 60, r: 30, t: 30, b: 50 };
+  var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+  function tx(t) { return pad.l + (t / tMax) * pw; }
+  function fy(f) { return pad.t + ph - (f / FMax) * ph; }
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = c.card; ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = c.border; ctx.lineWidth = 0.5;
+  for (var i = 0; i <= 7; i++) { ctx.beginPath(); ctx.moveTo(tx(i), pad.t); ctx.lineTo(tx(i), pad.t + ph); ctx.stroke(); }
+  for (var f = 0; f <= 28; f += 4) { ctx.beginPath(); ctx.moveTo(pad.l, fy(f)); ctx.lineTo(pad.l + pw, fy(f)); ctx.stroke(); }
+
+  // Shaded area (triangular pulse)
+  ctx.fillStyle = c.accent + '33';
+  ctx.beginPath();
+  ctx.moveTo(tx(0), fy(0));
+  ctx.lineTo(tx(dt / 2), fy(Fpk));
+  ctx.lineTo(tx(dt), fy(0));
+  ctx.closePath();
+  ctx.fill();
+
+  // Force curve
+  ctx.strokeStyle = c.accent; ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(tx(0), fy(0));
+  ctx.lineTo(tx(dt / 2), fy(Math.min(Fpk, FMax)));
+  ctx.lineTo(tx(dt), fy(0));
+  ctx.lineTo(tx(tMax), fy(0));
+  ctx.stroke();
+
+  // Axes
+  ctx.strokeStyle = c.text; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, pad.t + ph); ctx.lineTo(pad.l + pw, pad.t + ph); ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = c.text; ctx.font = '13px "JetBrains Mono"'; ctx.textAlign = 'center';
+  for (var i = 0; i <= 7; i++) { ctx.fillText(i + 's', tx(i), pad.t + ph + 20); }
+  ctx.textAlign = 'right';
+  for (var f = 0; f <= 28; f += 4) { ctx.fillText(f, pad.l - 8, fy(f) + 4); }
+
+  ctx.save(); ctx.translate(16, pad.t + ph / 2); ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center'; ctx.fillText('F (N)', 0, 0); ctx.restore();
+  ctx.textAlign = 'center'; ctx.fillText('t (s)', pad.l + pw / 2, H - 8);
+
+  // Impulse label
+  ctx.fillStyle = c.accent; ctx.font = 'bold 14px "JetBrains Mono"';
+  ctx.fillText('J = ' + J.toFixed(1) + ' N·s', tx(dt / 2), fy(Fpk / 3));
+}
+
+// ═══════════════════════════════════════════════
+// COLLISION EXPLORER
+// ═══════════════════════════════════════════════
+var collisionType = 'elastic';
+function setCollisionType(type) {
+  collisionType = type;
+  document.querySelectorAll('.type-btn').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+  drawCollision();
+}
+
+function drawCollision() {
+  var m1 = parseFloat(document.getElementById('colM1').value);
+  var m2 = parseFloat(document.getElementById('colM2').value);
+  var v1i = parseFloat(document.getElementById('colV1').value);
+  var v2i = parseFloat(document.getElementById('colV2').value);
+
+  document.getElementById('col_m1_val').textContent = m1;
+  document.getElementById('col_m2_val').textContent = m2;
+  document.getElementById('col_v1_val').textContent = v1i;
+  document.getElementById('col_v2_val').textContent = v2i;
+
+  var v1f, v2f;
+  if (collisionType === 'elastic') {
+    v1f = ((m1 - m2) * v1i + 2 * m2 * v2i) / (m1 + m2);
+    v2f = ((m2 - m1) * v2i + 2 * m1 * v1i) / (m1 + m2);
+  } else {
+    v1f = (m1 * v1i + m2 * v2i) / (m1 + m2);
+    v2f = v1f;
+  }
+
+  var KEi = 0.5 * m1 * v1i * v1i + 0.5 * m2 * v2i * v2i;
+  var KEf = (collisionType === 'elastic') ? (0.5 * m1 * v1f * v1f + 0.5 * m2 * v2f * v2f) : (0.5 * (m1 + m2) * v1f * v1f);
+  var KEpct = KEi > 0 ? (KEf / KEi * 100) : 100;
+  var vcm = (m1 * v1i + m2 * v2i) / (m1 + m2);
+
+  document.getElementById('col_v1f').textContent = v1f.toFixed(2);
+  document.getElementById('col_v2f').textContent = v2f.toFixed(2);
+  document.getElementById('col_KE').textContent = KEpct.toFixed(1);
+  document.getElementById('col_vcm').textContent = vcm.toFixed(2);
+
+  var canvas = document.getElementById('collisionCanvas');
+  if (!canvas) return;
+  var W = 800, H = 340, ctx = setupCanvas(canvas, W, H), c = getColors();
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = c.card; ctx.fillRect(0, 0, W, H);
+
+  // Fixed velocity axis: -12 to 12 m/s
+  var vMax = 12;
+  var barH = 60, gap = 30;
+  var centerX = W / 2, axisY = 30;
+
+  // Label
+  ctx.fillStyle = c.text; ctx.font = 'bold 13px "JetBrains Mono"'; ctx.textAlign = 'center';
+  ctx.fillText('BEFORE', centerX, axisY + 15);
+
+  // Scale: pixels per m/s
+  var pxPerV = (W - 120) / (2 * vMax);
+
+  function drawBar(label, v, mass, y, color) {
+    var barW = Math.abs(v) * pxPerV;
+    var x = v >= 0 ? centerX : centerX - barW;
+    var h = 20 + mass * 4; // scale bar height by mass
+    ctx.fillStyle = color + '88';
+    ctx.fillRect(x, y - h / 2, barW, h);
+    ctx.strokeStyle = color; ctx.lineWidth = 2;
+    ctx.strokeRect(x, y - h / 2, barW, h);
+    // Arrow
+    if (Math.abs(v) > 0.1) {
+      var arrowX = v >= 0 ? x + barW : x;
+      drawArrow(ctx, centerX, y, arrowX, y, color, 2);
+    }
+    // Label
+    ctx.fillStyle = c.text; ctx.font = '12px "JetBrains Mono"'; ctx.textAlign = 'center';
+    ctx.fillText(label + ': ' + v.toFixed(1) + ' m/s', v >= 0 ? x + barW / 2 : x + barW / 2, y + h / 2 + 16);
+  }
+
+  // Before
+  var y1b = axisY + 55;
+  drawBar('m₁', v1i, m1, y1b, c.accent);
+  drawBar('m₂', v2i, m2, y1b + barH + 10, c.green);
+
+  // After
+  var afterY = y1b + barH + 80;
+  ctx.fillStyle = c.text; ctx.font = 'bold 13px "JetBrains Mono"'; ctx.textAlign = 'center';
+  ctx.fillText('AFTER (' + (collisionType === 'elastic' ? 'Elastic' : 'Perfectly Inelastic') + ')', centerX, afterY);
+
+  if (collisionType === 'inelastic') {
+    drawBar('m₁+m₂', v1f, m1 + m2, afterY + 40, c.orange);
+  } else {
+    drawBar('m₁', v1f, m1, afterY + 35, c.accent);
+    drawBar('m₂', v2f, m2, afterY + 35 + barH + 10, c.green);
+  }
+
+  // Center line
+  ctx.strokeStyle = c.border; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(centerX, axisY); ctx.lineTo(centerX, H - 10); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // v_cm line
+  var vcmX = centerX + vcm * pxPerV;
+  ctx.strokeStyle = c.purple; ctx.lineWidth = 2; ctx.setLineDash([6, 3]);
+  ctx.beginPath(); ctx.moveTo(vcmX, axisY); ctx.lineTo(vcmX, H - 10); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = c.purple; ctx.font = '11px "JetBrains Mono"'; ctx.textAlign = 'center';
+  ctx.fillText('v_cm', vcmX, H - 2);
+
+  // Velocity axis at bottom
+  ctx.strokeStyle = c.text; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(60, H - 20); ctx.lineTo(W - 60, H - 20); ctx.stroke();
+  ctx.fillStyle = c.textSec; ctx.font = '10px "JetBrains Mono"'; ctx.textAlign = 'center';
+  for (var v = -12; v <= 12; v += 4) {
+    var vx = centerX + v * pxPerV;
+    ctx.fillText(v, vx, H - 8);
+    ctx.beginPath(); ctx.moveTo(vx, H - 23); ctx.lineTo(vx, H - 17); ctx.stroke();
+  }
+}
+
+// ═══════════════════════════════════════════════
+// ENERGY LOSS EXPLORER
+// ═══════════════════════════════════════════════
+function drawEnergy() {
+  var ratio = parseFloat(document.getElementById('enRatio').value);
+  document.getElementById('en_ratio_val').textContent = ratio.toFixed(1);
+
+  // For perfectly inelastic, target at rest: KE_retained = m1 / (m1 + m2) = ratio / (ratio + 1)
+  var kept = ratio / (ratio + 1);
+  var lost = 1 - kept;
+  var vfrac = ratio / (ratio + 1); // v_f / v_1i = m1/(m1+m2)
+
+  document.getElementById('en_kept').textContent = (kept * 100).toFixed(1);
+  document.getElementById('en_lost').textContent = (lost * 100).toFixed(1);
+  document.getElementById('en_vfrac').textContent = vfrac.toFixed(3);
+
+  var canvas = document.getElementById('energyCanvas');
+  if (!canvas) return;
+  var W = 800, H = 340, ctx = setupCanvas(canvas, W, H), c = getColors();
+
+  // Fixed axes: ratio 0 to 10, KE fraction 0 to 1
+  var pad = { l: 60, r: 30, t: 30, b: 50 };
+  var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
+
+  function rx(r) { return pad.l + (r / 10) * pw; }
+  function ky(k) { return pad.t + ph - k * ph; }
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = c.card; ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = c.border; ctx.lineWidth = 0.5;
+  for (var r = 0; r <= 10; r++) { ctx.beginPath(); ctx.moveTo(rx(r), pad.t); ctx.lineTo(rx(r), pad.t + ph); ctx.stroke(); }
+  for (var k = 0; k <= 1; k += 0.2) { ctx.beginPath(); ctx.moveTo(pad.l, ky(k)); ctx.lineTo(pad.l + pw, ky(k)); ctx.stroke(); }
+
+  // KE retained curve
+  ctx.strokeStyle = c.green; ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (var r = 0; r <= 10; r += 0.05) {
+    var kv = r / (r + 1);
+    var px = rx(r), py = ky(kv);
+    if (r === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // KE lost curve
+  ctx.strokeStyle = c.red; ctx.lineWidth = 3;
+  ctx.beginPath();
+  for (var r = 0; r <= 10; r += 0.05) {
+    var kv = 1 / (r + 1);
+    var px = rx(r), py = ky(kv);
+    if (r === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+
+  // Current point
+  ctx.fillStyle = c.green;
+  ctx.beginPath(); ctx.arc(rx(ratio), ky(kept), 7, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = c.red;
+  ctx.beginPath(); ctx.arc(rx(ratio), ky(lost), 7, 0, 2 * Math.PI); ctx.fill();
+
+  // Axes
+  ctx.strokeStyle = c.text; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, pad.t + ph); ctx.lineTo(pad.l + pw, pad.t + ph); ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = c.text; ctx.font = '12px "JetBrains Mono"'; ctx.textAlign = 'center';
+  for (var r = 0; r <= 10; r += 2) { ctx.fillText(r, rx(r), pad.t + ph + 18); }
+  ctx.textAlign = 'right';
+  for (var k = 0; k <= 1; k += 0.2) { ctx.fillText((k * 100).toFixed(0) + '%', pad.l - 8, ky(k) + 4); }
+
+  ctx.save(); ctx.translate(14, pad.t + ph / 2); ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center'; ctx.font = '12px "JetBrains Mono"'; ctx.fillText('Fraction of KE', 0, 0); ctx.restore();
+  ctx.textAlign = 'center'; ctx.fillText('Mass ratio m₁/m₂', pad.l + pw / 2, H - 8);
+
+  // Legend
+  ctx.font = 'bold 12px "JetBrains Mono"';
+  ctx.fillStyle = c.green; ctx.textAlign = 'left';
+  ctx.fillRect(pad.l + pw - 160, pad.t + 10, 14, 14); ctx.fillText('KE retained', pad.l + pw - 142, pad.t + 22);
+  ctx.fillStyle = c.red;
+  ctx.fillRect(pad.l + pw - 160, pad.t + 30, 14, 14); ctx.fillText('KE lost', pad.l + pw - 142, pad.t + 42);
+}
+
+// ═══ KAEX RENDER ═══
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(document.body, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError: false });
+  }
+  drawImpulse(); drawCollision(); drawEnergy();
+});
+window.addEventListener('load', function() {
+  if (typeof renderMathInElement !== 'undefined') {
+    renderMathInElement(document.body, { delimiters: [{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError: false });
+  }
+  drawImpulse(); drawCollision(); drawEnergy();
+});
+
+// Redraw on resize
+var resizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() { drawImpulse(); drawCollision(); drawEnergy(); }, 200);
+});
+
+
+(function finalPolish(){
+  var main = document.querySelector('main, .main, .main-wrap');
+  if (main && !document.querySelector('.skip-link')) {
+    if (!main.id) main.id = 'main-content';
+    var skip = document.createElement('a');
+    skip.className = 'skip-link';
+    skip.href = '#' + main.id;
+    skip.textContent = 'Skip to content';
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
+  document.querySelectorAll('.quiz-opt').forEach(function(opt){
+    opt.setAttribute('role', 'button');
+    opt.setAttribute('tabindex', '0');
+    opt.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        opt.click();
+      }
+    });
+  });
+
+  var topBtn = document.getElementById('backToTop');
+  if (topBtn) {
+    var syncTopBtn = function(){
+      if (window.scrollY > 500) topBtn.classList.add('show');
+      else topBtn.classList.remove('show');
+    };
+    window.addEventListener('scroll', syncTopBtn, { passive: true });
+    syncTopBtn();
+    topBtn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+})();
+
+</script>
+</body>
+</html>

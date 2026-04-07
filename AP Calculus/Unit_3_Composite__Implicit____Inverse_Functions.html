@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 — Differentiation: Composite, Implicit, and Inverse Functions | AP Calculus AB/BC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — Warm Maroon / Burgundy Theme
+   ═══════════════════════════════════════════ */
+:root {
+  /* Brand palette — warm maroon / burgundy academic identity */
+  --brand-primary: #7A2E2E;
+  --brand-primary-light: #974444;
+  --brand-primary-dark: #5C1E1E;
+  --brand-accent: #B8756A;
+  --brand-accent-light: #D4978E;
+  --brand-secondary: #5A3A3A;
+
+  /* Light theme */
+  --bg-body: #F5F0EB;
+  --bg-surface: #ffffff;
+  --bg-surface-raised: #F0EBE6;
+  --bg-nav: rgba(245, 240, 235, 0.92);
+  --bg-sidebar: #F0EBE6;
+  --bg-code: #EBE5DE;
+  --bg-hero: linear-gradient(135deg, #F5F0EB 0%, #F0E8E0 40%, #EDE5DB 100%);
+  --bg-card: #ffffff;
+  --bg-card-hover: #FAF7F4;
+  --bg-flashcard: linear-gradient(145deg, #ffffff, #F5F0EB);
+  --bg-quiz-option: #F5F1ED;
+  --bg-quiz-correct: #e8f5e9;
+  --bg-quiz-incorrect: #fce4e4;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-tertiary: #7a7a7a;
+  --text-inverse: #ffffff;
+  --text-on-brand: #ffffff;
+  --text-link: var(--brand-primary);
+
+  --border-light: #E0D8CE;
+  --border-medium: #D0C5B8;
+  --border-dark: #B8ADA0;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+
+  /* Concept box variants */
+  --box-default-border: var(--brand-primary);
+  --box-default-bg: #F5EDED;
+  --box-green-border: #4A7A4A;
+  --box-green-bg: #EBF3EB;
+  --box-orange-border: #B86E3A;
+  --box-orange-bg: #FDF3E8;
+  --box-red-border: #A03030;
+  --box-red-bg: #FCE8E8;
+  --box-purple-border: #7A4A8A;
+  --box-purple-bg: #F3EBF5;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* Typography */
+  --font-serif: 'DM Serif Display', Georgia, serif;
+  --font-sans: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.75rem;
+  --fs-4xl: 3.5rem;
+
+  --sidebar-width: 280px;
+  --nav-height: 60px;
+}
+
+/* ═══════════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg-body: #151010;
+  --bg-surface: #1E1818;
+  --bg-surface-raised: #251E1E;
+  --bg-nav: rgba(21, 16, 16, 0.94);
+  --bg-sidebar: #1E1818;
+  --bg-code: #251E1E;
+  --bg-hero: linear-gradient(135deg, #1A1212 0%, #151010 40%, #1A1510 100%);
+  --bg-card: #221A1A;
+  --bg-card-hover: #2A2020;
+  --bg-flashcard: linear-gradient(145deg, #221A1A, #251E1E);
+  --bg-quiz-option: #251E1E;
+  --bg-quiz-correct: #1A2E1A;
+  --bg-quiz-incorrect: #2E1A1A;
+
+  --text-primary: #E8E2DE;
+  --text-secondary: #B0A8A2;
+  --text-tertiary: #7D7572;
+  --text-inverse: #151010;
+  --text-link: var(--brand-primary-light);
+
+  --border-light: #302828;
+  --border-medium: #403535;
+  --border-dark: #504545;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.35);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.45);
+
+  --box-default-bg: #1F1414;
+  --box-green-bg: #141F14;
+  --box-orange-bg: #1F1A14;
+  --box-red-bg: #1F1212;
+  --box-purple-bg: #1A141F;
+
+  --brand-primary: #C87070;
+  --brand-primary-light: #D89090;
+  --brand-accent: #D4978E;
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 20px); }
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+a { color: var(--text-link); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--brand-accent); }
+img { max-width: 100%; display: block; }
+
+/* ═══════════════════════════════════════════
+   TOP NAVIGATION
+   ═══════════════════════════════════════════ */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-height);
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--space-lg);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.nav-left { display: flex; align-items: center; gap: var(--space-md); }
+.nav-brand {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: var(--space-sm);
+}
+.nav-brand-icon {
+  width: 32px; height: 32px;
+  background: var(--brand-primary);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 14px;
+  font-family: var(--font-mono);
+}
+.nav-badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--brand-primary);
+  color: var(--text-on-brand);
+}
+.nav-left-simple { gap: 0; }
+.nav-badge-left { font-size: var(--fs-sm); padding: 8px 14px; }
+.nav-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: nowrap;
+}
+.header-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-left: 2px;
+}
+.nav-btn {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.nav-btn:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.nav-btn:focus-visible, .sidebar-nav a:focus-visible, .quiz-option:focus-visible, .quiz-reset-btn:focus-visible { outline: 2px solid var(--brand-primary); outline-offset: 2px; }
+.nav-btn svg { width: 16px; height: 16px; }
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR
+   ═══════════════════════════════════════════ */
+.progress-bar {
+  position: fixed; top: var(--nav-height); left: 0; right: 0; z-index: 999;
+  height: 3px; background: var(--border-light);
+}
+.progress-bar-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR TOC
+   ═══════════════════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: calc(var(--nav-height) + 3px);
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--nav-height) - 3px);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-light);
+  overflow-y: auto;
+  padding: var(--space-lg) var(--space-md);
+  z-index: 900;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-md);
+}
+.sidebar-nav { list-style: none; }
+.sidebar-nav li { margin-bottom: 2px; }
+.sidebar-nav a {
+  display: block;
+  padding: 6px 12px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.sidebar-nav a:hover { color: var(--text-primary); background: var(--bg-surface); }
+.sidebar-nav a.active {
+  color: var(--brand-primary);
+  background: var(--box-default-bg);
+  font-weight: 600;
+}
+.sidebar-nav .sub-item a { padding-left: 24px; font-size: 0.8rem; }
+
+
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════ */
+
+.content-wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+@media (max-width: 768px) { .content-wrap { padding: 0 16px; } }
+
+.main-content {
+  margin-left: 0;
+  padding-top: calc(var(--nav-height) + 3px);
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+@media (max-width: 1100px) {
+  
+.main-content { margin-left: 0; }
+}
+.content-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+@media (max-width: 600px) {
+  .content-inner { padding: 0 var(--space-md); }
+}
+
+/* ═══════════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════════ */
+.hero {
+  background: var(--bg-hero);
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  border-bottom: 1px solid var(--border-light);
+}
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-sm);
+}
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-3xl);
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+@media (max-width: 600px) { .hero-title { font-size: var(--fs-2xl); } }
+.hero-subtitle {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.65;
+  margin-bottom: var(--space-xl);
+}
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: var(--space-sm);
+}
+.hero-chip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  display: flex; align-items: center; gap: 6px;
+}
+.hero-chip strong { color: var(--text-primary); font-weight: 700; }
+
+/* ═══════════════════════════════════════════
+   SECTION STYLING
+   ═══════════════════════════════════════════ */
+.section {
+  padding: var(--space-2xl) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.section:last-of-type { border-bottom: none; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-sm);
+}
+.section h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-2xl);
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+.section h3 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  color: var(--text-primary);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+.section p {
+  margin-bottom: var(--space-md);
+  color: var(--text-secondary);
+}
+.section p strong { color: var(--text-primary); }
+
+/* ═══════════════════════════════════════════
+   CONCEPT BOXES
+   ═══════════════════════════════════════════ */
+.concept-box {
+  border-left: 4px solid var(--box-default-border);
+  background: var(--box-default-bg);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 0 8px 8px 0;
+  margin: var(--space-lg) 0;
+  transition: background 0.3s ease;
+}
+.concept-box strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+  color: var(--text-primary);
+}
+.concept-box p { margin-bottom: var(--space-xs); color: var(--text-secondary); }
+.concept-box p:last-child { margin-bottom: 0; }
+.concept-box.green { border-color: var(--box-green-border); background: var(--box-green-bg); }
+.concept-box.orange { border-color: var(--box-orange-border); background: var(--box-orange-bg); }
+.concept-box.red { border-color: var(--box-red-border); background: var(--box-red-bg); }
+.concept-box.purple { border-color: var(--box-purple-border); background: var(--box-purple-bg); }
+
+/* ═══════════════════════════════════════════
+   FORMULA BOX
+   ═══════════════════════════════════════════ */
+.formula-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: var(--space-lg) var(--space-xl);
+  margin: var(--space-lg) 0;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.formula-box .katex { font-size: 1.3em; }
+.formula-box-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════
+   EXAMPLE BOX
+   ═══════════════════════════════════════════ */
+.example-box {
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+.example-box-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-accent);
+  margin-bottom: var(--space-sm);
+}
+.example-box .step {
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════
+   TABLE STYLING
+   ═══════════════════════════════════════════ */
+.table-wrapper {
+  overflow-x: auto;
+  margin: var(--space-lg) 0;
+  border-radius: 10px;
+  border: 1px solid var(--border-light);
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.styled-table thead {
+  background: var(--brand-primary);
+  color: #fff;
+}
+.styled-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+}
+.styled-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+.styled-table tbody tr:nth-child(even) { background: var(--bg-surface-raised); }
+.styled-table tbody tr:hover { background: var(--bg-card-hover); }
+
+/* ═══════════════════════════════════════════
+   INTERACTIVE VISUALIZATION CONTAINERS
+   ═══════════════════════════════════════════ */
+.interactive-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+}
+.interactive-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-md);
+}
+.interactive-canvas-wrap {
+  position: relative;
+  width: 100%;
+  background: var(--bg-surface-raised);
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+.interactive-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.interactive-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+}
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 180px;
+}
+.slider-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+.slider-label .val { color: var(--brand-primary); font-weight: 600; }
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-light);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  border: 2px solid var(--bg-surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  border: 2px solid var(--bg-surface);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.interactive-readout {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-surface-raised);
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  margin-top: var(--space-sm);
+  line-height: 1.6;
+}
+.interactive-readout .katex { font-size: 1em; }
+
+
+.worked-solution {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: var(--space-lg) var(--space-xl);
+  margin-top: var(--space-md);
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+.interactive-topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+.interactive-caption {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+.interactive-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+.mini-btn {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-surface-raised);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.mini-btn:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+.mini-btn:focus-visible, .flashcard:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+.graph-note {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  margin-top: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════
+   FLASHCARDS
+   ═══════════════════════════════════════════ */
+
+/* ─── FLASHCARDS (standardized) ─── */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard {
+  perspective: 800px;
+  min-height: 200px;
+  cursor: pointer;
+}
+.flashcard-inner {
+  width: 100%; min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  padding: 20px 16px;
+  text-align: center;
+  font-size: clamp(0.78rem, 2.2vw, 0.92rem);
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  font-weight: 600;
+  color: var(--accent);
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP'; position: absolute; bottom: 8px;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.4; letter-spacing: 1px;
+}
+.flashcard-back {
+  background: var(--bg);
+  transform: rotateY(180deg);
+  font-size: clamp(0.75rem, 2vw, 0.88rem);
+  line-height: 1.55;
+  border: 2px solid var(--accent);
+  color: var(--text);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px 14px;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 0.85em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.flashcard-back .katex {
+  font-size: 0.95em;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.flashcard-back br {
+  margin-bottom: 2px;
+}
+.flashcard-back > * {
+  max-width: 100%;
+}
+
+/* ═══════════════════════════════════════════
+   QUIZ
+   ═══════════════════════════════════════════ */
+.quiz-question {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+.quiz-question-number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--brand-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+}
+.quiz-question-text {
+  font-weight: 600;
+  font-size: var(--fs-md);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+.quiz-options { display: flex; flex-direction: column; gap: var(--space-sm); }
+.quiz-option {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-quiz-option);
+  border: 1.5px solid var(--border-light);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+.quiz-option:hover { border-color: var(--brand-primary); background: var(--box-default-bg); }
+.quiz-option.selected { border-color: var(--brand-primary); background: var(--box-default-bg); font-weight: 600; }
+.quiz-option.correct { border-color: var(--box-green-border); background: var(--bg-quiz-correct); }
+.quiz-option.incorrect { border-color: var(--box-red-border); background: var(--bg-quiz-incorrect); }
+.quiz-option .letter {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-medium);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.quiz-explanation {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-surface-raised);
+  border-radius: 8px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  display: none;
+}
+.quiz-explanation.visible { display: block; }
+.quiz-score-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+.quiz-score-bar .score-display {
+  font-family: var(--font-serif);
+  font-size: var(--fs-2xl);
+  color: var(--brand-primary);
+}
+.quiz-reset-btn {
+  margin-top: var(--space-md);
+  padding: 10px 24px;
+  background: var(--brand-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quiz-reset-btn:hover { background: var(--brand-primary-dark); }
+
+.checklist-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+}
+.checklist-box-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-primary);
+  margin-bottom: var(--space-md);
+}
+.checklist-list {
+  display: grid;
+  gap: 12px;
+}
+.checklist-item {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-light);
+}
+.checklist-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--text-on-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1;
+}
+.checklist-item strong {
+  color: var(--text-primary);
+}
+.checklist-item p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+@media (max-width: 600px) {
+  .checklist-item {
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+  .checklist-num {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.rule-combo-box {
+  margin: var(--space-xl) 0 0;
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--box-orange-border);
+  background: linear-gradient(180deg, var(--box-orange-bg) 0%, var(--bg-surface) 100%);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.rule-combo-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(184, 110, 58, 0.08);
+}
+.rule-combo-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--box-orange-border);
+  margin-bottom: 6px;
+}
+.rule-combo-title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-lg);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.rule-combo-body {
+  padding: 18px;
+}
+.rule-combo-intro {
+  margin: 0 0 var(--space-md);
+  color: var(--text-secondary);
+}
+.rule-combo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: var(--space-md);
+}
+.rule-combo-card {
+  background: var(--bg-surface-raised);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.rule-combo-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brand-primary-dark);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.rule-combo-card p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+.rule-combo-card .math-inline {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+.rule-combo-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(122, 46, 46, 0.08);
+  border: 1px solid rgba(122, 46, 46, 0.14);
+  color: var(--text-secondary);
+}
+.rule-combo-note strong {
+  color: var(--brand-primary-dark);
+}
+@media (max-width: 760px) {
+  .nav-right { gap: 6px; }
+  .nav-btn { padding: 7px 10px; }
+  .nav-logo { height: 32px; }
+  .rule-combo-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .nav-btn span { display: none; }
+  .nav-btn { min-width: 40px; justify-content: center; padding: 7px 9px; }
+  .nav-logo { height: 28px; }
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.site-footer {
+  background: var(--bg-surface-raised);
+  border-top: 1px solid var(--border-light);
+  padding: var(--space-2xl) 0 var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+.footer-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+@media (max-width: 700px) {
+  .footer-grid { grid-template-columns: 1fr; text-align: center; }
+}
+.footer-col h4 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.footer-col p, .footer-col a {
+  font-size: var(--fs-sm);
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+.footer-col a:hover { color: var(--brand-primary); }
+.footer-copyright {
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--space-lg);
+}
+
+/* ═══════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════ */
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-bar, .sidebar, .nav-btn, .interactive-container { display: none !important; }
+  
+.main-content { margin-left: 0 !important; padding-top: 0 !important; }
+  .section { page-break-inside: avoid; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .hero { background: none; border-bottom: 2px solid #000; }
+  .concept-box { border-left-width: 3px; background: #f5f5f5 !important; }
+  
+  
+  
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY & MISC
+   ═══════════════════════════════════════════ */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.divider { border: none; border-top: 1px solid var(--border-light); margin: var(--space-xl) 0; }
+.katex-display { margin: var(--space-md) 0; overflow-x: auto; }
+.math-inline { /* for katex inline */ }
+
+/* Sidebar scrollbar */
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Overlay for mobile sidebar */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 899;
+}
+.sidebar-overlay.visible { display: block; }
+
+/* ─── HEADER STANDARDIZED TO MATCH UNIT 5 ─── */
+.top-nav,
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  background: var(--color-nav-bg, rgba(245,240,235,0.88));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border-light, var(--border, #E2DCD5));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+[data-theme="dark"] .top-nav,
+[data-theme="dark"] .topnav {
+  background: var(--color-nav-bg, rgba(21,16,16,0.92));
+}
+.nav-left,
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-logo {
+  height: 36px;
+  width: auto;
+}
+.nav-badge,
+.topnav-brand .unit-badge {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  background: var(--color-accent-bg, rgba(122,46,46,0.06));
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.nav-right,
+.topnav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-btn,
+.topnav-actions button {
+  font-family: var(--font-sans, var(--font-body, 'Source Sans 3', sans-serif));
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  background: var(--color-surface-alt, var(--bg-card, #FFFFFF));
+  border: 1px solid var(--color-border, var(--border, #DDD4CC));
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nav-btn:hover,
+.topnav-actions button:hover {
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  border-color: var(--color-accent, var(--accent, #7A2E2E));
+  background: var(--color-accent-bg, var(--accent-light, rgba(122,46,46,0.06)));
+  transform: none;
+}
+.hero {
+  background: var(--color-hero-gradient, linear-gradient(135deg, #F5F0EB 0%, #EEE4DC 42%, #E5D6CD 100%));
+  padding: 72px 60px 60px;
+  border-bottom: 1px solid var(--color-border-light, var(--border, #E2DCD5));
+  border-radius: 0;
+  text-align: left;
+  margin-bottom: 0;
+}
+.hero-overline {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  margin-bottom: 14px;
+}
+.hero h1,
+.hero .hero-title {
+  font-family: var(--font-serif, var(--font-display, Georgia, serif));
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--color-text, var(--text, #2C2424));
+  margin-bottom: 16px;
+}
+.hero-subtitle,
+.hero .hero-sub,
+.hero p.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  max-width: 680px;
+  margin-bottom: 32px;
+}
+.hero-chips,
+.hero .hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+.hero-chips .chip,
+.hero .hero-meta .chip,
+.chip {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  background: var(--color-surface, var(--bg-card, #FFFFFF));
+  border: 1px solid var(--color-border, var(--border, #DDD4CC));
+  padding: 7px 16px;
+  border-radius: 100px;
+  box-shadow: none;
+}
+.hero-chips .chip strong,
+.hero .hero-meta .chip strong,
+.chip strong {
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  font-weight: 600;
+}
+.chip-maroon,
+.chip-green,
+.chip-purple {
+  color: inherit !important;
+  border-color: var(--color-border, var(--border, #DDD4CC)) !important;
+  background: var(--color-surface, var(--bg-card, #FFFFFF)) !important;
+}
+@media (max-width: 768px) {
+  .top-nav,
+  .topnav {
+    padding: 0 16px;
+  }
+  .hero {
+    padding: 48px 24px 40px;
+  }
+  .nav-logo {
+    height: 30px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     TOP NAVIGATION
+     ═══════════════════════════════════════════ -->
+<nav class="top-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-left">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFKAuoDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAEGBwgFBAID/8QAaxAAAQMDAQUBCAcQCwwHBgcAAQACAwQFEQYHEiExQRMIFCIyUWFxgRUXN5GUsbMWIzM2QlJUYnJ0dZOhstLTJDRVVnOCkpW0w9ElNThFU1djg4SiwdQmJ0NERmV2KGSFhqTwGEhmo8Lh9f/EABkBAQADAQEAAAAAAAAAAAAAAAABAgQDBf/EADQRAQACAgAEAwUHBAIDAAAAAAABAgMRBBIhMTJBURMzYXGBFCI0kaGx0SNSU/BCQ2PB4f/aAAwDAQACEQMRAD8A6jREWV1EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARREFREKAiIgIomfMgqZRT8qBniqiICIiAiBEBERAREygJlTgqgZRAiAiic0FTKiIKinxK9UBFFUBFECCooqgIiICZU9SvqQEUVQEQogIiICIiAiKIKmfMiiCoonrQVMoiAiIgIoqgIiICIiAiIgJ6kRARPUiAiJ0QEREBERAREQEyoqgIiICIiAiIgIiICIiAiIgIiICKKoCKZRBUURBURRAVREBFOHmX4q54aSAz1c0dPEOb5XBrR6zwQf0RYzdNf6JtkZfVaotpxzZBL27v5Me8fyLF6vbhoyLPYQ3esxyMdM1gP4xzT+RNutcOS3astmotP0O3qzPqZG1unrlBB/2b4po5XH0tO6B/KKyC2bYtCVkojluNTQuOMd9UjwD62BzR6yo3C08NljvVsFReVQam03XvDKHUFqqnuOA2Ksjc4nyboOfyL13BzfGaR6QpcZiY7vyiqIhEREDoiJ6kFCnrT0IgqdVEKCqInqQOXFPOr05KIKinmVQRE9SflQVFEPRBUREBEU9aAUREBVREFUREFRFEDqicccU6ICqIgnRERBVFUQFDzQ8lUBREQVF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CIiqCZRE6IKiBRBUUwqgKJyRBVE6J1QEREFUToiCqBEKAqpkeVBxQVFEQOKInVBVEQIHNEVQQoqogIiYQVREQFeSiBBRlREQFVB5kQE69UKdED1omUwgIiICIiAqoiAr51MKoIUTogQMIhRBVFVEBERARMcUQPWiFEBECICqiIBRECAEKIgoQophACqZTKAiIgIiICIiAiIgiqIgiqKdEBE5qoJ5kRVBEVRBEVU9KCqIiC8UUTzoKor1UKAEREBVREBOKeVOqAiqiAgREF64UKKoJyRCFUETqhCo8qCIqp0QVFEQFVEQOqKqIBTmiICeZVTqgIivVBCiIgBERARVRA6IPIqogdVeaiqCInmRAREQERCgBERAREQMomEQEVUQEQKoCiIEDHBPSidEBAiIHpTqieYIKinJOKCphQKoCIiAiIgIiICFEQTor1REDqpw44VRBCqiIHVERAREQEREBQKogiqIgKKogdEREBERBFURBFURBFURBCnVVEERVEEVREBERAUKqIInDCqIIiqIInVVEERVEBERBFURAKiqICIiAp6lUQTgiqFBOqoROXVBOSKlMIIipQIIiqBBETCqCJyVQoIiuEwgiqhTCAiqYQFFR6EQFFUQEQqICvJROiBhVMIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAohVQAiKBBUUCpQEQckQRUlCoguEygU6oKiIgIgRBCqiICIp1QVCUU6oKhRCggVQclOqCoURA4oiJI/9k=" class="nav-logo" alt="DingRui Scholars logo">
+    <span class="nav-badge">UNIT 3</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-label="Toggle table of contents">Contents</button>
+    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Progress Bar -->
+<div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ═══════════════════════════════════════════
+     SIDEBAR TABLE OF CONTENTS
+     ═══════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar" aria-label="Table of contents">
+  <div class="sidebar-title">Contents</div>
+  <ul class="sidebar-nav" id="sidebarNav">
+    <li><a href="#hero">Overview</a></li>
+    <li><a href="#sec-3-1">3.1 The Chain Rule</a></li>
+    <li><a href="#sec-3-2">3.2 Implicit Differentiation</a></li>
+    <li><a href="#sec-3-3">3.3 Differentiating Inverse Functions</a></li>
+    <li><a href="#sec-3-4">3.4 Inverse Trigonometric Derivatives</a></li>
+    <li><a href="#sec-3-5">3.5 Selecting Procedures</a></li>
+    <li><a href="#sec-3-6">3.6 Higher-Order Derivatives</a></li>
+    <li><a href="#sec-strategy">Exam Strategy</a></li>
+    <li><a href="#sec-mistakes">Common Mistakes</a></li>
+    <li><a href="#sec-flashcards">Flashcards</a></li>
+    <li><a href="#sec-quiz">Unit Quiz</a></li>
+  </ul>
+</aside>
+
+<!-- ═══════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════ -->
+<main class="main-content">
+<div class="content-wrap">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Calculus AB &amp; BC · Study Guide</div>
+  <h1>Differentiation: Composite,<br>Implicit, &amp; Inverse Functions</h1>
+  <p class="hero-subtitle">Master the chain rule and its extensions to implicit, inverse, and higher-order derivatives. This unit is essential groundwork for integration techniques in Unit 6 and beyond.</p>
+  <div class="hero-chips">
+    <span class="chip"><strong>9–13%</strong>&nbsp; AB Exam</span> <span class="chip"><strong>4–7%</strong>&nbsp; BC Exam</span> <span class="chip"><strong>6</strong>&nbsp; Topics</span> <span class="chip"><strong>~10–11</strong>&nbsp; Class Periods (AB)</span> <span class="chip"><strong>FUN-3</strong>&nbsp; Big Idea</span> <span class="chip"><strong>1.C / 1.E / 3.G</strong>&nbsp; Skills</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.1 — THE CHAIN RULE
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-1">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.1 · FUN-3.C</div>
+    <h2>The Chain Rule</h2>
+
+    <p>The chain rule is the single most important differentiation technique you will learn in this unit — and arguably in the entire course. It allows you to differentiate <strong>composite functions</strong>: functions built by nesting one function inside another.</p>
+
+    <p>If $y = f(g(x))$, then the derivative is found by differentiating the <strong>outer function</strong> evaluated at the inner function, then multiplying by the derivative of the <strong>inner function</strong>:</p>
+
+    <div class="formula-box">
+      <div class="formula-box-label">Chain Rule — Prime Notation</div>
+      $$\frac{d}{dx}\bigl[f(g(x))\bigr] = f'(g(x)) \cdot g'(x)$$
+    </div>
+
+    <p>In Leibniz notation, if $y = f(u)$ and $u = g(x)$, then:</p>
+
+    <div class="formula-box">
+      <div class="formula-box-label">Chain Rule — Leibniz Notation</div>
+      $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+    </div>
+
+    <p>A practical mnemonic: every time you apply the chain rule, say to yourself <strong>"times the derivative of what's inside."</strong> This simple habit prevents the most common chain rule error — forgetting to multiply by the inner derivative.</p>
+
+    <div class="concept-box green">
+      <strong>Key Insight</strong>
+      <p>Think of the chain rule as an extension of unit analysis. Just as $\dfrac{\text{psi}}{\text{min}} = \dfrac{\text{psi}}{\text{m}} \cdot \dfrac{\text{m}}{\text{min}}$, the Leibniz notation $\dfrac{dy}{dx} = \dfrac{dy}{du} \cdot \dfrac{du}{dx}$ "cancels" the intermediate variable $u$.</p>
+    </div>
+
+    <h3>Decomposing Composite Functions</h3>
+
+    <p>Before applying the chain rule, you must identify which function is the <strong>outer</strong> function and which is the <strong>inner</strong> function. Practice decomposing expressions into their component layers:</p>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead><tr><th>Function $y$</th><th>Outer $f(u)$</th><th>Inner $u = g(x)$</th><th>$\frac{dy}{dx}$</th></tr></thead>
+        <tbody>
+          <tr><td>$\sin(4x)$</td><td>$\sin(u)$</td><td>$4x$</td><td>$\cos(4x) \cdot 4$</td></tr>
+          <tr><td>$(\sin x)^4$</td><td>$u^4$</td><td>$\sin x$</td><td>$4(\sin x)^3 \cdot \cos x$</td></tr>
+          <tr><td>$e^{x^2}$</td><td>$e^u$</td><td>$x^2$</td><td>$e^{x^2} \cdot 2x$</td></tr>
+          <tr><td>$\sqrt{3x+1}$</td><td>$\sqrt{u}$</td><td>$3x+1$</td><td>$\dfrac{3}{2\sqrt{3x+1}}$</td></tr>
+          <tr><td>$\tan(2x-1)$</td><td>$\tan(u)$</td><td>$2x-1$</td><td>$\sec^2(2x-1)\cdot 2$</td></tr>
+          <tr><td>$\ln(\cos x)$</td><td>$\ln(u)$</td><td>$\cos x$</td><td>$\dfrac{-\sin x}{\cos x} = -\tan x$</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Nested Chains</h3>
+    <p>Some functions have multiple layers of composition. Apply the chain rule from the <strong>outermost layer inward</strong>, multiplying each inner derivative as you go.</p>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example — Double Chain</div>
+      <p>Find $\dfrac{d}{dx}\bigl[\sin(e^{3x})\bigr]$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        y &= \sin\!\left(e^{3x}\right) \\
+        \frac{dy}{dx} &= \cos\!\left(e^{3x}\right) \cdot \frac{d}{dx}\left(e^{3x}\right) \\
+        &= \cos\!\left(e^{3x}\right) \cdot e^{3x} \cdot \frac{d}{dx}(3x) \\
+        &= \cos\!\left(e^{3x}\right) \cdot e^{3x} \cdot 3 \\
+        &= 3e^{3x}\cos\!\left(e^{3x}\right)
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <!-- ═══════ INTERACTIVE: Chain Rule Visualizer ═══════ -->
+    <div class="interactive-container" id="chainRuleViz">
+      <div class="interactive-topbar">
+        <div class="interactive-title">Interactive — Chain Rule Explorer</div>
+        <div class="interactive-actions">
+          <button class="mini-btn" type="button" id="chainPlayBtn">Animate</button>
+        </div>
+      </div>
+      <p class="interactive-caption">Adjust the parameter $a$ in $y = \sin(ax)$ to see how the chain rule scales the derivative. Fixed axes make it easier to compare how the function and derivative change as $a$ varies.</p>
+      <div class="interactive-canvas-wrap">
+        <canvas id="chainCanvas" width="700" height="340"></canvas>
+      </div>
+      <div class="interactive-controls">
+        <div class="slider-group">
+          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="chainAVal">2</span></div>
+          <input type="range" id="chainASlider" min="0.5" max="6" step="0.1" value="2">
+        </div>
+      </div>
+      <div class="interactive-readout" id="chainReadout">
+        $y = \sin(2x)$, &nbsp; $\dfrac{dy}{dx} = 2\cos(2x)$
+      </div>
+      <div class="graph-note">Maroon shows the original function. Rose shows its derivative.</div>
+    </div>
+
+    <div class="concept-box orange">
+      <strong>Watch Out</strong>
+      <p>Do not confuse $\sin^2 x$ (which means $(\sin x)^2$) with $\sin(x^2)$. The outer and inner functions are different in each case, producing completely different derivatives.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.2 — IMPLICIT DIFFERENTIATION
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-2">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.2 · FUN-3.D</div>
+    <h2>Implicit Differentiation</h2>
+
+    <p>Not every relationship between $x$ and $y$ can be neatly written as $y = f(x)$. When $x$ and $y$ appear together in an equation such as $x^2 + y^2 = 25$, the function is defined <strong>implicitly</strong>. Implicit differentiation lets you find $\frac{dy}{dx}$ without solving for $y$ first.</p>
+
+    <h3>The Procedure</h3>
+    <p>The key insight is that <strong>the chain rule applies to $y$</strong> because $y$ depends on $x$. Whenever you differentiate a term containing $y$, you must multiply by $\frac{dy}{dx}$.</p>
+
+    <div class="concept-box">
+      <strong>Implicit Differentiation Steps</strong>
+      <p>1. Differentiate every term on both sides with respect to $x$.</p>
+      <p>2. Whenever you differentiate an expression involving $y$, apply the chain rule — attach a factor of $\frac{dy}{dx}$.</p>
+      <p>3. Collect all terms containing $\frac{dy}{dx}$ on one side.</p>
+      <p>4. Factor out $\frac{dy}{dx}$ and solve algebraically.</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example</div>
+      <p>Find $\dfrac{dy}{dx}$ given $x^2 + y^2 = 25$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        x^2 + y^2 &= 25 \\
+        \frac{d}{dx}(x^2) + \frac{d}{dx}(y^2) &= \frac{d}{dx}(25) \\
+        2x + 2y\frac{dy}{dx} &= 0 \\
+        2y\frac{dy}{dx} &= -2x \\
+        \frac{dy}{dx} &= -\frac{x}{y}
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <!-- ═══════ INTERACTIVE: Implicit Circle Tangent ═══════ -->
+    <div class="interactive-container" id="implicitViz">
+      <div class="interactive-topbar">
+        <div class="interactive-title">Interactive — Implicit Tangent Lines on $x^2 + y^2 = r^2$</div>
+        <div class="interactive-actions">
+          <button class="mini-btn" type="button" id="implicitPlayBtn">Animate</button>
+        </div>
+      </div>
+      <p class="interactive-caption">Move a point around the circle and watch the tangent update from the implicit derivative $\dfrac{dy}{dx}=-\dfrac{x}{y}$. The viewing window stays fixed with equal x/y scaling, and the tangent is extended to the graph edges so the geometry is visually accurate.</p>
+      <div class="interactive-canvas-wrap">
+        <canvas id="implicitCanvas" width="700" height="400"></canvas>
+      </div>
+      <div class="interactive-controls">
+        <div class="slider-group">
+          <div class="slider-label"><span>Angle $\theta$</span><span class="val" id="implicitAngleVal">45°</span></div>
+          <input type="range" id="implicitAngleSlider" min="5" max="355" step="1" value="45">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span>Radius $r$</span><span class="val" id="implicitRVal">5</span></div>
+          <input type="range" id="implicitRSlider" min="2" max="7" step="0.5" value="5">
+        </div>
+      </div>
+      <div class="interactive-readout" id="implicitReadout"></div>
+      <div class="graph-note">As the point approaches the left or right edge of the circle, the tangent becomes vertical and $\dfrac{dy}{dx}$ is undefined. The dashed radius helps show that the tangent is perpendicular to the radius at the point of contact.</div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example — Product &amp; Chain Combined</div>
+      <p>Find $\dfrac{dy}{dx}$ given $x^2 y + y^3 = 8$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        x^2y + y^3 &= 8 \\
+        \frac{d}{dx}(x^2y) + \frac{d}{dx}(y^3) &= 0 \\
+        (2x)y + x^2\frac{dy}{dx} + 3y^2\frac{dy}{dx} &= 0 \\
+        x^2\frac{dy}{dx} + 3y^2\frac{dy}{dx} &= -2xy \\
+        \frac{dy}{dx}(x^2 + 3y^2) &= -2xy \\
+        \frac{dy}{dx} &= \frac{-2xy}{x^2 + 3y^2}
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <div class="concept-box red">
+      <strong>Common Pitfall</strong>
+      <p>In expressions like $\dfrac{y}{3y - x^2}$, students sometimes forget that differentiating $y$ with respect to $x$ requires the chain rule. Every $y$ term produces a $\frac{dy}{dx}$ factor — no exceptions.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.3 — DIFFERENTIATING INVERSE FUNCTIONS
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-3">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.3 · FUN-3.E</div>
+    <h2>Differentiating Inverse Functions</h2>
+
+    <p>If $f$ is a one-to-one differentiable function with inverse $f^{-1}$, you can find the derivative of the inverse without knowing its explicit formula. The relationship rests on the chain rule applied to the identity $f(f^{-1}(x)) = x$.</p>
+
+    <div class="formula-box">
+      <div class="formula-box-label">Inverse Function Derivative</div>
+      $$(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$$
+    </div>
+
+    <p>Equivalently, if the point $(a, b)$ lies on the graph of $f$ (so $f(a) = b$), then the slope of $f^{-1}$ at $x = b$ is the reciprocal of the slope of $f$ at $x = a$:</p>
+
+    <div class="formula-box">
+      <div class="formula-box-label">Point-Based Form</div>
+      $$(f^{-1})'(b) = \frac{1}{f'(a)} \quad \text{where } f(a) = b$$
+    </div>
+
+    <div class="concept-box green">
+      <strong>Graphical Intuition</strong>
+      <p>The graph of $f^{-1}$ is the reflection of $f$ over the line $y = x$. Reflecting a tangent line swaps the rise and run, which is why the slopes are reciprocals.</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example — From a Table</div>
+      <p>Suppose $f(3) = 7$ and $f'(3) = 4$. Find $(f^{-1})'(7)$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        f(3) &= 7 \Rightarrow f^{-1}(7) = 3 \\
+        (f^{-1})'(7) &= \frac{1}{f'\!\left(f^{-1}(7)\right)} \\
+        &= \frac{1}{f'(3)} \\
+        &= \frac{1}{4}
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <div class="concept-box orange">
+      <strong>Watch Out</strong>
+      <p>This formula requires $f'(a) \neq 0$. If the original function has a horizontal tangent at $x = a$, the inverse has a vertical tangent at the corresponding point, and the derivative does not exist there.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.4 — INVERSE TRIGONOMETRIC DERIVATIVES
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-4">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.4 · FUN-3.E</div>
+    <h2>Differentiating Inverse Trigonometric Functions</h2>
+
+    <p>The derivatives of the inverse trigonometric functions can be derived using implicit differentiation (e.g., let $y = \arcsin(x)$, so $\sin(y) = x$, and differentiate implicitly). You should <strong>memorize</strong> these results:</p>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead><tr><th>Function</th><th>Derivative</th></tr></thead>
+        <tbody>
+          <tr><td>$\arcsin(x)$</td><td>$\dfrac{1}{\sqrt{1 - x^2}}$</td></tr>
+          <tr><td>$\arccos(x)$</td><td>$\dfrac{-1}{\sqrt{1 - x^2}}$</td></tr>
+          <tr><td>$\arctan(x)$</td><td>$\dfrac{1}{1 + x^2}$</td></tr>
+          <tr><td>$\text{arccot}(x)$</td><td>$\dfrac{-1}{1 + x^2}$</td></tr>
+          <tr><td>$\text{arcsec}(x)$</td><td>$\dfrac{1}{|x|\sqrt{x^2 - 1}}$</td></tr>
+          <tr><td>$\text{arccsc}(x)$</td><td>$\dfrac{-1}{|x|\sqrt{x^2 - 1}}$</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="concept-box purple">
+      <strong>Pattern to Remember</strong>
+      <p>Notice that the "co-" functions ($\arccos$, $\text{arccot}$, $\text{arccsc}$) each have derivatives that are the <strong>negatives</strong> of their non-"co" counterparts. Memorize three formulas and add a minus sign for the cofunctions.</p>
+    </div>
+
+    <h3>With the Chain Rule</h3>
+    <p>On the AP Exam, these functions almost always appear with a non-trivial inner function. Apply the chain rule:</p>
+
+    <div class="formula-box">
+      <div class="formula-box-label">Arctan with Chain Rule</div>
+      $$\frac{d}{dx}\bigl[\arctan(g(x))\bigr] = \frac{g'(x)}{1 + [g(x)]^2}$$
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example</div>
+      <p>Find $\dfrac{d}{dx}\bigl[\arcsin(3x^2)\bigr]$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        \frac{d}{dx}\left[\arcsin(3x^2)\right]
+        &= \frac{1}{\sqrt{1-(3x^2)^2}} \cdot \frac{d}{dx}(3x^2) \\
+        &= \frac{1}{\sqrt{1-9x^4}} \cdot 6x \\
+        &= \frac{6x}{\sqrt{1-9x^4}}
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <!-- ═══════ INTERACTIVE: Arctan Derivative Visualizer ═══════ -->
+    <div class="interactive-container" id="arctanViz">
+      <div class="interactive-topbar">
+        <div class="interactive-title">Interactive — $\arctan(ax)$ and Its Derivative</div>
+        <div class="interactive-actions">
+          <button class="mini-btn" type="button" id="arctanPlayBtn">Animate</button>
+        </div>
+      </div>
+      <p class="interactive-caption">Vary $a$ to see how the chain rule factor changes the steepness of $\arctan(ax)$ and the height of its derivative peak. The graph window stays fixed for direct visual comparison.</p>
+      <div class="interactive-canvas-wrap">
+        <canvas id="arctanCanvas" width="700" height="340"></canvas>
+      </div>
+      <div class="interactive-controls">
+        <div class="slider-group">
+          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="arctanAVal">1</span></div>
+          <input type="range" id="arctanASlider" min="0.2" max="5" step="0.1" value="1">
+        </div>
+      </div>
+      <div class="interactive-readout" id="arctanReadout">
+        $y = \arctan(x)$, &nbsp; $\dfrac{dy}{dx} = \dfrac{1}{1+x^2}$
+      </div>
+      <div class="graph-note">Dashed horizontal lines mark the asymptotes $y=\pm\dfrac{\pi}{2}$.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.5 — SELECTING PROCEDURES
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-5">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.5 · Skill 1.C</div>
+    <h2>Selecting Procedures for Calculating Derivatives</h2>
+
+    <p>By this point in the course, you have accumulated a large toolkit of differentiation rules: the power rule, product rule, quotient rule, chain rule, implicit differentiation, and inverse function derivatives. The challenge on the AP Exam is often not executing a rule, but <strong>recognizing which rules to apply and in what order</strong>.</p>
+
+    <h3>Decision Framework</h3>
+    <p>When you encounter a derivative problem, ask yourself the following questions in order:</p>
+
+    <div class="checklist-box">
+      <div class="checklist-box-title">Procedure Selection Checklist</div>
+      <div class="checklist-list">
+        <div class="checklist-item">
+          <div class="checklist-num">1</div>
+          <p><strong>Simplify first.</strong> Expand, factor, rewrite radicals as powers, or simplify fractions before differentiating.</p>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-num">2</div>
+          <p><strong>Product?</strong> If the expression is a product of two or more functions, use the <strong>product rule</strong> — often together with the chain rule.</p>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-num">3</div>
+          <p><strong>Quotient?</strong> Use the <strong>quotient rule</strong>, or rewrite the expression as a product with a negative exponent when that makes the derivative cleaner.</p>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-num">4</div>
+          <p><strong>Function inside a function?</strong> That is a composition, so apply the <strong>chain rule</strong>.</p>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-num">5</div>
+          <p><strong>$x$ and $y$ mixed together?</strong> Use <strong>implicit differentiation</strong>.</p>
+        </div>
+        <div class="checklist-item">
+          <div class="checklist-num">6</div>
+          <p><strong>Derivative of an inverse?</strong> Use the <strong>inverse function derivative formula</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule-combo-box">
+      <div class="rule-combo-header">
+        <div class="rule-combo-eyebrow">Mixed-Rule Recognition</div>
+        <div class="rule-combo-title">Multiple Rules at Once</div>
+      </div>
+      <div class="rule-combo-body">
+        <p class="rule-combo-intro">Many AP problems do <strong>not</strong> fit into just one rule. Read the expression in layers, then combine the correct tools in the correct order.</p>
+
+        <div class="rule-combo-grid">
+          <div class="rule-combo-card">
+            <strong>Product + Chain</strong>
+            <p><span class="math-inline">$y = x^2\sin(3x)$</span><br>Outside structure: a <strong>product</strong>. Inside $\sin(3x)$: a <strong>composition</strong>. Use the <strong>product rule</strong>, and inside one term use the <strong>chain rule</strong>.</p>
+          </div>
+          <div class="rule-combo-card">
+            <strong>Quotient + Chain</strong>
+            <p><span class="math-inline">$y = \dfrac{\sqrt{1+x^2}}{x^3+1}$</span><br>Overall structure: a <strong>quotient</strong>. Inside $\sqrt{1+x^2}$: a <strong>composition</strong>. Use the <strong>quotient rule</strong> together with the <strong>chain rule</strong>.</p>
+          </div>
+          <div class="rule-combo-card">
+            <strong>Implicit + Product / Chain</strong>
+            <p><span class="math-inline">$x^2 + xy + y^3 = 7$</span><br>Because <strong>$x$ and $y$ are mixed</strong>, start with <strong>implicit differentiation</strong>. Then differentiate $xy$ with the <strong>product rule</strong>.</p>
+          </div>
+          <div class="rule-combo-card">
+            <strong>Inverse + Chain</strong>
+            <p><span class="math-inline">$y = \arctan(4x)$</span><br>Recognize the outer function as an <strong>inverse trig function</strong>, then apply its derivative formula and multiply by the derivative of the inside using the <strong>chain rule</strong>.</p>
+          </div>
+        </div>
+
+        <div class="rule-combo-note"><strong>Best habit:</strong> identify the <strong>outermost structure first</strong>, then look inside each piece for any additional composition, product, quotient, or implicit relationship.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC 3.6 — HIGHER-ORDER DERIVATIVES
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-3-6">
+  <div class="content-inner">
+    <div class="section-label">Topic 3.6 · FUN-3.F</div>
+    <h2>Calculating Higher-Order Derivatives</h2>
+
+    <p>A <strong>higher-order derivative</strong> is simply the derivative of a derivative. Differentiating $f'(x)$ gives the second derivative $f''(x)$, differentiating again gives $f'''(x)$, and so on.</p>
+
+    <h3>Notation</h3>
+    <p>Higher-order derivatives can be written in several equivalent ways:</p>
+
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead><tr><th>Order</th><th>Prime Notation</th><th>Leibniz Notation</th></tr></thead>
+        <tbody>
+          <tr><td>First</td><td>$f'(x)$ or $y'$</td><td>$\dfrac{dy}{dx}$</td></tr>
+          <tr><td>Second</td><td>$f''(x)$ or $y''$</td><td>$\dfrac{d^2y}{dx^2}$</td></tr>
+          <tr><td>Third</td><td>$f'''(x)$ or $y'''$</td><td>$\dfrac{d^3y}{dx^3}$</td></tr>
+          <tr><td>$n$th</td><td>$f^{(n)}(x)$</td><td>$\dfrac{d^ny}{dx^n}$</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="concept-box green">
+      <strong>Key Insight</strong>
+      <p>The process of finding higher-order derivatives mirrors the original differentiation process. "Function is to first derivative as first derivative is to second derivative." There is no new rule — you apply the same techniques repeatedly.</p>
+    </div>
+
+    <div class="example-box">
+      <div class="example-box-title">Worked Example</div>
+      <p>Find $f''(x)$ if $f(x) = \sin(2x)$.</p>
+      <div class="worked-solution">
+        $$\begin{aligned}
+        f(x) &= \sin(2x) \\
+        f'(x) &= \cos(2x)\cdot 2 = 2\cos(2x) \\
+        f''(x) &= 2\left[-\sin(2x)\right]\cdot 2 \\
+        &= -4\sin(2x)
+        \end{aligned}$$
+      </div>
+    </div>
+
+    <!-- ═══════ INTERACTIVE: Higher-Order Derivative Visualizer ═══════ -->
+    <div class="interactive-container" id="higherOrderViz">
+      <div class="interactive-topbar">
+        <div class="interactive-title">Interactive — Successive Derivatives of $\sin(ax)$</div>
+        <div class="interactive-actions">
+          <button class="mini-btn" type="button" id="higherPlayBtn">Animate</button>
+        </div>
+      </div>
+      <p class="interactive-caption">Observe how each successive derivative of $\sin(ax)$ picks up another factor of $a$. Use the order slider to reveal the pattern one derivative at a time.</p>
+      <div class="interactive-canvas-wrap">
+        <canvas id="higherCanvas" width="700" height="340"></canvas>
+      </div>
+      <div class="interactive-controls">
+        <div class="slider-group">
+          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="higherAVal">2</span></div>
+          <input type="range" id="higherASlider" min="0.5" max="4" step="0.1" value="2">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span>Show up to derivative order</span><span class="val" id="higherOrderVal">2</span></div>
+          <input type="range" id="higherOrderSlider" min="0" max="4" step="1" value="2">
+        </div>
+      </div>
+      <div class="interactive-readout" id="higherReadout"></div>
+      <div class="graph-note">Each derivative multiplies the amplitude by another factor of $a$ and rotates sine through its 4-step cycle.</div>
+    </div>
+
+    <h3>Implicit Second Derivatives</h3>
+    <p>To find $\frac{d^2 y}{dx^2}$ implicitly, differentiate $\frac{dy}{dx}$ (which itself contains $y$ and possibly $\frac{dy}{dx}$) with respect to $x$. Then substitute your expression for $\frac{dy}{dx}$ back in to express the result in terms of $x$ and $y$ only.</p>
+
+    <div class="concept-box orange">
+      <strong>Watch Out</strong>
+      <p>When differentiating $\frac{dy}{dx}$ implicitly, remember that $y$ is still a function of $x$. You will need the chain rule (and often the quotient rule) in this step.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     EXAM STRATEGY
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-strategy">
+  <div class="content-inner">
+    <div class="section-label">Review</div>
+    <h2>Exam Strategy</h2>
+
+    <p>Unit 3 content accounts for <strong>9-13%</strong> of the AP Calculus AB exam and <strong>4-7%</strong> of the BC exam. However, the chain rule is a foundational skill that appears indirectly in many questions across other units (related rates, optimization, integration by substitution, differential equations, and series). Mastering it here pays dividends throughout the course.</p>
+
+    <div class="concept-box">
+      <strong>Exam Tips</strong>
+      <p><strong>Read the entire problem first.</strong> Determine which rules are needed before you start differentiating.</p>
+      <p><strong>Show every application of the chain rule explicitly.</strong> On free-response questions, skipping the inner derivative is a guaranteed point deduction.</p>
+      <p><strong>Practice with functions named $h$, $k$, $p$, etc.</strong> The AP Exam deliberately uses unfamiliar function names. Being comfortable with generic notation is essential.</p>
+      <p><strong>Tables and graphs are common.</strong> Be ready to find derivatives of compositions and inverses using tabulated values — without an explicit formula.</p>
+    </div>
+
+    <div class="concept-box green">
+      <strong>Free-Response Advice</strong>
+      <p>When justifying answers, write the differentiation rule you are using. For example: "By the chain rule, $\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$." This demonstrates understanding and earns methodology points.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COMMON MISTAKES
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-mistakes">
+  <div class="content-inner">
+    <div class="section-label">Review</div>
+    <h2>Common Mistakes</h2>
+
+    <div class="concept-box red">
+      <strong>Mistake #1 — Forgetting the Inner Derivative</strong>
+      <p>The most frequent error: writing $\frac{d}{dx}[\sin(3x)] = \cos(3x)$ instead of $3\cos(3x)$. Always multiply by $g'(x)$.</p>
+    </div>
+
+    <div class="concept-box red">
+      <strong>Mistake #2 — Missing the Chain Rule for $y$</strong>
+      <p>In implicit differentiation, every differentiated $y$ term must carry a $\frac{dy}{dx}$ factor. Writing $\frac{d}{dx}[y^3] = 3y^2$ instead of $3y^2 \frac{dy}{dx}$ is incorrect.</p>
+    </div>
+
+    <div class="concept-box red">
+      <strong>Mistake #3 — Confusing $(\sin x)^n$ and $\sin(x^n)$</strong>
+      <p>These have different outer/inner structures. $(\sin x)^4$ has outer $u^4$ and inner $\sin x$. But $\sin(x^4)$ has outer $\sin u$ and inner $x^4$. Misidentifying gives a wrong answer.</p>
+    </div>
+
+    <div class="concept-box red">
+      <strong>Mistake #4 — Inverse Derivative Evaluation Errors</strong>
+      <p>When using $(f^{-1})'(b) = \frac{1}{f'(a)}$ where $f(a)=b$, students sometimes evaluate $f'$ at $b$ instead of at $a$. Remember: evaluate the original function's derivative at the <em>input</em> that maps to $b$.</p>
+    </div>
+
+    <div class="concept-box red">
+      <strong>Mistake #5 — Stopping Too Early with $e^x$ or Trig</strong>
+      <p>Students sometimes apply the chain rule to the outermost layer but forget that $e^{g(x)}$ still needs $g'(x)$, or that $\cos(g(x))$ needs $g'(x)$. Carry the chain through every layer.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FLASHCARDS
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-flashcards">
+  <div class="content-inner">
+    <div class="section-label">Review</div>
+    <h2>Flashcards</h2>
+    <p>Click any card to reveal the answer. Click again to flip back.</p>
+
+    <div class="flashcard-grid">
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>State the chain rule in Leibniz notation.</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>$\dfrac{d}{dx}[\arctan(x)] = \;?$</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{1}{1+x^2}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>$\dfrac{d}{dx}[\arcsin(x)] = \;?$</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{1}{\sqrt{1-x^2}}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>What is the key step in implicit differentiation?</div>
+          </div>
+          <div class="flashcard-back">
+            Apply the chain rule to every $y$ term: each one produces a $\frac{dy}{dx}$ factor.
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>$(f^{-1})'(b) = \;?$<br>given $f(a) = b$</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{1}{f'(a)}$$
+            where $f(a)=b$ and $f'(a)\neq 0$.
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>What notation represents the second derivative in Leibniz form?</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{d^2 y}{dx^2}$$
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>$\dfrac{d}{dx}[e^{g(x)}] = \;?$</div>
+          </div>
+          <div class="flashcard-back">
+            $$e^{g(x)} \cdot g'(x)$$
+          </div>
+        </div>
+      </div>
+
+      <div class="flashcard" onclick="this.classList.toggle('flipped')">
+        <div class="flashcard-inner">
+          <div class="flashcard-front">
+            <div>$\dfrac{d}{dx}[\ln(g(x))] = \;?$</div>
+          </div>
+          <div class="flashcard-back">
+            $$\frac{g'(x)}{g(x)}$$
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     UNIT QUIZ
+     ═══════════════════════════════════════════ -->
+<section class="section" id="sec-quiz">
+  <div class="content-inner">
+    <div class="section-label">Assessment</div>
+    <h2>Unit Quiz</h2>
+    <p>Test your understanding. Select an answer for each question, then check the explanation.</p>
+
+    <div id="quizContainer">
+
+      <!-- Q1 -->
+      <div class="quiz-question" data-correct="B">
+        <div class="quiz-question-number">Question 1</div>
+        <div class="quiz-question-text">What is $\dfrac{d}{dx}[\cos(5x)]$?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $5\cos(5x)$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $-5\sin(5x)$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $-\sin(5x)$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $\sin(5x) \cdot 5$</div>
+        </div>
+        <div class="quiz-explanation">The outer function is $\cos(u)$ with derivative $-\sin(u)$. The inner function is $5x$ with derivative $5$. By the chain rule: $-\sin(5x) \cdot 5 = -5\sin(5x)$.</div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-question" data-correct="C">
+        <div class="quiz-question-number">Question 2</div>
+        <div class="quiz-question-text">Find $\dfrac{dy}{dx}$ if $x^2 + y^2 = 16$.</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{x}{y}$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{-2x}{y}$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{-x}{y}$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{y}{x}$</div>
+        </div>
+        <div class="quiz-explanation">Differentiating: $2x + 2y\frac{dy}{dx} = 0$. Solving: $\frac{dy}{dx} = \frac{-2x}{2y} = \frac{-x}{y}$.</div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-question" data-correct="A">
+        <div class="quiz-question-number">Question 3</div>
+        <div class="quiz-question-text">If $f(2) = 5$ and $f'(2) = 3$, what is $(f^{-1})'(5)$?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{1}{3}$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $3$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{1}{5}$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $5$</div>
+        </div>
+        <div class="quiz-explanation">Since $f(2) = 5$, we know $f^{-1}(5) = 2$. The inverse derivative formula gives $(f^{-1})'(5) = \frac{1}{f'(2)} = \frac{1}{3}$.</div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-question" data-correct="D">
+        <div class="quiz-question-number">Question 4</div>
+        <div class="quiz-question-text">What is $\dfrac{d}{dx}[e^{3x^2}]$?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $e^{3x^2}$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $3x^2 \cdot e^{3x^2-1}$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $3e^{3x^2}$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $6x\,e^{3x^2}$</div>
+        </div>
+        <div class="quiz-explanation">The outer function is $e^u$ (derivative $e^u$), and the inner function is $3x^2$ (derivative $6x$). Chain rule: $e^{3x^2} \cdot 6x = 6xe^{3x^2}$.</div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-question" data-correct="B">
+        <div class="quiz-question-number">Question 5</div>
+        <div class="quiz-question-text">What is $\dfrac{d}{dx}[\arctan(2x)]$?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{1}{1+4x^2}$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{2}{1+4x^2}$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{2}{1+2x^2}$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{1}{\sqrt{1-4x^2}}$</div>
+        </div>
+        <div class="quiz-explanation">$\frac{d}{dx}[\arctan(u)] = \frac{1}{1+u^2} \cdot u'$. With $u = 2x$: $\frac{1}{1+(2x)^2}\cdot 2 = \frac{2}{1+4x^2}$.</div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-question" data-correct="C">
+        <div class="quiz-question-number">Question 6</div>
+        <div class="quiz-question-text">If $f(x) = \sin(x^2)$, what is $f''(x)$?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $-4x^2\sin(x^2)$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $2\cos(x^2) + 4x^2\sin(x^2)$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $2\cos(x^2) - 4x^2\sin(x^2)$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $-2\sin(x^2)$</div>
+        </div>
+        <div class="quiz-explanation">$f'(x) = 2x\cos(x^2)$. Using the product rule on $f'$: $f''(x) = 2\cos(x^2) + 2x\cdot(-\sin(x^2)\cdot 2x) = 2\cos(x^2) - 4x^2\sin(x^2)$.</div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-question" data-correct="A">
+        <div class="quiz-question-number">Question 7</div>
+        <div class="quiz-question-text">Find $\dfrac{dy}{dx}$ for $\ln(xy) = 1$.</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-value="A"><span class="letter">A</span> $-\dfrac{y}{x}$</div>
+          <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{y}{x}$</div>
+          <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{-1}{x}$</div>
+          <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{1}{xy}$</div>
+        </div>
+        <div class="quiz-explanation">Rewrite: $\ln x + \ln y = 1$. Differentiate: $\frac{1}{x} + \frac{1}{y}\frac{dy}{dx} = 0$. So $\frac{dy}{dx} = -\frac{y}{x}$.</div>
+      </div>
+
+    </div>
+
+    <div class="quiz-score-bar" id="quizScore" style="display:none;">
+      <div>Your Score</div>
+      <div class="score-display" id="scoreDisplay"></div>
+      <button class="quiz-reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+  </div>
+</section>
+
+</div>
+</main>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>DingRui Scholars</h4>
+        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="490d20272e3b3c203a2a212625283b3a092e24282025672a2624">[email&#160;protected]</a></p>
+        <p>778-885-6368</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <p>WeChat: dingruischolars</p>
+        <p>Rednote ID: dingruischolars</p>
+      </div>
+      <div class="footer-col">
+        <h4>Website</h4>
+        <p><a href="https://dingruischolars.com" target="_blank" rel="noopener">dingruischolars.com</a></p>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2026 鼎睿学苑 DingRui Scholars. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── Theme Toggle ──
+(function() {
+  const html = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const label = document.getElementById('themeLabel');
+  const icon = document.getElementById('themeIcon');
+  const storageKey = 'dingrui-unit3-theme';
+
+  const sunPath = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+  function redrawInteractive() {
+    window.requestAnimationFrame(() => {
+      if (typeof drawChainRule === 'function') drawChainRule();
+      if (typeof drawImplicit === 'function') drawImplicit();
+      if (typeof drawArctan === 'function') drawArctan();
+      if (typeof drawHigherOrder === 'function') drawHigherOrder();
+    });
+  }
+
+  function setTheme(theme, persist = true) {
+    html.setAttribute('data-theme', theme);
+    label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    icon.innerHTML = theme === 'dark' ? moonPath : sunPath;
+    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    if (persist) {
+      try { localStorage.setItem(storageKey, theme); } catch (e) {}
+    }
+    redrawInteractive();
+  }
+
+  let initialTheme = 'light';
+  try {
+    initialTheme = localStorage.getItem(storageKey) || initialTheme;
+  } catch (e) {}
+  if (!['light', 'dark'].includes(initialTheme)) {
+    initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  setTheme(initialTheme, false);
+
+  toggle.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+})();
+
+// ── Progress Bar ──
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const denom = Math.max(1, h.scrollHeight - h.clientHeight);
+  const pct = Math.max(0, Math.min(100, (h.scrollTop / denom) * 100));
+  document.getElementById('progressFill').style.width = pct + '%';
+});
+
+
+
+// ── Active Section Highlight ──
+(function() {
+  const sections = document.querySelectorAll('.section, .hero');
+  const navLinks = document.querySelectorAll('#sidebarNav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(sec => observer.observe(sec));
+})();
+
+// ── Quiz Logic ──
+(function() {
+  const questions = document.querySelectorAll('.quiz-question');
+  let answered = 0;
+  let correct = 0;
+
+  questions.forEach(q => {
+    const options = q.querySelectorAll('.quiz-option');
+    const correctVal = q.getAttribute('data-correct');
+    const explanation = q.querySelector('.quiz-explanation');
+    let locked = false;
+
+    options.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if (locked) return;
+        locked = true;
+        answered++;
+        const selected = opt.getAttribute('data-value');
+
+        if (selected === correctVal) {
+          opt.classList.add('correct');
+          correct++;
+        } else {
+          opt.classList.add('incorrect');
+          options.forEach(o => {
+            if (o.getAttribute('data-value') === correctVal) o.classList.add('correct');
+          });
+        }
+        explanation.classList.add('visible');
+
+        if (answered === questions.length) {
+          const scoreBar = document.getElementById('quizScore');
+          scoreBar.style.display = 'block';
+          document.getElementById('scoreDisplay').textContent = correct + ' / ' + questions.length;
+        }
+      });
+    });
+  });
+
+  window.resetQuiz = function() {
+    location.hash = '#sec-quiz';
+    location.reload();
+  };
+})();
+
+// ── KaTeX Auto-Render ──
+function renderMathSafe(root) {
+  if (typeof renderMathInElement !== 'function' || !root || root.dataset.mathRendered === 'true') return;
+  renderMathInElement(root, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true },
+      { left: '$', right: '$', display: false }
+    ],
+    throwOnError: false
+  });
+  root.dataset.mathRendered = 'true';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderMathSafe(document.body);
+});
+
+window.addEventListener('load', () => {
+  renderMathSafe(document.body);
+});
+
+
+function bindAutoAnimate(buttonId, slider, drawFn, config) {
+  const button = document.getElementById(buttonId);
+  if (!button || !slider || typeof drawFn !== 'function') return;
+  const min = parseFloat(slider.min);
+  const max = parseFloat(slider.max);
+  const step = config.step || parseFloat(slider.step) || 0.1;
+  const fps = config.fps || 30;
+  const bounce = config.bounce !== false;
+  let frame = null;
+  let direction = 1;
+
+  function stop() {
+    if (frame) clearTimeout(frame);
+    frame = null;
+    button.textContent = 'Animate';
+    button.setAttribute('aria-pressed', 'false');
+  }
+
+  function tick() {
+    let value = parseFloat(slider.value) + direction * step;
+    if (value >= max || value <= min) {
+      if (bounce) {
+        direction *= -1;
+        value = Math.max(min, Math.min(max, value));
+      } else {
+        value = min;
+      }
+    }
+    slider.value = value.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');
+    drawFn();
+    frame = setTimeout(() => requestAnimationFrame(tick), 1000 / fps);
+  }
+
+  button.addEventListener('click', () => {
+    if (frame) {
+      clearTimeout(frame);
+      stop();
+    } else {
+      button.textContent = 'Pause';
+      button.setAttribute('aria-pressed', 'true');
+      tick();
+    }
+  });
+
+  slider.addEventListener('input', () => {
+    if (frame && config.stopOnManual !== false) stop();
+  });
+}
+
+// ═══════════════════════════════════════════
+// INTERACTIVE VISUALIZATION ENGINE
+// ═══════════════════════════════════════════
+
+function getThemeColors() {
+  const style = getComputedStyle(document.documentElement);
+  return {
+    bg: style.getPropertyValue('--bg-surface-raised').trim(),
+    axis: style.getPropertyValue('--text-tertiary').trim(),
+    grid: style.getPropertyValue('--border-light').trim(),
+    text: style.getPropertyValue('--text-secondary').trim(),
+    primary: style.getPropertyValue('--brand-primary').trim(),
+    accent: style.getPropertyValue('--brand-accent').trim(),
+    fn1: style.getPropertyValue('--brand-primary').trim(),
+    fn2: '#D4978E',
+    fn3: style.getPropertyValue('--box-green-border').trim() || '#4A7A4A',
+    fn4: style.getPropertyValue('--box-purple-border').trim() || '#7A4A8A',
+    fn5: style.getPropertyValue('--box-orange-border').trim() || '#B86E3A',
+  };
+}
+
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const baseWidth = parseFloat(canvas.getAttribute('width')) || 700;
+  const baseHeight = parseFloat(canvas.getAttribute('height')) || 340;
+  const rect = canvas.getBoundingClientRect();
+  const cssWidth = rect.width || baseWidth;
+  const cssHeight = cssWidth * (baseHeight / baseWidth);
+  canvas.width = Math.round(cssWidth * dpr);
+  canvas.height = Math.round(cssHeight * dpr);
+  canvas.style.width = cssWidth + 'px';
+  canvas.style.height = cssHeight + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { ctx, w: cssWidth, h: cssHeight };
+}
+
+function drawAxes(ctx, w, h, xRange, yRange, colors) {
+  const marginL = 50, marginR = 20, marginT = 20, marginB = 35;
+  const plotW = w - marginL - marginR;
+  const plotH = h - marginT - marginB;
+
+  function toPixX(x) { return marginL + (x - xRange[0]) / (xRange[1] - xRange[0]) * plotW; }
+  function toPixY(y) { return marginT + (yRange[1] - y) / (yRange[1] - yRange[0]) * plotH; }
+
+  // Background
+  ctx.fillStyle = colors.bg;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid lines
+  ctx.strokeStyle = colors.grid;
+  ctx.lineWidth = 0.5;
+  for (let x = Math.ceil(xRange[0]); x <= xRange[1]; x++) {
+    if (x === 0) continue;
+    ctx.beginPath(); ctx.moveTo(toPixX(x), marginT); ctx.lineTo(toPixX(x), h - marginB); ctx.stroke();
+  }
+  for (let y = Math.ceil(yRange[0]); y <= yRange[1]; y++) {
+    if (y === 0) continue;
+    ctx.beginPath(); ctx.moveTo(marginL, toPixY(y)); ctx.lineTo(w - marginR, toPixY(y)); ctx.stroke();
+  }
+
+  // Axes
+  ctx.strokeStyle = colors.axis;
+  ctx.lineWidth = 1.2;
+  // x-axis
+  if (yRange[0] <= 0 && yRange[1] >= 0) {
+    ctx.beginPath(); ctx.moveTo(marginL, toPixY(0)); ctx.lineTo(w - marginR, toPixY(0)); ctx.stroke();
+  }
+  // y-axis
+  if (xRange[0] <= 0 && xRange[1] >= 0) {
+    ctx.beginPath(); ctx.moveTo(toPixX(0), marginT); ctx.lineTo(toPixX(0), h - marginB); ctx.stroke();
+  }
+
+  // Labels
+  ctx.fillStyle = colors.text;
+  ctx.font = '11px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  for (let x = Math.ceil(xRange[0]); x <= xRange[1]; x++) {
+    if (x === 0) continue;
+    ctx.fillText(x, toPixX(x), h - marginB + 16);
+  }
+  ctx.textAlign = 'right';
+  for (let y = Math.ceil(yRange[0]); y <= yRange[1]; y++) {
+    if (y === 0) continue;
+    ctx.fillText(y, marginL - 8, toPixY(y) + 4);
+  }
+
+  return { toPixX, toPixY, marginL, marginR, marginT, marginB, plotW, plotH };
+}
+
+function plotFunction(ctx, fn, xRange, axes, color, lineWidth) {
+  const steps = 400;
+  const dx = (xRange[1] - xRange[0]) / steps;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth || 2.2;
+  ctx.beginPath();
+  let started = false;
+  for (let i = 0; i <= steps; i++) {
+    const x = xRange[0] + i * dx;
+    const y = fn(x);
+    if (!isFinite(y) || Math.abs(y) > 100) { started = false; continue; }
+    const px = axes.toPixX(x), py = axes.toPixY(y);
+    if (!started) { ctx.moveTo(px, py); started = true; }
+    else ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+}
+
+// ── Chain Rule Interactive ──
+var drawChainRule;
+(function() {
+  const slider = document.getElementById('chainASlider');
+  const valDisplay = document.getElementById('chainAVal');
+  const readout = document.getElementById('chainReadout');
+  const canvas = document.getElementById('chainCanvas');
+  if (!canvas) return;
+
+  drawChainRule = function() {
+    const a = parseFloat(slider.value);
+    valDisplay.textContent = a.toFixed(1);
+
+    const colors = getThemeColors();
+    const {ctx, w, h} = setupCanvas(canvas);
+    const xRange = [-4, 4];
+    const yMax = Math.max(3, Math.min(a + 1, 8));
+    const yRange = [-yMax, yMax];
+    const axes = drawAxes(ctx, w, h, xRange, yRange, colors);
+
+    // f(x) = sin(ax)
+    plotFunction(ctx, x => Math.sin(a * x), xRange, axes, colors.fn1, 2.5);
+    // f'(x) = a*cos(ax)
+    plotFunction(ctx, x => a * Math.cos(a * x), xRange, axes, colors.fn2, 2);
+
+    // Legend
+    ctx.font = '600 12px "Source Sans 3", sans-serif';
+    ctx.fillStyle = colors.fn1;
+    ctx.fillRect(w - 180, 12, 14, 3);
+    ctx.textAlign = 'left';
+    ctx.fillText('y = sin(' + a.toFixed(1) + 'x)', w - 160, 18);
+    ctx.fillStyle = colors.fn2;
+    ctx.fillRect(w - 180, 30, 14, 3);
+    ctx.fillText("y' = " + a.toFixed(1) + 'cos(' + a.toFixed(1) + 'x)', w - 160, 36);
+
+    readout.innerHTML = '$y = \\sin(' + a.toFixed(1) + 'x)$, &nbsp; $\\dfrac{dy}{dx} = ' + a.toFixed(1) + '\\cos(' + a.toFixed(1) + 'x)$';
+    readout.dataset.mathRendered = 'false';
+    renderMathSafe(readout);
+  };
+
+  slider.addEventListener('input', drawChainRule);
+  window.addEventListener('load', drawChainRule);
+  setTimeout(drawChainRule, 200);
+  bindAutoAnimate('chainPlayBtn', slider, drawChainRule, { step: 0.06, fps: 30 });
+})();
+
+// ── Implicit Differentiation Interactive ──
+var drawImplicit;
+(function() {
+  const angleSlider = document.getElementById('implicitAngleSlider');
+  const rSlider = document.getElementById('implicitRSlider');
+  const angleVal = document.getElementById('implicitAngleVal');
+  const rVal = document.getElementById('implicitRVal');
+  const readout = document.getElementById('implicitReadout');
+  const canvas = document.getElementById('implicitCanvas');
+  if (!canvas) return;
+
+  drawImplicit = function() {
+    const thetaDeg = parseFloat(angleSlider.value);
+    const theta = thetaDeg * Math.PI / 180;
+    const r = parseFloat(rSlider.value);
+    angleVal.textContent = Math.round(thetaDeg) + '\u00B0';
+    rVal.textContent = r.toFixed(1);
+
+    const colors = getThemeColors();
+    const {ctx, w, h} = setupCanvas(canvas);
+    const fixedBound = 8;
+    const xRange = [-fixedBound, fixedBound];
+    const yRange = [-fixedBound, fixedBound];
+
+    const marginL = 50, marginR = 20, marginT = 20, marginB = 35;
+    const rawPlotW = w - marginL - marginR;
+    const rawPlotH = h - marginT - marginB;
+    const unitScale = Math.min(rawPlotW / (xRange[1] - xRange[0]), rawPlotH / (yRange[1] - yRange[0]));
+    const plotW = unitScale * (xRange[1] - xRange[0]);
+    const plotH = unitScale * (yRange[1] - yRange[0]);
+    const plotLeft = marginL + (rawPlotW - plotW) / 2;
+    const plotTop = marginT + (rawPlotH - plotH) / 2;
+    const plotRight = plotLeft + plotW;
+    const plotBottom = plotTop + plotH;
+
+    function toPixX(x) { return plotLeft + (x - xRange[0]) * unitScale; }
+    function toPixY(y) { return plotTop + (yRange[1] - y) * unitScale; }
+
+    ctx.fillStyle = colors.bg;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.strokeStyle = colors.grid;
+    ctx.lineWidth = 0.5;
+    for (let x = Math.ceil(xRange[0]); x <= xRange[1]; x++) {
+      if (x === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(toPixX(x), plotTop);
+      ctx.lineTo(toPixX(x), plotBottom);
+      ctx.stroke();
+    }
+    for (let y = Math.ceil(yRange[0]); y <= yRange[1]; y++) {
+      if (y === 0) continue;
+      ctx.beginPath();
+      ctx.moveTo(plotLeft, toPixY(y));
+      ctx.lineTo(plotRight, toPixY(y));
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = colors.axis;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(plotLeft, toPixY(0));
+    ctx.lineTo(plotRight, toPixY(0));
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(toPixX(0), plotTop);
+    ctx.lineTo(toPixX(0), plotBottom);
+    ctx.stroke();
+
+    ctx.fillStyle = colors.text;
+    ctx.font = '11px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    for (let x = Math.ceil(xRange[0]); x <= xRange[1]; x++) {
+      if (x === 0) continue;
+      ctx.fillText(x, toPixX(x), plotBottom + 16);
+    }
+    ctx.textAlign = 'right';
+    for (let y = Math.ceil(yRange[0]); y <= yRange[1]; y++) {
+      if (y === 0) continue;
+      ctx.fillText(y, plotLeft - 8, toPixY(y) + 4);
+    }
+
+    const px = r * Math.cos(theta);
+    const py = r * Math.sin(theta);
+    const ppx = toPixX(px);
+    const ppy = toPixY(py);
+
+    ctx.strokeStyle = colors.fn1;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(toPixX(0), toPixY(0), r * unitScale, 0, 2 * Math.PI);
+    ctx.stroke();
+
+    ctx.strokeStyle = colors.axis;
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(toPixX(0), toPixY(0));
+    ctx.lineTo(ppx, ppy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = colors.fn2;
+    ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    if (Math.abs(py) > 1e-6) {
+      const slope = -px / py;
+      const candidates = [];
+      const eps = 1e-9;
+
+      const yAtLeft = py + slope * (xRange[0] - px);
+      if (yAtLeft >= yRange[0] - eps && yAtLeft <= yRange[1] + eps) candidates.push([xRange[0], yAtLeft]);
+
+      const yAtRight = py + slope * (xRange[1] - px);
+      if (yAtRight >= yRange[0] - eps && yAtRight <= yRange[1] + eps) candidates.push([xRange[1], yAtRight]);
+
+      if (Math.abs(slope) > eps) {
+        const xAtBottom = px + (yRange[0] - py) / slope;
+        if (xAtBottom >= xRange[0] - eps && xAtBottom <= xRange[1] + eps) candidates.push([xAtBottom, yRange[0]]);
+
+        const xAtTop = px + (yRange[1] - py) / slope;
+        if (xAtTop >= xRange[0] - eps && xAtTop <= xRange[1] + eps) candidates.push([xAtTop, yRange[1]]);
+      }
+
+      const unique = [];
+      for (const pt of candidates) {
+        const clippedX = Math.max(xRange[0], Math.min(xRange[1], pt[0]));
+        const clippedY = Math.max(yRange[0], Math.min(yRange[1], pt[1]));
+        if (!unique.some(u => Math.abs(u[0] - clippedX) < 1e-6 && Math.abs(u[1] - clippedY) < 1e-6)) {
+          unique.push([clippedX, clippedY]);
+        }
+      }
+
+      if (unique.length >= 2) {
+        unique.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+        ctx.moveTo(toPixX(unique[0][0]), toPixY(unique[0][1]));
+        ctx.lineTo(toPixX(unique[unique.length - 1][0]), toPixY(unique[unique.length - 1][1]));
+      }
+    } else {
+      ctx.moveTo(ppx, toPixY(yRange[0]));
+      ctx.lineTo(ppx, toPixY(yRange[1]));
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = colors.primary;
+    ctx.beginPath();
+    ctx.arc(ppx, ppy, 6, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.arc(ppx, ppy, 2.5, 0, 2 * Math.PI);
+    ctx.fill();
+
+    const labelDx = px >= 0 ? 12 : -92;
+    const labelDy = py >= 0 ? -12 : -14;
+    ctx.font = '600 12px "Source Sans 3", sans-serif';
+    ctx.fillStyle = colors.text;
+    ctx.textAlign = 'left';
+    ctx.fillText('(' + px.toFixed(2) + ', ' + py.toFixed(2) + ')', ppx + labelDx, ppy + labelDy);
+
+    if (Math.abs(py) > 0.01) {
+      const slopeVal = (-px / py).toFixed(3);
+      readout.innerHTML = 'Point: $(' + px.toFixed(2) + ',\,' + py.toFixed(2) + ')$ on $x^2 + y^2 = ' + (r*r).toFixed(1) + '$ &nbsp;&mdash;&nbsp; Slope $\dfrac{dy}{dx} = \dfrac{-x}{y} = ' + slopeVal + '$ &nbsp;&mdash;&nbsp; Equal scaling is enforced so the tangent is visually faithful.';
+    } else {
+      readout.innerHTML = 'Point: $(' + px.toFixed(2) + ',\,' + py.toFixed(2) + ')$ &nbsp;&mdash;&nbsp; Tangent line is <strong>vertical</strong> ($dy/dx$ undefined since $y = 0$). Equal scaling is enforced so the geometry stays accurate.';
+    }
+    readout.dataset.mathRendered = 'false';
+    renderMathSafe(readout);
+  };
+
+  angleSlider.addEventListener('input', drawImplicit);
+  rSlider.addEventListener('input', drawImplicit);
+  window.addEventListener('load', drawImplicit);
+  setTimeout(drawImplicit, 200);
+  bindAutoAnimate('implicitPlayBtn', angleSlider, drawImplicit, { step: 1, fps: 45, stopOnManual: true, bounce: false });
+})();
+
+// ── Arctan Interactive ──
+var drawArctan;
+(function() {
+  const slider = document.getElementById('arctanASlider');
+  const valDisplay = document.getElementById('arctanAVal');
+  const readout = document.getElementById('arctanReadout');
+  const canvas = document.getElementById('arctanCanvas');
+  if (!canvas) return;
+
+  drawArctan = function() {
+    const a = parseFloat(slider.value);
+    valDisplay.textContent = a.toFixed(1);
+
+    const colors = getThemeColors();
+    const {ctx, w, h} = setupCanvas(canvas);
+    const xRange = [-5, 5];
+    const yRange = [-2.5, 2.5];
+    const axes = drawAxes(ctx, w, h, xRange, yRange, colors);
+
+    // arctan(ax)
+    plotFunction(ctx, x => Math.atan(a * x), xRange, axes, colors.fn1, 2.5);
+    // derivative: a / (1 + (ax)^2)
+    plotFunction(ctx, x => a / (1 + (a * x) * (a * x)), xRange, axes, colors.fn2, 2);
+
+    // Asymptote lines for arctan
+    ctx.setLineDash([6, 4]);
+    ctx.strokeStyle = colors.axis;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.moveTo(axes.toPixX(-5), axes.toPixY(Math.PI / 2));
+    ctx.lineTo(axes.toPixX(5), axes.toPixY(Math.PI / 2));
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(axes.toPixX(-5), axes.toPixY(-Math.PI / 2));
+    ctx.lineTo(axes.toPixX(5), axes.toPixY(-Math.PI / 2));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Legend
+    ctx.font = '600 12px "Source Sans 3", sans-serif';
+    ctx.fillStyle = colors.fn1;
+    ctx.fillRect(w - 200, 12, 14, 3);
+    ctx.textAlign = 'left';
+    ctx.fillText('y = arctan(' + a.toFixed(1) + 'x)', w - 180, 18);
+    ctx.fillStyle = colors.fn2;
+    ctx.fillRect(w - 200, 30, 14, 3);
+    ctx.fillText("y' = " + a.toFixed(1) + '/(1+' + (a*a).toFixed(1) + 'x\u00B2)', w - 180, 36);
+
+    readout.innerHTML = '$y = \\arctan(' + a.toFixed(1) + 'x)$, &nbsp; $\\dfrac{dy}{dx} = \\dfrac{' + a.toFixed(1) + '}{1+' + (a*a).toFixed(2) + 'x^2}$ &nbsp;&mdash;&nbsp; Peak derivative at $x=0$: $' + a.toFixed(1) + '$';
+    readout.dataset.mathRendered = 'false';
+    renderMathSafe(readout);
+  };
+
+  slider.addEventListener('input', drawArctan);
+  window.addEventListener('load', drawArctan);
+  setTimeout(drawArctan, 200);
+  bindAutoAnimate('arctanPlayBtn', slider, drawArctan, { step: 0.05, fps: 30 });
+})();
+
+// ── Higher-Order Derivatives Interactive ──
+var drawHigherOrder;
+(function() {
+  const aSlider = document.getElementById('higherASlider');
+  const orderSlider = document.getElementById('higherOrderSlider');
+  const aVal = document.getElementById('higherAVal');
+  const orderVal = document.getElementById('higherOrderVal');
+  const readout = document.getElementById('higherReadout');
+  const canvas = document.getElementById('higherCanvas');
+  if (!canvas) return;
+
+  // nth derivative of sin(ax): a^n * sin(ax + n*pi/2)
+  function nthDeriv(a, n, x) {
+    return Math.pow(a, n) * Math.sin(a * x + n * Math.PI / 2);
+  }
+
+  const derivLabels = ['f(x)', "f'(x)", "f''(x)", "f'''(x)", 'f⁴(x)'];
+  function derivFormula(a, n) {
+    const coeff = Math.pow(a, n);
+    const phases = ['sin', 'cos', '-sin', '-cos'];
+    const phase = phases[n % 4];
+    const aStr = a.toFixed(1);
+    if (n === 0) return 'sin(' + aStr + 'x)';
+    const prefix = (phase.startsWith('-') ? '-' : '') + (coeff === 1 ? '' : coeff.toFixed(1).replace('-',''));
+    const func = phase.replace('-','');
+    return prefix + func + '(' + aStr + 'x)';
+  }
+
+  drawHigherOrder = function() {
+    const a = parseFloat(aSlider.value);
+    const maxOrder = parseInt(orderSlider.value);
+    aVal.textContent = a.toFixed(1);
+    orderVal.textContent = maxOrder;
+
+    const colors = getThemeColors();
+    const {ctx, w, h} = setupCanvas(canvas);
+    const xRange = [-4, 4];
+    const yMax = Math.max(3, Math.min(Math.pow(a, maxOrder) + 1, 20));
+    const yRange = [-yMax, yMax];
+    const axes = drawAxes(ctx, w, h, xRange, yRange, colors);
+
+    const lineColors = [colors.fn1, colors.fn2, colors.fn3, colors.fn4, colors.fn5];
+
+    for (let n = 0; n <= maxOrder; n++) {
+      plotFunction(ctx, x => nthDeriv(a, n, x), xRange, axes, lineColors[n] || colors.fn1, n === 0 ? 2.5 : 1.8);
+    }
+
+    // Legend
+    ctx.font = '600 11px "Source Sans 3", sans-serif';
+    for (let n = 0; n <= maxOrder; n++) {
+      const yOff = 14 + n * 18;
+      ctx.fillStyle = lineColors[n] || colors.fn1;
+      ctx.fillRect(w - 220, yOff - 2, 14, 3);
+      ctx.textAlign = 'left';
+      ctx.fillText(derivLabels[n] + ' = ' + derivFormula(a, n), w - 200, yOff + 3);
+    }
+
+    let html = '';
+    for (let n = 0; n <= maxOrder; n++) {
+      const coeffVal = Math.pow(a, n);
+      const phases = ['\\sin', '\\cos', '-\\sin', '-\\cos'];
+      const p = phases[n % 4];
+      const coeffStr = coeffVal === 1 ? '' : (n === 0 ? '' : coeffVal.toFixed(1));
+      html += '$' + derivLabels[n].replace("'", "'") + ' = ' + (p.startsWith('-') ? '-' : '') + coeffStr + p.replace('-','') + '(' + a.toFixed(1) + 'x)$ &nbsp; ';
+    }
+    readout.innerHTML = html;
+    readout.dataset.mathRendered = 'false';
+    renderMathSafe(readout);
+  };
+
+  aSlider.addEventListener('input', drawHigherOrder);
+  orderSlider.addEventListener('input', drawHigherOrder);
+  window.addEventListener('load', drawHigherOrder);
+  setTimeout(drawHigherOrder, 200);
+  bindAutoAnimate('higherPlayBtn', orderSlider, drawHigherOrder, { step: 1, fps: 3, bounce: true });
+})();
+
+// ── Flashcard Accessibility ──
+(function() {
+  document.querySelectorAll('.flashcard').forEach(card => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-pressed', 'false');
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('flipped');
+        card.setAttribute('aria-pressed', card.classList.contains('flipped') ? 'true' : 'false');
+      }
+    });
+    card.addEventListener('click', () => {
+      card.setAttribute('aria-pressed', card.classList.contains('flipped') ? 'true' : 'false');
+    });
+  });
+})();
+
+// Handle window resize for canvases
+window.addEventListener('resize', () => {
+  if (typeof drawChainRule === 'function') drawChainRule();
+  if (typeof drawImplicit === 'function') drawImplicit();
+  if (typeof drawArctan === 'function') drawArctan();
+  if (typeof drawHigherOrder === 'function') drawHigherOrder();
+});
+
+// ─── SIDEBAR TOGGLE ───
+
+// ─── SIDEBAR LAYOUT SYNC ───
+function syncSidebarLayout(isOpen) {
+  const main = document.querySelector('.main-wrap, .main-content, .main');
+  const sidebar = document.getElementById('sidebar');
+  if (!main || !sidebar) return;
+
+  if (!isOpen || window.innerWidth <= 1100) {
+    main.style.width = '';
+    main.style.maxWidth = '';
+    main.style.marginLeft = '';
+    main.style.marginRight = '';
+    return;
+  }
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const sidebarWidth = sidebar.offsetWidth
+    || parseFloat(rootStyles.getPropertyValue('--toc-w'))
+    || parseFloat(rootStyles.getPropertyValue('--sidebar-width'))
+    || parseFloat(rootStyles.getPropertyValue('--sidebar-w'))
+    || 280;
+  const mainPadding = 48;
+  const computedMain = getComputedStyle(main);
+  const maxWidth = parseFloat(computedMain.maxWidth)
+    || parseFloat(rootStyles.getPropertyValue('--max-w'))
+    || 860;
+  const availableWidth = window.innerWidth - sidebarWidth;
+  const targetWidth = Math.min(maxWidth, Math.max(320, availableWidth - mainPadding));
+  const leftOffset = sidebarWidth + Math.max(24, (availableWidth - targetWidth) / 2);
+
+  main.style.width = targetWidth + 'px';
+  main.style.maxWidth = 'none';
+  main.style.marginLeft = leftOffset + 'px';
+  main.style.marginRight = '0';
+}
+window.addEventListener('resize', () => {
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) syncSidebarLayout(sidebar.classList.contains('open'));
+});
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+  const isOpen = sidebar.classList.contains('open');
+  const btn = document.getElementById('tocToggle');
+  if (btn) btn.classList.toggle('active', isOpen);
+  syncSidebarLayout(isOpen);
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+    syncSidebarLayout(false);
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+    syncSidebarLayout(false);
+  }
+});
+</script>
+</body>
+</html>

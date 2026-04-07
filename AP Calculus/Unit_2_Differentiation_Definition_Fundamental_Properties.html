@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calculus AB/BC — Unit 2: Differentiation: Definition and Fundamental Properties</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1E2E;
+  --text: #2C2424;
+  --text-secondary: #6B5E5E;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5C1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --border: #DDD4CC;
+  --shadow: 0 4px 6px -1px rgba(60,30,30,0.06), 0 2px 4px -1px rgba(60,30,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,30,30,0.10);
+  --shadow-xl: 0 20px 40px -8px rgba(60,30,30,0.12);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 280px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1818;
+  --bg-code: #0D0A0A;
+  --text: #E8E0DC;
+  --text-secondary: #A89898;
+  --accent: #C87070;
+  --accent-light: #3A2020;
+  --accent-dark: #E89090;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --border: #352C2C;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+  --shadow-xl: 0 20px 40px -8px rgba(0,0,0,0.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.82);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .topnav { background: rgba(21, 16, 16, 0.82); }
+
+.topnav-brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem; color: var(--text);
+  display: flex; align-items: center; gap: 10px;
+}
+.topnav-brand .unit-badge {
+  background: var(--accent);
+  color: #fff; font-family: var(--font-body);
+  font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+.topnav-actions { display: flex; align-items: center; gap: 6px; }
+.topnav-actions button {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.topnav-actions button:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.topnav-actions button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Score pill in nav */
+.score-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--green-light); border: 1px solid var(--green);
+  color: var(--green); border-radius: 20px;
+  padding: 4px 12px; font-size: 0.78rem; font-weight: 700;
+  font-family: var(--font-mono);
+  transition: all 0.3s;
+}
+.score-pill .score-icon { font-size: 0.9rem; }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track {
+  position: fixed; top: 56px; left: 0; right: 0;
+  height: 3px; background: transparent; z-index: 99;
+}
+.progress-fill {
+  height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--green));
+  transition: width 0.15s;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ─── SIDEBAR TOC ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-xl); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 20px;
+  color: var(--text-secondary);
+  text-decoration: none; font-size: 0.86rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+.sidebar .toc-check {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; transition: all 0.3s;
+}
+.sidebar .toc-check.done {
+  background: var(--green); border-color: var(--green); color: #fff;
+}
+
+/* ─── MAIN ─── */
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+
+  transition: width 0.3s ease, margin-left 0.3s ease;}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: var(--accent); opacity: 0.04;
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px;
+  width: 150px; height: 150px; border-radius: 50%;
+  background: var(--green); opacity: 0.04;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 16px;
+  position: relative;
+}
+.hero-sub {
+  color: var(--text-secondary); max-width: 650px; margin: 0 auto;
+  font-size: 1.05rem; line-height: 1.6; position: relative;
+}
+.hero-meta {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.hero-meta .chip {
+  font-size: 0.82rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+
+/* ─── STUDY DASHBOARD ─── */
+.dashboard {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin: -20px 0 40px;
+}
+.dash-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 16px;
+  text-align: center; box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+.dash-card:hover { transform: translateY(-2px); }
+.dash-val {
+  font-family: var(--font-mono); font-size: 1.6rem;
+  font-weight: 700; color: var(--accent);
+  line-height: 1.2;
+}
+.dash-label {
+  font-size: 0.78rem; color: var(--text-secondary);
+  margin-top: 4px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.dash-card.green .dash-val { color: var(--green); }
+.dash-card.purple .dash-val { color: var(--purple); }
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin: 32px 0 12px;
+  line-height: 1.3; color: var(--text);
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px;
+}
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+/* ─── CODE BLOCKS ─── */
+pre {
+  background: var(--bg-code); color: #CDD6F4;
+  padding: 20px 24px; border-radius: var(--radius);
+  overflow-x: auto; font-family: var(--font-mono);
+  font-size: 0.88rem; line-height: 1.65; margin: 16px 0;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+code { font-family: var(--font-mono); font-size: 0.9em; }
+:not(pre) > code {
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 6px; border-radius: 4px; font-weight: 500;
+}
+.kw { color: #CBA6F7; }
+.ty { color: #89B4FA; }
+.str { color: #A6E3A1; }
+.cm { color: #A6ADC8; font-style: italic; }
+.num { color: #FAB387; }
+
+/* ─── KEY CONCEPT BOX ─── */
+.concept-box {
+  border-left: 5px solid var(--accent);
+  background: var(--bg-card);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child { 
+  display: inline-block; margin-bottom: 8px; 
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px 28px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.quiz::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--purple));
+  opacity: 0.6;
+}
+.quiz-q { font-weight: 600; margin-bottom: 16px; font-size: 1.05rem; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.25s;
+  background: var(--bg); font-weight: 500;
+  position: relative; padding-left: 44px;
+}
+.quiz-opt::before {
+  content: attr(data-label);
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: var(--text-secondary);
+  transition: all 0.25s;
+}
+.quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt:hover::before { border-color: var(--accent); color: var(--accent); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.correct::before { background: var(--green); border-color: var(--green); color: #fff; content: '✓'; }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.wrong::before { background: var(--red); border-color: var(--red); color: #fff; content: '✗'; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.75; }
+.quiz-opt.disabled.correct { opacity: 1; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.92rem; display: none; line-height: 1.65; }
+.quiz-explain.show { display: block; animation: slideUp 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── ACCORDION / DETAILS ─── */
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+/* ─── QUICK REF ─── */
+.qref { background: var(--bg-card); border: 2px dashed var(--accent); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+.qref-title { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; text-align: center; }
+
+/* ─── FLASHCARD ─── */
+
+/* ─── FLASHCARDS (standardized) ─── */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard {
+  perspective: 800px;
+  min-height: 200px;
+  cursor: pointer;
+}
+.flashcard-inner {
+  width: 100%; min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  padding: 20px 16px;
+  text-align: center;
+  font-size: clamp(0.78rem, 2.2vw, 0.92rem);
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  font-weight: 600;
+  color: var(--accent);
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP'; position: absolute; bottom: 8px;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.4; letter-spacing: 1px;
+}
+.flashcard-back {
+  background: var(--bg);
+  transform: rotateY(180deg);
+  font-size: clamp(0.75rem, 2vw, 0.88rem);
+  line-height: 1.55;
+  border: 2px solid var(--accent);
+  color: var(--text);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 18px 14px;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 0.85em;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.flashcard-back .katex {
+  font-size: 0.95em;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.flashcard-back br {
+  margin-bottom: 2px;
+}
+.flashcard-front::after {
+  content: 'tap to flip'; position: absolute; bottom: 10px;
+  font-size: 0.7rem; color: var(--text-secondary); font-weight: 400;
+  opacity: 0.6; font-family: var(--font-mono);
+}
+
+/* ─── SEPARATOR ─── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+
+/* ─── WORKED EXAMPLES (standardized) ─── */
+.worked-example {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 88%, var(--accent-light) 12%), var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+[data-theme="dark"] .worked-example {
+  background: linear-gradient(180deg, rgba(58,32,32,0.32), rgba(30,24,24,0.98));
+}
+.worked-example h4,
+.worked-example .we-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--accent);
+  margin: 0 0 16px 0;
+}
+.worked-example .we-steps {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.worked-example .we-step {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+[data-theme="dark"] .worked-example .we-step {
+  background: var(--bg-card);
+}
+.worked-example .we-step strong {
+  color: var(--accent);
+  font-size: 0.92rem;
+  display: block;
+  margin-bottom: 6px;
+}
+.worked-example .we-step .katex-display {
+  margin: 10px 0;
+}
+.worked-solution {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+
+/* ─── FORMULA BOX ─── */
+.formula-box {
+  background: var(--bg-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
+  position: relative;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+/* ─── INTERACTIVE WIDGETS ─── */
+.interactive-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: var(--shadow-lg);
+}
+.widget-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 16px;
+  text-align: center;
+}
+.widget-canvas-wrap {
+  position: relative; width: 100%; max-width: 720px; margin: 0 auto;
+}
+.widget-canvas-wrap canvas {
+  width: 100%; height: auto; display: block; border-radius: 8px;
+}
+.widget-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 16px; flex-wrap: wrap;
+}
+.widget-controls label {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  font-weight: 600; color: var(--text-secondary);
+}
+.widget-controls input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 220px; height: 6px; background: var(--border);
+  border-radius: 3px; outline: none; cursor: pointer;
+}
+.widget-controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  border: 2px solid var(--bg-card);
+}
+.widget-controls input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); cursor: pointer;
+  border: 2px solid var(--bg-card);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+.widget-readout {
+  font-family: var(--font-mono); font-size: 1rem;
+  font-weight: 700; color: var(--accent);
+  min-width: 90px; text-align: center;
+}
+.widget-sum-readout {
+  text-align: center; margin-top: 12px;
+  font-size: 1rem; line-height: 1.8;
+}
+.widget-sum-readout .sum-val {
+  font-family: var(--font-mono); font-weight: 700;
+  color: var(--accent); font-size: 1.15rem;
+}
+.widget-sum-readout .exact-val {
+  font-family: var(--font-mono); font-weight: 700;
+  color: var(--green); font-size: 1.15rem;
+}
+
+/* ─── FINAL QUIZ SECTION ─── */
+.quiz-results-bar {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 24px;
+  margin: 24px 0; box-shadow: var(--shadow);
+  display: none; animation: slideUp 0.4s ease;
+}
+.quiz-results-bar.show { display: block; }
+.results-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; flex-wrap: wrap; gap: 8px;
+}
+.results-title {
+  font-family: var(--font-display); font-size: 1.2rem;
+}
+.results-score {
+  font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700;
+}
+.results-bar-track {
+  height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;
+}
+.results-bar-fill {
+  height: 100%; border-radius: 5px; transition: width 0.8s ease;
+  background: linear-gradient(90deg, var(--red), var(--orange), var(--green));
+}
+.results-msg {
+  margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  text-align: center; padding: 48px 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.footer-brand {
+  font-family: var(--font-display); font-size: 1.1rem;
+  color: var(--text); margin-bottom: 8px;
+}
+.footer p { font-size: 0.82rem; line-height: 1.7; }
+.footer-badges { display: flex; gap: 8px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.footer-badges span {
+  font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+  border-radius: 12px; border: 1px solid var(--border);
+  font-family: var(--font-mono); color: var(--text-secondary);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (min-width: 1100px) {
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  pre { font-size: 0.8rem; padding: 16px; }
+  
+  .formula-box { padding: 16px; }
+  .dashboard { grid-template-columns: 1fr; }
+  .quiz { padding: 20px 16px; }
+  .topnav-brand { font-size: 0.95rem; }
+  .topnav-brand .unit-badge { display: none; }
+}
+
+/* Print */
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  
+  
+  
+  
+  
+  
+
+  .topnav, .progress-track, .sidebar, .topnav-actions, .flashcard-controls, .score-pill, .dashboard { display: none !important; }
+  .main-wrap { margin: 0 auto; }
+  body { font-size: 11pt; background: white; color: black; }
+  pre { border: 1px solid #ccc; white-space: pre-wrap; }
+  .card, .formula-box, .concept-box { break-inside: avoid; border: 1px solid #000; box-shadow: none; }
+}
+
+/* ─── HEADER STANDARDIZED TO MATCH UNIT 5 ─── */
+.top-nav,
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  background: var(--color-nav-bg, rgba(245,240,235,0.88));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border-light, var(--border, #E2DCD5));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+[data-theme="dark"] .top-nav,
+[data-theme="dark"] .topnav {
+  background: var(--color-nav-bg, rgba(21,16,16,0.92));
+}
+.nav-left,
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.nav-logo {
+  height: 36px;
+  width: auto;
+}
+.nav-badge,
+.topnav-brand .unit-badge {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  background: var(--color-accent-bg, rgba(122,46,46,0.06));
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.nav-right,
+.topnav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-btn,
+.topnav-actions button {
+  font-family: var(--font-sans, var(--font-body, 'Source Sans 3', sans-serif));
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  background: var(--color-surface-alt, var(--bg-card, #FFFFFF));
+  border: 1px solid var(--color-border, var(--border, #DDD4CC));
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nav-btn:hover,
+.topnav-actions button:hover {
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  border-color: var(--color-accent, var(--accent, #7A2E2E));
+  background: var(--color-accent-bg, var(--accent-light, rgba(122,46,46,0.06)));
+  transform: none;
+}
+.hero {
+  background: var(--color-hero-gradient, linear-gradient(135deg, #F5F0EB 0%, #EEE4DC 42%, #E5D6CD 100%));
+  padding: 72px 60px 60px;
+  border-bottom: 1px solid var(--color-border-light, var(--border, #E2DCD5));
+  border-radius: 0;
+  text-align: left;
+  margin-bottom: 0;
+}
+.hero-overline {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  margin-bottom: 14px;
+}
+.hero h1,
+.hero .hero-title {
+  font-family: var(--font-serif, var(--font-display, Georgia, serif));
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--color-text, var(--text, #2C2424));
+  margin-bottom: 16px;
+}
+.hero-subtitle,
+.hero .hero-sub,
+.hero p.hero-subtitle {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  max-width: 680px;
+  margin-bottom: 32px;
+}
+.hero-chips,
+.hero .hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+.hero-chips .chip,
+.hero .hero-meta .chip,
+.chip {
+  font-family: var(--font-mono, var(--font-mono));
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
+  background: var(--color-surface, var(--bg-card, #FFFFFF));
+  border: 1px solid var(--color-border, var(--border, #DDD4CC));
+  padding: 7px 16px;
+  border-radius: 100px;
+  box-shadow: none;
+}
+.hero-chips .chip strong,
+.hero .hero-meta .chip strong,
+.chip strong {
+  color: var(--color-accent, var(--accent, #7A2E2E));
+  font-weight: 600;
+}
+.chip-maroon,
+.chip-green,
+.chip-purple {
+  color: inherit !important;
+  border-color: var(--color-border, var(--border, #DDD4CC)) !important;
+  background: var(--color-surface, var(--bg-card, #FFFFFF)) !important;
+}
+@media (max-width: 768px) {
+  .top-nav,
+  .topnav {
+    padding: 0 16px;
+  }
+  .hero {
+    padding: 48px 24px 40px;
+  }
+  .nav-logo {
+    height: 30px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFKAuoDASIAAhEBAxEB/8QAHAABAQADAQEBAQAAAAAAAAAAAAEGBwgFBAID/8QAaxAAAQMDAQUBCAcQCwwHBgcAAQACAwQFEQYHEiExQRMIFCIyUWFxgRUXN5GUsbMWIzM2QlJUYnJ0dZOhstLTJDRVVnOCkpW0w9ElNThFU1djg4SiwdQmJ0NERmV2KGSFhqTwGEhmo8Lh9f/EABkBAQADAQEAAAAAAAAAAAAAAAABAgQDBf/EADQRAQACAgAEAwUHBAIDAAAAAAABAgMRBBIhMTJBURMzYXGBFCI0kaGx0SNSU/BCQ2PB4f/aAAwDAQACEQMRAD8A6jREWV1EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARREFREKAiIgIomfMgqZRT8qBniqiICIiAiBEBERAREygJlTgqgZRAiAiic0FTKiIKinxK9UBFFUBFECCooqgIiICZU9SvqQEUVQEQogIiICIiAiKIKmfMiiCoonrQVMoiAiIgIoqgIiICIiAiIgJ6kRARPUiAiJ0QEREBERAREQEyoqgIiICIiAiIgIiICIiAiIgIiICKKoCKZRBUURBURRAVREBFOHmX4q54aSAz1c0dPEOb5XBrR6zwQf0RYzdNf6JtkZfVaotpxzZBL27v5Me8fyLF6vbhoyLPYQ3esxyMdM1gP4xzT+RNutcOS3astmotP0O3qzPqZG1unrlBB/2b4po5XH0tO6B/KKyC2bYtCVkojluNTQuOMd9UjwD62BzR6yo3C08NljvVsFReVQam03XvDKHUFqqnuOA2Ksjc4nyboOfyL13BzfGaR6QpcZiY7vyiqIhEREDoiJ6kFCnrT0IgqdVEKCqInqQOXFPOr05KIKinmVQRE9SflQVFEPRBUREBEU9aAUREBVREFUREFRFEDqicccU6ICqIgnRERBVFUQFDzQ8lUBREQVF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CIiqCZRE6IKiBRBUUwqgKJyRBVE6J1QEREFUToiCqBEKAqpkeVBxQVFEQOKInVBVEQIHNEVQQoqogIiYQVREQFeSiBBRlREQFVB5kQE69UKdED1omUwgIiICIiAqoiAr51MKoIUTogQMIhRBVFVEBERARMcUQPWiFEBECICqiIBRECAEKIgoQophACqZTKAiIgIiICIiAiIgiqIgiqKdEBE5qoJ5kRVBEVRBEVU9KCqIiC8UUTzoKor1UKAEREBVREBOKeVOqAiqiAgREF64UKKoJyRCFUETqhCo8qCIqp0QVFEQFVEQOqKqIBTmiICeZVTqgIivVBCiIgBERARVRA6IPIqogdVeaiqCInmRAREQERCgBERAREQMomEQEVUQEQKoCiIEDHBPSidEBAiIHpTqieYIKinJOKCphQKoCIiAiIgIiICFEQTor1REDqpw44VRBCqiIHVERAREQEREBQKogiqIgKKogdEREBERBFURBFURBFURBCnVVEERVEEVREBERAUKqIInDCqIIiqIInVVEERVEBERBFURAKiqICIiAp6lUQTgiqFBOqoROXVBOSKlMIIipQIIiqBBETCqCJyVQoIiuEwgiqhTCAiqYQFFR6EQFFUQEQqICvJROiBhVMIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAohVQAiKBBUUCpQEQckQRUlCoguEygU6oKiIgIgRBCqiICIp1QVCUU6oKhRCggVQclOqCoURA4oiJI/9k=" class="nav-logo" alt="DingRui Scholars logo">
+    <span class="nav-badge">UNIT 2</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero"><span class="toc-check" data-section="hero"></span>Overview</a>
+  <a href="#s2-1"><span class="toc-check" data-section="s2-1"></span>2.1 Average &amp; Instantaneous Rates</a>
+  <a href="#s2-2"><span class="toc-check" data-section="s2-2"></span>2.2 Defining the Derivative</a>
+  <a href="#s2-3"><span class="toc-check" data-section="s2-3"></span>2.3 Estimating Derivatives</a>
+  <a href="#s2-4"><span class="toc-check" data-section="s2-4"></span>2.4 Differentiability &amp; Continuity</a>
+  <a href="#s2-5"><span class="toc-check" data-section="s2-5"></span>2.5 The Power Rule</a>
+  <a href="#s2-6"><span class="toc-check" data-section="s2-6"></span>2.6 Constant, Sum, Difference Rules</a>
+  <a href="#s2-7"><span class="toc-check" data-section="s2-7"></span>2.7 Derivatives of sin, cos, eˣ, ln x</a>
+  <a href="#s2-8"><span class="toc-check" data-section="s2-8"></span>2.8 The Product Rule</a>
+  <a href="#s2-9"><span class="toc-check" data-section="s2-9"></span>2.9 The Quotient Rule</a>
+  <a href="#s2-10"><span class="toc-check" data-section="s2-10"></span>2.10 Derivatives of tan, cot, sec, csc</a>
+  <a href="#exam-strategy"><span class="toc-check" data-section="exam-strategy"></span>Exam Strategy</a>
+  <a href="#flashcards"><span class="toc-check" data-section="flashcards"></span>Flashcards</a>
+  <a href="#unit-quiz"><span class="toc-check" data-section="unit-quiz"></span>Unit Quiz</a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Calculus AB &amp; BC · Study Guide</div>
+  <h1>Differentiation: Definition<br>and Fundamental Properties</h1>
+  <p class="hero-subtitle">Build the derivative from limits, master the core differentiation rules, and connect instantaneous rates of change to the tangent line.</p>
+  <div class="hero-chips">
+    <span class="chip"><strong>10–12%</strong>&nbsp; AB Exam</span> <span class="chip"><strong>4–7%</strong>&nbsp; BC Exam</span> <span class="chip"><strong>~13–14</strong>&nbsp; Class Periods (AB)</span> <span class="chip"><strong>10</strong>&nbsp; Topics</span>
+  </div>
+</section>
+
+<!-- Dashboard removed — quiz results shown at quiz section -->
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.1 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-1">
+  <div class="section-label">Topic 2.1</div>
+  <h2>Defining Average and Instantaneous Rates of Change at a Point</h2>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Big Idea</strong>
+    The derivative starts with a simple question: <em>how fast is something changing right now?</em> We answer it by first computing <strong>average rates of change</strong> over an interval, then shrinking that interval to zero.
+  </div>
+
+  <div class="formula-box" style="border-top-color: var(--green);">
+    <div class="formula-label" style="color: var(--green);">Average Rate of Change (Difference Quotient)</div>
+    $$ \text{AROC} = \frac{f(b) - f(a)}{b - a} $$
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;">
+      This is the slope of the <strong>secant line</strong> connecting $(a, f(a))$ and $(b, f(b))$. It tells you how much $f$ changes, on average, per unit change in $x$ over the interval $[a, b]$.
+    </p>
+  </div>
+
+  <p>The <strong>instantaneous rate of change</strong> at $x = a$ is the limit of the average rate of change as the interval shrinks to zero — that is, as $b \to a$ (or equivalently, as $h \to 0$).</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Instantaneous Rate of Change (Two Equivalent Forms)</div>
+    $$ f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} $$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Geometric Meaning</strong>
+    <span style="display:block; margin-top:8px;">The <strong>average rate of change</strong> = slope of the <strong>secant line</strong> through two points.</span>
+    <span style="display:block; margin-top:4px;">The <strong>instantaneous rate of change</strong> = slope of the <strong>tangent line</strong> at a single point.</span>
+    <span style="display:block; margin-top:8px;">As the two points on the secant line get closer and closer together, the secant line becomes the tangent line.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Average vs. Instantaneous Rate</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Given $f(x) = x^2 + 1$.</p>
+<p><strong>AROC on $[1, 3]$:</strong></p>
+$$\frac{f(3) - f(1)}{3 - 1} = \frac{(9+1)-(1+1)}{2} = \frac{8}{2} = 4$$
+<p><strong>Instantaneous rate at $x = 1$:</strong></p>
+$$\begin{aligned}
+f'(1) &= \lim_{h \to 0} \frac{f(1+h) - f(1)}{h} \\[4pt]
+&= \lim_{h \to 0} \frac{(1+h)^2 + 1 - 2}{h} \\[4pt]
+&= \lim_{h \to 0} \frac{2h + h^2}{h} \\[4pt]
+&= \lim_{h \to 0} (2 + h) = 2
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">The average rate of change of $f(x) = x^3$ on the interval $[1, 4]$ is:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$12$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$27$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$21$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$63$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$.</div>
+    <div class="quiz-explain wrong-exp">AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$. Don't forget to divide by the interval width!</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.2 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-2">
+  <div class="section-label">Topic 2.2</div>
+  <h2>Defining the Derivative of a Function and Using Derivative Notation</h2>
+
+  <p>In Topic 2.1 we found the derivative <em>at a single point</em>. Now we generalize: the derivative of $f$ is itself a <strong>function</strong> that gives the slope of the tangent line at every point where the limit exists.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Definition of the Derivative Function</div>
+    $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">provided this limit exists</p>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">Notation — All Mean the Same Thing</strong>
+    <span style="display:block; margin-top:10px;">$f'(x)$ — "f prime of x" (Lagrange notation)</span>
+    <span style="display:block; margin-top:6px;">$\dfrac{dy}{dx}$ — "dy dx" (Leibniz notation — looks like a fraction but is a single symbol)</span>
+    <span style="display:block; margin-top:6px;">$y'$ — shorthand when $y = f(x)$</span>
+    <span style="display:block; margin-top:6px;">$\dfrac{d}{dx}[f(x)]$ — operator notation: "the derivative with respect to $x$ of $f(x)$"</span>
+    <span style="display:block; margin-top:10px;">You must be comfortable reading and writing all of these — the AP exam uses them interchangeably.</span>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Tangent Line Equation</strong>
+    <span style="display:block; margin-top:8px;">The derivative at a point gives the slope of the tangent line at that point. The equation of the tangent line to $y = f(x)$ at $x = a$ is:</span>
+    $$ y - f(a) = f'(a)(x - a) $$
+  </div>
+
+  <details>
+    <summary>Worked Example — Finding Derivative from the Definition</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $f'(x)$ for $f(x) = 3x^2$ using the limit definition.</p>
+$$\begin{aligned}
+f'(x) &= \lim_{h \to 0} \frac{3(x+h)^2 - 3x^2}{h} \\[4pt]
+&= \lim_{h \to 0} \frac{3x^2 + 6xh + 3h^2 - 3x^2}{h} \\[4pt]
+&= \lim_{h \to 0} \frac{6xh + 3h^2}{h} \\[4pt]
+&= \lim_{h \to 0} (6x + 3h) = 6x
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Equation of a Tangent Line</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find the equation of the tangent line to $f(x) = x^2$ at $x = 3$.</p>
+<p><strong>Step 1:</strong> $f(3) = 9$</p>
+<p><strong>Step 2:</strong> $f'(x) = 2x \;\Longrightarrow\; f'(3) = 6$</p>
+<p><strong>Step 3:</strong> Point-slope form:</p>
+$$\begin{aligned}
+y - 9 &= 6(x - 3) \\
+y &= 6x - 9
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">Which of the following represents $\dfrac{d}{dx}[x^3]$ evaluated at $x = 2$ using the limit definition?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$\displaystyle\lim_{h \to 0} \frac{(x+h)^3 - x^3}{h}$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$\displaystyle\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$\displaystyle\lim_{h \to 0} \frac{2^3 - h^3}{h}$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$\displaystyle\lim_{h \to 0} \frac{(2+h)^3 - (2-h)^3}{h}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The limit definition of the derivative at $x = 2$ is $f'(2) = \lim_{h \to 0} \frac{f(2+h) - f(2)}{h} = \lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</div>
+    <div class="quiz-explain wrong-exp">Use the limit definition $f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$. With $f(x) = x^3$ and $a = 2$, this becomes $\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.3 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-3">
+  <div class="section-label">Topic 2.3</div>
+  <h2>Estimating Derivatives of a Function at a Point</h2>
+
+  <p>When you don't have a formula for $f$ but have a table of values or a graph, you can still <strong>estimate</strong> the derivative using a difference quotient with nearby points.</p>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Key Technique</strong>
+    <span style="display:block; margin-top:8px;">To estimate $f'(a)$ from a table, use the two values closest to $a$:</span>
+    $$ f'(a) \approx \frac{f(b) - f(c)}{b - c} $$
+    <span style="display:block; margin-top:8px;">where $b$ and $c$ are the table values flanking $a$ (or closest available).</span>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Exam Skill — Show Your Setup!</strong>
+    <span style="display:block; margin-top:8px;">You <em>must</em> write the difference quotient before evaluating. Just writing the numerical answer — even if correct — will not earn full credit on free-response questions.</span>
+    <span style="display:block; margin-top:8px;">Example of proper presentation:</span>
+    <span style="display:block; margin-top:4px;">$f'(3) \approx \dfrac{f(4) - f(3)}{4 - 3} = \dfrac{12.8 - 11.2}{1} = 1.6$</span>
+  </div>
+
+  <!-- ─── INTERACTIVE SECANT → TANGENT VISUALIZER ─── -->
+  <div class="interactive-widget" id="secant-widget">
+    <div class="widget-header">Interactive · Secant → Tangent Line Explorer</div>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Drag the slider to move point $Q$ toward point $P$ and watch the secant line approach the tangent line.</p>
+    <div class="widget-canvas-wrap">
+      <canvas id="secantCanvas" width="720" height="400"></canvas>
+    </div>
+    <div class="widget-controls">
+      <label for="secantH">$h$ =</label>
+      <input type="range" id="secantH" min="1" max="400" value="300" step="1">
+      <div class="widget-readout" id="secantReadout">h = 3.00</div>
+    </div>
+    <div class="widget-sum-readout" id="secantSlopeReadout">
+      Secant slope = <span class="sum-val" id="secantSlope">—</span> &nbsp;|&nbsp; Tangent slope = <span class="exact-val" id="tangentSlope">—</span>
+    </div>
+  </div>
+
+  <details>
+    <summary>Worked Example — Estimating from a Table</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Given table:</p>
+<table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
+  <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$x$</td><td style="padding:4px 14px; border:1px solid var(--border);">1</td><td style="padding:4px 14px; border:1px solid var(--border);">3</td><td style="padding:4px 14px; border:1px solid var(--border);">4</td><td style="padding:4px 14px; border:1px solid var(--border);">6</td></tr>
+  <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$f(x)$</td><td style="padding:4px 14px; border:1px solid var(--border);">2</td><td style="padding:4px 14px; border:1px solid var(--border);">8</td><td style="padding:4px 14px; border:1px solid var(--border);">11</td><td style="padding:4px 14px; border:1px solid var(--border);">20</td></tr>
+</table>
+<p>Estimate $f'(3)$ using symmetric values around $x=3$:</p>
+$$f'(3) \approx \frac{f(4) - f(1)}{4 - 1} = \frac{11 - 2}{3} = 3$$
+<p>Or, using the closest points on each side:</p>
+$$f'(3) \approx \frac{f(4) - f(3)}{4 - 3} = \frac{11 - 8}{1} = 3$$
+</div>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.4 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-4">
+  <div class="section-label">Topic 2.4</div>
+  <h2>Connecting Differentiability and Continuity</h2>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">The Key Theorem</strong>
+    <span style="display:block; margin-top:8px;">If $f$ is <strong>differentiable</strong> at $x = a$, then $f$ is <strong>continuous</strong> at $x = a$.</span>
+    <span style="display:block; margin-top:10px;"><em>Equivalently (contrapositive):</em> If $f$ is <em>not</em> continuous at $x = a$, then $f$ is <em>not</em> differentiable at $x = a$.</span>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Caution — The Converse is False!</strong>
+    <span style="display:block; margin-top:8px;">A function can be continuous at a point but <strong>not differentiable</strong> there. Differentiability is a stronger condition than continuity.</span>
+  </div>
+
+  <div class="qref">
+    <div class="qref-title">Where Does the Derivative Fail to Exist?</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type</th><th>What It Looks Like</th><th>Example</th></tr>
+        <tr><td><strong>Corner / Cusp</strong></td><td>Sharp change in direction; left and right derivatives differ</td><td>$f(x) = |x|$ at $x = 0$</td></tr>
+        <tr><td><strong>Vertical Tangent</strong></td><td>Tangent line is vertical (slope → $\pm\infty$)</td><td>$f(x) = \sqrt[3]{x}$ at $x = 0$</td></tr>
+        <tr><td><strong>Discontinuity</strong></td><td>Jump, removable, or infinite discontinuity</td><td>Piecewise function with a jump</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">How to Check Differentiability</strong>
+    <span style="display:block; margin-top:8px;">1. Is $f$ continuous at the point? If not → not differentiable.</span>
+    <span style="display:block; margin-top:4px;">2. Do the left-hand and right-hand derivatives exist and are they equal?</span>
+    $$ \lim_{h \to 0^-} \frac{f(a+h) - f(a)}{h} = \lim_{h \to 0^+} \frac{f(a+h) - f(a)}{h} $$
+    <span style="display:block; margin-top:4px;">If both conditions hold, the function is differentiable at $x = a$.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Checking Differentiability of a Piecewise Function</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Is $f$ differentiable at $x = 2$?</p>
+$$f(x) = \begin{cases} x^2, & x \le 2 \\ 4x - 4, & x > 2 \end{cases}$$
+<p><strong>Step 1 — Continuity:</strong></p>
+$$\lim_{x \to 2^-} x^2 = 4, \quad \lim_{x \to 2^+}(4x-4) = 4, \quad f(2) = 4 \;\;\checkmark$$
+<p><strong>Step 2 — Derivatives from each side:</strong></p>
+$$\begin{aligned}
+\text{Left: } &\frac{d}{dx}(x^2) = 2x \;\Longrightarrow\; 2(2) = 4 \\[4pt]
+\text{Right: } &\frac{d}{dx}(4x-4) = 4
+\end{aligned}$$
+<p>Left $=$ Right $= 4$, so $f$ is differentiable at $x=2$ and $f'(2) = 4$. ✓</p>
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">If $f$ is differentiable at $x = 5$, which of the following must be true?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$f'(5) = 0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$f$ is continuous at $x = 5$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$f$ has no sharp corners anywhere</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$f$ is defined for all real numbers</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Differentiability implies continuity. If a function is differentiable at a point, it must be continuous there.</div>
+    <div class="quiz-explain wrong-exp">Differentiability at a point implies continuity at that point. It does not mean the derivative is zero, nor that the function is smooth everywhere or defined everywhere.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.5 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-5">
+  <div class="section-label">Topic 2.5</div>
+  <h2>Applying the Power Rule</h2>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Why This Matters</strong>
+    The power rule is the single most-used differentiation rule. It works for any real exponent and replaces the tedious limit definition for polynomial-type functions.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">The Power Rule</div>
+    $$ \frac{d}{dx}\left[x^n\right] = n \cdot x^{n-1} $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">for any real number $n$</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Rewriting Before Differentiating</strong>
+    <span style="display:block; margin-top:8px;">Many functions must be rewritten in the form $x^n$ before applying the power rule:</span>
+    <span style="display:block; margin-top:6px;">$\sqrt{x} = x^{1/2}$ &nbsp;→&nbsp; $\frac{d}{dx}[\sqrt{x}] = \frac{1}{2}x^{-1/2}$</span>
+    <span style="display:block; margin-top:4px;">$\dfrac{1}{x^3} = x^{-3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\frac{1}{x^3}\right] = -3x^{-4}$</span>
+    <span style="display:block; margin-top:4px;">$\sqrt[3]{x^2} = x^{2/3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\sqrt[3]{x^2}\right] = \frac{2}{3}x^{-1/3}$</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Power Rule with Rewriting</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find the derivative of $f(x) = 5x^4 - \dfrac{2}{\sqrt{x}}$.</p>
+<p>Rewrite: $f(x) = 5x^4 - 2x^{-1/2}$</p>
+$$\begin{aligned}
+f'(x) &= 5 \cdot 4 x^3 - 2\!\left(-\tfrac{1}{2}\right)x^{-3/2} \\[4pt]
+&= 20x^3 + x^{-3/2} \\[4pt]
+&= 20x^3 + \frac{1}{x^{3/2}}
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">$\dfrac{d}{dx}\!\left[\dfrac{3}{\sqrt{x}}\right] =$</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$\dfrac{3}{2\sqrt{x}}$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$-\dfrac{3}{2}x^{1/2}$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$-\dfrac{3}{2x^{3/2}}$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$\dfrac{3}{2x^{3/2}}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Rewrite: $\frac{3}{\sqrt{x}} = 3x^{-1/2}$. Then $\frac{d}{dx}[3x^{-1/2}] = 3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2}x^{-3/2} = -\frac{3}{2x^{3/2}}$.</div>
+    <div class="quiz-explain wrong-exp">First rewrite as $3x^{-1/2}$, then apply the power rule: $3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2x^{3/2}}$. Watch the sign from the negative exponent!</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.6 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-6">
+  <div class="section-label">Topic 2.6</div>
+  <h2>Derivative Rules: Constant, Sum, Difference, and Constant Multiple</h2>
+
+  <div class="qref">
+    <div class="qref-title">Fundamental Differentiation Rules</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Rule</th><th>Formula</th></tr>
+        <tr><td>Constant</td><td>$\dfrac{d}{dx}[c] = 0$</td></tr>
+        <tr><td>Constant Multiple</td><td>$\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$</td></tr>
+        <tr><td>Sum</td><td>$\dfrac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$</td></tr>
+        <tr><td>Difference</td><td>$\dfrac{d}{dx}[f(x) - g(x)] = f'(x) - g'(x)$</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Key Takeaway</strong>
+    <span style="display:block; margin-top:8px;">You can differentiate polynomial functions <strong>term by term</strong>. Constants "come along for the ride" (constant multiple rule), and the derivative of any standalone constant is zero.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Combining Rules</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $\dfrac{dy}{dx}$ if $y = 7x^5 - 3x^3 + 4x - 9$.</p>
+$$\begin{aligned}
+\frac{dy}{dx} &= 7 \cdot 5x^4 - 3 \cdot 3x^2 + 4 \cdot 1 - 0 \\[4pt]
+&= 35x^4 - 9x^2 + 4
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.7 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-7">
+  <div class="section-label">Topic 2.7</div>
+  <h2>Derivatives of cos x, sin x, e<sup>x</sup>, and ln x</h2>
+
+  <div class="qref">
+    <div class="qref-title">Essential Derivatives to Memorize</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Function $f(x)$</th><th>Derivative $f'(x)$</th></tr>
+        <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
+        <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
+        <tr><td>$e^x$</td><td>$e^x$</td></tr>
+        <tr><td>$\ln x$</td><td>$\dfrac{1}{x}$</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Watch the Sign!</strong>
+    <span style="display:block; margin-top:8px;">The derivative of $\cos x$ is $\mathbf{-}\sin x$ — note the negative sign. Many students forget this.</span>
+    <span style="display:block; margin-top:8px;">Memory aid: the "co-" functions (cosine, cotangent, cosecant) all pick up a <strong>negative sign</strong> when differentiated.</span>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">Recognizing Limit Definitions</strong>
+    <span style="display:block; margin-top:8px;">Sometimes a limit on the exam is secretly the definition of a derivative in disguise:</span>
+    $$ \lim_{h \to 0} \frac{\sin\left(\frac{\pi}{3} + h\right) - \sin\left(\frac{\pi}{3}\right)}{h} $$
+    <span style="display:block; margin-top:8px;">This is $f'(\pi/3)$ where $f(x) = \sin x$, so the answer is $\cos(\pi/3) = 1/2$.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Derivatives of Transcendental Functions</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $f'(x)$ for $f(x) = 3e^x + 5\sin x - 2\ln x$.</p>
+$$\begin{aligned}
+f'(x) &= 3e^x + 5\cos x - 2 \cdot \frac{1}{x} \\[4pt]
+&= 3e^x + 5\cos x - \frac{2}{x}
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">$\displaystyle\lim_{h \to 0} \frac{e^{2+h} - e^2}{h}$ equals:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$2e$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$1$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$e^2$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! This limit is the definition of $f'(2)$ where $f(x) = e^x$. Since $\frac{d}{dx}[e^x] = e^x$, we get $f'(2) = e^2$.</div>
+    <div class="quiz-explain wrong-exp">Recognize this as $f'(2)$ where $f(x) = e^x$. The derivative of $e^x$ is $e^x$, so the answer is $e^2$.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.8 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-8">
+  <div class="section-label">Topic 2.8</div>
+  <h2>The Product Rule</h2>
+
+  <div class="formula-box">
+    <div class="formula-label">The Product Rule</div>
+    $$ \frac{d}{dx}\left[f(x) \cdot g(x)\right] = f'(x) \cdot g(x) + f(x) \cdot g'(x) $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Mnemonic: "derivative of the first times the second, plus the first times the derivative of the second"</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Common Mistake</strong>
+    <span style="display:block; margin-top:8px;">The derivative of a product is <strong>NOT</strong> the product of the derivatives:</span>
+    $$ \frac{d}{dx}[f \cdot g] \neq f' \cdot g' $$
+    <span style="display:block; margin-top:8px;">This is one of the most frequent errors on the AP exam.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Product Rule</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $\dfrac{d}{dx}\bigl[x^2 \cdot \sin x\bigr]$.</p>
+<p>Let $f = x^2,\; g = \sin x$, so $f' = 2x,\; g' = \cos x$:</p>
+$$\begin{aligned}
+\frac{d}{dx}[x^2 \sin x] &= f'g + fg' \\[4pt]
+&= 2x\sin x + x^2 \cos x
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Product Rule with Table Values</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Given: $u(3)=5,\; u'(3)=-2,\; v(3)=4,\; v'(3)=7$. Find $\dfrac{d}{dx}[u(x)\cdot v(x)]$ at $x=3$.</p>
+$$\begin{aligned}
+&= u'(3)\cdot v(3) + u(3)\cdot v'(3) \\[4pt]
+&= (-2)(4) + (5)(7) \\[4pt]
+&= -8 + 35 = 27
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">If $f(x) = x \cdot \ln x$, then $f'(x) =$</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$\dfrac{1}{x}$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$\ln x + 1$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$\ln x$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$x \ln x + 1$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Product rule: $f'(x) = (1)(\ln x) + (x)\!\left(\frac{1}{x}\right) = \ln x + 1$.</div>
+    <div class="quiz-explain wrong-exp">Apply the product rule with $u = x$ and $v = \ln x$: $f'(x) = (1)(\ln x) + (x)(1/x) = \ln x + 1$.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.9 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-9">
+  <div class="section-label">Topic 2.9</div>
+  <h2>The Quotient Rule</h2>
+
+  <div class="formula-box">
+    <div class="formula-label">The Quotient Rule</div>
+    $$ \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{[g(x)]^2} $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Mnemonic: "Low d-High minus High d-Low, over Low squared" (Lo·dHi − Hi·dLo) / Lo²</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">When to Use Which Rule?</strong>
+    <span style="display:block; margin-top:8px;"><strong>Product rule</strong> when you see $f(x) \cdot g(x)$.</span>
+    <span style="display:block; margin-top:4px;"><strong>Quotient rule</strong> when you see $\dfrac{f(x)}{g(x)}$.</span>
+    <span style="display:block; margin-top:8px;"><em>Pro tip:</em> Sometimes you can avoid the quotient rule by rewriting a fraction as a product with a negative exponent, then using the product rule or power rule instead.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Quotient Rule</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{x^2}\right]$.</p>
+<p>Let $f = \sin x,\; g = x^2$, so $f' = \cos x,\; g' = 2x$:</p>
+$$\begin{aligned}
+\frac{d}{dx}\!\left[\frac{\sin x}{x^2}\right] &= \frac{\cos x \cdot x^2 - \sin x \cdot 2x}{(x^2)^2} \\[4pt]
+&= \frac{x^2\cos x - 2x\sin x}{x^4} \\[4pt]
+&= \frac{x\cos x - 2\sin x}{x^3}
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">If $h(x) = \dfrac{e^x}{x+1}$, then $h'(0) = $</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$1$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$e$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$-1$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $h'(x) = \frac{e^x(x+1) - e^x \cdot 1}{(x+1)^2} = \frac{e^x \cdot x}{(x+1)^2}$. At $x = 0$: $h'(0) = \frac{e^0 \cdot 0}{1^2} = 0$.</div>
+    <div class="quiz-explain wrong-exp">Apply the quotient rule: $h'(x) = \frac{e^x(x+1) - e^x}{(x+1)^2} = \frac{x \cdot e^x}{(x+1)^2}$. At $x=0$: $h'(0) = \frac{0}{1} = 0$.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TOPIC 2.10 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="s2-10">
+  <div class="section-label">Topic 2.10</div>
+  <h2>Finding the Derivatives of Tangent, Cotangent, Secant, and Cosecant</h2>
+
+  <p>These derivatives are derived from the quotient rule applied to the basic trig functions. You should memorize the results.</p>
+
+  <div class="qref">
+    <div class="qref-title">Derivatives of All Six Trig Functions</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Function</th><th>Derivative</th></tr>
+        <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
+        <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
+        <tr><td>$\tan x$</td><td>$\sec^2 x$</td></tr>
+        <tr><td>$\cot x$</td><td>$-\csc^2 x$</td></tr>
+        <tr><td>$\sec x$</td><td>$\sec x \tan x$</td></tr>
+        <tr><td>$\csc x$</td><td>$-\csc x \cot x$</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Pattern to Remember</strong>
+    <span style="display:block; margin-top:8px;">Notice the "co-" pattern: every cofunction's derivative has a <strong>negative sign</strong>.</span>
+    <span style="display:block; margin-top:6px;">$\cos x → -\sin x$ &nbsp;|&nbsp; $\cot x → -\csc^2 x$ &nbsp;|&nbsp; $\csc x → -\csc x \cot x$</span>
+    <span style="display:block; margin-top:8px;">Also note the "sec/csc families" pair nicely: $\sec$ goes with $\sec \cdot \tan$, while $\csc$ goes with $\csc \cdot \cot$.</span>
+  </div>
+
+  <details>
+    <summary>Derivation — Why d/dx[tan x] = sec²x</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Derive $\dfrac{d}{dx}[\tan x]$ using the quotient rule on $\tan x = \dfrac{\sin x}{\cos x}$:</p>
+$$\begin{aligned}
+\frac{d}{dx}[\tan x] &= \frac{\cos x \cdot \cos x - \sin x \cdot (-\sin x)}{\cos^2 x} \\[4pt]
+&= \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \\[4pt]
+&= \frac{1}{\cos^2 x} \qquad\text{(Pythagorean identity)} \\[4pt]
+&= \sec^2 x
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Using Trig Derivatives</summary>
+    <div class="detail-body">
+<div class="worked-solution">
+<p>Find $f'(x)$ for $f(x) = 3\sec x + 2\tan x$.</p>
+$$\begin{aligned}
+f'(x) &= 3\sec x\tan x + 2\sec^2 x
+\end{aligned}$$
+</div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">$\dfrac{d}{dx}[\csc x]$ equals:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$\csc x \cot x$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$\sec x \cot x$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$-\sec x \tan x$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$-\csc x \cot x$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The derivative of $\csc x$ is $-\csc x \cot x$. Remember, the "co-" functions always pick up a negative sign.</div>
+    <div class="quiz-explain wrong-exp">The derivative of $\csc x$ is $-\csc x \cot x$. The negative sign is key — all "co-" function derivatives are negative.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- EXAM STRATEGY -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Exam Strategy</div>
+  <h2>How Unit 2 Appears on the AP Exam</h2>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-blue">MC</div>
+      <div class="card-title">MCQ — Common Question Styles</div>
+    </div>
+    <p style="margin-bottom:6px;"><strong>Compute</strong> derivatives using power, product, quotient rules, or trig/exponential/log formulas.</p>
+    <p style="margin-bottom:6px;"><strong>Evaluate</strong> limits that are secretly derivative definitions in disguise.</p>
+    <p style="margin-bottom:6px;"><strong>Estimate</strong> a derivative from a table of values or from a graph.</p>
+    <p style="margin-bottom:6px;"><strong>Determine</strong> where a function is or is not differentiable, and explain why.</p>
+    <p><strong>Find</strong> the equation of a tangent line at a given point.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-green">FR</div>
+      <div class="card-title">FRQ — Common Question Styles</div>
+    </div>
+    <p style="margin-bottom:6px;"><strong>Table problems:</strong> Estimate a derivative using a difference quotient from given data — you must show the setup.</p>
+    <p style="margin-bottom:6px;"><strong>Product/Quotient rule with given values:</strong> Given $f(a)$, $f'(a)$, $g(a)$, $g'(a)$, compute $(fg)'(a)$ or $(f/g)'(a)$.</p>
+    <p style="margin-bottom:6px;"><strong>Tangent line:</strong> Find the equation and use it to approximate a function value (local linearization).</p>
+    <p><strong>Justify:</strong> Explain whether a function is differentiable at a point, citing continuity and equal one-sided derivatives.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top 5 Mistakes That Lose Points</strong>
+    <span style="display:block; margin-top:8px;">1. Not showing the difference quotient setup when estimating a derivative from a table.</span>
+    <span style="display:block; margin-top:4px;">2. Taking the derivative of a product by differentiating each factor separately (must use product rule).</span>
+    <span style="display:block; margin-top:4px;">3. Sign errors with $\cos x$ derivatives and the quotient rule's subtraction.</span>
+    <span style="display:block; margin-top:4px;">4. Forgetting to square the denominator in the quotient rule.</span>
+    <span style="display:block; margin-top:4px;">5. Using incorrect notation — e.g., writing $\frac{dy}{dx}$ when you mean $\frac{d}{dx}[f(x)]$, or dropping primes.</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FLASHCARDS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards — Click to Flip</h2>
+
+  <div class="flashcard-controls">
+    <button onclick="shuffleFlashcards()">Shuffle</button>
+    <button onclick="resetFlashcards()">Reset All</button>
+    <span class="flashcard-counter" id="flashcardCounter">0 / 10 flipped</span>
+  </div>
+
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Limit definition<br>of the derivative?</div>
+        <div class="flashcard-back"><br>$$ f'(x) = \lim_{h \to 0}\frac{f(x+h)-f(x)}{h} $$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Power Rule:<br>$\frac{d}{dx}[x^n] = \;?$</div>
+        <div class="flashcard-back"><br>$$ n x^{n-1} $$<br>Works for any real $n$.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$\frac{d}{dx}[\sin x] = \;?$</div>
+        <div class="flashcard-back"><br>$$ \cos x $$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$\frac{d}{dx}[\cos x] = \;?$</div>
+        <div class="flashcard-back"><br>$$ -\sin x $$<br>Don't forget the negative!</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$\frac{d}{dx}[e^x] = \;?$</div>
+        <div class="flashcard-back"><br>$$ e^x $$<br>The only function equal to its own derivative.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$\frac{d}{dx}[\ln x] = \;?$</div>
+        <div class="flashcard-back"><br>$$ \frac{1}{x} $$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Product Rule:<br>$\frac{d}{dx}[f \cdot g] = \;?$</div>
+        <div class="flashcard-back"><br>$$ f' g + f g' $$<br>"d-first × second + first × d-second"</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Quotient Rule:<br>$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \;?$</div>
+        <div class="flashcard-back"><br>$$ \frac{f'g - fg'}{g^2} $$<br>"Lo dHi − Hi dLo over Lo²"</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$\frac{d}{dx}[\tan x] = \;?$</div>
+        <div class="flashcard-back"><br>$$ \sec^2 x $$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Differentiable at a point implies…?</div>
+        <div class="flashcard-back"><br><strong>Continuous</strong> at that point.<br>(But continuity does NOT imply differentiability!)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- UNIT QUIZ -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit 2 — Practice Quiz</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 24px;">Test yourself across the full unit. Your score updates live in the navigation bar.</p>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">1. If $f(x) = x^4 - 3x^2 + 5$, then $f'(2) = $</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$17$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$24$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$20$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$26$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $f'(x) = 4x^3 - 6x$. So $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</div>
+    <div class="quiz-explain wrong-exp">$f'(x) = 4x^3 - 6x$. Evaluate at $x = 2$: $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">2. The equation of the tangent line to $y = \sin x$ at $x = 0$ is:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$y = 0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$y = x$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$y = -x$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$y = 1$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! At $x = 0$: $y = \sin(0) = 0$ and $y' = \cos(0) = 1$. Tangent line: $y - 0 = 1(x - 0)$, so $y = x$.</div>
+    <div class="quiz-explain wrong-exp">$y(0) = \sin(0) = 0$, $y'(0) = \cos(0) = 1$. Tangent line: $y = 0 + 1 \cdot (x - 0) = x$.</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">3. $\frac{d}{dx}\left[x^2 e^x\right] = $</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$2x \cdot e^x$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$x^2 \cdot e^x$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$2x + e^x$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$e^x(2x + x^2)$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Product rule: $\frac{d}{dx}[x^2 e^x] = 2x \cdot e^x + x^2 \cdot e^x = e^x(2x + x^2)$.</div>
+    <div class="quiz-explain wrong-exp">Use the product rule: $(x^2)' \cdot e^x + x^2 \cdot (e^x)' = 2x e^x + x^2 e^x = e^x(2x + x^2)$.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">4. At which of the following points is $f(x) = |x - 3|$ NOT differentiable?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$x = 0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$x = 1$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$x = 3$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$x = -3$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The absolute value function has a sharp corner at $x = 3$ where the left derivative is $-1$ and the right derivative is $+1$. Since these are not equal, $f$ is not differentiable there.</div>
+    <div class="quiz-explain wrong-exp">$|x - 3|$ has a corner at $x = 3$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$ — they don't match, so $f$ is not differentiable at $x = 3$.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">5. Given $f(3) = 2$, $f'(3) = -1$, $g(3) = 4$, $g'(3) = 3$, find $\left(\frac{f}{g}\right)'(3)$.</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$\dfrac{2}{16}$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$-\dfrac{5}{8}$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$\dfrac{10}{16}$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$-\dfrac{1}{4}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Quotient rule: $\frac{f'g - fg'}{g^2} = \frac{(-1)(4) - (2)(3)}{4^2} = \frac{-4 - 6}{16} = \frac{-10}{16} = -\frac{5}{8}$.</div>
+    <div class="quiz-explain wrong-exp">Quotient rule: $\frac{f'(3) g(3) - f(3) g'(3)}{[g(3)]^2} = \frac{(-1)(4) - (2)(3)}{16} = \frac{-10}{16} = -\frac{5}{8}$.</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">6. If the tangent line to $y = f(x)$ at $x = 4$ is $y = 3x - 7$, what is $f(4)$?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$5$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$3$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$-7$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$12$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The tangent line passes through the point of tangency. Substituting $x = 4$ into $y = 3x - 7$ gives $y = 12 - 7 = 5$, so $f(4) = 5$.</div>
+    <div class="quiz-explain wrong-exp">The tangent line touches the curve at $x = 4$, so $f(4) = 3(4) - 7 = 5$. The slope tells us $f'(4) = 3$.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">7. $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{e^x}\right]$ at $x = 0$ equals:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
+      <div class="quiz-opt" data-idx="1" data-label="B">$-1$</div>
+      <div class="quiz-opt" data-idx="2" data-label="C">$1$</div>
+      <div class="quiz-opt" data-idx="3" data-label="D">$\dfrac{1}{e}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Quotient rule: $\frac{\cos x \cdot e^x - \sin x \cdot e^x}{(e^x)^2} = \frac{e^x(\cos x - \sin x)}{e^{2x}} = \frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{1 - 0}{1} = 1$.</div>
+    <div class="quiz-explain wrong-exp">Apply the quotient rule, then simplify: $\frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{\cos 0 - \sin 0}{e^0} = \frac{1 - 0}{1} = 1$.</div>
+  </div>
+
+  <!-- Results bar appears after all quizzes answered -->
+  <div class="quiz-results-bar" id="quizResultsBar">
+    <div class="results-header">
+      <div class="results-title">Quiz Complete!</div>
+      <div class="results-score" id="resultsScore"></div>
+    </div>
+    <div class="results-bar-track">
+      <div class="results-bar-fill" id="resultsBarFill"></div>
+    </div>
+    <div class="results-msg" id="resultsMsg"></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<div class="footer">
+  <div class="footer-brand">AP Calculus AB &amp; BC — Unit 2 Study Notes</div>
+  <p>Interactive exam prep — formulas, worked examples, flashcards, and practice quizzes.</p>
+  <div class="footer-badges">
+    <span>10 Topics</span>
+    <span>9 Practice Quizzes</span>
+    <span>10 Flashcards</span>
+    <span>Interactive Visualizer</span>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ─── THEME ───
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = 'Light';
+}
+
+
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+});
+
+// ─── ACTIVE TOC + SECTION READ TRACKING ───
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const readSections = new Set();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+      // Mark as read
+      if (!readSections.has(e.target.id)) {
+        readSections.add(e.target.id);
+        const check = document.querySelector(`.toc-check[data-section="${e.target.id}"]`);
+        if (check) { check.classList.add('done'); check.textContent = '✓'; }
+        updateDashboard();
+      }
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ─── SCORE TRACKING ───
+let totalCorrect = 0;
+let totalAnswered = 0;
+const totalQuizzes = document.querySelectorAll('.quiz').length;
+
+function updateScoreDisplay() {
+  document.getElementById('scoreDisplay').textContent = `${totalCorrect} / ${totalAnswered}`;
+  // Update pill color
+  const pill = document.getElementById('scorePill');
+  if (totalAnswered === 0) return;
+  const pct = totalCorrect / totalAnswered;
+  if (pct >= 0.8) {
+    pill.style.borderColor = 'var(--green)';
+    pill.style.background = 'var(--green-light)';
+    pill.style.color = 'var(--green)';
+  } else if (pct >= 0.5) {
+    pill.style.borderColor = 'var(--orange)';
+    pill.style.background = 'var(--orange-light)';
+    pill.style.color = 'var(--orange)';
+  } else {
+    pill.style.borderColor = 'var(--red)';
+    pill.style.background = 'var(--red-light)';
+    pill.style.color = 'var(--red)';
+  }
+  updateDashboard();
+  checkAllQuizzesDone();
+}
+
+function updateDashboard() {
+  const pct = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+  document.getElementById('dashScore').textContent = pct + '%';
+  document.getElementById('dashSections').textContent = readSections.size + '/13';
+  const flipped = document.querySelectorAll('.flashcard.flipped').length;
+  document.getElementById('dashCards').textContent = flipped + '/10';
+  document.getElementById('flashcardCounter').textContent = flipped + ' / 10 flipped';
+}
+
+function checkAllQuizzesDone() {
+  if (totalAnswered < totalQuizzes) return;
+  const bar = document.getElementById('quizResultsBar');
+  const pct = Math.round((totalCorrect / totalAnswered) * 100);
+  document.getElementById('resultsScore').textContent = `${totalCorrect} / ${totalAnswered} (${pct}%)`;
+  document.getElementById('resultsBarFill').style.width = pct + '%';
+  let msg = '';
+  if (pct === 100) msg = 'Perfect score! You\'ve mastered Unit 2. 🎯';
+  else if (pct >= 80) msg = 'Strong performance! Review the topics you missed and you\'ll be exam-ready.';
+  else if (pct >= 60) msg = 'Good foundation. Focus on the sections where you missed questions.';
+  else msg = 'Keep studying — revisit the worked examples and flashcards, then try again.';
+  document.getElementById('resultsMsg').textContent = msg;
+  bar.classList.add('show');
+  
+  // Color the score
+  const scoreEl = document.getElementById('resultsScore');
+  if (pct >= 80) scoreEl.style.color = 'var(--green)';
+  else if (pct >= 60) scoreEl.style.color = 'var(--orange)';
+  else scoreEl.style.color = 'var(--red)';
+}
+
+// ─── QUIZZES ───
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if(opt.classList.contains('disabled')) return;
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      totalAnswered++;
+      if (idx === answer) {
+        opt.classList.add('correct');
+        if (expCorrect) expCorrect.classList.add('show');
+        totalCorrect++;
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+      }
+      updateScoreDisplay();
+    });
+  });
+});
+
+// ─── FLASHCARDS ───
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  updateDashboard();
+}
+function shuffleFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  const cards = Array.from(grid.children);
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.insertBefore(cards[j], cards[i]);
+    const temp = cards[i];
+    cards[i] = cards[j];
+    cards[j] = temp;
+  }
+}
+function resetFlashcards() {
+  document.querySelectorAll('.flashcard.flipped').forEach(c => c.classList.remove('flipped'));
+  updateDashboard();
+}
+
+// ─── SECANT → TANGENT LINE VISUALIZER ───
+(function() {
+  const canvas = document.getElementById('secantCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const slider = document.getElementById('secantH');
+  const readoutEl = document.getElementById('secantReadout');
+  const secantSlopeEl = document.getElementById('secantSlope');
+  const tangentSlopeEl = document.getElementById('tangentSlope');
+
+  const xMin = -1, xMax = 5, yMin = -1, yMax = 12;
+  function f(x) { return 0.4*x*x*x - 1.5*x*x + 2*x + 3; }
+  function fPrime(x) { return 1.2*x*x - 3*x + 2; }
+
+  const aPoint = 2;
+  const fa = f(aPoint);
+  const slope_at_a = fPrime(aPoint);
+
+  const pad = { top: 30, right: 30, bottom: 50, left: 55 };
+  const W = 720, H = 400;
+  const plotW = W - pad.left - pad.right;
+  const plotH = H - pad.top - pad.bottom;
+
+  function xToCanvas(x) { return pad.left + (x - xMin) / (xMax - xMin) * plotW; }
+  function yToCanvas(y) { return pad.top + plotH - (y - yMin) / (yMax - yMin) * plotH; }
+
+  function getColors() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+      bg: isDark ? '#1E1818' : '#FFFFFF',
+      grid: isDark ? '#2A2424' : '#EDE6E0',
+      axis: isDark ? '#A89898' : '#6B5E5E',
+      curve: isDark ? '#E89090' : '#7A2E2E',
+      secant: isDark ? '#D4944A' : '#A65E1A',
+      tangent: isDark ? '#5CB88A' : '#2E6B4F',
+      pointP: isDark ? '#E89090' : '#7A2E2E',
+      pointQ: isDark ? '#D4944A' : '#A65E1A',
+      label: isDark ? '#A89898' : '#6B5E5E',
+    };
+  }
+
+  function draw() {
+    const hVal = parseInt(slider.value) / 100;
+    const c = getColors();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = c.grid; ctx.lineWidth = 1;
+    for (let y = 0; y <= 12; y += 2) {
+      ctx.beginPath(); ctx.moveTo(pad.left, yToCanvas(y)); ctx.lineTo(W - pad.right, yToCanvas(y)); ctx.stroke();
+    }
+    for (let x = 0; x <= 5; x++) {
+      ctx.beginPath(); ctx.moveTo(xToCanvas(x), pad.top); ctx.lineTo(xToCanvas(x), pad.top + plotH); ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = c.axis; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(pad.left, yToCanvas(0)); ctx.lineTo(W - pad.right, yToCanvas(0)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(xToCanvas(0), pad.top); ctx.lineTo(xToCanvas(0), pad.top + plotH); ctx.stroke();
+
+    // Axis labels
+    ctx.fillStyle = c.label; ctx.font = '12px "Source Sans 3", sans-serif'; ctx.textAlign = 'center';
+    for (let x = 0; x <= 5; x++) ctx.fillText(x, xToCanvas(x), pad.top + plotH + 18);
+    ctx.textAlign = 'right';
+    for (let y = 0; y <= 12; y += 2) ctx.fillText(y, pad.left - 8, yToCanvas(y) + 4);
+
+    // Curve
+    ctx.strokeStyle = c.curve; ctx.lineWidth = 2.5; ctx.beginPath();
+    for (let px = 0; px <= plotW; px++) {
+      const x = xMin + (px / plotW) * (xMax - xMin);
+      const cy = yToCanvas(f(x));
+      if (px === 0) ctx.moveTo(xToCanvas(x), cy); else ctx.lineTo(xToCanvas(x), cy);
+    }
+    ctx.stroke();
+
+    // Label curve
+    ctx.fillStyle = c.curve; ctx.font = 'bold 14px "Source Sans 3", sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('f(x) = 0.4x³ − 1.5x² + 2x + 3', xToCanvas(2.8), yToCanvas(f(4.2)) - 10);
+
+    // Tangent line (always shown as reference)
+    ctx.strokeStyle = c.tangent; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+    const tLineX1 = xMin, tLineX2 = xMax;
+    ctx.beginPath();
+    ctx.moveTo(xToCanvas(tLineX1), yToCanvas(fa + slope_at_a * (tLineX1 - aPoint)));
+    ctx.lineTo(xToCanvas(tLineX2), yToCanvas(fa + slope_at_a * (tLineX2 - aPoint)));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Secant line
+    const bPoint = aPoint + hVal;
+    const fb = f(bPoint);
+    const secSlope = (fb - fa) / (bPoint - aPoint);
+
+    ctx.strokeStyle = c.secant; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    const sLineX1 = xMin, sLineX2 = xMax;
+    ctx.moveTo(xToCanvas(sLineX1), yToCanvas(fa + secSlope * (sLineX1 - aPoint)));
+    ctx.lineTo(xToCanvas(sLineX2), yToCanvas(fa + secSlope * (sLineX2 - aPoint)));
+    ctx.stroke();
+
+    // Point P
+    ctx.fillStyle = c.pointP; ctx.beginPath();
+    ctx.arc(xToCanvas(aPoint), yToCanvas(fa), 7, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.pointP; ctx.font = 'bold 14px "Source Sans 3", sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('P (a = 2)', xToCanvas(aPoint) + 12, yToCanvas(fa) - 10);
+
+    // Point Q
+    ctx.fillStyle = c.pointQ; ctx.beginPath();
+    ctx.arc(xToCanvas(bPoint), yToCanvas(fb), 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.pointQ; ctx.font = 'bold 13px "Source Sans 3", sans-serif';
+    ctx.fillText('Q', xToCanvas(bPoint) + 10, yToCanvas(fb) - 8);
+
+    // Legend
+    ctx.font = '12px "Source Sans 3", sans-serif';
+    ctx.strokeStyle = c.secant; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(W - pad.right - 180, pad.top + 16); ctx.lineTo(W - pad.right - 150, pad.top + 16); ctx.stroke();
+    ctx.fillStyle = c.secant; ctx.textAlign = 'left';
+    ctx.fillText('Secant line', W - pad.right - 145, pad.top + 20);
+    ctx.strokeStyle = c.tangent; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+    ctx.beginPath(); ctx.moveTo(W - pad.right - 180, pad.top + 36); ctx.lineTo(W - pad.right - 150, pad.top + 36); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.tangent;
+    ctx.fillText('Tangent line', W - pad.right - 145, pad.top + 40);
+
+    // Readouts
+    readoutEl.textContent = 'h = ' + hVal.toFixed(2);
+    secantSlopeEl.textContent = secSlope.toFixed(3);
+    tangentSlopeEl.textContent = slope_at_a.toFixed(3);
+  }
+
+  slider.addEventListener('input', draw);
+  const themeObs = new MutationObserver(draw);
+  themeObs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  else setTimeout(draw, 100);
+})();
+
+// ─── SIDEBAR TOGGLE ───
+
+// ─── SIDEBAR LAYOUT SYNC ───
+function syncSidebarLayout(isOpen) {
+  const main = document.querySelector('.main-wrap, .main-content, .main');
+  const sidebar = document.getElementById('sidebar');
+  if (!main || !sidebar) return;
+
+  if (!isOpen || window.innerWidth <= 1100) {
+    main.style.width = '';
+    main.style.maxWidth = '';
+    main.style.marginLeft = '';
+    main.style.marginRight = '';
+    return;
+  }
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const sidebarWidth = sidebar.offsetWidth
+    || parseFloat(rootStyles.getPropertyValue('--toc-w'))
+    || parseFloat(rootStyles.getPropertyValue('--sidebar-width'))
+    || parseFloat(rootStyles.getPropertyValue('--sidebar-w'))
+    || 280;
+  const mainPadding = 48;
+  const computedMain = getComputedStyle(main);
+  const maxWidth = parseFloat(computedMain.maxWidth)
+    || parseFloat(rootStyles.getPropertyValue('--max-w'))
+    || 860;
+  const availableWidth = window.innerWidth - sidebarWidth;
+  const targetWidth = Math.min(maxWidth, Math.max(320, availableWidth - mainPadding));
+  const leftOffset = sidebarWidth + Math.max(24, (availableWidth - targetWidth) / 2);
+
+  main.style.width = targetWidth + 'px';
+  main.style.maxWidth = 'none';
+  main.style.marginLeft = leftOffset + 'px';
+  main.style.marginRight = '0';
+}
+window.addEventListener('resize', () => {
+  const sidebar = document.getElementById('sidebar');
+  if (sidebar) syncSidebarLayout(sidebar.classList.contains('open'));
+});
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
+  const isOpen = sidebar.classList.contains('open');
+  const btn = document.getElementById('tocToggle');
+  if (btn) btn.classList.toggle('active', isOpen);
+  syncSidebarLayout(isOpen);
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+    syncSidebarLayout(false);
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+    syncSidebarLayout(false);
+  }
+});
+</script>
+</body>
+</html>
