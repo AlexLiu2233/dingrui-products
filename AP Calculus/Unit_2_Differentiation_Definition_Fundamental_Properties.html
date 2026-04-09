@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AP Calculus AB/BC — Unit 2: Differentiation: Definition and Fundamental Properties</title>
+<meta name="description" content="AP Calculus BC — Unit 2: Differentiation: Definition and Fundamental Properties | Dingrui Scholars. Polished AP Calculus notes from Dingrui Scholars with worked examples, interactive review, quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>AP Calculus BC — Unit 2: Differentiation: Definition and Fundamental Properties | Dingrui Scholars</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
 
 <style>
 :root {
   --bg: #F5F0EB;
   --bg-card: #FFFFFF;
-  --bg-code: #1E1E2E;
-  --text: #2C2424;
-  --text-secondary: #6B5E5E;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
   --accent: #7A2E2E;
   --accent-light: #F2E4E4;
-  --accent-dark: #5C1E1E;
+  --accent-dark: #5A1E1E;
   --green: #2E6B4F;
   --green-light: #DFF0E8;
   --orange: #A65E1A;
@@ -28,27 +31,28 @@
   --red-light: #FCEAEA;
   --purple: #5E3D7A;
   --purple-light: #EDE4F5;
-  --border: #DDD4CC;
-  --shadow: 0 4px 6px -1px rgba(60,30,30,0.06), 0 2px 4px -1px rgba(60,30,30,0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(60,30,30,0.10);
-  --shadow-xl: 0 20px 40px -8px rgba(60,30,30,0.12);
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
   --font-body: 'Source Sans 3', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
-  --toc-w: 280px;
+  --toc-w: 260px;
 }
 
 [data-theme="dark"] {
   --bg: #151010;
-  --bg-card: #1E1818;
-  --bg-code: #0D0A0A;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
   --text: #E8E0DC;
-  --text-secondary: #A89898;
+  --text-secondary: #A89098;
   --accent: #C87070;
-  --accent-light: #3A2020;
-  --accent-dark: #E89090;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
   --green: #5CB88A;
   --green-light: #1A2E24;
   --orange: #D4944A;
@@ -57,10 +61,11 @@
   --red-light: #301515;
   --purple: #A888C8;
   --purple-light: #201828;
-  --border: #352C2C;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
   --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
-  --shadow-xl: 0 20px 40px -8px rgba(0,0,0,0.5);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,7 +82,7 @@ body {
 }
 
 /* ─── TOP NAV ─── */
-.topnav {
+.top-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(245, 240, 235, 0.82);
   border-bottom: 1px solid var(--border);
@@ -87,22 +92,22 @@ body {
   padding: 0 24px; height: 56px;
   transition: background 0.3s, border 0.3s;
 }
-[data-theme="dark"] .topnav { background: rgba(21, 16, 16, 0.82); }
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.82); }
 
-.topnav-brand {
+.nav-left {
   font-family: var(--font-display);
   font-size: 1.15rem; color: var(--text);
   display: flex; align-items: center; gap: 10px;
 }
-.topnav-brand .unit-badge {
+.nav-left .unit-badge {
   background: var(--accent);
   color: #fff; font-family: var(--font-body);
   font-size: 0.7rem; font-weight: 700;
   padding: 3px 8px; border-radius: 6px;
   letter-spacing: 0.5px;
 }
-.topnav-actions { display: flex; align-items: center; gap: 6px; }
-.topnav-actions button {
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-right button {
   background: var(--bg-card); border: 1px solid var(--border);
   color: var(--text); border-radius: 8px;
   padding: 6px 14px; font-size: 0.82rem;
@@ -110,8 +115,8 @@ body {
   transition: all 0.2s;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
-.topnav-actions button:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
-.topnav-actions button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.nav-right button:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-right button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 /* Score pill in nav */
 .score-pill {
@@ -130,7 +135,7 @@ body {
   height: 3px; background: transparent; z-index: 99;
 }
 .progress-fill {
-  height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--green));
+  height: 100%; width: 0; background: var(--accent);
   transition: width 0.15s;
   border-radius: 0 2px 2px 0;
 }
@@ -145,7 +150,7 @@ body {
   transition: transform 0.3s ease, background 0.3s;
   z-index: 90;
 }
-.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-xl); }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
 .sidebar-title {
   font-family: var(--font-display);
   font-size: 0.95rem; padding: 0 20px 12px;
@@ -685,8 +690,8 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   .formula-box { padding: 16px; }
   .dashboard { grid-template-columns: 1fr; }
   .quiz { padding: 20px 16px; }
-  .topnav-brand { font-size: 0.95rem; }
-  .topnav-brand .unit-badge { display: none; }
+  .nav-left { font-size: 0.95rem; }
+  .nav-left .unit-badge { display: none; }
 }
 
 /* Print */
@@ -702,7 +707,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   
   
 
-  .topnav, .progress-track, .sidebar, .topnav-actions, .flashcard-controls, .score-pill, .dashboard { display: none !important; }
+  .top-nav, .progress-track, .sidebar, .nav-right, .flashcard-controls, .score-pill, .dashboard { display: none !important; }
   .main-wrap { margin: 0 auto; }
   body { font-size: 11pt; background: white; color: black; }
   pre { border: 1px solid #ccc; white-space: pre-wrap; }
@@ -711,7 +716,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 /* ─── HEADER STANDARDIZED TO MATCH UNIT 5 ─── */
 .top-nav,
-.topnav {
+.top-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -729,11 +734,11 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 [data-theme="dark"] .top-nav,
-[data-theme="dark"] .topnav {
+[data-theme="dark"] .top-nav {
   background: var(--color-nav-bg, rgba(21,16,16,0.92));
 }
 .nav-left,
-.topnav-brand {
+.nav-left {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -743,7 +748,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   width: auto;
 }
 .nav-badge,
-.topnav-brand .unit-badge {
+.nav-left .unit-badge {
   font-family: var(--font-mono, var(--font-mono));
   font-size: 11px;
   font-weight: 600;
@@ -755,13 +760,13 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   border-radius: 4px;
 }
 .nav-right,
-.topnav-actions {
+.nav-right {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 .nav-btn,
-.topnav-actions button {
+.nav-right button {
   font-family: var(--font-sans, var(--font-body, 'Source Sans 3', sans-serif));
   font-size: 13px;
   font-weight: 600;
@@ -774,7 +779,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   transition: all 0.2s ease;
 }
 .nav-btn:hover,
-.topnav-actions button:hover {
+.nav-right button:hover {
   color: var(--color-accent, var(--accent, #7A2E2E));
   border-color: var(--color-accent, var(--accent, #7A2E2E));
   background: var(--color-accent-bg, var(--accent-light, rgba(122,46,46,0.06)));
@@ -851,7 +856,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 }
 @media (max-width: 768px) {
   .top-nav,
-  .topnav {
+  .top-nav {
     padding: 0 16px;
   }
   .hero {
