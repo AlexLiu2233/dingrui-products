@@ -418,37 +418,37 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 /* ─── FLASHCARD ─── */
 
-/* ─── FLASHCARDS (standardized) ─── */
+/* ─── FLASHCARDS (unified: grid overlay, equalized, no scrollbars) ─── */
 .flashcard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 1fr;
   gap: 16px;
   margin: 24px 0;
 }
 .flashcard {
-  perspective: 800px;
-  min-height: 200px;
+  perspective: 1000px;
   cursor: pointer;
+  display: grid;
 }
 .flashcard-inner {
-  width: 100%; min-height: 200px; height: 100%;
+  display: grid;
+  grid-template-areas: "card";
+  min-height: 200px;
+  height: 100%;
   position: relative;
-  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
 .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
 .flashcard-front, .flashcard-back {
-  position: absolute; inset: 0;
+  grid-area: card;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: var(--radius);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  padding: 20px 16px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   text-align: center;
-  font-size: clamp(0.78rem, 2.2vw, 0.92rem);
-  line-height: 1.5;
   box-shadow: var(--shadow);
   overflow: hidden;
   word-break: break-word;
@@ -456,43 +456,42 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 }
 .flashcard-front {
   background: var(--bg-card);
-  font-weight: 600;
+  border: 1px solid var(--border);
   color: var(--accent);
+  font-weight: 600;
+  font-size: clamp(0.92rem, 2.1vw, 1.05rem);
+  line-height: 1.45;
+  padding: 22px 20px 34px;
+  gap: 8px;
 }
 .flashcard-front::after {
-  content: 'TAP TO FLIP'; position: absolute; bottom: 8px;
+  content: 'TAP TO FLIP';
+  position: absolute; bottom: 10px; left: 0; right: 0;
   font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
-  color: var(--text-secondary); opacity: 0.4; letter-spacing: 1px;
+  color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px;
 }
 .flashcard-back {
   background: var(--bg);
-  transform: rotateY(180deg);
-  font-size: clamp(0.75rem, 2vw, 0.88rem);
-  line-height: 1.55;
   border: 2px solid var(--accent);
   color: var(--text);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 18px 14px;
+  transform: rotateY(180deg);
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.5;
+  padding: 22px 20px;
+  gap: 12px;
 }
 .flashcard-back .katex-display {
   margin: 6px 0 !important;
-  font-size: 0.85em;
-  overflow-x: auto;
-  overflow-y: hidden;
+  font-size: 1.25em;
+  max-width: 100%;
+  overflow: hidden;
 }
-.flashcard-back .katex {
-  font-size: 0.95em;
-  white-space: normal;
-  word-wrap: break-word;
-}
-.flashcard-back br {
-  margin-bottom: 2px;
-}
-.flashcard-front::after {
-  content: 'tap to flip'; position: absolute; bottom: 10px;
-  font-size: 0.7rem; color: var(--text-secondary); font-weight: 400;
-  opacity: 0.6; font-family: var(--font-mono);
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { line-height: 0.6; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
 }
 
 /* ─── SEPARATOR ─── */
