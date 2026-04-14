@@ -111,11 +111,12 @@ body {
   position: fixed; top: 59px; left: 0; bottom: 0;
   width: var(--toc-w); background: var(--bg-card);
   border-right: 1px solid var(--border);
-  overflow-y: auto; padding: 20px 0;
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
   transform: translateX(-100%);
   transition: transform 0.3s ease, background 0.3s;
   z-index: 90;
 }
+.sidebar::-webkit-scrollbar { display: none; }
 .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
 .sidebar-title {
   font-family: var(--font-display);
@@ -142,7 +143,14 @@ body {
 
   transition: width 0.3s ease, margin-left 0.3s ease;}
 @media (min-width: 1100px) {
-  /* On wide screens, sidebar occupies left, content centers in remaining space */
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
 }
 
 /* ─── HERO ─── */
@@ -791,7 +799,7 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
-  <div class="hero-overline">AP Calculus AB · 鼎睿学苑</div>
+  <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
   <h1>Unit 1: Limits<br>&amp; Continuity</h1>
   <p class="hero-sub">
     The foundation of calculus. Master how functions behave near a point, formal limit evaluation, continuity, asymptotes, and the Intermediate Value Theorem.
@@ -2207,37 +2215,13 @@ updateDashboard();
 
 // ─── SIDEBAR LAYOUT SYNC ───
 function syncSidebarLayout(isOpen) {
+  // Sidebar overlays empty left-margin space; main content stays centered and never shifts.
   const main = document.querySelector('.main-wrap, .main-content, .main');
-  const sidebar = document.getElementById('sidebar');
-  if (!main || !sidebar) return;
-
-  if (!isOpen || window.innerWidth <= 1100) {
-    main.style.width = '';
-    main.style.maxWidth = '';
-    main.style.marginLeft = '';
-    main.style.marginRight = '';
-    return;
-  }
-
-  const rootStyles = getComputedStyle(document.documentElement);
-  const sidebarWidth = sidebar.offsetWidth
-    || parseFloat(rootStyles.getPropertyValue('--toc-w'))
-    || parseFloat(rootStyles.getPropertyValue('--sidebar-width'))
-    || parseFloat(rootStyles.getPropertyValue('--sidebar-w'))
-    || 280;
-  const mainPadding = 48;
-  const computedMain = getComputedStyle(main);
-  const maxWidth = parseFloat(computedMain.maxWidth)
-    || parseFloat(rootStyles.getPropertyValue('--max-w'))
-    || 860;
-  const availableWidth = window.innerWidth - sidebarWidth;
-  const targetWidth = Math.min(maxWidth, Math.max(320, availableWidth - mainPadding));
-  const leftOffset = sidebarWidth + Math.max(24, (availableWidth - targetWidth) / 2);
-
-  main.style.width = targetWidth + 'px';
-  main.style.maxWidth = 'none';
-  main.style.marginLeft = leftOffset + 'px';
-  main.style.marginRight = '0';
+  if (!main) return;
+  main.style.width = '';
+  main.style.maxWidth = '';
+  main.style.marginLeft = '';
+  main.style.marginRight = '';
 }
 window.addEventListener('resize', () => {
   const sidebar = document.getElementById('sidebar');
@@ -2245,12 +2229,14 @@ window.addEventListener('resize', () => {
 });
 
 function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('open');
-  const isOpen = sidebar.classList.contains('open');
-  const btn = document.getElementById('tocToggle');
-  if (btn) btn.classList.toggle('active', isOpen);
-  syncSidebarLayout(isOpen);
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
 }
 document.addEventListener('click', function(e) {
   const sidebar = document.getElementById('sidebar');

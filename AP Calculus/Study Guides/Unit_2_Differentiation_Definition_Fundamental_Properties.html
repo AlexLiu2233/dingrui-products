@@ -145,11 +145,12 @@ body {
   position: fixed; top: 59px; left: 0; bottom: 0;
   width: var(--toc-w); background: var(--bg-card);
   border-right: 1px solid var(--border);
-  overflow-y: auto; padding: 20px 0;
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
   transform: translateX(-100%);
   transition: transform 0.3s ease, background 0.3s;
   z-index: 90;
 }
+.sidebar::-webkit-scrollbar { display: none; }
 .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
 .sidebar-title {
   font-family: var(--font-display);
@@ -681,6 +682,14 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 /* ─── RESPONSIVE ─── */
 @media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
 }
 @media (max-width: 600px) {
   .hero h1 { font-size: 1.8rem; }
@@ -749,15 +758,9 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 }
 .nav-badge,
 .nav-left .unit-badge {
-  font-family: var(--font-mono, var(--font-mono));
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent, var(--accent, #7A2E2E));
-  background: var(--color-accent-bg, rgba(122,46,46,0.06));
-  padding: 4px 10px;
-  border-radius: 4px;
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
 }
 .nav-right,
 .nav-right {
@@ -785,88 +788,64 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   background: var(--color-accent-bg, var(--accent-light, rgba(122,46,46,0.06)));
   transform: none;
 }
-.hero {
-  background: var(--color-hero-gradient, linear-gradient(135deg, #F5F0EB 0%, #EEE4DC 42%, #E5D6CD 100%));
-  padding: 72px 60px 60px;
-  border-bottom: 1px solid var(--color-border-light, var(--border, #E2DCD5));
-  border-radius: 0;
-  text-align: left;
-  margin-bottom: 0;
-}
-.hero-overline {
-  font-family: var(--font-mono, var(--font-mono));
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent, var(--accent, #7A2E2E));
-  margin-bottom: 14px;
-}
-.hero h1,
-.hero .hero-title {
-  font-family: var(--font-serif, var(--font-display, Georgia, serif));
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.18;
-  color: var(--color-text, var(--text, #2C2424));
-  margin-bottom: 16px;
-}
-.hero-subtitle,
-.hero .hero-sub,
-.hero p.hero-subtitle {
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
-  max-width: 680px;
-  margin-bottom: 32px;
-}
-.hero-chips,
-.hero .hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-start;
-  margin-top: 0;
-}
-.hero-chips .chip,
-.hero .hero-meta .chip,
-.chip {
-  font-family: var(--font-mono, var(--font-mono));
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--color-text-secondary, var(--text-secondary, #6B5E5E));
-  background: var(--color-surface, var(--bg-card, #FFFFFF));
-  border: 1px solid var(--color-border, var(--border, #DDD4CC));
-  padding: 7px 16px;
-  border-radius: 100px;
-  box-shadow: none;
-}
-.hero-chips .chip strong,
-.hero .hero-meta .chip strong,
-.chip strong {
-  color: var(--color-accent, var(--accent, #7A2E2E));
-  font-weight: 600;
-}
-.chip-maroon,
-.chip-green,
-.chip-purple {
-  color: inherit !important;
-  border-color: var(--color-border, var(--border, #DDD4CC)) !important;
-  background: var(--color-surface, var(--bg-card, #FFFFFF)) !important;
-}
 @media (max-width: 768px) {
   .top-nav,
   .top-nav {
     padding: 0 16px;
-  }
-  .hero {
-    padding: 48px 24px 40px;
   }
   .nav-logo {
     height: 30px;
   }
 }
 
+/* === Header normalization (canonical — keep all units in sync) === */
+.top-nav {
+  height: 56px !important;
+  padding: 0 20px !important;
+  background: rgba(245, 240, 235, 0.92) !important;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92) !important; }
+.nav-btn {
+  background: var(--bg-card, var(--card-bg, #FFFFFF)) !important;
+  color: var(--text, var(--text-primary, #2C1B1F)) !important;
+  border: 1px solid var(--border, var(--border-color, #DDD0C8)) !important;
+  border-radius: 8px !important;
+  padding: 6px 14px !important;
+  font-size: 0.82rem !important;
+  font-family: var(--font-body, var(--font-sans, 'Source Sans 3', sans-serif)) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  transition: all 0.2s !important;
+}
+.nav-btn:hover {
+  background: var(--accent-light, var(--accent-bg, #F2E4E4)) !important;
+  border-color: var(--accent, #7A2E2E) !important;
+  color: var(--text, var(--text-primary, #2C1B1F)) !important;
+  transform: translateY(-1px) !important;
+}
+.nav-btn.active { background: var(--accent, #7A2E2E) !important; color: #FFFFFF !important; border-color: var(--accent, #7A2E2E) !important; }
+#tocToggle { display: inline-flex !important; align-items: center !important; }
+
+/* ─── CHECKLIST ─── */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  cursor: pointer; font-size: 0.95rem;
+  background: var(--bg-card); transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+  font-size: 0.8rem; color: transparent;
+}
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
 </style>
 </head>
 <body>
@@ -886,30 +865,35 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero"><span class="toc-check" data-section="hero"></span>Overview</a>
-  <a href="#s2-1"><span class="toc-check" data-section="s2-1"></span>2.1 Average &amp; Instantaneous Rates</a>
-  <a href="#s2-2"><span class="toc-check" data-section="s2-2"></span>2.2 Defining the Derivative</a>
-  <a href="#s2-3"><span class="toc-check" data-section="s2-3"></span>2.3 Estimating Derivatives</a>
-  <a href="#s2-4"><span class="toc-check" data-section="s2-4"></span>2.4 Differentiability &amp; Continuity</a>
-  <a href="#s2-5"><span class="toc-check" data-section="s2-5"></span>2.5 The Power Rule</a>
-  <a href="#s2-6"><span class="toc-check" data-section="s2-6"></span>2.6 Constant, Sum, Difference Rules</a>
-  <a href="#s2-7"><span class="toc-check" data-section="s2-7"></span>2.7 Derivatives of sin, cos, eˣ, ln x</a>
-  <a href="#s2-8"><span class="toc-check" data-section="s2-8"></span>2.8 The Product Rule</a>
-  <a href="#s2-9"><span class="toc-check" data-section="s2-9"></span>2.9 The Quotient Rule</a>
-  <a href="#s2-10"><span class="toc-check" data-section="s2-10"></span>2.10 Derivatives of tan, cot, sec, csc</a>
-  <a href="#exam-strategy"><span class="toc-check" data-section="exam-strategy"></span>Exam Strategy</a>
-  <a href="#flashcards"><span class="toc-check" data-section="flashcards"></span>Flashcards</a>
-  <a href="#unit-quiz"><span class="toc-check" data-section="unit-quiz"></span>Unit Quiz</a>
+  <a href="#hero">Overview</a>
+  <a href="#s2-1">2.1 Average &amp; Instantaneous Rates</a>
+  <a href="#s2-2">2.2 Defining the Derivative</a>
+  <a href="#s2-3">2.3 Estimating Derivatives</a>
+  <a href="#s2-4">2.4 Differentiability &amp; Continuity</a>
+  <a href="#s2-5">2.5 The Power Rule</a>
+  <a href="#s2-6">2.6 Constant, Sum, Difference Rules</a>
+  <a href="#s2-7">2.7 Derivatives of sin, cos, eˣ, ln x</a>
+  <a href="#s2-8">2.8 The Product Rule</a>
+  <a href="#s2-9">2.9 The Quotient Rule</a>
+  <a href="#s2-10">2.10 Derivatives of tan, cot, sec, csc</a>
+  <a href="#exam-strategy">Exam Strategy</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
-  <div class="hero-overline">AP Calculus AB &amp; BC · Study Guide</div>
-  <h1>Differentiation: Definition<br>and Fundamental Properties</h1>
-  <p class="hero-subtitle">Build the derivative from limits, master the core differentiation rules, and connect instantaneous rates of change to the tangent line.</p>
-  <div class="hero-chips">
-    <span class="chip"><strong>10–12%</strong>&nbsp; AB Exam</span> <span class="chip"><strong>4–7%</strong>&nbsp; BC Exam</span> <span class="chip"><strong>~13–14</strong>&nbsp; Class Periods (AB)</span> <span class="chip"><strong>10</strong>&nbsp; Topics</span>
+  <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
+  <h1>Unit 2: Differentiation<br>Definition &amp; Fundamental Properties</h1>
+  <p class="hero-sub">
+    Build the derivative from limits, master the core differentiation rules, and connect instantaneous rates of change to the tangent line.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">10–12% of AP Exam</span>
+    <span class="chip chip-green">~13–14 Class Periods</span>
+    <span class="chip chip-purple">10 Topics</span>
   </div>
 </section>
 
@@ -1761,6 +1745,31 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
   </div>
 </section>
 
+<!-- ═══════════════ READINESS CHECKLIST ═══════════════ -->
+<section class="section" id="checklist">
+  <div class="section-label">Self-Assessment</div>
+  <h2>Readiness Checklist</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute the derivative from the limit definition</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish average rate of change from instantaneous rate</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Estimate derivatives numerically from tables and graphs</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Determine differentiability and its relationship to continuity</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Power Rule to polynomial and radical expressions</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use the constant multiple, sum, and difference rules</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate $\sin x$, $\cos x$, $e^x$, and $\ln x$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Product Rule correctly and simplify</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Quotient Rule correctly and simplify</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate $\tan x$, $\cot x$, $\sec x$, $\csc x$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Write an equation of the tangent line at a given point</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Identify points where a function fails to be differentiable</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate differentiation rule for a given expression</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret the derivative as slope of the tangent line</li>
+  </ul>
+</section>
+
 <!-- ─── FOOTER ─── -->
 <div class="footer">
   <div class="footer-brand">AP Calculus AB &amp; BC — Unit 2 Study Notes</div>
@@ -2070,37 +2079,13 @@ function resetFlashcards() {
 
 // ─── SIDEBAR LAYOUT SYNC ───
 function syncSidebarLayout(isOpen) {
+  // Sidebar overlays empty left-margin space; main content stays centered and never shifts.
   const main = document.querySelector('.main-wrap, .main-content, .main');
-  const sidebar = document.getElementById('sidebar');
-  if (!main || !sidebar) return;
-
-  if (!isOpen || window.innerWidth <= 1100) {
-    main.style.width = '';
-    main.style.maxWidth = '';
-    main.style.marginLeft = '';
-    main.style.marginRight = '';
-    return;
-  }
-
-  const rootStyles = getComputedStyle(document.documentElement);
-  const sidebarWidth = sidebar.offsetWidth
-    || parseFloat(rootStyles.getPropertyValue('--toc-w'))
-    || parseFloat(rootStyles.getPropertyValue('--sidebar-width'))
-    || parseFloat(rootStyles.getPropertyValue('--sidebar-w'))
-    || 280;
-  const mainPadding = 48;
-  const computedMain = getComputedStyle(main);
-  const maxWidth = parseFloat(computedMain.maxWidth)
-    || parseFloat(rootStyles.getPropertyValue('--max-w'))
-    || 860;
-  const availableWidth = window.innerWidth - sidebarWidth;
-  const targetWidth = Math.min(maxWidth, Math.max(320, availableWidth - mainPadding));
-  const leftOffset = sidebarWidth + Math.max(24, (availableWidth - targetWidth) / 2);
-
-  main.style.width = targetWidth + 'px';
-  main.style.maxWidth = 'none';
-  main.style.marginLeft = leftOffset + 'px';
-  main.style.marginRight = '0';
+  if (!main) return;
+  main.style.width = '';
+  main.style.maxWidth = '';
+  main.style.marginLeft = '';
+  main.style.marginRight = '';
 }
 window.addEventListener('resize', () => {
   const sidebar = document.getElementById('sidebar');
@@ -2108,12 +2093,14 @@ window.addEventListener('resize', () => {
 });
 
 function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('open');
-  const isOpen = sidebar.classList.contains('open');
-  const btn = document.getElementById('tocToggle');
-  if (btn) btn.classList.toggle('active', isOpen);
-  syncSidebarLayout(isOpen);
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
 }
 document.addEventListener('click', function(e) {
   const sidebar = document.getElementById('sidebar');
@@ -2137,6 +2124,15 @@ document.addEventListener('keydown', function(e) {
     syncSidebarLayout(false);
   }
 });
+
+// ─── CHECKLIST ───
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const total = document.querySelectorAll('#checklistUl li').length;
+  const checked = document.querySelectorAll('#checklistUl li.checked').length;
+  const prog = document.getElementById('checkProgress');
+  if (prog) prog.textContent = checked + ' / ' + total + ' mastered';
+}
 </script>
 </body>
 </html>
