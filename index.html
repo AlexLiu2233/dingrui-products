@@ -1,137 +1,311 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AP Calculus Study Guides — Dingrui Scholars</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AP Calculus BC study guides from Dingrui Scholars — worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>AP Calculus BC Study Guides | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#F5F0EB; --bg-card:#FFFFFF; --text:#2C1B1F; --text-secondary:#6B5058;
-    --accent:#7A2E2E; --accent-light:#F2E4E4; --border:#DDD0C8;
-    --radius:12px; --max-w:960px;
-  }
-  [data-theme="dark"]{
-    --bg:#1C1518; --bg-card:#2A2024; --text:#F0E6E8; --text-secondary:#B8A5AB;
-    --accent:#C47A7A; --accent-light:#3A2A2E; --border:#3D2F34;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    font-family:'Source Sans 3',system-ui,sans-serif;
-    background:var(--bg); color:var(--text);
-    line-height:1.55; -webkit-font-smoothing:antialiased;
-    transition:background .2s,color .2s;
-  }
-  .wrap{max-width:var(--max-w); margin:0 auto; padding:2.5rem 1.25rem 4rem}
-  header{display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:2rem}
-  .brand{font-family:'DM Serif Display',serif; font-style:italic; font-size:1.15rem; color:var(--accent)}
-  .theme-btn{
-    background:var(--bg-card); border:1px solid var(--border); color:var(--text);
-    padding:.45rem .8rem; border-radius:999px; font:inherit; font-size:.85rem;
-    cursor:pointer; transition:background .15s;
-  }
-  .theme-btn:hover{background:var(--accent-light)}
-  h1{
-    font-family:'DM Serif Display',serif; font-weight:400; font-style:italic;
-    font-size:clamp(2rem,4.5vw,2.75rem); margin:.25rem 0 .5rem; color:var(--text);
-    letter-spacing:-.01em;
-  }
-  .subtitle{color:var(--text-secondary); font-size:1.05rem; margin:0 0 2rem; max-width:52ch}
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem}
-  .card{
-    display:block; text-decoration:none; color:inherit;
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:1.1rem 1.2rem; transition:transform .12s, border-color .15s, box-shadow .15s;
-  }
-  .card:hover{
-    transform:translateY(-2px); border-color:var(--accent);
-    box-shadow:0 4px 14px rgba(122,46,46,.08);
-  }
-  .card__unit{
-    font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--accent); margin-bottom:.35rem;
-  }
-  .card__title{
-    font-family:'DM Serif Display',serif; font-style:italic; font-weight:400;
-    font-size:1.15rem; line-height:1.25; color:var(--text);
-  }
-  .card__arrow{
-    display:inline-block; margin-top:.75rem; font-size:.85rem;
-    color:var(--text-secondary); font-weight:600;
-  }
-  .card:hover .card__arrow{color:var(--accent)}
-  footer{
-    margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--border);
-    font-size:.85rem; color:var(--text-secondary); text-align:center;
-  }
-  @media (max-width:480px){
-    .wrap{padding:1.5rem 1rem 3rem}
-    header{flex-direction:row; margin-bottom:1.25rem}
-  }
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --orange: #A65E1A;
+  --red: #B03030;
+  --purple: #5E3D7A;
+  --gold: #C4956A;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 20px -4px rgba(60,20,30,0.12);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 1040px;
+}
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E89090;
+  --green: #5CB88A;
+  --orange: #D4995C;
+  --red: #E87070;
+  --purple: #A68AC4;
+  --gold: #D4A870;
+  --border: #352828;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 12px; }
+.nav-logo { height: 36px; width: auto; object-fit: contain; }
+.nav-wordmark {
+  font-family: var(--font-display); font-style: italic;
+  color: var(--accent); font-size: 1.05rem; line-height: 1;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 96px 24px 64px; }
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 48px 24px 40px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 48px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-logo {
+  height: 72px; width: auto; margin-bottom: 20px;
+  position: relative;
+}
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 400; line-height: 1.15;
+  margin: 0 0 16px; position: relative;
+  color: var(--text);
+}
+.hero-sub {
+  color: var(--text-secondary);
+  max-width: 620px; margin: 0 auto;
+  font-size: 1.05rem; position: relative;
+}
+.hero-meta {
+  display: flex; gap: 12px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.chip {
+  font-size: 0.8rem; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { border: 1px solid var(--accent); color: var(--accent); }
+.chip-green  { border: 1px solid var(--green);  color: var(--green);  }
+.chip-purple { border: 1px solid var(--purple); color: var(--purple); }
+
+/* ─── SECTION HEADER ─── */
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 1.5px; margin: 0 0 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-title::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* ─── GRID ─── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.card {
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+  box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--card-color, var(--accent));
+  opacity: 0.85;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--card-color, var(--accent));
+  box-shadow: var(--shadow-lg);
+}
+.card__num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--card-color, var(--accent));
+  margin-bottom: 8px;
+}
+.card__title {
+  font-family: var(--font-display); font-style: italic;
+  font-weight: 400; font-size: 1.2rem; line-height: 1.25;
+  color: var(--text); margin: 0 0 14px;
+  flex: 1;
+}
+.card__arrow {
+  font-family: var(--font-body);
+  font-size: 0.82rem; font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: color 0.18s, gap 0.18s;
+}
+.card:hover .card__arrow { color: var(--card-color, var(--accent)); gap: 8px; }
+
+/* Rotating accent colors across units */
+.card:nth-child(6n+1) { --card-color: var(--accent); }
+.card:nth-child(6n+2) { --card-color: var(--green); }
+.card:nth-child(6n+3) { --card-color: var(--purple); }
+.card:nth-child(6n+4) { --card-color: var(--orange); }
+.card:nth-child(6n+5) { --card-color: var(--gold); }
+.card:nth-child(6n)   { --card-color: var(--red); }
+
+/* ─── FOOTER ─── */
+footer {
+  margin-top: 64px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-align: center; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .wrap { padding: 80px 16px 48px; }
+  .hero { padding: 36px 16px 32px; margin-bottom: 36px; }
+  .hero-logo { height: 60px; }
+  .nav-wordmark { display: none; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="brand">Dingrui Scholars</div>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">Dark mode</button>
-  </header>
-  <h1>AP Calculus Study Guides</h1>
-  <p class="subtitle">Pick a unit. Each guide is self-contained with worked examples, key formulas, and interactive quizzes.</p>
 
-  <div class="grid" id="grid">
+<nav class="top-nav">
+  <div class="nav-left">
+    <img class="nav-logo" src="LOGO.png" alt="Dingrui Scholars logo">
+    <span class="nav-wordmark">Dingrui Scholars</span>
+  </div>
+  <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode">Dark</button>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <img class="hero-logo" src="LOGO.png" alt="">
+    <div class="hero-overline">AP Calculus BC</div>
+    <h1>Study Guides</h1>
+    <p class="hero-sub">
+      Ten self-contained units with worked examples, key formulas,
+      and interactive quizzes. Pick a unit to get started.
+    </p>
+    <div class="hero-meta">
+      <span class="chip chip-maroon">10 Units</span>
+      <span class="chip chip-green">Interactive Quizzes</span>
+      <span class="chip chip-purple">Dark Mode</span>
+    </div>
+  </section>
+
+  <h2 class="section-title">Course Units</h2>
+
+  <div class="grid">
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_1_Limits_and_Continuity.html">
-      <div class="card__unit">Unit 1</div>
-      <div class="card__title">Limits &amp; Continuity</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 01</div>
+      <h3 class="card__title">Limits &amp; Continuity</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_2_Differentiation_Definition_Fundamental_Properties.html">
-      <div class="card__unit">Unit 2</div>
-      <div class="card__title">Differentiation — Definition &amp; Properties</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 02</div>
+      <h3 class="card__title">Differentiation — Definition &amp; Properties</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_3_Composite__Implicit____Inverse_Functions.html">
-      <div class="card__unit">Unit 3</div>
-      <div class="card__title">Composite, Implicit &amp; Inverse Functions</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 03</div>
+      <h3 class="card__title">Composite, Implicit &amp; Inverse Functions</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_4_Contextual_Applications_of_Differentiation.html">
-      <div class="card__unit">Unit 4</div>
-      <div class="card__title">Contextual Applications of Differentiation</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 04</div>
+      <h3 class="card__title">Contextual Applications of Differentiation</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_5_Analytical_Applications_of_Differentiation.html">
-      <div class="card__unit">Unit 5</div>
-      <div class="card__title">Analytical Applications of Differentiation</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 05</div>
+      <h3 class="card__title">Analytical Applications of Differentiation</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit_6_Integration_Accumulation.html">
-      <div class="card__unit">Unit 6</div>
-      <div class="card__title">Integration &amp; Accumulation</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 06</div>
+      <h3 class="card__title">Integration &amp; Accumulation</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit%207%20Differential%20Equations.html">
-      <div class="card__unit">Unit 7</div>
-      <div class="card__title">Differential Equations</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 07</div>
+      <h3 class="card__title">Differential Equations</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit%208%20Applications%20of%20Integration.html">
-      <div class="card__unit">Unit 8</div>
-      <div class="card__title">Applications of Integration</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 08</div>
+      <h3 class="card__title">Applications of Integration</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit%209%20Parametric%20Polar%20and%20Vectors.html">
-      <div class="card__unit">Unit 9</div>
-      <div class="card__title">Parametric, Polar &amp; Vectors</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 09</div>
+      <h3 class="card__title">Parametric, Polar &amp; Vectors</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
     <a class="card" href="AP%20Calculus/Study%20Guides/Unit%2010%20Sequences%20and%20Series.html">
-      <div class="card__unit">Unit 10</div>
-      <div class="card__title">Sequences &amp; Series</div>
-      <span class="card__arrow">Open →</span>
+      <div class="card__num">Unit 10</div>
+      <h3 class="card__title">Sequences &amp; Series</h3>
+      <span class="card__arrow">Open guide →</span>
     </a>
   </div>
 
@@ -139,16 +313,24 @@
 </div>
 
 <script>
-  (function(){
-    var btn=document.getElementById('themeBtn');
-    var saved=localStorage.getItem('theme');
-    if(saved==='dark'){document.documentElement.setAttribute('data-theme','dark'); btn.textContent='Light mode';}
-    btn.addEventListener('click',function(){
-      var isDark=document.documentElement.getAttribute('data-theme')==='dark';
-      if(isDark){document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme','light'); btn.textContent='Dark mode';}
-      else{document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); btn.textContent='Light mode';}
-    });
-  })();
+(function () {
+  var btn = document.getElementById('themeToggle');
+  function apply(theme) {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      btn.textContent = 'Light';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      btn.textContent = 'Dark';
+    }
+  }
+  apply(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+  btn.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    apply(next);
+  });
+})();
 </script>
 </body>
 </html>
