@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 3: Class Creation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F0EB;--bg-card:#FFFFFF;--bg-code:#1E1E2E;--text:#2C2424;--text-secondary:#6B5E5E;--accent:#7A2E2E;--accent-light:#F2E4E4;--accent-dark:#5C1E1E;--green:#2E6B4F;--green-light:#DFF0E8;--orange:#A65E1A;--orange-light:#FBF0E0;--red:#B03030;--red-light:#FCEAEA;--purple:#5E3D7A;--purple-light:#EDE4F5;--teal:#2A6B6B;--teal-light:#DFF0F0;--border:#DDD4CC;--shadow:0 1px 3px rgba(60,30,30,0.06),0 1px 2px rgba(60,30,30,0.04);--shadow-lg:0 4px 12px rgba(60,30,30,0.10);--radius:10px;--font-display:'DM Serif Display',Georgia,serif;--font-body:'Source Sans 3',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--max-w:860px;--toc-w:280px}
+[data-theme="dark"]{--bg:#151010;--bg-card:#1E1818;--bg-code:#0D0A0A;--text:#E8E0DC;--text-secondary:#A89898;--accent:#C87070;--accent-light:#3A2020;--accent-dark:#E89090;--green:#5CB88A;--green-light:#1A2E24;--orange:#D4944A;--orange-light:#2E2010;--red:#E07070;--red-light:#301515;--purple:#A888C8;--purple-light:#201828;--teal:#5AB8B8;--teal-light:#102828;--border:#352C2C;--shadow:0 1px 3px rgba(0,0,0,0.3);--shadow-lg:0 4px 12px rgba(0,0,0,0.4)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;font-size:17px;transition:background .3s,color .3s}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg-card);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;transition:background .3s,border .3s}
+.topnav-brand{font-family:var(--font-display);font-size:1.15rem;color:var(--text);display:flex;align-items:center;gap:10px}
+.topnav-brand .unit-badge{background:var(--accent);color:#fff;font-family:var(--font-body);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px}
+.topnav-actions{display:flex;align-items:center;gap:8px}
+.topnav-actions button{background:none;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font-size:.82rem;cursor:pointer;font-family:var(--font-body);transition:all .2s}
+.topnav-actions button:hover{background:var(--accent-light);border-color:var(--accent)}
+.topnav-actions button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.topnav-actions .back-link{background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font-size:.82rem;cursor:pointer;font-family:var(--font-body);font-weight:600;text-decoration:none;transition:all .2s}
+.topnav-actions .back-link:hover{background:var(--accent-light);border-color:var(--accent)}
+.progress-track{position:fixed;top:56px;left:0;right:0;height:3px;background:var(--border);z-index:99}
+.progress-fill{height:100%;width:0;background:var(--accent);transition:width .15s}
+.sidebar{position:fixed;top:59px;left:0;bottom:0;width:var(--toc-w);background:var(--bg-card);border-right:1px solid var(--border);overflow-y:auto;padding:20px 0;transform:translateX(-100%);transition:transform .3s ease,background .3s;z-index:90}
+.sidebar.open{transform:translateX(0)}
+.sidebar-title{font-family:var(--font-display);font-size:.95rem;padding:0 20px 12px;color:var(--text-secondary);border-bottom:1px solid var(--border);margin-bottom:8px}
+.sidebar a{display:block;padding:7px 20px;color:var(--text-secondary);text-decoration:none;font-size:.85rem;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{color:var(--accent);background:var(--accent-light)}
+.sidebar a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+.main-wrap{max-width:var(--max-w);margin:80px auto 120px;padding:0 24px}
+.hero{text-align:center;padding:48px 0 40px}
+.hero-overline{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3rem);line-height:1.15;margin-bottom:16px}
+.hero-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hero-meta .chip{font-size:.8rem;font-weight:600;padding:5px 14px;border-radius:20px}
+.chip-maroon{background:var(--accent-light);color:var(--accent)}.chip-green{background:var(--green-light);color:var(--green)}.chip-teal{background:var(--teal-light);color:var(--teal)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section-label{font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.section h2{font-family:var(--font-display);font-size:1.65rem;margin-bottom:16px;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block}
+.section h3{font-family:var(--font-display);font-size:1.2rem;margin:28px 0 10px;line-height:1.3}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin:16px 0;box-shadow:var(--shadow);transition:background .3s,border .3s}
+pre{background:var(--bg-code);color:#CDD6F4;padding:18px 22px;border-radius:8px;overflow-x:auto;font-family:var(--font-mono);font-size:.82rem;line-height:1.65;margin:12px 0}
+code{font-family:var(--font-mono);font-size:.85em}
+:not(pre)>code{background:var(--accent-light);color:var(--accent);padding:2px 6px;border-radius:4px}
+.kw{color:#CBA6F7}.ty{color:#89B4FA}.str{color:#A6E3A1}.cm{color:#6C7086;font-style:italic}.num{color:#FAB387}.fn{color:#89DCEB}
+.concept-box{border-left:4px solid var(--accent);background:var(--accent-light);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
+.concept-box.green{border-left-color:var(--green);background:var(--green-light)}
+.concept-box.orange{border-left-color:var(--orange);background:var(--orange-light)}
+.concept-box.red{border-left-color:var(--red);background:var(--red-light)}
+.concept-box.purple{border-left-color:var(--purple);background:var(--purple-light)}
+.concept-box.teal{border-left-color:var(--teal);background:var(--teal-light)}
+.concept-box strong{display:block;margin-bottom:4px}
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:700;font-size:.82rem;letter-spacing:.3px}
+tr:hover td{background:var(--accent-light)}
+.quiz{margin:20px 0}.quiz-q{font-weight:600;margin-bottom:10px;font-size:.95rem}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{padding:10px 16px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .2s;background:var(--bg-card)}
+.quiz-opt:hover{border-color:var(--accent);background:var(--accent-light)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light)}
+.quiz-opt.disabled{pointer-events:none;opacity:.7}
+.quiz-explain{margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.88rem;display:none}
+.quiz-explain.show{display:block}
+.quiz-explain.correct-exp{background:var(--green-light);color:var(--green)}
+.quiz-explain.wrong-exp{background:var(--red-light);color:var(--red)}
+details{margin:12px 0;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);overflow:hidden}
+summary{padding:14px 18px;cursor:pointer;font-weight:600;font-size:.92rem;user-select:none;list-style:none;display:flex;align-items:center;gap:8px}
+summary::before{content:'▸';transition:transform .2s;font-size:.8rem;color:var(--accent)}
+details[open] summary::before{transform:rotate(90deg)}
+details .detail-body{padding:0 18px 16px;font-size:.92rem}
+.qref{background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);padding:20px 24px;margin:20px 0}
+.qref-title{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0}
+.flashcard{perspective:600px;height:160px;cursor:pointer}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+.flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;font-size:.88rem}
+.flashcard-front{background:var(--bg-card);font-weight:700}
+.flashcard-back{background:var(--accent-light);transform:rotateY(180deg);font-size:.82rem;line-height:1.5}
+.sep{border:none;border-top:1px solid var(--border);margin:40px 0}
+@media(min-width:1100px){.sidebar{transform:translateX(0)}.main-wrap{margin-left:calc(var(--toc-w) + 40px)}}
+@media(max-width:600px){.hero h1{font-size:1.8rem}.main-wrap{padding:0 16px}pre{font-size:.75rem;padding:14px}.flashcard-grid{grid-template-columns:1fr}}
+@media print{.topnav,.progress-track,.sidebar,.topnav-actions{display:none!important}.main-wrap{margin:0 auto}body{font-size:11pt}pre{border:1px solid #ccc}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-brand"><span class="unit-badge">UNIT 3</span>Class Creation</div>
+  <div class="topnav-actions">
+    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
+    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s3-1">3.1 Abstraction &amp; Design</a>
+  <a href="#s3-2">3.2 Impact of Design</a>
+  <a href="#s3-3">3.3 Anatomy of a Class</a>
+  <a href="#s3-4">3.4 Constructors</a>
+  <a href="#s3-5">3.5 Writing Methods</a>
+  <a href="#s3-6">3.6 Passing References</a>
+  <a href="#s3-7">3.7 Class Variables &amp; Methods</a>
+  <a href="#s3-8">3.8 Scope and Access</a>
+  <a href="#s3-9">3.9 this Keyword</a>
+  <a href="#full-example">Full Class Example</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
+  <h1>Unit 3: Class Creation</h1>
+  <p style="color:var(--text-secondary);max-width:580px;margin:0 auto;">
+    Design your own classes with instance variables, constructors, methods, encapsulation, static members, scope, and the <code>this</code> keyword.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">10–18% of AP Exam</span>
+    <span class="chip chip-green">~20–22 Class Periods</span>
+    <span class="chip chip-teal">9 Topics</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.1 ═══ -->
+<section class="section" id="s3-1">
+  <div class="section-label">Topic 3.1</div>
+  <h2>Abstraction and Program Design</h2>
+
+  <p><strong>Abstraction</strong> reduces complexity by focusing on the main idea while hiding irrelevant details.</p>
+
+  <div class="card">
+    <p><strong>Data Abstraction</strong> — separates what data represents from how it's stored. An instance variable like <code>balance</code> names the concept without exposing implementation.</p>
+    <p style="margin-top:10px"><strong>Procedural Abstraction</strong> — gives a name to a process (method). You use a method knowing <em>what</em> it does, not <em>how</em>. This enables code reuse and method decomposition.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong>Design First</strong>
+    Before coding, plan each class: identify its <em>attributes</em> (data/nouns) and <em>behaviors</em> (methods/verbs). This can be done with natural language, UML diagrams, or pseudocode.
+  </div>
+
+  <div class="concept-box teal">
+    <strong>Key Vocabulary</strong>
+    An <em>attribute</em> is a variable defined in a class outside any method. An <em>instance variable</em> is unique to each object. A <em>class variable</em> is shared by all objects.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.2 ═══ -->
+<section class="section" id="s3-2">
+  <div class="section-label">Topic 3.2</div>
+  <h2>Impact of Program Design</h2>
+
+  <p>Programs impact society, the economy, and culture — both positively and negatively.</p>
+
+  <div class="card">
+    <p><strong>System Reliability</strong> — a program should perform as expected under all stated conditions. Test with a variety of inputs to maximize reliability.</p>
+    <p style="margin-top:10px"><strong>Unintended Consequences</strong> — programs built to solve one problem can cause harm beyond their intended use.</p>
+    <p style="margin-top:10px"><strong>Intellectual Property</strong> — reusing code published as open source is fine. Code that is <em>not</em> open source requires permission (and often purchase) before use.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.3 ═══ -->
+<section class="section" id="s3-3">
+  <div class="section-label">Topic 3.3</div>
+  <h2>Anatomy of a Class</h2>
+
+  <h3>Encapsulation</h3>
+  <p><strong>Data encapsulation</strong> hides implementation details from external classes using access modifiers.</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Keyword</th><th>Who Can Access</th><th>Used For</th></tr>
+      <tr><td><code>public</code></td><td>Any class</td><td>Classes, constructors, methods that form the API</td></tr>
+      <tr><td><code>private</code></td><td>Only the declaring class</td><td>Instance variables (best practice), helper methods</td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box">
+    <strong>AP CSA Rules</strong>
+    Classes → always <code>public</code>. Constructors → always <code>public</code>. Instance variables → always <code>private</code> (for encapsulation).
+  </div>
+
+<pre><span class="kw">public class</span> <span class="ty">Dog</span> {
+    <span class="cm">// Instance variables — private!</span>
+    <span class="kw">private</span> <span class="ty">String</span> name;
+    <span class="kw">private</span> <span class="ty">int</span> age;
+
+    <span class="cm">// Constructor — public</span>
+    <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name, <span class="ty">int</span> age) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.age = age;
+    }
+
+    <span class="cm">// Public methods</span>
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getName</span>() { <span class="kw">return</span> name; }
+    <span class="kw">public</span> <span class="ty">int</span> <span class="fn">getAge</span>() { <span class="kw">return</span> age; }
+}</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.4 ═══ -->
+<section class="section" id="s3-4">
+  <div class="section-label">Topic 3.4</div>
+  <h2>Constructors</h2>
+
+  <p>A constructor sets the <strong>initial state</strong> of an object by assigning values to all instance variables.</p>
+
+  <div class="card">
+    <p><strong>State</strong> = the object's attributes and their current values (<em>has-a</em> relationship).</p>
+    <p style="margin-top:8px">When a constructor is called with <code>new</code>, memory is allocated and an object reference is returned.</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Mutable Object Parameters</strong>
+    If a constructor receives a mutable object, store a <em>copy</em> — not the original reference. This prevents outside code from changing the object's internal state.
+  </div>
+
+  <h3>Default Constructor</h3>
+  <p>If you write <em>no</em> constructors, Java provides a <strong>default (no-argument) constructor</strong> that sets fields to default values:</p>
+
+  <div class="qref">
+    <div class="qref-title">Default Values — Must Know</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type</th><th>Default Value</th></tr>
+        <tr><td><code>int</code></td><td><code>0</code></td></tr>
+        <tr><td><code>double</code></td><td><code>0.0</code></td></tr>
+        <tr><td><code>boolean</code></td><td><code>false</code></td></tr>
+        <tr><td>Reference types</td><td><code>null</code></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">If a class has no constructors and contains <code>private boolean active;</code>, what is <code>active</code> after <code>new MyClass()</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>true</code></div>
+      <div class="quiz-opt" data-idx="1"><code>null</code></div>
+      <div class="quiz-opt" data-idx="2"><code>false</code></div>
+      <div class="quiz-opt" data-idx="3">Compile error</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The default value of a <code>boolean</code> is <code>false</code>.</div>
+    <div class="quiz-explain wrong-exp">The default value for <code>boolean</code> instance variables is <code>false</code> (not <code>null</code> — that's for reference types).</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.5 ═══ -->
+<section class="section" id="s3-5">
+  <div class="section-label">Topic 3.5</div>
+  <h2>Methods: How to Write Them</h2>
+
+  <h3>void vs Non-void Methods</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Returns</th><th>Keyword</th><th>Example</th></tr>
+      <tr><td>void</td><td>Nothing</td><td><code>void</code></td><td><code>public void bark()</code></td></tr>
+      <tr><td>Non-void</td><td>A single value</td><td>Return type</td><td><code>public int getAge()</code></td></tr>
+    </table>
+  </div>
+
+  <h3>Accessor vs Mutator</h3>
+  <div class="card">
+    <p><strong>Accessor (getter)</strong> — returns a copy of an instance variable's value. Always non-void.</p>
+    <p style="margin-top:8px"><strong>Mutator (setter)</strong> — changes an instance variable's value. Usually void.</p>
+  </div>
+
+<pre><span class="cm">// Accessor</span>
+<span class="kw">public</span> <span class="ty">String</span> <span class="fn">getName</span>() {
+    <span class="kw">return</span> name;
+}
+
+<span class="cm">// Mutator</span>
+<span class="kw">public void</span> <span class="fn">setName</span>(<span class="ty">String</span> newName) {
+    name = newName;
+}</pre>
+
+  <div class="concept-box red">
+    <strong>return Exits Immediately</strong>
+    The <code>return</code> keyword sends control back to the caller. Any code after <code>return</code> in the same block is <strong>unreachable</strong> and will cause a compile error. A <code>return</code> inside a loop or if-statement exits the entire method.
+  </div>
+
+  <div class="concept-box teal">
+    <strong>Pass by Value (Primitives)</strong>
+    When a primitive is passed as an argument, the parameter gets a <em>copy</em> of the value. Changing the parameter inside the method does <strong>not</strong> affect the original variable.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.6 ═══ -->
+<section class="section" id="s3-6">
+  <div class="section-label">Topic 3.6</div>
+  <h2>Methods: Passing and Returning References</h2>
+
+  <p>When an <strong>object reference</strong> is passed to a method, the parameter receives a copy of the reference — not a copy of the object itself.</p>
+
+<pre><span class="kw">public void</span> <span class="fn">rename</span>(<span class="ty">Dog</span> d) {
+    d.<span class="fn">setName</span>(<span class="str">"Max"</span>);  <span class="cm">// Modifies the ORIGINAL object!</span>
+}</pre>
+
+  <div class="concept-box orange">
+    <strong>Aliasing Warning</strong>
+    Both the caller's variable and the parameter point to the <em>same</em> object. If the method mutates it, the caller sees the change. Best practice: don't modify passed objects unless required.
+  </div>
+
+  <div class="concept-box purple">
+    <strong>Private Access Rule</strong>
+    A method cannot access the <code>private</code> fields of a parameter object — unless the parameter is the <em>same type</em> as the enclosing class. (e.g., a <code>Dog</code> method can access private fields of another <code>Dog</code> parameter.)
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.7 ═══ -->
+<section class="section" id="s3-7">
+  <div class="section-label">Topic 3.7</div>
+  <h2>Class Variables and Methods</h2>
+
+  <h3>static Variables</h3>
+  <p>A <code>static</code> variable belongs to the <em>class</em>, not to any individual object. All instances share one copy.</p>
+
+<pre><span class="kw">public class</span> <span class="ty">Dog</span> {
+    <span class="kw">private static</span> <span class="ty">int</span> dogCount = <span class="num">0</span>;  <span class="cm">// shared</span>
+    <span class="kw">private</span> <span class="ty">String</span> name;               <span class="cm">// per object</span>
+
+    <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name) {
+        <span class="kw">this</span>.name = name;
+        dogCount++;
+    }
+
+    <span class="kw">public static</span> <span class="ty">int</span> <span class="fn">getDogCount</span>() {
+        <span class="kw">return</span> dogCount;
+    }
+}</pre>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>Instance</th><th>Class (static)</th></tr>
+      <tr><td>Belongs to</td><td>Each object</td><td>The class itself</td></tr>
+      <tr><td>Accessed via</td><td><code>obj.method()</code></td><td><code>ClassName.method()</code></td></tr>
+      <tr><td>Can use instance vars?</td><td>Yes</td><td>No (unless passed an instance)</td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box green">
+    <strong>final Keyword</strong>
+    A variable declared <code>final</code> cannot be reassigned after initialization. Often combined with <code>static</code> for constants: <code>public static final double PI = 3.14159;</code>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">Can a <code>static</code> method directly access an instance variable?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Yes, always</div>
+      <div class="quiz-opt" data-idx="1">No — it needs an instance passed as a parameter</div>
+      <div class="quiz-opt" data-idx="2">Only if the variable is public</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Static methods have no implicit object (<code>this</code>), so they can only access instance data through an explicit object reference.</div>
+    <div class="quiz-explain wrong-exp">Static methods don't belong to any object, so they can't directly access instance variables. They need an object reference passed in.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.8 ═══ -->
+<section class="section" id="s3-8">
+  <div class="section-label">Topic 3.8</div>
+  <h2>Scope and Access</h2>
+
+  <p><strong>Local variables</strong> are declared inside a method, constructor, or block. They exist only within that block.</p>
+
+  <div class="card">
+    <p><strong>Scope rules:</strong></p>
+    <p>Instance variables → accessible throughout the entire class.</p>
+    <p>Local variables → accessible only in the block where declared.</p>
+    <p>Parameters → local to their method/constructor.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>Name Shadowing</strong>
+    If a local variable or parameter has the <em>same name</em> as an instance variable, the local variable takes precedence inside that method. Use <code>this.variableName</code> to access the instance variable.
+  </div>
+
+<pre><span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name) {
+    <span class="cm">// "name" here refers to the parameter</span>
+    <span class="cm">// "this.name" refers to the instance variable</span>
+    <span class="kw">this</span>.name = name;
+}</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 3.9 ═══ -->
+<section class="section" id="s3-9">
+  <div class="section-label">Topic 3.9</div>
+  <h2>this Keyword</h2>
+
+  <p>Inside an instance method or constructor, <code>this</code> is a reference to the <strong>current object</strong> — the object whose method is being called.</p>
+
+  <div class="card">
+    <p><strong>Common uses of <code>this</code>:</strong></p>
+    <p>1. Disambiguate instance variables from parameters with the same name.</p>
+    <p>2. Pass the current object as an argument to another method.</p>
+  </div>
+
+<pre><span class="kw">public void</span> <span class="fn">addToList</span>(<span class="ty">DogList</span> list) {
+    list.<span class="fn">add</span>(<span class="kw">this</span>);  <span class="cm">// pass the current Dog object</span>
+}</pre>
+
+  <div class="concept-box purple">
+    <strong>No this in static Methods</strong>
+    Since static methods aren't called on any object, they have no <code>this</code> reference. Attempting to use <code>this</code> in a static method causes a compile error.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ FULL EXAMPLE ═══ -->
+<section class="section" id="full-example">
+  <div class="section-label">Worked Example</div>
+  <h2>Complete Class — BankAccount</h2>
+
+<pre><span class="kw">public class</span> <span class="ty">BankAccount</span> {
+    <span class="cm">// Class variable: tracks how many accounts exist</span>
+    <span class="kw">private static</span> <span class="ty">int</span> accountCount = <span class="num">0</span>;
+
+    <span class="cm">// Instance variables (private for encapsulation)</span>
+    <span class="kw">private</span> <span class="ty">String</span> owner;
+    <span class="kw">private</span> <span class="ty">double</span> balance;
+    <span class="kw">private</span> <span class="ty">int</span> id;
+
+    <span class="cm">// Constructor</span>
+    <span class="kw">public</span> <span class="fn">BankAccount</span>(<span class="ty">String</span> owner, <span class="ty">double</span> initialBalance) {
+        <span class="kw">this</span>.owner = owner;
+        <span class="kw">this</span>.balance = initialBalance;
+        accountCount++;
+        <span class="kw">this</span>.id = accountCount;
+    }
+
+    <span class="cm">// Accessor methods</span>
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getOwner</span>() { <span class="kw">return</span> owner; }
+    <span class="kw">public</span> <span class="ty">double</span> <span class="fn">getBalance</span>() { <span class="kw">return</span> balance; }
+    <span class="kw">public</span> <span class="ty">int</span> <span class="fn">getId</span>() { <span class="kw">return</span> id; }
+
+    <span class="cm">// Mutator methods</span>
+    <span class="kw">public void</span> <span class="fn">deposit</span>(<span class="ty">double</span> amount) {
+        <span class="kw">if</span> (amount &gt; <span class="num">0</span>) balance += amount;
+    }
+
+    <span class="kw">public void</span> <span class="fn">withdraw</span>(<span class="ty">double</span> amount) {
+        <span class="kw">if</span> (amount &gt; <span class="num">0</span> &amp;&amp; amount &lt;= balance) {
+            balance -= amount;
+        }
+    }
+
+    <span class="cm">// Class method</span>
+    <span class="kw">public static</span> <span class="ty">int</span> <span class="fn">getAccountCount</span>() {
+        <span class="kw">return</span> accountCount;
+    }
+}</pre>
+
+  <div class="concept-box green">
+    <strong>What to Notice</strong>
+    Private instance variables, public constructor and methods, <code>this</code> for disambiguation, a <code>static</code> variable for counting, and a <code>static</code> method to access it. This is the pattern the AP exam expects you to write for FRQ #2 (Class Design).
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ FLASHCARDS ═══ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards — Click to Flip</h2>
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">What is encapsulation?</div>
+      <div class="flashcard-back">Hiding implementation details from external classes using <code>private</code> access.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Accessor vs Mutator?</div>
+      <div class="flashcard-back">Accessor: returns data (getter, non-void). Mutator: changes data (setter, usually void).</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Default value of an <code>int</code> field?</div>
+      <div class="flashcard-back"><code>0</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Default value of a reference type field?</div>
+      <div class="flashcard-back"><code>null</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">What does <code>this</code> refer to?</div>
+      <div class="flashcard-back">The current object — the one whose method or constructor is executing.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front"><code>static</code> variable belongs to…?</div>
+      <div class="flashcard-back">The class (shared by all instances), not any individual object.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Can a static method use <code>this</code>?</div>
+      <div class="flashcard-back">No — static methods don't run on an object, so there's no <code>this</code>.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">What is name shadowing?</div>
+      <div class="flashcard-back">A local variable hides an instance variable of the same name. Use <code>this.var</code> to access the field.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Pass-by-value for objects means…?</div>
+      <div class="flashcard-back">A copy of the <em>reference</em> is passed, so the method can mutate the original object.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">What does <code>final</code> do?</div>
+      <div class="flashcard-back">Prevents a variable from being reassigned after initialization.</div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ UNIT QUIZ ═══ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit 3 — Practice Quiz</h2>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">1. Which access modifier should instance variables have for proper encapsulation?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>private</code></div>
+      <div class="quiz-opt" data-idx="1"><code>public</code></div>
+      <div class="quiz-opt" data-idx="2"><code>static</code></div>
+      <div class="quiz-opt" data-idx="3"><code>final</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Encapsulation requires keeping instance variables <code>private</code> so only the class's own methods can access them.</div>
+    <div class="quiz-explain wrong-exp">Instance variables should be <code>private</code> for encapsulation.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">2. What happens if you write no constructors in a class?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">The class cannot create objects</div>
+      <div class="quiz-opt" data-idx="1">All fields are set to <code>null</code></div>
+      <div class="quiz-opt" data-idx="2">Java provides a default no-arg constructor with default values</div>
+      <div class="quiz-opt" data-idx="3">Compile error</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Java auto-generates a no-parameter constructor. Fields get type-based defaults: 0, 0.0, false, or null.</div>
+    <div class="quiz-explain wrong-exp">Java provides a default constructor when none is written. Fields get defaults based on type.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">3. What type of method is <code>public double getBalance()</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Mutator (void)</div>
+      <div class="quiz-opt" data-idx="1">Accessor (non-void)</div>
+      <div class="quiz-opt" data-idx="2">Constructor</div>
+      <div class="quiz-opt" data-idx="3">Static method</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! It returns a value (non-void) and reads data without changing it — that's an accessor/getter.</div>
+    <div class="quiz-explain wrong-exp">A method with a return type that reads (not modifies) data is an accessor.</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">4. Given <code>private static int count = 0;</code>, how is <code>count</code> shared?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Each object gets its own copy</div>
+      <div class="quiz-opt" data-idx="1">Only the first object can access it</div>
+      <div class="quiz-opt" data-idx="2">It cannot be changed</div>
+      <div class="quiz-opt" data-idx="3">All objects of the class share one copy</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>static</code> means the variable belongs to the class — all objects share a single copy.</div>
+    <div class="quiz-explain wrong-exp"><code>static</code> variables are shared: one copy for the whole class, not per-object.</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">5. Inside a constructor, <code>this.name = name;</code> does what?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Assigns the parameter <code>name</code> to the instance variable <code>name</code></div>
+      <div class="quiz-opt" data-idx="1">Creates a new variable called <code>this.name</code></div>
+      <div class="quiz-opt" data-idx="2">Causes a compile error</div>
+      <div class="quiz-opt" data-idx="3">Assigns the instance variable to the parameter</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>this.name</code> refers to the instance variable, while <code>name</code> refers to the parameter. The parameter's value is stored in the field.</div>
+    <div class="quiz-explain wrong-exp"><code>this.name</code> = instance variable, <code>name</code> = parameter. The line stores the parameter value into the field.</div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:40px 0;color:var(--text-secondary);font-size:.85rem;">
+  <p style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:4px;color:var(--text);">鼎睿学苑 · Dingrui Scholars</p>
+  <p>AP Computer Science A — Unit 3: Class Creation · 2026 Edition</p>
+</div>
+
+</main>
+
+<script>
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'':'dark');document.getElementById('themeToggle').textContent=d?'Dark':'Light'}
+if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeToggle').textContent='Light'}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?(window.scrollY/h)*100:0;document.getElementById('progressFill').style.width=p+'%'});
+const sections=document.querySelectorAll('.section');const tocLinks=document.querySelectorAll('.sidebar a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const link=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(link)link.classList.add('active')}})},{rootMargin:'-80px 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz=>{const ans=parseInt(quiz.dataset.answer);const opts=quiz.querySelectorAll('.quiz-opt');const ec=quiz.querySelector('.quiz-explain.correct-exp');const ew=quiz.querySelector('.quiz-explain.wrong-exp');opts.forEach(opt=>{opt.addEventListener('click',()=>{const idx=parseInt(opt.dataset.idx);opts.forEach(o=>o.classList.add('disabled'));if(idx===ans){opt.classList.add('correct');if(ec)ec.classList.add('show')}else{opt.classList.add('wrong');opts[ans].classList.add('correct');if(ew)ew.classList.add('show')}})})});
+</script>
+</body>
+</html>

@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 2: Selection and Iteration</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1E2E;
+  --text: #2C2424;
+  --text-secondary: #6B5E5E;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5C1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --teal: #2A6B6B;
+  --teal-light: #DFF0F0;
+  --border: #DDD4CC;
+  --shadow: 0 1px 3px rgba(60,30,30,0.06), 0 1px 2px rgba(60,30,30,0.04);
+  --shadow-lg: 0 4px 12px rgba(60,30,30,0.10);
+  --radius: 10px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 280px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1818;
+  --bg-code: #0D0A0A;
+  --text: #E8E0DC;
+  --text-secondary: #A89898;
+  --accent: #C87070;
+  --accent-light: #3A2020;
+  --accent-dark: #E89090;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --teal: #5AB8B8;
+  --teal-light: #102828;
+  --border: #352C2C;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+.topnav-brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem; color: var(--text);
+  display: flex; align-items: center; gap: 10px;
+}
+.topnav-brand .unit-badge {
+  background: var(--accent);
+  color: #fff; font-family: var(--font-body);
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.topnav-actions { display: flex; align-items: center; gap: 8px; }
+.topnav-actions button {
+  background: none; border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 12px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.topnav-actions button:hover { background: var(--accent-light); border-color: var(--accent); }
+.topnav-actions button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.topnav-actions .back-link {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 12px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.topnav-actions .back-link:hover { background: var(--accent-light); border-color: var(--accent); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track {
+  position: fixed; top: 56px; left: 0; right: 0;
+  height: 3px; background: var(--border); z-index: 99;
+}
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+/* ─── SIDEBAR TOC ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 7px 20px;
+  color: var(--text-secondary);
+  text-decoration: none; font-size: 0.85rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+
+/* ─── MAIN ─── */
+.main-wrap { max-width: var(--max-w); margin: 80px auto 120px; padding: 0 24px; }
+
+/* ─── HERO ─── */
+.hero { text-align: center; padding: 48px 0 40px; }
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.hero-meta { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.hero-meta .chip { font-size: 0.8rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; }
+.chip-maroon { background: var(--accent-light); color: var(--accent); }
+.chip-green { background: var(--green-light); color: var(--green); }
+.chip-teal { background: var(--teal-light); color: var(--teal); }
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 48px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 { font-family: var(--font-display); font-size: 1.65rem; margin-bottom: 16px; line-height: 1.25; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; display: inline-block; }
+.section h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 28px 0 10px; line-height: 1.3; }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 22px 26px; margin: 16px 0;
+  box-shadow: var(--shadow); transition: background 0.3s, border 0.3s;
+}
+
+/* ─── CODE BLOCKS ─── */
+pre {
+  background: var(--bg-code); color: #CDD6F4;
+  padding: 18px 22px; border-radius: 8px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.65; margin: 12px 0;
+}
+code { font-family: var(--font-mono); font-size: 0.85em; }
+:not(pre) > code {
+  background: var(--accent-light); color: var(--accent);
+  padding: 2px 6px; border-radius: 4px;
+}
+.kw { color: #CBA6F7; } .ty { color: #89B4FA; } .str { color: #A6E3A1; }
+.cm { color: #6C7086; font-style: italic; } .num { color: #FAB387; } .fn { color: #89DCEB; }
+
+/* ─── CONCEPT BOX ─── */
+.concept-box {
+  border-left: 4px solid var(--accent); background: var(--accent-light);
+  padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0;
+}
+.concept-box.green { border-left-color: var(--green); background: var(--green-light); }
+.concept-box.orange { border-left-color: var(--orange); background: var(--orange-light); }
+.concept-box.red { border-left-color: var(--red); background: var(--red-light); }
+.concept-box.purple { border-left-color: var(--purple); background: var(--purple-light); }
+.concept-box.teal { border-left-color: var(--teal); background: var(--teal-light); }
+.concept-box strong { display: block; margin-bottom: 4px; }
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.3px; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 20px 0; }
+.quiz-q { font-weight: 600; margin-bottom: 10px; font-size: 0.95rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 6px; }
+.quiz-opt {
+  padding: 10px 16px; border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; font-size: 0.9rem;
+  transition: all 0.2s; background: var(--bg-card);
+}
+.quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-explain { margin-top: 10px; padding: 12px 16px; border-radius: 8px; font-size: 0.88rem; display: none; }
+.quiz-explain.show { display: block; }
+.quiz-explain.correct-exp { background: var(--green-light); color: var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: var(--red); }
+
+/* ─── DETAILS ─── */
+details { margin: 12px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; }
+summary { padding: 14px 18px; cursor: pointer; font-weight: 600; font-size: 0.92rem; user-select: none; list-style: none; display: flex; align-items: center; gap: 8px; }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 0.8rem; color: var(--accent); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 0 18px 16px; font-size: 0.92rem; }
+
+/* ─── QUICK REF ─── */
+.qref { background: var(--bg-card); border: 2px dashed var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 20px 0; }
+.qref-title { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+/* ─── FLASHCARD ─── */
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+.flashcard { perspective: 600px; height: 160px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s; transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; text-align: center; font-size: 0.88rem;
+}
+.flashcard-front { background: var(--bg-card); font-weight: 700; }
+.flashcard-back { background: var(--accent-light); transform: rotateY(180deg); font-size: 0.82rem; line-height: 1.5; }
+
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); }
+  .main-wrap { margin-left: calc(var(--toc-w) + 40px); }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main-wrap { padding: 0 16px; }
+  pre { font-size: 0.75rem; padding: 14px; }
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .topnav, .progress-track, .sidebar, .topnav-actions { display: none !important; }
+  .main-wrap { margin: 0 auto; }
+  body { font-size: 11pt; }
+  pre { border: 1px solid #ccc; }
+  .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-brand">
+    <span class="unit-badge">UNIT 2</span>
+    Selection &amp; Iteration
+  </div>
+  <div class="topnav-actions">
+    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
+    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s2-1">2.1 Selection &amp; Repetition</a>
+  <a href="#s2-2">2.2 Boolean Expressions</a>
+  <a href="#s2-3">2.3 if Statements</a>
+  <a href="#s2-4">2.4 Nested if</a>
+  <a href="#s2-5">2.5 Compound Booleans</a>
+  <a href="#s2-6">2.6 Comparing Booleans</a>
+  <a href="#s2-7">2.7 while Loops</a>
+  <a href="#s2-8">2.8 for Loops</a>
+  <a href="#s2-9">2.9 Standard Algorithms</a>
+  <a href="#s2-10">2.10 String Algorithms</a>
+  <a href="#s2-11">2.11 Nested Iteration</a>
+  <a href="#s2-12">2.12 Run-Time Analysis</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
+  <h1>Unit 2: Selection<br>and Iteration</h1>
+  <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto;">
+    Decision-making with conditionals, repetition with loops, Boolean logic, De Morgan's Law, and essential standard algorithms.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">25–35% of AP Exam</span>
+    <span class="chip chip-green">~29–31 Class Periods</span>
+    <span class="chip chip-teal">12 Topics</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.1 ═══════════════ -->
+<section class="section" id="s2-1">
+  <div class="section-label">Topic 2.1</div>
+  <h2>Algorithms with Selection and Repetition</h2>
+
+  <p>Algorithms are built from three fundamental blocks:</p>
+  <div class="card">
+    <p><strong>Sequencing</strong> — steps execute in order, one at a time.</p>
+    <p><strong>Selection</strong> — a choice is made based on a true/false decision.</p>
+    <p><strong>Repetition</strong> — a process repeats until a desired outcome is reached.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong>Key Insight</strong>
+    The <em>order</em> in which sequencing, selection, and repetition are combined determines the algorithm's outcome.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.2 ═══════════════ -->
+<section class="section" id="s2-2">
+  <div class="section-label">Topic 2.2</div>
+  <h2>Boolean Expressions</h2>
+
+  <h3>Relational Operators</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+      <tr><td><code>==</code></td><td>Equal to</td><td><code>5 == 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>!=</code></td><td>Not equal to</td><td><code>5 != 3</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&lt;</code></td><td>Less than</td><td><code>3 &lt; 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>3 &gt; 5</code></td><td><code>false</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td>Less than or equal</td><td><code>5 &lt;= 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td>Greater than or equal</td><td><code>6 &gt;= 5</code></td><td><code>true</code></td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box red">
+    <strong>== with Reference Types</strong>
+    For primitives, <code>==</code> compares <em>values</em>. For objects (reference types), <code>==</code> compares <em>references</em> (memory addresses), not content. Use <code>.equals()</code> to compare object content.
+  </div>
+
+<pre><span class="ty">int</span> a = <span class="num">10</span>;
+<span class="ty">boolean</span> result = (a &gt;= <span class="num">5</span>);  <span class="cm">// true</span></pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.3 ═══════════════ -->
+<section class="section" id="s2-3">
+  <div class="section-label">Topic 2.3</div>
+  <h2>if Statements</h2>
+
+  <p>Selection statements alter the sequential flow of execution based on a Boolean condition.</p>
+
+  <h3>One-Way Selection (if)</h3>
+<pre><span class="kw">if</span> (score &gt;= <span class="num">90</span>) {
+    <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Excellent!"</span>);
+}
+<span class="cm">// Body runs ONLY if condition is true</span></pre>
+
+  <h3>Two-Way Selection (if-else)</h3>
+<pre><span class="kw">if</span> (age &gt;= <span class="num">18</span>) {
+    <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Adult"</span>);
+} <span class="kw">else</span> {
+    <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Minor"</span>);
+}</pre>
+
+  <div class="concept-box green">
+    <strong>Remember</strong>
+    In an <code>if-else</code>, exactly one branch always executes — never both, never neither.
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">What prints when <code>x = 7</code>?<br><code>if (x &gt; 10) print("A"); else print("B");</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">A</div>
+      <div class="quiz-opt" data-idx="1">B</div>
+      <div class="quiz-opt" data-idx="2">AB</div>
+      <div class="quiz-opt" data-idx="3">Nothing</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! 7 is not greater than 10, so the else branch executes and prints "B".</div>
+    <div class="quiz-explain wrong-exp">Since 7 &gt; 10 is false, the else branch runs → "B".</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.4 ═══════════════ -->
+<section class="section" id="s2-4">
+  <div class="section-label">Topic 2.4</div>
+  <h2>Nested if Statements</h2>
+
+  <p>An <code>if</code> inside another <code>if</code>. The inner condition is only checked if the outer condition is <code>true</code>.</p>
+
+  <h3>if-else-if (Multiway Selection)</h3>
+<pre><span class="kw">if</span> (grade &gt;= <span class="num">90</span>) {
+    letter = <span class="str">"A"</span>;
+} <span class="kw">else if</span> (grade &gt;= <span class="num">80</span>) {
+    letter = <span class="str">"B"</span>;
+} <span class="kw">else if</span> (grade &gt;= <span class="num">70</span>) {
+    letter = <span class="str">"C"</span>;
+} <span class="kw">else</span> {
+    letter = <span class="str">"F"</span>;
+}</pre>
+
+  <div class="concept-box orange">
+    <strong>Multiway Selection Rule</strong>
+    Only the <em>first</em> branch whose condition is <code>true</code> executes. All remaining branches are skipped. If none are true and there's a trailing <code>else</code>, that <code>else</code> runs.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.5 ═══════════════ -->
+<section class="section" id="s2-5">
+  <div class="section-label">Topic 2.5</div>
+  <h2>Compound Boolean Expressions</h2>
+
+  <h3>Logical Operators</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Name</th><th>True When</th></tr>
+      <tr><td><code>!</code></td><td>NOT</td><td><code>!a</code> is true when <code>a</code> is false</td></tr>
+      <tr><td><code>&amp;&amp;</code></td><td>AND</td><td><code>a &amp;&amp; b</code> is true only when <em>both</em> are true</td></tr>
+      <tr><td><code>||</code></td><td>OR</td><td><code>a || b</code> is true when <em>at least one</em> is true</td></tr>
+    </table>
+  </div>
+
+  <p><strong>Precedence:</strong> <code>!</code> → <code>&amp;&amp;</code> → <code>||</code></p>
+
+<pre><span class="ty">int</span> age = <span class="num">20</span>;
+<span class="ty">boolean</span> hasID = <span class="kw">true</span>;
+<span class="kw">if</span> (age &gt;= <span class="num">18</span> &amp;&amp; hasID) {
+    <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Entry allowed"</span>);
+}</pre>
+
+  <div class="concept-box teal">
+    <strong>Short-Circuit Evaluation</strong>
+    Java stops evaluating as soon as the result is determined:
+    with <code>&amp;&amp;</code>, if the first operand is <code>false</code>, the second is never checked.
+    With <code>||</code>, if the first operand is <code>true</code>, the second is skipped.
+    This is important when the second expression could cause an error (e.g., null check).
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.6 ═══════════════ -->
+<section class="section" id="s2-6">
+  <div class="section-label">Topic 2.6</div>
+  <h2>Comparing Boolean Expressions</h2>
+
+  <h3>De Morgan's Law</h3>
+  <div class="qref">
+    <div class="qref-title">De Morgan's Law — Must Memorize</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Original</th><th>Equivalent</th></tr>
+        <tr><td><code>!(a &amp;&amp; b)</code></td><td><code>!a || !b</code></td></tr>
+        <tr><td><code>!(a || b)</code></td><td><code>!a &amp;&amp; !b</code></td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size: 0.88rem; color: var(--text-secondary);">Flip the operator (<code>&amp;&amp;</code> ↔ <code>||</code>) and negate each operand.</p>
+  </div>
+
+  <h3>Comparing Objects</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Comparison</th><th>What It Checks</th></tr>
+      <tr><td><code>obj1 == obj2</code></td><td>Same <em>reference</em> (same object in memory)?</td></tr>
+      <tr><td><code>obj1.equals(obj2)</code></td><td>Same <em>content</em> (as defined by the class)?</td></tr>
+      <tr><td><code>obj == null</code></td><td>Does the reference point to no object?</td></tr>
+    </table>
+  </div>
+
+<pre><span class="ty">String</span> a = <span class="kw">new</span> <span class="ty">String</span>(<span class="str">"Hi"</span>);
+<span class="ty">String</span> b = <span class="kw">new</span> <span class="ty">String</span>(<span class="str">"Hi"</span>);
+a == b        <span class="cm">// false — different objects</span>
+a.<span class="fn">equals</span>(b)  <span class="cm">// true  — same content</span></pre>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">Which is equivalent to <code>!(x &gt; 5 &amp;&amp; y &lt; 3)</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>x &gt; 5 || y &lt; 3</code></div>
+      <div class="quiz-opt" data-idx="1"><code>!x &gt; 5 &amp;&amp; !y &lt; 3</code></div>
+      <div class="quiz-opt" data-idx="2"><code>x &lt;= 5 || y &gt;= 3</code></div>
+      <div class="quiz-opt" data-idx="3"><code>x &lt;= 5 &amp;&amp; y &gt;= 3</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! By De Morgan's: negate each condition and flip &amp;&amp; to ||. <code>!(x&gt;5)</code> → <code>x&lt;=5</code>, <code>!(y&lt;3)</code> → <code>y&gt;=3</code>, and <code>&amp;&amp;</code> → <code>||</code>.</div>
+    <div class="quiz-explain wrong-exp">Apply De Morgan's: negate each part and flip the operator. <code>!(x&gt;5 &amp;&amp; y&lt;3)</code> = <code>x&lt;=5 || y&gt;=3</code>.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.7 ═══════════════ -->
+<section class="section" id="s2-7">
+  <div class="section-label">Topic 2.7</div>
+  <h2>while Loops</h2>
+
+  <p><strong>Iteration</strong> repeats code zero or more times while a condition is true.</p>
+
+<pre><span class="ty">int</span> count = <span class="num">1</span>;
+<span class="kw">while</span> (count &lt;= <span class="num">5</span>) {
+    <span class="ty">System</span>.out.<span class="fn">print</span>(count + <span class="str">" "</span>);
+    count++;
+}
+<span class="cm">// Output: 1 2 3 4 5</span></pre>
+
+  <div class="concept-box">
+    <strong>while Loop Mechanics</strong>
+    The Boolean expression is checked <em>before</em> each iteration (including the first). If it's initially <code>false</code>, the body never executes.
+  </div>
+
+  <div class="concept-box red">
+    <strong>Infinite Loop</strong>
+    If the condition never becomes <code>false</code>, the loop runs forever. Always ensure the loop body changes something that will eventually make the condition <code>false</code>.
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Off-by-One Errors</strong>
+    Using <code>&lt;</code> vs <code>&lt;=</code> (or starting at 0 vs 1) can cause a loop to run one time too many or too few. Trace carefully!
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.8 ═══════════════ -->
+<section class="section" id="s2-8">
+  <div class="section-label">Topic 2.8</div>
+  <h2>for Loops</h2>
+
+  <p>A <code>for</code> loop packs initialization, condition, and update into one header.</p>
+
+<pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    <span class="ty">System</span>.out.<span class="fn">print</span>(i + <span class="str">" "</span>);
+}
+<span class="cm">// Output: 0 1 2 3 4</span></pre>
+
+  <div class="card">
+    <p><strong>Three Parts of a for Header:</strong></p>
+    <p><code>for (</code><em>initialization</em><code>;</code> <em>Boolean expression</em><code>;</code> <em>update</em><code>)</code></p>
+    <p style="margin-top:8px; font-size:0.9rem; color: var(--text-secondary);">
+      1. <strong>Init</strong> runs once before the loop starts.<br>
+      2. <strong>Condition</strong> is checked before each iteration.<br>
+      3. <strong>Update</strong> runs after each iteration's body, before the next check.
+    </p>
+  </div>
+
+  <div class="concept-box green">
+    <strong>for ↔ while Equivalence</strong>
+    Every <code>for</code> loop can be rewritten as a <code>while</code> loop and vice versa:
+  </div>
+<pre><span class="cm">// Equivalent while loop:</span>
+<span class="ty">int</span> i = <span class="num">0</span>;
+<span class="kw">while</span> (i &lt; <span class="num">5</span>) {
+    <span class="ty">System</span>.out.<span class="fn">print</span>(i + <span class="str">" "</span>);
+    i++;
+}</pre>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">How many times does this loop iterate?<br><code>for (int i = 3; i &lt; 8; i++)</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">5 times (i = 3, 4, 5, 6, 7)</div>
+      <div class="quiz-opt" data-idx="1">6 times (i = 3, 4, 5, 6, 7, 8)</div>
+      <div class="quiz-opt" data-idx="2">4 times (i = 3, 4, 5, 6)</div>
+      <div class="quiz-opt" data-idx="3">Infinite loop</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! i starts at 3 and runs while i &lt; 8, so it takes values 3, 4, 5, 6, 7 → 5 iterations.</div>
+    <div class="quiz-explain wrong-exp">Count: 3, 4, 5, 6, 7 (stops before 8 because condition is &lt; not &lt;=). That's 5 iterations.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.9 ═══════════════ -->
+<section class="section" id="s2-9">
+  <div class="section-label">Topic 2.9</div>
+  <h2>Implementing Selection and Iteration Algorithms</h2>
+
+  <p>The AP exam expects you to recognize and implement these <strong>standard algorithms</strong>:</p>
+
+  <h3>1. Divisibility Check</h3>
+<pre><span class="kw">if</span> (num % <span class="num">3</span> == <span class="num">0</span>) {
+    <span class="ty">System</span>.out.<span class="fn">println</span>(num + <span class="str">" is divisible by 3"</span>);
+}</pre>
+
+  <h3>2. Extract Digits</h3>
+<pre><span class="ty">int</span> n = <span class="num">4827</span>;
+<span class="kw">while</span> (n &gt; <span class="num">0</span>) {
+    <span class="ty">int</span> digit = n % <span class="num">10</span>;  <span class="cm">// last digit: 7, 2, 8, 4</span>
+    n /= <span class="num">10</span>;
+}</pre>
+
+  <h3>3. Count (Frequency)</h3>
+<pre><span class="ty">int</span> count = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">100</span>; i++) {
+    <span class="kw">if</span> (i % <span class="num">7</span> == <span class="num">0</span>) count++;
+}</pre>
+
+  <h3>4. Min / Max</h3>
+<pre><span class="ty">int</span> max = Integer.MIN_VALUE;
+<span class="cm">// As you process values:</span>
+<span class="kw">if</span> (val &gt; max) max = val;</pre>
+
+  <h3>5. Sum / Average</h3>
+<pre><span class="ty">int</span> sum = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= n; i++) {
+    sum += i;
+}
+<span class="ty">double</span> avg = (<span class="ty">double</span>) sum / n;</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.10 ═══════════════ -->
+<section class="section" id="s2-10">
+  <div class="section-label">Topic 2.10</div>
+  <h2>Implementing String Algorithms</h2>
+
+  <p>Standard string algorithms you should know:</p>
+
+  <h3>Traverse &amp; Check Substrings</h3>
+<pre><span class="ty">String</span> str = <span class="str">"hello world"</span>;
+<span class="ty">int</span> vowels = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; str.<span class="fn">length</span>(); i++) {
+    <span class="ty">String</span> ch = str.<span class="fn">substring</span>(i, i + <span class="num">1</span>);
+    <span class="kw">if</span> (<span class="str">"aeiou"</span>.<span class="fn">indexOf</span>(ch) &gt;= <span class="num">0</span>) {
+        vowels++;
+    }
+}</pre>
+
+  <h3>Reverse a String</h3>
+<pre><span class="ty">String</span> original = <span class="str">"java"</span>;
+<span class="ty">String</span> reversed = <span class="str">""</span>;
+<span class="kw">for</span> (<span class="ty">int</span> i = original.<span class="fn">length</span>() - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    reversed += original.<span class="fn">substring</span>(i, i + <span class="num">1</span>);
+}
+<span class="cm">// reversed = "avaj"</span></pre>
+
+  <div class="concept-box teal">
+    <strong>Pattern: Single-Character Substring</strong>
+    Use <code>str.substring(i, i + 1)</code> to get the character at index <code>i</code> as a <code>String</code>. This is the standard approach on the AP exam.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.11 ═══════════════ -->
+<section class="section" id="s2-11">
+  <div class="section-label">Topic 2.11</div>
+  <h2>Nested Iteration</h2>
+
+  <p>A loop inside another loop. The <strong>inner loop completes all its iterations</strong> for each single iteration of the outer loop.</p>
+
+<pre><span class="kw">for</span> (<span class="ty">int</span> row = <span class="num">1</span>; row &lt;= <span class="num">3</span>; row++) {
+    <span class="kw">for</span> (<span class="ty">int</span> col = <span class="num">1</span>; col &lt;= <span class="num">4</span>; col++) {
+        <span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"* "</span>);
+    }
+    <span class="ty">System</span>.out.<span class="fn">println</span>();
+}
+<span class="cm">// Output:
+// * * * *
+// * * * *
+// * * * *</span></pre>
+
+  <div class="concept-box purple">
+    <strong>Counting Iterations</strong>
+    If the outer loop runs <em>m</em> times and the inner loop runs <em>n</em> times, the inner body executes <strong>m × n</strong> times total. Above: 3 × 4 = 12 stars.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 2.12 ═══════════════ -->
+<section class="section" id="s2-12">
+  <div class="section-label">Topic 2.12</div>
+  <h2>Informal Run-Time Analysis</h2>
+
+  <p>A <strong>statement execution count</strong> is the number of times a statement runs. You determine this by tracing the loop.</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Structure</th><th>Execution Count Pattern</th></tr>
+      <tr><td>Single loop (1 to n)</td><td>Body runs <strong>n</strong> times</td></tr>
+      <tr><td>Nested loop (n × n)</td><td>Inner body runs <strong>n²</strong> times</td></tr>
+      <tr><td>Nested loop (n × m)</td><td>Inner body runs <strong>n × m</strong> times</td></tr>
+    </table>
+  </div>
+
+<pre><span class="cm">// How many times does the inner print execute?</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {          <span class="cm">// 5 times</span>
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="num">0</span>; j &lt; <span class="num">3</span>; j++) {      <span class="cm">// 3 times each</span>
+        <span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"X"</span>);       <span class="cm">// 5 × 3 = 15 times</span>
+    }
+}</pre>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">How many times does <code>"*"</code> print?<br><code>for (int i = 0; i &lt; 4; i++)<br>&nbsp;&nbsp;for (int j = 0; j &lt; 4; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("*");</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">4</div>
+      <div class="quiz-opt" data-idx="1">8</div>
+      <div class="quiz-opt" data-idx="2">16</div>
+      <div class="quiz-opt" data-idx="3">12</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! 4 × 4 = 16 total executions of the inner print statement.</div>
+    <div class="quiz-explain wrong-exp">Nested loops: outer runs 4 times, inner runs 4 times each → 4 × 4 = 16.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards — Click to Flip</h2>
+
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">3 building blocks of algorithms?</div>
+        <div class="flashcard-back">Sequencing, Selection, Repetition</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">De Morgan's: <code>!(a &amp;&amp; b)</code> = ?</div>
+        <div class="flashcard-back"><code>!a || !b</code></div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">De Morgan's: <code>!(a || b)</code> = ?</div>
+        <div class="flashcard-back"><code>!a &amp;&amp; !b</code></div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">What is short-circuit evaluation?</div>
+        <div class="flashcard-back">Java skips the 2nd operand if the 1st already determines the result (<code>false &amp;&amp; ...</code> or <code>true || ...</code>).</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Infinite loop cause?</div>
+        <div class="flashcard-back">The Boolean condition never becomes <code>false</code>.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Off-by-one error?</div>
+        <div class="flashcard-back">Loop runs one time too many or too few (e.g., using <code>&lt;</code> vs <code>&lt;=</code>).</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front"><code>==</code> vs <code>.equals()</code>?</div>
+        <div class="flashcard-back"><code>==</code> compares references. <code>.equals()</code> compares content.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">for loop execution order?</div>
+        <div class="flashcard-back">Init → Check → Body → Update → Check → Body → Update → ...</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Nested loop: 5 outer × 3 inner = ?</div>
+        <div class="flashcard-back">Inner body runs <strong>15</strong> times total.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">How to get last digit of n?</div>
+        <div class="flashcard-back"><code>n % 10</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit 2 — Practice Quiz</h2>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">1. What is the output?<br><code>int x = 15;<br>if (x &gt; 20) print("A");<br>else if (x &gt; 10) print("B");<br>else if (x &gt; 5) print("C");<br>else print("D");</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">A</div>
+      <div class="quiz-opt" data-idx="1">B</div>
+      <div class="quiz-opt" data-idx="2">C</div>
+      <div class="quiz-opt" data-idx="3">BC</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! x=15: first condition (15&gt;20) is false. Second (15&gt;10) is true → prints "B". Remaining branches are skipped.</div>
+    <div class="quiz-explain wrong-exp">In if-else-if, only the first true branch runs. 15&gt;20 is false, 15&gt;10 is true → "B".</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">2. What value does <code>count</code> hold after this loop?<br><code>int count = 0;<br>for (int i = 0; i &lt; 10; i++) {<br>&nbsp;&nbsp;if (i % 2 == 0) count++;<br>}</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">10</div>
+      <div class="quiz-opt" data-idx="1">4</div>
+      <div class="quiz-opt" data-idx="2">6</div>
+      <div class="quiz-opt" data-idx="3">5</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Even values of i from 0–9: 0, 2, 4, 6, 8 → count = 5.</div>
+    <div class="quiz-explain wrong-exp">i goes 0–9. Even values: 0, 2, 4, 6, 8 = 5 values → count = 5.</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">3. Which expression is equivalent to <code>!(a || !b)</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>!a &amp;&amp; b</code></div>
+      <div class="quiz-opt" data-idx="1"><code>!a || b</code></div>
+      <div class="quiz-opt" data-idx="2"><code>a &amp;&amp; !b</code></div>
+      <div class="quiz-opt" data-idx="3"><code>a || b</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! By De Morgan's: <code>!(a || !b)</code> = <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
+    <div class="quiz-explain wrong-exp">Apply De Morgan's: flip || to &amp;&amp;, negate each. <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">4. What does this code print?<br><code>int n = 1234; int sum = 0;<br>while (n &gt; 0) { sum += n % 10; n /= 10; }<br>System.out.println(sum);</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">1234</div>
+      <div class="quiz-opt" data-idx="1">10</div>
+      <div class="quiz-opt" data-idx="2">4</div>
+      <div class="quiz-opt" data-idx="3">0</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Sums the digits: 4 + 3 + 2 + 1 = 10.</div>
+    <div class="quiz-explain wrong-exp">The loop extracts digits (4, 3, 2, 1) and sums them: 4+3+2+1 = 10.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">5. How many times does <code>"!"</code> print?<br><code>for (int i = 1; i &lt;= 3; i++)<br>&nbsp;&nbsp;for (int j = 1; j &lt;= i; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("!");</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">3</div>
+      <div class="quiz-opt" data-idx="1">9</div>
+      <div class="quiz-opt" data-idx="2">6</div>
+      <div class="quiz-opt" data-idx="3">5</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! i=1→1 print, i=2→2 prints, i=3→3 prints. Total: 1+2+3 = 6.</div>
+    <div class="quiz-explain wrong-exp">Inner loop depends on i: 1 + 2 + 3 = 6 total prints.</div>
+  </div>
+</section>
+
+<div style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem;">
+  <p style="font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px; color: var(--text);">鼎睿学苑 · Dingrui Scholars</p>
+  <p>AP Computer Science A — Unit 2: Selection &amp; Iteration · 2026 Edition</p>
+</div>
+
+</main>
+
+<script>
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = 'Light';
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+});
+
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      if (idx === answer) {
+        opt.classList.add('correct');
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

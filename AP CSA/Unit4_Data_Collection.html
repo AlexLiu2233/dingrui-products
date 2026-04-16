@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 4: Data Collections</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F0EB;--bg-card:#FFFFFF;--bg-code:#1E1E2E;--text:#2C2424;--text-secondary:#6B5E5E;--accent:#7A2E2E;--accent-light:#F2E4E4;--accent-dark:#5C1E1E;--green:#2E6B4F;--green-light:#DFF0E8;--orange:#A65E1A;--orange-light:#FBF0E0;--red:#B03030;--red-light:#FCEAEA;--purple:#5E3D7A;--purple-light:#EDE4F5;--teal:#2A6B6B;--teal-light:#DFF0F0;--border:#DDD4CC;--shadow:0 1px 3px rgba(60,30,30,0.06),0 1px 2px rgba(60,30,30,0.04);--shadow-lg:0 4px 12px rgba(60,30,30,0.10);--radius:10px;--font-display:'DM Serif Display',Georgia,serif;--font-body:'Source Sans 3',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--max-w:860px;--toc-w:280px}
+[data-theme="dark"]{--bg:#151010;--bg-card:#1E1818;--bg-code:#0D0A0A;--text:#E8E0DC;--text-secondary:#A89898;--accent:#C87070;--accent-light:#3A2020;--accent-dark:#E89090;--green:#5CB88A;--green-light:#1A2E24;--orange:#D4944A;--orange-light:#2E2010;--red:#E07070;--red-light:#301515;--purple:#A888C8;--purple-light:#201828;--teal:#5AB8B8;--teal-light:#102828;--border:#352C2C;--shadow:0 1px 3px rgba(0,0,0,0.3);--shadow-lg:0 4px 12px rgba(0,0,0,0.4)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;font-size:17px;transition:background .3s,color .3s}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg-card);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;transition:background .3s,border .3s}
+.topnav-brand{font-family:var(--font-display);font-size:1.15rem;color:var(--text);display:flex;align-items:center;gap:10px}
+.topnav-brand .unit-badge{background:var(--accent);color:#fff;font-family:var(--font-body);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px}
+.topnav-actions{display:flex;align-items:center;gap:8px}
+.topnav-actions button{background:none;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font-size:.82rem;cursor:pointer;font-family:var(--font-body);transition:all .2s}
+.topnav-actions button:hover{background:var(--accent-light);border-color:var(--accent)}
+.topnav-actions button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.topnav-actions .back-link{background:var(--bg-card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 12px;font-size:.82rem;cursor:pointer;font-family:var(--font-body);font-weight:600;text-decoration:none;transition:all .2s}
+.topnav-actions .back-link:hover{background:var(--accent-light);border-color:var(--accent)}
+.progress-track{position:fixed;top:56px;left:0;right:0;height:3px;background:var(--border);z-index:99}
+.progress-fill{height:100%;width:0;background:var(--accent);transition:width .15s}
+.sidebar{position:fixed;top:59px;left:0;bottom:0;width:var(--toc-w);background:var(--bg-card);border-right:1px solid var(--border);overflow-y:auto;padding:20px 0;transform:translateX(-100%);transition:transform .3s ease,background .3s;z-index:90}
+.sidebar.open{transform:translateX(0)}
+.sidebar-title{font-family:var(--font-display);font-size:.95rem;padding:0 20px 12px;color:var(--text-secondary);border-bottom:1px solid var(--border);margin-bottom:8px}
+.sidebar a{display:block;padding:7px 20px;color:var(--text-secondary);text-decoration:none;font-size:.85rem;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{color:var(--accent);background:var(--accent-light)}
+.sidebar a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+.main-wrap{max-width:var(--max-w);margin:80px auto 120px;padding:0 24px}
+.hero{text-align:center;padding:48px 0 40px}
+.hero-overline{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3rem);line-height:1.15;margin-bottom:16px}
+.hero-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hero-meta .chip{font-size:.8rem;font-weight:600;padding:5px 14px;border-radius:20px}
+.chip-maroon{background:var(--accent-light);color:var(--accent)}.chip-green{background:var(--green-light);color:var(--green)}.chip-teal{background:var(--teal-light);color:var(--teal)}
+.section{margin-bottom:48px;scroll-margin-top:80px}
+.section-label{font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.section h2{font-family:var(--font-display);font-size:1.65rem;margin-bottom:16px;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block}
+.section h3{font-family:var(--font-display);font-size:1.2rem;margin:28px 0 10px;line-height:1.3}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin:16px 0;box-shadow:var(--shadow);transition:background .3s,border .3s}
+pre{background:var(--bg-code);color:#CDD6F4;padding:18px 22px;border-radius:8px;overflow-x:auto;font-family:var(--font-mono);font-size:.82rem;line-height:1.65;margin:12px 0}
+code{font-family:var(--font-mono);font-size:.85em}
+:not(pre)>code{background:var(--accent-light);color:var(--accent);padding:2px 6px;border-radius:4px}
+.kw{color:#CBA6F7}.ty{color:#89B4FA}.str{color:#A6E3A1}.cm{color:#6C7086;font-style:italic}.num{color:#FAB387}.fn{color:#89DCEB}
+.concept-box{border-left:4px solid var(--accent);background:var(--accent-light);padding:16px 20px;border-radius:0 8px 8px 0;margin:16px 0}
+.concept-box.green{border-left-color:var(--green);background:var(--green-light)}
+.concept-box.orange{border-left-color:var(--orange);background:var(--orange-light)}
+.concept-box.red{border-left-color:var(--red);background:var(--red-light)}
+.concept-box.purple{border-left-color:var(--purple);background:var(--purple-light)}
+.concept-box.teal{border-left-color:var(--teal);background:var(--teal-light)}
+.concept-box strong{display:block;margin-bottom:4px}
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:700;font-size:.82rem;letter-spacing:.3px}
+tr:hover td{background:var(--accent-light)}
+.quiz{margin:20px 0}.quiz-q{font-weight:600;margin-bottom:10px;font-size:.95rem}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-opt{padding:10px 16px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.9rem;transition:all .2s;background:var(--bg-card)}
+.quiz-opt:hover{border-color:var(--accent);background:var(--accent-light)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light)}
+.quiz-opt.disabled{pointer-events:none;opacity:.7}
+.quiz-explain{margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.88rem;display:none}
+.quiz-explain.show{display:block}
+.quiz-explain.correct-exp{background:var(--green-light);color:var(--green)}
+.quiz-explain.wrong-exp{background:var(--red-light);color:var(--red)}
+details{margin:12px 0;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);overflow:hidden}
+summary{padding:14px 18px;cursor:pointer;font-weight:600;font-size:.92rem;user-select:none;list-style:none;display:flex;align-items:center;gap:8px}
+summary::before{content:'▸';transition:transform .2s;font-size:.8rem;color:var(--accent)}
+details[open] summary::before{transform:rotate(90deg)}
+details .detail-body{padding:0 18px 16px;font-size:.92rem}
+.qref{background:var(--bg-card);border:2px dashed var(--border);border-radius:var(--radius);padding:20px 24px;margin:20px 0}
+.qref-title{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:16px 0}
+.flashcard{perspective:600px;height:160px;cursor:pointer}
+.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
+.flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;font-size:.88rem}
+.flashcard-front{background:var(--bg-card);font-weight:700}
+.flashcard-back{background:var(--accent-light);transform:rotateY(180deg);font-size:.82rem;line-height:1.5}
+.sep{border:none;border-top:1px solid var(--border);margin:40px 0}
+@media(min-width:1100px){.sidebar{transform:translateX(0)}.main-wrap{margin-left:calc(var(--toc-w) + 40px)}}
+@media(max-width:600px){.hero h1{font-size:1.8rem}.main-wrap{padding:0 16px}pre{font-size:.75rem;padding:14px}.flashcard-grid{grid-template-columns:1fr}}
+@media print{.topnav,.progress-track,.sidebar,.topnav-actions{display:none!important}.main-wrap{margin:0 auto}body{font-size:11pt}pre{border:1px solid #ccc}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-brand"><span class="unit-badge">UNIT 4</span>Data Collections</div>
+  <div class="topnav-actions">
+    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
+    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s4-1">4.1 Ethics &amp; Data Collection</a>
+  <a href="#s4-2">4.2 Using Data Sets</a>
+  <a href="#s4-3">4.3 Array Creation &amp; Access</a>
+  <a href="#s4-4">4.4 Array Traversals</a>
+  <a href="#s4-5">4.5 Array Algorithms</a>
+  <a href="#s4-6">4.6 Using Text Files</a>
+  <a href="#s4-7">4.7 Wrapper Classes</a>
+  <a href="#s4-8">4.8 ArrayList Methods</a>
+  <a href="#s4-9">4.9 ArrayList Traversals</a>
+  <a href="#s4-10">4.10 ArrayList Algorithms</a>
+  <a href="#s4-11">4.11 2D Array Creation</a>
+  <a href="#s4-12">4.12 2D Array Traversals</a>
+  <a href="#s4-13">4.13 2D Array Algorithms</a>
+  <a href="#s4-14">4.14 Searching Algorithms</a>
+  <a href="#s4-15">4.15 Sorting Algorithms</a>
+  <a href="#s4-16">4.16 Recursion</a>
+  <a href="#s4-17">4.17 Recursive Search &amp; Sort</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
+  <h1>Unit 4: Data Collections</h1>
+  <p style="color:var(--text-secondary);max-width:600px;margin:0 auto;">
+    Arrays, ArrayLists, 2D arrays, text files, wrapper classes, searching &amp; sorting algorithms, and recursion.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">30–40% of AP Exam</span>
+    <span class="chip chip-green">~50–52 Class Periods</span>
+    <span class="chip chip-teal">17 Topics</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.1 ═══ -->
+<section class="section" id="s4-1">
+  <div class="section-label">Topic 4.1</div>
+  <h2>Ethical and Social Issues Around Data Collection</h2>
+
+  <p>Before diving into data structures, consider the ethical implications of collecting and storing data. Every program that handles personal information must prioritize user privacy.</p>
+
+  <div class="card">
+    <p><strong>Privacy Risks</strong> — When using a computer, personal privacy is at risk. Programmers should attempt to safeguard the personal privacy of users when developing new programs.</p>
+    <p style="margin-top:10px"><strong>Algorithmic Bias</strong> — Systemic and repeated errors in a program that create unfair outcomes for a specific group of users. Programmers should be aware of the data set collection method and the potential for bias.</p>
+    <p style="margin-top:10px"><strong>Data Quality</strong> — Some data sets are incomplete or contain inaccurate data. Using such data can cause programs to work incorrectly or inefficiently.</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Choose the Right Data Set</strong>
+    Contents of a data set might be related to a specific question or topic and might not be appropriate for a different question or topic. Always verify that the data you're using actually addresses the problem at hand.
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">What is algorithmic bias?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">A type of sorting error in algorithms</div>
+      <div class="quiz-opt" data-idx="1">Systemic and repeated errors that create unfair outcomes for a specific group</div>
+      <div class="quiz-opt" data-idx="2">When a program runs slower than expected</div>
+      <div class="quiz-opt" data-idx="3">Using too many nested loops</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Algorithmic bias describes systemic errors in a program that produce unfair outcomes for certain groups of users.</div>
+    <div class="quiz-explain wrong-exp">Algorithmic bias = systemic and repeated errors creating unfair outcomes for a specific group of users.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.2 ═══ -->
+<section class="section" id="s4-2">
+  <div class="section-label">Topic 4.2</div>
+  <h2>Introduction to Using Data Sets</h2>
+
+  <p>A <strong>data set</strong> is a collection of specific pieces of information or data. Data sets can be manipulated and analyzed to solve a problem or answer a question.</p>
+
+  <div class="card">
+    <p><strong>Processing Data</strong> — When analyzing data sets, values within the set are accessed and utilized one at a time, then processed according to the desired outcome.</p>
+    <p style="margin-top:10px"><strong>Visual Planning</strong> — Data can be represented in a diagram by using a chart or table. This visual can be used to plan the algorithm that will be used to manipulate the data.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.3 ═══ -->
+<section class="section" id="s4-3">
+  <div class="section-label">Topic 4.3</div>
+  <h2>Array Creation and Access</h2>
+
+  <p>An <strong>array</strong> stores multiple values of the same type. The values can be either primitive values or object references. An array's length is established at creation and <em>cannot be changed</em>.</p>
+
+  <h3>Creating Arrays</h3>
+<pre><span class="cm">// Method 1: Using the new keyword</span>
+<span class="ty">int</span>[] numbers = <span class="kw">new</span> <span class="ty">int</span>[<span class="num">5</span>];          <span class="cm">// {0, 0, 0, 0, 0}</span>
+<span class="ty">double</span>[] grades = <span class="kw">new</span> <span class="ty">double</span>[<span class="num">3</span>];     <span class="cm">// {0.0, 0.0, 0.0}</span>
+<span class="ty">boolean</span>[] flags = <span class="kw">new</span> <span class="ty">boolean</span>[<span class="num">4</span>];   <span class="cm">// {false, false, false, false}</span>
+<span class="ty">String</span>[] names = <span class="kw">new</span> <span class="ty">String</span>[<span class="num">3</span>];     <span class="cm">// {null, null, null}</span>
+
+<span class="cm">// Method 2: Using an initializer list</span>
+<span class="ty">int</span>[] primes = {<span class="num">2</span>, <span class="num">3</span>, <span class="num">5</span>, <span class="num">7</span>, <span class="num">11</span>};
+<span class="ty">String</span>[] days = {<span class="str">"Mon"</span>, <span class="str">"Tue"</span>, <span class="str">"Wed"</span>};</pre>
+
+  <div class="concept-box">
+    <strong>Default Values</strong>
+    When created with <code>new</code>, elements are initialized to defaults: <code>int</code> → <code>0</code>, <code>double</code> → <code>0.0</code>, <code>boolean</code> → <code>false</code>, reference types → <code>null</code>.
+  </div>
+
+  <h3>Accessing &amp; Modifying Elements</h3>
+<pre><span class="ty">int</span>[] arr = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};
+
+<span class="cm">// Access using index (0-based)</span>
+<span class="ty">int</span> first = arr[<span class="num">0</span>];     <span class="cm">// 10</span>
+<span class="ty">int</span> last = arr[<span class="num">4</span>];      <span class="cm">// 50</span>
+
+<span class="cm">// Modify an element</span>
+arr[<span class="num">2</span>] = <span class="num">99</span>;             <span class="cm">// arr is now {10, 20, 99, 40, 50}</span>
+
+<span class="cm">// Array length (attribute, not method!)</span>
+<span class="ty">int</span> len = arr.<span class="fn">length</span>;   <span class="cm">// 5</span></pre>
+
+  <div class="concept-box red">
+    <strong>ArrayIndexOutOfBoundsException</strong>
+    Valid indices are <code>0</code> through <code>array.length - 1</code>. Accessing an index outside this range throws an <code>ArrayIndexOutOfBoundsException</code>.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">What is the value of <code>arr[2]</code> after <code>int[] arr = new int[5];</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>null</code></div>
+      <div class="quiz-opt" data-idx="1"><code>2</code></div>
+      <div class="quiz-opt" data-idx="2"><code>0</code></div>
+      <div class="quiz-opt" data-idx="3">An exception is thrown</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>int</code> arrays default to <code>0</code>. Index 2 is valid (0–4), so the value is <code>0</code>.</div>
+    <div class="quiz-explain wrong-exp">When an <code>int</code> array is created with <code>new</code>, all elements default to <code>0</code>.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.4 ═══ -->
+<section class="section" id="s4-4">
+  <div class="section-label">Topic 4.4</div>
+  <h2>Array Traversals</h2>
+
+  <p><strong>Traversing an array</strong> means using repetition statements to access all or an ordered sequence of elements.</p>
+
+  <h3>Indexed for Loop</h3>
+<pre><span class="ty">int</span>[] arr = {<span class="num">3</span>, <span class="num">7</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">5</span>};
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span>; i++) {
+    System.out.<span class="fn">print</span>(arr[i] + <span class="str">" "</span>);
+}
+<span class="cm">// Output: 3 7 1 9 5</span></pre>
+
+  <h3>Enhanced for Loop (for-each)</h3>
+<pre><span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+    System.out.<span class="fn">print</span>(val + <span class="str">" "</span>);
+}
+<span class="cm">// Output: 3 7 1 9 5</span></pre>
+
+  <div class="concept-box orange">
+    <strong>Enhanced for Loop = Copy Only</strong>
+    The enhanced for loop variable is a <em>copy</em> of the element. Assigning a new value to it does <em>not</em> change the array. However, if the array stores objects, you <em>can</em> call methods on the loop variable to modify the object's attributes.
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>Indexed for Loop</th><th>Enhanced for Loop</th></tr>
+      <tr><td>Access by index</td><td>✅ Yes</td><td>❌ No</td></tr>
+      <tr><td>Modify array elements</td><td>✅ Yes</td><td>❌ No (copies only)</td></tr>
+      <tr><td>Traverse in reverse</td><td>✅ Yes</td><td>❌ No</td></tr>
+      <tr><td>Traverse partial array</td><td>✅ Yes</td><td>❌ No (full traversal)</td></tr>
+      <tr><td>Simpler syntax</td><td>❌ More verbose</td><td>✅ Cleaner</td></tr>
+    </table>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.5 ═══ -->
+<section class="section" id="s4-5">
+  <div class="section-label">Topic 4.5</div>
+  <h2>Implementing Array Algorithms</h2>
+
+  <p>Standard algorithms that traverse arrays to accomplish common tasks are fundamental to AP CSA.</p>
+
+  <details>
+    <summary>Find Minimum / Maximum</summary>
+    <div class="detail-body">
+<pre><span class="kw">public static</span> <span class="ty">int</span> <span class="fn">findMax</span>(<span class="ty">int</span>[] arr) {
+    <span class="ty">int</span> max = arr[<span class="num">0</span>];
+    <span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+        <span class="kw">if</span> (val &gt; max) max = val;
+    }
+    <span class="kw">return</span> max;
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Compute Sum / Average</summary>
+    <div class="detail-body">
+<pre><span class="kw">public static</span> <span class="ty">double</span> <span class="fn">average</span>(<span class="ty">int</span>[] arr) {
+    <span class="ty">int</span> sum = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+        sum += val;
+    }
+    <span class="kw">return</span> (<span class="ty">double</span>) sum / arr.<span class="fn">length</span>;
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Count / Check Elements with a Property</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Count elements greater than a threshold</span>
+<span class="kw">public static</span> <span class="ty">int</span> <span class="fn">countAbove</span>(<span class="ty">int</span>[] arr, <span class="ty">int</span> threshold) {
+    <span class="ty">int</span> count = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+        <span class="kw">if</span> (val &gt; threshold) count++;
+    }
+    <span class="kw">return</span> count;
+}
+
+<span class="cm">// Check if ALL elements are positive</span>
+<span class="kw">public static</span> <span class="ty">boolean</span> <span class="fn">allPositive</span>(<span class="ty">int</span>[] arr) {
+    <span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+        <span class="kw">if</span> (val &lt;= <span class="num">0</span>) <span class="kw">return false</span>;
+    }
+    <span class="kw">return true</span>;
+}
+
+<span class="cm">// Check if ANY element is negative</span>
+<span class="kw">public static</span> <span class="ty">boolean</span> <span class="fn">hasNegative</span>(<span class="ty">int</span>[] arr) {
+    <span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+        <span class="kw">if</span> (val &lt; <span class="num">0</span>) <span class="kw">return true</span>;
+    }
+    <span class="kw">return false</span>;
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Shift / Rotate / Reverse Elements</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Shift left (first element lost, last becomes 0)</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span> - <span class="num">1</span>; i++) {
+    arr[i] = arr[i + <span class="num">1</span>];
+}
+arr[arr.<span class="fn">length</span> - <span class="num">1</span>] = <span class="num">0</span>;
+
+<span class="cm">// Reverse the array</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span> / <span class="num">2</span>; i++) {
+    <span class="ty">int</span> temp = arr[i];
+    arr[i] = arr[arr.<span class="fn">length</span> - <span class="num">1</span> - i];
+    arr[arr.<span class="fn">length</span> - <span class="num">1</span> - i] = temp;
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Detect Duplicates / Consecutive Pairs</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Check for duplicates</span>
+<span class="kw">public static</span> <span class="ty">boolean</span> <span class="fn">hasDuplicates</span>(<span class="ty">int</span>[] arr) {
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span>; i++) {
+        <span class="kw">for</span> (<span class="ty">int</span> j = i + <span class="num">1</span>; j &lt; arr.<span class="fn">length</span>; j++) {
+            <span class="kw">if</span> (arr[i] == arr[j]) <span class="kw">return true</span>;
+        }
+    }
+    <span class="kw">return false</span>;
+}
+
+<span class="cm">// Access consecutive pairs</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span> - <span class="num">1</span>; i++) {
+    System.out.<span class="fn">println</span>(arr[i] + <span class="str">" and "</span> + arr[i + <span class="num">1</span>]);
+}</pre>
+    </div>
+  </details>
+
+  <div class="concept-box green">
+    <strong>Exam Tip</strong>
+    On the AP Exam, you may need to combine several of these patterns. Practice writing algorithms that find min/max, sum, count, and check properties — both with indexed and enhanced for loops.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.6 ═══ -->
+<section class="section" id="s4-6">
+  <div class="section-label">Topic 4.6</div>
+  <h2>Using Text Files</h2>
+
+  <p>A <strong>file</strong> provides persistent storage — data survives after the program ends. Java uses the <code>File</code> and <code>Scanner</code> classes to read from text files.</p>
+
+  <h3>Reading from a File</h3>
+<pre><span class="kw">import</span> java.io.File;
+<span class="kw">import</span> java.io.IOException;
+<span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public static void</span> <span class="fn">readFile</span>() <span class="kw">throws</span> <span class="ty">IOException</span> {
+    <span class="ty">File</span> f = <span class="kw">new</span> <span class="ty">File</span>(<span class="str">"data.txt"</span>);
+    <span class="ty">Scanner</span> sc = <span class="kw">new</span> <span class="ty">Scanner</span>(f);
+
+    <span class="kw">while</span> (sc.<span class="fn">hasNext</span>()) {
+        <span class="ty">String</span> line = sc.<span class="fn">nextLine</span>();
+        System.out.<span class="fn">println</span>(line);
+    }
+    sc.<span class="fn">close</span>();
+}</pre>
+
+  <div class="qref">
+    <div class="qref-title">Scanner Methods — Quick Reference</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td><code>nextInt()</code></td><td><code>int</code></td><td>Reads next integer</td></tr>
+        <tr><td><code>nextDouble()</code></td><td><code>double</code></td><td>Reads next double</td></tr>
+        <tr><td><code>nextBoolean()</code></td><td><code>boolean</code></td><td>Reads next boolean</td></tr>
+        <tr><td><code>nextLine()</code></td><td><code>String</code></td><td>Reads next full line</td></tr>
+        <tr><td><code>next()</code></td><td><code>String</code></td><td>Reads next token (word)</td></tr>
+        <tr><td><code>hasNext()</code></td><td><code>boolean</code></td><td>True if more data remains</td></tr>
+        <tr><td><code>close()</code></td><td><code>void</code></td><td>Closes the scanner/file</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>The split() Method</h3>
+<pre><span class="ty">String</span> line = <span class="str">"Alice,90,85,92"</span>;
+<span class="ty">String</span>[] parts = line.<span class="fn">split</span>(<span class="str">","</span>);
+<span class="cm">// parts = {"Alice", "90", "85", "92"}</span></pre>
+
+  <div class="concept-box orange">
+    <strong>IOException Required</strong>
+    When using the <code>File</code> class, you must add <code>throws IOException</code> to the method header. The <code>File</code> and <code>IOException</code> classes are in <code>java.io</code> and must be imported.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.7 ═══ -->
+<section class="section" id="s4-7">
+  <div class="section-label">Topic 4.7</div>
+  <h2>Wrapper Classes</h2>
+
+  <p>The <code>Integer</code> and <code>Double</code> classes wrap primitive types into objects. Both are <strong>immutable</strong> — once created, their values cannot change.</p>
+
+  <h3>Autoboxing &amp; Unboxing</h3>
+<pre><span class="cm">// Autoboxing: primitive → wrapper object</span>
+<span class="ty">Integer</span> x = <span class="num">5</span>;          <span class="cm">// int → Integer</span>
+<span class="ty">Double</span> y = <span class="num">3.14</span>;        <span class="cm">// double → Double</span>
+
+<span class="cm">// Unboxing: wrapper object → primitive</span>
+<span class="ty">int</span> a = x;              <span class="cm">// Integer → int</span>
+<span class="ty">double</span> b = y;           <span class="cm">// Double → double</span></pre>
+
+  <h3>Parsing Strings to Numbers</h3>
+<pre><span class="ty">int</span> num = <span class="ty">Integer</span>.<span class="fn">parseInt</span>(<span class="str">"42"</span>);       <span class="cm">// "42" → 42</span>
+<span class="ty">double</span> d = <span class="ty">Double</span>.<span class="fn">parseDouble</span>(<span class="str">"3.14"</span>); <span class="cm">// "3.14" → 3.14</span></pre>
+
+  <div class="concept-box teal">
+    <strong>Why Wrapper Classes?</strong>
+    ArrayLists can only store objects, not primitives. Wrapper classes let you store <code>int</code> and <code>double</code> values in an <code>ArrayList</code> via autoboxing: <code>ArrayList&lt;Integer&gt;</code>.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.8 ═══ -->
+<section class="section" id="s4-8">
+  <div class="section-label">Topic 4.8</div>
+  <h2>ArrayList Methods</h2>
+
+  <p>An <code>ArrayList</code> is a <strong>mutable-size</strong> collection that stores object references. Unlike arrays, it can grow and shrink dynamically.</p>
+
+  <h3>Creating an ArrayList</h3>
+<pre><span class="kw">import</span> java.util.ArrayList;
+
+<span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt; names = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt;();
+<span class="ty">ArrayList</span>&lt;<span class="ty">Integer</span>&gt; nums = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;<span class="ty">Integer</span>&gt;();</pre>
+
+  <div class="qref">
+    <div class="qref-title">ArrayList Methods — Quick Reference</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+        <tr><td><code>size()</code></td><td><code>int</code></td><td>Number of elements</td></tr>
+        <tr><td><code>add(E obj)</code></td><td><code>boolean</code></td><td>Appends <code>obj</code> to end; returns <code>true</code></td></tr>
+        <tr><td><code>add(int i, E obj)</code></td><td><code>void</code></td><td>Inserts <code>obj</code> at index <code>i</code>; shifts others right</td></tr>
+        <tr><td><code>get(int i)</code></td><td><code>E</code></td><td>Returns element at index <code>i</code></td></tr>
+        <tr><td><code>set(int i, E obj)</code></td><td><code>E</code></td><td>Replaces element at <code>i</code>; returns old element</td></tr>
+        <tr><td><code>remove(int i)</code></td><td><code>E</code></td><td>Removes at <code>i</code>; shifts others left; returns removed</td></tr>
+      </table>
+    </div>
+  </div>
+
+<pre><span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt; list = <span class="kw">new</span> <span class="ty">ArrayList</span>&lt;<span class="ty">String</span>&gt;();
+list.<span class="fn">add</span>(<span class="str">"A"</span>);          <span class="cm">// ["A"]</span>
+list.<span class="fn">add</span>(<span class="str">"B"</span>);          <span class="cm">// ["A", "B"]</span>
+list.<span class="fn">add</span>(<span class="num">1</span>, <span class="str">"X"</span>);      <span class="cm">// ["A", "X", "B"]</span>
+list.<span class="fn">set</span>(<span class="num">0</span>, <span class="str">"Z"</span>);      <span class="cm">// ["Z", "X", "B"]</span>
+list.<span class="fn">remove</span>(<span class="num">1</span>);        <span class="cm">// ["Z", "B"]</span>
+<span class="ty">String</span> s = list.<span class="fn">get</span>(<span class="num">0</span>); <span class="cm">// "Z"</span>
+<span class="ty">int</span> sz = list.<span class="fn">size</span>();   <span class="cm">// 2</span></pre>
+
+  <div class="concept-box">
+    <strong>Array vs ArrayList — Key Differences</strong>
+    <div class="table-wrap" style="margin-top:8px">
+      <table>
+        <tr><th>Feature</th><th>Array</th><th>ArrayList</th></tr>
+        <tr><td>Size</td><td>Fixed at creation</td><td>Dynamic (grows/shrinks)</td></tr>
+        <tr><td>Stores</td><td>Primitives or objects</td><td>Objects only (use wrappers)</td></tr>
+        <tr><td>Access</td><td><code>arr[i]</code></td><td><code>list.get(i)</code></td></tr>
+        <tr><td>Length</td><td><code>arr.length</code></td><td><code>list.size()</code></td></tr>
+        <tr><td>Modify</td><td><code>arr[i] = val</code></td><td><code>list.set(i, val)</code></td></tr>
+        <tr><td>Insert/Delete</td><td>Manual shifting</td><td>Built-in methods</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">After <code>list.add(1, "X")</code> on list <code>["A", "B", "C"]</code>, what is the list?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>["X", "A", "B", "C"]</code></div>
+      <div class="quiz-opt" data-idx="1"><code>["A", "X", "B", "C"]</code></div>
+      <div class="quiz-opt" data-idx="2"><code>["A", "B", "X", "C"]</code></div>
+      <div class="quiz-opt" data-idx="3"><code>["A", "B", "C", "X"]</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>add(1, "X")</code> inserts "X" at index 1, shifting "B" and "C" to the right.</div>
+    <div class="quiz-explain wrong-exp"><code>add(1, "X")</code> inserts at index 1: elements at index 1+ shift right.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.9 ═══ -->
+<section class="section" id="s4-9">
+  <div class="section-label">Topic 4.9</div>
+  <h2>ArrayList Traversals</h2>
+
+  <p>Traversing an <code>ArrayList</code> works similarly to arrays but with critical pitfalls when modifying the list during traversal.</p>
+
+<pre><span class="cm">// Indexed for loop</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; list.<span class="fn">size</span>(); i++) {
+    System.out.<span class="fn">println</span>(list.<span class="fn">get</span>(i));
+}
+
+<span class="cm">// Enhanced for loop</span>
+<span class="kw">for</span> (<span class="ty">String</span> s : list) {
+    System.out.<span class="fn">println</span>(s);
+}</pre>
+
+  <div class="concept-box red">
+    <strong>Critical Pitfalls</strong>
+    <strong style="display:inline">ConcurrentModificationException</strong> — Do NOT add or remove elements while using an enhanced for loop. Use an indexed for loop instead.<br><br>
+    <strong style="display:inline">Skipping elements on removal</strong> — When removing elements with an indexed for loop, either traverse backward or decrement the index after removal.
+  </div>
+
+  <h3>Safe Removal During Traversal</h3>
+<pre><span class="cm">// Method 1: Traverse backward</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = list.<span class="fn">size</span>() - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">if</span> (list.<span class="fn">get</span>(i).<span class="fn">equals</span>(<span class="str">"remove me"</span>)) {
+        list.<span class="fn">remove</span>(i);
+    }
+}
+
+<span class="cm">// Method 2: Decrement index after removal</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; list.<span class="fn">size</span>(); i++) {
+    <span class="kw">if</span> (list.<span class="fn">get</span>(i).<span class="fn">equals</span>(<span class="str">"remove me"</span>)) {
+        list.<span class="fn">remove</span>(i);
+        i--;  <span class="cm">// adjust to not skip next element</span>
+    }
+}</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.10 ═══ -->
+<section class="section" id="s4-10">
+  <div class="section-label">Topic 4.10</div>
+  <h2>Implementing ArrayList Algorithms</h2>
+
+  <p>The same standard algorithms from arrays apply to ArrayLists, plus the ability to <strong>insert</strong> and <strong>delete</strong> elements. Some algorithms require traversing multiple <code>String</code>, array, or <code>ArrayList</code> objects simultaneously.</p>
+
+  <details>
+    <summary>Remove All Elements with a Property</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Remove all even numbers (traverse backward)</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = nums.<span class="fn">size</span>() - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
+    <span class="kw">if</span> (nums.<span class="fn">get</span>(i) % <span class="num">2</span> == <span class="num">0</span>) {
+        nums.<span class="fn">remove</span>(i);
+    }
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Insert Elements Conditionally</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Insert separator between consecutive duplicates</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; list.<span class="fn">size</span>() - <span class="num">1</span>; i++) {
+    <span class="kw">if</span> (list.<span class="fn">get</span>(i).<span class="fn">equals</span>(list.<span class="fn">get</span>(i + <span class="num">1</span>))) {
+        list.<span class="fn">add</span>(i + <span class="num">1</span>, <span class="str">"---"</span>);
+        i++;  <span class="cm">// skip the inserted element</span>
+    }
+}</pre>
+    </div>
+  </details>
+
+  <div class="concept-box purple">
+    <strong>Simultaneous Traversal</strong>
+    Some algorithms require traversing multiple String, array, or ArrayList objects simultaneously — for example, comparing two lists element-by-element or merging two sorted lists.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.11 ═══ -->
+<section class="section" id="s4-11">
+  <div class="section-label">Topic 4.11</div>
+  <h2>2D Array Creation and Access</h2>
+
+  <p>A <strong>2D array</strong> is stored as an array of arrays — essentially a table with rows and columns. Its size is fixed at creation.</p>
+
+  <h3>Creating 2D Arrays</h3>
+<pre><span class="cm">// Using new (3 rows, 4 columns — all zeros)</span>
+<span class="ty">int</span>[][] grid = <span class="kw">new</span> <span class="ty">int</span>[<span class="num">3</span>][<span class="num">4</span>];
+
+<span class="cm">// Using initializer list</span>
+<span class="ty">int</span>[][] matrix = {
+    {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>},
+    {<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>}
+};  <span class="cm">// 2 rows, 3 columns</span></pre>
+
+  <h3>Accessing Elements</h3>
+<pre><span class="ty">int</span> val = matrix[<span class="num">1</span>][<span class="num">2</span>];   <span class="cm">// row 1, col 2 → 6</span>
+matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="num">99</span>;       <span class="cm">// set top-left to 99</span>
+
+<span class="cm">// Dimensions</span>
+<span class="ty">int</span> rows = matrix.<span class="fn">length</span>;       <span class="cm">// 2</span>
+<span class="ty">int</span> cols = matrix[<span class="num">0</span>].<span class="fn">length</span>;   <span class="cm">// 3</span>
+
+<span class="cm">// Access a single row (it's a 1D array)</span>
+<span class="ty">int</span>[] firstRow = matrix[<span class="num">0</span>];     <span class="cm">// {99, 2, 3}</span></pre>
+
+  <div class="concept-box">
+    <strong>2D Array Dimensions</strong>
+    <code>arr.length</code> = number of rows. <code>arr[0].length</code> = number of columns. First index is <strong>row</strong>, second is <strong>column</strong>: <code>arr[row][col]</code>.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.12 ═══ -->
+<section class="section" id="s4-12">
+  <div class="section-label">Topic 4.12</div>
+  <h2>2D Array Traversals</h2>
+
+  <p>2D arrays require <strong>nested loops</strong> to traverse all elements. Two common orderings are row-major and column-major.</p>
+
+  <h3>Row-Major Order</h3>
+<pre><span class="kw">for</span> (<span class="ty">int</span> r = <span class="num">0</span>; r &lt; grid.<span class="fn">length</span>; r++) {
+    <span class="kw">for</span> (<span class="ty">int</span> c = <span class="num">0</span>; c &lt; grid[<span class="num">0</span>].<span class="fn">length</span>; c++) {
+        System.out.<span class="fn">print</span>(grid[r][c] + <span class="str">" "</span>);
+    }
+    System.out.<span class="fn">println</span>();
+}</pre>
+
+  <h3>Column-Major Order</h3>
+<pre><span class="kw">for</span> (<span class="ty">int</span> c = <span class="num">0</span>; c &lt; grid[<span class="num">0</span>].<span class="fn">length</span>; c++) {
+    <span class="kw">for</span> (<span class="ty">int</span> r = <span class="num">0</span>; r &lt; grid.<span class="fn">length</span>; r++) {
+        System.out.<span class="fn">print</span>(grid[r][c] + <span class="str">" "</span>);
+    }
+}</pre>
+
+  <h3>Enhanced for Loop with 2D Arrays</h3>
+<pre><span class="kw">for</span> (<span class="ty">int</span>[] row : grid) {         <span class="cm">// outer: each row (1D array)</span>
+    <span class="kw">for</span> (<span class="ty">int</span> val : row) {        <span class="cm">// inner: each element</span>
+        System.out.<span class="fn">print</span>(val + <span class="str">" "</span>);
+    }
+}</pre>
+
+  <div class="concept-box teal">
+    <strong>Enhanced for Loop Types</strong>
+    The outer loop variable type is a 1D array (e.g., <code>int[]</code>) because it receives each row. The inner loop variable is the element type (e.g., <code>int</code>). Assigning to the enhanced for variable does <em>not</em> change the array.
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">In a nested enhanced for loop traversing a 2D <code>int</code> array, the outer loop variable type should be:</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>int[]</code></div>
+      <div class="quiz-opt" data-idx="1"><code>int</code></div>
+      <div class="quiz-opt" data-idx="2"><code>int[][]</code></div>
+      <div class="quiz-opt" data-idx="3"><code>Integer</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The outer loop iterates over rows, and each row is a 1D array — so the variable type is <code>int[]</code>.</div>
+    <div class="quiz-explain wrong-exp">Each row of a 2D array is a 1D array, so the outer loop variable is <code>int[]</code>.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.13 ═══ -->
+<section class="section" id="s4-13">
+  <div class="section-label">Topic 4.13</div>
+  <h2>Implementing 2D Array Algorithms</h2>
+
+  <p>Standard 2D array algorithms extend 1D algorithms to work on the entire grid or specific rows, columns, or subsections.</p>
+
+  <details>
+    <summary>Sum of a Specific Row or Column</summary>
+    <div class="detail-body">
+<pre><span class="cm">// Sum of row r</span>
+<span class="kw">public static</span> <span class="ty">int</span> <span class="fn">rowSum</span>(<span class="ty">int</span>[][] grid, <span class="ty">int</span> r) {
+    <span class="ty">int</span> sum = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">int</span> c = <span class="num">0</span>; c &lt; grid[r].<span class="fn">length</span>; c++)
+        sum += grid[r][c];
+    <span class="kw">return</span> sum;
+}
+
+<span class="cm">// Sum of column c</span>
+<span class="kw">public static</span> <span class="ty">int</span> <span class="fn">colSum</span>(<span class="ty">int</span>[][] grid, <span class="ty">int</span> c) {
+    <span class="ty">int</span> sum = <span class="num">0</span>;
+    <span class="kw">for</span> (<span class="ty">int</span> r = <span class="num">0</span>; r &lt; grid.<span class="fn">length</span>; r++)
+        sum += grid[r][c];
+    <span class="kw">return</span> sum;
+}</pre>
+    </div>
+  </details>
+
+  <details>
+    <summary>Find Max of Entire 2D Array</summary>
+    <div class="detail-body">
+<pre><span class="kw">public static</span> <span class="ty">int</span> <span class="fn">findMax2D</span>(<span class="ty">int</span>[][] grid) {
+    <span class="ty">int</span> max = grid[<span class="num">0</span>][<span class="num">0</span>];
+    <span class="kw">for</span> (<span class="ty">int</span>[] row : grid) {
+        <span class="kw">for</span> (<span class="ty">int</span> val : row) {
+            <span class="kw">if</span> (val &gt; max) max = val;
+        }
+    }
+    <span class="kw">return</span> max;
+}</pre>
+    </div>
+  </details>
+
+  <div class="concept-box green">
+    <strong>Exam Tip — FRQ #4</strong>
+    The AP Exam's fourth free-response question focuses on 2D arrays. Practice traversing in row-major, column-major, and non-standard orders. Always verify boundary conditions in your loops!
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.14 ═══ -->
+<section class="section" id="s4-14">
+  <div class="section-label">Topic 4.14</div>
+  <h2>Searching Algorithms</h2>
+
+  <h3>Linear Search</h3>
+  <p><strong>Linear search</strong> checks each element in order until the target is found or all elements have been checked. Works on both sorted and unsorted data.</p>
+<pre><span class="kw">public static</span> <span class="ty">int</span> <span class="fn">linearSearch</span>(<span class="ty">int</span>[] arr, <span class="ty">int</span> target) {
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span>; i++) {
+        <span class="kw">if</span> (arr[i] == target) <span class="kw">return</span> i;
+    }
+    <span class="kw">return</span> -<span class="num">1</span>;  <span class="cm">// not found</span>
+}</pre>
+
+  <h3>Linear Search on a 2D Array</h3>
+<pre><span class="kw">public static</span> <span class="ty">boolean</span> <span class="fn">search2D</span>(<span class="ty">int</span>[][] grid, <span class="ty">int</span> target) {
+    <span class="kw">for</span> (<span class="ty">int</span>[] row : grid) {
+        <span class="kw">for</span> (<span class="ty">int</span> val : row) {
+            <span class="kw">if</span> (val == target) <span class="kw">return true</span>;
+        }
+    }
+    <span class="kw">return false</span>;
+}</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.15 ═══ -->
+<section class="section" id="s4-15">
+  <div class="section-label">Topic 4.15</div>
+  <h2>Sorting Algorithms</h2>
+
+  <h3>Selection Sort</h3>
+  <p>Repeatedly finds the smallest element in the unsorted portion and swaps it into its correct <strong>final</strong> position.</p>
+<pre><span class="kw">public static void</span> <span class="fn">selectionSort</span>(<span class="ty">int</span>[] arr) {
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span> - <span class="num">1</span>; i++) {
+        <span class="ty">int</span> minIdx = i;
+        <span class="kw">for</span> (<span class="ty">int</span> j = i + <span class="num">1</span>; j &lt; arr.<span class="fn">length</span>; j++) {
+            <span class="kw">if</span> (arr[j] &lt; arr[minIdx]) minIdx = j;
+        }
+        <span class="ty">int</span> temp = arr[i];
+        arr[i] = arr[minIdx];
+        arr[minIdx] = temp;
+    }
+}</pre>
+
+  <h3>Insertion Sort</h3>
+  <p>Takes each element and inserts it into its correct (but not necessarily final) position in the sorted portion by shifting elements.</p>
+<pre><span class="kw">public static void</span> <span class="fn">insertionSort</span>(<span class="ty">int</span>[] arr) {
+    <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt; arr.<span class="fn">length</span>; i++) {
+        <span class="ty">int</span> key = arr[i];
+        <span class="ty">int</span> j = i - <span class="num">1</span>;
+        <span class="kw">while</span> (j &gt;= <span class="num">0</span> &amp;&amp; arr[j] &gt; key) {
+            arr[j + <span class="num">1</span>] = arr[j];
+            j--;
+        }
+        arr[j + <span class="num">1</span>] = key;
+    }
+}</pre>
+
+  <div class="concept-box">
+    <strong>Selection Sort vs Insertion Sort</strong>
+    <div class="table-wrap" style="margin-top:8px">
+      <table>
+        <tr><th>Feature</th><th>Selection Sort</th><th>Insertion Sort</th></tr>
+        <tr><td>Method</td><td>Select min, swap into place</td><td>Insert into sorted portion</td></tr>
+        <tr><td>Position after pass</td><td>Final position</td><td>Correct but not necessarily final</td></tr>
+        <tr><td>Best on</td><td>Small arrays</td><td>Nearly sorted arrays</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.16 ═══ -->
+<section class="section" id="s4-16">
+  <div class="section-label">Topic 4.16</div>
+  <h2>Recursion</h2>
+
+  <p>A <strong>recursive method</strong> is a method that calls itself. Every recursive method needs at least one <strong>base case</strong> (stops the recursion) and at least one <strong>recursive call</strong>.</p>
+
+<pre><span class="kw">public static</span> <span class="ty">int</span> <span class="fn">factorial</span>(<span class="ty">int</span> n) {
+    <span class="kw">if</span> (n == <span class="num">0</span>)          <span class="cm">// base case</span>
+        <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">return</span> n * <span class="fn">factorial</span>(n - <span class="num">1</span>);  <span class="cm">// recursive call</span>
+}
+<span class="cm">// factorial(4) → 4 * 3 * 2 * 1 * 1 = 24</span></pre>
+
+  <div class="card">
+    <p><strong>Key Insights:</strong></p>
+    <p>• Each recursive call gets its own set of local variables and parameters.</p>
+    <p>• Parameter values capture progress just like loop control variables do.</p>
+    <p>• Any recursive solution can be replicated with iteration, and vice versa.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong>Exam Tip</strong>
+    Recursion appears <strong>only on multiple-choice</strong> — you won't need to write recursive code on the free-response. Practice tracing recursive calls using call trees or stack traces.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">What does <code>mystery(5)</code> return if <code>mystery(int n)</code> returns <code>0</code> when <code>n &lt;= 0</code>, else <code>n + mystery(n - 2)</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">15</div>
+      <div class="quiz-opt" data-idx="1">5</div>
+      <div class="quiz-opt" data-idx="2">9</div>
+      <div class="quiz-opt" data-idx="3">12</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! mystery(5) = 5 + mystery(3) = 5 + 3 + mystery(1) = 5 + 3 + 1 + mystery(-1) = 5 + 3 + 1 + 0 = 9.</div>
+    <div class="quiz-explain wrong-exp">Trace it: mystery(5) = 5 + mystery(3) = 5 + 3 + mystery(1) = 5 + 3 + 1 + mystery(-1) = 9.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ 4.17 ═══ -->
+<section class="section" id="s4-17">
+  <div class="section-label">Topic 4.17</div>
+  <h2>Recursive Searching and Sorting</h2>
+
+  <h3>Binary Search</h3>
+  <p><strong>Binary search</strong> requires data to be <strong>sorted</strong>. It starts at the middle and eliminates half of the remaining elements each step.</p>
+
+<pre><span class="kw">public static</span> <span class="ty">int</span> <span class="fn">binarySearch</span>(<span class="ty">int</span>[] arr, <span class="ty">int</span> lo, <span class="ty">int</span> hi, <span class="ty">int</span> target) {
+    <span class="kw">if</span> (lo &gt; hi) <span class="kw">return</span> -<span class="num">1</span>;  <span class="cm">// base case: not found</span>
+    <span class="ty">int</span> mid = (lo + hi) / <span class="num">2</span>;
+    <span class="kw">if</span> (arr[mid] == target) <span class="kw">return</span> mid;
+    <span class="kw">else if</span> (arr[mid] &lt; target)
+        <span class="kw">return</span> <span class="fn">binarySearch</span>(arr, mid + <span class="num">1</span>, hi, target);
+    <span class="kw">else</span>
+        <span class="kw">return</span> <span class="fn">binarySearch</span>(arr, lo, mid - <span class="num">1</span>, target);
+}</pre>
+
+  <div class="concept-box teal">
+    <strong>Linear vs Binary Search</strong>
+    <div class="table-wrap" style="margin-top:8px">
+      <table>
+        <tr><th>Feature</th><th>Linear Search</th><th>Binary Search</th></tr>
+        <tr><td>Requires sorted data?</td><td>No</td><td>Yes</td></tr>
+        <tr><td>Worst-case comparisons (n items)</td><td>n</td><td>log₂(n)</td></tr>
+        <tr><td>Example: 1,000,000 elements</td><td>1,000,000</td><td>~20</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Merge Sort</h3>
+  <p><strong>Merge sort</strong> is a recursive sorting algorithm that divides the array in half, sorts each half, then merges the sorted halves together.</p>
+
+  <div class="card">
+    <p><strong>1. Divide</strong> — Split the array into two halves repeatedly until each subarray has one element.</p>
+    <p><strong>2. Conquer</strong> — Each single-element subarray is trivially sorted.</p>
+    <p><strong>3. Merge</strong> — Combine sorted subarrays back together, maintaining order.</p>
+  </div>
+
+<pre><span class="cm">// Trace: merge sort on [38, 27, 43, 3]</span>
+<span class="cm">// Split: [38, 27] and [43, 3]</span>
+<span class="cm">// Split: [38] [27]    [43] [3]</span>
+<span class="cm">// Merge: [27, 38]     [3, 43]</span>
+<span class="cm">// Merge: [3, 27, 38, 43]</span></pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ FLASHCARDS ═══ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+  <p>Click each card to flip and reveal the answer.</p>
+
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Default value of an <code>int</code> array element?</div>
+      <div class="flashcard-back"><code>0</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Array: <code>.length</code><br>ArrayList: ???</div>
+      <div class="flashcard-back"><code>.size()</code> — it's a method, not a field</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Invalid array index exception?</div>
+      <div class="flashcard-back"><code>ArrayIndexOutOfBoundsException</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Add/remove from ArrayList in enhanced for loop?</div>
+      <div class="flashcard-back">No — causes <code>ConcurrentModificationException</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Autoboxing: <code>int</code> → ???</div>
+      <div class="flashcard-back"><code>Integer</code> (automatic primitive-to-wrapper conversion)</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Number of rows in 2D array <code>grid</code>?</div>
+      <div class="flashcard-back"><code>grid.length</code></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Binary search requires data to be ___</div>
+      <div class="flashcard-back"><strong>Sorted</strong> — eliminates half the data each step</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">3 sorting algorithms on the AP exam?</div>
+      <div class="flashcard-back">Selection sort, Insertion sort, Merge sort</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Every recursive method needs…</div>
+      <div class="flashcard-back">At least one <strong>base case</strong> and one <strong>recursive call</strong></div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Selection sort: final position?</div>
+      <div class="flashcard-back">Yes — each element is placed in its <strong>correct and final</strong> position</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">What does <code>split(",")</code> return?</div>
+      <div class="flashcard-back">A <code>String[]</code> array split by the delimiter</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Import for ArrayList?</div>
+      <div class="flashcard-back"><code>java.util.ArrayList</code></div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ UNIT QUIZ ═══ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit 4 — Practice Quiz</h2>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">1. What is the value of <code>x</code> after <code>int[] arr = {5, 10, 15, 20}; int x = arr[arr.length - 1];</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>5</code></div>
+      <div class="quiz-opt" data-idx="1"><code>15</code></div>
+      <div class="quiz-opt" data-idx="2"><code>20</code></div>
+      <div class="quiz-opt" data-idx="3">ArrayIndexOutOfBoundsException</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>arr.length</code> is 4, so <code>arr[3]</code> is 20 (the last element).</div>
+    <div class="quiz-explain wrong-exp"><code>arr.length - 1</code> = 3, so <code>arr[3]</code> = 20.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">2. Which causes a <code>ConcurrentModificationException</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Modifying an element via indexed for loop on an ArrayList</div>
+      <div class="quiz-opt" data-idx="1">Removing an element during an enhanced for loop on an ArrayList</div>
+      <div class="quiz-opt" data-idx="2">Using <code>get()</code> in an enhanced for loop</div>
+      <div class="quiz-opt" data-idx="3">Adding to an ArrayList outside of any loop</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Changing the size of an ArrayList during an enhanced for loop causes ConcurrentModificationException.</div>
+    <div class="quiz-explain wrong-exp">Adding or removing elements during an enhanced for loop on an ArrayList causes ConcurrentModificationException.</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">3. Given <code>int[][] m = new int[3][4];</code>, what is <code>m[0].length</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>3</code></div>
+      <div class="quiz-opt" data-idx="1"><code>7</code></div>
+      <div class="quiz-opt" data-idx="2"><code>12</code></div>
+      <div class="quiz-opt" data-idx="3"><code>4</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>m.length</code> is 3 (rows). <code>m[0].length</code> is 4 (columns in each row).</div>
+    <div class="quiz-explain wrong-exp"><code>m.length</code> = rows (3). <code>m[0].length</code> = columns (4).</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">4. What must be true about data before applying binary search?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">The data must be sorted</div>
+      <div class="quiz-opt" data-idx="1">The data must contain no duplicates</div>
+      <div class="quiz-opt" data-idx="2">The data must be stored in an ArrayList</div>
+      <div class="quiz-opt" data-idx="3">The data must have at least 10 elements</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Binary search eliminates half the data each step by comparing to the middle, which only works on sorted data.</div>
+    <div class="quiz-explain wrong-exp">Binary search requires data to be sorted. It compares the target to the middle element to decide which half to eliminate.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">5. What does <code>mystery(4)</code> return?<br><code>public static int mystery(int n) { if (n == 1) return 1; return n + mystery(n - 1); }</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>4</code></div>
+      <div class="quiz-opt" data-idx="1"><code>7</code></div>
+      <div class="quiz-opt" data-idx="2"><code>10</code></div>
+      <div class="quiz-opt" data-idx="3"><code>1</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! mystery(4) = 4 + mystery(3) = 4 + 3 + mystery(2) = 4 + 3 + 2 + mystery(1) = 4 + 3 + 2 + 1 = 10.</div>
+    <div class="quiz-explain wrong-exp">Trace: mystery(4) = 4 + 3 + 2 + 1 = 10.</div>
+  </div>
+</section>
+
+<div style="text-align:center;padding:40px 0;color:var(--text-secondary);font-size:.85rem;">
+  <p style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:4px;color:var(--text);">鼎睿学苑 · Dingrui Scholars</p>
+  <p>AP Computer Science A — Unit 4: Data Collections · 2026 Edition</p>
+</div>
+
+</main>
+
+<script>
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'':'dark');document.getElementById('themeToggle').textContent=d?'Dark':'Light'}
+if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeToggle').textContent='Light'}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?(window.scrollY/h)*100:0;document.getElementById('progressFill').style.width=p+'%'});
+const sections=document.querySelectorAll('.section');const tocLinks=document.querySelectorAll('.sidebar a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const link=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(link)link.classList.add('active')}})},{rootMargin:'-80px 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz=>{const ans=parseInt(quiz.dataset.answer);const opts=quiz.querySelectorAll('.quiz-opt');const ec=quiz.querySelector('.quiz-explain.correct-exp');const ew=quiz.querySelector('.quiz-explain.wrong-exp');opts.forEach(opt=>{opt.addEventListener('click',()=>{const idx=parseInt(opt.dataset.idx);opts.forEach(o=>o.classList.add('disabled'));if(idx===ans){opt.classList.add('correct');if(ec)ec.classList.add('show')}else{opt.classList.add('wrong');opts[ans].classList.add('correct');if(ew)ew.classList.add('show')}})})});
+</script>
+</body>
+</html>

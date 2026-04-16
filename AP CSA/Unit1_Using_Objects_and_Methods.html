@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 1: Using Objects and Methods</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1E2E;
+  --text: #2C2424;
+  --text-secondary: #6B5E5E;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5C1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --border: #DDD4CC;
+  --shadow: 0 1px 3px rgba(60,30,30,0.06), 0 1px 2px rgba(60,30,30,0.04);
+  --shadow-lg: 0 4px 12px rgba(60,30,30,0.10);
+  --radius: 10px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 280px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1818;
+  --bg-code: #0D0A0A;
+  --text: #E8E0DC;
+  --text-secondary: #A89898;
+  --accent: #C87070;
+  --accent-light: #3A2020;
+  --accent-dark: #E89090;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --border: #352C2C;
+  --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── TOP NAV ─── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+.topnav-brand {
+  font-family: var(--font-display);
+  font-size: 1.15rem; color: var(--text);
+  display: flex; align-items: center; gap: 10px;
+}
+.topnav-brand .unit-badge {
+  background: var(--accent);
+  color: #fff; font-family: var(--font-body);
+  font-size: 0.7rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.topnav-actions { display: flex; align-items: center; gap: 8px; }
+.topnav-actions button {
+  background: none; border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 12px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.topnav-actions button:hover { background: var(--accent-light); border-color: var(--accent); }
+.topnav-actions button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.topnav-actions .back-link {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 12px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+}
+.topnav-actions .back-link:hover { background: var(--accent-light); border-color: var(--accent); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track {
+  position: fixed; top: 56px; left: 0; right: 0;
+  height: 3px; background: var(--border); z-index: 99;
+}
+.progress-fill {
+  height: 100%; width: 0; background: var(--accent);
+  transition: width 0.15s;
+}
+
+/* ─── SIDEBAR TOC ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar.open { transform: translateX(0); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 7px 20px;
+  color: var(--text-secondary);
+  text-decoration: none; font-size: 0.85rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.sidebar a.sub { padding-left: 36px; font-size: 0.8rem; }
+
+/* ─── MAIN ─── */
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 48px 0 40px;
+}
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.hero-meta {
+  display: flex; gap: 24px; justify-content: center;
+  flex-wrap: wrap; margin-top: 16px;
+}
+.hero-meta .chip {
+  font-size: 0.8rem; font-weight: 600;
+  padding: 5px 14px; border-radius: 20px;
+}
+.chip-maroon { background: var(--accent-light); color: var(--accent); }
+.chip-green { background: var(--green-light); color: var(--green); }
+.chip-purple { background: var(--purple-light); color: var(--purple); }
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 80px;
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.65rem; margin-bottom: 16px;
+  line-height: 1.25;
+  border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem; margin: 28px 0 10px;
+  line-height: 1.3;
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  margin: 16px 0;
+  box-shadow: var(--shadow);
+  transition: background 0.3s, border 0.3s;
+}
+.card-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+.card-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 0.95rem; }
+
+/* ─── CODE BLOCKS ─── */
+pre {
+  background: var(--bg-code);
+  color: #CDD6F4;
+  padding: 18px 22px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  margin: 12px 0;
+}
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+:not(pre) > code {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.kw { color: #CBA6F7; }
+.ty { color: #89B4FA; }
+.str { color: #A6E3A1; }
+.cm { color: #6C7086; font-style: italic; }
+.num { color: #FAB387; }
+.fn { color: #89DCEB; }
+
+/* ─── KEY CONCEPT BOX ─── */
+.concept-box {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-light);
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin: 16px 0;
+}
+.concept-box.green { border-left-color: var(--green); background: var(--green-light); }
+.concept-box.orange { border-left-color: var(--orange); background: var(--orange-light); }
+.concept-box.red { border-left-color: var(--red); background: var(--red-light); }
+.concept-box.purple { border-left-color: var(--purple); background: var(--purple-light); }
+.concept-box strong { display: block; margin-bottom: 4px; }
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th, td {
+  padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  background: var(--accent-light);
+  font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.3px;
+}
+tr:hover td { background: var(--accent-light); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 20px 0; }
+.quiz-q {
+  font-weight: 600; margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 6px; }
+.quiz-opt {
+  padding: 10px 16px; border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.9rem; transition: all 0.2s;
+  background: var(--bg-card);
+}
+.quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-explain {
+  margin-top: 10px; padding: 12px 16px;
+  border-radius: 8px; font-size: 0.88rem;
+  display: none;
+}
+.quiz-explain.show { display: block; }
+.quiz-explain.correct-exp { background: var(--green-light); color: var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: var(--red); }
+
+/* ─── ACCORDION / DETAILS ─── */
+details {
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+}
+summary {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.92rem;
+  user-select: none;
+  list-style: none;
+  display: flex; align-items: center; gap: 8px;
+}
+summary::before {
+  content: '▸'; transition: transform 0.2s;
+  font-size: 0.8rem; color: var(--accent);
+}
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 0 18px 16px; font-size: 0.92rem; }
+
+/* ─── QUICK REF ─── */
+.qref {
+  background: var(--bg-card);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.qref-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 10px;
+}
+
+/* ─── FLASHCARD ─── */
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+.flashcard {
+  perspective: 600px; height: 160px; cursor: pointer;
+}
+.flashcard-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.5s; transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; text-align: center;
+  font-size: 0.88rem;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  font-weight: 700;
+}
+.flashcard-back {
+  background: var(--accent-light);
+  transform: rotateY(180deg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* ─── SEPARATOR ─── */
+.sep {
+  border: none; border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); }
+  .main-wrap { margin-left: calc(var(--toc-w) + 40px); }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main-wrap { padding: 0 16px; }
+  pre { font-size: 0.75rem; padding: 14px; }
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+  .topnav, .progress-track, .sidebar, .topnav-actions { display: none !important; }
+  .main-wrap { margin: 0 auto; }
+  body { font-size: 11pt; }
+  pre { border: 1px solid #ccc; }
+  .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-brand">
+    <span class="unit-badge">UNIT 1</span>
+    Using Objects &amp; Methods
+  </div>
+  <div class="topnav-actions">
+    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
+    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#s1-1">1.1 Algorithms &amp; Compilers</a>
+  <a href="#s1-2">1.2 Variables &amp; Data Types</a>
+  <a href="#s1-3">1.3 Expressions &amp; Output</a>
+  <a href="#s1-4">1.4 Assignment &amp; Input</a>
+  <a href="#s1-5">1.5 Casting &amp; Range</a>
+  <a href="#s1-6">1.6 Compound Operators</a>
+  <a href="#s1-7">1.7 API &amp; Libraries</a>
+  <a href="#s1-8">1.8 Comments</a>
+  <a href="#s1-9">1.9 Method Signatures</a>
+  <a href="#s1-10">1.10 Calling Class Methods</a>
+  <a href="#s1-11">1.11 Math Class</a>
+  <a href="#s1-12">1.12 Objects &amp; Classes</a>
+  <a href="#s1-13">1.13 Instantiation</a>
+  <a href="#s1-14">1.14 Instance Methods</a>
+  <a href="#s1-15">1.15 String Manipulation</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Unit Quiz</a>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main-wrap">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
+  <h1>Unit 1: Using Objects<br>and Methods</h1>
+  <p style="color: var(--text-secondary); max-width: 560px; margin: 0 auto;">
+    Foundation of Java programming — variables, data types, expressions, the Math and String classes, and creating &amp; using objects.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">15–25% of AP Exam</span>
+    <span class="chip chip-green">~32–34 Class Periods</span>
+    <span class="chip chip-purple">15 Topics</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.1 ═══════════════ -->
+<section class="section" id="s1-1">
+  <div class="section-label">Topic 1.1</div>
+  <h2>Introduction to Algorithms, Programming, and Compilers</h2>
+
+  <div class="concept-box">
+    <strong>Algorithm</strong>
+    A step-by-step process for completing a task or solving a problem. Can be represented with written language or diagrams.
+  </div>
+
+  <p><strong>Sequencing</strong> means steps execute one at a time, in order. This is the most basic control structure in any program.</p>
+
+  <h3>The Build Process</h3>
+  <div class="card">
+    <p><strong>Write</strong> source code → <strong>Compile</strong> (javac) → <strong>Run</strong> (java) → Output</p>
+    <p style="margin-top:8px; font-size:0.9rem; color: var(--text-secondary);">
+      An <strong>IDE</strong> (Integrated Development Environment) bundles editing, compiling, and running into one tool.
+      A <strong>compiler</strong> checks for errors before the program runs; errors must be fixed first.
+    </p>
+  </div>
+
+  <h3>Three Types of Errors</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Error Type</th><th>When Detected</th><th>Example</th></tr>
+      <tr>
+        <td><strong>Syntax Error</strong></td>
+        <td>Compile-time</td>
+        <td>Missing semicolon, misspelled keyword</td>
+      </tr>
+      <tr>
+        <td><strong>Logic Error</strong></td>
+        <td>Testing / runtime</td>
+        <td>Using <code>+</code> instead of <code>-</code>; program runs but gives wrong answer</td>
+      </tr>
+      <tr>
+        <td><strong>Run-time Error</strong></td>
+        <td>During execution</td>
+        <td>Dividing by zero → <code>ArithmeticException</code></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Exception</strong>
+    A specific kind of run-time error that interrupts normal program flow. Not caught by the compiler.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.2 ═══════════════ -->
+<section class="section" id="s1-2">
+  <div class="section-label">Topic 1.2</div>
+  <h2>Variables and Data Types</h2>
+
+  <p>A <strong>data type</strong> is a set of values plus operations on those values. Java data types fall into two categories: <strong>primitive</strong> and <strong>reference</strong>.</p>
+
+  <h3>The Three Primitive Types (AP CSA)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>What It Stores</th><th>Example</th></tr>
+      <tr><td><code>int</code></td><td>Integers (whole numbers)</td><td><code>int age = 17;</code></td></tr>
+      <tr><td><code>double</code></td><td>Real numbers (decimals)</td><td><code>double gpa = 3.85;</code></td></tr>
+      <tr><td><code>boolean</code></td><td><code>true</code> or <code>false</code></td><td><code>boolean passed = true;</code></td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box purple">
+    <strong>Reference Types</strong>
+    Used for objects (non-primitive). A reference variable stores a <em>reference</em> (memory address) to the object, not the object itself.
+  </div>
+
+  <p>A <strong>variable</strong> is a named storage location. It has a name, a type, and a value that can change while the program runs.</p>
+
+<pre><span class="ty">int</span> score = <span class="num">95</span>;         <span class="cm">// primitive — holds the value directly</span>
+<span class="ty">String</span> name = <span class="str">"Alice"</span>;  <span class="cm">// reference — holds address of String object</span></pre>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">Quick Check: Which data type would you use to store whether a light switch is on or off?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">int</div>
+      <div class="quiz-opt" data-idx="1">boolean</div>
+      <div class="quiz-opt" data-idx="2">double</div>
+      <div class="quiz-opt" data-idx="3">String</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! A light switch is either on (<code>true</code>) or off (<code>false</code>) — a perfect fit for <code>boolean</code>.</div>
+    <div class="quiz-explain wrong-exp">Not quite. Since a light switch only has two states (on/off), <code>boolean</code> is the best choice.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.3 ═══════════════ -->
+<section class="section" id="s1-3">
+  <div class="section-label">Topic 1.3</div>
+  <h2>Expressions and Output</h2>
+
+  <h3>Printing to the Console</h3>
+<pre><span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Hello!"</span>);  <span class="cm">// prints + newline</span>
+<span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"Hi "</span>);       <span class="cm">// prints, cursor stays</span>
+<span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"there"</span>);     <span class="cm">// continues on same line</span>
+<span class="cm">// Output: Hi there</span></pre>
+
+  <h3>Literals &amp; Escape Sequences</h3>
+  <p>A <strong>literal</strong> is a fixed value in code. A <strong>string literal</strong> is text in double quotes: <code>"Hello"</code>.</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Escape</th><th>Meaning</th><th>Example Output</th></tr>
+      <tr><td><code>\"</code></td><td>Double quote</td><td><code>"She said \"hi\""</code> → She said "hi"</td></tr>
+      <tr><td><code>\\</code></td><td>Backslash</td><td><code>"C:\\Users"</code> → C:\Users</td></tr>
+      <tr><td><code>\n</code></td><td>Newline</td><td><code>"Line1\nLine2"</code> → two lines</td></tr>
+    </table>
+  </div>
+
+  <h3>Arithmetic Operators</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Operation</th><th>Example</th><th>Result</th></tr>
+      <tr><td><code>+</code></td><td>Addition</td><td><code>7 + 3</code></td><td><code>10</code></td></tr>
+      <tr><td><code>-</code></td><td>Subtraction</td><td><code>7 - 3</code></td><td><code>4</code></td></tr>
+      <tr><td><code>*</code></td><td>Multiplication</td><td><code>7 * 3</code></td><td><code>21</code></td></tr>
+      <tr><td><code>/</code></td><td>Division</td><td><code>7 / 3</code></td><td><code>2</code> (int!)</td></tr>
+      <tr><td><code>%</code></td><td>Remainder</td><td><code>7 % 3</code></td><td><code>1</code></td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box red">
+    <strong>Integer Division Trap</strong>
+    <code>7 / 2</code> → <code>3</code> (not 3.5!). Both operands are <code>int</code>, so the result is <code>int</code> — the decimal is dropped. Use at least one <code>double</code> to get 3.5: <code>7.0 / 2</code>.
+  </div>
+
+  <div class="concept-box">
+    <strong>Operator Precedence</strong>
+    <code>* / %</code> happen before <code>+ -</code> (left to right). Parentheses override precedence.
+  </div>
+
+  <div class="concept-box red">
+    <strong>ArithmeticException</strong>
+    Dividing an <code>int</code> by <code>0</code> throws this exception at run-time.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">What is the value of <code>13 / 5 + 13 % 5</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">5</div>
+      <div class="quiz-opt" data-idx="1">4</div>
+      <div class="quiz-opt" data-idx="2">5</div>
+      <div class="quiz-opt" data-idx="3">2.6</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>13 / 5</code> = 2 (integer division), <code>13 % 5</code> = 3, so 2 + 3 = <strong>5</strong>.</div>
+    <div class="quiz-explain wrong-exp"><code>13 / 5</code> = 2 (integer division), <code>13 % 5</code> = 3, so the answer is 2 + 3 = <strong>5</strong>.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.4 ═══════════════ -->
+<section class="section" id="s1-4">
+  <div class="section-label">Topic 1.4</div>
+  <h2>Assignment Statements and Input</h2>
+
+  <p>The <strong>assignment operator</strong> <code>=</code> stores the value on the right into the variable on the left. The expression on the right is evaluated first.</p>
+
+<pre><span class="ty">int</span> x = <span class="num">5</span>;
+x = x + <span class="num">3</span>;  <span class="cm">// x is now 8 — right side evaluates first</span></pre>
+
+  <div class="concept-box">
+    <strong>Initialization</strong>
+    A variable must be assigned a value before you use it. The first assignment is called <em>initialization</em>.
+    Reference types can be assigned <code>null</code> (no object).
+  </div>
+
+  <h3>Reading Input</h3>
+<pre><span class="kw">import</span> java.util.Scanner;
+
+<span class="ty">Scanner</span> input = <span class="kw">new</span> <span class="ty">Scanner</span>(System.in);
+<span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"Enter age: "</span>);
+<span class="ty">int</span> age = input.<span class="fn">nextInt</span>();</pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.5 ═══════════════ -->
+<section class="section" id="s1-5">
+  <div class="section-label">Topic 1.5</div>
+  <h2>Casting and Range of Variables</h2>
+
+  <h3>Casting</h3>
+  <p>Explicit casting converts one primitive type to another.</p>
+
+<pre><span class="ty">double</span> d = <span class="num">9.7</span>;
+<span class="ty">int</span> n = (<span class="ty">int</span>) d;       <span class="cm">// n = 9 — truncates (does NOT round)</span>
+<span class="ty">double</span> e = (<span class="ty">double</span>) <span class="num">5</span>; <span class="cm">// e = 5.0</span></pre>
+
+  <div class="concept-box orange">
+    <strong>Widening (Automatic)</strong>
+    Java automatically promotes <code>int</code> → <code>double</code> when needed (e.g., assigning an <code>int</code> to a <code>double</code> variable).
+  </div>
+
+  <div class="concept-box green">
+    <strong>Rounding Trick</strong>
+    <code>(int)(x + 0.5)</code> for non-negative numbers rounds to the nearest integer. For negatives: <code>(int)(x - 0.5)</code>.
+  </div>
+
+  <h3>Integer Range &amp; Overflow</h3>
+  <p><code>int</code> uses 4 bytes: range is <code>Integer.MIN_VALUE</code> (−2,147,483,648) to <code>Integer.MAX_VALUE</code> (2,147,483,647). Going beyond → <strong>integer overflow</strong>: result wraps around unpredictably.</p>
+
+  <div class="concept-box orange">
+    <strong>Round-off Errors</strong>
+    <code>double</code> has limited precision. Expressions may produce slightly inaccurate results (e.g., <code>0.1 + 0.2</code> ≠ exactly 0.3). Use <code>int</code> when exact values are needed.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.6 ═══════════════ -->
+<section class="section" id="s1-6">
+  <div class="section-label">Topic 1.6</div>
+  <h2>Compound Assignment Operators</h2>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Operator</th><th>Equivalent To</th><th>Example</th></tr>
+      <tr><td><code>x += 5</code></td><td><code>x = x + 5</code></td><td></td></tr>
+      <tr><td><code>x -= 3</code></td><td><code>x = x - 3</code></td><td></td></tr>
+      <tr><td><code>x *= 2</code></td><td><code>x = x * 2</code></td><td></td></tr>
+      <tr><td><code>x /= 4</code></td><td><code>x = x / 4</code></td><td></td></tr>
+      <tr><td><code>x %= 3</code></td><td><code>x = x % 3</code></td><td></td></tr>
+      <tr><td><code>x++</code></td><td><code>x = x + 1</code></td><td>Post-increment</td></tr>
+      <tr><td><code>x--</code></td><td><code>x = x - 1</code></td><td>Post-decrement</td></tr>
+    </table>
+  </div>
+
+<pre><span class="ty">int</span> score = <span class="num">10</span>;
+score += <span class="num">5</span>;   <span class="cm">// 15</span>
+score *= <span class="num">2</span>;   <span class="cm">// 30</span>
+score--;       <span class="cm">// 29</span></pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.7 ═══════════════ -->
+<section class="section" id="s1-7">
+  <div class="section-label">Topic 1.7</div>
+  <h2>Application Program Interface (API) and Libraries</h2>
+
+  <p><strong>Libraries</strong> are collections of pre-written classes. An <strong>API</strong> (Application Programming Interface) is documentation that tells you how to use those classes.</p>
+
+  <div class="concept-box">
+    <strong>Attributes vs Behaviors</strong>
+    <em>Attributes</em> = data stored in variables. <em>Behaviors</em> = what objects can do, defined by methods.
+  </div>
+
+  <p>Classes in APIs are grouped into <strong>packages</strong>. You use existing classes to create objects and call their methods.</p>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.8 ═══════════════ -->
+<section class="section" id="s1-8">
+  <div class="section-label">Topic 1.8</div>
+  <h2>Documentation with Comments</h2>
+
+<pre><span class="cm">// Single-line comment</span>
+
+<span class="cm">/* Multi-line
+   block comment */</span>
+
+<span class="cm">/** Javadoc comment — used to
+  * generate API documentation */</span></pre>
+
+  <div class="concept-box green">
+    <strong>Precondition</strong>
+    A condition that must be true <em>before</em> a method executes for it to work correctly. The method is not required to check it.
+  </div>
+
+  <div class="concept-box purple">
+    <strong>Postcondition</strong>
+    A condition guaranteed to be true <em>after</em> a method finishes. Describes what was returned or how the object changed.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.9 ═══════════════ -->
+<section class="section" id="s1-9">
+  <div class="section-label">Topic 1.9</div>
+  <h2>Method Signatures</h2>
+
+  <p>A <strong>method</strong> is a named block of code that runs only when called. <strong>Procedural abstraction</strong>: you can use a method knowing <em>what</em> it does without knowing <em>how</em>.</p>
+
+  <div class="concept-box">
+    <strong>Method Signature</strong>
+    The method name + ordered list of parameter types. Example: <code>substring(int, int)</code>
+  </div>
+
+  <h3>Parameters vs Arguments</h3>
+  <p><strong>Parameter</strong>: variable declared in the method header. <strong>Argument</strong>: the actual value passed in when calling the method. Java uses <strong>call by value</strong> — parameters get <em>copies</em> of the arguments.</p>
+
+  <h3>Void vs Non-Void Methods</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>void</th><th>Non-void</th></tr>
+      <tr><td>Returns a value?</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Used in expressions?</td><td>No — standalone call</td><td>Yes — store/use the return value</td></tr>
+    </table>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Overloaded Methods</strong>
+    Multiple methods with the <em>same name</em> but <em>different signatures</em> (different parameter lists). Java picks the right one based on the arguments.
+  </div>
+
+  <p>When a method is called, execution jumps into that method. After the method finishes (or hits a <code>return</code>), control returns to the calling point.</p>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.10 ═══════════════ -->
+<section class="section" id="s1-10">
+  <div class="section-label">Topic 1.10</div>
+  <h2>Calling Class Methods</h2>
+
+  <p><strong>Class methods</strong> (also called <em>static</em> methods) belong to the class itself, not to any particular object. They have <code>static</code> in the header.</p>
+
+<pre><span class="cm">// Called using ClassName.methodName()</span>
+<span class="ty">int</span> absVal = <span class="ty">Math</span>.<span class="fn">abs</span>(-<span class="num">42</span>);  <span class="cm">// 42</span></pre>
+
+  <p>If you call a static method from <em>within</em> the same class, the class name is optional.</p>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.11 ═══════════════ -->
+<section class="section" id="s1-11">
+  <div class="section-label">Topic 1.11</div>
+  <h2>Math Class</h2>
+
+  <p>Part of <code>java.lang</code> (automatically available). Contains only <strong>static</strong> methods — no objects needed.</p>
+
+  <div class="qref">
+    <div class="qref-title">Quick Reference — Math Methods</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Method</th><th>Returns</th></tr>
+        <tr><td><code>Math.abs(int x)</code></td><td>Absolute value (int)</td></tr>
+        <tr><td><code>Math.abs(double x)</code></td><td>Absolute value (double)</td></tr>
+        <tr><td><code>Math.pow(double b, double e)</code></td><td>b raised to power e</td></tr>
+        <tr><td><code>Math.sqrt(double x)</code></td><td>Square root of x</td></tr>
+        <tr><td><code>Math.random()</code></td><td>Random double in [0.0, 1.0)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Generating Random Integers</h3>
+<pre><span class="cm">// Random int from min to max (inclusive)</span>
+<span class="ty">int</span> roll = (<span class="ty">int</span>) (<span class="ty">Math</span>.<span class="fn">random</span>() * <span class="num">6</span>) + <span class="num">1</span>;  <span class="cm">// 1–6</span>
+
+<span class="cm">// General formula: (int)(Math.random() * range) + min</span>
+<span class="cm">// where range = max - min + 1</span></pre>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">Which expression produces a random integer from 5 to 10 inclusive?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>(int)(Math.random() * 5) + 5</code></div>
+      <div class="quiz-opt" data-idx="1"><code>(int)(Math.random() * 6) + 5</code></div>
+      <div class="quiz-opt" data-idx="2"><code>(int)(Math.random() * 10) + 5</code></div>
+      <div class="quiz-opt" data-idx="3"><code>(int)(Math.random() * 6) + 4</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Range = 10 − 5 + 1 = 6. So: <code>(int)(Math.random() * 6) + 5</code> → values 5, 6, 7, 8, 9, 10.</div>
+    <div class="quiz-explain wrong-exp">Range = max − min + 1 = 6. The formula is <code>(int)(Math.random() * 6) + 5</code>.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.12 ═══════════════ -->
+<section class="section" id="s1-12">
+  <div class="section-label">Topic 1.12</div>
+  <h2>Objects: Instances of Classes</h2>
+
+  <div class="concept-box purple">
+    <strong>Class vs Object</strong>
+    A <strong>class</strong> is a blueprint. An <strong>object</strong> is a specific instance of that class with defined attribute values. Think: <em>Cookie Cutter</em> (class) → <em>Cookie</em> (object).
+  </div>
+
+  <p>Key ideas about class hierarchies (for awareness, not implementation on the AP exam):</p>
+  <div class="card">
+    <p><strong>Superclass</strong>: a general class that holds common attributes/behaviors.</p>
+    <p><strong>Subclass</strong>: extends a superclass, inheriting its attributes and behaviors.</p>
+    <p><strong>Inheritance</strong>: the subclass → superclass relationship.</p>
+    <p style="margin-top:8px;">All classes in Java are subclasses of <code>Object</code>.</p>
+  </div>
+
+  <p>A <strong>reference variable</strong> stores an object reference (essentially the memory address of the object).</p>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.13 ═══════════════ -->
+<section class="section" id="s1-13">
+  <div class="section-label">Topic 1.13</div>
+  <h2>Object Creation and Storage (Instantiation)</h2>
+
+  <p>Objects are created using the <code>new</code> keyword followed by a <strong>constructor</strong> call.</p>
+
+<pre><span class="cm">// ClassName variableName = new ClassName(arguments);</span>
+<span class="ty">Scanner</span> sc = <span class="kw">new</span> <span class="ty">Scanner</span>(System.in);
+<span class="ty">String</span> greeting = <span class="kw">new</span> <span class="ty">String</span>(<span class="str">"Hello"</span>);</pre>
+
+  <div class="concept-box">
+    <strong>Constructor</strong>
+    A special method with the same name as the class. Sets up initial values.
+    <em>Constructor signature</em> = name + ordered parameter types. Constructors can be <strong>overloaded</strong> (multiple constructors with different parameter lists).
+  </div>
+
+  <p>Like method calls, constructor calls use <strong>call by value</strong> — parameters get copies of arguments. A constructor call interrupts sequential flow: statements in the constructor execute first, then control returns.</p>
+
+  <p>Reference variables hold either an object reference or <code>null</code>.</p>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.14 ═══════════════ -->
+<section class="section" id="s1-14">
+  <div class="section-label">Topic 1.14</div>
+  <h2>Calling Instance Methods</h2>
+
+  <p><strong>Instance methods</strong> are called <em>on</em> an object using the dot operator.</p>
+
+<pre><span class="ty">String</span> name = <span class="str">"Alice"</span>;
+<span class="ty">int</span> len = name.<span class="fn">length</span>();  <span class="cm">// instance method call → 5</span></pre>
+
+  <div class="concept-box red">
+    <strong>NullPointerException</strong>
+    Calling a method on a <code>null</code> reference throws this run-time error. Always make sure the object exists!
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ TOPIC 1.15 ═══════════════ -->
+<section class="section" id="s1-15">
+  <div class="section-label">Topic 1.15</div>
+  <h2>String Manipulation</h2>
+
+  <p><code>String</code> is in <code>java.lang</code> (auto-imported). Strings are <strong>immutable</strong> — once created, they cannot be changed. Methods return <em>new</em> strings.</p>
+
+  <h3>Creating Strings</h3>
+<pre><span class="ty">String</span> a = <span class="str">"hello"</span>;                      <span class="cm">// string literal</span>
+<span class="ty">String</span> b = <span class="kw">new</span> <span class="ty">String</span>(<span class="str">"hello"</span>);         <span class="cm">// constructor</span></pre>
+
+  <h3>Concatenation</h3>
+<pre><span class="ty">String</span> full = <span class="str">"AP"</span> + <span class="str">" CSA"</span>;   <span class="cm">// "AP CSA"</span>
+<span class="ty">int</span> num = <span class="num">5</span>;
+<span class="ty">String</span> msg = <span class="str">"Unit "</span> + num;    <span class="cm">// "Unit 5" — int auto-converts</span></pre>
+
+  <div class="qref">
+    <div class="qref-title">Quick Reference — String Methods</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Method</th><th>Returns</th></tr>
+        <tr><td><code>str.length()</code></td><td>Number of characters</td></tr>
+        <tr><td><code>str.substring(from, to)</code></td><td>Chars from index <code>from</code> to <code>to-1</code></td></tr>
+        <tr><td><code>str.substring(from)</code></td><td>From index <code>from</code> to end</td></tr>
+        <tr><td><code>str.indexOf(s)</code></td><td>Index of first occurrence of <code>s</code>; <code>-1</code> if not found</td></tr>
+        <tr><td><code>str.equals(other)</code></td><td><code>true</code> if same sequence of chars</td></tr>
+        <tr><td><code>str.compareTo(other)</code></td><td>Negative if <code>str</code>&lt;<code>other</code>, 0 if equal, positive if greater</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="concept-box red">
+    <strong>StringIndexOutOfBoundsException</strong>
+    Indices run from <code>0</code> to <code>length() - 1</code>. Accessing outside this range crashes the program.
+  </div>
+
+  <h3>Worked Example</h3>
+<pre><span class="ty">String</span> s = <span class="str">"computer"</span>;
+s.<span class="fn">length</span>()              <span class="cm">// 8</span>
+s.<span class="fn">substring</span>(<span class="num">0</span>, <span class="num">3</span>)       <span class="cm">// "com"</span>
+s.<span class="fn">substring</span>(<span class="num">3</span>)          <span class="cm">// "puter"</span>
+s.<span class="fn">indexOf</span>(<span class="str">"put"</span>)        <span class="cm">// 3</span>
+s.<span class="fn">indexOf</span>(<span class="str">"xyz"</span>)        <span class="cm">// -1</span>
+s.<span class="fn">substring</span>(<span class="num">2</span>, <span class="num">3</span>)       <span class="cm">// "m" — single char at index 2</span></pre>
+
+  <details>
+    <summary>toString() &amp; Concatenation with Objects</summary>
+    <div class="detail-body">
+      <p>When you concatenate a <code>String</code> with any object using <code>+</code>, Java implicitly calls that object's <code>toString()</code> method. Every class inherits <code>toString()</code> from <code>Object</code>, and subclasses often override it to return something meaningful.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">Given <code>String s = "banana";</code>, what does <code>s.substring(1, 4)</code> return?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">"ban"</div>
+      <div class="quiz-opt" data-idx="1">"bana"</div>
+      <div class="quiz-opt" data-idx="2">"ana"</div>
+      <div class="quiz-opt" data-idx="3">"anan"</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Index 1='a', 2='n', 3='a'. <code>substring(1,4)</code> returns chars at indices 1, 2, 3 → "ana".</div>
+    <div class="quiz-explain wrong-exp">Remember: <code>substring(from, to)</code> includes <code>from</code> but excludes <code>to</code>. Indices 1,2,3 → "ana".</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards — Click to Flip</h2>
+
+  <div class="flashcard-grid">
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">What is an algorithm?</div>
+        <div class="flashcard-back">A step-by-step process for completing a task or solving a problem.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">3 primitive types in AP CSA?</div>
+        <div class="flashcard-back"><code>int</code>, <code>double</code>, <code>boolean</code></div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">What does <code>7 / 2</code> equal?</div>
+        <div class="flashcard-back"><code>3</code> — integer division truncates the decimal.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Casting <code>(int) 9.8</code> gives?</div>
+        <div class="flashcard-back"><code>9</code> — truncation, not rounding.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Class method vs Instance method?</div>
+        <div class="flashcard-back">Class (static): called on the class.<br>Instance: called on an object.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">What does <code>Math.random()</code> return?</div>
+        <div class="flashcard-back">A <code>double</code> ≥ 0.0 and &lt; 1.0</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Strings are ___?</div>
+        <div class="flashcard-back"><strong>Immutable</strong> — once created, their content cannot change.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front"><code>s.substring(2, 5)</code> returns what indices?</div>
+        <div class="flashcard-back">Characters at indices 2, 3, 4 (includes <code>from</code>, excludes <code>to</code>).</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">NullPointerException</div>
+        <div class="flashcard-back">Thrown when you call a method on a reference that is <code>null</code>.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Precondition vs Postcondition?</div>
+        <div class="flashcard-back">Pre: must be true <em>before</em> method runs.<br>Post: guaranteed true <em>after</em> method runs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit 1 — Practice Quiz</h2>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">1. What is the output of <code>System.out.println(3 + 4 + "Hi" + 3 + 4);</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">34Hi34</div>
+      <div class="quiz-opt" data-idx="1">3 + 4 + Hi + 3 + 4</div>
+      <div class="quiz-opt" data-idx="2">7Hi34</div>
+      <div class="quiz-opt" data-idx="3">7Hi7</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Left to right: 3+4=7 (int math), then 7+"Hi"="7Hi" (string concat), then "7Hi"+3="7Hi3", then "7Hi3"+4="7Hi34".</div>
+    <div class="quiz-explain wrong-exp">Evaluate left to right: 3+4=7, then 7+"Hi"="7Hi" (switching to string concat), then append 3 and 4 as strings → "7Hi34".</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">2. Which correctly creates a random integer from 1 to 100?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>(int)(Math.random() * 100)</code></div>
+      <div class="quiz-opt" data-idx="1"><code>(int)(Math.random() * 100) + 1</code></div>
+      <div class="quiz-opt" data-idx="2"><code>(int)(Math.random() * 101)</code></div>
+      <div class="quiz-opt" data-idx="3"><code>(int)(Math.random() * 99) + 1</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>Math.random()*100</code> gives [0, 100), cast to int gives 0–99, + 1 gives 1–100.</div>
+    <div class="quiz-explain wrong-exp">Formula: <code>(int)(Math.random() * range) + min</code> where range = 100 and min = 1.</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">3. What does the following code print?<br>
+    <code>String s = "APCS"; System.out.println(s.substring(1, 3));</code></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">PC</div>
+      <div class="quiz-opt" data-idx="1">PCS</div>
+      <div class="quiz-opt" data-idx="2">AP</div>
+      <div class="quiz-opt" data-idx="3">APC</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Index 1='P', index 2='C'. <code>substring(1,3)</code> → "PC" (3 is exclusive).</div>
+    <div class="quiz-explain wrong-exp"><code>substring(1,3)</code> returns characters at indices 1 and 2 → "PC".</div>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">4. Which is a logic error?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Missing semicolon</div>
+      <div class="quiz-opt" data-idx="1">Dividing by zero at run-time</div>
+      <div class="quiz-opt" data-idx="2">Using an undeclared variable</div>
+      <div class="quiz-opt" data-idx="3">Using + instead of − in a formula</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Logic errors produce wrong results but no compiler/runtime errors. Using the wrong operator is a classic logic error.</div>
+    <div class="quiz-explain wrong-exp">A logic error makes the program produce incorrect output without crashing. Using the wrong operator (+ instead of −) is a logic error.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">5. What value is stored after: <code>int x = 5; x %= 3;</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">1.67</div>
+      <div class="quiz-opt" data-idx="1">3</div>
+      <div class="quiz-opt" data-idx="2">2</div>
+      <div class="quiz-opt" data-idx="3">0</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>x %= 3</code> means <code>x = x % 3</code> = <code>5 % 3</code> = 2.</div>
+    <div class="quiz-explain wrong-exp"><code>x %= 3</code> is the same as <code>x = 5 % 3</code>. 5 divided by 3 has remainder 2.</div>
+  </div>
+</section>
+
+<div style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem;">
+  <p style="font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px; color: var(--text);">鼎睿学苑 · Dingrui Scholars</p>
+  <p>AP Computer Science A — Unit 1: Using Objects &amp; Methods · 2026 Edition</p>
+</div>
+
+</main>
+
+<script>
+// ─── THEME ───
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+}
+// System preference
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = 'Light';
+}
+
+// ─── SIDEBAR ───
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+});
+
+// ─── ACTIVE TOC ───
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ─── QUIZZES ───
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      if (idx === answer) {
+        opt.classList.add('correct');
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
