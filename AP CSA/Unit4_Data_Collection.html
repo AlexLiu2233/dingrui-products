@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AP CSA — Unit 4: Data Collections</title>
+<meta name="description" content="AP Computer Science A — Unit 4: Data Collections | Dingrui Scholars. 1D/2D arrays, ArrayList, traversals, searching, sorting, and recursion — with worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>AP CSA — Unit 4: Data Collections | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F5F0EB;--bg-card:#FFFFFF;--bg-code:#1E1E2E;--text:#2C2424;--text-secondary:#6B5E5E;--accent:#7A2E2E;--accent-light:#F2E4E4;--accent-dark:#5C1E1E;--green:#2E6B4F;--green-light:#DFF0E8;--orange:#A65E1A;--orange-light:#FBF0E0;--red:#B03030;--red-light:#FCEAEA;--purple:#5E3D7A;--purple-light:#EDE4F5;--teal:#2A6B6B;--teal-light:#DFF0F0;--border:#DDD4CC;--shadow:0 1px 3px rgba(60,30,30,0.06),0 1px 2px rgba(60,30,30,0.04);--shadow-lg:0 4px 12px rgba(60,30,30,0.10);--radius:10px;--font-display:'DM Serif Display',Georgia,serif;--font-body:'Source Sans 3',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--max-w:860px;--toc-w:280px}
@@ -28,7 +32,14 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-he
 .sidebar a:hover{color:var(--accent);background:var(--accent-light)}
 .sidebar a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
 .main-wrap{max-width:var(--max-w);margin:80px auto 120px;padding:0 24px}
-.hero{text-align:center;padding:48px 0 40px}
+.hero{text-align:center;padding:56px 24px 48px;background:linear-gradient(180deg,var(--accent-light) 0%,transparent 100%);border-radius:var(--radius);margin-bottom:40px}
+[data-theme="dark"] .hero{background:linear-gradient(180deg,rgba(58,32,32,0.4) 0%,transparent 100%)}
+.skip-link{position:absolute;left:16px;top:-48px;z-index:2000;background:var(--accent);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:700;transition:top .2s ease}
+.skip-link:focus{top:12px}
+.backtotop{position:fixed;right:18px;bottom:18px;z-index:120;width:46px;height:46px;border-radius:999px;border:1px solid var(--border);background:var(--bg-card);color:var(--accent);box-shadow:var(--shadow-lg);font-size:1.05rem;font-weight:700;cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,background .2s ease}
+.backtotop.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.backtotop:hover{background:var(--accent-light)}
+@media print{.backtotop{display:none!important}}
 .hero-overline{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
 .hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3rem);line-height:1.15;margin-bottom:16px}
 .hero-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:16px}
@@ -81,12 +92,14 @@ details .detail-body{padding:0 18px 16px;font-size:.92rem}
 .flashcard-front{background:var(--bg-card);font-weight:700}
 .flashcard-back{background:var(--accent-light);transform:rotateY(180deg);font-size:.82rem;line-height:1.5}
 .sep{border:none;border-top:1px solid var(--border);margin:40px 0}
-@media(min-width:1100px){.sidebar{transform:translateX(0)}.main-wrap{margin-left:calc(var(--toc-w) + 40px)}}
+@media(min-width:1100px){.sidebar{transform:translateX(0);box-shadow:none}.main-wrap{max-width:none;margin-left:calc(var(--toc-w) + 40px);margin-right:0;padding:0 48px}}
 @media(max-width:600px){.hero h1{font-size:1.8rem}.main-wrap{padding:0 16px}pre{font-size:.75rem;padding:14px}.flashcard-grid{grid-template-columns:1fr}}
 @media print{.topnav,.progress-track,.sidebar,.topnav-actions{display:none!important}.main-wrap{margin:0 auto}body{font-size:11pt}pre{border:1px solid #ccc}.card{break-inside:avoid}}
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <nav class="topnav">
   <div class="topnav-brand"><span class="unit-badge">UNIT 4</span>Data Collections</div>
@@ -122,7 +135,7 @@ details .detail-body{padding:0 18px 16px;font-size:.92rem}
   <a href="#unit-quiz">Unit Quiz</a>
 </aside>
 
-<main class="main-wrap">
+<main class="main-wrap" id="main-content">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
@@ -1053,11 +1066,13 @@ matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="nu
 
 </main>
 
+<button class="backtotop" id="backtotop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
 function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'':'dark');document.getElementById('themeToggle').textContent=d?'Dark':'Light'}
 if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeToggle').textContent='Light'}
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
-window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?(window.scrollY/h)*100:0;document.getElementById('progressFill').style.width=p+'%'});
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?(window.scrollY/h)*100:0;document.getElementById('progressFill').style.width=p+'%';const btt=document.getElementById('backtotop');if(btt)btt.classList.toggle('show',window.scrollY>400)});
 const sections=document.querySelectorAll('.section');const tocLinks=document.querySelectorAll('.sidebar a');
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));const link=document.querySelector(`.sidebar a[href="#${e.target.id}"]`);if(link)link.classList.add('active')}})},{rootMargin:'-80px 0px -60% 0px'});
 sections.forEach(s=>obs.observe(s));

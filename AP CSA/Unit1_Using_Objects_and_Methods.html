@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AP CSA — Unit 1: Using Objects and Methods</title>
+<meta name="description" content="AP Computer Science A — Unit 1: Using Objects and Methods | Dingrui Scholars. Java fundamentals — variables, data types, Math &amp; String classes, and creating objects — with worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>AP CSA — Unit 1: Using Objects and Methods | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -68,6 +72,28 @@ body {
   font-size: 17px;
   transition: background 0.3s, color 0.3s;
 }
+
+/* ─── SKIP LINK (A11Y) ─── */
+.skip-link {
+  position: absolute; left: 16px; top: -48px; z-index: 2000;
+  background: var(--accent); color: #fff; text-decoration: none;
+  padding: 10px 14px; border-radius: 10px; font-weight: 700;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+
+/* ─── BACK TO TOP ─── */
+.backtotop {
+  position: fixed; right: 18px; bottom: 18px; z-index: 120;
+  width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--accent);
+  box-shadow: var(--shadow-lg); font-size: 1.05rem; font-weight: 700; cursor: pointer;
+  opacity: 0; transform: translateY(10px); pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+.backtotop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.backtotop:hover { background: var(--accent-light); }
+@media print { .backtotop { display: none !important; } }
 
 /* ─── TOP NAV ─── */
 .topnav {
@@ -158,8 +184,11 @@ body {
 
 /* ─── HERO ─── */
 .hero {
-  text-align: center; padding: 48px 0 40px;
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius); margin-bottom: 40px;
 }
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58,32,32,0.4) 0%, transparent 100%); }
 .hero-overline {
   font-family: var(--font-mono);
   font-size: 0.75rem; font-weight: 600;
@@ -396,8 +425,13 @@ details .detail-body { padding: 0 18px 16px; font-size: 0.92rem; }
 
 /* ─── RESPONSIVE ─── */
 @media (min-width: 1100px) {
-  .sidebar { transform: translateX(0); }
-  .main-wrap { margin-left: calc(var(--toc-w) + 40px); }
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
 }
 @media (max-width: 600px) {
   .hero h1 { font-size: 1.8rem; }
@@ -417,6 +451,8 @@ details .detail-body { padding: 0 18px 16px; font-size: 0.92rem; }
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- TOP NAV -->
 <nav class="topnav">
@@ -457,7 +493,7 @@ details .detail-body { padding: 0 18px 16px; font-size: 0.92rem; }
 </aside>
 
 <!-- MAIN CONTENT -->
-<main class="main-wrap">
+<main class="main-wrap" id="main-content">
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1130,6 +1166,8 @@ s.<span class="fn">substring</span>(<span class="num">2</span>, <span class="num
 
 </main>
 
+<button class="backtotop" id="backtotop" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
 <script>
 // ─── THEME ───
 function toggleTheme() {
@@ -1148,11 +1186,13 @@ function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
 }
 
-// ─── PROGRESS BAR ───
+// ─── PROGRESS BAR + BACK-TO-TOP ───
 window.addEventListener('scroll', () => {
   const h = document.documentElement.scrollHeight - window.innerHeight;
   const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
   document.getElementById('progressFill').style.width = pct + '%';
+  const btt = document.getElementById('backtotop');
+  if (btt) btt.classList.toggle('show', window.scrollY > 400);
 });
 
 // ─── ACTIVE TOC ───
