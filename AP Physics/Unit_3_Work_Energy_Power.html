@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AP Physics C: Mechanics — Unit 3: Work, Energy, and Power | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
 <meta name="description" content="AP Physics C: Mechanics — Unit 3: Work, Energy, and Power | Dingrui Scholars. Polished AP Physics C notes from Dingrui Scholars with worked examples, interactive review, quizzes, dark mode, and print-friendly formatting.">
 <meta name="theme-color" content="#7A2E2E">
 <meta name="color-scheme" content="light dark">
@@ -423,10 +424,13 @@ summary::-webkit-details-marker { display: none; }
 }
 @media print {
   .top-nav, .progress-track, .sidebar, .nav-right { display: none !important; }
+  canvas, button, .quiz-retry, .mastery-dash, .score-badge, .backtotop { display: none !important; }
   .main-wrap { margin: 0 auto; }
   body { font-size: 11pt; background: white; color: black; }
   pre { border: 1px solid #ccc; white-space: pre-wrap; }
-  .card, .formula-box, .concept-box { break-inside: avoid; border: 1px solid #000; box-shadow: none; }
+  .card, .formula-box, .concept-box, .quiz { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
 }
 
 /* ─── KATEX TWEAKS ─── */
@@ -551,7 +555,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
   <div class="nav-right">
     <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
     <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
   </div>
 </nav>
@@ -1449,7 +1453,10 @@ function toggleSidebar() {
   sidebar.classList.toggle('open');
   const isOpen = sidebar.classList.contains('open');
   const btn = document.getElementById('tocToggle');
-  if (btn) btn.classList.toggle('active', isOpen);
+  if (btn) {
+    btn.classList.toggle('active', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
 }
 document.addEventListener('click', function(e) {
   const sidebar = document.getElementById('sidebar');
