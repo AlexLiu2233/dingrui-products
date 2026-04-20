@@ -734,6 +734,28 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     </div>
   </details>
 
+  <details>
+    <summary>Worked Example — Block on a Rough Incline (Energy Method)</summary>
+    <div class="detail-body">
+      <p>A 3.0 kg block slides 4.0 m down a 30° incline starting from rest. The kinetic friction coefficient is $\mu_k = 0.20$. Find the speed at the bottom using the work–energy theorem.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">// 1. Identify forces along the slide direction:</div>
+          <div class="step-math">$$F_\parallel = mg\sin\theta - \mu_k mg\cos\theta$$</div>
+          <div class="step-text">// 2. Net work over distance d = 4.0 m:</div>
+          <div class="step-math">$$W_\text{net} = (mg\sin\theta - \mu_k mg\cos\theta)\,d$$</div>
+          <div class="step-math">$$= (3.0)(9.8)\bigl[\sin 30° - 0.20\cos 30°\bigr](4.0)$$</div>
+          <div class="step-math">$$= 29.4\,[0.500 - 0.173](4.0) = 38.5\;\text{J}$$</div>
+          <div class="step-text">// 3. Apply $\Delta K = W_\text{net}$ with $K_i = 0$:</div>
+          <div class="step-math">$$\tfrac{1}{2}mv_f^2 = 38.5 \Rightarrow v_f = \sqrt{\frac{2(38.5)}{3.0}}$$</div>
+          <div class="step-math">$$v_f \approx 5.07\;\text{m/s}$$</div>
+          <div class="step-text">// Note: solving with $\vec{F}=m\vec{a}$ + kinematics gives the same answer,</div>
+          <div class="step-text">// but energy methods skip finding acceleration explicitly.</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
   <h3>The Work–Energy Theorem</h3>
 
   <p>The <em>net</em> work done on an object — by <em>all</em> forces combined — equals the change in that object's kinetic energy. This exact theorem is derivable from Newton's second law via calculus and gives you a powerful alternative to $\vec{F} = m\vec{a}$ for solving problems.</p>
@@ -846,14 +868,24 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       </div>
       <div class="slider-group">
         <label>Particle position x <span class="val" id="ux_xpos_val">1.0</span> m</label>
-        <input type="range" id="uxXpos" min="-3" max="3" step="0.1" value="1.0" oninput="drawUx()">
+        <input type="range" id="uxXpos" min="-3" max="3" step="0.1" value="1.0" oninput="onUxManual()">
+      </div>
+      <div class="slider-group">
+        <label>Total energy E <span class="val" id="ux_E_val">3.0</span> J</label>
+        <input type="range" id="uxE" min="-2" max="15" step="0.1" value="3.0" oninput="drawUx()">
       </div>
     </div>
     <div class="explorer-results">
       <div class="result-card"><div class="result-label">U(x)</div><div class="result-value" id="ux_U">—</div><div class="result-unit">J</div></div>
+      <div class="result-card"><div class="result-label">KE = E − U</div><div class="result-value" id="ux_KE">—</div><div class="result-unit">J</div></div>
       <div class="result-card"><div class="result-label">F(x) = −dU/dx</div><div class="result-value" id="ux_F">—</div><div class="result-unit">N</div></div>
       <div class="result-card"><div class="result-label">d²U/dx²</div><div class="result-value" id="ux_d2U">—</div><div class="result-unit">J/m²</div></div>
       <div class="result-card"><div class="result-label">Equilibrium</div><div class="result-value" id="ux_eq">—</div><div class="result-unit"></div></div>
+      <div class="result-card"><div class="result-label">Turning points</div><div class="result-value" id="ux_tp">—</div><div class="result-unit">m</div></div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center; margin: 12px 0 4px; flex-wrap:wrap;">
+      <button type="button" id="uxPlayBtn" onclick="toggleUxPlay()" style="background:var(--accent); color:#fff; border:none; padding:8px 18px; border-radius:8px; font-family:var(--font-body); font-weight:600; cursor:pointer; font-size:0.9rem;">▶ Play motion</button>
+      <span style="font-size:0.85rem; color:var(--text-secondary);">Animates the particle bouncing between turning points (energy conserved).</span>
     </div>
     <div class="explorer-canvas-wrap">
       <canvas id="uxCanvas"></canvas>
@@ -978,6 +1010,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <div class="result-card"><div class="result-label">Friction Loss</div><div class="result-value" id="spr_Wf">—</div><div class="result-unit">J</div></div>
       <div class="result-card"><div class="result-label">Final KE</div><div class="result-value" id="spr_KE">—</div><div class="result-unit">J</div></div>
       <div class="result-card"><div class="result-label">Launch Speed</div><div class="result-value" id="spr_v">—</div><div class="result-unit">m/s</div></div>
+      <div class="result-card"><div class="result-label">Efficiency</div><div class="result-value" id="spr_eff">—</div><div class="result-unit">%</div></div>
     </div>
     <div class="explorer-canvas-wrap">
       <canvas id="springCanvas"></canvas>
@@ -1000,6 +1033,48 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         </div>
       </div>
 
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Loop-the-Loop Minimum Release Height</summary>
+    <div class="detail-body">
+      <p>A small block is released from rest at height $h$ on a frictionless track that leads into a vertical loop of radius $R$. Find the minimum $h$ (in terms of $R$) for the block to maintain contact with the track at the top of the loop.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">// 1. At the top of the loop, gravity alone must supply the centripetal force</div>
+          <div class="step-text">// at the threshold of losing contact ($N \to 0$):</div>
+          <div class="step-math">$$mg = \frac{mv_\text{top}^2}{R} \Rightarrow v_\text{top}^2 = gR$$</div>
+          <div class="step-text">// 2. Apply energy conservation between the release point ($v=0$, height $h$)</div>
+          <div class="step-text">// and the top of the loop (height $2R$):</div>
+          <div class="step-math">$$mgh = \tfrac{1}{2}mv_\text{top}^2 + mg(2R)$$</div>
+          <div class="step-math">$$gh = \tfrac{1}{2}(gR) + 2gR = \tfrac{5}{2}gR$$</div>
+          <div class="step-math">$$\boxed{\,h_\text{min} = \tfrac{5}{2}R\,}$$</div>
+          <div class="step-text">// Common slip: forgetting to add the height $2R$ of the loop's top.</div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Bungee Jumper Maximum Stretch</summary>
+    <div class="detail-body">
+      <p>A 70 kg jumper steps off a platform attached to an ideal bungee cord of natural length $L_0 = 15$ m and spring constant $k = 200$ N/m. Use $g = 9.8$ m/s². Find the maximum stretch $\Delta x$ of the cord (the jumper momentarily at rest at the lowest point).</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">// 1. Choose $U_g = 0$ at the lowest point. Initial height = $L_0 + \Delta x$.</div>
+          <div class="step-text">// 2. At top: $K_i = 0$, $U_g = mg(L_0+\Delta x)$, $U_s = 0$ (cord slack).</div>
+          <div class="step-text">// 3. At bottom: $K_f = 0$, $U_g = 0$, $U_s = \tfrac{1}{2}k(\Delta x)^2$.</div>
+          <div class="step-math">$$mg(L_0 + \Delta x) = \tfrac{1}{2}k(\Delta x)^2$$</div>
+          <div class="step-text">// 4. Rearrange into a quadratic in $\Delta x$:</div>
+          <div class="step-math">$$\tfrac{1}{2}k(\Delta x)^2 - mg\,\Delta x - mgL_0 = 0$$</div>
+          <div class="step-math">$$100(\Delta x)^2 - 686\,\Delta x - 10{,}290 = 0$$</div>
+          <div class="step-text">// 5. Quadratic formula (take the positive root):</div>
+          <div class="step-math">$$\Delta x = \frac{686 + \sqrt{686^2 + 4{,}116{,}000}}{200}$$</div>
+          <div class="step-math">$$\Delta x \approx \frac{686 + 2147}{200} \approx 14.2\;\text{m}$$</div>
+          <div class="step-text">// Sanity check: the jumper falls $L_0 + \Delta x \approx 29$ m total.</div>
+        </div>
+      </div>
     </div>
   </details>
 
@@ -1064,6 +1139,26 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         </div>
       </div>
 
+    </div>
+  </details>
+
+  <details>
+    <summary>Worked Example — Constant-Power Acceleration (Calculus)</summary>
+    <div class="detail-body">
+      <p>An engine delivers a constant 60 kW of power to a 1500 kg car starting from rest on a level frictionless road. Find (a) the speed at $t = 8.0$ s and (b) the distance covered in that time.</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-text">// (a) Constant $P$ means $W = Pt$. Apply work–energy theorem:</div>
+          <div class="step-math">$$Pt = \tfrac{1}{2}mv^2 \Rightarrow v(t) = \sqrt{\tfrac{2Pt}{m}}$$</div>
+          <div class="step-math">$$v(8) = \sqrt{\tfrac{2(60{,}000)(8)}{1500}} = \sqrt{640} \approx 25.3\;\text{m/s}$$</div>
+          <div class="step-text">// (b) Integrate $v(t) = \sqrt{2P/m}\;t^{1/2}$ from 0 to T:</div>
+          <div class="step-math">$$x(T) = \sqrt{\tfrac{2P}{m}}\int_0^T t^{1/2}\,dt = \sqrt{\tfrac{2P}{m}}\cdot \tfrac{2}{3}T^{3/2}$$</div>
+          <div class="step-math">$$x(8) = \tfrac{2}{3}\sqrt{\tfrac{2(60{,}000)}{1500}}\,(8)^{3/2}$$</div>
+          <div class="step-math">$$= \tfrac{2}{3}\sqrt{80}\,(22.63) \approx 135\;\text{m}$$</div>
+          <div class="step-text">// Note: at $t \to 0$ the force $F = P/v$ diverges (idealization).</div>
+          <div class="step-text">// Real engines limit force at low speed by torque-vs-rpm curves.</div>
+        </div>
+      </div>
     </div>
   </details>
 
@@ -1570,6 +1665,52 @@ function drawWork() {
 }
 
 // ═══ CANVAS: U(x) POTENTIAL ENERGY ═══
+var uxAnim = { running: false, raf: null, last: 0, x: 1.0, v: 0 };
+
+function onUxManual() {
+  // User dragged the position slider — stop animation and sync state
+  if (uxAnim.running) toggleUxPlay();
+  uxAnim.x = parseFloat(document.getElementById('uxXpos').value);
+  uxAnim.v = 0;
+  drawUx();
+}
+
+function toggleUxPlay() {
+  var btn = document.getElementById('uxPlayBtn');
+  if (uxAnim.running) {
+    uxAnim.running = false;
+    if (uxAnim.raf) cancelAnimationFrame(uxAnim.raf);
+    if (btn) btn.textContent = '▶ Play motion';
+    return;
+  }
+  uxAnim.running = true;
+  uxAnim.x = parseFloat(document.getElementById('uxXpos').value);
+  uxAnim.v = 0;
+  uxAnim.last = performance.now();
+  if (btn) btn.textContent = '⏸ Pause';
+  function step(now) {
+    if (!uxAnim.running) return;
+    var dt = Math.min(0.04, (now - uxAnim.last) / 1000);
+    uxAnim.last = now;
+    var a = parseFloat(document.getElementById('uxA').value);
+    var b = parseFloat(document.getElementById('uxB').value);
+    // Force = -dU/dx; treat unit mass for visualization
+    var F = function(x) { return -(4 * a * Math.pow(x, 3) - 2 * b * x); };
+    // Symplectic Euler over a few sub-steps for stability
+    var subs = 6, h = dt / subs;
+    for (var s = 0; s < subs; s++) {
+      uxAnim.v += F(uxAnim.x) * h;
+      uxAnim.x += uxAnim.v * h;
+      if (uxAnim.x > 3) { uxAnim.x = 3; uxAnim.v = -Math.abs(uxAnim.v); }
+      if (uxAnim.x < -3) { uxAnim.x = -3; uxAnim.v = Math.abs(uxAnim.v); }
+    }
+    document.getElementById('uxXpos').value = uxAnim.x.toFixed(2);
+    drawUx();
+    uxAnim.raf = requestAnimationFrame(step);
+  }
+  uxAnim.raf = requestAnimationFrame(step);
+}
+
 function drawUx() {
   var canvas = document.getElementById('uxCanvas');
   if (!canvas) return;
@@ -1579,11 +1720,13 @@ function drawUx() {
   var b = parseFloat(document.getElementById('uxB').value);
   var cVal = parseFloat(document.getElementById('uxC').value);
   var xpos = parseFloat(document.getElementById('uxXpos').value);
+  var E = parseFloat(document.getElementById('uxE').value);
 
   document.getElementById('ux_a_val').textContent = a.toFixed(1);
   document.getElementById('ux_b_val').textContent = b.toFixed(1);
   document.getElementById('ux_c_val').textContent = cVal.toFixed(1);
   document.getElementById('ux_xpos_val').textContent = xpos.toFixed(1);
+  document.getElementById('ux_E_val').textContent = E.toFixed(1);
 
   var U = function(x) { return a * Math.pow(x, 4) - b * Math.pow(x, 2) + cVal; };
   var dUdx = function(x) { return 4 * a * Math.pow(x, 3) - 2 * b * x; };
@@ -1593,11 +1736,31 @@ function drawUx() {
   var fVal = -dUdx(xpos);
   var d2Val = d2Udx2(xpos);
   var isEq = Math.abs(dUdx(xpos)) < 0.3;
+  var keVal = E - uVal;
 
   document.getElementById('ux_U').textContent = uVal.toFixed(2);
   document.getElementById('ux_F').textContent = fVal.toFixed(2);
   document.getElementById('ux_d2U').textContent = d2Val.toFixed(2);
   document.getElementById('ux_eq').textContent = isEq ? (d2Val > 0 ? 'Stable' : d2Val < 0 ? 'Unstable' : 'Neutral') : '—';
+  document.getElementById('ux_KE').textContent = (keVal >= 0) ? keVal.toFixed(2) : 'forbidden';
+
+  // Find turning points where U(x) = E by sign-change scan over [-3, 3]
+  var tps = [];
+  var Nscan = 1200;
+  var prevX = -3, prevG = U(-3) - E;
+  for (var k = 1; k <= Nscan; k++) {
+    var xk = -3 + (k / Nscan) * 6;
+    var gk = U(xk) - E;
+    if (prevG === 0) tps.push(prevX);
+    else if (prevG * gk < 0) {
+      // Linear interpolation for the crossing
+      var xt = prevX + (xk - prevX) * (-prevG) / (gk - prevG);
+      tps.push(xt);
+    }
+    prevX = xk; prevG = gk;
+  }
+  document.getElementById('ux_tp').textContent = tps.length === 0 ? 'none in view' :
+    tps.map(function(t){ return t.toFixed(2); }).join(', ');
 
   var pad = { l: 70, r: 30, t: 30, b: 55 };
   var pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
@@ -1611,6 +1774,9 @@ function drawUx() {
     if (u > yMax2) yMax2 = u;
   }
   yMin = Math.min(yMin, -2); yMax2 = Math.max(yMax2, 10);
+  // Make sure E is in view
+  if (E < yMin) yMin = E - 1;
+  if (E > yMax2) yMax2 = E + 1;
   var yPad = (yMax2 - yMin) * 0.1;
   yMin -= yPad; yMax2 += yPad;
 
@@ -1642,6 +1808,43 @@ function drawUx() {
   ctx.fillText('Position x (m)', W / 2, H - 10);
   ctx.save(); ctx.translate(18, H / 2); ctx.rotate(-Math.PI / 2); ctx.fillText('U(x) (J)', 0, 0); ctx.restore();
 
+  // ─── Forbidden regions: shade where U(x) > E ───
+  ctx.fillStyle = c.fill;
+  var inForb = false, forbStart = 0;
+  for (var i = 0; i <= 400; i++) {
+    var x = -xRange + (i / 400) * 2 * xRange;
+    var u = U(x);
+    var above = u > E;
+    if (above && !inForb) { inForb = true; forbStart = x; }
+    if ((!above || i === 400) && inForb) {
+      var forbEnd = above ? x : x;
+      // Fill rectangle column (top of canvas down to U(x) curve isn't quite right;
+      // shade between U curve and E line in forbidden region)
+      ctx.beginPath();
+      var steps = 30;
+      for (var s = 0; s <= steps; s++) {
+        var xx = forbStart + (s / steps) * (forbEnd - forbStart);
+        var uu = U(xx);
+        var px2 = toX(xx), py2 = toY(uu);
+        if (s === 0) ctx.moveTo(px2, py2); else ctx.lineTo(px2, py2);
+      }
+      for (var s = steps; s >= 0; s--) {
+        var xx = forbStart + (s / steps) * (forbEnd - forbStart);
+        ctx.lineTo(toX(xx), toY(E));
+      }
+      ctx.closePath(); ctx.fill();
+      inForb = false;
+    }
+  }
+
+  // ─── Total-energy line E ───
+  ctx.strokeStyle = c.purple; ctx.lineWidth = 2;
+  ctx.setLineDash([8, 5]);
+  ctx.beginPath(); ctx.moveTo(pad.l, toY(E)); ctx.lineTo(W - pad.r, toY(E)); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = c.purple; ctx.font = 'bold 12px "Source Sans 3"'; ctx.textAlign = 'left';
+  ctx.fillText('E = ' + E.toFixed(1) + ' J', pad.l + 6, toY(E) - 6);
+
   // U(x) curve
   ctx.beginPath(); ctx.strokeStyle = c.curve; ctx.lineWidth = 3;
   for (var i = 0; i <= 400; i++) {
@@ -1652,6 +1855,14 @@ function drawUx() {
     if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
   }
   ctx.stroke();
+
+  // ─── Turning points: U(x) = E ───
+  tps.forEach(function(xt) {
+    ctx.fillStyle = c.purple;
+    ctx.beginPath(); ctx.arc(toX(xt), toY(E), 5, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = c.bg; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(toX(xt), toY(E), 5, 0, Math.PI * 2); ctx.stroke();
+  });
 
   // Find equilibria (where dU/dx ≈ 0)
   // For ax^4 - bx^2 + c: dU/dx = 4ax^3 - 2bx = 2x(2ax^2 - b)
@@ -1672,9 +1883,19 @@ function drawUx() {
     ctx.fillText(label, toX(xe), toY(ue) - 12);
   });
 
-  // Particle dot
-  var pxP = toX(xpos), pyP = toY(uVal);
-  ctx.fillStyle = c.orange;
+  // ─── KE indicator: vertical green bar from U(x) up to E line at particle x ───
+  var pxP = toX(xpos);
+  if (keVal > 0) {
+    ctx.strokeStyle = c.green; ctx.lineWidth = 6; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(pxP, toY(uVal)); ctx.lineTo(pxP, toY(E)); ctx.stroke();
+    ctx.lineCap = 'butt';
+    ctx.fillStyle = c.green; ctx.font = 'bold 11px "Source Sans 3"'; ctx.textAlign = 'left';
+    ctx.fillText('KE ' + keVal.toFixed(1) + ' J', pxP + 9, (toY(uVal) + toY(E)) / 2 + 4);
+  }
+
+  // Particle dot (orange) sits on U(x) — KE > 0 means it's moving here
+  var pyP = toY(uVal);
+  ctx.fillStyle = (keVal >= 0) ? c.orange : c.red;
   ctx.beginPath(); ctx.arc(pxP, pyP, 8, 0, Math.PI * 2); ctx.fill();
   ctx.strokeStyle = c.bg; ctx.lineWidth = 2;
   ctx.beginPath(); ctx.arc(pxP, pyP, 8, 0, Math.PI * 2); ctx.stroke();
@@ -1718,12 +1939,13 @@ function drawSpring() {
   document.getElementById('spr_Wf').textContent = wf.toFixed(1);
   document.getElementById('spr_KE').textContent = ke.toFixed(1);
   document.getElementById('spr_v').textContent = v.toFixed(2);
+  document.getElementById('spr_eff').textContent = (pe > 0 ? (100 * ke / pe).toFixed(1) : '—');
 
   ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
 
-  // Energy bar chart
+  // Energy bar chart (normalize against the larger of pe and wf so over-friction case still fits)
   var barW = 100, barMaxH = 200, barY = H - 50;
-  var maxE = pe;
+  var maxE = Math.max(pe, wf);
   if (maxE <= 0) maxE = 1;
 
   // Spring PE bar
@@ -1750,11 +1972,18 @@ function drawSpring() {
   ctx.fillText('Final KE', 550, barY + 18);
   ctx.fillText(ke.toFixed(1) + ' J', 550, barY - h3 - 8);
 
-  // Speed result
-  ctx.fillStyle = c.accent; ctx.font = 'bold 20px "Source Sans 3"'; ctx.textAlign = 'center';
-  ctx.fillText('v = ' + v.toFixed(2) + ' m/s', 700, H / 2);
-  ctx.font = '12px "Source Sans 3"'; ctx.fillStyle = c.textSec;
-  ctx.fillText('Launch speed', 700, H / 2 + 20);
+  // Speed result + warning when friction wins
+  if (wf >= pe) {
+    ctx.fillStyle = c.red; ctx.font = 'bold 16px "Source Sans 3"'; ctx.textAlign = 'center';
+    ctx.fillText('No launch', 700, H / 2 - 6);
+    ctx.font = '11px "Source Sans 3"'; ctx.fillStyle = c.textSec;
+    ctx.fillText('friction ≥ spring PE', 700, H / 2 + 14);
+  } else {
+    ctx.fillStyle = c.accent; ctx.font = 'bold 20px "Source Sans 3"'; ctx.textAlign = 'center';
+    ctx.fillText('v = ' + v.toFixed(2) + ' m/s', 700, H / 2);
+    ctx.font = '12px "Source Sans 3"'; ctx.fillStyle = c.textSec;
+    ctx.fillText('Launch speed', 700, H / 2 + 20);
+  }
 
   // Arrows
   drawArrow(ctx, 210, H / 2, 290, H / 2, c.red, 2);
