@@ -283,7 +283,9 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   padding: 20px; text-align: center; font-size: 0.95rem; box-shadow: var(--shadow);
 }
 .flashcard-front { background: var(--bg-card); font-weight: 600; color: var(--accent); }
-.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.6; border: 2px solid var(--accent); }
+.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.5; border: 2px solid var(--accent); flex-direction: column; gap: 4px; padding: 14px 16px; }
+.flashcard-back .katex-display { margin: 0 !important; }
+.flashcard-back .katex { font-size: 1em; }
 
 /* ─── CARDS ─── */
 .card {
@@ -864,10 +866,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     </div>
   </details>
 
-  <!-- ─── INTERACTIVE: FREE-FALL EXPLORER ─── -->
+  <!-- ─── INTERACTIVE: VERTICAL-MOTION EXPLORER ─── -->
   <div class="formula-explorer" id="freefall-widget">
-    <div class="explorer-title">Free-Fall Explorer</div>
-    <div class="explorer-subtitle">Adjust initial upward velocity and launch height. This graph is height vs. time. The object can move upward at first because the slope is positive, but the graph is still a downward-opening parabola because gravity provides constant downward acceleration.</div>
+    <div class="explorer-title">Vertical 1D Motion Explorer</div>
+    <div class="explorer-subtitle">The ball is thrown straight up — its motion is purely vertical, with no horizontal component. The <strong>left strip</strong> shows the ball's actual stroboscopic positions on a single vertical line. The <strong>right panel</strong> is a height-vs-time <em>graph</em> (time on the horizontal axis, NOT horizontal distance). The parabola shape is the function $y(t)$, not the path through space.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>Initial velocity v₀ <span class="val" id="ff_v0_val">20</span> m/s</label>
@@ -881,7 +883,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div style="position:relative; width:100%; max-width:800px; margin:0 auto;">
       <canvas id="freefallCanvas" width="920" height="440"></canvas>
     </div>
-    <p style="max-width:920px; margin:10px auto 0; color: var(--text-secondary); font-size: 0.95rem;">Upward motion means the curve starts with a positive slope. It is not a straight line because the slope keeps decreasing by 10 m/s every second.</p>
+    <p style="max-width:920px; margin:10px auto 0; color: var(--text-secondary); font-size: 0.95rem;">The dots in the left strip show where the ball physically <em>is</em> at $t = 0, 0.5, 1.0, \ldots$ s — they sit on a single vertical line because the motion is purely 1D. Purple dots are on the way up, green is the apex, red is on the way down. The same data plotted as a graph (right) gives the parabola $y(t) = h_0 + v_0 t - \tfrac{1}{2}g t^2$ — that curve is a function plot, not a flight path.</p>
     <div class="explorer-results">
       <div class="result-card" style="border-color: var(--green);">
         <div class="result-label">Peak Height</div>
@@ -1524,7 +1526,71 @@ function drawFreeFall() {
   ctx.fillStyle = c.bg;
   ctx.fillRect(0, 0, W, H);
 
-  var pad = { l: 78, r: 28, t: 26, b: 56 };
+  // ── Stroboscopic 1D motion column (LEFT) ──
+  var strobeW = 200;
+  var strobeX = 80;            // x-center of the vertical track
+  var strobeTopPad = 38;
+  var strobeBotPad = 56;
+  var strobeH = H - strobeTopPad - strobeBotPad;
+  var sStrobeY = strobeH / yAxisMax;
+
+  // Header label
+  ctx.fillStyle = c.text;
+  ctx.font = 'bold 13px "Source Sans 3"';
+  ctx.textAlign = 'center';
+  ctx.fillText('True 1D motion', strobeX + 40, 20);
+  ctx.font = '11px "Source Sans 3"';
+  ctx.fillText('(stroboscopic, every 0.5 s)', strobeX + 40, 34);
+
+  // Vertical guide line and ground
+  ctx.strokeStyle = c.grid;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(strobeX, strobeTopPad);
+  ctx.lineTo(strobeX, H - strobeBotPad);
+  ctx.stroke();
+  // Ground line
+  ctx.strokeStyle = c.axis;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(strobeX - 30, H - strobeBotPad);
+  ctx.lineTo(strobeX + 30, H - strobeBotPad);
+  ctx.stroke();
+  ctx.fillStyle = c.text;
+  ctx.font = '11px "Source Sans 3"';
+  ctx.textAlign = 'center';
+  ctx.fillText('ground', strobeX, H - strobeBotPad + 16);
+
+  // Strobe dots at t = 0, 0.5, 1.0, ... up to tMax
+  var dt = 0.5;
+  var tEnd = Math.min(tMax, tAxisMax);
+  for (var ts = 0; ts <= tEnd + 1e-6; ts += dt) {
+    var ys = h0 + v0 * ts - 0.5 * g * ts * ts;
+    if (ys < 0) ys = 0;
+    var ysClamp = Math.min(ys, yAxisMax);
+    var dotY = H - strobeBotPad - ysClamp * sStrobeY;
+    var dotColor = (ts < tPeak - 0.01) ? c.purple : (ts > tPeak + 0.01 ? c.red : c.green);
+    ctx.fillStyle = dotColor;
+    ctx.beginPath();
+    ctx.arc(strobeX, dotY, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = c.text;
+    ctx.font = '10px "JetBrains Mono"';
+    ctx.textAlign = 'left';
+    ctx.fillText(ts.toFixed(1) + 's', strobeX + 9, dotY + 3);
+  }
+
+  // Vertical separator between strobe and graph
+  ctx.strokeStyle = c.grid;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(strobeW, 8);
+  ctx.lineTo(strobeW, H - 8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── y-vs-t graph (RIGHT) ──
+  var pad = { l: strobeW + 62, r: 28, t: 26, b: 56 };
   var pw = W - pad.l - pad.r;
   var ph = H - pad.t - pad.b;
   var sx = pw / tAxisMax;
@@ -1564,9 +1630,12 @@ function drawFreeFall() {
   ctx.restore();
 
   ctx.fillStyle = c.text;
-  ctx.font = '12px "Source Sans 3"';
+  ctx.font = 'bold 12px "Source Sans 3"';
+  ctx.textAlign = 'left';
+  ctx.fillText('Graph: height vs. time', pad.l + 8, pad.t + 14);
+  ctx.font = '11px "Source Sans 3"';
   ctx.textAlign = 'right';
-  ctx.fillText('Height-time graph: y(t) = h₀ + v₀t − ½gt²', W - pad.r, pad.t + 16);
+  ctx.fillText('y(t) = h₀ + v₀t − ½gt²', W - pad.r, pad.t + 14);
 
   ctx.beginPath();
   ctx.fillStyle = c.fill;
