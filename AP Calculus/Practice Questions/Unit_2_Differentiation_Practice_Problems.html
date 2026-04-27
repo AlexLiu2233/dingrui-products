@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calculus AB — Chapter 2: Differentiation — AP-Style Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style>
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --easy-bg:#E7F2E3; --easy-ink:#2F6B2F; --easy-rule:#79A977;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --calc-bg:#E4ECF7;  --calc-ink:#1E3F75;  --calc-rule:#7A9BCD;
+    --nocalc-bg:#ECECEE;--nocalc-ink:#333;   --nocalc-rule:#9A9A9A;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Source Serif 4','Times New Roman',Times,serif;font-size:11.5pt;line-height:1.5;max-width:8.5in;margin:0 auto;padding:0.45in 0.65in 0.7in;}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;}
+  .legend .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.14em;padding:3px 10px;border-radius:999px;border:1px solid;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.calc{background:var(--calc-bg);color:var(--calc-ink);border-color:var(--calc-rule);}
+  .pill.nocalc{background:var(--nocalc-bg);color:var(--nocalc-ink);border-color:var(--nocalc-rule);}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:46px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin{border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;margin:4px 0 22px;color:#222;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .study-path{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:10px 14px;margin:10px 0 16px;background:#FBF8F3;font-family:'Source Sans 3',sans-serif;font-size:10pt;}
+  .study-path h3{font-family:'DM Serif Display',serif;font-size:13pt;color:var(--maroon);margin-bottom:4px;}
+  .study-path .row{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;}
+  .study-path .row > div{flex:1 1 200px;}
+  .study-path .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.1em;padding:1px 8px;border-radius:999px;border:1px solid;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:10px 14px 12px;margin-bottom:12px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q.frq{border-left-color:#1E3F75;}
+  .q-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11.5pt;}
+  .q-body p{margin:4px 0;}
+  .q-body .prompt{margin:4px 0 8px;}
+  .opts{list-style:none;margin:6px 0 0 12px;padding:0;}
+  .opts li{padding:2px 0;margin-bottom:2px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+  .work{min-height:90px;border-top:1px dashed #c9c4bd;margin-top:8px;}
+  .work.s{min-height:50px;} .work.m{min-height:120px;} .work.l{min-height:170px;} .work.xl{min-height:240px;}
+  .frq-parts{margin-top:6px;}
+  .frq-parts .part-item{margin:6px 0 4px;}
+  .frq-parts .part-item > .tag{font-family:'Source Sans 3',sans-serif;font-weight:700;margin-right:6px;}
+  table.data{border-collapse:collapse;margin:8px auto;font-size:10.5pt;}
+  table.data th, table.data td{border:1px solid #444;padding:4px 14px;text-align:center;font-family:'Source Sans 3',sans-serif;}
+  table.data th{background:#f1ece4;font-weight:700;}
+  .fig{display:flex;justify-content:center;margin:6px 0 4px;}
+  .fig svg{background:#fafafa;border:1px solid #ccc;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media print{body{padding:0;}.q{box-shadow:none;}}
+</style>
+</head>
+<body>
+
+<div class="brand">A&nbsp;B&nbsp;&nbsp;C&nbsp;A&nbsp;L&nbsp;C&nbsp;U&nbsp;L&nbsp;U&nbsp;S</div>
+<div class="chapter-tag">Chapter 2</div>
+<h1 class="chapter-title">Differentiation: Definition &amp; Basic Rules</h1>
+<p class="chapter-sub">AP-Style Practice Questions</p>
+<div class="legend"><span class="pill easy">EASY</span><span class="pill med">MEDIUM</span><span class="pill hard">HARD</span></div>
+<p class="topics-line"><b>Multiple Choice</b> &bull; <b>Free Response</b> &bull; Topics 2.1 – 2.10 (AB)</p>
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span>Name:<span class="blank"></span></span><span>Period:<span class="blank period"></span></span></div>
+
+<div class="study-path">
+  <h3>How to Use This Set</h3>
+  <div class="row">
+    <div><b>Last-Minute Cram (≈30 min):</b> Drill every <span class="pill easy">EASY</span> MC. The non-negotiables are the power, product, quotient rules and the limit-definition recognizer.</div>
+    <div><b>Standard Prep (≈90 min):</b> Solve all MC, then attempt FRQ 1–3. Watch units and notation on the limit-definition items.</div>
+    <div><b>Shooting for a 5 (≈2.5 hr):</b> Complete everything; pay extra attention to <span class="pill hard">HARD</span> items, differentiability boundary cases (corners, cusps, vertical tangents), and writing piecewise differentiability justifications cleanly.</div>
+  </div>
+</div>
+
+<div class="part"><span class="part-label">PART I</span><span class="part-meta">Topics 2.1 – 2.10</span></div>
+<h2 class="section-head">Multiple Choice Questions</h2>
+<p class="instructions">Show all supporting work on scratch paper. On the AP Exam, Section I is split into a no-calculator and a calculator-allowed part — each question below is labeled accordingly.</p>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill topic">2.1 Average Rate of Change</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The average rate of change of $f(x)=x^{2}+2x$ on $[1,3]$ is</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $4$</li><li><span class="lbl">(B)</span> $6$</li>
+      <li><span class="lbl">(C)</span> $8$</li><li><span class="lbl">(D)</span> $10$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill topic">2.1 Definition of Derivative</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{h\to 0}\dfrac{(3+h)^{2}-9}{h}$ equals</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li><li><span class="lbl">(B)</span> $3$</li>
+      <li><span class="lbl">(C)</span> $6$</li><li><span class="lbl">(D)</span> $9$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q3</span><span class="pill easy">EASY</span><span class="pill topic">2.2 Connecting $f$ and $f'$</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $f$ is differentiable at $x=a$, which of the following must be true?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f$ is continuous at $x=a$.</li>
+      <li><span class="lbl">(B)</span> $f$ has a local extremum at $x=a$.</li>
+      <li><span class="lbl">(C)</span> $\displaystyle\lim_{x\to a}f(x)=0$.</li>
+      <li><span class="lbl">(D)</span> $f''(a)$ exists.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span><span class="pill topic">2.2 Differentiability</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Which of the following is NOT differentiable at $x=0$?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f(x)=x^{2}$</li>
+      <li><span class="lbl">(B)</span> $f(x)=|x|$</li>
+      <li><span class="lbl">(C)</span> $f(x)=\sin x$</li>
+      <li><span class="lbl">(D)</span> $f(x)=x^{3}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill easy">EASY</span><span class="pill topic">2.3 Power Rule</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $f(x)=5x^{4}-3x^{2}+7$, then $f'(x)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $20x^{3}-6x$</li>
+      <li><span class="lbl">(B)</span> $20x^{3}-6x+7$</li>
+      <li><span class="lbl">(C)</span> $5x^{3}-3x$</li>
+      <li><span class="lbl">(D)</span> $20x^{3}-3x^{2}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill easy">EASY</span><span class="pill topic">2.4 Trig Derivatives</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\dfrac{d}{dx}\bigl[\sin x - \cos x\bigr]=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $\cos x - \sin x$</li>
+      <li><span class="lbl">(B)</span> $\cos x + \sin x$</li>
+      <li><span class="lbl">(C)</span> $-\cos x - \sin x$</li>
+      <li><span class="lbl">(D)</span> $-\sin x - \cos x$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span><span class="pill topic">2.5 Exp/Log Derivatives</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\dfrac{d}{dx}\bigl[\,e^{x}\ln x\,\bigr]=$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{e^{x}}{x}$</li>
+      <li><span class="lbl">(B)</span> $e^{x}\ln x+\dfrac{e^{x}}{x}$</li>
+      <li><span class="lbl">(C)</span> $e^{x}\ln x$</li>
+      <li><span class="lbl">(D)</span> $e^{x}+\ln x$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill med">MEDIUM</span><span class="pill topic">2.6 Product Rule</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $h(x)=x^{2}\cos x$, then $h'(x)=$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $2x\cos x - x^{2}\sin x$</li>
+      <li><span class="lbl">(B)</span> $2x\cos x + x^{2}\sin x$</li>
+      <li><span class="lbl">(C)</span> $-2x\sin x$</li>
+      <li><span class="lbl">(D)</span> $2x - \sin x$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill med">MEDIUM</span><span class="pill topic">2.7 Quotient Rule</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $g(x)=\dfrac{x}{x^{2}+1}$, then $g'(x)=$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{1}{2x}$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1-x^{2}}{(x^{2}+1)^{2}}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{x^{2}+1-2x^{2}}{x^{2}+1}$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{x^{2}-1}{(x^{2}+1)^{2}}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span><span class="pill topic">2.8 Tangent Lines</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The tangent line to $f(x)=x^{3}-2x$ at $x=1$ has equation</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $y=x-2$</li>
+      <li><span class="lbl">(B)</span> $y=x-1$</li>
+      <li><span class="lbl">(C)</span> $y=x-3$</li>
+      <li><span class="lbl">(D)</span> $y=-x+1$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill med">MEDIUM</span><span class="pill topic">2.6 / 2.7 Rule Selection</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=\dfrac{x\sin x}{e^{x}}$. Which differentiation rules are required?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Product only</li>
+      <li><span class="lbl">(B)</span> Quotient only</li>
+      <li><span class="lbl">(C)</span> Product and quotient</li>
+      <li><span class="lbl">(D)</span> None (power rule suffices)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill topic">2.7 Quotient Rule (Table)</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Selected values of $f,g,f',g'$ at $x=2$ are given.</p>
+    <table class="data">
+      <tr><th>$x$</th><th>$f$</th><th>$g$</th><th>$f'$</th><th>$g'$</th></tr>
+      <tr><td>$2$</td><td>$3$</td><td>$4$</td><td>$5$</td><td>$-1$</td></tr>
+    </table>
+    <p>If $h(x)=\dfrac{f(x)}{g(x)}$, then $h'(2)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $\dfrac{17}{16}$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{23}{16}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{13}{4}$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{19}{16}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill med">MEDIUM</span><span class="pill topic">2.8 Normal Line</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The normal line to $y=\sqrt{x}$ at $x=4$ has slope</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $4$</li>
+      <li><span class="lbl">(B)</span> $-4$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{1}{4}$</li>
+      <li><span class="lbl">(D)</span> $-\dfrac{1}{4}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill hard">HARD</span><span class="pill topic">2.9 Higher Order</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $f(x)=\sin(2x)$, then $f^{(4)}(x)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $16\sin(2x)$</li>
+      <li><span class="lbl">(B)</span> $-16\sin(2x)$</li>
+      <li><span class="lbl">(C)</span> $16\cos(2x)$</li>
+      <li><span class="lbl">(D)</span> $-8\sin(2x)$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill med">MEDIUM</span><span class="pill topic">2.10 Motion</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">A particle's position is $s(t)=t^{3}-6t^{2}+9t$. The acceleration at $t=3$ is</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $3$</li>
+      <li><span class="lbl">(C)</span> $6$</li>
+      <li><span class="lbl">(D)</span> $12$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q16</span><span class="pill hard">HARD</span><span class="pill topic">2.2 Graphical Reading</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The graph of $f$ consists of two line segments meeting at a sharp corner at $x=3$. Which statement about $f'$ is true?</p>
+    <div class="fig">
+      <svg width="240" height="150" viewBox="-0.5 -0.3 7 4" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="3" x2="7" y2="3" stroke="#999" stroke-width="0.03"/>
+        <line x1="1" y1="0" x2="1" y2="3.5" stroke="#999" stroke-width="0.03"/>
+        <polyline points="1,2 3,1 5,2.5" fill="none" stroke="#222" stroke-width="0.08"/>
+        <circle cx="3" cy="1" r="0.1" fill="#222"/>
+      </svg>
+    </div>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f'(3)$ exists and equals zero.</li>
+      <li><span class="lbl">(B)</span> $f'$ has a jump at $x=3$; $f'(3)$ does not exist.</li>
+      <li><span class="lbl">(C)</span> $f$ is not continuous at $x=3$.</li>
+      <li><span class="lbl">(D)</span> $f'$ is constant on $(1,5)$.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q17</span><span class="pill med">MEDIUM</span><span class="pill topic">2.5 $a^{x}$ &amp; $\log_a$</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\dfrac{d}{dx}\bigl[\,3^{x}\,\bigr]=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $3^{x}$</li>
+      <li><span class="lbl">(B)</span> $x\cdot 3^{x-1}$</li>
+      <li><span class="lbl">(C)</span> $3^{x}\ln 3$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{3^{x}}{\ln 3}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q18</span><span class="pill hard">HARD</span><span class="pill topic">2.8 Calculator Tangent</span><span class="pill calc">Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=x\,e^{-x}$. The value of $x>0$ at which the tangent line to $y=f(x)$ is horizontal is closest to</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0.5$</li>
+      <li><span class="lbl">(B)</span> $1.0$</li>
+      <li><span class="lbl">(C)</span> $1.5$</li>
+      <li><span class="lbl">(D)</span> $2.0$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q19</span><span class="pill med">MEDIUM</span><span class="pill topic">2.1 Limit-Definition Disguise</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{h\to 0}\dfrac{\sin\!\left(\tfrac{\pi}{3}+h\right)-\sin\!\left(\tfrac{\pi}{3}\right)}{h}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1}{2}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{\sqrt{3}}{2}$</li>
+      <li><span class="lbl">(D)</span> $1$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q20</span><span class="pill med">MEDIUM</span><span class="pill topic">2.1 Limit-Definition Disguise (Exp)</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{h\to 0}\dfrac{e^{2+h}-e^{2}}{h}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $1$</li>
+      <li><span class="lbl">(C)</span> $e$</li>
+      <li><span class="lbl">(D)</span> $e^{2}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q21</span><span class="pill hard">HARD</span><span class="pill topic">2.2 Cusp / Vertical Tangent</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Consider $f(x)=x^{2/3}$. Which statement about $f$ at $x=0$ is true?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f$ is differentiable at $x=0$ with $f'(0)=0$.</li>
+      <li><span class="lbl">(B)</span> $f$ has a vertical tangent at $x=0$ — the one-sided limits of $f'$ are both $+\infty$.</li>
+      <li><span class="lbl">(C)</span> $f$ has a cusp at $x=0$ — $f$ is continuous there but $\displaystyle\lim_{x\to 0^{-}}f'(x)$ and $\displaystyle\lim_{x\to 0^{+}}f'(x)$ are infinite with opposite signs.</li>
+      <li><span class="lbl">(D)</span> $f$ is not continuous at $x=0$.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 2 Practice · Page 1</span></footer>
+<div class="page-break"></div>
+
+<div class="part"><span class="part-label">PART II</span><span class="part-meta">Show All Work</span></div>
+<h2 class="section-head">Free-Response Questions</h2>
+<p class="instructions">Free-response answers require complete setup: derivative rules stated, clear notation, and units for contextual problems. Tangent-line equations should be in point-slope or slope-intercept form.</p>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;1</span><span class="pill easy">EASY</span><span class="pill topic">2.1 / 2.3 Limit Definition</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=x^{2}-4x+1$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Use the limit definition of the derivative to compute $f'(x)$.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> Find $f'(3)$ and interpret it as a rate of change at $x=3$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Find the equation of the tangent line to $y=f(x)$ at $x=3$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;2</span><span class="pill med">MEDIUM</span><span class="pill topic">2.6 / 2.7 Rules with Table</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The table gives values of $f,g,f',g'$ at $x=1$ and $x=3$.</p>
+    <table class="data">
+      <tr><th>$x$</th><th>$f$</th><th>$g$</th><th>$f'$</th><th>$g'$</th></tr>
+      <tr><td>$1$</td><td>$2$</td><td>$4$</td><td>$-1$</td><td>$3$</td></tr>
+      <tr><td>$3$</td><td>$5$</td><td>$-2$</td><td>$2$</td><td>$1$</td></tr>
+    </table>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find $\dfrac{d}{dx}[\,f(x)g(x)\,]$ at $x=1$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> Find $\dfrac{d}{dx}\!\left[\dfrac{f(x)}{g(x)}\right]$ at $x=3$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Let $h(x)=x\cdot g(x)$. Write the equation of the tangent line to $y=h(x)$ at $x=3$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 2 Practice · Page 2</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;3</span><span class="pill med">MEDIUM</span><span class="pill topic">2.10 Motion</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">A particle moves along the $x$-axis with position $s(t)=t^{3}-9t^{2}+15t+4$ for $t\ge 0$ (seconds, meters).</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find the velocity $v(t)$ and acceleration $a(t)$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> Find all times $t\ge 0$ when the particle is at rest.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Determine the intervals on which the particle is moving right, and those on which it is moving left. Justify.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(d)</span> At $t=2$, is the particle speeding up or slowing down? Justify using the signs of $v$ and $a$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;4</span><span class="pill hard">HARD</span><span class="pill topic">2.2 Differentiability &amp; Continuity</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=\begin{cases} x^{2}+ax, & x\le 1\\ bx+c, & x>1 \end{cases}$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> State the condition for $f$ to be continuous at $x=1$ in terms of $a,b,c$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> State the condition for $f$ to be differentiable at $x=1$ in terms of $a,b$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Given that $f(1)=3$ and $f$ is differentiable at $x=1$, solve for $a$, $b$, and $c$.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(d)</span> With the values from (c), write $f'(x)$ as a piecewise function and state $f'(1)$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 2 Practice · Page 3</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;5</span><span class="pill hard">HARD</span><span class="pill topic">2.8 Tangent &amp; Parameters</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=x^{3}+px^{2}+qx$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find $f'(x)$ in terms of $p,q$.</div><div class="work s"></div>
+      <div class="part-item"><span class="tag">(b)</span> The graph of $y=f(x)$ passes through $(1,2)$ with horizontal tangent at $x=1$. Set up and solve a system for $p$ and $q$.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(c)</span> Using the values from (b), find the equation of the tangent line at $x=-1$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(d)</span> Find all $x$ where the tangent line to $y=f(x)$ has slope $6$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 2 Practice · Page 4</span></footer>
+
+</body>
+</html>

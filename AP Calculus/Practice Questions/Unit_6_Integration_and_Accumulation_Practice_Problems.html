@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calculus AB — Chapter 6: Integration &amp; Accumulation of Change — AP-Style Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style>
+  :root{--ink:#141414;--paper:#ffffff;--rule:#111;--maroon:#7A2E2E;--maroon-ink:#fff;
+    --easy-bg:#E7F2E3;--easy-ink:#2F6B2F;--easy-rule:#79A977;
+    --med-bg:#FFF3DE;--med-ink:#8A5A10;--med-rule:#D9A94A;
+    --hard-bg:#FBE4E4;--hard-ink:#8E2020;--hard-rule:#C85454;
+    --topic-bg:#EFE9E4;--topic-ink:#4A3A2A;--topic-rule:#B5A68F;
+    --calc-bg:#E4ECF7;--calc-ink:#1E3F75;--calc-rule:#7A9BCD;
+    --nocalc-bg:#ECECEE;--nocalc-ink:#333;--nocalc-rule:#9A9A9A;}
+  @page{size:letter;margin:.6in .65in;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Source Serif 4','Times New Roman',Times,serif;font-size:11.5pt;line-height:1.5;max-width:8.5in;margin:0 auto;padding:.45in .65in .7in;}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;}
+  .legend .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.14em;padding:3px 10px;border-radius:999px;border:1px solid;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med{background:var(--med-bg);color:var(--med-ink);border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.calc{background:var(--calc-bg);color:var(--calc-ink);border-color:var(--calc-rule);}
+  .pill.nocalc{background:var(--nocalc-bg);color:var(--nocalc-ink);border-color:var(--nocalc-rule);}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:46px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin{border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;margin:4px 0 22px;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .study-path{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:10px 14px;margin:10px 0 16px;background:#FBF8F3;font-family:'Source Sans 3',sans-serif;font-size:10pt;}
+  .study-path h3{font-family:'DM Serif Display',serif;font-size:13pt;color:var(--maroon);margin-bottom:4px;}
+  .study-path .row{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;}
+  .study-path .row > div{flex:1 1 200px;}
+  .study-path .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.1em;padding:1px 8px;border-radius:999px;border:1px solid;}
+  .pill.bc{background:#EDE0F0;color:#5B2A6E;border-color:#A678BC;}
+  .q.bc{border-left-color:#7A4A98;background:#FBF7FC;}
+  .bc-banner{border:1.5px solid #A678BC;background:#F5ECF7;color:#4A2358;border-radius:6px;padding:8px 12px;margin:14px 0 12px;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;}
+  .bc-banner b{color:#5B2A6E;letter-spacing:.08em;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:10px 14px 12px;margin-bottom:12px;break-inside:avoid;page-break-inside:avoid;}
+  .q.frq{border-left-color:#1E3F75;}
+  .q-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11.5pt;}
+  .q-body p{margin:4px 0;}.q-body .prompt{margin:4px 0 8px;}
+  .opts{list-style:none;margin:6px 0 0 12px;padding:0;}
+  .opts li{padding:2px 0;margin-bottom:2px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+  .work{min-height:90px;border-top:1px dashed #c9c4bd;margin-top:8px;}
+  .work.s{min-height:50px;}.work.m{min-height:120px;}.work.l{min-height:170px;}.work.xl{min-height:240px;}
+  .frq-parts{margin-top:6px;}
+  .frq-parts .part-item{margin:6px 0 4px;}
+  .frq-parts .part-item > .tag{font-family:'Source Sans 3',sans-serif;font-weight:700;margin-right:6px;}
+  table.data{border-collapse:collapse;margin:8px auto;font-size:10.5pt;}
+  table.data th,table.data td{border:1px solid #444;padding:4px 14px;text-align:center;font-family:'Source Sans 3',sans-serif;}
+  table.data th{background:#f1ece4;font-weight:700;}
+  .fig{display:flex;justify-content:center;margin:6px 0 4px;}
+  .fig svg{background:#fafafa;border:1px solid #ccc;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media print{body{padding:0;}}
+</style>
+</head>
+<body>
+
+<div class="brand">A&nbsp;B&nbsp;&nbsp;C&nbsp;A&nbsp;L&nbsp;C&nbsp;U&nbsp;L&nbsp;U&nbsp;S</div>
+<div class="chapter-tag">Chapter 6</div>
+<h1 class="chapter-title">Integration &amp; Accumulation of Change</h1>
+<p class="chapter-sub">AP-Style Practice Questions</p>
+<div class="legend"><span class="pill easy">EASY</span><span class="pill med">MEDIUM</span><span class="pill hard">HARD</span></div>
+<p class="topics-line"><b>Multiple Choice</b> &bull; <b>Free Response</b> &bull; Topics 6.1 – 6.10, 6.14 (AB) &bull; <span style="color:#5B2A6E"><b>(BC) Extensions:</b> 6.11 IBP, 6.12 Partial Fractions, 6.13 Improper Integrals at end</span></p>
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span>Name:<span class="blank"></span></span><span>Period:<span class="blank period"></span></span></div>
+
+<div class="study-path">
+  <h3>How to Use This Set</h3>
+  <div class="row">
+    <div><b>Last-Minute Cram (≈30 min):</b> Drill every <span class="pill easy">EASY</span> MC. Lock in basic antiderivatives, the FTC, and the u-substitution 5-step template.</div>
+    <div><b>Standard Prep (≈90 min):</b> Solve all MC, then attempt FRQ 1–3. Watch the Riemann over/under tables (monotonicity × concavity).</div>
+    <div><b>Shooting for a 5 (≈2.5 hr):</b> Complete everything; pay extra attention to <span class="pill hard">HARD</span> items, FTC1 with chain rule (upper AND lower limit variants), and accumulation-function reasoning. <span style="color:#5B2A6E"><b>BC students:</b> Q4 (BC) covers IBP; see Unit 6 study guide §6.11–6.13 for partial fractions and improper integrals.</span></div>
+  </div>
+</div>
+
+<div class="part"><span class="part-label">PART I</span><span class="part-meta">Topics 6.1 – 6.10</span></div>
+<h2 class="section-head">Multiple Choice Questions</h2>
+<p class="instructions">Show all supporting work on scratch paper. On the AP Exam, Section I is split into a no-calculator and a calculator-allowed part — each question below is labeled accordingly.</p>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill topic">6.2 Riemann Sums</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The interval $[0,4]$ is divided into four subintervals of equal length. Which expression gives the right Riemann sum approximation for $\displaystyle\int_{0}^{4}f(x)\,dx$?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f(0)+f(1)+f(2)+f(3)$</li>
+      <li><span class="lbl">(B)</span> $f(1)+f(2)+f(3)+f(4)$</li>
+      <li><span class="lbl">(C)</span> $f(0.5)+f(1.5)+f(2.5)+f(3.5)$</li>
+      <li><span class="lbl">(D)</span> $\tfrac{1}{2}\bigl[f(0)+2f(1)+2f(2)+2f(3)+f(4)\bigr]$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill topic">6.6 Properties</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $\displaystyle\int_{0}^{5}f(x)\,dx=12$ and $\displaystyle\int_{0}^{2}f(x)\,dx=3$, then $\displaystyle\int_{2}^{5}f(x)\,dx=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $-9$</li>
+      <li><span class="lbl">(B)</span> $9$</li>
+      <li><span class="lbl">(C)</span> $15$</li>
+      <li><span class="lbl">(D)</span> $36$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q3</span><span class="pill easy">EASY</span><span class="pill topic">6.4 FTC</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $F(x)=\displaystyle\int_{1}^{x}t^{2}\,dt$, then $F'(x)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $\dfrac{x^{3}}{3}$</li>
+      <li><span class="lbl">(B)</span> $x^{2}-1$</li>
+      <li><span class="lbl">(C)</span> $x^{2}$</li>
+      <li><span class="lbl">(D)</span> $2x$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span><span class="pill topic">6.4 FTC + Chain</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $F(x)=\displaystyle\int_{0}^{x^{2}}\sin t\,dt$, then $F'(x)=$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\sin(x^{2})$</li>
+      <li><span class="lbl">(B)</span> $2x\sin(x^{2})$</li>
+      <li><span class="lbl">(C)</span> $-\cos(x^{2})+1$</li>
+      <li><span class="lbl">(D)</span> $\cos(x^{2})\cdot 2x$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill easy">EASY</span><span class="pill topic">6.8 Antiderivatives</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int (3x^{2}-4x+5)\,dx =$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $x^{3}-2x^{2}+5x+C$</li>
+      <li><span class="lbl">(B)</span> $x^{3}-2x^{2}+5+C$</li>
+      <li><span class="lbl">(C)</span> $6x-4+C$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{x^{3}}{3}-\dfrac{4x^{2}}{2}+5x+C$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span><span class="pill topic">6.9 U-Substitution</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int 2x\,(x^{2}+1)^{4}\,dx =$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{(x^{2}+1)^{5}}{5}+C$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{(x^{2}+1)^{5}}{10}+C$</li>
+      <li><span class="lbl">(C)</span> $2x\cdot\dfrac{(x^{2}+1)^{5}}{5}+C$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{x^{2}(x^{2}+1)^{5}}{5}+C$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span><span class="pill topic">6.7 FTC Evaluation</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int_{0}^{\pi/2}\cos x\,dx =$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1}{2}$</li>
+      <li><span class="lbl">(C)</span> $1$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{\pi}{2}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill med">MEDIUM</span><span class="pill topic">6.6 Geometry of Integral</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The graph of $f$ consists of two line segments (forming a triangle above the $x$-axis with vertices $(-2,0)$, $(0,2)$, $(2,0)$) and a semicircle of radius $2$ below the $x$-axis on $[2,6]$. Find $\displaystyle\int_{-2}^{6}f(x)\,dx$.</p>
+    <div class="fig">
+      <svg width="320" height="160" viewBox="-3 -2.5 10 4.5" xmlns="http://www.w3.org/2000/svg">
+        <line x1="-3" y1="0" x2="6.5" y2="0" stroke="#777" stroke-width="0.04"/>
+        <line x1="0" y1="-2.3" x2="0" y2="2.3" stroke="#777" stroke-width="0.04"/>
+        <text x="-2" y="0.42" font-size="0.32" text-anchor="middle">-2</text>
+        <text x="2" y="0.42" font-size="0.32" text-anchor="middle">2</text>
+        <text x="4" y="0.42" font-size="0.32" text-anchor="middle">4</text>
+        <text x="6" y="0.42" font-size="0.32" text-anchor="middle">6</text>
+        <text x="-0.22" y="-1.9" font-size="0.32" text-anchor="end">2</text>
+        <text x="-0.22" y="2.1" font-size="0.32" text-anchor="end">-2</text>
+        <polyline points="-2,0 0,-2 2,0" fill="none" stroke="#222" stroke-width="0.08"/>
+        <path d="M 2,0 A 2 2 0 0 1 6,0" fill="none" stroke="#222" stroke-width="0.08"/>
+      </svg>
+    </div>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $4-2\pi$</li>
+      <li><span class="lbl">(B)</span> $4+2\pi$</li>
+      <li><span class="lbl">(C)</span> $3+2\pi$</li>
+      <li><span class="lbl">(D)</span> $3-2\pi$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill topic">6.9 U-Sub Definite</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int_{0}^{1}\dfrac{x}{(x^{2}+1)^{2}}\,dx =$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $\dfrac{1}{4}$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1}{2}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{1}{8}$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{1}{6}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span><span class="pill topic">6.3 Riemann ↔ Integral</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Which definite integral equals $\displaystyle\lim_{n\to\infty}\sum_{i=1}^{n}\!\left(1+\dfrac{2i}{n}\right)^{2}\!\cdot\dfrac{2}{n}$?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\displaystyle\int_{0}^{2}x^{2}\,dx$</li>
+      <li><span class="lbl">(B)</span> $\displaystyle\int_{1}^{3}x^{2}\,dx$</li>
+      <li><span class="lbl">(C)</span> $\displaystyle\int_{1}^{2}(1+x)^{2}\,dx$</li>
+      <li><span class="lbl">(D)</span> $\displaystyle\int_{0}^{1}(1+2x)^{2}\,dx$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill topic">6.2 Over/Underestimate</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$f$ is positive, increasing, and concave down on $[a,b]$. Which of the following must be an underestimate of $\displaystyle\int_{a}^{b}f(x)\,dx$?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Left Riemann sum</li>
+      <li><span class="lbl">(B)</span> Right Riemann sum</li>
+      <li><span class="lbl">(C)</span> Trapezoidal sum</li>
+      <li><span class="lbl">(D)</span> Midpoint Riemann sum</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill med">MEDIUM</span><span class="pill topic">6.10 Long Division</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int \dfrac{x^{2}+1}{x+1}\,dx =$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{x^{2}}{2}-x+2\ln|x+1|+C$</li>
+      <li><span class="lbl">(B)</span> $x-\ln|x+1|+C$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{x^{3}+x}{x^{2}+x}+C$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{x^{2}}{2}+\ln|x+1|+C$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill topic">6.2 / 6.4 Accumulation</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Selected values of the differentiable function $f$ are given. Let $g(x)=\displaystyle\int_{0}^{x}f(t)\,dt$.</p>
+    <table class="data">
+      <tr><th>$x$</th><td>$0$</td><td>$2$</td><td>$4$</td><td>$6$</td><td>$8$</td></tr>
+      <tr><th>$f(x)$</th><td>$5$</td><td>$3$</td><td>$-1$</td><td>$-4$</td><td>$-2$</td></tr>
+    </table>
+    <p>Using a midpoint Riemann sum with two subintervals of equal length, the approximation for $g(8)$ is</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $-4$</li>
+      <li><span class="lbl">(B)</span> $-2$</li>
+      <li><span class="lbl">(C)</span> $4$</li>
+      <li><span class="lbl">(D)</span> $12$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill med">MEDIUM</span><span class="pill topic">6.5 Behavior of $g$</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $g(x)=\displaystyle\int_{0}^{x}f(t)\,dt$, where $f$ is continuous and is positive on $(0,3)$, zero at $x=3$, and negative on $(3,5)$. At what value of $x$ does $g$ attain its maximum on $[0,5]$?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $3$</li>
+      <li><span class="lbl">(C)</span> $5$</li>
+      <li><span class="lbl">(D)</span> Cannot be determined</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill easy">EASY</span><span class="pill topic">6.1 Accumulation Units</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Water flows into a tank at a rate $r(t)$ gallons per minute, where $t$ is in minutes. The most appropriate units of $\displaystyle\int_{0}^{10}r(t)\,dt$ are</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> gallons per minute</li>
+      <li><span class="lbl">(B)</span> gallons per minute squared</li>
+      <li><span class="lbl">(C)</span> gallons</li>
+      <li><span class="lbl">(D)</span> minutes per gallon</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q16</span><span class="pill hard">HARD</span><span class="pill topic">6.10 Completing the Square</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int \dfrac{1}{x^{2}+2x+5}\,dx =$</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{1}{2}\arctan\!\left(\dfrac{x+1}{2}\right)+C$</li>
+      <li><span class="lbl">(B)</span> $\arctan(x+1)+C$</li>
+      <li><span class="lbl">(C)</span> $\ln|x^{2}+2x+5|+C$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{1}{4}\ln|x^{2}+2x+5|+C$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q17</span><span class="pill med">MEDIUM</span><span class="pill topic">6.14 Selecting a Technique</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Which technique is most appropriate for evaluating $\displaystyle\int x\sec^{2}(x^{2})\,dx$?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Power rule (direct antidifferentiation)</li>
+      <li><span class="lbl">(B)</span> $u$-substitution with $u=x^{2}$</li>
+      <li><span class="lbl">(C)</span> Long division</li>
+      <li><span class="lbl">(D)</span> Completing the square</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q18</span><span class="pill med">MEDIUM</span><span class="pill topic">6.6 Properties</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">If $\displaystyle\int_{1}^{4}\bigl[\,2f(x)-3\,\bigr]\,dx = 14$ and $\displaystyle\int_{1}^{4}f(x)\,dx = ?$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $\dfrac{17}{2}$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{23}{2}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{11}{2}$</li>
+      <li><span class="lbl">(D)</span> $7$</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 1</span></footer>
+<div class="page-break"></div>
+
+<div class="part"><span class="part-label">PART II</span><span class="part-meta">Show All Work</span></div>
+<h2 class="section-head">Free-Response Questions</h2>
+<p class="instructions">Free-response answers must include all setup. When using a calculator, present the integral expression with limits and a differential before evaluating. When without a calculator, show antiderivatives, the constant of integration on indefinite integrals, and careful use of substitution.</p>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;1</span><span class="pill easy">EASY</span><span class="pill topic">6.7 / 6.8 / 6.9 Evaluation</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Evaluate each of the following. Show all work.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> $\displaystyle\int_{1}^{2}(4x^{3}-6x+1)\,dx$</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\int \cos(3x)\,dx$</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> $\displaystyle\int x\,e^{x^{2}}\,dx$</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;2</span><span class="pill med">MEDIUM</span><span class="pill topic">6.1 / 6.2 / 6.3 Reservoir</span><span class="pill calc">Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The rate at which water enters a reservoir is modeled by the differentiable function $R(t)$, where $R$ is in thousands of gallons per hour and $t$ is in hours since midnight. Selected values of $R$:</p>
+    <table class="data">
+      <tr><th>$t$ (hr)</th><td>$0$</td><td>$3$</td><td>$6$</td><td>$9$</td><td>$12$</td></tr>
+      <tr><th>$R(t)$</th><td>$5.2$</td><td>$6.8$</td><td>$8.1$</td><td>$7.4$</td><td>$4.5$</td></tr>
+    </table>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Use a left Riemann sum with the four subintervals shown to approximate $\displaystyle\int_{0}^{12}R(t)\,dt$. Using correct units, explain the meaning of this integral in context.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> Use a trapezoidal sum with the four subintervals shown to approximate $\displaystyle\int_{0}^{12}R(t)\,dt$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Is the left Riemann sum in part (a) an over- or under-estimate? Explain using the behavior of $R$ shown in the table, or state what additional information would be needed to decide.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(d)</span> The reservoir holds $W(t)$ thousand gallons at time $t$. Water leaves the reservoir at a constant rate of $4$ thousand gallons per hour during the $12$-hour period. Write, but do not evaluate, an expression involving an integral for $W(12)$ given $W(0)=80$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 2</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;3</span><span class="pill med">MEDIUM</span><span class="pill topic">6.4 / 6.5 Accumulation Function</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The graph of the continuous function $f$ on $[0,8]$ consists of three line segments and a quarter circle of radius $2$, as shown. Let $g(x)=\displaystyle\int_{0}^{x}f(t)\,dt$.</p>
+    <div class="fig">
+      <svg width="340" height="180" viewBox="-1 -3 10 5" xmlns="http://www.w3.org/2000/svg">
+        <line x1="-1" y1="0" x2="9" y2="0" stroke="#777" stroke-width="0.04"/>
+        <line x1="0" y1="-3" x2="0" y2="2" stroke="#777" stroke-width="0.04"/>
+        <text x="2" y="0.4" font-size="0.32">2</text>
+        <text x="4" y="0.4" font-size="0.32">4</text>
+        <text x="6" y="0.4" font-size="0.32">6</text>
+        <text x="8" y="0.4" font-size="0.32">8</text>
+        <text x="-0.3" y="-1.6" font-size="0.32">2</text>
+        <text x="-0.3" y="1.6" font-size="0.32">-2</text>
+        <polyline points="0,0 2,-1.5 4,0" fill="none" stroke="#222" stroke-width="0.08"/>
+        <path d="M 4,0 A 2 2 0 0 1 6,2" fill="none" stroke="#222" stroke-width="0.08"/>
+        <polyline points="6,2 8,2" fill="none" stroke="#222" stroke-width="0.08"/>
+      </svg>
+    </div>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find $g(2)$, $g(4)$, and $g(8)$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> On what interval(s) is $g$ increasing? Justify.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> At what value of $x$ on $[0,8]$ does $g$ attain its absolute maximum? Justify.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(d)</span> Find the $x$-coordinate of each point of inflection of $g$ on $(0,8)$. Justify.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 3</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;4</span><span class="pill hard">HARD</span><span class="pill topic">6.8 / 6.9 / 6.10 Techniques</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Evaluate each of the following integrals, showing all algebraic steps. For $u$-substitution problems, clearly state your choice of $u$ and $du$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> $\displaystyle\int \dfrac{2x+3}{x^{2}+3x+5}\,dx$</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\int_{0}^{1}x\sqrt{1-x^{2}}\,dx$</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(c)</span> $\displaystyle\int \dfrac{x^{2}+1}{x-2}\,dx$</div><div class="work l"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;5</span><span class="pill hard">HARD</span><span class="pill topic">6.4 / 6.5 / 6.7 Reasoning with $g$</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Let $f$ be a continuous function on $[-2,8]$, and define $g(x)=\displaystyle\int_{0}^{x}f(t)\,dt$. It is known that $\displaystyle\int_{0}^{3}f(t)\,dt=6$, $\displaystyle\int_{3}^{5}f(t)\,dt=-2$, and $\displaystyle\int_{5}^{8}f(t)\,dt=4$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find $g(3)$, $g(5)$, and $g(8)$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> Find $\displaystyle\int_{-1}^{8}\bigl[\,2f(t)+1\,\bigr]\,dt$, given that $\displaystyle\int_{-1}^{0}f(t)\,dt = 1$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Suppose $f$ is differentiable on $[0,8]$, with $f(0)=2$ and $f(8)=-3$. Let $h(x)=x\cdot f(x)$. Find $\displaystyle\int_{0}^{8}\bigl[\,f(x)+x\,f'(x)\,\bigr]\,dx$.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(d)</span> Let $H(x)=\displaystyle\int_{0}^{x^{2}}f(t)\,dt$. Express $H'(x)$ in terms of $f$ and $x$.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 4</span></footer>
+<div class="page-break"></div>
+
+<div class="part" style="border-top-color:#7A4A98;border-bottom-color:#7A4A98;"><span class="part-label" style="color:#5B2A6E;">PART III &mdash; (BC) EXTENSIONS</span><span class="part-meta">Topics 6.11, 6.12, 6.13 — BC ONLY</span></div>
+<h2 class="section-head" style="color:#5B2A6E;">BC-Only Practice</h2>
+<div class="bc-banner"><b>BC ONLY.</b> The following items cover Integration by Parts (Topic 6.11), Linear Partial Fractions (Topic 6.12), and Improper Integrals (Topic 6.13). AB students may skip this section. BC students should be fluent with: (i) IBP $\displaystyle\int u\,dv = uv-\int v\,du$ — pick $u$ via LIATE; (ii) decomposing proper rationals with distinct linear factors as $\dfrac{A}{x-r_1}+\dfrac{B}{x-r_2}+\cdots$; (iii) evaluating improper integrals as limits, including those with interior discontinuities (split first).</div>
+
+<div class="q bc">
+  <div class="q-head"><span class="pill qnum">Q&nbsp;BC1</span><span class="pill med">MEDIUM</span><span class="pill topic">6.11 IBP</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int_{0}^{1}x\,e^{x}\,dx=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $1$</li>
+      <li><span class="lbl">(C)</span> $e-1$</li>
+      <li><span class="lbl">(D)</span> $e$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q bc">
+  <div class="q-head"><span class="pill qnum">Q&nbsp;BC2</span><span class="pill med">MEDIUM</span><span class="pill topic">6.12 Partial Fractions</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">The partial-fraction decomposition of $\dfrac{1}{x^{2}-1}$ is</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\dfrac{1}{x-1}+\dfrac{1}{x+1}$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1/2}{x-1}-\dfrac{1/2}{x+1}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{1/2}{x-1}+\dfrac{1/2}{x+1}$</li>
+      <li><span class="lbl">(D)</span> $\dfrac{1}{x-1}-\dfrac{1}{x+1}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q bc">
+  <div class="q-head"><span class="pill qnum">Q&nbsp;BC3</span><span class="pill easy">EASY</span><span class="pill topic">6.13 Improper</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\int_{1}^{\infty}\dfrac{1}{x^{2}}\,dx=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $1$</li>
+      <li><span class="lbl">(C)</span> $\infty$ (diverges)</li>
+      <li><span class="lbl">(D)</span> $\dfrac{1}{2}$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q bc">
+  <div class="q-head"><span class="pill qnum">Q&nbsp;BC4</span><span class="pill med">MEDIUM</span><span class="pill topic">6.13 Improper (Compare)</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Which of the following improper integrals diverge?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">I.</span> $\displaystyle\int_{1}^{\infty}\dfrac{1}{x}\,dx$</li>
+      <li><span class="lbl">II.</span> $\displaystyle\int_{1}^{\infty}\dfrac{1}{x^{3/2}}\,dx$</li>
+      <li><span class="lbl">III.</span> $\displaystyle\int_{0}^{1}\dfrac{1}{\sqrt{x}}\,dx$</li>
+    </ul>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> I only</li>
+      <li><span class="lbl">(B)</span> I and II</li>
+      <li><span class="lbl">(C)</span> II and III</li>
+      <li><span class="lbl">(D)</span> I, II, and III</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q frq bc">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;BC1</span><span class="pill hard">HARD</span><span class="pill topic">6.11 IBP (Twice)</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Evaluate each integral using integration by parts. State your choice of $u$ and $dv$ at every step.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> $\displaystyle\int x^{2}\,e^{x}\,dx$ — apply IBP twice.</div><div class="work xl"></div>
+      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\int_{1}^{e}\ln x\,dx$ — use $u=\ln x$, $dv=dx$.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(c)</span> Briefly explain how the LIATE mnemonic guided your $u$ selection in parts (a) and (b).</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 5 (BC)</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq bc">
+  <div class="q-head"><span class="pill qnum">FRQ&nbsp;BC2</span><span class="pill hard">HARD</span><span class="pill topic">6.12 / 6.13 Partial Fractions + Improper</span><span class="pill bc">BC ONLY</span><span class="pill nocalc">No Calculator</span></div>
+  <div class="q-body">
+    <p class="prompt">Consider $\displaystyle\int_{2}^{\infty}\dfrac{1}{x^{2}-x}\,dx$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Decompose $\dfrac{1}{x^{2}-x}$ into partial fractions. Show the algebraic system you solve.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> Set up the integral as a limit, evaluate the antiderivative, and determine whether the integral converges. If it converges, give the exact value.</div><div class="work xl"></div>
+      <div class="part-item"><span class="tag">(c)</span> Now consider $\displaystyle\int_{0}^{2}\dfrac{1}{(x-1)^{1/3}}\,dx$, which is improper at the interior point $x=1$. Split the integral, evaluate each piece as a one-sided limit, and find the total value (or state divergence). Justify each step.</div><div class="work xl"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 6 Practice · Page 6 (BC)</span></footer>
+
+</body>
+</html>

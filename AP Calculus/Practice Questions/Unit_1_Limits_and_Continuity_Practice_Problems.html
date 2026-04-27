@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Calculus AB — Chapter 1: Limits &amp; Continuity — AP-Style Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style>
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --easy-bg:#E7F2E3; --easy-ink:#2F6B2F; --easy-rule:#79A977;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --calc-bg:#E4ECF7;  --calc-ink:#1E3F75;  --calc-rule:#7A9BCD;
+    --nocalc-bg:#ECECEE;--nocalc-ink:#333;   --nocalc-rule:#9A9A9A;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{
+    font-family:'Source Serif 4','Times New Roman',Times,serif;
+    font-size:11.5pt;line-height:1.5;
+    max-width:8.5in;margin:0 auto;padding:0.45in 0.65in 0.7in;
+  }
+  /* ——————————————————————————— header ——————————————————————————— */
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;}
+  .legend .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.14em;padding:3px 10px;border-radius:999px;border:1px solid;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.calc{background:var(--calc-bg);color:var(--calc-ink);border-color:var(--calc-rule);}
+  .pill.nocalc{background:var(--nocalc-bg);color:var(--nocalc-ink);border-color:var(--nocalc-rule);}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:46px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;margin:4px 0 22px;color:#222;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .study-path{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:10px 14px;margin:10px 0 16px;background:#FBF8F3;font-family:'Source Sans 3',sans-serif;font-size:10pt;}
+  .study-path h3{font-family:'DM Serif Display',serif;font-size:13pt;color:var(--maroon);margin-bottom:4px;}
+  .study-path .row{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;}
+  .study-path .row > div{flex:1 1 200px;}
+  .study-path .pill{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.1em;padding:1px 8px;border-radius:999px;border:1px solid;}
+  .preview-note{font-family:'Source Sans 3',sans-serif;font-size:9.5pt;color:#7A2E2E;font-style:italic;margin:2px 0 6px;}
+
+  /* ——————————————————————————— part/section headers ——————————————————————————— */
+  .part{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:'Source Sans 3',sans-serif;
+    border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);
+    padding:6px 2px;margin:18px 0 8px;
+  }
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+
+  /* ——————————————————————————— question card ——————————————————————————— */
+  .q{
+    border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;
+    padding:10px 14px 12px;margin-bottom:12px;background:#fff;
+    break-inside:avoid;page-break-inside:avoid;
+  }
+  .q.frq{border-left-color:#1E3F75;}
+  .q-head{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px;font-family:'Source Sans 3',sans-serif;}
+  .q-head .title{margin-left:auto;font-size:9.5pt;color:#666;font-style:italic;}
+  .q-body{font-size:11.5pt;}
+  .q-body p{margin:4px 0;}
+  .q-body .prompt{margin:4px 0 8px;}
+
+  /* options */
+  .opts{list-style:none;margin:6px 0 0 12px;padding:0;}
+  .opts li{padding:2px 0;margin-bottom:2px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+
+  /* work space */
+  .work{min-height:90px;border-top:1px dashed #c9c4bd;margin-top:8px;}
+  .work.s{min-height:50px;} .work.m{min-height:120px;} .work.l{min-height:170px;} .work.xl{min-height:240px;}
+
+  /* FRQ parts */
+  .frq-parts{margin-top:6px;}
+  .frq-parts .part-item{margin:6px 0 4px;}
+  .frq-parts .part-item > .tag{font-family:'Source Sans 3',sans-serif;font-weight:700;margin-right:6px;}
+
+  /* tables & small assets */
+  table.data{border-collapse:collapse;margin:8px auto;font-size:10.5pt;}
+  table.data th, table.data td{border:1px solid #444;padding:4px 14px;text-align:center;font-family:'Source Sans 3',sans-serif;}
+  table.data th{background:#f1ece4;font-weight:700;}
+
+  .fig{display:flex;justify-content:center;margin:6px 0 4px;}
+  .fig svg{background:#fafafa;border:1px solid #ccc;}
+
+  /* footer */
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+
+  .page-break{page-break-after:always;break-after:page;height:0;}
+
+  @media print{
+    body{padding:0;}
+    .q{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand">A&nbsp;B&nbsp;&nbsp;C&nbsp;A&nbsp;L&nbsp;C&nbsp;U&nbsp;L&nbsp;U&nbsp;S</div>
+<div class="chapter-tag">Chapter 1</div>
+<h1 class="chapter-title">Limits &amp; Continuity</h1>
+<p class="chapter-sub">AP-Style Practice Questions</p>
+<div class="legend">
+  <span class="pill easy">EASY</span>
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+</div>
+<p class="topics-line"><b>Multiple Choice</b> &bull; <b>Free Response</b> &bull; Topics 1.1 – 1.16 (AB)</p>
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span>Name:<span class="blank"></span></span><span>Period:<span class="blank period"></span></span></div>
+
+<div class="study-path">
+  <h3>How to Use This Set</h3>
+  <div class="row">
+    <div><b>Last-Minute Cram (≈30 min):</b> Solve every <span class="pill easy">EASY</span> MC and skim the FRQ prompts. If you miss an EASY, jump back to that topic in the study guide before moving on.</div>
+    <div><b>Standard Prep (≈90 min):</b> Solve all MC, then attempt the EASY/MEDIUM FRQs. Aim for clean, justified algebraic steps.</div>
+    <div><b>Shooting for a 5 (≈2.5 hr):</b> Complete every MC and every FRQ. Pay extra attention to <span class="pill hard">HARD</span> items and to writing FRQ justifications in full sentences with theorem citations (Squeeze, IVT).</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ PART I ════════════════════════════════ -->
+<div class="part"><span class="part-label">PART I</span><span class="part-meta">Topics 1.1 – 1.16</span></div>
+<h2 class="section-head">Multiple Choice Questions</h2>
+<p class="instructions">Show all supporting work on scratch paper. On the AP Exam, Section I is split into a no-calculator and a calculator-allowed part — each question below is labeled accordingly.</p>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span>
+    <span class="pill topic">1.3 Estimating from Tables</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">The table gives values of $f(x)$ near $x=2$.</p>
+    <table class="data">
+      <tr><th>$x$</th><td>1.9</td><td>1.99</td><td>1.999</td><td>2.001</td><td>2.01</td><td>2.1</td></tr>
+      <tr><th>$f(x)$</th><td>4.61</td><td>4.9601</td><td>4.996</td><td>5.004</td><td>5.0401</td><td>5.41</td></tr>
+    </table>
+    <p>Based on the table, $\displaystyle\lim_{x\to 2}f(x)$ is best estimated by</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $4$</li>
+      <li><span class="lbl">(B)</span> $4.5$</li>
+      <li><span class="lbl">(C)</span> $5$</li>
+      <li><span class="lbl">(D)</span> does not exist</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span>
+    <span class="pill topic">1.5 Algebraic Manipulation</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 3}\dfrac{x^2-9}{x-3}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $3$</li>
+      <li><span class="lbl">(C)</span> $6$</li>
+      <li><span class="lbl">(D)</span> does not exist</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q3</span><span class="pill easy">EASY</span>
+    <span class="pill topic">1.6 Rationalizing</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 4}\dfrac{\sqrt{x}-2}{x-4}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1}{4}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{1}{2}$</li>
+      <li><span class="lbl">(D)</span> $1$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.8 Special Trig Limits</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 0}\dfrac{\sin(5x)}{3x}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{3}{5}$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{5}{3}$</li>
+      <li><span class="lbl">(D)</span> does not exist</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.8 Trig Limits</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 0}\dfrac{1-\cos x}{x^{2}}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $\dfrac{1}{2}$</li>
+      <li><span class="lbl">(C)</span> $1$</li>
+      <li><span class="lbl">(D)</span> does not exist</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.7 Squeeze Theorem</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">If $4-x^{2}\le g(x)\le 4+x^{2}$ for all $x$, then $\displaystyle\lim_{x\to 0}g(x)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $2$</li>
+      <li><span class="lbl">(C)</span> $4$</li>
+      <li><span class="lbl">(D)</span> cannot be determined</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q7</span><span class="pill easy">EASY</span>
+    <span class="pill topic">1.2 One-Sided from Graph</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">The graph of $f$ is shown. Which statement is true?</p>
+    <div class="fig">
+      <svg width="260" height="180" viewBox="-0.5 -0.3 7 5" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="4.3" x2="7" y2="4.3" stroke="#999" stroke-width="0.03"/>
+        <line x1="1" y1="0" x2="1" y2="4.8" stroke="#999" stroke-width="0.03"/>
+        <text x="2" y="4.7" font-size="0.32" text-anchor="middle" fill="#444">1</text>
+        <text x="3" y="4.7" font-size="0.32" text-anchor="middle" fill="#444">2</text>
+        <text x="4" y="4.7" font-size="0.32" text-anchor="middle" fill="#444">3</text>
+        <text x="5" y="4.7" font-size="0.32" text-anchor="middle" fill="#444">4</text>
+        <text x="0.7" y="3.4" font-size="0.32" text-anchor="end" fill="#444">1</text>
+        <text x="0.7" y="2.4" font-size="0.32" text-anchor="end" fill="#444">2</text>
+        <text x="0.7" y="1.4" font-size="0.32" text-anchor="end" fill="#444">3</text>
+        <polyline points="1,3.3 2,2.3 3,1.3" fill="none" stroke="#222" stroke-width="0.07"/>
+        <circle cx="3" cy="1.3" r="0.13" fill="#fff" stroke="#222" stroke-width="0.06"/>
+        <circle cx="3" cy="3.3" r="0.13" fill="#222"/>
+        <polyline points="3,3.3 4,2.8 5,2.3 6,1.3" fill="none" stroke="#222" stroke-width="0.07"/>
+        <circle cx="3" cy="3.3" r="0.12" fill="#fff" stroke="#222" stroke-width="0.05"/>
+      </svg>
+    </div>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $\displaystyle\lim_{x\to 2^-}f(x)=\lim_{x\to 2^+}f(x)$ and $f(2)$ equals that value.</li>
+      <li><span class="lbl">(B)</span> $\displaystyle\lim_{x\to 2^-}f(x)\ne\lim_{x\to 2^+}f(x)$, so $\displaystyle\lim_{x\to 2}f(x)$ does not exist.</li>
+      <li><span class="lbl">(C)</span> $\displaystyle\lim_{x\to 2}f(x)$ exists and equals $f(2)$.</li>
+      <li><span class="lbl">(D)</span> $\displaystyle\lim_{x\to 2}f(x)$ exists but is not equal to $f(2)$.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q8</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.9 Continuity</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=\begin{cases}\dfrac{x^{2}-4}{x-2}, & x\ne 2\\[4pt]k, & x=2\end{cases}$. For what value of $k$ is $f$ continuous at $x=2$?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $2$</li>
+      <li><span class="lbl">(C)</span> $4$</li>
+      <li><span class="lbl">(D)</span> no such value exists</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q9</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.10 Types of Discontinuity</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$g(x)=\dfrac{x+1}{x^{2}+x}$ has which type of discontinuity at $x=0$?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> Removable</li>
+      <li><span class="lbl">(B)</span> Jump</li>
+      <li><span class="lbl">(C)</span> Infinite</li>
+      <li><span class="lbl">(D)</span> $g$ is continuous at $x=0$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q10</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.11 Piecewise Continuity</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Find $a$ and $b$ so that $f(x)=\begin{cases}2x+a, & x\le 1\\ bx^{2}+3, & 1<x<2\\ 4x-b, & x\ge 2\end{cases}$ is continuous everywhere.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $a=2,\ b=1$</li>
+      <li><span class="lbl">(B)</span> $a=3,\ b=2$</li>
+      <li><span class="lbl">(C)</span> $a=1,\ b=0$</li>
+      <li><span class="lbl">(D)</span> No such $(a,b)$ makes $f$ continuous everywhere.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q11</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.14 Infinite Limits</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 2^-}\dfrac{x+3}{x-2}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $+\infty$</li>
+      <li><span class="lbl">(B)</span> $-\infty$</li>
+      <li><span class="lbl">(C)</span> $0$</li>
+      <li><span class="lbl">(D)</span> $1$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q12</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.15 Limits at Infinity</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to\infty}\dfrac{6x^{2}-x}{3x^{2}+4}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $1$</li>
+      <li><span class="lbl">(C)</span> $2$</li>
+      <li><span class="lbl">(D)</span> $\infty$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q13</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.15 Limits at Infinity (Radical)</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to\infty}\dfrac{\sqrt{9x^{4}+1}}{x^{2}-3x}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $1$</li>
+      <li><span class="lbl">(C)</span> $3$</li>
+      <li><span class="lbl">(D)</span> nonexistent</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q14</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.15 End Behavior</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to -\infty}\bigl(\sqrt{x^{2}+4x}+x\bigr)=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $-2$</li>
+      <li><span class="lbl">(B)</span> $0$</li>
+      <li><span class="lbl">(C)</span> $2$</li>
+      <li><span class="lbl">(D)</span> $\infty$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q15</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.16 IVT</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $f$ be continuous on $[0,3]$ with $f(0)=-2$ and $f(3)=5$. Which conclusion does the IVT guarantee?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> $f(c)=0$ for some $c\in(0,3)$.</li>
+      <li><span class="lbl">(B)</span> $f(c)=6$ for some $c\in(0,3)$.</li>
+      <li><span class="lbl">(C)</span> $f(c)=-3$ for some $c\in(0,3)$.</li>
+      <li><span class="lbl">(D)</span> $f$ is differentiable on $(0,3)$.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q16</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.16 IVT (Table)</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">The continuous function $h$ has the selected values below. What is the minimum number of real zeros of $h$ on $[1,9]$ guaranteed by the IVT?</p>
+    <table class="data">
+      <tr><th>$x$</th><td>1</td><td>3</td><td>5</td><td>7</td><td>9</td></tr>
+      <tr><th>$h(x)$</th><td>$-4$</td><td>$2$</td><td>$-1$</td><td>$3$</td><td>$-5$</td></tr>
+    </table>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $1$</li>
+      <li><span class="lbl">(B)</span> $2$</li>
+      <li><span class="lbl">(C)</span> $3$</li>
+      <li><span class="lbl">(D)</span> $4$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q17</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.12 Intermediate Forms</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{h\to 0}\dfrac{(2+h)^{3}-8}{h}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $0$</li>
+      <li><span class="lbl">(B)</span> $6$</li>
+      <li><span class="lbl">(C)</span> $8$</li>
+      <li><span class="lbl">(D)</span> $12$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q18</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.13 Complex Fractions</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\displaystyle\lim_{x\to 0}\dfrac{\frac{1}{x+3}-\frac{1}{3}}{x}=$</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> $-\dfrac{1}{9}$</li>
+      <li><span class="lbl">(B)</span> $0$</li>
+      <li><span class="lbl">(C)</span> $\dfrac{1}{9}$</li>
+      <li><span class="lbl">(D)</span> does not exist</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 1 Practice · Page 1</span></footer>
+<div class="page-break"></div>
+
+<!-- ════════════════════════════════ PART II ════════════════════════════════ -->
+<div class="part"><span class="part-label">PART II</span><span class="part-meta">Show All Work</span></div>
+<h2 class="section-head">Free-Response Questions</h2>
+<p class="instructions">Free-response answers must include complete setup: algebraic manipulation, stated theorem conditions for IVT/Squeeze, and interval justification for continuity. Units and contextual explanations are required where indicated.</p>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">FRQ&nbsp;1</span><span class="pill easy">EASY</span>
+    <span class="pill topic">1.5 / 1.6 Evaluating Limits</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Evaluate each limit. Show all algebraic steps.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> $\displaystyle\lim_{x\to 5}\dfrac{x^{2}-25}{x^{2}-4x-5}$</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\lim_{x\to 9}\dfrac{x-9}{\sqrt{x}-3}$</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> $\displaystyle\lim_{x\to 0}\dfrac{\sin(3x)}{\tan(2x)}$</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">FRQ&nbsp;2</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.9 – 1.11 Continuity &amp; Parameters</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=\begin{cases} \dfrac{x^{2}-x-6}{x-3}, & x<3\\[4pt] ax+b, & 3\le x\le 5\\[4pt] x^{2}-9, & x>5 \end{cases}$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find $\displaystyle\lim_{x\to 3^-}f(x)$ and explain how this determines a restriction on $a$ and $b$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> Determine values of $a$ and $b$ that make $f$ continuous on $\mathbb{R}$. Show the system you solve.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(c)</span> With the values from (b), classify the discontinuity of $f'$ at $x=3$ and at $x=5$ (if any). <span class="preview-note" style="display:inline">(Preview of Unit 2 — derivative discontinuity. Cram-track students may skip this part.)</span></div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 1 Practice · Page 2</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">FRQ&nbsp;3</span><span class="pill med">MEDIUM</span>
+    <span class="pill topic">1.14 – 1.15 Asymptotes</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=\dfrac{2x^{2}-x-6}{x^{2}-4}$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Find all vertical asymptotes of $f$. Justify with one-sided limits.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> Find any removable discontinuities and state the value needed to remove each.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Find $\displaystyle\lim_{x\to\infty}f(x)$ and $\displaystyle\lim_{x\to -\infty}f(x)$, and state the horizontal asymptote.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">FRQ&nbsp;4</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.16 IVT Application (Table)</span><span class="pill calc">Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A diver's depth $d(t)$ in meters at time $t$ seconds is continuous on $[0,20]$.</p>
+    <table class="data">
+      <tr><th>$t$ (s)</th><td>0</td><td>4</td><td>10</td><td>15</td><td>20</td></tr>
+      <tr><th>$d(t)$ (m)</th><td>0</td><td>8</td><td>22</td><td>18</td><td>5</td></tr>
+    </table>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Use the IVT to justify that there is a time in $(0,10)$ when the diver is exactly $15$ meters deep.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(b)</span> Is the IVT enough to conclude that the diver is $15$ meters deep at some time in $(10,20)$? Justify.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> A student claims the IVT guarantees that the diver's depth equals $25$ meters for some $t\in(0,20)$. Is the claim correct? Explain.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(d)</span> What is the minimum number of times the diver can be at depth $15$ meters on $[0,20]$? Justify.</div><div class="work m"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 1 Practice · Page 3</span></footer>
+<div class="page-break"></div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">FRQ&nbsp;5</span><span class="pill hard">HARD</span>
+    <span class="pill topic">1.7 / 1.12 Squeeze &amp; Definition</span><span class="pill nocalc">No Calculator</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $f(x)=x^{2}\cos\!\bigl(\tfrac{1}{x}\bigr)$ for $x\ne 0$, and define $f(0)=0$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Show, using the Squeeze Theorem, that $\displaystyle\lim_{x\to 0}f(x)=0$. State the bounding inequalities and verify all conditions.</div><div class="work l"></div>
+      <div class="part-item"><span class="tag">(b)</span> Use part (a) to explain why $f$ is continuous at $x=0$.</div><div class="work m"></div>
+      <div class="part-item"><span class="tag">(c)</span> Compute $\displaystyle\lim_{x\to 0}\dfrac{f(x)-f(0)}{x-0}$ using the Squeeze Theorem. Interpret the meaning of the limit.</div><div class="work l"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot"><span class="mark">© Dingrui Scholars</span><span>Chapter 1 Practice · Page 4</span></footer>
+
+</body>
+</html>
