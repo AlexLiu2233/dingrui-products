@@ -1457,7 +1457,7 @@ code {
 
     <div class="concept-box">
       <strong>AP Exam Scope</strong>
-      The AP Calculus AB and BC Exams only test L'Hôpital's Rule on the indeterminate forms \(\frac{0}{0}\) and \(\frac{\infty}{\infty}\). Other indeterminate forms like \(0 \cdot \infty\), \(\infty - \infty\), \(0^0\), \(1^\infty\), \(\infty^0\) are not assessed, though they can sometimes be rewritten into a quotient form where L'Hôpital's applies.
+      The AP Calculus AB and BC Exams only test L'Hôpital's Rule on the indeterminate forms \(\frac{0}{0}\) and \(\frac{\infty}{\infty}\). Other indeterminate forms like \(0 \cdot \infty\), \(\infty - \infty\), \(0^0\), \(1^\infty\), \(\infty^0\) are not assessed directly — but a \(0 \cdot \infty\) form <em>can appear</em> on a free-response problem where you are expected to <strong>rewrite</strong> it into \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\) before L'Hôpital applies. The trick: move one factor into the denominator (e.g., \(x \ln x = \dfrac{\ln x}{1/x}\)). See the worked example below.
     </div>
 
     <details>
@@ -1518,6 +1518,47 @@ code {
             \lim_{x\to 0}\frac{\sin x}{2x}=\lim_{x\to 0}\frac{\cos x}{2}=\frac{\cos 0}{2}=\frac{1}{2}
             \]
           </div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Worked Example — Rewriting \(0 \cdot \infty\) for L'Hôpital (\(\displaystyle\lim_{x \to 0^+}\, x \ln x\))</summary>
+      <div class="detail-body">
+        <p class="worked-intro">L'Hôpital does not apply directly to a \(0 \cdot \infty\) form. The strategy is to move one factor to the denominator so the limit becomes \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\), then apply L'Hôpital.</p>
+        <div class="worked-solution">
+          <div class="solution-step">
+            <h4>Step 1 — Identify the indeterminate form</h4>
+            <p>As \(x \to 0^+\): \(x \to 0\) and \(\ln x \to -\infty\). So the form is \(0 \cdot (-\infty)\). This is indeterminate, but L'Hôpital does <strong>not</strong> apply yet — we need a quotient.</p>
+          </div>
+          <div class="solution-step">
+            <h4>Step 2 — Rewrite as \(\frac{\infty}{\infty}\)</h4>
+            <p>Move \(x\) into the denominator as \(\dfrac{1}{1/x}\):</p>
+            \[
+            x \ln x \;=\; \dfrac{\ln x}{\,1/x\,}
+            \]
+            <p>As \(x \to 0^+\): \(\ln x \to -\infty\) and \(\dfrac{1}{x} \to +\infty\). The new form is \(\dfrac{-\infty}{+\infty}\) — now L'Hôpital applies.</p>
+          </div>
+          <div class="solution-step">
+            <h4>Step 3 — Apply L'Hôpital's Rule</h4>
+            \[
+            \lim_{x\to 0^+}\frac{\ln x}{1/x}
+            \;=\; \lim_{x\to 0^+}\frac{\,1/x\,}{-1/x^{2}}
+            \;=\; \lim_{x\to 0^+}\frac{1}{x}\cdot\bigl(-x^{2}\bigr)
+            \;=\; \lim_{x\to 0^+}\bigl(-x\bigr)
+            \]
+          </div>
+          <div class="solution-step solution-final">
+            <h4>Step 4 — Evaluate</h4>
+            \[
+            \lim_{x\to 0^+}\bigl(-x\bigr) \;=\; 0
+            \]
+            <p>Therefore \(\displaystyle\lim_{x\to 0^+}x\ln x = 0\).</p>
+          </div>
+        </div>
+        <div class="concept-box orange" style="margin-top: 14px;">
+          <strong>Choice of which factor to move</strong>
+          We moved \(x\) (not \(\ln x\)) to the denominator. Why? After applying L'Hôpital, the resulting expression simplified cleanly to \(-x\). If you instead wrote \(x \ln x = \dfrac{x}{1/\ln x}\), L'Hôpital would still work but the algebra is uglier. Try both arrangements on scratch paper and pick the one that simplifies.
         </div>
       </div>
     </details>
@@ -1735,7 +1776,7 @@ code {
       <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize when approximation over- or underestimates (concavity)</li>
       <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Identify indeterminate forms $0/0$ and $\infty/\infty$</li>
       <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply L'Hôpital's Rule with correct justification of hypotheses</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Convert other indeterminate forms ($0 \cdot \infty$, $\infty - \infty$, $1^\infty$) for L'Hôpital</li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Rewrite a $0 \cdot \infty$ form as $\frac{0}{0}$ or $\frac{\infty}{\infty}$ before applying L'Hôpital (e.g., $x \ln x$)</li>
       <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate tool (derivative rule, related rates, L'Hôpital) per problem</li>
     </ul>
   </section>

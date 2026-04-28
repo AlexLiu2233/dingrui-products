@@ -1093,6 +1093,43 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
     <div class="quiz-explain correct-exp">Correct! By FTC Part 1 with chain rule: $g'(x) = \sqrt{3x+1} \cdot 3 = 3\sqrt{3x+1}$. The upper limit is $3x$, so you must multiply by its derivative, $3$.</div>
     <div class="quiz-explain wrong-exp">Apply FTC Part 1: $g'(x) = f(g(x)) \cdot g'(x) = \sqrt{3x + 1} \cdot 3$. Don't forget to multiply by the derivative of the upper limit!</div>
   </div>
+
+  <div class="concept-box red" style="margin-top: 22px;">
+    <strong style="color: var(--red);">Lower-Limit Variant — Sign Flip!</strong>
+    <span style="display:block; margin-top:8px;">If the <em>lower</em> limit is the function of $x$ (and the upper limit is constant), reverse the bounds first to put the variable back on top. Reversing introduces a leading minus sign:</span>
+    $$ \frac{d}{dx} \int_{g(x)}^{a} f(t)\,dt \;=\; -\,f\!\bigl(g(x)\bigr) \cdot g'(x) $$
+    <span style="display:block; margin-top:8px;">Forgetting that minus sign is one of the most common AP traps for this topic.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — FTC Part 1 with Chain Rule on the <em>Lower</em> Limit</summary>
+    <div class="detail-body">
+      <div class="worked-solution">
+        <p>Find $H'(x)$ if $\displaystyle H(x) = \int_{x^2}^{3} \cos t\,dt$.</p>
+        <p><strong>Step 1 — Reverse the bounds.</strong> Use the property $\int_a^b = -\int_b^a$ so the variable bound is on top:</p>
+        $$ H(x) \;=\; -\int_{3}^{x^2} \cos t\,dt $$
+        <p><strong>Step 2 — Apply FTC Part 1 with chain rule on the upper limit.</strong> Now $g(x)=x^2$, $g'(x)=2x$, integrand $f(t)=\cos t$:</p>
+        $$\begin{aligned}
+        H'(x) &= -\,f\!\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
+        &= -\cos(x^2)\cdot 2x \\[4pt]
+        &= -\,2x\cos(x^2)
+        \end{aligned}$$
+        <p><strong>Sanity check.</strong> The minus sign comes from reversing the bounds — not from anything in the integrand. If you skip Step 1 and apply the chain-rule formula directly to a lower-limit integral, you will get the wrong sign.</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">If $\displaystyle K(x) = \int_{x^3}^{5} e^{t}\,dt$, what is $K'(x)$?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$3x^2\, e^{x^3}$</div>
+      <div class="quiz-opt" data-idx="1">$-3x^2\, e^{x^3}$</div>
+      <div class="quiz-opt" data-idx="2">$e^{x^3}$</div>
+      <div class="quiz-opt" data-idx="3">$-e^{x^3}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Reverse the bounds: $K(x) = -\int_5^{x^3} e^t\,dt$. Apply FTC + chain rule with $g(x)=x^3$, $g'(x)=3x^2$: $K'(x) = -e^{x^3}\cdot 3x^2 = -3x^2 e^{x^3}$.</div>
+    <div class="quiz-explain wrong-exp">The variable is on the <em>lower</em> limit. Reverse the bounds to introduce a $-$ sign, then apply FTC + chain rule: $K'(x) = -e^{x^3}\cdot 3x^2$.</div>
+  </div>
 </section>
 
 <hr class="sep">
@@ -1486,9 +1523,12 @@ $$\begin{aligned}
 
   <div class="concept-box purple">
     <strong style="color: var(--purple);">What Makes an Integral "Improper"?</strong>
-    <span style="display:block; margin-top:8px;">1. One or both limits of integration are infinite ($\pm\infty$).</span>
-    <span style="display:block; margin-top:4px;">2. The integrand is unbounded (has a vertical asymptote) within the interval.</span>
+    <span style="display:block; margin-top:8px;"><strong>Case 1.</strong> One or both limits of integration are infinite ($\pm\infty$).</span>
+    <span style="display:block; margin-top:4px;"><strong>Case 2.</strong> The integrand is unbounded (has a vertical asymptote) somewhere in the interval — including the endpoints or, importantly, an <em>interior</em> point.</span>
+    <span style="display:block; margin-top:8px;">Both cases are evaluated by replacing the trouble point with a limit.</span>
   </div>
+
+  <h3 style="color: var(--purple);">Case 1 — Infinite Limits of Integration</h3>
 
   <div class="formula-box">
     <div class="formula-label">Improper Integral — Infinite Limit</div>
@@ -1532,6 +1572,67 @@ $$\begin{aligned}
   <div class="concept-box green">
     <strong style="color: var(--green);">p-Series Test for Integrals</strong>
     $\displaystyle\int_1^{\infty} \frac{1}{x^p}\,dx$ converges if $p > 1$ and diverges if $p \leq 1$.
+  </div>
+
+  <hr style="margin: 28px 0; border: 0; border-top: 1px dashed var(--border-light);">
+
+  <h3 style="color: var(--purple);">Case 2 — Discontinuity Inside the Interval</h3>
+
+  <p>If the integrand has a vertical asymptote at an <em>interior</em> point $c$ with $a \lt c \lt b$, the integral is improper at $c$ and you <strong>must split it</strong> at the discontinuity before evaluating. Each piece becomes a one-sided limit.</p>
+
+  <div class="formula-box">
+    <div class="formula-label">Improper Integral — Interior Discontinuity at $x=c$</div>
+    $$ \int_a^b f(x)\,dx \;=\; \lim_{t \to c^{-}} \int_a^{t} f(x)\,dx \;+\; \lim_{s \to c^{+}} \int_{s}^{b} f(x)\,dx $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The full integral converges only if <strong>both</strong> one-sided pieces converge. If either piece diverges, the whole integral diverges.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Critical — Don't Skip the Split!</strong>
+    <span style="display:block; margin-top:8px;">Plugging the bounds straight into the antiderivative on an interval that <em>contains</em> a vertical asymptote gives a meaningless number. The interior point must be quarantined into its own one-sided limits.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Splitting at an Interior Discontinuity ($\displaystyle\int_0^{2}\frac{1}{(x-1)^{1/3}}\,dx$)</summary>
+    <div class="detail-body">
+      <div class="worked-solution">
+        <p><strong>Step 1 — Locate the discontinuity.</strong> The integrand $(x-1)^{-1/3}$ blows up as $x \to 1$. Since $0 \lt 1 \lt 2$, this is an <em>interior</em> singularity — split at $x=1$:</p>
+        $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; \underbrace{\lim_{t\to 1^{-}}\int_0^{t}(x-1)^{-1/3}\,dx}_{\text{Piece A}} \;+\; \underbrace{\lim_{s\to 1^{+}}\int_{s}^{2}(x-1)^{-1/3}\,dx}_{\text{Piece B}} $$
+        <p><strong>Step 2 — Antiderivative.</strong> Using $u = x-1$, $du = dx$:</p>
+        $$ \int (x-1)^{-1/3}\,dx \;=\; \tfrac{3}{2}\,(x-1)^{2/3} + C $$
+        <p><strong>Step 3 — Evaluate Piece A.</strong></p>
+        $$\begin{aligned}
+        \lim_{t\to 1^{-}} \tfrac{3}{2}(x-1)^{2/3}\Big|_0^{t}
+        &= \lim_{t\to 1^{-}}\!\left[\tfrac{3}{2}(t-1)^{2/3} - \tfrac{3}{2}(-1)^{2/3}\right] \\[4pt]
+        &= 0 - \tfrac{3}{2}(1) \;=\; -\tfrac{3}{2}
+        \end{aligned}$$
+        <p>(Note: $(-1)^{2/3} = \bigl((-1)^2\bigr)^{1/3} = 1$, and $(t-1)^{2/3} \to 0$ since $2/3 \gt 0$.)</p>
+        <p><strong>Step 4 — Evaluate Piece B.</strong></p>
+        $$\begin{aligned}
+        \lim_{s\to 1^{+}} \tfrac{3}{2}(x-1)^{2/3}\Big|_s^{2}
+        &= \lim_{s\to 1^{+}}\!\left[\tfrac{3}{2}(1)^{2/3} - \tfrac{3}{2}(s-1)^{2/3}\right] \\[4pt]
+        &= \tfrac{3}{2} - 0 \;=\; \tfrac{3}{2}
+        \end{aligned}$$
+        <p><strong>Step 5 — Add the pieces.</strong> Both are finite, so the original integral converges:</p>
+        $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; -\tfrac{3}{2} + \tfrac{3}{2} \;=\; 0 $$
+        <p style="margin-top: 10px;"><strong>Sanity check.</strong> The integrand is an <em>odd</em> function about $x=1$, so by symmetry the signed area on $[0,1]$ exactly cancels the signed area on $[1,2]$. The answer of $0$ matches that intuition.</p>
+      </div>
+      <div class="concept-box orange" style="margin-top: 14px;">
+        <strong>Cautionary contrast</strong>
+        If the same split produced an answer like $\frac{3}{2} + \infty$ — i.e., one piece diverged — the whole integral would <strong>diverge</strong>. You don't get to cancel an infinity against a finite negative; convergence requires <em>both</em> one-sided limits to be finite.
+      </div>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-q">Which of the following is the correct setup for $\displaystyle\int_{-1}^{1}\frac{1}{x^{2}}\,dx$?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\displaystyle\bigl[-1/x\bigr]_{-1}^{1} = -1 - 1 = -2$ (just plug in the bounds)</div>
+      <div class="quiz-opt" data-idx="1">$\displaystyle\lim_{b\to\infty}\int_{-1}^{b}\frac{1}{x^{2}}\,dx$</div>
+      <div class="quiz-opt" data-idx="2">$\displaystyle\int_{-1}^{0}\frac{1}{x^{2}}\,dx + \int_{0}^{1}\frac{1}{x^{2}}\,dx$ (no limits needed)</div>
+      <div class="quiz-opt" data-idx="3">$\displaystyle\lim_{t\to 0^{-}}\int_{-1}^{t}\frac{1}{x^{2}}\,dx + \lim_{s\to 0^{+}}\int_{s}^{1}\frac{1}{x^{2}}\,dx$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $1/x^2$ has a vertical asymptote at $x=0$, which is interior to $[-1,1]$. The integral is improper there and must be split into two one-sided limits. (The answer turns out to be $\infty$ — both pieces diverge — but that's a separate evaluation step.)</div>
+    <div class="quiz-explain wrong-exp">$1/x^{2}$ blows up at $x=0$, which sits inside the interval $[-1,1]$. You can't just plug in bounds — you must split at $x=0$ and use one-sided limits.</div>
   </div>
 </section>
 
