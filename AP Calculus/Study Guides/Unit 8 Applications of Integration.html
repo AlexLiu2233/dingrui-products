@@ -354,55 +354,104 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-volume-roadmap">
-      <div class="topic-header"><span class="overline">Roadmap · Topics 8.7 – 8.12</span><h2>Volume Methods — Decision Tree</h2></div>
-      <p>Topics 8.7 – 8.12 cover three volume techniques. Pick the right one in 30 seconds with this flow:</p>
+      <div class="topic-header"><span class="overline">Roadmap · Topics 8.7 – 8.12</span><h2>Volume Methods Roadmap</h2></div>
 
-      <div class="concept-box"><strong>Step 1 — What kind of solid?</strong>
-        <p style="margin-top:6px;">If the solid is built from <em>specified cross-sectional shapes</em> (squares, semicircles, etc.), use the <strong>Cross-Section Method</strong> (8.7 – 8.8). Otherwise, if a region is <em>revolved</em> about a line, go to Step 2.</p>
+      <div class="concept-box"><strong>The big picture.</strong>
+        <p style="margin-top:6px;">Every Unit 8 volume problem reduces to the same three moves:</p>
+        <ol style="margin-left:18px; margin-top:4px;">
+          <li>Pick a <em>typical slice</em> of the solid (perpendicular to one axis).</li>
+          <li>Compute the <em>area</em> of that slice as a function of position.</li>
+          <li>Integrate the area along the axis.</li>
+        </ol>
+        <p style="margin-top:6px;">Topics 8.7 – 8.12 differ only in the <em>shape</em> of that slice. The 4-step decision tree below tells you which.</p>
+      </div>
+
+      <div class="concept-box"><strong>Step 1 — Cross-sections, or revolved?</strong>
+        <p style="margin-top:6px;">If the problem describes a solid built from <em>specified cross-sectional shapes</em> (squares, equilateral triangles, semicircles, …) sitting over a planar region, use the <strong>Cross-Section Method</strong> (Topics 8.7 – 8.8). Otherwise, if a planar region is <em>revolved</em> about a line, go to Step 2.</p>
       </div>
 
       <div class="concept-box"><strong>Step 2 — Disc or Washer?</strong>
-        <p style="margin-top:6px;"><em>Does the region touch the axis of revolution?</em></p>
+        <p style="margin-top:6px;">Sketch the region together with the axis of revolution and ask:</p>
+        <p style="margin-top:6px;"><em>"Does the region share at least one boundary with the axis?"</em></p>
         <ul style="margin-left:18px; margin-top:4px;">
-          <li><strong>Yes</strong> (region flush against the axis, no hole) → <strong>Disc Method</strong> (8.9 standard axis, 8.10 shifted axis).</li>
-          <li><strong>No</strong> (region offset from the axis, hole appears) → <strong>Washer Method</strong> (8.11 standard axis, 8.12 shifted axis).</li>
+          <li><strong>Yes</strong> — region's edge sits ON the axis → <strong>Disc Method</strong>. Each cross-section is a solid disc (no hole). Topics 8.9 (axis is $x$- or $y$-axis) and 8.10 (axis is $y=k$ or $x=k$).</li>
+          <li><strong>No</strong> — there is a gap between the region and the axis → <strong>Washer Method</strong>. Each cross-section is annular (hole in the middle). Topics 8.11 (standard axis) and 8.12 (shifted axis).</li>
         </ul>
       </div>
 
-      <div class="concept-box"><strong>Step 3 — $dx$ or $dy$?</strong>
+      <div class="concept-box"><strong>Step 3 — Slice direction: $dx$ or $dy$?</strong>
         <p style="margin-top:6px;">Slices must be <em>perpendicular</em> to the axis of revolution.</p>
         <ul style="margin-left:18px; margin-top:4px;">
-          <li>Axis is horizontal (the $x$-axis or $y=k$) → vertical slices → integrate <span class="mono">dx</span>.</li>
-          <li>Axis is vertical (the $y$-axis or $x=k$) → horizontal slices → integrate <span class="mono">dy</span>. (You will need to rewrite curves as $x=g(y)$.)</li>
+          <li>Axis is <strong>horizontal</strong> (the $x$-axis, or any $y=k$) → vertical slices → integrate <span class="mono">dx</span>.</li>
+          <li>Axis is <strong>vertical</strong> (the $y$-axis, or any $x=k$) → horizontal slices → integrate <span class="mono">dy</span>. (You will likely need to rewrite curves as $x=g(y)$.)</li>
         </ul>
       </div>
 
-      <div class="concept-box"><strong>Step 4 — What's the radius?</strong>
-        <p style="margin-top:6px;">Radius is the <em>perpendicular distance</em> from the curve to the axis of revolution — never automatically the function value.</p>
+      <div class="concept-box"><strong>Step 4 — What is the radius?</strong>
+        <p style="margin-top:6px;">A radius is the <em>perpendicular distance</em> from a boundary point of the region to the axis of revolution — <strong>not</strong> automatically the function value.</p>
+        <p style="margin-top:10px;"><strong>Disc</strong> (region edge sits on the axis):</p>
         <ul style="margin-left:18px; margin-top:4px;">
-          <li>Axis $y=0$: $R=f(x)$.</li>
-          <li>Axis $y=k$ above the region: $R=k-f(x)$. Below the region: $R=f(x)-k$. Either way: $R=|f(x)-k|$, but you can drop the bars if you know which side.</li>
-          <li>Washer: $R$ = farther curve, $r$ = nearer curve, both measured to the <em>same</em> axis.</li>
+          <li>Axis is the $x$-axis: $R = |f(x)|$. Squaring kills the sign, so writing $R = f(x)$ in the integrand is fine.</li>
+          <li>Axis is $y = k$: $R = |f(x) - k|$, which simplifies to $k - f(x)$ when the axis lies above the curve and $f(x) - k$ when below.</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Washer</strong> (gap between region and axis): a region bounded by two curves, both on the <em>same side</em> of the axis. The slice is an annulus.</p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>$R$ = outer radius = distance from the <em>farther</em> boundary curve to the axis.</li>
+          <li>$r$ = inner radius = distance from the <em>nearer</em> boundary curve to the axis.</li>
+          <li><strong>Critical:</strong> "outer" and "inner" depend on the <em>axis location</em>, not on which curve is called "$f$" or "$g$". Move the axis and the labels can swap. Always re-identify outer/inner from your sketch.</li>
         </ul>
       </div>
 
       <table class="content-table" style="margin-top:14px;">
-        <thead><tr><th>Method</th><th>When to use</th><th>Integrand</th><th>Topic</th></tr></thead>
+        <thead><tr><th>Method</th><th>When</th><th>Integrand</th><th>Topic</th></tr></thead>
         <tbody>
-          <tr><td>Cross Section</td><td>Solid built from named cross-sectional shapes (not revolved)</td><td>$A(x)\,dx$</td><td>8.7 – 8.8</td></tr>
-          <tr><td>Disc, standard axis</td><td>Revolved about $x$- or $y$-axis; region touches the axis</td><td>$\pi\,[R(x)]^2\,dx$</td><td>8.9</td></tr>
-          <tr><td>Disc, shifted axis</td><td>Revolved about $y=k$ or $x=k$; region touches that line</td><td>$\pi\,[f(x)-k]^2\,dx$</td><td>8.10</td></tr>
-          <tr><td>Washer, standard axis</td><td>Revolved about $x$- or $y$-axis; region leaves a hole</td><td>$\pi\bigl(R^2-r^2\bigr)\,dx$</td><td>8.11</td></tr>
-          <tr><td>Washer, shifted axis</td><td>Revolved about $y=k$ or $x=k$; region leaves a hole</td><td>$\pi\bigl([f(x)-k]^2-[g(x)-k]^2\bigr)\,dx$</td><td>8.12</td></tr>
+          <tr><td>Cross Section</td><td>Solid built from named cross-sectional shapes</td><td>$A(x)\,dx$ &nbsp;(or $A(y)\,dy$)</td><td>8.7 – 8.8</td></tr>
+          <tr><td>Disc, axis = $x$ or $y$</td><td>Revolved; region's edge sits on axis</td><td>$\pi\,R^2\,dx$ &nbsp;(or $dy$)</td><td>8.9</td></tr>
+          <tr><td>Disc, axis = $y=k$ or $x=k$</td><td>Revolved; region's edge sits on the line</td><td>$\pi\,[\,\text{dist}(f, \text{axis})\,]^{\,2}\,dx$</td><td>8.10</td></tr>
+          <tr><td>Washer, axis = $x$ or $y$</td><td>Revolved; gap between region and axis</td><td>$\pi\,(R^2 - r^2)\,dx$</td><td>8.11</td></tr>
+          <tr><td>Washer, axis = $y=k$ or $x=k$</td><td>Revolved; gap between region and the line</td><td>$\pi\,(R^2 - r^2)\,dx$ &nbsp;where $R, r$ = distances to the axis</td><td>8.12</td></tr>
         </tbody>
       </table>
 
-      <div class="concept-box red" style="margin-top:14px;"><strong>The single most common AP slip — $R^2-r^2$, NOT $(R-r)^2$</strong>
-        <p style="margin-top:6px;">Numerical check: with $R=3$ and $r=1$, $R^2-r^2 = 9-1 = 8$, but $(R-r)^2 = 2^2 = 4$. They are not equal — and the washer formula uses the first.</p>
+      <div class="concept-box red" style="margin-top:14px;"><strong>The single most common AP slip — $R^2 - r^2$, NOT $(R - r)^2$</strong>
+        <p style="margin-top:6px;">Numerical check: with $R = 3$ and $r = 1$, &nbsp;$R^2 - r^2 = 9 - 1 = 8$, &nbsp;but&nbsp; $(R - r)^2 = 2^2 = 4$. They are not equal — and the washer formula uses the first.</p>
+      </div>
+
+      <hr style="margin: 28px 0; border: 0; border-top: 1px dashed var(--border-light);">
+
+      <h3 style="margin-bottom: 6px;">Same Region, Three Axes — How the Setup Changes</h3>
+      <p>To see the decision tree in action, take one fixed region and revolve it about three different axes. The region: bounded by $y = \sqrt{x}$, &nbsp;$y = 0$, &nbsp;and $x = 4$. (A half-parabola sitting on the $x$-axis, with maximum height $\sqrt{4} = 2$.)</p>
+
+      <table class="content-table" style="margin-top:10px;">
+        <thead><tr><th>Axis of revolution</th><th>Method &amp; reasoning</th><th>Radii</th><th>Volume integral</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>$y = 0$ &nbsp;(the $x$-axis)</td>
+            <td><strong>Disc.</strong> Region's lower boundary <em>is</em> the axis.</td>
+            <td>$R = \sqrt{x}$</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 (\sqrt{x})^{\,2}\,dx = \pi\!\int_0^4 x\,dx = 8\pi$</td>
+          </tr>
+          <tr>
+            <td>$y = 3$ &nbsp;(line above region)</td>
+            <td><strong>Washer.</strong> Region's max height is $2$, so axis sits $1$ unit above the top — gap.</td>
+            <td>$R = 3 - 0 = 3$ &nbsp;(axis to the lower edge $y=0$, the <em>farther</em> boundary) <br>$r = 3 - \sqrt{x}$ &nbsp;(axis to upper curve, the <em>nearer</em> boundary)</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 \!\!\left[\,9 - (3 - \sqrt{x})^{\,2}\,\right]dx$</td>
+          </tr>
+          <tr>
+            <td>$y = -1$ &nbsp;(line below region)</td>
+            <td><strong>Washer.</strong> Region's bottom is at $y=0$; gap of $1$ unit below.</td>
+            <td>$R = \sqrt{x} - (-1) = \sqrt{x} + 1$ &nbsp;(axis to upper curve, the <em>farther</em> boundary) <br>$r = 0 - (-1) = 1$ &nbsp;(axis to lower edge, the <em>nearer</em> boundary)</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 \!\!\left[\,(\sqrt{x}+1)^{\,2} - 1\,\right]dx$</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="concept-box"><strong>What changed across the three rows?</strong>
+        <p style="margin-top:6px;">Same region every time. The axis moved, and that flipped <em>which boundary is farther</em>. With $y=3$ above, the lower edge $y=0$ is the outer curve. With $y=-1$ below, the upper curve $y=\sqrt{x}$ is the outer curve. Mechanical reuse of a previous problem's $R$ and $r$ assignments will give a wrong answer here. Always re-derive from a fresh sketch.</p>
       </div>
 
       <div class="concept-box green"><strong>30-second sketch routine</strong>
-        <p style="margin-top:6px;">Before writing any integral: (1) draw the region; (2) draw the axis of revolution as a dashed line; (3) draw <em>one representative slice</em> perpendicular to that axis and label its radius/radii. If you can do this on scratch paper in 30 seconds, the integral writes itself.</p>
+        <p style="margin-top:6px;">Before writing any integral: <strong>(1)</strong> draw the region; <strong>(2)</strong> draw the axis of revolution as a dashed line; <strong>(3)</strong> draw <em>one representative slice</em> perpendicular to that axis; <strong>(4)</strong> on the slice, mark the boundary points and label the perpendicular distance to the axis as $R$ (and $r$ if there's a hole). If your sketch is right, the integrand reads itself off the page.</p>
       </div>
     </section>
     <hr class="section-divider">
