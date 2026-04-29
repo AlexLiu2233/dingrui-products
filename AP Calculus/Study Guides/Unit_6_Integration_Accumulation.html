@@ -1486,12 +1486,44 @@ $$\begin{aligned}
 
   <div class="concept-box">
     <strong style="color: var(--accent);">When to Use</strong>
-    Use partial fractions when the integrand is a proper rational function whose denominator factors into <strong>distinct linear factors</strong>.
+    Use partial fractions when the integrand is a <strong>proper</strong> rational function whose denominator factors into <strong>distinct linear factors</strong>.
   </div>
 
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Step 0 — Check "Proper" First!</strong>
+    <span style="display:block; margin-top:8px;">A rational function $\dfrac{P(x)}{Q(x)}$ is <em>proper</em> when $\deg P &lt; \deg Q$. Partial fractions only applies to proper rationals.</span>
+    <span style="display:block; margin-top:8px;">If $\deg P \ge \deg Q$, you must <strong>polynomial-divide first</strong> to split the integrand into a polynomial part plus a proper-rational remainder. Then partial-fraction the remainder.</span>
+  </div>
+
+  <details>
+    <summary>Worked Example — Long Division First, Then Decompose</summary>
+    <div class="detail-body">
+      <div class="worked-solution">
+        <p>Evaluate $\displaystyle\int \frac{x^2 + 1}{x - 2}\,dx$. Note $\deg(\text{num}) = 2 \ge 1 = \deg(\text{denom})$ — improper. Long-divide first.</p>
+        <p><strong>Step 1 — Polynomial long division of $x^2 + 1$ by $x - 2$.</strong></p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>$x^2 \div x = x$. &nbsp;Multiply: $x(x-2) = x^2 - 2x$. &nbsp;Subtract: $(x^2 + 1) - (x^2 - 2x) = 2x + 1$.</li>
+          <li>$2x \div x = 2$. &nbsp;Multiply: $2(x-2) = 2x - 4$. &nbsp;Subtract: $(2x + 1) - (2x - 4) = 5$.</li>
+        </ul>
+        <p>So</p>
+        $$\frac{x^2 + 1}{x - 2} \;=\; x + 2 + \frac{5}{x - 2}.$$
+        <p>The remainder $\dfrac{5}{x - 2}$ is now proper (numerator degree $0 < 1$).</p>
+        <p><strong>Step 2 — Integrate term by term.</strong> The remainder is already a single linear factor — no further partial-fraction decomposition needed:</p>
+        $$\begin{aligned}
+        \int \frac{x^2 + 1}{x - 2}\,dx
+        &= \int \!\bigl(x + 2 + \tfrac{5}{x - 2}\bigr)\,dx \\[4pt]
+        &= \frac{x^2}{2} + 2x + 5\ln|x - 2| + C.
+        \end{aligned}$$
+      </div>
+      <div class="concept-box orange"><strong>Why does long division come first?</strong>
+        <p style="margin-top:6px;">Partial-fraction decomposition assumes the rational expression behaves like a sum of $\dfrac{A}{x-a}$ pieces (each of which has lower-degree numerator). If you skip the long division, you're trying to decompose a function that has a polynomial growth term — and the system $A = \cdots$ won't have a consistent solution.</p>
+      </div>
+    </div>
+  </details>
+
   <div class="formula-box">
-    <div class="formula-label">Partial Fraction Decomposition</div>
-    $$ \frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b} $$
+    <div class="formula-label">Partial Fraction Decomposition (proper, distinct linear factors)</div>
+    $$ \frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b} \qquad (\deg P &lt; 2) $$
   </div>
 
   <details>
