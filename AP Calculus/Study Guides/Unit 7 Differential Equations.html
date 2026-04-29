@@ -977,6 +977,51 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
     <strong>Exam Tip</strong>
     <p>Practice Euler's method as an extension of tangent-line approximation, not just as a memorized algorithm. Understanding <em>why</em> it works will help you set up correct computations under time pressure.</p>
   </div>
+
+  <h3>Bias of the Approximation — Concavity Tells You Over vs Under</h3>
+  <p>Because each Euler step advances along a <em>tangent line</em>, the geometry of tangent-line approximation carries over directly. The relative position of the tangent line versus the true solution curve depends on the curve's concavity.</p>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">The Bias Rule</strong>
+    <span style="display:block; margin-top:8px;">Suppose the true solution curve $y(x)$ has constant concavity over the step. Then:</span>
+    <ul style="margin-left:18px; margin-top:6px;">
+      <li><strong>Concave up</strong> ($y'' &gt; 0$): tangent line lies <em>below</em> the curve → Euler estimate is an <strong>underestimate</strong>.</li>
+      <li><strong>Concave down</strong> ($y'' &lt; 0$): tangent line lies <em>above</em> the curve → Euler estimate is an <strong>overestimate</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="concept-box">
+    <strong>How to find $y''$ from the DE.</strong>
+    <p style="margin-top:6px;">Given $\dfrac{dy}{dx} = f(x, y)$, differentiate <em>both sides</em> with respect to $x$, treating $y$ as a function of $x$:</p>
+    $$y'' \;=\; \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y}\cdot y' \;=\; f_x + f_y \cdot f(x,y).$$
+    <p style="margin-top:6px;">Evaluate at the relevant point and read off the sign — that's the bias.</p>
+  </div>
+
+  <div class="example-card">
+    <div class="example-head">
+      <div class="example-kicker">Worked Example</div>
+      <div class="example-tag">Euler Bias via Concavity</div>
+    </div>
+    <p class="example-prompt">Let $y$ satisfy $\dfrac{dy}{dx} = x + y$ with $y(0) = 1$. Use Euler's method with two steps of size $\Delta x = 0.5$ to approximate $y(1)$, and decide whether the approximation is an over- or underestimate.</p>
+    <ol class="example-steps">
+      <li><strong>Two Euler steps.</strong>
+        <ul style="margin-left:14px; margin-top:4px;">
+          <li>At $(0, 1)$: slope $= 0 + 1 = 1$, so $y_1 = 1 + 1\cdot 0.5 = 1.5$ at $x = 0.5$.</li>
+          <li>At $(0.5, 1.5)$: slope $= 0.5 + 1.5 = 2$, so $y_2 = 1.5 + 2\cdot 0.5 = 2.5$ at $x = 1$.</li>
+        </ul>
+        <p>Euler's approximation: $y(1) \approx 2.5$.</p>
+      </li>
+      <li><strong>Compute $y''$ from the DE.</strong> Differentiate $y' = x + y$ implicitly with respect to $x$:
+        $$y'' \;=\; 1 + y' \;=\; 1 + (x + y).$$
+      </li>
+      <li><strong>Evaluate the sign of $y''$ on the step.</strong> At every point on or near the solution curve in $0 \le x \le 1$ (where $y \ge 1$), we have $1 + x + y &gt; 0$. So the solution is <strong>concave up</strong> on the entire step.</li>
+      <li><strong>Apply the bias rule.</strong> Concave up → tangent lines lie below the curve → Euler <strong>underestimates</strong>. So the true value of $y(1)$ is greater than $2.5$.</li>
+    </ol>
+    <div class="example-result">
+      <strong>Verification (for intuition only — not required on the exam)</strong>
+      <p>The exact solution is $y(x) = -x - 1 + 2e^x$, giving $y(1) = -2 + 2e \approx 3.437$. The Euler estimate $2.5$ is indeed below the true value, confirming the underestimate.</p>
+    </div>
+  </div>
 </section>
 
 <hr class="section-break">
@@ -1167,6 +1212,39 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
       <p>The population levels off near <strong>100</strong>, and the curve is steepest when the population reaches <strong>50</strong>.</p>
     </div>
   </div>
+
+  <details style="margin-top: 18px;">
+    <summary><strong>Derivation — Why the Inflection Lies at $y = a/2$</strong></summary>
+    <div class="detail-body">
+      <p>The "growth fastest at $a/2$" claim isn't a coincidence — it falls out of computing $\dfrac{d^{2}y}{dt^{2}}$ for the logistic ODE and reading off where it changes sign.</p>
+      <div class="worked-solution">
+        <p><strong>Step 1 — Start from the logistic equation.</strong></p>
+        $$\frac{dy}{dt} \;=\; k\,y\,(a - y).$$
+        <p><strong>Step 2 — Differentiate both sides with respect to $t$.</strong> Treat $y$ as a function of $t$ and apply the product rule on the right:</p>
+        $$\begin{aligned}
+        \frac{d^{2}y}{dt^{2}} &= k\,\frac{d}{dt}\bigl[\,y\,(a-y)\,\bigr] \\[4pt]
+        &= k\,\bigl[\,(a-y)\cdot\tfrac{dy}{dt} + y\cdot(-1)\cdot\tfrac{dy}{dt}\,\bigr] \\[4pt]
+        &= k\,\frac{dy}{dt}\,\bigl[\,(a - y) - y\,\bigr] \\[4pt]
+        &= k\,\frac{dy}{dt}\,(a - 2y).
+        \end{aligned}$$
+        <p><strong>Step 3 — Substitute the original $\dfrac{dy}{dt}$ back in</strong> to get $\dfrac{d^{2}y}{dt^{2}}$ purely as a function of $y$:</p>
+        $$\frac{d^{2}y}{dt^{2}} \;=\; k\,\bigl[\,k\,y\,(a-y)\,\bigr]\,(a - 2y) \;=\; k^{2}\,y\,(a-y)\,(a-2y).$$
+        <p><strong>Step 4 — Sign analysis</strong> for $0 &lt; y &lt; a$ (the only physically meaningful range for a population). Throughout this range $y &gt; 0$ and $a - y &gt; 0$, so the sign of $\dfrac{d^{2}y}{dt^{2}}$ is governed entirely by $(a - 2y)$:</p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>If $y &lt; a/2$: $a - 2y &gt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &gt; 0$ → <strong>concave up</strong>, growth accelerating.</li>
+          <li>If $y = a/2$: $a - 2y = 0$ → $\dfrac{d^{2}y}{dt^{2}} = 0$ and changes sign → <strong>inflection point</strong>.</li>
+          <li>If $y &gt; a/2$: $a - 2y &lt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &lt; 0$ → <strong>concave down</strong>, growth decelerating.</li>
+        </ul>
+        <p style="margin-top:8px;"><strong>Conclusion:</strong> the unique inflection point of the logistic curve sits exactly at $y = a/2$, half the carrying capacity. The same $y = a/2$ is also where $\dfrac{dy}{dt}$ is maximized — making it the moment of fastest growth. $\;\Box$</p>
+      </div>
+      <div class="concept-box green"><strong>Why the two coincide.</strong>
+        <p style="margin-top:6px;">$\dfrac{d^{2}y}{dt^{2}} = 0$ is exactly the condition that $\dfrac{dy}{dt}$ stops increasing and starts decreasing — i.e., the maximum of $\dfrac{dy}{dt}$. So the inflection point of $y(t)$ <em>is</em> the moment of fastest growth, and both occur at the same value of $y$.</p>
+      </div>
+      <div class="concept-box orange"><strong>Aliases for the formula.</strong>
+        <p style="margin-top:6px;">If your textbook writes the logistic in the alternative form $\dfrac{dy}{dt} = k\,y\!\left(1 - \dfrac{y}{K}\right)$ with carrying capacity $K$, the same derivation gives $\dfrac{d^{2}y}{dt^{2}} = k^{2}\,y\!\left(1 - \dfrac{y}{K}\right)\!\left(1 - \dfrac{2y}{K}\right)$, with inflection at $y = K/2$.</p>
+      </div>
+    </div>
+  </details>
 </section>
 
 <hr class="section-break">
