@@ -299,6 +299,28 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
       <div class="formula-box">$$s(b)-s(a)=\int_a^b v(t)\,dt \qquad \text{and} \qquad v(b)-v(a)=\int_a^b a(t)\,dt$$</div>
       <div class="formula-box">$$\text{Total distance traveled}=\int_a^b |v(t)|\,dt$$</div>
       <div class="concept-box orange"><strong>Displacement vs. distance</strong><p>Displacement keeps track of direction. Distance ignores direction and is always nonnegative. If velocity changes sign, you must account for that before computing distance.</p></div>
+
+      <div class="worked-example">
+        <h3>Worked Example — Velocity Changes Sign</h3>
+        <p>A particle moves along the $x$-axis with velocity $v(t) = t^{2} - 4t + 3$ for $0 \le t \le 4$ (in m/s). Find <strong>(a)</strong> the displacement and <strong>(b)</strong> the total distance traveled on $[0, 4]$.</p>
+        <ol class="example-steps">
+          <li><strong>Find where $v(t)$ changes sign.</strong> Factor: $v(t) = (t-1)(t-3)$, so $v(t) = 0$ at $t = 1$ and $t = 3$. Sign chart on $[0, 4]$: $v(0.5) = 1.25 &gt; 0$, $v(2) = -1 &lt; 0$, $v(3.5) = 1.25 &gt; 0$. So $v &gt; 0$ on $(0, 1)$ and $(3, 4)$, and $v &lt; 0$ on $(1, 3)$.</li>
+          <li><strong>(a) Displacement</strong> ignores direction — just integrate $v$ straight through:
+            $$\int_0^{4}(t^{2} - 4t + 3)\,dt \;=\; \Bigl[\tfrac{t^{3}}{3} - 2t^{2} + 3t\Bigr]_0^{4} \;=\; \tfrac{64}{3} - 32 + 12 \;=\; \tfrac{4}{3}\text{ m}.$$
+          </li>
+          <li><strong>(b) Total distance</strong> uses $|v(t)|$. Split at each sign change so absolute value resolves into a definite sign:
+            $$\int_0^{4}|v(t)|\,dt \;=\; \int_0^{1}\!v\,dt \;+\; \int_1^{3}\!(-v)\,dt \;+\; \int_3^{4}\!v\,dt.$$
+            Each piece evaluates separately. Using the same antiderivative $\tfrac{t^{3}}{3} - 2t^{2} + 3t$:
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>$\int_0^{1} v \,dt = \tfrac{1}{3} - 2 + 3 = \tfrac{4}{3}$.</li>
+              <li>$\int_1^{3} v \,dt = (9 - 18 + 9) - (\tfrac{1}{3} - 2 + 3) = 0 - \tfrac{4}{3} = -\tfrac{4}{3}$. &nbsp;Take absolute value: $\tfrac{4}{3}$.</li>
+              <li>$\int_3^{4} v \,dt = \tfrac{4}{3} - 0 = \tfrac{4}{3}$.</li>
+            </ul>
+            Total distance $= \tfrac{4}{3} + \tfrac{4}{3} + \tfrac{4}{3} = 4$ m.
+          </li>
+        </ol>
+        <div class="concept-box red"><strong>Common AP slip</strong><p>Computing $\int_0^4 v\,dt$ and reporting that as the total distance. That gives the displacement $\tfrac{4}{3}$ m — the cancellation across the sign change has thrown away $\tfrac{8}{3}$ m of "back-and-forth" motion. <em>Always</em> split at sign changes before computing distance.</p></div>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-3">
@@ -307,6 +329,28 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
       <div class="formula-box">$$\int_a^b r(t)\,dt = Q(b)-Q(a) \quad \text{when} \quad r(t)=Q'(t)$$</div>
       <p>In words: the integral of a rate gives net change in the underlying quantity. This is why words like <em>accumulation</em>, <em>flows in</em>, <em>net increase</em>, and <em>amount added</em> usually point to integration.</p>
       <div class="concept-box"><strong>Context rule</strong><p>If the problem gives a rate and asks for an amount, integrate. If the problem gives an amount and asks how fast it changes, differentiate.</p></div>
+
+      <div class="worked-example">
+        <h3>Worked Example — Tank Filling with a Variable-Rate Inflow</h3>
+        <p>Water flows into a tank at the rate $R(t) = 6 + 4t$ gal/min for $0 \le t \le 5$ min. The tank holds $W(0) = 20$ gal at $t = 0$.</p>
+        <p><strong>(a)</strong> How much water enters the tank during the interval $[0, 5]$?</p>
+        <p><strong>(b)</strong> How much water is in the tank at $t = 5$?</p>
+        <ol class="example-steps">
+          <li><strong>Identify the integral.</strong> The amount that enters during $[0, 5]$ is the accumulation of the inflow rate:
+            $$\text{Net inflow} \;=\; \int_0^{5} R(t)\,dt \;=\; \int_0^{5}(6 + 4t)\,dt.$$
+          </li>
+          <li><strong>Evaluate.</strong>
+            $$\int_0^{5}(6 + 4t)\,dt \;=\; \bigl[\,6t + 2t^{2}\,\bigr]_0^{5} \;=\; 30 + 50 \;=\; 80\text{ gal}.$$
+          </li>
+          <li><strong>(b) Add to the initial amount.</strong> Net change formula: $W(5) = W(0) + \int_0^{5} R(t)\,dt = 20 + 80 = 100$ gal.</li>
+        </ol>
+        <div class="concept-box green"><strong>Why this works.</strong>
+          <p>The Net Change Theorem ($Q(b) - Q(a) = \int_a^b Q'(t)\,dt$) is the bridge between rates and amounts. We do not need an explicit formula for $W(t)$ — the rate $R$ <em>is</em> $W'$, and integrating it directly gives the change.</p>
+        </div>
+        <div class="concept-box orange"><strong>Inflow + Outflow variant</strong>
+          <p>If water also drains at rate $D(t)$, the <em>net</em> rate of change of the tank is $W'(t) = R(t) - D(t)$, and the same formula applies: $W(b) = W(a) + \int_a^b\!\bigl[\,R(t) - D(t)\,\bigr]\,dt$. AP free-response often pairs an inflow rate with an outflow rate and asks for the amount at a specific time.</p>
+        </div>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-4">
@@ -351,6 +395,34 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
       <p>If the top and bottom curves switch positions, a single integral will no longer work unless you use absolute value. Usually the safest method is to split the interval at every intersection.</p>
       <div class="formula-box">$$A=\int_a^b |f(x)-g(x)|\,dx$$</div>
       <div class="concept-box red"><strong>Frequent AP error</strong><p>Students often forget to split at an intersection where the graphs cross. That causes cancellation and gives signed area instead of actual area.</p></div>
+
+      <div class="worked-example">
+        <h3>Worked Example — $\displaystyle\int_{-1}^{1} |x^{3} - x|\,dx$</h3>
+        <p>Find the area enclosed between $y = x^{3}$ and $y = x$ on $[-1, 1]$. The graphs cross at $x = -1, 0, 1$, so the "top minus bottom" identity flips at $x = 0$.</p>
+        <ol class="example-steps">
+          <li><strong>Locate the zeros of the difference.</strong> $x^{3} - x = x(x-1)(x+1) = 0$ at $x = -1, 0, 1$. These split $[-1, 1]$ into two subintervals.</li>
+          <li><strong>Sign chart on each subinterval.</strong>
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>On $(-1, 0)$, test $x = -\tfrac{1}{2}$: $(-\tfrac{1}{2})^{3} - (-\tfrac{1}{2}) = -\tfrac{1}{8} + \tfrac{1}{2} = \tfrac{3}{8} &gt; 0$. So $x^{3} \ge x$ — cubic is on top.</li>
+              <li>On $(0, 1)$, test $x = \tfrac{1}{2}$: $\tfrac{1}{8} - \tfrac{1}{2} = -\tfrac{3}{8} &lt; 0$. So $x \ge x^{3}$ — line is on top.</li>
+            </ul>
+          </li>
+          <li><strong>Split the absolute-value integral by sign.</strong>
+            $$\int_{-1}^{1}|x^{3} - x|\,dx \;=\; \int_{-1}^{0}(x^{3} - x)\,dx \;+\; \int_{0}^{1}(x - x^{3})\,dx.$$
+          </li>
+          <li><strong>Evaluate each piece.</strong> Use antiderivative $\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}$:
+            $$\int_{-1}^{0}(x^{3} - x)\,dx \;=\; \Bigl[\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}\Bigr]_{-1}^{0} \;=\; 0 - \!\left(\tfrac{1}{4} - \tfrac{1}{2}\right) \;=\; \tfrac{1}{4}.$$
+            $$\int_{0}^{1}(x - x^{3})\,dx \;=\; \Bigl[\tfrac{x^{2}}{2} - \tfrac{x^{4}}{4}\Bigr]_{0}^{1} \;=\; \tfrac{1}{2} - \tfrac{1}{4} \;=\; \tfrac{1}{4}.$$
+          </li>
+          <li><strong>Sum.</strong> Total area $= \tfrac{1}{4} + \tfrac{1}{4} = \tfrac{1}{2}$.</li>
+        </ol>
+        <div class="concept-box green"><strong>Symmetry shortcut</strong>
+          <p>$|x^{3} - x|$ is an <em>even</em> function (the absolute value kills the odd-symmetry sign flip), so $\int_{-1}^{1}|x^{3} - x|\,dx = 2\!\int_0^1 |x^{3} - x|\,dx = 2 \cdot \tfrac{1}{4} = \tfrac{1}{2}$. Same answer.</p>
+        </div>
+        <div class="concept-box red"><strong>What goes wrong if you don't split</strong>
+          <p>Computing $\int_{-1}^{1}(x^{3} - x)\,dx$ <em>without</em> the absolute value gives $0$, because $x^{3} - x$ is odd and the contributions on $(-1,0)$ and $(0,1)$ cancel. That zero is signed area — definitely not the geometric area between the curves.</p>
+        </div>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-volume-roadmap">
