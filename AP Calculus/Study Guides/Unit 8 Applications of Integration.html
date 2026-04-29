@@ -529,9 +529,19 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-7">
       <div class="topic-header"><span class="overline">Topic 8.7 · CHA-5</span><h2>Volumes with Cross Sections: Squares and Rectangles</h2></div>
-      <p>For solids with known cross sections, volume is found by integrating cross-sectional area. The entire problem reduces to one question: what is the area of a typical slice?</p>
+      <p>For solids built from <em>specified</em> cross-sectional shapes (no rotation), the volume reduces to a single question: what is the area of a typical slice as a function of position? Integrate that area along the axis.</p>
       <div class="formula-box">$$V=\int_a^b A(x)\,dx$$</div>
-      <p>If the cross sections are squares and the side length is the vertical distance between two curves, then $A(x)=[f(x)-g(x)]^2$. If the cross sections are rectangles, adjust the area formula to match the stated dimensions.</p>
+      <p>When cross-sections are squares with side equal to the vertical distance between two curves, $A(x)=[f(x)-g(x)]^2$. For rectangles, replace $A(x)$ with the correct length × width matching the problem statement.</p>
+
+      <div class="worked-example">
+        <h3>Worked Example — Square Cross-Sections</h3>
+        <p>The base of a solid is the region bounded by $y=\sqrt{x}$, &nbsp;$y=0$, &nbsp;and $x=4$. Cross-sections perpendicular to the $x$-axis are <strong>squares</strong> with one side in the base. Find the volume.</p>
+        <ol class="example-steps">
+          <li><strong>Read the side length off the base.</strong> A vertical slice of the base at position $x$ runs from $y=0$ to $y=\sqrt{x}$, so the square's side is $s = \sqrt{x}$.</li>
+          <li><strong>Cross-sectional area.</strong> $A(x) = s^2 = (\sqrt{x})^2 = x$.</li>
+          <li><strong>Integrate.</strong> $\displaystyle V = \int_0^4 x\,dx = \tfrac{x^2}{2}\Big|_0^4 = 8.$</li>
+        </ol>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-8">
@@ -551,16 +561,42 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-9">
       <div class="topic-header"><span class="overline">Topic 8.9 · CHA-5</span><h2>Volume with Disc Method: Revolving Around the x- or y-Axis</h2></div>
-      <p>The disc method applies when the region touches the axis of revolution, so there is no hole in each circular cross section.</p>
+      <p>Use the disc method when the region's boundary <em>sits on</em> the axis of revolution — every cross-section is a solid disc with no hole. (See the Roadmap above for the disc-vs-washer decision.)</p>
       <div class="formula-box">$$V=\pi\int_a^b [R(x)]^2\,dx$$</div>
-      <p>Here <span class="mono">R</span> is the distance from the curve to the axis of revolution. Around the x-axis, that distance is usually the y-value of the curve. Around the y-axis, that distance is usually the x-value.</p>
+      <p>$R$ is the perpendicular distance from the curve to the axis. About the $x$-axis: $R = f(x)$. About the $y$-axis (slicing in $y$): $R = g(y)$ where $x = g(y)$.</p>
+
+      <div class="worked-example">
+        <h3>Worked Example — Revolve $y = x^2$ on $[0,1]$ about the $x$-axis</h3>
+        <ol class="example-steps">
+          <li><strong>Region touches axis?</strong> Yes — the region under $y=x^2$ from $0$ to $1$ has its lower boundary on $y=0$. Disc applies.</li>
+          <li><strong>Slice direction.</strong> Axis is horizontal, so slice vertically and integrate $dx$.</li>
+          <li><strong>Radius.</strong> $R(x) = x^2$ (distance from curve to $x$-axis).</li>
+          <li><strong>Set up and evaluate.</strong>
+            $$V = \pi\!\int_0^1 (x^2)^{\,2}\,dx = \pi\!\int_0^1 x^4\,dx = \pi \cdot \tfrac{1}{5} = \tfrac{\pi}{5}.$$
+          </li>
+        </ol>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-10">
       <div class="topic-header"><span class="overline">Topic 8.10 · CHA-5</span><h2>Volume with Disc Method: Revolving Around Other Axes</h2></div>
-      <p>If the axis is <span class="mono">y = k</span> or <span class="mono">x = k</span>, the radius is the perpendicular distance to that line.</p>
-      <div class="formula-box">$$V=\pi\int_a^b [f(x)-k]^2\,dx \quad \text{(around } y=k\text{)}$$</div>
-      <div class="concept-box red"><strong>Best habit</strong><p>Draw one representative disc and label the radius on the sketch. This prevents most setup mistakes.</p></div>
+      <p>When the axis is $y=k$ or $x=k$, the formula is the same — only the radius changes. The radius is now the perpendicular distance from the curve to <em>that line</em>, not to the standard axis.</p>
+      <div class="formula-box">$$V=\pi\int_a^b [f(x)-k]^2\,dx \qquad\text{(around } y=k\text{, axis below the curve)}$$</div>
+      <p>If the axis lies <em>above</em> the curve, swap to $\,k - f(x)\,$. Either way, $|f(x)-k|$ is the perpendicular distance — and squaring it makes the sign moot.</p>
+
+      <div class="worked-example">
+        <h3>Worked Example — Translation Invariance</h3>
+        <p>Revolve $y = x + 3$ on $[0, 2]$ about the line $y = 3$. The region touches the axis at $x = 0$ (where $y = 3$).</p>
+        <ol class="example-steps">
+          <li><strong>Radius.</strong> $R(x) = (x + 3) - 3 = x$.</li>
+          <li><strong>Volume.</strong>
+            $$V = \pi\!\int_0^2 x^2\,dx = \pi\cdot \tfrac{8}{3} = \tfrac{8\pi}{3}.$$
+          </li>
+          <li><strong>Sanity check.</strong> The same line $y = x$ on $[0, 2]$ revolved about the $x$-axis gives $\pi\!\int_0^2 x^2\,dx = \tfrac{8\pi}{3}$. Translating the region and the axis together by the same amount does not change the volume — a useful self-check.</li>
+        </ol>
+      </div>
+
+      <div class="concept-box red"><strong>Best habit</strong><p>Draw one representative disc on your sketch and label the radius on the picture. The picture catches "is the axis above or below the curve" before you write a single integral.</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-11">
@@ -581,9 +617,33 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-12">
       <div class="topic-header"><span class="overline">Topic 8.12 · CHA-5</span><h2>Volume with Washer Method: Revolving Around Other Axes</h2></div>
-      <p>This is the same structure as Topic 8.11, except both radii must be measured to a nonstandard axis.</p>
-      <div class="formula-box">$$V=\pi\int_a^b \Bigl([f(x)-k]^2-[g(x)-k]^2\Bigr)\,dx$$</div>
-      <div class="concept-box purple"><strong>Reliable setup routine</strong><p>Sketch the region, draw one slice perpendicular to the axis, identify the outer distance, identify the inner distance, then write the integral.</p></div>
+      <p>Same structure as Topic 8.11. The only change: $R$ and $r$ are now perpendicular distances to a <em>shifted</em> axis $y=k$ or $x=k$.</p>
+      <div class="formula-box">$$V=\pi\!\int_a^b \!\bigl(R^2 - r^2\bigr)\,dx$$<p style="font-size:0.9rem;color:var(--text-secondary);margin-top:8px;">where $R, r$ are distances from the <em>farther</em> and <em>nearer</em> boundary curves to the axis, respectively.</p></div>
+      <div class="concept-box red"><strong>Watch which curve is outer.</strong><p>"Outer" depends on the axis location, not on which boundary you happened to call $f$. With axis above the region, the lower boundary is farther (outer); with axis below the region, the upper boundary is farther. Re-identify on every problem from a fresh sketch.</p></div>
+
+      <div class="worked-example">
+        <h3>Worked Example — Region $\{y=x, y=x^2\}$ on $[0,1]$ Revolved About $y = -1$</h3>
+        <ol class="example-steps">
+          <li><strong>Region touches axis?</strong> No — the region sits above $y=0$, while the axis is at $y=-1$. Gap of at least 1 unit. Washer.</li>
+          <li><strong>Identify outer and inner.</strong> Both boundaries are above the axis. The line $y=x$ is farther from $y=-1$ than the parabola $y=x^2$ is, so $y=x$ is outer.</li>
+          <li><strong>Radii.</strong>
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>$R = x - (-1) = x + 1$</li>
+              <li>$r = x^2 - (-1) = x^2 + 1$</li>
+            </ul>
+          </li>
+          <li><strong>Set up and evaluate.</strong>
+            $$\begin{aligned}
+            V &= \pi\!\int_0^1 \!\bigl[(x+1)^2 - (x^2+1)^2\bigr]\,dx \\[4pt]
+              &= \pi\!\int_0^1 \!\bigl[(x^2 + 2x + 1) - (x^4 + 2x^2 + 1)\bigr]\,dx \\[4pt]
+              &= \pi\!\int_0^1 \!\bigl(2x - x^2 - x^4\bigr)\,dx \\[4pt]
+              &= \pi\Bigl[\,x^2 - \tfrac{x^3}{3} - \tfrac{x^5}{5}\,\Bigr]_0^1 \\[4pt]
+              &= \pi\Bigl(1 - \tfrac{1}{3} - \tfrac{1}{5}\Bigr) = \tfrac{7\pi}{15}.
+            \end{aligned}$$
+          </li>
+          <li><strong>Compare to Topic 8.11.</strong> The same region revolved about the $x$-axis gives $\tfrac{2\pi}{15}$. Shifting the axis from $y=0$ down to $y=-1$ enlarged the volume to $\tfrac{7\pi}{15}$ — each radius grew by 1, but $R^2 - r^2$ changes in a non-trivial way, so always rewrite from scratch.</li>
+        </ol>
+      </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-13">
