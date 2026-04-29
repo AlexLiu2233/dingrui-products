@@ -1329,6 +1329,53 @@ f'(x) &= 3e^x + 5\cos x - 2 \cdot \frac{1}{x} \\[4pt]
     <div class="quiz-explain correct-exp">Correct! This limit is the definition of $f'(2)$ where $f(x) = e^x$. Since $\frac{d}{dx}[e^x] = e^x$, we get $f'(2) = e^2$.</div>
     <div class="quiz-explain wrong-exp">Recognize this as $f'(2)$ where $f(x) = e^x$. The derivative of $e^x$ is $e^x$, so the answer is $e^2$.</div>
   </div>
+
+  <details style="margin-top: 18px;">
+    <summary><strong>Derivation — Why $\dfrac{d}{dx}[\sin x] = \cos x$ (from the limit definition)</strong></summary>
+    <div class="detail-body">
+      <p>This proof uses two limits from <strong>Unit 1</strong> as building blocks:</p>
+      <div class="formula-box">
+        $$\lim_{h \to 0}\frac{\sin h}{h} = 1 \qquad\text{and}\qquad \lim_{h \to 0}\frac{\cos h - 1}{h} = 0$$
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The first comes from the Squeeze Theorem on $\cos h \le \frac{\sin h}{h} \le 1$. The second follows from the first via the identity $\cos h - 1 = -\dfrac{\sin^2 h}{\cos h + 1}$.</p>
+      </div>
+
+      <div class="worked-solution">
+        <p><strong>Step 1 — Apply the limit definition.</strong></p>
+        $$\frac{d}{dx}[\sin x] \;=\; \lim_{h\to 0}\frac{\sin(x+h)-\sin x}{h}$$
+        <p><strong>Step 2 — Expand using the sum-of-angles identity</strong> $\sin(x+h) = \sin x \cos h + \cos x \sin h$:</p>
+        $$= \lim_{h\to 0}\frac{\sin x \cos h + \cos x \sin h - \sin x}{h}$$
+        <p><strong>Step 3 — Group the $\sin x$ terms.</strong></p>
+        $$= \lim_{h\to 0}\frac{\sin x\,(\cos h - 1) + \cos x \,\sin h}{h}
+        \;=\; \sin x \cdot \lim_{h\to 0}\frac{\cos h - 1}{h} \;+\; \cos x \cdot \lim_{h\to 0}\frac{\sin h}{h}$$
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">($\sin x$ and $\cos x$ are constants with respect to $h$, so they pull out of the $h$-limit.)</p>
+        <p><strong>Step 4 — Substitute the two known limits.</strong></p>
+        $$= \sin x \cdot 0 \;+\; \cos x \cdot 1 \;=\; \cos x$$
+        <p><strong>Therefore</strong> $\;\dfrac{d}{dx}[\sin x] = \cos x$. The derivation for $\dfrac{d}{dx}[\cos x] = -\sin x$ is structurally identical, using $\cos(x+h) = \cos x\cos h - \sin x \sin h$.</p>
+      </div>
+    </div>
+  </details>
+
+  <details style="margin-top: 14px;">
+    <summary><strong>Generalization — $\dfrac{d}{dx}[a^x] = a^x \ln a$ for any base $a &gt; 0$</strong></summary>
+    <div class="detail-body">
+      <p>The exponential rule $\frac{d}{dx}[e^x] = e^x$ generalizes to any base $a > 0$. The trick is to <em>rewrite $a^x$ as a composition involving $e$</em>, then apply the chain rule.</p>
+      <div class="worked-solution">
+        <p><strong>Step 1 — Rewrite using the identity $a = e^{\ln a}$.</strong></p>
+        <p>For any $a > 0$, raising both sides to the $x$ gives</p>
+        $$a^x \;=\; \bigl(e^{\ln a}\bigr)^{x} \;=\; e^{x \ln a}.$$
+        <p><strong>Step 2 — Differentiate using the chain rule.</strong> The outer function is $e^u$ with $u = x \ln a$; note $\ln a$ is a <em>constant</em> with respect to $x$, so $\dfrac{du}{dx} = \ln a$:</p>
+        $$\frac{d}{dx}\bigl[e^{x \ln a}\bigr] \;=\; e^{x \ln a} \cdot \ln a.$$
+        <p><strong>Step 3 — Convert back to $a^x$.</strong> Using $e^{x \ln a} = a^x$ from Step 1:</p>
+        $$\frac{d}{dx}\bigl[a^x\bigr] \;=\; a^x \ln a. \qquad\Box$$
+      </div>
+      <div class="concept-box"><strong>Sanity check at $a = e$.</strong>
+        <p style="margin-top:6px;">Plugging $a = e$ into $a^x \ln a$ gives $e^x \ln e = e^x \cdot 1 = e^x$, matching the rule for $e^x$. The factor $\ln a$ is the price you pay for picking a base other than $e$.</p>
+      </div>
+      <div class="concept-box orange"><strong>Worked numerical example</strong>
+        <p style="margin-top:6px;">$\displaystyle\frac{d}{dx}\bigl[3^x\bigr] = 3^x \ln 3$. &nbsp;At $x = 2$: &nbsp;$3^2 \ln 3 = 9 \ln 3 \approx 9.89$.</p>
+      </div>
+    </div>
+  </details>
 </section>
 
 <hr class="sep">
