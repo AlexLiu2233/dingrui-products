@@ -117,7 +117,9 @@ details .detail-body{padding:20px;font-size:.95rem;background:var(--bg-card)}
 .flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
 .flashcard-front,.flashcard-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;font-size:.95rem;box-shadow:var(--shadow)}
 .flashcard-front{background:var(--bg-card);font-weight:600;color:var(--accent)}
-.flashcard-back{background:var(--bg);transform:rotateY(180deg);font-size:.9rem;line-height:1.6;border:2px solid var(--accent)}
+.flashcard-back{background:var(--bg);transform:rotateY(180deg);font-size:.9rem;line-height:1.5;border:2px solid var(--accent);flex-direction:column;gap:4px;padding:14px 16px}
+.flashcard-back .katex-display{margin:0 !important}
+.flashcard-back .katex{font-size:1em}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin:20px 0;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
 .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -459,6 +461,24 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     $$x(t) = A\cos(\omega t + \phi)$$
     <p style="font-size:.9rem;color:var(--text-secondary);margin-top:8px;">$A$ = amplitude, $\omega$ = angular frequency, $\phi$ = phase constant</p>
   </div>
+
+  <div class="concept-box gold">
+    <strong style="color:var(--gold);">Why This Is the Solution — Plug-and-Check in Three Lines</strong>
+    <p style="margin-top:8px;">The AP exam sometimes asks you to <em>verify</em> that $x(t) = A\cos(\omega t + \phi)$ satisfies the SHM differential equation $\ddot{x} = -\omega^2 x$. Just differentiate twice and compare.</p>
+    <div class="worked-steps" style="margin-top:10px;">
+      <div class="worked-step">
+        <div class="step-text">Start with the proposed solution:</div>
+        <div class="step-math">$$x(t) = A\cos(\omega t + \phi)$$</div>
+        <div class="step-text">First derivative — velocity:</div>
+        <div class="step-math">$$\dot{x}(t) = -A\omega\sin(\omega t + \phi)$$</div>
+        <div class="step-text">Second derivative — acceleration:</div>
+        <div class="step-math">$$\ddot{x}(t) = -A\omega^2\cos(\omega t + \phi) = -\omega^2\,x(t)\;\checkmark$$</div>
+        <div class="step-text">The last line matches the ODE for any amplitude $A$ and any phase constant $\phi$.</div>
+      </div>
+    </div>
+    <p style="margin-top:10px;">The constants $A$ and $\phi$ are fixed by <em>initial conditions</em>: if the mass starts at $x_0$ with velocity $v_0$, then $A = \sqrt{x_0^2 + (v_0/\omega)^2}$ and $\tan\phi = -v_0/(\omega x_0)$. Released from rest at $x = A$ gives $\phi = 0$ — the simplest case.</p>
+  </div>
+
   <h3>Velocity and Acceleration</h3>
   <div class="formula-box" style="border-top-color:var(--green);">
     <div class="formula-label" style="color:var(--green);">Velocity in SHM</div>
@@ -647,6 +667,28 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     $$E_{\text{total}} = \frac{1}{2}kA^2$$
     <p style="font-size:.9rem;color:var(--text-secondary);margin-top:8px;">Depends on amplitude and spring constant — not on mass directly</p>
   </div>
+
+  <div class="concept-box gold">
+    <strong style="color:var(--gold);">Derivation — Why $E = \tfrac{1}{2}kA^2$ Works Everywhere</strong>
+    <p style="margin-top:8px;">Two different "angles of attack" both give the same answer. Either one earns full credit on an FRQ.</p>
+    <div class="worked-steps" style="margin-top:10px;">
+      <div class="worked-step">
+        <div class="step-label">Method 1 — Turning point</div>
+        <div class="step-text">At $x = \pm A$ the mass is momentarily at rest, so $K = 0$ and all the energy is elastic PE:</div>
+        <div class="step-math">$$E = K + U = 0 + \tfrac{1}{2}k A^2 = \tfrac{1}{2}kA^2$$</div>
+        <div class="step-text">Energy is conserved, so this value holds for all $t$ — even at points where $x \ne A$.</div>
+      </div>
+      <div class="worked-step">
+        <div class="step-label">Method 2 — Plug in $x(t)$ and $v(t)$</div>
+        <div class="step-math">$$E = \tfrac{1}{2}m\bigl[-A\omega\sin(\omega t+\phi)\bigr]^2 + \tfrac{1}{2}k\bigl[A\cos(\omega t+\phi)\bigr]^2$$</div>
+        <div class="step-math">$$= \tfrac{1}{2}mA^2\omega^2\sin^2(\omega t + \phi) + \tfrac{1}{2}kA^2\cos^2(\omega t + \phi)$$</div>
+        <div class="step-text">Use the SHM identity $m\omega^2 = k$:</div>
+        <div class="step-math">$$= \tfrac{1}{2}kA^2\bigl[\sin^2(\omega t+\phi) + \cos^2(\omega t+\phi)\bigr] = \tfrac{1}{2}kA^2$$</div>
+        <div class="step-text">The result is time-independent — the Pythagorean identity $\sin^2 + \cos^2 = 1$ is doing all the work.</div>
+      </div>
+    </div>
+    <p style="margin-top:10px;">Since $v_\text{max} = A\omega$, you can also write $E = \tfrac{1}{2}mv_\text{max}^2$ — equating these two forms gives the useful identity $\omega = \sqrt{k/m}$ on exam problems where you're handed $v_\text{max}$ and $A$ but not $k$.</p>
+  </div>
   <h3>Energy vs. Position</h3>
   <p>At any position $x$, speed can be found from conservation of energy:</p>
   <div class="formula-box" style="border-top-color:var(--orange);">
@@ -691,7 +733,7 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
         <div class="worked-step">
           <div class="step-label">Step 4</div>
           <div class="step-text">Speed</div>
-          <div class="step-math">$$v = \sqrt(2K/m) = \sqrt(6.0/2.0) = \sqrt3 \approx 1.73\;\text{m/s}$$</div>
+          <div class="step-math">$$v = \sqrt{2K/m} = \sqrt{6.0/2.0} = \sqrt{3} \approx 1.73\;\text{m/s}$$</div>
           <div class="step-math"><div class="step-text">Alternate check: $v = \omega\sqrt{A^2 - x^2} = 5\sqrt{0.12} \approx 1.73\;\text{m/s}$.</div></div>
         </div>
       </div>
@@ -750,9 +792,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
             <div class="step-math">$$\omega_d = \sqrt{\omega_0^2 - \gamma^2} = \sqrt{25 - 1} = \sqrt{24} = \boxed{4.90\;\text{rad/s}}$$</div>
           </div>
           <div class="worked-step" style="border-left-color: var(--green);">
-            <div class="step-label" style="color: var(--green);">Solution form</div>
+            <div class="step-label" style="color: var(--green);">Solution form and period</div>
             <div class="step-math">$$x(t) = A e^{-\gamma t}\cos(\omega_d t + \phi) = A e^{-t}\cos(4.90\,t + \phi)$$</div>
-            <div class="step-text">The amplitude decays exponentially with time constant $\tau = 1/\gamma = 1.0\;\text{s}$.</div>
+            <div class="step-math">$$T_d = \frac{2\pi}{\omega_d} = \frac{2\pi}{4.90} \approx 1.28\;\text{s}$$</div>
+            <div class="step-text">The amplitude envelope decays exponentially with time constant $\tau = 1/\gamma = 1.0\;\text{s}$.</div>
           </div>
         </div>
       </div>
@@ -760,9 +803,11 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
       <div class="isee-evaluate">
         <div class="isee-tag">Evaluate</div>
         <div class="isee-check">$\omega_d = 4.90 < \omega_0 = 5.0$: damping slightly reduces the frequency. ✓</div>
-        <div class="isee-check">In the limit $b \to 0$: $\omega_d \to \omega_0 = 5.0\;\text{rad/s}$ (pure SHM). ✓</div>
-        <div class="isee-check">Critical damping would require $b = \sqrt{4mk} = \sqrt{400} = 20\;\text{kg/s}$, much larger than our $b = 4$. ✓</div>
+        <div class="isee-check">Limit $b \to 0$: $\omega_d \to \omega_0 = 5.0\;\text{rad/s}$ (pure SHM). ✓</div>
+        <div class="isee-check">Critical damping requires $b_c = \sqrt{4mk} = 20\;\text{kg/s}$, much larger than our $b = 4$. ✓</div>
       </div>
+
+      <p style="margin-top:10px; font-size: 0.9rem; color: var(--text-secondary);"><strong>AP context:</strong> Physics C: Mechanics rarely requires you to solve the damped ODE from scratch. Most exam questions are conceptual — classify the regime (underdamped / critical / overdamped) from the coefficients, explain why the amplitude decays, or relate energy loss to the damping force. Memorize the three conditions on $b^2$ vs. $4mk$ and you'll handle almost any damping prompt.</p>
     </div>
   </details>
 
@@ -954,12 +999,12 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   <h2>Flashcards — Click to Flip</h2>
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Condition for SHM?</div><div class="flashcard-back">Restoring force proportional to displacement:<br>$F = -kx$ or $\tau = -\kappa\theta$</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Period of a mass–spring?</div><div class="flashcard-back"><br>$$T = 2\pi\sqrt{m/k}$$<br>Independent of amplitude</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Period of a simple pendulum?</div><div class="flashcard-back"><br>$$T = 2\pi\sqrt{\ell/g}$$<br>Small angle, independent of mass</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">$v_{\max}$ in SHM?</div><div class="flashcard-back"><br>$v_{\max} = A\omega$<br><br>Occurs at equilibrium ($x = 0$)</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Total energy of a spring oscillator?</div><div class="flashcard-back"><br>$$E = \frac{1}{2}kA^2$$<br>Constant; $K + U$ at every instant</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">SHM differential equation?</div><div class="flashcard-back"><br>$\frac{d^2x}{dt^2} = -\omega^2 x$<br><br>Solution: $x = A\cos(\omega t + \phi)$</div></div></div>
-    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Physical pendulum period?</div><div class="flashcard-back"><br>$$T = 2\pi\sqrt{\frac{I}{mgd}}$$<br>$I$ about pivot, $d$ = pivot to CM</div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Period of a mass–spring?</div><div class="flashcard-back">$$T = 2\pi\sqrt{m/k}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Independent of amplitude.</div></div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Period of a simple pendulum?</div><div class="flashcard-back">$$T = 2\pi\sqrt{\ell/g}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Small-angle limit; independent of mass.</div></div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">$v_\text{max}$ in SHM?</div><div class="flashcard-back">$$v_\text{max} = A\omega$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Occurs at equilibrium ($x = 0$).</div></div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Total energy of a spring oscillator?</div><div class="flashcard-back">$$E = \tfrac{1}{2}kA^2$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Constant; equals $K + U$ at every instant.</div></div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">SHM differential equation?</div><div class="flashcard-back">$$\ddot{x} = -\omega^2 x$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Solution: $x(t) = A\cos(\omega t + \phi)$.</div></div></div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">Physical pendulum period?</div><div class="flashcard-back">$$T = 2\pi\sqrt{\frac{I}{mgd}}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">$I$ about the pivot, $d$ = pivot to CM.</div></div></div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front">What is resonance?</div><div class="flashcard-back">Amplitude increases dramatically when driving frequency matches the system's natural frequency.</div></div></div>
   </div>
 </section>

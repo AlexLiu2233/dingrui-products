@@ -384,7 +384,13 @@ summary:hover { background: var(--accent-light); }
   background: var(--accent); color: #fff;
   transform: rotateY(180deg);
   border: 2px solid var(--accent-dark);
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
 }
+.flashcard-back .katex-display { margin: 0 !important; }
+.flashcard-back .katex { font-size: 1em; color: #fff; }
+.flashcard-back > div[style*="text-secondary"] { color: rgba(255,255,255,0.85) !important; }
 
 /* ═══════════ CARDS ═══════════ */
 .card {
@@ -772,21 +778,54 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   <details>
     <summary>Worked Example — Non-Uniform Rod</summary>
     <div class="detail-body">
-      <p>A rod of length \(L = 2\,\text{m}\) has linear mass density \(\lambda(x) = 3x\;\text{kg/m}\), where \(x\) is measured from the left end. Find the center of mass.</p>
-            <p class="worked-problem">Step 1: Total mass</p>
+      <p>A rod of length $L = 2$ m has linear mass density $\lambda(x) = 3x$ kg/m, where $x$ is measured from the left end. Find the center of mass.</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-math">$$M = \int _0^L \lambda(x) dx = \int _0^2 3x dx = 3[x^2/2]_0^2 = 6\;\text{kg}$$</div>
-          <div class="step-comment">Step 2: Numerator of x_cm</div>
-          <div class="step-math">$$\int _0^L x\cdot \lambda(x) dx = \int _0^2 x\cdot 3x dx = 3\int _0^2 x^2 dx$$</div>
-          <div class="step-math">$$= 3[x^3/3]_0^2 = [x^3]_0^2 = 8\;\text{kg}\cdot m$$</div>
-          <div class="step-comment">Step 3: Divide</div>
-          <div class="step-math">$$x_cm = 8/6 = 4/3\;\text{m} \approx 1.33\;\text{m} from the left end$$</div>
-          <div class="step-comment">Check: Since density increases with x, the cm should</div>
-          <div class="step-comment">be right of center (1.0 m). ✓ 1.33 m > 1.0 m.</div>
+          <div class="step-label">Step 1 — Total mass</div>
+          <div class="step-math">$$M = \int_0^L \lambda(x)\,dx = \int_0^2 3x\,dx = 3\left[\tfrac{x^2}{2}\right]_0^2 = 6\;\text{kg}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Step 2 — Numerator of $x_\text{cm}$</div>
+          <div class="step-math">$$\int_0^L x\,\lambda(x)\,dx = \int_0^2 3x^2\,dx = \left[x^3\right]_0^2 = 8\;\text{kg·m}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">Step 3 — Divide</div>
+          <div class="step-math">$$x_\text{cm} = \frac{8}{6} = \tfrac{4}{3}\;\text{m} \approx 1.33\;\text{m}$$</div>
+          <div class="step-text">Measured from the left end. Since density increases with $x$, the cm should sit to the right of the geometric center (1.0 m) — and it does. ✓</div>
         </div>
       </div>
+    </div>
+  </details>
 
+  <details>
+    <summary>Worked Example — Exploding Firework: CoM Trajectory (FRQ-style)</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A 3.0 kg firework is launched at 40 m/s at $60°$ above horizontal. At the peak of its trajectory it explodes into two fragments: a 1.0 kg piece and a 2.0 kg piece. Immediately after the explosion, the 1.0 kg fragment is momentarily at rest. (a) Find the velocity of the 2.0 kg fragment just after the explosion. (b) Where does the center of mass land, measured horizontally from the launch point? (Take $g = 10\;\text{m/s}^2$; ignore air resistance.)</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-label">Set up — state at the peak</div>
+          <div class="step-text">At the peak of flight the vertical velocity is zero, so the center-of-mass velocity is horizontal:</div>
+          <div class="step-math">$$v_y = 0, \qquad v_x = v_0\cos 60° = 40(0.5) = 20\;\text{m/s}$$</div>
+          <div class="step-math">$$p_x = M\,v_x = (3.0)(20) = 60\;\text{kg·m/s}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">(a) Fragment velocity after explosion</div>
+          <div class="step-text">The explosion forces are internal, so horizontal momentum is conserved:</div>
+          <div class="step-math">$$p_\text{before} = p_\text{after}: \quad 60 = (1.0)(0) + (2.0)\,v_2$$</div>
+          <div class="step-math">$$v_2 = 30\;\text{m/s (horizontal, forward)}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">(b) Landing point of the center of mass</div>
+          <div class="step-text">Because the explosion forces are internal, the CoM continues along the original projectile parabola as if nothing had happened:</div>
+          <div class="step-math">$$T_\text{flight} = \frac{2v_0\sin\theta}{g} = \frac{2(40)(\sin 60°)}{10} \approx 6.93\;\text{s}$$</div>
+          <div class="step-math">$$R_\text{cm} = (v_0\cos\theta)\,T_\text{flight} = (20)(6.93) \approx 138.6\;\text{m}$$</div>
+          <div class="step-text">The two fragments hit the ground separately, but the mass-weighted average of their landing positions is still 138.6 m from the launch point.</div>
+        </div>
+      </div>
+      <div class="concept-box green" style="margin-top: 12px;">
+        <strong style="color: var(--green);">Why This Is a Classic FRQ</strong>
+        "Does the CoM path change?" is a reliable AP question. Answer: NO, so long as the net external force is unchanged. Internal forces — explosions, collisions, muscle forces — cannot move the CoM.
+      </div>
     </div>
   </details>
 
@@ -836,15 +875,12 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
             <p class="worked-problem">FBD forces on the block:<br>• Weight mg straight down (agent: Earth)<br>• Normal force N perpendicular to surface (agent: incline)</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-comment">Choose axes: x along incline (positive down-slope), y ⊥ to surface</div>
-          <div class="step-math">$$y-direction (no acceleration \perp to surface):$$</div>
-          <div class="step-math">$$N − mg cos \theta = 0$$</div>
-          <div class="step-math">$$N = mg cos \theta$$</div>
-          <div class="step-text">x-direction (along incline):</div>
-          <div class="step-math">$$mg sin \theta = ma$$</div>
-          <div class="step-math">$$a = g sin \theta$$</div>
-          <div class="step-comment">Check: θ = 0 → a = 0 (flat surface) ✓</div>
-          <div class="step-comment">Check: θ = 90° → a = g (free fall) ✓</div>
+          <div class="step-text">Choose axes: $x$ along the incline (positive down-slope), $y$ perpendicular to the surface.</div>
+          <div class="step-text">$y$-direction (no acceleration perpendicular to the surface):</div>
+          <div class="step-math">$$N - mg\cos\theta = 0 \;\Rightarrow\; N = mg\cos\theta$$</div>
+          <div class="step-text">$x$-direction (along the incline):</div>
+          <div class="step-math">$$mg\sin\theta = ma \;\Rightarrow\; a = g\sin\theta$$</div>
+          <div class="step-text">Limits: $\theta = 0 \Rightarrow a = 0$ (flat) ✓; $\theta = 90° \Rightarrow a = g$ (free fall) ✓.</div>
         </div>
       </div>
 
@@ -1166,15 +1202,13 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
             <p class="worked-problem">FBD: Weight mg down, Normal N ⊥ surface, Friction f_k up the slope<br>Axes: x down the incline, y ⊥ to surface</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-math">$$\perp direction (no accel):$$</div>
-          <div class="step-math">$$N = mg cos \theta$$</div>
-          <div class="step-text">∥ direction:</div>
-          <div class="step-math">$$mg sin \theta − f_k = ma$$</div>
-          <div class="step-math">$$mg sin \theta − \mu_k \cdot mg cos \theta = ma$$</div>
-          <div class="step-math">$$a = g(sin \theta − \mu_k cos \theta)$$</div>
-          <div class="step-comment">Note: if μ_k cos θ > sin θ, i.e. μ_k > tan θ,</div>
-          <div class="step-comment">the block decelerates (friction exceeds the</div>
-          <div class="step-comment">gravity component along the slope).</div>
+          <div class="step-text">Perpendicular direction (no acceleration):</div>
+          <div class="step-math">$$N = mg\cos\theta$$</div>
+          <div class="step-text">Parallel direction (along the slope):</div>
+          <div class="step-math">$$mg\sin\theta - f_k = ma$$</div>
+          <div class="step-math">$$mg\sin\theta - \mu_k\,mg\cos\theta = ma$$</div>
+          <div class="step-math">$$a = g(\sin\theta - \mu_k\cos\theta)$$</div>
+          <div class="step-text">If $\mu_k\cos\theta > \sin\theta$ (i.e. $\mu_k > \tan\theta$), the block decelerates — friction exceeds the gravity component along the slope.</div>
         </div>
       </div>
 
@@ -1363,9 +1397,19 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   <p>where \(v_T = mg/k\) is the terminal velocity and \(\tau = m/k\) is the time constant.</p>
 
   <div class="formula-box">
-    <div class="formula-label">Terminal Velocity</div>
-    $$v_T = \frac{mg}{k}$$
-    <div class="formula-sub">Reached when \(F_{\text{net}} = 0\): the drag force balances gravity. Acceleration drops to zero.</div>
+    <div class="formula-label">Terminal Velocity — Linear Drag</div>
+    $$v_T = \frac{mg}{k} \qquad (\text{for }F_r = -kv)$$
+    <div class="formula-sub">Reached when \(F_{\text{net}} = 0\): drag balances gravity, so $mg = kv_T$. Only valid for the linear drag model.</div>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Don't Confuse Linear and Quadratic Drag</strong>
+    <p style="margin-top:8px;">The terminal velocity formula depends on which drag model applies:</p>
+    <ul style="margin: 8px 0 0 20px;">
+      <li><strong>Linear drag</strong> (low speed, laminar flow): $F_r = kv \;\Rightarrow\; v_T = \dfrac{mg}{k}$</li>
+      <li><strong>Quadratic drag</strong> (high speed, turbulent flow): $F_r = bv^2 \;\Rightarrow\; v_T = \sqrt{\dfrac{mg}{b}}$</li>
+    </ul>
+    <p style="margin-top:8px;">AP Physics C uses whichever model the problem specifies. Read the force law in the prompt <em>before</em> invoking a terminal velocity formula from memory.</p>
   </div>
 
   <div class="concept-box">
@@ -1373,31 +1417,49 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     Position, velocity, and acceleration all exhibit exponential behavior. Velocity rises exponentially toward \(v_T\); acceleration starts at \(g\) and decays exponentially to zero; position grows linearly at late times (constant \(v_T\)) but curves at early times. On graphs, recognize the characteristic exponential approach shape — rapid initial change that gradually levels off.
   </div>
 
+  <div class="concept-box gold">
+    <strong style="color:var(--gold);">Derivation — Linear Drag ODE to $v(t)$</strong>
+    <p style="margin-top:8px;">This is the single most-tested calculus derivation in Unit 2. Object of mass $m$ dropped from rest, drag $\vec{F}_r = -k\vec{v}$ (down-positive).</p>
+    <div class="worked-steps" style="margin-top:10px;">
+      <div class="worked-step">
+        <div class="step-text">Step 1 — Newton's second law with down positive:</div>
+        <div class="step-math">$$m\,\frac{dv}{dt} = mg - kv$$</div>
+        <div class="step-text">Step 2 — Separate variables:</div>
+        <div class="step-math">$$\frac{dv}{mg - kv} = \frac{dt}{m}$$</div>
+        <div class="step-text">Step 3 — Integrate from rest:</div>
+        <div class="step-math">$$\int_0^{v}\!\frac{dv'}{mg - kv'} = \int_0^{t}\!\frac{dt'}{m}$$</div>
+        <div class="step-math">$$-\tfrac{1}{k}\bigl[\ln(mg - kv) - \ln(mg)\bigr] = \frac{t}{m}$$</div>
+        <div class="step-text">Step 4 — Rearrange and exponentiate:</div>
+        <div class="step-math">$$\ln\!\left(\frac{mg - kv}{mg}\right) = -\frac{kt}{m} \;\Longrightarrow\; \frac{mg - kv}{mg} = e^{-kt/m}$$</div>
+        <div class="step-text">Step 5 — Solve for $v(t)$:</div>
+        <div class="step-math">$$\boxed{\,v(t) = \frac{mg}{k}\bigl(1 - e^{-kt/m}\bigr) = v_T\bigl(1 - e^{-t/\tau}\bigr)\,}$$</div>
+        <div class="step-text">Sanity checks: at $t \to 0$, $v \to 0$ ✓; as $t \to \infty$, $v \to mg/k = v_T$ ✓.</div>
+      </div>
+    </div>
+    <p style="margin-top:10px;"><strong>Two constants to memorize:</strong> terminal velocity $v_T = mg/k$ and time constant $\tau = m/k$. After one $\tau$, the object reaches $(1 - e^{-1}) \approx 63\%$ of $v_T$; after three $\tau$'s, $\approx 95\%$.</p>
+  </div>
+
   <details>
-    <summary>Worked Example — Deriving v(t) with Drag</summary>
+    <summary>Worked Example — Deriving v(t) with Drag (Full Work)</summary>
     <div class="detail-body">
-      <p>An object of mass \(m\) is dropped from rest in a medium where drag force is \(F_r = -kv\). Derive \(v(t)\).</p>
-            <p class="worked-problem">Newton's second law (down positive):</p>
+      <p>An object of mass $m$ is dropped from rest in a medium where drag force is $\vec{F}_r = -k\vec{v}$. Derive $v(t)$.</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-math">$$m dv/dt = mg − kv$$</div>
-          <div class="step-comment">Separate variables:</div>
-          <div class="step-math">$$dv/(mg − kv) = dt/m$$</div>
-          <div class="step-comment">Integrate from v = 0 at t = 0:</div>
-          <div class="step-math">$$\int _0ᵛ dv'/(mg − kv') = \int _0ᵗ dt'/m$$</div>
-          <div class="step-math">$$−(1/k) ln(mg − kv') |_0ᵛ = t/m$$</div>
-          <div class="step-math">$$−(1/k)[ln(mg − kv) − ln(mg)] = t/m$$</div>
-          <div class="step-math">$$ln[(mg − kv)/mg] = −kt/m$$</div>
-          <div class="step-comment">Exponentiate:</div>
-          <div class="step-math">$$(mg − kv)/mg = e^{−kt/m}$$</div>
-          <div class="step-math">$$mg − kv = mg \cdot e^{−kt/m}$$</div>
-          <div class="step-math">$$kv = mg(1 − e^{−kt/m})$$</div>
-          <div class="step-math">$$v(t) = (mg/k)(1 − e^{−kt/m})$$</div>
-          <div class="step-comment">Check: t → 0 → v → 0 ✓</div>
-          <div class="step-comment">Check: t → ∞ → v → mg/k = v_T ✓</div>
+          <div class="step-text">Newton's second law with down positive:</div>
+          <div class="step-math">$$m\,\frac{dv}{dt} = mg - kv$$</div>
+          <div class="step-text">Separate variables:</div>
+          <div class="step-math">$$\frac{dv}{mg - kv} = \frac{dt}{m}$$</div>
+          <div class="step-text">Integrate from $v = 0$ at $t = 0$:</div>
+          <div class="step-math">$$\int_0^{v}\frac{dv'}{mg - kv'} = \int_0^{t}\frac{dt'}{m}$$</div>
+          <div class="step-math">$$-\tfrac{1}{k}\bigl[\ln(mg - kv') \bigr]_0^{v} = \frac{t}{m}$$</div>
+          <div class="step-math">$$-\tfrac{1}{k}\bigl[\ln(mg - kv) - \ln(mg)\bigr] = \frac{t}{m}$$</div>
+          <div class="step-math">$$\ln\!\left(\frac{mg - kv}{mg}\right) = -\frac{kt}{m}$$</div>
+          <div class="step-text">Exponentiate and solve for $v$:</div>
+          <div class="step-math">$$\frac{mg - kv}{mg} = e^{-kt/m}$$</div>
+          <div class="step-math">$$v(t) = \frac{mg}{k}\bigl(1 - e^{-kt/m}\bigr)$$</div>
+          <div class="step-text">Limits: at $t \to 0$, $v \to 0$ ✓; as $t \to \infty$, $v \to mg/k = v_T$ ✓.</div>
         </div>
       </div>
-
     </div>
   </details>
 
@@ -1627,56 +1689,56 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Newton's Second Law</div>
-        <div class="flashcard-back">$$\vec{F}_{\text{net}} = m\vec{a}$$<br>Net external force equals mass times acceleration of the center of mass.</div>
+        <div class="flashcard-back">$$\vec{F}_\text{net} = m\vec{a}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Net external force = mass × acceleration of the center of mass.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Universal Gravitation</div>
-        <div class="flashcard-back">$$F_g = G\frac{m_1 m_2}{r^2}$$<br>Attractive. Along the line connecting centers. \(r\) from center to center.</div>
+        <div class="flashcard-back">$$F_g = G\frac{m_1 m_2}{r^2}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Attractive, along the line of centers. $r$ is center-to-center distance.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Centripetal Acceleration</div>
-        <div class="flashcard-back">$$a_c = \frac{v^2}{r}$$<br>Always points toward the center of the circular path.</div>
+        <div class="flashcard-back">$$a_c = \frac{v^2}{r}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Always points toward the center of the circular path.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Hooke's Law</div>
-        <div class="flashcard-back">$$F_s = -k\Delta x$$<br>Restoring force. Proportional to displacement from equilibrium.</div>
+        <div class="flashcard-back">$$F_s = -k\Delta x$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Restoring force; proportional to displacement from equilibrium.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Terminal Velocity</div>
-        <div class="flashcard-back">$$v_T = \frac{mg}{k}$$<br>When drag balances gravity. Net force = 0, acceleration = 0.</div>
+        <div class="flashcard-front">Terminal Velocity (Linear Drag)</div>
+        <div class="flashcard-back">$$v_T = \frac{mg}{k}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Linear drag $F_r=-kv$. Quadratic drag gives $v_T=\sqrt{mg/b}$.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Kepler's Third Law</div>
-        <div class="flashcard-back">$$T^2 = \frac{4\pi^2}{GM}R^3$$<br>\(T^2 \propto R^3\). Relates orbital period to radius for circular orbits.</div>
+        <div class="flashcard-back">$$T^2 = \frac{4\pi^2}{GM}R^3$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">$T^2 \propto R^3$ for circular orbits.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Kinetic Friction</div>
-        <div class="flashcard-back">$$f_k = \mu_k F_N$$<br>Opposes relative sliding. \(\mu_k\) depends on surfaces, not area.</div>
+        <div class="flashcard-back">$$f_k = \mu_k F_N$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Opposes relative sliding; $\mu_k$ depends on the surfaces, not on area.</div></div>
       </div>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Center of Mass (continuous)</div>
-        <div class="flashcard-back">$$\vec{r}_{\text{cm}} = \frac{\int \vec{r}\,dm}{\int dm}$$<br>Express \(dm\) via \(\lambda\,dx\), \(\sigma\,dA\), or \(\rho\,dV\).</div>
+        <div class="flashcard-back">$$\vec{r}_\text{cm} = \frac{\int \vec{r}\,dm}{\int dm}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Express $dm$ via $\lambda\,dx$, $\sigma\,dA$, or $\rho\,dV$.</div></div>
       </div>
     </div>
   </div>

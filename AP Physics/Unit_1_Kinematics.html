@@ -283,7 +283,9 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   padding: 20px; text-align: center; font-size: 0.95rem; box-shadow: var(--shadow);
 }
 .flashcard-front { background: var(--bg-card); font-weight: 600; color: var(--accent); }
-.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.6; border: 2px solid var(--accent); }
+.flashcard-back { background: var(--bg); transform: rotateY(180deg); font-size: 0.9rem; line-height: 1.5; border: 2px solid var(--accent); flex-direction: column; gap: 4px; padding: 14px 16px; }
+.flashcard-back .katex-display { margin: 0 !important; }
+.flashcard-back .katex { font-size: 1em; }
 
 /* ─── CARDS ─── */
 .card {
@@ -607,12 +609,12 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         <div class="worked-step">
           <div class="step-label">Step 2</div>
           <div class="step-text">Magnitude</div>
-          <div class="step-math">$$|\vec{C}| = \sqrt(4 + 36) = \sqrt40 = 2\sqrt10 \approx 6.32$$</div>
+          <div class="step-math">$$|\vec{C}| = \sqrt{4 + 36} = \sqrt{40} = 2\sqrt{10} \approx 6.32$$</div>
         </div>
         <div class="worked-step">
-          <div class="step-label">Step 3</div>
-          <div class="step-text">Direction</div>
-          <div class="step-math">$$\theta = arctan(6/2) = arctan(3) \approx 71.6° above +x-axis$$</div>
+          <div class="step-label">Step 3 — Direction</div>
+          <div class="step-math">$$\theta = \arctan(6/2) = \arctan(3) \approx 71.6°$$</div>
+          <div class="step-text">Measured above the $+x$-axis.</div>
         </div>
       </div>
 
@@ -625,10 +627,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <p class="worked-problem">A 50 N force acts at 37° above horizontal. Find its components.</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-text">x-component:</div>
-          <div class="step-math">$$Fx = 50 cos 37° = 50(0.7986) \approx 39.9\;\text{N}$$</div>
-          <div class="step-text">y-component:</div>
-          <div class="step-math">$$Fy = 50 sin 37° = 50(0.6018) \approx 30.1\;\text{N}$$</div>
+          <div class="step-text">$x$-component:</div>
+          <div class="step-math">$$F_x = 50\cos 37° = 50(0.7986) \approx 39.9\;\text{N}$$</div>
+          <div class="step-text">$y$-component:</div>
+          <div class="step-math">$$F_y = 50\sin 37° = 50(0.6018) \approx 30.1\;\text{N}$$</div>
         </div>
       </div>
 
@@ -864,10 +866,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     </div>
   </details>
 
-  <!-- ─── INTERACTIVE: FREE-FALL EXPLORER ─── -->
+  <!-- ─── INTERACTIVE: VERTICAL-MOTION EXPLORER ─── -->
   <div class="formula-explorer" id="freefall-widget">
-    <div class="explorer-title">Free-Fall Explorer</div>
-    <div class="explorer-subtitle">Adjust initial upward velocity and launch height. This graph is height vs. time. The object can move upward at first because the slope is positive, but the graph is still a downward-opening parabola because gravity provides constant downward acceleration.</div>
+    <div class="explorer-title">Vertical 1D Motion Explorer</div>
+    <div class="explorer-subtitle">The ball is thrown straight up — its motion is purely vertical, with no horizontal component. The <strong>left strip</strong> shows the ball's actual stroboscopic positions on a single vertical line. The <strong>right panel</strong> is a height-vs-time <em>graph</em> (time on the horizontal axis, NOT horizontal distance). The parabola shape is the function $y(t)$, not the path through space.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>Initial velocity v₀ <span class="val" id="ff_v0_val">20</span> m/s</label>
@@ -881,7 +883,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div style="position:relative; width:100%; max-width:800px; margin:0 auto;">
       <canvas id="freefallCanvas" width="920" height="440"></canvas>
     </div>
-    <p style="max-width:920px; margin:10px auto 0; color: var(--text-secondary); font-size: 0.95rem;">Upward motion means the curve starts with a positive slope. It is not a straight line because the slope keeps decreasing by 10 m/s every second.</p>
+    <p style="max-width:920px; margin:10px auto 0; color: var(--text-secondary); font-size: 0.95rem;">The dots in the left strip show where the ball physically <em>is</em> at $t = 0, 0.5, 1.0, \ldots$ s — they sit on a single vertical line because the motion is purely 1D. Purple dots are on the way up, green is the apex, red is on the way down. The same data plotted as a graph (right) gives the parabola $y(t) = h_0 + v_0 t - \tfrac{1}{2}g t^2$ — that curve is a function plot, not a flight path.</p>
     <div class="explorer-results">
       <div class="result-card" style="border-color: var(--green);">
         <div class="result-label">Peak Height</div>
@@ -950,11 +952,11 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <p class="worked-problem">A boat moves north at 5 m/s relative to water.<br>Current flows east at 3 m/s. Ground velocity?</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-math">$$\vec{v}(B/W) = 5\hat{j} m/s$$</div>
-          <div class="step-math">$$\vec{v}(W/G) = 3\hat{i} m/s$$</div>
-          <div class="step-math">$$\vec{v}(B/G) = \vec{v}(B/W) + \vec{v}(W/G) = 3\hat{i} + 5\hat{j}$$</div>
-          <div class="step-math">$$|\vec{v}(B/G)| = \sqrt(9 + 25) = \sqrt34 \approx 5.83\;\text{m/s}$$</div>
-          <div class="step-math">$$\theta = arctan(5/3) \approx 59° north of east$$</div>
+          <div class="step-math">$$\vec{v}_{B/W} = 5\,\hat{j}\;\text{m/s}, \qquad \vec{v}_{W/G} = 3\,\hat{i}\;\text{m/s}$$</div>
+          <div class="step-math">$$\vec{v}_{B/G} = \vec{v}_{B/W} + \vec{v}_{W/G} = 3\,\hat{i} + 5\,\hat{j}\;\text{m/s}$$</div>
+          <div class="step-math">$$|\vec{v}_{B/G}| = \sqrt{9 + 25} = \sqrt{34} \approx 5.83\;\text{m/s}$$</div>
+          <div class="step-math">$$\theta = \arctan(5/3) \approx 59°$$</div>
+          <div class="step-text">Measured north of east.</div>
         </div>
       </div>
 
@@ -1033,6 +1035,29 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     $$T = \frac{2v_0\sin\theta}{g}$$
   </div>
 
+  <div class="formula-box" style="border-top-color: var(--purple);">
+    <div class="formula-label" style="color: var(--purple);">Trajectory Equation — y as a function of x</div>
+    $$y(x) = x\tan\theta - \frac{g\,x^2}{2v_0^2\cos^2\theta}$$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The path of a projectile is a parabola. Coefficient of $x$ sets the initial slope; coefficient of $x^2$ sets the curvature (opens downward).</p>
+  </div>
+
+  <div class="concept-box gold">
+    <strong style="color: var(--gold);">Derivation — Eliminate Time to Get the Path</strong>
+    <p style="margin-top:8px;">Whenever an FRQ asks "does it clear the wall?" or "what angle must it be launched at to hit target $(x_T, y_T)$?", start from $x(t)$ and $y(t)$, solve $x(t)$ for $t$, and substitute into $y(t)$.</p>
+    <div class="worked-steps" style="margin-top:10px;">
+      <div class="worked-step">
+        <div class="step-text">Step 1 — Parametric equations (launch from the origin):</div>
+        <div class="step-math">$$x(t) = (v_0\cos\theta)\,t \qquad y(t) = (v_0\sin\theta)\,t - \tfrac{1}{2}g\,t^2$$</div>
+        <div class="step-text">Step 2 — Solve the horizontal equation for time:</div>
+        <div class="step-math">$$t = \frac{x}{v_0\cos\theta}$$</div>
+        <div class="step-text">Step 3 — Substitute into the vertical equation and simplify:</div>
+        <div class="step-math">$$y = v_0\sin\theta\cdot\frac{x}{v_0\cos\theta} - \tfrac{1}{2}g\left(\frac{x}{v_0\cos\theta}\right)^2$$</div>
+        <div class="step-math">$$y = x\tan\theta - \frac{g\,x^2}{2v_0^2\cos^2\theta}$$</div>
+      </div>
+    </div>
+    <p style="margin-top:10px;">Setting $y = 0$ (landing on level ground) and solving for $x$ recovers the range formula — a quick FRQ sanity check.</p>
+  </div>
+
   <details>
     <summary>Worked Example — Angled Launch</summary>
     <div class="detail-body">
@@ -1040,16 +1065,16 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <div class="worked-steps">
         <div class="worked-step">
           <div class="step-text">Components:</div>
-          <div class="step-math">$$vx_0 = 40 cos 30° = 40(0.866) = 34.6\;\text{m/s}$$</div>
-          <div class="step-math">$$vy_0 = 40 sin 30° = 40(0.5) = 20\;\text{m/s}$$</div>
-          <div class="step-text">Max height (vy = 0):</div>
-          <div class="step-math">$$H = vy_0^2/(2g) = 400/20 = 20\;\text{m}$$</div>
+          <div class="step-math">$$v_{x0} = 40\cos 30° = 40(0.866) = 34.6\;\text{m/s}$$</div>
+          <div class="step-math">$$v_{y0} = 40\sin 30° = 40(0.5) = 20\;\text{m/s}$$</div>
+          <div class="step-text">Max height (when $v_y = 0$):</div>
+          <div class="step-math">$$H = \frac{v_{y0}^2}{2g} = \frac{400}{20} = 20\;\text{m}$$</div>
         </div>
         <div class="worked-step">
           <div class="step-label">Time of flight</div>
-          <div class="step-math">$$T = 2vy_0/g = 40/10 = 4\;\text{s}$$</div>
+          <div class="step-math">$$T = \frac{2v_{y0}}{g} = \frac{40}{10} = 4\;\text{s}$$</div>
           <div class="step-text">Range:</div>
-          <div class="step-math">$$R = vx_0 \times T = 34.6 \times 4 = 138.6\;\text{m}$$</div>
+          <div class="step-math">$$R = v_{x0}\,T = (34.6)(4) = 138.6\;\text{m}$$</div>
         </div>
       </div>
 
@@ -1059,18 +1084,52 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   <details>
     <summary>Worked Example — Horizontal Launch from a Cliff</summary>
     <div class="detail-body">
-      <p class="worked-problem">Ball rolls off a 45 m cliff at 10 m/s horizontally.<br>How far from the base does it land?</p>
+      <p class="worked-problem">Ball rolls off a 45 m cliff at 10 m/s horizontally. How far from the base does it land? (Take $g = 10\;\text{m/s}^2$.)</p>
       <div class="worked-steps">
         <div class="worked-step">
-          <div class="step-math">$$Fall time (vy_0 = 0):$$</div>
-          <div class="step-math">$$45 = \frac{1}{2}(10)t^2 \to t^2 = 9 \to t = 3\;\text{s}$$</div>
+          <div class="step-label">Fall time (initial $v_{y0} = 0$)</div>
+          <div class="step-math">$$45 = \tfrac{1}{2}(10)t^2 \;\Rightarrow\; t^2 = 9 \;\Rightarrow\; t = 3\;\text{s}$$</div>
         </div>
         <div class="worked-step">
           <div class="step-label">Horizontal distance</div>
-          <div class="step-math">$$x = vx_0 \times t = 10 \times 3 = 30\;\text{m}$$</div>
+          <div class="step-math">$$x = v_{x0}\,t = (10)(3) = 30\;\text{m}$$</div>
         </div>
       </div>
+    </div>
+  </details>
 
+  <details>
+    <summary>Worked Example — Projectile + Relative Motion FRQ (Plane Drop)</summary>
+    <div class="detail-body">
+      <p class="worked-problem">A plane flies horizontally at $v_p = 80$ m/s at an altitude of $h = 500$ m and releases a supply package. (a) How long until the package lands? (b) What horizontal distance does the package travel relative to the ground? (c) In the plane's reference frame, what does the package's path look like? (d) A target on the ground is moving in the same direction as the plane at $v_t = 20$ m/s. How far <em>behind</em> the target must the package be released so it lands on the target? (Take $g = 10\;\text{m/s}^2$.)</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-label">(a) Fall time</div>
+          <div class="step-text">Vertical motion starts with $v_y = 0$ and falls $h = 500$ m:</div>
+          <div class="step-math">$$h = \tfrac{1}{2}g\,t^2 \;\Rightarrow\; t = \sqrt{\tfrac{2h}{g}} = \sqrt{\tfrac{1000}{10}} = 10\;\text{s}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">(b) Ground-frame horizontal distance</div>
+          <div class="step-text">The package keeps the plane's horizontal velocity at release:</div>
+          <div class="step-math">$$x = v_p\,t = (80)(10) = 800\;\text{m}$$</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">(c) Path in the plane's reference frame</div>
+          <div class="step-text">In the plane's frame the package has zero horizontal velocity at release, so it falls straight down — a vertical line directly below the plane. The plane observer sees pure free fall; the ground observer sees a parabola. Both are correct descriptions of the same motion.</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">(d) Release offset for a moving target</div>
+          <div class="step-text">Horizontal velocity of the package relative to the target:</div>
+          <div class="step-math">$$v_{\text{pkg}/\text{target}} = v_p - v_t = 80 - 20 = 60\;\text{m/s}$$</div>
+          <div class="step-text">In the target's frame, the package closes horizontally at 60 m/s for 10 s:</div>
+          <div class="step-math">$$\Delta x_\text{release} = (60)(10) = 600\;\text{m}$$</div>
+          <div class="step-text">So the package must be released 600 m behind the target. Ground-frame check: the package travels 800 m while the target drifts only 200 m during the 10 s fall, so release position = target's start $- 600$ m. ✓</div>
+        </div>
+      </div>
+      <div class="concept-box purple" style="margin-top: 12px;">
+        <strong style="color: var(--purple);">Frame-Switching Rule</strong>
+        Questions like "what does observer B see?" are just $\vec{v}_{A/B} = \vec{v}_{A/C} - \vec{v}_{B/C}$. For a dropped object in a moving frame, the object <em>inherits</em> the frame's velocity at release. Gravity is the same in all inertial frames.
+      </div>
     </div>
   </details>
 
@@ -1189,7 +1248,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">$v = \;?$ (calculus definition)</div>
-        <div class="flashcard-back"><br>$$v = \frac{d\vec{r}}{dt}$$<br>Velocity is the time derivative of position.</div>
+        <div class="flashcard-back">$$\vec{v} = \frac{d\vec{r}}{dt}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Velocity is the time derivative of position.</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1201,37 +1260,37 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Slope of $x$-$t$ graph = ?</div>
-        <div class="flashcard-back"><br>Instantaneous velocity $v$<br><br>$v = dx/dt$</div>
+        <div class="flashcard-back">$$v = \frac{dx}{dt}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Slope of the position–time graph = instantaneous velocity.</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Area under $v$-$t$ curve = ?</div>
-        <div class="flashcard-back"><br>Displacement $\Delta x$<br><br>$\Delta x = \int v\,dt$</div>
+        <div class="flashcard-back">$$\Delta x = \int v\,dt$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Area under the velocity–time graph = displacement.</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Relative velocity formula?</div>
-        <div class="flashcard-back"><br>$$\vec{v}_{A/C} = \vec{v}_{A/B} + \vec{v}_{B/C}$$<br>Inner subscripts cancel.</div>
+        <div class="flashcard-back">$$\vec{v}_{A/C} = \vec{v}_{A/B} + \vec{v}_{B/C}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Inner subscripts cancel (B cancels B).</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Projectile: $a_x$ and $a_y$?</div>
-        <div class="flashcard-back"><br>$a_x = 0$ (constant $v_x$)<br>$a_y = -g \approx -10$ m/s²<br><br>Components are independent.</div>
+        <div class="flashcard-back">$$a_x = 0, \quad a_y = -g$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Horizontal and vertical motion are independent; link them through time $t$.</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Range formula<br>(level ground)</div>
-        <div class="flashcard-back"><br>$$R = \frac{v_0^2 \sin 2\theta}{g}$$<br>Max at $\theta = 45°$.</div>
+        <div class="flashcard-back">$$R = \frac{v_0^2 \sin 2\theta}{g}$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Level ground only; maximum at $\theta = 45°$.</div></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">Stopping distance scales as…?</div>
-        <div class="flashcard-back"><br>$\Delta x \propto v_0^2$<br><br>Double the speed → <strong>four times</strong> the stopping distance.</div>
+        <div class="flashcard-back">$$\Delta x \propto v_0^2$$<div style="font-size:0.78rem;color:var(--text-secondary);margin-top:6px;">Double the speed → <strong>4×</strong> the stopping distance.</div></div>
       </div>
     </div>
   </div>
@@ -1467,7 +1526,71 @@ function drawFreeFall() {
   ctx.fillStyle = c.bg;
   ctx.fillRect(0, 0, W, H);
 
-  var pad = { l: 78, r: 28, t: 26, b: 56 };
+  // ── Stroboscopic 1D motion column (LEFT) ──
+  var strobeW = 200;
+  var strobeX = 80;            // x-center of the vertical track
+  var strobeTopPad = 38;
+  var strobeBotPad = 56;
+  var strobeH = H - strobeTopPad - strobeBotPad;
+  var sStrobeY = strobeH / yAxisMax;
+
+  // Header label
+  ctx.fillStyle = c.text;
+  ctx.font = 'bold 13px "Source Sans 3"';
+  ctx.textAlign = 'center';
+  ctx.fillText('True 1D motion', strobeX + 40, 20);
+  ctx.font = '11px "Source Sans 3"';
+  ctx.fillText('(stroboscopic, every 0.5 s)', strobeX + 40, 34);
+
+  // Vertical guide line and ground
+  ctx.strokeStyle = c.grid;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(strobeX, strobeTopPad);
+  ctx.lineTo(strobeX, H - strobeBotPad);
+  ctx.stroke();
+  // Ground line
+  ctx.strokeStyle = c.axis;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(strobeX - 30, H - strobeBotPad);
+  ctx.lineTo(strobeX + 30, H - strobeBotPad);
+  ctx.stroke();
+  ctx.fillStyle = c.text;
+  ctx.font = '11px "Source Sans 3"';
+  ctx.textAlign = 'center';
+  ctx.fillText('ground', strobeX, H - strobeBotPad + 16);
+
+  // Strobe dots at t = 0, 0.5, 1.0, ... up to tMax
+  var dt = 0.5;
+  var tEnd = Math.min(tMax, tAxisMax);
+  for (var ts = 0; ts <= tEnd + 1e-6; ts += dt) {
+    var ys = h0 + v0 * ts - 0.5 * g * ts * ts;
+    if (ys < 0) ys = 0;
+    var ysClamp = Math.min(ys, yAxisMax);
+    var dotY = H - strobeBotPad - ysClamp * sStrobeY;
+    var dotColor = (ts < tPeak - 0.01) ? c.purple : (ts > tPeak + 0.01 ? c.red : c.green);
+    ctx.fillStyle = dotColor;
+    ctx.beginPath();
+    ctx.arc(strobeX, dotY, 4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = c.text;
+    ctx.font = '10px "JetBrains Mono"';
+    ctx.textAlign = 'left';
+    ctx.fillText(ts.toFixed(1) + 's', strobeX + 9, dotY + 3);
+  }
+
+  // Vertical separator between strobe and graph
+  ctx.strokeStyle = c.grid;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(strobeW, 8);
+  ctx.lineTo(strobeW, H - 8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // ── y-vs-t graph (RIGHT) ──
+  var pad = { l: strobeW + 62, r: 28, t: 26, b: 56 };
   var pw = W - pad.l - pad.r;
   var ph = H - pad.t - pad.b;
   var sx = pw / tAxisMax;
@@ -1507,9 +1630,12 @@ function drawFreeFall() {
   ctx.restore();
 
   ctx.fillStyle = c.text;
-  ctx.font = '12px "Source Sans 3"';
+  ctx.font = 'bold 12px "Source Sans 3"';
+  ctx.textAlign = 'left';
+  ctx.fillText('Graph: height vs. time', pad.l + 8, pad.t + 14);
+  ctx.font = '11px "Source Sans 3"';
   ctx.textAlign = 'right';
-  ctx.fillText('Height-time graph: y(t) = h₀ + v₀t − ½gt²', W - pad.r, pad.t + 16);
+  ctx.fillText('y(t) = h₀ + v₀t − ½gt²', W - pad.r, pad.t + 14);
 
   ctx.beginPath();
   ctx.fillStyle = c.fill;
