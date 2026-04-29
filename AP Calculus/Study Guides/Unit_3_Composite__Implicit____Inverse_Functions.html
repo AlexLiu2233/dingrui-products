@@ -1422,6 +1422,26 @@ input[type="range"]::-moz-range-thumb {
       $$(f^{-1})'(b) = \frac{1}{f'(a)} \quad \text{where } f(a) = b$$
     </div>
 
+    <details style="margin: 14px 0;">
+      <summary><strong>Derivation — Chain Rule on $f(f^{-1}(x)) = x$</strong></summary>
+      <div class="detail-body">
+        <p>Suppose $f$ is differentiable and one-to-one on an open interval, with differentiable inverse $f^{-1}$. By definition of inverse, the identity</p>
+        $$f\!\bigl(f^{-1}(x)\bigr) = x$$
+        <p>holds for every $x$ in the range of $f$.</p>
+        <div class="worked-solution">
+          <p><strong>Step 1 — Differentiate both sides with respect to $x$.</strong> The right side is just $1$. The left side is a composition, so apply the <strong>chain rule</strong> with outer function $f$ and inner function $f^{-1}(x)$:</p>
+          $$f'\!\bigl(f^{-1}(x)\bigr) \cdot \bigl(f^{-1}\bigr)'(x) \;=\; 1.$$
+          <p><strong>Step 2 — Solve for $(f^{-1})'(x)$.</strong> Divide both sides by $f'(f^{-1}(x))$ — this requires $f'(f^{-1}(x)) \ne 0$:</p>
+          $$\bigl(f^{-1}\bigr)'(x) \;=\; \frac{1}{f'\!\bigl(f^{-1}(x)\bigr)}.$$
+          <p><strong>Step 3 — Specialize to a point.</strong> If $f(a) = b$, then $f^{-1}(b) = a$, so substituting $x = b$ gives the point form:</p>
+          $$\bigl(f^{-1}\bigr)'(b) \;=\; \frac{1}{f'(a)}. \qquad\Box$$
+        </div>
+        <div class="concept-box orange"><strong>Where the "$f'(a) \neq 0$" condition comes from</strong>
+          <p>It is the divide-by-zero step. Geometrically, $f'(a) = 0$ means $f$ has a horizontal tangent at $a$; reflecting that horizontal tangent across $y = x$ produces a <em>vertical</em> tangent on $f^{-1}$, where the derivative does not exist.</p>
+        </div>
+      </div>
+    </details>
+
     <div class="concept-box green">
       <strong>Graphical Intuition</strong>
       <p>The graph of $f^{-1}$ is the reflection of $f$ over the line $y = x$. Reflecting a tangent line swaps the rise and run, which is why the slopes are reciprocals.</p>
@@ -1460,14 +1480,14 @@ input[type="range"]::-moz-range-thumb {
 
     <div class="table-wrapper">
       <table class="styled-table">
-        <thead><tr><th>Function</th><th>Derivative</th></tr></thead>
+        <thead><tr><th>Function</th><th>Derivative</th><th>Domain</th></tr></thead>
         <tbody>
-          <tr><td>$\arcsin(x)$</td><td>$\dfrac{1}{\sqrt{1 - x^2}}$</td></tr>
-          <tr><td>$\arccos(x)$</td><td>$\dfrac{-1}{\sqrt{1 - x^2}}$</td></tr>
-          <tr><td>$\arctan(x)$</td><td>$\dfrac{1}{1 + x^2}$</td></tr>
-          <tr><td>$\text{arccot}(x)$</td><td>$\dfrac{-1}{1 + x^2}$</td></tr>
-          <tr><td>$\text{arcsec}(x)$</td><td>$\dfrac{1}{|x|\sqrt{x^2 - 1}}$</td></tr>
-          <tr><td>$\text{arccsc}(x)$</td><td>$\dfrac{-1}{|x|\sqrt{x^2 - 1}}$</td></tr>
+          <tr><td>$\arcsin(x)$</td><td>$\dfrac{1}{\sqrt{1 - x^2}}$</td><td>$-1 &lt; x &lt; 1$</td></tr>
+          <tr><td>$\arccos(x)$</td><td>$\dfrac{-1}{\sqrt{1 - x^2}}$</td><td>$-1 &lt; x &lt; 1$</td></tr>
+          <tr><td>$\arctan(x)$</td><td>$\dfrac{1}{1 + x^2}$</td><td>all real $x$</td></tr>
+          <tr><td>$\text{arccot}(x)$</td><td>$\dfrac{-1}{1 + x^2}$</td><td>all real $x$</td></tr>
+          <tr><td>$\text{arcsec}(x)$</td><td>$\dfrac{1}{|x|\sqrt{x^2 - 1}}$</td><td>$|x| &gt; 1$</td></tr>
+          <tr><td>$\text{arccsc}(x)$</td><td>$\dfrac{-1}{|x|\sqrt{x^2 - 1}}$</td><td>$|x| &gt; 1$</td></tr>
         </tbody>
       </table>
     </div>
@@ -1476,6 +1496,45 @@ input[type="range"]::-moz-range-thumb {
       <strong>Pattern to Remember</strong>
       <p>Notice that the "co-" functions ($\arccos$, $\text{arccot}$, $\text{arccsc}$) each have derivatives that are the <strong>negatives</strong> of their non-"co" counterparts. Memorize three formulas and add a minus sign for the cofunctions.</p>
     </div>
+
+    <details style="margin: 14px 0;">
+      <summary><strong>Derivation — $\dfrac{d}{dx}[\arcsin x]$ via implicit differentiation</strong></summary>
+      <div class="detail-body">
+        <div class="worked-solution">
+          <p><strong>Step 1 — Set up.</strong> Let $y = \arcsin(x)$. By definition of the principal branch, this means</p>
+          $$\sin y = x \qquad\text{with}\qquad -\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}.$$
+          <p><strong>Step 2 — Differentiate $\sin y = x$ implicitly with respect to $x$.</strong> Apply the chain rule on the left:</p>
+          $$\cos y \cdot \frac{dy}{dx} \;=\; 1 \quad\Longrightarrow\quad \frac{dy}{dx} \;=\; \frac{1}{\cos y}.$$
+          <p><strong>Step 3 — Convert $\cos y$ back to a function of $x$.</strong> From the Pythagorean identity, $\cos^2 y = 1 - \sin^2 y = 1 - x^2$, so</p>
+          $$\cos y \;=\; \pm\sqrt{1 - x^2}.$$
+          <p><strong>Step 4 — Pick the correct branch.</strong> On the principal range $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$, cosine is non-negative, so we take the $+$ sign:</p>
+          $$\cos y \;=\; \sqrt{1 - x^2}.$$
+          <p><strong>Step 5 — Conclude.</strong></p>
+          $$\frac{d}{dx}[\arcsin x] \;=\; \frac{1}{\sqrt{1 - x^2}}, \qquad -1 &lt; x &lt; 1. \qquad\Box$$
+        </div>
+        <div class="concept-box"><strong>Why the open interval $-1 &lt; x &lt; 1$?</strong>
+          <p style="margin-top:6px;">At the endpoints $x = \pm 1$, $\cos y = 0$, so the formula divides by zero. Geometrically, $\arcsin$ has a vertical tangent at $\pm 1$ — its derivative is undefined there.</p>
+        </div>
+      </div>
+    </details>
+
+    <details style="margin: 14px 0;">
+      <summary><strong>Derivation — $\dfrac{d}{dx}[\arccos x]$ via implicit differentiation</strong></summary>
+      <div class="detail-body">
+        <div class="worked-solution">
+          <p>Same recipe. Let $y = \arccos(x)$, so $\cos y = x$ with $0 \le y \le \pi$.</p>
+          <p><strong>Differentiate implicitly:</strong></p>
+          $$-\sin y \cdot \frac{dy}{dx} \;=\; 1 \quad\Longrightarrow\quad \frac{dy}{dx} \;=\; -\frac{1}{\sin y}.$$
+          <p><strong>Convert $\sin y$:</strong> $\sin^2 y = 1 - \cos^2 y = 1 - x^2$, so $\sin y = \pm\sqrt{1 - x^2}$.</p>
+          <p><strong>Pick the branch:</strong> on $0 \le y \le \pi$, sine is non-negative, so $\sin y = +\sqrt{1 - x^2}$.</p>
+          <p><strong>Conclude:</strong></p>
+          $$\frac{d}{dx}[\arccos x] \;=\; -\frac{1}{\sqrt{1 - x^2}}, \qquad -1 &lt; x &lt; 1. \qquad\Box$$
+        </div>
+        <div class="concept-box green"><strong>Why the negative sign?</strong>
+          <p style="margin-top:6px;">$\arcsin x + \arccos x = \tfrac{\pi}{2}$ for all $x \in [-1, 1]$ (a standard identity). Differentiating both sides gives $\frac{d}{dx}[\arcsin x] + \frac{d}{dx}[\arccos x] = 0$, so $\arccos$'s derivative is the negative of $\arcsin$'s — consistent with our result.</p>
+        </div>
+      </div>
+    </details>
 
     <h3>With the Chain Rule</h3>
     <p>On the AP Exam, these functions almost always appear with a non-trivial inner function. Apply the chain rule:</p>
