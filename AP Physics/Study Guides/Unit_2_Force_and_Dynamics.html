@@ -1036,7 +1036,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </details>
 
   <!-- ═══ NEW: F=ma EXPLORER ═══ -->
-  <div class="formula-explorer" id="fmaExplorer">
+  <!-- Widget concept: a = F/m — how doubling the force vs. doubling the mass each change acceleration. -->
+  <div class="formula-explorer" id="fma-widget">
     <div class="explorer-title">F = ma Explorer</div>
     <div class="explorer-subtitle">See how force, mass, and acceleration are linked. Adjust two to see the third.</div>
     <div class="explorer-sliders">
@@ -1216,7 +1217,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </details>
 
   <!-- ═══ NEW: INCLINED PLANE EXPLORER ═══ -->
-  <div class="formula-explorer" id="inclineExplorer" style="border-color: var(--orange);">
+  <!-- Widget concept: angle vs. friction trade-off setting the down-slope acceleration on an incline. -->
+  <div class="formula-explorer" id="incline-widget" style="border-color: var(--orange);">
     <div class="explorer-title" style="color: var(--orange);">Inclined Plane Explorer</div>
     <div class="explorer-subtitle">Adjust the angle and friction coefficient. Watch the forces and acceleration change.</div>
     <div class="explorer-sliders">
@@ -1231,10 +1233,6 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <div class="slider-group">
         <label>μ_k <span class="val" id="inc_mu_val">0.20</span></label>
         <input type="range" id="inc_mu" min="0" max="1" value="0.2" step="0.01" oninput="updateIncline()">
-      </div>
-      <div class="slider-group">
-        <label>g <span class="val" id="inc_g_val">10</span> m/s²</label>
-        <input type="range" id="inc_g" min="1" max="25" value="10" step="0.5" oninput="updateIncline()">
       </div>
     </div>
     <div style="position:relative; width:100%; max-width:720px; margin:0 auto;">
@@ -1333,7 +1331,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
 
   <!-- ═══ NEW: HOOKE'S LAW EXPLORER ═══ -->
-  <div class="formula-explorer" id="springExplorer" style="border-color: var(--green);">
+  <!-- Widget concept: Hooke's law — spring force scales linearly with displacement and is restoring. -->
+  <div class="formula-explorer" id="spring-force-widget" style="border-color: var(--green);">
     <div class="explorer-title" style="color: var(--green);">Hooke's Law Explorer</div>
     <div class="explorer-subtitle">Stretch or compress a spring and see how force scales linearly with displacement.</div>
     <div class="explorer-sliders">
@@ -1464,7 +1463,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </details>
 
   <!-- ═══ NEW: TERMINAL VELOCITY EXPLORER ═══ -->
-  <div class="formula-explorer" id="dragExplorer" style="border-color: var(--purple);">
+  <!-- Widget concept: linear drag drives velocity exponentially toward terminal velocity v_t = mg/b. -->
+  <div class="formula-explorer" id="drag-widget" style="border-color: var(--purple);">
     <div class="explorer-title" style="color: var(--purple);">Terminal Velocity Explorer</div>
     <div class="explorer-subtitle">Watch velocity approach terminal velocity exponentially. Adjust mass and drag coefficient.</div>
     <div class="explorer-sliders">
@@ -1589,7 +1589,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
 
   <!-- ═══ NEW: CIRCULAR MOTION EXPLORER ═══ -->
-  <div class="formula-explorer" id="circExplorer" style="border-color: var(--red);">
+  <!-- Widget concept: centripetal force F = mv²/r — how speed and radius set the inward force needed. -->
+  <div class="formula-explorer" id="circular-widget" style="border-color: var(--red);">
     <div class="explorer-title" style="color: var(--red);">Circular Motion Explorer</div>
     <div class="explorer-subtitle">See how speed, radius, and mass affect centripetal acceleration and force.</div>
     <div class="explorer-sliders">
@@ -2042,11 +2043,10 @@ document.addEventListener('keydown', function(e) {
     var theta = parseFloat(document.getElementById('inc_theta').value);
     var m = parseFloat(document.getElementById('inc_m').value);
     var mu = parseFloat(document.getElementById('inc_mu').value);
-    var g = parseFloat(document.getElementById('inc_g').value);
+    var g = 9.8;
     document.getElementById('inc_theta_val').textContent = theta;
     document.getElementById('inc_m_val').textContent = m;
     document.getElementById('inc_mu_val').textContent = mu.toFixed(2);
-    document.getElementById('inc_g_val').textContent = g;
     var rad = theta * Math.PI / 180;
     var mg = m * g, grav_par = mg * Math.sin(rad), N = mg * Math.cos(rad);
     var fk = mu * N, accel = g * (Math.sin(rad) - mu * Math.cos(rad));
