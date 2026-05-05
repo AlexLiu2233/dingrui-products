@@ -153,11 +153,12 @@ spacing, and alignment fight the content.
 
 ### S1-B — Apply Interactive Component Philosophy
 
-**Status:** ✅ Closed 2026-05-04. **Tier:** P0. **Where:** all 22 study-guide
-widgets across Units 1–7 (the previous estimate of 11 was incorrect — the
-actual count is 22).
+**Status:** ✅ Closed 2026-05-04 (initial pass) + 2026-05-04 (Sprint 1-b
+follow-up trim). **Tier:** P0. **Where:** all 22 study-guide widgets across
+Units 1–7 (the previous estimate of 11 was incorrect — the actual count is
+22).
 
-**Resolution:**
+**Resolution (initial pass):**
 
 - **Slider-only confirmed.** All 22 widgets already use `<input type="range">`
   exclusively — no other input controls in any widget.
@@ -174,6 +175,29 @@ actual count is 22).
   `impulseExplorer → impulse-widget`, `collisionExplorer → collision-widget`,
   `energyExplorer → energy-widget`. None of the renamed IDs were referenced
   in JS or CSS, so the rename was contained to the container `id=` attribute.
+
+**Resolution (Sprint 1-b condensation pass):**
+
+- **`impV0` slider trimmed from `impulse-widget`.** Initial velocity didn't
+  affect the impulse $J$ or $\Delta v$ (it only fed the downstream $v_\text{f}$
+  result card). Removed the slider, the v-final card, and the v0/vf
+  references in `drawImpulse()`. The widget is now a clean
+  3-slider × 3-result demo of $J = F \cdot \Delta t = \Delta p$. Removed
+  control logged as DP-6.
+
+**Deferred to a future "deep condensation" pass** (logged here so they
+aren't lost):
+
+| Widget | Candidate trim | Why deferred |
+|---|---|---|
+| `incline-widget` (U2) | `inc_m` slider | Acceleration is mass-independent under fixed $\mu$, so by rule 4 mass is gratuitous. But three result cards (mg sin θ, N, f_k) all depend on $m$ — trimming the slider would orphan them. Needs concept-recasting + card pruning, not a one-line trim. |
+| `circular-widget` (U2) | `circ_m` slider | $a_c = v^2/r$ is mass-independent; only the $F_c$ card depends on $m$. Trimming requires removing $F_c$ and rewriting the concept comment from "centripetal force F = mv²/r" to "centripetal acceleration v²/r." |
+| `ux-widget` (U3) | `uxXpos` test-point slider + 4 dependent result cards (U(x), KE, F(x), d²U/dx²) | Probe-only behaviour — useful for advanced students but orthogonal to the "where E intersects U(x)" core concept. The 4 cards plus the JS that updates them on Xpos change is a meaningful refactor. |
+| `spring-energy-widget` (U3) | `sprF` friction slider + Friction Loss / Efficiency cards | Friction is conceptually orthogonal to PE→KE conversion. Three result cards depend on the slider. Same invasiveness as the others. |
+
+These four trims should be done together in a single "widget-condensation"
+sprint with explicit before/after screenshots, since each one changes the
+widget's visible result-card layout and may need a brief tour-style note.
 
 **Why now:** the philosophy was just locked (see above). Existing widgets were
 built before it; some violate rules 1, 2, or 4.
@@ -288,15 +312,36 @@ where appropriate. **Action:** track as opportunity, not a blocker.
 
 ---
 
-## Practice Questions Status
+## Sprint 4 — Practice Questions (queued, separate workstream)
 
 The `Practice Questions/` folder currently contains
-`Unit_1_Kinematics_Practice_Problems.html` (rough draft) plus a README. See
+`Unit_1_Kinematics_Practice_Problems.html` (Draft v0) plus a README. See
 [`Practice Questions/README.md`](Practice%20Questions/README.md). Target:
 AP-style MC + FRQ for Units 1–7, mirroring the AP Calculus practice question
 shape (HTML + print PDF, with `EASY/MEDIUM/HARD` and `Calculator/No
-Calculator` pills). **Schedule:** kick off after Sprint 2 closes (so new
-practice questions inherit the current ISEE template and hygiene rules).
+Calculator` pills).
+
+### Sprint 4 scope
+
+| ID | Item | Notes |
+|---|---|---|
+| S4-1 | Bring Unit 1 from 14 MC → 18 MC (target per README) | Add 4 MC items spread across topic distribution gaps |
+| S4-2 | Draft Units 2–7 practice files | One file per unit; ~18 MC + 4 FRQ each; ≈ 130 MC + 28 FRQ total |
+| S4-3 | Decide answer-key format | Two paths: separate `…_Answer_Key.html` per unit, or inline `<details>` reveals on each item. Lock the choice and apply uniformly |
+| S4-4 | Lock unit-typography convention | Practice files use `\mathrm{m/s}`; study guides use `\text{m/s}`. Both render; pick `\mathrm` for practice (closer to AP exam style) and document in `GENERATION_PROMPT.md` |
+| S4-5 | Render PDFs for distribution | Manual: `chrome --headless --print-to-pdf=Unit_N.pdf <file>`. Goes alongside the HTML |
+
+**Resolved on this branch (Sprint 1-b polish):**
+
+- ~~Q11 had no correct answer~~ — fixed: choice (C) now reads $2 \pm \tfrac{2\sqrt{3}}{3}$ s, which is the actual MVT solution. Distractor (D) kept as a near-miss (factor-of-two slip).
+- ~~Q13 distractor (D) was incoherent~~ — replaced "$\sqrt{25}$ m/s but pointing in $-\hat\jmath$" with `$\sqrt{18}~\mathrm{m/s}$` (the trap is computing $|\vec r(1)|$ instead of $|\vec v(1)|$). Choice (A) tightened to `$2~\mathrm{m/s}$` (y-component only trap).
+- ~~README claimed "18 MC" but file had 14~~ — README now reads `14 MC + 4 FRQ *(draft v0; target 18 MC)*`.
+
+### Sprint 4 dependency
+
+**Schedule:** kicks off after Sprint 2 (study-guide ISEE additions) closes,
+so the practice questions inherit the locked ISEE conventions, the hygiene
+rules from S1-A, and the Interactive Component Philosophy where applicable.
 
 ---
 
@@ -315,6 +360,24 @@ practice questions inherit the current ISEE template and hygiene rules).
 `GENERATION_PROMPT.md` baselines: ≥2 widgets per unit (✓ all), 8+ flashcards
 (✓ all), 6+ quiz items (✗ Unit 3 has 5), 2–3 ISEE worked examples (✗ Units
 1–4 have 0).
+
+---
+
+## Known Infra / Tooling Items
+
+### I-1 — `scripts/validate.sh` is hard-coded for study-guide products
+
+**Symptom:** running the validator on practice-questions HTML fails with
+`Missing dark mode styles` and (for AP Calculus practice) `Missing 'data-theme'`.
+The practice product is intentionally print-only with no dark mode (see
+`Practice Questions/README.md` "Style & Conventions" — "no dark mode
+(print-targeted)").
+**Why it matters:** every practice-product change shows a red FAIL even when
+the file is correct. Easy to miss real errors in noise.
+**Fix:** detect product type from path (anything under `Practice Questions/`
+gets a print-only validation profile that drops the dark-mode + data-theme
+checks). Or pass a `--profile=print` flag and let callers opt in. Bundle
+with Sprint 4 since that's when practice files start being touched at scale.
 
 ---
 
@@ -352,6 +415,7 @@ up. Anything the Interactive Component Philosophy excludes belongs here.
 | DP-3 | Multi-stage scenario player ("release block → spring compresses → block leaves spring") | Implied by Unit 3/4 energy bookkeeping | State machine + timeline scrubber |
 | DP-4 | Adjustable-$g$ "what if Earth had different gravity" sandbox | Stripped from Inclined Plane Explorer per S1-B | Genuinely interesting for intuition; doesn't fit study-guide one-concept rule |
 | DP-5 | Interactive FRQ rubric trainer (student types answer, rubric grades it) | Net-new | Pairs naturally with the Practice Questions product |
+| DP-6 | "Pre-loaded velocity" impulse widget — set initial velocity, watch how impulse adds to it | Stripped from `impulse-widget` per S1-B condensation | Useful for showing v_final = v_0 + J/m as a separate concept; doesn't fit the study-guide one-concept rule for the impulse widget |
 
 *Add new entries with auto-incremented `DP-N` ID. When a backlog item is
 picked up by the Digital Product team, mark it `→ in flight: <link>` here

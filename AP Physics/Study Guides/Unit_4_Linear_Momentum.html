@@ -715,15 +715,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         <label>Mass <span class="val" id="imp_m_val">2</span> kg</label>
         <input type="range" id="impM" min="0.5" max="5" step="0.5" value="2" oninput="drawImpulse()">
       </div>
-      <div class="slider-group">
-        <label>Initial Velocity <span class="val" id="imp_v0_val">0</span> m/s</label>
-        <input type="range" id="impV0" min="-5" max="5" step="0.5" value="0" oninput="drawImpulse()">
-      </div>
     </div>
     <div class="explorer-results">
       <div class="result-card"><div class="result-label">Impulse J</div><div class="result-value" id="imp_J">—</div><div class="result-unit">N·s</div></div>
       <div class="result-card"><div class="result-label">Δv</div><div class="result-value" id="imp_dv">—</div><div class="result-unit">m/s</div></div>
-      <div class="result-card"><div class="result-label">v final</div><div class="result-value" id="imp_vf">—</div><div class="result-unit">m/s</div></div>
       <div class="result-card"><div class="result-label">F avg</div><div class="result-value" id="imp_Favg">—</div><div class="result-unit">N</div></div>
     </div>
     <div class="explorer-canvas-wrap">
@@ -1464,22 +1459,18 @@ function drawImpulse() {
   var Fpk = parseFloat(document.getElementById('impF').value);
   var dt = parseFloat(document.getElementById('impDt').value);
   var m = parseFloat(document.getElementById('impM').value);
-  var v0 = parseFloat(document.getElementById('impV0').value);
 
   document.getElementById('imp_F_val').textContent = Fpk;
   document.getElementById('imp_dt_val').textContent = dt;
   document.getElementById('imp_m_val').textContent = m;
-  document.getElementById('imp_v0_val').textContent = v0;
 
   // Triangular impulse
   var J = 0.5 * Fpk * dt;
   var dv = J / m;
-  var vf = v0 + dv;
   var Favg = J / dt;
 
   document.getElementById('imp_J').textContent = J.toFixed(1);
   document.getElementById('imp_dv').textContent = dv.toFixed(1);
-  document.getElementById('imp_vf').textContent = vf.toFixed(1);
   document.getElementById('imp_Favg').textContent = Favg.toFixed(1);
 
   var canvas = document.getElementById('impulseCanvas');
