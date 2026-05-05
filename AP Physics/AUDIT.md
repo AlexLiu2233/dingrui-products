@@ -316,36 +316,31 @@ where appropriate. **Action:** track as opportunity, not a blocker.
 
 ---
 
-## Sprint 4 — Practice Questions (queued, separate workstream)
+## Sprint 4 — Practice Questions (in flight)
 
-The `Practice Questions/` folder currently contains
-`Unit_1_Kinematics_Practice_Problems.html` (Draft v0) plus a README. See
-[`Practice Questions/README.md`](Practice%20Questions/README.md). Target:
-AP-style MC + FRQ for Units 1–7, mirroring the AP Calculus practice question
-shape (HTML + print PDF, with `EASY/MEDIUM/HARD` and `Calculator/No
-Calculator` pills).
+The `Practice Questions/` folder is being built out unit by unit. See
+[`Practice Questions/README.md`](Practice%20Questions/README.md) for the
+full conventions and per-unit index.
 
-### Sprint 4 scope
+### Sprint 4 scope (Phase 1 closed 2026-05-04)
 
-| ID | Item | Notes |
+| ID | Item | Status |
 |---|---|---|
-| S4-1 | Bring Unit 1 from 14 MC → 18 MC (target per README) | Add 4 MC items spread across topic distribution gaps |
-| S4-2 | Draft Units 2–7 practice files | One file per unit; ~18 MC + 4 FRQ each; ≈ 130 MC + 28 FRQ total |
-| S4-3 | Decide answer-key format | Two paths: separate `…_Answer_Key.html` per unit, or inline `<details>` reveals on each item. Lock the choice and apply uniformly |
-| S4-4 | Lock unit-typography convention | Practice files use `\mathrm{m/s}`; study guides use `\text{m/s}`. Both render; pick `\mathrm` for practice (closer to AP exam style) and document in `GENERATION_PROMPT.md` |
-| S4-5 | Render PDFs for distribution | Manual: `chrome --headless --print-to-pdf=Unit_N.pdf <file>`. Goes alongside the HTML |
+| ~~S4-1~~ | Bring Unit 1 from 14 MC → 18 MC | ✅ Closed — added Q15 (1.4 relative motion, EASY), Q16 (1.2 sign analysis, MED), Q17 (1.5 simultaneous-fall conceptual, MED), Q18 (1.5 cliff-launch impact speed via energy, HARD). Difficulty mix balanced (4 EASY / 9 MED / 5 HARD). |
+| S4-2 | Draft Units 2–7 practice files | **Open** — biggest remaining workstream. Target ~18 MC + 4 FRQ per unit, ≈ 108 MC + 24 FRQ across the six units. Should be done one unit at a time with review between. |
+| ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
+| ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
+| S4-5 | Render PDFs for distribution | **Open** — manual `chrome --headless --print-to-pdf=...`. Wait until S4-2 is complete so all units render together. |
 
-**Resolved on this branch (Sprint 1-b polish):**
+**Earlier resolutions (Sprint 1-b polish, retained for traceability):**
 
 - ~~Q11 had no correct answer~~ — fixed: choice (C) now reads $2 \pm \tfrac{2\sqrt{3}}{3}$ s, which is the actual MVT solution. Distractor (D) kept as a near-miss (factor-of-two slip).
 - ~~Q13 distractor (D) was incoherent~~ — replaced "$\sqrt{25}$ m/s but pointing in $-\hat\jmath$" with `$\sqrt{18}~\mathrm{m/s}$` (the trap is computing $|\vec r(1)|$ instead of $|\vec v(1)|$). Choice (A) tightened to `$2~\mathrm{m/s}$` (y-component only trap).
-- ~~README claimed "18 MC" but file had 14~~ — README now reads `14 MC + 4 FRQ *(draft v0; target 18 MC)*`.
+- ~~README claimed "18 MC" but file had 14~~ — README now reads `18 MC + 4 FRQ ✓`.
 
-### Sprint 4 dependency
+### Sprint 4 — what's next
 
-**Schedule:** kicks off after Sprint 2 (study-guide ISEE additions) closes,
-so the practice questions inherit the locked ISEE conventions, the hygiene
-rules from S1-A, and the Interactive Component Philosophy where applicable.
+Phase 2 is the per-unit build-out (S4-2). Suggested ordering: **U2 → U3 → U4 → U5 → U6 → U7** (i.e. follow the study-guide order, so each new practice unit can borrow conventions and worked-example seeds from the just-completed study-guide unit). Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
 
 ---
 
@@ -369,19 +364,19 @@ units now).
 
 ## Known Infra / Tooling Items
 
-### I-1 — `scripts/validate.sh` is hard-coded for study-guide products
+### ~~I-1 — `scripts/validate.sh` is hard-coded for study-guide products~~
 
-**Symptom:** running the validator on practice-questions HTML fails with
-`Missing dark mode styles` and (for AP Calculus practice) `Missing 'data-theme'`.
-The practice product is intentionally print-only with no dark mode (see
-`Practice Questions/README.md` "Style & Conventions" — "no dark mode
-(print-targeted)").
-**Why it matters:** every practice-product change shows a red FAIL even when
-the file is correct. Easy to miss real errors in noise.
-**Fix:** detect product type from path (anything under `Practice Questions/`
-gets a print-only validation profile that drops the dark-mode + data-theme
-checks). Or pass a `--profile=print` flag and let callers opt in. Bundle
-with Sprint 4 since that's when practice files start being touched at scale.
+**Status:** ✅ Resolved 2026-05-04 (Sprint 4 Phase 1). The dark-mode check
+in `scripts/validate.sh` now skips files whose path contains
+`Practice Questions`. The `data-theme` check is preserved for all files
+(both Physics and Calculus practice files should declare a theme — Physics
+already has `data-theme="light"`; AP Calculus practice files genuinely
+omit it, which is a separate bug in those files, not the validator).
+
+The change is intentionally minimal — single conditional rather than a
+new `--profile` flag — because there are only two profiles in play
+(study guide vs. print practice) and a path-based heuristic is enough.
+If a third product type appears, revisit.
 
 ---
 

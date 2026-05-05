@@ -29,7 +29,7 @@ Both versions will have:
 
 | Unit | Title | Items | Scope | HTML | PDF |
 |---|---|---|---|---|---|
-| 1 | Kinematics | 14 MC + 4 FRQ *(draft v0; target 18 MC)* | 1.1 – 1.5 | [Unit_1_Kinematics_Practice_Problems.html](Unit_1_Kinematics_Practice_Problems.html) | _pending_ |
+| 1 | Kinematics | 18 MC + 4 FRQ ✓ | 1.1 – 1.5 | [Unit_1_Kinematics_Practice_Problems.html](Unit_1_Kinematics_Practice_Problems.html) | _pending_ |
 | 2 | Force & Translational Dynamics | _pending_ | 2.1 – 2.10 | _pending_ | _pending_ |
 | 3 | Work, Energy, & Power | _pending_ | 3.1 – 3.5 | _pending_ | _pending_ |
 | 4 | Linear Momentum | _pending_ | 4.1 – 4.4 | _pending_ | _pending_ |
@@ -56,6 +56,21 @@ The practice files reuse the print-first CSS pattern from
 
 Topic-pill convention for Mechanics: `N.X Short Topic Name`, e.g.
 `1.3 Kinematic Equations`, `2.7 Drag Forces`, `5.4 Rolling Without Slipping`.
+
+### Locked conventions (Sprint 4, 2026-05-04)
+
+- **Question-only product.** No embedded answers, no `<details>` reveals,
+  no answer keys inside the practice file itself. This matches the AP
+  Calculus house style — the file is what the student receives. If
+  teacher answer keys are needed, they ship as a separate
+  `Unit_N_*_Answer_Key.html` companion (deferred — not yet a deliverable).
+- **Typography for SI units:** use `\mathrm{...}` for unit composition
+  (`\mathrm{m/s}`, `\mathrm{kg \cdot m^2/s}`), not `\text{...}`. Rationale:
+  closer to AP exam typography, and avoids the unicode-in-`\text{}` annotation
+  bug from study guides (see AUDIT.md S1-A). Variables remain in plain math
+  mode (`v`, `\theta`, `m_1`).
+- **Body math uses `~` for inter-unit spacing** (e.g. `5~\mathrm{m/s}`),
+  not `\;` — `~` ties the value to its unit and prevents line breaks.
 
 ---
 

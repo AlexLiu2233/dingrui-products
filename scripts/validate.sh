@@ -32,8 +32,8 @@ validate_file() {
     echo -e "  ${YELLOW}WARN${NC}: Odd number of \$ delimiters ($single_dollars) — possible unclosed math"
   fi
 
-  # Check dark mode CSS exists
-  if ! grep -q '\[data-theme="dark"\]' "$f"; then
+  # Check dark mode CSS exists (skipped for print-targeted Practice Questions products)
+  if [[ "$f" != *"Practice Questions"* ]] && ! grep -q '\[data-theme="dark"\]' "$f"; then
     echo -e "  ${RED}FAIL${NC}: Missing dark mode styles"
     ((ERRORS++))
   fi
