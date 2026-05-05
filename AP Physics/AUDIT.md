@@ -232,38 +232,42 @@ built before it; some violate rules 1, 2, or 4.
 
 ---
 
-## Sprint 2 — Content Gaps (P0, queued)
+## Sprint 2 — Content Gaps (P0)
 
-### P0-1 — Units 1–4 have zero ISEE worked examples
+**Sprint 2 closed 2026-05-04** — both items landed on
+`sprint2_content_gaps`. Resolved details preserved below.
 
-**Where:** `Unit_1_Kinematics.html`, `Unit_2_Force_and_Dynamics.html`,
-`Unit_3_Work_Energy_Power.html`, `Unit_4_Linear_Momentum.html`.
-**Status:** still open (Units 5/6/7 have 8/8/9 ISEE blocks; Units 1–4 have 0).
-**Spec:** `GENERATION_PROMPT.md` §6.9 / §7 — every unit's quiz section should
-include 2–3 ISEE FRQ-style worked examples.
-**Why it matters:** the ISEE block is the primary FRQ-prep surface; Units 1–4
-are the most-tested content (Unit 2 alone is 20–25% of the exam).
-**Suggested scenarios:**
+### ~~P0-1 — Units 1–4 have zero ISEE worked examples~~
 
-- Unit 1: 2-D projectile range/launch-angle FRQ; non-constant-$a$ integration
-  problem ($a(t)$ given).
-- Unit 2: Atwood with friction; block-on-incline with applied force at angle;
-  drag terminal-velocity ramp-up.
-- Unit 3: Variable-force work integral with $U(x)$ → turning points; spring +
-  ramp + friction energy bookkeeping.
-- Unit 4: 2-D inelastic collision with COM frame; ballistic pendulum + spring.
+**Status:** ✅ Closed 2026-05-04. **Where:** `Unit_1_Kinematics.html`,
+`Unit_2_Force_and_Dynamics.html`, `Unit_3_Work_Energy_Power.html`,
+`Unit_4_Linear_Momentum.html`.
 
-**Cross-cutting note:** any new ISEE example written in Sprint 2 must follow
-the S1-A hygiene rules from the start (no nested step-text-in-step-math, etc.).
+**Resolution:** added 2 ISEE FRQ-style worked examples to each of Units
+1–4 (8 new examples total). Each follows the canonical
+Identify / Set Up / Execute / Evaluate format and inherits the S1-A
+hygiene rules from the start (acceptance grep targets all return zero).
+Inserted at the end of the existing `unit-quiz` section, mirroring U5's
+collected-FRQ pattern.
 
-### P0-2 — Unit 3 quiz is below the spec floor
+| Unit | ISEE-1 | ISEE-2 |
+|---|---|---|
+| 1 | Projectile range R(θ) + 45° optimization (calculus + numeric) | Non-constant $a(t) = 6t - 12$ — integrate to $v(t), x(t)$; total distance with sign change at $t = 4$ |
+| 2 | Atwood with friction on the table — solve symbolically then numerically; tension by back-substitution | Block on incline with applied force up-slope — incline coordinates; verify above the slip threshold |
+| 3 | Double-well $U(x) = x^4 - 8x^2 + 5$ — equilibria + stability via $d^2U/dx^2$; speed at $x=0$; turning points at $\pm 3$ | Spring → frictionless launch → frictioned ramp — full energy bookkeeping; check whether block slides back |
+| 4 | 2-D perfectly inelastic collision — component-wise momentum conservation; COM-frame interpretation of KE loss | Ballistic pendulum + spring recoil — three steps (collision/swing/spring) with the right conservation law per step |
 
-**Where:** `Unit_3_Work_Energy_Power.html` — 5 quiz items vs. spec floor of 6.
-**Status:** still open.
-**Why it matters:** Unit 3 has the broadest energy-bookkeeping toolkit and is
-chained into Units 4/6/7. Five items is too thin to cover work integrals,
-$U(x)$, conservative-vs-non-conservative, and power.
-**Fix:** add 3–5 MC items plus the ISEE examples from P0-1 (do them together).
+### ~~P0-2 — Unit 3 quiz is below the spec floor~~
+
+**Status:** ✅ Closed 2026-05-04. **Where:**
+`Unit_3_Work_Energy_Power.html` — was 5 quiz items, now 8.
+
+**Resolution:** added 3 new MC items (Q6, Q7, Q8) covering:
+- Q6: friction work as a non-conservative, sign-aware quantity ($W_f < 0$).
+- Q7: instantaneous power $P = \vec F \cdot \vec v$ on an inclined car.
+- Q8: turning points from $U(x) = E$ for a quadratic potential.
+Quiz total updated from 5 to 8 (above the spec floor of 6). Bundled with
+P0-1 since both touched the unit-quiz section.
 
 ---
 
@@ -349,17 +353,17 @@ rules from S1-A, and the Interactive Component Philosophy where applicable.
 
 | Unit | Sections | Widgets | ISEE | Flashcards | Quiz | h1 prefix | JSXGraph |
 |---|---|---|---|---|---|---|---|
-| 1 | 5 | 2 | **0** | 8 | 10 | ✓ "Unit 1:" | — |
-| 2 | 10 | 5 | **0** | 8 | 11 | **✗ missing** | — |
-| 3 | 5 | 3 | **0** | 8 | **5** | **✗ missing** | — |
-| 4 | 4 | 3 | **0** | 8 | 10 | ✓ "Unit 4:" | — |
+| 1 | 5 | 2 | **2** ✓ | 8 | 10 | ✓ "Unit 1:" | — |
+| 2 | 10 | 5 | **2** ✓ | 8 | 11 | **✗ missing** | — |
+| 3 | 5 | 3 | **2** ✓ | 8 | **8** ✓ | **✗ missing** | — |
+| 4 | 4 | 3 | **2** ✓ | 8 | 10 | ✓ "Unit 4:" | — |
 | 5 | 6 | 4 | 8 blocks | 8 | 11 | ✓ "Unit 5:" | ✓ |
 | 6 | 6 | 4 | 8 blocks | 8 | 11 | ✓ "Unit 6:" | ✓ |
 | 7 | 5 | 1 + phase | 9 blocks | 8 | 10 | ✓ "Unit 7:" | ✓ |
 
 `GENERATION_PROMPT.md` baselines: ≥2 widgets per unit (✓ all), 8+ flashcards
-(✓ all), 6+ quiz items (✗ Unit 3 has 5), 2–3 ISEE worked examples (✗ Units
-1–4 have 0).
+(✓ all), 6+ quiz items (✓ all units now), 2–3 ISEE worked examples (✓ all
+units now).
 
 ---
 

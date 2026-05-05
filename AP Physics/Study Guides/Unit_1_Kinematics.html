@@ -1364,6 +1364,112 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <div class="quiz-explain correct-exp">Correct! From $v^2 = v_0^2 + 2a\Delta x$, stopping distance $\Delta x = v_0^2/(2|a|)$. Since $\Delta x \propto v_0^2$, doubling $v_0$ quadruples $\Delta x$.</div>
     <div class="quiz-explain wrong-exp">Stopping distance is proportional to $v_0^2$. Double the speed → $2^2 = 4$ times the distance.</div>
   </div>
+
+  <details class="isee-example">
+    <summary>Worked Example — Projectile Range and the 45° Result (FRQ Style)</summary>
+    <div class="isee-body">
+      <p class="worked-problem">A projectile is launched from ground level with initial speed $v_0$ at angle $\theta$ above the horizontal. Air resistance is negligible. (a) Derive the horizontal range $R(\theta)$ and the time of flight. (b) Show that $R$ is maximized at $\theta = 45^{\circ}$. (c) Compute $R$ for $v_0 = 20\;\text{m/s}$, $\theta = 30^{\circ}$, $g = 9.8\;\text{m/s}^2$.</p>
+
+      <div class="isee-identify">
+        <div class="isee-tag">Identify</div>
+        <p style="margin: 4px 0; font-size: 0.92rem;"><strong>Principle:</strong> 2-D projectile motion as independent constant-acceleration kinematics in $x$ (no force) and $y$ (gravity only); calculus optimization on the closed-form range.</p>
+        <div class="isee-given">
+          <span>Initial speed $v_0$</span>
+          <span>Launch angle $\theta$</span>
+          <span>Gravity $g$</span>
+        </div>
+      </div>
+
+      <div class="isee-setup">
+        <div class="isee-tag">Set Up</div>
+        <p style="font-size: 0.92rem;">Place the origin at the launch point with $+x$ horizontal and $+y$ upward. Resolve $\vec v_0$ into components and write the kinematic equations:</p>
+        <div class="step-math">$$x(t) = (v_0\cos\theta)\,t \qquad y(t) = (v_0\sin\theta)\,t - \tfrac{1}{2}g t^2$$</div>
+      </div>
+
+      <div class="isee-execute">
+        <div class="isee-tag">Execute</div>
+        <div class="worked-steps">
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(a) Time of flight and range</div>
+            <div class="step-text">Set $y(t) = 0$ for landing back at launch height (other root is $t = 0$):</div>
+            <div class="step-math">$$t_\text{flight} = \frac{2v_0\sin\theta}{g}$$</div>
+            <div class="step-text">Substitute into $x(t)$ and use $2\sin\theta\cos\theta = \sin(2\theta)$:</div>
+            <div class="step-math">$$\boxed{\,R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}\,}$$</div>
+          </div>
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(b) Optimization</div>
+            <div class="step-text">$R$ depends on $\theta$ only through $\sin(2\theta)$, which has its maximum value of $1$ when $2\theta = 90^{\circ}$:</div>
+            <div class="step-math">$$\frac{dR}{d\theta} = \frac{2v_0^2 \cos(2\theta)}{g} = 0 \;\Rightarrow\; \cos(2\theta) = 0 \;\Rightarrow\; \theta = 45^{\circ}$$</div>
+            <div class="step-text">The second derivative is $-4v_0^2\sin(2\theta)/g < 0$ at $\theta = 45^{\circ}$, confirming a maximum:</div>
+            <div class="step-math">$$R_\text{max} = \frac{v_0^2}{g}$$</div>
+          </div>
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(c) Numeric evaluation</div>
+            <div class="step-math">$$R = \frac{(20)^2 \sin 60^{\circ}}{9.8} = \frac{400 \times 0.866}{9.8} \approx 35.3\;\text{m}$$</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="isee-evaluate">
+        <div class="isee-tag">Evaluate</div>
+        <div class="isee-check">$R_\text{max} = v_0^2/g = 400/9.8 \approx 40.8\;\text{m}$ for these inputs — the $\theta = 30^{\circ}$ result is correctly less. ✓</div>
+        <div class="isee-check">Symmetry: $R(30^{\circ}) = R(60^{\circ})$ because $\sin 60^{\circ} = \sin 120^{\circ}$. Two angles always reach the same range (except $45^{\circ}$, the unique max). ✓</div>
+        <div class="isee-check">Limit $\theta \to 0$ or $\theta \to 90^{\circ}$: $\sin(2\theta) \to 0$, so $R \to 0$ — consistent with launching nearly horizontally (no time aloft) or nearly vertically (no horizontal velocity). ✓</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="isee-example">
+    <summary>Worked Example — Non-Constant Acceleration: Integrating $a(t)$ (FRQ Style)</summary>
+    <div class="isee-body">
+      <p class="worked-problem">A particle moves along the $x$-axis with acceleration $a(t) = 6t - 12\;\text{m/s}^2$. At $t = 0$ the particle is at $x_0 = 5\;\text{m}$ with $v_0 = 0$. (a) Derive $v(t)$ and $x(t)$. (b) Find every time on $0 \le t \le 5\;\text{s}$ at which the particle is momentarily at rest. (c) Compute the total distance (not displacement) traveled on $0 \le t \le 5\;\text{s}$.</p>
+
+      <div class="isee-identify">
+        <div class="isee-tag">Identify</div>
+        <p style="margin: 4px 0; font-size: 0.92rem;"><strong>Principle:</strong> velocity and position from non-constant acceleration via direct integration; total distance requires partitioning the interval at sign changes of $v(t)$.</p>
+        <div class="isee-given">
+          <span>$a(t) = 6t - 12$</span>
+          <span>$v_0 = 0$</span>
+          <span>$x_0 = 5\;\text{m}$</span>
+        </div>
+      </div>
+
+      <div class="isee-setup">
+        <div class="isee-tag">Set Up</div>
+        <p style="font-size: 0.92rem;">Use the calculus definitions directly:</p>
+        <div class="step-math">$$v(t) = v_0 + \int_0^{t} a(s)\,ds \qquad x(t) = x_0 + \int_0^{t} v(s)\,ds$$</div>
+      </div>
+
+      <div class="isee-execute">
+        <div class="isee-tag">Execute</div>
+        <div class="worked-steps">
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(a) Integrate twice</div>
+            <div class="step-math">$$v(t) = 0 + \int_0^{t}(6s - 12)\,ds = 3t^2 - 12t$$</div>
+            <div class="step-math">$$x(t) = 5 + \int_0^{t}(3s^2 - 12s)\,ds = t^3 - 6t^2 + 5$$</div>
+          </div>
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(b) Solve $v(t) = 0$</div>
+            <div class="step-math">$$3t^2 - 12t = 3t(t - 4) = 0 \;\Rightarrow\; t = 0\;\text{s},\; t = 4\;\text{s}$$</div>
+            <div class="step-text">Both solutions lie in $[0, 5]$, so the particle is at rest at $t = 0$ (the initial condition) and again at $t = 4\;\text{s}$.</div>
+          </div>
+          <div class="worked-step" style="border-left-color: var(--green);">
+            <div class="step-label" style="color: var(--green);">(c) Total distance — partition at the sign change</div>
+            <div class="step-text">$v(t) = 3t(t - 4)$ is negative on $(0, 4)$ and positive on $(4, 5)$, so the particle moves left then right. Sum the magnitudes of the two displacements:</div>
+            <div class="step-math">$$x(0) = 5,\quad x(4) = 64 - 96 + 5 = -27,\quad x(5) = 125 - 150 + 5 = -20$$</div>
+            <div class="step-math">$$\text{Distance} = |x(4) - x(0)| + |x(5) - x(4)| = 32 + 7 = 39\;\text{m}$$</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="isee-evaluate">
+        <div class="isee-tag">Evaluate</div>
+        <div class="isee-check">Net displacement $x(5) - x(0) = -25\;\text{m}$, smaller in magnitude than the $39\;\text{m}$ total distance. The two only agree when $v$ does not change sign. ✓</div>
+        <div class="isee-check">Differentiation check: $\frac{d}{dt}(3t^2 - 12t) = 6t - 12 = a(t)$. ✓</div>
+        <div class="isee-check">A common slip is to compute $|x(5) - x(0)|$ and call it "distance." That gives the displacement magnitude, not the path length — the partition at $t = 4$ is the whole point. ✓</div>
+      </div>
+    </div>
+  </details>
 </section>
 
 <div style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem;">
