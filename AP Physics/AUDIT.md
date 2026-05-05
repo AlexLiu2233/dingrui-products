@@ -88,10 +88,26 @@ These are good ideas — they live in the [Digital Product Backlog](#digital-pro
 concentrated in Units 5/6/7 worked examples (the units with the most
 `step-math` blocks).
 
-**Resolution:** all three grep acceptance criteria return zero hits. 9 nested
-`step-math > step-text` instances unwrapped; 7 unicode-in-prose Greek/
-subscript instances wrapped in `$…$`; 3 bare-LaTeX-in-prose instances given
-proper `$…$` delimiters. Sweep extended to U1–4 (no additional hits).
+**Resolution:** all four grep acceptance criteria return zero hits.
+
+- 9 nested `step-math > step-text` instances unwrapped (U5/6/7).
+- 7 unicode-in-prose Greek/subscript instances wrapped in `$…$` (e.g.
+  `y₀` → `$y_0$`, `r₁` → `$r_1$`, `θ` → `$\theta$`).
+- 3 bare-LaTeX-in-prose instances given proper `$…$` delimiters
+  (e.g. `Use T = 2\pi\sqrt(m/k)` → `Use $T = 2\pi\sqrt{m/k}$.`).
+- 10 instances of `\text{X·Y}` (literal middle-dot inside `\text{}`)
+  rewritten as `\text{X}\cdot\text{Y}`. The unicode `·` rendered visually
+  but its MathML annotation encoded as `\cdotp`, which leaked into
+  copy-paste output and looked like a render bug. Affected: U2 (`kg·m`,
+  `kg·m/s`, `N·m^2/kg^2` — including the gravitational-constant box at
+  line 1095), U4 (`N·s`, two `kg·m/s`), U5 (`N·m`), U6 (three `kg·m^2…`).
+- Sweep extended to U1–4 for all patterns (no additional hits beyond the
+  ones called out above).
+
+**New rule for future authors:** never put unicode `·` inside `\text{…}`.
+Use math-mode `\cdot` with `\text{}` alternation, e.g. `\text{N}\cdot\text{m}`.
+Plain unicode `·` is fine in HTML prose, table cells, and result-card
+labels — only the `\text{}` context is the bug.
 
 **Symptom:** prose and unicode are leaking into containers that the CSS styles
 as display math, producing visually awkward "math-mode prose" where the font,
