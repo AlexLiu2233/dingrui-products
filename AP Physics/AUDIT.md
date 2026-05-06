@@ -327,7 +327,7 @@ full conventions and per-unit index.
 | ID | Item | Status |
 |---|---|---|
 | ~~S4-1~~ | Bring Unit 1 from 14 MC → 18 MC | ✅ Closed — added Q15 (1.4 relative motion, EASY), Q16 (1.2 sign analysis, MED), Q17 (1.5 simultaneous-fall conceptual, MED), Q18 (1.5 cliff-launch impact speed via energy, HARD). Difficulty mix balanced (4 EASY / 9 MED / 5 HARD). |
-| S4-2 | Draft Units 2–7 practice files | **In flight (1/6 done)** — Unit 2 landed 2026-05-05 (18 MC + 4 FRQ; full Topics 2.1–2.10 coverage). Units 3–7 still open. Target ≈ 90 MC + 20 FRQ remaining across the five units. One unit per commit + review cycle. |
+| S4-2 | Draft Units 2–7 practice files | **In flight (2/6 done)** — Unit 2 landed 2026-05-05; Unit 3 landed 2026-05-06 (18 MC + 4 FRQ each, full topic coverage). Units 4–7 still open. Target ≈ 72 MC + 16 FRQ remaining across the four units. One unit per commit + review cycle. |
 | ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
 | ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
 | S4-5 | Render PDFs for distribution | **Open** — manual `chrome --headless --print-to-pdf=...`. Wait until S4-2 is complete so all units render together. |
@@ -340,7 +340,7 @@ full conventions and per-unit index.
 
 ### Sprint 4 — what's next
 
-Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → U3 → U4 → U5 → U6 → U7**. Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
+Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → ~~U3~~ → U4 → U5 → U6 → U7**. Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
 
 **Unit 2 — Phase 2 entry (2026-05-05):**
 
@@ -348,6 +348,13 @@ Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → U3 → U4 → U5 �
 - Difficulty mix 4 EASY / 9 MED / 5 HARD (matches Unit 1).
 - 4 FRQ items: Atwood with table friction (2.2/2.4), incline with applied force + friction (2.6/2.4), linear drag derivation including ODE solution (2.5), and vertical-loop centripetal+energy problem (2.9).
 - All AP-style: each MC labeled with topic and calculator/no-calc, each FRQ scaffolded into 4 sub-parts (a)–(d) with sized `.work` zones.
+
+**Unit 3 — Phase 2 (2026-05-06):**
+
+- 18 MC items spanning all 5 sub-topics (3.1 KE → 3.5 conservation of energy). Same locked conventions and difficulty mix.
+- Concept coverage: $K = \tfrac{1}{2}mv^2$, work at an angle, average + instantaneous power, $U_s = \tfrac{1}{2}kx^2$, work-energy theorem with friction, $F = -dU/dx$, frictionless ramp speed, variable-force integral, equilibrium classification via $d^2U/dx^2$, spring launchers, instantaneous power on incline, conservative-vs-non-conservative classification, KE scaling, 2-D line integral $\int \vec F \cdot d\vec r$, constant-power kinematics, loop-the-loop minimum height, pump power $P = (dm/dt)\,gh$.
+- 4 FRQ items: ramp + spring + friction energy bookkeeping (3.5), $U(x) = x^4/4 - 2x^2 + 3$ double-well analysis (3.4), variable friction coefficient $\mu_k(x) = 0.10 + 0.05x$ work integral (3.2), constant-power car ODE derivation $v = \sqrt{2Pt/m}$ (3.3).
+- Inherits the pill-styling + spacing fix from `b789754` so the q-head pills render properly from the start.
 
 ---
 

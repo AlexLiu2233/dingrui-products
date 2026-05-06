@@ -31,7 +31,7 @@ Both versions will have:
 |---|---|---|---|---|---|
 | 1 | Kinematics | 18 MC + 4 FRQ ✓ | 1.1 – 1.5 | [Unit_1_Kinematics_Practice_Problems.html](Unit_1_Kinematics_Practice_Problems.html) | _pending_ |
 | 2 | Force & Translational Dynamics | 18 MC + 4 FRQ ✓ | 2.1 – 2.10 | [Unit_2_Force_and_Dynamics_Practice_Problems.html](Unit_2_Force_and_Dynamics_Practice_Problems.html) | _pending_ |
-| 3 | Work, Energy, & Power | _pending_ | 3.1 – 3.5 | _pending_ | _pending_ |
+| 3 | Work, Energy, & Power | 18 MC + 4 FRQ ✓ | 3.1 – 3.5 | [Unit_3_Work_Energy_Power_Practice_Problems.html](Unit_3_Work_Energy_Power_Practice_Problems.html) | _pending_ |
 | 4 | Linear Momentum | _pending_ | 4.1 – 4.4 | _pending_ | _pending_ |
 | 5 | Torque & Rotational Dynamics | _pending_ | 5.1 – 5.6 | _pending_ | _pending_ |
 | 6 | Energy & Momentum of Rotating Systems | _pending_ | 6.1 – 6.6 | _pending_ | _pending_ |
