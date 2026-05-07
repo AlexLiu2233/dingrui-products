@@ -327,7 +327,7 @@ full conventions and per-unit index.
 | ID | Item | Status |
 |---|---|---|
 | ~~S4-1~~ | Bring Unit 1 from 14 MC → 18 MC | ✅ Closed — added Q15 (1.4 relative motion, EASY), Q16 (1.2 sign analysis, MED), Q17 (1.5 simultaneous-fall conceptual, MED), Q18 (1.5 cliff-launch impact speed via energy, HARD). Difficulty mix balanced (4 EASY / 9 MED / 5 HARD). |
-| S4-2 | Draft Units 2–7 practice files | **In flight (2/6 done)** — Unit 2 landed 2026-05-05; Unit 3 landed 2026-05-06 (18 MC + 4 FRQ each, full topic coverage). Units 4–7 still open. Target ≈ 72 MC + 16 FRQ remaining across the four units. One unit per commit + review cycle. |
+| S4-2 | Draft Units 2–7 practice files | **In flight (3/6 done)** — Unit 2 landed 2026-05-05; Unit 3 landed 2026-05-06; Unit 4 landed 2026-05-07 (18 MC + 4 FRQ each, full topic coverage). Units 5–7 still open. Target ≈ 54 MC + 12 FRQ remaining across the three units. One unit per commit + review cycle. |
 | ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
 | ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
 | S4-5 | Render PDFs for distribution | **Open** — manual `chrome --headless --print-to-pdf=...`. Wait until S4-2 is complete so all units render together. |
@@ -340,7 +340,13 @@ full conventions and per-unit index.
 
 ### Sprint 4 — what's next
 
-Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → ~~U3~~ → U4 → U5 → U6 → U7**. Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
+Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → ~~U3~~ → ~~U4~~ → U5 → U6 → U7**. Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
+
+**Unit 4 — Phase 2 (2026-05-07):**
+
+- 18 MC items spanning all 4 sub-topics (4.1 momentum → 4.4 elastic/inelastic), with the locked S4-3/S4-4 conventions. Difficulty mix 4 EASY / 9 MED / 5 HARD.
+- 4 FRQ items: variable-force impulse $F(t) = \alpha t$ with bag/dashboard reasoning (4.2), skater-recoil with relative-frame variant (4.3), 1-D head-on elastic collision with full derivation + COM verification (4.4), 2-D unequal-mass collision with elastic/inelastic classification + COM check (4.4). Picked deliberately to avoid duplicating the U4 study-guide ISEE examples (2-D perfectly-inelastic + ballistic-pendulum-with-spring-recoil).
+- Bundled CSS update: practice files now use `clamp()` padding so layout fits narrow screens, stacks 2-column options on phones, and re-asserts `@page { size: letter }` inside `@media print` so print always defaults to letter regardless of browser-dialog quirks. Applied to U1–U4 in the same commit.
 
 **Unit 2 — Phase 2 entry (2026-05-05):**
 
