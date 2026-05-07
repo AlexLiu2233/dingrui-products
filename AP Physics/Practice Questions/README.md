@@ -33,11 +33,11 @@ Both versions will have:
 | 2 | Force & Translational Dynamics | 18 MC + 4 FRQ ✓ | 2.1 – 2.10 | [Unit_2_Force_and_Dynamics_Practice_Problems.html](Unit_2_Force_and_Dynamics_Practice_Problems.html) | _pending_ |
 | 3 | Work, Energy, & Power | 18 MC + 4 FRQ ✓ | 3.1 – 3.5 | [Unit_3_Work_Energy_Power_Practice_Problems.html](Unit_3_Work_Energy_Power_Practice_Problems.html) | _pending_ |
 | 4 | Linear Momentum | 18 MC + 4 FRQ ✓ | 4.1 – 4.4 | [Unit_4_Linear_Momentum_Practice_Problems.html](Unit_4_Linear_Momentum_Practice_Problems.html) | _pending_ |
-| 5 | Torque & Rotational Dynamics | _pending_ | 5.1 – 5.6 | _pending_ | _pending_ |
-| 6 | Energy & Momentum of Rotating Systems | _pending_ | 6.1 – 6.6 | _pending_ | _pending_ |
-| 7 | Oscillations | _pending_ | 7.1 – 7.5 | _pending_ | _pending_ |
+| 5 | Torque & Rotational Dynamics | 18 MC + 4 FRQ ✓ | 5.1 – 5.6 | [Unit_5_Torque_and_Rotational_Dynamics_Practice_Problems.html](Unit_5_Torque_and_Rotational_Dynamics_Practice_Problems.html) | _pending_ |
+| 6 | Energy & Momentum of Rotating Systems | 18 MC + 4 FRQ ✓ | 6.1 – 6.6 | [Unit_6_Energy_and_Momentum_of_Rotating_Systems_Practice_Problems.html](Unit_6_Energy_and_Momentum_of_Rotating_Systems_Practice_Problems.html) | _pending_ |
+| 7 | Oscillations | 18 MC + 4 FRQ ✓ | 7.1 – 7.5 | [Unit_7_Oscillations_Practice_Problems.html](Unit_7_Oscillations_Practice_Problems.html) | _pending_ |
 
-> **Coverage target:** ≈ 130 MC + 28 FRQ across the seven units once complete.
+> **Coverage:** 126 MC + 28 FRQ across the seven units. ✓ Sprint 4 Phase 2 build-out complete; PDF render (S4-5) is the remaining open item.
 
 ---
 

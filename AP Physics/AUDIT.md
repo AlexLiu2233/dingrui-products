@@ -327,7 +327,7 @@ full conventions and per-unit index.
 | ID | Item | Status |
 |---|---|---|
 | ~~S4-1~~ | Bring Unit 1 from 14 MC → 18 MC | ✅ Closed — added Q15 (1.4 relative motion, EASY), Q16 (1.2 sign analysis, MED), Q17 (1.5 simultaneous-fall conceptual, MED), Q18 (1.5 cliff-launch impact speed via energy, HARD). Difficulty mix balanced (4 EASY / 9 MED / 5 HARD). |
-| S4-2 | Draft Units 2–7 practice files | **In flight (3/6 done)** — Unit 2 landed 2026-05-05; Unit 3 landed 2026-05-06; Unit 4 landed 2026-05-07 (18 MC + 4 FRQ each, full topic coverage). Units 5–7 still open. Target ≈ 54 MC + 12 FRQ remaining across the three units. One unit per commit + review cycle. |
+| ~~S4-2~~ | Draft Units 2–7 practice files | ✅ **Closed 2026-05-07** — all six units (U2 → U7) shipped at 18 MC + 4 FRQ each, full topic coverage, locked S4-3/S4-4 conventions throughout. Total: 126 MC + 28 FRQ across U1–U7. |
 | ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
 | ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
 | S4-5 | Render PDFs for distribution | **Open** — manual `chrome --headless --print-to-pdf=...`. Wait until S4-2 is complete so all units render together. |
@@ -338,15 +338,22 @@ full conventions and per-unit index.
 - ~~Q13 distractor (D) was incoherent~~ — replaced "$\sqrt{25}$ m/s but pointing in $-\hat\jmath$" with `$\sqrt{18}~\mathrm{m/s}$` (the trap is computing $|\vec r(1)|$ instead of $|\vec v(1)|$). Choice (A) tightened to `$2~\mathrm{m/s}$` (y-component only trap).
 - ~~README claimed "18 MC" but file had 14~~ — README now reads `18 MC + 4 FRQ ✓`.
 
-### Sprint 4 — what's next
+### Sprint 4 — Phase 2 closed 2026-05-07
 
-Phase 2 is the per-unit build-out (S4-2). Order: **~~U2~~ → ~~U3~~ → ~~U4~~ → U5 → U6 → U7**. Each unit gets its own commit + review cycle so distractors can be sanity-checked individually before scaling.
+Per-unit build-out complete. Order shipped: **~~U2~~ → ~~U3~~ → ~~U4~~ → ~~U5~~ → ~~U6~~ → ~~U7~~**. Only S4-5 (PDF render) remains in the sprint.
 
 **Unit 4 — Phase 2 (2026-05-07):**
 
 - 18 MC items spanning all 4 sub-topics (4.1 momentum → 4.4 elastic/inelastic), with the locked S4-3/S4-4 conventions. Difficulty mix 4 EASY / 9 MED / 5 HARD.
 - 4 FRQ items: variable-force impulse $F(t) = \alpha t$ with bag/dashboard reasoning (4.2), skater-recoil with relative-frame variant (4.3), 1-D head-on elastic collision with full derivation + COM verification (4.4), 2-D unequal-mass collision with elastic/inelastic classification + COM check (4.4). Picked deliberately to avoid duplicating the U4 study-guide ISEE examples (2-D perfectly-inelastic + ballistic-pendulum-with-spring-recoil).
 - Bundled CSS update: practice files now use `clamp()` padding so layout fits narrow screens, stacks 2-column options on phones, and re-asserts `@page { size: letter }` inside `@media print` so print always defaults to letter regardless of browser-dialog quirks. Applied to U1–U4 in the same commit.
+
+**Units 5/6/7 — Phase 2 (2026-05-07):**
+
+- **U5 Torque & Rotational Dynamics (5.1 – 5.6):** Atwood with massive pulley + ladder-against-frictionless-wall ($\tan\theta = 1/(2\mu)$) + composite-rod $I$ + yo-yo $a = 2g/3$ (HARD); FRQs cover massive-pulley dynamics, beam-and-cable static equilibrium, pivoted composite rod (release from horizontal → vertical), and rolling cylinder on incline with $\mu_s$ derivation.
+- **U6 Energy & Momentum of Rotating Systems (6.1 – 6.6):** Sphere/disk/hoop rolling race, person-walks-toward-axis $L$ conservation, geosynchronous orbital radius ($\approx 4.2 \times 10^4$ km), bound-orbit total energy $E = -GMm/(2r)$ (HARD); FRQs cover disk-on-disk inelastic collision with KE accounting, sphere rolling down incline with $\mu_s$ derivation, ballistic-pendulum-with-rod (bullet embeds at free end → max swing angle), and orbital-mechanics derivation + $\Delta E$ to raise orbit.
+- **U7 Oscillations (7.1 – 7.5):** $x = A/\sqrt{2}$ for KE = PE, $v/v_\mathrm{max} = \sqrt{3}/2$ at $x = A/2$, physical-pendulum rod period $T = 2\pi\sqrt{2L/(3g)}$, "Both I and II" choice for $\tfrac{1}{2}kA^2 = \tfrac{1}{2}m\omega^2A^2$ (HARD); FRQs cover full mass-spring SHM characterization, phase-analysis of $x(t) = A\cos(\omega t + \phi)$, rod physical pendulum with small-angle vs. exact-energy comparison, and vertical mass-spring with new-equilibrium derivation + KE = 3PE position.
+- All three files inherit the locked CSS contract (responsive screen + print-letter).
 
 **Unit 2 — Phase 2 entry (2026-05-05):**
 
