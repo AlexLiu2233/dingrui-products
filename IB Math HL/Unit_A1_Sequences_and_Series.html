@@ -697,8 +697,16 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   <details>
     <summary>▸ Going deeper — Why "$2$ facts → unique sequence"</summary>
     <div class="detail-body">
-<p>An arithmetic sequence is determined by two parameters: $u_1$ and $d$. Any condition on the sequence — a specific term, a specific sum, a relation between two terms — gives one equation in those two parameters. Two independent equations therefore solve uniquely (so long as they really are independent — see the trap below).</p>
-<p><strong>Independence trap.</strong> "$u_3 = 11$ and $u_3 + u_5 = 26$" looks like two facts but the second simplifies to $2u_3 + 2d = 26$, which together with the first only constrains $d$. Always rewrite both conditions as linear equations in $u_1, d$ and check the coefficient determinant before claiming uniqueness.</p>
+<p>An AP has two parameters: $u_1$ and $d$. Each condition is one linear equation in them.</p>
+$$
+\begin{aligned}
+u_p = a \;\;&\Longleftrightarrow\;\; u_1 + (p-1)\,d = a \\
+S_q = b \;\;&\Longleftrightarrow\;\; q\,u_1 + \tfrac{q(q-1)}{2}\,d = b
+\end{aligned}
+$$
+<p>Two <em>independent</em> equations $\Rightarrow$ unique $(u_1, d)$. Independence fails when one is a scalar multiple of the other — e.g.</p>
+$$ u_3 = 11 \;\;\text{and}\;\; u_3 + u_5 = 26 $$
+<p>The second is $2u_1 + 6d = 26$, but $u_3 = 11$ gives $2u_1 + 4d = 22$, so subtracting yields $2d = 4$ alone — $u_1$ stays free. <strong>Recipe:</strong> write both as $\alpha u_1 + \beta d = \gamma$, then check $\det\!\begin{pmatrix}\alpha_1 & \beta_1 \\ \alpha_2 & \beta_2\end{pmatrix} \ne 0$.</p>
     </div>
   </details>
 
@@ -1123,10 +1131,10 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
 
   <h3>Worked Example — Compound interest, quarterly</h3>
   <div class="worked-solution">
-    <p><strong>Problem:</strong> $\$5000$ is invested at $4\%$ per annum compounded quarterly. Find the value after $7$ years.</p>
-    <p>Per-period rate: $r/k = 0.04/4 = 0.01$. Number of periods: $kt = 4 \cdot 7 = 28$.</p>
-    $$ A = 5000(1.01)^{28} \approx 5000 \cdot 1.32129 \approx \$6606.45. $$
-    <p>The balance is a GP $\{P, P(1.01), P(1.01)^2, \ldots\}$ — the formula just plucks out the $28$th term ($u_{29}$ if you index from $0$, or interpret as "after 28 compounding events").</p>
+    <p><strong>Problem:</strong> $\$5000$ invested at $4\%$ p.a. compounded quarterly. Find the value after $7$ years.</p>
+    <p>Per-period rate $\tfrac{r}{k} = \tfrac{0.04}{4} = 0.01$; periods $kt = 28$.</p>
+    $$ A = 5000(1.01)^{28} \approx \$6606.45. $$
+    <p>The balance is the GP $P, P(1.01), P(1.01)^2, \ldots$ ; the formula reads off the term after $28$ compoundings.</p>
   </div>
 
   <h3>Worked Example — Depreciation</h3>
@@ -1192,9 +1200,9 @@ $$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cd
   <details>
     <summary>▸ Going deeper — Quick proof</summary>
     <div class="detail-body">
-<p>If $\{u_n\}$ is AP with common difference $d$, then $u_{n+1} = u_n + d$. If it is also GP with ratio $r$, then $u_{n+1} = r\, u_n$. Equate:</p>
-$$ u_n + d = r u_n \;\Rightarrow\; d = (r - 1)u_n \quad \text{for every } n. $$
-<p>The right side depends on $n$ (since $u_n$ varies), but the left side does not. This forces either $r = 1$ (giving $d = 0$, a constant sequence), or $u_n$ constant (which already gives $d = 0$ and $r = 1$). Either way, the sequence is constant.</p>
+<p>AP: $u_{n+1} = u_n + d$. GP: $u_{n+1} = r\, u_n$. Equate for every $n$:</p>
+$$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
+<p>RHS depends on $n$, LHS does not — only possible if $r = 1$ (so $d = 0$) or $u_n$ is constant. Either case gives a constant sequence. $\blacksquare$</p>
     </div>
   </details>
 
@@ -1316,74 +1324,74 @@ $$ u_n + d = r u_n \;\Rightarrow\; d = (r - 1)u_n \quad \text{for every } n. $$
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$n$-th term of an arithmetic sequence?</div>
-        <div class="flashcard-back">$u_n = u_1 + (n-1)d$</div>
+        <div class="flashcard-front">$u_n$ for an AP?</div>
+        <div class="flashcard-back">$$u_n = u_1 + (n-1)d$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Two equivalent forms for $S_n$ of an AP?</div>
-        <div class="flashcard-back">$S_n = \tfrac{n}{2}(u_1 + u_n) = \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)$</div>
+        <div class="flashcard-front">$S_n$ for an AP?</div>
+        <div class="flashcard-back">$$S_n = \tfrac{n}{2}(u_1 + u_n)$$ $$= \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$n$-th term of a geometric sequence?</div>
-        <div class="flashcard-back">$u_n = u_1 \, r^{\,n-1}$</div>
+        <div class="flashcard-front">$u_n$ for a GP?</div>
+        <div class="flashcard-back">$$u_n = u_1\, r^{\,n-1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sum of $n$ terms of a GP (with $r \ne 1$)?</div>
-        <div class="flashcard-back">$S_n = \dfrac{u_1(r^n - 1)}{r - 1}$</div>
+        <div class="flashcard-front">$S_n$ for a GP $\;(r \ne 1)$?</div>
+        <div class="flashcard-back">$$S_n = \dfrac{u_1(r^n - 1)}{r - 1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">When does an infinite GP converge?</div>
-        <div class="flashcard-back">$|r| &lt; 1$, with $S_\infty = \dfrac{u_1}{1 - r}$</div>
+        <div class="flashcard-front">Infinite GP — converges when?</div>
+        <div class="flashcard-back">$|r| &lt; 1$ $$S_\infty = \dfrac{u_1}{1 - r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Compound interest formula?</div>
-        <div class="flashcard-back">$A = P\bigl(1 + \tfrac{r}{k}\bigr)^{kt}$<br>$k$ = compounds per year, $t$ = years</div>
+        <div class="flashcard-front">Compound interest?</div>
+        <div class="flashcard-back">$$A = P\!\left(1 + \tfrac{r}{k}\right)^{kt}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Quick identity for $u_m - u_n$ (AP) and $u_m / u_n$ (GP)?</div>
-        <div class="flashcard-back">AP: $u_m - u_n = (m - n)d$<br>GP: $u_m / u_n = r^{m-n}$</div>
+        <div class="flashcard-front">Term-relation identities?</div>
+        <div class="flashcard-back">AP:&nbsp;$u_m - u_n = (m - n)d$<br>GP:&nbsp;$u_m / u_n = r^{m-n}$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sigma linearity: $\sum (a_k + b_k) = \;?$</div>
-        <div class="flashcard-back">$\sum a_k + \sum b_k$. Also $\sum c\,a_k = c\sum a_k$ and $\sum_{k=1}^{n} c = nc$.</div>
+        <div class="flashcard-front">Sigma linearity?</div>
+        <div class="flashcard-back">$\sum(a_k + b_k) = \sum a_k + \sum b_k$<br>$\sum c\, a_k = c \sum a_k$<br>$\sum_{k=1}^{n} c = nc$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">If $\{u_n\}$ is both AP and GP, what is it?</div>
-        <div class="flashcard-back">A constant sequence. ($d = 0$, $r = 1$.)</div>
+        <div class="flashcard-front">Sequence both AP and GP?</div>
+        <div class="flashcard-back">Constant. $d = 0,\; r = 1$.</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Geometric mean of two positives $a$ and $c$?</div>
-        <div class="flashcard-back">$b = \sqrt{ac}$ (the middle term of an AP-style insertion would be $\tfrac{a+c}{2}$ instead).</div>
+        <div class="flashcard-front">Geometric mean of $a, c &gt; 0$?</div>
+        <div class="flashcard-back">$$\sqrt{ac}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Recurring decimal $0.\overline{a_1 a_2 \ldots a_k}$ as a fraction?</div>
-        <div class="flashcard-back">Geometric series with $u_1 = \tfrac{N}{10^k}$, $r = 10^{-k}$, where $N$ is the repeating block. Sum: $\tfrac{N}{10^k - 1}$.</div>
+        <div class="flashcard-front">$0.\overline{N}$ as a fraction&nbsp;($N$ has $k$ digits)?</div>
+        <div class="flashcard-back">$$\dfrac{N}{10^k - 1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">"Smallest $n$ such that $r^n &lt; \varepsilon$" — how to solve?</div>
-        <div class="flashcard-back">Take log; remember to flip the inequality if $\log r &lt; 0$ (i.e. when $|r| &lt; 1$).</div>
+        <div class="flashcard-front">Solving $r^n &lt; \varepsilon$ — gotcha?</div>
+        <div class="flashcard-back">$\log r &lt; 0$ when $|r| &lt; 1$,<br>so dividing <strong>flips</strong> the inequality.</div>
       </div>
     </div>
   </div>
