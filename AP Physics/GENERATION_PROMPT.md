@@ -166,14 +166,20 @@ Fixed at `top: 56px`, `height: 3px`, scroll-linked via JS. ID: `#progressFill`.
 Margin-left offset by `var(--toc-w)`, responsive collapse on mobile.
 
 ### 6.6 Hero Section (`#hero`)
+
+**Locked schema (Sprint 3, 2026-05-09).** All 7 Mechanics units conform.
+Order is fixed: Exam Weight → Class Periods → Topics. Numbers are bare —
+no `<strong>` wrappers (the `.chip` font weight is already 600).
+
 ```html
 <section class="hero" id="hero">
-  <div class="hero-overline">AP PHYSICS C: MECHANICS</div>
+  <div class="hero-overline">AP Physics C: Mechanics</div>
   <h1>Unit {N}: {Title}</h1>
+  <p>{1-2 sentence unit overview}</p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">{N} Sections</span>
-    <span class="chip chip-green">{M} Interactive Widgets</span>
-    <span class="chip chip-gold">AP Exam Weight: ~{W}%</span>
+    <span class="chip chip-maroon">{X-Y}% Exam Weight</span>
+    <span class="chip chip-green">~{X-Y} Class Periods</span>
+    <span class="chip chip-gold">{N} Topics</span>
   </div>
 </section>
 ```
