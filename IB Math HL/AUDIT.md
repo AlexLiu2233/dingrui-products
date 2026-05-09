@@ -16,8 +16,8 @@ and the IB Math AA HL syllabus (first exams 2021).
 question files and any future digital products are out of scope until they
 exist.
 
-Last reviewed: **2026-05-08** (Sprint 1 active: Unit A refactor in flight,
-A1 shipped).
+Last reviewed: **2026-05-09** (Sprint 1 active: Unit A refactor in flight,
+A1 + A3 shipped).
 
 ---
 
@@ -35,13 +35,14 @@ updates to list them.
 |---|---|---|---|
 | ~~**S1-1**~~ | Draft `Unit_A1_Sequences_and_Series.html` (Topic 1.2–1.4, 1.8) | P0 | ✅ **Shipped 2026-05-08** — 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed patterns), 18 quiz items, 12 flashcards, 14-item readiness checklist. Introduces the `cram-cheat` CSS pattern + `hl-flag` chip. |
 | **S1-2** | Draft `Unit_A2_Exponents_and_Logarithms.html` (Topic 1.5, 1.7) | P0 | **Open** — covers laws of exponents, logarithms, exponential equations, change-of-base. |
-| **S1-3** | Draft `Unit_A3_Counting_and_Binomial.html` (Topic 1.9, 1.10) | P0 | **Open** — counting principles, permutations/combinations, binomial theorem (incl. extended HL). |
+| ~~**S1-3**~~ | Draft `Unit_A3_Combinatorics.html` (Topic 1.9–1.10) | P0 | ✅ **Shipped 2026-05-09** — 6 sections (counting principles, permutations, combinations, binomial theorem, Pascal's triangle &amp; identities, extended binomial HL). 6 inline quizzes + 10-item practice quiz, 12 flashcards, 14-item readiness checklist. Introduces `pascal-tri` ASCII-table CSS pattern. Renamed from "Counting & Binomial" to user's preferred "Combinatorics." |
 | **S1-4** | Draft `Unit_A4_Complex_Numbers.html` (Topic 1.12–1.14) | P0 | **Open** — Cartesian, polar, Euler forms, De Moivre, roots, conjugate root theorem. HL-heavy. |
 | **S1-5** | Draft `Unit_A5_Proof.html` (Topic 1.6, 1.15) | P0 | **Open** — direct proof, induction, contradiction. Cross-link from A1 induction-of-sums. |
 | **S1-6** | Draft `Unit_A6_Algebra_and_Systems.html` (Topic 1.11 + linear systems) | P0 | **Open** — partial fractions, $3\times 3$ systems, RREF. |
 | **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | **Open** — bundle once S1-6 ships. |
 
-Build order: **A1 (✓) → A2 → A3 → A4 → A5 → A6 → cleanup**.
+Build order: **A1 (✓) → A3 (✓) → A2 → A4 → A5 → A6 → cleanup**. (A3 jumped
+ahead of A2 on user request 2026-05-09.)
 
 ### Sprint 2 (queued) — new topic units
 Once Sprint 1 closes, Sprint 2 picks up the missing units (B Functions,
@@ -97,7 +98,7 @@ no-calc; Paper 2 is calc.
 | A (legacy) | Number & Algebra (monolith) | 24 | ~24 | 14 | 9 | **To remove** once A1–A6 ship |
 | A1 | Sequences & Series | 8 + how-to + strategy | 12 | 12 | 18 (8 inline + 10 unit) | ✓ Shipped 2026-05-08 |
 | A2 | Exponents & Logs | — | — | — | — | **S1-2 open** |
-| A3 | Counting & Binomial | — | — | — | — | **S1-3 open** |
+| A3 | Combinatorics | 6 + how-to + strategy | 11 | 12 | 16 (6 inline + 10 unit) | ✓ Shipped 2026-05-09 |
 | A4 | Complex Numbers | — | — | — | — | **S1-4 open** |
 | A5 | Proof | — | — | — | — | **S1-5 open** |
 | A6 | Algebra & Systems | — | — | — | — | **S1-6 open** |
