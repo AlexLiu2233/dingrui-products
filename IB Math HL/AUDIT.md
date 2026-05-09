@@ -16,8 +16,8 @@ and the IB Math AA HL syllabus (first exams 2021).
 question files and any future digital products are out of scope until they
 exist.
 
-Last reviewed: **2026-05-09** (Sprint 1 active: Unit A refactor in flight,
-A1 + A3 shipped).
+Last reviewed: **2026-05-09** (Sprint 1 active: Unit A refactor in flight;
+A1 + A3 study guides shipped; A1 + A3 practice question sets shipped).
 
 ---
 
@@ -43,6 +43,21 @@ updates to list them.
 
 Build order: **A1 (✓) → A3 (✓) → A2 → A4 → A5 → A6 → cleanup**. (A3 jumped
 ahead of A2 on user request 2026-05-09.)
+
+### Practice Questions sub-stream
+
+Parallel build-out of IB-style practice files in `Practice Questions/`,
+mirroring the AP Physics pattern but adapted for IB paper structure
+(Paper 1A short / Paper 1B extended / Paper 2 calc / Paper 3 HL). Each
+question carries difficulty (Easy/Medium/Hard), paper, syllabus topic,
+and mark allocation pills. Question-only — no embedded answers.
+
+| ID | Item | Status |
+|---|---|---|
+| ~~**SQ-1**~~ | `Practice Questions/README.md` + locked conventions | ✅ Shipped 2026-05-09 |
+| ~~**SQ-2**~~ | `Unit_A1_Sequences_and_Series_Practice.html` (11 Qs, 67 marks total) | ✅ Shipped 2026-05-09 |
+| ~~**SQ-3**~~ | `Unit_A3_Combinatorics_Practice.html` (11 Qs, 61 marks total) | ✅ Shipped 2026-05-09 |
+| **SQ-4** | Practice files for A2 / A4 / A5 / A6 / B / D / E (one per study guide as those land) | **Open** — track per study-guide ship |
 
 ### Sprint 2 (queued) — new topic units
 Once Sprint 1 closes, Sprint 2 picks up the missing units (B Functions,
