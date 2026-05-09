@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IB Math AA HL — Unit A1: Sequences & Series | Dingrui Scholars. Arithmetic and geometric sequences, sigma notation, infinite GP convergence, financial applications, and induction proofs of sums. Cram-friendly cheat-sheets and 7-chaser derivations side by side. Interactive quizzes, flashcards, dark mode, print-friendly.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>IB Math AA HL — Unit A1: Sequences & Series | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── SCORE BADGE ─── */
+.score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--green); background: var(--green-light);
+  border: 1px solid var(--green);
+  padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.3s;
+}
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+/* ─── SIDEBAR TOC ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.88rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+/* ─── MAIN ─── */
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 16px;
+  position: relative;
+}
+.hero-sub {
+  color: var(--text-secondary); max-width: 650px; margin: 0 auto;
+  position: relative;
+}
+.hero-meta {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HL-only flag chip — small inline */
+.hl-flag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--purple); background: var(--purple-light);
+  border: 1px solid var(--purple);
+  padding: 2px 7px; border-radius: 6px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  vertical-align: middle; margin-left: 8px;
+}
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin: 32px 0 12px;
+  line-height: 1.3; color: var(--text);
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+/* ─── KEY CONCEPT BOX ─── */
+.concept-box {
+  border-left: 5px solid var(--accent);
+  background: var(--bg-card);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 8px; border-radius: 6px;
+  flex-shrink: 0; margin-left: 12px;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+  position: relative;
+}
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '✓'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '✗'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry {
+  display: none; margin-top: 12px;
+  padding: 8px 18px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── ACCORDION / DETAILS ─── */
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+/* ─── FLASHCARDS ─── */
+.flashcard-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 12px 0 4px;
+  font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.flashcard-toolbar button {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 12px;
+  border-radius: 8px; font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-left: 6px;
+}
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner {
+  display: grid;
+  grid-template-areas: "card";
+  min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  grid-area: card;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; box-shadow: var(--shadow);
+  overflow: hidden; word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--accent); font-weight: 600;
+  font-size: clamp(0.92rem, 2.1vw, 1.05rem);
+  line-height: 1.45;
+  padding: 22px 20px 34px; gap: 8px;
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP';
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px;
+}
+.flashcard-back {
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.6;
+  padding: 26px 22px; gap: 12px;
+  word-break: normal; hyphens: manual;
+  overflow-wrap: break-word; text-wrap: pretty;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 1.25em;
+  max-width: 100%; overflow: hidden;
+}
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── WORKED EXAMPLES ─── */
+.worked-solution {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+
+/* ─── FORMULA BOX ─── */
+.formula-box {
+  background: var(--bg-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+/* ─── SEPARATOR ─── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+
+/* ─── CHECKLIST ─── */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  cursor: pointer; font-size: 0.95rem;
+  background: var(--bg-card); transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+  font-size: 0.8rem; color: transparent;
+}
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── TWO COLUMNS ─── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ─── FOOTER ─── */
+.footer-wrap {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-secondary); font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem; color: var(--text);
+  margin-bottom: 4px;
+}
+
+/* ─── REFINEMENTS ─── */
+.formula-box .katex-display {
+  margin: 14px 0 !important;
+  overflow-x: auto; overflow-y: hidden;
+  padding: 2px 0;
+}
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+
+.section-label + h2 { margin-top: 0.2rem; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  .formula-box { padding: 16px; }
+  .top-nav { padding: 0 16px; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry,
+  .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ─── TOP-NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── CRAM/DEPTH MARKERS ─── */
+/* Visual cue for the "if-you-only-read-one-thing" cheat-sheet element */
+.cram-cheat {
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%);
+  border: 2px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  margin: 20px 0;
+  position: relative;
+}
+.cram-cheat::before {
+  content: 'CRAM-MODE CHEAT';
+  position: absolute; top: -10px; left: 18px;
+  background: var(--gold); color: #fff;
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;
+}
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">UNIT A1</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#how-to-use">How to use this guide</a>
+  <a href="#s-a1-1">A1.1 Arithmetic Sequences</a>
+  <a href="#s-a1-2">A1.2 Arithmetic Series</a>
+  <a href="#s-a1-3">A1.3 Geometric Sequences</a>
+  <a href="#s-a1-4">A1.4 Geometric Series</a>
+  <a href="#s-a1-5">A1.5 Sigma Notation</a>
+  <a href="#s-a1-6">A1.6 Infinite Geometric Series</a>
+  <a href="#s-a1-7">A1.7 Financial Applications</a>
+  <a href="#s-a1-8">A1.8 Mixed &amp; Hybrid Patterns</a>
+  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Practice Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
+</aside>
+
+<main class="main-wrap">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-overline">IB Mathematics: Analysis &amp; Approaches HL · 鼎睿学苑</div>
+  <h1>Unit A1: Sequences<br>&amp; Series</h1>
+  <p class="hero-sub">
+    The first sub-unit of Topic 1 (Number &amp; Algebra). Master arithmetic and geometric progressions, sigma notation, the convergence of an infinite GP, financial applications, and the patterns IB rewards on Papers 1 and 2.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">IB AA HL · Topic 1.2–1.4, 1.8</span>
+    <span class="chip chip-green">Papers 1 · 2</span>
+    <span class="chip chip-purple">8 Concepts</span>
+  </div>
+</section>
+
+<!-- ═══════════════ HOW TO USE ═══════════════ -->
+<section class="section" id="how-to-use">
+  <div class="section-label">Read me first</div>
+  <h2>How to use this guide</h2>
+
+  <p>This guide is built to serve <strong>two students at once</strong>:</p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">!</div>
+        <div class="card-title">If you're cramming</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 30-minute pass.</p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">★</div>
+        <div class="card-title">If you're going for a 7</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where derivations and proofs live. Do every worked example with the solution covered first. Re-do the quiz with no hints. Owning the <em>why</em> is what separates a 5 from a 7.</p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">HL flag</strong>
+    Sections marked <span class="hl-flag">HL</span> contain content that is HL-only on the AA syllabus (most prominently the convergence proof for an infinite GP and any induction-style argument). SL students can skim these but should not panic if they don't click — they aren't on the SL papers.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.1 ARITHMETIC SEQUENCES ═══════════════ -->
+<section class="section" id="s-a1-1">
+  <div class="section-label">Topic A1.1 · Sequences</div>
+  <h2>Arithmetic Sequences</h2>
+
+  <div class="cram-cheat">
+    <strong>An arithmetic sequence adds a fixed amount each step.</strong> The fixed amount is the <em>common difference</em> $d = u_{n+1} - u_n$. The $n$-th term is
+    $$ u_n = u_1 + (n-1)d. $$
+    Two facts in $u_1$ and $d$ → $2\times 2$ system → unique sequence. That single sentence answers ~80% of Paper 1 AP questions.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Definition</strong>
+    A sequence $\{u_n\}$ is <strong>arithmetic</strong> iff the difference between consecutive terms is constant:
+    $$ u_{n+1} - u_n = d \quad \text{for every } n \ge 1. $$
+    Equivalently, $u_n = u_1 + (n-1)d$. The constant $d$ is the <em>common difference</em>; it can be positive (increasing), negative (decreasing), or zero (constant).
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">$n$-th Term Formula</div>
+    $$ u_n = u_1 + (n-1)d $$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Three useful identities</strong>
+    <strong>(1)</strong> $u_m - u_n = (m - n)d$ — any two terms tell you $d$.<br>
+    <strong>(2)</strong> The arithmetic mean: $u_{n+1} = \tfrac{u_n + u_{n+2}}{2}$ — middle term is the average of its neighbours.<br>
+    <strong>(3)</strong> Symmetry: $u_k + u_{n-k+1}$ is constant across $k$ for the first $n$ terms.
+  </div>
+
+  <h3>Worked Example — Find a specific term</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> An arithmetic sequence has $u_3 = 11$ and $u_8 = 26$. Find $u_{20}$.</p>
+    <p><strong>Set up.</strong> Two facts in two unknowns. From identity (1):</p>
+    $$ u_8 - u_3 = (8 - 3)d \;\Rightarrow\; 26 - 11 = 5d \;\Rightarrow\; d = 3. $$
+    <p><strong>Find $u_1$.</strong> $u_3 = u_1 + 2d$, so $u_1 = 11 - 6 = 5$.</p>
+    <p><strong>Apply.</strong> $u_{20} = 5 + 19(3) = 62$.</p>
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Why "$2$ facts → unique sequence"</summary>
+    <div class="detail-body">
+<p>An arithmetic sequence is determined by two parameters: $u_1$ and $d$. Any condition on the sequence — a specific term, a specific sum, a relation between two terms — gives one equation in those two parameters. Two independent equations therefore solve uniquely (so long as they really are independent — see the trap below).</p>
+<p><strong>Independence trap.</strong> "$u_3 = 11$ and $u_3 + u_5 = 26$" looks like two facts but the second simplifies to $2u_3 + 2d = 26$, which together with the first only constrains $d$. Always rewrite both conditions as linear equations in $u_1, d$ and check the coefficient determinant before claiming uniqueness.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">In an arithmetic sequence, $u_5 = 14$ and $u_{12} = 49$. The value of $u_1$ is:</div>
+      <span class="quiz-number">A1.1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-7$</div>
+      <div class="quiz-opt" data-idx="1">$-5$</div>
+      <div class="quiz-opt" data-idx="2">$-6$</div>
+      <div class="quiz-opt" data-idx="3">$3$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $u_{12} - u_5 = 7d = 35 \Rightarrow d = 5$. Then $u_1 = u_5 - 4d = 14 - 20 = -6$.</div>
+    <div class="quiz-explain wrong-exp">Use $u_m - u_n = (m-n)d$ to find $d = 5$, then $u_1 = u_5 - 4d = -6$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.2 ARITHMETIC SERIES ═══════════════ -->
+<section class="section" id="s-a1-2">
+  <div class="section-label">Topic A1.2 · Series</div>
+  <h2>Arithmetic Series</h2>
+
+  <div class="cram-cheat">
+    <strong>The sum of the first $n$ arithmetic terms is $\boxed{\,S_n = \tfrac{n}{2}(u_1 + u_n) = \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)\,}$.</strong> Use the first form when you already know $u_n$; the second when you only have $u_1$ and $d$. Both give the same answer.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Sum of an Arithmetic Series</div>
+    $$ S_n = \frac{n}{2}(u_1 + u_n) = \frac{n}{2}\bigl(2u_1 + (n-1)d\bigr) $$
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — The Gauss-pairing derivation</summary>
+    <div class="detail-body">
+<p>Write the sum forwards and backwards on top of each other:</p>
+$$
+\begin{aligned}
+S_n &= u_1 + (u_1 + d) + (u_1 + 2d) + \cdots + (u_1 + (n-1)d) \\
+S_n &= u_n + (u_n - d) + (u_n - 2d) + \cdots + (u_n - (n-1)d).
+\end{aligned}
+$$
+<p>Add column-wise. Each column gives $u_1 + u_n$, and there are $n$ columns:</p>
+$$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
+<p>Substituting $u_n = u_1 + (n-1)d$ gives the second form. The trick is named for Gauss who reportedly used it as a child to sum $1 + 2 + \cdots + 100$ in seconds — pair $1$ with $100$, $2$ with $99$, etc., to get $50$ pairs each summing to $101$.</p>
+    </div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Exam Tip — Two-condition systems</strong>
+    "$u_p = a$ and $S_q = b$" is the canonical Paper 1 setup. Translate both to linear equations in $u_1, d$, solve the $2\times 2$, then answer the question. The same recipe handles "consecutive terms" prompts ("the $4$th, $9$th, $16$th terms are themselves an AP").
+  </div>
+
+  <h3>Worked Example — System for $u_1$ and $d$</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> An arithmetic sequence has $u_4 = 11$ and $S_8 = 76$. Find $u_1$ and $d$.</p>
+    <p>Translate:</p>
+    $$ u_4 = u_1 + 3d = 11 \tag{1} $$
+    $$ S_8 = \tfrac{8}{2}\bigl(2u_1 + 7d\bigr) = 4(2u_1 + 7d) = 76 \;\Rightarrow\; 2u_1 + 7d = 19. \tag{2} $$
+    <p>From (1), $u_1 = 11 - 3d$. Sub into (2):</p>
+    $$ 2(11 - 3d) + 7d = 19 \;\Rightarrow\; 22 + d = 19 \;\Rightarrow\; d = -3. $$
+    <p>Then $u_1 = 11 - 3(-3) = 20$.</p>
+  </div>
+
+  <h3>Worked Example — Sum of integers in a range</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find the sum of all multiples of $7$ between $100$ and $400$ inclusive.</p>
+    <p><strong>Find $u_1$, $u_n$, $n$.</strong> First multiple $\ge 100$ is $105 = 7\cdot 15$; last $\le 400$ is $399 = 7 \cdot 57$. Number of terms: $57 - 15 + 1 = 43$.</p>
+    $$ S_{43} = \tfrac{43}{2}(105 + 399) = \tfrac{43}{2}\cdot 504 = 43 \cdot 252 = 10\,836. $$
+    <p>Sanity check: the average term is $(105 + 399)/2 = 252$, times $43$ terms = $10\,836$. ✓</p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">In an arithmetic sequence, $u_1 = 7$ and $d = 4$. The sum $S_{20}$ equals:</div>
+      <span class="quiz-number">A1.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$400$</div>
+      <div class="quiz-opt" data-idx="1">$760$</div>
+      <div class="quiz-opt" data-idx="2">$900$</div>
+      <div class="quiz-opt" data-idx="3">$1060$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $S_{20} = \tfrac{20}{2}(2(7) + 19(4)) = 10(14 + 76) = 900$.</div>
+    <div class="quiz-explain wrong-exp">Use $S_n = \tfrac{n}{2}(2u_1 + (n-1)d)$: $S_{20} = 10(14 + 76) = 900$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.3 GEOMETRIC SEQUENCES ═══════════════ -->
+<section class="section" id="s-a1-3">
+  <div class="section-label">Topic A1.3 · Sequences</div>
+  <h2>Geometric Sequences</h2>
+
+  <div class="cram-cheat">
+    <strong>A geometric sequence multiplies by a fixed amount each step.</strong> The fixed amount is the <em>common ratio</em> $r = u_{n+1}/u_n$. The $n$-th term is
+    $$ u_n = u_1 \, r^{\,n-1}. $$
+    Compound interest, depreciation, and exponential growth are all GP problems in disguise.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Definition</strong>
+    A sequence is <strong>geometric</strong> iff the ratio of consecutive terms is constant:
+    $$ \frac{u_{n+1}}{u_n} = r \quad \text{for every } n. $$
+    Equivalently, $u_n = u_1 \, r^{n-1}$ with $u_1 \ne 0$ and $r \ne 0$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">$n$-th Term of a GP</div>
+    $$ u_n = u_1 \, r^{\,n-1} $$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Geometric mean &amp; ratio identities</strong>
+    <strong>Ratio of two terms:</strong> $\dfrac{u_m}{u_n} = r^{m-n}$. Useful when you have two terms and need $r$.<br>
+    <strong>Geometric mean:</strong> if $a, b, c$ are consecutive terms of a GP with $a, c > 0$, then $b = \pm\sqrt{ac}$.
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Three signs to keep straight</strong>
+    <strong>$|r| > 1$:</strong> terms grow without bound (in magnitude).<br>
+    <strong>$|r| < 1$:</strong> terms shrink toward $0$.<br>
+    <strong>$r < 0$:</strong> terms alternate sign. So $r = -\tfrac{1}{2}$ shrinks AND alternates.
+  </div>
+
+  <h3>Worked Example — Finding $r$ and $u_1$ from two terms</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A geometric sequence has $u_2 = 6$ and $u_5 = 48$. Find $u_1$ and $u_{10}$.</p>
+    <p><strong>Eliminate $u_1$.</strong> Take ratios:</p>
+    $$ \frac{u_5}{u_2} = r^{5-2} = r^3 = \frac{48}{6} = 8 \;\Rightarrow\; r = 2. $$
+    <p><strong>Solve for $u_1$.</strong> $u_2 = u_1 r \Rightarrow u_1 = 6/2 = 3$.</p>
+    <p><strong>Apply.</strong> $u_{10} = 3 \cdot 2^9 = 3 \cdot 512 = 1536$.</p>
+  </div>
+
+  <h3>Worked Example — "Smallest $n$ such that"</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A GP has $u_1 = 5$ and $r = 3$. Find the smallest $n$ such that $u_n > 10\,000$.</p>
+    $$ u_n = 5 \cdot 3^{\,n-1} > 10\,000 \;\Rightarrow\; 3^{\,n-1} > 2000. $$
+    <p>Take log:</p>
+    $$ (n-1)\log 3 > \log 2000 \;\Rightarrow\; n - 1 > \frac{\log 2000}{\log 3} \approx 6.92. $$
+    <p>So $n - 1 \ge 7 \Rightarrow n = 8$. Check: $u_8 = 5\cdot 3^7 = 10\,935 > 10\,000$. ✓</p>
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Negative $r$ makes "first term exceeding $M$" subtle</summary>
+    <div class="detail-body">
+<p>If $r$ is negative, "exceeds $M$" usually means $|u_n| > M$, since the sequence alternates sign. Always read whether the question wants <em>magnitude</em> exceeded or the term itself to be greater than $M$ (a positive bound is unreachable from a negative term). Worked-out IB markschemes are explicit about this — match their convention by stating clearly whether you're working with $u_n$ or $|u_n|$.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">The 5th term of a geometric sequence is $48$ and the 2nd term is $6$. Find $u_1$.</div>
+      <span class="quiz-number">A1.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$2$</div>
+      <div class="quiz-opt" data-idx="1">$3$</div>
+      <div class="quiz-opt" data-idx="2">$4$</div>
+      <div class="quiz-opt" data-idx="3">$6$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $u_5/u_2 = r^3 = 8 \Rightarrow r = 2$. Then $u_1 = u_2/r = 3$.</div>
+    <div class="quiz-explain wrong-exp">Divide to eliminate $u_1$: $r^3 = 8 \Rightarrow r = 2$, so $u_1 = 6/2 = 3$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.4 GEOMETRIC SERIES ═══════════════ -->
+<section class="section" id="s-a1-4">
+  <div class="section-label">Topic A1.4 · Series</div>
+  <h2>Geometric Series</h2>
+
+  <div class="cram-cheat">
+    <strong>The sum of the first $n$ geometric terms is $\boxed{\,S_n = \dfrac{u_1(r^n - 1)}{r - 1} = \dfrac{u_1(1 - r^n)}{1 - r}\,}$, $r \ne 1$.</strong> The two forms are algebraically identical — pick the one that makes your numerator and denominator both positive (less arithmetic). When $r = 1$ the formula fails; instead $S_n = nu_1$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Partial Sum of a GP</div>
+    $$ S_n = \frac{u_1(r^n - 1)}{r - 1} = \frac{u_1(1 - r^n)}{1 - r} \quad (r \ne 1). $$
+    <p>If $r = 1$ then every term is $u_1$ and $S_n = nu_1$.</p>
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Derivation by $S_n - rS_n$</summary>
+    <div class="detail-body">
+<p>Write the sum:</p>
+$$ S_n = u_1 + u_1 r + u_1 r^2 + \cdots + u_1 r^{n-1}. $$
+<p>Multiply by $r$:</p>
+$$ r S_n = u_1 r + u_1 r^2 + \cdots + u_1 r^{n-1} + u_1 r^n. $$
+<p>Subtract — most terms telescope away:</p>
+$$ S_n - r S_n = u_1 - u_1 r^n \;\Rightarrow\; (1 - r) S_n = u_1(1 - r^n). $$
+<p>Divide by $(1 - r)$ (legal since $r \ne 1$):</p>
+$$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
+<p>The other form follows from multiplying numerator and denominator by $-1$.</p>
+    </div>
+  </details>
+
+  <h3>Worked Example — Direct sum</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Compute $2 + 6 + 18 + \cdots$ for the first $10$ terms.</p>
+    <p>$u_1 = 2$, $r = 3$, $n = 10$. Use the form with $r > 1$:</p>
+    $$ S_{10} = \frac{2(3^{10} - 1)}{3 - 1} = \frac{2 \cdot 59\,048}{2} = 59\,048. $$
+  </div>
+
+  <h3>Worked Example — Solving for $n$</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A GP has $u_1 = 4$ and $r = \tfrac{3}{2}$. Find the smallest $n$ such that $S_n > 200$.</p>
+    $$ S_n = \frac{4\bigl((3/2)^n - 1\bigr)}{(3/2) - 1} = 8\bigl((3/2)^n - 1\bigr) > 200. $$
+    $$ (3/2)^n > 26 \;\Rightarrow\; n > \frac{\log 26}{\log(3/2)} \approx 8.04. $$
+    <p>So $n = 9$. Check: $S_9 = 8((3/2)^9 - 1) \approx 8(25.629) \approx 205.0 > 200$. ✓</p>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">The sum of the first $6$ terms of a GP with $u_1 = 5$ and $r = 2$ is:</div>
+      <span class="quiz-number">A1.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$155$</div>
+      <div class="quiz-opt" data-idx="1">$160$</div>
+      <div class="quiz-opt" data-idx="2">$310$</div>
+      <div class="quiz-opt" data-idx="3">$315$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $S_6 = \tfrac{5(2^6 - 1)}{2 - 1} = 5(63) = 315$.</div>
+    <div class="quiz-explain wrong-exp">Apply $S_n = \tfrac{u_1(r^n - 1)}{r - 1}$: $\tfrac{5(64 - 1)}{1} = 315$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.5 SIGMA NOTATION ═══════════════ -->
+<section class="section" id="s-a1-5">
+  <div class="section-label">Topic A1.5 · Notation</div>
+  <h2>Sigma Notation</h2>
+
+  <div class="cram-cheat">
+    <strong>Sigma is shorthand for a sum.</strong> $\displaystyle\sum_{k=1}^{n} a_k = a_1 + a_2 + \cdots + a_n$. The strategy on every IB sigma question: <em>recognize the underlying AP or GP, then use the sum formula</em>. Don't add term by term.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Anatomy</strong>
+    $$ \sum_{k=\,m}^{\,n} a_k = a_m + a_{m+1} + \cdots + a_n. $$
+    The <em>index</em> $k$ runs from the lower bound $m$ to the upper bound $n$, inclusive. The expression after $\Sigma$ is the formula for each term as a function of $k$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Linearity Properties</div>
+    $$ \sum_{k=1}^{n}(a_k + b_k) = \sum_{k=1}^{n} a_k + \sum_{k=1}^{n} b_k $$
+    $$ \sum_{k=1}^{n} c\, a_k = c\sum_{k=1}^{n} a_k \qquad \sum_{k=1}^{n} c = nc \;\;(c \text{ const.}) $$
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Recognition Strategy</strong>
+    <strong>Linear in $k$:</strong> $\sum (ak + b)$ — arithmetic with $u_1 = a + b$, $d = a$, $u_n = an + b$.<br>
+    <strong>Exponential in $k$:</strong> $\sum c \cdot r^{\,k-1}$ — geometric with $u_1 = c$, common ratio $r$.<br>
+    <strong>Mixed:</strong> split with linearity, e.g. $\sum (3k + 2 \cdot 5^k) = 3\sum k + 2\sum 5^k$.
+  </div>
+
+  <h3>Worked Example — Linear summand (AP)</h3>
+  <div class="worked-solution">
+    <p><strong>Evaluate:</strong> $\displaystyle\sum_{k=1}^{15}(4k - 3)$.</p>
+    <p>Arithmetic with $u_1 = 4(1) - 3 = 1$, $u_{15} = 4(15) - 3 = 57$, $n = 15$.</p>
+    $$ S_{15} = \tfrac{15}{2}(1 + 57) = \tfrac{15}{2}\cdot 58 = 435. $$
+  </div>
+
+  <h3>Worked Example — Exponential summand (GP)</h3>
+  <div class="worked-solution">
+    <p><strong>Evaluate:</strong> $\displaystyle\sum_{k=1}^{8} 3 \cdot 2^{\,k-1}$.</p>
+    <p>Geometric with $u_1 = 3$, $r = 2$, $n = 8$.</p>
+    $$ S_8 = \frac{3(2^8 - 1)}{2 - 1} = 3 \cdot 255 = 765. $$
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Index shift</summary>
+    <div class="detail-body">
+<p>Sometimes the lower bound isn't $1$. The trick is to substitute $j = k - m + 1$ so $j$ runs from $1$:</p>
+$$ \sum_{k=m}^{n} a_k = \sum_{j=1}^{n - m + 1} a_{j + m - 1}. $$
+<p>For example, $\sum_{k=3}^{10} 2k = \sum_{j=1}^{8} 2(j+2) = \sum_{j=1}^{8}(2j + 4)$ which is now a clean AP on $j$.</p>
+<p>Equivalently, use the <em>"big sum minus small sum"</em> identity:</p>
+$$ \sum_{k=m}^{n} a_k = \sum_{k=1}^{n} a_k - \sum_{k=1}^{m-1} a_k. $$
+<p>Both work; pick whichever leaves cleaner arithmetic.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">$\displaystyle\sum_{k=1}^{20}(3k + 1)$ equals:</div>
+      <span class="quiz-number">A1.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$610$</div>
+      <div class="quiz-opt" data-idx="1">$620$</div>
+      <div class="quiz-opt" data-idx="2">$650$</div>
+      <div class="quiz-opt" data-idx="3">$670$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! AP with $u_1 = 4$, $u_{20} = 61$, $n = 20$. $S_{20} = \tfrac{20}{2}(4 + 61) = 10 \cdot 65 = 650$.</div>
+    <div class="quiz-explain wrong-exp">Recognize an AP: $u_1 = 4$, $u_{20} = 61$, so $S_{20} = \tfrac{20}{2}(4 + 61) = 650$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.6 INFINITE GP ═══════════════ -->
+<section class="section" id="s-a1-6">
+  <div class="section-label">Topic A1.6 · Convergence</div>
+  <h2>Infinite Geometric Series <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>An infinite GP converges iff $|r| < 1$,</strong> with sum
+    $$ S_\infty = \frac{u_1}{1 - r}. $$
+    <strong>Always check $|r| < 1$ first.</strong> If you blindly apply the formula to $|r| \ge 1$ you'll get a finite-looking number for a divergent sum — instant zero on Paper 1.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Convergence condition</strong>
+    The infinite series $u_1 + u_1 r + u_1 r^2 + \cdots$ converges (i.e. has a finite sum) <strong>if and only if $|r| < 1$</strong>. Otherwise it <em>diverges</em> — it grows without bound (if $r > 1$ or $r < -1$) or oscillates without settling (if $|r| = 1$ with $r = -1$, which alternates between $0$ and $u_1$).
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Sum to Infinity</div>
+    $$ S_\infty = \frac{u_1}{1 - r}, \qquad |r| < 1. $$
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Why the condition is $|r| < 1$ and not just $r &lt; 1$</summary>
+    <div class="detail-body">
+<p>Recall the partial sum:</p>
+$$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
+<p>For $S_n$ to settle to a finite limit as $n \to \infty$, the term $r^n$ must approach a finite value. Examine cases:</p>
+<ul style="margin: 8px 0 8px 22px;">
+  <li><strong>$|r| &lt; 1$:</strong> $r^n \to 0$, so $S_n \to \tfrac{u_1}{1 - r}$. ✓ Converges.</li>
+  <li><strong>$r = 1$:</strong> the formula breaks (denominator is $0$); each term equals $u_1$, so $S_n = nu_1$ which is unbounded if $u_1 \ne 0$.</li>
+  <li><strong>$r = -1$:</strong> $r^n$ alternates $\{-1, 1, -1, \ldots\}$, never settling. $S_n$ alternates between $u_1$ and $0$.</li>
+  <li><strong>$|r| &gt; 1$:</strong> $|r^n| \to \infty$, so $|S_n| \to \infty$.</li>
+</ul>
+<p>Only the first case yields a finite limit. The condition is therefore $|r| &lt; 1$, strict on both sides.</p>
+    </div>
+  </details>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Geometric intuition</strong>
+    Each new term is $|r|$ times the previous, so when $|r| &lt; 1$ the terms shrink. Visually: think of Zeno's arrow halving its remaining distance — the partial distances pile up to a finite total.
+  </div>
+
+  <h3>Worked Example — Recurring decimal as a fraction</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Express $0.\overline{63} = 0.636363\ldots$ as a fraction in lowest terms.</p>
+    <p>Write as a geometric series:</p>
+    $$ 0.\overline{63} = 0.63 + 0.0063 + 0.000063 + \cdots $$
+    <p>$u_1 = 0.63 = \tfrac{63}{100}$, $r = \tfrac{1}{100}$, so $|r| &lt; 1$.</p>
+    $$ S_\infty = \frac{63/100}{1 - 1/100} = \frac{63/100}{99/100} = \frac{63}{99} = \frac{7}{11}. $$
+  </div>
+
+  <h3>Worked Example — Geometric series with given infinite sum</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A convergent GP has $u_1 = 12$ and $S_\infty = 18$. Find $r$, and the sum of the first $5$ terms.</p>
+    $$ S_\infty = \frac{12}{1 - r} = 18 \;\Rightarrow\; 1 - r = \tfrac{12}{18} = \tfrac{2}{3} \;\Rightarrow\; r = \tfrac{1}{3}. $$
+    <p>Check $|r| &lt; 1$. ✓ Then</p>
+    $$ S_5 = \frac{12\bigl(1 - (1/3)^5\bigr)}{1 - 1/3} = \frac{12(1 - 1/243)}{2/3} = 18 \cdot \tfrac{242}{243} = \tfrac{1452}{81} \approx 17.93. $$
+    <p>(Sanity: $S_5$ should be close to but less than $S_\infty = 18$. ✓)</p>
+  </div>
+
+  <h3>Worked Example — Bouncing ball (classic AP problem)</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A ball is dropped from $5$ m. Each bounce returns to $80\%$ of the previous height. Find the total vertical distance travelled before it comes to rest.</p>
+    <p>Down distances: $5, 4, 3.2, \ldots$ (a GP with $u_1 = 5$, $r = 0.8$).</p>
+    <p>Up distances: $4, 3.2, 2.56, \ldots$ (the same GP starting one term later: $u_1 = 4$, $r = 0.8$).</p>
+    $$ D_{\text{down}} = \frac{5}{1 - 0.8} = 25 \text{ m}, \qquad D_{\text{up}} = \frac{4}{1 - 0.8} = 20 \text{ m}. $$
+    $$ \text{Total} = 25 + 20 = 45 \text{ m}. $$
+    <p><strong>Common slip:</strong> double-counting the first drop or forgetting that the up-and-down distances are different series.</p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">The series $16 + 12 + 9 + \tfrac{27}{4} + \cdots$ converges to:</div>
+      <span class="quiz-number">A1.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$48$</div>
+      <div class="quiz-opt" data-idx="1">$32$</div>
+      <div class="quiz-opt" data-idx="2">$64$</div>
+      <div class="quiz-opt" data-idx="3">Diverges</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $r = \tfrac{12}{16} = \tfrac{3}{4}$, $|r| &lt; 1$. $S_\infty = \tfrac{16}{1 - 3/4} = 64$.</div>
+    <div class="quiz-explain wrong-exp">$r = 3/4$, $|r| &lt; 1$, so $S_\infty = u_1/(1-r) = 16/(1/4) = 64$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.7 FINANCIAL APPLICATIONS ═══════════════ -->
+<section class="section" id="s-a1-7">
+  <div class="section-label">Topic A1.7 · Applications</div>
+  <h2>Financial Applications</h2>
+
+  <div class="cram-cheat">
+    <strong>Compound interest is a GP.</strong> After $n$ compounding periods at rate $r$ per period, $A = P(1 + r)^n$. If interest compounds $k$ times per year at annual rate $r$ for $t$ years, $A = P\bigl(1 + \tfrac{r}{k}\bigr)^{kt}$. Depreciation: same formula with $(1 - r)^n$. <strong>Always state your "per-period" rate before plugging in.</strong>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Compound Interest</div>
+    $$ A = P\left(1 + \frac{r}{k}\right)^{kt} $$
+    <p>$P$ = principal, $r$ = annual rate (decimal), $k$ = compounds per year, $t$ = years, $A$ = future value.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Depreciation (linear-decay GP)</div>
+    $$ V = V_0 (1 - r)^{n} $$
+    <p>$V_0$ = initial value, $r$ = depreciation rate per period, $n$ = number of periods, $V$ = final value.</p>
+  </div>
+
+  <h3>Worked Example — Compound interest, quarterly</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> $\$5000$ is invested at $4\%$ per annum compounded quarterly. Find the value after $7$ years.</p>
+    <p>Per-period rate: $r/k = 0.04/4 = 0.01$. Number of periods: $kt = 4 \cdot 7 = 28$.</p>
+    $$ A = 5000(1.01)^{28} \approx 5000 \cdot 1.32129 \approx \$6606.45. $$
+    <p>The balance is a GP $\{P, P(1.01), P(1.01)^2, \ldots\}$ — the formula just plucks out the $28$th term ($u_{29}$ if you index from $0$, or interpret as "after 28 compounding events").</p>
+  </div>
+
+  <h3>Worked Example — Depreciation</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A car bought for $\$24\,000$ depreciates by $15\%$ each year. How long until its value drops below $\$10\,000$?</p>
+    $$ 24\,000(0.85)^n &lt; 10\,000 \;\Rightarrow\; (0.85)^n &lt; \tfrac{5}{12}. $$
+    <p>Take log (note $\log 0.85 &lt; 0$, so flip the inequality):</p>
+    $$ n \log 0.85 &lt; \log(5/12) \;\Rightarrow\; n &gt; \frac{\log(5/12)}{\log(0.85)} \approx 5.39. $$
+    <p>So in the $6$th year. (Year $5$ value: $24000 \cdot 0.85^5 \approx \$10{,}649$; Year $6$: $\approx \$9051$.)</p>
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Annuity formulas (HL Paper 2 territory)</summary>
+    <div class="detail-body">
+<p>An <strong>annuity</strong> is a sequence of equal payments $P$ made each period at rate $r$. The future value of an annuity (ordinary, with payments at end of each period) is the GP-sum</p>
+$$ FV = P + P(1+r) + P(1+r)^2 + \cdots + P(1+r)^{n-1} = P \cdot \frac{(1+r)^n - 1}{r}. $$
+<p>The present value is</p>
+$$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cdot \frac{1 - (1+r)^{-n}}{r}. $$
+<p>Both follow directly from the GP partial-sum formula — no need to memorize them as separate facts. On Paper 2, IB usually wants you to set up the GP from scratch and then sum it; calculator handles the arithmetic.</p>
+<p><strong>Annuity-due variant:</strong> if payments are at the <em>start</em> of each period instead, multiply by $(1+r)$ — every payment earns one extra period of interest.</p>
+    </div>
+  </details>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Per-period rate trap</strong>
+    A statement of "$6\%$ per annum compounded monthly" means a per-period rate of $0.06/12 = 0.005$, not $0.06$. Forgetting to divide is the most common single error in financial-math IB questions. Always write down "per-period rate" and "number of periods" as your first line of working.
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">$\$2000$ is invested at $5\%$ per annum compounded annually. After how many full years does the balance first exceed $\$3000$?</div>
+      <span class="quiz-number">A1.7</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$8$</div>
+      <div class="quiz-opt" data-idx="1">$9$</div>
+      <div class="quiz-opt" data-idx="2">$10$</div>
+      <div class="quiz-opt" data-idx="3">$12$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $2000(1.05)^n &gt; 3000 \Rightarrow (1.05)^n &gt; 1.5 \Rightarrow n &gt; \tfrac{\log 1.5}{\log 1.05} \approx 8.31$, so $n = 9$.</div>
+    <div class="quiz-explain wrong-exp">Solve $(1.05)^n &gt; 1.5$ via logs: $n &gt; \log 1.5 / \log 1.05 \approx 8.31$. First integer is $9$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A1.8 MIXED & HYBRID ═══════════════ -->
+<section class="section" id="s-a1-8">
+  <div class="section-label">Topic A1.8 · Synthesis</div>
+  <h2>Mixed &amp; Hybrid Patterns</h2>
+
+  <div class="cram-cheat">
+    <strong>The three patterns IB loves to mix:</strong> (1) a sequence that's both AP and GP (must be constant); (2) inserting <em>means</em> between two given terms; (3) a system involving both a sum and a term. None require new formulas — they all reduce to the AP/GP toolkit by careful set-up.
+  </div>
+
+  <h3>Pattern 1 — Both AP and GP</h3>
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Claim</strong>
+    A sequence that is simultaneously arithmetic <em>and</em> geometric is constant ($d = 0$, $r = 1$, all terms equal).
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Quick proof</summary>
+    <div class="detail-body">
+<p>If $\{u_n\}$ is AP with common difference $d$, then $u_{n+1} = u_n + d$. If it is also GP with ratio $r$, then $u_{n+1} = r\, u_n$. Equate:</p>
+$$ u_n + d = r u_n \;\Rightarrow\; d = (r - 1)u_n \quad \text{for every } n. $$
+<p>The right side depends on $n$ (since $u_n$ varies), but the left side does not. This forces either $r = 1$ (giving $d = 0$, a constant sequence), or $u_n$ constant (which already gives $d = 0$ and $r = 1$). Either way, the sequence is constant.</p>
+    </div>
+  </details>
+
+  <h3>Pattern 2 — Inserting means between given terms</h3>
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Recipe</strong>
+    To insert $k$ arithmetic means between $a$ and $b$: the result is an AP with $u_1 = a$ and $u_{k+2} = b$, so $b - a = (k+1)d \Rightarrow d = \tfrac{b - a}{k + 1}$. The means are $a + d, a + 2d, \ldots, a + kd$. <br>
+    For geometric means, replace differences with ratios: $r = \bigl(\tfrac{b}{a}\bigr)^{1/(k+1)}$, requiring $a, b$ same sign.
+  </div>
+
+  <h3>Worked Example — System with sum + term condition</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A GP has $u_1 + u_2 + u_3 = 14$ and $u_3 = 8$. Find all possible values of $r$.</p>
+    <p>Use $u_2 = u_1 r$, $u_3 = u_1 r^2 = 8$:</p>
+    $$ u_1(1 + r + r^2) = 14 \quad\text{and}\quad u_1 r^2 = 8. $$
+    <p>Divide:</p>
+    $$ \frac{1 + r + r^2}{r^2} = \frac{14}{8} = \tfrac{7}{4} \;\Rightarrow\; 4(1 + r + r^2) = 7 r^2 \;\Rightarrow\; 3 r^2 - 4 r - 4 = 0. $$
+    <p>Quadratic formula: $r = \tfrac{4 \pm \sqrt{16 + 48}}{6} = \tfrac{4 \pm 8}{6}$, giving $r = 2$ or $r = -\tfrac{2}{3}$.</p>
+    <p><strong>Both are valid.</strong> Don't drop the negative root without checking — IB markschemes credit both.</p>
+  </div>
+
+  <h3>Pattern 3 — Telescoping (light intro)</h3>
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Why this works</strong>
+    A telescoping sum is one where adjacent terms cancel. The classic example: $\tfrac{1}{k(k+1)} = \tfrac{1}{k} - \tfrac{1}{k+1}$. Then
+    $$ \sum_{k=1}^{n} \frac{1}{k(k+1)} = \left(1 - \tfrac{1}{2}\right) + \left(\tfrac{1}{2} - \tfrac{1}{3}\right) + \cdots + \left(\tfrac{1}{n} - \tfrac{1}{n+1}\right) = 1 - \tfrac{1}{n+1}. $$
+    Most middle terms cancel; only the first and last survive. Useful when partial fractions appear.
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">Three positive numbers form an arithmetic sequence. They also form a geometric sequence. What can you conclude?</div>
+      <span class="quiz-number">A1.8</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">All three numbers are equal.</div>
+      <div class="quiz-opt" data-idx="1">The middle number is the average of the other two.</div>
+      <div class="quiz-opt" data-idx="2">The middle number is the square root of the product of the other two.</div>
+      <div class="quiz-opt" data-idx="3">No such sequence exists.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Both AP and GP forces $d = 0$ and $r = 1$, i.e. a constant sequence — all three values equal.</div>
+    <div class="quiz-explain wrong-exp">Both AP and GP forces $d = 0$, $r = 1$ (constant). Options (B) and (C) are individually true (AP-mean and GP-mean), but only (A) captures both at once.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Review</div>
+  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">M</div>
+        <div class="card-title">Memorize</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>$u_n = u_1 + (n-1)d$ &amp; both forms of $S_n$ for an AP</li>
+        <li>$u_n = u_1 r^{n-1}$ &amp; both forms of $S_n$ for a GP (and the $r=1$ exception)</li>
+        <li>$S_\infty = \tfrac{u_1}{1-r}$, valid <strong>only</strong> when $|r| &lt; 1$</li>
+        <li>Compound interest $A = P(1 + r/k)^{kt}$</li>
+        <li>Identity: $u_m - u_n = (m-n)d$ (AP), $u_m / u_n = r^{m-n}$ (GP)</li>
+        <li>Sigma linearity properties</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">U</div>
+        <div class="card-title">Understand</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>Why $|r| &lt; 1$ is the <em>exact</em> convergence condition</li>
+        <li>Gauss-pairing derivation of $S_n^{\text{AP}}$</li>
+        <li>The $S_n - r S_n$ trick for $S_n^{\text{GP}}$</li>
+        <li>Why both $r = 1$ and $r = -1$ are excluded from $S_\infty$</li>
+        <li>Recognizing AP / GP under sigma — picking the right sum formula</li>
+        <li>Why the per-period rate is $r/k$, not $r$, in compound interest</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Common Pitfalls</h3>
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top student errors</strong>
+    <strong>1.</strong> Using $S_\infty$ without verifying $|r| &lt; 1$.<br>
+    <strong>2.</strong> Off-by-one on the index — confusing $u_5$ ("$5$th term") with $u_4 = u_1 + 3d$ ("$4$ steps from $u_1$").<br>
+    <strong>3.</strong> Forgetting the $r = 1$ case in geometric sums (formula divides by zero).<br>
+    <strong>4.</strong> Mis-identifying a sequence: $\{1, 2, 4, 7, 11, \ldots\}$ has differences $1, 2, 3, 4, \ldots$ — that's <em>quadratic</em>, neither AP nor GP.<br>
+    <strong>5.</strong> In compound interest, plugging the annual rate without dividing by the compounding frequency.<br>
+    <strong>6.</strong> Bouncing-ball: counting the initial drop twice or forgetting that "up" and "down" distances form different series.<br>
+    <strong>7.</strong> On a sigma question, expanding term-by-term instead of recognizing the AP/GP — works but eats clock.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Paper-specific notes</strong>
+    <strong>Paper 1 (no calc):</strong> exact-value AP and GP sums, recurring-decimal-as-fraction problems, AP/GP system-solving by hand. Logs of "nice" arguments only.<br>
+    <strong>Paper 2 (calc):</strong> long compound-interest problems, "smallest $n$ such that" with non-trivial bases, multi-stage financial problems. Don't over-use the calculator on the AP/GP set-up — they're testing whether you can identify the structure first.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+
+  <div class="flashcard-toolbar">
+    <span class="fc-count" id="fcCount">0 / 12 flipped</span>
+    <div>
+      <button onclick="shuffleFlashcards()">Shuffle</button>
+      <button onclick="resetFlashcards()">Reset</button>
+    </div>
+  </div>
+
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$n$-th term of an arithmetic sequence?</div>
+        <div class="flashcard-back">$u_n = u_1 + (n-1)d$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Two equivalent forms for $S_n$ of an AP?</div>
+        <div class="flashcard-back">$S_n = \tfrac{n}{2}(u_1 + u_n) = \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$n$-th term of a geometric sequence?</div>
+        <div class="flashcard-back">$u_n = u_1 \, r^{\,n-1}$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Sum of $n$ terms of a GP (with $r \ne 1$)?</div>
+        <div class="flashcard-back">$S_n = \dfrac{u_1(r^n - 1)}{r - 1}$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">When does an infinite GP converge?</div>
+        <div class="flashcard-back">$|r| &lt; 1$, with $S_\infty = \dfrac{u_1}{1 - r}$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Compound interest formula?</div>
+        <div class="flashcard-back">$A = P\bigl(1 + \tfrac{r}{k}\bigr)^{kt}$<br>$k$ = compounds per year, $t$ = years</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Quick identity for $u_m - u_n$ (AP) and $u_m / u_n$ (GP)?</div>
+        <div class="flashcard-back">AP: $u_m - u_n = (m - n)d$<br>GP: $u_m / u_n = r^{m-n}$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Sigma linearity: $\sum (a_k + b_k) = \;?$</div>
+        <div class="flashcard-back">$\sum a_k + \sum b_k$. Also $\sum c\,a_k = c\sum a_k$ and $\sum_{k=1}^{n} c = nc$.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">If $\{u_n\}$ is both AP and GP, what is it?</div>
+        <div class="flashcard-back">A constant sequence. ($d = 0$, $r = 1$.)</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Geometric mean of two positives $a$ and $c$?</div>
+        <div class="flashcard-back">$b = \sqrt{ac}$ (the middle term of an AP-style insertion would be $\tfrac{a+c}{2}$ instead).</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Recurring decimal $0.\overline{a_1 a_2 \ldots a_k}$ as a fraction?</div>
+        <div class="flashcard-back">Geometric series with $u_1 = \tfrac{N}{10^k}$, $r = 10^{-k}$, where $N$ is the repeating block. Sum: $\tfrac{N}{10^k - 1}$.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">"Smallest $n$ such that $r^n &lt; \varepsilon$" — how to solve?</div>
+        <div class="flashcard-back">Take log; remember to flip the inequality if $\log r &lt; 0$ (i.e. when $|r| &lt; 1$).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit A1 — Practice Quiz</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">1. In an arithmetic sequence, $u_3 = 10$ and $u_7 = 22$. Then $u_{15}$ equals:</div>
+      <span class="quiz-number">Q1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$34$</div>
+      <div class="quiz-opt" data-idx="1">$42$</div>
+      <div class="quiz-opt" data-idx="2">$46$</div>
+      <div class="quiz-opt" data-idx="3">$52$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $u_7 - u_3 = 4d = 12 \Rightarrow d = 3$. Then $u_1 = 4$, $u_{15} = 4 + 14(3) = 46$.</div>
+    <div class="quiz-explain wrong-exp">From $4d = 12$, $d = 3$. Then $u_1 = 4$, so $u_{15} = 4 + 14(3) = 46$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">2. The first three terms of an AP are $x - 1$, $2x + 1$, $7x - 5$. The value of $x$ is:</div>
+      <span class="quiz-number">Q2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$1$</div>
+      <div class="quiz-opt" data-idx="1">$2$</div>
+      <div class="quiz-opt" data-idx="2">$3$</div>
+      <div class="quiz-opt" data-idx="3">$4$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Equal differences: $(2x+1) - (x-1) = (7x-5) - (2x+1) \Rightarrow x + 2 = 5x - 6 \Rightarrow x = 2$.</div>
+    <div class="quiz-explain wrong-exp">Use the AP-mean: $2(2x+1) = (x-1) + (7x-5)$, giving $4x + 2 = 8x - 6 \Rightarrow x = 2$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">3. The sum of the first $n$ terms of a GP with $u_1 = 3$ and $r = 2$ first exceeds $1500$ when $n$ equals:</div>
+      <span class="quiz-number">Q3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$7$</div>
+      <div class="quiz-opt" data-idx="1">$8$</div>
+      <div class="quiz-opt" data-idx="2">$9$</div>
+      <div class="quiz-opt" data-idx="3">$10$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. Since $2^8 = 256$ and $2^9 = 512$, the smallest $n$ is $9$. Check: $S_9 = 3 \cdot 511 = 1533 &gt; 1500$. ✓</div>
+    <div class="quiz-explain wrong-exp">$S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. $2^9 = 512 &gt; 501$ but $2^8 = 256 &lt; 501$, so $n = 9$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">4. $\displaystyle\sum_{k=1}^{12}(2k - 5)$ equals:</div>
+      <span class="quiz-number">Q4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$72$</div>
+      <div class="quiz-opt" data-idx="1">$84$</div>
+      <div class="quiz-opt" data-idx="2">$96$</div>
+      <div class="quiz-opt" data-idx="3">$108$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! AP with $u_1 = -3$, $u_{12} = 19$, $n = 12$. $S_{12} = \tfrac{12}{2}(-3 + 19) = 6 \cdot 16 = 96$.</div>
+    <div class="quiz-explain wrong-exp">$u_1 = 2(1) - 5 = -3$, $u_{12} = 2(12) - 5 = 19$. $S_{12} = 6 \cdot 16 = 96$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">5. An infinite GP has $u_1 = 9$ and $S_\infty = 12$. The common ratio is:</div>
+      <span class="quiz-number">Q5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{1}{4}$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{3}{4}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{1}{3}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{2}{3}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\tfrac{9}{1 - r} = 12 \Rightarrow 1 - r = \tfrac{9}{12} = \tfrac{3}{4} \Rightarrow r = \tfrac{1}{4}$. $|r| &lt; 1$ ✓.</div>
+    <div class="quiz-explain wrong-exp">$1 - r = u_1 / S_\infty = 9/12 = 3/4 \Rightarrow r = 1/4$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">6. $0.\overline{27} = 0.272727\ldots$ as a fraction in lowest terms is:</div>
+      <span class="quiz-number">Q6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{27}{100}$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{27}{99}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{3}{11}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{9}{33}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! GP with $u_1 = 27/100$, $r = 1/100$. $S_\infty = \tfrac{27/100}{99/100} = \tfrac{27}{99} = \tfrac{3}{11}$.</div>
+    <div class="quiz-explain wrong-exp">$\tfrac{27}{99}$ is correct but not in lowest terms — divide by $9$ to get $\tfrac{3}{11}$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">7. $\$8000$ is invested at $6\%$ p.a. compounded monthly. The balance after $4$ years is closest to:</div>
+      <span class="quiz-number">Q7</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\$9000$</div>
+      <div class="quiz-opt" data-idx="1">$\$9500$</div>
+      <div class="quiz-opt" data-idx="2">$\$9920$</div>
+      <div class="quiz-opt" data-idx="3">$\$10\,162$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Per-period rate $0.06/12 = 0.005$, periods $48$. $A = 8000(1.005)^{48} \approx 8000 \cdot 1.27049 \approx 10162$.</div>
+    <div class="quiz-explain wrong-exp">$A = 8000(1 + 0.06/12)^{48} = 8000(1.005)^{48} \approx \$10\,162$. (If you forgot to divide by $12$, you would have computed $8000(1.06)^4 \approx 10100$ — close but wrong methodology.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">8. The first three terms of a GP are $x$, $x + 4$, $x + 12$. The common ratio is:</div>
+      <span class="quiz-number">Q8</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{3}{2}$</div>
+      <div class="quiz-opt" data-idx="1">$2$</div>
+      <div class="quiz-opt" data-idx="2">$3$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{4}{3}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Equal ratios: $\tfrac{x+4}{x} = \tfrac{x+12}{x+4}$. Cross-multiply: $(x+4)^2 = x(x+12) \Rightarrow x^2 + 8x + 16 = x^2 + 12x \Rightarrow x = 4$. Then $r = (x+4)/x = 8/4 = 2$.</div>
+    <div class="quiz-explain wrong-exp">Use the GP-mean: $(x+4)^2 = x(x+12)$, giving $x = 4$. Then $r = 8/4 = 2$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">9. A ball is dropped from $10$ m and rebounds to $\tfrac{3}{4}$ of its previous height each time. The total vertical distance travelled is:</div>
+      <span class="quiz-number">Q9</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$30$ m</div>
+      <div class="quiz-opt" data-idx="1">$40$ m</div>
+      <div class="quiz-opt" data-idx="2">$60$ m</div>
+      <div class="quiz-opt" data-idx="3">$70$ m</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Down: GP with $u_1 = 10$, $r = 3/4$, sum $= 40$. Up: GP with $u_1 = 7.5$, $r = 3/4$, sum $= 30$. Total $= 70$ m.</div>
+    <div class="quiz-explain wrong-exp">$D_{\text{down}} = 10/(1-3/4) = 40$. $D_{\text{up}} = 7.5/(1 - 3/4) = 30$. Sum $= 70$ m. (Common slip: forgetting that "up" and "down" are different series.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">10. A GP has $u_1 + u_2 = 12$ and $u_3 + u_4 = 27$. Find $r$, given $r &gt; 0$.</div>
+      <span class="quiz-number">Q10</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{4}{3}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{3}{2}$</div>
+      <div class="quiz-opt" data-idx="3">$2$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Note $u_3 + u_4 = r^2(u_1 + u_2)$. So $27 = r^2 \cdot 12 \Rightarrow r^2 = 9/4 \Rightarrow r = \tfrac{3}{2}$ (positive root).</div>
+    <div class="quiz-explain wrong-exp">Factor: $u_3 + u_4 = r^2(u_1 + u_2) \Rightarrow r^2 = 27/12 = 9/4 \Rightarrow r = 3/2$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ CHECKLIST ═══════════════ -->
+<section class="section" id="checklist">
+  <div class="section-label">Self-Assessment</div>
+  <h2>Readiness Checklist</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are HL-only.</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $u_n = u_1 + (n-1)d$ for an AP</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve $2\times 2$ systems in $u_1$ and $d$ from two AP conditions</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use both forms of $S_n$ for an AP and choose the cleaner one</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the Gauss-pairing derivation of $S_n^{\text{AP}}$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $u_n = u_1 r^{n-1}$ for a GP</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use $u_m/u_n = r^{m-n}$ to recover $r$ from two terms</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $S_n^{\text{GP}}$ in both forms; handle the $r = 1$ case</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the $S_n - r S_n$ derivation of the GP sum formula</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Translate sigma notation into AP or GP form before summing</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply linearity and index-shift identities for sigma sums</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Recognize when an infinite GP converges (exact condition $|r| &lt; 1$)</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Compute $S_\infty$ and convert recurring decimals into fractions</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up and solve compound-interest / depreciation problems with the right per-period rate</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize and resolve mixed AP+GP and "both AP and GP" patterns</li>
+  </ul>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
+  <p>IB Math Analysis &amp; Approaches HL — Unit A1: Sequences &amp; Series · First Assessment 2029</p>
+</div>
+
+</main>
+<script>
+// ─── SCORE TRACKING ───
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+
+function updateScoreBadge() {
+  const badge = document.getElementById('scoreBadge');
+  if (!badge) return;
+  if (quizScore.total === 0) {
+    badge.textContent = '0 / 0';
+    badge.classList.add('zero');
+  } else {
+    badge.textContent = quizScore.correct + ' / ' + quizScore.total;
+    badge.classList.remove('zero');
+  }
+}
+
+// ─── THEME ───
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  const tt = document.getElementById('themeToggle');
+  if (tt) tt.textContent = 'Light';
+}
+
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.width = pct + '%';
+});
+
+// ─── ACTIVE TOC ───
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ─── QUIZZES ───
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if(opt.classList.contains('disabled')) return;
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      quizScore.total++;
+      if (idx === answer) {
+        opt.classList.add('correct');
+        quizScore.correct++;
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+        const retry = quiz.querySelector('.quiz-retry');
+        if (retry) retry.classList.add('show');
+      }
+      updateScoreBadge();
+    });
+  });
+});
+
+function retryQuiz(btn) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => {
+    o.classList.remove('disabled', 'correct', 'wrong');
+  });
+  quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show'));
+  btn.classList.remove('show');
+  quizScore.total--;
+  updateScoreBadge();
+}
+
+// ─── FLASHCARDS ───
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  updateFlashcardCount();
+}
+function updateFlashcardCount() {
+  const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
+  const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
+  const el = document.getElementById('fcCount');
+  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+}
+function resetFlashcards() {
+  document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
+  updateFlashcardCount();
+}
+function shuffleFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  if (!grid) return;
+  const cards = [...grid.children];
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(cards[j]);
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+}
+
+// ─── CHECKLIST ───
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const total = document.querySelectorAll('#checklistUl li').length;
+  const checked = document.querySelectorAll('#checklistUl li.checked').length;
+  const el = document.getElementById('checkProgress');
+  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+}
+
+// ─── SIDEBAR TOGGLE ───
+function toggleSidebar() {
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+// Init
+updateScoreBadge();
+</script>
+</body>
+</html>

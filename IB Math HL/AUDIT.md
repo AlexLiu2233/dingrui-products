@@ -16,25 +16,37 @@ and the IB Math AA HL syllabus (first exams 2021).
 question files and any future digital products are out of scope until they
 exist.
 
-Last reviewed: **2026-05-08** (audit created; build-out begins).
+Last reviewed: **2026-05-08** (Sprint 1 active: Unit A refactor in flight,
+A1 shipped).
 
 ---
 
 ## Active Sprint — what we're working on now
 
-**Sprint 1 — Cover the syllabus.** Two of five topic units exist (A, C);
-three are missing (B, D, E). One active sprint at a time, mirroring the AP
-Physics workstream policy.
+**Sprint 1 — Refactor Unit A into focused sub-units.** The original
+`Unit_A_Number_and_Algebra.html` is a 2588-line monolith covering 24
+sub-topics. Per 2026-05-08 decision, it's being split into 6 focused
+sub-units (A1 → A6). Each sub-unit conforms to the dual-goal contract
+(cram cheat-sheet on top, going-deeper proofs at the bottom). Once the
+six sub-units are shipped, the monolith gets removed and `index.html`
+updates to list them.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S1-1** | Draft `Unit_B_Functions.html` (Topic 2: Functions) | P0 | **Open** |
-| **S1-2** | Draft `Unit_D_Statistics_and_Probability.html` (Topic 4) | P0 | **Open** |
-| **S1-3** | Draft `Unit_E_Calculus.html` (Topic 5) | P0 | **Open** |
-| **S1-4** | Update `index.html` chip count from "2 Units" to "5 Units" + add cards for B/D/E | P1 | Bundles with S1-3. |
+| ~~**S1-1**~~ | Draft `Unit_A1_Sequences_and_Series.html` (Topic 1.2–1.4, 1.8) | P0 | ✅ **Shipped 2026-05-08** — 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed patterns), 18 quiz items, 12 flashcards, 14-item readiness checklist. Introduces the `cram-cheat` CSS pattern + `hl-flag` chip. |
+| **S1-2** | Draft `Unit_A2_Exponents_and_Logarithms.html` (Topic 1.5, 1.7) | P0 | **Open** — covers laws of exponents, logarithms, exponential equations, change-of-base. |
+| **S1-3** | Draft `Unit_A3_Counting_and_Binomial.html` (Topic 1.9, 1.10) | P0 | **Open** — counting principles, permutations/combinations, binomial theorem (incl. extended HL). |
+| **S1-4** | Draft `Unit_A4_Complex_Numbers.html` (Topic 1.12–1.14) | P0 | **Open** — Cartesian, polar, Euler forms, De Moivre, roots, conjugate root theorem. HL-heavy. |
+| **S1-5** | Draft `Unit_A5_Proof.html` (Topic 1.6, 1.15) | P0 | **Open** — direct proof, induction, contradiction. Cross-link from A1 induction-of-sums. |
+| **S1-6** | Draft `Unit_A6_Algebra_and_Systems.html` (Topic 1.11 + linear systems) | P0 | **Open** — partial fractions, $3\times 3$ systems, RREF. |
+| **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | **Open** — bundle once S1-6 ships. |
 
-Build order: **B → D → E** (alphabetical, also roughly the order students
-encounter the topics).
+Build order: **A1 (✓) → A2 → A3 → A4 → A5 → A6 → cleanup**.
+
+### Sprint 2 (queued) — new topic units
+Once Sprint 1 closes, Sprint 2 picks up the missing units (B Functions,
+D Statistics &amp; Probability, E Calculus). Build order: **B → D → E**.
+Original P0 work; preserved here so it isn't lost.
 
 ---
 
@@ -82,14 +94,22 @@ no-calc; Paper 2 is calc.
 
 | Unit | Topic | Sections | Worked Ex. | Flashcards | Quiz | Status |
 |---|---|---|---|---|---|---|
-| A | Number & Algebra | TBA | TBA | TBA | TBA | ✓ Shipped |
-| B | Functions | — | — | — | — | **Missing** (S1-1) |
-| C | Geometry & Trigonometry | TBA | TBA | TBA | TBA | ✓ Shipped |
-| D | Statistics & Probability | — | — | — | — | **Missing** (S1-2) |
-| E | Calculus | — | — | — | — | **Missing** (S1-3) |
+| A (legacy) | Number & Algebra (monolith) | 24 | ~24 | 14 | 9 | **To remove** once A1–A6 ship |
+| A1 | Sequences & Series | 8 + how-to + strategy | 12 | 12 | 18 (8 inline + 10 unit) | ✓ Shipped 2026-05-08 |
+| A2 | Exponents & Logs | — | — | — | — | **S1-2 open** |
+| A3 | Counting & Binomial | — | — | — | — | **S1-3 open** |
+| A4 | Complex Numbers | — | — | — | — | **S1-4 open** |
+| A5 | Proof | — | — | — | — | **S1-5 open** |
+| A6 | Algebra & Systems | — | — | — | — | **S1-6 open** |
+| B | Functions | — | — | — | — | Sprint 2 |
+| C | Geometry & Trigonometry | TBA | TBA | TBA | TBA | ✓ Shipped (legacy form) |
+| D | Statistics & Probability | — | — | — | — | Sprint 2 |
+| E | Calculus | — | — | — | — | Sprint 2 |
 
-*The "TBA" rows for A and C will be filled in during the next pass; the
-priority right now is closing the coverage gap on B/D/E.*
+*The legacy `Unit_A_Number_and_Algebra.html` stays on disk until S1-6
+ships, so the live site still has full Topic 1 coverage during the
+refactor. Same plan eventually applies to Unit C if monolith size
+becomes a problem.*
 
 ---
 
