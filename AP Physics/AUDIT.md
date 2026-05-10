@@ -24,16 +24,20 @@ Last reorganized: **2026-05-04**.
 
 ## Active Sprint — what we're working on now
 
-**Sprint 1 closed 2026-05-04** — both items landed on `improve_AP_Physics`.
-Resolved details preserved below for traceability; next up is Sprint 2.
+**Sprint 3 closed 2026-05-09** — all P1 polish items landed on
+`sprint3_p1_polish`. Sprints 1, 2, 3, 4 are all closed; resolved details
+preserved below for traceability.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| ~~**S1-A**~~ | ~~Math/text hygiene pass in worked examples~~ | P0 | ✅ closed — see [details](#s1-a--mathtext-hygiene-in-worked-examples) |
-| ~~**S1-B**~~ | ~~Apply Interactive Component Philosophy to study-guide widgets~~ | P0 | ✅ closed — see [details](#s1-b--apply-interactive-component-philosophy) |
+| ~~**P1-1**~~ | ~~Add `Unit N:` prefix to U2 & U3 `<h1>`~~ | P1 | ✅ closed — `562b81a` |
+| ~~**P1-2**~~ | ~~Lock canonical hero chip schema across all 7 units~~ | P1 | ✅ closed — `562b81a` (units) + `245e17d` (spec) |
+| ~~**P1-4**~~ | ~~Rename `projCanvas` → `projectileCanvas` in Unit 1~~ | P1 | ✅ closed — `a63ede4` |
 
-Sprint 2 (P0-1 content gaps + P0-2 quiz floor) starts on the new
-`sprint2_content_gaps` branch.
+Currently the only active sprint is **Sprint 5** (S5-1 PDF render of
+practice files, P1) — running manually outside this branch. Once that
+lands, pick the next sprint from the backlog (deep widget condensation,
+P2 future work).
 
 ---
 
@@ -271,29 +275,39 @@ P0-1 since both touched the unit-quiz section.
 
 ---
 
-## Sprint 3 — Consistency & Polish (P1, queued)
+## Sprint 3 — Consistency & Polish (P1) — closed 2026-05-09
 
-### P1-1 — Units 2 & 3 missing "Unit N:" prefix in `<h1>`
+All three open P1 items landed on `sprint3_p1_polish`. Resolved details
+preserved below for traceability.
 
-**Where:**
+### ~~P1-1 — Units 2 & 3 missing "Unit N:" prefix in `<h1>`~~
 
-- `Unit_2_Force_and_Dynamics.html:715` — `<h1>Force & Translational Dynamics</h1>`
-- `Unit_3_Work_Energy_Power.html:589` — `<h1>Work, Energy, & Power</h1>`
+**Status:** ✅ Closed 2026-05-09 (`562b81a`, bundled with P1-2).
 
-**Spec:** `GENERATION_PROMPT.md` §6.6 — hero `<h1>` is `Unit {N}: {Title}`.
-Units 1, 4, 5, 6, 7 follow this pattern. **Fix:** prepend `Unit 2: ` and
-`Unit 3: ` respectively.
+Added `Unit 2: ` to `Unit_2_Force_and_Dynamics.html:715` and `Unit 3: `
+to `Unit_3_Work_Energy_Power.html:589`. All 7 units now satisfy the
+`Unit {N}: {Title}` h1 pattern.
 
-### P1-2 — Hero chip schema drift
+### ~~P1-2 — Hero chip schema drift~~
 
-**Spec:** `GENERATION_PROMPT.md` §6.6 says hero chips are `chip-maroon`
-(sections), `chip-green` (widgets), `chip-gold` (AP exam weight).
-**Observed:** units carry chips like "10–15% Exam, ~14–19 Periods, 5 Topics"
-— the order, content, and color mapping vary across units.
-**Fix:** lock canonical schema (recommend keeping current "Topics / Periods /
-Exam %" content but standardizing order and color across all 7 units), and
-update `GENERATION_PROMPT.md` §6.6 to match. **Bundle with P1-1** since both
-touch the hero block.
+**Status:** ✅ Closed 2026-05-09 (`562b81a` units + `245e17d` spec).
+
+Locked canonical schema (now in `GENERATION_PROMPT.md` §6.6):
+
+```html
+<div class="hero-meta">
+  <span class="chip chip-maroon">{X-Y}% Exam Weight</span>
+  <span class="chip chip-green">~{X-Y} Class Periods</span>
+  <span class="chip chip-gold">{N} Topics</span>
+</div>
+```
+
+- U1, U4, U5, U6, U7: wording sweep "of AP Exam" → "Exam Weight".
+- U2: replaced `hero-chips`/`<div>` markup with `hero-meta`/`<span chip-X>`;
+  renamed `.hero-chips` CSS rule to `.hero-meta` accordingly.
+- U3: stripped `<strong>` wrappers, fixed `~12/~17` → `~12–17`.
+- `GENERATION_PROMPT.md` §6.6 updated to lock the schema and corrected
+  the prior spec, which described chips no unit actually used.
 
 ### ~~P1-3 — Widget naming conventions diverge~~
 
@@ -301,12 +315,13 @@ touch the hero block.
 `*Explorer` IDs renamed to kebab-case `*-widget`. Canvas-name parity (e.g.
 `shmCanvas`) is *not* in scope here — those are sub-IDs not container IDs.
 
-### P1-4 — Unit 1 free-fall widget vs. canvas naming
+### ~~P1-4 — Unit 1 free-fall widget vs. canvas naming~~
 
-**Observed:** Unit 1 `freefall-widget` is fine, but `projCanvas` (not
-`projectileCanvas`) breaks the `{shortname}Canvas` rule. **Fix:** rename
-`projCanvas` → `projectileCanvas` (one ID, one CSS selector, one JS
-reference).
+**Status:** ✅ Closed 2026-05-09 (`a63ede4`).
+
+Renamed `projCanvas` → `projectileCanvas` in `Unit_1_Kinematics.html`
+(canvas `id` at line 1153 + the matching `getElementById` call in widget
+JS at line 1811). No CSS selector references existed.
 
 ### P1-5 — JSXGraph used in 5/6/7 only
 
