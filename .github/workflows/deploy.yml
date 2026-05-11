@@ -1,0 +1,85 @@
+name: Deploy to GitHub Pages
+
+# Publishes `main` to the site root and the `preview` branch to /preview/.
+# Triggered by pushes to either branch; either push rebuilds the full artifact
+# so that both surfaces stay in sync with their respective branches.
+
+on:
+  push:
+    branches: [main, preview]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production (main)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: prod
+
+      - name: Checkout staging (preview)
+        uses: actions/checkout@v4
+        with:
+          ref: preview
+          path: preview
+
+      - name: Validate production HTML (strict — fails the build)
+        working-directory: prod
+        run: bash scripts/validate.sh
+
+      - name: Validate preview HTML (soft — warns only)
+        working-directory: preview
+        continue-on-error: true
+        run: bash scripts/validate.sh
+
+      - name: Assemble deploy tree
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+
+          # Helper: strip internal/workflow files from a source tree
+          strip_internals() {
+            local root="$1"
+            rm -rf  "$root/.git" "$root/.github" "$root/.claude" \
+                    "$root/scripts" "$root/prompts" "$root/rag"
+            rm -f   "$root/CLAUDE.md" "$root/serve.sh"
+            find "$root" -name 'AUDIT.md'             -delete
+            find "$root" -name 'GENERATION_PROMPT.md' -delete
+            find "$root" -name 'README.md'            -delete
+          }
+
+          # Production at /
+          cp -R prod/. _site/
+          strip_internals _site
+
+          # Staging at /preview/
+          mkdir -p _site/preview
+          cp -R preview/. _site/preview/
+          strip_internals _site/preview
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
