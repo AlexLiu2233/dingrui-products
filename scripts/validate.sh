@@ -17,19 +17,39 @@ validate_file() {
     echo -e "  ${RED}FAIL${NC}: File is empty or missing"; ((ERRORS++)); return
   fi
 
-  # Required structure checks
-  for pattern in '<!DOCTYPE html>' '<meta charset' 'katex' 'data-theme' 'DM Serif Display'; do
+  # Universal structure checks (apply to every product)
+  for pattern in '<!DOCTYPE html>' '<meta charset' 'DM Serif Display'; do
     if ! grep -qi "$pattern" "$f"; then
       echo -e "  ${RED}FAIL${NC}: Missing '$pattern'"
       ((ERRORS++))
     fi
   done
 
-  # Check for unclosed KaTeX delimiters (basic check)
-  local single_dollars
-  single_dollars=$(grep -o '\$' "$f" | wc -l)
-  if (( single_dollars % 2 != 0 )); then
-    echo -e "  ${YELLOW}WARN${NC}: Odd number of \$ delimiters ($single_dollars) — possible unclosed math"
+  # Theme support is required except for print-targeted Practice Questions
+  if [[ "$f" != *"Practice Questions"* ]] && ! grep -qi 'data-theme' "$f"; then
+    echo -e "  ${RED}FAIL${NC}: Missing 'data-theme'"
+    ((ERRORS++))
+  fi
+
+  # KaTeX is conditional: required only when the file actually uses math syntax
+  # (AP CSA, for example, is Java-only and has no math content).
+  local needs_katex=false
+  if grep -qE '\\\(|\\\[' "$f" \
+     || grep -qE '\$[^$[:space:]][^$]{0,200}\$' "$f"; then
+    needs_katex=true
+  fi
+  if $needs_katex && ! grep -qi 'katex' "$f"; then
+    echo -e "  ${RED}FAIL${NC}: Uses math delimiters but missing KaTeX"
+    ((ERRORS++))
+  fi
+
+  # Unclosed-math heuristic only meaningful when the file uses math
+  if $needs_katex; then
+    local single_dollars
+    single_dollars=$(grep -o '\$' "$f" | wc -l)
+    if (( single_dollars % 2 != 0 )); then
+      echo -e "  ${YELLOW}WARN${NC}: Odd number of \$ delimiters ($single_dollars) — possible unclosed math"
+    fi
   fi
 
   # Check dark mode CSS exists (skipped for print-targeted Practice Questions products)
