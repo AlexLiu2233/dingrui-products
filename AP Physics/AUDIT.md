@@ -34,13 +34,27 @@ preserved below for traceability.
 | ~~**P1-2**~~ | ~~Lock canonical hero chip schema across all 7 units~~ | P1 | ✅ closed — `562b81a` (units) + `245e17d` (spec) |
 | ~~**P1-4**~~ | ~~Rename `projCanvas` → `projectileCanvas` in Unit 1~~ | P1 | ✅ closed — `a63ede4` |
 
-Currently the only active sprint is **Sprint 5** (S5-1 PDF render of
-practice files, P1). Tooling staged on `sprint5_pdf_render`:
-`scripts/render-practice-pdfs.sh` resolves a Chrome/Edge binary and renders
-each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
-(gitignored). User runs the render manually; once distribution PDFs are
-verified, S5-1 closes. Then pick the next sprint from the backlog (deep
-widget condensation, P2 future work).
+**Sprint 6 closed 2026-05-12** — all four deep-condensation trims
+landed on `sprint6_widget_condensation`. See Sprint 1-B § "Resolved by
+Sprint 6" below for per-widget shas; the four removed controls are
+logged as DP-7 / DP-8 / DP-9 / DP-10.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S6-1**~~ | ~~Trim `incline-widget` mass slider + 3 mass-dependent result cards~~ | P0 | ✅ closed — `00ad7e5` |
+| ~~**S6-2**~~ | ~~Trim `circular-widget` mass slider + `F_c` card~~ | P0 | ✅ closed — `fd6bdd5` |
+| ~~**S6-3**~~ | ~~Trim `ux-widget` `uxXpos` probe slider + 4 probe cards~~ | P0 | ✅ closed — `4c2ef7f` |
+| ~~**S6-4**~~ | ~~Trim `spring-energy-widget` `sprF` slider + Friction Loss / Efficiency cards~~ | P0 | ✅ closed — `c220b3c` |
+
+**Sprint 5** (S5-1 PDF render) remains tooling-ready on `main` —
+`scripts/render-practice-pdfs.sh` resolves a Chrome/Edge binary and
+renders each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
+(gitignored). User runs the render manually; S5-1 closes once
+distribution PDFs are verified.
+
+No active sprint right now. Backlog candidates: P2-1 (E&M expansion),
+P2-2 (cross-unit spaced-review deck), P1-5 (JSXGraph in U1–U4
+opportunity).
 
 ---
 
@@ -192,19 +206,18 @@ Units 1–7 (the previous estimate of 11 was incorrect — the actual count is
   3-slider × 3-result demo of $J = F \cdot \Delta t = \Delta p$. Removed
   control logged as DP-6.
 
-**Deferred to a future "deep condensation" pass** (logged here so they
-aren't lost):
+**Resolved by Sprint 6 (closed 2026-05-12)** — the four deep-condensation
+items landed on `sprint6_widget_condensation`. Per-widget summary:
 
-| Widget | Candidate trim | Why deferred |
-|---|---|---|
-| `incline-widget` (U2) | `inc_m` slider | Acceleration is mass-independent under fixed $\mu$, so by rule 4 mass is gratuitous. But three result cards (mg sin θ, N, f_k) all depend on $m$ — trimming the slider would orphan them. Needs concept-recasting + card pruning, not a one-line trim. |
-| `circular-widget` (U2) | `circ_m` slider | $a_c = v^2/r$ is mass-independent; only the $F_c$ card depends on $m$. Trimming requires removing $F_c$ and rewriting the concept comment from "centripetal force F = mv²/r" to "centripetal acceleration v²/r." |
-| `ux-widget` (U3) | `uxXpos` test-point slider + 4 dependent result cards (U(x), KE, F(x), d²U/dx²) | Probe-only behaviour — useful for advanced students but orthogonal to the "where E intersects U(x)" core concept. The 4 cards plus the JS that updates them on Xpos change is a meaningful refactor. |
-| `spring-energy-widget` (U3) | `sprF` friction slider + Friction Loss / Efficiency cards | Friction is conceptually orthogonal to PE→KE conversion. Three result cards depend on the slider. Same invasiveness as the others. |
+| Widget | Trim | Resolved | Removed control logged as |
+|---|---|---|---|
+| ~~`incline-widget` (U2)~~ | ~~`inc_m` slider + mg sin θ / Normal N / Friction f_k cards~~ | ✅ `00ad7e5` | DP-7 |
+| ~~`circular-widget` (U2)~~ | ~~`circ_m` slider + $F_c$ card~~ | ✅ `fd6bdd5` | DP-8 |
+| ~~`ux-widget` (U3)~~ | ~~`uxXpos` probe slider + U / KE / F(x) / d²U/dx² cards (particle position now driven by the Play-motion animation)~~ | ✅ `4c2ef7f` | DP-9 |
+| ~~`spring-energy-widget` (U3)~~ | ~~`sprF` slider + Friction Loss / Efficiency cards (canvas recentered around two-column PE→KE bars)~~ | ✅ `c220b3c` | DP-10 |
 
-These four trims should be done together in a single "widget-condensation"
-sprint with explicit before/after screenshots, since each one changes the
-widget's visible result-card layout and may need a brief tour-style note.
+The original deferred-list with per-widget "why deferred" reasoning is
+preserved in the git history at the pre-Sprint-6 tip.
 
 **Why now:** the philosophy was just locked (see above). Existing widgets were
 built before it; some violate rules 1, 2, or 4.
@@ -483,6 +496,10 @@ up. Anything the Interactive Component Philosophy excludes belongs here.
 | DP-4 | Adjustable-$g$ "what if Earth had different gravity" sandbox | Stripped from Inclined Plane Explorer per S1-B | Genuinely interesting for intuition; doesn't fit study-guide one-concept rule |
 | DP-5 | Interactive FRQ rubric trainer (student types answer, rubric grades it) | Net-new | Pairs naturally with the Practice Questions product |
 | DP-6 | "Pre-loaded velocity" impulse widget — set initial velocity, watch how impulse adds to it | Stripped from `impulse-widget` per S1-B condensation | Useful for showing v_final = v_0 + J/m as a separate concept; doesn't fit the study-guide one-concept rule for the impulse widget |
+| DP-7 | Inclined-plane force-magnitudes sandbox — vary mass to see mg sin θ, N, f_k scale | Stripped from `incline-widget` per Sprint 6 | Useful for Newton/force-magnitude intuition; doesn't fit the one-concept rule for the angle-friction-trade-off widget |
+| DP-8 | Centripetal-force calculator — vary mass to see $F_c = mv^2/r$ | Stripped from `circular-widget` per Sprint 6 | Pairs with DP-7; isolates force-magnitude as a separate concept from $a_c = v^2/r$ |
+| DP-9 | U(x) probe-point widget — drag a test point along the potential curve to read U(x), KE, F(x), d²U/dx² | Stripped from `ux-widget` per Sprint 6 | Probe-only behaviour orthogonal to the "where E intersects U(x)" core concept |
+| DP-10 | Spring launcher with friction — vary friction to see Final KE, Efficiency, and the "no launch" regime when friction ≥ spring PE | Stripped from `spring-energy-widget` per Sprint 6 | Friction is conceptually orthogonal to PE↔KE conversion; deserves its own non-conservative-work widget |
 
 *Add new entries with auto-incremented `DP-N` ID. When a backlog item is
 picked up by the Digital Product team, mark it `→ in flight: <link>` here
