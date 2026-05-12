@@ -1570,10 +1570,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
 
   <!-- ═══ NEW: CIRCULAR MOTION EXPLORER ═══ -->
-  <!-- Widget concept: centripetal force F = mv²/r — how speed and radius set the inward force needed. -->
+  <!-- Widget concept: centripetal acceleration $a_c = v^2/r$ — how speed and radius set the inward acceleration. Mass-independent; mass slider + $F_c$ card removed in Sprint 6 (DP-8). -->
   <div class="formula-explorer" id="circular-widget" style="border-color: var(--red);">
     <div class="explorer-title" style="color: var(--red);">Circular Motion Explorer</div>
-    <div class="explorer-subtitle">See how speed, radius, and mass affect centripetal acceleration and force.</div>
+    <div class="explorer-subtitle">See how speed and radius set the centripetal acceleration $a_c = v^2/r$.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>Speed v <span class="val" id="circ_v_val">4.0</span> m/s</label>
@@ -1582,10 +1582,6 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <div class="slider-group">
         <label>Radius r <span class="val" id="circ_r_val">2.0</span> m</label>
         <input type="range" id="circ_r" min="0.5" max="10" value="2" step="0.5" oninput="updateCirc()">
-      </div>
-      <div class="slider-group">
-        <label>Mass m <span class="val" id="circ_m_val">1.0</span> kg</label>
-        <input type="range" id="circ_m" min="0.5" max="10" value="1" step="0.5" oninput="updateCirc()">
       </div>
     </div>
     <div style="position:relative; width:100%; max-width:720px; margin:0 auto;">
@@ -1596,11 +1592,6 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         <div class="result-label">a_c = v²/r</div>
         <div class="result-value" id="circ_ac" style="color: var(--red);">8.0</div>
         <div class="result-unit">m/s²</div>
-      </div>
-      <div class="result-card" style="border-color: var(--accent);">
-        <div class="result-label">F_c = mv²/r</div>
-        <div class="result-value" id="circ_Fc">8.0</div>
-        <div class="result-unit">N</div>
       </div>
       <div class="result-card" style="border-color: var(--green);">
         <div class="result-label">Period T</div>
@@ -2247,13 +2238,10 @@ document.addEventListener('keydown', function(e) {
   window.updateCirc = function() {
     var v = parseFloat(document.getElementById('circ_v').value);
     var r = parseFloat(document.getElementById('circ_r').value);
-    var m = parseFloat(document.getElementById('circ_m').value);
     document.getElementById('circ_v_val').textContent = v.toFixed(1);
     document.getElementById('circ_r_val').textContent = r.toFixed(1);
-    document.getElementById('circ_m_val').textContent = m.toFixed(1);
-    var ac = v*v/r, Fc = m*v*v/r, T = 2*Math.PI*r/v, vmin = Math.sqrt(9.8*r);
+    var ac = v*v/r, T = 2*Math.PI*r/v, vmin = Math.sqrt(9.8*r);
     document.getElementById('circ_ac').textContent = ac.toFixed(1);
-    document.getElementById('circ_Fc').textContent = Fc.toFixed(1);
     document.getElementById('circ_T').textContent = T.toFixed(2);
     document.getElementById('circ_vmin').textContent = vmin.toFixed(2);
     function drawFrame() {
@@ -2282,18 +2270,14 @@ document.addEventListener('keydown', function(e) {
       ctx.font = 'bold 16px "JetBrains Mono"'; ctx.fillStyle = c.red;
       ctx.fillText('a_c = '+ac.toFixed(1)+' m/s²', rx, ry+22);
       ctx.fillStyle = c.text; ctx.font = '14px "Source Sans 3"';
-      ctx.fillText('Centripetal force:', rx, ry+52);
-      ctx.font = 'bold 16px "JetBrains Mono"'; ctx.fillStyle = c.curve;
-      ctx.fillText('F_c = '+Fc.toFixed(1)+' N', rx, ry+74);
-      ctx.fillStyle = c.text; ctx.font = '14px "Source Sans 3"';
-      ctx.fillText('Period:', rx, ry+104);
+      ctx.fillText('Period:', rx, ry+52);
       ctx.font = 'bold 16px "JetBrains Mono"'; ctx.fillStyle = c.green;
-      ctx.fillText('T = '+T.toFixed(2)+' s', rx, ry+126);
+      ctx.fillText('T = '+T.toFixed(2)+' s', rx, ry+74);
       ctx.fillStyle = c.text; ctx.font = '14px "Source Sans 3"';
-      ctx.fillText('Min speed (top of loop):', rx, ry+156);
+      ctx.fillText('Min speed (top of loop):', rx, ry+104);
       ctx.font = 'bold 16px "JetBrains Mono"'; ctx.fillStyle = c.orange;
-      ctx.fillText('v_min = '+vmin.toFixed(2)+' m/s', rx, ry+178);
-      if (v < vmin) { ctx.fillStyle = c.red; ctx.font = 'bold 13px "Source Sans 3"'; ctx.fillText('⚠ Below min speed!', rx, ry+206); }
+      ctx.fillText('v_min = '+vmin.toFixed(2)+' m/s', rx, ry+126);
+      if (v < vmin) { ctx.fillStyle = c.red; ctx.font = 'bold 13px "Source Sans 3"'; ctx.fillText('⚠ Below min speed!', rx, ry+154); }
       // Legend
       ctx.font = 'bold 12px "Source Sans 3"';
       ctx.fillStyle = c.green; ctx.fillText('→ v (tangent)', rx, H-30);
