@@ -39,6 +39,10 @@ if [[ ! -f "$FILE" ]]; then
 fi
 
 ABS_FILE="$(cd "$(dirname "$FILE")" && pwd)/$(basename "$FILE")"
+# Build a proper file:// URI. On Git Bash, $(pwd) yields /c/Users/... which
+# would produce an invalid file:///c/Users/... URI on Windows; pathlib.Path.as_uri()
+# emits the correct file:///C:/Users/... form across platforms.
+FILE_URI="$(python -c "import pathlib,sys; print(pathlib.Path(sys.argv[1]).resolve().as_uri())" "$FILE")"
 
 # Ensure globally-installed Node modules are discoverable
 export NODE_PATH="${NODE_PATH:-$(npm root -g)}"
@@ -54,8 +58,8 @@ const { chromium } = require('playwright');
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
   const page = await browser.newPage({ viewport: { width: ${WIDTH}, height: 900 } });
-  await page.goto('file://${ABS_FILE}', { waitUntil: 'networkidle', timeout: 30000 }).catch(() =>
-    page.goto('file://${ABS_FILE}', { waitUntil: 'load', timeout: 15000 })
+  await page.goto('${FILE_URI}', { waitUntil: 'networkidle', timeout: 30000 }).catch(() =>
+    page.goto('${FILE_URI}', { waitUntil: 'load', timeout: 15000 })
   );
   // Let KaTeX + fonts render
   await page.waitForTimeout(2000);

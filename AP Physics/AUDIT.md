@@ -423,6 +423,15 @@ new `--profile` flag — because there are only two profiles in play
 (study guide vs. print practice) and a path-based heuristic is enough.
 If a third product type appears, revisit.
 
+### ~~I-3~~ — `scripts/screenshot.sh` builds an invalid `file:///c/...` URI on Git Bash
+
+**Status:** ✅ Resolved 2026-05-11 — `scripts/screenshot.sh` now derives the
+file URI via `pathlib.Path.as_uri()` instead of concatenating `file://` with
+`$(pwd)`. Git Bash on Windows returns `/c/Users/...` from `pwd`, which produced
+`file:///c/Users/...` and triggered `net::ERR_FILE_NOT_FOUND` in Playwright.
+The Python-based URI emits the correct `file:///C:/Users/...` form across
+platforms. Surfaced when capturing Sprint 6 before-screenshots.
+
 ### I-2 — `serve.sh` exits when a subject has only one of Study Guides/Practice Questions
 
 **Status:** Open (logged 2026-05-11 during Sprint 5 walkthrough). **Tier:** P1.
