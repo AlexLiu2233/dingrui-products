@@ -1217,18 +1217,14 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </details>
 
   <!-- ═══ NEW: INCLINED PLANE EXPLORER ═══ -->
-  <!-- Widget concept: angle vs. friction trade-off setting the down-slope acceleration on an incline. -->
+  <!-- Widget concept: angle vs. friction trade-off setting the down-slope acceleration on an incline. Acceleration $a=g(\sin\theta-\mu\cos\theta)$ is mass-independent — the slider removed in Sprint 6 (DP-7). -->
   <div class="formula-explorer" id="incline-widget" style="border-color: var(--orange);">
     <div class="explorer-title" style="color: var(--orange);">Inclined Plane Explorer</div>
-    <div class="explorer-subtitle">Adjust the angle and friction coefficient. Watch the forces and acceleration change.</div>
+    <div class="explorer-subtitle">Adjust the angle and friction. Watch how acceleration emerges from the angle–friction trade-off.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>Angle θ <span class="val" id="inc_theta_val">30</span>°</label>
         <input type="range" id="inc_theta" min="5" max="80" value="30" step="1" oninput="updateIncline()">
-      </div>
-      <div class="slider-group">
-        <label>Mass m <span class="val" id="inc_m_val">5</span> kg</label>
-        <input type="range" id="inc_m" min="1" max="20" value="5" step="0.5" oninput="updateIncline()">
       </div>
       <div class="slider-group">
         <label>μ_k <span class="val" id="inc_mu_val">0.20</span></label>
@@ -1239,21 +1235,6 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       <canvas id="inclineCanvas" width="720" height="320"></canvas>
     </div>
     <div class="explorer-results">
-      <div class="result-card" style="border-color: var(--orange);">
-        <div class="result-label">mg sin θ</div>
-        <div class="result-value" id="inc_grav" style="color: var(--orange);">25.0</div>
-        <div class="result-unit">N (down slope)</div>
-      </div>
-      <div class="result-card" style="border-color: var(--green);">
-        <div class="result-label">Normal N</div>
-        <div class="result-value" id="inc_N" style="color: var(--green);">43.3</div>
-        <div class="result-unit">N</div>
-      </div>
-      <div class="result-card" style="border-color: var(--red);">
-        <div class="result-label">Friction f_k</div>
-        <div class="result-value" id="inc_fk" style="color: var(--red);">8.7</div>
-        <div class="result-unit">N (up slope)</div>
-      </div>
       <div class="result-card" style="border-color: var(--accent);">
         <div class="result-label">Acceleration</div>
         <div class="result-value" id="inc_accel">3.27</div>
@@ -2133,18 +2114,14 @@ document.addEventListener('keydown', function(e) {
   // ═══ INCLINE EXPLORER ═══
   window.updateIncline = function() {
     var theta = parseFloat(document.getElementById('inc_theta').value);
-    var m = parseFloat(document.getElementById('inc_m').value);
     var mu = parseFloat(document.getElementById('inc_mu').value);
     var g = 9.8;
+    var m = 1; // fixed internally so the canvas force arrows still scale proportionally
     document.getElementById('inc_theta_val').textContent = theta;
-    document.getElementById('inc_m_val').textContent = m;
     document.getElementById('inc_mu_val').textContent = mu.toFixed(2);
     var rad = theta * Math.PI / 180;
     var mg = m * g, grav_par = mg * Math.sin(rad), N = mg * Math.cos(rad);
     var fk = mu * N, accel = g * (Math.sin(rad) - mu * Math.cos(rad));
-    document.getElementById('inc_grav').textContent = grav_par.toFixed(1);
-    document.getElementById('inc_N').textContent = N.toFixed(1);
-    document.getElementById('inc_fk').textContent = fk.toFixed(1);
     document.getElementById('inc_accel').textContent = accel.toFixed(2);
     var canvas = document.getElementById('inclineCanvas'); if (!canvas) return;
     var W = 720, H = 320, ctx = setupCanvas(canvas, W, H), c = getColors();
@@ -2163,8 +2140,7 @@ document.addEventListener('keydown', function(e) {
     ctx.save(); ctx.translate(bx, by); ctx.rotate(-rad);
     ctx.fillStyle = c.fill; ctx.strokeStyle = c.curve; ctx.lineWidth = 2;
     ctx.fillRect(-20,-30,40,30); ctx.strokeRect(-20,-30,40,30);
-    ctx.fillStyle = c.text; ctx.font = 'bold 11px "Source Sans 3"'; ctx.textAlign = 'center';
-    ctx.fillText(m+'kg', 0, -10); ctx.restore();
+    ctx.restore();
     var scale = 2.5;
     drawArrow(ctx, bx, by-15, bx, by-15+mg*scale*0.5, c.text, 2);
     var nx = -Math.sin(rad), ny = -Math.cos(rad), nLen = N*scale*0.6;
