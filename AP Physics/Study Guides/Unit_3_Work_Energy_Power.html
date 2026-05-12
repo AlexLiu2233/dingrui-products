@@ -1003,10 +1003,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
 
   <!-- ═══ INTERACTIVE: SPRING LAUNCHER ═══ -->
-  <!-- Widget concept: spring PE U = ½kx² stores energy that converts to kinetic energy on release. -->
+  <!-- Widget concept: spring PE U = ½kx² stores energy that converts to kinetic energy on release (conservative case; friction slider + Friction Loss / Efficiency cards removed in Sprint 6 (DP-10) so the widget demonstrates pure PE↔KE). -->
   <div class="formula-explorer" id="spring-energy-widget">
     <div class="explorer-title"> Interactive — Spring Launch Speed Calculator</div>
-    <div class="explorer-subtitle">See conservation of energy in action: spring PE → kinetic energy (with optional friction)</div>
+    <div class="explorer-subtitle">See conservation of energy in action: spring PE $\to$ kinetic energy.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>Spring constant k <span class="val" id="spr_k_val">500</span> N/m</label>
@@ -1020,17 +1020,11 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         <label>Mass m <span class="val" id="spr_m_val">0.50</span> kg</label>
         <input type="range" id="sprM" min="0.05" max="5" step="0.05" value="0.50" oninput="drawSpring()">
       </div>
-      <div class="slider-group">
-        <label>Friction force <span class="val" id="spr_f_val">0</span> N</label>
-        <input type="range" id="sprF" min="0" max="20" step="0.5" value="0" oninput="drawSpring()">
-      </div>
     </div>
     <div class="explorer-results">
       <div class="result-card"><div class="result-label">Spring PE</div><div class="result-value" id="spr_PE">—</div><div class="result-unit">J</div></div>
-      <div class="result-card"><div class="result-label">Friction Loss</div><div class="result-value" id="spr_Wf">—</div><div class="result-unit">J</div></div>
       <div class="result-card"><div class="result-label">Final KE</div><div class="result-value" id="spr_KE">—</div><div class="result-unit">J</div></div>
       <div class="result-card"><div class="result-label">Launch Speed</div><div class="result-value" id="spr_v">—</div><div class="result-unit">m/s</div></div>
-      <div class="result-card"><div class="result-label">Efficiency</div><div class="result-value" id="spr_eff">—</div><div class="result-unit">%</div></div>
     </div>
     <div class="explorer-canvas-wrap">
       <canvas id="springCanvas"></canvas>
@@ -2118,75 +2112,53 @@ function drawSpring() {
   var k = parseFloat(document.getElementById('sprK').value);
   var dx = parseFloat(document.getElementById('sprDx').value);
   var m = parseFloat(document.getElementById('sprM').value);
-  var fric = parseFloat(document.getElementById('sprF').value);
 
   document.getElementById('spr_k_val').textContent = k;
   document.getElementById('spr_dx_val').textContent = dx.toFixed(2);
   document.getElementById('spr_m_val').textContent = m.toFixed(2);
-  document.getElementById('spr_f_val').textContent = fric;
 
   var pe = 0.5 * k * dx * dx;
-  var wf = fric * dx; // friction over compression distance
-  var ke = Math.max(0, pe - wf);
+  var ke = pe; // conservative: all spring PE → KE
   var v = Math.sqrt(2 * ke / m);
 
   document.getElementById('spr_PE').textContent = pe.toFixed(1);
-  document.getElementById('spr_Wf').textContent = wf.toFixed(1);
   document.getElementById('spr_KE').textContent = ke.toFixed(1);
   document.getElementById('spr_v').textContent = v.toFixed(2);
-  document.getElementById('spr_eff').textContent = (pe > 0 ? (100 * ke / pe).toFixed(1) : '—');
 
   ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
 
-  // Energy bar chart (normalize against the larger of pe and wf so over-friction case still fits)
+  // Two-column energy bar chart: PE on the left, Final KE on the right
   var barW = 100, barMaxH = 200, barY = H - 50;
-  var maxE = Math.max(pe, wf);
-  if (maxE <= 0) maxE = 1;
+  var maxE = pe > 0 ? pe : 1;
 
   // Spring PE bar
   var h1 = (pe / maxE) * barMaxH;
   ctx.fillStyle = c.accent;
-  ctx.fillRect(150 - barW / 2, barY - h1, barW, h1);
+  ctx.fillRect(200 - barW / 2, barY - h1, barW, h1);
   ctx.fillStyle = c.text; ctx.font = 'bold 12px "Source Sans 3"'; ctx.textAlign = 'center';
-  ctx.fillText('Spring PE', 150, barY + 18);
-  ctx.fillText(pe.toFixed(1) + ' J', 150, barY - h1 - 8);
-
-  // Friction loss bar
-  var h2 = (wf / maxE) * barMaxH;
-  ctx.fillStyle = c.red;
-  ctx.fillRect(350 - barW / 2, barY - h2, barW, h2);
-  ctx.fillStyle = c.text;
-  ctx.fillText('Friction', 350, barY + 18);
-  ctx.fillText(wf.toFixed(1) + ' J', 350, barY - h2 - 8);
+  ctx.fillText('Spring PE', 200, barY + 18);
+  ctx.fillText(pe.toFixed(1) + ' J', 200, barY - h1 - 8);
 
   // KE bar
   var h3 = (ke / maxE) * barMaxH;
   ctx.fillStyle = c.green;
-  ctx.fillRect(550 - barW / 2, barY - h3, barW, h3);
+  ctx.fillRect(500 - barW / 2, barY - h3, barW, h3);
   ctx.fillStyle = c.text;
-  ctx.fillText('Final KE', 550, barY + 18);
-  ctx.fillText(ke.toFixed(1) + ' J', 550, barY - h3 - 8);
+  ctx.fillText('Final KE', 500, barY + 18);
+  ctx.fillText(ke.toFixed(1) + ' J', 500, barY - h3 - 8);
 
-  // Speed result + warning when friction wins
-  if (wf >= pe) {
-    ctx.fillStyle = c.red; ctx.font = 'bold 16px "Source Sans 3"'; ctx.textAlign = 'center';
-    ctx.fillText('No launch', 700, H / 2 - 6);
-    ctx.font = '11px "Source Sans 3"'; ctx.fillStyle = c.textSec;
-    ctx.fillText('friction ≥ spring PE', 700, H / 2 + 14);
-  } else {
-    ctx.fillStyle = c.accent; ctx.font = 'bold 20px "Source Sans 3"'; ctx.textAlign = 'center';
-    ctx.fillText('v = ' + v.toFixed(2) + ' m/s', 700, H / 2);
-    ctx.font = '12px "Source Sans 3"'; ctx.fillStyle = c.textSec;
-    ctx.fillText('Launch speed', 700, H / 2 + 20);
-  }
+  // Speed result
+  ctx.fillStyle = c.accent; ctx.font = 'bold 20px "Source Sans 3"'; ctx.textAlign = 'center';
+  ctx.fillText('v = ' + v.toFixed(2) + ' m/s', 700, H / 2);
+  ctx.font = '12px "Source Sans 3"'; ctx.fillStyle = c.textSec;
+  ctx.fillText('Launch speed', 700, H / 2 + 20);
 
-  // Arrows
-  drawArrow(ctx, 210, H / 2, 290, H / 2, c.red, 2);
-  drawArrow(ctx, 410, H / 2, 490, H / 2, c.green, 2);
+  // Conversion arrow PE → KE
+  drawArrow(ctx, 260, H / 2, 440, H / 2, c.accent, 2);
 
   // Title
   ctx.fillStyle = c.text; ctx.font = '12px "Source Sans 3"'; ctx.textAlign = 'left';
-  ctx.fillText('½kΔx² = ½mv² + F_f·Δx', 30, 24);
+  ctx.fillText('½kΔx² = ½mv²', 30, 24);
 }
 
 // ═══ SCROLL ANIMATIONS ═══
