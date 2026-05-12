@@ -56,11 +56,14 @@ bash scripts/validate.sh [file.html]
 # Visual screenshot for comparison
 bash scripts/screenshot.sh <file.html> [output.png]
 
-# Create new unit from template
-bash scripts/new-unit.sh "AP Subject" "Unit N Topic Name"
+# Create new unit from template (Prefix:Topic form lets build-index parse it)
+bash scripts/new-unit.sh "AP Physics" "Unit 8: Magnetic Fields"
 
 # Regenerate index.html cards + hero chips from filesystem
 python scripts/build-index.py
+
+# Local preview server (discovers all subjects' Study Guides + Practice Questions)
+bash serve.sh [port]
 ```
 
 ## Adding a New Unit
