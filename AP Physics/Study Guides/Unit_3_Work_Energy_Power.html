@@ -876,10 +876,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   </div>
 
   <!-- ═══ INTERACTIVE: U(x) EXPLORER ═══ -->
-  <!-- Widget concept: U(x) landscape and turning points — where total energy E intersects the potential curve. -->
+  <!-- Widget concept: U(x) landscape and turning points — where total energy E intersects the potential curve. Probe-position slider + 4 probe cards (U, KE, F, d²U/dx²) removed in Sprint 6 (DP-9); particle position is now driven by the Play-motion animation. -->
   <div class="formula-explorer" id="ux-widget">
     <div class="explorer-title">Interactive — Potential Energy Landscape</div>
-    <div class="explorer-subtitle">Explore $U(x) = ax^4 - bx^2 + c$ — identify equilibrium points and the force at any position</div>
+    <div class="explorer-subtitle">Explore $U(x) = ax^4 - bx^2 + c$ — find equilibrium positions and turning points for a given total energy $E$.</div>
     <div class="explorer-sliders">
       <div class="slider-group">
         <label>a (x⁴ coeff) <span class="val" id="ux_a_val">1.0</span></label>
@@ -894,19 +894,11 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
         <input type="range" id="uxC" min="0" max="10" step="0.5" value="5.0" oninput="drawUx()">
       </div>
       <div class="slider-group">
-        <label>Particle position x <span class="val" id="ux_xpos_val">1.0</span> m</label>
-        <input type="range" id="uxXpos" min="-3" max="3" step="0.1" value="1.0" oninput="onUxManual()">
-      </div>
-      <div class="slider-group">
         <label>Total energy E <span class="val" id="ux_E_val">3.0</span> J</label>
         <input type="range" id="uxE" min="-2" max="15" step="0.1" value="3.0" oninput="drawUx()">
       </div>
     </div>
     <div class="explorer-results">
-      <div class="result-card"><div class="result-label">U(x)</div><div class="result-value" id="ux_U">—</div><div class="result-unit">J</div></div>
-      <div class="result-card"><div class="result-label">KE = E − U</div><div class="result-value" id="ux_KE">—</div><div class="result-unit">J</div></div>
-      <div class="result-card"><div class="result-label">F(x) = −dU/dx</div><div class="result-value" id="ux_F">—</div><div class="result-unit">N</div></div>
-      <div class="result-card"><div class="result-label">d²U/dx²</div><div class="result-value" id="ux_d2U">—</div><div class="result-unit">J/m²</div></div>
       <div class="result-card"><div class="result-label">Equilibrium</div><div class="result-value" id="ux_eq">—</div><div class="result-unit"></div></div>
       <div class="result-card"><div class="result-label">Turning points</div><div class="result-value" id="ux_tp">—</div><div class="result-unit">m</div></div>
     </div>
@@ -1885,14 +1877,6 @@ function drawWork() {
 // ═══ CANVAS: U(x) POTENTIAL ENERGY ═══
 var uxAnim = { running: false, raf: null, last: 0, x: 1.0, v: 0 };
 
-function onUxManual() {
-  // User dragged the position slider — stop animation and sync state
-  if (uxAnim.running) toggleUxPlay();
-  uxAnim.x = parseFloat(document.getElementById('uxXpos').value);
-  uxAnim.v = 0;
-  drawUx();
-}
-
 function toggleUxPlay() {
   var btn = document.getElementById('uxPlayBtn');
   if (uxAnim.running) {
@@ -1902,7 +1886,6 @@ function toggleUxPlay() {
     return;
   }
   uxAnim.running = true;
-  uxAnim.x = parseFloat(document.getElementById('uxXpos').value);
   uxAnim.v = 0;
   uxAnim.last = performance.now();
   if (btn) btn.textContent = '⏸ Pause';
@@ -1922,7 +1905,6 @@ function toggleUxPlay() {
       if (uxAnim.x > 3) { uxAnim.x = 3; uxAnim.v = -Math.abs(uxAnim.v); }
       if (uxAnim.x < -3) { uxAnim.x = -3; uxAnim.v = Math.abs(uxAnim.v); }
     }
-    document.getElementById('uxXpos').value = uxAnim.x.toFixed(2);
     drawUx();
     uxAnim.raf = requestAnimationFrame(step);
   }
@@ -1937,13 +1919,12 @@ function drawUx() {
   var a = parseFloat(document.getElementById('uxA').value);
   var b = parseFloat(document.getElementById('uxB').value);
   var cVal = parseFloat(document.getElementById('uxC').value);
-  var xpos = parseFloat(document.getElementById('uxXpos').value);
+  var xpos = uxAnim.x;  // particle position is driven by the animation, not a slider
   var E = parseFloat(document.getElementById('uxE').value);
 
   document.getElementById('ux_a_val').textContent = a.toFixed(1);
   document.getElementById('ux_b_val').textContent = b.toFixed(1);
   document.getElementById('ux_c_val').textContent = cVal.toFixed(1);
-  document.getElementById('ux_xpos_val').textContent = xpos.toFixed(1);
   document.getElementById('ux_E_val').textContent = E.toFixed(1);
 
   var U = function(x) { return a * Math.pow(x, 4) - b * Math.pow(x, 2) + cVal; };
@@ -1956,11 +1937,7 @@ function drawUx() {
   var isEq = Math.abs(dUdx(xpos)) < 0.3;
   var keVal = E - uVal;
 
-  document.getElementById('ux_U').textContent = uVal.toFixed(2);
-  document.getElementById('ux_F').textContent = fVal.toFixed(2);
-  document.getElementById('ux_d2U').textContent = d2Val.toFixed(2);
   document.getElementById('ux_eq').textContent = isEq ? (d2Val > 0 ? 'Stable' : d2Val < 0 ? 'Unstable' : 'Neutral') : '—';
-  document.getElementById('ux_KE').textContent = (keVal >= 0) ? keVal.toFixed(2) : 'forbidden';
 
   // Find turning points where U(x) = E by sign-change scan over [-3, 3]
   var tps = [];
