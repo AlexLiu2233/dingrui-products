@@ -35,9 +35,12 @@ preserved below for traceability.
 | ~~**P1-4**~~ | ~~Rename `projCanvas` → `projectileCanvas` in Unit 1~~ | P1 | ✅ closed — `a63ede4` |
 
 Currently the only active sprint is **Sprint 5** (S5-1 PDF render of
-practice files, P1) — running manually outside this branch. Once that
-lands, pick the next sprint from the backlog (deep widget condensation,
-P2 future work).
+practice files, P1). Tooling staged on `sprint5_pdf_render`:
+`scripts/render-practice-pdfs.sh` resolves a Chrome/Edge binary and renders
+each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
+(gitignored). User runs the render manually; once distribution PDFs are
+verified, S5-1 closes. Then pick the next sprint from the backlog (deep
+widget condensation, P2 future work).
 
 ---
 
@@ -345,7 +348,7 @@ full conventions and per-unit index.
 | ~~S4-2~~ | Draft Units 2–7 practice files | ✅ **Closed 2026-05-07** — all six units (U2 → U7) shipped at 18 MC + 4 FRQ each, full topic coverage, locked S4-3/S4-4 conventions throughout. Total: 126 MC + 28 FRQ across U1–U7. |
 | ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
 | ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
-| S4-5 | Render PDFs for distribution | **Open** — manual `chrome --headless --print-to-pdf=...`. Wait until S4-2 is complete so all units render together. |
+| ~~S4-5~~ | Promoted to Sprint 5 as **S5-1** | See Active Sprint table above; tooling staged in `scripts/render-practice-pdfs.sh`. |
 
 **Earlier resolutions (Sprint 1-b polish, retained for traceability):**
 
@@ -419,6 +422,20 @@ The change is intentionally minimal — single conditional rather than a
 new `--profile` flag — because there are only two profiles in play
 (study guide vs. print practice) and a path-based heuristic is enough.
 If a third product type appears, revisit.
+
+### I-2 — `serve.sh` exits when a subject has only one of Study Guides/Practice Questions
+
+**Status:** Open (logged 2026-05-11 during Sprint 5 walkthrough). **Tier:** P1.
+
+`scripts/serve.sh` uses `ls -1 "$d/Practice Questions"/*.html 2>/dev/null | wc -l`
+under `set -euo pipefail`. When the subdirectory is absent (e.g. `AP CSA` has
+only `Study Guides/`), `ls` exits 2, pipefail propagates, and the script
+aborts mid-iteration. Today `AP Calculus` prints, then iteration dies at
+`AP CSA` and the remaining subjects never list.
+
+**Workaround:** run `python -m http.server 8000` from repo root.
+**Fix:** guard each `ls`/`wc` pair with `[[ -d "$d/Practice Questions" ]]`,
+or use `shopt -s nullglob` + array length.
 
 ---
 
