@@ -58,7 +58,28 @@ bash scripts/screenshot.sh <file.html> [output.png]
 
 # Create new unit from template
 bash scripts/new-unit.sh "AP Subject" "Unit N Topic Name"
+
+# Regenerate index.html cards + hero chips from filesystem
+python scripts/build-index.py
 ```
+
+## Adding a New Unit
+
+Each Study Guide HTML's `<title>` tag is the source of truth for card text:
+
+```html
+<title>{Subject Long} — {Prefix}: {Topic} | Dingrui Scholars</title>
+```
+
+Examples:
+- `AP Physics C: Mechanics — Unit 1: Kinematics | Dingrui Scholars`
+- `IB Chemistry — Structure 1: Models of the Particulate Nature of Matter | Dingrui Scholars`
+- `IB Math AA HL — Unit A1: Sequences & Series | Dingrui Scholars`
+
+To add a new unit:
+1. Drop the HTML into `<Subject>/Study Guides/` with a conformant `<title>` tag.
+2. Run `python scripts/build-index.py` — index.html cards and hero chip
+   counts regenerate automatically. The script is idempotent.
 
 ## When Modifying HTML Products
 1. Read the target file fully before making changes
