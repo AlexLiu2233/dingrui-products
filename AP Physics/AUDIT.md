@@ -46,6 +46,22 @@ logged as DP-7 / DP-8 / DP-9 / DP-10.
 | ~~**S6-3**~~ | ~~Trim `ux-widget` `uxXpos` probe slider + 4 probe cards~~ | P0 | ✅ closed — `4c2ef7f` |
 | ~~**S6-4**~~ | ~~Trim `spring-energy-widget` `sprF` slider + Friction Loss / Efficiency cards~~ | P0 | ✅ closed — `c220b3c` |
 
+**Sprint 7 closed 2026-05-13** — un-deferred the S4-3 answer-key
+companion product. All seven `Unit_N_<topic>_Solutions.html` files
+shipped to `AP Physics/Practice Questions/Solutions/`. CSS-only
+readability polish applied uniformly across the set.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S7-1**~~ | ~~U1 Kinematics solutions companion (preview)~~ | P1 | ✅ closed — `3432575` |
+| ~~**S7-2**~~ | ~~U2 Force &amp; Translational Dynamics solutions~~ | P1 | ✅ closed — `dd22332` |
+| ~~**S7-3**~~ | ~~U3 Work, Energy &amp; Power solutions~~ | P1 | ✅ closed — `ea64006` |
+| ~~**S7-4**~~ | ~~U4 Linear Momentum solutions~~ | P1 | ✅ closed — `b70c9de` |
+| ~~**S7-5**~~ | ~~U5 Torque &amp; Rotational Dynamics solutions~~ | P1 | ✅ closed — `7ba11eb` |
+| ~~**S7-6**~~ | ~~U6 Energy &amp; Momentum of Rotating Systems solutions~~ | P1 | ✅ closed — `3d87377` |
+| ~~**S7-7**~~ | ~~U7 Oscillations solutions~~ | P1 | ✅ closed — `dfdface` |
+| ~~**S7-P**~~ | ~~Readability polish: tighten `.solution` CSS across U1–U4~~ | P1 | ✅ closed — `0638370` |
+
 **Sprint 5** (S5-1 PDF render) remains tooling-ready on `main` —
 `scripts/render-practice-pdfs.sh` resolves a Chrome/Edge binary and
 renders each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
@@ -54,7 +70,7 @@ distribution PDFs are verified.
 
 No active sprint right now. Backlog candidates: P2-1 (E&M expansion),
 P2-2 (cross-unit spaced-review deck), P1-5 (JSXGraph in U1–U4
-opportunity).
+opportunity), P1-6 (U6 practice FRQ 3 bullet-speed fix — see below).
 
 ---
 
@@ -345,6 +361,31 @@ Not a defect — §3 lists it as optional — but worth flagging that any future
 "add an interactive proof" task should consider adding JSXGraph to Units 1–4
 where appropriate. **Action:** track as opportunity, not a blocker.
 
+### P1-6 — U6 practice FRQ 3 bullet speed makes the question ill-posed
+
+**Status:** Open (logged 2026-05-13 during Sprint 7 solutions write-up).
+**Where:** `AP Physics/Practice Questions/Unit_6_Energy_and_Momentum_of_Rotating_Systems_Practice_Problems.html`,
+FRQ 3 ("bullet-into-pivoted-rod, find max swing angle from vertical").
+
+The stated bullet speed $v_0 = 200~\mathrm{m/s}$ delivers a post-collision
+rotational KE of roughly $43~\mathrm{J}$, which is about $10\times$ the
+maximum gravitational-PE barrier ($\approx 4.2~\mathrm{J}$) for the
+rod-plus-bullet system to swing past vertical. With the given parameters
+the system therefore rotates full circle rather than momentarily stopping,
+so "the maximum angle $\theta$ from the vertical that the rod-plus-bullet
+swings up before momentarily stopping" has no finite answer.
+
+The Sprint 7 solutions file (`Unit_6_..._Solutions.html`, FRQ 3 part (c))
+flags this with a yellow callout and notes that $v_0 \sim 20~\mathrm{m/s}$
+would make the question well-posed ($\theta_\text{max} \approx 37^\circ$).
+
+**Action:** edit the practice file (and Solutions companion) to drop $v_0$
+from $200$ to $\sim 20~\mathrm{m/s}$ (or restate the prompt to ask "how many
+full rotations does the system complete before its KE first equals zero
+under air drag," etc.). Tier P1 because the question still teaches
+angular-momentum + energy reasoning; only the final part returns a
+nonsensical value.
+
 ---
 
 ## Sprint 4 — Practice Questions (in flight)
@@ -359,7 +400,7 @@ full conventions and per-unit index.
 |---|---|---|
 | ~~S4-1~~ | Bring Unit 1 from 14 MC → 18 MC | ✅ Closed — added Q15 (1.4 relative motion, EASY), Q16 (1.2 sign analysis, MED), Q17 (1.5 simultaneous-fall conceptual, MED), Q18 (1.5 cliff-launch impact speed via energy, HARD). Difficulty mix balanced (4 EASY / 9 MED / 5 HARD). |
 | ~~S4-2~~ | Draft Units 2–7 practice files | ✅ **Closed 2026-05-07** — all six units (U2 → U7) shipped at 18 MC + 4 FRQ each, full topic coverage, locked S4-3/S4-4 conventions throughout. Total: 126 MC + 28 FRQ across U1–U7. |
-| ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers. Matches AP Calculus house style (verified: AP Calculus practice files contain no `<details>` reveals or answer markers). If teacher answer keys are needed later, they ship as a separate `Unit_N_*_Answer_Key.html` companion file — deferred until classroom demand. |
+| ~~S4-3~~ | Decide answer-key format | ✅ Locked: **question-only**, no embedded answers in the practice files. The companion product was un-deferred and shipped in Sprint 7 as `Unit_N_<topic>_Solutions.html` under `Practice Questions/Solutions/` (full worked solutions; MC correct-letter highlighted + 1–3-sentence rationale; FRQ step-math walkthroughs). |
 | ~~S4-4~~ | Lock unit-typography convention | ✅ Locked: `\mathrm{...}` for unit composition, `~` for value/unit tying. Documented in `Practice Questions/README.md` "Locked conventions" section. |
 | ~~S4-5~~ | Promoted to Sprint 5 as **S5-1** | See Active Sprint table above; tooling staged in `scripts/render-practice-pdfs.sh`. |
 
@@ -445,19 +486,14 @@ file URI via `pathlib.Path.as_uri()` instead of concatenating `file://` with
 The Python-based URI emits the correct `file:///C:/Users/...` form across
 platforms. Surfaced when capturing Sprint 6 before-screenshots.
 
-### I-2 — `serve.sh` exits when a subject has only one of Study Guides/Practice Questions
+### ~~I-2~~ — `serve.sh` exits when a subject has only one of Study Guides/Practice Questions
 
-**Status:** Open (logged 2026-05-11 during Sprint 5 walkthrough). **Tier:** P1.
-
-`scripts/serve.sh` uses `ls -1 "$d/Practice Questions"/*.html 2>/dev/null | wc -l`
-under `set -euo pipefail`. When the subdirectory is absent (e.g. `AP CSA` has
-only `Study Guides/`), `ls` exits 2, pipefail propagates, and the script
-aborts mid-iteration. Today `AP Calculus` prints, then iteration dies at
-`AP CSA` and the remaining subjects never list.
-
-**Workaround:** run `python -m http.server 8000` from repo root.
-**Fix:** guard each `ls`/`wc` pair with `[[ -d "$d/Practice Questions" ]]`,
-or use `shopt -s nullglob` + array length.
+**Status:** ✅ Resolved 2026-05-13. Replaced the `ls ... | wc -l` pipeline
+with `shopt -s nullglob` arrays so a missing or empty subfolder contributes
+zero files (instead of `ls` exit-2 propagating through pipefail and killing
+the script). Bonus: the new loop also enumerates `Practice Questions/Solutions/`,
+which the previous version didn't surface at all. `bash serve.sh` now lists
+all 5 subjects (previously stopped at AP CSA).
 
 ---
 
