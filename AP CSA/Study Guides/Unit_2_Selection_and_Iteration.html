@@ -363,6 +363,7 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
   <a href="#s2-10">2.10 String Algorithms</a>
   <a href="#s2-11">2.11 Nested Iteration</a>
   <a href="#s2-12">2.12 Run-Time Analysis</a>
+  <a href="#mcq-patterns">MCQ Patterns</a>
   <a href="#flashcards">Flashcards</a>
   <a href="#unit-quiz">Unit Quiz</a>
 </aside>
@@ -529,6 +530,23 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     With <code>||</code>, if the first operand is <code>true</code>, the second is skipped.
     This is important when the second expression could cause an error (e.g., null check).
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Short-circuit guards against NullPointerException</div>
+<pre><span class="ty">String</span> s = <span class="kw">null</span>;
+
+<span class="cm">// Wrong order: s.length() runs first, throws NullPointerException</span>
+<span class="kw">if</span> (s.<span class="fn">length</span>() &gt; <span class="num">0</span> &amp;&amp; s != <span class="kw">null</span>) { ... }
+
+<span class="cm">// Correct order: null check first, short-circuit skips s.length()</span>
+<span class="kw">if</span> (s != <span class="kw">null</span> &amp;&amp; s.<span class="fn">length</span>() &gt; <span class="num">0</span>) { ... }</pre>
+    <p style="margin-top:10px"><strong>Why this matters on the exam:</strong> AP MCQs love to put the null check second, so the dangerous method call happens first. Short-circuit evaluation only saves you if the guard is on the left side of <code>&amp;&amp;</code>. Same idea with <code>||</code>: put the "safe" condition that can short-circuit out the dangerous one on the left.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Operator precedence inside if-conditions</strong>
+    <code>!</code> binds tightest, then <code>&amp;&amp;</code>, then <code>||</code>. So <code>a || b &amp;&amp; c</code> is read as <code>a || (b &amp;&amp; c)</code>, not <code>(a || b) &amp;&amp; c</code>. When in doubt, add parentheses. The AP rubric does not subtract points for "redundant" parentheses, but it does subtract for wrong groupings.
+  </div>
 </section>
 
 <hr class="sep">
@@ -577,6 +595,22 @@ a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</sp
     <div class="quiz-explain correct-exp">Correct! By De Morgan's: negate each condition and flip &amp;&amp; to ||. <code>!(x&gt;5)</code> → <code>x&lt;=5</code>, <code>!(y&lt;3)</code> → <code>y&gt;=3</code>, and <code>&amp;&amp;</code> → <code>||</code>.</div>
     <div class="quiz-explain wrong-exp">Apply De Morgan's: negate each part and flip the operator. <code>!(x&gt;5 &amp;&amp; y&lt;3)</code> = <code>x&lt;=5 || y&gt;=3</code>.</div>
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Negating a compound condition</div>
+    <p>You want the opposite of "the student passed AND submitted on time".</p>
+<pre><span class="cm">// Original</span>
+passed &amp;&amp; onTime
+
+<span class="cm">// Negated (apply De Morgan: flip &amp;&amp; to ||, negate each side)</span>
+!passed || !onTime</pre>
+    <p style="margin-top:10px">Read aloud: "the student failed OR was late". That matches your intuition for the opposite of "passed AND on time". If it doesn't match intuition, you probably flipped the operator without negating the operands (or vice versa).</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Negating relational operators</strong>
+    The negation of <code>x &gt; 5</code> is <code>x &lt;= 5</code>, not <code>x &lt; 5</code>. Always include the boundary value in the negation. Same logic: <code>!(x == 5)</code> becomes <code>x != 5</code>; <code>!(x &gt;= 5)</code> becomes <code>x &lt; 5</code>. Drop the "or equal" half exactly once per flip.
+  </div>
 </section>
 
 <hr class="sep">
@@ -608,6 +642,32 @@ a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</sp
   <div class="concept-box orange">
     <strong>Off-by-One Errors</strong>
     Using <code>&lt;</code> vs <code>&lt;=</code> (or starting at 0 vs 1) can cause a loop to run one time too many or too few. Trace carefully!
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Tracing a while loop</div>
+<pre><span class="ty">int</span> n = <span class="num">20</span>;
+<span class="ty">int</span> count = <span class="num">0</span>;
+<span class="kw">while</span> (n &gt; <span class="num">1</span>) {
+    n /= <span class="num">2</span>;
+    count++;
+}
+<span class="cm">// What is count?</span></pre>
+    <p style="margin-top:10px"><strong>Trace it:</strong></p>
+    <table>
+      <tr><th>Iteration</th><th><code>n</code> before body</th><th><code>n</code> after <code>n/=2</code></th><th><code>count</code> after</th></tr>
+      <tr><td>1</td><td>20</td><td>10</td><td>1</td></tr>
+      <tr><td>2</td><td>10</td><td>5</td><td>2</td></tr>
+      <tr><td>3</td><td>5</td><td>2</td><td>3</td></tr>
+      <tr><td>4</td><td>2</td><td>1</td><td>4</td></tr>
+      <tr><td>(check)</td><td>1</td><td>(loop exits, 1 &gt; 1 is false)</td><td>4</td></tr>
+    </table>
+    <p style="margin-top:10px">Final answer: <code>count = 4</code>. This is essentially counting how many times you can halve <code>n</code> until it drops to 1, which is roughly <code>log<sub>2</sub>(n)</code>. A common AP pattern.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Reading the variable's value at the wrong moment</strong>
+    When tracing a loop, distinguish "value at the start of iteration" from "value after the body". The condition is checked at the <em>start</em> of each pass, using the value from the end of the previous pass. Forgetting this is the most common source of off-by-one mistakes in MCQ traces.
   </div>
 </section>
 
@@ -656,6 +716,21 @@ a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</sp
     </div>
     <div class="quiz-explain correct-exp">Correct! i starts at 3 and runs while i &lt; 8, so it takes values 3, 4, 5, 6, 7 → 5 iterations.</div>
     <div class="quiz-explain wrong-exp">Count: 3, 4, 5, 6, 7 (stops before 8 because condition is &lt; not &lt;=). That's 5 iterations.</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Final value of a loop variable</div>
+<pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    <span class="cm">// body runs with i = 0, 1, 2, 3, 4</span>
+}
+<span class="cm">// after the loop, i = 5  (but only if i was declared OUTSIDE the for header)</span></pre>
+    <p style="margin-top:10px">The update step runs after every iteration, including the one that fails the condition. So <code>i</code> reaches the first value that makes the condition false. With <code>i &lt; 5</code>, that's <code>i = 5</code>. With <code>i &lt;= 5</code>, it's <code>i = 6</code>.</p>
+    <p style="margin-top:8px"><strong>Catch:</strong> when <code>i</code> is declared inside the for header (<code>for (int i = 0; ...)</code>), it goes out of scope when the loop ends, and you can't read its final value. Declare <code>i</code> outside the header if you need it afterward.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Iteration count formulas</strong>
+    For <code>for (int i = a; i &lt; b; i++)</code> with <code>a &lt; b</code>: iteration count is <code>b - a</code>. For <code>i &lt;= b</code>: count is <code>b - a + 1</code>. For <code>i += step</code>: count is <code>ceil((b - a) / step)</code>. Memorising the closed-form is faster than tracing the full loop on a timed MCQ.
   </div>
 </section>
 
@@ -756,6 +831,27 @@ a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</sp
     <strong>Counting Iterations</strong>
     If the outer loop runs <em>m</em> times and the inner loop runs <em>n</em> times, the inner body executes <strong>m × n</strong> times total. Above: 3 × 4 = 12 stars.
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: When the inner loop depends on the outer index</div>
+<pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">4</span>; i++) {
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="num">1</span>; j &lt;= i; j++) {
+        <span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"*"</span>);
+    }
+    <span class="ty">System</span>.out.<span class="fn">println</span>();
+}</pre>
+    <p style="margin-top:10px"><strong>Output:</strong></p>
+<pre>*
+**
+***
+****</pre>
+    <p style="margin-top:10px">When <code>j</code>'s upper bound depends on <code>i</code>, you can't use the <code>m × n</code> shortcut. Total stars: <code>1 + 2 + 3 + 4 = 10</code>, not <code>4 × 4 = 16</code>. The shortcut only works when the inner loop bounds are constant across outer iterations.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Print vs println in nested loops</strong>
+    The newline behaviour is the most common nested-loop MCQ trap. <code>println</code> after the inner loop produces a row-and-column grid; <code>println</code> inside the inner loop puts each star on its own line; missing the <code>println</code> entirely produces one long row. Re-read where the newlines actually fall before picking an answer.
+  </div>
 </section>
 
 <hr class="sep">
@@ -793,6 +889,45 @@ a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</sp
     </div>
     <div class="quiz-explain correct-exp">Correct! 4 × 4 = 16 total executions of the inner print statement.</div>
     <div class="quiz-explain wrong-exp">Nested loops: outer runs 4 times, inner runs 4 times each → 4 × 4 = 16.</div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ MCQ PATTERNS PREVIEW ═══════════════ -->
+<section class="section" id="mcq-patterns">
+  <div class="section-label">AP MCQ Preview</div>
+  <h2>Unit 2 MCQ Patterns That Show Up Every Year</h2>
+  <p>Unit 2 is the most-tested unit on the AP CSA MCQ section. Most questions fall into a handful of recurring shapes. Recognising the shape first lets you trace less and answer faster.</p>
+
+  <div class="concept-box">
+    <strong>Pattern 1: Iteration counting (closed form vs trace)</strong>
+    The question gives a for-loop header and asks how many times the body runs. For <code>i &lt; b</code> starting at <code>a</code>, the count is <code>b - a</code>. For <code>i &lt;= b</code>, it's <code>b - a + 1</code>. For <code>i += step</code>, count is <code>ceil((b - a) / step)</code>. Skip the trace if you can spot the form. (See Topic 2.8.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 2: Short-circuit and null safety</strong>
+    Compound conditions with a null guard. The correct AP answer always has the null check on the left of <code>&amp;&amp;</code> (or the "safe" condition that short-circuits). Order-of-operands MCQs are common. (See Topic 2.5.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 3: De Morgan's transforms</strong>
+    "Which expression is equivalent to <code>!(...)</code>?" The mechanical answer: flip <code>&amp;&amp;</code> ↔ <code>||</code> and negate each operand. Watch the relational flips: <code>!(x &gt; 5)</code> is <code>x &lt;= 5</code>, not <code>x &lt; 5</code>. (See Topic 2.6.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 4: Nested loop with dependent inner bound</strong>
+    Inner loop runs <code>j ≤ i</code> or <code>j &lt; n - i</code>. Total iterations form a triangular sum (<code>1 + 2 + ... + n = n(n+1)/2</code>) or a reversed triangle. The <code>m × n</code> shortcut does not apply. (See Topic 2.11.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 5: Off-by-one boundary picking</strong>
+    Two answer choices differ only by <code>&lt;</code> vs <code>&lt;=</code>. Trace the boundary cases: what happens at the first and last value? The "correct" formula usually pairs with the inclusive or exclusive endpoint of the problem statement. (See Topic 2.7.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 6: Trace-the-output for nested print/println</strong>
+    Where the newlines fall determines whether you see a triangle, a square, or a single long line. Mark every <code>println</code> with a forced line break and trace iteration by iteration. (See Topic 2.11.)
   </div>
 </section>
 
