@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 2: Selection and Iteration — AP-Style Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style data-theme="light">
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --mc-bg:#ECECEE;   --mc-ink:#333;      --mc-rule:#9A9A9A;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.mc{background:var(--mc-bg);color:var(--mc-ink);border-color:var(--mc-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  .topics-line .scope{display:inline-block;background:#EFE9E4;color:#4A3A2A;border:1px solid #B5A68F;border-radius:3px;padding:1px 8px;font-size:9pt;font-weight:700;letter-spacing:.1em;margin-left:6px;vertical-align:1px;}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;margin:4px 0 22px;color:#222;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .draft-banner{font-family:'Source Sans 3',sans-serif;font-size:9.5pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:12px 18px 14px;margin-bottom:16px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11.5pt;line-height:1.5;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 10px;}
+  .opts{list-style:none;margin:8px 0 0 12px;padding:0;}
+  .opts li{padding:3px 0;margin-bottom:3px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+  code{font-family:'JetBrains Mono',monospace;font-size:0.95em;}
+  pre{font-family:'JetBrains Mono',monospace;font-size:10.5pt;line-height:1.5;background:#F8F6F1;border:1px solid #DDD0C8;border-radius:4px;padding:10px 14px;margin:8px 0;overflow-x:auto;}
+  pre code{font-size:inherit;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media (max-width: 600px){body{font-size:10.5pt;}.opts.cols2{grid-template-columns:1fr;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.opts.cols2{grid-template-columns:1fr 1fr;}.draft-banner{display:none;}pre{background:#f5f5f0;}}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="brand">A&nbsp;P&nbsp;&nbsp;C&nbsp;O&nbsp;M&nbsp;P&nbsp;U&nbsp;T&nbsp;E&nbsp;R&nbsp;&nbsp;S&nbsp;C&nbsp;I&nbsp;E&nbsp;N&nbsp;C&nbsp;E&nbsp;&nbsp;A</div>
+<div class="chapter-tag">Unit 2 · Selection and Iteration</div>
+<h1 class="chapter-title">Selection and Iteration</h1>
+<p class="chapter-sub">AP-Style MC Practice Questions</p>
+<div class="legend">
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+  <span class="pill mc">AP MC</span>
+</div>
+<p class="topics-line">Unit <b>2: Selection and Iteration</b><span class="scope">CSA</span></p>
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
+<p class="draft-banner">Draft v1 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); code-trace heavy with realistic distractors. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
+
+<!-- ════════════════════════════════ MULTIPLE CHOICE ════════════════════════════════ -->
+<div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">15 questions · ~34 min at exam pace</span></div>
+<h2 class="section-head">Multiple Choice</h2>
+<p class="instructions">Choose the best of the four options. Assume all referenced classes and methods are imported / available unless otherwise stated. "Consider the following code segment" implies the code compiles and runs without exception unless the question states otherwise.</p>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q1</span><span class="pill med">MEDIUM</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.5 Short-Circuit &amp;&amp;</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int x = 0;
+if (x != 0 &amp;&amp; 10 / x &gt; 0) {
+  System.out.println("yes");
+} else {
+  System.out.println("no");
+}</code></pre>
+    <p>What is the result of executing the code segment?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>yes</code> is printed.</li>
+      <li><span class="lbl">(B)</span> <code>no</code> is printed.</li>
+      <li><span class="lbl">(C)</span> An <code>ArithmeticException</code> is thrown (division by zero).</li>
+      <li><span class="lbl">(D)</span> A compile-time error occurs.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q2</span><span class="pill med">MEDIUM</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.8 for Loop Count</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int count = 0;
+for (int i = 5; i &lt;= 20; i += 3) {
+  count++;
+}
+System.out.println(count);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>5</code></li>
+      <li><span class="lbl">(B)</span> <code>6</code></li>
+      <li><span class="lbl">(C)</span> <code>7</code></li>
+      <li><span class="lbl">(D)</span> <code>15</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.6 De Morgan's Law</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Which of the following expressions is logically equivalent to <code>!(a &lt; b || c &gt;= d)</code>?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>a &gt; b &amp;&amp; c &lt; d</code></li>
+      <li><span class="lbl">(B)</span> <code>a &gt;= b &amp;&amp; c &lt; d</code></li>
+      <li><span class="lbl">(C)</span> <code>a &gt;= b || c &lt; d</code></li>
+      <li><span class="lbl">(D)</span> <code>a &gt; b || c &lt; d</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q4</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.4 Nested if Trace</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int x = 15;
+if (x &gt; 10) {
+  if (x % 2 == 0) {
+    System.out.print("A");
+  } else {
+    System.out.print("B");
+  }
+} else if (x &gt; 5) {
+  System.out.print("C");
+}
+System.out.println("D");</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>AD</code></li>
+      <li><span class="lbl">(B)</span> <code>BD</code></li>
+      <li><span class="lbl">(C)</span> <code>BCD</code></li>
+      <li><span class="lbl">(D)</span> <code>D</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q5</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.9 Digit Sum</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int n = 234;
+int s = 0;
+while (n &gt; 0) {
+  s += n % 10;
+  n /= 10;
+}
+System.out.println(s);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>6</code></li>
+      <li><span class="lbl">(B)</span> <code>9</code></li>
+      <li><span class="lbl">(C)</span> <code>234</code></li>
+      <li><span class="lbl">(D)</span> <code>432</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q6</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.10 String Traverse — Case Trap</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>String s = "ProgrAmming";
+int count = 0;
+for (int i = 0; i &lt; s.length(); i++) {
+  char c = s.charAt(i);
+  if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+    count++;
+  }
+}
+System.out.println(count);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>1</code></li>
+      <li><span class="lbl">(B)</span> <code>2</code></li>
+      <li><span class="lbl">(C)</span> <code>3</code></li>
+      <li><span class="lbl">(D)</span> <code>4</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q7</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.8 Off-by-One Loop Bounds</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider a <code>String s</code> with <code>s.length() &gt; 0</code>. Which of the following loop headers visit every index from <code>0</code> to <code>s.length() - 1</code> exactly once?</p>
+    <ul style="margin: 6px 0 8px 22px; line-height: 1.7;">
+      <li>I. <code>for (int i = 0; i &lt; s.length(); i++)</code></li>
+      <li>II. <code>for (int i = 0; i &lt;= s.length() - 1; i++)</code></li>
+      <li>III. <code>for (int i = 0; i &lt;= s.length(); i++)</code></li>
+    </ul>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> I only</li>
+      <li><span class="lbl">(B)</span> I and II only</li>
+      <li><span class="lbl">(C)</span> I and III only</li>
+      <li><span class="lbl">(D)</span> I, II, and III</li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.11 Nested Loop Count</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int count = 0;
+for (int i = 1; i &lt;= 4; i++) {
+  for (int j = 1; j &lt;= i; j++) {
+    count++;
+  }
+}
+System.out.println(count);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>10</code></li>
+      <li><span class="lbl">(C)</span> <code>16</code></li>
+      <li><span class="lbl">(D)</span> <code>24</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q9</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.9 Reverse Digits</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int n = 1234;
+int rev = 0;
+while (n &gt; 0) {
+  rev = rev * 10 + n % 10;
+  n /= 10;
+}
+System.out.println(rev);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>1234</code></li>
+      <li><span class="lbl">(B)</span> <code>4321</code></li>
+      <li><span class="lbl">(C)</span> <code>432</code></li>
+      <li><span class="lbl">(D)</span> <code>4320</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q10</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.7 while Compound Condition</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int x = 10;
+int y = 0;
+while (x &gt; 0 &amp;&amp; y &lt; 5) {
+  x -= 2;
+  y++;
+}
+System.out.println(x + " " + y);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0 5</code></li>
+      <li><span class="lbl">(B)</span> <code>-2 6</code></li>
+      <li><span class="lbl">(C)</span> <code>10 0</code></li>
+      <li><span class="lbl">(D)</span> <code>2 4</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q11</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.7 while Threshold</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int n = 0;
+int p = 1;
+while (p &lt; 1000) {
+  p *= 2;
+  n++;
+}
+System.out.println(n);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>9</code></li>
+      <li><span class="lbl">(B)</span> <code>10</code></li>
+      <li><span class="lbl">(C)</span> <code>1000</code></li>
+      <li><span class="lbl">(D)</span> <code>1024</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q12</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.8 Decrementing for</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int sum = 0;
+for (int i = 10; i &gt; 0; i -= 2) {
+  sum += i;
+}
+System.out.println(sum);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>25</code></li>
+      <li><span class="lbl">(B)</span> <code>30</code></li>
+      <li><span class="lbl">(C)</span> <code>36</code></li>
+      <li><span class="lbl">(D)</span> <code>55</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q13</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.5 Boolean Simplification</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider <code>boolean p</code> and <code>boolean q</code>. Which of the following expressions is logically equivalent to <code>(p &amp;&amp; !q) || (p &amp;&amp; q)</code> for all values of <code>p</code> and <code>q</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>p</code></li>
+      <li><span class="lbl">(B)</span> <code>q</code></li>
+      <li><span class="lbl">(C)</span> <code>p &amp;&amp; q</code></li>
+      <li><span class="lbl">(D)</span> <code>p || q</code></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q14</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.11 Nested Loop Pattern</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>for (int i = 1; i &lt;= 3; i++) {
+  for (int j = 0; j &lt; i; j++) {
+    System.out.print("*");
+  }
+  System.out.println();
+}</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
+**
+***</code></pre></li>
+      <li><span class="lbl">(B)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
+**
+*</code></pre></li>
+      <li><span class="lbl">(C)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
+***
+***</code></pre></li>
+      <li><span class="lbl">(D)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
+*
+*</code></pre></li>
+    </ul>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q15</span><span class="pill hard">HARD</span>
+    <span class="pill mc">AP MC</span>
+    <span class="pill topic">2.7 Odd Sum</span>
+    <span class="pill marks">[1]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int i = 1;
+int sum = 0;
+while (i &lt; 10) {
+  sum += i;
+  i += 2;
+}
+System.out.println(sum);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>20</code></li>
+      <li><span class="lbl">(B)</span> <code>25</code></li>
+      <li><span class="lbl">(C)</span> <code>36</code></li>
+      <li><span class="lbl">(D)</span> <code>45</code></li>
+    </ul>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 2 Practice (Draft v1 · exam-level)</span>
+  <span>Page · Unit 2</span>
+</footer>
+
+</body>
+</html>

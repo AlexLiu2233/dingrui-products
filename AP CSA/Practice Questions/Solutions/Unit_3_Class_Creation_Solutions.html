@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 3: Class Creation — Solutions | Dingrui Scholars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style data-theme="light">
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --mc-bg:#ECECEE;   --mc-ink:#333;      --mc-rule:#9A9A9A;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+    --sol-bg:#F1F7EE;  --sol-rule:#5E8E47;  --sol-ink:#2F4E1E;
+    --sol-accent:#3E7228;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.mc{background:var(--mc-bg);color:var(--mc-ink);border-color:var(--mc-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  .topics-line .scope{display:inline-block;background:#EFE9E4;color:#4A3A2A;border:1px solid #B5A68F;border-radius:3px;padding:1px 8px;font-size:9pt;font-weight:700;letter-spacing:.1em;margin-left:6px;vertical-align:1px;}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:14px 20px 4px;margin-bottom:22px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11.5pt;line-height:1.55;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 12px;}
+  .opts{list-style:none;margin:10px 0 0 12px;padding:0;}
+  .opts li{padding:4px 0;margin-bottom:4px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts li.correct .lbl{color:var(--sol-accent);}
+  .opts li.correct{background:var(--sol-bg);border-radius:4px;padding:4px 8px;margin-left:-6px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+  code{font-family:'JetBrains Mono',monospace;font-size:0.95em;}
+  pre{font-family:'JetBrains Mono',monospace;font-size:10.5pt;line-height:1.5;background:#F8F6F1;border:1px solid #DDD0C8;border-radius:4px;padding:10px 14px;margin:8px 0;overflow-x:auto;}
+  pre code{font-size:inherit;}
+  .solution{margin:18px 0 22px;background:var(--sol-bg);border-left:3px solid var(--sol-rule);border-radius:0 4px 4px 0;padding:14px 18px 16px;font-size:11pt;line-height:1.65;}
+  .solution .answer-line{font-family:'Source Sans 3',sans-serif;font-weight:700;color:var(--sol-ink);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #d4e4cb;letter-spacing:.06em;font-size:11.5pt;}
+  .solution .answer-line .ans{color:var(--sol-accent);font-size:1.15em;letter-spacing:.1em;}
+  .solution .rationale{color:#2a2a2a;}
+  .solution .rationale p{margin:5px 0;}
+  .solution pre{background:#EFF5EB;border-color:#cfe0c5;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media (max-width: 600px){body{font-size:10.5pt;}.opts.cols2{grid-template-columns:1fr;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.opts.cols2{grid-template-columns:1fr 1fr;}pre{background:#f5f5f0;}}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="brand">A&nbsp;P&nbsp;&nbsp;C&nbsp;O&nbsp;M&nbsp;P&nbsp;U&nbsp;T&nbsp;E&nbsp;R&nbsp;&nbsp;S&nbsp;C&nbsp;I&nbsp;E&nbsp;N&nbsp;C&nbsp;E&nbsp;&nbsp;A</div>
+<div class="chapter-tag">Unit 3 · Solutions</div>
+<h1 class="chapter-title">Class Creation — Solutions</h1>
+<p class="chapter-sub">Companion to the AP-Style MC Practice Set</p>
+<div class="legend">
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+  <span class="pill mc">AP MC</span>
+</div>
+<p class="topics-line">Unit <b>3: Class Creation</b><span class="scope">CSA</span></p>
+<hr class="thick"><hr class="thin">
+
+<div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">Worked Answers</span></div>
+<h2 class="section-head">Multiple Choice — Worked Answers</h2>
+<p class="instructions">Each item restates the prompt and choices, marks the correct letter, and gives a brief justification. Trap distractors are called out where useful.</p>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q1</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">this Keyword</span></div>
+  <div class="q-body">
+    <p class="prompt">What does <code>this.size = size;</code> do in the constructor?</p>
+    <ul class="opts cols1">
+      <li class="correct"><span class="lbl">(A)</span> Assigns the parameter <code>size</code> to the instance variable <code>size</code>.</li>
+      <li><span class="lbl">(B)</span> Assigns the parameter to itself.</li>
+      <li><span class="lbl">(C)</span> Compile-time error.</li>
+      <li><span class="lbl">(D)</span> Creates a discarded local.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      When a parameter <em>shadows</em> an instance variable (same name in scope), an unqualified <code>size</code> refers to the parameter. The prefix <code>this.</code> reaches past the parameter and refers explicitly to the <strong>instance variable</strong> of the current object.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>Left of <code>=</code>: <code>this.size</code> → instance variable.</li>
+        <li>Right of <code>=</code>: bare <code>size</code> → parameter.</li>
+      </ul>
+      <strong>Compare with Q6:</strong> writing <code>size = size;</code> (no <code>this.</code>) self-assigns the parameter and leaves the field at its default value.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q2</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">static Variables</span></div>
+  <div class="q-body">
+    <p class="prompt">Which statement about a <code>static</code> variable is true?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Each instance has its own copy.</li>
+      <li><span class="lbl">(B)</span> Auto-initialized to <code>null</code> regardless of type.</li>
+      <li class="correct"><span class="lbl">(C)</span> A single copy is shared by all instances.</li>
+      <li><span class="lbl">(D)</span> Read-only after initialization.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      <code>static</code> binds the variable to the <em>class</em>, not to any individual instance. All instances share the same single storage location.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>Access from outside: <code>ClassName.varName</code>.</li>
+        <li>Default initialization follows the type (numerics get <code>0</code>, <code>boolean</code> gets <code>false</code>, references get <code>null</code>) — <strong>not</strong> "<code>null</code> regardless of type."</li>
+        <li>Reassignment is allowed unless declared <code>final</code>.</li>
+      </ul>
+      Use case: counters that span all instances (see Q5), shared constants, factory helpers.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">Default Constructor</span></div>
+  <div class="q-body">
+    <p class="prompt">A class with no declared constructors:</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Cannot be instantiated.</li>
+      <li class="correct"><span class="lbl">(B)</span> Receives a default no-arg constructor.</li>
+      <li><span class="lbl">(C)</span> Fails to compile.</li>
+      <li><span class="lbl">(D)</span> Is implicitly a static utility class.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      The compiler synthesizes a public no-argument constructor with an empty body — i.e. <code>public Foo() {}</code> — so <code>new Foo()</code> works and instance variables fall back to their type defaults.
+      <p><strong>Important caveat:</strong> as soon as you declare <em>any</em> explicit constructor (e.g. <code>public Foo(int x)</code>), the compiler will <strong>no longer</strong> supply the no-arg default. <code>new Foo()</code> then becomes a compile-time error unless you write the no-arg form yourself. This is a common AP trap.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Object Reference Param</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>bump(k); bump(k); println(k.getCount());</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0</code></li>
+      <li><span class="lbl">(B)</span> <code>1</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>2</code></li>
+      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      In Java, parameters are passed by value — but for object types, the <em>reference</em> is what gets copied. The parameter <code>c</code> inside <code>bump</code> points to the <strong>same</strong> <code>Counter</code> object as <code>k</code> outside.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>First <code>bump(k)</code>: <code>c.inc()</code> mutates the shared object → <code>count = 1</code>.</li>
+        <li>Second <code>bump(k)</code>: same object → <code>count = 2</code>.</li>
+        <li><code>k.getCount()</code> → <code>2</code>.</li>
+      </ul>
+      <strong>Contrast with primitives</strong> (Q14): assigning to a primitive parameter does <em>not</em> affect the caller. The reference-vs-primitive distinction is the highest-yield Unit 3 topic on the AP exam.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">static Counter</span></div>
+  <div class="q-body">
+    <p class="prompt">Three <code>new Widget()</code> calls; print <code>Widget.total()</code>.</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>1</code></li>
+      <li><span class="lbl">(B)</span> <code>2</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>3</code></li>
+      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      <code>built</code> is <code>static</code> — one shared counter across the entire <code>Widget</code> class. Each call to the constructor increments it once:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>new Widget()</code> #1 → <code>built = 1</code> (discarded reference; the object exists)</li>
+        <li><code>new Widget()</code> #2 → <code>built = 2</code></li>
+        <li><code>new Widget()</code> #3 → <code>built = 3</code> (assigned to <code>w</code>)</li>
+      </ul>
+      <code>Widget.total()</code> returns <code>3</code>. <strong>Trap (B)</strong>: "I only stored one reference (<code>w</code>), so only one was constructed" — false. All three constructor calls execute regardless of whether you keep the reference. <strong>Trap (D)</strong>: a <code>static</code> method <em>can</em> access a <code>static</code> field — only <strong>instance</strong> fields are off-limits (see Q12).
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Missing this. Trap</span></div>
+  <div class="q-body">
+    <p class="prompt">Constructor body is <code>x = x;</code> (no <code>this.</code>); <code>new Point(7).getX()</code>?</p>
+    <ul class="opts cols2">
+      <li class="correct"><span class="lbl">(A)</span> <code>0</code></li>
+      <li><span class="lbl">(B)</span> <code>7</code></li>
+      <li><span class="lbl">(C)</span> <code>-1</code></li>
+      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      Inside the constructor, the parameter <code>x</code> shadows the instance variable <code>x</code>. Without the <code>this.</code> qualifier, <strong>both</strong> sides of <code>x = x;</code> refer to the parameter — it's a self-assignment of the parameter to itself.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>The instance variable <code>x</code> is <em>never touched</em>, so it keeps its default value <code>0</code>.</li>
+        <li><code>getX()</code> returns the instance variable → <code>0</code>.</li>
+      </ul>
+      Java <em>does</em> allow self-assignment without error, so <strong>(D)</strong> is wrong. Fix: write <code>this.x = x;</code> as in Q1. This bug is silent and embarrassingly common in beginner Java.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Constructor Chaining</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>public Box() { this(10); }</code> — <code>new Box().getSize()</code>?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>0</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>10</code></li>
+      <li><span class="lbl">(C)</span> Compile-time error: cross-constructor call not allowed.</li>
+      <li><span class="lbl">(D)</span> <code>StackOverflowError</code> from recursive constructor call.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>this(...)</code> as the <em>first statement</em> of a constructor invokes another constructor of the same class — this is legal "constructor chaining."
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>new Box()</code> enters the no-arg constructor.</li>
+        <li>It immediately delegates to <code>Box(10)</code> via <code>this(10)</code>.</li>
+        <li><code>Box(10)</code> sets <code>this.size = 10</code>.</li>
+        <li>Control returns; the object is fully constructed. <code>getSize()</code> → <code>10</code>.</li>
+      </ul>
+      <strong>Trap (D):</strong> the call is to a <em>different</em> constructor, not the same one — no recursion. <strong>Trap (C):</strong> cross-constructor calls are allowed; the rule is "must be the first statement."
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Mutator + Validation</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>deposit(100); deposit(-50); deposit(30); getBal()</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>80.0</code></li>
+      <li><span class="lbl">(B)</span> <code>100.0</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>130.0</code></li>
+      <li><span class="lbl">(D)</span> <code>180.0</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      <code>deposit</code> applies the change only if <code>amt &gt; 0</code>:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>deposit(100)</code>: <code>100 &gt; 0</code> ✓ → <code>bal = 100.0</code>.</li>
+        <li><code>deposit(-50)</code>: <code>-50 &gt; 0</code> ✗ → ignored.</li>
+        <li><code>deposit(30)</code>: <code>30 &gt; 0</code> ✓ → <code>bal = 130.0</code>.</li>
+      </ul>
+      <strong>Trap (A)</strong> assumes the negative is treated as a withdrawal: <code>100 − 50 + 30 = 80</code>. <strong>(D)</strong> takes the absolute value of every input: <code>100 + 50 + 30 = 180</code>. Both are valid <em>design</em> choices, but neither is what this code does.
+      <p>This input-validation pattern is a Unit 3 staple — the AP expects you to read the guard precisely.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Method Overload Resolution</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>square(3)</code> vs <code>square(3.0)</code> on overloaded methods.</p>
+    <ul class="opts cols1">
+      <li class="correct"><span class="lbl">(A)</span> <code>9</code> then <code>9.0</code></li>
+      <li><span class="lbl">(B)</span> <code>9.0</code> then <code>9.0</code></li>
+      <li><span class="lbl">(C)</span> <code>9</code> then <code>9</code></li>
+      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      Overload resolution picks the most specific matching signature at compile time, based on the static type of each argument.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>3</code> is an <code>int</code> literal → exact match for <code>square(int)</code> → returns <code>int 9</code> → printed as <code>9</code>.</li>
+        <li><code>3.0</code> is a <code>double</code> literal → exact match for <code>square(double)</code> → returns <code>double 9.0</code> → printed as <code>9.0</code>.</li>
+      </ul>
+      <strong>Trap (D):</strong> two methods <em>can</em> share a name as long as their parameter lists differ in number or type — this is overloading, not a conflict.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Object Equality</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>p == q</code> vs <code>p == r</code> where <code>r = p</code> and <code>q = new Pt(1,2)</code>.</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>true true</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>false true</code></li>
+      <li><span class="lbl">(C)</span> <code>true false</code></li>
+      <li><span class="lbl">(D)</span> <code>false false</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      The <code>==</code> operator on objects compares <em>references</em>, not contents.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>p</code> and <code>q</code> are made by separate <code>new Pt(...)</code> calls — different objects in memory, regardless of identical contents. <code>p == q</code> → <code>false</code>.</li>
+        <li><code>r = p</code> copies the reference, so <code>r</code> points to the same object. <code>p == r</code> → <code>true</code>.</li>
+      </ul>
+      <strong>Rule (Unit 1/3 carryover):</strong> for "do they have the same contents?" you'd override and use <code>.equals(...)</code>; <code>==</code> is "do they refer to literally the same instance?"
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Local Variable Shadows</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>drain()</code> redeclares <code>int level = 0;</code> locally — final <code>getLevel()</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>90</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>100</code></li>
+      <li><span class="lbl">(C)</span> <code>-10</code></li>
+      <li><span class="lbl">(D)</span> <code>0</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      The line <code>int level = 0;</code> declares a <strong>new local variable</strong> named <code>level</code> inside <code>drain()</code>. From that point in the method, any unqualified reference to <code>level</code> refers to the <em>local</em>, not the instance variable.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>Local <code>level</code>: <code>0</code> → <code>-10</code>. (Then disappears when <code>drain</code> returns.)</li>
+        <li>Instance <code>level</code>: untouched, still <code>100</code>.</li>
+      </ul>
+      <code>getLevel()</code> reads the instance field → <code>100</code>. <strong>Trap (A)</strong> assumes the mutation reaches the instance variable. To actually mutate the instance, drop the <code>int</code> declaration: <code>level -= 10;</code> alone would resolve to the instance variable (with no shadowing local).
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">static Accessing Instance</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>public static int getCount() { return count; }</code> where <code>count</code> is a non-static field.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Compiles and works.</li>
+      <li><span class="lbl">(B)</span> Compiles; returns <code>0</code>.</li>
+      <li class="correct"><span class="lbl">(C)</span> Compile-time error: non-static field cannot be referenced from a static context.</li>
+      <li><span class="lbl">(D)</span> Run-time <code>NullPointerException</code>.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      A <code>static</code> method is associated with the class, not an instance — so there is no implicit <code>this</code>. Inside it, an unqualified reference to a non-static field is ambiguous: "which instance's <code>count</code>?" The compiler refuses.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>Exact message: <em>non-static variable count cannot be referenced from a static context</em>.</li>
+        <li>Fix #1: make <code>count</code> static (one shared counter for the class — see Q5).</li>
+        <li>Fix #2: make <code>getCount()</code> non-static, so it has an implicit <code>this</code> to read from.</li>
+      </ul>
+      <strong>Trap (B):</strong> the field <em>has</em> a value (<code>0</code>), but the compiler won't even let the code reach run time.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Encapsulation Access</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>p.name = "Bob";</code> from outside <code>Person</code>, where <code>name</code> is <code>private</code>.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Compiles; sets <code>name</code>.</li>
+      <li><span class="lbl">(B)</span> Compiles; silently ignored.</li>
+      <li class="correct"><span class="lbl">(C)</span> Compile-time error: private access.</li>
+      <li><span class="lbl">(D)</span> Run-time <code>IllegalAccessException</code>.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      <code>private</code> restricts access to <em>within the same class declaration only</em> — not even other classes in the same package can read or write it directly. Attempting <code>p.name = "Bob";</code> from outside <code>Person</code> is rejected at compile time.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>Same-package alone is <strong>not</strong> sufficient (that's <em>default / package-private</em>, which uses no modifier).</li>
+        <li>Same-class <em>is</em> sufficient — code <em>inside</em> <code>Person</code> can read/write <code>name</code> freely.</li>
+        <li>To allow external mutation, expose a mutator method like <code>setName(String)</code>, ideally with validation.</li>
+      </ul>
+      <strong>Trap (D):</strong> Java enforces <code>private</code> at compile time, so the run-time exception class isn't involved.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Primitive vs Object Params</span></div>
+  <div class="q-body">
+    <p class="prompt">After <code>modify(x, w)</code> assigns <code>x = 999</code> and <code>w.n = 999</code>: <code>println(x + " " + w.n)</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>5 5</code></li>
+      <li><span class="lbl">(B)</span> <code>999 999</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>5 999</code></li>
+      <li><span class="lbl">(D)</span> <code>999 5</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      Java is uniformly pass-by-value — but for objects, the <em>value</em> being passed is a copy of the reference.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><strong>Primitive <code>x</code>:</strong> the parameter inside <code>modify</code> is a copy of the value <code>5</code>. Reassigning the local copy to <code>999</code> has zero effect on the caller's <code>x</code>. Caller's <code>x</code> stays <code>5</code>.</li>
+        <li><strong>Object <code>w</code>:</strong> the parameter inside <code>modify</code> is a copy of the <em>reference</em> — it points to the <em>same</em> <code>Wrap</code> object. The dot access <code>w.n = 999</code> reaches across the reference and mutates the shared object. Caller sees <code>w.n = 999</code>.</li>
+      </ul>
+      Distinction: <em>reassigning</em> the parameter vs <em>mutating</em> the object the parameter points to. The first never escapes; the second does.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">toString Implicit Call</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>System.out.println("Found: " + c);</code> where <code>c</code> overrides <code>toString</code>.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> Memory address.</li>
+      <li class="correct"><span class="lbl">(B)</span> <code>Found: (25¢)</code></li>
+      <li><span class="lbl">(C)</span> <code>Found: 25</code></li>
+      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      String concatenation with <code>+</code> implicitly invokes <code>toString()</code> on the object operand. <code>println</code> also does this when handed a non-String object directly.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>"Found: " + c</code> → <code>"Found: " + c.toString()</code> → <code>"Found: " + "(25¢)"</code> → <code>"Found: (25¢)"</code>.</li>
+      </ul>
+      <strong>Trap (A):</strong> the default <code>Object.toString()</code> <em>does</em> produce something like <code>Coin@1a2b3c</code> — but only when no override is provided. Here <code>Coin</code> overrides <code>toString</code>, so that default is shadowed. Designing a class for printability nearly always means writing a <code>toString</code>; the AP exam expects you to recognize this idiom.
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 3 Solutions (Draft v1 · exam-level)</span>
+  <span>Page · Unit 3</span>
+</footer>
+
+</body>
+</html>
