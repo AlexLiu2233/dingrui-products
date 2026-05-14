@@ -509,6 +509,7 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
   <a href="#s1-13">1.13 Instantiation</a>
   <a href="#s1-14">1.14 Instance Methods</a>
   <a href="#s1-15">1.15 String Manipulation</a>
+  <a href="#mcq-patterns">MCQ Patterns</a>
   <a href="#flashcards">Flashcards</a>
   <a href="#unit-quiz">Unit Quiz</a>
 </aside>
@@ -686,6 +687,20 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     <div class="quiz-explain correct-exp">Correct! <code>13 / 5</code> = 2 (integer division), <code>13 % 5</code> = 3, so 2 + 3 = <strong>5</strong>.</div>
     <div class="quiz-explain wrong-exp"><code>13 / 5</code> = 2 (integer division), <code>13 % 5</code> = 3, so the answer is 2 + 3 = <strong>5</strong>.</div>
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Mixed-type expression</div>
+<pre><span class="ty">double</span> avg = <span class="num">5</span> / <span class="num">2</span> * <span class="num">2.0</span>;
+<span class="cm">// Step 1: 5 / 2 evaluates to 2 (both ints, integer division)</span>
+<span class="cm">// Step 2: 2 * 2.0 evaluates to 4.0 (int gets promoted to double)</span>
+<span class="cm">// avg = 4.0, not 5.0</span></pre>
+    <p style="margin-top:10px"><strong>What tripped people up:</strong> Java evaluates left to right at equal precedence. The integer division finishes before the <code>double</code> ever shows up to promote anything. If you want the real average, move the <code>2.0</code> earlier (or write one of the literals as <code>5.0</code>).</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: The result type comes from the operands, not from the variable</strong>
+    The result type of <code>a / b</code> depends on the types of <code>a</code> and <code>b</code>, not on what you store the result in. <code>double d = 7 / 2;</code> gives <code>d = 3.0</code>, because <code>7 / 2</code> evaluates to the int <code>3</code> first, and then that <code>3</code> gets widened to <code>3.0</code>. The destination type can't reach back into the expression to fix it.
+  </div>
 </section>
 
 <hr class="sep">
@@ -744,6 +759,20 @@ x = x + <span class="num">3</span>;  <span class="cm">// x is now 8, right side 
   <div class="concept-box orange">
     <strong>Round-off Errors</strong>
     <code>double</code> has limited precision. Expressions may produce slightly inaccurate results (e.g., <code>0.1 + 0.2</code> ≠ exactly 0.3). Use <code>int</code> when exact values are needed.
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Casts truncate toward zero</div>
+<pre><span class="ty">int</span> a = (<span class="ty">int</span>) <span class="num">9.7</span>;          <span class="cm">// 9   (drops the .7)</span>
+<span class="ty">int</span> b = (<span class="ty">int</span>) -<span class="num">9.7</span>;         <span class="cm">// -9  (NOT -10; truncates toward zero)</span>
+<span class="ty">double</span> c = (<span class="ty">int</span>) <span class="num">3.9</span> + <span class="num">0.5</span>;   <span class="cm">// 3.5  (cast hits 3.9 only, then 3 + 0.5)</span>
+<span class="ty">int</span> d = (<span class="ty">int</span>) (<span class="num">3.9</span> + <span class="num">0.5</span>);    <span class="cm">// 4    (parentheses make the cast hit the whole sum)</span></pre>
+    <p style="margin-top:10px"><strong>Two things to watch:</strong> the cast applies to whatever sits to its right (in line 3, just <code>3.9</code>), not to the whole expression after it. And for negative doubles, the cast drops the fractional part toward zero, not toward minus infinity, so <code>(int)(-3.9)</code> is <code>-3</code>, not <code>-4</code>.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Implicit widening in arithmetic</strong>
+    Any expression that mixes an <code>int</code> with a <code>double</code> evaluates as a <code>double</code>. <code>3 + 1.0</code> is <code>4.0</code>, not <code>4</code>. To assign the result to an <code>int</code> variable, you need an explicit cast, and the cast will truncate the fractional part.
   </div>
 </section>
 
@@ -906,6 +935,22 @@ score--;       <span class="cm">// 29</span></pre>
     <div class="quiz-explain correct-exp">Correct! Range = 10 − 5 + 1 = 6. So: <code>(int)(Math.random() * 6) + 5</code> → values 5, 6, 7, 8, 9, 10.</div>
     <div class="quiz-explain wrong-exp">Range = max − min + 1 = 6. The formula is <code>(int)(Math.random() * 6) + 5</code>.</div>
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Deriving the random-int formula</div>
+    <p>Goal: pick a random integer from <code>min</code> to <code>max</code> inclusive.</p>
+    <p style="margin-top:8px">Step 1. <code>Math.random()</code> returns a <code>double</code> in <code>[0.0, 1.0)</code>.</p>
+    <p>Step 2. Multiplying by <code>n</code> stretches the range to <code>[0.0, n)</code>.</p>
+    <p>Step 3. Casting to <code>int</code> truncates the fractional part, leaving an int in <code>{0, 1, ..., n-1}</code>, which is exactly <code>n</code> possible values.</p>
+    <p>Step 4. Adding <code>min</code> shifts the set to <code>{min, min+1, ..., min+n-1}</code>. To reach <code>max</code>, you need <code>min + n - 1 = max</code>, so <code>n = max - min + 1</code>.</p>
+<pre><span class="cm">// Random integer in [min, max] inclusive:</span>
+<span class="ty">int</span> r = (<span class="ty">int</span>)(<span class="ty">Math</span>.<span class="fn">random</span>() * (max - min + <span class="num">1</span>)) + min;</pre>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Off-by-one on the multiplier</strong>
+    Two common wrong answers on AP MCQs: using <code>(max - min)</code> instead of <code>(max - min + 1)</code> (loses the <code>max</code> value, since multiplication stops just below the multiplier), or putting the cast in the wrong place. <code>(int) Math.random() * 6</code> casts <code>Math.random()</code> first, which is always <code>0</code> as an int, so the whole thing is <code>0</code>. The cast has to surround the multiplication: <code>(int)(Math.random() * 6)</code>.
+  </div>
 </section>
 
 <hr class="sep">
@@ -1037,6 +1082,62 @@ s.<span class="fn">substring</span>(<span class="num">2</span>, <span class="num
     </div>
     <div class="quiz-explain correct-exp">Correct! Index 1='a', 2='n', 3='a'. <code>substring(1,4)</code> returns chars at indices 1, 2, 3 → "ana".</div>
     <div class="quiz-explain wrong-exp">Remember: <code>substring(from, to)</code> includes <code>from</code> but excludes <code>to</code>. Indices 1,2,3 → "ana".</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: <code>.equals()</code> vs <code>==</code></div>
+<pre><span class="ty">String</span> a = <span class="str">"hi"</span>;
+<span class="ty">String</span> b = <span class="str">"hi"</span>;
+<span class="ty">String</span> c = <span class="kw">new</span> <span class="ty">String</span>(<span class="str">"hi"</span>);
+
+a == b           <span class="cm">// true   (string-pool sharing, both point to the same literal)</span>
+a == c           <span class="cm">// false  (c is a fresh object on the heap)</span>
+a.<span class="fn">equals</span>(c)      <span class="cm">// true   (same characters)</span></pre>
+    <p style="margin-top:10px"><strong>The rule:</strong> use <code>.equals()</code> for content equality on every object type. <code>==</code> on references asks "are these the same object?", which is almost never what an AP MCQ wants when the question says "is the text the same?".</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Strings are immutable</strong>
+    Methods like <code>toUpperCase()</code>, <code>substring()</code>, and <code>replace()</code> return a <em>new</em> String, they don't modify the original. <code>s.toUpperCase();</code> by itself does nothing useful, you have to write <code>s = s.toUpperCase();</code> to keep the result. Forgetting to reassign is one of the most common String-manipulation MCQ traps.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ MCQ PATTERNS PREVIEW ═══════════════ -->
+<section class="section" id="mcq-patterns">
+  <div class="section-label">AP MCQ Preview</div>
+  <h2>Unit 1 MCQ Patterns That Show Up Every Year</h2>
+  <p>Unit 1 is mostly tested on the MCQ section. The same handful of patterns reappear in different costumes. If you can spot which pattern a question is testing, you can usually answer it in under 30 seconds.</p>
+
+  <div class="concept-box">
+    <strong>Pattern 1: Integer division hiding inside an expression</strong>
+    Look for <code>/</code> with two int operands. If both sides are ints, the result is an int, the fractional part is dropped. Common disguise: storing the result in a <code>double</code> variable, which doesn't change the division itself. (See Topic 1.3.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 2: Cast precedence</strong>
+    A cast binds tightly. <code>(int) 3.7 + 0.5</code> is <code>3.5</code> (cast hits <code>3.7</code> only), not <code>4</code>. Compare with <code>(int)(3.7 + 0.5)</code>, which is <code>4</code>. (See Topic 1.5.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 3: Math.random() range derivation</strong>
+    Either pick the right formula <code>(int)(Math.random() * (max-min+1)) + min</code> or read a given expression and back-solve the inclusive range. Watch for off-by-one in the multiplier and for casts in the wrong spot. (See Topic 1.11.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 4: String <code>==</code> vs <code>.equals()</code></strong>
+    If the question stores strings two different ways (one literal, one <code>new String(...)</code>), <code>==</code> can be <code>false</code> even though the text is identical. <code>.equals()</code> is the AP-correct answer for content comparison. (See Topic 1.15.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 5: substring index bounds</strong>
+    <code>s.substring(a, b)</code> includes index <code>a</code>, excludes index <code>b</code>. Length of the result is <code>b - a</code>. <code>s.substring(a)</code> runs to the end. Always check that <code>0 ≤ a ≤ b ≤ s.length()</code>, otherwise it crashes.
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 6: NullPointerException on uninitialized reference</strong>
+    Calling any instance method on a <code>null</code> reference crashes the program. If a code segment declares <code>String s;</code> but never assigns it, then <code>s.length()</code> throws NullPointerException. Watch for the missing <code>new</code>.
   </div>
 </section>
 
