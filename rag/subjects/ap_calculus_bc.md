@@ -1,9 +1,9 @@
-# Subject Spec — AP Calculus BC
+# Subject Spec — AP Calculus AB/BC
 
 ## Identity
 
-- **Display (section heading):** AP Calculus BC
-- **Display (hero chip):** AP Calculus BC
+- **Display (section heading):** AP Calculus AB/BC
+- **Display (hero chip):** AP Calculus AB/BC
 - **Directory:** `AP Calculus/`
 - **Audit:** `AP Calculus/AUDIT.md`
 
@@ -27,7 +27,7 @@ unit, prefer rephrasing to avoid this).
 ## Required `<title>` format
 
 ```
-AP Calculus BC — Unit N: {Topic} | Dingrui Scholars
+AP Calculus AB/BC — Unit N: {Topic} | Dingrui Scholars
 ```
 
 `build-index.py` reads this verbatim to generate the card on the home

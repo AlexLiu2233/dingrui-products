@@ -13,7 +13,7 @@ Per-subject specs live in `rag/subjects/`. Each file documents:
 
 | Subject | Spec | Audit |
 |---|---|---|
-| AP Calculus BC               | [`subjects/ap_calculus_bc.md`](subjects/ap_calculus_bc.md)             | [`AP Calculus/AUDIT.md`](../AP%20Calculus/AUDIT.md) |
+| AP Calculus AB/BC               | [`subjects/ap_calculus_bc.md`](subjects/ap_calculus_bc.md)             | [`AP Calculus/AUDIT.md`](../AP%20Calculus/AUDIT.md) |
 | AP Physics C: Mechanics      | [`subjects/ap_physics_c_mechanics.md`](subjects/ap_physics_c_mechanics.md) | [`AP Physics/AUDIT.md`](../AP%20Physics/AUDIT.md) |
 | AP Computer Science A        | [`subjects/ap_csa.md`](subjects/ap_csa.md)                             | [`AP CSA/AUDIT.md`](../AP%20CSA/AUDIT.md) |
 | IB Chemistry HL              | [`subjects/ib_chemistry_hl.md`](subjects/ib_chemistry_hl.md)           | [`IB Chemistry HL/AUDIT.md`](../IB%20Chemistry%20HL/AUDIT.md) |

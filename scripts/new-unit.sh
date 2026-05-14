@@ -41,7 +41,7 @@ fi
 # Map directory -> long subject name used in the <title> tag.
 # Keep this in sync with scripts/build-index.py SUBJECTS.
 case "$SUBJECT_DIR" in
-  "AP Calculus")     SUBJECT_LONG="AP Calculus BC" ;;
+  "AP Calculus")     SUBJECT_LONG="AP Calculus AB/BC" ;;
   "AP Physics")      SUBJECT_LONG="AP Physics C: Mechanics" ;;
   "AP CSA")          SUBJECT_LONG="AP CSA" ;;
   "IB Chemistry HL") SUBJECT_LONG="IB Chemistry" ;;

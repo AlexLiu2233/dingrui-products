@@ -1,6 +1,6 @@
-# AP Calculus BC — Audit
+# AP Calculus AB/BC — Audit
 
-Open punch list for the AP Calculus BC study guides and practice questions,
+Open punch list for the AP Calculus AB/BC study guides and practice questions,
 scored against `prompts/create-unit.md`, `rag/subjects/ap_calculus_bc.md`,
 and the official AP Calculus AB/BC Course and Exam Description (CED).
 

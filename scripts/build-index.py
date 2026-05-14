@@ -32,21 +32,12 @@ INDEX = ROOT / "index.html"
 
 # (directory, display name shown in <h2> and hero chip, chip CSS class)
 SUBJECTS = [
-    ("AP Calculus",     "AP Calculus BC",          "chip-maroon"),
+    ("AP Calculus",     "AP Calculus AB/BC",          "chip-maroon"),
     ("AP Physics",      "AP Physics C: Mechanics", "chip-green"),
     ("IB Chemistry HL", "IB Chemistry HL",         "chip-purple"),
     ("AP CSA",          "AP Computer Science A",   "chip-gold"),
     ("IB Math HL",      "IB Math AA HL",           "chip-maroon"),
 ]
-
-# Hero chips render a shorter name than the section heading
-CHIP_NAME = {
-    "AP Calculus":     "AP Calculus BC",
-    "AP Physics":      "AP Physics C",
-    "IB Chemistry HL": "IB Chemistry HL",
-    "AP CSA":          "AP Computer Science A",
-    "IB Math HL":      "IB Math AA HL",
-}
 
 # When a subject mixes prefix words (e.g. IB Chemistry's Structure/Reactivity),
 # alphabetical sort isn't the curriculum order. This map sets explicit ordering.
@@ -126,16 +117,6 @@ def gen_cards(subject_dir: str) -> str:
     return "\n".join(lines)
 
 
-def gen_chips() -> str:
-    lines = []
-    for subject_dir, _display, css in SUBJECTS:
-        n = len(study_guides(subject_dir))
-        word = "Units" if n != 1 else "Unit"
-        name = CHIP_NAME.get(subject_dir, _display)
-        lines.append(f'      <span class="chip {css}">{escape(name)} · {n} {word}</span>')
-    return "\n".join(lines)
-
-
 def subject_marker(subject_dir: str) -> str:
     return "cards:" + re.sub(r"\W+", "_", subject_dir)
 
@@ -170,21 +151,6 @@ def ensure_sentinels(text: str) -> str:
             + m.group(3)
         )
         text = text[: m.start()] + replacement + text[m.end():]
-
-    if "<!-- BEGIN chips -->" not in text:
-        pat = re.compile(r'(<div class="hero-meta">)([\s\S]*?)(</div>)')
-        m = pat.search(text)
-        if not m:
-            sys.exit("FAIL: cannot find hero-meta div in index.html")
-        body = m.group(2).rstrip("\n ")
-        replacement = (
-            m.group(1)
-            + "\n      <!-- BEGIN chips -->"
-            + body
-            + "\n      <!-- END chips -->\n    "
-            + m.group(3)
-        )
-        text = text[: m.start()] + replacement + text[m.end():]
     return text
 
 
@@ -204,7 +170,6 @@ def main():
     text = ensure_sentinels(text)
     for subject_dir, _display, _css in SUBJECTS:
         text = replace_between(text, subject_marker(subject_dir), gen_cards(subject_dir))
-    text = replace_between(text, "chips", gen_chips(), body_indent="      ")
     INDEX.write_text(text, encoding="utf-8")
     print(f"Wrote {INDEX.relative_to(ROOT)}")
 

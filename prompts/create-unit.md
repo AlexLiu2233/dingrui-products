@@ -80,7 +80,7 @@ crystallize the takeaway for the crammer, or expand the derivation for the
   calculator/no-calc split (e.g. statistics distributions), note it in the
   section header.
 
-### AP Physics C / AP Calculus BC / AP CSA
+### AP Physics C / AP Calculus AB/BC / AP CSA
 - Units are numbered: `Unit_N_*`. Match the existing per-subject
   conventions for hero chips, section anchors, and worked-example schema.
 
