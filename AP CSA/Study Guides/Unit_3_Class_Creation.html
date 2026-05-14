@@ -172,6 +172,28 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <strong>Key Vocabulary</strong>
     An <em>attribute</em> is a variable defined in a class outside any method. An <em>instance variable</em> is unique to each object. A <em>class variable</em> is shared by all objects.
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example — Designing a <code>Library</code> class</div>
+    <p><strong>Problem.</strong> Sketch a class to model a public library that tracks books and members.</p>
+    <p style="margin-top:10px"><strong>Step 1 — Identify nouns (attributes).</strong> A library "has" a name and a collection of books. A book has a title and an ISBN.</p>
+    <p style="margin-top:10px"><strong>Step 2 — Identify verbs (behaviors).</strong> A library can <em>add a book</em>, <em>check out a book to a member</em>, <em>return a book</em>, <em>list available books</em>.</p>
+    <p style="margin-top:10px"><strong>Step 3 — Decide what to expose.</strong> Public methods form the API (<code>addBook</code>, <code>checkOut</code>). Private helpers do internal work. Instance variables are always <code>private</code>.</p>
+    <p style="margin-top:10px"><strong>Step 4 — Sketch the skeleton.</strong></p>
+<pre><span class="kw">public class</span> <span class="ty">Library</span> {
+    <span class="kw">private</span> <span class="ty">String</span> name;
+    <span class="kw">private</span> <span class="ty">ArrayList&lt;Book&gt;</span> books;
+
+    <span class="kw">public</span> <span class="fn">Library</span>(<span class="ty">String</span> name) { <span class="cm">/* ... */</span> }
+    <span class="kw">public void</span> <span class="fn">addBook</span>(<span class="ty">Book</span> b) { <span class="cm">/* ... */</span> }
+    <span class="kw">public boolean</span> <span class="fn">checkOut</span>(<span class="ty">String</span> isbn) { <span class="cm">/* ... */</span> }
+}</pre>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap — Attribute vs Method</strong>
+    On AP MCQs, "<em>has-a</em>" relationships indicate attributes (data); "<em>can-do</em>" or "<em>does</em>" indicate methods (behavior). A library <em>has</em> books (attribute); a library <em>checks out</em> books (method). Don't model behaviors as fields.
+  </div>
 </section>
 
 <hr class="sep">
@@ -181,12 +203,30 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   <div class="section-label">Topic 3.2</div>
   <h2>Impact of Program Design</h2>
 
-  <p>Programs impact society, the economy, and culture — both positively and negatively.</p>
+  <p>Programs impact society, the economy, and culture — both positively and negatively. The AP exam tests this with 1–2 conceptual MCQs per year. Easy points if you've seen the framework once.</p>
 
   <div class="card">
-    <p><strong>System Reliability</strong> — a program should perform as expected under all stated conditions. Test with a variety of inputs to maximize reliability.</p>
-    <p style="margin-top:10px"><strong>Unintended Consequences</strong> — programs built to solve one problem can cause harm beyond their intended use.</p>
-    <p style="margin-top:10px"><strong>Intellectual Property</strong> — reusing code published as open source is fine. Code that is <em>not</em> open source requires permission (and often purchase) before use.</p>
+    <p><strong>System Reliability</strong> — a program should perform as expected under <em>all</em> stated conditions, not just the happy path. Test with edge cases, invalid input, and boundary values to maximize reliability. A reliability gap is a failure for a stated condition.</p>
+    <p style="margin-top:10px"><strong>Unintended Consequences</strong> — a program built for one purpose can cause harm outside its intended scope. A recommendation algorithm optimised for engagement can amplify misinformation; a routing app's optimum may cause traffic chaos on residential streets. The harm <em>was not intended</em> by the designer but emerged from the design.</p>
+    <p style="margin-top:10px"><strong>Intellectual Property</strong> — code published as open source under a permissive license (MIT, Apache) can be reused with attribution. Code under a copyleft license (GPL) requires that derivatives also be open-sourced. Code with no license, or a proprietary license, requires explicit permission (and often payment) before reuse.</p>
+    <p style="margin-top:10px"><strong>Plagiarism</strong> — copying another student's submitted code (even partially, even modified) without attribution is plagiarism — a serious academic-integrity violation. Cite the source of any code you didn't write yourself, including snippets adapted from documentation or online forums.</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Telling Unintended Consequence from Reliability</strong>
+    A subtle but exam-tested distinction. <em>Reliability</em> = the program fails to do what it was designed to do under some valid input. <em>Unintended consequence</em> = the program does exactly what it was designed to do, but that behavior causes harm in a way the designer did not anticipate.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">A weather-prediction app shows accurate forecasts 99% of the time but on rare extreme-weather days predicts mild conditions. Which best describes the issue?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Intellectual property violation</div>
+      <div class="quiz-opt" data-idx="1">Plagiarism</div>
+      <div class="quiz-opt" data-idx="2">Lack of system reliability under edge-case inputs</div>
+      <div class="quiz-opt" data-idx="3">Unintended consequence</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The app fails on a specific class of inputs (extreme weather). It's not behaving as designed under all stated conditions — that's a reliability gap. (Unintended consequence would be: the app works perfectly, but its accurate predictions cause panic-buying that harms grocery supply chains.)</div>
+    <div class="quiz-explain wrong-exp">"Reliability" = performs as expected under all conditions. A 99% success rate with a known failure mode on edge cases is a reliability issue. "Unintended consequence" means the program works as intended but causes side-effect harm.</div>
   </div>
 </section>
 
@@ -228,6 +268,32 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getName</span>() { <span class="kw">return</span> name; }
     <span class="kw">public</span> <span class="ty">int</span> <span class="fn">getAge</span>() { <span class="kw">return</span> age; }
 }</pre>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example — Translate an FRQ prompt to a class skeleton</div>
+    <p><strong>Problem.</strong> "Write a class <code>Student</code> with a name (String), grade (int 9–12), and methods to access each."</p>
+    <p style="margin-top:10px"><strong>Step 1 — Class declaration.</strong> Always <code>public class</code>.</p>
+    <p style="margin-top:10px"><strong>Step 2 — Instance variables.</strong> Always <code>private</code>. Types come from the prompt: <code>String name</code>, <code>int grade</code>.</p>
+    <p style="margin-top:10px"><strong>Step 3 — Constructor.</strong> Public. Parameters match the data the prompt says the class needs. Use <code>this.</code> when the parameter shadows the field.</p>
+    <p style="margin-top:10px"><strong>Step 4 — Accessors.</strong> One per private field. Return type matches the field type. Body is a single <code>return</code>.</p>
+<pre><span class="kw">public class</span> <span class="ty">Student</span> {
+    <span class="kw">private</span> <span class="ty">String</span> name;
+    <span class="kw">private</span> <span class="ty">int</span> grade;
+
+    <span class="kw">public</span> <span class="fn">Student</span>(<span class="ty">String</span> name, <span class="ty">int</span> grade) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.grade = grade;
+    }
+
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getName</span>() { <span class="kw">return</span> name; }
+    <span class="kw">public</span> <span class="ty">int</span> <span class="fn">getGrade</span>() { <span class="kw">return</span> grade; }
+}</pre>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap — Don't Forget <code>public</code></strong>
+    Omitting <code>public</code> on a method or constructor doesn't cause a Java compile error (it makes them <em>package-private</em>), but the AP rubric requires <code>public</code> on every constructor and every method intended to be called from outside the class. <strong>Always write <code>public</code></strong> — losing this point is the single most common Class Design FRQ mistake.
+  </div>
 </section>
 
 <hr class="sep">
@@ -276,6 +342,33 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <div class="quiz-explain correct-exp">Correct! The default value of a <code>boolean</code> is <code>false</code>.</div>
     <div class="quiz-explain wrong-exp">The default value for <code>boolean</code> instance variables is <code>false</code> (not <code>null</code> — that's for reference types).</div>
   </div>
+
+  <h3>Overloaded Constructors</h3>
+  <p>A class can have <strong>multiple constructors</strong> with different parameter lists. The compiler picks the right one at the call site based on the arguments — this is <em>method overloading</em>.</p>
+<pre><span class="kw">public class</span> <span class="ty">Dog</span> {
+    <span class="kw">private</span> <span class="ty">String</span> name;
+    <span class="kw">private</span> <span class="ty">int</span> age;
+
+    <span class="cm">// Full constructor</span>
+    <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name, <span class="ty">int</span> age) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.age = age;
+    }
+
+    <span class="cm">// Convenience constructor — defaults age to 0</span>
+    <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name) {
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.age = <span class="num">0</span>;
+    }
+}
+
+<span class="ty">Dog</span> a = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>, <span class="num">5</span>);  <span class="cm">// uses 2-arg constructor</span>
+<span class="ty">Dog</span> b = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Buddy"</span>);     <span class="cm">// uses 1-arg constructor</span></pre>
+
+  <div class="concept-box red">
+    <strong>AP Trap — A "constructor" with a return type isn't a constructor</strong>
+    If you accidentally write <code>public void Dog(String name) { ... }</code> (with <code>void</code>), it's a <em>method</em> named "Dog", not a constructor. Java won't invoke it via <code>new Dog("Rex")</code>. Worse, since no real constructor was declared, the compiler auto-generates a default no-arg constructor — so <code>new Dog()</code> compiles but does nothing useful. <strong>Constructors have no return type.</strong>
+  </div>
 </section>
 
 <hr class="sep">
@@ -319,6 +412,44 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <strong>Pass by Value (Primitives)</strong>
     When a primitive is passed as an argument, the parameter gets a <em>copy</em> of the value. Changing the parameter inside the method does <strong>not</strong> affect the original variable.
   </div>
+
+  <h3>Mutator with Input Validation</h3>
+  <p>A robust mutator <em>validates</em> input before changing state. Reject obviously-bad values; preserve the object's invariants.</p>
+<pre><span class="kw">public class</span> <span class="ty">BankAccount</span> {
+    <span class="kw">private</span> <span class="ty">double</span> balance;
+
+    <span class="kw">public void</span> <span class="fn">deposit</span>(<span class="ty">double</span> amount) {
+        <span class="kw">if</span> (amount &gt; <span class="num">0</span>) {           <span class="cm">// validate</span>
+            balance += amount;
+        }
+        <span class="cm">// silently ignore non-positive deposits</span>
+    }
+
+    <span class="kw">public boolean</span> <span class="fn">withdraw</span>(<span class="ty">double</span> amount) {
+        <span class="kw">if</span> (amount &lt;= <span class="num">0</span> || amount &gt; balance) {
+            <span class="kw">return false</span>;            <span class="cm">// reject invalid</span>
+        }
+        balance -= amount;
+        <span class="kw">return true</span>;
+    }
+}</pre>
+
+  <h3>Accessor Returning a Mutable Object — Defensive Copy</h3>
+  <p>If an accessor returns a reference to a <em>mutable</em> object (array, <code>ArrayList</code>, or any class you wrote), the caller has the same reference as your field — and can mutate it, breaking encapsulation.</p>
+<pre><span class="cm">// BAD: caller can mutate our internal list</span>
+<span class="kw">public</span> <span class="ty">ArrayList&lt;String&gt;</span> <span class="fn">getNames</span>() {
+    <span class="kw">return</span> names;
+}
+
+<span class="cm">// GOOD: return a fresh copy</span>
+<span class="kw">public</span> <span class="ty">ArrayList&lt;String&gt;</span> <span class="fn">getNames</span>() {
+    <span class="kw">return new</span> <span class="ty">ArrayList&lt;&gt;</span>(names);
+}</pre>
+
+  <div class="concept-box red">
+    <strong>AP Trap — Accessor That Leaks Internal State</strong>
+    Returning the array reference (<code>return arr;</code>) or list reference (<code>return list;</code>) means external code holds your internal data and can change it. The FRQ rubric awards a point for defensive copy when the accessor returns a mutable type. Memorise: <em>String</em> is immutable so it's fine to return directly; arrays and <code>ArrayList</code> are mutable so return a copy.
+  </div>
 </section>
 
 <hr class="sep">
@@ -328,20 +459,85 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   <div class="section-label">Topic 3.6</div>
   <h2>Methods: Passing and Returning References</h2>
 
-  <p>When an <strong>object reference</strong> is passed to a method, the parameter receives a copy of the reference — not a copy of the object itself.</p>
+  <p>When an <strong>object reference</strong> is passed to a method, the parameter receives a <em>copy of the reference</em> — but both the caller's variable and the parameter refer to the same object on the heap. Mutations made through the parameter are visible to the caller. This is the most-tested concept on AP MCQs about methods.</p>
 
-<pre><span class="kw">public void</span> <span class="fn">rename</span>(<span class="ty">Dog</span> d) {
-    d.<span class="fn">setName</span>(<span class="str">"Max"</span>);  <span class="cm">// Modifies the ORIGINAL object!</span>
-}</pre>
+  <div class="concept-box red">
+    <strong>The Single Most Important Distinction</strong>
+    A method that takes a <strong>primitive</strong> (<code>int</code>, <code>double</code>, etc.) can <em>never</em> change the caller's variable — the parameter is a fresh copy of the value. A method that takes an <strong>object</strong> can change the caller's object through <em>mutation</em>, but cannot make the caller's variable refer to a different object. Memorise this; it's a high-frequency AP MCQ trap.
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example 1 — Method mutates a passed object</div>
+<pre><span class="kw">public class</span> <span class="ty">Dog</span> {
+    <span class="kw">private</span> <span class="ty">String</span> name;
+    <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> n) { name = n; }
+    <span class="kw">public</span> <span class="ty">String</span> <span class="fn">getName</span>() { <span class="kw">return</span> name; }
+    <span class="kw">public void</span> <span class="fn">setName</span>(<span class="ty">String</span> n) { name = n; }
+}
+
+<span class="kw">public static void</span> <span class="fn">rename</span>(<span class="ty">Dog</span> d) {
+    d.<span class="fn">setName</span>(<span class="str">"Max"</span>);  <span class="cm">// mutates the original Dog</span>
+}
+
+<span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
+<span class="fn">rename</span>(rex);
+System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Max</span></pre>
+    <p style="margin-top:10px"><strong>Why?</strong> The parameter <code>d</code> is a copy of the reference to the same Dog object as <code>rex</code>. <code>d.setName(...)</code> mutates that object. <code>rex</code> "sees" the change because both names still refer to the same heap object.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example 2 — Reassigning the parameter doesn't change the caller</div>
+<pre><span class="kw">public static void</span> <span class="fn">replace</span>(<span class="ty">Dog</span> d) {
+    d = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Replaced"</span>);  <span class="cm">// reassigns the LOCAL copy</span>
+}
+
+<span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
+<span class="fn">replace</span>(rex);
+System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Rex (unchanged!)</span></pre>
+    <p style="margin-top:10px"><strong>Why?</strong> <code>d = new Dog(...)</code> only changes what the local parameter <code>d</code> points to. The caller's <code>rex</code> reference is unchanged. <strong>You can't reassign your way to "replacing" the caller's object.</strong> This is the AP trap that catches the most students.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example 3 — Aliasing in assignment</div>
+<pre><span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
+<span class="ty">Dog</span> buddy = rex;       <span class="cm">// alias: buddy and rex refer to the SAME object</span>
+buddy.<span class="fn">setName</span>(<span class="str">"Buddy"</span>);
+System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Buddy</span></pre>
+    <p style="margin-top:10px"><strong>Why?</strong> <code>buddy = rex</code> copies the <em>reference</em>, not the object. Both names refer to the same Dog object. A mutation through one is visible through the other. This is "aliasing" and is the same mechanism as passing an object to a method.</p>
+  </div>
 
   <div class="concept-box orange">
-    <strong>Aliasing Warning</strong>
-    Both the caller's variable and the parameter point to the <em>same</em> object. If the method mutates it, the caller sees the change. Best practice: don't modify passed objects unless required.
+    <strong>Aliasing — Friend or Bug</strong>
+    Aliasing is fine when intentional (e.g., shorter local name for clarity). It's a bug when accidental — e.g., a constructor stores a passed-in array reference and the caller later mutates the array, corrupting the object's invariants. The fix: <em>defensive copy</em> at the boundary (in the constructor or accessor).
   </div>
 
   <div class="concept-box purple">
     <strong>Private Access Rule</strong>
-    A method cannot access the <code>private</code> fields of a parameter object — unless the parameter is the <em>same type</em> as the enclosing class. (e.g., a <code>Dog</code> method can access private fields of another <code>Dog</code> parameter.)
+    A method cannot access the <code>private</code> fields of a parameter object — unless the parameter is the <em>same type</em> as the enclosing class. e.g., a <code>Dog</code> instance method <em>can</em> read another <code>Dog</code> parameter's private fields directly, because they're in the same class.
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">Consider <code>public static void inc(int x) { x++; }</code> and the call <code>int n = 5; inc(n); System.out.println(n);</code>. What is printed?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>4</code></div>
+      <div class="quiz-opt" data-idx="1"><code>5</code></div>
+      <div class="quiz-opt" data-idx="2"><code>6</code></div>
+      <div class="quiz-opt" data-idx="3">Compile error</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>x</code> is a local copy of the value <code>5</code>. <code>x++</code> increments that copy, not the caller's <code>n</code>. <code>n</code> remains <code>5</code>. Primitives are <strong>always</strong> passed by value in Java.</div>
+    <div class="quiz-explain wrong-exp">Primitives are passed by value. The method's <code>x</code> is a copy. Mutating the copy doesn't affect the caller. <code>n</code> = 5.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">Consider a class <code>Box</code> with a <code>void clear()</code> method that sets a private field to <code>null</code>. Given <code>Box b = new Box(); Box c = b; c.clear();</code>, what happens to <code>b</code>?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>b</code> is unchanged because <code>c</code> is a copy</div>
+      <div class="quiz-opt" data-idx="1"><code>b</code> becomes <code>null</code></div>
+      <div class="quiz-opt" data-idx="2"><code>b</code>'s internal field is now <code>null</code></div>
+      <div class="quiz-opt" data-idx="3">Compile error — can't share Box across variables</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>c = b</code> creates an alias. <code>c</code> and <code>b</code> refer to the same Box. <code>c.clear()</code> mutates that shared Box, so the Box's internal field is <code>null</code>. The variable <code>b</code> itself is unchanged (still points to the same object) — it's the object's <em>state</em> that changed.</div>
+    <div class="quiz-explain wrong-exp">Aliasing: <code>c = b</code> shares the reference. <code>c.clear()</code> mutates the object. <code>b</code> (the variable) still refers to the same object, but that object's internal state has changed.</div>
   </div>
 </section>
 
@@ -421,6 +617,32 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <span class="cm">// "this.name" refers to the instance variable</span>
     <span class="kw">this</span>.name = name;
 }</pre>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example — Shadowing pitfall in action</div>
+<pre><span class="kw">public class</span> <span class="ty">Counter</span> {
+    <span class="kw">private</span> <span class="ty">int</span> count = <span class="num">100</span>;  <span class="cm">// instance variable</span>
+
+    <span class="kw">public void</span> <span class="fn">increment</span>(<span class="ty">int</span> count) {  <span class="cm">// parameter shadows field</span>
+        count++;            <span class="cm">// increments the PARAMETER, not the field</span>
+        <span class="kw">this</span>.count++;       <span class="cm">// increments the FIELD</span>
+    }
+
+    <span class="kw">public</span> <span class="ty">int</span> <span class="fn">getCount</span>() { <span class="kw">return</span> count; }  <span class="cm">// field</span>
+}
+
+<span class="ty">Counter</span> c = <span class="kw">new</span> <span class="fn">Counter</span>();
+c.<span class="fn">increment</span>(<span class="num">5</span>);
+                  <span class="cm">// parameter starts at 5, becomes 6 (ignored)</span>
+                  <span class="cm">// field starts at 100, becomes 101</span>
+System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// prints: 101</span></pre>
+    <p style="margin-top:10px"><strong>Takeaway.</strong> Without <code>this.</code>, a bare <code>count</code> inside <code>increment</code> refers to the <em>parameter</em>. The field is reachable only via <code>this.count</code>. This is the most common cause of "constructor doesn't seem to work" bugs.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap — Silent Shadowing</strong>
+    Shadowing compiles cleanly — the compiler never warns you. The bug manifests at runtime as "the field never changed". On the AP MCQ, watch for parameter names that match field names; if the method body doesn't use <code>this.</code>, the field is untouched.
+  </div>
 </section>
 
 <hr class="sep">
@@ -502,6 +724,54 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <hr class="sep">
 
+<!-- ═══ AP FRQ PATTERNS ═══ -->
+<section class="section" id="frq-patterns">
+  <div class="section-label">AP FRQ Preview</div>
+  <h2>How Class Creation Shows Up on the AP Exam</h2>
+
+  <p>The AP CSA exam has 4 Free-Response Questions. Class Creation directly underpins <strong>FRQ #2: Class Design</strong>, which appears <em>every</em> year. Knowing the rubric is half the battle — the College Board awards points for specific syntactic features, not just "correct" code.</p>
+
+  <div class="card">
+    <p><strong>Typical FRQ #2 prompt structure:</strong></p>
+    <p style="margin-top:8px"><em>"Write a class <code>X</code> that has &lt;list of attributes&gt;. Include a constructor that &lt;assigns the attributes from parameters&gt;. Include accessor methods &lt;getName, getAge, ...&gt;, mutator methods &lt;setAge with validation&gt;, and a behavior method &lt;summary, isAvailable, ...&gt; that uses the fields."</em></p>
+    <p style="margin-top:10px">You'll write this from scratch in ~25 minutes. The class is usually 25–50 lines of code. Partial credit is rubric-driven.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong>FRQ #2 Rubric — Common Point Allocations (≈9 pts total)</strong>
+    <ul style="margin: 8px 0 0 20px; line-height: 1.7;">
+      <li><strong>+1–2:</strong> Class declared <code>public class X</code> with private fields</li>
+      <li><strong>+1:</strong> Constructor signature matches the prompt's parameters</li>
+      <li><strong>+1:</strong> All instance variables assigned in the constructor</li>
+      <li><strong>+1:</strong> <code>this.</code> used to disambiguate where parameter and field share a name</li>
+      <li><strong>+2–3:</strong> Each method correctly written — return type, parameter list, and body behavior match the description</li>
+      <li><strong>+1:</strong> Mutator includes any required validation (the prompt usually says "if the value is positive…")</li>
+      <li><strong>+1:</strong> Defensive copy where applicable (returning an array or <code>ArrayList</code>)</li>
+    </ul>
+  </div>
+
+  <div class="concept-box red">
+    <strong>Common FRQ #2 Mistakes — Each Costs ~1 Point</strong>
+    <ul style="margin: 8px 0 0 20px; line-height: 1.7;">
+      <li>Public instance variables (must be <code>private</code>)</li>
+      <li>Missing <code>public</code> on the constructor or on any method</li>
+      <li>Constructor with a return type (e.g., <code>public void Dog(...)</code> — silently becomes a method)</li>
+      <li>Accessor with the wrong return type (e.g., <code>void</code> on a getter)</li>
+      <li>Forgetting to assign some of the instance variables in the constructor</li>
+      <li>Parameter name shadowing the field, without <code>this.</code> qualification</li>
+      <li>Returning the raw array/<code>ArrayList</code> reference instead of a copy</li>
+      <li>Forgetting input validation on a mutator when the prompt requires it</li>
+    </ul>
+  </div>
+
+  <div class="concept-box orange">
+    <strong>Time-Saver — Read the Stem Twice</strong>
+    Before writing code, underline each <em>noun</em> the prompt mentions (those are your private fields, with the types named in the prompt) and each <em>verb</em> (those are your methods, with return types and parameters derived from the prompt). Then code from your underlines — don't ad-lib fields or methods that aren't asked for, since extra unrequested code doesn't earn points and can break the rubric.
+  </div>
+</section>
+
+<hr class="sep">
+
 <!-- ═══ FLASHCARDS ═══ -->
 <section class="section" id="flashcards">
   <div class="section-label">Review</div>
@@ -546,6 +816,26 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
       <div class="flashcard-front">What does <code>final</code> do?</div>
       <div class="flashcard-back">Prevents a variable from being reassigned after initialization.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Can constructors be overloaded?</div>
+      <div class="flashcard-back">Yes — multiple constructors with different parameter lists. Java picks one based on the arguments at the call site.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Should a constructor declare a return type?</div>
+      <div class="flashcard-back">No. Writing <code>void</code> or any type turns it into a regular method, not a constructor — and Java will auto-generate the default no-arg constructor.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Why "defensive copy" in a getter?</div>
+      <div class="flashcard-back">If the field is mutable (array, <code>ArrayList</code>, etc.), returning the reference lets the caller mutate it. Return a copy to protect encapsulation.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">Can a method reassign the caller's reference?</div>
+      <div class="flashcard-back">No. Reassigning the parameter (<code>d = new Dog(...)</code>) only changes the local copy. The caller's reference still points to the original object.</div>
+    </div></div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
+      <div class="flashcard-front">How are static methods called?</div>
+      <div class="flashcard-back"><code>ClassName.method()</code> — using the class name, not an object reference. e.g., <code>Math.abs(-5)</code>, <code>User.getTotalUsers()</code>.</div>
     </div></div>
   </div>
 </section>
@@ -615,6 +905,73 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     </div>
     <div class="quiz-explain correct-exp">Correct! <code>this.name</code> refers to the instance variable, while <code>name</code> refers to the parameter. The parameter's value is stored in the field.</div>
     <div class="quiz-explain wrong-exp"><code>this.name</code> = instance variable, <code>name</code> = parameter. The line stores the parameter value into the field.</div>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-q">6. Consider:<pre>public class Box {
+    private int[] contents;
+    public Box(int[] items) {
+        contents = items;
+    }
+}
+int[] arr = {1, 2, 3};
+Box b = new Box(arr);
+arr[0] = 99;</pre>What is in <code>b</code>'s <code>contents</code> after this code runs?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>{1, 2, 3}</code> — the Box made a copy</div>
+      <div class="quiz-opt" data-idx="1">Compile error</div>
+      <div class="quiz-opt" data-idx="2"><code>{99, 2, 3}</code> — the Box's field aliases <code>arr</code></div>
+      <div class="quiz-opt" data-idx="3"><code>null</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>contents = items</code> stored the caller's reference, which is the same array on the heap as <code>arr</code>. Mutating <code>arr</code> after construction is visible inside the Box. Fix: <code>contents = items.clone();</code> in the constructor.</div>
+    <div class="quiz-explain wrong-exp">Both <code>contents</code> and <code>arr</code> reference the same array. Mutating through one is visible through the other. The Box constructor needs a defensive copy (<code>items.clone()</code>) to prevent this.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">7. Given the class<pre>public class Counter {
+    private static int total = 0;
+    private int value;
+    public Counter(int v) { value = v; total++; }
+    public int getValue() { return value; }
+    public static int getTotal() { return total; }
+}</pre>which of the following lines does <em>not</em> compile?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>Counter c = new Counter(5);</code></div>
+      <div class="quiz-opt" data-idx="1"><code>Counter.getValue();</code></div>
+      <div class="quiz-opt" data-idx="2"><code>Counter.getTotal();</code></div>
+      <div class="quiz-opt" data-idx="3"><code>new Counter(0).getValue();</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! <code>getValue()</code> is an <em>instance</em> method — it needs an object reference. <code>Counter.getValue()</code> tries to call it as a static method, which doesn't compile.</div>
+    <div class="quiz-explain wrong-exp">Static methods are called on the class. Instance methods need an object. <code>getValue()</code> is instance, so <code>Counter.getValue()</code> fails to compile.</div>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-q">8. Consider:<pre>public class P {
+    private int n;
+    public P(int n) { n = n; }
+    public int getN() { return n; }
+}
+System.out.println(new P(42).getN());</pre>What is printed?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>42</code></div>
+      <div class="quiz-opt" data-idx="1"><code>0</code></div>
+      <div class="quiz-opt" data-idx="2">Compile error</div>
+      <div class="quiz-opt" data-idx="3"><code>null</code></div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Classic shadowing bug. Inside the constructor, <code>n = n</code> assigns the parameter <code>n</code> to <em>itself</em> — it never touches the field. The field stays at its default value <code>0</code>. Fix: <code>this.n = n;</code></div>
+    <div class="quiz-explain wrong-exp">The constructor body is <code>n = n</code>, which assigns the parameter to itself. The field is shadowed and never written, so it keeps its default value <code>0</code>. Always use <code>this.n = n</code> when names collide.</div>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-q">9. A class has a private <code>String[] arr</code> and an accessor <code>public String[] getArr() { return arr; }</code>. What's the issue?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">The caller can mutate the array, breaking encapsulation</div>
+      <div class="quiz-opt" data-idx="1">The method signature is invalid for arrays</div>
+      <div class="quiz-opt" data-idx="2">The method needs to be <code>static</code></div>
+      <div class="quiz-opt" data-idx="3">There is no issue — accessors should return the field directly</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Returning the array reference exposes the field. Any mutation by the caller (e.g. <code>obj.getArr()[0] = 99</code>) changes the class's internal state — encapsulation is broken. Defensive fix: <code>return arr.clone();</code> for a shallow copy of the array spine. (For an array of mutable objects, you'd need a deep copy.)</div>
+    <div class="quiz-explain wrong-exp">Mutable accessors must return a copy. The AP rubric awards a defensive-copy point on FRQ #2 when the field is a mutable type like an array or <code>ArrayList</code>.</div>
   </div>
 </section>
 
