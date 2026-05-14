@@ -137,6 +137,7 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   <a href="#s4-15">4.15 Sorting Algorithms</a>
   <a href="#s4-16">4.16 Recursion</a>
   <a href="#s4-17">4.17 Recursive Search &amp; Sort</a>
+  <a href="#mcq-patterns">MCQ Patterns</a>
   <a href="#flashcards">Flashcards</a>
   <a href="#unit-quiz">Unit Quiz</a>
 </aside>
@@ -258,6 +259,11 @@ arr[<span class="num">2</span>] = <span class="num">99</span>;             <span
     <div class="quiz-explain correct-exp">Correct! <code>int</code> arrays default to <code>0</code>. Index 2 is valid (0–4), so the value is <code>0</code>.</div>
     <div class="quiz-explain wrong-exp">When an <code>int</code> array is created with <code>new</code>, all elements default to <code>0</code>.</div>
   </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: <code>length</code> on arrays vs <code>length()</code> on Strings and ArrayLists</strong>
+    Arrays use <code>arr.length</code>, no parentheses, because <code>length</code> is a public field, not a method. Strings use <code>s.length()</code>; ArrayLists use <code>list.size()</code>. Writing <code>arr.length()</code> or <code>s.length</code> is a compile error and shows up on MCQs as a "which line fails to compile?" trap.
+  </div>
 </section>
 
 <hr class="sep">
@@ -296,6 +302,25 @@ arr[<span class="num">2</span>] = <span class="num">99</span>;             <span
       <tr><td>Traverse partial array</td><td>✅ Yes</td><td>❌ No (full traversal)</td></tr>
       <tr><td>Simpler syntax</td><td>❌ More verbose</td><td>✅ Cleaner</td></tr>
     </table>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Enhanced for can't modify primitive arrays</div>
+<pre><span class="ty">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>};
+
+<span class="cm">// Doesn't work, val is a copy</span>
+<span class="kw">for</span> (<span class="ty">int</span> val : arr) {
+    val *= <span class="num">2</span>;
+}
+<span class="cm">// arr is still {1, 2, 3}</span>
+
+<span class="cm">// Works, indexed for assigns through the array reference</span>
+<span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; arr.<span class="fn">length</span>; i++) {
+    arr[i] *= <span class="num">2</span>;
+}
+<span class="cm">// arr is now {2, 4, 6}</span></pre>
+    <p style="margin-top:10px"><strong>Why this matters:</strong> the enhanced for loop binds a copy of each value (for primitives) or a copy of each reference (for objects) to the loop variable. Assigning to that variable replaces the local copy and nothing else. To mutate the array itself, you need the index so you can write through <code>arr[i] = ...</code>.</p>
+    <p style="margin-top:8px"><strong>Object arrays are different:</strong> if the array holds object references, the enhanced for variable holds a reference to the same object. Calling a mutator method on it (e.g., <code>account.deposit(10)</code>) <em>does</em> change the object the array still points to. Only <em>reassigning</em> the variable (<code>account = new Account()</code>) leaves the array unchanged.</p>
   </div>
 </section>
 
@@ -595,6 +620,23 @@ list.<span class="fn">remove</span>(<span class="num">1</span>);        <span cl
         i--;  <span class="cm">// adjust to not skip next element</span>
     }
 }</pre>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Why forward removal skips elements</div>
+    <p>Start with <code>list = ["a", "x", "x", "b"]</code> and try to remove every <code>"x"</code> with a forward indexed loop and <em>no</em> <code>i--</code> adjustment:</p>
+    <table>
+      <tr><th><code>i</code></th><th>list at start</th><th><code>get(i)</code></th><th>action</th><th>list at end</th></tr>
+      <tr><td>0</td><td>["a", "x", "x", "b"]</td><td>"a"</td><td>keep</td><td>["a", "x", "x", "b"]</td></tr>
+      <tr><td>1</td><td>["a", "x", "x", "b"]</td><td>"x"</td><td>remove → shift left</td><td>["a", "x", "b"]</td></tr>
+      <tr><td>2</td><td>["a", "x", "b"]</td><td>"b"</td><td>keep, ❌ skipped the "x" that slid to index 1</td><td>["a", "x", "b"]</td></tr>
+    </table>
+    <p style="margin-top:10px">Final list: <code>["a", "x", "b"]</code>. One <code>"x"</code> was never removed because the remaining elements shifted left under the loop cursor. The two fixes shown above (<code>i--</code> after removal, or traverse backward) both keep every element exactly under inspection once.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: ConcurrentModificationException with enhanced for</strong>
+    Using an enhanced for loop and calling <code>list.add(...)</code> or <code>list.remove(...)</code> inside the body throws <code>ConcurrentModificationException</code> at runtime, even though the code compiles. MCQs love to plant this in a snippet that "looks correct". The fix is always: switch to an indexed for loop, or use an iterator with its own <code>.remove()</code>.
+  </div>
 </section>
 
 <hr class="sep">
@@ -719,6 +761,30 @@ matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="nu
     </div>
     <div class="quiz-explain correct-exp">Correct! The outer loop iterates over rows, and each row is a 1D array, so the variable type is <code>int[]</code>.</div>
     <div class="quiz-explain wrong-exp">Each row of a 2D array is a 1D array, so the outer loop variable is <code>int[]</code>.</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Row-major vs column-major output order</div>
+<pre><span class="ty">int</span>[][] g = {
+    {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>},
+    {<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>}
+};
+
+<span class="cm">// Row-major prints: 1 2 3 4 5 6</span>
+<span class="kw">for</span> (<span class="ty">int</span> r = <span class="num">0</span>; r &lt; g.<span class="fn">length</span>; r++)
+    <span class="kw">for</span> (<span class="ty">int</span> c = <span class="num">0</span>; c &lt; g[<span class="num">0</span>].<span class="fn">length</span>; c++)
+        System.out.<span class="fn">print</span>(g[r][c] + <span class="str">" "</span>);
+
+<span class="cm">// Column-major prints: 1 4 2 5 3 6</span>
+<span class="kw">for</span> (<span class="ty">int</span> c = <span class="num">0</span>; c &lt; g[<span class="num">0</span>].<span class="fn">length</span>; c++)
+    <span class="kw">for</span> (<span class="ty">int</span> r = <span class="num">0</span>; r &lt; g.<span class="fn">length</span>; r++)
+        System.out.<span class="fn">print</span>(g[r][c] + <span class="str">" "</span>);</pre>
+    <p style="margin-top:10px"><strong>Quick way to tell which one a snippet is doing:</strong> look at which index is in the <em>outer</em> loop. If the row index <code>r</code> moves slowest (outer), the output goes row by row. If the column index moves slowest, the output goes column by column. Total iteration count is <code>rows × cols</code> either way.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Ragged 2D arrays</strong>
+    Java 2D arrays are arrays-of-arrays, so rows can have different lengths (e.g., <code>{{1,2},{3,4,5}}</code>). Using <code>g[0].length</code> as the inner bound assumes every row is the same length as row 0, which fails on ragged arrays. The safer pattern is <code>g[r].length</code> as the inner bound, which re-reads the row length each pass.
   </div>
 </section>
 
@@ -846,6 +912,25 @@ matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="nu
       </table>
     </div>
   </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Sorting state after pass k</div>
+    <p>Both algorithms keep the first <code>k</code> elements sorted after pass <code>k</code>, but only one of them puts those elements in their <em>final</em> positions.</p>
+<pre>Start: [5, 2, 4, 6, 1, 3]
+
+Selection sort, after pass 1: [<strong>1</strong>, 2, 4, 6, 5, 3]
+  ↳ Position 0 holds the global minimum, FINAL position.
+
+Insertion sort, after pass 1: [<strong>2, 5</strong>, 4, 6, 1, 3]
+  ↳ The first two elements are sorted, but 5 is NOT in its final position.
+    The 1 and 3 still to come will push it right.</pre>
+    <p style="margin-top:10px"><strong>How AP MCQs phrase this:</strong> "After pass 3, which of the following must be true?" The selection-sort answer is "the smallest 3 elements are in positions 0–2". The insertion-sort answer is "the first 3 elements are in sorted order relative to each other" (not relative to the full array).</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: "Number of passes" includes the implicit last one</strong>
+    For an array of <code>n</code> elements, selection sort runs <code>n - 1</code> outer passes (the last element falls into place automatically). Insertion sort also runs <code>n - 1</code> outer passes (it starts at index 1 and inserts each subsequent element). The classic wrong answer on MCQs is <code>n</code> passes.
+  </div>
 </section>
 
 <hr class="sep">
@@ -886,6 +971,30 @@ matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="nu
     </div>
     <div class="quiz-explain correct-exp">Correct! mystery(5) = 5 + mystery(3) = 5 + 3 + mystery(1) = 5 + 3 + 1 + mystery(-1) = 5 + 3 + 1 + 0 = 9.</div>
     <div class="quiz-explain wrong-exp">Trace it: mystery(5) = 5 + mystery(3) = 5 + 3 + mystery(1) = 5 + 3 + 1 + mystery(-1) = 9.</div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--accent);">
+    <div class="card-header" style="color:var(--accent);">Worked Example: Tracing recursion with a call tree</div>
+<pre><span class="kw">public static</span> <span class="ty">String</span> <span class="fn">mystery</span>(<span class="ty">int</span> n) {
+    <span class="kw">if</span> (n &lt;= <span class="num">0</span>) <span class="kw">return</span> <span class="str">""</span>;
+    <span class="kw">return</span> <span class="fn">mystery</span>(n - <span class="num">1</span>) + n + <span class="str">" "</span>;
+}
+<span class="cm">// mystery(3) returns what?</span></pre>
+    <p style="margin-top:10px"><strong>Step through it:</strong></p>
+<pre>mystery(3)
+= mystery(2) + 3 + " "
+= (mystery(1) + 2 + " ") + 3 + " "
+= ((mystery(0) + 1 + " ") + 2 + " ") + 3 + " "
+= (("" + 1 + " ") + 2 + " ") + 3 + " "
+= ("1 " + 2 + " ") + 3 + " "
+= "1 2 " + 3 + " "
+= "1 2 3 "</pre>
+    <p style="margin-top:10px"><strong>The pattern to look for:</strong> when the recursive call comes <em>before</em> the rest of the expression, the work happens on the way <em>back up</em> the call stack, in reverse order of the calls. When the recursive call comes <em>after</em>, the work happens on the way down. Whichever side the work sits on determines whether you build the string forward or backward.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong>AP Trap: Base case that returns the wrong empty value</strong>
+    For a recursive method that returns a String, the base case usually returns <code>""</code>. For one that returns an int sum, it returns <code>0</code>. For one that returns a count, it might return <code>0</code> or <code>1</code> depending on whether the base case "counts itself". The wrong empty value is the most common reason a recursive MCQ trace is off by one element.
   </div>
 </section>
 
@@ -935,6 +1044,50 @@ matrix[<span class="num">0</span>][<span class="num">0</span>] = <span class="nu
 <span class="cm">// Split: [38] [27]    [43] [3]</span>
 <span class="cm">// Merge: [27, 38]     [3, 43]</span>
 <span class="cm">// Merge: [3, 27, 38, 43]</span></pre>
+</section>
+
+<hr class="sep">
+
+<!-- ═══ MCQ PATTERNS PREVIEW ═══ -->
+<section class="section" id="mcq-patterns">
+  <div class="section-label">AP MCQ Preview</div>
+  <h2>Unit 4 MCQ Patterns That Show Up Every Year</h2>
+  <p>Unit 4 carries the most weight on the AP CSA MCQ section. The questions cluster around a handful of operational pitfalls. Knowing the pattern usually beats tracing the whole snippet.</p>
+
+  <div class="concept-box">
+    <strong>Pattern 1: <code>length</code> vs <code>length()</code> vs <code>size()</code></strong>
+    Arrays: <code>arr.length</code> (field, no parens). Strings: <code>s.length()</code> (method). ArrayLists: <code>list.size()</code> (method). MCQs frequently include a "won't compile" trap that swaps one for another. (See Topic 4.3.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 2: Enhanced for can't mutate primitives</strong>
+    Reassigning the loop variable in <code>for (int x : arr)</code> doesn't change <code>arr</code>. Calling a mutator on an object loop variable <em>does</em> change the object. The answer choice that says "the array is unchanged" is right for primitives. (See Topic 4.4.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 3: Remove during forward traversal</strong>
+    Calling <code>list.remove(i)</code> in a forward indexed loop without a compensating <code>i--</code> skips the element that slid into position <code>i</code>. Either traverse backward or adjust the index. Using an enhanced for at all throws <code>ConcurrentModificationException</code>. (See Topic 4.9.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 4: Row-major vs column-major output</strong>
+    Which loop is outer tells you the traversal direction. Iteration count is always <code>rows × cols</code>. Ragged 2D arrays use <code>g[r].length</code> as the per-row inner bound, not <code>g[0].length</code>. (See Topic 4.12.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 5: Sort state after pass k</strong>
+    Selection sort: the first <code>k</code> elements are the <em>k smallest</em>, in final position. Insertion sort: the first <code>k</code> elements are sorted <em>relative to each other</em>, but not necessarily in their final spots. (See Topic 4.15.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 6: Recursion call-tree trace</strong>
+    Recursive call <em>before</em> the rest of the expression means work happens on the way back up. <em>After</em> means work happens on the way down. Trace the base case first and unfold from there. (See Topic 4.16.)
+  </div>
+
+  <div class="concept-box">
+    <strong>Pattern 7: <code>ArrayList&lt;Integer&gt;.remove()</code> overload trap</strong>
+    <code>list.remove(2)</code> on an <code>ArrayList&lt;Integer&gt;</code> removes the element <em>at index 2</em>, not the value <code>2</code>. To remove the value, pass it boxed: <code>list.remove(Integer.valueOf(2))</code>. AP MCQs occasionally hide this in a "what is the list after these calls?" trace.
+  </div>
 </section>
 
 <hr class="sep">
