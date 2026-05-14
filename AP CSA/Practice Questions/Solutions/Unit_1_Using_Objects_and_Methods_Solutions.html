@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP CSA — Unit 1: Using Objects and Methods — Solutions | Dingrui Scholars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style data-theme="light">
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --mc-bg:#ECECEE;   --mc-ink:#333;      --mc-rule:#9A9A9A;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+    --sol-bg:#F1F7EE;  --sol-rule:#5E8E47;  --sol-ink:#2F4E1E;
+    --sol-accent:#3E7228;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.mc{background:var(--mc-bg);color:var(--mc-ink);border-color:var(--mc-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  .topics-line .scope{display:inline-block;background:#EFE9E4;color:#4A3A2A;border:1px solid #B5A68F;border-radius:3px;padding:1px 8px;font-size:9pt;font-weight:700;letter-spacing:.1em;margin-left:6px;vertical-align:1px;}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:14px 20px 4px;margin-bottom:22px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11.5pt;line-height:1.55;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 12px;}
+  .opts{list-style:none;margin:10px 0 0 12px;padding:0;}
+  .opts li{padding:4px 0;margin-bottom:4px;display:flex;gap:8px;align-items:baseline;}
+  .opts li .lbl{font-family:'Source Sans 3',sans-serif;font-weight:700;min-width:22px;}
+  .opts li.correct .lbl{color:var(--sol-accent);}
+  .opts li.correct{background:var(--sol-bg);border-radius:4px;padding:4px 8px;margin-left:-6px;}
+  .opts.cols2{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;row-gap:2px;}
+  .opts.cols1{display:block;}
+  code{font-family:'JetBrains Mono',monospace;font-size:0.95em;}
+  pre{font-family:'JetBrains Mono',monospace;font-size:10.5pt;line-height:1.5;background:#F8F6F1;border:1px solid #DDD0C8;border-radius:4px;padding:10px 14px;margin:8px 0;overflow-x:auto;}
+  pre code{font-size:inherit;}
+  .solution{margin:18px 0 22px;background:var(--sol-bg);border-left:3px solid var(--sol-rule);border-radius:0 4px 4px 0;padding:14px 18px 16px;font-size:11pt;line-height:1.65;}
+  .solution .answer-line{font-family:'Source Sans 3',sans-serif;font-weight:700;color:var(--sol-ink);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #d4e4cb;letter-spacing:.06em;font-size:11.5pt;}
+  .solution .answer-line .ans{color:var(--sol-accent);font-size:1.15em;letter-spacing:.1em;}
+  .solution .rationale{color:#2a2a2a;}
+  .solution .rationale p{margin:5px 0;}
+  .solution pre{background:#EFF5EB;border-color:#cfe0c5;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media (max-width: 600px){body{font-size:10.5pt;}.opts.cols2{grid-template-columns:1fr;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.opts.cols2{grid-template-columns:1fr 1fr;}pre{background:#f5f5f0;}}
+</style>
+</head>
+<body data-theme="light">
+
+<div class="brand">A&nbsp;P&nbsp;&nbsp;C&nbsp;O&nbsp;M&nbsp;P&nbsp;U&nbsp;T&nbsp;E&nbsp;R&nbsp;&nbsp;S&nbsp;C&nbsp;I&nbsp;E&nbsp;N&nbsp;C&nbsp;E&nbsp;&nbsp;A</div>
+<div class="chapter-tag">Unit 1 · Solutions</div>
+<h1 class="chapter-title">Using Objects and Methods — Solutions</h1>
+<p class="chapter-sub">Companion to the AP-Style MC Practice Set</p>
+<div class="legend">
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+  <span class="pill mc">AP MC</span>
+</div>
+<p class="topics-line">Unit <b>1: Using Objects and Methods</b><span class="scope">CSA</span></p>
+<hr class="thick"><hr class="thin">
+
+<div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">Worked Answers</span></div>
+<h2 class="section-head">Multiple Choice — Worked Answers</h2>
+<p class="instructions">Each item restates the prompt and choices, marks the correct letter, and gives a brief justification. Trap-distractor reasoning is called out where useful.</p>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q1</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">1.3 Integer Division</span></div>
+  <div class="q-body">
+    <p class="prompt">Value of <code>15 / 4 + 1</code>?</p>
+    <ul class="opts cols2">
+      <li class="correct"><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>4.0</code></li>
+      <li><span class="lbl">(C)</span> <code>4.75</code></li>
+      <li><span class="lbl">(D)</span> <code>5</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      Both operands are <code>int</code>, so <code>15 / 4</code> performs integer division and truncates toward zero: <code>15 / 4 = 3</code>. Then <code>3 + 1 = 4</code>. The result is an <code>int</code>, so (B) is wrong — there's no <code>double</code> anywhere in the expression. (C) is the real-number answer; (D) skips the truncation.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q2</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">1.5 Casting</span></div>
+  <div class="q-body">
+    <p class="prompt">Value of <code>(double)(15 / 4)</code>?</p>
+    <ul class="opts cols2">
+      <li class="correct"><span class="lbl">(A)</span> <code>3.0</code></li>
+      <li><span class="lbl">(B)</span> <code>3.7</code></li>
+      <li><span class="lbl">(C)</span> <code>3.75</code></li>
+      <li><span class="lbl">(D)</span> <code>4.0</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      Operator precedence: the parentheses force <code>15 / 4</code> to be evaluated <em>first</em>, while both operands are still <code>int</code>. So <code>15 / 4 = 3</code> (integer division). The cast to <code>double</code> then converts <code>3</code> → <code>3.0</code>. To get <code>3.75</code>, the cast must be inside: <code>(double) 15 / 4</code> or <code>15 / 4.0</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">String Immutability</span></div>
+  <div class="q-body">
+    <p class="prompt">After <code>String s = "hello"; s.concat(" world");</code>, what does <code>println(s)</code> print?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>hello world</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>hello</code></li>
+      <li><span class="lbl">(C)</span> <code> world</code></li>
+      <li><span class="lbl">(D)</span> A compile-time error occurs.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>String</code> objects are <strong>immutable</strong>. <code>s.concat(" world")</code> returns a <em>new</em> <code>String</code> containing <code>"hello world"</code>, but since the result is not assigned to anything, it's discarded. <code>s</code> still references the original <code>"hello"</code>. To make (A) correct, the code would need <code>s = s.concat(" world");</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">Math.random()</span></div>
+  <div class="q-body">
+    <p class="prompt">Random integer from 5 to 10 inclusive?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>(int)(Math.random() * 5) + 5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>(int)(Math.random() * 6) + 5</code></li>
+      <li><span class="lbl">(C)</span> <code>(int)(Math.random() * 10) + 5</code></li>
+      <li><span class="lbl">(D)</span> <code>(int)(Math.random() * 5 + 10)</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      Count the values: 5, 6, 7, 8, 9, 10 — that's <strong>6 possible integers</strong>. Standard pattern: <code>(int)(Math.random() * range) + min</code> where <code>range = max − min + 1</code>. Here, <code>range = 10 − 5 + 1 = 6</code>, <code>min = 5</code>, giving <code>(int)(Math.random() * 6) + 5</code>.
+      <p>(A) only yields 5–9 (range 5 instead of 6). (C) yields 5–14 (overshoots). (D) yields 10–14 (the <code>+ 10</code> is inside the cast).</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">String Methods</span></div>
+  <div class="q-body">
+    <p class="prompt">Value of <code>"hello".length() + "world".substring(1).length()</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>9</code></li>
+      <li><span class="lbl">(C)</span> <code>10</code></li>
+      <li><span class="lbl">(D)</span> <code>11</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      Evaluate piece by piece:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>"hello".length()</code> → <code>5</code></li>
+        <li><code>"world".substring(1)</code> → <code>"orld"</code> (drops index 0)</li>
+        <li><code>"orld".length()</code> → <code>4</code></li>
+      </ul>
+      Sum: <code>5 + 4 = 9</code>. (C) miscounts the substring as 5 chars; (D) misses the substring entirely.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">Compound Assignment</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>int x = 17; x %= 5; x *= 2;</code> prints?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0</code></li>
+      <li><span class="lbl">(B)</span> <code>2</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>4</code></li>
+      <li><span class="lbl">(D)</span> <code>14</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      Step through:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>x = 17</code></li>
+        <li><code>x %= 5</code> → <code>x = 17 % 5 = 2</code></li>
+        <li><code>x *= 2</code> → <code>x = 2 * 2 = 4</code></li>
+      </ul>
+      The compound operators apply in order, top-to-bottom. (D) is the trap if you apply <code>*= 2</code> to the <em>original</em> <code>17</code> and forget the <code>%</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span><span class="pill mc">AP MC</span><span class="pill topic">String — `==` vs `.equals()`</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>String a = new String("AP"); String b = "AP";</code> Evaluate (i) <code>a == b</code> and (ii) <code>a.equals(b)</code>.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> (i) <code>true</code>; (ii) <code>true</code></li>
+      <li class="correct"><span class="lbl">(B)</span> (i) <code>false</code>; (ii) <code>true</code></li>
+      <li><span class="lbl">(C)</span> (i) <code>true</code>; (ii) <code>false</code></li>
+      <li><span class="lbl">(D)</span> (i) <code>false</code>; (ii) <code>false</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>a = new String("AP")</code> explicitly allocates a new <code>String</code> object on the heap. <code>b = "AP"</code> reuses the literal from the String pool. So <code>a</code> and <code>b</code> are different references → <code>a == b</code> is <code>false</code>. <code>.equals()</code> compares the character content, so <code>a.equals(b)</code> is <code>true</code>.
+      <p><strong>Rule:</strong> use <code>.equals()</code> for content comparison; <code>==</code> on objects compares references.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Integer Overflow</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>int x = Integer.MAX_VALUE; println(x + 1);</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>2147483648</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>-2147483648</code></li>
+      <li><span class="lbl">(C)</span> <code>0</code></li>
+      <li><span class="lbl">(D)</span> A run-time error occurs.</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      Java <code>int</code> is a 32-bit signed two's-complement integer. <code>Integer.MAX_VALUE = 2,147,483,647</code>. Adding 1 wraps around to <code>Integer.MIN_VALUE = -2,147,483,648</code>. There is <strong>no run-time error</strong> for integer overflow in Java — the wraparound is silent.
+      <p>(A) is the mathematical answer (out of range); (C) confuses overflow with unsigned modular arithmetic; (D) assumes Java throws on overflow (it doesn't).</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Type Promotion</span></div>
+  <div class="q-body">
+    <p class="prompt">Value of <code>5 + 3 / 2 + 1.5</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>7.0</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>7.5</code></li>
+      <li><span class="lbl">(C)</span> <code>8.0</code></li>
+      <li><span class="lbl">(D)</span> <code>8.5</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      Java evaluates operators by precedence first (<code>*, /, %</code> before <code>+, −</code>), then left to right within the same precedence. So <code>3 / 2</code> is evaluated <em>first</em> — both operands are <code>int</code>, so it's integer division: <code>3 / 2 = 1</code>. Then:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>5 + 1 = 6</code> (still <code>int</code>)</li>
+        <li><code>6 + 1.5 = 7.5</code> (<code>int + double</code> → <code>double</code>)</li>
+      </ul>
+      (D) is the trap if you treat <code>3 / 2</code> as a real-number division <code>1.5</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String Method Chaining</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>"competition".substring(3, 8).indexOf('e')</code> →?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>-1</code></li>
+      <li><span class="lbl">(B)</span> <code>0</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>1</code></li>
+      <li><span class="lbl">(D)</span> <code>5</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="rationale">
+      Index map of <code>"competition"</code>:
+<pre><code> c  o  m  p  e  t  i  t  i  o  n
+ 0  1  2  3  4  5  6  7  8  9 10</code></pre>
+      <code>substring(3, 8)</code> includes index 3 and stops <em>before</em> index 8, giving <code>"petit"</code>. Then on the <em>new</em> string <code>"petit"</code>, <code>indexOf('e')</code> finds <code>'e'</code> at index <strong>1</strong> (not 4 — indices restart in the substring).
+      <p>(D) is the trap of forgetting that <code>indexOf</code> on the substring uses indices into the substring, not the original.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Aliasing</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>String s = "first"; String t = s; s = "second"; println(t);</code></p>
+    <ul class="opts cols2">
+      <li class="correct"><span class="lbl">(A)</span> <code>first</code></li>
+      <li><span class="lbl">(B)</span> <code>second</code></li>
+      <li><span class="lbl">(C)</span> <code>null</code></li>
+      <li><span class="lbl">(D)</span> <code>""</code> (empty string)</li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="rationale">
+      Walk through the references:
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>s = "first"</code> → <code>s</code> points to the <code>"first"</code> object.</li>
+        <li><code>t = s</code> → <code>t</code> now <em>also</em> points to <code>"first"</code> (aliasing).</li>
+        <li><code>s = "second"</code> → <code>s</code> is <em>reassigned</em> to point to a new object <code>"second"</code>. <strong>This does not change what <code>t</code> points to.</strong></li>
+      </ul>
+      <code>t</code> still references the original <code>"first"</code> object — and because <code>String</code> is immutable, the original object cannot have been modified anyway. (B) is the trap of confusing "<code>t</code> is a copy of <code>s</code>" with "<code>t</code> tracks whatever <code>s</code> currently references."
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Math.pow Return Type</span></div>
+  <div class="q-body">
+    <p class="prompt">Type and value of <code>Math.pow(2, 3)</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>int 8</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>double 8.0</code></li>
+      <li><span class="lbl">(C)</span> <code>int 6</code></li>
+      <li><span class="lbl">(D)</span> <code>double 6.0</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>Math.pow</code> has signature <code>public static double pow(double a, double b)</code>. The <code>int</code> arguments <code>2</code> and <code>3</code> are auto-widened to <code>double</code>, the method computes <code>2.0³ = 8.0</code>, and returns a <code>double</code>. To use the result as an <code>int</code> you must cast: <code>int n = (int) Math.pow(2, 3);</code>.
+      <p>(C) and (D) confuse exponentiation with multiplication (<code>2 × 3 = 6</code>).</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Modulus with Negatives</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>(-7) % 3</code> →?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>-2</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>-1</code></li>
+      <li><span class="lbl">(C)</span> <code>1</code></li>
+      <li><span class="lbl">(D)</span> <code>2</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      In Java, integer division truncates toward zero, and <code>%</code> follows the identity <code>a == (a / b) * b + (a % b)</code>, with the sign of the result matching the <em>dividend</em>.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>-7 / 3 = -2</code> (truncating <code>-2.33...</code> toward zero gives <code>-2</code>)</li>
+        <li><code>(-2) * 3 = -6</code></li>
+        <li><code>(-7) - (-6) = -1</code> → so <code>(-7) % 3 = -1</code></li>
+      </ul>
+      (C) is the math-class answer (always non-negative); Java's <code>%</code> is <em>not</em> the mathematical modulo for negative operands.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Mixed-Type Expression</span></div>
+  <div class="q-body">
+    <p class="prompt">Output of <code>println(7 / 2 * 1.0)</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0.5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>3.0</code></li>
+      <li><span class="lbl">(C)</span> <code>3.5</code></li>
+      <li><span class="lbl">(D)</span> <code>7.0</code></li>
+    </ul>
+  </div>
+  <div class="rationale"></div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>/</code> and <code>*</code> have the same precedence and associate left-to-right.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><code>7 / 2</code> first — both <code>int</code>, integer division: <code>3</code>.</li>
+        <li><code>3 * 1.0</code> — <code>int * double</code> promotes to <code>double</code>: <code>3.0</code>.</li>
+      </ul>
+      The trap (C) treats the multiplication by <code>1.0</code> as "promoting the whole expression to double from the start." It doesn't — promotion happens <em>at the operator</em>, not retroactively. To get <code>3.5</code>, the expression would need to be <code>7 / 2.0 * 1.0</code> or <code>7.0 / 2 * 1.0</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Static vs Instance</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>int x = -7;</code> Which expression returns <code>7</code>?</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>x.abs()</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>Math.abs(x)</code></li>
+      <li><span class="lbl">(C)</span> <code>Math.abs.x</code></li>
+      <li><span class="lbl">(D)</span> <code>abs(x)</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      <code>Math.abs</code> is a <strong>static</strong> method on the <code>Math</code> class. Static methods are called as <code>ClassName.method(args)</code>.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>(A) <strong>does not compile</strong> — <code>int</code> is a primitive type and has no methods. Only <em>reference types</em> can have methods invoked via the dot operator.</li>
+        <li>(C) is invalid syntax — <code>Math.abs</code> isn't a field; it's a method, so the call needs parentheses with the argument inside.</li>
+        <li>(D) would work only if <code>abs</code> were imported as a static-import: <code>import static java.lang.Math.abs;</code>. Without that, the bare name <code>abs</code> is undefined.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 1 Solutions (Draft v1)</span>
+  <span>Page · Unit 1</span>
+</footer>
+
+</body>
+</html>
