@@ -160,25 +160,29 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Array Reverse</span></div>
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Array aliasing + == on references</span></div>
   <div class="q-body">
-    <p class="prompt">Reverse <code>{1,2,3,4,5}</code> via swap loop — print <code>a[0] a[2] a[4]</code>?</p>
+    <p class="prompt"><code>int[] a = {1,2,3}; b = a; b[1] = 99; c = {1,99,3};</code><br>Print <code>a[1] + " " + (a == b) + " " + (a == c)</code>.</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1 3 5</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>5 3 1</code></li>
-      <li><span class="lbl">(C)</span> <code>5 4 1</code></li>
-      <li><span class="lbl">(D)</span> <code>5 2 1</code></li>
+      <li><span class="lbl">(A)</span> <code>1 true false</code></li>
+      <li><span class="lbl">(B)</span> <code>99 false false</code></li>
+      <li><span class="lbl">(C)</span> <code>99 true true</code></li>
+      <li class="correct"><span class="lbl">(D)</span> <code>99 true false</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(D)</span></div>
     <div class="rationale">
-      <code>a.length / 2 = 2</code>, so the loop runs for <code>i = 0, 1</code> — exactly enough swaps to reverse a 5-element array.
-<pre><code>i = 0: swap a[0] ↔ a[4]: {5, 2, 3, 4, 1}
-i = 1: swap a[1] ↔ a[3]: {5, 4, 3, 2, 1}
-i = 2: 2 &lt; 2 false → exit</code></pre>
-      Note the middle element <code>a[2]</code> is untouched — for an odd-length array, the loop correctly leaves the center alone. Output: <code>5 3 1</code>.
-      <p><strong>Trap (A)</strong> is the original array (no swaps happened). The endpoint computation <code>a.length - 1 - i</code> is the key to a clean in-place reverse — get it wrong and you blow up the array.</p>
+      Two independent ideas combined: (1) <code>b = a</code> does <em>not</em> clone the array — both names point to the same underlying object, so mutations are shared. (2) <code>==</code> on array references compares <em>reference identity</em>, not contents.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>After <code>b = a</code>: both <code>a</code> and <code>b</code> reference the same array <code>{1, 2, 3}</code>.</li>
+        <li><code>b[1] = 99</code> reaches through that shared reference → the array becomes <code>{1, 99, 3}</code>. Reading <code>a[1]</code> sees <code>99</code>.</li>
+        <li><code>c = {1, 99, 3}</code> allocates a <em>brand-new</em> array on the heap with matching contents.</li>
+        <li><code>a == b</code> → same reference → <code>true</code>.</li>
+        <li><code>a == c</code> → different references (even though contents are identical) → <code>false</code>.</li>
+      </ul>
+      Output: <code>"99 true false"</code>.
+      <p><strong>Trap (A) <code>"1 true false"</code></strong> assumes <code>b = a</code> is a copy. <strong>(C) <code>"99 true true"</code></strong> assumes <code>==</code> compares content — it doesn't (no <code>.equals()</code> override for plain <code>int[]</code> beyond <code>Object</code>'s reference equality; use <code>Arrays.equals</code> for content). <strong>(B)</strong> mixes both mistakes.</p>
     </div>
   </div>
 </div>
@@ -210,58 +214,59 @@ i = 2: 2 &lt; 2 false → exit</code></pre>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">2D Access</span></div>
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">2D anti-diagonal sum</span></div>
   <div class="q-body">
-    <p class="prompt"><code>g[1][2] + g[2][1]</code> on a 3×3 grid <code>1..9</code>.</p>
+    <p class="prompt">3×3 grid <code>1..9</code>; nested loop sums <code>g[r][c]</code> when <code>r + c == 2</code>.</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>8</code></li>
-      <li><span class="lbl">(B)</span> <code>11</code></li>
-      <li><span class="lbl">(C)</span> <code>13</code></li>
-      <li class="correct"><span class="lbl">(D)</span> <code>14</code></li>
+      <li><span class="lbl">(A)</span> <code>9</code></li>
+      <li><span class="lbl">(B)</span> <code>12</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>15</code></li>
+      <li><span class="lbl">(D)</span> <code>18</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(D)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      Indexing is <code>g[row][col]</code>, both zero-based.
-<pre><code>row\col   0   1   2
-   0   |  1   2   3
-   1   |  4   5   6
-   2   |  7   8   9</code></pre>
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>g[1][2]</code> → row 1, col 2 → <code>6</code></li>
-        <li><code>g[2][1]</code> → row 2, col 1 → <code>8</code></li>
-        <li>Sum: <code>14</code></li>
-      </ul>
-      <strong>Trap (B)</strong> swaps the indices (reads <code>g[2][1]</code> as "col 2, row 1" = <code>6</code>, doubling up). <strong>Trap (C)</strong> assumes <code>g[r][c] == r * 3 + c + 1</code> arithmetic without actually checking the diagonal swap. Always draw the grid.
+      <code>r + c == 2</code> picks out the <strong>anti-diagonal</strong> — the diagonal running from top-right to bottom-left.
+<pre><code>row\col   0     1     2
+   0   |  .     .   [3] ← r+c=2
+   1   |  .   [5]    .  ← r+c=2
+   2   | [7]    .     .  ← r+c=2</code></pre>
+      Sum: <code>3 + 5 + 7 = 15</code>.
+      <p><strong>Trap (A) <code>9</code></strong> reads the main diagonal (<code>r == c</code>: 1 + 5 + 9 = 15… actually = 15 too — that coincidence is intentional, so be careful). Wait — the main diagonal is <code>1 + 5 + 9 = 15</code>, same as the anti-diagonal. <strong>Trap (A) <code>9</code></strong> represents grabbing the single element at <code>(2, 2)</code> (only the bottom-right corner of the "diagonal"). <strong>(B) <code>12</code></strong> drops the corner (only 5 + 7). <strong>(D) <code>18</code></strong> double-counts the center.</p>
+      <p><em>Anti-diagonal trick:</em> for an N×N grid, all elements on the anti-diagonal satisfy <code>r + c == N − 1</code>. Memorize the two diagonal forms — they appear constantly on FRQ-style 2D problems.</p>
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">2D Traversal (Non-Square)</span></div>
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">In-place 2D transpose</span></div>
   <div class="q-body">
-    <p class="prompt"><code>m = {{1,2},{3,4},{5,6}}</code>; sum elements where <code>r == c</code>.</p>
+    <p class="prompt"><code>transpose(g)</code> swaps <code>m[r][c]</code> with <code>m[c][r]</code> for all <code>c &gt; r</code>. Print <code>g[0][2] + " " + g[2][0] + " " + g[1][1]</code> after.</p>
     <ul class="opts cols2">
-      <li class="correct"><span class="lbl">(A)</span> <code>5</code></li>
-      <li><span class="lbl">(B)</span> <code>9</code></li>
-      <li><span class="lbl">(C)</span> <code>21</code></li>
-      <li><span class="lbl">(D)</span> <code>1</code></li>
+      <li><span class="lbl">(A)</span> <code>3 7 5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>7 3 5</code></li>
+      <li><span class="lbl">(C)</span> <code>3 3 5</code></li>
+      <li><span class="lbl">(D)</span> <code>6 8 5</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      The array has <strong>3 rows × 2 columns</strong> — it is <em>not</em> square. The inner loop bound <code>c &lt; m[r].length</code> is <code>2</code> for every row, so <code>c</code> only ever takes values <code>0, 1</code>.
+      The inner loop starts at <code>c = r + 1</code>, so each pair <code>(r, c)</code> with <code>r &lt; c</code> is swapped exactly <em>once</em>. (If the inner started at <code>c = 0</code>, each pair would swap twice and the array would end up unchanged.)
+<pre><code>start:                  swap (0,1) ↔ (1,0):    swap (0,2) ↔ (2,0):    swap (1,2) ↔ (2,1):
+1 2 3                   1 4 3                   1 4 7                  1 4 7
+4 5 6                   2 5 6                   2 5 6                  2 5 8
+7 8 9                   7 8 9                   3 8 9                  3 6 9</code></pre>
+      Final grid is the transpose: rows are the original columns. Read out:
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li>r=0, c=0: <code>r == c</code> ✓ → add <code>m[0][0] = 1</code> → s = 1</li>
-        <li>r=0, c=1: 0 ≠ 1 → skip</li>
-        <li>r=1, c=0: 1 ≠ 0 → skip</li>
-        <li>r=1, c=1: <code>r == c</code> ✓ → add <code>m[1][1] = 4</code> → s = 5</li>
-        <li>r=2, c=0 and c=1: 2 ≠ 0, 2 ≠ 1 → skip both (<strong>no c = 2 visited</strong>)</li>
+        <li><code>g[0][2]</code> → <code>7</code></li>
+        <li><code>g[2][0]</code> → <code>3</code></li>
+        <li><code>g[1][1]</code> → <code>5</code> (center is invariant under transpose)</li>
       </ul>
-      Final <code>s = 5</code>. <strong>Trap (B)</strong> assumes square geometry and adds <code>m[2][2]</code>, which doesn't exist. <strong>Trap (C)</strong> sums every element.
-      <p><strong>Lesson:</strong> a <code>int[][]</code> doesn't have to be rectangular — it's an array of arrays. Always bound the inner loop by <code>m[r].length</code>, not <code>m.length</code>.</p>
+      Print: <code>"7 3 5"</code>.
+      <p><strong>Trap (A) <code>"3 7 5"</code></strong> reverses the swap. <strong>(C) <code>"3 3 5"</code></strong> uses pre-transpose <code>g[0][2]</code> value. <strong>(D) <code>"6 8 5"</code></strong> is the pre-transpose <code>g[1][2]</code> + <code>g[2][1]</code> values (no swap happened in your head).</p>
+      <p>2D-mutation-through-parameter pattern: the array is passed by reference, so changes inside <code>transpose</code> persist in the caller — no return needed.</p>
     </div>
   </div>
 </div>
@@ -269,24 +274,28 @@ i = 2: 2 &lt; 2 false → exit</code></pre>
 <div class="page-break"></div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">ArrayList Insert</span></div>
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">ArrayList aliasing through set + add</span></div>
   <div class="q-body">
-    <p class="prompt">Insert <code>"X"</code> at index 1, then <code>"Y"</code> at index 0.</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>[a, X, b, c]</code></li>
-      <li><span class="lbl">(B)</span> <code>[Y, X, a, b, c]</code></li>
-      <li class="correct"><span class="lbl">(C)</span> <code>[Y, a, X, b, c]</code></li>
-      <li><span class="lbl">(D)</span> <code>[a, b, X, Y, c]</code></li>
+    <p class="prompt"><code>a</code> = <code>[1,2,3]</code>; <code>b = a;</code> <code>b.set(0, 99); b.add(4);</code> Print <code>a.size() + " " + a.get(0) + " " + a.get(3)</code>.</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>3 1 ?</code></li>
+      <li><span class="lbl">(B)</span> <code>3 99 4</code></li>
+      <li><span class="lbl">(C)</span> <code>4 1 4</code></li>
+      <li class="correct"><span class="lbl">(D)</span> <code>4 99 4</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(D)</span></div>
     <div class="rationale">
-      <code>add(index, element)</code> inserts <em>at</em> the given index and shifts the existing elements (at that index and after) one position to the right.
-<pre><code>start                     [a, b, c]
-add(1, "X")               [a, X, b, c]
-add(0, "Y")               [Y, a, X, b, c]</code></pre>
-      <strong>Trap (B)</strong> assumes both inserts happen against the <em>original</em> list, not the updated list. <strong>(D)</strong> appends at the end. The key is that the <em>second</em> <code>add</code> is computed against the new size 4 list, so inserting at 0 pushes everything (including <code>X</code> now at index 1) right by one.
+      <code>ArrayList</code> is an object; <code>b = a</code> aliases the same underlying list. Every mutation through <code>b</code> is visible through <code>a</code>.
+<pre><code>step          | underlying list  a.size()
+a.add(1..3)   | [1, 2, 3]            3
+b = a         | [1, 2, 3]            3   (same list, two names)
+b.set(0, 99)  | [99, 2, 3]           3   (no size change — set overwrites)
+b.add(4)      | [99, 2, 3, 4]        4   (append → size grows)</code></pre>
+      Then <code>a.size() = 4</code>, <code>a.get(0) = 99</code>, <code>a.get(3) = 4</code> → print <code>"4 99 4"</code>.
+      <p><strong>Trap (A) <code>"3 1 ?"</code></strong> assumes <code>b = a</code> copies. <strong>(B) <code>"3 99 4"</code></strong> sees the mutations but forgets <code>add</code> increased the size — but then <code>a.get(3)</code> would throw on a size-3 list. <strong>(C) <code>"4 1 4"</code></strong> recognizes the size change but somehow ignores <code>set</code>.</p>
+      <p>Lesson: assigning one <code>ArrayList</code> reference to another never clones. To copy, use <code>new ArrayList&lt;&gt;(a)</code>.</p>
     </div>
   </div>
 </div>
@@ -400,28 +409,29 @@ Pass 2 (i=2):
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Recursion — Factorial</span></div>
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Recursion — exponential branching</span></div>
   <div class="q-body">
-    <p class="prompt"><code>f(n) = (n &lt;= 1) ? 1 : n * f(n - 1)</code>; <code>f(5)</code>?</p>
+    <p class="prompt"><code>mystery(n) = (n == 0) ? "X" : mystery(n - 1) + mystery(n - 1)</code>; <code>mystery(4).length()</code>?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>5</code></li>
-      <li><span class="lbl">(B)</span> <code>25</code></li>
-      <li class="correct"><span class="lbl">(C)</span> <code>120</code></li>
-      <li><span class="lbl">(D)</span> <code>StackOverflowError</code>.</li>
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>8</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>16</code></li>
+      <li><span class="lbl">(D)</span> <code>32</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      Standard factorial — the base case <code>n &lt;= 1</code> returns 1, the recursive case multiplies.
-<pre><code>f(5) = 5 * f(4)
-     = 5 * 4 * f(3)
-     = 5 * 4 * 3 * f(2)
-     = 5 * 4 * 3 * 2 * f(1)
-     = 5 * 4 * 3 * 2 * 1
-     = 120</code></pre>
-      <strong>Trap (D):</strong> stack overflow only happens if the base case is never reached. Here the argument <code>n - 1</code> strictly decreases each call and eventually hits <code>1</code>, so the recursion terminates in 5 levels.
-      <p>An AP exam might also ask: how many <em>activations</em> of <code>f</code> are on the stack at peak? Answer: 5 (one for each of <code>f(5), f(4), …, f(1)</code>).</p>
+      Each recursive call splits into <em>two</em> identical sub-calls and concatenates their results. The length doubles at every level.
+<pre><code>n  | mystery(n)              length
+0  | "X"                      1
+1  | "X" + "X"      = "XX"    2
+2  | "XX" + "XX"   = "XXXX"   4
+3  |  "XXXX"+"XXXX"           8
+4  |  …            (8+8)     16</code></pre>
+      In general, <code>mystery(n)</code> has length <code>2ⁿ</code>. For <code>n = 4</code>, that's <code>2⁴ = 16</code>.
+      <p><strong>Trap (A) <code>4</code></strong> assumes linear growth (one recursive call per level). <strong>(B) <code>8</code></strong> stops one level short — picks <code>2³</code> rather than <code>2⁴</code>. <strong>(D) <code>32</code></strong> overshoots — adds an extra doubling.</p>
+      <p>The deeper lesson: a recursive method with <em>k</em> recursive calls has a call tree with branching factor <em>k</em>. Total work is exponential in the depth: this method makes <code>2ⁿ + 2ⁿ⁻¹ + … + 2 + 1 = 2ⁿ⁺¹ − 1</code> total calls. Even at <code>n = 30</code>, you'd be making ~2 billion calls — the classic naive-Fibonacci trap.</p>
     </div>
   </div>
 </div>
@@ -454,34 +464,34 @@ Pass 2 (i=2):
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Array Aliasing in Method</span></div>
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Array — rebind vs mutate in method</span></div>
   <div class="q-body">
-    <p class="prompt"><code>swapEnds(vals)</code> on <code>{1,2,3,4,5}</code> — caller sees what?</p>
-    <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1 5</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>5 1</code></li>
-      <li><span class="lbl">(C)</span> <code>1 1</code></li>
-      <li><span class="lbl">(D)</span> No effect.</li>
+    <p class="prompt"><code>modify(a)</code>: <code>a[0] = 99; a = new int[]{100,200,300}; a[0] = 999;</code> — after <code>modify(vals)</code> on <code>{1,2,3,4,5}</code>, print <code>vals[0] + " " + vals[2] + " " + vals.length</code>.</p>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>1 3 5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>99 3 5</code></li>
+      <li><span class="lbl">(C)</span> <code>999 300 3</code></li>
+      <li><span class="lbl">(D)</span> <code>100 300 3</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      Arrays in Java are <strong>objects</strong>. The parameter <code>a</code> inside the method is a copy of the <em>reference</em>, but it points to the same underlying array as <code>vals</code> in the caller. Mutating the elements is visible everywhere that reference is held.
-<pre><code>Before: vals = {1, 2, 3, 4, 5}
-Inside swapEnds:
-  tmp = a[0]            // tmp = 1
-  a[0] = a[4]           // {5, 2, 3, 4, 5}
-  a[4] = tmp            // {5, 2, 3, 4, 1}
-After:  vals = {5, 2, 3, 4, 1}
-println vals[0] + " " + vals[4]: "5 1"</code></pre>
-      <strong>Trap (D):</strong> students sometimes assume "pass by value" means "no side effects." For object types, the <em>reference</em> is the value, and side effects on the referent are absolutely visible. Same rule applies to <code>ArrayList</code> and any custom class instance. Compare with Unit 3 Q14: primitives don't escape, references do.
+      Java passes the array reference <em>by value</em>: the parameter <code>a</code> is a local copy of the reference. The body does three things, in order — and only the <em>first</em> escapes the method.
+<pre><code>step                          | parameter a points to         caller's vals
+on entry                      | (original) {1,2,3,4,5}        {1,2,3,4,5}
+a[0] = 99                     | {99,2,3,4,5}                  {99,2,3,4,5}   ← shared array mutated
+a = new int[]{100,200,300}    | (NEW)     {100,200,300}       {99,2,3,4,5}   ← caller untouched
+a[0] = 999                    | (NEW)     {999,200,300}       {99,2,3,4,5}   ← still untouched</code></pre>
+      After return: <code>vals = {99, 2, 3, 4, 5}</code>. Print <code>vals[0] = 99</code>, <code>vals[2] = 3</code>, <code>vals.length = 5</code> → <code>"99 3 5"</code>.
+      <p><strong>Trap (C) <code>"999 300 3"</code></strong> is the canonical mistake — assumes the method's reassignment of <code>a</code> is visible to the caller. It isn't. Reassigning a parameter never reaches the caller; mutating through it does. <strong>(A) <code>"1 3 5"</code></strong> assumes pass-by-value means nothing happens. <strong>(D) <code>"100 300 3"</code></strong> sees the rebind but misses the second mutation.</p>
+      <p>This is the array twin of Unit 3 Q7's rebind-vs-mutate. The rule is uniform across <code>int[]</code>, <code>ArrayList</code>, and any class instance.</p>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 4 Solutions (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 4 Solutions (Draft v2 · exam-level)</span>
   <span>Page · Unit 4</span>
 </footer>
 

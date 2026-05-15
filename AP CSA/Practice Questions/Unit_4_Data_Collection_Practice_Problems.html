@@ -81,7 +81,7 @@
 <p class="topics-line">Unit <b>4: Data Collections</b><span class="scope">CSA</span></p>
 <hr class="thick"><hr class="thin">
 <div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner">Draft v1 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); array/ArrayList/2D/search/sort/recursion trace heavy with realistic distractors. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
+<p class="draft-banner">Draft v2 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); array/ArrayList/2D/search/sort/recursion trace heavy with realistic distractors. HARDs upgraded: array aliasing + ==, 2D anti-diagonal sum, in-place transpose, ArrayList aliasing, exponential-branching recursion, array rebind-vs-mutate. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
 
 <!-- ════════════════════════════════ MULTIPLE CHOICE ════════════════════════════════ -->
 <div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">15 questions · ~34 min at exam pace</span></div>
@@ -162,24 +162,22 @@ System.out.println(vals[0] + " " + vals[3]);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q4</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.5 Array Reverse</span>
+    <span class="pill topic">4.4 Array aliasing + == on references</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>int[] a = {1, 2, 3, 4, 5};
-for (int i = 0; i &lt; a.length / 2; i++) {
-  int tmp = a[i];
-  a[i] = a[a.length - 1 - i];
-  a[a.length - 1 - i] = tmp;
-}
-System.out.println(a[0] + " " + a[2] + " " + a[4]);</code></pre>
+<pre><code>int[] a = {1, 2, 3};
+int[] b = a;
+b[1] = 99;
+int[] c = {1, 99, 3};
+System.out.println(a[1] + " " + (a == b) + " " + (a == c));</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1 3 5</code></li>
-      <li><span class="lbl">(B)</span> <code>5 3 1</code></li>
-      <li><span class="lbl">(C)</span> <code>5 4 1</code></li>
-      <li><span class="lbl">(D)</span> <code>5 2 1</code></li>
+      <li><span class="lbl">(A)</span> <code>1 true false</code></li>
+      <li><span class="lbl">(B)</span> <code>99 false false</code></li>
+      <li><span class="lbl">(C)</span> <code>99 true true</code></li>
+      <li><span class="lbl">(D)</span> <code>99 true false</code></li>
     </ul>
   </div>
 </div>
@@ -215,7 +213,7 @@ System.out.println(list);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q6</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.11 2D Access</span>
+    <span class="pill topic">4.12 2D anti-diagonal sum</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
@@ -223,13 +221,19 @@ System.out.println(list);</code></pre>
 <pre><code>int[][] g = { {1, 2, 3},
               {4, 5, 6},
               {7, 8, 9} };
-System.out.println(g[1][2] + g[2][1]);</code></pre>
+int sum = 0;
+for (int r = 0; r &lt; g.length; r++) {
+  for (int c = 0; c &lt; g[r].length; c++) {
+    if (r + c == 2) sum += g[r][c];
+  }
+}
+System.out.println(sum);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>8</code></li>
-      <li><span class="lbl">(B)</span> <code>11</code></li>
-      <li><span class="lbl">(C)</span> <code>13</code></li>
-      <li><span class="lbl">(D)</span> <code>14</code></li>
+      <li><span class="lbl">(A)</span> <code>9</code></li>
+      <li><span class="lbl">(B)</span> <code>12</code></li>
+      <li><span class="lbl">(C)</span> <code>15</code></li>
+      <li><span class="lbl">(D)</span> <code>18</code></li>
     </ul>
   </div>
 </div>
@@ -238,27 +242,33 @@ System.out.println(g[1][2] + g[2][1]);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q7</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.12 2D Traversal (Non-Square)</span>
+    <span class="pill topic">4.12 In-place 2D transpose</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>int[][] m = { {1, 2}, {3, 4}, {5, 6} };
-int s = 0;
-for (int r = 0; r &lt; m.length; r++) {
-  for (int c = 0; c &lt; m[r].length; c++) {
-    if (r == c) {
-      s += m[r][c];
+<pre><code>public static void transpose(int[][] m) {
+  for (int r = 0; r &lt; m.length; r++) {
+    for (int c = r + 1; c &lt; m[r].length; c++) {
+      int tmp = m[r][c];
+      m[r][c] = m[c][r];
+      m[c][r] = tmp;
     }
   }
 }
-System.out.println(s);</code></pre>
+
+// in main:
+int[][] g = { {1, 2, 3},
+              {4, 5, 6},
+              {7, 8, 9} };
+transpose(g);
+System.out.println(g[0][2] + " " + g[2][0] + " " + g[1][1]);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>5</code></li>
-      <li><span class="lbl">(B)</span> <code>9</code></li>
-      <li><span class="lbl">(C)</span> <code>21</code></li>
-      <li><span class="lbl">(D)</span> <code>1</code></li>
+      <li><span class="lbl">(A)</span> <code>3 7 5</code></li>
+      <li><span class="lbl">(B)</span> <code>7 3 5</code></li>
+      <li><span class="lbl">(C)</span> <code>3 3 5</code></li>
+      <li><span class="lbl">(D)</span> <code>6 8 5</code></li>
     </ul>
   </div>
 </div>
@@ -269,22 +279,23 @@ System.out.println(s);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.8 ArrayList Insert</span>
+    <span class="pill topic">4.8 ArrayList aliasing through set + add</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
-list.add("a"); list.add("b"); list.add("c");
-list.add(1, "X");
-list.add(0, "Y");
-System.out.println(list);</code></pre>
+<pre><code>ArrayList&lt;Integer&gt; a = new ArrayList&lt;&gt;();
+a.add(1); a.add(2); a.add(3);
+ArrayList&lt;Integer&gt; b = a;
+b.set(0, 99);
+b.add(4);
+System.out.println(a.size() + " " + a.get(0) + " " + a.get(3));</code></pre>
     <p>What is printed?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>[a, X, b, c]</code></li>
-      <li><span class="lbl">(B)</span> <code>[Y, X, a, b, c]</code></li>
-      <li><span class="lbl">(C)</span> <code>[Y, a, X, b, c]</code></li>
-      <li><span class="lbl">(D)</span> <code>[a, b, X, Y, c]</code></li>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>3 1 ?</code></li>
+      <li><span class="lbl">(B)</span> <code>3 99 4</code></li>
+      <li><span class="lbl">(C)</span> <code>4 1 4</code></li>
+      <li><span class="lbl">(D)</span> <code>4 99 4</code></li>
     </ul>
   </div>
 </div>
@@ -374,21 +385,21 @@ System.out.println(idx);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q13</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.16 Recursion — Factorial</span>
+    <span class="pill topic">4.16 Recursion — exponential branching</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following method.</p>
-<pre><code>public static int f(int n) {
-  if (n &lt;= 1) return 1;
-  return n * f(n - 1);
+<pre><code>public static String mystery(int n) {
+  if (n == 0) return "X";
+  return mystery(n - 1) + mystery(n - 1);
 }</code></pre>
-    <p>What is the value of <code>f(5)</code>?</p>
+    <p>What is the value of <code>mystery(4).length()</code>?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>5</code></li>
-      <li><span class="lbl">(B)</span> <code>25</code></li>
-      <li><span class="lbl">(C)</span> <code>120</code></li>
-      <li><span class="lbl">(D)</span> A <code>StackOverflowError</code> is thrown.</li>
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>8</code></li>
+      <li><span class="lbl">(C)</span> <code>16</code></li>
+      <li><span class="lbl">(D)</span> <code>32</code></li>
     </ul>
   </div>
 </div>
@@ -420,33 +431,33 @@ System.out.println(idx);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q15</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">4.4 Array Aliasing in Method</span>
+    <span class="pill topic">4.4 Array — rebind vs mutate in method</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>public static void swapEnds(int[] a) {
-  int tmp = a[0];
-  a[0] = a[a.length - 1];
-  a[a.length - 1] = tmp;
+<pre><code>public static void modify(int[] a) {
+  a[0] = 99;
+  a = new int[]{100, 200, 300};
+  a[0] = 999;
 }
 
 // in main:
 int[] vals = {1, 2, 3, 4, 5};
-swapEnds(vals);
-System.out.println(vals[0] + " " + vals[4]);</code></pre>
+modify(vals);
+System.out.println(vals[0] + " " + vals[2] + " " + vals.length);</code></pre>
     <p>What is printed?</p>
-    <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1 5</code></li>
-      <li><span class="lbl">(B)</span> <code>5 1</code></li>
-      <li><span class="lbl">(C)</span> <code>1 1</code></li>
-      <li><span class="lbl">(D)</span> The method has no effect on <code>vals</code> in <code>main</code>.</li>
+    <ul class="opts cols1">
+      <li><span class="lbl">(A)</span> <code>1 3 5</code></li>
+      <li><span class="lbl">(B)</span> <code>99 3 5</code></li>
+      <li><span class="lbl">(C)</span> <code>999 300 3</code></li>
+      <li><span class="lbl">(D)</span> <code>100 300 3</code></li>
     </ul>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 4 Practice (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 4 Practice (Draft v2 · exam-level)</span>
   <span>Page · Unit 4</span>
 </footer>
 
