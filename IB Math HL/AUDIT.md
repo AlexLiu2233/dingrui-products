@@ -39,7 +39,7 @@ updates to list them.
 | ~~**S1-4**~~ | Draft `Unit_A4_Complex_Numbers.html` (Topic 1.12–1.14) | P0 | ✅ **Shipped 2026-05-15** — 6 sections (Cartesian form, Argand &amp; polar form, Euler form &amp; multiplication, De Moivre, roots &amp; roots of unity, polynomials over ℂ). 6 inline quizzes + 10-item practice quiz, 14 flashcards, 14-item readiness checklist. Includes inductive proof of De Moivre, derivation of multiple-angle identities, and proof of the conjugate root theorem. Introduces `argand-figure` SVG component (Argand-diagram inline graphics for $z = a + bi$, multiplication-as-rotation, and the 5th roots of unity). |
 | **S1-5** | Draft `Unit_A5_Proof.html` (Topic 1.6, 1.15) | P0 | **Open** — direct proof, induction, contradiction. Cross-link from A1 induction-of-sums. |
 | **S1-6** | Draft `Unit_A6_Algebra_and_Systems.html` (Topic 1.11 + linear systems) | P0 | **Open** — partial fractions, $3\times 3$ systems, RREF. |
-| **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | **Open** — bundle once S1-6 ships. |
+| **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | 🟡 **Partial 2026-05-15** — file moved to `rag/archive/Unit_A_Number_and_Algebra.html` (stripped from deploy by `deploy.yml`); Unit A card dropped from `index.html`. Full deletion of the archived copy pending A2/A5/A6 ship (content needs to land in sub-units before the reference copy can be discarded). |
 
 Build order: **A1 (✓) → A3 (✓) → A4 (✓) → A2 → A5 → A6 → cleanup**. (A3
 jumped ahead of A2 on user request 2026-05-09; A4 jumped ahead of A2 on
