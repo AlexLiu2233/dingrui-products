@@ -161,51 +161,61 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Object Reference Param</span></div>
+  <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Aliasing + compound assignment</span></div>
   <div class="q-body">
-    <p class="prompt"><code>bump(k); bump(k); println(k.getCount());</code></p>
+    <p class="prompt"><code>Box a = new Box(5); Box b = a; b.n = 10; a.n += b.n; println(a.n + " " + b.n);</code></p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li><span class="lbl">(B)</span> <code>1</code></li>
-      <li class="correct"><span class="lbl">(C)</span> <code>2</code></li>
-      <li><span class="lbl">(D)</span> Compile-time error.</li>
+      <li><span class="lbl">(A)</span> <code>5 10</code></li>
+      <li><span class="lbl">(B)</span> <code>15 10</code></li>
+      <li><span class="lbl">(C)</span> <code>20 10</code></li>
+      <li class="correct"><span class="lbl">(D)</span> <code>20 20</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(D)</span></div>
     <div class="rationale">
-      In Java, parameters are passed by value — but for object types, the <em>reference</em> is what gets copied. The parameter <code>c</code> inside <code>bump</code> points to the <strong>same</strong> <code>Counter</code> object as <code>k</code> outside.
+      After <code>Box b = a</code>, both <code>a</code> and <code>b</code> reference the <em>same</em> heap object. Any mutation through one is visible through the other.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li>First <code>bump(k)</code>: <code>c.inc()</code> mutates the shared object → <code>count = 1</code>.</li>
-        <li>Second <code>bump(k)</code>: same object → <code>count = 2</code>.</li>
-        <li><code>k.getCount()</code> → <code>2</code>.</li>
+        <li>Start: object has <code>n = 5</code>; both <code>a</code> and <code>b</code> point to it.</li>
+        <li><code>b.n = 10</code> → the shared object's <code>n</code> is now <code>10</code>. Reading <code>a.n</code> here would also give <code>10</code>.</li>
+        <li><code>a.n += b.n</code> reads <code>a.n</code> (= 10), reads <code>b.n</code> (also 10 — same object!), writes <code>a.n = 20</code>.</li>
+        <li>Print: both <code>a.n</code> and <code>b.n</code> read the shared <code>n</code> = <code>20</code>.</li>
       </ul>
-      <strong>Contrast with primitives</strong> (Q14): assigning to a primitive parameter does <em>not</em> affect the caller. The reference-vs-primitive distinction is the highest-yield Unit 3 topic on the AP exam.
+      Output: <code>"20 20"</code>.
+      <p><strong>Trap (C) <code>"20 10"</code></strong> is the classic mistake — assumes <code>b</code> is an independent copy of <code>a</code>. Java has no implicit cloning; assignment of references is shallow. <strong>(B) <code>"15 10"</code></strong> reads <code>a.n</code> as if it were still <code>5</code> when the <code>+=</code> evaluates.</p>
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">static Counter</span></div>
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">static aggregate + instance mutator</span></div>
   <div class="q-body">
-    <p class="prompt">Three <code>new Widget()</code> calls; print <code>Widget.total()</code>.</p>
+    <p class="prompt"><code>Sensor</code> with <code>static int total</code>; <code>update(r)</code> does <code>total -= reading; reading = r; total += r;</code>.<br>
+    <code>s1 = new Sensor(10); s2 = new Sensor(20); s1.update(50); s2.update(0); println(Sensor.total());</code></p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1</code></li>
-      <li><span class="lbl">(B)</span> <code>2</code></li>
-      <li class="correct"><span class="lbl">(C)</span> <code>3</code></li>
-      <li><span class="lbl">(D)</span> Compile-time error.</li>
+      <li><span class="lbl">(A)</span> <code>30</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>50</code></li>
+      <li><span class="lbl">(C)</span> <code>70</code></li>
+      <li><span class="lbl">(D)</span> <code>80</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      <code>built</code> is <code>static</code> — one shared counter across the entire <code>Widget</code> class. Each call to the constructor increments it once:
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>new Widget()</code> #1 → <code>built = 1</code> (discarded reference; the object exists)</li>
-        <li><code>new Widget()</code> #2 → <code>built = 2</code></li>
-        <li><code>new Widget()</code> #3 → <code>built = 3</code> (assigned to <code>w</code>)</li>
-      </ul>
-      <code>Widget.total()</code> returns <code>3</code>. <strong>Trap (B)</strong>: "I only stored one reference (<code>w</code>), so only one was constructed" — false. All three constructor calls execute regardless of whether you keep the reference. <strong>Trap (D)</strong>: a <code>static</code> method <em>can</em> access a <code>static</code> field — only <strong>instance</strong> fields are off-limits (see Q12).
+      <code>total</code> is class-wide; each <code>Sensor</code> contributes only its <em>current</em> reading. The mutator carefully removes the old contribution before adding the new one.
+<pre><code>step                       | reading(s1) reading(s2)  total
+new Sensor(10)             |    10           —          10
+new Sensor(20)             |    10          20          30
+s1.update(50):             |
+  total -= reading(=10)    |    10          20          20
+  reading = 50             |    50          20          20
+  total += 50              |    50          20          70
+s2.update(0):              |
+  total -= reading(=20)    |    50          20          50
+  reading = 0              |    50           0          50
+  total += 0               |    50           0          50</code></pre>
+      Final <code>total = 50</code>.
+      <p><strong>Trap (C) <code>70</code></strong> skips the second update entirely. <strong>(D) <code>80</code></strong> forgets to <em>subtract</em> the old reading before adding the new one (treats every <code>update</code> as a fresh add). <strong>(A) <code>30</code></strong> ignores all updates.</p>
     </div>
   </div>
 </div>
@@ -235,27 +245,26 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Constructor Chaining</span></div>
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Reassigning a ref param vs mutating</span></div>
   <div class="q-body">
-    <p class="prompt"><code>public Box() { this(10); }</code> — <code>new Box().getSize()</code>?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>10</code></li>
-      <li><span class="lbl">(C)</span> Compile-time error: cross-constructor call not allowed.</li>
-      <li><span class="lbl">(D)</span> <code>StackOverflowError</code> from recursive constructor call.</li>
+    <p class="prompt"><code>replace(b) { b = new Box(99); }</code> vs <code>mutate(b) { b.n = 99; }</code>. After <code>replace(one); mutate(two);</code> — final <code>one.n</code> and <code>two.n</code>?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>1 2</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>1 99</code></li>
+      <li><span class="lbl">(C)</span> <code>99 99</code></li>
+      <li><span class="lbl">(D)</span> <code>99 2</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      <code>this(...)</code> as the <em>first statement</em> of a constructor invokes another constructor of the same class — this is legal "constructor chaining."
+      Java passes references <em>by value</em>: the method's parameter is a <strong>local copy</strong> of the caller's reference. Reassigning the parameter only changes that local copy; mutating through the parameter affects the shared object.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>new Box()</code> enters the no-arg constructor.</li>
-        <li>It immediately delegates to <code>Box(10)</code> via <code>this(10)</code>.</li>
-        <li><code>Box(10)</code> sets <code>this.size = 10</code>.</li>
-        <li>Control returns; the object is fully constructed. <code>getSize()</code> → <code>10</code>.</li>
+        <li><code>replace(one)</code>: the parameter <code>b</code> initially aliases the same object as <code>one</code>. Then <code>b = new Box(99)</code> makes <code>b</code> point to a brand-new heap object — <code>one</code> in the caller is unaffected, so <code>one.n</code> is still <code>1</code>.</li>
+        <li><code>mutate(two)</code>: the parameter <code>b</code> aliases <code>two</code>'s object. <code>b.n = 99</code> mutates that shared object — <code>two.n</code> is now <code>99</code>.</li>
       </ul>
-      <strong>Trap (D):</strong> the call is to a <em>different</em> constructor, not the same one — no recursion. <strong>Trap (C):</strong> cross-constructor calls are allowed; the rule is "must be the first statement."
+      Output: <code>"1 99"</code>.
+      <p><strong>Trap (C) <code>"99 99"</code></strong> is the most common misconception — students think a method can reassign references in the caller. It cannot; that would require return values or a wrapping object. <strong>(A) <code>"1 2"</code></strong> assumes nothing happens to either. <strong>(D) <code>"99 2"</code></strong> swaps which method does which.</p>
     </div>
   </div>
 </div>
@@ -263,51 +272,56 @@
 <div class="page-break"></div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Mutator + Validation</span></div>
+  <div class="q-head"><span class="pill qnum">Q8</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Mutator order with conditional cap</span></div>
   <div class="q-body">
-    <p class="prompt"><code>deposit(100); deposit(-50); deposit(30); getBal()</code>?</p>
+    <p class="prompt"><code>Score s = new Score(10); s.add(20); s.cap(15); s.add(5); s.cap(50); println(s.get());</code> — <code>cap(max)</code> sets <code>v = max</code> only when <code>v &gt; max</code>.</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>80.0</code></li>
-      <li><span class="lbl">(B)</span> <code>100.0</code></li>
-      <li class="correct"><span class="lbl">(C)</span> <code>130.0</code></li>
-      <li><span class="lbl">(D)</span> <code>180.0</code></li>
+      <li><span class="lbl">(A)</span> <code>15</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>20</code></li>
+      <li><span class="lbl">(C)</span> <code>30</code></li>
+      <li><span class="lbl">(D)</span> <code>35</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      <code>deposit</code> applies the change only if <code>amt &gt; 0</code>:
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>deposit(100)</code>: <code>100 &gt; 0</code> ✓ → <code>bal = 100.0</code>.</li>
-        <li><code>deposit(-50)</code>: <code>-50 &gt; 0</code> ✗ → ignored.</li>
-        <li><code>deposit(30)</code>: <code>30 &gt; 0</code> ✓ → <code>bal = 130.0</code>.</li>
-      </ul>
-      <strong>Trap (A)</strong> assumes the negative is treated as a withdrawal: <code>100 − 50 + 30 = 80</code>. <strong>(D)</strong> takes the absolute value of every input: <code>100 + 50 + 30 = 180</code>. Both are valid <em>design</em> choices, but neither is what this code does.
-      <p>This input-validation pattern is a Unit 3 staple — the AP expects you to read the guard precisely.</p>
+      Apply each mutator in order, checking the cap's guard <em>at the time of the call</em>.
+<pre><code>step      | v before  cap fires?    v after
+init      |    —        —             10
+add(20)   |   10        —             30
+cap(15)   |   30        30 &gt; 15 ✓     15
+add(5)    |   15        —             20
+cap(50)   |   20        20 &gt; 50 ✗     20
+</code></pre>
+      Final <code>v = 20</code>.
+      <p><strong>Trap (A) <code>15</code></strong> assumes the last <code>cap</code> still constrains the value (it doesn't — <code>20 &lt;= 50</code> so the cap is a no-op). <strong>(C) <code>30</code></strong> ignores the first cap, picturing it as "set v to max" rather than "constrain v if it exceeds max." <strong>(D) <code>35</code></strong> ignores both caps.</p>
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Method Overload Resolution</span></div>
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Fluent interface (return this)</span></div>
   <div class="q-body">
-    <p class="prompt"><code>square(3)</code> vs <code>square(3.0)</code> on overloaded methods.</p>
-    <ul class="opts cols1">
-      <li class="correct"><span class="lbl">(A)</span> <code>9</code> then <code>9.0</code></li>
-      <li><span class="lbl">(B)</span> <code>9.0</code> then <code>9.0</code></li>
-      <li><span class="lbl">(C)</span> <code>9</code> then <code>9</code></li>
-      <li><span class="lbl">(D)</span> Compile-time error.</li>
+    <p class="prompt"><code>inc()</code> and <code>dec()</code> each return <code>this</code> after mutating <code>n</code>. <code>int x = c.inc().inc().inc().dec().peek(); println(x + " " + c.peek());</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0 2</code></li>
+      <li><span class="lbl">(B)</span> <code>2 0</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>2 2</code></li>
+      <li><span class="lbl">(D)</span> <code>4 4</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      Overload resolution picks the most specific matching signature at compile time, based on the static type of each argument.
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>3</code> is an <code>int</code> literal → exact match for <code>square(int)</code> → returns <code>int 9</code> → printed as <code>9</code>.</li>
-        <li><code>3.0</code> is a <code>double</code> literal → exact match for <code>square(double)</code> → returns <code>double 9.0</code> → printed as <code>9.0</code>.</li>
-      </ul>
-      <strong>Trap (D):</strong> two methods <em>can</em> share a name as long as their parameter lists differ in number or type — this is overloading, not a conflict.
+      Each <code>inc()</code> / <code>dec()</code> returns <code>this</code> — i.e., the same <code>Counter</code> object on which it was called. So every link in the chain operates on the <em>same</em> instance <code>c</code>.
+<pre><code>step            | what runs      n after
+c.inc()         | n++; return c     1
+.inc()          | n++; return c     2
+.inc()          | n++; return c     3
+.dec()          | n--; return c     2
+.peek()         | return n          2  → assigned to x</code></pre>
+      Since the chain never made a copy of <code>c</code>, <code>c.peek()</code> after the chain returns the same value: <code>2</code>. Output: <code>"2 2"</code>.
+      <p><strong>Trap (A) <code>"0 2"</code></strong> assumes <code>x</code> captures <code>c</code>'s state at the start of the chain (it doesn't — it captures the value of <code>.peek()</code> at the end). <strong>(B) <code>"2 0"</code></strong> reverses that misconception. <strong>(D) <code>"4 4"</code></strong> assumes <code>n</code> keeps incrementing for each link without recognizing the <code>dec()</code>.</p>
     </div>
   </div>
 </div>
@@ -435,30 +449,40 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">toString Implicit Call</span></div>
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">static seq + aliasing + toString</span></div>
   <div class="q-body">
-    <p class="prompt"><code>System.out.println("Found: " + c);</code> where <code>c</code> overrides <code>toString</code>.</p>
+    <p class="prompt"><code>Tag</code> uses <code>id = ++seq;</code> per instance. <code>a = new Tag("alpha"); b = new Tag("beta"); c = a; a = new Tag("alpha"); println(a + " " + b + " " + c);</code></p>
     <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> Memory address.</li>
-      <li class="correct"><span class="lbl">(B)</span> <code>Found: (25¢)</code></li>
-      <li><span class="lbl">(C)</span> <code>Found: 25</code></li>
-      <li><span class="lbl">(D)</span> Compile-time error.</li>
+      <li><span class="lbl">(A)</span> <code>#1:alpha #2:beta #1:alpha</code></li>
+      <li><span class="lbl">(B)</span> <code>#3:alpha #2:beta #3:alpha</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>#3:alpha #2:beta #1:alpha</code></li>
+      <li><span class="lbl">(D)</span> <code>#1:alpha #2:beta #3:alpha</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      String concatenation with <code>+</code> implicitly invokes <code>toString()</code> on the object operand. <code>println</code> also does this when handed a non-String object directly.
+      Three things happen at once: <code>seq</code> increments globally, each new object gets a snapshot of <code>seq</code> as its <code>id</code>, and references can be reassigned to point to different objects on the heap. The objects themselves stay put.
+<pre><code>step                | heap                              a points to  b points to  c points to  seq
+new Tag("alpha")    | O1 {id:1, label:"alpha"}              O1            —            —          1
+new Tag("beta")     | O1, O2 {id:2, label:"beta"}           O1            O2           —          2
+c = a               | (no new object — just aliasing)       O1            O2           O1         2
+a = new Tag("alpha")| O1, O2, O3 {id:3, label:"alpha"}      O3            O2           O1         3
+</code></pre>
+      At <code>println</code> time, the implicit <code>toString()</code> calls give:
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>"Found: " + c</code> → <code>"Found: " + c.toString()</code> → <code>"Found: " + "(25¢)"</code> → <code>"Found: (25¢)"</code>.</li>
+        <li><code>a</code> → <code>O3</code> → <code>"#3:alpha"</code></li>
+        <li><code>b</code> → <code>O2</code> → <code>"#2:beta"</code></li>
+        <li><code>c</code> → <code>O1</code> → <code>"#1:alpha"</code> (still pointing to the original)</li>
       </ul>
-      <strong>Trap (A):</strong> the default <code>Object.toString()</code> <em>does</em> produce something like <code>Coin@1a2b3c</code> — but only when no override is provided. Here <code>Coin</code> overrides <code>toString</code>, so that default is shadowed. Designing a class for printability nearly always means writing a <code>toString</code>; the AP exam expects you to recognize this idiom.
+      Output: <code>"#3:alpha #2:beta #1:alpha"</code>.
+      <p><strong>Trap (B) <code>"#3:alpha … #3:alpha"</code></strong> is the classic mistake: assumes <code>c</code> "follows" <code>a</code> after reassignment. It doesn't — <code>c</code> captured the reference at the moment <code>c = a</code> ran. Reassigning <code>a</code> later doesn't reach back through <code>c</code>. <strong>(D)</strong> reverses the trap (assumes <code>a</code> follows the original instead).</p>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 3 Solutions (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 3 Solutions (Draft v2 · exam-level)</span>
   <span>Page · Unit 3</span>
 </footer>
 

@@ -81,7 +81,7 @@
 <p class="topics-line">Unit <b>3: Class Creation</b><span class="scope">CSA</span></p>
 <hr class="thick"><hr class="thin">
 <div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner">Draft v1 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); class/constructor/method trace heavy with realistic distractors. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
+<p class="draft-banner">Draft v2 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); class/constructor/method trace heavy with realistic distractors. HARDs upgraded: aliasing + compound assignment, static aggregate w/ mutator, reassign-vs-mutate ref param, mutator order w/ conditional cap, fluent interface, static seq + reassignment-through-aliasing. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
 
 <!-- ════════════════════════════════ MULTIPLE CHOICE ════════════════════════════════ -->
 <div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">15 questions · ~34 min at exam pace</span></div>
@@ -153,32 +153,28 @@
   <div class="q-head">
     <span class="pill qnum">Q4</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.6 Object Reference Param</span>
+    <span class="pill topic">3.6 Aliasing + compound assignment</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following class and code.</p>
-<pre><code>public class Counter {
-  private int count;
-  public void inc() { count++; }
-  public int getCount() { return count; }
-}
-
-public static void bump(Counter c) {
-  c.inc();
+<pre><code>public class Box {
+  public int n;
+  public Box(int n) { this.n = n; }
 }
 
 // in main:
-Counter k = new Counter();
-bump(k);
-bump(k);
-System.out.println(k.getCount());</code></pre>
+Box a = new Box(5);
+Box b = a;
+b.n = 10;
+a.n += b.n;
+System.out.println(a.n + " " + b.n);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li><span class="lbl">(B)</span> <code>1</code></li>
-      <li><span class="lbl">(C)</span> <code>2</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error occurs.</li>
+      <li><span class="lbl">(A)</span> <code>5 10</code></li>
+      <li><span class="lbl">(B)</span> <code>15 10</code></li>
+      <li><span class="lbl">(C)</span> <code>20 10</code></li>
+      <li><span class="lbl">(D)</span> <code>20 20</code></li>
     </ul>
   </div>
 </div>
@@ -187,28 +183,35 @@ System.out.println(k.getCount());</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q5</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.7 static Counter</span>
+    <span class="pill topic">3.7 static aggregate + instance mutator</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following class.</p>
-<pre><code>public class Widget {
-  private static int built = 0;
-  public Widget() { built++; }
-  public static int total() { return built; }
+<pre><code>public class Sensor {
+  private static int total = 0;
+  private int reading;
+  public Sensor(int r) { reading = r; total += r; }
+  public void update(int r) {
+    total -= reading;
+    reading = r;
+    total += r;
+  }
+  public static int total() { return total; }
 }
 
 // in main:
-new Widget();
-new Widget();
-Widget w = new Widget();
-System.out.println(Widget.total());</code></pre>
+Sensor s1 = new Sensor(10);
+Sensor s2 = new Sensor(20);
+s1.update(50);
+s2.update(0);
+System.out.println(Sensor.total());</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>1</code></li>
-      <li><span class="lbl">(B)</span> <code>2</code></li>
-      <li><span class="lbl">(C)</span> <code>3</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error: cannot access <code>built</code> from a static method.</li>
+      <li><span class="lbl">(A)</span> <code>30</code></li>
+      <li><span class="lbl">(B)</span> <code>50</code></li>
+      <li><span class="lbl">(C)</span> <code>70</code></li>
+      <li><span class="lbl">(D)</span> <code>80</code></li>
     </ul>
   </div>
 </div>
@@ -247,26 +250,36 @@ System.out.println(p.getX());</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q7</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.4 Constructor Chaining</span>
+    <span class="pill topic">3.6 Reassigning a ref param vs mutating</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the following class.</p>
+    <p class="prompt">Consider the following class and methods.</p>
 <pre><code>public class Box {
-  private int size;
-  public Box()        { this(10); }
-  public Box(int size){ this.size = size; }
-  public int getSize() { return size; }
+  public int n;
+  public Box(int n) { this.n = n; }
 }
 
-Box b = new Box();
-System.out.println(b.getSize());</code></pre>
-    <p>What is printed (or what happens)?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li><span class="lbl">(B)</span> <code>10</code></li>
-      <li><span class="lbl">(C)</span> A compile-time error: a constructor cannot invoke another constructor of the same class.</li>
-      <li><span class="lbl">(D)</span> A run-time error: <code>StackOverflowError</code> from recursive constructor call.</li>
+public static void replace(Box b) {
+  b = new Box(99);
+}
+
+public static void mutate(Box b) {
+  b.n = 99;
+}
+
+// in main:
+Box one = new Box(1);
+Box two = new Box(2);
+replace(one);
+mutate(two);
+System.out.println(one.n + " " + two.n);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>1 2</code></li>
+      <li><span class="lbl">(B)</span> <code>1 99</code></li>
+      <li><span class="lbl">(C)</span> <code>99 99</code></li>
+      <li><span class="lbl">(D)</span> <code>99 2</code></li>
     </ul>
   </div>
 </div>
@@ -277,30 +290,31 @@ System.out.println(b.getSize());</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.5 Mutator + Validation</span>
+    <span class="pill topic">3.5 Mutator order with conditional cap</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following class.</p>
-<pre><code>public class Account {
-  private double bal;
-  public void deposit(double amt) {
-    if (amt &gt; 0) bal += amt;
-  }
-  public double getBal() { return bal; }
+<pre><code>public class Score {
+  private int v;
+  public Score(int v) { this.v = v; }
+  public void add(int n) { v += n; }
+  public void cap(int max) { if (v &gt; max) v = max; }
+  public int get() { return v; }
 }
 
-Account a = new Account();
-a.deposit(100);
-a.deposit(-50);
-a.deposit(30);
-System.out.println(a.getBal());</code></pre>
+Score s = new Score(10);
+s.add(20);
+s.cap(15);
+s.add(5);
+s.cap(50);
+System.out.println(s.get());</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>80.0</code></li>
-      <li><span class="lbl">(B)</span> <code>100.0</code></li>
-      <li><span class="lbl">(C)</span> <code>130.0</code></li>
-      <li><span class="lbl">(D)</span> <code>180.0</code></li>
+      <li><span class="lbl">(A)</span> <code>15</code></li>
+      <li><span class="lbl">(B)</span> <code>20</code></li>
+      <li><span class="lbl">(C)</span> <code>30</code></li>
+      <li><span class="lbl">(D)</span> <code>35</code></li>
     </ul>
   </div>
 </div>
@@ -309,24 +323,28 @@ System.out.println(a.getBal());</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q9</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.5 Method Overload Resolution</span>
+    <span class="pill topic">3.5 Fluent interface (return this)</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following class.</p>
-<pre><code>public class Calc {
-  public static int    square(int n)    { return n * n; }
-  public static double square(double n) { return n * n; }
+<pre><code>public class Counter {
+  private int n;
+  public Counter()       { n = 0; }
+  public Counter inc()   { n++; return this; }
+  public Counter dec()   { n--; return this; }
+  public int peek()      { return n; }
 }
 
-System.out.println(Calc.square(3));
-System.out.println(Calc.square(3.0));</code></pre>
-    <p>What is printed (in order, on two lines)?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>9</code> then <code>9.0</code></li>
-      <li><span class="lbl">(B)</span> <code>9.0</code> then <code>9.0</code></li>
-      <li><span class="lbl">(C)</span> <code>9</code> then <code>9</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error: two methods cannot share the same name.</li>
+Counter c = new Counter();
+int x = c.inc().inc().inc().dec().peek();
+System.out.println(x + " " + c.peek());</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>0 2</code></li>
+      <li><span class="lbl">(B)</span> <code>2 0</code></li>
+      <li><span class="lbl">(C)</span> <code>2 2</code></li>
+      <li><span class="lbl">(D)</span> <code>4 4</code></li>
     </ul>
   </div>
 </div>
@@ -479,31 +497,40 @@ System.out.println(x + " " + w.n);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q15</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">3.5 toString Implicit Call</span>
+    <span class="pill topic">3.7 static seq + aliasing + toString</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the following class.</p>
-<pre><code>public class Coin {
-  private int value;
-  public Coin(int v) { value = v; }
-  public String toString() { return "(" + value + "¢)"; }
+    <p class="prompt">Consider the following class and code.</p>
+<pre><code>public class Tag {
+  private static int seq = 0;
+  private String label;
+  private int id;
+  public Tag(String label) {
+    this.label = label;
+    this.id = ++seq;
+  }
+  public String toString() { return "#" + id + ":" + label; }
 }
 
-Coin c = new Coin(25);
-System.out.println("Found: " + c);</code></pre>
+// in main:
+Tag a = new Tag("alpha");
+Tag b = new Tag("beta");
+Tag c = a;
+a = new Tag("alpha");
+System.out.println(a + " " + b + " " + c);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>Found:</code> followed by a hexadecimal memory address.</li>
-      <li><span class="lbl">(B)</span> <code>Found: (25¢)</code></li>
-      <li><span class="lbl">(C)</span> <code>Found: 25</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error: cannot concatenate a <code>Coin</code> with a <code>String</code>.</li>
+      <li><span class="lbl">(A)</span> <code>#1:alpha #2:beta #1:alpha</code></li>
+      <li><span class="lbl">(B)</span> <code>#3:alpha #2:beta #3:alpha</code></li>
+      <li><span class="lbl">(C)</span> <code>#3:alpha #2:beta #1:alpha</code></li>
+      <li><span class="lbl">(D)</span> <code>#1:alpha #2:beta #3:alpha</code></li>
     </ul>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 3 Practice (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 3 Practice (Draft v2 · exam-level)</span>
   <span>Page · Unit 3</span>
 </footer>
 
