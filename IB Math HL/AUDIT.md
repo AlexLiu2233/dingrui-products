@@ -16,8 +16,8 @@ and the IB Math AA HL syllabus (first exams 2021).
 question files and any future digital products are out of scope until they
 exist.
 
-Last reviewed: **2026-05-09** (Sprint 1 active: Unit A refactor in flight;
-A1 + A3 study guides shipped; A1 + A3 practice question sets shipped).
+Last reviewed: **2026-05-15** (Sprint 1 active: Unit A refactor in flight;
+A1 + A3 + A4 study guides shipped; A1 + A3 practice question sets shipped).
 
 ---
 
@@ -36,13 +36,14 @@ updates to list them.
 | ~~**S1-1**~~ | Draft `Unit_A1_Sequences_and_Series.html` (Topic 1.2–1.4, 1.8) | P0 | ✅ **Shipped 2026-05-08** — 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed patterns), 18 quiz items, 12 flashcards, 14-item readiness checklist. Introduces the `cram-cheat` CSS pattern + `hl-flag` chip. |
 | **S1-2** | Draft `Unit_A2_Exponents_and_Logarithms.html` (Topic 1.5, 1.7) | P0 | **Open** — covers laws of exponents, logarithms, exponential equations, change-of-base. |
 | ~~**S1-3**~~ | Draft `Unit_A3_Combinatorics.html` (Topic 1.9–1.10) | P0 | ✅ **Shipped 2026-05-09** — 6 sections (counting principles, permutations, combinations, binomial theorem, Pascal's triangle &amp; identities, extended binomial HL). 6 inline quizzes + 10-item practice quiz, 12 flashcards, 14-item readiness checklist. Introduces `pascal-tri` ASCII-table CSS pattern. Renamed from "Counting & Binomial" to user's preferred "Combinatorics." |
-| **S1-4** | Draft `Unit_A4_Complex_Numbers.html` (Topic 1.12–1.14) | P0 | **Open** — Cartesian, polar, Euler forms, De Moivre, roots, conjugate root theorem. HL-heavy. |
+| ~~**S1-4**~~ | Draft `Unit_A4_Complex_Numbers.html` (Topic 1.12–1.14) | P0 | ✅ **Shipped 2026-05-15** — 6 sections (Cartesian form, Argand &amp; polar form, Euler form &amp; multiplication, De Moivre, roots &amp; roots of unity, polynomials over ℂ). 6 inline quizzes + 10-item practice quiz, 14 flashcards, 14-item readiness checklist. Includes inductive proof of De Moivre, derivation of multiple-angle identities, and proof of the conjugate root theorem. Introduces `argand-figure` SVG component (Argand-diagram inline graphics for $z = a + bi$, multiplication-as-rotation, and the 5th roots of unity). |
 | **S1-5** | Draft `Unit_A5_Proof.html` (Topic 1.6, 1.15) | P0 | **Open** — direct proof, induction, contradiction. Cross-link from A1 induction-of-sums. |
 | **S1-6** | Draft `Unit_A6_Algebra_and_Systems.html` (Topic 1.11 + linear systems) | P0 | **Open** — partial fractions, $3\times 3$ systems, RREF. |
 | **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | **Open** — bundle once S1-6 ships. |
 
-Build order: **A1 (✓) → A3 (✓) → A2 → A4 → A5 → A6 → cleanup**. (A3 jumped
-ahead of A2 on user request 2026-05-09.)
+Build order: **A1 (✓) → A3 (✓) → A4 (✓) → A2 → A5 → A6 → cleanup**. (A3
+jumped ahead of A2 on user request 2026-05-09; A4 jumped ahead of A2 on
+user request 2026-05-14.)
 
 ### Practice Questions sub-stream
 

@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IB Math AA HL — Unit A4: Complex Numbers | Dingrui Scholars. Cartesian, polar (modulus-argument), and Euler forms; De Moivre's theorem; nth roots and roots of unity; conjugate root theorem; fundamental theorem of algebra. Cram-friendly cheat-sheets and 7-chaser derivations side by side. Interactive quizzes, flashcards, dark mode, print-friendly.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>IB Math AA HL — Unit A4: Complex Numbers | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ─── SCORE BADGE ─── */
+.score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--green); background: var(--green-light);
+  border: 1px solid var(--green);
+  padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.3s;
+}
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+/* ─── SIDEBAR TOC ─── */
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.88rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+/* ─── MAIN ─── */
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 16px;
+  position: relative;
+}
+.hero-sub {
+  color: var(--text-secondary); max-width: 650px; margin: 0 auto;
+  position: relative;
+}
+.hero-meta {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HL-only flag chip — small inline */
+.hl-flag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--purple); background: var(--purple-light);
+  border: 1px solid var(--purple);
+  padding: 2px 7px; border-radius: 6px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  vertical-align: middle; margin-left: 8px;
+}
+
+/* ─── SECTION ─── */
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin: 32px 0 12px;
+  line-height: 1.3; color: var(--text);
+}
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+/* ─── KEY CONCEPT BOX ─── */
+.concept-box {
+  border-left: 5px solid var(--accent);
+  background: var(--bg-card);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+/* ─── TABLES ─── */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+/* ─── QUIZ ─── */
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 8px; border-radius: 6px;
+  flex-shrink: 0; margin-left: 12px;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+  position: relative;
+}
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '✓'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '✗'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry {
+  display: none; margin-top: 12px;
+  padding: 8px 18px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ─── ACCORDION / DETAILS ─── */
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '▸'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+/* ─── FLASHCARDS ─── */
+.flashcard-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 12px 0 4px;
+  font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.flashcard-toolbar button {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 12px;
+  border-radius: 8px; font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-left: 6px;
+}
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner {
+  display: grid;
+  grid-template-areas: "card";
+  min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  grid-area: card;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; box-shadow: var(--shadow);
+  overflow: hidden; word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--accent); font-weight: 600;
+  font-size: clamp(0.92rem, 2.1vw, 1.05rem);
+  line-height: 1.45;
+  padding: 22px 20px 34px; gap: 8px;
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP';
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px;
+}
+.flashcard-back {
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.6;
+  padding: 26px 22px; gap: 12px;
+  word-break: normal; hyphens: manual;
+  overflow-wrap: break-word; text-wrap: pretty;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 1.25em;
+  max-width: 100%; overflow: hidden;
+}
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── WORKED EXAMPLES ─── */
+.worked-solution {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+
+/* ─── FORMULA BOX ─── */
+.formula-box {
+  background: var(--bg-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+/* ─── SEPARATOR ─── */
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+
+/* ─── CHECKLIST ─── */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  cursor: pointer; font-size: 0.95rem;
+  background: var(--bg-card); transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+  font-size: 0.8rem; color: transparent;
+}
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── TWO COLUMNS ─── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ─── FOOTER ─── */
+.footer-wrap {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-secondary); font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem; color: var(--text);
+  margin-bottom: 4px;
+}
+
+/* ─── REFINEMENTS ─── */
+.formula-box .katex-display {
+  margin: 14px 0 !important;
+  overflow-x: auto; overflow-y: hidden;
+  padding: 2px 0;
+}
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+
+.section-label + h2 { margin-top: 0.2rem; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  .formula-box { padding: 16px; }
+  .top-nav { padding: 0 16px; }
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry,
+  .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ─── TOP-NAV ─── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── CRAM/DEPTH MARKERS ─── */
+.cram-cheat {
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%);
+  border: 2px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  margin: 20px 0;
+  position: relative;
+}
+.cram-cheat::before {
+  content: 'CRAM-MODE CHEAT';
+  position: absolute; top: -10px; left: 18px;
+  background: var(--gold); color: #fff;
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;
+}
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* ─── ARGAND DIAGRAM ─── */
+.argand-figure {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.argand-figure svg { max-width: 100%; height: auto; }
+.argand-caption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+}
+.argand-figure .axis { stroke: var(--text-secondary); stroke-width: 1; }
+.argand-figure .grid { stroke: var(--border); stroke-width: 0.5; stroke-dasharray: 2 3; }
+.argand-figure .vec { stroke: var(--accent); stroke-width: 2; fill: none; }
+.argand-figure .vec-alt { stroke: var(--green); stroke-width: 2; fill: none; }
+.argand-figure .vec-alt2 { stroke: var(--purple); stroke-width: 2; fill: none; }
+.argand-figure .pt { fill: var(--accent); }
+.argand-figure .pt-alt { fill: var(--green); }
+.argand-figure .pt-alt2 { fill: var(--purple); }
+.argand-figure text { font-family: var(--font-mono); font-size: 11px; fill: var(--text); }
+.argand-figure .lbl-accent { fill: var(--accent); font-weight: 700; }
+.argand-figure .lbl-green { fill: var(--green); font-weight: 700; }
+.argand-figure .lbl-purple { fill: var(--purple); font-weight: 700; }
+.argand-figure .arc { stroke: var(--accent); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+.argand-figure .unit-circle { stroke: var(--text-secondary); stroke-width: 1; fill: none; stroke-dasharray: 3 3; opacity: 0.5; }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">UNIT A4</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#how-to-use">How to use this guide</a>
+  <a href="#s-a4-1">A4.1 Cartesian Form</a>
+  <a href="#s-a4-2">A4.2 Argand Diagram &amp; Polar Form</a>
+  <a href="#s-a4-3">A4.3 Euler Form &amp; Multiplication</a>
+  <a href="#s-a4-4">A4.4 De Moivre's Theorem</a>
+  <a href="#s-a4-5">A4.5 Roots of Complex Numbers</a>
+  <a href="#s-a4-6">A4.6 Polynomials over ℂ</a>
+  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Practice Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
+</aside>
+
+<main class="main-wrap">
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-overline">IB Mathematics: Analysis &amp; Approaches HL · 鼎睿学苑</div>
+  <h1>Unit A4: Complex<br>Numbers</h1>
+  <p class="hero-sub">
+    The fourth sub-unit of Topic 1 (Number &amp; Algebra). Master Cartesian, polar, and Euler forms; De Moivre's theorem; nth roots and roots of unity; and the conjugate root theorem for real polynomials. HL-heavy: most of this unit does not appear on the SL syllabus.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">IB AA HL · Topic 1.12–1.14</span>
+    <span class="chip chip-green">Papers 1 · 2</span>
+    <span class="chip chip-purple">6 Concepts</span>
+    <span class="chip chip-gold">HL-only</span>
+  </div>
+</section>
+
+<!-- ═══════════════ HOW TO USE ═══════════════ -->
+<section class="section" id="how-to-use">
+  <div class="section-label">Read me first</div>
+  <h2>How to use this guide</h2>
+
+  <p>This guide is built to serve <strong>two students at once</strong>:</p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">!</div>
+        <div class="card-title">If you're cramming</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 35-minute pass.</p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">★</div>
+        <div class="card-title">If you're going for a 7</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where the De Moivre induction proof, the convergence of roots-of-unity sums, and the fundamental theorem of algebra context live. Re-do the quiz with no hints. Owning the geometry of multiplication in the Argand plane is what separates a 5 from a 7.</p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">HL flag</strong>
+    The entire unit is <span class="hl-flag">HL</span> on the AA syllabus — SL students do not see complex numbers at all. Inside the unit, callouts flagged <span class="hl-flag">HL+</span> highlight especially deep material (multiple-angle derivations from De Moivre, the fundamental theorem of algebra) that is unlikely on Paper 1 but routine on Paper 2 / Paper 3.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Paper note — calculator vs. no-calc</strong>
+    Paper 1 (no-calc) tests <em>exact-value</em> manipulations: division by conjugate, polar form with "nice" arguments ($\pi/6, \pi/4, \pi/3, \pi/2$), De Moivre on small integer exponents. Paper 2 (calc) lets you use the GDC's complex mode — but you still need to set up the problem in the right form. Always double-check the GDC argument convention (most return values in $(-\pi, \pi]$).
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.1 CARTESIAN FORM ═══════════════ -->
+<section class="section" id="s-a4-1">
+  <div class="section-label">Topic A4.1 · Definitions &amp; arithmetic</div>
+  <h2>Cartesian Form</h2>
+
+  <div class="cram-cheat">
+    <strong>Define $i$ by $i^2 = -1$.</strong> Every complex number has a unique <em>Cartesian form</em> $z = a + bi$ with $a, b \in \mathbb{R}$. Add componentwise, multiply by FOIL using $i^2 = -1$, and divide by multiplying top and bottom by the <em>conjugate</em> $\bar{z} = a - bi$. The key identity is
+    $$ z\bar{z} = a^2 + b^2 = |z|^2. $$
+    That single fact lets you rationalize any denominator in one step.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Definition</strong>
+    The <strong>imaginary unit</strong> is the symbol $i$ satisfying $i^2 = -1$. A <strong>complex number</strong> is an expression $z = a + bi$ where $a, b \in \mathbb{R}$. We call $a = \operatorname{Re}(z)$ the <em>real part</em> and $b = \operatorname{Im}(z)$ the <em>imaginary part</em> (note: $\operatorname{Im}(z)$ is a real number — the coefficient of $i$, not $bi$).
+  </div>
+
+  <h3>Equality and arithmetic</h3>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Three rules</strong>
+    <strong>(1) Equality.</strong> $a + bi = c + di \iff a = c \text{ and } b = d$. Two complex equations become two real equations.<br>
+    <strong>(2) Addition.</strong> $(a + bi) + (c + di) = (a + c) + (b + d)i$ — componentwise.<br>
+    <strong>(3) Multiplication.</strong> $(a + bi)(c + di) = (ac - bd) + (ad + bc)i$ — FOIL, then collapse $i^2 = -1$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Conjugate &amp; Modulus</div>
+    $$ \bar{z} = a - bi, \qquad |z| = \sqrt{a^2 + b^2}, \qquad z\bar{z} = |z|^2. $$
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Why "multiply by the conjugate" works</strong>
+    Multiplying numerator and denominator of $\dfrac{a + bi}{c + di}$ by $c - di$ turns the denominator into $(c + di)(c - di) = c^2 + d^2$ — a real number — so the result lands in Cartesian form. This is the complex analogue of rationalizing $\dfrac{1}{\sqrt{2} + 1}$ by multiplying by $\sqrt{2} - 1$.
+  </div>
+
+  <h3>Worked Example — Arithmetic in Cartesian form</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Let $z_1 = 3 + 2i$ and $z_2 = 1 - 4i$. Compute (a) $z_1 + z_2$, (b) $z_1 z_2$, (c) $\dfrac{z_1}{z_2}$, (d) $|z_1|$.</p>
+    <p><strong>(a) Sum.</strong> $z_1 + z_2 = (3 + 1) + (2 - 4)i = 4 - 2i$.</p>
+    <p><strong>(b) Product.</strong></p>
+    $$ z_1 z_2 = (3 + 2i)(1 - 4i) = 3 - 12i + 2i - 8i^2 = 3 - 10i + 8 = 11 - 10i. $$
+    <p><strong>(c) Quotient.</strong> Multiply top and bottom by $\bar{z}_2 = 1 + 4i$:</p>
+    $$ \frac{z_1}{z_2} = \frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \frac{3 + 12i + 2i + 8i^2}{1 + 16} = \frac{-5 + 14i}{17} = -\tfrac{5}{17} + \tfrac{14}{17} i. $$
+    <p><strong>(d) Modulus.</strong> $|z_1| = \sqrt{3^2 + 2^2} = \sqrt{13}$.</p>
+  </div>
+
+  <h3>Conjugate identities</h3>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">The five must-know conjugate rules</strong>
+    For any $z, w \in \mathbb{C}$:
+    $$ \overline{z + w} = \bar{z} + \bar{w}, \qquad \overline{zw} = \bar{z}\bar{w}, \qquad \overline{\bar{z}} = z. $$
+    $$ z + \bar{z} = 2\operatorname{Re}(z), \qquad z - \bar{z} = 2i\operatorname{Im}(z). $$
+    The first two say "conjugation respects $+$ and $\times$" — so for any real polynomial $p$, $\overline{p(z)} = p(\bar z)$. That's the engine of the conjugate root theorem in §A4.6.
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Why "$\mathbb{C}$ is a field" matters</summary>
+    <div class="detail-body">
+<p>The point of insisting that <em>every</em> non-zero complex number has a multiplicative inverse is that $\mathbb{C}$ is closed under division: every quotient lives in $\mathbb{C}$ again. The formula is</p>
+$$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
+<p>This guarantees that all the algebra you know — polynomial long division, partial fractions, factoring — works over $\mathbb{C}$ exactly as it does over $\mathbb{R}$. The bonus is that $\mathbb{C}$ is also <em>algebraically closed</em> (every non-constant polynomial has a root) — that's the fundamental theorem of algebra. We'll see one consequence in §A4.6: a real polynomial of degree $n$ has exactly $n$ roots when complex roots are allowed.</p>
+<p>One thing $\mathbb{C}$ <em>loses</em> compared to $\mathbb{R}$: there is no consistent ordering "$z &lt; w$" that respects arithmetic. So inequalities only ever apply to real quantities — modulus, real part, imaginary part — not to complex numbers themselves.</p>
+    </div>
+  </details>
+
+  <h3>Worked Example — Solving $z^2 = w$ in Cartesian form</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find all $z \in \mathbb{C}$ such that $z^2 = 3 + 4i$.</p>
+    <p><strong>Set up.</strong> Let $z = a + bi$. Then $z^2 = (a^2 - b^2) + 2abi$. Equate real and imaginary parts:</p>
+    $$ a^2 - b^2 = 3, \qquad 2ab = 4 \;\Rightarrow\; ab = 2. $$
+    <p><strong>Solve.</strong> From $ab = 2$: $b = 2/a$. Substitute:</p>
+    $$ a^2 - \tfrac{4}{a^2} = 3 \;\Rightarrow\; a^4 - 3a^2 - 4 = 0 \;\Rightarrow\; (a^2 - 4)(a^2 + 1) = 0. $$
+    <p>Real solutions: $a^2 = 4$, so $a = \pm 2$. Then $b = 2/a$, giving $z = 2 + i$ or $z = -2 - i$.</p>
+    <p><strong>Check.</strong> $(2 + i)^2 = 4 + 4i + i^2 = 3 + 4i$ ✓. Polar form (next section) gives the same answer in one line.</p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">$\dfrac{2 + 3i}{1 - i}$ in the form $a + bi$ equals:</div>
+      <span class="quiz-number">A4.1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-\tfrac{1}{2} + \tfrac{5}{2} i$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{1}{2} + \tfrac{5}{2} i$</div>
+      <div class="quiz-opt" data-idx="2">$-\tfrac{1}{2} + \tfrac{5}{2} i$ (after multiplying by $\bar{z}_2$)</div>
+      <div class="quiz-opt" data-idx="3">$2 + 3i$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Multiply top and bottom by $1 + i$: numerator $= (2+3i)(1+i) = 2+2i+3i+3i^2 = -1 + 5i$, denominator $= 1^2 + 1^2 = 2$. So the result is $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
+    <div class="quiz-explain wrong-exp">Multiply top and bottom by the conjugate $1 + i$: $(2+3i)(1+i) = -1 + 5i$, denominator $= 2$. Answer: $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.2 ARGAND & POLAR ═══════════════ -->
+<section class="section" id="s-a4-2">
+  <div class="section-label">Topic A4.2 · Geometric view</div>
+  <h2>Argand Diagram &amp; Polar Form</h2>
+
+  <div class="cram-cheat">
+    <strong>Plot $z = a + bi$ at the point $(a, b)$ in the plane.</strong> Then $|z|$ is the distance from the origin and $\arg(z) = \theta$ is the angle from the positive real axis, measured counter-clockwise. The <em>polar (modulus-argument) form</em> is
+    $$ z = r(\cos\theta + i\sin\theta) = r\operatorname{cis}\theta, \qquad r = |z|,\; \theta = \arg(z). $$
+    Conversions: $a = r\cos\theta$, $b = r\sin\theta$, $r = \sqrt{a^2 + b^2}$, $\tan\theta = b/a$ <em>with quadrant care</em>.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">The Argand diagram</strong>
+    The complex plane has the real axis horizontal and the imaginary axis vertical. The number $z = a + bi$ corresponds to the point $(a, b)$ — equivalently, the position vector $\binom{a}{b}$. Addition of complex numbers is then vector addition: $(z_1 + z_2)$ is the tip of the parallelogram built from $z_1$ and $z_2$. Multiplication is <em>not</em> coordinate-wise — its geometric meaning (rotation + scaling) is unlocked by polar form.
+  </div>
+
+  <div class="argand-figure">
+    <svg viewBox="0 0 360 280" role="img" aria-label="Argand diagram showing z = a + bi as a point with modulus r and argument theta">
+      <line class="grid" x1="0" y1="140" x2="360" y2="140"/>
+      <line class="grid" x1="180" y1="0" x2="180" y2="280"/>
+      <line class="axis" x1="20" y1="140" x2="340" y2="140" marker-end="url(#arrowR)"/>
+      <line class="axis" x1="180" y1="260" x2="180" y2="20" marker-end="url(#arrowU)"/>
+      <defs>
+        <marker id="arrowR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="currentColor"/></marker>
+        <marker id="arrowU" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="currentColor"/></marker>
+      </defs>
+      <text x="345" y="135">Re</text>
+      <text x="186" y="20">Im</text>
+      <text x="172" y="135">0</text>
+      <line class="vec" x1="180" y1="140" x2="280" y2="60"/>
+      <circle class="pt" cx="280" cy="60" r="4"/>
+      <text x="288" y="55" class="lbl-accent">z = a + bi</text>
+      <line class="grid" x1="280" y1="60" x2="280" y2="140"/>
+      <line class="grid" x1="180" y1="60" x2="280" y2="60"/>
+      <text x="282" y="155">a</text>
+      <text x="160" y="65">b</text>
+      <path class="arc" d="M 220 140 A 40 40 0 0 0 211 110"/>
+      <text x="225" y="125" class="lbl-accent">θ</text>
+      <text x="220" y="95" class="lbl-accent">r</text>
+    </svg>
+    <div class="argand-caption">Fig 1 — Argand diagram: $z = a + bi$ at $(a, b)$, modulus $r$, argument $\theta$.</div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Polar form</div>
+    $$ z = r\bigl(\cos\theta + i\sin\theta\bigr) = r\operatorname{cis}\theta $$
+    $$ r = \sqrt{a^2 + b^2}, \qquad \cos\theta = \tfrac{a}{r}, \qquad \sin\theta = \tfrac{b}{r}. $$
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Argument — beware the quadrant</strong>
+    The principal argument $\arg(z)$ is conventionally in $(-\pi, \pi]$ (the IB convention; some books use $[0, 2\pi)$). The shortcut $\theta = \arctan(b/a)$ <strong>only</strong> works in quadrants I and IV (where $a &gt; 0$). For quadrants II and III, add or subtract $\pi$:
+    <div class="table-wrap" style="margin-top: 10px;">
+      <table>
+        <thead><tr><th>Quadrant</th><th>Sign of $a, b$</th><th>$\arg(z)$</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>$a &gt; 0, b \ge 0$</td><td>$\arctan(b/a) \in [0, \pi/2)$</td></tr>
+          <tr><td>II</td><td>$a &lt; 0, b &gt; 0$</td><td>$\arctan(b/a) + \pi \in (\pi/2, \pi)$</td></tr>
+          <tr><td>III</td><td>$a &lt; 0, b &lt; 0$</td><td>$\arctan(b/a) - \pi \in (-\pi, -\pi/2)$</td></tr>
+          <tr><td>IV</td><td>$a &gt; 0, b &lt; 0$</td><td>$\arctan(b/a) \in (-\pi/2, 0)$</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>Worked Example — Cartesian to polar</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Express $z = -1 + i\sqrt{3}$ in polar form with $\theta \in (-\pi, \pi]$.</p>
+    <p><strong>Modulus.</strong> $|z| = \sqrt{(-1)^2 + (\sqrt 3)^2} = \sqrt{1 + 3} = 2$.</p>
+    <p><strong>Argument.</strong> $a = -1 &lt; 0$, $b = \sqrt{3} &gt; 0$ — quadrant II. Reference angle $\arctan(\sqrt{3}/1) = \pi/3$, so</p>
+    $$ \theta = \pi - \pi/3 = \tfrac{2\pi}{3}. $$
+    <p><strong>Polar form.</strong> $z = 2\bigl(\cos\tfrac{2\pi}{3} + i\sin\tfrac{2\pi}{3}\bigr) = 2\operatorname{cis}\tfrac{2\pi}{3}$.</p>
+    <p><strong>Sanity check.</strong> $2\cos(2\pi/3) = 2(-\tfrac{1}{2}) = -1$ ✓, $2\sin(2\pi/3) = 2(\tfrac{\sqrt 3}{2}) = \sqrt 3$ ✓.</p>
+  </div>
+
+  <h3>Worked Example — Polar to Cartesian</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Write $z = 4\operatorname{cis}(-\tfrac{\pi}{6})$ in Cartesian form.</p>
+    $$ z = 4\cos(-\tfrac{\pi}{6}) + 4i\sin(-\tfrac{\pi}{6}) = 4 \cdot \tfrac{\sqrt 3}{2} - 4i \cdot \tfrac{1}{2} = 2\sqrt 3 - 2i. $$
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Why "$\tan\theta = b/a$" loses two quadrants</summary>
+    <div class="detail-body">
+<p>The function $\arctan$ has range $(-\pi/2, \pi/2)$ — it can only return arguments in quadrants I and IV. But the four pairs $(a, b)$ and $(-a, -b)$ have the <em>same</em> ratio $b/a$, so $\arctan$ can't distinguish them. The fix is to track the sign of $a$ separately:</p>
+$$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt; 0, b \ge 0 \\ \arctan(b/a) - \pi & a &lt; 0, b &lt; 0 \\ \pi/2 & a = 0, b &gt; 0 \\ -\pi/2 & a = 0, b &lt; 0 \end{cases} $$
+<p>Programmers will recognize this as the <code>atan2(b, a)</code> function. The IB markscheme expects you to <em>state which quadrant</em> the point lies in before writing the argument — points are lost for naked $\arctan(b/a)$ when the answer should have been in quadrant II or III.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">The principal argument of $z = -2 - 2i$ is:</div>
+      <span class="quiz-number">A4.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="1">$-\tfrac{3\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{3\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{5\pi}{4}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $a = -2 &lt; 0$, $b = -2 &lt; 0$ — quadrant III. Reference angle $\arctan(2/2) = \pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$ (in the principal range $(-\pi, \pi]$).</div>
+    <div class="quiz-explain wrong-exp">Quadrant III means subtract $\pi$ from the reference angle: $\arg(-2-2i) = \pi/4 - \pi = -3\pi/4$. ($5\pi/4$ is the same direction but outside the principal range.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.3 EULER FORM ═══════════════ -->
+<section class="section" id="s-a4-3">
+  <div class="section-label">Topic A4.3 · Exponential form</div>
+  <h2>Euler Form &amp; Multiplication <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Euler's formula: $e^{i\theta} = \cos\theta + i\sin\theta$.</strong> So every complex number can be written as
+    $$ z = r e^{i\theta}, \qquad r \ge 0,\;\theta \in \mathbb{R}. $$
+    In Euler form, <strong>multiplication is rotation + scaling</strong>:
+    $$ z_1 z_2 = r_1 r_2 \, e^{i(\theta_1 + \theta_2)}, \qquad \frac{z_1}{z_2} = \frac{r_1}{r_2} e^{i(\theta_1 - \theta_2)}. $$
+    Multiplying by $e^{i\alpha}$ rotates by $\alpha$. Multiplying by a real $r &gt; 0$ scales by $r$. That single picture is half of the unit.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Three equivalent forms</strong>
+    For one complex number $z$ with modulus $r$ and argument $\theta$:
+    <div class="table-wrap" style="margin-top: 10px;">
+      <table>
+        <thead><tr><th>Form</th><th>Expression</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td>Cartesian</td><td>$z = a + bi$</td><td>Adding, subtracting, equating to a real polynomial.</td></tr>
+          <tr><td>Polar (cis)</td><td>$z = r\operatorname{cis}\theta$</td><td>Reading off $r$ and $\theta$ by inspection.</td></tr>
+          <tr><td>Euler</td><td>$z = re^{i\theta}$</td><td>Multiplying, dividing, raising to powers, taking roots.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Multiplication &amp; Division in polar/Euler form</div>
+    $$ z_1 z_2 = r_1 r_2 \,\operatorname{cis}(\theta_1 + \theta_2) = r_1 r_2 \, e^{i(\theta_1 + \theta_2)} $$
+    $$ \frac{z_1}{z_2} = \frac{r_1}{r_2}\,\operatorname{cis}(\theta_1 - \theta_2) = \frac{r_1}{r_2}\, e^{i(\theta_1 - \theta_2)} $$
+    <p>"Moduli multiply, arguments add."</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Conjugate &amp; reciprocal in Euler form</strong>
+    $$ \overline{re^{i\theta}} = r e^{-i\theta}, \qquad \frac{1}{re^{i\theta}} = \frac{1}{r} e^{-i\theta} \;\; (r &gt; 0). $$
+    So conjugation reflects across the real axis (negate the argument); taking the reciprocal both reflects and rescales by $1/r$. If $|z| = 1$, then $1/z = \bar z$ — a constant gem for unit-modulus problems.
+  </div>
+
+  <div class="argand-figure">
+    <svg viewBox="0 0 360 280" role="img" aria-label="Argand diagram showing the product of two complex numbers as rotation plus scaling">
+      <line class="grid" x1="0" y1="140" x2="360" y2="140"/>
+      <line class="grid" x1="180" y1="0" x2="180" y2="280"/>
+      <line class="axis" x1="20" y1="140" x2="340" y2="140"/>
+      <line class="axis" x1="180" y1="260" x2="180" y2="20"/>
+      <text x="345" y="135">Re</text>
+      <text x="186" y="20">Im</text>
+      <line class="vec" x1="180" y1="140" x2="240" y2="80"/>
+      <circle class="pt" cx="240" cy="80" r="4"/>
+      <text x="246" y="75" class="lbl-accent">z₁</text>
+      <line class="vec-alt" x1="180" y1="140" x2="230" y2="170"/>
+      <circle class="pt-alt" cx="230" cy="170" r="4"/>
+      <text x="236" y="180" class="lbl-green">z₂</text>
+      <line class="vec-alt2" x1="180" y1="140" x2="300" y2="50"/>
+      <circle class="pt-alt2" cx="300" cy="50" r="4"/>
+      <text x="306" y="45" class="lbl-purple">z₁z₂</text>
+      <path class="arc" d="M 215 140 A 35 35 0 0 0 213 117"/>
+      <text x="218" y="125" class="lbl-accent">θ₁</text>
+      <path class="arc" d="M 210 140 A 30 30 0 0 1 208 158" style="stroke: var(--green);"/>
+      <text x="200" y="160" class="lbl-green">θ₂</text>
+    </svg>
+    <div class="argand-caption">Fig 2 — Multiplication in the Argand plane: $z_1 z_2$ has modulus $|z_1||z_2|$ and argument $\theta_1 + \theta_2$.</div>
+  </div>
+
+  <h3>Worked Example — Multiplication via polar form</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Let $z_1 = \sqrt 2 \,\operatorname{cis}\tfrac{\pi}{4}$ and $z_2 = 3\operatorname{cis}\tfrac{\pi}{6}$. Find $z_1 z_2$ in Cartesian form.</p>
+    <p><strong>Multiply in polar.</strong> $r_1 r_2 = 3\sqrt 2$, $\theta_1 + \theta_2 = \tfrac{\pi}{4} + \tfrac{\pi}{6} = \tfrac{5\pi}{12}$. So</p>
+    $$ z_1 z_2 = 3\sqrt 2 \,\operatorname{cis}\tfrac{5\pi}{12}. $$
+    <p><strong>Convert.</strong> Use the exact values $\cos\tfrac{5\pi}{12} = \tfrac{\sqrt 6 - \sqrt 2}{4}$, $\sin\tfrac{5\pi}{12} = \tfrac{\sqrt 6 + \sqrt 2}{4}$. Then</p>
+    $$ z_1 z_2 = 3\sqrt 2 \cdot \tfrac{\sqrt 6 - \sqrt 2}{4} + 3\sqrt 2 i \cdot \tfrac{\sqrt 6 + \sqrt 2}{4} = \tfrac{3(\sqrt{12} - 2)}{4} + i\tfrac{3(\sqrt{12} + 2)}{4} = \tfrac{6\sqrt 3 - 6}{4} + i\tfrac{6\sqrt 3 + 6}{4}. $$
+    <p>Simplify: $z_1 z_2 = \tfrac{3}{2}(\sqrt 3 - 1) + \tfrac{3}{2}(\sqrt 3 + 1) i$. (You can double-check by multiplying the Cartesian forms $z_1 = 1 + i$ and $z_2 = \tfrac{3\sqrt 3}{2} + \tfrac{3}{2} i$ — same answer.)</p>
+  </div>
+
+  <h3>Worked Example — Quotient as rotation</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Let $z = 4 e^{i\,\pi/3}$ and $w = 2 e^{i\,\pi/6}$. Find $z/w$ and $w/z$.</p>
+    $$ \frac{z}{w} = \frac{4}{2} e^{i(\pi/3 - \pi/6)} = 2 e^{i\,\pi/6}, \qquad \frac{w}{z} = \tfrac{1}{2} e^{i(\pi/6 - \pi/3)} = \tfrac{1}{2} e^{-i\,\pi/6}. $$
+    <p>Note that $w/z = 1/(z/w)$, just as you'd hope: moduli reciprocate, arguments negate.</p>
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Where does Euler's formula come from?</summary>
+    <div class="detail-body">
+<p>One clean route uses the Maclaurin (Taylor at $0$) series:</p>
+$$ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \qquad \cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}, \qquad \sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}. $$
+<p>Plug $x = i\theta$ into the exponential series. The powers cycle: $i^0 = 1,\, i^1 = i,\, i^2 = -1,\, i^3 = -i$, and back to $1$. Splitting even-index from odd-index terms:</p>
+$$ e^{i\theta} = \underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n}}{(2n)!}}_{\cos\theta} + i\underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n+1}}{(2n+1)!}}_{\sin\theta} = \cos\theta + i\sin\theta. $$
+<p>A second route (more suited to a Paper 3): show that the function $f(\theta) = (\cos\theta + i\sin\theta) \cdot e^{-i\theta}$ has derivative $0$ everywhere (using the chain rule and the trig derivatives), so $f$ is constant; check $f(0) = 1$ to conclude $f \equiv 1$. Either way, the multiplicative-additive translation $e^{i(\alpha + \beta)} = e^{i\alpha} e^{i\beta}$ is exactly the trig product-to-sum identity for cosine and sine — Euler's formula <em>is</em> the angle-addition formula in disguise.</p>
+<p><strong>One-line corollary (Euler's identity).</strong> Setting $\theta = \pi$: $e^{i\pi} + 1 = 0$. The five most important constants of mathematics in a single equation.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">If $z = 2 e^{i\pi/3}$ and $w = 3 e^{-i\pi/4}$, then $\arg(zw)$ is:</div>
+      <span class="quiz-number">A4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{\pi}{12}$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{7\pi}{12}$</div>
+      <div class="quiz-opt" data-idx="2">$-\tfrac{\pi}{12}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{\pi}{4}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Arguments add: $\pi/3 + (-\pi/4) = 4\pi/12 - 3\pi/12 = \pi/12$. Modulus would be $6$.</div>
+    <div class="quiz-explain wrong-exp">Multiplication adds arguments: $\arg(zw) = \pi/3 - \pi/4 = \pi/12$. ($7\pi/12$ would be the sum if both arguments were positive.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.4 DE MOIVRE ═══════════════ -->
+<section class="section" id="s-a4-4">
+  <div class="section-label">Topic A4.4 · Powers</div>
+  <h2>De Moivre's Theorem <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>For every integer $n$:</strong>
+    $$ \bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta), $$
+    or equivalently $\bigl(re^{i\theta}\bigr)^n = r^n e^{i\,n\theta}$. Raising to the $n$-th power <em>multiplies the argument by $n$</em> and <em>raises the modulus to the $n$-th</em>. Two big uses: computing $(1 + i)^{10}$ in one line, and deriving multiple-angle identities for $\cos(n\theta)$ and $\sin(n\theta)$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">De Moivre's Theorem</div>
+    $$ \bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta), \quad n \in \mathbb{Z}. $$
+    $$ \bigl(re^{i\theta}\bigr)^n = r^n e^{i\,n\theta}, \quad r &gt; 0, n \in \mathbb{Z}. $$
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Proof of De Moivre by induction <span class="hl-flag">HL+</span></summary>
+    <div class="detail-body">
+<p><strong>Statement.</strong> For every positive integer $n$, $\bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta)$.</p>
+<p><strong>Base case ($n = 1$).</strong> Both sides equal $\cos\theta + i\sin\theta$. ✓</p>
+<p><strong>Inductive step.</strong> Assume the identity holds for $n = k$. Then</p>
+$$
+\begin{aligned}
+\bigl(\cos\theta + i\sin\theta\bigr)^{k+1}
+&amp;= \bigl(\cos\theta + i\sin\theta\bigr)^k \cdot \bigl(\cos\theta + i\sin\theta\bigr) \\
+&amp;\stackrel{(IH)}{=} \bigl(\cos(k\theta) + i\sin(k\theta)\bigr) \cdot \bigl(\cos\theta + i\sin\theta\bigr) \\
+&amp;= \cos(k\theta)\cos\theta - \sin(k\theta)\sin\theta + i\bigl(\sin(k\theta)\cos\theta + \cos(k\theta)\sin\theta\bigr) \\
+&amp;= \cos\bigl((k+1)\theta\bigr) + i\sin\bigl((k+1)\theta\bigr),
+\end{aligned}
+$$
+<p>using the angle-addition formulas for cosine and sine in the last step. By induction the identity holds for all $n \ge 1$. (For $n = 0$ both sides equal $1$; for $n &lt; 0$, write $\bigl(\cos\theta + i\sin\theta\bigr)^{-1} = \cos\theta - i\sin\theta = \cos(-\theta) + i\sin(-\theta)$ and apply the positive case.)</p>
+<p><strong>Why the proof "feels right."</strong> In Euler form the statement is $\bigl(e^{i\theta}\bigr)^n = e^{i\,n\theta}$, which is just the law of exponents — once you accept Euler's formula, De Moivre is one line. The induction proof is what you write when the question asks you to prove it <em>without</em> assuming Euler.</p>
+    </div>
+  </details>
+
+  <h3>Worked Example — Compute $(1 + i)^{10}$</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find $(1 + i)^{10}$ in Cartesian form.</p>
+    <p><strong>Polar form.</strong> $|1 + i| = \sqrt 2$, $\arg(1+i) = \pi/4$, so $1 + i = \sqrt 2 \, e^{i\pi/4}$.</p>
+    <p><strong>Apply De Moivre.</strong></p>
+    $$ (1 + i)^{10} = \bigl(\sqrt 2\bigr)^{10} e^{i\cdot 10\pi/4} = 32 \, e^{i\,5\pi/2}. $$
+    <p><strong>Reduce the argument.</strong> $5\pi/2 = 2\pi + \pi/2$, so $e^{i\,5\pi/2} = e^{i\pi/2} = i$.</p>
+    <p><strong>Answer.</strong> $(1 + i)^{10} = 32i$.</p>
+    <p>Try this with the binomial theorem and you'll see why De Moivre is worth the polar conversion.</p>
+  </div>
+
+  <h3>Worked Example — Triple-angle formula <span class="hl-flag">HL+</span></h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Use De Moivre to derive $\cos(3\theta)$ and $\sin(3\theta)$ in terms of $\cos\theta$ and $\sin\theta$.</p>
+    <p><strong>Expand both sides of De Moivre with $n = 3$.</strong> Left side: by the binomial theorem,</p>
+    $$ (\cos\theta + i\sin\theta)^3 = \cos^3\theta + 3i\cos^2\theta\sin\theta + 3i^2\cos\theta\sin^2\theta + i^3\sin^3\theta. $$
+    <p>Using $i^2 = -1$, $i^3 = -i$:</p>
+    $$ = \bigl(\cos^3\theta - 3\cos\theta\sin^2\theta\bigr) + i\bigl(3\cos^2\theta\sin\theta - \sin^3\theta\bigr). $$
+    <p><strong>Right side</strong> is $\cos(3\theta) + i\sin(3\theta)$. Match real and imaginary parts:</p>
+    $$ \cos(3\theta) = \cos^3\theta - 3\cos\theta\sin^2\theta, \qquad \sin(3\theta) = 3\cos^2\theta\sin\theta - \sin^3\theta. $$
+    <p>Using $\sin^2\theta = 1 - \cos^2\theta$, the first identity becomes $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$. Likewise, $\sin(3\theta) = 3\sin\theta - 4\sin^3\theta$. Two classical identities falling out of De Moivre in three lines.</p>
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Exam pattern — "Find $z^n$"</strong>
+    <strong>(1)</strong> Convert $z$ to polar form (modulus + argument). <strong>(2)</strong> Raise: modulus to the $n$-th, multiply argument by $n$. <strong>(3)</strong> Reduce the argument mod $2\pi$ to the principal range. <strong>(4)</strong> Convert back to Cartesian if asked. The whole flow takes about 90 seconds once practised; you save several minutes vs. expanding the binomial.
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">$(\sqrt{3} + i)^6$ equals:</div>
+      <span class="quiz-number">A4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-64i$</div>
+      <div class="quiz-opt" data-idx="1">$64$</div>
+      <div class="quiz-opt" data-idx="2">$-64$</div>
+      <div class="quiz-opt" data-idx="3">$64i$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Polar: $|\sqrt 3 + i| = 2$, $\arg = \pi/6$. So $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = 64(-1) = -64$.</div>
+    <div class="quiz-explain wrong-exp">$\sqrt 3 + i = 2e^{i\pi/6}$, so $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = -64$. (You get $64$ only if you forgot $e^{i\pi} = -1$.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.5 ROOTS ═══════════════ -->
+<section class="section" id="s-a4-5">
+  <div class="section-label">Topic A4.5 · Roots</div>
+  <h2>Roots of Complex Numbers <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>The $n$ distinct $n$-th roots of $z = re^{i\theta}$ are</strong>
+    $$ w_k = r^{1/n} \, e^{i(\theta + 2\pi k)/n}, \qquad k = 0, 1, 2, \ldots, n - 1. $$
+    They sit on a circle of radius $r^{1/n}$, equally spaced by $2\pi/n$. The $n$-th <em>roots of unity</em> (the case $z = 1$) are $e^{2\pi i k/n}$, $k = 0, \ldots, n-1$ — they form a regular $n$-gon on the unit circle.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Why $n$ roots, and why this formula</strong>
+    Write the unknown root as $w = se^{i\varphi}$. Then $w^n = s^n e^{i n\varphi}$. Setting $w^n = re^{i\theta}$ forces $s^n = r$ (so $s = r^{1/n}$, the positive real $n$-th root) and $n\varphi = \theta + 2\pi k$ for some integer $k$. As $k$ ranges over $0, 1, \ldots, n-1$ we hit $n$ distinct arguments (in the principal range); $k = n$ wraps back to $k = 0$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">$n$-th roots formula</div>
+    $$ z^{1/n} = r^{1/n} \, e^{i(\theta + 2\pi k)/n}, \qquad k = 0, 1, \ldots, n - 1. $$
+    <p>$n$ distinct roots, equally spaced by $2\pi/n$, all of modulus $r^{1/n}$.</p>
+  </div>
+
+  <div class="argand-figure">
+    <svg viewBox="0 0 360 280" role="img" aria-label="Fifth roots of unity arranged as a regular pentagon on the unit circle">
+      <line class="grid" x1="0" y1="140" x2="360" y2="140"/>
+      <line class="grid" x1="180" y1="0" x2="180" y2="280"/>
+      <line class="axis" x1="20" y1="140" x2="340" y2="140"/>
+      <line class="axis" x1="180" y1="260" x2="180" y2="20"/>
+      <circle class="unit-circle" cx="180" cy="140" r="100"/>
+      <text x="345" y="135">Re</text>
+      <text x="186" y="20">Im</text>
+      <!-- 5 roots: angles 0, 72, 144, 216, 288 degrees -->
+      <circle class="pt" cx="280" cy="140" r="4"/>
+      <text x="288" y="145" class="lbl-accent">w₀</text>
+      <circle class="pt" cx="211" cy="45" r="4"/>
+      <text x="218" y="40" class="lbl-accent">w₁</text>
+      <circle class="pt" cx="99" cy="81" r="4"/>
+      <text x="68" y="80" class="lbl-accent">w₂</text>
+      <circle class="pt" cx="99" cy="199" r="4"/>
+      <text x="68" y="205" class="lbl-accent">w₃</text>
+      <circle class="pt" cx="211" cy="235" r="4"/>
+      <text x="218" y="245" class="lbl-accent">w₄</text>
+      <!-- pentagon outlines -->
+      <path d="M 280 140 L 211 45 L 99 81 L 99 199 L 211 235 Z" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
+    </svg>
+    <div class="argand-caption">Fig 3 — Fifth roots of unity: $w_k = e^{2\pi i k/5}$ for $k = 0, \ldots, 4$. Regular pentagon on the unit circle.</div>
+  </div>
+
+  <h3>Worked Example — Fourth roots of $-16$</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find all $w \in \mathbb{C}$ with $w^4 = -16$.</p>
+    <p><strong>Polar form of $-16$.</strong> Modulus $16$, argument $\pi$, so $-16 = 16 e^{i\pi}$.</p>
+    <p><strong>Apply the roots formula with $n = 4$.</strong></p>
+    $$ w_k = 16^{1/4} \, e^{i(\pi + 2\pi k)/4} = 2 \, e^{i(\pi/4 + \pi k/2)}, \quad k = 0, 1, 2, 3. $$
+    <p><strong>List.</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>$k$</th><th>Argument</th><th>Cartesian</th></tr></thead>
+        <tbody>
+          <tr><td>$0$</td><td>$\pi/4$</td><td>$\sqrt 2 + i\sqrt 2$</td></tr>
+          <tr><td>$1$</td><td>$3\pi/4$</td><td>$-\sqrt 2 + i\sqrt 2$</td></tr>
+          <tr><td>$2$</td><td>$5\pi/4 \;(\equiv -3\pi/4)$</td><td>$-\sqrt 2 - i\sqrt 2$</td></tr>
+          <tr><td>$3$</td><td>$7\pi/4 \;(\equiv -\pi/4)$</td><td>$\sqrt 2 - i\sqrt 2$</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The four roots form a square of "radius" $2$ centred at the origin, rotated $45°$ from the axes. ✓</p>
+  </div>
+
+  <h3>Roots of unity</h3>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">The $n$-th roots of unity</strong>
+    The $n$ solutions of $z^n = 1$ are
+    $$ \omega_k = e^{2\pi i k/n}, \qquad k = 0, 1, \ldots, n - 1. $$
+    Write $\omega = e^{2\pi i/n}$ (the "primitive" root). Then the full list is $1, \omega, \omega^2, \ldots, \omega^{n-1}$ — the powers of $\omega$ — and they form a regular $n$-gon on the unit circle with one vertex at $z = 1$.
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Sum of the $n$-th roots of unity is $0$ (for $n \ge 2$) <span class="hl-flag">HL+</span></summary>
+    <div class="detail-body">
+<p>Let $\omega = e^{2\pi i/n}$. The roots of unity are $1, \omega, \omega^2, \ldots, \omega^{n-1}$. Their sum is a finite geometric series with first term $1$ and ratio $\omega$:</p>
+$$ S = 1 + \omega + \omega^2 + \cdots + \omega^{n-1} = \frac{\omega^n - 1}{\omega - 1}. $$
+<p>But $\omega^n = e^{2\pi i} = 1$, so the numerator is $0$. Since $\omega \ne 1$ (we assumed $n \ge 2$), the denominator is non-zero, giving $S = 0$.</p>
+<p><strong>Geometric reading.</strong> The roots of unity are the vertices of a regular $n$-gon centred at the origin — by symmetry their centroid (= average position) is the centre, $0$. So their sum (= $n \times$ centroid) is also $0$. The algebraic and geometric proofs say the same thing.</p>
+<p><strong>Consequence.</strong> For the cube roots of unity ($n = 3$), writing $\omega = e^{2\pi i/3}$, we get $1 + \omega + \omega^2 = 0$, i.e. $\omega^2 = -1 - \omega$. This single identity is the entire content of "the cube roots of unity" on Paper 1 — memorize it.</p>
+    </div>
+  </details>
+
+  <h3>Worked Example — Cube roots of $-8i$</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find all $z \in \mathbb{C}$ with $z^3 = -8i$.</p>
+    <p><strong>Polar of $-8i$.</strong> $|-8i| = 8$, $\arg(-8i) = -\pi/2$. So $-8i = 8 e^{-i\pi/2}$.</p>
+    <p><strong>Apply formula with $n = 3$.</strong></p>
+    $$ z_k = 8^{1/3} e^{i(-\pi/2 + 2\pi k)/3} = 2 e^{i(-\pi/6 + 2\pi k/3)}, \quad k = 0, 1, 2. $$
+    <p><strong>List the arguments.</strong> $-\pi/6$, $-\pi/6 + 2\pi/3 = \pi/2$, $-\pi/6 + 4\pi/3 = 7\pi/6 \equiv -5\pi/6$. So</p>
+    $$ z_0 = 2 e^{-i\pi/6} = \sqrt 3 - i, \quad z_1 = 2 e^{i\pi/2} = 2i, \quad z_2 = 2 e^{-i\,5\pi/6} = -\sqrt 3 - i. $$
+    <p>Three roots on the circle $|z| = 2$, equally spaced by $2\pi/3$. ✓</p>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">How many distinct complex solutions does $z^6 = 64$ have?</div>
+      <span class="quiz-number">A4.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$1$</div>
+      <div class="quiz-opt" data-idx="1">$6$</div>
+      <div class="quiz-opt" data-idx="2">$2$</div>
+      <div class="quiz-opt" data-idx="3">infinitely many</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Every non-zero complex number has exactly $n$ distinct $n$-th roots. Two of them ($\pm 2$) are real, the other four are non-real complex.</div>
+    <div class="quiz-explain wrong-exp">Every non-zero complex number has $n$ distinct $n$-th roots, so $6$. (The two real roots $\pm 2$ are the only real ones — the rest are non-real.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ A4.6 POLYNOMIALS ═══════════════ -->
+<section class="section" id="s-a4-6">
+  <div class="section-label">Topic A4.6 · Polynomials</div>
+  <h2>Polynomials over &Copf; <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Conjugate root theorem.</strong> If $p(x)$ is a polynomial with <em>real</em> coefficients and $z_0$ is a non-real root, then $\bar z_0$ is also a root. So complex roots of real polynomials come in conjugate pairs, and each pair gives a real quadratic factor
+    $$ (x - z_0)(x - \bar z_0) = x^2 - 2\operatorname{Re}(z_0)\,x + |z_0|^2. $$
+    A real polynomial of odd degree therefore has at least one real root.
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Fundamental theorem of algebra (statement)</strong>
+    Every non-constant polynomial $p(x) \in \mathbb{C}[x]$ of degree $n$ has exactly $n$ roots in $\mathbb{C}$, counted with multiplicity. So
+    $$ p(x) = a_n (x - r_1)(x - r_2)\cdots(x - r_n), $$
+    where $r_1, \ldots, r_n \in \mathbb{C}$ are the roots (possibly with repeats). Over the reals, the factorization may instead use real <em>quadratic</em> factors — one for each conjugate pair of complex roots.
+  </div>
+
+  <details>
+    <summary>▸ Going deeper — Proof of the conjugate root theorem <span class="hl-flag">HL+</span></summary>
+    <div class="detail-body">
+<p>Let $p(x) = \sum_{k=0}^{n} a_k x^k$ with every $a_k \in \mathbb{R}$, and suppose $p(z_0) = 0$. Apply conjugation to both sides:</p>
+$$ 0 = \overline{0} = \overline{p(z_0)} = \overline{\sum_{k=0}^{n} a_k z_0^k} = \sum_{k=0}^{n} \overline{a_k z_0^k} = \sum_{k=0}^{n} \bar a_k \, \bar z_0^{\,k} = \sum_{k=0}^{n} a_k \, \bar z_0^{\,k} = p(\bar z_0), $$
+<p>where we used (i) $\overline{\sum} = \sum \overline{(\cdot)}$ (conjugation respects addition), (ii) $\overline{ab} = \bar a\, \bar b$ (respects multiplication, hence powers), and (iii) $\bar a_k = a_k$ because $a_k$ is real. So $\bar z_0$ is also a root. ∎</p>
+<p><strong>Why the "real coefficients" assumption matters.</strong> If $p(x) = x - i$, the only root is $z_0 = i$ and its conjugate $\bar z_0 = -i$ is <em>not</em> a root: $p(-i) = -2i \ne 0$. The conjugate root theorem fails the moment a single coefficient leaves $\mathbb{R}$.</p>
+<p><strong>Consequence — quadratic factor.</strong> If $z_0 = a + bi$ ($b \ne 0$) is a root of a real polynomial, then so is $\bar z_0 = a - bi$, and</p>
+$$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x + (a^2 + b^2) $$
+<p>is a real quadratic factor of $p(x)$.</p>
+    </div>
+  </details>
+
+  <h3>Worked Example — Build a polynomial from a complex root</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find a monic polynomial $p(x)$ with real coefficients of <em>smallest</em> possible degree such that $p(2 + 3i) = 0$ and $p(-1) = 0$.</p>
+    <p><strong>Force the conjugate.</strong> Real coefficients $\Rightarrow$ $2 - 3i$ is also a root.</p>
+    <p><strong>Three roots, three factors.</strong></p>
+    $$ p(x) = (x + 1)\bigl(x - (2 + 3i)\bigr)\bigl(x - (2 - 3i)\bigr) = (x + 1)\bigl(x^2 - 4x + 13\bigr). $$
+    <p>Here $z_0 + \bar z_0 = 4$ and $z_0 \bar z_0 = 4 + 9 = 13$.</p>
+    <p><strong>Expand.</strong></p>
+    $$ p(x) = (x + 1)(x^2 - 4x + 13) = x^3 - 4x^2 + 13x + x^2 - 4x + 13 = x^3 - 3x^2 + 9x + 13. $$
+    <p>Degree $3$ — odd — so $p$ must have at least one real root, and indeed $p(-1) = 0$.</p>
+  </div>
+
+  <h3>Worked Example — Recovering all roots from one</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> $p(x) = x^4 - 4x^3 + 14x^2 - 4x + 13$ has $i$ as a root. Find the remaining three roots.</p>
+    <p><strong>Conjugate.</strong> By the conjugate root theorem, $-i$ is also a root. So $(x - i)(x + i) = x^2 + 1$ divides $p$.</p>
+    <p><strong>Polynomial long division.</strong></p>
+    $$ p(x) \div (x^2 + 1) = x^2 - 4x + 13. $$
+    <p>(Verify by multiplying back: $(x^2 + 1)(x^2 - 4x + 13) = x^4 - 4x^3 + 13x^2 + x^2 - 4x + 13 = x^4 - 4x^3 + 14x^2 - 4x + 13$. ✓)</p>
+    <p><strong>Solve the quadratic.</strong></p>
+    $$ x = \frac{4 \pm \sqrt{16 - 52}}{2} = \frac{4 \pm \sqrt{-36}}{2} = 2 \pm 3i. $$
+    <p><strong>Four roots:</strong> $i,\, -i,\, 2 + 3i,\, 2 - 3i$ — two conjugate pairs, as required.</p>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Watch for: the "one root, find the rest" pattern</strong>
+    Whenever a problem hands you one non-real root of a real-coefficient polynomial, the conjugate is <em>free</em> — write it down before doing any work. Then divide out the corresponding real quadratic factor, leaving a lower-degree polynomial that you finish by other means (factor theorem, quadratic formula, GDC). About one Paper 2 question per session uses this pattern.
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">A polynomial $p(x)$ has real coefficients, degree $5$, and roots $2,\; 1 + i,\; -3$ (each simple). How many <em>real</em> roots does $p$ have?</div>
+      <span class="quiz-number">A4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$3$ — namely $2, -3$, and one more.</div>
+      <div class="quiz-opt" data-idx="1">$2$</div>
+      <div class="quiz-opt" data-idx="2">$5$</div>
+      <div class="quiz-opt" data-idx="3">$1$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The complex root $1 + i$ forces conjugate $1 - i$, accounting for $2$ non-real roots. With $2$ and $-3$ that's $4$ roots. A degree-$5$ polynomial has $5$ roots total, so one more real root must exist. Total real: $2, -3,$ and one unspecified $\Rightarrow$ $3$.</div>
+    <div class="quiz-explain wrong-exp">Conjugate pair contributes $2$ non-real roots. $5 - 2 = 3$ real roots in total ($2$, $-3$, plus a third forced by the degree count).</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Review</div>
+  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">M</div>
+        <div class="card-title">Memorize</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>$i^2 = -1$, $\bar z = a - bi$, $|z|^2 = z\bar z = a^2 + b^2$</li>
+        <li>Divide-by-conjugate recipe</li>
+        <li>Quadrant rules for $\arg(z)$</li>
+        <li>$e^{i\theta} = \cos\theta + i\sin\theta$ (Euler) &amp; $z_1 z_2 = r_1 r_2 e^{i(\theta_1 + \theta_2)}$</li>
+        <li>De Moivre: $(re^{i\theta})^n = r^n e^{i n\theta}$ for $n \in \mathbb{Z}$</li>
+        <li>$n$-th roots formula: spacing $2\pi/n$, modulus $r^{1/n}$</li>
+        <li>Conjugate root theorem &amp; real-quadratic factor formula</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">U</div>
+        <div class="card-title">Understand</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>Multiplication = rotation + scaling in the Argand plane</li>
+        <li>Why Cartesian/polar/Euler are the same number, different forms</li>
+        <li>The induction proof of De Moivre</li>
+        <li>Why $\arctan(b/a)$ "loses" quadrants II and III</li>
+        <li>Sum of $n$-th roots of unity is $0$ — algebraic and geometric arguments</li>
+        <li>Why the conjugate root theorem needs real coefficients</li>
+        <li>Why every odd-degree real polynomial has a real root</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Common Pitfalls</h3>
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top student errors</strong>
+    <strong>1.</strong> Writing $\arg(z) = \arctan(b/a)$ without checking the quadrant — instant mark loss in quadrants II and III.<br>
+    <strong>2.</strong> Forgetting that $|z|$ is defined to be the <em>positive</em> square root: $\sqrt{a^2 + b^2}$, not $\pm$.<br>
+    <strong>3.</strong> Mixing up $\operatorname{Im}(z) = b$ (a real number) with $bi$.<br>
+    <strong>4.</strong> Applying $\sqrt{ab} = \sqrt a \sqrt b$ across negative reals — that identity fails: $\sqrt{(-1)(-1)} = 1$, not $i \cdot i = -1$.<br>
+    <strong>5.</strong> Forgetting to reduce a De Moivre argument modulo $2\pi$ — leaving $e^{i\,15\pi/4}$ instead of $e^{-i\pi/4}$.<br>
+    <strong>6.</strong> Listing only one $n$-th root when the question asks for all $n$ — the wording "find all $z$" is non-negotiable.<br>
+    <strong>7.</strong> Forgetting the conjugate when you're handed a single complex root of a real polynomial.<br>
+    <strong>8.</strong> Treating the conjugate root theorem as if it applied to complex-coefficient polynomials.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Paper-specific notes</strong>
+    <strong>Paper 1 (no calc):</strong> exact-value arithmetic in Cartesian form (especially division), conversions between Cartesian and polar for "nice" angles, De Moivre on small integer powers, recovering polynomial roots from one given complex root.<br>
+    <strong>Paper 2 (calc):</strong> longer factoring problems, larger De Moivre powers, $n$-th roots displayed on a numerical Argand plot. You can use the GDC's complex mode, but write your set-up in proper notation — the marks are for the method, not the final number.<br>
+    <strong>Paper 3 (HL extension):</strong> derivations using De Moivre (multiple-angle identities, sums of $\cos n\theta$), proofs of the conjugate root theorem and the roots-of-unity sum.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ FLASHCARDS ═══════════════ -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+
+  <div class="flashcard-toolbar">
+    <span class="fc-count" id="fcCount">0 / 14 flipped</span>
+    <div>
+      <button onclick="shuffleFlashcards()">Shuffle</button>
+      <button onclick="resetFlashcards()">Reset</button>
+    </div>
+  </div>
+
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Defining property of $i$?</div>
+        <div class="flashcard-back">$$i^2 = -1$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Conjugate of $a + bi$?</div>
+        <div class="flashcard-back">$$\bar z = a - bi$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Modulus of $a + bi$?</div>
+        <div class="flashcard-back">$$|z| = \sqrt{a^2 + b^2}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$z \bar z = ?$</div>
+        <div class="flashcard-back">$$|z|^2 = a^2 + b^2$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">How to divide $(a+bi)/(c+di)$?</div>
+        <div class="flashcard-back">Multiply top &amp; bottom by $c - di$. $$\frac{a+bi}{c+di} = \frac{(a+bi)(c-di)}{c^2 + d^2}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Polar form of $z$?</div>
+        <div class="flashcard-back">$$z = r\operatorname{cis}\theta = re^{i\theta}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Euler's formula?</div>
+        <div class="flashcard-back">$$e^{i\theta} = \cos\theta + i\sin\theta$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Product in polar form?</div>
+        <div class="flashcard-back">Moduli multiply, arguments add. $$z_1 z_2 = r_1 r_2\, e^{i(\theta_1 + \theta_2)}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">De Moivre's theorem?</div>
+        <div class="flashcard-back">$$(re^{i\theta})^n = r^n e^{i n\theta}$$ $$n \in \mathbb{Z}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$n$-th roots of $re^{i\theta}$?</div>
+        <div class="flashcard-back">$$w_k = r^{1/n} e^{i(\theta + 2\pi k)/n}$$ $$k = 0, 1, \ldots, n-1$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Sum of $n$-th roots of unity, $n \ge 2$?</div>
+        <div class="flashcard-back">$$0$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Cube roots of unity identity?</div>
+        <div class="flashcard-back">$$1 + \omega + \omega^2 = 0$$ where $\omega = e^{2\pi i/3}$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Conjugate root theorem?</div>
+        <div class="flashcard-back">Real-coefficient polynomial: $p(z_0) = 0 \Rightarrow p(\bar z_0) = 0$. Complex roots come in conjugate pairs.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Real quadratic from conjugate pair $a \pm bi$?</div>
+        <div class="flashcard-back">$$x^2 - 2ax + (a^2 + b^2)$$</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ UNIT QUIZ ═══════════════ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit A4 — Practice Quiz</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">1. $(2 - i)(3 + 4i)$ equals:</div>
+      <span class="quiz-number">Q1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$2 + 5i$</div>
+      <div class="quiz-opt" data-idx="1">$10 + 5i$</div>
+      <div class="quiz-opt" data-idx="2">$6 + 5i$</div>
+      <div class="quiz-opt" data-idx="3">$10 - 5i$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $(2-i)(3+4i) = 6 + 8i - 3i - 4i^2 = 6 + 5i + 4 = 10 + 5i$.</div>
+    <div class="quiz-explain wrong-exp">FOIL then collapse $i^2 = -1$: $(2-i)(3+4i) = 6 + 8i - 3i + 4 = 10 + 5i$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">2. $\dfrac{1}{3 - 4i}$ in Cartesian form is:</div>
+      <span class="quiz-number">Q2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$3 + 4i$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{3 - 4i}{25}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{3}{25} + \tfrac{4}{25} i$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{1}{3} + \tfrac{1}{4} i$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Multiply top &amp; bottom by $3 + 4i$: $\dfrac{3 + 4i}{(3-4i)(3+4i)} = \dfrac{3 + 4i}{9 + 16} = \dfrac{3 + 4i}{25}$, i.e. $\tfrac{3}{25} + \tfrac{4}{25}i$.</div>
+    <div class="quiz-explain wrong-exp">$\dfrac{1}{3 - 4i} \cdot \dfrac{3 + 4i}{3 + 4i} = \dfrac{3 + 4i}{25} = \tfrac{3}{25} + \tfrac{4}{25}i$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">3. The modulus of $z = (1 - i\sqrt 3)^4$ is:</div>
+      <span class="quiz-number">Q3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$2$</div>
+      <div class="quiz-opt" data-idx="1">$8$</div>
+      <div class="quiz-opt" data-idx="2">$16$</div>
+      <div class="quiz-opt" data-idx="3">$4$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $|1 - i\sqrt 3| = \sqrt{1 + 3} = 2$, so $|z| = 2^4 = 16$ (modulus is multiplicative under powers).</div>
+    <div class="quiz-explain wrong-exp">$|z^n| = |z|^n$. Here $|1 - i\sqrt 3| = 2$, so $|z| = 2^4 = 16$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">4. The principal argument of $z = -1 - i$ is:</div>
+      <span class="quiz-number">Q4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="1">$-\tfrac{3\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{3\pi}{4}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{5\pi}{4}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Quadrant III: reference angle $\pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$.</div>
+    <div class="quiz-explain wrong-exp">In quadrant III, principal argument is $\arctan(b/a) - \pi = \pi/4 - \pi = -3\pi/4$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">5. $(1 + i)^{8}$ equals:</div>
+      <span class="quiz-number">Q5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$256$</div>
+      <div class="quiz-opt" data-idx="1">$-256$</div>
+      <div class="quiz-opt" data-idx="2">$256 i$</div>
+      <div class="quiz-opt" data-idx="3">$16$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $1 + i = \sqrt 2 \, e^{i\pi/4}$. So $(1+i)^8 = (\sqrt 2)^8 e^{i\,2\pi} = 16 \cdot 1 = 16$.</div>
+    <div class="quiz-explain wrong-exp">$(1+i)^8 = (\sqrt 2)^8 e^{i\,8\pi/4} = 2^4 \cdot e^{i\,2\pi} = 16$. (You get $256$ if you forgot the modulus is $\sqrt 2$, not $2$.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">6. The three cube roots of $-1$ are:</div>
+      <span class="quiz-number">Q6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-1$ only</div>
+      <div class="quiz-opt" data-idx="1">$\pm 1, \, i$</div>
+      <div class="quiz-opt" data-idx="2">$-1, \, \tfrac{1 + i\sqrt 3}{2}, \, \tfrac{1 - i\sqrt 3}{2}$</div>
+      <div class="quiz-opt" data-idx="3">$-1, \, i, \, -i$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $-1 = e^{i\pi}$, so cube roots are $e^{i(\pi + 2\pi k)/3}$ for $k = 0, 1, 2$. Arguments $\pi/3, \pi, 5\pi/3$ (i.e. $-\pi/3$), giving $\tfrac{1 + i\sqrt 3}{2}, \, -1, \, \tfrac{1 - i\sqrt 3}{2}$.</div>
+    <div class="quiz-explain wrong-exp">Apply the $n$-th roots formula with $z = -1$, $n = 3$. The three roots are $e^{i\pi/3}, e^{i\pi}, e^{-i\pi/3}$ — the second is $-1$; the other two are $\tfrac{1 \pm i\sqrt 3}{2}$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">7. If $\omega = e^{2\pi i/7}$, then $1 + \omega + \omega^2 + \cdots + \omega^6$ equals:</div>
+      <span class="quiz-number">Q7</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0$</div>
+      <div class="quiz-opt" data-idx="1">$1$</div>
+      <div class="quiz-opt" data-idx="2">$7$</div>
+      <div class="quiz-opt" data-idx="3">$e^{2\pi i}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! These are the seven $7$-th roots of unity. Their sum is the geometric series $\dfrac{\omega^7 - 1}{\omega - 1} = \dfrac{0}{\omega - 1} = 0$ (since $\omega^7 = 1$, $\omega \ne 1$).</div>
+    <div class="quiz-explain wrong-exp">The sum of the $n$-th roots of unity is $0$ for any $n \ge 2$, by the geometric-series argument or by symmetry of the regular $n$-gon centred at $0$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">8. $p(x)$ has real coefficients, is monic, and degree $3$ with $1 + 2i$ as a root. If $p(0) = 5$, then $p(x)$ is:</div>
+      <span class="quiz-number">Q8</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$(x - 1 - 2i)(x - 1 + 2i)(x - 1)$</div>
+      <div class="quiz-opt" data-idx="1">$(x^2 - 2x + 5)(x - 1)$</div>
+      <div class="quiz-opt" data-idx="2">$x^3 + 5$</div>
+      <div class="quiz-opt" data-idx="3">$(x^2 - 2x + 5)(x + 1)$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The conjugate root $1 - 2i$ gives the real quadratic factor $(x - (1+2i))(x - (1-2i)) = x^2 - 2x + 5$. Let the third root be $r$, so $p(x) = (x^2 - 2x + 5)(x - r)$. Then $p(0) = 5 \cdot (-r) = -5r = 5 \Rightarrow r = -1$, i.e. linear factor $(x + 1)$.</div>
+    <div class="quiz-explain wrong-exp">Conjugate forces the real factor $x^2 - 2x + 5$. The third root $r$ is determined by $p(0) = 5(-r) = 5 \Rightarrow r = -1$, so the linear factor is $(x + 1)$, giving $(x^2 - 2x + 5)(x + 1)$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">9. Using De Moivre, $\cos(2\theta)$ in terms of $\cos\theta$ alone is:</div>
+      <span class="quiz-number">Q9</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\cos^2\theta + \sin^2\theta$</div>
+      <div class="quiz-opt" data-idx="1">$1 - \cos^2\theta$</div>
+      <div class="quiz-opt" data-idx="2">$2\cos^2\theta - 1$</div>
+      <div class="quiz-opt" data-idx="3">$\cos^2\theta - \sin^2\theta$ (cannot be reduced further)</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $(\cos\theta + i\sin\theta)^2 = \cos^2\theta - \sin^2\theta + 2i\sin\theta\cos\theta = \cos(2\theta) + i\sin(2\theta)$. Equating real parts: $\cos(2\theta) = \cos^2\theta - \sin^2\theta = \cos^2\theta - (1 - \cos^2\theta) = 2\cos^2\theta - 1$.</div>
+    <div class="quiz-explain wrong-exp">From De Moivre, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$. Substituting $\sin^2\theta = 1 - \cos^2\theta$ gives $2\cos^2\theta - 1$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">10. The set of complex numbers $z$ with $|z - 2| = |z + 2i|$ is:</div>
+      <span class="quiz-number">Q10</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">A circle centred at the origin.</div>
+      <div class="quiz-opt" data-idx="1">A circle centred at $1 - i$.</div>
+      <div class="quiz-opt" data-idx="2">The single point $z = 1 - i$.</div>
+      <div class="quiz-opt" data-idx="3">A straight line (the perpendicular bisector of the segment from $2$ to $-2i$).</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $|z - w|$ is the distance between $z$ and $w$. The condition "distance to $2$ equals distance to $-2i$" picks out the perpendicular bisector of the segment from $2$ to $-2i$ — the line $y = -x$ (or $\operatorname{Re}(z) + \operatorname{Im}(z) = 0$).</div>
+    <div class="quiz-explain wrong-exp">$|z - w|$ is a distance, so $|z - z_1| = |z - z_2|$ defines the perpendicular bisector of the segment $z_1 z_2$ — a straight line. (Concentric circles correspond to $|z - c| = r$, a single equality with one centre.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- ═══════════════ CHECKLIST ═══════════════ -->
+<section class="section" id="checklist">
+  <div class="section-label">Self-Assessment</div>
+  <h2>Readiness Checklist</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL+</span> are deeper-tier mastery (Paper 3 / top-mark territory).</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Add, subtract, multiply, and divide complex numbers in Cartesian form</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use $z \bar z = |z|^2$ to rationalize denominators</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve $z^2 = w$ by equating real and imaginary parts</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Plot complex numbers on the Argand diagram &amp; read off modulus and argument</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Convert between Cartesian and polar (or Euler) form with correct quadrant</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Multiply and divide in polar form by adding/subtracting arguments</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply De Moivre's theorem to compute integer powers</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Reproduce the inductive proof of De Moivre</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Derive multiple-angle identities ($\cos n\theta$, $\sin n\theta$) using De Moivre</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find all $n$ distinct $n$-th roots of a given complex number</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Show that the $n$-th roots of unity sum to $0$ (algebraically and geometrically)</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply the conjugate root theorem to factor real polynomials</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Build the real quadratic factor $x^2 - 2ax + (a^2+b^2)$ from a conjugate pair $a \pm bi$</li>
+  </ul>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
+  <p>IB Math Analysis &amp; Approaches HL — Unit A4: Complex Numbers · First Assessment 2029</p>
+</div>
+
+</main>
+<script>
+// ─── SCORE TRACKING ───
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+
+function updateScoreBadge() {
+  const badge = document.getElementById('scoreBadge');
+  if (!badge) return;
+  if (quizScore.total === 0) {
+    badge.textContent = '0 / 0';
+    badge.classList.add('zero');
+  } else {
+    badge.textContent = quizScore.correct + ' / ' + quizScore.total;
+    badge.classList.remove('zero');
+  }
+}
+
+// ─── THEME ───
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  const tt = document.getElementById('themeToggle');
+  if (tt) tt.textContent = 'Light';
+}
+
+// ─── PROGRESS BAR ───
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.width = pct + '%';
+});
+
+// ─── ACTIVE TOC ───
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ─── QUIZZES ───
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if(opt.classList.contains('disabled')) return;
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      quizScore.total++;
+      if (idx === answer) {
+        opt.classList.add('correct');
+        quizScore.correct++;
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+        const retry = quiz.querySelector('.quiz-retry');
+        if (retry) retry.classList.add('show');
+      }
+      updateScoreBadge();
+    });
+  });
+});
+
+function retryQuiz(btn) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => {
+    o.classList.remove('disabled', 'correct', 'wrong');
+  });
+  quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show'));
+  btn.classList.remove('show');
+  quizScore.total--;
+  updateScoreBadge();
+}
+
+// ─── FLASHCARDS ───
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  updateFlashcardCount();
+}
+function updateFlashcardCount() {
+  const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
+  const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
+  const el = document.getElementById('fcCount');
+  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+}
+function resetFlashcards() {
+  document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
+  updateFlashcardCount();
+}
+function shuffleFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  if (!grid) return;
+  const cards = [...grid.children];
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(cards[j]);
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+}
+
+// ─── CHECKLIST ───
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const total = document.querySelectorAll('#checklistUl li').length;
+  const checked = document.querySelectorAll('#checklistUl li.checked').length;
+  const el = document.getElementById('checkProgress');
+  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+}
+
+// ─── SIDEBAR TOGGLE ───
+function toggleSidebar() {
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+// Init
+updateScoreBadge();
+</script>
+</body>
+</html>
