@@ -240,30 +240,30 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Off-by-One Loop Bounds</span></div>
+  <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">while — Flag-controlled exit + counter</span></div>
   <div class="q-body">
-    <p class="prompt">Which headers visit every index <code>0</code> to <code>s.length() - 1</code> exactly once?</p>
-    <ul style="margin: 6px 0 8px 22px; line-height: 1.7;">
-      <li>I. <code>for (int i = 0; i &lt; s.length(); i++)</code></li>
-      <li>II. <code>for (int i = 0; i &lt;= s.length() - 1; i++)</code></li>
-      <li>III. <code>for (int i = 0; i &lt;= s.length(); i++)</code></li>
-    </ul>
+    <p class="prompt"><code>n=100; count=0; stop=false; while (n&gt;0 &amp;&amp; !stop) { count++; if (count&gt;5) stop=true; n-=10; } println(count + " " + n);</code></p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> I only</li>
-      <li class="correct"><span class="lbl">(B)</span> I and II only</li>
-      <li><span class="lbl">(C)</span> I and III only</li>
-      <li><span class="lbl">(D)</span> I, II, and III</li>
+      <li><span class="lbl">(A)</span> <code>5 50</code></li>
+      <li><span class="lbl">(B)</span> <code>5 60</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>6 40</code></li>
+      <li><span class="lbl">(D)</span> <code>10 0</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><strong>I.</strong> The idiomatic form. <code>i</code> takes <code>0, 1, …, length − 1</code>. ✓</li>
-        <li><strong>II.</strong> <code>i &lt;= length − 1</code> is algebraically equivalent to <code>i &lt; length</code>. Same indices visited. ✓</li>
-        <li><strong>III.</strong> <code>i &lt;= length</code> goes one too far — when <code>i = length</code>, an access like <code>s.charAt(i)</code> throws <code>StringIndexOutOfBoundsException</code>. ✗</li>
-      </ul>
-      <strong>Rule:</strong> for a half-open range with upper bound <code>N</code>, use <code>&lt; N</code>; for a closed range with upper bound <code>N − 1</code>, use <code>&lt;= N − 1</code>. Mixing them ("<code>&lt;= N</code>" with intent "<code>&lt; N</code>") is the classic off-by-one.
+      Two things move inside the body: <code>count</code> increments first; <code>n</code> decrements last. The flag <code>stop</code> is set <em>inside</em> the body, but the loop condition only re-checks after the body completes. So the iteration where <code>count</code> first exceeds 5 still finishes — including the <code>n -= 10</code>.
+<pre><code>iter | count after  stop after  n after
+  1  |     1         false        90
+  2  |     2         false        80
+  3  |     3         false        70
+  4  |     4         false        60
+  5  |     5         false        50
+  6  |     6         true         40   ← count&gt;5 fires, stop set, n still drops
+loop test now: 40&gt;0 &amp;&amp; !true = false → exit</code></pre>
+      Print: <code>"6 40"</code>.
+      <p><strong>Trap (A)</strong> assumes <code>stop=true</code> short-circuits the rest of the body (it doesn't — <code>if/then</code> isn't <code>break</code>). <strong>(B)</strong> stops after the 5th decrement <em>and</em> before the count increment. <strong>(D)</strong> ignores the flag entirely.</p>
     </div>
   </div>
 </div>
@@ -325,29 +325,28 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">while Compound Condition</span></div>
+  <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">while — OR + guarded decrements</span></div>
   <div class="q-body">
-    <p class="prompt"><code>x = 10, y = 0; while (x &gt; 0 &amp;&amp; y &lt; 5) { x -= 2; y++; }</code></p>
+    <p class="prompt"><code>a=5; b=3; while (a&gt;0 || b&gt;0) { if (a&gt;0) a--; if (b&gt;0) b--; } println(a + " " + b);</code></p>
     <ul class="opts cols2">
-      <li class="correct"><span class="lbl">(A)</span> <code>0 5</code></li>
-      <li><span class="lbl">(B)</span> <code>-2 6</code></li>
-      <li><span class="lbl">(C)</span> <code>10 0</code></li>
-      <li><span class="lbl">(D)</span> <code>2 4</code></li>
+      <li class="correct"><span class="lbl">(A)</span> <code>0 0</code></li>
+      <li><span class="lbl">(B)</span> <code>0 -2</code></li>
+      <li><span class="lbl">(C)</span> <code>2 0</code></li>
+      <li><span class="lbl">(D)</span> The loop never terminates.</li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(A)</span></div>
     <div class="rationale">
-      Trace iteration by iteration; both <code>x &gt; 0</code> and <code>y &lt; 5</code> must hold to continue.
-<pre><code>iter | x  y   after body
-  1  | 10 0 → 8  1
-  2  |  8 1 → 6  2
-  3  |  6 2 → 4  3
-  4  |  4 3 → 2  4
-  5  |  2 4 → 0  5
-  6  |  0 5 — x &gt; 0 false → exit</code></pre>
-      Loop runs <strong>5 times</strong> and exits with <code>x = 0, y = 5</code>. The condition is checked <em>before</em> the body each time, so the body does not run on iteration 6.
-      <p><strong>Trap (B)</strong> assumes the body runs one extra time (the "until" mistake). <strong>(D)</strong> ignores the final iteration.</p>
+      Two subtle things: (1) the loop condition is <strong><code>||</code></strong>, so the loop runs while <em>either</em> variable is still positive; (2) the inner <code>if</code> guards prevent <code>b</code> from going negative once it hits 0.
+<pre><code>iter | a after  b after  loop test after
+  1  |    4        2     4&gt;0 || 2&gt;0 → true
+  2  |    3        1     true
+  3  |    2        0     true
+  4  |    1        0     (b guard skipped) true
+  5  |    0        0     0&gt;0 || 0&gt;0 → false → exit</code></pre>
+      Once <code>b = 0</code>, the <code>if (b &gt; 0)</code> guard skips its decrement — so <code>b</code> stays at 0 while <code>a</code> finishes counting down.
+      <p><strong>Trap (B)</strong> drops the <code>if (b&gt;0)</code> guard, so <code>b</code> goes negative (decrements once per iteration past 0). <strong>(C)</strong> swaps the roles. <strong>(D)</strong> assumes the loop can't terminate because of the OR — but eventually both reach 0 since each iteration strictly decreases the positive variable(s).</p>
     </div>
   </div>
 </div>
@@ -385,117 +384,118 @@ loop test: 1024 &lt; 1000 false → exit</code></pre>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Decrementing for</span></div>
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">for — Integer-division step (log₂ counter)</span></div>
   <div class="q-body">
-    <p class="prompt"><code>for (int i = 10; i &gt; 0; i -= 2) sum += i;</code></p>
+    <p class="prompt"><code>n=100; count=0; for (int i=n; i&gt;1; i=i/2) count++; println(count);</code></p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>25</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>30</code></li>
-      <li><span class="lbl">(C)</span> <code>36</code></li>
-      <li><span class="lbl">(D)</span> <code>55</code></li>
+      <li><span class="lbl">(A)</span> <code>5</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>6</code></li>
+      <li><span class="lbl">(C)</span> <code>7</code></li>
+      <li><span class="lbl">(D)</span> <code>50</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      Enumerate the values of <code>i</code> while <code>i &gt; 0</code>:
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>i = 10, 8, 6, 4, 2</code> — five values</li>
-        <li>Next would be <code>0</code>, but <code>0 &gt; 0</code> is <code>false</code> → exit before adding 0.</li>
-      </ul>
-      Sum: <code>10 + 8 + 6 + 4 + 2 = 30</code>. <strong>Trap (C)</strong> adds <code>0</code> (treats the bound as <code>i &gt;= 0</code>). <strong>(D)</strong> is <code>1 + 2 + … + 10</code> — assumes a step of 1.
+      The update step <code>i = i / 2</code> is <em>integer</em> division, so values shrink fast and round down. The condition is <code>i &gt; 1</code> (not <code>&gt; 0</code>), so the loop exits once <code>i</code> reaches 1.
+<pre><code>iter | i before  i after = i/2  count after
+  1  |   100        50                1
+  2  |    50        25                2
+  3  |    25        12                3
+  4  |    12         6                4
+  5  |     6         3                5
+  6  |     3         1                6
+loop test: 1 &gt; 1 false → exit</code></pre>
+      So <code>count = 6</code> — equivalently, ⌊log₂(100)⌋ = 6 (since <code>2⁶ = 64 ≤ 100 &lt; 128 = 2⁷</code>).
+      <p><strong>Trap (A)</strong> stops when <code>i</code> reaches 2 (off-by-one on the loop bound). <strong>(C)</strong> counts the would-be iteration at <code>i = 1</code>. <strong>(D)</strong> mistakes the loop for one that runs <code>n/2</code> times.</p>
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Boolean Simplification</span></div>
+  <div class="q-head"><span class="pill qnum">Q13</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">if-else-if chain vs independent ifs</span></div>
   <div class="q-body">
-    <p class="prompt">Equivalent to <code>(p &amp;&amp; !q) || (p &amp;&amp; q)</code>?</p>
+    <p class="prompt"><code>x=7; result=""; if(x&gt;0) result+="P"; if(x%2==0) result+="E"; else if(x&gt;5) result+="B"; if(x&lt;10 &amp;&amp; x&gt;3) result+="M"; println(result);</code></p>
     <ul class="opts cols2">
-      <li class="correct"><span class="lbl">(A)</span> <code>p</code></li>
-      <li><span class="lbl">(B)</span> <code>q</code></li>
-      <li><span class="lbl">(C)</span> <code>p &amp;&amp; q</code></li>
-      <li><span class="lbl">(D)</span> <code>p || q</code></li>
+      <li class="correct"><span class="lbl">(A)</span> <code>PBM</code></li>
+      <li><span class="lbl">(B)</span> <code>PEBM</code></li>
+      <li><span class="lbl">(C)</span> <code>PEB</code></li>
+      <li><span class="lbl">(D)</span> <code>PM</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(A)</span></div>
     <div class="rationale">
-      Factor <code>p</code> out (distributive law for <code>&amp;&amp;</code> over <code>||</code>):
+      The structure is three separate <code>if</code> statements — but the <em>second</em> one has an attached <code>else if</code>. That changes its behavior: the chain runs <strong>at most one</strong> of its branches; the independent ifs each run on their own merits.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>(p &amp;&amp; !q) || (p &amp;&amp; q)</code> ≡ <code>p &amp;&amp; (!q || q)</code></li>
-        <li><code>!q || q</code> is the law of the excluded middle — always <code>true</code>.</li>
-        <li><code>p &amp;&amp; true</code> ≡ <code>p</code>.</li>
+        <li><strong>1st <code>if</code> (independent):</strong> <code>x &gt; 0</code> → <code>7 &gt; 0</code> true → append <code>"P"</code>. Result: <code>"P"</code>.</li>
+        <li><strong>2nd <code>if</code>/<code>else if</code> (chain):</strong> <code>x % 2 == 0</code> → <code>7 % 2 = 1</code> false → check <code>else if (x &gt; 5)</code> → true → append <code>"B"</code>. The <code>"E"</code> branch is skipped <em>and so is any sibling once one branch fires</em>. Result: <code>"PB"</code>.</li>
+        <li><strong>3rd <code>if</code> (independent):</strong> <code>x &lt; 10 &amp;&amp; x &gt; 3</code> → both true → append <code>"M"</code>. Result: <code>"PBM"</code>.</li>
       </ul>
-      Verify with a truth table — for every combination of <code>p, q</code>, both expressions agree with <code>p</code>. <strong>Trap (C)</strong> is what you'd get from combining the wrong two clauses; <strong>(D)</strong> swaps <code>&amp;&amp;</code> and <code>||</code>.
+      Print: <code>"PBM"</code>.
+      <p><strong>Trap (B) <code>"PEBM"</code></strong> treats the chain as two independent ifs (both <code>E</code> and <code>B</code> branches appended). <strong>(C)</strong> ignores the final independent if. <strong>(D)</strong> sees the chain correctly but skips both its branches (forgetting <code>else if</code>).</p>
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Nested Loop Pattern</span></div>
+  <div class="q-head"><span class="pill qnum">Q14</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Nested loop — modular pair counting</span></div>
   <div class="q-body">
-    <p class="prompt"><code>for i = 1..3 { for j = 0..i−1 { print "*"; } println(); }</code></p>
+    <p class="prompt"><code>total=0; for(i=1..6) for(j=i..6) if((i+j)%3==0) total++; println(total);</code></p>
     <ul class="opts cols2">
-      <li class="correct"><span class="lbl">(A)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
-**
-***</code></pre></li>
-      <li><span class="lbl">(B)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
-**
-*</code></pre></li>
-      <li><span class="lbl">(C)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
-***
-***</code></pre></li>
-      <li><span class="lbl">(D)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
-*
-*</code></pre></li>
-    </ul>
-  </div>
-  <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
-    <div class="rationale">
-      The outer <code>i</code> selects the row; the inner runs <code>i</code> times printing <code>"*"</code> with no newline; <code>println()</code> terminates the row.
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>i = 1</code>: print <code>*</code> once → <code>"*"</code> then newline.</li>
-        <li><code>i = 2</code>: print <code>**</code> → <code>"**"</code> then newline.</li>
-        <li><code>i = 3</code>: print <code>***</code> → <code>"***"</code> then newline.</li>
-      </ul>
-      Right-staircase. <strong>Trap (B)</strong> reverses the direction (would need <code>i</code> to decrement). <strong>(C)</strong> ignores the dependency of inner on <code>i</code>.
-    </div>
-  </div>
-</div>
-
-<div class="q">
-  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Odd Sum</span></div>
-  <div class="q-body">
-    <p class="prompt"><code>i = 1; sum = 0; while (i &lt; 10) { sum += i; i += 2; }</code></p>
-    <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>20</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>25</code></li>
-      <li><span class="lbl">(C)</span> <code>36</code></li>
-      <li><span class="lbl">(D)</span> <code>45</code></li>
+      <li><span class="lbl">(A)</span> <code>6</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>7</code></li>
+      <li><span class="lbl">(C)</span> <code>8</code></li>
+      <li><span class="lbl">(D)</span> <code>12</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      The condition <code>i &lt; 10</code> is checked before each iteration; <code>i</code> increases by 2 each pass.
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>i = 1</code>: add 1 (sum = 1); then <code>i = 3</code>.</li>
-        <li><code>i = 3</code>: add 3 (sum = 4); then <code>i = 5</code>.</li>
-        <li><code>i = 5</code>: add 5 (sum = 9); then <code>i = 7</code>.</li>
-        <li><code>i = 7</code>: add 7 (sum = 16); then <code>i = 9</code>.</li>
-        <li><code>i = 9</code>: add 9 (sum = 25); then <code>i = 11</code>.</li>
-        <li><code>i = 11</code>: <code>11 &lt; 10</code> false → exit.</li>
-      </ul>
-      Sum is the first five positive odd integers: <code>1 + 3 + 5 + 7 + 9 = 25</code>. <strong>Trap (D)</strong> is <code>1 + 2 + … + 9</code> (consecutive integers, not odd). <strong>(C)</strong> sums one extra term <code>(11)</code>.
+      The inner loop starts at <code>j = i</code> (not 1), so we only count <strong>unordered pairs</strong> <code>(i, j)</code> with <code>i ≤ j ≤ 6</code> where <code>i + j</code> is divisible by 3. Walk row by row:
+<pre><code>i=1, j∈{1..6}: hits at j=2 (sum 3), j=5 (sum 6)             → 2
+i=2, j∈{2..6}: hits at j=4 (sum 6)                          → 1
+i=3, j∈{3..6}: hits at j=3 (sum 6), j=6 (sum 9)             → 2
+i=4, j∈{4..6}: hits at j=5 (sum 9)                          → 1
+i=5, j∈{5..6}: no hits (sums 10, 11)                        → 0
+i=6, j=6:      hits at j=6 (sum 12)                         → 1
+                                                  total = 2+1+2+1+0+1 = 7</code></pre>
+      Print: <code>7</code>.
+      <p><strong>Trap (D) <code>12</code></strong> counts the full 6×6 grid's hits (would be right if inner ran <code>j = 1..6</code> — double-counts unordered pairs and includes ordered duplicates). <strong>(A) <code>6</code></strong> miscounts a row. <strong>(C) <code>8</code></strong> double-counts a single pair.</p>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">while — Conditional shrink (halve/decrement)</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>n=13; count=0; while(n&gt;1) { if(n%2==0) n/=2; else n--; count++; } println(count);</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>5</code></li>
+      <li><span class="lbl">(C)</span> <code>6</code></li>
+      <li><span class="lbl">(D)</span> <code>12</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      Each iteration either halves <code>n</code> (when even) or subtracts 1 (when odd). <code>count</code> tracks <em>every</em> iteration, not just halvings. Trace from <code>n = 13</code>:
+<pre><code>iter | n before  branch   n after  count after
+  1  |    13      else      12          1     (odd: decrement)
+  2  |    12      if         6          2     (even: halve)
+  3  |     6      if         3          3     (even: halve)
+  4  |     3      else       2          4     (odd: decrement)
+  5  |     2      if         1          5     (even: halve)
+loop test: 1 &gt; 1 false → exit</code></pre>
+      Print: <code>5</code>.
+      <p><strong>Trap (A) <code>4</code></strong> miscounts by 1 — usually skipping the first "odd → 12" iteration. <strong>(C) <code>6</code></strong> runs one extra loop (forgets the exit is at <code>n = 1</code>, not 0). <strong>(D) <code>12</code></strong> counts the value of <code>n</code> after one decrement instead of <code>count</code>.</p>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 2 Solutions (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 2 Solutions (Draft v2 · exam-level)</span>
   <span>Page · Unit 2</span>
 </footer>
 

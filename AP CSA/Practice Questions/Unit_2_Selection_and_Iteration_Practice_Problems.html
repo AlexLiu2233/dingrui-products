@@ -81,7 +81,7 @@
 <p class="topics-line">Unit <b>2: Selection and Iteration</b><span class="scope">CSA</span></p>
 <hr class="thick"><hr class="thin">
 <div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner">Draft v1 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); code-trace heavy with realistic distractors. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
+<p class="draft-banner">Draft v2 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); code-trace heavy with realistic distractors. HARDs upgraded: flag-controlled while exits, OR + guarded decrements, log₂ counter, if-else-if vs independent ifs, modular pair counting, conditional shrink. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
 
 <!-- ════════════════════════════════ MULTIPLE CHOICE ════════════════════════════════ -->
 <div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">15 questions · ~34 min at exam pace</span></div>
@@ -243,21 +243,26 @@ System.out.println(count);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q7</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.8 Off-by-One Loop Bounds</span>
+    <span class="pill topic">2.7 while — Flag-controlled exit + counter</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider a <code>String s</code> with <code>s.length() &gt; 0</code>. Which of the following loop headers visit every index from <code>0</code> to <code>s.length() - 1</code> exactly once?</p>
-    <ul style="margin: 6px 0 8px 22px; line-height: 1.7;">
-      <li>I. <code>for (int i = 0; i &lt; s.length(); i++)</code></li>
-      <li>II. <code>for (int i = 0; i &lt;= s.length() - 1; i++)</code></li>
-      <li>III. <code>for (int i = 0; i &lt;= s.length(); i++)</code></li>
-    </ul>
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int n = 100;
+int count = 0;
+boolean stop = false;
+while (n &gt; 0 &amp;&amp; !stop) {
+  count++;
+  if (count &gt; 5) stop = true;
+  n -= 10;
+}
+System.out.println(count + " " + n);</code></pre>
+    <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> I only</li>
-      <li><span class="lbl">(B)</span> I and II only</li>
-      <li><span class="lbl">(C)</span> I and III only</li>
-      <li><span class="lbl">(D)</span> I, II, and III</li>
+      <li><span class="lbl">(A)</span> <code>5 50</code></li>
+      <li><span class="lbl">(B)</span> <code>5 60</code></li>
+      <li><span class="lbl">(C)</span> <code>6 40</code></li>
+      <li><span class="lbl">(D)</span> <code>10 0</code></li>
     </ul>
   </div>
 </div>
@@ -320,24 +325,24 @@ System.out.println(rev);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q10</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.7 while Compound Condition</span>
+    <span class="pill topic">2.7 while — OR + guarded decrements</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>int x = 10;
-int y = 0;
-while (x &gt; 0 &amp;&amp; y &lt; 5) {
-  x -= 2;
-  y++;
+<pre><code>int a = 5;
+int b = 3;
+while (a &gt; 0 || b &gt; 0) {
+  if (a &gt; 0) a--;
+  if (b &gt; 0) b--;
 }
-System.out.println(x + " " + y);</code></pre>
+System.out.println(a + " " + b);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>0 5</code></li>
-      <li><span class="lbl">(B)</span> <code>-2 6</code></li>
-      <li><span class="lbl">(C)</span> <code>10 0</code></li>
-      <li><span class="lbl">(D)</span> <code>2 4</code></li>
+      <li><span class="lbl">(A)</span> <code>0 0</code></li>
+      <li><span class="lbl">(B)</span> <code>0 -2</code></li>
+      <li><span class="lbl">(C)</span> <code>2 0</code></li>
+      <li><span class="lbl">(D)</span> The loop never terminates.</li>
     </ul>
   </div>
 </div>
@@ -372,22 +377,23 @@ System.out.println(n);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q12</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.8 Decrementing for</span>
+    <span class="pill topic">2.8 for — Integer-division step (log₂ counter)</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>int sum = 0;
-for (int i = 10; i &gt; 0; i -= 2) {
-  sum += i;
+<pre><code>int n = 100;
+int count = 0;
+for (int i = n; i &gt; 1; i = i / 2) {
+  count++;
 }
-System.out.println(sum);</code></pre>
+System.out.println(count);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>25</code></li>
-      <li><span class="lbl">(B)</span> <code>30</code></li>
-      <li><span class="lbl">(C)</span> <code>36</code></li>
-      <li><span class="lbl">(D)</span> <code>55</code></li>
+      <li><span class="lbl">(A)</span> <code>5</code></li>
+      <li><span class="lbl">(B)</span> <code>6</code></li>
+      <li><span class="lbl">(C)</span> <code>7</code></li>
+      <li><span class="lbl">(D)</span> <code>50</code></li>
     </ul>
   </div>
 </div>
@@ -396,16 +402,24 @@ System.out.println(sum);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q13</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.5 Boolean Simplification</span>
+    <span class="pill topic">2.4 if-else-if chain vs independent ifs</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider <code>boolean p</code> and <code>boolean q</code>. Which of the following expressions is logically equivalent to <code>(p &amp;&amp; !q) || (p &amp;&amp; q)</code> for all values of <code>p</code> and <code>q</code>?</p>
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int x = 7;
+String result = "";
+if (x &gt; 0) result += "P";
+if (x % 2 == 0) result += "E";
+else if (x &gt; 5) result += "B";
+if (x &lt; 10 &amp;&amp; x &gt; 3) result += "M";
+System.out.println(result);</code></pre>
+    <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>p</code></li>
-      <li><span class="lbl">(B)</span> <code>q</code></li>
-      <li><span class="lbl">(C)</span> <code>p &amp;&amp; q</code></li>
-      <li><span class="lbl">(D)</span> <code>p || q</code></li>
+      <li><span class="lbl">(A)</span> <code>PBM</code></li>
+      <li><span class="lbl">(B)</span> <code>PEBM</code></li>
+      <li><span class="lbl">(C)</span> <code>PEB</code></li>
+      <li><span class="lbl">(D)</span> <code>PM</code></li>
     </ul>
   </div>
 </div>
@@ -414,31 +428,24 @@ System.out.println(sum);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q14</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.11 Nested Loop Pattern</span>
+    <span class="pill topic">2.11 Nested loop — modular pair counting</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>for (int i = 1; i &lt;= 3; i++) {
-  for (int j = 0; j &lt; i; j++) {
-    System.out.print("*");
+<pre><code>int total = 0;
+for (int i = 1; i &lt;= 6; i++) {
+  for (int j = i; j &lt;= 6; j++) {
+    if ((i + j) % 3 == 0) total++;
   }
-  System.out.println();
-}</code></pre>
+}
+System.out.println(total);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
-**
-***</code></pre></li>
-      <li><span class="lbl">(B)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
-**
-*</code></pre></li>
-      <li><span class="lbl">(C)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>***
-***
-***</code></pre></li>
-      <li><span class="lbl">(D)</span> <pre style="margin:0;background:transparent;border:none;padding:0;"><code>*
-*
-*</code></pre></li>
+      <li><span class="lbl">(A)</span> <code>6</code></li>
+      <li><span class="lbl">(B)</span> <code>7</code></li>
+      <li><span class="lbl">(C)</span> <code>8</code></li>
+      <li><span class="lbl">(D)</span> <code>12</code></li>
     </ul>
   </div>
 </div>
@@ -447,30 +454,31 @@ System.out.println(sum);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q15</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">2.7 Odd Sum</span>
+    <span class="pill topic">2.7 while — Conditional shrink (halve/decrement)</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>int i = 1;
-int sum = 0;
-while (i &lt; 10) {
-  sum += i;
-  i += 2;
+<pre><code>int n = 13;
+int count = 0;
+while (n &gt; 1) {
+  if (n % 2 == 0) n /= 2;
+  else n--;
+  count++;
 }
-System.out.println(sum);</code></pre>
+System.out.println(count);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>20</code></li>
-      <li><span class="lbl">(B)</span> <code>25</code></li>
-      <li><span class="lbl">(C)</span> <code>36</code></li>
-      <li><span class="lbl">(D)</span> <code>45</code></li>
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>5</code></li>
+      <li><span class="lbl">(C)</span> <code>6</code></li>
+      <li><span class="lbl">(D)</span> <code>12</code></li>
     </ul>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 2 Practice (Draft v1 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 2 Practice (Draft v2 · exam-level)</span>
   <span>Page · Unit 2</span>
 </footer>
 
