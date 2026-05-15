@@ -81,7 +81,7 @@
 <p class="topics-line">Unit <b>1: Using Objects and Methods</b><span class="scope">CSA</span></p>
 <hr class="thick"><hr class="thin">
 <div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner">Draft v2 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); code-trace heavy with realistic distractors. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
+<p class="draft-banner">Draft v3 — 15 AP-style MCQs at exam level (3 MED + 12 HARD); code-trace heavy with realistic distractors. HARDs upgraded: multi-step chains, aliased reassignment timing, swap-without-temp, Math.pow edge inputs, compareTo case/lex. Assumes top-score target. No calculator. Java Quick Reference assumed available.</p>
 
 <!-- ════════════════════════════════ MULTIPLE CHOICE ════════════════════════════════ -->
 <div class="part"><span class="part-label">MULTIPLE CHOICE</span><span class="part-meta">15 questions · ~34 min at exam pace</span></div>
@@ -177,20 +177,22 @@ System.out.println(r);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q5</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.x String — Method Chain</span>
+    <span class="pill topic">1.x String — 4-step Chain</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>String s = "competition";
-String t = s.substring(s.indexOf("p"), s.indexOf("t"));
-System.out.println(t);</code></pre>
+<pre><code>String s = "ABCDEFG";
+String t = s.substring(2);
+String u = t.substring(t.indexOf("E"));
+String v = u.substring(0, u.length() - 1);
+System.out.println(v + u.substring(u.length() - 1));</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>pe</code></li>
-      <li><span class="lbl">(B)</span> <code>pet</code></li>
-      <li><span class="lbl">(C)</span> <code>et</code></li>
-      <li><span class="lbl">(D)</span> An empty string</li>
+      <li><span class="lbl">(A)</span> <code>EF</code></li>
+      <li><span class="lbl">(B)</span> <code>EFG</code></li>
+      <li><span class="lbl">(C)</span> <code>EFGFG</code></li>
+      <li><span class="lbl">(D)</span> <code>FG</code></li>
     </ul>
   </div>
 </div>
@@ -199,22 +201,22 @@ System.out.println(t);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q6</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.x String — Immutability + Aliasing</span>
+    <span class="pill topic">1.x String — Aliased Reassignment Timing</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>String s = "abc";
-String t = "def";
-String u = s + t;
-s += "xyz";
-System.out.println(u);</code></pre>
+<pre><code>String a = "go";
+String b = a;
+a = a + a;
+b += a;
+System.out.println(b);</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>abc</code></li>
-      <li><span class="lbl">(B)</span> <code>abcdef</code></li>
-      <li><span class="lbl">(C)</span> <code>abcxyz</code></li>
-      <li><span class="lbl">(D)</span> <code>abcxyzdef</code></li>
+      <li><span class="lbl">(A)</span> <code>gogo</code></li>
+      <li><span class="lbl">(B)</span> <code>gogogo</code></li>
+      <li><span class="lbl">(C)</span> <code>gogogogo</code></li>
+      <li><span class="lbl">(D)</span> <code>gogogogogo</code></li>
     </ul>
   </div>
 </div>
@@ -268,21 +270,22 @@ System.out.println(z);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q9</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.x String — Indexed substring</span>
+    <span class="pill topic">1.x String — Self-referential length arithmetic</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>String word = "PROGRAMMING";
-int n = word.length();
-String mid = word.substring(n / 2 - 1, n / 2 + 1);
-System.out.println(mid);</code></pre>
+<pre><code>String s = "BAOBAB";
+int i = s.indexOf("OB");
+String a = s.substring(i);
+String b = s.substring(i, i + a.length() - 2);
+System.out.println(a.length() + b.length());</code></pre>
     <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>GR</code></li>
-      <li><span class="lbl">(B)</span> <code>RA</code></li>
-      <li><span class="lbl">(C)</span> <code>AM</code></li>
-      <li><span class="lbl">(D)</span> <code>MM</code></li>
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>5</code></li>
+      <li><span class="lbl">(C)</span> <code>6</code></li>
+      <li><span class="lbl">(D)</span> <code>7</code></li>
     </ul>
   </div>
 </div>
@@ -313,22 +316,23 @@ System.out.println((x / y) + " " + (x % y));</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q11</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.x String — Three-variable Swap</span>
+    <span class="pill topic">1.x String — Swap without a temp</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Consider the following code segment.</p>
-<pre><code>String x = "alpha";
-String y = "beta";
-String z = x;
-x = y;
-y = z;</code></pre>
-    <p>After execution, which of the following correctly lists the values of <code>x</code>, <code>y</code>, and <code>z</code> (in that order)?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>"alpha"</code>, <code>"beta"</code>, <code>"alpha"</code></li>
-      <li><span class="lbl">(B)</span> <code>"beta"</code>, <code>"alpha"</code>, <code>"alpha"</code></li>
-      <li><span class="lbl">(C)</span> <code>"beta"</code>, <code>"beta"</code>, <code>"alpha"</code></li>
-      <li><span class="lbl">(D)</span> <code>"alpha"</code>, <code>"alpha"</code>, <code>"beta"</code></li>
+<pre><code>String a = "AB";
+String b = "CD";
+a = a + b;
+b = a.substring(0, a.length() - b.length());
+a = a.substring(b.length());
+System.out.println(a + b);</code></pre>
+    <p>What is printed?</p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>ABCD</code></li>
+      <li><span class="lbl">(B)</span> <code>CDAB</code></li>
+      <li><span class="lbl">(C)</span> <code>ABAB</code></li>
+      <li><span class="lbl">(D)</span> <code>CDCD</code></li>
     </ul>
   </div>
 </div>
@@ -337,16 +341,21 @@ y = z;</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q12</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.6 Math.pow + Cast</span>
+    <span class="pill topic">1.6 Math.pow — Edge inputs + Cast</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">What is the value of <code>(int) Math.pow(3, 0.5)</code>?</p>
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>int x = (int) Math.pow(-3, 3)
+      + (int) Math.pow(-3, -1)
+      + (int) Math.pow(0, 0);
+System.out.println(x);</code></pre>
+    <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li><span class="lbl">(B)</span> <code>1</code></li>
-      <li><span class="lbl">(C)</span> <code>2</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error occurs.</li>
+      <li><span class="lbl">(A)</span> <code>-28</code></li>
+      <li><span class="lbl">(B)</span> <code>-27</code></li>
+      <li><span class="lbl">(C)</span> <code>-26</code></li>
+      <li><span class="lbl">(D)</span> <code>-25</code></li>
     </ul>
   </div>
 </div>
@@ -400,27 +409,29 @@ System.out.println(c);</code></pre>
   <div class="q-head">
     <span class="pill qnum">Q15</span><span class="pill hard">HARD</span>
     <span class="pill mc">AP MC</span>
-    <span class="pill topic">1.x String — indexOf Overloads</span>
+    <span class="pill topic">1.x String — compareTo, case &amp; lex</span>
     <span class="pill marks">[1]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider <code>String s = "Hello";</code>. Which of the following expressions correctly return the index of the first <code>'l'</code> in <code>s</code> (that is, the integer <code>2</code>)?</p>
-    <ul style="margin: 6px 0 8px 22px; line-height: 1.7;">
-      <li>I. <code>s.indexOf('l')</code></li>
-      <li>II. <code>s.indexOf("l")</code></li>
-      <li>III. <code>s.indexOf(s.charAt(2))</code></li>
-    </ul>
+    <p class="prompt">Consider the following code segment.</p>
+<pre><code>String a = "apple";
+String b = "Apple";
+String c = "apricot";
+int p = a.compareTo(b);
+int q = a.compareTo(c);
+System.out.println((p > 0) + " " + (q > 0));</code></pre>
+    <p>What is printed?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> I only</li>
-      <li><span class="lbl">(B)</span> I and II only</li>
-      <li><span class="lbl">(C)</span> I and III only</li>
-      <li><span class="lbl">(D)</span> I, II, and III</li>
+      <li><span class="lbl">(A)</span> <code>true true</code></li>
+      <li><span class="lbl">(B)</span> <code>true false</code></li>
+      <li><span class="lbl">(C)</span> <code>false true</code></li>
+      <li><span class="lbl">(D)</span> <code>false false</code></li>
     </ul>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 1 Practice (Draft v2 · exam-level)</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> · AP Computer Science A — Unit 1 Practice (Draft v3 · exam-level)</span>
   <span>Page · Unit 1</span>
 </footer>
 

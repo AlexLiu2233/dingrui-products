@@ -190,52 +190,54 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String Method Chain</span></div>
+  <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String — 4-step Chain</span></div>
   <div class="q-body">
-    <p class="prompt"><code>s = "competition"</code>; <code>t = s.substring(s.indexOf("p"), s.indexOf("t"))</code></p>
+    <p class="prompt"><code>s = "ABCDEFG"</code>; chain through <code>t</code>, <code>u</code>, <code>v</code>, then print <code>v + u.substring(u.length() - 1)</code>.</p>
     <ul class="opts cols2">
-      <li class="correct"><span class="lbl">(A)</span> <code>pe</code></li>
-      <li><span class="lbl">(B)</span> <code>pet</code></li>
-      <li><span class="lbl">(C)</span> <code>et</code></li>
-      <li><span class="lbl">(D)</span> An empty string</li>
-    </ul>
-  </div>
-  <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(A)</span></div>
-    <div class="rationale">
-      Index map of <code>"competition"</code>:
-<pre><code> c  o  m  p  e  t  i  t  i  o  n
- 0  1  2  3  4  5  6  7  8  9 10</code></pre>
-      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>s.indexOf("p") = 3</code></li>
-        <li><code>s.indexOf("t") = 5</code> (first occurrence — there's another <code>t</code> at index 7 but <code>indexOf</code> stops at the first)</li>
-        <li><code>s.substring(3, 5)</code> → chars at indices 3, 4 → <code>"pe"</code></li>
-      </ul>
-      Recall: <code>substring(beginIndex, endIndex)</code> includes <code>beginIndex</code> and stops <em>before</em> <code>endIndex</code>. Trap (B) includes <code>endIndex</code>; (D) confuses the bounds.
-    </div>
-  </div>
-</div>
-
-<div class="q">
-  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Immutability + Aliasing</span></div>
-  <div class="q-body">
-    <p class="prompt"><code>s = "abc"; t = "def"; u = s + t; s += "xyz"; println(u);</code></p>
-    <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>abc</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>abcdef</code></li>
-      <li><span class="lbl">(C)</span> <code>abcxyz</code></li>
-      <li><span class="lbl">(D)</span> <code>abcxyzdef</code></li>
+      <li><span class="lbl">(A)</span> <code>EF</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>EFG</code></li>
+      <li><span class="lbl">(C)</span> <code>EFGFG</code></li>
+      <li><span class="lbl">(D)</span> <code>FG</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      Two layered concepts:
+      Resolve each new variable in order. The tricky part: every <code>indexOf</code> / <code>length</code> / <code>substring</code> call is made on the <em>most recent</em> reassignment, not on the original <code>s</code>.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><strong><code>u = s + t</code></strong> evaluates <code>s + t</code> <em>at the time of the statement</em>, producing the new <code>String</code> object <code>"abcdef"</code> and storing a reference to it in <code>u</code>. <code>u</code> does not "track" the future value of <code>s</code> or <code>t</code>.</li>
-        <li><strong><code>s += "xyz"</code></strong> reassigns <code>s</code> to point to a brand-new <code>String</code> <code>"abcxyz"</code>. The original <code>"abc"</code> object is unchanged (Strings are immutable), and <code>u</code>'s reference is unchanged.</li>
+        <li><code>t = s.substring(2)</code> → <code>"CDEFG"</code> (5 chars, indices 0..4 are C,D,E,F,G)</li>
+        <li><code>t.indexOf("E") = 2</code> (in <code>t</code>, not in <code>s</code> — that's the key)</li>
+        <li><code>u = t.substring(2)</code> → <code>"EFG"</code> (3 chars)</li>
+        <li><code>v = u.substring(0, u.length() - 1) = u.substring(0, 2)</code> → <code>"EF"</code></li>
+        <li><code>u.substring(u.length() - 1) = u.substring(2)</code> → <code>"G"</code></li>
+        <li>Print <code>"EF" + "G"</code> = <code>"EFG"</code></li>
       </ul>
-      So <code>u</code> still refers to <code>"abcdef"</code>. Trap (D) computes <code>s + t</code> using the <em>final</em> value of <code>s</code>; (C) confuses <code>u</code> with <code>s</code>.
+      Trap (A) drops the trailing <code>"G"</code> term. (C) double-counts the last character. (D) forgets that <code>u</code> already starts at <code>'E'</code> — students often re-index from the start of <code>s</code>.
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String — Aliased Reassignment Timing</span></div>
+  <div class="q-body">
+    <p class="prompt"><code>a = "go"; b = a; a = a + a; b += a; println(b);</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>gogo</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>gogogo</code></li>
+      <li><span class="lbl">(C)</span> <code>gogogogo</code></li>
+      <li><span class="lbl">(D)</span> <code>gogogogogo</code></li>
+    </ul>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="rationale">
+      The key is tracking what <code>b</code> refers to <em>at the moment</em> each statement runs.
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li>After <code>a = "go"; b = a;</code> &nbsp;→&nbsp; both reference the literal <code>"go"</code>.</li>
+        <li><code>a = a + a;</code> &nbsp;→&nbsp; RHS evaluates first: <code>"go" + "go" = "gogo"</code>. Then <code>a</code> is reassigned to that new String. <strong><code>b</code> is unchanged</strong> — it still points to <code>"go"</code>. Strings are immutable, so the original <code>"go"</code> object can't be mutated underneath <code>b</code>.</li>
+        <li><code>b += a;</code> &nbsp;→&nbsp; expands to <code>b = b + a</code>. Read each operand's <em>current</em> value: <code>b = "go"</code>, <code>a = "gogo"</code>. Concatenate: <code>"go" + "gogo" = "gogogo"</code>. Reassign <code>b</code>.</li>
+      </ul>
+      Trap (C) <code>"gogogogo"</code> happens if you mistakenly use the <em>new</em> value of <code>a</code> in place of <code>b</code> in <code>b + a</code> (i.e., compute <code>a + a</code> a second time). (D) doubles up further. (A) ignores the second statement entirely.
     </div>
   </div>
 </div>
@@ -294,28 +296,30 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Indexed substring</span></div>
+  <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String — Self-referential length arithmetic</span></div>
   <div class="q-body">
-    <p class="prompt"><code>word = "PROGRAMMING"</code>; <code>mid = word.substring(n/2 - 1, n/2 + 1)</code>, <code>n = word.length()</code>.</p>
+    <p class="prompt"><code>s = "BAOBAB"</code>; <code>i = s.indexOf("OB")</code>; <code>a = s.substring(i)</code>; <code>b = s.substring(i, i + a.length() - 2)</code>. Print <code>a.length() + b.length()</code>.</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>GR</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>RA</code></li>
-      <li><span class="lbl">(C)</span> <code>AM</code></li>
-      <li><span class="lbl">(D)</span> <code>MM</code></li>
+      <li><span class="lbl">(A)</span> <code>4</code></li>
+      <li><span class="lbl">(B)</span> <code>5</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>6</code></li>
+      <li><span class="lbl">(D)</span> <code>7</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      Index map:
-<pre><code> P  R  O  G  R  A  M  M  I  N  G
- 0  1  2  3  4  5  6  7  8  9 10</code></pre>
+      Index map of <code>"BAOBAB"</code>:
+<pre><code> B  A  O  B  A  B
+ 0  1  2  3  4  5</code></pre>
+      The trick: <code>a.length()</code> appears <em>inside</em> the bounds for <code>b</code> — you must compute <code>a</code> first.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>n = 11</code></li>
-        <li><code>n / 2 = 5</code> (integer division of 11)</li>
-        <li><code>substring(5 - 1, 5 + 1)</code> = <code>substring(4, 6)</code> = chars at indices 4 and 5 = <code>"RA"</code></li>
+        <li><code>i = s.indexOf("OB") = 2</code> (first match of the 2-char sequence O-B starts at index 2)</li>
+        <li><code>a = s.substring(2)</code> &nbsp;→&nbsp; <code>"OBAB"</code>, so <code>a.length() = 4</code></li>
+        <li><code>b = s.substring(2, 2 + 4 - 2) = s.substring(2, 4)</code> &nbsp;→&nbsp; <code>"OB"</code>, so <code>b.length() = 2</code></li>
+        <li>Print <code>4 + 2 = 6</code></li>
       </ul>
-      Trap (A) starts at <code>n/2 - 2</code> by mistake. (D) picks the middle <em>letter</em> (index 5 = 'A'? no, 'A' is at 5 but the duplicate trap is the double 'M' at indices 6–7).
+      Trap (A) ignores <code>b.length()</code>. (B) miscounts <code>a</code> (forgets the second 'B' at index 5). (D) double-includes the endpoint in <code>b</code>.
     </div>
   </div>
 </div>
@@ -345,50 +349,54 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Three-variable Swap</span></div>
+  <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String — Swap without a temp</span></div>
   <div class="q-body">
-    <p class="prompt"><code>x = "alpha"; y = "beta"; z = x; x = y; y = z;</code> → final <code>x</code>, <code>y</code>, <code>z</code>?</p>
-    <ul class="opts cols1">
-      <li><span class="lbl">(A)</span> <code>"alpha"</code>, <code>"beta"</code>, <code>"alpha"</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>"beta"</code>, <code>"alpha"</code>, <code>"alpha"</code></li>
-      <li><span class="lbl">(C)</span> <code>"beta"</code>, <code>"beta"</code>, <code>"alpha"</code></li>
-      <li><span class="lbl">(D)</span> <code>"alpha"</code>, <code>"alpha"</code>, <code>"beta"</code></li>
+    <p class="prompt"><code>a = "AB"; b = "CD"; a = a + b; b = a.substring(0, a.length() - b.length()); a = a.substring(b.length()); println(a + b);</code></p>
+    <ul class="opts cols2">
+      <li><span class="lbl">(A)</span> <code>ABCD</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>CDAB</code></li>
+      <li><span class="lbl">(C)</span> <code>ABAB</code></li>
+      <li><span class="lbl">(D)</span> <code>CDCD</code></li>
     </ul>
   </div>
   <div class="solution">
     <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      Walk through one assignment at a time:
+      This is the classic "swap two values without using a temporary variable" using concatenation. Every step uses the <em>current</em> values of <code>a</code> and <code>b</code>, which change between statements.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li>After <code>x = "alpha"</code>, <code>y = "beta"</code>: <code>x = "alpha"</code>, <code>y = "beta"</code>.</li>
-        <li>After <code>z = x</code>: <code>z = "alpha"</code>. (<code>z</code> takes the <em>current</em> value of <code>x</code>.)</li>
-        <li>After <code>x = y</code>: <code>x = "beta"</code>. (<code>x</code> is reassigned; <code>z</code> still references <code>"alpha"</code>.)</li>
-        <li>After <code>y = z</code>: <code>y = "alpha"</code>. (<code>y</code> takes <code>z</code>'s current value.)</li>
+        <li>Start: <code>a = "AB"</code> (len 2), <code>b = "CD"</code> (len 2)</li>
+        <li><code>a = a + b</code> &nbsp;→&nbsp; <code>a = "ABCD"</code> (len 4). <code>b</code> still equals <code>"CD"</code>.</li>
+        <li><code>b = a.substring(0, a.length() - b.length())</code> &nbsp;→&nbsp; <code>a.length() = 4</code>, <code>b.length() = 2</code> (b is still "CD"!). So <code>a.substring(0, 2) = "AB"</code>. <strong><code>b</code> is now <code>"AB"</code></strong>.</li>
+        <li><code>a = a.substring(b.length())</code> &nbsp;→&nbsp; <code>b.length()</code> is now <code>2</code> (b is "AB"). So <code>a.substring(2) = "CD"</code>. <strong><code>a</code> is now <code>"CD"</code></strong>.</li>
+        <li>Print <code>a + b</code> &nbsp;→&nbsp; <code>"CD" + "AB"</code> = <code>"CDAB"</code>.</li>
       </ul>
-      Final: <code>x = "beta"</code>, <code>y = "alpha"</code>, <code>z = "alpha"</code>. This is the standard "swap with auxiliary variable" pattern — the temporary <code>z</code> keeps the original <code>x</code>-value alive across the reassignment.
+      Trap (A) ignores the swap. (C, D) collapse to whichever original value the student tracked. The deep trap is the third statement: <code>b.length()</code> there equals the <em>new</em> b (which is <code>"AB"</code>, len 2) — not the original. The values happen to coincide here because both originals were length 2; if the originals had different lengths, the answer would be different.
     </div>
   </div>
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Math.pow + Cast</span></div>
+  <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">Math.pow — Edge inputs + Cast</span></div>
   <div class="q-body">
-    <p class="prompt">Value of <code>(int) Math.pow(3, 0.5)</code>?</p>
+    <p class="prompt">Value of <code>(int) Math.pow(-3, 3) + (int) Math.pow(-3, -1) + (int) Math.pow(0, 0)</code>?</p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> <code>0</code></li>
-      <li class="correct"><span class="lbl">(B)</span> <code>1</code></li>
-      <li><span class="lbl">(C)</span> <code>2</code></li>
-      <li><span class="lbl">(D)</span> A compile-time error occurs.</li>
+      <li><span class="lbl">(A)</span> <code>-28</code></li>
+      <li><span class="lbl">(B)</span> <code>-27</code></li>
+      <li class="correct"><span class="lbl">(C)</span> <code>-26</code></li>
+      <li><span class="lbl">(D)</span> <code>-25</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(C)</span></div>
     <div class="rationale">
-      <code>Math.pow(3, 0.5)</code> computes <code>3<sup>0.5</sup> = √3 ≈ 1.732</code>, returned as a <code>double</code>. Casting to <code>int</code> <em>truncates toward zero</em>:
+      Three edge-case <code>Math.pow</code> evaluations, each followed by truncation toward zero:
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><code>(int) 1.732</code> = <code>1</code> (drop the fractional part; do NOT round)</li>
+        <li><code>Math.pow(-3, 3)</code> &nbsp;=&nbsp; <code>(-3)<sup>3</sup> = -27.0</code>. <code>(int) -27.0 = -27</code>.</li>
+        <li><code>Math.pow(-3, -1)</code> &nbsp;=&nbsp; <code>1 / (-3) ≈ -0.3333</code>. <strong>Cast to int truncates toward zero</strong>, not toward minus-infinity, so <code>(int) -0.3333 = 0</code> (not <code>-1</code>).</li>
+        <li><code>Math.pow(0, 0)</code> &nbsp;=&nbsp; <code>1.0</code> by Java's convention (matches the IEEE-754 spec). <code>(int) 1.0 = 1</code>.</li>
+        <li>Sum: <code>-27 + 0 + 1 = -26</code>.</li>
       </ul>
-      Trap (C) is what you'd get by <em>rounding</em> rather than truncating. To round, use <code>(int) Math.round(...)</code>.
+      Trap (A) <code>-28</code> truncates <code>-0.33</code> toward minus-infinity to <code>-1</code> (Python-style, wrong for Java). Trap (B) <code>-27</code> assumes <code>Math.pow(0, 0)</code> is <code>0</code>. Trap (D) <code>-25</code> assumes <code>Math.pow(0, 0)</code> is <code>1</code> AND that <code>Math.pow(-3, -1)</code> rounds to <code>1</code>.
     </div>
   </div>
 </div>
@@ -444,31 +452,30 @@
 </div>
 
 <div class="q">
-  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">indexOf Overloads</span></div>
+  <div class="q-head"><span class="pill qnum">Q15</span><span class="pill hard">HARD</span><span class="pill mc">AP MC</span><span class="pill topic">String — compareTo, case &amp; lex</span></div>
   <div class="q-body">
-    <p class="prompt"><code>s = "Hello"</code>. Which return the index of the first <code>'l'</code> (i.e., 2)?</p>
-    <ul style="margin: 6px 0 8px 22px; line-height: 1.7;">
-      <li>I. <code>s.indexOf('l')</code></li>
-      <li>II. <code>s.indexOf("l")</code></li>
-      <li>III. <code>s.indexOf(s.charAt(2))</code></li>
-    </ul>
+    <p class="prompt"><code>a = "apple"; b = "Apple"; c = "apricot"; p = a.compareTo(b); q = a.compareTo(c); println((p > 0) + " " + (q > 0));</code></p>
     <ul class="opts cols2">
-      <li><span class="lbl">(A)</span> I only</li>
-      <li><span class="lbl">(B)</span> I and II only</li>
-      <li><span class="lbl">(C)</span> I and III only</li>
-      <li class="correct"><span class="lbl">(D)</span> I, II, and III</li>
+      <li><span class="lbl">(A)</span> <code>true true</code></li>
+      <li class="correct"><span class="lbl">(B)</span> <code>true false</code></li>
+      <li><span class="lbl">(C)</span> <code>false true</code></li>
+      <li><span class="lbl">(D)</span> <code>false false</code></li>
     </ul>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: <span class="ans">(D)</span></div>
+    <div class="answer-line">Answer: <span class="ans">(B)</span></div>
     <div class="rationale">
-      The <code>String</code> class provides multiple <code>indexOf</code> overloads — both <code>indexOf(int ch)</code> and <code>indexOf(String str)</code> exist and behave the same way for a single-character search:
+      <code>compareTo</code> walks character by character. The first differing position determines the sign: it returns <code>(Unicode of this char) − (Unicode of other char)</code>.
       <ul style="margin:6px 0 6px 22px;line-height:1.7;">
-        <li><strong>I.</strong> <code>s.indexOf('l')</code> uses the <code>(int)</code> overload (the <code>char</code> auto-promotes to <code>int</code>). Returns the index of the first <code>'l'</code> = <code>2</code>.</li>
-        <li><strong>II.</strong> <code>s.indexOf("l")</code> uses the <code>(String)</code> overload. Returns <code>2</code> as well.</li>
-        <li><strong>III.</strong> <code>s.charAt(2)</code> returns the <code>char</code> <code>'l'</code>, then <code>s.indexOf('l')</code> returns <code>2</code>.</li>
+        <li><code>"apple".compareTo("Apple")</code> &nbsp;→&nbsp; first differing char is index 0: <code>'a'</code> (Unicode 97) vs <code>'A'</code> (Unicode 65). Returns <code>97 - 65 = +32</code>. So <code>p > 0</code> is <code>true</code>.</li>
+        <li><code>"apple".compareTo("apricot")</code> &nbsp;→&nbsp; index 0: <code>'a' == 'a'</code>. Index 1: <code>'p' == 'p'</code>. Index 2: <code>'p'</code> (112) vs <code>'r'</code> (114). Returns <code>112 - 114 = -2</code>. So <code>q > 0</code> is <code>false</code>.</li>
+        <li>Println &nbsp;→&nbsp; <code>"true false"</code> (the booleans auto-convert to <code>String</code>).</li>
       </ul>
-      All three give the same result.
+      <strong>Two pitfalls baked in:</strong>
+      <ul style="margin:6px 0 6px 22px;line-height:1.7;">
+        <li><em>Case sensitivity.</em> Lowercase letters have HIGHER Unicode values than uppercase, so <code>"apple"</code> &gt; <code>"Apple"</code>. Trap (D) assumes upper-comes-first like an English dictionary.</li>
+        <li><em>Stop at first difference.</em> Once <code>'p'</code> vs <code>'r'</code> resolves, the rest of the strings (<code>"le"</code> vs <code>"icot"</code>) is ignored. Trap (A) compares the full strings as if they were numbers.</li>
+      </ul>
     </div>
   </div>
 </div>
