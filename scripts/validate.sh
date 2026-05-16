@@ -65,6 +65,33 @@ validate_file() {
     echo -e "  ${YELLOW}WARN${NC}: File seems small (${size} bytes)"
   fi
 
+  # Practice <-> Solutions version-pair check.
+  # Convention: each Practice file <dir>/Unit_*_Practice.html may have a
+  # companion <dir>/Solutions/Unit_*_Solutions.html. When both exist, they
+  # must declare the same dingrui:version tag (HTML comment near <title>).
+  # Tag format: <!-- dingrui:version vX.Y  dingrui:pair-key <KEY>  dingrui:doc-type {practice|solutions} -->
+  if [[ "$f" == *"_Practice.html" ]]; then
+    local pdir pbase sol
+    pdir="$(dirname "$f")"
+    pbase="$(basename "$f" "_Practice.html")"
+    sol="$pdir/Solutions/${pbase}_Solutions.html"
+    if [[ -f "$sol" ]]; then
+      local pv sv
+      pv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$f"   | head -1 | awk '{print $2}')
+      sv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$sol" | head -1 | awk '{print $2}')
+      if [[ -z "$pv" ]]; then
+        echo -e "  ${RED}FAIL${NC}: Practice missing 'dingrui:version' tag (Solutions present at $sol)"
+        ((ERRORS++))
+      elif [[ -z "$sv" ]]; then
+        echo -e "  ${RED}FAIL${NC}: Solutions missing 'dingrui:version' tag ($sol)"
+        ((ERRORS++))
+      elif [[ "$pv" != "$sv" ]]; then
+        echo -e "  ${RED}FAIL${NC}: Practice/Solutions version mismatch — practice=$pv, solutions=$sv ($sol)"
+        ((ERRORS++))
+      fi
+    fi
+  fi
+
   echo -e "  ${GREEN}OK${NC}"
 }
 
