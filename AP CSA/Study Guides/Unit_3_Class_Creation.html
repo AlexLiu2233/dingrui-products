@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="../LOGO.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F0EB;--bg-card:#FFFFFF;--bg-code:#1E1E2E;--text:#2C2424;--text-secondary:#6B5E5E;--accent:#7A2E2E;--accent-light:#F2E4E4;--accent-dark:#5C1E1E;--green:#2E6B4F;--green-light:#DFF0E8;--orange:#A65E1A;--orange-light:#FBF0E0;--red:#B03030;--red-light:#FCEAEA;--purple:#5E3D7A;--purple-light:#EDE4F5;--teal:#2A6B6B;--teal-light:#DFF0F0;--border:#DDD4CC;--shadow:0 1px 3px rgba(60,30,30,0.06),0 1px 2px rgba(60,30,30,0.04);--shadow-lg:0 4px 12px rgba(60,30,30,0.10);--radius:10px;--font-display:'DM Serif Display',Georgia,serif;--font-body:'Source Sans 3',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--max-w:860px;--toc-w:280px}
+:root{--bg:#F5F0EB;--bg-card:#FFFFFF;--bg-code:#1E1E2E;--text:#2C2424;--text-secondary:#6B5E5E;--accent:#7A2E2E;--accent-light:#F2E4E4;--accent-dark:#5C1E1E;--green:#2E6B4F;--green-light:#DFF0E8;--orange:#A65E1A;--orange-light:#FBF0E0;--red:#B03030;--red-light:#FCEAEA;--purple:#5E3D7A;--purple-light:#EDE4F5;--teal:#2A6B6B;--teal-light:#DFF0F0;--border:#DDD4CC;--shadow:0 1px 3px rgba(60,30,30,0.06),0 1px 2px rgba(60,30,30,0.04);--shadow-lg:0 4px 12px rgba(60,30,30,0.10);--radius:10px;--font-display:'DM Serif Display',Georgia,serif;--font-body:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',-apple-system,sans-serif;--font-mono:'JetBrains Mono',monospace;--max-w:860px;--toc-w:280px}
 [data-theme="dark"]{--bg:#151010;--bg-card:#1E1818;--bg-code:#0D0A0A;--text:#E8E0DC;--text-secondary:#A89898;--accent:#C87070;--accent-light:#3A2020;--accent-dark:#E89090;--green:#5CB88A;--green-light:#1A2E24;--orange:#D4944A;--orange-light:#2E2010;--red:#E07070;--red-light:#301515;--purple:#A888C8;--purple-light:#201828;--teal:#5AB8B8;--teal-light:#102828;--border:#352C2C;--shadow:0 1px 3px rgba(0,0,0,0.3);--shadow-lg:0 4px 12px rgba(0,0,0,0.4)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.7;font-size:17px;transition:background .3s,color .3s}
@@ -101,51 +101,63 @@ details .detail-body{padding:0 18px 16px;font-size:.92rem}
 ::selection{background:var(--accent-light);color:var(--accent-dark)}
 button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visible,.flashcard:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+/* ─── BILINGUAL TOGGLE ─── */
+/* body-scoped specificity (0,2,1) beats class+element rules. */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="topnav">
-  <div class="topnav-brand"><span class="unit-badge">UNIT 3</span>Class Creation</div>
+  <div class="topnav-brand"><span class="unit-badge">UNIT 3</span><span data-lang="en">Class Creation</span><span data-lang="zh">类的定义</span></div>
   <div class="topnav-actions">
-    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="back-link" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s3-1">3.1 Abstraction &amp; Design</a>
-  <a href="#s3-2">3.2 Impact of Design</a>
-  <a href="#s3-3">3.3 Anatomy of a Class</a>
-  <a href="#s3-4">3.4 Constructors</a>
-  <a href="#s3-5">3.5 Writing Methods</a>
-  <a href="#s3-6">3.6 Passing References</a>
-  <a href="#s3-7">3.7 Class Variables &amp; Methods</a>
-  <a href="#s3-8">3.8 Scope and Access</a>
-  <a href="#s3-9">3.9 this Keyword</a>
-  <a href="#full-example">Full Class Example</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s3-1"><span data-lang="en">3.1 Abstraction &amp; Design</span><span data-lang="zh">3.1 抽象与程序设计</span></a>
+  <a href="#s3-2"><span data-lang="en">3.2 Impact of Design</span><span data-lang="zh">3.2 程序设计的影响</span></a>
+  <a href="#s3-3"><span data-lang="en">3.3 Anatomy of a Class</span><span data-lang="zh">3.3 类的结构剖析</span></a>
+  <a href="#s3-4"><span data-lang="en">3.4 Constructors</span><span data-lang="zh">3.4 构造方法</span></a>
+  <a href="#s3-5"><span data-lang="en">3.5 Writing Methods</span><span data-lang="zh">3.5 编写方法</span></a>
+  <a href="#s3-6"><span data-lang="en">3.6 Passing References</span><span data-lang="zh">3.6 传递引用</span></a>
+  <a href="#s3-7"><span data-lang="en">3.7 Class Variables &amp; Methods</span><span data-lang="zh">3.7 类变量与类方法</span></a>
+  <a href="#s3-8"><span data-lang="en">3.8 Scope and Access</span><span data-lang="zh">3.8 作用域与可见性</span></a>
+  <a href="#s3-9"><span data-lang="en">3.9 this Keyword</span><span data-lang="zh">3.9 this 关键字</span></a>
+  <a href="#full-example"><span data-lang="en">Full Class Example</span><span data-lang="zh">完整类示例</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
 </aside>
 
 <main class="main-wrap" id="main-content">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
-  <h1>Unit 3: Class Creation</h1>
-  <p style="color:var(--text-secondary);max-width:580px;margin:0 auto;">
+  <h1 data-lang="en">Unit 3: Class Creation</h1>
+  <h1 data-lang="zh">单元 3：类的定义</h1>
+  <p data-lang="en" style="color:var(--text-secondary);max-width:580px;margin:0 auto;">
     Design your own classes with instance variables, constructors, methods, encapsulation, static members, scope, and the <code>this</code> keyword.
   </p>
+  <p data-lang="zh" style="color:var(--text-secondary);max-width:580px;margin:0 auto;">
+    自行设计类，掌握实例变量、构造方法、方法、封装、静态成员、作用域以及 <code>this</code> 关键字。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–18% of AP Exam</span>
-    <span class="chip chip-green">~20–22 Class Periods</span>
-    <span class="chip chip-teal">9 Topics</span>
+    <span class="chip chip-maroon" data-lang="en">10–18% of AP Exam</span>
+    <span class="chip chip-maroon" data-lang="zh">占 AP 考试 10–18%</span>
+    <span class="chip chip-green" data-lang="en">~20–22 Class Periods</span>
+    <span class="chip chip-green" data-lang="zh">约 20–22 课时</span>
+    <span class="chip chip-teal" data-lang="en">9 Topics</span>
+    <span class="chip chip-teal" data-lang="zh">9 个小节</span>
   </div>
 </section>
 
@@ -153,33 +165,48 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.1 ═══ -->
 <section class="section" id="s3-1">
-  <div class="section-label">Topic 3.1</div>
-  <h2>Abstraction and Program Design</h2>
+  <div class="section-label" data-lang="en">Topic 3.1</div>
+  <div class="section-label" data-lang="zh">小节 3.1</div>
+  <h2 data-lang="en">Abstraction and Program Design</h2>
+  <h2 data-lang="zh">抽象与程序设计</h2>
 
-  <p><strong>Abstraction</strong> reduces complexity by focusing on the main idea while hiding irrelevant details.</p>
+  <p data-lang="en"><strong>Abstraction</strong> reduces complexity by focusing on the main idea while hiding irrelevant details.</p>
+  <p data-lang="zh"><strong>抽象</strong>通过聚焦主要思想、隐藏无关细节来降低复杂度。</p>
 
   <div class="card">
-    <p><strong>Data Abstraction</strong>, separates what data represents from how it's stored. An instance variable like <code>balance</code> names the concept without exposing implementation.</p>
-    <p style="margin-top:10px"><strong>Procedural Abstraction</strong>, gives a name to a process (method). You use a method knowing <em>what</em> it does, not <em>how</em>. This enables code reuse and method decomposition.</p>
+    <p data-lang="en"><strong>Data Abstraction</strong>, separates what data represents from how it's stored. An instance variable like <code>balance</code> names the concept without exposing implementation.</p>
+    <p data-lang="zh"><strong>数据抽象</strong>，将数据"代表什么"与"如何存储"分离开来。像 <code>balance</code> 这样的实例变量只为概念命名，而不暴露具体实现。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Procedural Abstraction</strong>, gives a name to a process (method). You use a method knowing <em>what</em> it does, not <em>how</em>. This enables code reuse and method decomposition.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>过程抽象</strong>，为某个过程（方法）赋予名称。你只需知道方法<em>做了什么</em>，而不必关心<em>如何做</em>。这便于代码复用与方法分解。</p>
   </div>
 
   <div class="concept-box green">
-    <strong>Design First</strong>
-    Before coding, plan each class: identify its <em>attributes</em> (data/nouns) and <em>behaviors</em> (methods/verbs). This can be done with natural language, UML diagrams, or pseudocode.
+    <strong data-lang="en">Design First</strong>
+    <strong data-lang="zh">先设计</strong>
+    <span data-lang="en">Before coding, plan each class: identify its <em>attributes</em> (data/nouns) and <em>behaviors</em> (methods/verbs). This can be done with natural language, UML diagrams, or pseudocode.</span>
+    <span data-lang="zh">编码前先为每个类做规划：识别其<em>属性</em>（数据/名词）与<em>行为</em>（方法/动词）。可用自然语言、UML 图或伪代码来完成。</span>
   </div>
 
   <div class="concept-box teal">
-    <strong>Key Vocabulary</strong>
-    An <em>attribute</em> is a variable defined in a class outside any method. An <em>instance variable</em> is unique to each object. A <em>class variable</em> is shared by all objects.
+    <strong data-lang="en">Key Vocabulary</strong>
+    <strong data-lang="zh">关键词汇</strong>
+    <span data-lang="en">An <em>attribute</em> is a variable defined in a class outside any method. An <em>instance variable</em> is unique to each object. A <em>class variable</em> is shared by all objects.</span>
+    <span data-lang="zh"><em>属性</em>是在类中、任何方法之外定义的变量。<em>实例变量</em>每个对象独有一份。<em>类变量</em>由所有对象共享。</span>
   </div>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example: Designing a <code>Library</code> class</div>
-    <p><strong>Problem.</strong> Sketch a class to model a public library that tracks books and members.</p>
-    <p style="margin-top:10px"><strong>Step 1. Identify nouns (attributes).</strong> A library "has" a name and a collection of books. A book has a title and an ISBN.</p>
-    <p style="margin-top:10px"><strong>Step 2. Identify verbs (behaviors).</strong> A library can <em>add a book</em>, <em>check out a book to a member</em>, <em>return a book</em>, <em>list available books</em>.</p>
-    <p style="margin-top:10px"><strong>Step 3. Decide what to expose.</strong> Public methods form the API (<code>addBook</code>, <code>checkOut</code>). Private helpers do internal work. Instance variables are always <code>private</code>.</p>
-    <p style="margin-top:10px"><strong>Step 4. Sketch the skeleton.</strong></p>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example: Designing a <code>Library</code> class</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题：设计一个 <code>Library</code> 类</div>
+    <p data-lang="en"><strong>Problem.</strong> Sketch a class to model a public library that tracks books and members.</p>
+    <p data-lang="zh"><strong>题目。</strong>勾画一个类，用于建模一个跟踪藏书与会员的公共图书馆。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 1. Identify nouns (attributes).</strong> A library "has" a name and a collection of books. A book has a title and an ISBN.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 1 步：识别名词（属性）。</strong>一个图书馆"有"一个名称和一批藏书。一本书有标题和 ISBN。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 2. Identify verbs (behaviors).</strong> A library can <em>add a book</em>, <em>check out a book to a member</em>, <em>return a book</em>, <em>list available books</em>.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 2 步：识别动词（行为）。</strong>图书馆可以<em>添加一本书</em>、<em>把书借给会员</em>、<em>还书</em>、<em>列出可借阅的书</em>。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 3. Decide what to expose.</strong> Public methods form the API (<code>addBook</code>, <code>checkOut</code>). Private helpers do internal work. Instance variables are always <code>private</code>.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 3 步：决定对外暴露什么。</strong>公有方法构成 API（<code>addBook</code>、<code>checkOut</code>）。私有辅助方法负责内部工作。实例变量永远是 <code>private</code>。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 4. Sketch the skeleton.</strong></p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 4 步：勾画骨架。</strong></p>
 <pre><span class="kw">public class</span> <span class="ty">Library</span> {
     <span class="kw">private</span> <span class="ty">String</span> name;
     <span class="kw">private</span> <span class="ty">ArrayList&lt;Book&gt;</span> books;
@@ -191,8 +218,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   </div>
 
   <div class="concept-box red">
-    <strong>AP Trap: Attribute vs Method</strong>
-    On AP MCQs, "<em>has-a</em>" relationships indicate attributes (data); "<em>can-do</em>" or "<em>does</em>" indicate methods (behavior). A library <em>has</em> books (attribute); a library <em>checks out</em> books (method). Don't model behaviors as fields.
+    <strong data-lang="en">AP Trap: Attribute vs Method</strong>
+    <strong data-lang="zh">AP 陷阱：属性 vs 方法</strong>
+    <span data-lang="en">On AP MCQs, "<em>has-a</em>" relationships indicate attributes (data); "<em>can-do</em>" or "<em>does</em>" indicate methods (behavior). A library <em>has</em> books (attribute); a library <em>checks out</em> books (method). Don't model behaviors as fields.</span>
+    <span data-lang="zh">在 AP 选择题中，"<em>有一个</em>"（has-a）关系表示属性（数据）；"<em>能做</em>"或"<em>会做</em>"则表示方法（行为）。图书馆<em>有</em>书（属性）；图书馆<em>外借</em>书（方法）。不要把行为建模为字段。</span>
   </div>
 </section>
 
@@ -200,33 +229,45 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.2 ═══ -->
 <section class="section" id="s3-2">
-  <div class="section-label">Topic 3.2</div>
-  <h2>Impact of Program Design</h2>
+  <div class="section-label" data-lang="en">Topic 3.2</div>
+  <div class="section-label" data-lang="zh">小节 3.2</div>
+  <h2 data-lang="en">Impact of Program Design</h2>
+  <h2 data-lang="zh">程序设计的影响</h2>
 
-  <p>Programs impact society, the economy, and culture, both positively and negatively. The AP exam tests this with 1–2 conceptual MCQs per year. Easy points if you've seen the framework once.</p>
+  <p data-lang="en">Programs impact society, the economy, and culture, both positively and negatively. The AP exam tests this with 1–2 conceptual MCQs per year. Easy points if you've seen the framework once.</p>
+  <p data-lang="zh">程序会对社会、经济和文化产生正面或负面的影响。AP 考试每年都会出 1–2 道概念性选择题。只要熟悉这个框架，就是稳拿分。</p>
 
   <div class="card">
-    <p><strong>System Reliability</strong>, a program should perform as expected under <em>all</em> stated conditions, not just the happy path. Test with edge cases, invalid input, and boundary values to maximize reliability. A reliability gap is a failure for a stated condition.</p>
-    <p style="margin-top:10px"><strong>Unintended Consequences</strong>, a program built for one purpose can cause harm outside its intended scope. A recommendation algorithm optimised for engagement can amplify misinformation; a routing app's optimum may cause traffic chaos on residential streets. The harm <em>was not intended</em> by the designer but emerged from the design.</p>
-    <p style="margin-top:10px"><strong>Intellectual Property</strong>, code published as open source under a permissive license (MIT, Apache) can be reused with attribution. Code under a copyleft license (GPL) requires that derivatives also be open-sourced. Code with no license, or a proprietary license, requires explicit permission (and often payment) before reuse.</p>
-    <p style="margin-top:10px"><strong>Plagiarism</strong>, copying another student's submitted code (even partially, even modified) without attribution is plagiarism, a serious academic-integrity violation. Cite the source of any code you didn't write yourself, including snippets adapted from documentation or online forums.</p>
+    <p data-lang="en"><strong>System Reliability</strong>, a program should perform as expected under <em>all</em> stated conditions, not just the happy path. Test with edge cases, invalid input, and boundary values to maximize reliability. A reliability gap is a failure for a stated condition.</p>
+    <p data-lang="zh"><strong>系统可靠性</strong>，程序应当在<em>所有</em>规定条件下都按预期运行，而不仅仅是顺利路径。要用边界情况、非法输入和临界值来测试以最大化可靠性。可靠性缺口指的是在某个规定条件下出现失败。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Unintended Consequences</strong>, a program built for one purpose can cause harm outside its intended scope. A recommendation algorithm optimised for engagement can amplify misinformation; a routing app's optimum may cause traffic chaos on residential streets. The harm <em>was not intended</em> by the designer but emerged from the design.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>意料之外的后果</strong>，为某种目的设计的程序可能在其预期范围之外造成危害。以"参与度"为目标优化的推荐算法可能放大错误信息；以最优路径为目标的导航 App 可能让住宅街道交通陷入混乱。这种危害<em>并非</em>设计者所期望，而是从设计中浮现出来。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Intellectual Property</strong>, code published as open source under a permissive license (MIT, Apache) can be reused with attribution. Code under a copyleft license (GPL) requires that derivatives also be open-sourced. Code with no license, or a proprietary license, requires explicit permission (and often payment) before reuse.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>知识产权</strong>，以宽松许可证（MIT、Apache）开源发布的代码，只要署名即可复用。以 copyleft 许可证（GPL）发布的代码，要求衍生作品也必须开源。没有许可证的代码或专有许可证下的代码，则必须在获得明确许可（通常还要付费）后才能复用。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Plagiarism</strong>, copying another student's submitted code (even partially, even modified) without attribution is plagiarism, a serious academic-integrity violation. Cite the source of any code you didn't write yourself, including snippets adapted from documentation or online forums.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>抄袭</strong>，未署名地复制其他同学提交的代码（哪怕只是部分、哪怕做过修改）就是抄袭，属于严重的学术诚信违规。任何并非你本人编写的代码都应标注出处，包括根据文档或在线论坛改编的代码片段。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Telling Unintended Consequence from Reliability</strong>
-    A subtle but exam-tested distinction. <em>Reliability</em> = the program fails to do what it was designed to do under some valid input. <em>Unintended consequence</em> = the program does exactly what it was designed to do, but that behavior causes harm in a way the designer did not anticipate.
+    <strong data-lang="en">Telling Unintended Consequence from Reliability</strong>
+    <strong data-lang="zh">如何区分"意料之外的后果"与"可靠性"</strong>
+    <span data-lang="en">A subtle but exam-tested distinction. <em>Reliability</em> = the program fails to do what it was designed to do under some valid input. <em>Unintended consequence</em> = the program does exactly what it was designed to do, but that behavior causes harm in a way the designer did not anticipate.</span>
+    <span data-lang="zh">这是一个细微但考点常考的区别。<em>可靠性</em> = 程序在某些合法输入下没能完成设计要做的事。<em>意料之外的后果</em> = 程序恰恰完成了设计要做的事，但这种行为以设计者未预见的方式造成了危害。</span>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">A weather-prediction app shows accurate forecasts 99% of the time but on rare extreme-weather days predicts mild conditions. Which best describes the issue?</div>
+    <div class="quiz-q" data-lang="en">A weather-prediction app shows accurate forecasts 99% of the time but on rare extreme-weather days predicts mild conditions. Which best describes the issue?</div>
+    <div class="quiz-q" data-lang="zh">一款天气预报 App 在 99% 的情况下都能准确预报，但在罕见的极端天气日却预报为温和天气。下列哪一项最贴切地描述了问题？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Intellectual property violation</div>
-      <div class="quiz-opt" data-idx="1">Plagiarism</div>
-      <div class="quiz-opt" data-idx="2">Lack of system reliability under edge-case inputs</div>
-      <div class="quiz-opt" data-idx="3">Unintended consequence</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Intellectual property violation</span><span data-lang="zh">侵犯知识产权</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Plagiarism</span><span data-lang="zh">抄袭</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Lack of system reliability under edge-case inputs</span><span data-lang="zh">在边界输入下缺乏系统可靠性</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Unintended consequence</span><span data-lang="zh">意料之外的后果</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The app fails on a specific class of inputs (extreme weather). It's not behaving as designed under all stated conditions, that's a reliability gap. (Unintended consequence would be: the app works perfectly, but its accurate predictions cause panic-buying that harms grocery supply chains.)</div>
-    <div class="quiz-explain wrong-exp">"Reliability" = performs as expected under all conditions. A 99% success rate with a known failure mode on edge cases is a reliability issue. "Unintended consequence" means the program works as intended but causes side-effect harm.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! The app fails on a specific class of inputs (extreme weather). It's not behaving as designed under all stated conditions, that's a reliability gap. (Unintended consequence would be: the app works perfectly, but its accurate predictions cause panic-buying that harms grocery supply chains.)</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！这个 App 在某一类特定输入（极端天气）下失败。它没有在所有规定条件下都按设计运行，这就是可靠性缺口。（"意料之外的后果"会是：App 工作完全正常，但其准确预报引发抢购，破坏了食品供应链。）</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">"Reliability" = performs as expected under all conditions. A 99% success rate with a known failure mode on edge cases is a reliability issue. "Unintended consequence" means the program works as intended but causes side-effect harm.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">"可靠性" = 在所有条件下都按预期运行。99% 的成功率、且在边界情形下存在已知失败模式，这属于可靠性问题。"意料之外的后果"指的是程序按设计运行，但引发副作用造成危害。</div>
   </div>
 </section>
 
@@ -234,23 +275,29 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.3 ═══ -->
 <section class="section" id="s3-3">
-  <div class="section-label">Topic 3.3</div>
-  <h2>Anatomy of a Class</h2>
+  <div class="section-label" data-lang="en">Topic 3.3</div>
+  <div class="section-label" data-lang="zh">小节 3.3</div>
+  <h2 data-lang="en">Anatomy of a Class</h2>
+  <h2 data-lang="zh">类的结构剖析</h2>
 
-  <h3>Encapsulation</h3>
-  <p><strong>Data encapsulation</strong> hides implementation details from external classes using access modifiers.</p>
+  <h3 data-lang="en">Encapsulation</h3>
+  <h3 data-lang="zh">封装</h3>
+  <p data-lang="en"><strong>Data encapsulation</strong> hides implementation details from external classes using access modifiers.</p>
+  <p data-lang="zh"><strong>数据封装</strong>利用访问修饰符把实现细节对外部类隐藏起来。</p>
 
   <div class="table-wrap">
     <table>
-      <tr><th>Keyword</th><th>Who Can Access</th><th>Used For</th></tr>
-      <tr><td><code>public</code></td><td>Any class</td><td>Classes, constructors, methods that form the API</td></tr>
-      <tr><td><code>private</code></td><td>Only the declaring class</td><td>Instance variables (best practice), helper methods</td></tr>
+      <tr><th><span data-lang="en">Keyword</span><span data-lang="zh">关键字</span></th><th><span data-lang="en">Who Can Access</span><span data-lang="zh">谁可以访问</span></th><th><span data-lang="en">Used For</span><span data-lang="zh">用途</span></th></tr>
+      <tr><td><code>public</code></td><td><span data-lang="en">Any class</span><span data-lang="zh">任何类</span></td><td><span data-lang="en">Classes, constructors, methods that form the API</span><span data-lang="zh">类、构造方法、构成 API 的方法</span></td></tr>
+      <tr><td><code>private</code></td><td><span data-lang="en">Only the declaring class</span><span data-lang="zh">只有声明它的类</span></td><td><span data-lang="en">Instance variables (best practice), helper methods</span><span data-lang="zh">实例变量（最佳实践）、辅助方法</span></td></tr>
     </table>
   </div>
 
   <div class="concept-box">
-    <strong>AP CSA Rules</strong>
-    Classes → always <code>public</code>. Constructors → always <code>public</code>. Instance variables → always <code>private</code> (for encapsulation).
+    <strong data-lang="en">AP CSA Rules</strong>
+    <strong data-lang="zh">AP CSA 规则</strong>
+    <span data-lang="en">Classes → always <code>public</code>. Constructors → always <code>public</code>. Instance variables → always <code>private</code> (for encapsulation).</span>
+    <span data-lang="zh">类 → 总是 <code>public</code>。构造方法 → 总是 <code>public</code>。实例变量 → 总是 <code>private</code>（用于封装）。</span>
   </div>
 
 <pre><span class="kw">public class</span> <span class="ty">Dog</span> {
@@ -270,12 +317,18 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 }</pre>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example: Translate an FRQ prompt to a class skeleton</div>
-    <p><strong>Problem.</strong> "Write a class <code>Student</code> with a name (String), grade (int 9–12), and methods to access each."</p>
-    <p style="margin-top:10px"><strong>Step 1. Class declaration.</strong> Always <code>public class</code>.</p>
-    <p style="margin-top:10px"><strong>Step 2. Instance variables.</strong> Always <code>private</code>. Types come from the prompt: <code>String name</code>, <code>int grade</code>.</p>
-    <p style="margin-top:10px"><strong>Step 3. Constructor.</strong> Public. Parameters match the data the prompt says the class needs. Use <code>this.</code> when the parameter shadows the field.</p>
-    <p style="margin-top:10px"><strong>Step 4. Accessors.</strong> One per private field. Return type matches the field type. Body is a single <code>return</code>.</p>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example: Translate an FRQ prompt to a class skeleton</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题：把 FRQ 题干翻译成类骨架</div>
+    <p data-lang="en"><strong>Problem.</strong> "Write a class <code>Student</code> with a name (String), grade (int 9–12), and methods to access each."</p>
+    <p data-lang="zh"><strong>题目。</strong>"编写一个类 <code>Student</code>，包含 name（String）、grade（int 9–12），以及访问每个字段的方法。"</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 1. Class declaration.</strong> Always <code>public class</code>.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 1 步：类声明。</strong>总是写 <code>public class</code>。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 2. Instance variables.</strong> Always <code>private</code>. Types come from the prompt: <code>String name</code>, <code>int grade</code>.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 2 步：实例变量。</strong>总是 <code>private</code>。类型来自题干：<code>String name</code>、<code>int grade</code>。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 3. Constructor.</strong> Public. Parameters match the data the prompt says the class needs. Use <code>this.</code> when the parameter shadows the field.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 3 步：构造方法。</strong>public。形参与题干所述类所需的数据一致。当形参与字段同名时，使用 <code>this.</code>。</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Step 4. Accessors.</strong> One per private field. Return type matches the field type. Body is a single <code>return</code>.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>第 4 步：访问器。</strong>每个私有字段一个。返回类型与字段类型一致。方法体只有一行 <code>return</code>。</p>
 <pre><span class="kw">public class</span> <span class="ty">Student</span> {
     <span class="kw">private</span> <span class="ty">String</span> name;
     <span class="kw">private</span> <span class="ty">int</span> grade;
@@ -291,8 +344,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
   </div>
 
   <div class="concept-box red">
-    <strong>AP Trap: Don't Forget <code>public</code></strong>
-    Omitting <code>public</code> on a method or constructor doesn't cause a Java compile error (it makes them <em>package-private</em>), but the AP rubric requires <code>public</code> on every constructor and every method intended to be called from outside the class. <strong>Always write <code>public</code></strong>. Losing it is one of the most common Class Design FRQ mistakes.
+    <strong data-lang="en">AP Trap: Don't Forget <code>public</code></strong>
+    <strong data-lang="zh">AP 陷阱：别忘了 <code>public</code></strong>
+    <span data-lang="en">Omitting <code>public</code> on a method or constructor doesn't cause a Java compile error (it makes them <em>package-private</em>), but the AP rubric requires <code>public</code> on every constructor and every method intended to be called from outside the class. <strong>Always write <code>public</code></strong>. Losing it is one of the most common Class Design FRQ mistakes.</span>
+    <span data-lang="zh">在方法或构造方法上漏写 <code>public</code> 不会引起 Java 编译错误（它们会变成<em>包私有</em>），但 AP 评分标准要求每个构造方法以及每个打算从外部调用的方法都必须带 <code>public</code>。<strong>永远写上 <code>public</code></strong>。忘写 public 是 Class Design FRQ 最常见的失分点之一。</span>
   </div>
 </section>
 
@@ -300,51 +355,66 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.4 ═══ -->
 <section class="section" id="s3-4">
-  <div class="section-label">Topic 3.4</div>
-  <h2>Constructors</h2>
+  <div class="section-label" data-lang="en">Topic 3.4</div>
+  <div class="section-label" data-lang="zh">小节 3.4</div>
+  <h2 data-lang="en">Constructors</h2>
+  <h2 data-lang="zh">构造方法</h2>
 
-  <p>A constructor sets the <strong>initial state</strong> of an object by assigning values to all instance variables.</p>
+  <p data-lang="en">A constructor sets the <strong>initial state</strong> of an object by assigning values to all instance variables.</p>
+  <p data-lang="zh">构造方法通过给所有实例变量赋值来设定对象的<strong>初始状态</strong>。</p>
 
   <div class="card">
-    <p><strong>State</strong> = the object's attributes and their current values (<em>has-a</em> relationship).</p>
-    <p style="margin-top:8px">When a constructor is called with <code>new</code>, memory is allocated and an object reference is returned.</p>
+    <p data-lang="en"><strong>State</strong> = the object's attributes and their current values (<em>has-a</em> relationship).</p>
+    <p data-lang="zh"><strong>状态</strong> = 对象的属性及其当前值（<em>has-a</em> 关系）。</p>
+    <p data-lang="en" style="margin-top:8px">When a constructor is called with <code>new</code>, memory is allocated and an object reference is returned.</p>
+    <p data-lang="zh" style="margin-top:8px">当用 <code>new</code> 调用构造方法时，内存被分配，并返回一个对象引用。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Mutable Object Parameters</strong>
-    If a constructor receives a mutable object, store a <em>copy</em>, not the original reference. This prevents outside code from changing the object's internal state.
+    <strong data-lang="en">Mutable Object Parameters</strong>
+    <strong data-lang="zh">可变对象形参</strong>
+    <span data-lang="en">If a constructor receives a mutable object, store a <em>copy</em>, not the original reference. This prevents outside code from changing the object's internal state.</span>
+    <span data-lang="zh">如果构造方法收到一个可变对象，应保存一份<em>副本</em>，而不是原始引用。这样可以防止外部代码改动对象的内部状态。</span>
   </div>
 
-  <h3>Default Constructor</h3>
-  <p>If you write <em>no</em> constructors, Java provides a <strong>default (no-argument) constructor</strong> that sets fields to default values:</p>
+  <h3 data-lang="en">Default Constructor</h3>
+  <h3 data-lang="zh">默认构造方法</h3>
+  <p data-lang="en">If you write <em>no</em> constructors, Java provides a <strong>default (no-argument) constructor</strong> that sets fields to default values:</p>
+  <p data-lang="zh">如果你<em>一个</em>构造方法都没写，Java 会提供一个<strong>默认（无参）构造方法</strong>，把各字段设为类型默认值：</p>
 
   <div class="qref">
-    <div class="qref-title">Default Values, Must Know</div>
+    <div class="qref-title" data-lang="en">Default Values, Must Know</div>
+    <div class="qref-title" data-lang="zh">默认值（必须掌握）</div>
     <div class="table-wrap">
       <table>
-        <tr><th>Type</th><th>Default Value</th></tr>
+        <tr><th><span data-lang="en">Type</span><span data-lang="zh">类型</span></th><th><span data-lang="en">Default Value</span><span data-lang="zh">默认值</span></th></tr>
         <tr><td><code>int</code></td><td><code>0</code></td></tr>
         <tr><td><code>double</code></td><td><code>0.0</code></td></tr>
         <tr><td><code>boolean</code></td><td><code>false</code></td></tr>
-        <tr><td>Reference types</td><td><code>null</code></td></tr>
+        <tr><td><span data-lang="en">Reference types</span><span data-lang="zh">引用类型</span></td><td><code>null</code></td></tr>
       </table>
     </div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">If a class has no constructors and contains <code>private boolean active;</code>, what is <code>active</code> after <code>new MyClass()</code>?</div>
+    <div class="quiz-q" data-lang="en">If a class has no constructors and contains <code>private boolean active;</code>, what is <code>active</code> after <code>new MyClass()</code>?</div>
+    <div class="quiz-q" data-lang="zh">如果一个类没有任何构造方法，并且包含 <code>private boolean active;</code>，那么 <code>new MyClass()</code> 之后 <code>active</code> 的值是？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>true</code></div>
       <div class="quiz-opt" data-idx="1"><code>null</code></div>
       <div class="quiz-opt" data-idx="2"><code>false</code></div>
-      <div class="quiz-opt" data-idx="3">Compile error</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Compile error</span><span data-lang="zh">编译错误</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The default value of a <code>boolean</code> is <code>false</code>.</div>
-    <div class="quiz-explain wrong-exp">The default value for <code>boolean</code> instance variables is <code>false</code> (not <code>null</code>, that's for reference types).</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! The default value of a <code>boolean</code> is <code>false</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>boolean</code> 的默认值是 <code>false</code>。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">The default value for <code>boolean</code> instance variables is <code>false</code> (not <code>null</code>, that's for reference types).</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh"><code>boolean</code> 实例变量的默认值是 <code>false</code>（不是 <code>null</code>，<code>null</code> 是引用类型的默认值）。</div>
   </div>
 
-  <h3>Overloaded Constructors</h3>
-  <p>A class can have <strong>multiple constructors</strong> with different parameter lists. The compiler picks the right one at the call site based on the arguments, this is <em>method overloading</em>.</p>
+  <h3 data-lang="en">Overloaded Constructors</h3>
+  <h3 data-lang="zh">重载构造方法</h3>
+  <p data-lang="en">A class can have <strong>multiple constructors</strong> with different parameter lists. The compiler picks the right one at the call site based on the arguments, this is <em>method overloading</em>.</p>
+  <p data-lang="zh">一个类可以有<strong>多个构造方法</strong>，每个的形参列表不同。编译器会在调用处根据实参选择合适的那一个，这就是<em>方法重载</em>。</p>
 <pre><span class="kw">public class</span> <span class="ty">Dog</span> {
     <span class="kw">private</span> <span class="ty">String</span> name;
     <span class="kw">private</span> <span class="ty">int</span> age;
@@ -366,8 +436,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 <span class="ty">Dog</span> b = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Buddy"</span>);     <span class="cm">// uses 1-arg constructor</span></pre>
 
   <div class="concept-box red">
-    <strong>AP Trap: A "constructor" with a return type isn't a constructor</strong>
-    If you accidentally write <code>public void Dog(String name) { ... }</code> (with <code>void</code>), it's a <em>method</em> named "Dog", not a constructor. Java won't invoke it via <code>new Dog("Rex")</code>. Worse, since no real constructor was declared, the compiler auto-generates a default no-arg constructor, so <code>new Dog()</code> compiles but does nothing useful. <strong>Constructors have no return type.</strong>
+    <strong data-lang="en">AP Trap: A "constructor" with a return type isn't a constructor</strong>
+    <strong data-lang="zh">AP 陷阱：带返回类型的"构造方法"不是构造方法</strong>
+    <span data-lang="en">If you accidentally write <code>public void Dog(String name) { ... }</code> (with <code>void</code>), it's a <em>method</em> named "Dog", not a constructor. Java won't invoke it via <code>new Dog("Rex")</code>. Worse, since no real constructor was declared, the compiler auto-generates a default no-arg constructor, so <code>new Dog()</code> compiles but does nothing useful. <strong>Constructors have no return type.</strong></span>
+    <span data-lang="zh">如果你不小心写成 <code>public void Dog(String name) { ... }</code>（带 <code>void</code>），它就是一个名叫 "Dog" 的<em>方法</em>，而不是构造方法。Java 不会通过 <code>new Dog("Rex")</code> 来调用它。更糟的是，由于没有声明真正的构造方法，编译器会自动生成一个默认无参构造方法，于是 <code>new Dog()</code> 能通过编译，但什么有用的事都没做。<strong>构造方法没有返回类型。</strong></span>
   </div>
 </section>
 
@@ -375,22 +447,28 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.5 ═══ -->
 <section class="section" id="s3-5">
-  <div class="section-label">Topic 3.5</div>
-  <h2>Methods: How to Write Them</h2>
+  <div class="section-label" data-lang="en">Topic 3.5</div>
+  <div class="section-label" data-lang="zh">小节 3.5</div>
+  <h2 data-lang="en">Methods: How to Write Them</h2>
+  <h2 data-lang="zh">方法：如何编写</h2>
 
-  <h3>void vs Non-void Methods</h3>
+  <h3 data-lang="en">void vs Non-void Methods</h3>
+  <h3 data-lang="zh">void 方法 vs 非 void 方法</h3>
   <div class="table-wrap">
     <table>
-      <tr><th>Type</th><th>Returns</th><th>Keyword</th><th>Example</th></tr>
-      <tr><td>void</td><td>Nothing</td><td><code>void</code></td><td><code>public void bark()</code></td></tr>
-      <tr><td>Non-void</td><td>A single value</td><td>Return type</td><td><code>public int getAge()</code></td></tr>
+      <tr><th><span data-lang="en">Type</span><span data-lang="zh">类型</span></th><th><span data-lang="en">Returns</span><span data-lang="zh">返回</span></th><th><span data-lang="en">Keyword</span><span data-lang="zh">关键字</span></th><th><span data-lang="en">Example</span><span data-lang="zh">示例</span></th></tr>
+      <tr><td><span data-lang="en">void</span><span data-lang="zh">void</span></td><td><span data-lang="en">Nothing</span><span data-lang="zh">不返回任何值</span></td><td><code>void</code></td><td><code>public void bark()</code></td></tr>
+      <tr><td><span data-lang="en">Non-void</span><span data-lang="zh">非 void</span></td><td><span data-lang="en">A single value</span><span data-lang="zh">单个值</span></td><td><span data-lang="en">Return type</span><span data-lang="zh">返回类型</span></td><td><code>public int getAge()</code></td></tr>
     </table>
   </div>
 
-  <h3>Accessor vs Mutator</h3>
+  <h3 data-lang="en">Accessor vs Mutator</h3>
+  <h3 data-lang="zh">访问器 vs 修改器</h3>
   <div class="card">
-    <p><strong>Accessor (getter)</strong>, returns a copy of an instance variable's value. Always non-void.</p>
-    <p style="margin-top:8px"><strong>Mutator (setter)</strong>, changes an instance variable's value. Usually void.</p>
+    <p data-lang="en"><strong>Accessor (getter)</strong>, returns a copy of an instance variable's value. Always non-void.</p>
+    <p data-lang="zh"><strong>访问器（getter）</strong>，返回某个实例变量值的副本。永远是非 void。</p>
+    <p data-lang="en" style="margin-top:8px"><strong>Mutator (setter)</strong>, changes an instance variable's value. Usually void.</p>
+    <p data-lang="zh" style="margin-top:8px"><strong>修改器（setter）</strong>，修改某个实例变量的值。通常是 void。</p>
   </div>
 
 <pre><span class="cm">// Accessor</span>
@@ -404,17 +482,23 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 }</pre>
 
   <div class="concept-box red">
-    <strong>return Exits Immediately</strong>
-    The <code>return</code> keyword sends control back to the caller. Any code after <code>return</code> in the same block is <strong>unreachable</strong> and will cause a compile error. A <code>return</code> inside a loop or if-statement exits the entire method.
+    <strong data-lang="en">return Exits Immediately</strong>
+    <strong data-lang="zh">return 立即退出</strong>
+    <span data-lang="en">The <code>return</code> keyword sends control back to the caller. Any code after <code>return</code> in the same block is <strong>unreachable</strong> and will cause a compile error. A <code>return</code> inside a loop or if-statement exits the entire method.</span>
+    <span data-lang="zh"><code>return</code> 关键字会把控制权交回调用者。同一代码块中 <code>return</code> 之后的任何代码都<strong>不可达</strong>，会导致编译错误。位于循环或 if 语句中的 <code>return</code> 会退出整个方法。</span>
   </div>
 
   <div class="concept-box teal">
-    <strong>Pass by Value (Primitives)</strong>
-    When a primitive is passed as an argument, the parameter gets a <em>copy</em> of the value. Changing the parameter inside the method does <strong>not</strong> affect the original variable.
+    <strong data-lang="en">Pass by Value (Primitives)</strong>
+    <strong data-lang="zh">按值传递（基本类型）</strong>
+    <span data-lang="en">When a primitive is passed as an argument, the parameter gets a <em>copy</em> of the value. Changing the parameter inside the method does <strong>not</strong> affect the original variable.</span>
+    <span data-lang="zh">当基本类型作为实参传入时，形参拿到的是值的<em>副本</em>。在方法内部修改形参<strong>不会</strong>影响原变量。</span>
   </div>
 
-  <h3>Mutator with Input Validation</h3>
-  <p>A robust mutator <em>validates</em> input before changing state. Reject obviously-bad values; preserve the object's invariants.</p>
+  <h3 data-lang="en">Mutator with Input Validation</h3>
+  <h3 data-lang="zh">带输入校验的修改器</h3>
+  <p data-lang="en">A robust mutator <em>validates</em> input before changing state. Reject obviously-bad values; preserve the object's invariants.</p>
+  <p data-lang="zh">健壮的修改器会在改变状态之前先<em>校验</em>输入。拒绝明显非法的值，以维护对象的不变式。</p>
 <pre><span class="kw">public class</span> <span class="ty">BankAccount</span> {
     <span class="kw">private</span> <span class="ty">double</span> balance;
 
@@ -434,8 +518,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
     }
 }</pre>
 
-  <h3>Accessor Returning a Mutable Object, Defensive Copy</h3>
-  <p>If an accessor returns a reference to a <em>mutable</em> object (array, <code>ArrayList</code>, or any class you wrote), the caller has the same reference as your field, and can mutate it, breaking encapsulation.</p>
+  <h3 data-lang="en">Accessor Returning a Mutable Object, Defensive Copy</h3>
+  <h3 data-lang="zh">访问器返回可变对象，防御性拷贝</h3>
+  <p data-lang="en">If an accessor returns a reference to a <em>mutable</em> object (array, <code>ArrayList</code>, or any class you wrote), the caller has the same reference as your field, and can mutate it, breaking encapsulation.</p>
+  <p data-lang="zh">如果访问器返回一个<em>可变</em>对象的引用（数组、<code>ArrayList</code> 或你自己写的任何类），调用方就持有了与字段相同的引用，可以对其进行修改，从而破坏封装。</p>
 <pre><span class="cm">// BAD: caller can mutate our internal list</span>
 <span class="kw">public</span> <span class="ty">ArrayList&lt;String&gt;</span> <span class="fn">getNames</span>() {
     <span class="kw">return</span> names;
@@ -447,8 +533,10 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 }</pre>
 
   <div class="concept-box red">
-    <strong>AP Trap: Accessor That Leaks Internal State</strong>
-    Returning the array reference (<code>return arr;</code>) or list reference (<code>return list;</code>) means external code holds your internal data and can change it. The FRQ rubric awards a point for defensive copy when the accessor returns a mutable type. Worth remembering: <em>String</em> is immutable so it's fine to return directly; arrays and <code>ArrayList</code> are mutable so return a copy.
+    <strong data-lang="en">AP Trap: Accessor That Leaks Internal State</strong>
+    <strong data-lang="zh">AP 陷阱：泄露内部状态的访问器</strong>
+    <span data-lang="en">Returning the array reference (<code>return arr;</code>) or list reference (<code>return list;</code>) means external code holds your internal data and can change it. The FRQ rubric awards a point for defensive copy when the accessor returns a mutable type. Worth remembering: <em>String</em> is immutable so it's fine to return directly; arrays and <code>ArrayList</code> are mutable so return a copy.</span>
+    <span data-lang="zh">返回数组引用（<code>return arr;</code>）或列表引用（<code>return list;</code>），意味着外部代码持有了你的内部数据并可以修改它。当访问器返回可变类型时，FRQ 评分标准会为防御性拷贝给一分。值得记住：<em>String</em> 是不可变的，可以直接返回；数组和 <code>ArrayList</code> 是可变的，要返回副本。</span>
   </div>
 </section>
 
@@ -456,18 +544,24 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 
 <!-- ═══ 3.6 ═══ -->
 <section class="section" id="s3-6">
-  <div class="section-label">Topic 3.6</div>
-  <h2>Methods: Passing and Returning References</h2>
+  <div class="section-label" data-lang="en">Topic 3.6</div>
+  <div class="section-label" data-lang="zh">小节 3.6</div>
+  <h2 data-lang="en">Methods: Passing and Returning References</h2>
+  <h2 data-lang="zh">方法：传递与返回引用</h2>
 
-  <p>When an <strong>object reference</strong> is passed to a method, the parameter receives a <em>copy of the reference</em>, but both the caller's variable and the parameter refer to the same object on the heap. Mutations made through the parameter are visible to the caller. This comes up a lot on AP MCQ questions about methods.</p>
+  <p data-lang="en">When an <strong>object reference</strong> is passed to a method, the parameter receives a <em>copy of the reference</em>, but both the caller's variable and the parameter refer to the same object on the heap. Mutations made through the parameter are visible to the caller. This comes up a lot on AP MCQ questions about methods.</p>
+  <p data-lang="zh">当一个<strong>对象引用</strong>传给方法时，形参收到的是<em>引用的副本</em>，但调用方的变量和形参指向堆上的同一个对象。通过形参所做的修改对调用方是可见的。这是关于方法的 AP 选择题里反复出现的考点。</p>
 
   <div class="concept-box red">
-    <strong>Primitives vs Objects in Method Calls</strong>
-    A method that takes a <strong>primitive</strong> (<code>int</code>, <code>double</code>, etc.) can <em>never</em> change the caller's variable, the parameter is a fresh copy of the value. A method that takes an <strong>object</strong> can change the caller's object through <em>mutation</em>, but cannot make the caller's variable refer to a different object. It's a common AP MCQ trap.
+    <strong data-lang="en">Primitives vs Objects in Method Calls</strong>
+    <strong data-lang="zh">方法调用中：基本类型 vs 对象</strong>
+    <span data-lang="en">A method that takes a <strong>primitive</strong> (<code>int</code>, <code>double</code>, etc.) can <em>never</em> change the caller's variable, the parameter is a fresh copy of the value. A method that takes an <strong>object</strong> can change the caller's object through <em>mutation</em>, but cannot make the caller's variable refer to a different object. It's a common AP MCQ trap.</span>
+    <span data-lang="zh">接收<strong>基本类型</strong>（<code>int</code>、<code>double</code> 等）的方法<em>永远</em>无法改变调用方的变量，形参只是值的全新副本。接收<strong>对象</strong>的方法可以通过<em>变异</em>来改变调用方的对象，但不能让调用方的变量指向另一个对象。这是 AP 选择题常见的陷阱。</span>
   </div>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example 1: Method mutates a passed object</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example 1: Method mutates a passed object</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题 1：方法修改传入的对象</div>
 <pre><span class="kw">public class</span> <span class="ty">Dog</span> {
     <span class="kw">private</span> <span class="ty">String</span> name;
     <span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> n) { name = n; }
@@ -482,11 +576,13 @@ button:focus-visible,.quiz-opt:focus-visible,summary:focus-visible,a:focus-visib
 <span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
 <span class="fn">rename</span>(rex);
 System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Max</span></pre>
-    <p style="margin-top:10px"><strong>Why?</strong> The parameter <code>d</code> is a copy of the reference to the same Dog object as <code>rex</code>. <code>d.setName(...)</code> mutates that object. <code>rex</code> "sees" the change because both names still refer to the same heap object.</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Why?</strong> The parameter <code>d</code> is a copy of the reference to the same Dog object as <code>rex</code>. <code>d.setName(...)</code> mutates that object. <code>rex</code> "sees" the change because both names still refer to the same heap object.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>原因。</strong>形参 <code>d</code> 是 <code>rex</code> 所指 Dog 对象的引用副本。<code>d.setName(...)</code> 修改了该对象。<code>rex</code> 能"看到"这个变化，因为这两个名字仍然指向堆上同一个对象。</p>
   </div>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example 2: Reassigning the parameter doesn't change the caller</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example 2: Reassigning the parameter doesn't change the caller</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题 2：重新给形参赋值并不会改变调用方</div>
 <pre><span class="kw">public static void</span> <span class="fn">replace</span>(<span class="ty">Dog</span> d) {
     d = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Replaced"</span>);  <span class="cm">// reassigns the LOCAL copy</span>
 }
@@ -494,50 +590,63 @@ System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// 
 <span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
 <span class="fn">replace</span>(rex);
 System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Rex (unchanged!)</span></pre>
-    <p style="margin-top:10px"><strong>Why?</strong> <code>d = new Dog(...)</code> only changes what the local parameter <code>d</code> points to. The caller's <code>rex</code> reference is unchanged. <strong>You can't reassign your way to "replacing" the caller's object.</strong> This is the AP trap that catches the most students.</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Why?</strong> <code>d = new Dog(...)</code> only changes what the local parameter <code>d</code> points to. The caller's <code>rex</code> reference is unchanged. <strong>You can't reassign your way to "replacing" the caller's object.</strong> This is the AP trap that catches the most students.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>原因。</strong><code>d = new Dog(...)</code> 只改变本地形参 <code>d</code> 所指的对象。调用方的 <code>rex</code> 引用并未改变。<strong>你无法靠重新赋值来"替换"调用方的对象。</strong>这是抓走最多学生的 AP 陷阱。</p>
   </div>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example 3: Aliasing in assignment</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example 3: Aliasing in assignment</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题 3：赋值中的别名</div>
 <pre><span class="ty">Dog</span> rex = <span class="kw">new</span> <span class="fn">Dog</span>(<span class="str">"Rex"</span>);
 <span class="ty">Dog</span> buddy = rex;       <span class="cm">// alias: buddy and rex refer to the SAME object</span>
 buddy.<span class="fn">setName</span>(<span class="str">"Buddy"</span>);
 System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// prints: Buddy</span></pre>
-    <p style="margin-top:10px"><strong>Why?</strong> <code>buddy = rex</code> copies the <em>reference</em>, not the object. Both names refer to the same Dog object. A mutation through one is visible through the other. This is "aliasing" and is the same mechanism as passing an object to a method.</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Why?</strong> <code>buddy = rex</code> copies the <em>reference</em>, not the object. Both names refer to the same Dog object. A mutation through one is visible through the other. This is "aliasing" and is the same mechanism as passing an object to a method.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>原因。</strong><code>buddy = rex</code> 复制的是<em>引用</em>，不是对象。两个名字指向同一个 Dog 对象。通过其中一个所做的修改，通过另一个也能看到。这就是"别名"现象，与把对象传给方法是同一种机制。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Aliasing: Friend or Bug</strong>
-    Aliasing is fine when intentional (e.g., shorter local name for clarity). It's a bug when accidental, e.g., a constructor stores a passed-in array reference and the caller later mutates the array, corrupting the object's invariants. The fix: <em>defensive copy</em> at the boundary (in the constructor or accessor).
+    <strong data-lang="en">Aliasing: Friend or Bug</strong>
+    <strong data-lang="zh">别名：是助手还是 bug</strong>
+    <span data-lang="en">Aliasing is fine when intentional (e.g., shorter local name for clarity). It's a bug when accidental, e.g., a constructor stores a passed-in array reference and the caller later mutates the array, corrupting the object's invariants. The fix: <em>defensive copy</em> at the boundary (in the constructor or accessor).</span>
+    <span data-lang="zh">如果是有意为之（例如取一个更短的本地名以提升可读性），别名没问题。但如果是无意造成的，就是 bug，例如构造方法存下传入的数组引用，之后调用方修改了该数组，破坏了对象的不变式。修复方法：在边界处（构造方法或访问器中）做<em>防御性拷贝</em>。</span>
   </div>
 
   <div class="concept-box purple">
-    <strong>Private Access Rule</strong>
-    A method cannot access the <code>private</code> fields of a parameter object, unless the parameter is the <em>same type</em> as the enclosing class. e.g., a <code>Dog</code> instance method <em>can</em> read another <code>Dog</code> parameter's private fields directly, because they're in the same class.
+    <strong data-lang="en">Private Access Rule</strong>
+    <strong data-lang="zh">私有访问规则</strong>
+    <span data-lang="en">A method cannot access the <code>private</code> fields of a parameter object, unless the parameter is the <em>same type</em> as the enclosing class. e.g., a <code>Dog</code> instance method <em>can</em> read another <code>Dog</code> parameter's private fields directly, because they're in the same class.</span>
+    <span data-lang="zh">方法不能访问形参对象的 <code>private</code> 字段，<em>除非</em>形参与所在类是<em>同一类型</em>。例如，<code>Dog</code> 的实例方法<em>可以</em>直接读取另一个 <code>Dog</code> 形参的私有字段，因为它们在同一个类中。</span>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">Consider <code>public static void inc(int x) { x++; }</code> and the call <code>int n = 5; inc(n); System.out.println(n);</code>. What is printed?</div>
+    <div class="quiz-q" data-lang="en">Consider <code>public static void inc(int x) { x++; }</code> and the call <code>int n = 5; inc(n); System.out.println(n);</code>. What is printed?</div>
+    <div class="quiz-q" data-lang="zh">考虑 <code>public static void inc(int x) { x++; }</code>，以及调用 <code>int n = 5; inc(n); System.out.println(n);</code>。会打印什么？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>4</code></div>
       <div class="quiz-opt" data-idx="1"><code>5</code></div>
       <div class="quiz-opt" data-idx="2"><code>6</code></div>
-      <div class="quiz-opt" data-idx="3">Compile error</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Compile error</span><span data-lang="zh">编译错误</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>x</code> is a local copy of the value <code>5</code>. <code>x++</code> increments that copy, not the caller's <code>n</code>. <code>n</code> remains <code>5</code>. Primitives are <strong>always</strong> passed by value in Java.</div>
-    <div class="quiz-explain wrong-exp">Primitives are passed by value. The method's <code>x</code> is a copy. Mutating the copy doesn't affect the caller. <code>n</code> = 5.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>x</code> is a local copy of the value <code>5</code>. <code>x++</code> increments that copy, not the caller's <code>n</code>. <code>n</code> remains <code>5</code>. Primitives are <strong>always</strong> passed by value in Java.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>x</code> 是值 <code>5</code> 的本地副本。<code>x++</code> 自增的是这份副本，而不是调用方的 <code>n</code>。<code>n</code> 仍然是 <code>5</code>。在 Java 中，基本类型<strong>始终</strong>按值传递。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Primitives are passed by value. The method's <code>x</code> is a copy. Mutating the copy doesn't affect the caller. <code>n</code> = 5.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">基本类型按值传递。方法里的 <code>x</code> 只是一个副本，修改副本不会影响调用方。<code>n</code> = 5。</div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">Consider a class <code>Box</code> with a <code>void clear()</code> method that sets a private field to <code>null</code>. Given <code>Box b = new Box(); Box c = b; c.clear();</code>, what happens to <code>b</code>?</div>
+    <div class="quiz-q" data-lang="en">Consider a class <code>Box</code> with a <code>void clear()</code> method that sets a private field to <code>null</code>. Given <code>Box b = new Box(); Box c = b; c.clear();</code>, what happens to <code>b</code>?</div>
+    <div class="quiz-q" data-lang="zh">某个类 <code>Box</code> 含有一个 <code>void clear()</code> 方法，会把某个私有字段设为 <code>null</code>。给定 <code>Box b = new Box(); Box c = b; c.clear();</code>，<code>b</code> 会发生什么？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0"><code>b</code> is unchanged because <code>c</code> is a copy</div>
-      <div class="quiz-opt" data-idx="1"><code>b</code> becomes <code>null</code></div>
-      <div class="quiz-opt" data-idx="2"><code>b</code>'s internal field is now <code>null</code></div>
-      <div class="quiz-opt" data-idx="3">Compile error, can't share Box across variables</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en"><code>b</code> is unchanged because <code>c</code> is a copy</span><span data-lang="zh"><code>b</code> 不变，因为 <code>c</code> 是副本</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en"><code>b</code> becomes <code>null</code></span><span data-lang="zh"><code>b</code> 变成 <code>null</code></span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en"><code>b</code>'s internal field is now <code>null</code></span><span data-lang="zh"><code>b</code> 的内部字段现在是 <code>null</code></span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Compile error, can't share Box across variables</span><span data-lang="zh">编译错误，Box 不能在多个变量间共享</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>c = b</code> creates an alias. <code>c</code> and <code>b</code> refer to the same Box. <code>c.clear()</code> mutates that shared Box, so the Box's internal field is <code>null</code>. The variable <code>b</code> itself is unchanged (still points to the same object), it's the object's <em>state</em> that changed.</div>
-    <div class="quiz-explain wrong-exp">Aliasing: <code>c = b</code> shares the reference. <code>c.clear()</code> mutates the object. <code>b</code> (the variable) still refers to the same object, but that object's internal state has changed.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>c = b</code> creates an alias. <code>c</code> and <code>b</code> refer to the same Box. <code>c.clear()</code> mutates that shared Box, so the Box's internal field is <code>null</code>. The variable <code>b</code> itself is unchanged (still points to the same object), it's the object's <em>state</em> that changed.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>c = b</code> 创建了一个别名。<code>c</code> 和 <code>b</code> 指向同一个 Box。<code>c.clear()</code> 修改了这个共享的 Box，因此 Box 的内部字段是 <code>null</code>。变量 <code>b</code> 本身没变（仍指向同一个对象），变的是该对象的<em>状态</em>。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Aliasing: <code>c = b</code> shares the reference. <code>c.clear()</code> mutates the object. <code>b</code> (the variable) still refers to the same object, but that object's internal state has changed.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">别名现象：<code>c = b</code> 共享了引用。<code>c.clear()</code> 修改了该对象。变量 <code>b</code> 仍然指向同一个对象，但该对象的内部状态已经改变。</div>
   </div>
 </section>
 
@@ -545,11 +654,15 @@ System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// 
 
 <!-- ═══ 3.7 ═══ -->
 <section class="section" id="s3-7">
-  <div class="section-label">Topic 3.7</div>
-  <h2>Class Variables and Methods</h2>
+  <div class="section-label" data-lang="en">Topic 3.7</div>
+  <div class="section-label" data-lang="zh">小节 3.7</div>
+  <h2 data-lang="en">Class Variables and Methods</h2>
+  <h2 data-lang="zh">类变量与类方法</h2>
 
-  <h3>static Variables</h3>
-  <p>A <code>static</code> variable belongs to the <em>class</em>, not to any individual object. All instances share one copy.</p>
+  <h3 data-lang="en">static Variables</h3>
+  <h3 data-lang="zh">static 变量</h3>
+  <p data-lang="en">A <code>static</code> variable belongs to the <em>class</em>, not to any individual object. All instances share one copy.</p>
+  <p data-lang="zh"><code>static</code> 变量属于<em>类</em>，而不属于任何单个对象。所有实例共享同一份。</p>
 
 <pre><span class="kw">public class</span> <span class="ty">Dog</span> {
     <span class="kw">private static</span> <span class="ty">int</span> dogCount = <span class="num">0</span>;  <span class="cm">// shared</span>
@@ -567,27 +680,32 @@ System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// 
 
   <div class="table-wrap">
     <table>
-      <tr><th>Feature</th><th>Instance</th><th>Class (static)</th></tr>
-      <tr><td>Belongs to</td><td>Each object</td><td>The class itself</td></tr>
-      <tr><td>Accessed via</td><td><code>obj.method()</code></td><td><code>ClassName.method()</code></td></tr>
-      <tr><td>Can use instance vars?</td><td>Yes</td><td>No (unless passed an instance)</td></tr>
+      <tr><th><span data-lang="en">Feature</span><span data-lang="zh">特性</span></th><th><span data-lang="en">Instance</span><span data-lang="zh">实例</span></th><th><span data-lang="en">Class (static)</span><span data-lang="zh">类（static）</span></th></tr>
+      <tr><td><span data-lang="en">Belongs to</span><span data-lang="zh">归属</span></td><td><span data-lang="en">Each object</span><span data-lang="zh">每个对象</span></td><td><span data-lang="en">The class itself</span><span data-lang="zh">类本身</span></td></tr>
+      <tr><td><span data-lang="en">Accessed via</span><span data-lang="zh">访问方式</span></td><td><code>obj.method()</code></td><td><code>ClassName.method()</code></td></tr>
+      <tr><td><span data-lang="en">Can use instance vars?</span><span data-lang="zh">能使用实例变量吗？</span></td><td><span data-lang="en">Yes</span><span data-lang="zh">可以</span></td><td><span data-lang="en">No (unless passed an instance)</span><span data-lang="zh">不能（除非传入一个实例）</span></td></tr>
     </table>
   </div>
 
   <div class="concept-box green">
-    <strong>final Keyword</strong>
-    A variable declared <code>final</code> cannot be reassigned after initialization. Often combined with <code>static</code> for constants: <code>public static final double PI = 3.14159;</code>
+    <strong data-lang="en">final Keyword</strong>
+    <strong data-lang="zh">final 关键字</strong>
+    <span data-lang="en">A variable declared <code>final</code> cannot be reassigned after initialization. Often combined with <code>static</code> for constants: <code>public static final double PI = 3.14159;</code></span>
+    <span data-lang="zh">声明为 <code>final</code> 的变量在初始化之后不能再被赋值。常与 <code>static</code> 组合来定义常量：<code>public static final double PI = 3.14159;</code></span>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">Can a <code>static</code> method directly access an instance variable?</div>
+    <div class="quiz-q" data-lang="en">Can a <code>static</code> method directly access an instance variable?</div>
+    <div class="quiz-q" data-lang="zh"><code>static</code> 方法可以直接访问实例变量吗？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Yes, always</div>
-      <div class="quiz-opt" data-idx="1">No, it needs an instance passed as a parameter</div>
-      <div class="quiz-opt" data-idx="2">Only if the variable is public</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Yes, always</span><span data-lang="zh">可以，总是可以</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">No, it needs an instance passed as a parameter</span><span data-lang="zh">不可以，需要把一个实例作为形参传入</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Only if the variable is public</span><span data-lang="zh">只有当变量是 public 时才行</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Static methods have no implicit object (<code>this</code>), so they can only access instance data through an explicit object reference.</div>
-    <div class="quiz-explain wrong-exp">Static methods don't belong to any object, so they can't directly access instance variables. They need an object reference passed in.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Static methods have no implicit object (<code>this</code>), so they can only access instance data through an explicit object reference.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！static 方法没有隐式对象（没有 <code>this</code>），所以只能通过显式的对象引用来访问实例数据。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Static methods don't belong to any object, so they can't directly access instance variables. They need an object reference passed in.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">static 方法不属于任何对象，因此不能直接访问实例变量，需要外部传入对象引用。</div>
   </div>
 </section>
 
@@ -595,21 +713,30 @@ System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// 
 
 <!-- ═══ 3.8 ═══ -->
 <section class="section" id="s3-8">
-  <div class="section-label">Topic 3.8</div>
-  <h2>Scope and Access</h2>
+  <div class="section-label" data-lang="en">Topic 3.8</div>
+  <div class="section-label" data-lang="zh">小节 3.8</div>
+  <h2 data-lang="en">Scope and Access</h2>
+  <h2 data-lang="zh">作用域与可见性</h2>
 
-  <p><strong>Local variables</strong> are declared inside a method, constructor, or block. They exist only within that block.</p>
+  <p data-lang="en"><strong>Local variables</strong> are declared inside a method, constructor, or block. They exist only within that block.</p>
+  <p data-lang="zh"><strong>局部变量</strong>声明在方法、构造方法或代码块内部，只在该代码块中存在。</p>
 
   <div class="card">
-    <p><strong>Scope rules:</strong></p>
-    <p>Instance variables → accessible throughout the entire class.</p>
-    <p>Local variables → accessible only in the block where declared.</p>
-    <p>Parameters → local to their method/constructor.</p>
+    <p data-lang="en"><strong>Scope rules:</strong></p>
+    <p data-lang="zh"><strong>作用域规则：</strong></p>
+    <p data-lang="en">Instance variables → accessible throughout the entire class.</p>
+    <p data-lang="zh">实例变量 → 在整个类中都可访问。</p>
+    <p data-lang="en">Local variables → accessible only in the block where declared.</p>
+    <p data-lang="zh">局部变量 → 只在其声明所在的代码块内可访问。</p>
+    <p data-lang="en">Parameters → local to their method/constructor.</p>
+    <p data-lang="zh">形参 → 仅在其所属的方法/构造方法中有效。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>Name Shadowing</strong>
-    If a local variable or parameter has the <em>same name</em> as an instance variable, the local variable takes precedence inside that method. Use <code>this.variableName</code> to access the instance variable.
+    <strong data-lang="en">Name Shadowing</strong>
+    <strong data-lang="zh">名称遮蔽</strong>
+    <span data-lang="en">If a local variable or parameter has the <em>same name</em> as an instance variable, the local variable takes precedence inside that method. Use <code>this.variableName</code> to access the instance variable.</span>
+    <span data-lang="zh">如果某个局部变量或形参与实例变量<em>同名</em>，那么在该方法内部，局部变量优先生效。要访问实例变量，请使用 <code>this.variableName</code>。</span>
   </div>
 
 <pre><span class="kw">public</span> <span class="fn">Dog</span>(<span class="ty">String</span> name) {
@@ -619,7 +746,8 @@ System.out.println(rex.<span class="fn">getName</span>());  <span class="cm">// 
 }</pre>
 
   <div class="card" style="border-left:4px solid var(--accent);">
-    <div class="card-header" style="color:var(--accent);">Worked Example: Shadowing pitfall in action</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="en">Worked Example: Shadowing pitfall in action</div>
+    <div class="card-header" style="color:var(--accent);" data-lang="zh">例题：名称遮蔽陷阱实例</div>
 <pre><span class="kw">public class</span> <span class="ty">Counter</span> {
     <span class="kw">private</span> <span class="ty">int</span> count = <span class="num">100</span>;  <span class="cm">// instance variable</span>
 
@@ -636,12 +764,15 @@ c.<span class="fn">increment</span>(<span class="num">5</span>);
                   <span class="cm">// parameter starts at 5, becomes 6 (ignored)</span>
                   <span class="cm">// field starts at 100, becomes 101</span>
 System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// prints: 101</span></pre>
-    <p style="margin-top:10px"><strong>Takeaway.</strong> Without <code>this.</code>, a bare <code>count</code> inside <code>increment</code> refers to the <em>parameter</em>. The field is reachable only via <code>this.count</code>. This is the most common cause of "constructor doesn't seem to work" bugs.</p>
+    <p data-lang="en" style="margin-top:10px"><strong>Takeaway.</strong> Without <code>this.</code>, a bare <code>count</code> inside <code>increment</code> refers to the <em>parameter</em>. The field is reachable only via <code>this.count</code>. This is the most common cause of "constructor doesn't seem to work" bugs.</p>
+    <p data-lang="zh" style="margin-top:10px"><strong>要点。</strong>在 <code>increment</code> 内部，如果不加 <code>this.</code>，光写 <code>count</code> 指的是<em>形参</em>。字段只能通过 <code>this.count</code> 才能访问。这是"构造方法好像没生效"这类 bug 最常见的原因。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>AP Trap: Silent Shadowing</strong>
-    Shadowing compiles cleanly, the compiler never warns you. The bug manifests at runtime as "the field never changed". On the AP MCQ, watch for parameter names that match field names; if the method body doesn't use <code>this.</code>, the field is untouched.
+    <strong data-lang="en">AP Trap: Silent Shadowing</strong>
+    <strong data-lang="zh">AP 陷阱：无声的名称遮蔽</strong>
+    <span data-lang="en">Shadowing compiles cleanly, the compiler never warns you. The bug manifests at runtime as "the field never changed". On the AP MCQ, watch for parameter names that match field names; if the method body doesn't use <code>this.</code>, the field is untouched.</span>
+    <span data-lang="zh">名称遮蔽能正常编译通过，编译器永远不会发出警告。bug 表现在运行时是"字段始终没变"。在 AP 选择题中，要盯住与字段同名的形参；如果方法体没用 <code>this.</code>，那么字段就没被改动过。</span>
   </div>
 </section>
 
@@ -649,15 +780,21 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 
 <!-- ═══ 3.9 ═══ -->
 <section class="section" id="s3-9">
-  <div class="section-label">Topic 3.9</div>
-  <h2>this Keyword</h2>
+  <div class="section-label" data-lang="en">Topic 3.9</div>
+  <div class="section-label" data-lang="zh">小节 3.9</div>
+  <h2 data-lang="en">this Keyword</h2>
+  <h2 data-lang="zh">this 关键字</h2>
 
-  <p>Inside an instance method or constructor, <code>this</code> is a reference to the <strong>current object</strong>, the object whose method is being called.</p>
+  <p data-lang="en">Inside an instance method or constructor, <code>this</code> is a reference to the <strong>current object</strong>, the object whose method is being called.</p>
+  <p data-lang="zh">在实例方法或构造方法内部，<code>this</code> 是指向<strong>当前对象</strong>的引用，即被调用方法所属的那个对象。</p>
 
   <div class="card">
-    <p><strong>Common uses of <code>this</code>:</strong></p>
-    <p>1. Disambiguate instance variables from parameters with the same name.</p>
-    <p>2. Pass the current object as an argument to another method.</p>
+    <p data-lang="en"><strong>Common uses of <code>this</code>:</strong></p>
+    <p data-lang="zh"><strong><code>this</code> 的常见用法：</strong></p>
+    <p data-lang="en">1. Disambiguate instance variables from parameters with the same name.</p>
+    <p data-lang="zh">1. 区分实例变量与同名的形参。</p>
+    <p data-lang="en">2. Pass the current object as an argument to another method.</p>
+    <p data-lang="zh">2. 把当前对象作为实参传给另一个方法。</p>
   </div>
 
 <pre><span class="kw">public void</span> <span class="fn">addToList</span>(<span class="ty">DogList</span> list) {
@@ -665,8 +802,10 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 }</pre>
 
   <div class="concept-box purple">
-    <strong>No this in static Methods</strong>
-    Since static methods aren't called on any object, they have no <code>this</code> reference. Attempting to use <code>this</code> in a static method causes a compile error.
+    <strong data-lang="en">No this in static Methods</strong>
+    <strong data-lang="zh">static 方法中没有 this</strong>
+    <span data-lang="en">Since static methods aren't called on any object, they have no <code>this</code> reference. Attempting to use <code>this</code> in a static method causes a compile error.</span>
+    <span data-lang="zh">由于 static 方法不针对任何对象调用，它们没有 <code>this</code> 引用。在 static 方法中使用 <code>this</code> 会导致编译错误。</span>
   </div>
 </section>
 
@@ -674,8 +813,10 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 
 <!-- ═══ FULL EXAMPLE ═══ -->
 <section class="section" id="full-example">
-  <div class="section-label">Worked Example</div>
-  <h2>Complete Class, BankAccount</h2>
+  <div class="section-label" data-lang="en">Worked Example</div>
+  <div class="section-label" data-lang="zh">例题</div>
+  <h2 data-lang="en">Complete Class, BankAccount</h2>
+  <h2 data-lang="zh">完整类示例：BankAccount</h2>
 
 <pre><span class="kw">public class</span> <span class="ty">BankAccount</span> {
     <span class="cm">// Class variable: tracks how many accounts exist</span>
@@ -717,8 +858,10 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 }</pre>
 
   <div class="concept-box green">
-    <strong>What to Notice</strong>
-    Private instance variables, public constructor and methods, <code>this</code> for disambiguation, a <code>static</code> variable for counting, and a <code>static</code> method to access it. This is the pattern the AP exam expects you to write for FRQ #2 (Class Design).
+    <strong data-lang="en">What to Notice</strong>
+    <strong data-lang="zh">要点</strong>
+    <span data-lang="en">Private instance variables, public constructor and methods, <code>this</code> for disambiguation, a <code>static</code> variable for counting, and a <code>static</code> method to access it. This is the pattern the AP exam expects you to write for FRQ #2 (Class Design).</span>
+    <span data-lang="zh">私有实例变量、公有构造方法与方法、用 <code>this</code> 消除歧义、用 <code>static</code> 变量计数、再用一个 <code>static</code> 方法读取它。这正是 AP 考试 FRQ #2（类设计题）希望你写出的模式。</span>
   </div>
 </section>
 
@@ -726,20 +869,27 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 
 <!-- ═══ AP FRQ PATTERNS ═══ -->
 <section class="section" id="frq-patterns">
-  <div class="section-label">AP FRQ Preview</div>
-  <h2>How Class Creation Shows Up on the AP Exam</h2>
+  <div class="section-label" data-lang="en">AP FRQ Preview</div>
+  <div class="section-label" data-lang="zh">AP FRQ 预览</div>
+  <h2 data-lang="en">How Class Creation Shows Up on the AP Exam</h2>
+  <h2 data-lang="zh">类的定义在 AP 考试中如何考</h2>
 
-  <p>The AP CSA exam has 4 Free-Response Questions. Class Creation directly underpins <strong>FRQ #2: Class Design</strong>, which appears <em>every</em> year. Knowing the rubric is half the battle, the College Board awards points for specific syntactic features, not just "correct" code.</p>
+  <p data-lang="en">The AP CSA exam has 4 Free-Response Questions. Class Creation directly underpins <strong>FRQ #2: Class Design</strong>, which appears <em>every</em> year. Knowing the rubric is half the battle, the College Board awards points for specific syntactic features, not just "correct" code.</p>
+  <p data-lang="zh">AP CSA 考试有 4 道自由回答题（FRQ）。类的定义正是 <strong>FRQ #2：类设计</strong>的核心，该题<em>每年</em>都考。熟悉评分标准已经赢了一半——College Board 给分看的是具体的语法要素，而不仅仅是"代码对了"。</p>
 
   <div class="card">
-    <p><strong>Typical FRQ #2 prompt structure:</strong></p>
-    <p style="margin-top:8px"><em>"Write a class <code>X</code> that has &lt;list of attributes&gt;. Include a constructor that &lt;assigns the attributes from parameters&gt;. Include accessor methods &lt;getName, getAge, ...&gt;, mutator methods &lt;setAge with validation&gt;, and a behavior method &lt;summary, isAvailable, ...&gt; that uses the fields."</em></p>
-    <p style="margin-top:10px">You'll write this from scratch in ~25 minutes. The class is usually 25–50 lines of code. Partial credit is rubric-driven.</p>
+    <p data-lang="en"><strong>Typical FRQ #2 prompt structure:</strong></p>
+    <p data-lang="zh"><strong>典型的 FRQ #2 题干结构：</strong></p>
+    <p data-lang="en" style="margin-top:8px"><em>"Write a class <code>X</code> that has &lt;list of attributes&gt;. Include a constructor that &lt;assigns the attributes from parameters&gt;. Include accessor methods &lt;getName, getAge, ...&gt;, mutator methods &lt;setAge with validation&gt;, and a behavior method &lt;summary, isAvailable, ...&gt; that uses the fields."</em></p>
+    <p data-lang="zh" style="margin-top:8px"><em>"编写一个类 <code>X</code>，它包含 &lt;属性清单&gt;。包含一个 &lt;从形参为属性赋值&gt; 的构造方法。包含访问器方法 &lt;getName、getAge…&gt;、修改器方法 &lt;带校验的 setAge&gt;，以及一个 &lt;summary、isAvailable…&gt; 这样的行为方法，使用各字段。"</em></p>
+    <p data-lang="en" style="margin-top:10px">You'll write this from scratch in ~25 minutes. The class is usually 25–50 lines of code. Partial credit is rubric-driven.</p>
+    <p data-lang="zh" style="margin-top:10px">你要在约 25 分钟内从零写完。整个类一般有 25–50 行代码。部分给分严格按评分标准来。</p>
   </div>
 
   <div class="concept-box green">
-    <strong>FRQ #2 Rubric, Common Point Allocations (≈9 pts total)</strong>
-    <ul style="margin: 8px 0 0 20px; line-height: 1.7;">
+    <strong data-lang="en">FRQ #2 Rubric, Common Point Allocations (≈9 pts total)</strong>
+    <strong data-lang="zh">FRQ #2 评分标准：常见给分点（共约 9 分）</strong>
+    <ul data-lang="en" style="margin: 8px 0 0 20px; line-height: 1.7;">
       <li><strong>+1–2:</strong> Class declared <code>public class X</code> with private fields</li>
       <li><strong>+1:</strong> Constructor signature matches the prompt's parameters</li>
       <li><strong>+1:</strong> All instance variables assigned in the constructor</li>
@@ -748,11 +898,21 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
       <li><strong>+1:</strong> Mutator includes any required validation (the prompt usually says "if the value is positive…")</li>
       <li><strong>+1:</strong> Defensive copy where applicable (returning an array or <code>ArrayList</code>)</li>
     </ul>
+    <ul data-lang="zh" style="margin: 8px 0 0 20px; line-height: 1.7;">
+      <li><strong>+1–2：</strong>用 <code>public class X</code> 声明类，并使用私有字段</li>
+      <li><strong>+1：</strong>构造方法的方法签名与题干给出的形参一致</li>
+      <li><strong>+1：</strong>构造方法中给所有实例变量都赋了值</li>
+      <li><strong>+1：</strong>当形参与字段同名时使用 <code>this.</code> 消除歧义</li>
+      <li><strong>+2–3：</strong>每个方法正确实现，返回类型、形参列表与方法体行为均与题目描述相符</li>
+      <li><strong>+1：</strong>修改器包含题目要求的校验（题干通常会说"如果值为正…"）</li>
+      <li><strong>+1：</strong>必要时进行防御性拷贝（当返回数组或 <code>ArrayList</code> 时）</li>
+    </ul>
   </div>
 
   <div class="concept-box red">
-    <strong>Common FRQ #2 Mistakes, Each Costs ~1 Point</strong>
-    <ul style="margin: 8px 0 0 20px; line-height: 1.7;">
+    <strong data-lang="en">Common FRQ #2 Mistakes, Each Costs ~1 Point</strong>
+    <strong data-lang="zh">FRQ #2 常见错误（每个大约扣 1 分）</strong>
+    <ul data-lang="en" style="margin: 8px 0 0 20px; line-height: 1.7;">
       <li>Public instance variables (must be <code>private</code>)</li>
       <li>Missing <code>public</code> on the constructor or on any method</li>
       <li>Constructor with a return type (e.g., <code>public void Dog(...)</code>, silently becomes a method)</li>
@@ -762,11 +922,23 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
       <li>Returning the raw array/<code>ArrayList</code> reference instead of a copy</li>
       <li>Forgetting input validation on a mutator when the prompt requires it</li>
     </ul>
+    <ul data-lang="zh" style="margin: 8px 0 0 20px; line-height: 1.7;">
+      <li>实例变量写成 public（必须是 <code>private</code>）</li>
+      <li>构造方法或某个方法漏写 <code>public</code></li>
+      <li>构造方法带返回类型（例如 <code>public void Dog(...)</code>，悄无声息地变成普通方法）</li>
+      <li>访问器返回类型写错（例如给 getter 写 <code>void</code>）</li>
+      <li>构造方法中漏给某些实例变量赋值</li>
+      <li>形参与字段同名，但没有用 <code>this.</code> 限定</li>
+      <li>直接返回数组/<code>ArrayList</code> 的原始引用而非副本</li>
+      <li>题干要求校验，却忘了在修改器中做输入校验</li>
+    </ul>
   </div>
 
   <div class="concept-box orange">
-    <strong>Time-Saver, Read the Stem Twice</strong>
-    Before writing code, underline each <em>noun</em> the prompt mentions (those are your private fields, with the types named in the prompt) and each <em>verb</em> (those are your methods, with return types and parameters derived from the prompt). Then code from your underlines, don't ad-lib fields or methods that aren't asked for, since extra unrequested code doesn't earn points and can break the rubric.
+    <strong data-lang="en">Time-Saver, Read the Stem Twice</strong>
+    <strong data-lang="zh">省时技巧：把题干读两遍</strong>
+    <span data-lang="en">Before writing code, underline each <em>noun</em> the prompt mentions (those are your private fields, with the types named in the prompt) and each <em>verb</em> (those are your methods, with return types and parameters derived from the prompt). Then code from your underlines, don't ad-lib fields or methods that aren't asked for, since extra unrequested code doesn't earn points and can break the rubric.</span>
+    <span data-lang="zh">在写代码前，把题干里的每个<em>名词</em>都划线（这些就是你的私有字段，类型用题干给出的）和每个<em>动词</em>（这些就是你的方法，返回类型和形参也都源自题干）。然后按划线的内容写代码，不要"自由发挥"出题目未要求的字段或方法——多写未要求的代码不仅不会加分，反而可能违反评分标准。</span>
   </div>
 </section>
 
@@ -774,68 +946,70 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 
 <!-- ═══ FLASHCARDS ═══ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards, Click to Flip</h2>
+  <div class="section-label" data-lang="en">Review</div>
+  <div class="section-label" data-lang="zh">复习</div>
+  <h2 data-lang="en">Flashcards, Click to Flip</h2>
+  <h2 data-lang="zh">闪卡：点击翻面</h2>
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">What is encapsulation?</div>
-      <div class="flashcard-back">Hiding implementation details from external classes using <code>private</code> access.</div>
+      <div class="flashcard-front"><span data-lang="en">What is encapsulation?</span><span data-lang="zh">什么是封装？</span></div>
+      <div class="flashcard-back"><span data-lang="en">Hiding implementation details from external classes using <code>private</code> access.</span><span data-lang="zh">用 <code>private</code> 访问权限把实现细节对外部类隐藏起来。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Accessor vs Mutator?</div>
-      <div class="flashcard-back"><strong>Accessor</strong> → returns data (getter, non-void)<br><strong>Mutator</strong> → changes data (setter, usually void)</div>
+      <div class="flashcard-front"><span data-lang="en">Accessor vs Mutator?</span><span data-lang="zh">访问器 vs 修改器？</span></div>
+      <div class="flashcard-back"><span data-lang="en"><strong>Accessor</strong> → returns data (getter, non-void)<br><strong>Mutator</strong> → changes data (setter, usually void)</span><span data-lang="zh"><strong>访问器</strong> → 返回数据（getter，非 void）<br><strong>修改器</strong> → 修改数据（setter，通常是 void）</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Default value of an <code>int</code> field?</div>
+      <div class="flashcard-front"><span data-lang="en">Default value of an <code>int</code> field?</span><span data-lang="zh"><code>int</code> 字段的默认值？</span></div>
       <div class="flashcard-back"><code>0</code></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Default value of a reference type field?</div>
+      <div class="flashcard-front"><span data-lang="en">Default value of a reference type field?</span><span data-lang="zh">引用类型字段的默认值？</span></div>
       <div class="flashcard-back"><code>null</code></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">What does <code>this</code> refer to?</div>
-      <div class="flashcard-back">The current object, the one whose method or constructor is executing.</div>
+      <div class="flashcard-front"><span data-lang="en">What does <code>this</code> refer to?</span><span data-lang="zh"><code>this</code> 指代什么？</span></div>
+      <div class="flashcard-back"><span data-lang="en">The current object, the one whose method or constructor is executing.</span><span data-lang="zh">当前对象，即正在执行其方法或构造方法的那个对象。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front"><code>static</code> variable belongs to…?</div>
-      <div class="flashcard-back">The class (shared by all instances), not any individual object.</div>
+      <div class="flashcard-front"><span data-lang="en"><code>static</code> variable belongs to…?</span><span data-lang="zh"><code>static</code> 变量属于……？</span></div>
+      <div class="flashcard-back"><span data-lang="en">The class (shared by all instances), not any individual object.</span><span data-lang="zh">类（由所有实例共享），而不是任何单个对象。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Can a static method use <code>this</code>?</div>
-      <div class="flashcard-back">No, static methods don't run on an object, so there's no <code>this</code>.</div>
+      <div class="flashcard-front"><span data-lang="en">Can a static method use <code>this</code>?</span><span data-lang="zh">static 方法可以使用 <code>this</code> 吗？</span></div>
+      <div class="flashcard-back"><span data-lang="en">No, static methods don't run on an object, so there's no <code>this</code>.</span><span data-lang="zh">不行，static 方法不针对对象运行，所以没有 <code>this</code>。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">What is name shadowing?</div>
-      <div class="flashcard-back">Local var hides the instance field of the same name.<br>Fix: use <code>this.var</code> to reach the field.</div>
+      <div class="flashcard-front"><span data-lang="en">What is name shadowing?</span><span data-lang="zh">什么是名称遮蔽？</span></div>
+      <div class="flashcard-back"><span data-lang="en">Local var hides the instance field of the same name.<br>Fix: use <code>this.var</code> to reach the field.</span><span data-lang="zh">局部变量遮蔽了同名的实例字段。<br>修复：用 <code>this.var</code> 来访问字段。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Pass-by-value for objects means…?</div>
-      <div class="flashcard-back">A copy of the <em>reference</em> is passed.<br>The method can still mutate the original object.</div>
+      <div class="flashcard-front"><span data-lang="en">Pass-by-value for objects means…?</span><span data-lang="zh">对象的按值传递是指……？</span></div>
+      <div class="flashcard-back"><span data-lang="en">A copy of the <em>reference</em> is passed.<br>The method can still mutate the original object.</span><span data-lang="zh">传入的是<em>引用</em>的副本。<br>方法仍然可以修改原始对象。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">What does <code>final</code> do?</div>
-      <div class="flashcard-back">Prevents a variable from being reassigned after initialization.</div>
+      <div class="flashcard-front"><span data-lang="en">What does <code>final</code> do?</span><span data-lang="zh"><code>final</code> 有什么作用？</span></div>
+      <div class="flashcard-back"><span data-lang="en">Prevents a variable from being reassigned after initialization.</span><span data-lang="zh">禁止变量在初始化之后被重新赋值。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Can constructors be overloaded?</div>
-      <div class="flashcard-back">Yes, multiple constructors with different parameter lists. Java picks one based on the arguments at the call site.</div>
+      <div class="flashcard-front"><span data-lang="en">Can constructors be overloaded?</span><span data-lang="zh">构造方法可以重载吗？</span></div>
+      <div class="flashcard-back"><span data-lang="en">Yes, multiple constructors with different parameter lists. Java picks one based on the arguments at the call site.</span><span data-lang="zh">可以，多个构造方法、形参列表各不相同。Java 会根据调用处的实参选择其中一个。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Should a constructor declare a return type?</div>
-      <div class="flashcard-back">No. Writing <code>void</code> or any type turns it into a regular method, not a constructor, and Java will auto-generate the default no-arg constructor.</div>
+      <div class="flashcard-front"><span data-lang="en">Should a constructor declare a return type?</span><span data-lang="zh">构造方法应该声明返回类型吗？</span></div>
+      <div class="flashcard-back"><span data-lang="en">No. Writing <code>void</code> or any type turns it into a regular method, not a constructor, and Java will auto-generate the default no-arg constructor.</span><span data-lang="zh">不应。写 <code>void</code> 或任何类型，都会把它变成普通方法而非构造方法，Java 会自动生成默认无参构造方法。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Why "defensive copy" in a getter?</div>
-      <div class="flashcard-back">If the field is mutable (array, <code>ArrayList</code>, etc.), returning the reference lets the caller mutate it. Return a copy to protect encapsulation.</div>
+      <div class="flashcard-front"><span data-lang="en">Why "defensive copy" in a getter?</span><span data-lang="zh">getter 为什么要"防御性拷贝"？</span></div>
+      <div class="flashcard-back"><span data-lang="en">If the field is mutable (array, <code>ArrayList</code>, etc.), returning the reference lets the caller mutate it. Return a copy to protect encapsulation.</span><span data-lang="zh">如果字段是可变的（数组、<code>ArrayList</code> 等），返回引用就让调用方可以修改它。返回副本以保护封装。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">Can a method reassign the caller's reference?</div>
-      <div class="flashcard-back">No. Reassigning the parameter (<code>d = new Dog(...)</code>) only changes the local copy. The caller's reference still points to the original object.</div>
+      <div class="flashcard-front"><span data-lang="en">Can a method reassign the caller's reference?</span><span data-lang="zh">方法能重新指定调用方的引用吗？</span></div>
+      <div class="flashcard-back"><span data-lang="en">No. Reassigning the parameter (<code>d = new Dog(...)</code>) only changes the local copy. The caller's reference still points to the original object.</span><span data-lang="zh">不能。给形参重新赋值（<code>d = new Dog(...)</code>）只改变本地副本。调用方的引用仍指向原对象。</span></div>
     </div></div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner">
-      <div class="flashcard-front">How are static methods called?</div>
-      <div class="flashcard-back"><code>ClassName.method()</code>, using the class name, not an object reference. e.g., <code>Math.abs(-5)</code>, <code>User.getTotalUsers()</code>.</div>
+      <div class="flashcard-front"><span data-lang="en">How are static methods called?</span><span data-lang="zh">static 方法如何调用？</span></div>
+      <div class="flashcard-back"><span data-lang="en"><code>ClassName.method()</code>, using the class name, not an object reference. e.g., <code>Math.abs(-5)</code>, <code>User.getTotalUsers()</code>.</span><span data-lang="zh"><code>ClassName.method()</code>，用类名调用，而不是对象引用。例如 <code>Math.abs(-5)</code>、<code>User.getTotalUsers()</code>。</span></div>
     </div></div>
   </div>
 </section>
@@ -844,71 +1018,88 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 
 <!-- ═══ UNIT QUIZ ═══ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 3, Practice Quiz</h2>
+  <div class="section-label" data-lang="en">Assessment</div>
+  <div class="section-label" data-lang="zh">单元小测</div>
+  <h2 data-lang="en">Unit 3, Practice Quiz</h2>
+  <h2 data-lang="zh">单元 3 练习小测</h2>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">1. Which access modifier should instance variables have for proper encapsulation?</div>
+    <div class="quiz-q" data-lang="en">1. Which access modifier should instance variables have for proper encapsulation?</div>
+    <div class="quiz-q" data-lang="zh">1. 为了正确实现封装，实例变量应当使用哪个访问修饰符？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>private</code></div>
       <div class="quiz-opt" data-idx="1"><code>public</code></div>
       <div class="quiz-opt" data-idx="2"><code>static</code></div>
       <div class="quiz-opt" data-idx="3"><code>final</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Encapsulation requires keeping instance variables <code>private</code> so only the class's own methods can access them.</div>
-    <div class="quiz-explain wrong-exp">Instance variables should be <code>private</code> for encapsulation.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Encapsulation requires keeping instance variables <code>private</code> so only the class's own methods can access them.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！封装要求把实例变量保持为 <code>private</code>，这样只有类自己的方法才能访问它们。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Instance variables should be <code>private</code> for encapsulation.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">实例变量应当是 <code>private</code> 以实现封装。</div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">2. What happens if you write no constructors in a class?</div>
+    <div class="quiz-q" data-lang="en">2. What happens if you write no constructors in a class?</div>
+    <div class="quiz-q" data-lang="zh">2. 如果你在类中一个构造方法都不写，会发生什么？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">The class cannot create objects</div>
-      <div class="quiz-opt" data-idx="1">All fields are set to <code>null</code></div>
-      <div class="quiz-opt" data-idx="2">Java provides a default no-arg constructor with default values</div>
-      <div class="quiz-opt" data-idx="3">Compile error</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The class cannot create objects</span><span data-lang="zh">该类无法创建对象</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">All fields are set to <code>null</code></span><span data-lang="zh">所有字段都被设为 <code>null</code></span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Java provides a default no-arg constructor with default values</span><span data-lang="zh">Java 提供一个无参的默认构造方法，字段使用默认值</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Compile error</span><span data-lang="zh">编译错误</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Java auto-generates a no-parameter constructor. Fields get type-based defaults: 0, 0.0, false, or null.</div>
-    <div class="quiz-explain wrong-exp">Java provides a default constructor when none is written. Fields get defaults based on type.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Java auto-generates a no-parameter constructor. Fields get type-based defaults: 0, 0.0, false, or null.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！Java 会自动生成一个无参构造方法。字段获得基于类型的默认值：0、0.0、false 或 null。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Java provides a default constructor when none is written. Fields get defaults based on type.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">当一个构造方法都没写时，Java 会提供默认构造方法。字段按类型获得默认值。</div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">3. What type of method is <code>public double getBalance()</code>?</div>
+    <div class="quiz-q" data-lang="en">3. What type of method is <code>public double getBalance()</code>?</div>
+    <div class="quiz-q" data-lang="zh">3. <code>public double getBalance()</code> 属于哪一类方法？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Mutator (void)</div>
-      <div class="quiz-opt" data-idx="1">Accessor (non-void)</div>
-      <div class="quiz-opt" data-idx="2">Constructor</div>
-      <div class="quiz-opt" data-idx="3">Static method</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Mutator (void)</span><span data-lang="zh">修改器（void）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Accessor (non-void)</span><span data-lang="zh">访问器（非 void）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Constructor</span><span data-lang="zh">构造方法</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Static method</span><span data-lang="zh">static 方法</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! It returns a value (non-void) and reads data without changing it, that's an accessor/getter.</div>
-    <div class="quiz-explain wrong-exp">A method with a return type that reads (not modifies) data is an accessor.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! It returns a value (non-void) and reads data without changing it, that's an accessor/getter.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！它返回一个值（非 void），并且只读数据不修改数据，这就是访问器/getter。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">A method with a return type that reads (not modifies) data is an accessor.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">带返回类型、只读取（不修改）数据的方法就是访问器。</div>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">4. Given <code>private static int count = 0;</code>, how is <code>count</code> shared?</div>
+    <div class="quiz-q" data-lang="en">4. Given <code>private static int count = 0;</code>, how is <code>count</code> shared?</div>
+    <div class="quiz-q" data-lang="zh">4. 给定 <code>private static int count = 0;</code>，<code>count</code> 是如何共享的？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Each object gets its own copy</div>
-      <div class="quiz-opt" data-idx="1">Only the first object can access it</div>
-      <div class="quiz-opt" data-idx="2">It cannot be changed</div>
-      <div class="quiz-opt" data-idx="3">All objects of the class share one copy</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Each object gets its own copy</span><span data-lang="zh">每个对象拥有自己的副本</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Only the first object can access it</span><span data-lang="zh">只有第一个对象可以访问</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">It cannot be changed</span><span data-lang="zh">它不能被修改</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">All objects of the class share one copy</span><span data-lang="zh">该类的所有对象共享同一份</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>static</code> means the variable belongs to the class, all objects share a single copy.</div>
-    <div class="quiz-explain wrong-exp"><code>static</code> variables are shared: one copy for the whole class, not per-object.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>static</code> means the variable belongs to the class, all objects share a single copy.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>static</code> 意味着该变量属于类，所有对象共享同一份。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en"><code>static</code> variables are shared: one copy for the whole class, not per-object.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh"><code>static</code> 变量是共享的：整个类只有一份，而不是每个对象一份。</div>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">5. Inside a constructor, <code>this.name = name;</code> does what?</div>
+    <div class="quiz-q" data-lang="en">5. Inside a constructor, <code>this.name = name;</code> does what?</div>
+    <div class="quiz-q" data-lang="zh">5. 在构造方法内部，<code>this.name = name;</code> 的作用是什么？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Assigns the parameter <code>name</code> to the instance variable <code>name</code></div>
-      <div class="quiz-opt" data-idx="1">Creates a new variable called <code>this.name</code></div>
-      <div class="quiz-opt" data-idx="2">Causes a compile error</div>
-      <div class="quiz-opt" data-idx="3">Assigns the instance variable to the parameter</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Assigns the parameter <code>name</code> to the instance variable <code>name</code></span><span data-lang="zh">把形参 <code>name</code> 赋给实例变量 <code>name</code></span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Creates a new variable called <code>this.name</code></span><span data-lang="zh">创建一个名为 <code>this.name</code> 的新变量</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Causes a compile error</span><span data-lang="zh">引发编译错误</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Assigns the instance variable to the parameter</span><span data-lang="zh">把实例变量赋给形参</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>this.name</code> refers to the instance variable, while <code>name</code> refers to the parameter. The parameter's value is stored in the field.</div>
-    <div class="quiz-explain wrong-exp"><code>this.name</code> = instance variable, <code>name</code> = parameter. The line stores the parameter value into the field.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>this.name</code> refers to the instance variable, while <code>name</code> refers to the parameter. The parameter's value is stored in the field.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>this.name</code> 指向实例变量，而 <code>name</code> 指向形参。形参的值被存入字段。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en"><code>this.name</code> = instance variable, <code>name</code> = parameter. The line stores the parameter value into the field.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh"><code>this.name</code> = 实例变量，<code>name</code> = 形参。这一行把形参的值存到字段里。</div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">6. Consider:<pre>public class Box {
+    <div class="quiz-q" data-lang="en">6. Consider:<pre>public class Box {
     private int[] contents;
     public Box(int[] items) {
         contents = items;
@@ -917,79 +1108,114 @@ System.out.println(c.<span class="fn">getCount</span>());  <span class="cm">// p
 int[] arr = {1, 2, 3};
 Box b = new Box(arr);
 arr[0] = 99;</pre>What is in <code>b</code>'s <code>contents</code> after this code runs?</div>
+    <div class="quiz-q" data-lang="zh">6. 考虑：<pre>public class Box {
+    private int[] contents;
+    public Box(int[] items) {
+        contents = items;
+    }
+}
+int[] arr = {1, 2, 3};
+Box b = new Box(arr);
+arr[0] = 99;</pre>这段代码执行后，<code>b</code> 的 <code>contents</code> 是什么？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0"><code>{1, 2, 3}</code>, the Box made a copy</div>
-      <div class="quiz-opt" data-idx="1">Compile error</div>
-      <div class="quiz-opt" data-idx="2"><code>{99, 2, 3}</code>, the Box's field aliases <code>arr</code></div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en"><code>{1, 2, 3}</code>, the Box made a copy</span><span data-lang="zh"><code>{1, 2, 3}</code>，Box 做了一份副本</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Compile error</span><span data-lang="zh">编译错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en"><code>{99, 2, 3}</code>, the Box's field aliases <code>arr</code></span><span data-lang="zh"><code>{99, 2, 3}</code>，Box 的字段是 <code>arr</code> 的别名</span></div>
       <div class="quiz-opt" data-idx="3"><code>null</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>contents = items</code> stored the caller's reference, which is the same array on the heap as <code>arr</code>. Mutating <code>arr</code> after construction is visible inside the Box. Fix: <code>contents = items.clone();</code> in the constructor.</div>
-    <div class="quiz-explain wrong-exp">Both <code>contents</code> and <code>arr</code> reference the same array. Mutating through one is visible through the other. The Box constructor needs a defensive copy (<code>items.clone()</code>) to prevent this.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>contents = items</code> stored the caller's reference, which is the same array on the heap as <code>arr</code>. Mutating <code>arr</code> after construction is visible inside the Box. Fix: <code>contents = items.clone();</code> in the constructor.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>contents = items</code> 存下了调用方的引用，它指向堆上与 <code>arr</code> 相同的数组。构造之后再修改 <code>arr</code>，在 Box 内部能看到。修复：构造方法里改为 <code>contents = items.clone();</code>。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Both <code>contents</code> and <code>arr</code> reference the same array. Mutating through one is visible through the other. The Box constructor needs a defensive copy (<code>items.clone()</code>) to prevent this.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh"><code>contents</code> 和 <code>arr</code> 指向同一个数组。通过其中一个所做的修改，通过另一个也能看到。Box 的构造方法需要做防御性拷贝（<code>items.clone()</code>）来避免这种情况。</div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">7. Given the class<pre>public class Counter {
+    <div class="quiz-q" data-lang="en">7. Given the class<pre>public class Counter {
     private static int total = 0;
     private int value;
     public Counter(int v) { value = v; total++; }
     public int getValue() { return value; }
     public static int getTotal() { return total; }
 }</pre>which of the following lines does <em>not</em> compile?</div>
+    <div class="quiz-q" data-lang="zh">7. 给定如下类：<pre>public class Counter {
+    private static int total = 0;
+    private int value;
+    public Counter(int v) { value = v; total++; }
+    public int getValue() { return value; }
+    public static int getTotal() { return total; }
+}</pre>下列哪一行<em>不能</em>通过编译？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>Counter c = new Counter(5);</code></div>
       <div class="quiz-opt" data-idx="1"><code>Counter.getValue();</code></div>
       <div class="quiz-opt" data-idx="2"><code>Counter.getTotal();</code></div>
       <div class="quiz-opt" data-idx="3"><code>new Counter(0).getValue();</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! <code>getValue()</code> is an <em>instance</em> method, it needs an object reference. <code>Counter.getValue()</code> tries to call it as a static method, which doesn't compile.</div>
-    <div class="quiz-explain wrong-exp">Static methods are called on the class. Instance methods need an object. <code>getValue()</code> is instance, so <code>Counter.getValue()</code> fails to compile.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! <code>getValue()</code> is an <em>instance</em> method, it needs an object reference. <code>Counter.getValue()</code> tries to call it as a static method, which doesn't compile.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！<code>getValue()</code> 是<em>实例</em>方法，需要对象引用。<code>Counter.getValue()</code> 把它当作 static 方法调用，不能通过编译。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Static methods are called on the class. Instance methods need an object. <code>getValue()</code> is instance, so <code>Counter.getValue()</code> fails to compile.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">static 方法用类名调用，实例方法需要对象。<code>getValue()</code> 是实例方法，所以 <code>Counter.getValue()</code> 编译失败。</div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">8. Consider:<pre>public class P {
+    <div class="quiz-q" data-lang="en">8. Consider:<pre>public class P {
     private int n;
     public P(int n) { n = n; }
     public int getN() { return n; }
 }
 System.out.println(new P(42).getN());</pre>What is printed?</div>
+    <div class="quiz-q" data-lang="zh">8. 考虑：<pre>public class P {
+    private int n;
+    public P(int n) { n = n; }
+    public int getN() { return n; }
+}
+System.out.println(new P(42).getN());</pre>会打印什么？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>42</code></div>
       <div class="quiz-opt" data-idx="1"><code>0</code></div>
-      <div class="quiz-opt" data-idx="2">Compile error</div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Compile error</span><span data-lang="zh">编译错误</span></div>
       <div class="quiz-opt" data-idx="3"><code>null</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Classic shadowing bug. Inside the constructor, <code>n = n</code> assigns the parameter <code>n</code> to <em>itself</em>, it never touches the field. The field stays at its default value <code>0</code>. Fix: <code>this.n = n;</code></div>
-    <div class="quiz-explain wrong-exp">The constructor body is <code>n = n</code>, which assigns the parameter to itself. The field is shadowed and never written, so it keeps its default value <code>0</code>. Always use <code>this.n = n</code> when names collide.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Classic shadowing bug. Inside the constructor, <code>n = n</code> assigns the parameter <code>n</code> to <em>itself</em>, it never touches the field. The field stays at its default value <code>0</code>. Fix: <code>this.n = n;</code></div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！经典的名称遮蔽 bug。在构造方法内部，<code>n = n</code> 把形参 <code>n</code> 赋给<em>它自己</em>，根本没碰字段。字段保留默认值 <code>0</code>。修复：<code>this.n = n;</code></div>
+    <div class="quiz-explain wrong-exp" data-lang="en">The constructor body is <code>n = n</code>, which assigns the parameter to itself. The field is shadowed and never written, so it keeps its default value <code>0</code>. Always use <code>this.n = n</code> when names collide.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">构造方法体是 <code>n = n</code>，把形参赋给它自己。字段被遮蔽且从未被写入，因此保留默认值 <code>0</code>。名称冲突时永远写 <code>this.n = n</code>。</div>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">9. A class has a private <code>String[] arr</code> and an accessor <code>public String[] getArr() { return arr; }</code>. What's the issue?</div>
+    <div class="quiz-q" data-lang="en">9. A class has a private <code>String[] arr</code> and an accessor <code>public String[] getArr() { return arr; }</code>. What's the issue?</div>
+    <div class="quiz-q" data-lang="zh">9. 某个类有一个 private 字段 <code>String[] arr</code>，以及访问器 <code>public String[] getArr() { return arr; }</code>。这里有什么问题？</div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">The caller can mutate the array, breaking encapsulation</div>
-      <div class="quiz-opt" data-idx="1">The method signature is invalid for arrays</div>
-      <div class="quiz-opt" data-idx="2">The method needs to be <code>static</code></div>
-      <div class="quiz-opt" data-idx="3">There is no issue, accessors should return the field directly</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The caller can mutate the array, breaking encapsulation</span><span data-lang="zh">调用方可以修改数组，从而破坏封装</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The method signature is invalid for arrays</span><span data-lang="zh">对数组而言该方法签名不合法</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The method needs to be <code>static</code></span><span data-lang="zh">该方法需要写成 <code>static</code></span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">There is no issue, accessors should return the field directly</span><span data-lang="zh">没有问题，访问器就该直接返回字段</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Returning the array reference exposes the field. Any mutation by the caller (e.g. <code>obj.getArr()[0] = 99</code>) changes the class's internal state, encapsulation is broken. Defensive fix: <code>return arr.clone();</code> for a shallow copy of the array spine. (For an array of mutable objects, you'd need a deep copy.)</div>
-    <div class="quiz-explain wrong-exp">Mutable accessors must return a copy. The AP rubric awards a defensive-copy point on FRQ #2 when the field is a mutable type like an array or <code>ArrayList</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Returning the array reference exposes the field. Any mutation by the caller (e.g. <code>obj.getArr()[0] = 99</code>) changes the class's internal state, encapsulation is broken. Defensive fix: <code>return arr.clone();</code> for a shallow copy of the array spine. (For an array of mutable objects, you'd need a deep copy.)</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！返回数组引用就把字段暴露出去了。调用方任何修改（例如 <code>obj.getArr()[0] = 99</code>）都会改动类的内部状态，封装被破坏。防御性修复：<code>return arr.clone();</code>，对数组主体做一次浅拷贝。（如果是可变对象数组，还需要深拷贝。）</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Mutable accessors must return a copy. The AP rubric awards a defensive-copy point on FRQ #2 when the field is a mutable type like an array or <code>ArrayList</code>.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">返回可变对象的访问器必须返回副本。当字段是数组或 <code>ArrayList</code> 这类可变类型时，FRQ #2 评分标准会为防御性拷贝给一分。</div>
   </div>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section class="section" id="ap-practice">
-  <div class="section-label">Next Step</div>
-  <h2>AP-Style Practice Problems</h2>
+  <div class="section-label" data-lang="en">Next Step</div>
+  <div class="section-label" data-lang="zh">下一步</div>
+  <h2 data-lang="en">AP-Style Practice Problems</h2>
+  <h2 data-lang="zh">AP 风格练习题</h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">15 exam-level multiple-choice questions (3 medium · 12 hard), code-trace heavy with realistic distractors and fully worked solutions. Built for top-score prep — go here after you've worked through the notes and the in-page quiz above.</p>
+    <p data-lang="en" style="margin-bottom:16px;">15 exam-level multiple-choice questions (3 medium · 12 hard), code-trace heavy with realistic distractors and fully worked solutions. Built for top-score prep — go here after you've worked through the notes and the in-page quiz above.</p>
+    <p data-lang="zh" style="margin-bottom:16px;">15 道考试难度选择题（3 道中等 · 12 道困难），偏重代码追踪，干扰项贴近真题，每题都有完整解析。为冲击满分而设——把上面的讲义和小测过完之后再来。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_3_Class_Creation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_3_Class_Creation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
 
 <div style="text-align:center;padding:40px 0;color:var(--text-secondary);font-size:.85rem;">
   <p style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:4px;color:var(--text);">鼎睿学苑 · Dingrui Scholars</p>
-  <p>AP Computer Science A, Unit 3: Class Creation · 2026 Edition</p>
+  <p data-lang="en">AP Computer Science A, Unit 3: Class Creation · 2026 Edition</p>
+  <p data-lang="zh">AP 计算机科学 A，单元 3：类的定义 · 2026 版</p>
 </div>
 
 </main>
@@ -997,8 +1223,36 @@ System.out.println(new P(42).getN());</pre>What is printed?</div>
 <button class="backtotop" id="backtotop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'':'dark');document.getElementById('themeToggle').textContent=d?'Dark':'Light'}
-if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeToggle').textContent='Light'}
+// ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  setThemeBtnLabel(!isDark);
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  setThemeBtnLabel(true);
+}
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') {
+    document.body.classList.add('lang-zh');
+  }
+} catch(e) {}
+
 function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
 window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;const p=h>0?(window.scrollY/h)*100:0;document.getElementById('progressFill').style.width=p+'%';const btt=document.getElementById('backtotop');if(btt)btt.classList.toggle('show',window.scrollY>400)});
 const sections=document.querySelectorAll('.section');const tocLinks=document.querySelectorAll('.sidebar a');

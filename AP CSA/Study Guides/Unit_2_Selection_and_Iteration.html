@@ -34,7 +34,7 @@
   --shadow-lg: 0 4px 12px rgba(60,30,30,0.10);
   --radius: 10px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 280px;
@@ -328,58 +328,71 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ─── BILINGUAL TOGGLE ─── */
+/* body-scoped selectors raise specificity to (0,2,1) so they beat .section h2 (0,1,1) etc. */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="topnav">
   <div class="topnav-brand">
     <span class="unit-badge">UNIT 2</span>
-    Selection &amp; Iteration
+    <span data-lang="en">Selection &amp; Iteration</span><span data-lang="zh">选择与循环</span>
   </div>
   <div class="topnav-actions">
-    <a class="back-link" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="back-link" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s2-1">2.1 Selection &amp; Repetition</a>
-  <a href="#s2-2">2.2 Boolean Expressions</a>
-  <a href="#s2-3">2.3 if Statements</a>
-  <a href="#s2-4">2.4 Nested if</a>
-  <a href="#s2-5">2.5 Compound Booleans</a>
-  <a href="#s2-6">2.6 Comparing Booleans</a>
-  <a href="#s2-7">2.7 while Loops</a>
-  <a href="#s2-8">2.8 for Loops</a>
-  <a href="#s2-9">2.9 Standard Algorithms</a>
-  <a href="#s2-10">2.10 String Algorithms</a>
-  <a href="#s2-11">2.11 Nested Iteration</a>
-  <a href="#s2-12">2.12 Run-Time Analysis</a>
-  <a href="#mcq-patterns">MCQ Patterns</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s2-1"><span data-lang="en">2.1 Selection &amp; Repetition</span><span data-lang="zh">2.1 选择与重复</span></a>
+  <a href="#s2-2"><span data-lang="en">2.2 Boolean Expressions</span><span data-lang="zh">2.2 布尔表达式</span></a>
+  <a href="#s2-3"><span data-lang="en">2.3 if Statements</span><span data-lang="zh">2.3 if 语句</span></a>
+  <a href="#s2-4"><span data-lang="en">2.4 Nested if</span><span data-lang="zh">2.4 嵌套 if</span></a>
+  <a href="#s2-5"><span data-lang="en">2.5 Compound Booleans</span><span data-lang="zh">2.5 复合布尔表达式</span></a>
+  <a href="#s2-6"><span data-lang="en">2.6 Comparing Booleans</span><span data-lang="zh">2.6 比较布尔表达式</span></a>
+  <a href="#s2-7"><span data-lang="en">2.7 while Loops</span><span data-lang="zh">2.7 while 循环</span></a>
+  <a href="#s2-8"><span data-lang="en">2.8 for Loops</span><span data-lang="zh">2.8 for 循环</span></a>
+  <a href="#s2-9"><span data-lang="en">2.9 Standard Algorithms</span><span data-lang="zh">2.9 标准算法</span></a>
+  <a href="#s2-10"><span data-lang="en">2.10 String Algorithms</span><span data-lang="zh">2.10 字符串算法</span></a>
+  <a href="#s2-11"><span data-lang="en">2.11 Nested Iteration</span><span data-lang="zh">2.11 嵌套循环</span></a>
+  <a href="#s2-12"><span data-lang="en">2.12 Run-Time Analysis</span><span data-lang="zh">2.12 运行时分析</span></a>
+  <a href="#mcq-patterns"><span data-lang="en">MCQ Patterns</span><span data-lang="zh">选择题套路</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
 </aside>
 
 <main class="main-wrap" id="main-content">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Computer Science A · 鼎睿学苑</div>
-  <h1>Unit 2: Selection<br>and Iteration</h1>
-  <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto;">
+  <h1 data-lang="en">Unit 2: Selection<br>and Iteration</h1>
+  <h1 data-lang="zh">单元 2：选择<br>与循环</h1>
+  <p data-lang="en" style="color: var(--text-secondary); max-width: 580px; margin: 0 auto;">
     Decision-making with conditionals, repetition with loops, Boolean logic, De Morgan's Law, and essential standard algorithms.
   </p>
+  <p data-lang="zh" style="color: var(--text-secondary); max-width: 580px; margin: 0 auto;">
+    用条件语句做决策、用循环做重复、布尔逻辑、德摩根定律，以及必会的标准算法。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">25–35% of AP Exam</span>
-    <span class="chip chip-green">~29–31 Class Periods</span>
-    <span class="chip chip-teal">12 Topics</span>
+    <span class="chip chip-maroon" data-lang="en">25–35% of AP Exam</span>
+    <span class="chip chip-maroon" data-lang="zh">占 AP 考试 25–35%</span>
+    <span class="chip chip-green" data-lang="en">~29–31 Class Periods</span>
+    <span class="chip chip-green" data-lang="zh">约 29–31 课时</span>
+    <span class="chip chip-teal" data-lang="en">12 Topics</span>
+    <span class="chip chip-teal" data-lang="zh">12 个小节</span>
   </div>
 </section>
 
@@ -388,18 +401,29 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.1 ═══════════════ -->
 <section class="section" id="s2-1">
   <div class="section-label">Topic 2.1</div>
-  <h2>Algorithms with Selection and Repetition</h2>
+  <h2 data-lang="en">Algorithms with Selection and Repetition</h2>
+  <h2 data-lang="zh">含选择与重复的算法</h2>
 
-  <p>Algorithms are built from three fundamental blocks:</p>
-  <div class="card">
+  <p data-lang="en">Algorithms are built from three fundamental blocks:</p>
+  <p data-lang="zh">算法由三个基本结构构成：</p>
+  <div class="card" data-lang="en">
     <p><strong>Sequencing</strong>, steps execute in order, one at a time.</p>
     <p><strong>Selection</strong>, a choice is made based on a true/false decision.</p>
     <p><strong>Repetition</strong>, a process repeats until a desired outcome is reached.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <p><strong>顺序</strong>：各步骤依次执行，每次执行一条。</p>
+    <p><strong>选择</strong>：根据 true/false 判断做出分支。</p>
+    <p><strong>重复</strong>：某段过程不断重复，直到达成目标。</p>
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Key Insight</strong>
     The <em>order</em> in which sequencing, selection, and repetition are combined determines the algorithm's outcome.
+  </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>关键点</strong>
+    顺序、选择、重复这三种结构<em>组合的次序</em>决定了算法的最终结果。
   </div>
 </section>
 
@@ -408,10 +432,12 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.2 ═══════════════ -->
 <section class="section" id="s2-2">
   <div class="section-label">Topic 2.2</div>
-  <h2>Boolean Expressions</h2>
+  <h2 data-lang="en">Boolean Expressions</h2>
+  <h2 data-lang="zh">布尔表达式</h2>
 
-  <h3>Relational Operators</h3>
-  <div class="table-wrap">
+  <h3 data-lang="en">Relational Operators</h3>
+  <h3 data-lang="zh">关系运算符</h3>
+  <div class="table-wrap" data-lang="en">
     <table>
       <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
       <tr><td><code>==</code></td><td>Equal to</td><td><code>5 == 5</code></td><td><code>true</code></td></tr>
@@ -422,10 +448,25 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
       <tr><td><code>&gt;=</code></td><td>Greater than or equal</td><td><code>6 &gt;= 5</code></td><td><code>true</code></td></tr>
     </table>
   </div>
+  <div class="table-wrap" data-lang="zh">
+    <table>
+      <tr><th>运算符</th><th>含义</th><th>示例</th><th>结果</th></tr>
+      <tr><td><code>==</code></td><td>等于</td><td><code>5 == 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>!=</code></td><td>不等于</td><td><code>5 != 3</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&lt;</code></td><td>小于</td><td><code>3 &lt; 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&gt;</code></td><td>大于</td><td><code>3 &gt; 5</code></td><td><code>false</code></td></tr>
+      <tr><td><code>&lt;=</code></td><td>小于等于</td><td><code>5 &lt;= 5</code></td><td><code>true</code></td></tr>
+      <tr><td><code>&gt;=</code></td><td>大于等于</td><td><code>6 &gt;= 5</code></td><td><code>true</code></td></tr>
+    </table>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong>== with Reference Types</strong>
     For primitives, <code>==</code> compares <em>values</em>. For objects (reference types), <code>==</code> compares <em>references</em> (memory addresses), not content. Use <code>.equals()</code> to compare object content.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>引用类型上的 ==</strong>
+    对基本类型，<code>==</code> 比较<em>值</em>。对对象（引用类型），<code>==</code> 比较的是<em>引用</em>（内存地址），不是内容。要比较对象内容请用 <code>.equals()</code>。
   </div>
 
 <pre><span class="ty">int</span> a = <span class="num">10</span>;
@@ -437,38 +478,49 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.3 ═══════════════ -->
 <section class="section" id="s2-3">
   <div class="section-label">Topic 2.3</div>
-  <h2>if Statements</h2>
+  <h2 data-lang="en">if Statements</h2>
+  <h2 data-lang="zh">if 语句</h2>
 
-  <p>Selection statements alter the sequential flow of execution based on a Boolean condition.</p>
+  <p data-lang="en">Selection statements alter the sequential flow of execution based on a Boolean condition.</p>
+  <p data-lang="zh">选择语句根据布尔条件改变顺序执行的流程。</p>
 
-  <h3>One-Way Selection (if)</h3>
+  <h3 data-lang="en">One-Way Selection (if)</h3>
+  <h3 data-lang="zh">单分支选择（if）</h3>
 <pre><span class="kw">if</span> (score &gt;= <span class="num">90</span>) {
     <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Excellent!"</span>);
 }
 <span class="cm">// Body runs ONLY if condition is true</span></pre>
 
-  <h3>Two-Way Selection (if-else)</h3>
+  <h3 data-lang="en">Two-Way Selection (if-else)</h3>
+  <h3 data-lang="zh">双分支选择（if-else）</h3>
 <pre><span class="kw">if</span> (age &gt;= <span class="num">18</span>) {
     <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Adult"</span>);
 } <span class="kw">else</span> {
     <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Minor"</span>);
 }</pre>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong>Remember</strong>
     In an <code>if-else</code>, exactly one branch always executes, never both, never neither.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong>记住</strong>
+    在 <code>if-else</code> 中，必定恰好执行一个分支，不会两个都执行，也不会两个都跳过。
+  </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">What prints when <code>x = 7</code>?<br><code>if (x &gt; 10) print("A"); else print("B");</code></div>
+    <div class="quiz-q" data-lang="en">What prints when <code>x = 7</code>?<br><code>if (x &gt; 10) print("A"); else print("B");</code></div>
+    <div class="quiz-q" data-lang="zh">当 <code>x = 7</code> 时输出什么？<br><code>if (x &gt; 10) print("A"); else print("B");</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">A</div>
       <div class="quiz-opt" data-idx="1">B</div>
       <div class="quiz-opt" data-idx="2">AB</div>
-      <div class="quiz-opt" data-idx="3">Nothing</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Nothing</span><span data-lang="zh">无输出</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! 7 is not greater than 10, so the else branch executes and prints "B".</div>
-    <div class="quiz-explain wrong-exp">Since 7 &gt; 10 is false, the else branch runs → "B".</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! 7 is not greater than 10, so the else branch executes and prints "B".</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！7 不大于 10，所以 else 分支执行，输出 "B"。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Since 7 &gt; 10 is false, the else branch runs → "B".</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">因为 7 &gt; 10 为假，else 分支执行 → "B"。</div>
   </div>
 </section>
 
@@ -477,11 +529,14 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.4 ═══════════════ -->
 <section class="section" id="s2-4">
   <div class="section-label">Topic 2.4</div>
-  <h2>Nested if Statements</h2>
+  <h2 data-lang="en">Nested if Statements</h2>
+  <h2 data-lang="zh">嵌套 if 语句</h2>
 
-  <p>An <code>if</code> inside another <code>if</code>. The inner condition is only checked if the outer condition is <code>true</code>.</p>
+  <p data-lang="en">An <code>if</code> inside another <code>if</code>. The inner condition is only checked if the outer condition is <code>true</code>.</p>
+  <p data-lang="zh">一个 <code>if</code> 嵌套在另一个 <code>if</code> 中。只有外层条件为 <code>true</code> 时，才会检查内层条件。</p>
 
-  <h3>if-else-if (Multiway Selection)</h3>
+  <h3 data-lang="en">if-else-if (Multiway Selection)</h3>
+  <h3 data-lang="zh">if-else-if（多分支选择）</h3>
 <pre><span class="kw">if</span> (grade &gt;= <span class="num">90</span>) {
     letter = <span class="str">"A"</span>;
 } <span class="kw">else if</span> (grade &gt;= <span class="num">80</span>) {
@@ -492,9 +547,13 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     letter = <span class="str">"F"</span>;
 }</pre>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong>Multiway Selection Rule</strong>
     Only the <em>first</em> branch whose condition is <code>true</code> executes. All remaining branches are skipped. If none are true and there's a trailing <code>else</code>, that <code>else</code> runs.
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong>多分支选择规则</strong>
+    只有<em>第一个</em>条件为 <code>true</code> 的分支会执行，后面的分支全部跳过。若所有条件都不成立且末尾有 <code>else</code>，则执行该 <code>else</code>。
   </div>
 </section>
 
@@ -503,10 +562,12 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.5 ═══════════════ -->
 <section class="section" id="s2-5">
   <div class="section-label">Topic 2.5</div>
-  <h2>Compound Boolean Expressions</h2>
+  <h2 data-lang="en">Compound Boolean Expressions</h2>
+  <h2 data-lang="zh">复合布尔表达式</h2>
 
-  <h3>Logical Operators</h3>
-  <div class="table-wrap">
+  <h3 data-lang="en">Logical Operators</h3>
+  <h3 data-lang="zh">逻辑运算符</h3>
+  <div class="table-wrap" data-lang="en">
     <table>
       <tr><th>Operator</th><th>Name</th><th>True When</th></tr>
       <tr><td><code>!</code></td><td>NOT</td><td><code>!a</code> is true when <code>a</code> is false</td></tr>
@@ -514,8 +575,17 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
       <tr><td><code>||</code></td><td>OR</td><td><code>a || b</code> is true when <em>at least one</em> is true</td></tr>
     </table>
   </div>
+  <div class="table-wrap" data-lang="zh">
+    <table>
+      <tr><th>运算符</th><th>名称</th><th>何时为真</th></tr>
+      <tr><td><code>!</code></td><td>非（NOT）</td><td>当 <code>a</code> 为假时，<code>!a</code> 为真</td></tr>
+      <tr><td><code>&amp;&amp;</code></td><td>与（AND）</td><td>当<em>两者</em>都为真时，<code>a &amp;&amp; b</code> 才为真</td></tr>
+      <tr><td><code>||</code></td><td>或（OR）</td><td>当<em>至少一个</em>为真时，<code>a || b</code> 为真</td></tr>
+    </table>
+  </div>
 
-  <p><strong>Precedence:</strong> <code>!</code> → <code>&amp;&amp;</code> → <code>||</code></p>
+  <p data-lang="en"><strong>Precedence:</strong> <code>!</code> → <code>&amp;&amp;</code> → <code>||</code></p>
+  <p data-lang="zh"><strong>优先级：</strong> <code>!</code> → <code>&amp;&amp;</code> → <code>||</code></p>
 
 <pre><span class="ty">int</span> age = <span class="num">20</span>;
 <span class="ty">boolean</span> hasID = <span class="kw">true</span>;
@@ -523,15 +593,22 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     <span class="ty">System</span>.out.<span class="fn">println</span>(<span class="str">"Entry allowed"</span>);
 }</pre>
 
-  <div class="concept-box teal">
+  <div class="concept-box teal" data-lang="en">
     <strong>Short-Circuit Evaluation</strong>
     Java stops evaluating as soon as the result is determined:
     with <code>&amp;&amp;</code>, if the first operand is <code>false</code>, the second is never checked.
     With <code>||</code>, if the first operand is <code>true</code>, the second is skipped.
     This is important when the second expression could cause an error (e.g., null check).
   </div>
+  <div class="concept-box teal" data-lang="zh">
+    <strong>短路求值</strong>
+    Java 一旦能确定整体结果就停止继续求值：
+    对 <code>&amp;&amp;</code>，若左操作数为 <code>false</code>，右操作数不再检查；
+    对 <code>||</code>，若左操作数为 <code>true</code>，右操作数被跳过。
+    当右侧表达式可能抛错时（例如 null 判空），这点尤其重要。
+  </div>
 
-  <div class="card" style="border-left:4px solid var(--accent);">
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="en">
     <div class="card-header" style="color:var(--accent);">Worked Example: Short-circuit guards against NullPointerException</div>
 <pre><span class="ty">String</span> s = <span class="kw">null</span>;
 
@@ -542,10 +619,25 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <span class="kw">if</span> (s != <span class="kw">null</span> &amp;&amp; s.<span class="fn">length</span>() &gt; <span class="num">0</span>) { ... }</pre>
     <p style="margin-top:10px"><strong>Why this matters on the exam:</strong> AP MCQs love to put the null check second, so the dangerous method call happens first. Short-circuit evaluation only saves you if the guard is on the left side of <code>&amp;&amp;</code>. Same idea with <code>||</code>: put the "safe" condition that can short-circuit out the dangerous one on the left.</p>
   </div>
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="zh">
+    <div class="card-header" style="color:var(--accent);">例题：用短路求值防止 NullPointerException</div>
+<pre><span class="ty">String</span> s = <span class="kw">null</span>;
 
-  <div class="concept-box red">
+<span class="cm">// 顺序错误：先执行 s.length()，抛出 NullPointerException</span>
+<span class="kw">if</span> (s.<span class="fn">length</span>() &gt; <span class="num">0</span> &amp;&amp; s != <span class="kw">null</span>) { ... }
+
+<span class="cm">// 顺序正确：先判空，短路会跳过 s.length()</span>
+<span class="kw">if</span> (s != <span class="kw">null</span> &amp;&amp; s.<span class="fn">length</span>() &gt; <span class="num">0</span>) { ... }</pre>
+    <p style="margin-top:10px"><strong>为什么这在考试上重要：</strong> AP 选择题最爱把 null 判断放在第二位，让危险的方法调用先发生。只有把守卫条件放在 <code>&amp;&amp;</code> 的<em>左侧</em>，短路求值才能救你。<code>||</code> 同理：把可以短路掉危险条件的"安全"判断放在左边。</p>
+  </div>
+
+  <div class="concept-box red" data-lang="en">
     <strong>AP Trap: Operator precedence inside if-conditions</strong>
     <code>!</code> binds tightest, then <code>&amp;&amp;</code>, then <code>||</code>. So <code>a || b &amp;&amp; c</code> is read as <code>a || (b &amp;&amp; c)</code>, not <code>(a || b) &amp;&amp; c</code>. When in doubt, add parentheses. The AP rubric does not subtract points for "redundant" parentheses, but it does subtract for wrong groupings.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>AP 陷阱：if 条件中的运算符优先级</strong>
+    <code>!</code> 结合最紧，其次是 <code>&amp;&amp;</code>，最后是 <code>||</code>。所以 <code>a || b &amp;&amp; c</code> 应解读为 <code>a || (b &amp;&amp; c)</code>，而不是 <code>(a || b) &amp;&amp; c</code>。拿不准时就加括号。AP 评分标准不会因"多余"的括号扣分，但会因错误分组扣分。
   </div>
 </section>
 
@@ -554,10 +646,12 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ TOPIC 2.6 ═══════════════ -->
 <section class="section" id="s2-6">
   <div class="section-label">Topic 2.6</div>
-  <h2>Comparing Boolean Expressions</h2>
+  <h2 data-lang="en">Comparing Boolean Expressions</h2>
+  <h2 data-lang="zh">比较布尔表达式</h2>
 
-  <h3>De Morgan's Law</h3>
-  <div class="qref">
+  <h3 data-lang="en">De Morgan's Law</h3>
+  <h3 data-lang="zh">德摩根定律</h3>
+  <div class="qref" data-lang="en">
     <div class="qref-title">De Morgan's Law, Must Memorize</div>
     <div class="table-wrap">
       <table>
@@ -568,14 +662,34 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     </div>
     <p style="margin-top:10px; font-size: 0.88rem; color: var(--text-secondary);">Flip the operator (<code>&amp;&amp;</code> ↔ <code>||</code>) and negate each operand.</p>
   </div>
+  <div class="qref" data-lang="zh">
+    <div class="qref-title">德摩根定律，必背</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>原式</th><th>等价式</th></tr>
+        <tr><td><code>!(a &amp;&amp; b)</code></td><td><code>!a || !b</code></td></tr>
+        <tr><td><code>!(a || b)</code></td><td><code>!a &amp;&amp; !b</code></td></tr>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size: 0.88rem; color: var(--text-secondary);">翻转运算符（<code>&amp;&amp;</code> ↔ <code>||</code>），并对每个操作数取反。</p>
+  </div>
 
-  <h3>Comparing Objects</h3>
-  <div class="table-wrap">
+  <h3 data-lang="en">Comparing Objects</h3>
+  <h3 data-lang="zh">比较对象</h3>
+  <div class="table-wrap" data-lang="en">
     <table>
       <tr><th>Comparison</th><th>What It Checks</th></tr>
       <tr><td><code>obj1 == obj2</code></td><td>Same <em>reference</em> (same object in memory)?</td></tr>
       <tr><td><code>obj1.equals(obj2)</code></td><td>Same <em>content</em> (as defined by the class)?</td></tr>
       <tr><td><code>obj == null</code></td><td>Does the reference point to no object?</td></tr>
+    </table>
+  </div>
+  <div class="table-wrap" data-lang="zh">
+    <table>
+      <tr><th>比较方式</th><th>检查什么</th></tr>
+      <tr><td><code>obj1 == obj2</code></td><td>同一个<em>引用</em>（内存中是同一个对象）？</td></tr>
+      <tr><td><code>obj1.equals(obj2)</code></td><td>相同<em>内容</em>（由类自行定义）？</td></tr>
+      <tr><td><code>obj == null</code></td><td>引用是否未指向任何对象？</td></tr>
     </table>
   </div>
 
@@ -585,18 +699,21 @@ a == b        <span class="cm">// false, different objects</span>
 a.<span class="fn">equals</span>(b)  <span class="cm">// true , same content</span></pre>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">Which is equivalent to <code>!(x &gt; 5 &amp;&amp; y &lt; 3)</code>?</div>
+    <div class="quiz-q" data-lang="en">Which is equivalent to <code>!(x &gt; 5 &amp;&amp; y &lt; 3)</code>?</div>
+    <div class="quiz-q" data-lang="zh">下列哪个与 <code>!(x &gt; 5 &amp;&amp; y &lt; 3)</code> 等价？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>x &gt; 5 || y &lt; 3</code></div>
       <div class="quiz-opt" data-idx="1"><code>!x &gt; 5 &amp;&amp; !y &lt; 3</code></div>
       <div class="quiz-opt" data-idx="2"><code>x &lt;= 5 || y &gt;= 3</code></div>
       <div class="quiz-opt" data-idx="3"><code>x &lt;= 5 &amp;&amp; y &gt;= 3</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! By De Morgan's: negate each condition and flip &amp;&amp; to ||. <code>!(x&gt;5)</code> → <code>x&lt;=5</code>, <code>!(y&lt;3)</code> → <code>y&gt;=3</code>, and <code>&amp;&amp;</code> → <code>||</code>.</div>
-    <div class="quiz-explain wrong-exp">Apply De Morgan's: negate each part and flip the operator. <code>!(x&gt;5 &amp;&amp; y&lt;3)</code> = <code>x&lt;=5 || y&gt;=3</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! By De Morgan's: negate each condition and flip &amp;&amp; to ||. <code>!(x&gt;5)</code> → <code>x&lt;=5</code>, <code>!(y&lt;3)</code> → <code>y&gt;=3</code>, and <code>&amp;&amp;</code> → <code>||</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！由德摩根定律：对每个条件取反，并把 &amp;&amp; 翻成 ||。<code>!(x&gt;5)</code> → <code>x&lt;=5</code>，<code>!(y&lt;3)</code> → <code>y&gt;=3</code>，<code>&amp;&amp;</code> → <code>||</code>。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Apply De Morgan's: negate each part and flip the operator. <code>!(x&gt;5 &amp;&amp; y&lt;3)</code> = <code>x&lt;=5 || y&gt;=3</code>.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">运用德摩根定律：每一项取反，运算符翻转。<code>!(x&gt;5 &amp;&amp; y&lt;3)</code> = <code>x&lt;=5 || y&gt;=3</code>。</div>
   </div>
 
-  <div class="card" style="border-left:4px solid var(--accent);">
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="en">
     <div class="card-header" style="color:var(--accent);">Worked Example: Negating a compound condition</div>
     <p>You want the opposite of "the student passed AND submitted on time".</p>
 <pre><span class="cm">// Original</span>
@@ -606,10 +723,24 @@ passed &amp;&amp; onTime
 !passed || !onTime</pre>
     <p style="margin-top:10px">Read aloud: "the student failed OR was late". That matches your intuition for the opposite of "passed AND on time". If it doesn't match intuition, you probably flipped the operator without negating the operands (or vice versa).</p>
   </div>
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="zh">
+    <div class="card-header" style="color:var(--accent);">例题：对复合条件取反</div>
+    <p>你想得到"学生通过 AND 按时提交"的反面。</p>
+<pre><span class="cm">// 原式</span>
+passed &amp;&amp; onTime
 
-  <div class="concept-box red">
+<span class="cm">// 取反（用德摩根：&amp;&amp; 翻成 ||，每一项取反）</span>
+!passed || !onTime</pre>
+    <p style="margin-top:10px">读出来：「学生不及格 OR 没按时」。这正是"通过 AND 按时"的反面，与直觉一致。如果不一致，说明你只翻转了运算符却没把操作数取反（或者反过来）。</p>
+  </div>
+
+  <div class="concept-box red" data-lang="en">
     <strong>AP Trap: Negating relational operators</strong>
     The negation of <code>x &gt; 5</code> is <code>x &lt;= 5</code>, not <code>x &lt; 5</code>. Always include the boundary value in the negation. Same logic: <code>!(x == 5)</code> becomes <code>x != 5</code>; <code>!(x &gt;= 5)</code> becomes <code>x &lt; 5</code>. Drop the "or equal" half exactly once per flip.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>AP 陷阱：关系运算符取反</strong>
+    <code>x &gt; 5</code> 的反是 <code>x &lt;= 5</code>，不是 <code>x &lt; 5</code>。取反时必须把边界值包进来。同理：<code>!(x == 5)</code> 变为 <code>x != 5</code>；<code>!(x &gt;= 5)</code> 变为 <code>x &lt; 5</code>。每次翻转时，"等于"那一半要恰好被丢掉一次。
   </div>
 </section>
 
@@ -618,9 +749,11 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.7 ═══════════════ -->
 <section class="section" id="s2-7">
   <div class="section-label">Topic 2.7</div>
-  <h2>while Loops</h2>
+  <h2 data-lang="en">while Loops</h2>
+  <h2 data-lang="zh">while 循环</h2>
 
-  <p><strong>Iteration</strong> repeats code zero or more times while a condition is true.</p>
+  <p data-lang="en"><strong>Iteration</strong> repeats code zero or more times while a condition is true.</p>
+  <p data-lang="zh"><strong>循环</strong>会在条件为真时重复执行代码零次或多次。</p>
 
 <pre><span class="ty">int</span> count = <span class="num">1</span>;
 <span class="kw">while</span> (count &lt;= <span class="num">5</span>) {
@@ -629,22 +762,34 @@ passed &amp;&amp; onTime
 }
 <span class="cm">// Output: 1 2 3 4 5</span></pre>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>while Loop Mechanics</strong>
     The Boolean expression is checked <em>before</em> each iteration (including the first). If it's initially <code>false</code>, the body never executes.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>while 循环的执行机制</strong>
+    每次迭代<em>之前</em>（包括第一次）都会检查布尔表达式。如果一开始就为 <code>false</code>，循环体一次都不会执行。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong>Infinite Loop</strong>
     If the condition never becomes <code>false</code>, the loop runs forever. Always ensure the loop body changes something that will eventually make the condition <code>false</code>.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>死循环</strong>
+    如果条件永远不会变成 <code>false</code>，循环就会一直跑下去。务必确保循环体中有某个变化最终能让条件为 <code>false</code>。
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong>Off-by-One Errors</strong>
     Using <code>&lt;</code> vs <code>&lt;=</code> (or starting at 0 vs 1) can cause a loop to run one time too many or too few. Trace carefully!
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong>差一错误（Off-by-One）</strong>
+    用 <code>&lt;</code> 还是 <code>&lt;=</code>（或从 0 起还是从 1 起）会让循环多跑一次或少跑一次。一定要仔细追踪！
+  </div>
 
-  <div class="card" style="border-left:4px solid var(--accent);">
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="en">
     <div class="card-header" style="color:var(--accent);">Worked Example: Tracing a while loop</div>
 <pre><span class="ty">int</span> n = <span class="num">20</span>;
 <span class="ty">int</span> count = <span class="num">0</span>;
@@ -664,10 +809,34 @@ passed &amp;&amp; onTime
     </table>
     <p style="margin-top:10px">Final answer: <code>count = 4</code>. This is essentially counting how many times you can halve <code>n</code> until it drops to 1, which is roughly <code>log<sub>2</sub>(n)</code>. A common AP pattern.</p>
   </div>
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="zh">
+    <div class="card-header" style="color:var(--accent);">例题：追踪 while 循环</div>
+<pre><span class="ty">int</span> n = <span class="num">20</span>;
+<span class="ty">int</span> count = <span class="num">0</span>;
+<span class="kw">while</span> (n &gt; <span class="num">1</span>) {
+    n /= <span class="num">2</span>;
+    count++;
+}
+<span class="cm">// count 等于多少？</span></pre>
+    <p style="margin-top:10px"><strong>逐步追踪：</strong></p>
+    <table>
+      <tr><th>第几次迭代</th><th>循环体前的 <code>n</code></th><th><code>n/=2</code> 后的 <code>n</code></th><th>之后的 <code>count</code></th></tr>
+      <tr><td>1</td><td>20</td><td>10</td><td>1</td></tr>
+      <tr><td>2</td><td>10</td><td>5</td><td>2</td></tr>
+      <tr><td>3</td><td>5</td><td>2</td><td>3</td></tr>
+      <tr><td>4</td><td>2</td><td>1</td><td>4</td></tr>
+      <tr><td>（再次检查）</td><td>1</td><td>（退出循环，1 &gt; 1 为假）</td><td>4</td></tr>
+    </table>
+    <p style="margin-top:10px">最终答案：<code>count = 4</code>。这本质上是数 <code>n</code> 能被对半除多少次才降到 1，大约是 <code>log<sub>2</sub>(n)</code>。这是 AP 常见的套路。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong>AP Trap: Reading the variable's value at the wrong moment</strong>
     When tracing a loop, distinguish "value at the start of iteration" from "value after the body". The condition is checked at the <em>start</em> of each pass, using the value from the end of the previous pass. Forgetting this is the most common source of off-by-one mistakes in MCQ traces.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>AP 陷阱：在错误的时间点读变量值</strong>
+    追踪循环时，要区分"迭代开始时的值"与"循环体执行完后的值"。条件是在每一轮的<em>开头</em>检查的，使用的是上一轮末尾的那个值。忽视这一点是选择题追踪中差一错误的最常见原因。
   </div>
 </section>
 
@@ -676,16 +845,18 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.8 ═══════════════ -->
 <section class="section" id="s2-8">
   <div class="section-label">Topic 2.8</div>
-  <h2>for Loops</h2>
+  <h2 data-lang="en">for Loops</h2>
+  <h2 data-lang="zh">for 循环</h2>
 
-  <p>A <code>for</code> loop packs initialization, condition, and update into one header.</p>
+  <p data-lang="en">A <code>for</code> loop packs initialization, condition, and update into one header.</p>
+  <p data-lang="zh">一个 <code>for</code> 循环把初始化、条件和更新打包在同一个头部里。</p>
 
 <pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
     <span class="ty">System</span>.out.<span class="fn">print</span>(i + <span class="str">" "</span>);
 }
 <span class="cm">// Output: 0 1 2 3 4</span></pre>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <p><strong>Three Parts of a for Header:</strong></p>
     <p><code>for (</code><em>initialization</em><code>;</code> <em>Boolean expression</em><code>;</code> <em>update</em><code>)</code></p>
     <p style="margin-top:8px; font-size:0.9rem; color: var(--text-secondary);">
@@ -694,10 +865,23 @@ passed &amp;&amp; onTime
       3. <strong>Update</strong> runs after each iteration's body, before the next check.
     </p>
   </div>
+  <div class="card" data-lang="zh">
+    <p><strong>for 头部的三个部分：</strong></p>
+    <p><code>for (</code><em>初始化</em><code>;</code> <em>布尔表达式</em><code>;</code> <em>更新</em><code>)</code></p>
+    <p style="margin-top:8px; font-size:0.9rem; color: var(--text-secondary);">
+      1. <strong>初始化</strong>：循环开始前只执行一次。<br>
+      2. <strong>条件</strong>：每次迭代前都会检查。<br>
+      3. <strong>更新</strong>：每次循环体之后、下一次检查之前执行。
+    </p>
+  </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong>for ↔ while Equivalence</strong>
     Every <code>for</code> loop can be rewritten as a <code>while</code> loop and vice versa:
+  </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong>for 与 while 的等价性</strong>
+    每个 <code>for</code> 循环都能改写成 <code>while</code> 循环，反之亦然：
   </div>
 <pre><span class="cm">// Equivalent while loop:</span>
 <span class="ty">int</span> i = <span class="num">0</span>;
@@ -707,18 +891,21 @@ passed &amp;&amp; onTime
 }</pre>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">How many times does this loop iterate?<br><code>for (int i = 3; i &lt; 8; i++)</code></div>
+    <div class="quiz-q" data-lang="en">How many times does this loop iterate?<br><code>for (int i = 3; i &lt; 8; i++)</code></div>
+    <div class="quiz-q" data-lang="zh">这个循环会迭代多少次？<br><code>for (int i = 3; i &lt; 8; i++)</code></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">5 times (i = 3, 4, 5, 6, 7)</div>
-      <div class="quiz-opt" data-idx="1">6 times (i = 3, 4, 5, 6, 7, 8)</div>
-      <div class="quiz-opt" data-idx="2">4 times (i = 3, 4, 5, 6)</div>
-      <div class="quiz-opt" data-idx="3">Infinite loop</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">5 times (i = 3, 4, 5, 6, 7)</span><span data-lang="zh">5 次（i = 3, 4, 5, 6, 7）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">6 times (i = 3, 4, 5, 6, 7, 8)</span><span data-lang="zh">6 次（i = 3, 4, 5, 6, 7, 8）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">4 times (i = 3, 4, 5, 6)</span><span data-lang="zh">4 次（i = 3, 4, 5, 6）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Infinite loop</span><span data-lang="zh">死循环</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! i starts at 3 and runs while i &lt; 8, so it takes values 3, 4, 5, 6, 7 → 5 iterations.</div>
-    <div class="quiz-explain wrong-exp">Count: 3, 4, 5, 6, 7 (stops before 8 because condition is &lt; not &lt;=). That's 5 iterations.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! i starts at 3 and runs while i &lt; 8, so it takes values 3, 4, 5, 6, 7 → 5 iterations.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！i 从 3 起，当 i &lt; 8 时执行，因此取值 3, 4, 5, 6, 7 → 5 次迭代。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Count: 3, 4, 5, 6, 7 (stops before 8 because condition is &lt; not &lt;=). That's 5 iterations.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">数一遍：3, 4, 5, 6, 7（因为条件是 &lt; 而不是 &lt;=，所以到 8 之前就停了）。共 5 次。</div>
   </div>
 
-  <div class="card" style="border-left:4px solid var(--accent);">
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="en">
     <div class="card-header" style="color:var(--accent);">Worked Example: Final value of a loop variable</div>
 <pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
     <span class="cm">// body runs with i = 0, 1, 2, 3, 4</span>
@@ -727,10 +914,23 @@ passed &amp;&amp; onTime
     <p style="margin-top:10px">The update step runs after every iteration, including the one that fails the condition. So <code>i</code> reaches the first value that makes the condition false. With <code>i &lt; 5</code>, that's <code>i = 5</code>. With <code>i &lt;= 5</code>, it's <code>i = 6</code>.</p>
     <p style="margin-top:8px"><strong>Catch:</strong> when <code>i</code> is declared inside the for header (<code>for (int i = 0; ...)</code>), it goes out of scope when the loop ends, and you can't read its final value. Declare <code>i</code> outside the header if you need it afterward.</p>
   </div>
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="zh">
+    <div class="card-header" style="color:var(--accent);">例题：循环变量的最终值</div>
+<pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    <span class="cm">// 循环体在 i = 0, 1, 2, 3, 4 下执行</span>
+}
+<span class="cm">// 循环结束后，i = 5（仅当 i 在 for 头部之外声明时可见）</span></pre>
+    <p style="margin-top:10px">更新步骤在每次迭代后都会执行，包括让条件变假的那一次。所以 <code>i</code> 会到达让条件首次为假的那个值。<code>i &lt; 5</code> 时是 <code>i = 5</code>；<code>i &lt;= 5</code> 时是 <code>i = 6</code>。</p>
+    <p style="margin-top:8px"><strong>注意：</strong> 当 <code>i</code> 在 for 头部内声明（<code>for (int i = 0; ...)</code>）时，循环结束后 <code>i</code> 就出了作用域，你拿不到它的最终值。如果之后还要读它，就把 <code>i</code> 在头部外声明。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong>AP Trap: Iteration count formulas</strong>
     For <code>for (int i = a; i &lt; b; i++)</code> with <code>a &lt; b</code>: iteration count is <code>b - a</code>. For <code>i &lt;= b</code>: count is <code>b - a + 1</code>. For <code>i += step</code>: count is <code>ceil((b - a) / step)</code>. Memorising the closed-form is faster than tracing the full loop on a timed MCQ.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>AP 陷阱：迭代次数公式</strong>
+    对于 <code>for (int i = a; i &lt; b; i++)</code>（<code>a &lt; b</code>）：次数为 <code>b - a</code>。对 <code>i &lt;= b</code>：次数为 <code>b - a + 1</code>。对 <code>i += step</code>：次数为 <code>ceil((b - a) / step)</code>。在限时选择题里，背公式比完整追踪更快。
   </div>
 </section>
 
@@ -739,34 +939,41 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.9 ═══════════════ -->
 <section class="section" id="s2-9">
   <div class="section-label">Topic 2.9</div>
-  <h2>Implementing Selection and Iteration Algorithms</h2>
+  <h2 data-lang="en">Implementing Selection and Iteration Algorithms</h2>
+  <h2 data-lang="zh">实现选择与循环算法</h2>
 
-  <p>The AP exam expects you to recognize and implement these <strong>standard algorithms</strong>:</p>
+  <p data-lang="en">The AP exam expects you to recognize and implement these <strong>standard algorithms</strong>:</p>
+  <p data-lang="zh">AP 考试要求你能识别并实现下列<strong>标准算法</strong>：</p>
 
-  <h3>1. Divisibility Check</h3>
+  <h3 data-lang="en">1. Divisibility Check</h3>
+  <h3 data-lang="zh">1. 整除性检查</h3>
 <pre><span class="kw">if</span> (num % <span class="num">3</span> == <span class="num">0</span>) {
     <span class="ty">System</span>.out.<span class="fn">println</span>(num + <span class="str">" is divisible by 3"</span>);
 }</pre>
 
-  <h3>2. Extract Digits</h3>
+  <h3 data-lang="en">2. Extract Digits</h3>
+  <h3 data-lang="zh">2. 提取数位</h3>
 <pre><span class="ty">int</span> n = <span class="num">4827</span>;
 <span class="kw">while</span> (n &gt; <span class="num">0</span>) {
     <span class="ty">int</span> digit = n % <span class="num">10</span>;  <span class="cm">// last digit: 7, 2, 8, 4</span>
     n /= <span class="num">10</span>;
 }</pre>
 
-  <h3>3. Count (Frequency)</h3>
+  <h3 data-lang="en">3. Count (Frequency)</h3>
+  <h3 data-lang="zh">3. 计数（频次）</h3>
 <pre><span class="ty">int</span> count = <span class="num">0</span>;
 <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">100</span>; i++) {
     <span class="kw">if</span> (i % <span class="num">7</span> == <span class="num">0</span>) count++;
 }</pre>
 
-  <h3>4. Min / Max</h3>
+  <h3 data-lang="en">4. Min / Max</h3>
+  <h3 data-lang="zh">4. 最小值 / 最大值</h3>
 <pre><span class="ty">int</span> max = Integer.MIN_VALUE;
 <span class="cm">// As you process values:</span>
 <span class="kw">if</span> (val &gt; max) max = val;</pre>
 
-  <h3>5. Sum / Average</h3>
+  <h3 data-lang="en">5. Sum / Average</h3>
+  <h3 data-lang="zh">5. 求和 / 平均</h3>
 <pre><span class="ty">int</span> sum = <span class="num">0</span>;
 <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= n; i++) {
     sum += i;
@@ -779,11 +986,14 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.10 ═══════════════ -->
 <section class="section" id="s2-10">
   <div class="section-label">Topic 2.10</div>
-  <h2>Implementing String Algorithms</h2>
+  <h2 data-lang="en">Implementing String Algorithms</h2>
+  <h2 data-lang="zh">实现字符串算法</h2>
 
-  <p>Standard string algorithms you should know:</p>
+  <p data-lang="en">Standard string algorithms you should know:</p>
+  <p data-lang="zh">你应当掌握的标准字符串算法：</p>
 
-  <h3>Traverse &amp; Check Substrings</h3>
+  <h3 data-lang="en">Traverse &amp; Check Substrings</h3>
+  <h3 data-lang="zh">遍历并检查子串</h3>
 <pre><span class="ty">String</span> str = <span class="str">"hello world"</span>;
 <span class="ty">int</span> vowels = <span class="num">0</span>;
 <span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">0</span>; i &lt; str.<span class="fn">length</span>(); i++) {
@@ -793,7 +1003,8 @@ passed &amp;&amp; onTime
     }
 }</pre>
 
-  <h3>Reverse a String</h3>
+  <h3 data-lang="en">Reverse a String</h3>
+  <h3 data-lang="zh">反转字符串</h3>
 <pre><span class="ty">String</span> original = <span class="str">"java"</span>;
 <span class="ty">String</span> reversed = <span class="str">""</span>;
 <span class="kw">for</span> (<span class="ty">int</span> i = original.<span class="fn">length</span>() - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--) {
@@ -801,9 +1012,13 @@ passed &amp;&amp; onTime
 }
 <span class="cm">// reversed = "avaj"</span></pre>
 
-  <div class="concept-box teal">
+  <div class="concept-box teal" data-lang="en">
     <strong>Pattern: Single-Character Substring</strong>
     Use <code>str.substring(i, i + 1)</code> to get the character at index <code>i</code> as a <code>String</code>. This is the standard approach on the AP exam.
+  </div>
+  <div class="concept-box teal" data-lang="zh">
+    <strong>套路：取单字符子串</strong>
+    用 <code>str.substring(i, i + 1)</code> 把索引 <code>i</code> 处的字符作为 <code>String</code> 取出来。这是 AP 考试上的标准做法。
   </div>
 </section>
 
@@ -812,9 +1027,11 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.11 ═══════════════ -->
 <section class="section" id="s2-11">
   <div class="section-label">Topic 2.11</div>
-  <h2>Nested Iteration</h2>
+  <h2 data-lang="en">Nested Iteration</h2>
+  <h2 data-lang="zh">嵌套循环</h2>
 
-  <p>A loop inside another loop. The <strong>inner loop completes all its iterations</strong> for each single iteration of the outer loop.</p>
+  <p data-lang="en">A loop inside another loop. The <strong>inner loop completes all its iterations</strong> for each single iteration of the outer loop.</p>
+  <p data-lang="zh">循环里再套循环。外层每跑一次，<strong>内层都要把它的所有迭代跑完</strong>。</p>
 
 <pre><span class="kw">for</span> (<span class="ty">int</span> row = <span class="num">1</span>; row &lt;= <span class="num">3</span>; row++) {
     <span class="kw">for</span> (<span class="ty">int</span> col = <span class="num">1</span>; col &lt;= <span class="num">4</span>; col++) {
@@ -827,12 +1044,16 @@ passed &amp;&amp; onTime
 // * * * *
 // * * * *</span></pre>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong>Counting Iterations</strong>
     If the outer loop runs <em>m</em> times and the inner loop runs <em>n</em> times, the inner body executes <strong>m × n</strong> times total. Above: 3 × 4 = 12 stars.
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong>计算迭代次数</strong>
+    如果外层跑 <em>m</em> 次、内层跑 <em>n</em> 次，那么内层体总共执行 <strong>m × n</strong> 次。上例：3 × 4 = 12 个星号。
+  </div>
 
-  <div class="card" style="border-left:4px solid var(--accent);">
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="en">
     <div class="card-header" style="color:var(--accent);">Worked Example: When the inner loop depends on the outer index</div>
 <pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">4</span>; i++) {
     <span class="kw">for</span> (<span class="ty">int</span> j = <span class="num">1</span>; j &lt;= i; j++) {
@@ -847,10 +1068,29 @@ passed &amp;&amp; onTime
 ****</pre>
     <p style="margin-top:10px">When <code>j</code>'s upper bound depends on <code>i</code>, you can't use the <code>m × n</code> shortcut. Total stars: <code>1 + 2 + 3 + 4 = 10</code>, not <code>4 × 4 = 16</code>. The shortcut only works when the inner loop bounds are constant across outer iterations.</p>
   </div>
+  <div class="card" style="border-left:4px solid var(--accent);" data-lang="zh">
+    <div class="card-header" style="color:var(--accent);">例题：内层循环依赖外层索引</div>
+<pre><span class="kw">for</span> (<span class="ty">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">4</span>; i++) {
+    <span class="kw">for</span> (<span class="ty">int</span> j = <span class="num">1</span>; j &lt;= i; j++) {
+        <span class="ty">System</span>.out.<span class="fn">print</span>(<span class="str">"*"</span>);
+    }
+    <span class="ty">System</span>.out.<span class="fn">println</span>();
+}</pre>
+    <p style="margin-top:10px"><strong>输出：</strong></p>
+<pre>*
+**
+***
+****</pre>
+    <p style="margin-top:10px">当 <code>j</code> 的上界依赖于 <code>i</code> 时，不能套用 <code>m × n</code> 的捷径。星号总数：<code>1 + 2 + 3 + 4 = 10</code>，不是 <code>4 × 4 = 16</code>。这个捷径只在内层边界对每次外层迭代都不变时才适用。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong>AP Trap: Print vs println in nested loops</strong>
     The newline behaviour is the most common nested-loop MCQ trap. <code>println</code> after the inner loop produces a row-and-column grid; <code>println</code> inside the inner loop puts each star on its own line; missing the <code>println</code> entirely produces one long row. Re-read where the newlines actually fall before picking an answer.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong>AP 陷阱：嵌套循环里的 print 与 println</strong>
+    换行的位置是嵌套循环选择题最常见的陷阱。<code>println</code> 放在内层循环<em>之后</em>会形成行列网格；放在内层循环<em>之内</em>会让每个星号自占一行；完全没有 <code>println</code> 则全部挤成一长串。选答案前先把换行实际出现的位置看清楚。
   </div>
 </section>
 
@@ -859,16 +1099,26 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ TOPIC 2.12 ═══════════════ -->
 <section class="section" id="s2-12">
   <div class="section-label">Topic 2.12</div>
-  <h2>Informal Run-Time Analysis</h2>
+  <h2 data-lang="en">Informal Run-Time Analysis</h2>
+  <h2 data-lang="zh">非形式化运行时分析</h2>
 
-  <p>A <strong>statement execution count</strong> is the number of times a statement runs. You determine this by tracing the loop.</p>
+  <p data-lang="en">A <strong>statement execution count</strong> is the number of times a statement runs. You determine this by tracing the loop.</p>
+  <p data-lang="zh"><strong>语句执行次数</strong>指一条语句被执行的次数。通过追踪循环来确定它。</p>
 
-  <div class="table-wrap">
+  <div class="table-wrap" data-lang="en">
     <table>
       <tr><th>Structure</th><th>Execution Count Pattern</th></tr>
       <tr><td>Single loop (1 to n)</td><td>Body runs <strong>n</strong> times</td></tr>
       <tr><td>Nested loop (n × n)</td><td>Inner body runs <strong>n²</strong> times</td></tr>
       <tr><td>Nested loop (n × m)</td><td>Inner body runs <strong>n × m</strong> times</td></tr>
+    </table>
+  </div>
+  <div class="table-wrap" data-lang="zh">
+    <table>
+      <tr><th>结构</th><th>执行次数公式</th></tr>
+      <tr><td>单层循环（1 到 n）</td><td>循环体执行 <strong>n</strong> 次</td></tr>
+      <tr><td>嵌套循环（n × n）</td><td>内层体执行 <strong>n²</strong> 次</td></tr>
+      <tr><td>嵌套循环（n × m）</td><td>内层体执行 <strong>n × m</strong> 次</td></tr>
     </table>
   </div>
 
@@ -880,15 +1130,18 @@ passed &amp;&amp; onTime
 }</pre>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">How many times does <code>"*"</code> print?<br><code>for (int i = 0; i &lt; 4; i++)<br>&nbsp;&nbsp;for (int j = 0; j &lt; 4; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("*");</code></div>
+    <div class="quiz-q" data-lang="en">How many times does <code>"*"</code> print?<br><code>for (int i = 0; i &lt; 4; i++)<br>&nbsp;&nbsp;for (int j = 0; j &lt; 4; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("*");</code></div>
+    <div class="quiz-q" data-lang="zh"><code>"*"</code> 会被打印多少次？<br><code>for (int i = 0; i &lt; 4; i++)<br>&nbsp;&nbsp;for (int j = 0; j &lt; 4; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("*");</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">4</div>
       <div class="quiz-opt" data-idx="1">8</div>
       <div class="quiz-opt" data-idx="2">16</div>
       <div class="quiz-opt" data-idx="3">12</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! 4 × 4 = 16 total executions of the inner print statement.</div>
-    <div class="quiz-explain wrong-exp">Nested loops: outer runs 4 times, inner runs 4 times each → 4 × 4 = 16.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! 4 × 4 = 16 total executions of the inner print statement.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！4 × 4 = 16，内层 print 总共执行 16 次。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Nested loops: outer runs 4 times, inner runs 4 times each → 4 × 4 = 16.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">嵌套循环：外层 4 次，内层每次 4 次 → 4 × 4 = 16。</div>
   </div>
 </section>
 
@@ -897,37 +1150,63 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ MCQ PATTERNS PREVIEW ═══════════════ -->
 <section class="section" id="mcq-patterns">
   <div class="section-label">AP MCQ Preview</div>
-  <h2>Unit 2 MCQ Patterns That Show Up Every Year</h2>
-  <p>Unit 2 is the most-tested unit on the AP CSA MCQ section. Most questions fall into a handful of recurring shapes. Recognising the shape first lets you trace less and answer faster.</p>
+  <h2 data-lang="en">Unit 2 MCQ Patterns That Show Up Every Year</h2>
+  <h2 data-lang="zh">单元 2 每年都考的选择题套路</h2>
+  <p data-lang="en">Unit 2 is the most-tested unit on the AP CSA MCQ section. Most questions fall into a handful of recurring shapes. Recognising the shape first lets you trace less and answer faster.</p>
+  <p data-lang="zh">单元 2 是 AP CSA 选择题中考得最多的单元。大多数题都落在几种固定的套路里。先认出套路，就能少追踪、快出答案。</p>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 1: Iteration counting (closed form vs trace)</strong>
     The question gives a for-loop header and asks how many times the body runs. For <code>i &lt; b</code> starting at <code>a</code>, the count is <code>b - a</code>. For <code>i &lt;= b</code>, it's <code>b - a + 1</code>. For <code>i += step</code>, count is <code>ceil((b - a) / step)</code>. Skip the trace if you can spot the form. (See Topic 2.8.)
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 1：迭代计数（公式法 vs 追踪法）</strong>
+    题目给出 for 循环头部，问循环体执行多少次。从 <code>a</code> 起的 <code>i &lt; b</code>：次数为 <code>b - a</code>。<code>i &lt;= b</code>：次数为 <code>b - a + 1</code>。<code>i += step</code>：次数为 <code>ceil((b - a) / step)</code>。能套公式就不要全程追踪。（见 2.8 节）
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 2: Short-circuit and null safety</strong>
     Compound conditions with a null guard. The correct AP answer always has the null check on the left of <code>&amp;&amp;</code> (or the "safe" condition that short-circuits). Order-of-operands MCQs are common. (See Topic 2.5.)
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 2：短路求值与 null 安全</strong>
+    带 null 判空的复合条件。正确的 AP 答案永远把 null 判断放在 <code>&amp;&amp;</code> 的左侧（或者把能短路掉危险条件的"安全"判断放在左侧）。操作数顺序型选择题很常见。（见 2.5 节）
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 3: De Morgan's transforms</strong>
     "Which expression is equivalent to <code>!(...)</code>?" The mechanical answer: flip <code>&amp;&amp;</code> ↔ <code>||</code> and negate each operand. Watch the relational flips: <code>!(x &gt; 5)</code> is <code>x &lt;= 5</code>, not <code>x &lt; 5</code>. (See Topic 2.6.)
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 3：德摩根变换</strong>
+    "下列哪个与 <code>!(...)</code> 等价？" 机械做法：把 <code>&amp;&amp;</code> ↔ <code>||</code> 翻过来，并对每个操作数取反。注意关系运算符的翻转：<code>!(x &gt; 5)</code> 是 <code>x &lt;= 5</code>，不是 <code>x &lt; 5</code>。（见 2.6 节）
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 4: Nested loop with dependent inner bound</strong>
     Inner loop runs <code>j ≤ i</code> or <code>j &lt; n - i</code>. Total iterations form a triangular sum (<code>1 + 2 + ... + n = n(n+1)/2</code>) or a reversed triangle. The <code>m × n</code> shortcut does not apply. (See Topic 2.11.)
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 4：内层边界依赖外层的嵌套循环</strong>
+    内层循环跑 <code>j ≤ i</code> 或 <code>j &lt; n - i</code>。总迭代次数构成三角和（<code>1 + 2 + ... + n = n(n+1)/2</code>）或反向三角。这种情况下 <code>m × n</code> 的捷径不适用。（见 2.11 节）
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 5: Off-by-one boundary picking</strong>
     Two answer choices differ only by <code>&lt;</code> vs <code>&lt;=</code>. Trace the boundary cases: what happens at the first and last value? The "correct" formula usually pairs with the inclusive or exclusive endpoint of the problem statement. (See Topic 2.7.)
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 5：差一边界的选项辨别</strong>
+    两个选项只在 <code>&lt;</code> 与 <code>&lt;=</code> 上有差别。追踪边界情况：第一个值和最后一个值各会怎样？"正确"公式通常与题面里端点是闭还是开相匹配。（见 2.7 节）
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong>Pattern 6: Trace-the-output for nested print/println</strong>
     Where the newlines fall determines whether you see a triangle, a square, or a single long line. Mark every <code>println</code> with a forced line break and trace iteration by iteration. (See Topic 2.11.)
+  </div>
+  <div class="concept-box" data-lang="zh">
+    <strong>套路 6：嵌套 print/println 的输出追踪</strong>
+    换行落在哪里决定了你看到的是三角形、正方形还是一长行。把每个 <code>println</code> 都标记为强制换行，然后一轮一轮地追踪。（见 2.11 节）
   </div>
 </section>
 
@@ -936,66 +1215,67 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
   <div class="section-label">Review</div>
-  <h2>Flashcards, Click to Flip</h2>
+  <h2 data-lang="en">Flashcards, Click to Flip</h2>
+  <h2 data-lang="zh">闪卡，点击翻面</h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">3 building blocks of algorithms?</div>
-        <div class="flashcard-back">Sequencing, Selection, Repetition</div>
+        <div class="flashcard-front"><span data-lang="en">3 building blocks of algorithms?</span><span data-lang="zh">算法的 3 个基本结构？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Sequencing, Selection, Repetition</span><span data-lang="zh">顺序、选择、重复</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">De Morgan's: <code>!(a &amp;&amp; b)</code> = ?</div>
+        <div class="flashcard-front"><span data-lang="en">De Morgan's: <code>!(a &amp;&amp; b)</code> = ?</span><span data-lang="zh">德摩根：<code>!(a &amp;&amp; b)</code> = ?</span></div>
         <div class="flashcard-back"><code>!a || !b</code></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">De Morgan's: <code>!(a || b)</code> = ?</div>
+        <div class="flashcard-front"><span data-lang="en">De Morgan's: <code>!(a || b)</code> = ?</span><span data-lang="zh">德摩根：<code>!(a || b)</code> = ?</span></div>
         <div class="flashcard-back"><code>!a &amp;&amp; !b</code></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is short-circuit evaluation?</div>
-        <div class="flashcard-back"><code>false &amp;&amp; ...</code> → skips 2nd<br><code>true || ...</code> → skips 2nd<br>Result already determined.</div>
+        <div class="flashcard-front"><span data-lang="en">What is short-circuit evaluation?</span><span data-lang="zh">什么是短路求值？</span></div>
+        <div class="flashcard-back"><span data-lang="en"><code>false &amp;&amp; ...</code> → skips 2nd<br><code>true || ...</code> → skips 2nd<br>Result already determined.</span><span data-lang="zh"><code>false &amp;&amp; ...</code> → 跳过右侧<br><code>true || ...</code> → 跳过右侧<br>结果已经确定。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Infinite loop cause?</div>
-        <div class="flashcard-back">The Boolean condition never becomes <code>false</code>.</div>
+        <div class="flashcard-front"><span data-lang="en">Infinite loop cause?</span><span data-lang="zh">死循环的成因？</span></div>
+        <div class="flashcard-back"><span data-lang="en">The Boolean condition never becomes <code>false</code>.</span><span data-lang="zh">布尔条件永远不会变成 <code>false</code>。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Off-by-one error?</div>
-        <div class="flashcard-back">Loop runs one time too many or too few (e.g., using <code>&lt;</code> vs <code>&lt;=</code>).</div>
+        <div class="flashcard-front"><span data-lang="en">Off-by-one error?</span><span data-lang="zh">差一错误？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Loop runs one time too many or too few (e.g., using <code>&lt;</code> vs <code>&lt;=</code>).</span><span data-lang="zh">循环多跑或少跑一次（如 <code>&lt;</code> 与 <code>&lt;=</code> 用错）。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front"><code>==</code> vs <code>.equals()</code>?</div>
-        <div class="flashcard-back"><code>==</code> → compares references<br><code>.equals()</code> → compares content</div>
+        <div class="flashcard-back"><span data-lang="en"><code>==</code> → compares references<br><code>.equals()</code> → compares content</span><span data-lang="zh"><code>==</code> → 比较引用<br><code>.equals()</code> → 比较内容</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">for loop execution order?</div>
-        <div class="flashcard-back"><strong>Init</strong> → Check → Body → Update<br>↻ Check → Body → Update …</div>
+        <div class="flashcard-front"><span data-lang="en">for loop execution order?</span><span data-lang="zh">for 循环的执行顺序？</span></div>
+        <div class="flashcard-back"><span data-lang="en"><strong>Init</strong> → Check → Body → Update<br>↻ Check → Body → Update …</span><span data-lang="zh"><strong>初始化</strong> → 检查 → 循环体 → 更新<br>↻ 检查 → 循环体 → 更新 …</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Nested loop: 5 outer × 3 inner = ?</div>
-        <div class="flashcard-back">Inner body runs <strong>15</strong> times total.</div>
+        <div class="flashcard-front"><span data-lang="en">Nested loop: 5 outer × 3 inner = ?</span><span data-lang="zh">嵌套循环：外层 5 × 内层 3 = ?</span></div>
+        <div class="flashcard-back"><span data-lang="en">Inner body runs <strong>15</strong> times total.</span><span data-lang="zh">内层体共执行 <strong>15</strong> 次。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">How to get last digit of n?</div>
+        <div class="flashcard-front"><span data-lang="en">How to get last digit of n?</span><span data-lang="zh">如何取 n 的末位数字？</span></div>
         <div class="flashcard-back"><code>n % 10</code></div>
       </div>
     </div>
@@ -1007,84 +1287,103 @@ passed &amp;&amp; onTime
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
   <div class="section-label">Assessment</div>
-  <h2>Unit 2, Practice Quiz</h2>
+  <h2 data-lang="en">Unit 2, Practice Quiz</h2>
+  <h2 data-lang="zh">单元 2 练习小测</h2>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">1. What is the output?<br><code>int x = 15;<br>if (x &gt; 20) print("A");<br>else if (x &gt; 10) print("B");<br>else if (x &gt; 5) print("C");<br>else print("D");</code></div>
+    <div class="quiz-q" data-lang="en">1. What is the output?<br><code>int x = 15;<br>if (x &gt; 20) print("A");<br>else if (x &gt; 10) print("B");<br>else if (x &gt; 5) print("C");<br>else print("D");</code></div>
+    <div class="quiz-q" data-lang="zh">1. 输出是什么？<br><code>int x = 15;<br>if (x &gt; 20) print("A");<br>else if (x &gt; 10) print("B");<br>else if (x &gt; 5) print("C");<br>else print("D");</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">A</div>
       <div class="quiz-opt" data-idx="1">B</div>
       <div class="quiz-opt" data-idx="2">C</div>
       <div class="quiz-opt" data-idx="3">BC</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! x=15: first condition (15&gt;20) is false. Second (15&gt;10) is true → prints "B". Remaining branches are skipped.</div>
-    <div class="quiz-explain wrong-exp">In if-else-if, only the first true branch runs. 15&gt;20 is false, 15&gt;10 is true → "B".</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! x=15: first condition (15&gt;20) is false. Second (15&gt;10) is true → prints "B". Remaining branches are skipped.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！x=15：第一个条件（15&gt;20）为假；第二个（15&gt;10）为真 → 输出 "B"。之后的分支全部跳过。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">In if-else-if, only the first true branch runs. 15&gt;20 is false, 15&gt;10 is true → "B".</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">在 if-else-if 中，只有第一个为真的分支会执行。15&gt;20 为假，15&gt;10 为真 → "B"。</div>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">2. What value does <code>count</code> hold after this loop?<br><code>int count = 0;<br>for (int i = 0; i &lt; 10; i++) {<br>&nbsp;&nbsp;if (i % 2 == 0) count++;<br>}</code></div>
+    <div class="quiz-q" data-lang="en">2. What value does <code>count</code> hold after this loop?<br><code>int count = 0;<br>for (int i = 0; i &lt; 10; i++) {<br>&nbsp;&nbsp;if (i % 2 == 0) count++;<br>}</code></div>
+    <div class="quiz-q" data-lang="zh">2. 循环结束后 <code>count</code> 的值是多少？<br><code>int count = 0;<br>for (int i = 0; i &lt; 10; i++) {<br>&nbsp;&nbsp;if (i % 2 == 0) count++;<br>}</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">10</div>
       <div class="quiz-opt" data-idx="1">4</div>
       <div class="quiz-opt" data-idx="2">6</div>
       <div class="quiz-opt" data-idx="3">5</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Even values of i from 0–9: 0, 2, 4, 6, 8 → count = 5.</div>
-    <div class="quiz-explain wrong-exp">i goes 0–9. Even values: 0, 2, 4, 6, 8 = 5 values → count = 5.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Even values of i from 0–9: 0, 2, 4, 6, 8 → count = 5.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！i 在 0–9 中的偶数：0, 2, 4, 6, 8 → count = 5。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">i goes 0–9. Even values: 0, 2, 4, 6, 8 = 5 values → count = 5.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">i 从 0 取到 9。偶数共 5 个：0, 2, 4, 6, 8 → count = 5。</div>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">3. Which expression is equivalent to <code>!(a || !b)</code>?</div>
+    <div class="quiz-q" data-lang="en">3. Which expression is equivalent to <code>!(a || !b)</code>?</div>
+    <div class="quiz-q" data-lang="zh">3. 下列哪个与 <code>!(a || !b)</code> 等价？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0"><code>!a &amp;&amp; b</code></div>
       <div class="quiz-opt" data-idx="1"><code>!a || b</code></div>
       <div class="quiz-opt" data-idx="2"><code>a &amp;&amp; !b</code></div>
       <div class="quiz-opt" data-idx="3"><code>a || b</code></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! By De Morgan's: <code>!(a || !b)</code> = <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
-    <div class="quiz-explain wrong-exp">Apply De Morgan's: flip || to &amp;&amp;, negate each. <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! By De Morgan's: <code>!(a || !b)</code> = <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！由德摩根定律：<code>!(a || !b)</code> = <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Apply De Morgan's: flip || to &amp;&amp;, negate each. <code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">运用德摩根定律：将 || 翻为 &amp;&amp;，每项取反。<code>!a &amp;&amp; !!b</code> = <code>!a &amp;&amp; b</code>。</div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">4. What does this code print?<br><code>int n = 1234; int sum = 0;<br>while (n &gt; 0) { sum += n % 10; n /= 10; }<br>System.out.println(sum);</code></div>
+    <div class="quiz-q" data-lang="en">4. What does this code print?<br><code>int n = 1234; int sum = 0;<br>while (n &gt; 0) { sum += n % 10; n /= 10; }<br>System.out.println(sum);</code></div>
+    <div class="quiz-q" data-lang="zh">4. 这段代码输出什么？<br><code>int n = 1234; int sum = 0;<br>while (n &gt; 0) { sum += n % 10; n /= 10; }<br>System.out.println(sum);</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">1234</div>
       <div class="quiz-opt" data-idx="1">10</div>
       <div class="quiz-opt" data-idx="2">4</div>
       <div class="quiz-opt" data-idx="3">0</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Sums the digits: 4 + 3 + 2 + 1 = 10.</div>
-    <div class="quiz-explain wrong-exp">The loop extracts digits (4, 3, 2, 1) and sums them: 4+3+2+1 = 10.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Sums the digits: 4 + 3 + 2 + 1 = 10.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！把各位相加：4 + 3 + 2 + 1 = 10。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">The loop extracts digits (4, 3, 2, 1) and sums them: 4+3+2+1 = 10.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">循环依次提取各位数字（4, 3, 2, 1）并相加：4+3+2+1 = 10。</div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">5. How many times does <code>"!"</code> print?<br><code>for (int i = 1; i &lt;= 3; i++)<br>&nbsp;&nbsp;for (int j = 1; j &lt;= i; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("!");</code></div>
+    <div class="quiz-q" data-lang="en">5. How many times does <code>"!"</code> print?<br><code>for (int i = 1; i &lt;= 3; i++)<br>&nbsp;&nbsp;for (int j = 1; j &lt;= i; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("!");</code></div>
+    <div class="quiz-q" data-lang="zh">5. <code>"!"</code> 会被打印多少次？<br><code>for (int i = 1; i &lt;= 3; i++)<br>&nbsp;&nbsp;for (int j = 1; j &lt;= i; j++)<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("!");</code></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">3</div>
       <div class="quiz-opt" data-idx="1">9</div>
       <div class="quiz-opt" data-idx="2">6</div>
       <div class="quiz-opt" data-idx="3">5</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! i=1→1 print, i=2→2 prints, i=3→3 prints. Total: 1+2+3 = 6.</div>
-    <div class="quiz-explain wrong-exp">Inner loop depends on i: 1 + 2 + 3 = 6 total prints.</div>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! i=1→1 print, i=2→2 prints, i=3→3 prints. Total: 1+2+3 = 6.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！i=1 → 打印 1 次，i=2 → 2 次，i=3 → 3 次。合计：1+2+3 = 6。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Inner loop depends on i: 1 + 2 + 3 = 6 total prints.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">内层循环依赖 i：1 + 2 + 3 = 6 次。</div>
   </div>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section class="section" id="ap-practice">
   <div class="section-label">Next Step</div>
-  <h2>AP-Style Practice Problems</h2>
+  <h2 data-lang="en">AP-Style Practice Problems</h2>
+  <h2 data-lang="zh">AP 风格练习题</h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">15 exam-level multiple-choice questions (3 medium · 12 hard), code-trace heavy with realistic distractors and fully worked solutions. Built for top-score prep — go here after you've worked through the notes and the in-page quiz above.</p>
+    <p data-lang="en" style="margin-bottom:16px;">15 exam-level multiple-choice questions (3 medium · 12 hard), code-trace heavy with realistic distractors and fully worked solutions. Built for top-score prep — go here after you've worked through the notes and the in-page quiz above.</p>
+    <p data-lang="zh" style="margin-bottom:16px;">15 道考试级别的选择题（3 道中等 · 12 道困难），以代码追踪为主，配真实迷惑选项与完整解答。为冲高分而设——把上面的笔记和小测做完后再来挑战。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_2_Selection_and_Iteration_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_2_Selection_and_Iteration_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
 
 <div style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem;">
   <p style="font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 4px; color: var(--text);">鼎睿学苑 · Dingrui Scholars</p>
-  <p>AP Computer Science A, Unit 2: Selection &amp; Iteration · 2026 Edition</p>
+  <p data-lang="en">AP Computer Science A, Unit 2: Selection &amp; Iteration · 2026 Edition</p>
+  <p data-lang="zh">AP 计算机科学 A · 单元 2：选择与循环 · 2026 版</p>
 </div>
 
 </main>
@@ -1092,15 +1391,35 @@ passed &amp;&amp; onTime
 <button class="backtotop" id="backtotop" aria-label="Back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
 <script>
+// ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') {
+    document.body.classList.add('lang-zh');
+  }
+} catch(e) {}
 
 function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('open');
