@@ -25,8 +25,8 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-16** (Sprint 0 closed, Sprint 0.5 active —
-source-fetch + first unit choice).
+Last reviewed: **2026-05-17** (Sprint 0.5 paused — PDFs fetched, text
+extraction blocked by sandbox; awaiting user-supplied extracts).
 
 ---
 
@@ -39,13 +39,59 @@ training-data recall.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S0.5-1** | Add **CCSSM High School** (US Common Core) as a row in `sources.txt` &mdash; currently missing; only Canadian provincial sources are catalogued | P0 | **Open** |
-| **S0.5-2** | Fetch the four highest-leverage source PDFs into `rag/sources/`: CCSSM HS, BC Pre-Calc 11, BC Pre-Calc 12, Ontario MCR3U/MHF4U (1112 doc) | P0 | **Open** |
-| **S0.5-3** | Pick the topic for Unit 1 (default: **Linear Functions and Systems** &mdash; universal, lowest prerequisite, natural entry point) | P0 | **Open &mdash; awaiting user choice** |
-| **S0.5-4** | Define the `syllabus-map` and `syllabus-note` CSS callout classes (one-time visual-design pass; reuse on every subsequent unit) | P1 | Open &mdash; lands with Unit 1 |
+| ~~**S0.5-1**~~ | Add **CCSSM High School** (US Common Core) as a row in `sources.txt` | P0 | ✅ shipped 2026-05-16 (commit `ecbc87a`, row 13) |
+| **S0.5-2a** | Fetch 4 priority PDFs into `rag/sources/` | P0 | ✅ shipped 2026-05-16 — files committed (see [Manual extraction checklist](#manual-extraction-checklist--blocking-unit-1) below) |
+| **S0.5-2b** | Extract Linear-Functions text from those PDFs into `*_extract.md` companions | P0 | 🟡 **BLOCKED — user-action required.** Sandbox lacks `pdftoppm`; Read tool cannot parse PDFs. Checklist below. |
+| ~~**S0.5-3**~~ | Pick the topic for Unit 1 | P0 | ✅ 2026-05-16 — **Linear Functions and Systems** |
+| **S0.5-4** | Define the `syllabus-map` and `syllabus-note` CSS callout classes | P1 | Open &mdash; lands with Unit 1 |
 
-Build order: S0.5-1 → S0.5-2 → S0.5-3 → open Sprint 1 (Unit 1
-drafting) → S0.5-4 lands as part of Unit 1.
+Build order: S0.5-2b (user) → open Sprint 1 (Unit 1 drafting) → S0.5-4
+lands as part of Unit 1.
+
+### Manual extraction checklist — blocking Unit 1
+
+The four primary PDFs are on disk in `rag/sources/` (commit `ecbc87a`),
+but this sandbox can't extract text from them. User opens each PDF
+locally, finds the Linear-Functions / Linear-Systems sections, and saves
+the verbatim extract as a markdown sibling next to the PDF. Format
+suggestion below the table.
+
+| # | Region | Source PDF (on disk now) | Extract file to create | What to pull out |
+|---|---|---|---|---|
+| 1 | 🇺🇸 US | `rag/sources/us/ccssm_hs_math.pdf` (93 pp) | `rag/sources/us/ccssm_hs_math_extract.md` | All HS standards under domains **HSA-CED**, **HSA-REI** (linear portions: A.1, A.3, B.3, C.5–6, D.10–12), **HSA-SSE** (A.1 cases), **HSF-IF** (B.4, B.6, C.7a, C.9 linear), **HSF-LE** (A.1–4, B.5), **HSF-BF** (A.1a, B.3 linear), **HSN-Q** (modeling) |
+| 2 | 🇨🇦 BC | `rag/sources/bc/fmpc10_elab.pdf` | `rag/sources/bc/fmpc10_elab_extract.md` | The **Big Ideas**, **Curricular Competencies**, and **Content** standards from the **Relations and Functions** strand of FMPC10. Include the elaborations columns (column 3 in the curriculum tables). Slope, linear relations, systems, function notation. |
+| 3 | 🇨🇦 ON | `rag/sources/on/math_grades_9-10.pdf` | `rag/sources/on/math_grades_9-10_extract.md` | The **MPM2D — Principles of Mathematics, Grade 10 Academic** strand for **Linear Systems** (strand and specific expectations with codes — typically appears as "LS" or under "Linear Systems"), plus any **Analytic Geometry** expectations touching linear (slope, distance, midpoint, equation of a line). Skip quadratics and trig. |
+| 4 | 🇨🇦 ON | `rag/sources/on/math_grades_11-12.pdf` | `rag/sources/on/math_grades_11-12_extract.md` | **MCR3U — Functions, Grade 11 University** specific expectations that review or extend linear functions (function notation, domain/range, transformations of linear). Brief; skip if MCR3U has no dedicated linear strand. |
+
+**Suggested extract format** (per file):
+
+```markdown
+# {Subject} — Linear-Functions Extract
+Source: `{path/to/file.pdf}` p. X–Y (date or revision if visible on cover)
+
+## {Domain / Strand name}
+- **{CODE}**: {verbatim standard text}
+  - {sub-bullet if present}
+- **{CODE}**: {verbatim standard text}
+
+## {Next domain / strand}
+...
+```
+
+Anything beyond verbatim standards (commentary, study notes) is fine but
+optional — what blocks the draft is having the **codes + text** verbatim
+so the in-guide Syllabus Map can cite them without paraphrase risk. Once
+all four `*_extract.md` files exist, S0.5-2b closes and Unit 1 drafting
+opens.
+
+**Optional later additions** (don't block Unit 1, but useful for later units):
+
+| # | Region | Source URL (in `sources.txt`, row #) | Why later |
+|---|---|---|---|
+| 5 | 🇨🇦 BC | row 02 — `bc/pc11_elab.pdf` | Drives Units 2–6 (quadratics, exp/log, sequences, trig basics) |
+| 6 | 🇨🇦 BC | row 03 — `bc/pc12_elab.pdf` | Drives Units 5–12 (function families, trig identities, combinatorics) |
+| 7 | 🇨🇦 AB | row 07 — `ab/pos_10-12_indicators.pdf` | One doc covering AB Math 10C / 20-1 / 30-1 — needed to add the AB column to every Unit's Syllabus Map |
+| 8 | 🇨🇦 AB | row 09 — `ab/math10c_standards.pdf` | Granular Math 10C assessment standards; useful but Math 30-1 is higher leverage |
 
 ---
 
