@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Progress Report — Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#e6ddca;--paper:#f6f1e6;--paper-2:#efe7d4;
+    --ink:#3a2b21;--ink-soft:#6a5947;--muted:#9b8a72;
+    --maroon:#6e2f2c;--maroon-deep:#3a2017;--gold:#b08b4f;--line:#d9cdb4;
+    --ph:#b6a587;--edit:rgba(176,139,79,.13);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--page);}
+  body{font-family:'Spectral',Georgia,serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased;padding:18px 20px 70px;line-height:1.5;}
+
+  /* ---- helper bar ---- */
+  .helpbar{max-width:840px;margin:0 auto 14px;background:var(--maroon-deep);
+    color:#f0e6d2;border-radius:3px;padding:11px 18px;display:flex;
+    justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
+  .helpbar p{font-family:'Archivo',sans-serif;font-size:11.5px;letter-spacing:.03em;}
+  .helpbar b{color:var(--gold);}
+  .print-btn{font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.12em;
+    text-transform:uppercase;font-weight:600;color:var(--maroon-deep);
+    background:var(--gold);border:none;padding:9px 16px;border-radius:2px;
+    cursor:pointer;transition:.18s;white-space:nowrap;}
+  .print-btn:hover{background:#f0e6d2;}
+
+  /* ---- sheet ---- */
+  .report{max-width:840px;margin:0 auto;background:var(--paper);
+    padding:54px 58px 46px;border-top:5px solid var(--maroon-deep);
+    box-shadow:0 1px 0 rgba(58,32,23,.04),0 22px 50px -28px rgba(58,32,23,.45);}
+
+  /* ---- editable affordances ---- */
+  [contenteditable]{border-radius:3px;transition:background .14s;outline:none;}
+  [contenteditable]:hover{background:rgba(110,47,44,.05);}
+  [contenteditable]:focus{background:var(--edit);box-shadow:0 0 0 1px rgba(176,139,79,.55);}
+  [contenteditable]:empty::before{content:attr(data-ph);color:var(--ph);
+    font-style:italic;font-weight:400;}
+  .f-inline{display:inline-block;border-bottom:1px dashed #c6b694;
+    padding:0 4px;min-width:70px;}
+  .f-block{display:block;padding:3px 5px;}
+
+  /* ---- masthead ---- */
+  .masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;}
+  .eyebrow{font-family:'Archivo',sans-serif;font-size:11px;font-weight:600;
+    letter-spacing:.26em;text-transform:uppercase;color:var(--maroon);margin-bottom:7px;}
+  h1{font-weight:600;font-size:35px;letter-spacing:-.012em;line-height:1.05;
+    color:var(--maroon-deep);}
+  .logo{display:flex;align-items:center;gap:11px;flex-shrink:0;
+    background:var(--paper-2);border:1px solid var(--line);padding:11px 16px;border-radius:3px;}
+  .logo-zh{font-size:21px;font-weight:700;color:var(--maroon);letter-spacing:.04em;}
+  .logo-en{font-family:'Archivo',sans-serif;font-size:8.5px;font-weight:600;
+    letter-spacing:.2em;color:var(--ink-soft);margin-top:2px;}
+  .rule{height:2px;background:var(--maroon-deep);margin:20px 0 24px;}
+
+  /* ---- meta ---- */
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:13px 38px;margin-bottom:34px;}
+  .meta div{display:flex;align-items:baseline;gap:12px;
+    border-bottom:1px solid var(--line);padding-bottom:6px;}
+  .meta .lab{font-family:'Archivo',sans-serif;font-size:10px;font-weight:600;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+    flex-shrink:0;width:62px;}
+  .meta .val{font-size:15.5px;font-weight:500;color:var(--ink);flex:1;}
+
+  /* ---- section heads ---- */
+  section{margin-bottom:30px;}
+  .shead{display:flex;align-items:baseline;gap:11px;margin-bottom:14px;}
+  .snum{font-family:'Archivo',sans-serif;font-size:11px;font-weight:700;
+    color:var(--gold);letter-spacing:.05em;}
+  .shead h2{font-size:18px;font-weight:600;color:var(--maroon-deep);letter-spacing:.01em;}
+  .shead .line{flex:1;height:1px;background:var(--line);}
+
+  /* ---- snapshot table ---- */
+  table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  thead th{background:var(--maroon-deep);color:#f3e8d4;text-align:left;
+    font-family:'Archivo',sans-serif;font-size:10.5px;font-weight:600;
+    letter-spacing:.13em;text-transform:uppercase;padding:9px 16px;}
+  tbody td{padding:10px 16px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:nth-child(even){background:var(--paper-2);}
+  td.ind{color:var(--maroon-deep);font-weight:600;width:32%;}
+  td.asm{color:var(--ink);}
+  .snap-tag{display:block;font-family:'Archivo',sans-serif;font-size:9.5px;
+    font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--maroon);margin-bottom:3px;}
+  .snap-sent{display:block;font-size:14px;line-height:1.5;color:var(--ink);}
+
+  /* ---- progress before/after ---- */
+  .progress{display:grid;grid-template-columns:1fr 34px 1fr;align-items:stretch;}
+  .pcard{background:var(--paper-2);border:1px solid var(--line);padding:14px 16px;}
+  .pcard.now{border-color:var(--maroon);background:#f1e6d4;}
+  .ptag{font-family:'Archivo',sans-serif;font-size:9.5px;font-weight:700;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .pcard.now .ptag{color:var(--maroon);}
+  .pcard .f-block{font-size:14.5px;line-height:1.46;color:var(--ink);}
+  .parrow{display:flex;align-items:center;justify-content:center;
+    font-size:22px;color:var(--maroon);font-weight:700;}
+
+  /* ---- editable list rows ---- */
+  .covered{list-style:none;}
+  .covered li{display:flex;gap:11px;align-items:flex-start;
+    padding:7px 0;border-bottom:1px solid var(--line);}
+  .covered li:last-child{border-bottom:none;}
+  .check{flex-shrink:0;width:21px;height:21px;border-radius:50%;
+    background:var(--maroon);color:#f3e8d4;display:flex;align-items:center;
+    justify-content:center;font-size:12px;margin-top:3px;}
+  .covered .ci{flex:1;font-size:14.5px;}
+  .covered .topic{font-weight:600;color:var(--maroon-deep);}
+  .covered .desc{color:var(--ink-soft);}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .ccard{background:var(--paper-2);border:1px solid var(--line);
+    border-top:3px solid var(--maroon);padding:14px 17px;}
+  .ccard h3{font-size:13px;font-family:'Archivo',sans-serif;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--maroon);margin-bottom:8px;}
+  .ccard ul{list-style:none;}
+  .ccard li{display:flex;gap:9px;align-items:flex-start;margin-bottom:5px;}
+  .ccard li:last-child{margin-bottom:0;}
+  .bullet{flex-shrink:0;width:5px;height:5px;background:var(--gold);
+    transform:rotate(45deg);margin-top:9px;}
+  .ccard .ci{flex:1;font-size:14px;line-height:1.42;color:var(--ink);}
+
+  .position{border-left:3px solid var(--maroon);background:var(--paper-2);
+    padding:12px 20px;}
+  .position .prow{display:flex;gap:9px;align-items:flex-start;}
+  .position .ci{flex:1;font-size:15px;line-height:1.5;color:var(--ink);padding:3px 0;}
+
+  .road-intro{margin-bottom:14px;}
+  .road-intro .f-block{font-size:14.5px;color:var(--ink-soft);font-style:italic;}
+  .road{list-style:none;counter-reset:r;}
+  .road li{display:flex;gap:14px;align-items:flex-start;
+    padding:9px 0;border-bottom:1px solid var(--line);}
+  .road li:last-child{border-bottom:none;}
+  .rnum{counter-increment:r;flex-shrink:0;width:30px;height:30px;
+    background:var(--maroon-deep);color:#f3e8d4;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;margin-top:2px;}
+  .rnum::before{content:counter(r);}
+  .rbody{flex:1;}
+  .rbody .rt{font-size:15.5px;font-weight:600;color:var(--maroon-deep);}
+  .rbody .rd{font-size:14px;color:var(--ink-soft);line-height:1.42;}
+
+  /* ---- add / delete controls ---- */
+  .del{flex-shrink:0;width:20px;height:20px;border-radius:50%;border:none;
+    background:none;color:var(--muted);font-size:15px;cursor:pointer;
+    line-height:1;margin-top:3px;transition:.14s;}
+  .del:hover{background:var(--maroon);color:#f3e8d4;}
+  .add{font-family:'Archivo',sans-serif;font-size:10.5px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--maroon);
+    background:none;border:1px dashed #c6b694;border-radius:3px;
+    padding:6px 12px;cursor:pointer;margin-top:9px;transition:.14s;}
+  .add:hover{background:var(--edit);border-color:var(--maroon);}
+
+  /* ---- footer ---- */
+  .foot{margin-top:34px;padding-top:16px;border-top:2px solid var(--maroon-deep);
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:'Archivo',sans-serif;}
+  .foot .pl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+  .foot .pv{font-size:13px;font-weight:600;color:var(--maroon);letter-spacing:.04em;}
+  .foot .date{font-size:11px;color:var(--muted);letter-spacing:.05em;}
+
+  @media (max-width:640px){
+    .report{padding:34px 22px 32px;}
+    h1{font-size:27px;}
+    .meta{grid-template-columns:1fr;}
+    .progress{grid-template-columns:1fr;}
+    .parrow{transform:rotate(90deg);}
+    .twocol{grid-template-columns:1fr;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .no-print{display:none!important;}
+    .report{box-shadow:none;max-width:100%;padding:30px 36px;}
+    section{break-inside:avoid;}
+    [contenteditable]{background:none!important;box-shadow:none!important;}
+    [contenteditable]:empty::before{content:""!important;}
+    .f-inline{border-bottom:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="helpbar no-print">
+  <p>FILL-IN TEMPLATE &nbsp;·&nbsp; Click any <b>highlighted field</b> to type &nbsp;·&nbsp; Use <b>+ Add</b> / <b>×</b> to manage rows &nbsp;·&nbsp; Then print &amp; save as PDF</p>
+  <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="report">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Mathematics Tutoring</p>
+      <h1>Student Progress Report</h1>
+    </div>
+    <div class="logo">
+      <svg width="42" height="48" viewBox="0 0 44 50" aria-hidden="true">
+        <path d="M22 1 L43 7 V25 C43 38 34 46 22 49 C10 46 1 38 1 25 V7 Z" fill="#6e2f2c"/>
+        <path d="M22 17 C19 15 14.5 15 12 16 V31 C14.5 30 19 30 22 32 C25 30 29.5 30 32 31 V16 C29.5 15 25 15 22 17 Z" fill="none" stroke="#f3e8d4" stroke-width="1.7" stroke-linejoin="round"/>
+        <line x1="22" y1="17" x2="22" y2="32" stroke="#f3e8d4" stroke-width="1.7"/>
+      </svg>
+      <div>
+        <div class="logo-zh">鼎睿学苑</div>
+        <div class="logo-en">DINGRUI SCHOLARS</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <div class="meta">
+    <div><span class="lab">Student</span><span class="val f-inline" contenteditable="true" data-ph="Full name"></span></div>
+    <div><span class="lab">Grade</span><span class="val f-inline" contenteditable="true" data-ph="e.g. Grade 11"></span></div>
+    <div><span class="lab">Subject</span><span class="val f-inline" contenteditable="true" data-ph="e.g. Pre-Calculus 12"></span></div>
+    <div><span class="lab">Period</span><span class="val f-inline" contenteditable="true" data-ph="e.g. Nov 2025 – Present"></span></div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="snum">01</span><h2>Performance Snapshot</h2><span class="line"></span></div>
+    <table>
+      <thead><tr><th>Indicator</th><th>Assessment</th></tr></thead>
+      <tbody>
+        <tr><td class="ind">Overall Performance Level</td><td class="asm"><span class="snap-tag" contenteditable="true" data-ph="Short tag"></span><span class="snap-sent" contenteditable="true" data-ph="One specific sentence on this student's overall command of the course material."></span></td></tr>
+        <tr><td class="ind">Working Level</td><td class="asm"><span class="snap-tag" contenteditable="true" data-ph="Short tag"></span><span class="snap-sent" contenteditable="true" data-ph="One specific sentence comparing this student to grade-level expectations."></span></td></tr>
+        <tr><td class="ind">Problem-Solving Independence</td><td class="asm"><span class="snap-tag" contenteditable="true" data-ph="Short tag"></span><span class="snap-sent" contenteditable="true" data-ph="One specific sentence on how independently this student works."></span></td></tr>
+        <tr><td class="ind">Contest-Style Readiness</td><td class="asm"><span class="snap-tag" contenteditable="true" data-ph="Short tag"></span><span class="snap-sent" contenteditable="true" data-ph="One specific sentence on this student's readiness for non-routine / contest work."></span></td></tr>
+        <tr><td class="ind">Curriculum Progress</td><td class="asm"><span class="snap-tag" contenteditable="true" data-ph="Short tag"></span><span class="snap-sent" contenteditable="true" data-ph="One specific sentence on where this student stands in the curriculum."></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="shead"><span class="snum">02</span><h2>Progress So Far</h2><span class="line"></span></div>
+    <div class="progress">
+      <div class="pcard">
+        <div class="ptag">Starting Point</div>
+        <div class="f-block" contenteditable="true" data-ph="Describe where the student began — foundation, habits, confidence level."></div>
+      </div>
+      <div class="parrow">→</div>
+      <div class="pcard now">
+        <div class="ptag">Where the Student Is Now</div>
+        <div class="f-block" contenteditable="true" data-ph="Describe current ability — confidence, independence, concept transfer."></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="snum">03</span><h2>What We've Covered</h2><span class="line"></span></div>
+    <ul class="covered" id="list-covered">
+      <li data-row>
+        <span class="check">✓</span>
+        <span class="ci"><span class="topic" contenteditable="true" data-ph="Unit / topic">&nbsp;</span><span class="desc"> — </span><span class="desc" contenteditable="true" data-ph="brief description of what was covered"></span></span>
+        <button class="del no-print" onclick="delRow(this)" title="Remove">×</button>
+      </li>
+      <li data-row>
+        <span class="check">✓</span>
+        <span class="ci"><span class="topic" contenteditable="true" data-ph="Unit / topic">&nbsp;</span><span class="desc"> — </span><span class="desc" contenteditable="true" data-ph="brief description of what was covered"></span></span>
+        <button class="del no-print" onclick="delRow(this)" title="Remove">×</button>
+      </li>
+      <li data-row>
+        <span class="check">✓</span>
+        <span class="ci"><span class="topic" contenteditable="true" data-ph="Unit / topic">&nbsp;</span><span class="desc"> — </span><span class="desc" contenteditable="true" data-ph="brief description of what was covered"></span></span>
+        <button class="del no-print" onclick="delRow(this)" title="Remove">×</button>
+      </li>
+    </ul>
+    <button class="add no-print" onclick="addRow('list-covered')">+ Add unit</button>
+  </section>
+
+  <section>
+    <div class="shead"><span class="snum">04</span><h2>Strengths &amp; Focus Areas</h2><span class="line"></span></div>
+    <div class="twocol">
+      <div class="ccard">
+        <h3>Strengths</h3>
+        <ul id="list-strength">
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a strength…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a strength…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a strength…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+        </ul>
+        <button class="add no-print" onclick="addRow('list-strength')">+ Add</button>
+      </div>
+      <div class="ccard">
+        <h3>Focus Areas</h3>
+        <ul id="list-focus">
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a focus area…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a focus area…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+          <li data-row><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a focus area…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+        </ul>
+        <button class="add no-print" onclick="addRow('list-focus')">+ Add</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="snum">05</span><h2>Academic Positioning</h2><span class="line"></span></div>
+    <div class="position">
+      <ul id="list-position" style="list-style:none;">
+        <li data-row class="prow"><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a positioning statement…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+        <li data-row class="prow"><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a positioning statement…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+        <li data-row class="prow"><span class="bullet"></span><span class="ci" contenteditable="true" data-ph="Add a positioning statement…"></span><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+      </ul>
+    </div>
+    <button class="add no-print" onclick="addRow('list-position')">+ Add statement</button>
+  </section>
+
+  <section>
+    <div class="shead"><span class="snum">06</span><h2>The Road Ahead</h2><span class="line"></span></div>
+    <div class="road-intro">
+      <div class="f-block" contenteditable="true" data-ph="One-line framing — e.g. To keep [Student] ahead of class and ready for [next course], we recommend the following focus blocks for the coming term:"></div>
+    </div>
+    <ol class="road" id="list-road">
+      <li data-row><span class="rnum"></span><div class="rbody"><div class="rt" contenteditable="true" data-ph="Focus block title"></div><div class="rd" contenteditable="true" data-ph="One-line description of this block"></div></div><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+      <li data-row><span class="rnum"></span><div class="rbody"><div class="rt" contenteditable="true" data-ph="Focus block title"></div><div class="rd" contenteditable="true" data-ph="One-line description of this block"></div></div><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+      <li data-row><span class="rnum"></span><div class="rbody"><div class="rt" contenteditable="true" data-ph="Focus block title"></div><div class="rd" contenteditable="true" data-ph="One-line description of this block"></div></div><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+      <li data-row><span class="rnum"></span><div class="rbody"><div class="rt" contenteditable="true" data-ph="Focus block title"></div><div class="rd" contenteditable="true" data-ph="One-line description of this block"></div></div><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+      <li data-row><span class="rnum"></span><div class="rbody"><div class="rt" contenteditable="true" data-ph="Focus block title"></div><div class="rd" contenteditable="true" data-ph="One-line description of this block"></div></div><button class="del no-print" onclick="delRow(this)" title="Remove">×</button></li>
+    </ol>
+    <button class="add no-print" onclick="addRow('list-road')">+ Add focus block</button>
+  </section>
+
+  <div class="foot">
+    <div><span class="pl">Prepared by&nbsp;&nbsp;</span><span class="pv">DingRui Scholars</span></div>
+    <div class="date f-inline" contenteditable="true" data-ph="Month Year"></div>
+  </div>
+
+</div>
+
+<script>
+  function addRow(listId){
+    var list=document.getElementById(listId);
+    var rows=list.querySelectorAll('[data-row]');
+    var clone=rows[rows.length-1].cloneNode(true);
+    clone.querySelectorAll('[contenteditable]').forEach(function(el){el.innerHTML='';});
+    list.appendChild(clone);
+  }
+  function delRow(btn){
+    var row=btn.closest('[data-row]');
+    var list=row.parentElement;
+    if(list.querySelectorAll('[data-row]').length>1) row.remove();
+  }
+  // restore placeholder when a field is emptied
+  document.addEventListener('blur',function(e){
+    var t=e.target;
+    if(t&&t.isContentEditable&&!t.textContent.replace(/\u00a0/g,'').trim()) t.innerHTML='';
+  },true);
+</script>
+
+</body>
+</html>
