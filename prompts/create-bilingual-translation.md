@@ -1,0 +1,271 @@
+# Create Bilingual (EN ↔ ZH) Translation for a Study Guide
+
+You are producing a Mandarin Chinese translation of an existing Dingrui
+Scholars English study guide. This is a **teaching translation**, not a
+literal one. The locked conventions below were established on AP CSA
+U1–U4 (commits `12cef14` + `d1b6257`), refined on IB Math HL Unit A1
+(`af27baf`), and applied to AP Calculus U1–U10 (`3ab03d5`).
+
+## Inputs
+- **Source file**: `<Subject>/Study Guides/<Unit_X_Topic>.html` (or Practice / Solutions equivalent)
+- **Subject glossary**: lives in `prompts/create-bilingual-translation.md`
+  (this file — extend it as new subjects are translated)
+
+## Audience — locked
+
+Mandarin-Chinese-language students preparing to write the AP / IB / SAT
+exam **in English**. The Chinese is a teaching translation:
+- **Math notation, code, and exam-rubric terminology stay in English.**
+  The student must recognize them on the exam paper. The Chinese
+  *explains* the concept; the English *carries* the exam vocabulary.
+- **Pedagogical prose translates to natural Chinese.** Not word-for-word.
+  Idiomatic, clear, in the register a Chinese math/CS textbook uses.
+
+This is the opposite of a literal translation. If a sentence reads
+fluently to a Chinese student but doesn't preserve the English exam
+term, **fix the translation, not the term**.
+
+## Locked design
+
+### CSS toggle (single-source)
+
+```css
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+```
+
+Both rules at specificity (0, 2, 1) — beats `.section h2` and similar
+class-plus-element rules. Place near the end of the `<style>` block
+under a `/* ─── BILINGUAL TOGGLE ─── */` comment.
+
+### CJK font fallback in `--font-body`
+
+```css
+--font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB',
+             'Microsoft YaHei', -apple-system, sans-serif;
+```
+
+Without this, Chinese characters render in a system fallback that may
+look thin / inconsistent cross-platform. PingFang SC covers macOS / iOS;
+Hiragino Sans GB is the legacy macOS fallback; Microsoft YaHei covers
+Windows; everything else picks up the sans-serif.
+
+### Nav button + JS toggle
+
+Insert the language button between **Contents** and **Dark** in the
+nav:
+
+```html
+<button class="nav-btn" id="langToggle" onclick="toggleLang()"
+        title="Switch language / 切换语言">
+  <span data-lang="en">中文</span><span data-lang="zh">EN</span>
+</button>
+```
+
+```js
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  try {
+    localStorage.setItem('drs.lang',
+      document.body.classList.contains('lang-zh') ? 'zh' : 'en');
+  } catch (e) { /* ignore quota / privacy errors */ }
+}
+// Restore on load:
+(function () {
+  try {
+    if (localStorage.getItem('drs.lang') === 'zh') {
+      document.body.classList.add('lang-zh');
+    }
+  } catch (e) { /* ignore */ }
+})();
+```
+
+`localStorage` key namespace: `drs.lang` (drs = dingrui scholars).
+
+### Two markup forms (use whichever fits)
+
+**Form A — inline `<span>` pair** for short labels, headings,
+sentences:
+
+```html
+<span data-lang="en">Limit Laws</span><span data-lang="zh">极限法则</span>
+```
+
+**Form B — parallel block siblings** for long worked examples,
+multi-line callouts, tables. Each block carries the `data-lang`
+attribute on its own root element:
+
+```html
+<div class="worked-solution" data-lang="en">
+  <p>Given table:</p>
+  ...long English block...
+</div>
+<div class="worked-solution" data-lang="zh">
+  <p>给定表格：</p>
+  ...long Chinese block...
+</div>
+```
+
+Children inside a Form-B block do **not** need `data-lang`
+attributes — the parent's `data-lang` flips visibility via the CSS
+rule.
+
+### Exam-term glosses inside Chinese text
+
+The single most important pattern. Any English term the student must
+recognize on the exam paper appears parenthesised in `<code>` inside
+the Chinese:
+
+```
+多项式以及分母非零的有理函数都可直接代入（<code>direct substitution</code>）求极限。
+当直接代入得到 0/0，即不定式（<code>indeterminate form</code>）时，需要先做代数变形。
+```
+
+Reading rule for the student: *the Chinese tells you what the concept
+means; the English in `<code>` is the exact phrase the AP exam will
+use.*
+
+### What NOT to translate
+
+- **Math notation**: $\lim$, $\int$, $\frac{d}{dx}$, $\binom{n}{r}$ —
+  LaTeX renders identically in either language. Leave untouched.
+- **Code identifiers and Java keywords** (AP CSA): `int`, `String`,
+  `ArrayList`, `Math.random()`, etc. Stay in English. Code comments
+  inside `<pre>` blocks: **don't translate them** — the student types
+  them in English on the exam.
+- **AP rubric language**: "AP-Style Practice", "Free-Response
+  Question", "Multiple Choice", "Calculator Permitted / No
+  Calculator". Keep in English; the AP exam uses these phrases.
+
+### Surface coverage per file
+
+Translate every user-facing string. The checklist:
+
+- [ ] Hero (overline, h1, subtitle, "Read me first" intro)
+- [ ] Sidebar TOC (every link label)
+- [ ] All topic sub-section headings + topic-label chips
+- [ ] Concept boxes (header + body, both languages, all colors)
+- [ ] Worked-example titles + step labels + prose
+- [ ] Tables (cell prose, header cells, captions)
+- [ ] Inline quizzes (question + 4 options + correct-explanation + wrong-explanation + "Try Again" button)
+- [ ] Flashcards (front + back if prose; math stays untouched)
+- [ ] MCQ Patterns / Exam Strategy sections
+- [ ] Unit Quiz items
+- [ ] AP-Style Practice CTA section
+- [ ] Readiness Checklist items
+- [ ] Footer prose
+- [ ] Nav buttons (already in design)
+- [ ] Skip-link, back-link, brand subtitle (Form A)
+- [ ] JS-generated text (template literals inside `toggleCheck`, etc. — both languages span-paired)
+
+### Exam-rubric term-flagging — examples
+
+Below are the canonical English terms whose preservation is non-negotiable
+across each subject. Add to this list when a new subject is translated.
+
+#### AP Calculus AB/BC
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| limit | 极限 | `limit` |
+| derivative | 导数 | `derivative` |
+| integral | 积分 | `integral` |
+| antiderivative | 原函数 | `antiderivative` |
+| continuous | 连续 | `continuous` |
+| differentiable | 可微 | `differentiable` |
+| Chain Rule | 链式法则 | `Chain Rule` |
+| Product Rule | 乘积法则 | `Product Rule` |
+| Quotient Rule | 商的法则 | `Quotient Rule` |
+| Fundamental Theorem of Calculus | 微积分基本定理 | `FTC` / `Fundamental Theorem of Calculus` |
+| Riemann sum | 黎曼和 | `LRS` / `RRS` / `MRS` / `Riemann sum` |
+| Trapezoidal sum | 梯形和 | `trapezoidal sum` |
+| Mean Value Theorem | 中值定理 | `MVT` / `Mean Value Theorem` |
+| Intermediate Value Theorem | 介值定理 | `IVT` |
+| Extreme Value Theorem | 极值定理 | `EVT` |
+| related rates | 相关变化率 | `related rates` |
+| implicit (function) | 隐函数 | `implicit differentiation` |
+| inverse function | 反函数 | `inverse` |
+| parametric (equations) | 参数方程 | `parametric` |
+| polar coordinates | 极坐标 | `polar` |
+| vector | 向量 | `vector` |
+| sequence | 数列 | `sequence` |
+| series | 级数 | `series` |
+| converge / diverge | 收敛 / 发散 | `convergence` / `divergence` |
+| Taylor series | 泰勒级数 | `Taylor series` |
+| Maclaurin series | 麦克劳林级数 | `Maclaurin series` |
+| direct substitution | 直接代入 | `direct substitution` |
+| indeterminate form | 不定式 | `indeterminate form` |
+| concavity / inflection point | 凹凸性 / 拐点 | `concavity` / `inflection point` |
+| velocity / acceleration / speed | 速度 / 加速度 / 速率 | `velocity` / `acceleration` / `speed` |
+| particle motion | 质点运动 | `particle motion` |
+
+#### AP Computer Science A
+
+| Concept | Chinese |
+|---|---|
+| algorithm / compiler | 算法 / 编译器 |
+| variable / data type | 变量 / 数据类型 |
+| primitive / reference type | 基本类型 / 引用类型 |
+| class / object / method / instance | 类 / 对象 / 方法 / 实例 |
+| constructor | 构造方法 |
+| parameter / argument (formal / actual) | 形参 / 实参 |
+| exception | 异常 |
+| selection / iteration | 选择 / 循环 |
+| short-circuit evaluation | 短路求值 |
+| encapsulation | 封装 |
+| accessor / mutator | 访问器 / 修改器 |
+| array / ArrayList | 数组 / `ArrayList` (keep English for the type) |
+| traversal / iteration | 遍历 / 迭代 |
+
+Java type names (`int`, `String`, `ArrayList`, `boolean`, `double`)
+and method names (`Math.random()`, `length()`, `equals()`) **stay in
+English** — they are the exact symbols the student types on the exam.
+
+#### IB Math AA HL
+
+| Concept | Chinese |
+|---|---|
+| sequence / series | 数列 / 级数 |
+| arithmetic / geometric | 等差 / 等比 |
+| common difference / common ratio | 公差 / 公比 |
+| binomial theorem | 二项式定理 |
+| Pascal's triangle | 帕斯卡三角 |
+| permutation / combination | 排列 / 组合 |
+| complex number | 复数 |
+| Argand diagram | 阿尔冈图 / Argand 图 |
+| De Moivre's theorem | 棣莫弗定理 |
+| modulus / argument | 模 / 辐角 |
+| extended binomial | 推广二项式 / 广义二项式 |
+
+## Build order
+
+1. Read the source file fully. Note which surface elements need
+   translation per the checklist above.
+2. Add the bilingual CSS rules + CJK font fallback to `:root` /
+   `<style>` block (one-time per file).
+3. Insert the language toggle button + `toggleLang()` JS + restore-on-load
+   block (one-time per file).
+4. Translate top-to-bottom, **applying both Form A and Form B as fits the
+   element size.** Short labels → Form A. Multi-line worked examples →
+   Form B.
+5. Apply the exam-term gloss pattern: every English term in the
+   subject glossary above gets a `<code>english term</code>` inline
+   inside its first Chinese mention per section.
+6. Sweep the JS-generated strings (look for template literals that
+   build HTML — `toggleCheck`, `setThemeBtnLabel`, etc.) and wrap their
+   text in `<span data-lang>` pairs.
+7. Run `scripts/validate.sh <file>` — must pass.
+8. Audit: `grep -c 'data-lang="en"'` and `grep -c 'data-lang="zh"'`
+   should be **equal** in the final file. Any imbalance = something
+   was missed.
+9. Open in a browser, click the "中文" button, page should flip cleanly.
+   Click "EN" — page flips back. Reload — language sticks.
+
+## Cross-references
+
+- Locked example commits to mirror:
+  - AP CSA U1–U4 — `12cef14` (translation) + `d1b6257` (glosses)
+  - IB Math HL Unit A1 — `af27baf`
+  - AP Calculus U1–U10 — `3ab03d5`
+- Audit pattern: `<Subject>/AUDIT.md` has a "Translation audit" section
+  (see `AP Calculus/AUDIT.md` for the locked template).
