@@ -37,7 +37,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -105,6 +105,10 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 
 /* ─── PROGRESS BAR ─── */
 .progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
@@ -507,7 +511,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="top-nav">
   <div class="nav-left">
@@ -515,25 +519,26 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <span class="nav-badge">UNIT 1</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s1-1">1.1 Scalars &amp; Vectors</a>
-  <a href="#s1-2">1.2 Displacement, Velocity &amp; Acceleration</a>
-  <a href="#s1-3">1.3 Representing Motion</a>
-  <a href="#s1-4">1.4 Reference Frames</a>
-  <a href="#s1-5">1.5 Motion in 2D / 3D</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s1-1"><span data-lang="en">1.1 Scalars &amp; Vectors</span><span data-lang="zh">1.1 标量与矢量</span></a>
+  <a href="#s1-2"><span data-lang="en">1.2 Displacement, Velocity &amp; Acceleration</span><span data-lang="zh">1.2 位移、速度与加速度</span></a>
+  <a href="#s1-3"><span data-lang="en">1.3 Representing Motion</span><span data-lang="zh">1.3 运动的表示</span></a>
+  <a href="#s1-4"><span data-lang="en">1.4 Reference Frames</span><span data-lang="zh">1.4 参考系</span></a>
+  <a href="#s1-5"><span data-lang="en">1.5 Motion in 2D / 3D</span><span data-lang="zh">1.5 二维 / 三维运动</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <main class="main-wrap" id="main-content">
@@ -541,14 +546,14 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Physics C: Mechanics</div>
-  <h1>Unit 1: Kinematics</h1>
+  <h1><span data-lang="en">Unit 1: Kinematics</span><span data-lang="zh">第 1 单元：运动学</span></h1>
   <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
-    Describe and predict the motion of objects using vectors, calculus-based definitions of velocity and acceleration, kinematic equations, and the independence of perpendicular motion components.
+    <span data-lang="en">Describe and predict the motion of objects using vectors, calculus-based definitions of velocity and acceleration, kinematic equations, and the independence of perpendicular motion components.</span><span data-lang="zh">用矢量（<code>vector</code>）、基于微积分的速度（<code>velocity</code>）与加速度（<code>acceleration</code>）定义、运动学方程（<code>kinematic equations</code>），以及垂直方向上运动分量相互独立的原理，描述并预测物体的运动。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–15% Exam Weight</span>
-    <span class="chip chip-green">~14–19 Class Periods</span>
-    <span class="chip chip-gold">5 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">10–15% Exam Weight</span><span data-lang="zh">考试占分 10–15%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~14–19 Class Periods</span><span data-lang="zh">约 14–19 课时</span></span>
+    <span class="chip chip-gold"><span data-lang="en">5 Topics</span><span data-lang="zh">5 个专题</span></span>
   </div>
 </section>
 
@@ -556,8 +561,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 1.1 ═══════════════ -->
 <section class="section" id="s1-1">
-  <div class="section-label">Topic 1.1</div>
-  <h2>Scalars and Vectors</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.1</span><span data-lang="zh">专题 1.1</span></div>
+  <h2><span data-lang="en">Scalars and Vectors</span><span data-lang="zh">标量与矢量</span></h2>
 
   <p>Physics begins with measurement, and the first distinction to make is between quantities that have direction and those that don't. A <strong>scalar</strong> is described by magnitude alone — distance, speed, mass, and energy are all scalars. A <strong>vector</strong> requires both magnitude and direction — position, displacement, velocity, acceleration, and force are vectors.</p>
 
@@ -659,8 +664,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 1.2 ═══════════════ -->
 <section class="section" id="s1-2">
-  <div class="section-label">Topic 1.2</div>
-  <h2>Displacement, Velocity, and Acceleration</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.2</span><span data-lang="zh">专题 1.2</span></div>
+  <h2><span data-lang="en">Displacement, Velocity, and Acceleration</span><span data-lang="zh">位移、速度与加速度</span></h2>
 
   <p>When we model a physical object, we often use the <strong>object (particle) model</strong> — ignoring its size, shape, and internal structure and treating it as a single point. This simplification lets us focus entirely on the object's position as a function of time.</p>
 
@@ -779,8 +784,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 1.3 ═══════════════ -->
 <section class="section" id="s1-3">
-  <div class="section-label">Topic 1.3</div>
-  <h2>Representing Motion</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.3</span><span data-lang="zh">专题 1.3</span></div>
+  <h2><span data-lang="en">Representing Motion</span><span data-lang="zh">运动的表示</span></h2>
 
   <p>Motion can be represented through motion diagrams, figures, graphs, equations, and narrative descriptions. The most important skill in kinematics is translating fluently between these representations — this is the core of the Translation Between Representations (TBR) free-response question.</p>
 
@@ -931,8 +936,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 1.4 ═══════════════ -->
 <section class="section" id="s1-4">
-  <div class="section-label">Topic 1.4</div>
-  <h2>Reference Frames and Relative Motion</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.4</span><span data-lang="zh">专题 1.4</span></div>
+  <h2><span data-lang="en">Reference Frames and Relative Motion</span><span data-lang="zh">参考系与相对运动</span></h2>
 
   <p>A <strong>reference frame</strong> defines the origin and coordinate system from which an observer makes measurements. Two observers in different reference frames may measure different velocities for the same object. The key tool for connecting their measurements is the relative velocity equation.</p>
 
@@ -1001,8 +1006,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 1.5 ═══════════════ -->
 <section class="section" id="s1-5">
-  <div class="section-label">Topic 1.5</div>
-  <h2>Motion in Two or Three Dimensions</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.5</span><span data-lang="zh">专题 1.5</span></div>
+  <h2><span data-lang="en">Motion in Two or Three Dimensions</span><span data-lang="zh">二维与三维运动</span></h2>
 
   <p>The central insight of multidimensional kinematics is the <strong>independence of perpendicular components</strong>. Motion in one dimension can be changed without causing a change in a perpendicular dimension. This means 2D or 3D motion is analyzed by separating it into independent 1D kinematic problems, one for each axis.</p>
 
@@ -1203,8 +1208,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 1 Appears on the AP Exam</h2>
+  <div class="section-label"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">How Unit 1 Appears on the AP Exam</span><span data-lang="zh">第 1 单元在 AP 考试中的形式</span></h2>
 
   <div class="card">
     <div class="card-header">
@@ -1243,8 +1248,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards — Click to Flip</span><span data-lang="zh">闪卡 —— 点击翻面</span></h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1302,8 +1307,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 1 — Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测评</span></div>
+  <h2><span data-lang="en">Unit 1 — Practice Quiz</span><span data-lang="zh">第 1 单元 —— 练习测验</span></h2>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-q">1. A particle's position is $x(t) = 2t^3 - 3t^2 + t$. At what time is the velocity zero?</div>
@@ -1480,16 +1485,26 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 </main>
 
 <script>
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+
 // ─── THEME ───
+function setThemeBtnLabel(isDark) {
+  document.getElementById('themeToggle').innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
   drawFreeFall(); drawProjectile();
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
 
 // ─── SIDEBAR ───
