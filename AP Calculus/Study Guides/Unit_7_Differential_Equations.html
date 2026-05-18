@@ -51,7 +51,7 @@
   --nav-height: 62px;
   --sidebar-width: 280px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -770,6 +770,10 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 }
 .checklist li.checked { background: var(--green-bg); border-color: var(--green); }
 .checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -781,9 +785,10 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
     <span class="nav-badge">UNIT 7</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents">Contents</button>
-    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
@@ -795,21 +800,21 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 
 <!-- ===== SIDEBAR TOC ===== -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#topic-7-1">7.1 Modeling with DEs</a>
-  <a href="#topic-7-2">7.2 Verifying Solutions</a>
-  <a href="#topic-7-3">7.3 Sketching Slope Fields</a>
-  <a href="#topic-7-4">7.4 Reasoning with Slope Fields</a>
-  <a href="#topic-7-5">7.5 Euler's Method <span class="bc-tag">BC</span></a>
-  <a href="#topic-7-6">7.6 Separation of Variables</a>
-  <a href="#topic-7-7">7.7 Particular Solutions</a>
-  <a href="#topic-7-8">7.8 Exponential Models</a>
-  <a href="#topic-7-9">7.9 Logistic Models <span class="bc-tag">BC</span></a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#topic-7-1"><span data-lang="en">7.1 Modeling with DEs</span><span data-lang="zh">7.1 用微分方程建模</span></a>
+  <a href="#topic-7-2"><span data-lang="en">7.2 Verifying Solutions</span><span data-lang="zh">7.2 验证解</span></a>
+  <a href="#topic-7-3"><span data-lang="en">7.3 Sketching Slope Fields</span><span data-lang="zh">7.3 绘制斜率场</span></a>
+  <a href="#topic-7-4"><span data-lang="en">7.4 Reasoning with Slope Fields</span><span data-lang="zh">7.4 利用斜率场推理</span></a>
+  <a href="#topic-7-5"><span data-lang="en">7.5 Euler's Method <span class="bc-tag">BC</span></span><span data-lang="zh">7.5 欧拉方法 <span class="bc-tag">BC</span></span></a>
+  <a href="#topic-7-6"><span data-lang="en">7.6 Separation of Variables</span><span data-lang="zh">7.6 分离变量法</span></a>
+  <a href="#topic-7-7"><span data-lang="en">7.7 Particular Solutions</span><span data-lang="zh">7.7 特解</span></a>
+  <a href="#topic-7-8"><span data-lang="en">7.8 Exponential Models</span><span data-lang="zh">7.8 指数模型</span></a>
+  <a href="#topic-7-9"><span data-lang="en">7.9 Logistic Models <span class="bc-tag">BC</span></span><span data-lang="zh">7.9 逻辑斯蒂模型 <span class="bc-tag">BC</span></span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">备考策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">应考清单</span></a>
 </aside>
 <!-- ===== MAIN CONTENT ===== -->
 <main class="main-content">
@@ -817,14 +822,15 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-  <h1>Unit 7: Differential Equations</h1>
+  <h1><span data-lang="en">Unit 7: Differential Equations</span><span data-lang="zh">第 7 单元：微分方程</span></h1>
   <p class="hero-sub">
-    Learn to set up and solve differential equations — from slope fields and separation of variables to exponential growth and logistic models. This unit connects derivatives and integrals to real-world modeling.
+    <span data-lang="en">Learn to set up and solve differential equations — from slope fields and separation of variables to exponential growth and logistic models. This unit connects derivatives and integrals to real-world modeling.</span>
+    <span data-lang="zh">学习如何建立并求解微分方程——从斜率场、分离变量法，到指数增长与逻辑斯蒂模型。本单元将导数与积分应用于真实世界的建模。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">6–12% of AP Exam</span>
-    <span class="chip chip-green">~8–10 Class Periods</span>
-    <span class="chip chip-purple">9 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">6–12% of AP Exam</span><span data-lang="zh">占 AP 考试 6–12%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~8–10 Class Periods</span><span data-lang="zh">约 8–10 课时</span></span>
+    <span class="chip chip-purple"><span data-lang="en">9 Topics</span><span data-lang="zh">9 个主题</span></span>
   </div>
 
 </section>
@@ -835,27 +841,35 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.1 ===== -->
 <section class="topic" id="topic-7-1">
   <p class="section-label">Topic 7.1</p>
-  <h2>Modeling Situations with Differential Equations</h2>
+  <h2><span data-lang="en">Modeling Situations with Differential Equations</span><span data-lang="zh">用微分方程（<code>differential equation</code>）建模实际情境</span></h2>
   <div class="section-divider"></div>
 
-  <p>A <strong>differential equation</strong> is an equation that relates a function to one or more of its derivatives. The ability to translate a verbal description of a real-world situation into a differential equation is a foundational skill in this unit.</p>
+  <p data-lang="en">A <strong>differential equation</strong> is an equation that relates a function to one or more of its derivatives. The ability to translate a verbal description of a real-world situation into a differential equation is a foundational skill in this unit.</p>
+  <p data-lang="zh"><strong>微分方程</strong>是把一个函数（<code>function</code>）与其一个或多个导数（<code>derivative</code>）联系起来的方程。把真实世界情境的文字描述翻译成微分方程，是本单元最基础的技能。</p>
 
   <div class="concept-box green">
-    <strong>Enduring Understanding — FUN-7</strong>
-    <p>Solving differential equations allows us to determine functions and develop models.</p>
+    <strong data-lang="en">Enduring Understanding — FUN-7</strong>
+    <strong data-lang="zh">核心理解 — FUN-7</strong>
+    <p data-lang="en">Solving differential equations allows us to determine functions and develop models.</p>
+    <p data-lang="zh">求解微分方程让我们能够确定未知函数并建立数学模型。</p>
   </div>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>Essential Knowledge FUN-7.A.1:</strong> Differential equations relate a function of an independent variable and the function's derivatives. For example, the verbal statement "the rate of change of a population $P$ is proportional to the current population" translates to:</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>Essential Knowledge FUN-7.A.1:</strong> Differential equations relate a function of an independent variable and the function's derivatives. For example, the verbal statement "the rate of change of a population $P$ is proportional to the current population" translates to:</p>
+  <p data-lang="zh"><strong>核心知识 FUN-7.A.1：</strong> 微分方程把一个关于自变量的函数与该函数的导数联系起来。例如，文字描述"种群 $P$ 的变化率（<code>rate of change</code>）与当前种群成正比"对应于：</p>
   <div class="math-block">$$\frac{dP}{dt} = kP$$</div>
-  <p>where $k$ is the proportionality constant.</p>
+  <p data-lang="en">where $k$ is the proportionality constant.</p>
+  <p data-lang="zh">其中 $k$ 是比例常数。</p>
 
-  <h3>Learning Objective FUN-7.A</h3>
-  <p>Interpret verbal statements of problems as differential equations involving a derivative expression. This means you should be able to read a scenario, identify what quantity is changing, what it depends on, and write the corresponding equation involving $\frac{dy}{dx}$ or $\frac{dy}{dt}$.</p>
+  <h3><span data-lang="en">Learning Objective FUN-7.A</span><span data-lang="zh">学习目标 FUN-7.A</span></h3>
+  <p data-lang="en">Interpret verbal statements of problems as differential equations involving a derivative expression. This means you should be able to read a scenario, identify what quantity is changing, what it depends on, and write the corresponding equation involving $\frac{dy}{dx}$ or $\frac{dy}{dt}$.</p>
+  <p data-lang="zh">能够把题目的文字描述翻译为含有导数表达式的微分方程。换言之，你要能读懂情境，辨认出哪个量在变化、它依赖于什么变量，并写出对应的含 $\frac{dy}{dx}$ 或 $\frac{dy}{dt}$ 的方程。</p>
 
   <div class="concept-box">
-    <strong>Skill Focus: 2.C — Connecting Representations</strong>
-    <p>Identify a re-expression of mathematical information presented in a given representation. Practice converting between verbal descriptions, equations, graphs, and tables.</p>
+    <strong data-lang="en">Skill Focus: 2.C — Connecting Representations</strong>
+    <strong data-lang="zh">技能重点：2.C — 多种表示之间的转换</strong>
+    <p data-lang="en">Identify a re-expression of mathematical information presented in a given representation. Practice converting between verbal descriptions, equations, graphs, and tables.</p>
+    <p data-lang="zh">辨认同一数学信息在不同表示形式下的写法。多练习在文字描述、方程、图像和表格之间相互转换。</p>
   </div>
 </section>
 
@@ -864,27 +878,35 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.2 ===== -->
 <section class="topic" id="topic-7-2">
   <p class="section-label">Topic 7.2</p>
-  <h2>Verifying Solutions for Differential Equations</h2>
+  <h2><span data-lang="en">Verifying Solutions for Differential Equations</span><span data-lang="zh">验证微分方程的解</span></h2>
   <div class="section-divider"></div>
 
-  <p>Before solving differential equations from scratch, it is important to understand what it means for a function to <em>be</em> a solution. Verification uses differentiation—a skill you already have—to confirm that a proposed function satisfies the given equation.</p>
+  <p data-lang="en">Before solving differential equations from scratch, it is important to understand what it means for a function to <em>be</em> a solution. Verification uses differentiation—a skill you already have—to confirm that a proposed function satisfies the given equation.</p>
+  <p data-lang="zh">在从零求解微分方程之前，先要理解什么叫做一个函数<em>是</em>微分方程的解（<code>solution</code>）。验证靠的是求导——一项你已经掌握的技能——把候选函数代入方程，确认两边相等。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.B.1:</strong> Derivatives can be used to verify that a function is a solution to a given differential equation. To verify, substitute the function and its derivative into the equation and check that both sides are equal.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.B.1:</strong> Derivatives can be used to verify that a function is a solution to a given differential equation. To verify, substitute the function and its derivative into the equation and check that both sides are equal.</p>
+  <p data-lang="zh"><strong>FUN-7.B.1：</strong> 可以用导数来验证一个函数是否为给定微分方程的解。验证方法：把函数及其导数代入方程，检查两边是否相等。</p>
 
-  <p><strong>FUN-7.B.2:</strong> There may be infinitely many general solutions to a differential equation. These solutions differ only by a constant of integration.</p>
+  <p data-lang="en"><strong>FUN-7.B.2:</strong> There may be infinitely many general solutions to a differential equation. These solutions differ only by a constant of integration.</p>
+  <p data-lang="zh"><strong>FUN-7.B.2：</strong> 一个微分方程的通解（<code>general solution</code>）可以有无穷多个，它们之间仅差一个积分常数。</p>
 
   <div class="concept-box purple">
-    <strong>Example: Verification Technique</strong>
-    <p>Suppose we claim $y = Ce^{3x}$ is a solution to $\frac{dy}{dx} = 3y$. Differentiate: $\frac{dy}{dx} = 3Ce^{3x} = 3y$. Since the equation is satisfied for every value of $C$, we have infinitely many solutions.</p>
+    <strong data-lang="en">Example: Verification Technique</strong>
+    <strong data-lang="zh">例题：验证方法</strong>
+    <p data-lang="en">Suppose we claim $y = Ce^{3x}$ is a solution to $\frac{dy}{dx} = 3y$. Differentiate: $\frac{dy}{dx} = 3Ce^{3x} = 3y$. Since the equation is satisfied for every value of $C$, we have infinitely many solutions.</p>
+    <p data-lang="zh">设我们声称 $y = Ce^{3x}$ 是 $\frac{dy}{dx} = 3y$ 的解。求导：$\frac{dy}{dx} = 3Ce^{3x} = 3y$。因为对任意 $C$ 方程都成立，所以解有无穷多个。</p>
   </div>
 
-  <h3>Learning Objective FUN-7.B</h3>
-  <p>Verify solutions to differential equations by computing derivatives and substituting back into the original equation.</p>
+  <h3><span data-lang="en">Learning Objective FUN-7.B</span><span data-lang="zh">学习目标 FUN-7.B</span></h3>
+  <p data-lang="en">Verify solutions to differential equations by computing derivatives and substituting back into the original equation.</p>
+  <p data-lang="zh">通过求导并代回原方程的方式，验证微分方程的解。</p>
 
   <div class="concept-box">
-    <strong>Skill Focus: 3.G — Justification</strong>
-    <p>Confirm that solutions are accurate and appropriate. Always show your substitution work explicitly on the AP Exam.</p>
+    <strong data-lang="en">Skill Focus: 3.G — Justification</strong>
+    <strong data-lang="zh">技能重点：3.G — 论证</strong>
+    <p data-lang="en">Confirm that solutions are accurate and appropriate. Always show your substitution work explicitly on the AP Exam.</p>
+    <p data-lang="zh">确认所得到的解是正确且合适的。在 AP 考试中，必须把代入验证的过程明确写出来。</p>
   </div>
 </section>
 
@@ -893,31 +915,42 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.3 ===== -->
 <section class="topic" id="topic-7-3">
   <p class="section-label">Topic 7.3</p>
-  <h2>Sketching Slope Fields</h2>
+  <h2><span data-lang="en">Sketching Slope Fields</span><span data-lang="zh">绘制斜率场（<code>slope field</code>）</span></h2>
   <div class="section-divider"></div>
 
-  <p>A <strong>slope field</strong> (also called a direction field) is a graphical representation of a differential equation. At each point $(x, y)$ in the plane, a short line segment is drawn whose slope equals the value of $\frac{dy}{dx}$ at that point.</p>
+  <p data-lang="en">A <strong>slope field</strong> (also called a direction field) is a graphical representation of a differential equation. At each point $(x, y)$ in the plane, a short line segment is drawn whose slope equals the value of $\frac{dy}{dx}$ at that point.</p>
+  <p data-lang="zh"><strong>斜率场</strong>（又称方向场（<code>direction field</code>））是微分方程的图像表示。在平面上每一点 $(x, y)$ 画一段短线段，线段的斜率（<code>slope</code>）等于该点 $\frac{dy}{dx}$ 的值。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.C.1:</strong> A slope field is a graphical representation of a differential equation on a finite set of points in the plane.</p>
-  <p><strong>FUN-7.C.2:</strong> Slope fields provide information about the behavior of solutions to first-order differential equations.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.C.1:</strong> A slope field is a graphical representation of a differential equation on a finite set of points in the plane.</p>
+  <p data-lang="zh"><strong>FUN-7.C.1：</strong> 斜率场是微分方程在平面上有限网格点处的图像表示。</p>
+  <p data-lang="en"><strong>FUN-7.C.2:</strong> Slope fields provide information about the behavior of solutions to first-order differential equations.</p>
+  <p data-lang="zh"><strong>FUN-7.C.2：</strong> 斜率场可以提供一阶微分方程解曲线（<code>solution curve</code>）的整体行为信息。</p>
 
-  <h3>How to Sketch a Slope Field</h3>
+  <h3><span data-lang="en">How to Sketch a Slope Field</span><span data-lang="zh">如何绘制斜率场</span></h3>
   <ol class="step-list">
-    <li>Choose a grid of points in the $xy$-plane.</li>
-    <li>At each point $(x, y)$, evaluate $\frac{dy}{dx}$ using the differential equation.</li>
-    <li>Draw a short segment at each point with the computed slope.</li>
-    <li>Look for patterns: are slopes constant along rows (depends only on $x$), columns (depends only on $y$), or diagonals?</li>
+    <li data-lang="en">Choose a grid of points in the $xy$-plane.</li>
+    <li data-lang="zh">在 $xy$ 平面上选定一组网格点。</li>
+    <li data-lang="en">At each point $(x, y)$, evaluate $\frac{dy}{dx}$ using the differential equation.</li>
+    <li data-lang="zh">在每个点 $(x, y)$ 用微分方程计算 $\frac{dy}{dx}$ 的值。</li>
+    <li data-lang="en">Draw a short segment at each point with the computed slope.</li>
+    <li data-lang="zh">在该点处画一段短线段，使其斜率等于刚才算出的值。</li>
+    <li data-lang="en">Look for patterns: are slopes constant along rows (depends only on $x$), columns (depends only on $y$), or diagonals?</li>
+    <li data-lang="zh">观察规律：斜率是沿着行（只依赖于 $x$）、沿着列（只依赖于 $y$），还是沿着对角线保持不变？</li>
   </ol>
 
   <div class="concept-box green">
-    <strong>Key Insight</strong>
-    <p>If $\frac{dy}{dx}$ depends only on $y$, slopes will be identical along every horizontal line. If it depends only on $x$, slopes are identical along vertical lines. Recognizing these patterns saves time.</p>
+    <strong data-lang="en">Key Insight</strong>
+    <strong data-lang="zh">关键洞察</strong>
+    <p data-lang="en">If $\frac{dy}{dx}$ depends only on $y$, slopes will be identical along every horizontal line. If it depends only on $x$, slopes are identical along vertical lines. Recognizing these patterns saves time.</p>
+    <p data-lang="zh">如果 $\frac{dy}{dx}$ 仅依赖于 $y$，那么每条水平线上的斜率都相同；如果它仅依赖于 $x$，那么每条竖直线上的斜率都相同。识别这些规律能节省大量时间。</p>
   </div>
 
   <div class="concept-box">
-    <strong>Skill Focus: 2.C — Connecting Representations</strong>
-    <p>Translate between the analytic form of a differential equation and its graphical slope-field representation.</p>
+    <strong data-lang="en">Skill Focus: 2.C — Connecting Representations</strong>
+    <strong data-lang="zh">技能重点：2.C — 多种表示之间的转换</strong>
+    <p data-lang="en">Translate between the analytic form of a differential equation and its graphical slope-field representation.</p>
+    <p data-lang="zh">在微分方程的解析形式与其斜率场图像表示之间相互转换。</p>
   </div>
 </section>
 
@@ -926,25 +959,32 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.4 ===== -->
 <section class="topic" id="topic-7-4">
   <p class="section-label">Topic 7.4</p>
-  <h2>Reasoning Using Slope Fields</h2>
+  <h2><span data-lang="en">Reasoning Using Slope Fields</span><span data-lang="zh">利用斜率场进行推理</span></h2>
   <div class="section-divider"></div>
 
-  <p>Beyond drawing slope fields, you must be able to <em>reason</em> about them: match a slope field to its differential equation, sketch solution curves through given points, and describe the long-term behavior of solutions.</p>
+  <p data-lang="en">Beyond drawing slope fields, you must be able to <em>reason</em> about them: match a slope field to its differential equation, sketch solution curves through given points, and describe the long-term behavior of solutions.</p>
+  <p data-lang="zh">除了会画斜率场，你还要能基于斜率场进行<em>推理</em>：把斜率场与对应的微分方程匹配；过给定点画出解曲线；描述解的长期行为。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.C.3:</strong> Solutions to differential equations are functions or families of functions. A slope field visualizes these families—each curve that follows the direction of the segments is a possible solution.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.C.3:</strong> Solutions to differential equations are functions or families of functions. A slope field visualizes these families—each curve that follows the direction of the segments is a possible solution.</p>
+  <p data-lang="zh"><strong>FUN-7.C.3：</strong> 微分方程的解是函数，或者是一族函数。斜率场把这一族函数可视化——每一条沿着线段方向流动的曲线都是一个可能的解。</p>
 
   <div class="concept-box orange">
-    <strong>Exam Tip</strong>
-    <p>When asked to sketch a solution curve on a slope field, start at the given initial point and trace a smooth curve that is tangent to the segments at every point. Do not draw through segments—follow them.</p>
+    <strong data-lang="en">Exam Tip</strong>
+    <strong data-lang="zh">考试提示</strong>
+    <p data-lang="en">When asked to sketch a solution curve on a slope field, start at the given initial point and trace a smooth curve that is tangent to the segments at every point. Do not draw through segments—follow them.</p>
+    <p data-lang="zh">题目要求在斜率场上画解曲线时，要从给定的初始点出发，画一条光滑曲线，使其在每一点都与该处的线段相切。不要"穿过"线段——要"沿着"它们走。</p>
   </div>
 
-  <h3>Learning Objective FUN-7.C</h3>
-  <p>Estimate solutions to differential equations using slope fields and graphical techniques.</p>
+  <h3><span data-lang="en">Learning Objective FUN-7.C</span><span data-lang="zh">学习目标 FUN-7.C</span></h3>
+  <p data-lang="en">Estimate solutions to differential equations using slope fields and graphical techniques.</p>
+  <p data-lang="zh">利用斜率场和图像技巧估计微分方程的解。</p>
 
   <div class="concept-box">
-    <strong>Skill Focus: 4.D — Communication and Notation</strong>
-    <p>Use appropriate graphing techniques. Ensure your sketched solution curves are smooth and consistent with the slope field.</p>
+    <strong data-lang="en">Skill Focus: 4.D — Communication and Notation</strong>
+    <strong data-lang="zh">技能重点：4.D — 表达与记号</strong>
+    <p data-lang="en">Use appropriate graphing techniques. Ensure your sketched solution curves are smooth and consistent with the slope field.</p>
+    <p data-lang="zh">使用合适的作图方法。保证你画出的解曲线既光滑，又与斜率场一致。</p>
   </div>
 </section>
 
@@ -953,73 +993,107 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.5 ===== -->
 <section class="topic" id="topic-7-5">
   <p class="section-label">Topic 7.5 <span class="bc-tag">BC Only</span></p>
-  <h2>Approximating Solutions Using Euler's Method</h2>
+  <h2><span data-lang="en">Approximating Solutions Using Euler's Method</span><span data-lang="zh">用欧拉方法（<code>Euler's method</code>）近似求解</span></h2>
   <div class="section-divider"></div>
 
-  <p>Euler's method is a numerical technique for approximating the value of a solution to a differential equation at a particular point, using repeated tangent-line approximations.</p>
+  <p data-lang="en">Euler's method is a numerical technique for approximating the value of a solution to a differential equation at a particular point, using repeated tangent-line approximations.</p>
+  <p data-lang="zh">欧拉方法是一种数值方法，通过反复使用切线近似来估算微分方程在某一指定点处解的值。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.C.4 (BC only):</strong> Euler's method provides a procedure for approximating a solution to a differential equation or a point on a solution curve.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.C.4 (BC only):</strong> Euler's method provides a procedure for approximating a solution to a differential equation or a point on a solution curve.</p>
+  <p data-lang="zh"><strong>FUN-7.C.4（仅 BC）：</strong> 欧拉方法给出了一套程序，用来近似求解微分方程或求解曲线上某一点的值。</p>
 
-  <h3>The Algorithm</h3>
-  <p>Given $\frac{dy}{dx} = f(x, y)$, an initial point $(x_0, y_0)$, and a step size $\Delta x$:</p>
+  <h3><span data-lang="en">The Algorithm</span><span data-lang="zh">算法</span></h3>
+  <p data-lang="en">Given $\frac{dy}{dx} = f(x, y)$, an initial point $(x_0, y_0)$, and a step size $\Delta x$:</p>
+  <p data-lang="zh">给定 $\frac{dy}{dx} = f(x, y)$、初始点 $(x_0, y_0)$ 以及步长（<code>step size</code>）$\Delta x$：</p>
   <div class="math-block">$$y_{n+1} = y_n + f(x_n, y_n) \cdot \Delta x$$</div>
   <div class="math-block">$$x_{n+1} = x_n + \Delta x$$</div>
 
   <div class="concept-box purple">
-    <strong>Example: One Step of Euler's Method</strong>
-    <p>Suppose $\frac{dy}{dx} = x + y$, with $(x_0, y_0) = (0, 1)$ and $\Delta x = 0.5$.</p>
-    <p>Slope at $(0, 1)$: $f(0, 1) = 0 + 1 = 1$.</p>
-    <p>New $y$: $y_1 = 1 + 1 \cdot 0.5 = 1.5$. New point: $(0.5,\; 1.5)$.</p>
+    <strong data-lang="en">Example: One Step of Euler's Method</strong>
+    <strong data-lang="zh">例题：欧拉方法的一步</strong>
+    <p data-lang="en">Suppose $\frac{dy}{dx} = x + y$, with $(x_0, y_0) = (0, 1)$ and $\Delta x = 0.5$.</p>
+    <p data-lang="zh">设 $\frac{dy}{dx} = x + y$，$(x_0, y_0) = (0, 1)$，$\Delta x = 0.5$。</p>
+    <p data-lang="en">Slope at $(0, 1)$: $f(0, 1) = 0 + 1 = 1$.</p>
+    <p data-lang="zh">在 $(0, 1)$ 处的斜率：$f(0, 1) = 0 + 1 = 1$。</p>
+    <p data-lang="en">New $y$: $y_1 = 1 + 1 \cdot 0.5 = 1.5$. New point: $(0.5,\; 1.5)$.</p>
+    <p data-lang="zh">新的 $y$ 值：$y_1 = 1 + 1 \cdot 0.5 = 1.5$。新点为 $(0.5,\; 1.5)$。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Exam Tip</strong>
-    <p>Practice Euler's method as an extension of tangent-line approximation, not just as a memorized algorithm. Understanding <em>why</em> it works will help you set up correct computations under time pressure.</p>
+    <strong data-lang="en">Exam Tip</strong>
+    <strong data-lang="zh">考试提示</strong>
+    <p data-lang="en">Practice Euler's method as an extension of tangent-line approximation, not just as a memorized algorithm. Understanding <em>why</em> it works will help you set up correct computations under time pressure.</p>
+    <p data-lang="zh">把欧拉方法当作切线近似的推广来练习，而不是死记硬背的算法。理解它<em>为什么</em>有效，能让你在考场紧迫的时间里把计算列对。</p>
   </div>
 
-  <h3>Bias of the Approximation — Concavity Tells You Over vs Under</h3>
-  <p>Because each Euler step advances along a <em>tangent line</em>, the geometry of tangent-line approximation carries over directly. The relative position of the tangent line versus the true solution curve depends on the curve's concavity.</p>
+  <h3><span data-lang="en">Bias of the Approximation — Concavity Tells You Over vs Under</span><span data-lang="zh">近似的偏差——凹凸性决定高估还是低估</span></h3>
+  <p data-lang="en">Because each Euler step advances along a <em>tangent line</em>, the geometry of tangent-line approximation carries over directly. The relative position of the tangent line versus the true solution curve depends on the curve's concavity.</p>
+  <p data-lang="zh">由于欧拉方法的每一步都沿着<em>切线</em>前进，所以切线近似的几何性质可以直接搬过来。切线相对于真实解曲线的位置，取决于曲线的凹凸性。</p>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">The Bias Rule</strong>
-    <span style="display:block; margin-top:8px;">Suppose the true solution curve $y(x)$ has constant concavity over the step. Then:</span>
-    <ul style="margin-left:18px; margin-top:6px;">
+    <strong style="color: var(--red);" data-lang="en">The Bias Rule</strong>
+    <strong style="color: var(--red);" data-lang="zh">偏差判定规则</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Suppose the true solution curve $y(x)$ has constant concavity over the step. Then:</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">设真实解曲线 $y(x)$ 在该步内凹凸性不变，则：</span>
+    <ul style="margin-left:18px; margin-top:6px;" data-lang="en">
       <li><strong>Concave up</strong> ($y'' &gt; 0$): tangent line lies <em>below</em> the curve → Euler estimate is an <strong>underestimate</strong>.</li>
       <li><strong>Concave down</strong> ($y'' &lt; 0$): tangent line lies <em>above</em> the curve → Euler estimate is an <strong>overestimate</strong>.</li>
+    </ul>
+    <ul style="margin-left:18px; margin-top:6px;" data-lang="zh">
+      <li><strong>凹（向上凹）</strong>（$y'' &gt; 0$）：切线在曲线<em>下方</em> → 欧拉估计为<strong>低估</strong>。</li>
+      <li><strong>凸（向下凹）</strong>（$y'' &lt; 0$）：切线在曲线<em>上方</em> → 欧拉估计为<strong>高估</strong>。</li>
     </ul>
   </div>
 
   <div class="concept-box">
-    <strong>How to find $y''$ from the DE.</strong>
-    <p style="margin-top:6px;">Given $\dfrac{dy}{dx} = f(x, y)$, differentiate <em>both sides</em> with respect to $x$, treating $y$ as a function of $x$:</p>
+    <strong data-lang="en">How to find $y''$ from the DE.</strong>
+    <strong data-lang="zh">如何由微分方程求 $y''$。</strong>
+    <p style="margin-top:6px;" data-lang="en">Given $\dfrac{dy}{dx} = f(x, y)$, differentiate <em>both sides</em> with respect to $x$, treating $y$ as a function of $x$:</p>
+    <p style="margin-top:6px;" data-lang="zh">给定 $\dfrac{dy}{dx} = f(x, y)$，把 $y$ 看作 $x$ 的函数，对<em>两边</em>关于 $x$ 求导：</p>
     $$y'' \;=\; \frac{\partial f}{\partial x} + \frac{\partial f}{\partial y}\cdot y' \;=\; f_x + f_y \cdot f(x,y).$$
-    <p style="margin-top:6px;">Evaluate at the relevant point and read off the sign — that's the bias.</p>
+    <p style="margin-top:6px;" data-lang="en">Evaluate at the relevant point and read off the sign — that's the bias.</p>
+    <p style="margin-top:6px;" data-lang="zh">在相关点处代入求值，看其正负号——这就是偏差方向。</p>
   </div>
 
   <div class="example-card">
     <div class="example-head">
-      <div class="example-kicker">Worked Example</div>
-      <div class="example-tag">Euler Bias via Concavity</div>
+      <div class="example-kicker"><span data-lang="en">Worked Example</span><span data-lang="zh">例题精解</span></div>
+      <div class="example-tag"><span data-lang="en">Euler Bias via Concavity</span><span data-lang="zh">由凹凸性判断欧拉偏差</span></div>
     </div>
-    <p class="example-prompt">Let $y$ satisfy $\dfrac{dy}{dx} = x + y$ with $y(0) = 1$. Use Euler's method with two steps of size $\Delta x = 0.5$ to approximate $y(1)$, and decide whether the approximation is an over- or underestimate.</p>
+    <p class="example-prompt" data-lang="en">Let $y$ satisfy $\dfrac{dy}{dx} = x + y$ with $y(0) = 1$. Use Euler's method with two steps of size $\Delta x = 0.5$ to approximate $y(1)$, and decide whether the approximation is an over- or underestimate.</p>
+    <p class="example-prompt" data-lang="zh">设 $y$ 满足 $\dfrac{dy}{dx} = x + y$，且 $y(0) = 1$。用步长 $\Delta x = 0.5$ 的两步欧拉方法近似 $y(1)$，并判断该近似是高估还是低估。</p>
     <ol class="example-steps">
-      <li><strong>Two Euler steps.</strong>
+      <li data-lang="en"><strong>Two Euler steps.</strong>
         <ul style="margin-left:14px; margin-top:4px;">
           <li>At $(0, 1)$: slope $= 0 + 1 = 1$, so $y_1 = 1 + 1\cdot 0.5 = 1.5$ at $x = 0.5$.</li>
           <li>At $(0.5, 1.5)$: slope $= 0.5 + 1.5 = 2$, so $y_2 = 1.5 + 2\cdot 0.5 = 2.5$ at $x = 1$.</li>
         </ul>
         <p>Euler's approximation: $y(1) \approx 2.5$.</p>
       </li>
-      <li><strong>Compute $y''$ from the DE.</strong> Differentiate $y' = x + y$ implicitly with respect to $x$:
+      <li data-lang="zh"><strong>两步欧拉法。</strong>
+        <ul style="margin-left:14px; margin-top:4px;">
+          <li>在 $(0, 1)$：斜率 $= 0 + 1 = 1$，所以 $y_1 = 1 + 1\cdot 0.5 = 1.5$，对应 $x = 0.5$。</li>
+          <li>在 $(0.5, 1.5)$：斜率 $= 0.5 + 1.5 = 2$，所以 $y_2 = 1.5 + 2\cdot 0.5 = 2.5$，对应 $x = 1$。</li>
+        </ul>
+        <p>欧拉法近似值：$y(1) \approx 2.5$。</p>
+      </li>
+      <li data-lang="en"><strong>Compute $y''$ from the DE.</strong> Differentiate $y' = x + y$ implicitly with respect to $x$:
         $$y'' \;=\; 1 + y' \;=\; 1 + (x + y).$$
       </li>
-      <li><strong>Evaluate the sign of $y''$ on the step.</strong> At every point on or near the solution curve in $0 \le x \le 1$ (where $y \ge 1$), we have $1 + x + y &gt; 0$. So the solution is <strong>concave up</strong> on the entire step.</li>
-      <li><strong>Apply the bias rule.</strong> Concave up → tangent lines lie below the curve → Euler <strong>underestimates</strong>. So the true value of $y(1)$ is greater than $2.5$.</li>
+      <li data-lang="zh"><strong>由微分方程求 $y''$。</strong> 对 $y' = x + y$ 关于 $x$ 隐式求导：
+        $$y'' \;=\; 1 + y' \;=\; 1 + (x + y).$$
+      </li>
+      <li data-lang="en"><strong>Evaluate the sign of $y''$ on the step.</strong> At every point on or near the solution curve in $0 \le x \le 1$ (where $y \ge 1$), we have $1 + x + y &gt; 0$. So the solution is <strong>concave up</strong> on the entire step.</li>
+      <li data-lang="zh"><strong>判断 $y''$ 在该步上的符号。</strong> 在 $0 \le x \le 1$ 解曲线上或其附近的每一点（此处 $y \ge 1$）都有 $1 + x + y &gt; 0$。所以解在整个步长上<strong>向上凹</strong>。</li>
+      <li data-lang="en"><strong>Apply the bias rule.</strong> Concave up → tangent lines lie below the curve → Euler <strong>underestimates</strong>. So the true value of $y(1)$ is greater than $2.5$.</li>
+      <li data-lang="zh"><strong>套用偏差判定规则。</strong> 向上凹 → 切线在曲线下方 → 欧拉法<strong>低估</strong>。因此 $y(1)$ 的真实值大于 $2.5$。</li>
     </ol>
     <div class="example-result">
-      <strong>Verification (for intuition only — not required on the exam)</strong>
-      <p>The exact solution is $y(x) = -x - 1 + 2e^x$, giving $y(1) = -2 + 2e \approx 3.437$. The Euler estimate $2.5$ is indeed below the true value, confirming the underestimate.</p>
+      <strong data-lang="en">Verification (for intuition only — not required on the exam)</strong>
+      <strong data-lang="zh">验证（仅供建立直觉——AP 考试不要求）</strong>
+      <p data-lang="en">The exact solution is $y(x) = -x - 1 + 2e^x$, giving $y(1) = -2 + 2e \approx 3.437$. The Euler estimate $2.5$ is indeed below the true value, confirming the underestimate.</p>
+      <p data-lang="zh">精确解为 $y(x) = -x - 1 + 2e^x$，由此 $y(1) = -2 + 2e \approx 3.437$。欧拉法估计的 $2.5$ 确实小于真实值，验证了"低估"的结论。</p>
     </div>
   </div>
 </section>
@@ -1029,48 +1103,67 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.6 ===== -->
 <section class="topic" id="topic-7-6">
   <p class="section-label">Topic 7.6</p>
-  <h2>Finding General Solutions Using Separation of Variables</h2>
+  <h2><span data-lang="en">Finding General Solutions Using Separation of Variables</span><span data-lang="zh">用分离变量法（<code>separation of variables</code>）求通解</span></h2>
   <div class="section-divider"></div>
 
-  <p>Separation of variables is the primary analytic technique for solving first-order differential equations in AP Calculus. The strategy is to rearrange the equation so that each variable appears on only one side, then integrate both sides.</p>
+  <p data-lang="en">Separation of variables is the primary analytic technique for solving first-order differential equations in AP Calculus. The strategy is to rearrange the equation so that each variable appears on only one side, then integrate both sides.</p>
+  <p data-lang="zh">分离变量法是 AP Calculus 中求解一阶微分方程最主要的解析方法。策略是把方程重排，使每个变量都只出现在等式的一侧，然后两边同时积分（<code>integrate</code>）。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.D.1:</strong> Some differential equations can be solved by separation of variables.</p>
-  <p><strong>FUN-7.D.2:</strong> Antidifferentiation can be used to find general solutions to differential equations.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.D.1:</strong> Some differential equations can be solved by separation of variables.</p>
+  <p data-lang="zh"><strong>FUN-7.D.1：</strong> 部分微分方程可以用分离变量法求解。</p>
+  <p data-lang="en"><strong>FUN-7.D.2:</strong> Antidifferentiation can be used to find general solutions to differential equations.</p>
+  <p data-lang="zh"><strong>FUN-7.D.2：</strong> 可以利用原函数（<code>antiderivative</code>）来求微分方程的通解。</p>
 
-  <h3>The Procedure</h3>
+  <h3><span data-lang="en">The Procedure</span><span data-lang="zh">解题步骤</span></h3>
   <ol class="step-list">
-    <li><strong>Separate</strong> the variables: move all $y$ terms (including $dy$) to one side and all $x$ terms (including $dx$) to the other.</li>
-    <li><strong>Integrate</strong> both sides. Do not forget the constant of integration—place $+ C$ on one side only.</li>
-    <li><strong>Solve</strong> for $y$ if possible, leaving the answer as a general solution.</li>
+    <li data-lang="en"><strong>Separate</strong> the variables: move all $y$ terms (including $dy$) to one side and all $x$ terms (including $dx$) to the other.</li>
+    <li data-lang="zh"><strong>分离</strong>变量：把所有含 $y$ 的项（包括 $dy$）移到一边，所有含 $x$ 的项（包括 $dx$）移到另一边。</li>
+    <li data-lang="en"><strong>Integrate</strong> both sides. Do not forget the constant of integration—place $+ C$ on one side only.</li>
+    <li data-lang="zh">两边同时<strong>积分</strong>。不要忘记积分常数——只在一边加 $+ C$。</li>
+    <li data-lang="en"><strong>Solve</strong> for $y$ if possible, leaving the answer as a general solution.</li>
+    <li data-lang="zh">尽量<strong>解出</strong> $y$，所得即为通解。</li>
   </ol>
 
   <div class="math-block">$$\frac{dy}{dx} = g(x) \cdot h(y) \implies \int \frac{1}{h(y)}\, dy = \int g(x)\, dx + C$$</div>
 
   <div class="concept-box red">
-    <strong>Critical Warning</strong>
-    <p>Forgetting the constant of integration or failing to properly separate variables before integrating are among the most penalized errors on the AP Exam. Always add $+ C$ immediately after integrating.</p>
+    <strong data-lang="en">Critical Warning</strong>
+    <strong data-lang="zh">重要警告</strong>
+    <p data-lang="en">Forgetting the constant of integration or failing to properly separate variables before integrating are among the most penalized errors on the AP Exam. Always add $+ C$ immediately after integrating.</p>
+    <p data-lang="zh">漏写积分常数、或者积分前没把变量分离干净，都是 AP 考试中最常被扣分的错误。每次积分后立刻加 $+ C$。</p>
   </div>
 
   <div class="example-card">
     <div class="example-head">
-      <div class="example-kicker">Worked Example</div>
-      <div class="example-tag">Separation of Variables</div>
+      <div class="example-kicker"><span data-lang="en">Worked Example</span><span data-lang="zh">例题精解</span></div>
+      <div class="example-tag"><span data-lang="en">Separation of Variables</span><span data-lang="zh">分离变量法</span></div>
     </div>
-    <p class="example-prompt">Solve the differential equation \(\dfrac{dy}{dx} = \dfrac{x^2}{y}\).</p>
+    <p class="example-prompt" data-lang="en">Solve the differential equation \(\dfrac{dy}{dx} = \dfrac{x^2}{y}\).</p>
+    <p class="example-prompt" data-lang="zh">求解微分方程 \(\dfrac{dy}{dx} = \dfrac{x^2}{y}\)。</p>
     <ol class="example-steps">
-      <li>Separate the variables.
+      <li data-lang="en">Separate the variables.
         <div class="math-block">$$y\,dy = x^2\,dx$$</div>
       </li>
-      <li>Integrate both sides.
+      <li data-lang="zh">分离变量。
+        <div class="math-block">$$y\,dy = x^2\,dx$$</div>
+      </li>
+      <li data-lang="en">Integrate both sides.
         <div class="math-block">$$\int y\,dy = \int x^2\,dx \quad \Rightarrow \quad \frac{1}{2}y^2 = \frac{1}{3}x^3 + C$$</div>
       </li>
-      <li>Write the family of general solutions in a cleaner form.
+      <li data-lang="zh">两边同时积分。
+        <div class="math-block">$$\int y\,dy = \int x^2\,dx \quad \Rightarrow \quad \frac{1}{2}y^2 = \frac{1}{3}x^3 + C$$</div>
+      </li>
+      <li data-lang="en">Write the family of general solutions in a cleaner form.
+        <div class="math-block">$$y^2 = \frac{2}{3}x^3 + C$$</div>
+      </li>
+      <li data-lang="zh">把这一族通解写成更整洁的形式。
         <div class="math-block">$$y^2 = \frac{2}{3}x^3 + C$$</div>
       </li>
     </ol>
     <div class="example-result">
-      <strong>Final Result</strong>
+      <strong data-lang="en">Final Result</strong>
+      <strong data-lang="zh">最终结果</strong>
       <div class="math-block">$$y^2 = \frac{2}{3}x^3 + C$$</div>
     </div>
   </div>
@@ -1081,54 +1174,78 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.7 ===== -->
 <section class="topic" id="topic-7-7">
   <p class="section-label">Topic 7.7</p>
-  <h2>Finding Particular Solutions Using Initial Conditions</h2>
+  <h2><span data-lang="en">Finding Particular Solutions Using Initial Conditions</span><span data-lang="zh">利用初始条件（<code>initial condition</code>）求特解（<code>particular solution</code>）</span></h2>
   <div class="section-divider"></div>
 
-  <p>A <strong>particular solution</strong> to a differential equation is a single function chosen from the family of general solutions by using an initial condition—a known point on the solution curve.</p>
+  <p data-lang="en">A <strong>particular solution</strong> to a differential equation is a single function chosen from the family of general solutions by using an initial condition—a known point on the solution curve.</p>
+  <p data-lang="zh">微分方程的<strong>特解</strong>是从通解所代表的函数族中，借助一个初始条件（即解曲线上一个已知点）挑选出来的那一个具体函数。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.E.1:</strong> A general solution may describe infinitely many solutions to a differential equation. There is only one particular solution passing through a given point.</p>
-  <p><strong>FUN-7.E.2:</strong> The function $F$ defined by $F(x) = y_0 + \int_a^x f(t)\, dt$ is a particular solution to the differential equation $\frac{dy}{dx} = f(x)$, satisfying $F(a) = y_0$.</p>
-  <p><strong>FUN-7.E.3:</strong> Solutions to differential equations may be subject to domain restrictions.</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.E.1:</strong> A general solution may describe infinitely many solutions to a differential equation. There is only one particular solution passing through a given point.</p>
+  <p data-lang="zh"><strong>FUN-7.E.1：</strong> 通解可以描述微分方程的无穷多个解，但经过某个给定点的特解只有一个。</p>
+  <p data-lang="en"><strong>FUN-7.E.2:</strong> The function $F$ defined by $F(x) = y_0 + \int_a^x f(t)\, dt$ is a particular solution to the differential equation $\frac{dy}{dx} = f(x)$, satisfying $F(a) = y_0$.</p>
+  <p data-lang="zh"><strong>FUN-7.E.2：</strong> 由 $F(x) = y_0 + \int_a^x f(t)\, dt$ 定义的函数 $F$ 是微分方程 $\frac{dy}{dx} = f(x)$ 的一个特解，且满足 $F(a) = y_0$。</p>
+  <p data-lang="en"><strong>FUN-7.E.3:</strong> Solutions to differential equations may be subject to domain restrictions.</p>
+  <p data-lang="zh"><strong>FUN-7.E.3：</strong> 微分方程的解可能存在定义域限制。</p>
 
-  <h3>The Full Solution Strategy</h3>
+  <h3><span data-lang="en">The Full Solution Strategy</span><span data-lang="zh">完整解题策略</span></h3>
   <ol class="step-list">
-    <li><strong>Separate</strong> the variables.</li>
-    <li><strong>Integrate</strong> both sides (include $+ C$).</li>
-    <li><strong>Apply the initial condition</strong> to solve for $C$.</li>
-    <li><strong>Write the particular solution</strong> and check domain restrictions.</li>
+    <li data-lang="en"><strong>Separate</strong> the variables.</li>
+    <li data-lang="zh"><strong>分离</strong>变量。</li>
+    <li data-lang="en"><strong>Integrate</strong> both sides (include $+ C$).</li>
+    <li data-lang="zh">两边同时<strong>积分</strong>（记得加 $+ C$）。</li>
+    <li data-lang="en"><strong>Apply the initial condition</strong> to solve for $C$.</li>
+    <li data-lang="zh"><strong>代入初始条件</strong>，求出 $C$。</li>
+    <li data-lang="en"><strong>Write the particular solution</strong> and check domain restrictions.</li>
+    <li data-lang="zh">写出<strong>特解</strong>，并检查定义域限制。</li>
   </ol>
 
   <div class="concept-box green">
-    <strong>Key Insight</strong>
-    <p>Always apply the initial condition <em>before</em> solving for $y$ when possible. This simplifies the algebra and reduces opportunities for error, especially with logarithmic or absolute-value expressions.</p>
+    <strong data-lang="en">Key Insight</strong>
+    <strong data-lang="zh">关键洞察</strong>
+    <p data-lang="en">Always apply the initial condition <em>before</em> solving for $y$ when possible. This simplifies the algebra and reduces opportunities for error, especially with logarithmic or absolute-value expressions.</p>
+    <p data-lang="zh">能够在解出 $y$ <em>之前</em>先代入初始条件，就先代入。这样能简化代数过程、减少出错机会，对含对数或绝对值的表达式尤其有用。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Domain Restrictions</strong>
-    <p>After finding a particular solution, consider whether the solution is valid for all $x$ or whether the domain must be restricted. For instance, if your solution contains $\ln|y|$, you must determine the sign of $y$ from the initial condition and restrict accordingly.</p>
+    <strong data-lang="en">Domain Restrictions</strong>
+    <strong data-lang="zh">定义域限制</strong>
+    <p data-lang="en">After finding a particular solution, consider whether the solution is valid for all $x$ or whether the domain must be restricted. For instance, if your solution contains $\ln|y|$, you must determine the sign of $y$ from the initial condition and restrict accordingly.</p>
+    <p data-lang="zh">求出特解后，要考虑它是否对所有 $x$ 都有意义，还是必须限制定义域。例如，若解中含 $\ln|y|$，就要由初始条件确定 $y$ 的符号，并据此限制定义域。</p>
   </div>
 
   <div class="example-card">
     <div class="example-head">
-      <div class="example-kicker">Worked Example</div>
-      <div class="example-tag">Initial Condition</div>
+      <div class="example-kicker"><span data-lang="en">Worked Example</span><span data-lang="zh">例题精解</span></div>
+      <div class="example-tag"><span data-lang="en">Initial Condition</span><span data-lang="zh">初始条件</span></div>
     </div>
-    <p class="example-prompt">Solve \(\dfrac{dy}{dx} = \dfrac{x}{y}\) given \(y(0)=2\).</p>
+    <p class="example-prompt" data-lang="en">Solve \(\dfrac{dy}{dx} = \dfrac{x}{y}\) given \(y(0)=2\).</p>
+    <p class="example-prompt" data-lang="zh">已知 \(y(0)=2\)，求解 \(\dfrac{dy}{dx} = \dfrac{x}{y}\)。</p>
     <ol class="example-steps">
-      <li>Separate and integrate.
+      <li data-lang="en">Separate and integrate.
         <div class="math-block">$$y\,dy = x\,dx \quad \Rightarrow \quad \int y\,dy = \int x\,dx$$</div>
         <div class="math-block">$$\frac{1}{2}y^2 = \frac{1}{2}x^2 + C$$</div>
       </li>
-      <li>Use the initial condition \((0,2)\).
+      <li data-lang="zh">分离变量并积分。
+        <div class="math-block">$$y\,dy = x\,dx \quad \Rightarrow \quad \int y\,dy = \int x\,dx$$</div>
+        <div class="math-block">$$\frac{1}{2}y^2 = \frac{1}{2}x^2 + C$$</div>
+      </li>
+      <li data-lang="en">Use the initial condition \((0,2)\).
         <div class="math-block">$$\frac{1}{2}(2)^2 = \frac{1}{2}(0)^2 + C \quad \Rightarrow \quad C=2$$</div>
       </li>
-      <li>Substitute back and solve for the branch that matches the initial condition.
+      <li data-lang="zh">代入初始条件 \((0,2)\)。
+        <div class="math-block">$$\frac{1}{2}(2)^2 = \frac{1}{2}(0)^2 + C \quad \Rightarrow \quad C=2$$</div>
+      </li>
+      <li data-lang="en">Substitute back and solve for the branch that matches the initial condition.
+        <div class="math-block">$$y^2 = x^2 + 4 \quad \Rightarrow \quad y = \sqrt{x^2 + 4}$$</div>
+      </li>
+      <li data-lang="zh">代回并选取与初始条件相符的分支。
         <div class="math-block">$$y^2 = x^2 + 4 \quad \Rightarrow \quad y = \sqrt{x^2 + 4}$$</div>
       </li>
     </ol>
     <div class="example-result">
-      <strong>Final Result</strong>
+      <strong data-lang="en">Final Result</strong>
+      <strong data-lang="zh">最终结果</strong>
       <div class="math-block">$$y = \sqrt{x^2 + 4}$$</div>
     </div>
   </div>
@@ -1139,27 +1256,36 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.8 ===== -->
 <section class="topic" id="topic-7-8">
   <p class="section-label">Topic 7.8</p>
-  <h2>Exponential Models with Differential Equations</h2>
+  <h2><span data-lang="en">Exponential Models with Differential Equations</span><span data-lang="zh">基于微分方程的指数模型（<code>exponential model</code>）</span></h2>
   <div class="section-divider"></div>
 
-  <p>Exponential growth and decay arise from one of the most important differential equations in applied mathematics: "the rate of change of a quantity is proportional to the size of the quantity."</p>
+  <p data-lang="en">Exponential growth and decay arise from one of the most important differential equations in applied mathematics: "the rate of change of a quantity is proportional to the size of the quantity."</p>
+  <p data-lang="zh">指数增长（<code>exponential growth</code>）与指数衰减（<code>exponential decay</code>）来源于应用数学中最重要的一类微分方程：" 一个量的变化率与该量自身的大小成正比 "。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.F.1:</strong> Specific applications of finding general and particular solutions to differential equations include motion along a line and exponential growth and decay.</p>
-  <p><strong>FUN-7.F.2:</strong> The model for exponential growth and decay that arises from the statement "the rate of change of a quantity is proportional to the size of the quantity" is:</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.F.1:</strong> Specific applications of finding general and particular solutions to differential equations include motion along a line and exponential growth and decay.</p>
+  <p data-lang="zh"><strong>FUN-7.F.1：</strong> 求解微分方程通解与特解的典型应用包括直线运动以及指数增长与衰减。</p>
+  <p data-lang="en"><strong>FUN-7.F.2:</strong> The model for exponential growth and decay that arises from the statement "the rate of change of a quantity is proportional to the size of the quantity" is:</p>
+  <p data-lang="zh"><strong>FUN-7.F.2：</strong> 由命题"某量的变化率与该量大小成正比"得到的指数增长／衰减模型为：</p>
   <div class="math-block">$$\frac{dy}{dt} = ky$$</div>
-  <p><strong>FUN-7.G.1:</strong> The exponential growth and decay model, $\frac{dy}{dt} = ky$, with initial condition $y = y_0$ when $t = 0$, has solutions of the form:</p>
+  <p data-lang="en"><strong>FUN-7.G.1:</strong> The exponential growth and decay model, $\frac{dy}{dt} = ky$, with initial condition $y = y_0$ when $t = 0$, has solutions of the form:</p>
+  <p data-lang="zh"><strong>FUN-7.G.1：</strong> 指数增长／衰减模型 $\frac{dy}{dt} = ky$，在初始条件 $t = 0$ 时 $y = y_0$ 下，其解形式为：</p>
   <div class="math-block">$$y = y_0 e^{kt}$$</div>
-  <p>If $k > 0$, the quantity grows exponentially. If $k < 0$, the quantity decays exponentially.</p>
+  <p data-lang="en">If $k > 0$, the quantity grows exponentially. If $k < 0$, the quantity decays exponentially.</p>
+  <p data-lang="zh">若 $k > 0$，该量按指数规律增长；若 $k < 0$，则按指数规律衰减。</p>
 
   <div class="concept-box green">
-    <strong>Key Insight</strong>
-    <p>You should recognize $\frac{dy}{dt} = ky$ on sight and immediately know its solution is $y = y_0 e^{kt}$. The AP Exam expects you to use this result directly without re-deriving it each time.</p>
+    <strong data-lang="en">Key Insight</strong>
+    <strong data-lang="zh">关键洞察</strong>
+    <p data-lang="en">You should recognize $\frac{dy}{dt} = ky$ on sight and immediately know its solution is $y = y_0 e^{kt}$. The AP Exam expects you to use this result directly without re-deriving it each time.</p>
+    <p data-lang="zh">看到 $\frac{dy}{dt} = ky$ 必须立刻识别，并直接给出解 $y = y_0 e^{kt}$。AP 考试期望你直接调用这一结果，而不是每次都重新推导。</p>
   </div>
 
   <div class="concept-box">
-    <strong>Skill Focus: 3.G — Justification</strong>
-    <p>Confirm that solutions are accurate by substituting back: if $y = y_0 e^{kt}$, then $\frac{dy}{dt} = ky_0 e^{kt} = ky$. ✓</p>
+    <strong data-lang="en">Skill Focus: 3.G — Justification</strong>
+    <strong data-lang="zh">技能重点：3.G — 论证</strong>
+    <p data-lang="en">Confirm that solutions are accurate by substituting back: if $y = y_0 e^{kt}$, then $\frac{dy}{dt} = ky_0 e^{kt} = ky$. ✓</p>
+    <p data-lang="zh">通过代回验证解的正确性：若 $y = y_0 e^{kt}$，则 $\frac{dy}{dt} = ky_0 e^{kt} = ky$。 ✓</p>
   </div>
 </section>
 
@@ -1168,80 +1294,113 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <!-- ===== TOPIC 7.9 ===== -->
 <section class="topic" id="topic-7-9">
   <p class="section-label">Topic 7.9 <span class="bc-tag">BC Only</span></p>
-  <h2>Logistic Models with Differential Equations</h2>
+  <h2><span data-lang="en">Logistic Models with Differential Equations</span><span data-lang="zh">基于微分方程的逻辑斯蒂模型（<code>logistic model</code>）</span></h2>
   <div class="section-divider"></div>
 
-  <p>The logistic model extends exponential growth by introducing a <strong>carrying capacity</strong>—a maximum sustainable population. As the population approaches this limit, growth slows and eventually levels off.</p>
+  <p data-lang="en">The logistic model extends exponential growth by introducing a <strong>carrying capacity</strong>—a maximum sustainable population. As the population approaches this limit, growth slows and eventually levels off.</p>
+  <p data-lang="zh">逻辑斯蒂模型在指数增长的基础上引入了<strong>环境容量</strong>（<code>carrying capacity</code>）——一个种群可持续维持的最大规模。当种群接近这一上限时，增长速度逐渐放缓，最终趋于平稳。</p>
 
-  <h3>What You Need to Know</h3>
-  <p><strong>FUN-7.H.1 (BC only):</strong> The model for logistic growth arises from the statement "the rate of change of a quantity is jointly proportional to the size of the quantity and the difference between the quantity and the carrying capacity":</p>
+  <h3><span data-lang="en">What You Need to Know</span><span data-lang="zh">你需要掌握什么</span></h3>
+  <p data-lang="en"><strong>FUN-7.H.1 (BC only):</strong> The model for logistic growth arises from the statement "the rate of change of a quantity is jointly proportional to the size of the quantity and the difference between the quantity and the carrying capacity":</p>
+  <p data-lang="zh"><strong>FUN-7.H.1（仅 BC）：</strong> 逻辑斯蒂增长模型来源于命题"某量的变化率与该量的大小以及该量与环境容量之差，联合成正比"：</p>
   <div class="math-block">$$\frac{dy}{dt} = ky(a - y)$$</div>
-  <p>where $a$ is the carrying capacity.</p>
+  <p data-lang="en">where $a$ is the carrying capacity.</p>
+  <p data-lang="zh">其中 $a$ 即为环境容量。</p>
 
-  <p><strong>FUN-7.H.2:</strong> The logistic differential equation and initial conditions can be interpreted without solving the differential equation.</p>
-  <p><strong>FUN-7.H.3:</strong> The limiting value (carrying capacity) of a logistic differential equation as $t \to \infty$ can be determined using the logistic growth model and initial conditions.</p>
-  <p><strong>FUN-7.H.4:</strong> The value of the dependent variable at the point when it is changing fastest can be determined using the logistic growth model and initial conditions.</p>
+  <p data-lang="en"><strong>FUN-7.H.2:</strong> The logistic differential equation and initial conditions can be interpreted without solving the differential equation.</p>
+  <p data-lang="zh"><strong>FUN-7.H.2：</strong> 不必真正求解逻辑斯蒂微分方程，仅凭方程本身和初始条件即可作出解释。</p>
+  <p data-lang="en"><strong>FUN-7.H.3:</strong> The limiting value (carrying capacity) of a logistic differential equation as $t \to \infty$ can be determined using the logistic growth model and initial conditions.</p>
+  <p data-lang="zh"><strong>FUN-7.H.3：</strong> 逻辑斯蒂微分方程在 $t \to \infty$ 时的极限值（即环境容量），可以直接由模型和初始条件确定。</p>
+  <p data-lang="en"><strong>FUN-7.H.4:</strong> The value of the dependent variable at the point when it is changing fastest can be determined using the logistic growth model and initial conditions.</p>
+  <p data-lang="zh"><strong>FUN-7.H.4：</strong> 因变量在变化最快时刻所取的值，可以直接由模型和初始条件确定。</p>
 
   <div class="concept-box purple">
-    <strong>Important Properties of the Logistic Model</strong>
-    <p>For $\frac{dy}{dt} = ky(a - y)$: the carrying capacity is $a$; the population grows fastest when $y = \frac{a}{2}$; the graph of $y(t)$ has an inflection point at $y = \frac{a}{2}$; and the solution curve is sigmoidal (S-shaped).</p>
+    <strong data-lang="en">Important Properties of the Logistic Model</strong>
+    <strong data-lang="zh">逻辑斯蒂模型的重要性质</strong>
+    <p data-lang="en">For $\frac{dy}{dt} = ky(a - y)$: the carrying capacity is $a$; the population grows fastest when $y = \frac{a}{2}$; the graph of $y(t)$ has an inflection point at $y = \frac{a}{2}$; and the solution curve is sigmoidal (S-shaped).</p>
+    <p data-lang="zh">对 $\frac{dy}{dt} = ky(a - y)$：环境容量为 $a$；种群在 $y = \frac{a}{2}$ 时增长最快；$y(t)$ 的图像在 $y = \frac{a}{2}$ 处有一个拐点；解曲线呈 S 形（sigmoid）。</p>
   </div>
 
   <div class="concept-box">
-    <strong>Skill Focus: 3.F — Justification</strong>
-    <p>Explain the meaning of mathematical solutions in context. Be prepared to interpret what the carrying capacity, growth rate, and inflection point mean in a real-world scenario.</p>
+    <strong data-lang="en">Skill Focus: 3.F — Justification</strong>
+    <strong data-lang="zh">技能重点：3.F — 论证</strong>
+    <p data-lang="en">Explain the meaning of mathematical solutions in context. Be prepared to interpret what the carrying capacity, growth rate, and inflection point mean in a real-world scenario.</p>
+    <p data-lang="zh">结合情境解释数学解的含义。要能说明环境容量、增长率与拐点在真实情境中各自代表什么。</p>
   </div>
 
   <div class="example-card">
     <div class="example-head">
-      <div class="example-kicker">Worked Example</div>
-      <div class="example-tag">Logistic Interpretation</div>
+      <div class="example-kicker"><span data-lang="en">Worked Example</span><span data-lang="zh">例题精解</span></div>
+      <div class="example-tag"><span data-lang="en">Logistic Interpretation</span><span data-lang="zh">逻辑斯蒂模型的解释</span></div>
     </div>
-    <p class="example-prompt">For \(\dfrac{dy}{dt}=0.5y(100-y)\), identify the carrying capacity and the population level where growth is fastest.</p>
+    <p class="example-prompt" data-lang="en">For \(\dfrac{dy}{dt}=0.5y(100-y)\), identify the carrying capacity and the population level where growth is fastest.</p>
+    <p class="example-prompt" data-lang="zh">对 \(\dfrac{dy}{dt}=0.5y(100-y)\)，求出环境容量以及种群增长最快时的种群规模。</p>
     <ol class="example-steps">
-      <li>Match the equation to the logistic form \(\dfrac{dy}{dt}=ky(a-y)\). Here, \(a=100\).</li>
-      <li>The carrying capacity is therefore
+      <li data-lang="en">Match the equation to the logistic form \(\dfrac{dy}{dt}=ky(a-y)\). Here, \(a=100\).</li>
+      <li data-lang="zh">把方程与逻辑斯蒂标准形式 \(\dfrac{dy}{dt}=ky(a-y)\) 对应，此处 \(a=100\)。</li>
+      <li data-lang="en">The carrying capacity is therefore
         <div class="math-block">$$a=100$$</div>
       </li>
-      <li>Logistic growth is fastest at half of the carrying capacity.
+      <li data-lang="zh">因此环境容量为
+        <div class="math-block">$$a=100$$</div>
+      </li>
+      <li data-lang="en">Logistic growth is fastest at half of the carrying capacity.
+        <div class="math-block">$$y=\frac{a}{2}=\frac{100}{2}=50$$</div>
+      </li>
+      <li data-lang="zh">逻辑斯蒂增长在环境容量的一半处最快。
         <div class="math-block">$$y=\frac{a}{2}=\frac{100}{2}=50$$</div>
       </li>
     </ol>
     <div class="example-result">
-      <strong>Interpretation</strong>
-      <p>The population levels off near <strong>100</strong>, and the curve is steepest when the population reaches <strong>50</strong>.</p>
+      <strong data-lang="en">Interpretation</strong>
+      <strong data-lang="zh">解释</strong>
+      <p data-lang="en">The population levels off near <strong>100</strong>, and the curve is steepest when the population reaches <strong>50</strong>.</p>
+      <p data-lang="zh">种群最终趋近 <strong>100</strong>，而当种群达到 <strong>50</strong> 时曲线最陡。</p>
     </div>
   </div>
 
   <details style="margin-top: 18px;">
-    <summary><strong>Derivation — Why the Inflection Lies at $y = a/2$</strong></summary>
+    <summary><strong><span data-lang="en">Derivation — Why the Inflection Lies at $y = a/2$</span><span data-lang="zh">推导——为什么拐点恰好在 $y = a/2$</span></strong></summary>
     <div class="detail-body">
-      <p>The "growth fastest at $a/2$" claim isn't a coincidence — it falls out of computing $\dfrac{d^{2}y}{dt^{2}}$ for the logistic ODE and reading off where it changes sign.</p>
+      <p data-lang="en">The "growth fastest at $a/2$" claim isn't a coincidence — it falls out of computing $\dfrac{d^{2}y}{dt^{2}}$ for the logistic ODE and reading off where it changes sign.</p>
+      <p data-lang="zh">"在 $a/2$ 处增长最快"并不是巧合——只要对逻辑斯蒂常微分方程（<code>ODE</code>）算出 $\dfrac{d^{2}y}{dt^{2}}$，再看它在哪里变号，结论自然就出来了。</p>
       <div class="worked-solution">
-        <p><strong>Step 1 — Start from the logistic equation.</strong></p>
+        <p data-lang="en"><strong>Step 1 — Start from the logistic equation.</strong></p>
+        <p data-lang="zh"><strong>第 1 步 ——从逻辑斯蒂方程出发。</strong></p>
         $$\frac{dy}{dt} \;=\; k\,y\,(a - y).$$
-        <p><strong>Step 2 — Differentiate both sides with respect to $t$.</strong> Treat $y$ as a function of $t$ and apply the product rule on the right:</p>
+        <p data-lang="en"><strong>Step 2 — Differentiate both sides with respect to $t$.</strong> Treat $y$ as a function of $t$ and apply the product rule on the right:</p>
+        <p data-lang="zh"><strong>第 2 步 ——两边对 $t$ 求导。</strong> 将 $y$ 视为 $t$ 的函数，对右边使用乘积法则：</p>
         $$\begin{aligned}
         \frac{d^{2}y}{dt^{2}} &= k\,\frac{d}{dt}\bigl[\,y\,(a-y)\,\bigr] \\[4pt]
         &= k\,\bigl[\,(a-y)\cdot\tfrac{dy}{dt} + y\cdot(-1)\cdot\tfrac{dy}{dt}\,\bigr] \\[4pt]
         &= k\,\frac{dy}{dt}\,\bigl[\,(a - y) - y\,\bigr] \\[4pt]
         &= k\,\frac{dy}{dt}\,(a - 2y).
         \end{aligned}$$
-        <p><strong>Step 3 — Substitute the original $\dfrac{dy}{dt}$ back in</strong> to get $\dfrac{d^{2}y}{dt^{2}}$ purely as a function of $y$:</p>
+        <p data-lang="en"><strong>Step 3 — Substitute the original $\dfrac{dy}{dt}$ back in</strong> to get $\dfrac{d^{2}y}{dt^{2}}$ purely as a function of $y$:</p>
+        <p data-lang="zh"><strong>第 3 步 ——把原方程中的 $\dfrac{dy}{dt}$ 代回去</strong>，使 $\dfrac{d^{2}y}{dt^{2}}$ 变成纯粹关于 $y$ 的函数：</p>
         $$\frac{d^{2}y}{dt^{2}} \;=\; k\,\bigl[\,k\,y\,(a-y)\,\bigr]\,(a - 2y) \;=\; k^{2}\,y\,(a-y)\,(a-2y).$$
-        <p><strong>Step 4 — Sign analysis</strong> for $0 &lt; y &lt; a$ (the only physically meaningful range for a population). Throughout this range $y &gt; 0$ and $a - y &gt; 0$, so the sign of $\dfrac{d^{2}y}{dt^{2}}$ is governed entirely by $(a - 2y)$:</p>
-        <ul style="margin-left:18px; margin-top:4px;">
+        <p data-lang="en"><strong>Step 4 — Sign analysis</strong> for $0 &lt; y &lt; a$ (the only physically meaningful range for a population). Throughout this range $y &gt; 0$ and $a - y &gt; 0$, so the sign of $\dfrac{d^{2}y}{dt^{2}}$ is governed entirely by $(a - 2y)$:</p>
+        <p data-lang="zh"><strong>第 4 步 ——符号分析。</strong> 在 $0 &lt; y &lt; a$ 范围内（这是种群唯一有物理意义的范围），$y &gt; 0$ 且 $a - y &gt; 0$，因此 $\dfrac{d^{2}y}{dt^{2}}$ 的符号完全由 $(a - 2y)$ 决定：</p>
+        <ul style="margin-left:18px; margin-top:4px;" data-lang="en">
           <li>If $y &lt; a/2$: $a - 2y &gt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &gt; 0$ → <strong>concave up</strong>, growth accelerating.</li>
           <li>If $y = a/2$: $a - 2y = 0$ → $\dfrac{d^{2}y}{dt^{2}} = 0$ and changes sign → <strong>inflection point</strong>.</li>
           <li>If $y &gt; a/2$: $a - 2y &lt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &lt; 0$ → <strong>concave down</strong>, growth decelerating.</li>
         </ul>
-        <p style="margin-top:8px;"><strong>Conclusion:</strong> the unique inflection point of the logistic curve sits exactly at $y = a/2$, half the carrying capacity. The same $y = a/2$ is also where $\dfrac{dy}{dt}$ is maximized — making it the moment of fastest growth. $\;\Box$</p>
+        <ul style="margin-left:18px; margin-top:4px;" data-lang="zh">
+          <li>若 $y &lt; a/2$：$a - 2y &gt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &gt; 0$ → <strong>向上凹</strong>，增长加速。</li>
+          <li>若 $y = a/2$：$a - 2y = 0$ → $\dfrac{d^{2}y}{dt^{2}} = 0$ 且变号 → <strong>拐点</strong>。</li>
+          <li>若 $y &gt; a/2$：$a - 2y &lt; 0$ → $\dfrac{d^{2}y}{dt^{2}} &lt; 0$ → <strong>向下凹</strong>，增长减速。</li>
+        </ul>
+        <p style="margin-top:8px;" data-lang="en"><strong>Conclusion:</strong> the unique inflection point of the logistic curve sits exactly at $y = a/2$, half the carrying capacity. The same $y = a/2$ is also where $\dfrac{dy}{dt}$ is maximized — making it the moment of fastest growth. $\;\Box$</p>
+        <p style="margin-top:8px;" data-lang="zh"><strong>结论：</strong> 逻辑斯蒂曲线的唯一拐点恰好位于 $y = a/2$，即环境容量的一半。同一处 $y = a/2$ 也是 $\dfrac{dy}{dt}$ 取最大值的点——因此是增长最快的时刻。 $\;\Box$</p>
       </div>
-      <div class="concept-box green"><strong>Why the two coincide.</strong>
-        <p style="margin-top:6px;">$\dfrac{d^{2}y}{dt^{2}} = 0$ is exactly the condition that $\dfrac{dy}{dt}$ stops increasing and starts decreasing — i.e., the maximum of $\dfrac{dy}{dt}$. So the inflection point of $y(t)$ <em>is</em> the moment of fastest growth, and both occur at the same value of $y$.</p>
+      <div class="concept-box green"><strong data-lang="en">Why the two coincide.</strong><strong data-lang="zh">两者为何重合。</strong>
+        <p style="margin-top:6px;" data-lang="en">$\dfrac{d^{2}y}{dt^{2}} = 0$ is exactly the condition that $\dfrac{dy}{dt}$ stops increasing and starts decreasing — i.e., the maximum of $\dfrac{dy}{dt}$. So the inflection point of $y(t)$ <em>is</em> the moment of fastest growth, and both occur at the same value of $y$.</p>
+        <p style="margin-top:6px;" data-lang="zh">$\dfrac{d^{2}y}{dt^{2}} = 0$ 正是 $\dfrac{dy}{dt}$ 由增到减的临界条件，也就是 $\dfrac{dy}{dt}$ 的极大值点。所以 $y(t)$ 的拐点<em>正是</em>增长最快的时刻，二者都发生在同一 $y$ 值处。</p>
       </div>
-      <div class="concept-box orange"><strong>Aliases for the formula.</strong>
-        <p style="margin-top:6px;">If your textbook writes the logistic in the alternative form $\dfrac{dy}{dt} = k\,y\!\left(1 - \dfrac{y}{K}\right)$ with carrying capacity $K$, the same derivation gives $\dfrac{d^{2}y}{dt^{2}} = k^{2}\,y\!\left(1 - \dfrac{y}{K}\right)\!\left(1 - \dfrac{2y}{K}\right)$, with inflection at $y = K/2$.</p>
+      <div class="concept-box orange"><strong data-lang="en">Aliases for the formula.</strong><strong data-lang="zh">公式的等价形式。</strong>
+        <p style="margin-top:6px;" data-lang="en">If your textbook writes the logistic in the alternative form $\dfrac{dy}{dt} = k\,y\!\left(1 - \dfrac{y}{K}\right)$ with carrying capacity $K$, the same derivation gives $\dfrac{d^{2}y}{dt^{2}} = k^{2}\,y\!\left(1 - \dfrac{y}{K}\right)\!\left(1 - \dfrac{2y}{K}\right)$, with inflection at $y = K/2$.</p>
+        <p style="margin-top:6px;" data-lang="zh">如果你的教材把逻辑斯蒂方程写成等价形式 $\dfrac{dy}{dt} = k\,y\!\left(1 - \dfrac{y}{K}\right)$（其中 $K$ 为环境容量），同样的推导可得 $\dfrac{d^{2}y}{dt^{2}} = k^{2}\,y\!\left(1 - \dfrac{y}{K}\right)\!\left(1 - \dfrac{2y}{K}\right)$，拐点位于 $y = K/2$。</p>
       </div>
     </div>
   </details>
@@ -1251,59 +1410,62 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <hr class="section-break">
 
 <section class="topic" id="interactive-lab">
-  <p class="section-label">Interactive Lab</p>
-  <h2>Visual Intuition Builders</h2>
+  <p class="section-label"><span data-lang="en">Interactive Lab</span><span data-lang="zh">交互实验</span></p>
+  <h2><span data-lang="en">Visual Intuition Builders</span><span data-lang="zh">几何直觉训练</span></h2>
   <div class="section-divider"></div>
-  <p>These two fixed-graph interactives are designed to make the most commonly tested ideas in Unit 7 feel visual and intuitive, not memorized.</p>
+  <p data-lang="en">These two fixed-graph interactives are designed to make the most commonly tested ideas in Unit 7 feel visual and intuitive, not memorized.</p>
+  <p data-lang="zh">下面两个交互图像（固定坐标系）旨在让第 7 单元最常考的概念变得直观可感，而不是死记硬背。</p>
 
   <div class="interactive-shell">
-    <h3>Slope Field + Solution Curve</h3>
-    <p class="interactive-subtitle">The field stays fixed for \(\dfrac{dy}{dx}=x-y\). Move the initial value slider to see how the particular solution changes while the underlying differential equation stays the same.</p>
+    <h3><span data-lang="en">Slope Field + Solution Curve</span><span data-lang="zh">斜率场 + 解曲线</span></h3>
+    <p class="interactive-subtitle" data-lang="en">The field stays fixed for \(\dfrac{dy}{dx}=x-y\). Move the initial value slider to see how the particular solution changes while the underlying differential equation stays the same.</p>
+    <p class="interactive-subtitle" data-lang="zh">斜率场固定对应 \(\dfrac{dy}{dx}=x-y\)。拖动初始值滑块，观察当微分方程保持不变时，特解如何随之变化。</p>
     <div class="interactive-grid">
       <div class="graph-card">
         <div class="canvas-frame"><canvas id="slopeCanvas" width="460" height="460" aria-label="Slope field interactive graph"></canvas></div>
         <div class="legend-row">
-          <span><span class="legend-swatch" style="background: var(--accent);"></span>Solution curve</span>
-          <span><span class="legend-swatch" style="background: var(--purple);"></span>Initial point</span>
-          <span><span class="legend-swatch" style="background: var(--text-tertiary);"></span>Slope field</span>
+          <span><span class="legend-swatch" style="background: var(--accent);"></span><span data-lang="en">Solution curve</span><span data-lang="zh">解曲线</span></span>
+          <span><span class="legend-swatch" style="background: var(--purple);"></span><span data-lang="en">Initial point</span><span data-lang="zh">初始点</span></span>
+          <span><span class="legend-swatch" style="background: var(--text-tertiary);"></span><span data-lang="en">Slope field</span><span data-lang="zh">斜率场</span></span>
         </div>
       </div>
       <div class="control-card">
         <div class="control-stack">
           <div class="control-group">
-            <label for="y0Slider"><span>Initial value \(y(0)\)</span><span class="control-value" id="y0Value">1.00</span></label>
+            <label for="y0Slider"><span><span data-lang="en">Initial value \(y(0)\)</span><span data-lang="zh">初始值 \(y(0)\)</span></span><span class="control-value" id="y0Value">1.00</span></label>
             <input id="y0Slider" type="range" min="-2.5" max="2.5" step="0.1" value="1">
           </div>
         </div>
-        <div class="mini-note" id="slopeInsight">At \(x=0\), the chosen particular solution starts at \((0,1)\). Every other curve that follows the field is another member of the same solution family.</div>
+        <div class="mini-note" id="slopeInsight"><span data-lang="en">At \(x=0\), the chosen particular solution starts at \((0,1)\). Every other curve that follows the field is another member of the same solution family.</span><span data-lang="zh">在 \(x=0\) 处，所选特解的起点为 \((0,1)\)。沿着斜率场流动的每一条其他曲线，都是同一解族中的另一个成员。</span></div>
       </div>
     </div>
   </div>
 
   <div class="interactive-shell">
-    <h3>Logistic Growth vs. Carrying Capacity</h3>
-    <p class="interactive-subtitle">The axes stay fixed so you can focus on shape. Adjust the growth rate and carrying capacity to see what changes and what does not.</p>
+    <h3><span data-lang="en">Logistic Growth vs. Carrying Capacity</span><span data-lang="zh">逻辑斯蒂增长与环境容量</span></h3>
+    <p class="interactive-subtitle" data-lang="en">The axes stay fixed so you can focus on shape. Adjust the growth rate and carrying capacity to see what changes and what does not.</p>
+    <p class="interactive-subtitle" data-lang="zh">坐标轴保持不变，帮助你专注于曲线形状。调节增长率与环境容量，观察哪些会变、哪些不变。</p>
     <div class="interactive-grid">
       <div class="graph-card">
         <div class="canvas-frame"><canvas id="logisticCanvas" width="460" height="460" aria-label="Logistic model interactive graph"></canvas></div>
         <div class="legend-row">
-          <span><span class="legend-swatch" style="background: var(--accent);"></span>Population \(P(t)\)</span>
-          <span><span class="legend-swatch" style="background: var(--orange);"></span>Half-capacity</span>
-          <span><span class="legend-swatch" style="background: var(--purple);"></span>Carrying capacity</span>
+          <span><span class="legend-swatch" style="background: var(--accent);"></span><span data-lang="en">Population \(P(t)\)</span><span data-lang="zh">种群 \(P(t)\)</span></span>
+          <span><span class="legend-swatch" style="background: var(--orange);"></span><span data-lang="en">Half-capacity</span><span data-lang="zh">半容量</span></span>
+          <span><span class="legend-swatch" style="background: var(--purple);"></span><span data-lang="en">Carrying capacity</span><span data-lang="zh">环境容量</span></span>
         </div>
       </div>
       <div class="control-card">
         <div class="control-stack">
           <div class="control-group">
-            <label for="kSlider"><span>Growth rate \(k\)</span><span class="control-value" id="kValue">0.60</span></label>
+            <label for="kSlider"><span><span data-lang="en">Growth rate \(k\)</span><span data-lang="zh">增长率 \(k\)</span></span><span class="control-value" id="kValue">0.60</span></label>
             <input id="kSlider" type="range" min="0.2" max="1.5" step="0.05" value="0.6">
           </div>
           <div class="control-group">
-            <label for="aSlider"><span>Carrying capacity \(a\)</span><span class="control-value" id="aValue">100</span></label>
+            <label for="aSlider"><span><span data-lang="en">Carrying capacity \(a\)</span><span data-lang="zh">环境容量 \(a\)</span></span><span class="control-value" id="aValue">100</span></label>
             <input id="aSlider" type="range" min="40" max="160" step="5" value="100">
           </div>
         </div>
-        <div class="mini-note" id="logisticInsight">Growth is fastest at half-capacity, so the steepest point currently occurs at \(P=50\).</div>
+        <div class="mini-note" id="logisticInsight"><span data-lang="en">Growth is fastest at half-capacity, so the steepest point currently occurs at \(P=50\).</span><span data-lang="zh">增长在半容量处最快，所以当前最陡的点位于 \(P=50\)。</span></div>
       </div>
     </div>
   </div>
@@ -1312,30 +1474,39 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <hr class="section-break">
 <!-- ===== EXAM STRATEGY ===== -->
 <section class="topic" id="exam-strategy">
-  <p class="section-label">Exam Preparation</p>
-  <h2>Exam Strategy</h2>
+  <p class="section-label"><span data-lang="en">Exam Preparation</span><span data-lang="zh">考前准备</span></p>
+  <h2><span data-lang="en">Exam Strategy</span><span data-lang="zh">备考策略</span></h2>
   <div class="section-divider"></div>
 
-  <p>Unit 7 accounts for 6–12% of the AB exam and 6–9% of the BC exam. Differential equations appear consistently in the free-response section, often as part of a multi-step problem that combines several topics from this unit.</p>
+  <p data-lang="en">Unit 7 accounts for 6–12% of the AB exam and 6–9% of the BC exam. Differential equations appear consistently in the free-response section, often as part of a multi-step problem that combines several topics from this unit.</p>
+  <p data-lang="zh">第 7 单元在 AB 考试中占 6–12%，在 BC 考试中占 6–9%。微分方程在自由作答（<code>free-response</code>）部分几乎每年都会出现，通常是结合本单元多个主题的多步综合题。</p>
 
   <div class="concept-box green">
-    <strong>The Separation of Variables Routine</strong>
-    <p>Practice this sequence until it is automatic: (1) Separate variables. (2) Integrate both sides with $+C$. (3) Apply initial conditions to find $C$. (4) Solve for $y$ and state domain restrictions. On the free-response section, each step typically earns a separate point.</p>
+    <strong data-lang="en">The Separation of Variables Routine</strong>
+    <strong data-lang="zh">分离变量法的固定流程</strong>
+    <p data-lang="en">Practice this sequence until it is automatic: (1) Separate variables. (2) Integrate both sides with $+C$. (3) Apply initial conditions to find $C$. (4) Solve for $y$ and state domain restrictions. On the free-response section, each step typically earns a separate point.</p>
+    <p data-lang="zh">把这套流程练到形成肌肉记忆：(1) 分离变量。(2) 两边积分并加 $+C$。(3) 代入初始条件求出 $C$。(4) 解出 $y$ 并写出定义域限制。在自由作答中，每一步通常都对应一个独立的得分点。</p>
   </div>
 
   <div class="concept-box orange">
-    <strong>Notation Matters</strong>
-    <p>Use correct mathematical notation at all times. Write $\frac{dy}{dx}$ or $\frac{dy}{dt}$ rather than $y'$ when the problem uses Leibniz notation. Always include $dx$ or $dt$ when integrating. Points are deducted for missing or incorrect notation.</p>
+    <strong data-lang="en">Notation Matters</strong>
+    <strong data-lang="zh">记号同样重要</strong>
+    <p data-lang="en">Use correct mathematical notation at all times. Write $\frac{dy}{dx}$ or $\frac{dy}{dt}$ rather than $y'$ when the problem uses Leibniz notation. Always include $dx$ or $dt$ when integrating. Points are deducted for missing or incorrect notation.</p>
+    <p data-lang="zh">全程使用正确的数学记号。题目使用莱布尼茨记号时，要写 $\frac{dy}{dx}$ 或 $\frac{dy}{dt}$，而不是 $y'$。积分时必须保留 $dx$ 或 $dt$。漏写或写错记号都会扣分。</p>
   </div>
 
   <div class="concept-box">
-    <strong>Recognizing Standard Forms</strong>
-    <p>Know the standard form $\frac{dy}{dt} = ky$ and its solution $y = y_0 e^{kt}$ on sight. For BC students, also recognize $\frac{dy}{dt} = ky(a - y)$ as the logistic model. These may be used or interpreted without performing the derivation.</p>
+    <strong data-lang="en">Recognizing Standard Forms</strong>
+    <strong data-lang="zh">识别标准形式</strong>
+    <p data-lang="en">Know the standard form $\frac{dy}{dt} = ky$ and its solution $y = y_0 e^{kt}$ on sight. For BC students, also recognize $\frac{dy}{dt} = ky(a - y)$ as the logistic model. These may be used or interpreted without performing the derivation.</p>
+    <p data-lang="zh">看到 $\frac{dy}{dt} = ky$ 立刻识别，并直接给出解 $y = y_0 e^{kt}$。BC 学生还要把 $\frac{dy}{dt} = ky(a - y)$ 识别为逻辑斯蒂模型。这些标准形式可以直接使用或解释，无需每次重新推导。</p>
   </div>
 
   <div class="concept-box purple">
-    <strong>Differential Equations Give Derivative Information</strong>
-    <p>Remember: a differential equation tells you the derivative. You can use it directly to find slopes, rates of change, or to justify increasing/decreasing behavior without solving the entire equation.</p>
+    <strong data-lang="en">Differential Equations Give Derivative Information</strong>
+    <strong data-lang="zh">微分方程提供的是导数信息</strong>
+    <p data-lang="en">Remember: a differential equation tells you the derivative. You can use it directly to find slopes, rates of change, or to justify increasing/decreasing behavior without solving the entire equation.</p>
+    <p data-lang="zh">记住：微分方程告诉你的是导数。可以直接用它求斜率、变化率，或者论证单调性，而不必先把方程解出来。</p>
   </div>
 </section>
 
@@ -1343,33 +1514,43 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 
 <!-- ===== COMMON MISTAKES ===== -->
 <section class="topic" id="common-mistakes">
-  <p class="section-label">Watch Out</p>
-  <h2>Common Mistakes</h2>
+  <p class="section-label"><span data-lang="en">Watch Out</span><span data-lang="zh">注意</span></p>
+  <h2><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></h2>
   <div class="section-divider"></div>
 
   <div class="concept-box red">
-    <strong>Mistake #1: Forgetting the Constant of Integration</strong>
-    <p>Omitting $+ C$ when finding a general solution severely limits the number of points you can earn. Always add the constant immediately after integrating.</p>
+    <strong data-lang="en">Mistake #1: Forgetting the Constant of Integration</strong>
+    <strong data-lang="zh">错误 1：忘记积分常数</strong>
+    <p data-lang="en">Omitting $+ C$ when finding a general solution severely limits the number of points you can earn. Always add the constant immediately after integrating.</p>
+    <p data-lang="zh">求通解时漏写 $+ C$ 会大幅压低你的得分。每次积分完立刻把常数加上。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>Mistake #2: Failing to Separate Variables</strong>
-    <p>Attempting to integrate without properly separating $y$ terms from $x$ terms leads to incorrect results. Before integrating, verify that one side contains only $y$ (and $dy$) and the other contains only $x$ (and $dx$).</p>
+    <strong data-lang="en">Mistake #2: Failing to Separate Variables</strong>
+    <strong data-lang="zh">错误 2：没有真正分离变量</strong>
+    <p data-lang="en">Attempting to integrate without properly separating $y$ terms from $x$ terms leads to incorrect results. Before integrating, verify that one side contains only $y$ (and $dy$) and the other contains only $x$ (and $dx$).</p>
+    <p data-lang="zh">没有把含 $y$ 的项与含 $x$ 的项彻底分开就直接积分，结果一定错。积分前先检查：一侧只含 $y$（和 $dy$），另一侧只含 $x$（和 $dx$）。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>Mistake #3: Assuming All Fractions Lead to Logarithms</strong>
-    <p>Not every differential equation involving fractions has a logarithmic solution. For example, $\frac{dy}{dx} = \frac{x}{y}$ yields $y^2 = x^2 + C$, not a logarithm. Match the antiderivative to the actual integrand.</p>
+    <strong data-lang="en">Mistake #3: Assuming All Fractions Lead to Logarithms</strong>
+    <strong data-lang="zh">错误 3：以为出现分式就一定有对数</strong>
+    <p data-lang="en">Not every differential equation involving fractions has a logarithmic solution. For example, $\frac{dy}{dx} = \frac{x}{y}$ yields $y^2 = x^2 + C$, not a logarithm. Match the antiderivative to the actual integrand.</p>
+    <p data-lang="zh">含分式的微分方程不一定都解出对数。例如 $\frac{dy}{dx} = \frac{x}{y}$ 的解是 $y^2 = x^2 + C$，并不是对数。要根据实际的被积函数来选原函数。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>Mistake #4: Ignoring Domain Restrictions</strong>
-    <p>After finding a particular solution, always check whether domain restrictions apply. If your work involves $\ln|y|$ or division by an expression, determine the appropriate domain from the initial condition.</p>
+    <strong data-lang="en">Mistake #4: Ignoring Domain Restrictions</strong>
+    <strong data-lang="zh">错误 4：忽视定义域限制</strong>
+    <p data-lang="en">After finding a particular solution, always check whether domain restrictions apply. If your work involves $\ln|y|$ or division by an expression, determine the appropriate domain from the initial condition.</p>
+    <p data-lang="zh">求出特解后，要检查是否需要限制定义域。如果过程中出现 $\ln|y|$ 或除以某个表达式的步骤，就要由初始条件确定合适的定义域。</p>
   </div>
 
   <div class="concept-box red">
-    <strong>Mistake #5: Sketching Solution Curves Incorrectly</strong>
-    <p>When drawing a solution curve on a slope field, the curve must be tangent to the segments, not cut through them. A smooth curve that follows the flow of the field is expected.</p>
+    <strong data-lang="en">Mistake #5: Sketching Solution Curves Incorrectly</strong>
+    <strong data-lang="zh">错误 5：解曲线画错</strong>
+    <p data-lang="en">When drawing a solution curve on a slope field, the curve must be tangent to the segments, not cut through them. A smooth curve that follows the flow of the field is expected.</p>
+    <p data-lang="zh">在斜率场上画解曲线时，曲线必须与线段相切，而不能"穿过"线段。最终应当是一条沿着斜率场流动方向走的光滑曲线。</p>
   </div>
 </section>
 
@@ -1377,28 +1558,29 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 
 <!-- ===== FLASHCARDS ===== -->
 <section class="topic" id="flashcards">
-  <p class="section-label">Review</p>
-  <h2>Flashcards</h2>
+  <p class="section-label"><span data-lang="en">Review</span><span data-lang="zh">回顾</span></p>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <div class="section-divider"></div>
-  <p>Click any card to reveal the answer.</p>
+  <p data-lang="en">Click any card to reveal the answer.</p>
+  <p data-lang="zh">点击任意卡片查看答案。</p>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('revealed')">
-      <div class="flashcard-q">What is the Euler's method formula?</div>
-      <div class="flashcard-a">$$y_{n+1} = y_n + f(x_n, y_n)\,\Delta x$$ (BC only)</div>
-      <span class="flashcard-hint">tap to reveal</span>
+      <div class="flashcard-q"><span data-lang="en">What is the Euler's method formula?</span><span data-lang="zh">欧拉方法的公式是什么？</span></div>
+      <div class="flashcard-a">$$y_{n+1} = y_n + f(x_n, y_n)\,\Delta x$$ <span data-lang="en">(BC only)</span><span data-lang="zh">（仅 BC）</span></div>
+      <span class="flashcard-hint"><span data-lang="en">tap to reveal</span><span data-lang="zh">点击查看</span></span>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('revealed')">
-      <div class="flashcard-q">What is the solution to $\frac{dy}{dt} = ky$?</div>
+      <div class="flashcard-q"><span data-lang="en">What is the solution to $\frac{dy}{dt} = ky$?</span><span data-lang="zh">$\frac{dy}{dt} = ky$ 的解是什么？</span></div>
       <div class="flashcard-a">$$y = y_0 e^{kt}$$</div>
-      <span class="flashcard-hint">tap to reveal</span>
+      <span class="flashcard-hint"><span data-lang="en">tap to reveal</span><span data-lang="zh">点击查看</span></span>
     </div>
 
     <div class="flashcard" onclick="this.classList.toggle('revealed')">
-      <div class="flashcard-q">What is the logistic differential equation?</div>
-      <div class="flashcard-a">$$\frac{dy}{dt} = ky(a - y)$$ fastest growth at $y = a/2$ (BC)</div>
-      <span class="flashcard-hint">tap to reveal</span>
+      <div class="flashcard-q"><span data-lang="en">What is the logistic differential equation?</span><span data-lang="zh">逻辑斯蒂微分方程是什么？</span></div>
+      <div class="flashcard-a">$$\frac{dy}{dt} = ky(a - y)$$ <span data-lang="en">fastest growth at $y = a/2$ (BC)</span><span data-lang="zh">在 $y = a/2$ 处增长最快（BC）</span></div>
+      <span class="flashcard-hint"><span data-lang="en">tap to reveal</span><span data-lang="zh">点击查看</span></span>
     </div>
   </div>
 </section>
@@ -1406,134 +1588,137 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 <hr class="section-break">
 <!-- ===== UNIT QUIZ ===== -->
 <section class="topic" id="unit-quiz">
-  <p class="section-label">Assessment</p>
-  <h2>Unit Quiz</h2>
+  <p class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测试</span></p>
+  <h2><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></h2>
   <div class="section-divider"></div>
-  <p>Test your understanding of the key concepts from Unit 7. Select the best answer for each question, then check your results.</p>
+  <p data-lang="en">Test your understanding of the key concepts from Unit 7. Select the best answer for each question, then check your results.</p>
+  <p data-lang="zh">检验你对第 7 单元核心概念的掌握。每题选出最佳答案后，再核对结果。</p>
 
   <!-- Q1 -->
   <div class="quiz-question" data-correct="B">
-    <div class="quiz-question-text">1. Which of the following is a differential equation for the statement "the rate of change of $y$ with respect to $x$ is proportional to $y$"?</div>
+    <div class="quiz-question-text"><span data-lang="en">1. Which of the following is a differential equation for the statement "the rate of change of $y$ with respect to $x$ is proportional to $y$"?</span><span data-lang="zh">1. 下列哪个微分方程对应"$y$ 关于 $x$ 的变化率与 $y$ 成正比"这一陈述？</span></div>
     <div class="quiz-options">
       <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>$y = kx$</span></div>
       <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>$\frac{dy}{dx} = ky$</span></div>
       <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>$\frac{dy}{dx} = kx$</span></div>
       <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>$\frac{dx}{dy} = ky$</span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! "Rate of change of $y$" is $\frac{dy}{dx}$, and "proportional to $y$" means $= ky$.</div>
-    <div class="quiz-feedback incorrect">Not quite. "Rate of change of $y$ with respect to $x$" translates to $\frac{dy}{dx}$, and "proportional to $y$" means $= ky$. The answer is B.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! "Rate of change of $y$" is $\frac{dy}{dx}$, and "proportional to $y$" means $= ky$.</span><span data-lang="zh">正确！"$y$ 的变化率"即 $\frac{dy}{dx}$，"与 $y$ 成正比"即 $= ky$。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">Not quite. "Rate of change of $y$ with respect to $x$" translates to $\frac{dy}{dx}$, and "proportional to $y$" means $= ky$. The answer is B.</span><span data-lang="zh">不太对。"$y$ 关于 $x$ 的变化率"对应 $\frac{dy}{dx}$，"与 $y$ 成正比"即 $= ky$。答案为 B。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <!-- Q2 -->
   <div class="quiz-question" data-correct="C">
-    <div class="quiz-question-text">2. To verify that $y = e^{2x}$ is a solution to $\frac{dy}{dx} - 2y = 0$, what should you do?</div>
+    <div class="quiz-question-text"><span data-lang="en">2. To verify that $y = e^{2x}$ is a solution to $\frac{dy}{dx} - 2y = 0$, what should you do?</span><span data-lang="zh">2. 要验证 $y = e^{2x}$ 是 $\frac{dy}{dx} - 2y = 0$ 的解，应该怎么做？</span></div>
     <div class="quiz-options">
-      <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>Integrate $e^{2x}$ and check the result.</span></div>
-      <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>Set $e^{2x} = 0$ and solve for $x$.</span></div>
-      <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>Compute $\frac{dy}{dx} = 2e^{2x}$ and substitute into the equation to verify $2e^{2x} - 2e^{2x} = 0$.</span></div>
-      <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>Graph $y = e^{2x}$ and check visually.</span></div>
+      <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span><span data-lang="en">Integrate $e^{2x}$ and check the result.</span><span data-lang="zh">对 $e^{2x}$ 积分，再检查结果。</span></span></div>
+      <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span><span data-lang="en">Set $e^{2x} = 0$ and solve for $x$.</span><span data-lang="zh">令 $e^{2x} = 0$，求解 $x$。</span></span></div>
+      <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span><span data-lang="en">Compute $\frac{dy}{dx} = 2e^{2x}$ and substitute into the equation to verify $2e^{2x} - 2e^{2x} = 0$.</span><span data-lang="zh">求 $\frac{dy}{dx} = 2e^{2x}$，代入方程验证 $2e^{2x} - 2e^{2x} = 0$。</span></span></div>
+      <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span><span data-lang="en">Graph $y = e^{2x}$ and check visually.</span><span data-lang="zh">画出 $y = e^{2x}$ 的图像，用视觉判断。</span></span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! Differentiate the proposed solution and substitute into the DE to confirm both sides are equal.</div>
-    <div class="quiz-feedback incorrect">Verification requires differentiating the function and substituting into the DE. Here, $\frac{dy}{dx} = 2e^{2x}$, and $2e^{2x} - 2e^{2x} = 0$ ✓. The answer is C.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! Differentiate the proposed solution and substitute into the DE to confirm both sides are equal.</span><span data-lang="zh">正确！对候选解求导，再代入微分方程，确认两边相等。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">Verification requires differentiating the function and substituting into the DE. Here, $\frac{dy}{dx} = 2e^{2x}$, and $2e^{2x} - 2e^{2x} = 0$ ✓. The answer is C.</span><span data-lang="zh">验证需要对函数求导并代入微分方程。此处 $\frac{dy}{dx} = 2e^{2x}$，且 $2e^{2x} - 2e^{2x} = 0$ ✓。答案为 C。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <!-- Q3 -->
   <div class="quiz-question" data-correct="A">
-    <div class="quiz-question-text">3. In a slope field for $\frac{dy}{dx} = x - y$, what is the slope of the segment at the point $(2, 1)$?</div>
+    <div class="quiz-question-text"><span data-lang="en">3. In a slope field for $\frac{dy}{dx} = x - y$, what is the slope of the segment at the point $(2, 1)$?</span><span data-lang="zh">3. 对 $\frac{dy}{dx} = x - y$ 的斜率场，点 $(2, 1)$ 处线段的斜率是多少？</span></div>
     <div class="quiz-options">
       <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>$1$</span></div>
       <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>$-1$</span></div>
       <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>$3$</span></div>
       <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>$0$</span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! Substituting: $\frac{dy}{dx} = 2 - 1 = 1$.</div>
-    <div class="quiz-feedback incorrect">Substitute the point into the DE: $\frac{dy}{dx} = 2 - 1 = 1$. The answer is A.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! Substituting: $\frac{dy}{dx} = 2 - 1 = 1$.</span><span data-lang="zh">正确！代入：$\frac{dy}{dx} = 2 - 1 = 1$。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">Substitute the point into the DE: $\frac{dy}{dx} = 2 - 1 = 1$. The answer is A.</span><span data-lang="zh">把点代入微分方程：$\frac{dy}{dx} = 2 - 1 = 1$。答案为 A。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <!-- Q4 -->
   <div class="quiz-question" data-correct="D">
-    <div class="quiz-question-text">4. What is the first step when solving $\frac{dy}{dx} = \frac{x^2}{y}$ by separation of variables?</div>
+    <div class="quiz-question-text"><span data-lang="en">4. What is the first step when solving $\frac{dy}{dx} = \frac{x^2}{y}$ by separation of variables?</span><span data-lang="zh">4. 用分离变量法求解 $\frac{dy}{dx} = \frac{x^2}{y}$，第一步应该做什么？</span></div>
     <div class="quiz-options">
-      <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>Integrate both sides immediately.</span></div>
-      <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>Divide both sides by $x^2$.</span></div>
-      <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>Take the natural logarithm of both sides.</span></div>
-      <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>Rewrite as $y\, dy = x^2\, dx$.</span></div>
+      <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span><span data-lang="en">Integrate both sides immediately.</span><span data-lang="zh">直接对两边积分。</span></span></div>
+      <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span><span data-lang="en">Divide both sides by $x^2$.</span><span data-lang="zh">两边同除以 $x^2$。</span></span></div>
+      <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span><span data-lang="en">Take the natural logarithm of both sides.</span><span data-lang="zh">两边取自然对数。</span></span></div>
+      <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span><span data-lang="en">Rewrite as $y\, dy = x^2\, dx$.</span><span data-lang="zh">改写为 $y\, dy = x^2\, dx$。</span></span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! Separate the variables first: multiply both sides by $y$ and by $dx$ to get $y\, dy = x^2\, dx$.</div>
-    <div class="quiz-feedback incorrect">Before integrating, you must separate variables. Multiply both sides by $y\, dx$ to get $y\, dy = x^2\, dx$. The answer is D.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! Separate the variables first: multiply both sides by $y$ and by $dx$ to get $y\, dy = x^2\, dx$.</span><span data-lang="zh">正确！先分离变量：两边同乘 $y$ 和 $dx$，得到 $y\, dy = x^2\, dx$。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">Before integrating, you must separate variables. Multiply both sides by $y\, dx$ to get $y\, dy = x^2\, dx$. The answer is D.</span><span data-lang="zh">积分前必须先分离变量。两边同乘 $y\, dx$，得到 $y\, dy = x^2\, dx$。答案为 D。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <!-- Q5 -->
   <div class="quiz-question" data-correct="B">
-    <div class="quiz-question-text">5. A population $P$ satisfies $\frac{dP}{dt} = 0.03P$ with $P(0) = 500$. What is $P(t)$?</div>
+    <div class="quiz-question-text"><span data-lang="en">5. A population $P$ satisfies $\frac{dP}{dt} = 0.03P$ with $P(0) = 500$. What is $P(t)$?</span><span data-lang="zh">5. 种群 $P$ 满足 $\frac{dP}{dt} = 0.03P$，且 $P(0) = 500$。求 $P(t)$。</span></div>
     <div class="quiz-options">
       <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>$P = 500 + 0.03t$</span></div>
       <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>$P = 500e^{0.03t}$</span></div>
       <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>$P = 0.03 \cdot 500^t$</span></div>
       <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>$P = e^{500 \cdot 0.03t}$</span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! The DE $\frac{dP}{dt} = kP$ with $P(0) = P_0$ has solution $P = P_0 e^{kt} = 500e^{0.03t}$.</div>
-    <div class="quiz-feedback incorrect">This is the standard exponential growth model: $\frac{dP}{dt} = kP$ yields $P = P_0 e^{kt} = 500e^{0.03t}$. The answer is B.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! The DE $\frac{dP}{dt} = kP$ with $P(0) = P_0$ has solution $P = P_0 e^{kt} = 500e^{0.03t}$.</span><span data-lang="zh">正确！微分方程 $\frac{dP}{dt} = kP$，配合 $P(0) = P_0$，其解为 $P = P_0 e^{kt} = 500e^{0.03t}$。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">This is the standard exponential growth model: $\frac{dP}{dt} = kP$ yields $P = P_0 e^{kt} = 500e^{0.03t}$. The answer is B.</span><span data-lang="zh">这是标准的指数增长模型：$\frac{dP}{dt} = kP$ 给出 $P = P_0 e^{kt} = 500e^{0.03t}$。答案为 B。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <!-- Q6 -->
   <div class="quiz-question" data-correct="C">
-    <div class="quiz-question-text">6. For the logistic equation $\frac{dy}{dt} = 0.5y(100 - y)$, the population grows fastest when $y$ equals:</div>
+    <div class="quiz-question-text"><span data-lang="en">6. For the logistic equation $\frac{dy}{dt} = 0.5y(100 - y)$, the population grows fastest when $y$ equals:</span><span data-lang="zh">6. 对逻辑斯蒂方程 $\frac{dy}{dt} = 0.5y(100 - y)$，种群增长最快时 $y$ 等于：</span></div>
     <div class="quiz-options">
       <div class="quiz-option" data-value="A"><span class="quiz-option-letter">A</span><span>$0$</span></div>
       <div class="quiz-option" data-value="B"><span class="quiz-option-letter">B</span><span>$100$</span></div>
       <div class="quiz-option" data-value="C"><span class="quiz-option-letter">C</span><span>$50$</span></div>
       <div class="quiz-option" data-value="D"><span class="quiz-option-letter">D</span><span>$25$</span></div>
     </div>
-    <div class="quiz-feedback correct">Correct! For $\frac{dy}{dt} = ky(a - y)$, the maximum rate of change occurs at $y = \frac{a}{2} = \frac{100}{2} = 50$.</div>
-    <div class="quiz-feedback incorrect">The logistic model grows fastest at half the carrying capacity: $y = \frac{a}{2} = \frac{100}{2} = 50$. The answer is C.</div>
-    <button class="quiz-check-btn" disabled>Check Answer</button>
+    <div class="quiz-feedback correct"><span data-lang="en">Correct! For $\frac{dy}{dt} = ky(a - y)$, the maximum rate of change occurs at $y = \frac{a}{2} = \frac{100}{2} = 50$.</span><span data-lang="zh">正确！对 $\frac{dy}{dt} = ky(a - y)$，变化率在 $y = \frac{a}{2} = \frac{100}{2} = 50$ 处取最大。</span></div>
+    <div class="quiz-feedback incorrect"><span data-lang="en">The logistic model grows fastest at half the carrying capacity: $y = \frac{a}{2} = \frac{100}{2} = 50$. The answer is C.</span><span data-lang="zh">逻辑斯蒂模型在环境容量的一半处增长最快：$y = \frac{a}{2} = \frac{100}{2} = 50$。答案为 C。</span></div>
+    <button class="quiz-check-btn" disabled><span data-lang="en">Check Answer</span><span data-lang="zh">核对答案</span></button>
   </div>
 
   <div class="quiz-score" id="quizScore">
     <div class="quiz-score-number" id="scoreNum">0/6</div>
-    <div class="quiz-score-label">Questions Correct</div>
+    <div class="quiz-score-label"><span data-lang="en">Questions Correct</span><span data-lang="zh">答对题数</span></div>
   </div>
 </section>
 
 <!-- ═══════════════ READINESS CHECKLIST ═══════════════ -->
 <section class="topic" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-Assessment</span><span data-lang="zh">自我评估</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">应考清单</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击你已经掌握的每一项。考前争取勾满 100%。</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">0 / 14 已掌握</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Translate a verbal description into a differential equation</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Verify whether a given function is a solution of a DE</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Sketch a slope field from a differential equation</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Sketch an approximate solution curve on a slope field</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply Euler's method for a specified step size (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Determine whether Euler's method over- or underestimates (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve a separable differential equation</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find a particular solution from an initial condition</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up and solve exponential growth/decay models $\frac{dy}{dt} = ky$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret $k$, doubling time, and half-life in context</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize the logistic model $\frac{dy}{dt} = ky(1 - y/L)$ (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Identify the carrying capacity and inflection point of a logistic curve (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use proper notation including $+C$ on general antiderivatives</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret a DE solution in the context of the real-world problem</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Translate a verbal description into a differential equation</span><span data-lang="zh">把文字描述翻译为微分方程</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Verify whether a given function is a solution of a DE</span><span data-lang="zh">验证给定函数是否为微分方程的解</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Sketch a slope field from a differential equation</span><span data-lang="zh">根据微分方程绘制斜率场</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Sketch an approximate solution curve on a slope field</span><span data-lang="zh">在斜率场上画出近似的解曲线</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply Euler's method for a specified step size (BC)</span><span data-lang="zh">按指定步长应用欧拉方法（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Determine whether Euler's method over- or underestimates (BC)</span><span data-lang="zh">判断欧拉方法是高估还是低估（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Solve a separable differential equation</span><span data-lang="zh">求解可分离变量的微分方程</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find a particular solution from an initial condition</span><span data-lang="zh">由初始条件求出特解</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Set up and solve exponential growth/decay models $\frac{dy}{dt} = ky$</span><span data-lang="zh">建立并求解指数增长／衰减模型 $\frac{dy}{dt} = ky$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Interpret $k$, doubling time, and half-life in context</span><span data-lang="zh">结合情境解释 $k$、倍增时间与半衰期</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Recognize the logistic model $\frac{dy}{dt} = ky(1 - y/L)$ (BC)</span><span data-lang="zh">识别逻辑斯蒂模型 $\frac{dy}{dt} = ky(1 - y/L)$（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Identify the carrying capacity and inflection point of a logistic curve (BC)</span><span data-lang="zh">识别逻辑斯蒂曲线的环境容量与拐点（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use proper notation including $+C$ on general antiderivatives</span><span data-lang="zh">使用正确的记号，包括在通解处写上 $+C$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Interpret a DE solution in the context of the real-world problem</span><span data-lang="zh">结合现实情境解释微分方程的解</span></li>
   </ul>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;"><span data-lang="en">AP-Style Practice Problems</span><span data-lang="zh">AP 风格练习题</span></h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="zh">本单元的考试难度练习——按 AP 评分标准设计的多项选择题与扩展作答题。专为冲击高分准备；建议在完成上方笔记与页内测验后再来挑战。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_7_Differential_Equations_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_7_Differential_Equations_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
@@ -1548,12 +1733,12 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
       <p>Dingruischolars@gmail.com<br>778-885-6368</p>
     </div>
     <div>
-      <div class="footer-col-title">Follow Us</div>
-      <p>WeChat: dingruischolars<br>Rednote ID: dingruischolars<br>dingruischolars.com</p>
+      <div class="footer-col-title"><span data-lang="en">Follow Us</span><span data-lang="zh">关注我们</span></div>
+      <p><span data-lang="en">WeChat: dingruischolars<br>Rednote ID: dingruischolars<br>dingruischolars.com</span><span data-lang="zh">微信：dingruischolars<br>小红书号：dingruischolars<br>dingruischolars.com</span></p>
     </div>
     <div>
-      <div class="footer-col-title">About</div>
-      <p>Premium AP study resources designed to help students achieve their best scores.</p>
+      <div class="footer-col-title"><span data-lang="en">About</span><span data-lang="zh">关于我们</span></div>
+      <p><span data-lang="en">Premium AP study resources designed to help students achieve their best scores.</span><span data-lang="zh">高品质 AP 学习资源，助力学生取得最佳成绩。</span></p>
     </div>
   </div>
   <div class="footer-bottom">© 2026 鼎睿学苑 DingRui Scholars. All rights reserved.</div>
@@ -1562,25 +1747,46 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 </main>
 <!-- ===== JAVASCRIPT ===== -->
 <script>
-(function() {
-  // ===== THEME =====
-  const html = document.documentElement;
-  const themeBtn = document.getElementById('themeToggle');
-  
-  function setTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    themeBtn.textContent = theme === 'dark' ? 'Light' : 'Dark';
-    localStorage.setItem('dr-theme', theme);
+// ===== THEME (bilingual-aware) =====
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? '' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  setThemeBtnLabel(!isDark);
+  try { localStorage.setItem('dr-theme', next || 'light'); } catch(e) {}
+}
+(function initTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem('dr-theme'); } catch(e) {}
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    setThemeBtnLabel(true);
+  } else if (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    setThemeBtnLabel(true);
+  } else {
+    setThemeBtnLabel(false);
   }
-  
-  // Detect system preference or saved preference
-  const saved = localStorage.getItem('dr-theme');
-  if (saved) { setTheme(saved); }
-  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { setTheme('dark'); }
-  
-  themeBtn.addEventListener('click', function() {
-    setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
+})();
+
+// ===== LANGUAGE =====
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
+
+(function() {
 
   // ===== PROGRESS BAR =====
   const progressFill = document.getElementById('progressFill');
@@ -1618,8 +1824,10 @@ window.addEventListener('resize', () => {
       overlay.classList.toggle('open');
     }
   }
+  // Expose for inline onclick handlers
+  window.toggleSidebar = toggleSidebar;
 
-  tocBtn.addEventListener('click', toggleSidebar);
+  if (tocBtn) tocBtn.addEventListener('click', toggleSidebar);
   overlay.addEventListener('click', function(){ sidebar.classList.remove('open'); overlay.classList.remove('open'); });
   
   // Close sidebar on link click (mobile)
@@ -1683,8 +1891,10 @@ window.addEventListener('resize', () => {
       });
       
       btn.disabled = true;
-      btn.textContent = isCorrect ? '✓ Correct' : '✗ Incorrect';
-      
+      btn.innerHTML = isCorrect
+        ? '<span data-lang="en">✓ Correct</span><span data-lang="zh">✓ 正确</span>'
+        : '<span data-lang="en">✗ Incorrect</span><span data-lang="zh">✗ 错误</span>';
+
       // Check if all answered
       checkAllAnswered();
     });
@@ -1796,8 +2006,10 @@ window.addEventListener('resize', () => {
     ctx.arc(px(0), py(y0), 5, 0, Math.PI * 2);
     ctx.fill();
 
-    slopeInsight.innerHTML = `At <strong>\(x=0\)</strong>, the chosen particular solution starts at <strong>\((0, ${y0.toFixed(1)})\)</strong>. The field stays fixed because the differential equation stays fixed.`;
-    if (typeof renderMathInElement !== 'undefined') renderMathInElement(slopeInsight, {delimiters:[{left:'$$',right:'$$',display:true},{left:'\(',right:'\)',display:false},{left:'$',right:'$',display:false}], throwOnError:false});
+    slopeInsight.innerHTML =
+      `<span data-lang="en">At <strong>\\(x=0\\)</strong>, the chosen particular solution starts at <strong>\\((0, ${y0.toFixed(1)})\\)</strong>. The field stays fixed because the differential equation stays fixed.</span>` +
+      `<span data-lang="zh">在 <strong>\\(x=0\\)</strong> 处，所选特解的起点为 <strong>\\((0, ${y0.toFixed(1)})\\)</strong>。斜率场保持不变，是因为微分方程保持不变。</span>`;
+    if (typeof renderMathInElement !== 'undefined') renderMathInElement(slopeInsight, {delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}], throwOnError:false});
   }
 
   function drawLogisticInteractive() {
@@ -1835,8 +2047,10 @@ window.addEventListener('resize', () => {
     ctx.fillText('P = a', px(xmax) - 38, py(a) - 8);
     ctx.fillText('P = a/2', px(xmax) - 56, py(a / 2) - 8);
 
-    logisticInsight.innerHTML = `Growth is fastest at <strong>half-capacity</strong>, so the steepest point occurs at <strong>\(P=${(a/2).toFixed(0)}\)</strong> when <strong>\(a=${a.toFixed(0)}\)</strong>.`;
-    if (typeof renderMathInElement !== 'undefined') renderMathInElement(logisticInsight, {delimiters:[{left:'$$',right:'$$',display:true},{left:'\(',right:'\)',display:false},{left:'$',right:'$',display:false}], throwOnError:false});
+    logisticInsight.innerHTML =
+      `<span data-lang="en">Growth is fastest at <strong>half-capacity</strong>, so the steepest point occurs at <strong>\\(P=${(a/2).toFixed(0)}\\)</strong> when <strong>\\(a=${a.toFixed(0)}\\)</strong>.</span>` +
+      `<span data-lang="zh">增长在<strong>半容量</strong>处最快，所以当 <strong>\\(a=${a.toFixed(0)}\\)</strong> 时，最陡的点位于 <strong>\\(P=${(a/2).toFixed(0)}\\)</strong>。</span>`;
+    if (typeof renderMathInElement !== 'undefined') renderMathInElement(logisticInsight, {delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}], throwOnError:false});
   }
 
   [y0Slider, kSlider, aSlider].forEach(function(input) { if (input) input.addEventListener('input', function() { drawSlopeInteractive(); drawLogisticInteractive(); }); });
@@ -1883,7 +2097,11 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const prog = document.getElementById('checkProgress');
-  if (prog) prog.textContent = checked + ' / ' + total + ' mastered';
+  if (prog) {
+    prog.innerHTML =
+      '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+      '<span data-lang="zh">' + checked + ' / ' + total + ' 已掌握</span>';
+  }
 }
 </script>
 </body>

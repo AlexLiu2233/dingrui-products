@@ -13,7 +13,7 @@
 <style>
 :root {
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --accent: #7A2E2E;
   --accent-2: #9A5151;
@@ -208,6 +208,10 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
 }
 .checklist li.checked { background: var(--green-bg); border-color: var(--green); }
 .checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -217,76 +221,93 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     <span class="nav-badge">UNIT 8</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents">Contents</button>
-    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 <div class="progress-bar" id="progressBar"></div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero" class="sidebar-link active">Overview</a>
-  <a href="#sec-8-1" class="sidebar-link">8.1 Average Value</a>
-  <a href="#sec-8-2" class="sidebar-link">8.2 Position, Velocity &amp; Acceleration</a>
-  <a href="#sec-8-3" class="sidebar-link">8.3 Accumulation &amp; Net Change</a>
-  <a href="#sec-8-4" class="sidebar-link">8.4 Area (Functions of x)</a>
-  <a href="#sec-8-5" class="sidebar-link">8.5 Area (Functions of y)</a>
-  <a href="#sec-8-6" class="sidebar-link">8.6 Area (Multiple Intersections)</a>
-  <a href="#sec-volume-roadmap" class="sidebar-link"><strong>Volume Methods Roadmap</strong></a>
-  <a href="#sec-8-7" class="sidebar-link">8.7 Cross Sections</a>
-  <a href="#sec-8-8" class="sidebar-link">8.8 Triangles &amp; Semicircles</a>
-  <a href="#sec-8-9" class="sidebar-link">8.9 Disc Method</a>
-  <a href="#sec-8-10" class="sidebar-link">8.10 Disc Method (Other Axes)</a>
-  <a href="#sec-8-11" class="sidebar-link">8.11 Washer Method</a>
-  <a href="#sec-8-12" class="sidebar-link">8.12 Washer Method (Other Axes)</a>
-  <a href="#sec-8-13" class="sidebar-link">8.13 Arc Length (BC)</a>
-  <a href="#exam-strategy" class="sidebar-link">Exam Strategy</a>
-  <a href="#flashcards" class="sidebar-link">Flashcards</a>
-  <a href="#unit-quiz" class="sidebar-link">Unit Quiz</a>
-  <a href="#checklist" class="sidebar-link">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero" class="sidebar-link active"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#sec-8-1" class="sidebar-link"><span data-lang="en">8.1 Average Value</span><span data-lang="zh">8.1 函数平均值</span></a>
+  <a href="#sec-8-2" class="sidebar-link"><span data-lang="en">8.2 Position, Velocity &amp; Acceleration</span><span data-lang="zh">8.2 位置、速度与加速度</span></a>
+  <a href="#sec-8-3" class="sidebar-link"><span data-lang="en">8.3 Accumulation &amp; Net Change</span><span data-lang="zh">8.3 累积与净变化</span></a>
+  <a href="#sec-8-4" class="sidebar-link"><span data-lang="en">8.4 Area (Functions of x)</span><span data-lang="zh">8.4 面积（关于 x 的函数）</span></a>
+  <a href="#sec-8-5" class="sidebar-link"><span data-lang="en">8.5 Area (Functions of y)</span><span data-lang="zh">8.5 面积（关于 y 的函数）</span></a>
+  <a href="#sec-8-6" class="sidebar-link"><span data-lang="en">8.6 Area (Multiple Intersections)</span><span data-lang="zh">8.6 面积（多次相交）</span></a>
+  <a href="#sec-volume-roadmap" class="sidebar-link"><strong><span data-lang="en">Volume Methods Roadmap</span><span data-lang="zh">体积方法路线图</span></strong></a>
+  <a href="#sec-8-7" class="sidebar-link"><span data-lang="en">8.7 Cross Sections</span><span data-lang="zh">8.7 横截面</span></a>
+  <a href="#sec-8-8" class="sidebar-link"><span data-lang="en">8.8 Triangles &amp; Semicircles</span><span data-lang="zh">8.8 三角形与半圆</span></a>
+  <a href="#sec-8-9" class="sidebar-link"><span data-lang="en">8.9 Disc Method</span><span data-lang="zh">8.9 圆盘法</span></a>
+  <a href="#sec-8-10" class="sidebar-link"><span data-lang="en">8.10 Disc Method (Other Axes)</span><span data-lang="zh">8.10 圆盘法（其它旋转轴）</span></a>
+  <a href="#sec-8-11" class="sidebar-link"><span data-lang="en">8.11 Washer Method</span><span data-lang="zh">8.11 圆环法</span></a>
+  <a href="#sec-8-12" class="sidebar-link"><span data-lang="en">8.12 Washer Method (Other Axes)</span><span data-lang="zh">8.12 圆环法（其它旋转轴）</span></a>
+  <a href="#sec-8-13" class="sidebar-link"><span data-lang="en">8.13 Arc Length (BC)</span><span data-lang="zh">8.13 弧长（BC）</span></a>
+  <a href="#exam-strategy" class="sidebar-link"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards" class="sidebar-link"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz" class="sidebar-link"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
+  <a href="#checklist" class="sidebar-link"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 <main class="main-content">
   <section class="hero" id="hero">
     <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-    <h1>Unit 8: Applications of Integration</h1>
-    <p class="hero-sub">
+    <h1 data-lang="en">Unit 8: Applications of Integration</h1>
+    <h1 data-lang="zh">单元 8：积分的应用</h1>
+    <p class="hero-sub" data-lang="en">
       This unit turns the definite integral into a problem-solving tool — average values, net change, geometric area, volume from cross sections, solids of revolution, and arc length. The unifying idea is simple: an integral accumulates many tiny pieces into one total quantity.
     </p>
+    <p class="hero-sub" data-lang="zh">
+      本单元把定积分（<code>definite integral</code>）当作解题工具——平均值、净变化、几何面积、由横截面（<code>cross-section</code>）得到的体积、旋转体（<code>solid of revolution</code>）以及弧长。统一思想很简单：积分把无数微小片段累加成一个整体量。
+    </p>
     <div class="hero-meta">
-      <span class="chip chip-maroon">10–15% of AP Exam</span>
-      <span class="chip chip-green">~19–20 Class Periods</span>
-      <span class="chip chip-purple">13 Topics</span>
+      <span class="chip chip-maroon" data-lang="en">10–15% of AP Exam</span>
+      <span class="chip chip-maroon" data-lang="zh">占 AP 考试 10–15%</span>
+      <span class="chip chip-green" data-lang="en">~19–20 Class Periods</span>
+      <span class="chip chip-green" data-lang="zh">约 19–20 课时</span>
+      <span class="chip chip-purple" data-lang="en">13 Topics</span>
+      <span class="chip chip-purple" data-lang="zh">13 个小节</span>
     </div>
   </section>
   <div class="content-inner">
     <section class="topic-section" id="sec-8-1">
-      <div class="topic-header"><span class="overline">Topic 8.1 · CHA-4</span><h2>Finding the Average Value of a Function on an Interval</h2></div>
-      <p>The average value of a continuous function is the constant height that gives the same area as the original curve over the same interval. It is a “one-number summary” of a varying function.</p>
+      <div class="topic-header"><span class="overline">Topic 8.1 · CHA-4</span><h2 data-lang="en">Finding the Average Value of a Function on an Interval</h2><h2 data-lang="zh">在区间上求函数的平均值</h2></div>
+      <p data-lang="en">The average value of a continuous function is the constant height that gives the same area as the original curve over the same interval. It is a “one-number summary” of a varying function.</p>
+      <p data-lang="zh">连续函数的平均值（<code>average value of a function</code>）是这样一个常数高度：它在同一区间上所围矩形面积与原曲线下的面积相等。它是一个变化函数（<code>function</code>）的“单值概括”。</p>
       <div class="formula-box">$$f_{\text{avg}}=\frac{1}{b-a}\int_a^b f(x)\,dx$$</div>
-      <p>Geometrically, this is the height of a rectangle with width <span class="mono">b − a</span> whose area matches the signed area under the graph of <span class="mono">f</span> on <span class="mono">[a,b]</span>.</p>
-      <div class="concept-box green"><strong>Key distinction</strong><p>Average value is not average rate of change. Average value measures a typical output level; average rate of change measures how much the output changes per unit input.</p></div>
+      <p data-lang="en">Geometrically, this is the height of a rectangle with width <span class="mono">b − a</span> whose area matches the signed area under the graph of <span class="mono">f</span> on <span class="mono">[a,b]</span>.</p>
+      <p data-lang="zh">几何上，这就是一个宽度为 <span class="mono">b − a</span> 的矩形高度，使其面积等于 <span class="mono">f</span> 在 <span class="mono">[a,b]</span> 上图形下方的带号面积。</p>
+      <div class="concept-box green" data-lang="en"><strong>Key distinction</strong><p>Average value is not average rate of change. Average value measures a typical output level; average rate of change measures how much the output changes per unit input.</p></div>
+      <div class="concept-box green" data-lang="zh"><strong>关键区分</strong><p>函数的平均值不是平均变化率（<code>average rate of change</code>）。平均值衡量典型的输出水平；平均变化率衡量每单位输入对应输出的变化量。</p></div>
       <div class="worked-example">
-        <h3>Worked Example 1</h3>
-        <p><strong>Find the average value of</strong> $f(x)=x^2+1$ <strong>on</strong> $[0,2]$.</p>
+        <h3 data-lang="en">Worked Example 1</h3>
+        <h3 data-lang="zh">例题 1</h3>
+        <p data-lang="en"><strong>Find the average value of</strong> $f(x)=x^2+1$ <strong>on</strong> $[0,2]$.</p>
+        <p data-lang="zh"><strong>求</strong> $f(x)=x^2+1$ <strong>在</strong> $[0,2]$ <strong>上的平均值。</strong></p>
         <ol class="example-steps">
-          <li>Write the average-value formula: $$f_{\text{avg}}=\frac{1}{2-0}\int_0^2 (x^2+1)\,dx$$</li>
-          <li>Evaluate the integral: $$\int_0^2 (x^2+1)\,dx=\left[\frac{x^3}{3}+x\right]_0^2=\frac{8}{3}+2=\frac{14}{3}$$</li>
-          <li>Divide by the interval length: $$f_{\text{avg}}=\frac{1}{2}\cdot\frac{14}{3}=\frac{7}{3}$$</li>
+          <li><span data-lang="en">Write the average-value formula:</span><span data-lang="zh">写出平均值公式：</span> $$f_{\text{avg}}=\frac{1}{2-0}\int_0^2 (x^2+1)\,dx$$</li>
+          <li><span data-lang="en">Evaluate the integral:</span><span data-lang="zh">计算积分（<code>integral</code>）：</span> $$\int_0^2 (x^2+1)\,dx=\left[\frac{x^3}{3}+x\right]_0^2=\frac{8}{3}+2=\frac{14}{3}$$</li>
+          <li><span data-lang="en">Divide by the interval length:</span><span data-lang="zh">除以区间长度：</span> $$f_{\text{avg}}=\frac{1}{2}\cdot\frac{14}{3}=\frac{7}{3}$$</li>
         </ol>
-        <div class="concept-box"><strong>Interpretation</strong><p>The curve’s average height on <span class="mono">[0,2]</span> is $\frac73$. A rectangle of width 2 and height $\frac73$ has the same area as the region under $y=x^2+1$ from 0 to 2.</p></div>
+        <div class="concept-box" data-lang="en"><strong>Interpretation</strong><p>The curve’s average height on <span class="mono">[0,2]</span> is $\frac73$. A rectangle of width 2 and height $\frac73$ has the same area as the region under $y=x^2+1$ from 0 to 2.</p></div>
+        <div class="concept-box" data-lang="zh"><strong>解释</strong><p>曲线在 <span class="mono">[0,2]</span> 上的平均高度为 $\frac73$。宽 2、高 $\frac73$ 的矩形与 $y=x^2+1$ 在 0 到 2 之间的区域面积相同。</p></div>
       </div>
       <div class="interactive-card" id="avgInteractive">
-        <h3>Interactive Example — Average Value as an Equal-Area Rectangle</h3>
+        <h3 data-lang="en">Interactive Example — Average Value as an Equal-Area Rectangle</h3>
+        <h3 data-lang="zh">交互示例——把函数平均值看作等面积矩形</h3>
         <div class="interactive-grid">
           <div class="graph-wrap">
             <svg id="avgSvg" viewBox="0 0 420 280" width="100%" aria-label="Average value graph"></svg>
-            <div class="graph-caption">Fixed axes. The shaded curve region and the highlighted rectangle always share the same total area over the chosen interval.</div>
+            <div class="graph-caption" data-lang="en">Fixed axes. The shaded curve region and the highlighted rectangle always share the same total area over the chosen interval.</div>
+            <div class="graph-caption" data-lang="zh">坐标轴固定。曲线下的阴影区域与高亮矩形在所选区间上始终具有相同的总面积。</div>
           </div>
           <div class="interactive-panel">
-            <h4>Controls</h4>
-            <div class="control-row"><label><span>Upper bound b</span><span id="avgBVal">3.0</span></label><input id="avgB" type="range" min="1.5" max="4.5" step="0.1" value="3.0"></div>
-            <div class="control-row"><label><span>Coefficient k in f(x)=kx²+1</span><span id="avgKVal">0.50</span></label><input id="avgK" type="range" min="0.2" max="1.2" step="0.05" value="0.50"></div>
+            <h4 data-lang="en">Controls</h4>
+            <h4 data-lang="zh">控制项</h4>
+            <div class="control-row"><label><span data-lang="en">Upper bound b</span><span data-lang="zh">上限 b</span><span id="avgBVal">3.0</span></label><input id="avgB" type="range" min="1.5" max="4.5" step="0.1" value="3.0"></div>
+            <div class="control-row"><label><span data-lang="en">Coefficient k in f(x)=kx²+1</span><span data-lang="zh">f(x)=kx²+1 中的系数 k</span><span id="avgKVal">0.50</span></label><input id="avgK" type="range" min="0.2" max="1.2" step="0.05" value="0.50"></div>
             <div class="live-values" id="avgReadout"></div>
           </div>
         </div>
@@ -294,21 +315,29 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-2">
-      <div class="topic-header"><span class="overline">Topic 8.2 · CHA-4</span><h2>Connecting Position, Velocity, and Acceleration Using Integrals</h2></div>
-      <p>If velocity is the rate of change of position, then integrating velocity accumulates displacement. If acceleration is the rate of change of velocity, then integrating acceleration accumulates the change in velocity.</p>
+      <div class="topic-header"><span class="overline">Topic 8.2 · CHA-4</span><h2 data-lang="en">Connecting Position, Velocity, and Acceleration Using Integrals</h2><h2 data-lang="zh">用积分串联位置、速度与加速度</h2></div>
+      <p data-lang="en">If velocity is the rate of change of position, then integrating velocity accumulates displacement. If acceleration is the rate of change of velocity, then integrating acceleration accumulates the change in velocity.</p>
+      <p data-lang="zh">若速度是位置的变化率（<code>rate of change</code>），则对速度积分就累积出位移。若加速度是速度的变化率，则对加速度积分就累积出速度的变化量。</p>
       <div class="formula-box">$$s(b)-s(a)=\int_a^b v(t)\,dt \qquad \text{and} \qquad v(b)-v(a)=\int_a^b a(t)\,dt$$</div>
       <div class="formula-box">$$\text{Total distance traveled}=\int_a^b |v(t)|\,dt$$</div>
-      <div class="concept-box orange"><strong>Displacement vs. distance</strong><p>Displacement keeps track of direction. Distance ignores direction and is always nonnegative. If velocity changes sign, you must account for that before computing distance.</p></div>
+      <div class="concept-box orange" data-lang="en"><strong>Displacement vs. distance</strong><p>Displacement keeps track of direction. Distance ignores direction and is always nonnegative. If velocity changes sign, you must account for that before computing distance.</p></div>
+      <div class="concept-box orange" data-lang="zh"><strong>位移 vs. 路程</strong><p>位移（<code>displacement</code>）会保留方向信息。路程（<code>distance</code>）忽略方向，且恒为非负。如果速度变号，在计算路程前必须先处理这一点。</p></div>
 
       <div class="worked-example">
-        <h3>Worked Example — Velocity Changes Sign</h3>
-        <p>A particle moves along the $x$-axis with velocity $v(t) = t^{2} - 4t + 3$ for $0 \le t \le 4$ (in m/s). Find <strong>(a)</strong> the displacement and <strong>(b)</strong> the total distance traveled on $[0, 4]$.</p>
+        <h3 data-lang="en">Worked Example — Velocity Changes Sign</h3>
+        <h3 data-lang="zh">例题——速度变号</h3>
+        <p data-lang="en">A particle moves along the $x$-axis with velocity $v(t) = t^{2} - 4t + 3$ for $0 \le t \le 4$ (in m/s). Find <strong>(a)</strong> the displacement and <strong>(b)</strong> the total distance traveled on $[0, 4]$.</p>
+        <p data-lang="zh">一质点沿 $x$ 轴运动，速度为 $v(t) = t^{2} - 4t + 3$，其中 $0 \le t \le 4$（单位 m/s）。求 <strong>(a)</strong> 位移；<strong>(b)</strong> 在 $[0, 4]$ 上的总路程。</p>
         <ol class="example-steps">
-          <li><strong>Find where $v(t)$ changes sign.</strong> Factor: $v(t) = (t-1)(t-3)$, so $v(t) = 0$ at $t = 1$ and $t = 3$. Sign chart on $[0, 4]$: $v(0.5) = 1.25 &gt; 0$, $v(2) = -1 &lt; 0$, $v(3.5) = 1.25 &gt; 0$. So $v &gt; 0$ on $(0, 1)$ and $(3, 4)$, and $v &lt; 0$ on $(1, 3)$.</li>
-          <li><strong>(a) Displacement</strong> ignores direction — just integrate $v$ straight through:
+          <li data-lang="en"><strong>Find where $v(t)$ changes sign.</strong> Factor: $v(t) = (t-1)(t-3)$, so $v(t) = 0$ at $t = 1$ and $t = 3$. Sign chart on $[0, 4]$: $v(0.5) = 1.25 &gt; 0$, $v(2) = -1 &lt; 0$, $v(3.5) = 1.25 &gt; 0$. So $v &gt; 0$ on $(0, 1)$ and $(3, 4)$, and $v &lt; 0$ on $(1, 3)$.</li>
+          <li data-lang="zh"><strong>找出 $v(t)$ 的变号点。</strong> 因式分解：$v(t) = (t-1)(t-3)$，所以 $v(t) = 0$ 在 $t = 1$ 与 $t = 3$。在 $[0, 4]$ 上的符号表：$v(0.5) = 1.25 &gt; 0$，$v(2) = -1 &lt; 0$，$v(3.5) = 1.25 &gt; 0$。所以 $v &gt; 0$ 在 $(0, 1)$ 和 $(3, 4)$ 上，$v &lt; 0$ 在 $(1, 3)$ 上。</li>
+          <li data-lang="en"><strong>(a) Displacement</strong> ignores direction — just integrate $v$ straight through:
             $$\int_0^{4}(t^{2} - 4t + 3)\,dt \;=\; \Bigl[\tfrac{t^{3}}{3} - 2t^{2} + 3t\Bigr]_0^{4} \;=\; \tfrac{64}{3} - 32 + 12 \;=\; \tfrac{4}{3}\text{ m}.$$
           </li>
-          <li><strong>(b) Total distance</strong> uses $|v(t)|$. Split at each sign change so absolute value resolves into a definite sign:
+          <li data-lang="zh"><strong>(a) 位移</strong>忽略方向——直接对 $v$ 在整个区间积分：
+            $$\int_0^{4}(t^{2} - 4t + 3)\,dt \;=\; \Bigl[\tfrac{t^{3}}{3} - 2t^{2} + 3t\Bigr]_0^{4} \;=\; \tfrac{64}{3} - 32 + 12 \;=\; \tfrac{4}{3}\text{ m}.$$
+          </li>
+          <li data-lang="en"><strong>(b) Total distance</strong> uses $|v(t)|$. Split at each sign change so absolute value resolves into a definite sign:
             $$\int_0^{4}|v(t)|\,dt \;=\; \int_0^{1}\!v\,dt \;+\; \int_1^{3}\!(-v)\,dt \;+\; \int_3^{4}\!v\,dt.$$
             Each piece evaluates separately. Using the same antiderivative $\tfrac{t^{3}}{3} - 2t^{2} + 3t$:
             <ul style="margin-left:18px; margin-top:4px;">
@@ -318,117 +347,185 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
             </ul>
             Total distance $= \tfrac{4}{3} + \tfrac{4}{3} + \tfrac{4}{3} = 4$ m.
           </li>
+          <li data-lang="zh"><strong>(b) 总路程</strong>使用 $|v(t)|$。在每个变号点处分段，让绝对值落到确定的符号：
+            $$\int_0^{4}|v(t)|\,dt \;=\; \int_0^{1}\!v\,dt \;+\; \int_1^{3}\!(-v)\,dt \;+\; \int_3^{4}\!v\,dt.$$
+            每段分别计算。使用同一个原函数（<code>antiderivative</code>） $\tfrac{t^{3}}{3} - 2t^{2} + 3t$：
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>$\int_0^{1} v \,dt = \tfrac{1}{3} - 2 + 3 = \tfrac{4}{3}$。</li>
+              <li>$\int_1^{3} v \,dt = (9 - 18 + 9) - (\tfrac{1}{3} - 2 + 3) = 0 - \tfrac{4}{3} = -\tfrac{4}{3}$。&nbsp;取绝对值：$\tfrac{4}{3}$。</li>
+              <li>$\int_3^{4} v \,dt = \tfrac{4}{3} - 0 = \tfrac{4}{3}$。</li>
+            </ul>
+            总路程 $= \tfrac{4}{3} + \tfrac{4}{3} + \tfrac{4}{3} = 4$ m。
+          </li>
         </ol>
-        <div class="concept-box red"><strong>Common AP slip</strong><p>Computing $\int_0^4 v\,dt$ and reporting that as the total distance. That gives the displacement $\tfrac{4}{3}$ m — the cancellation across the sign change has thrown away $\tfrac{8}{3}$ m of "back-and-forth" motion. <em>Always</em> split at sign changes before computing distance.</p></div>
+        <div class="concept-box red" data-lang="en"><strong>Common AP slip</strong><p>Computing $\int_0^4 v\,dt$ and reporting that as the total distance. That gives the displacement $\tfrac{4}{3}$ m — the cancellation across the sign change has thrown away $\tfrac{8}{3}$ m of "back-and-forth" motion. <em>Always</em> split at sign changes before computing distance.</p></div>
+        <div class="concept-box red" data-lang="zh"><strong>常见 AP 失误</strong><p>把 $\int_0^4 v\,dt$ 当成总路程。这只算出位移 $\tfrac{4}{3}$ m——变号处的正负相消已经抹掉了 $\tfrac{8}{3}$ m 的“来回”运动。计算路程前<em>务必</em>在变号点处分段。</p></div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-3">
-      <div class="topic-header"><span class="overline">Topic 8.3 · CHA-4</span><h2>Using Accumulation Functions and Definite Integrals in Applied Contexts</h2></div>
-      <p>An accumulation function records how much of a changing quantity has built up from a starting point to a variable endpoint. In AP Calculus, this usually appears in the form $F(x)=\int_a^x f(t)\,dt$.</p>
+      <div class="topic-header"><span class="overline">Topic 8.3 · CHA-4</span><h2 data-lang="en">Using Accumulation Functions and Definite Integrals in Applied Contexts</h2><h2 data-lang="zh">在应用情境中使用累积函数与定积分</h2></div>
+      <p data-lang="en">An accumulation function records how much of a changing quantity has built up from a starting point to a variable endpoint. In AP Calculus, this usually appears in the form $F(x)=\int_a^x f(t)\,dt$.</p>
+      <p data-lang="zh">累积函数（<code>accumulation function</code>）记录某个变化量从起点到可变终点之间累积了多少。在 AP 微积分中，它通常写成 $F(x)=\int_a^x f(t)\,dt$ 的形式。</p>
       <div class="formula-box">$$\int_a^b r(t)\,dt = Q(b)-Q(a) \quad \text{when} \quad r(t)=Q'(t)$$</div>
-      <p>In words: the integral of a rate gives net change in the underlying quantity. This is why words like <em>accumulation</em>, <em>flows in</em>, <em>net increase</em>, and <em>amount added</em> usually point to integration.</p>
-      <div class="concept-box"><strong>Context rule</strong><p>If the problem gives a rate and asks for an amount, integrate. If the problem gives an amount and asks how fast it changes, differentiate.</p></div>
+      <p data-lang="en">In words: the integral of a rate gives net change in the underlying quantity. This is why words like <em>accumulation</em>, <em>flows in</em>, <em>net increase</em>, and <em>amount added</em> usually point to integration.</p>
+      <p data-lang="zh">用文字描述：对一个变化率（<code>rate</code>）积分得到的是底层量的净变化（<code>net change</code>）。这就是为什么<em>累积</em>、<em>流入</em>、<em>净增加</em>、<em>新增量</em>这类词通常都指向积分。</p>
+      <div class="concept-box" data-lang="en"><strong>Context rule</strong><p>If the problem gives a rate and asks for an amount, integrate. If the problem gives an amount and asks how fast it changes, differentiate.</p></div>
+      <div class="concept-box" data-lang="zh"><strong>情境判别</strong><p>若题目给出变化率而求总量，则积分。若题目给出总量而问其变化速率，则求导（<code>derivative</code>）。</p></div>
 
       <div class="worked-example">
-        <h3>Worked Example — Tank Filling with a Variable-Rate Inflow</h3>
-        <p>Water flows into a tank at the rate $R(t) = 6 + 4t$ gal/min for $0 \le t \le 5$ min. The tank holds $W(0) = 20$ gal at $t = 0$.</p>
-        <p><strong>(a)</strong> How much water enters the tank during the interval $[0, 5]$?</p>
-        <p><strong>(b)</strong> How much water is in the tank at $t = 5$?</p>
+        <h3 data-lang="en">Worked Example — Tank Filling with a Variable-Rate Inflow</h3>
+        <h3 data-lang="zh">例题——变速率注水的水箱</h3>
+        <p data-lang="en">Water flows into a tank at the rate $R(t) = 6 + 4t$ gal/min for $0 \le t \le 5$ min. The tank holds $W(0) = 20$ gal at $t = 0$.</p>
+        <p data-lang="zh">水以速率 $R(t) = 6 + 4t$ gal/min 流入水箱，$0 \le t \le 5$ 分钟。$t = 0$ 时水箱中的水量为 $W(0) = 20$ gal。</p>
+        <p data-lang="en"><strong>(a)</strong> How much water enters the tank during the interval $[0, 5]$?</p>
+        <p data-lang="zh"><strong>(a)</strong> 在 $[0, 5]$ 区间内有多少水流入水箱？</p>
+        <p data-lang="en"><strong>(b)</strong> How much water is in the tank at $t = 5$?</p>
+        <p data-lang="zh"><strong>(b)</strong> $t = 5$ 时水箱里有多少水？</p>
         <ol class="example-steps">
-          <li><strong>Identify the integral.</strong> The amount that enters during $[0, 5]$ is the accumulation of the inflow rate:
+          <li data-lang="en"><strong>Identify the integral.</strong> The amount that enters during $[0, 5]$ is the accumulation of the inflow rate:
             $$\text{Net inflow} \;=\; \int_0^{5} R(t)\,dt \;=\; \int_0^{5}(6 + 4t)\,dt.$$
           </li>
-          <li><strong>Evaluate.</strong>
+          <li data-lang="zh"><strong>识别积分。</strong> 在 $[0, 5]$ 区间内流入的水量就是流入速率的累积：
+            $$\text{净流入量} \;=\; \int_0^{5} R(t)\,dt \;=\; \int_0^{5}(6 + 4t)\,dt.$$
+          </li>
+          <li data-lang="en"><strong>Evaluate.</strong>
             $$\int_0^{5}(6 + 4t)\,dt \;=\; \bigl[\,6t + 2t^{2}\,\bigr]_0^{5} \;=\; 30 + 50 \;=\; 80\text{ gal}.$$
           </li>
-          <li><strong>(b) Add to the initial amount.</strong> Net change formula: $W(5) = W(0) + \int_0^{5} R(t)\,dt = 20 + 80 = 100$ gal.</li>
+          <li data-lang="zh"><strong>计算。</strong>
+            $$\int_0^{5}(6 + 4t)\,dt \;=\; \bigl[\,6t + 2t^{2}\,\bigr]_0^{5} \;=\; 30 + 50 \;=\; 80\text{ gal}.$$
+          </li>
+          <li data-lang="en"><strong>(b) Add to the initial amount.</strong> Net change formula: $W(5) = W(0) + \int_0^{5} R(t)\,dt = 20 + 80 = 100$ gal.</li>
+          <li data-lang="zh"><strong>(b) 加上初始量。</strong> 由净变化公式：$W(5) = W(0) + \int_0^{5} R(t)\,dt = 20 + 80 = 100$ gal。</li>
         </ol>
-        <div class="concept-box green"><strong>Why this works.</strong>
+        <div class="concept-box green" data-lang="en"><strong>Why this works.</strong>
           <p>The Net Change Theorem ($Q(b) - Q(a) = \int_a^b Q'(t)\,dt$) is the bridge between rates and amounts. We do not need an explicit formula for $W(t)$ — the rate $R$ <em>is</em> $W'$, and integrating it directly gives the change.</p>
         </div>
-        <div class="concept-box orange"><strong>Inflow + Outflow variant</strong>
+        <div class="concept-box green" data-lang="zh"><strong>原理。</strong>
+          <p>净变化定理 ($Q(b) - Q(a) = \int_a^b Q'(t)\,dt$) 是连接变化率与总量的桥梁。我们无需 $W(t)$ 的显式表达——速率 $R$ <em>就是</em> $W'$，直接积分就得到变化量。</p>
+        </div>
+        <div class="concept-box orange" data-lang="en"><strong>Inflow + Outflow variant</strong>
           <p>If water also drains at rate $D(t)$, the <em>net</em> rate of change of the tank is $W'(t) = R(t) - D(t)$, and the same formula applies: $W(b) = W(a) + \int_a^b\!\bigl[\,R(t) - D(t)\,\bigr]\,dt$. AP free-response often pairs an inflow rate with an outflow rate and asks for the amount at a specific time.</p>
+        </div>
+        <div class="concept-box orange" data-lang="zh"><strong>同时有流入与流出</strong>
+          <p>若同时以速率 $D(t)$ 排水，则水箱的<em>净</em>变化率为 $W'(t) = R(t) - D(t)$，同一公式仍然适用：$W(b) = W(a) + \int_a^b\!\bigl[\,R(t) - D(t)\,\bigr]\,dt$。AP 自由响应题（FRQ）常把流入率与流出率配对出现，并要求某个时刻的总量。</p>
         </div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-4">
-      <div class="topic-header"><span class="overline">Topic 8.4 · CHA-5</span><h2>Finding the Area Between Curves Expressed as Functions of x</h2></div>
-      <p>When curves are written as <span class="mono">y = f(x)</span> and <span class="mono">y = g(x)</span>, the area between them is found by integrating the vertical distance between the top and bottom curves.</p>
+      <div class="topic-header"><span class="overline">Topic 8.4 · CHA-5</span><h2 data-lang="en">Finding the Area Between Curves Expressed as Functions of x</h2><h2 data-lang="zh">求以 x 为自变量的两条曲线之间的面积</h2></div>
+      <p data-lang="en">When curves are written as <span class="mono">y = f(x)</span> and <span class="mono">y = g(x)</span>, the area between them is found by integrating the vertical distance between the top and bottom curves.</p>
+      <p data-lang="zh">当曲线写成 <span class="mono">y = f(x)</span> 和 <span class="mono">y = g(x)</span> 时，两条曲线之间的面积（<code>area between two curves</code>）就是对上下两条曲线之间的垂直距离作积分。</p>
       <div class="formula-box">$$A=\int_a^b [\text{top} - \text{bottom}]\,dx$$</div>
       <div class="worked-example">
-        <h3>Worked Example 2</h3>
-        <p><strong>Find the area enclosed by</strong> $y=x$ <strong>and</strong> $y=x^2$ <strong>on</strong> $[0,1]$.</p>
+        <h3 data-lang="en">Worked Example 2</h3>
+        <h3 data-lang="zh">例题 2</h3>
+        <p data-lang="en"><strong>Find the area enclosed by</strong> $y=x$ <strong>and</strong> $y=x^2$ <strong>on</strong> $[0,1]$.</p>
+        <p data-lang="zh"><strong>求</strong> $y=x$ <strong>与</strong> $y=x^2$ <strong>在</strong> $[0,1]$ <strong>上所围成的面积。</strong></p>
         <ol class="example-steps">
-          <li>Determine which graph is on top on <span class="mono">[0,1]</span>. Since $x \ge x^2$ there, the top curve is $y=x$ and the bottom curve is $y=x^2$.</li>
-          <li>Set up the integral: $$A=\int_0^1 (x-x^2)\,dx$$</li>
-          <li>Integrate: $$A=\left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1=\frac12-\frac13=\frac16$$</li>
+          <li data-lang="en">Determine which graph is on top on <span class="mono">[0,1]</span>. Since $x \ge x^2$ there, the top curve is $y=x$ and the bottom curve is $y=x^2$.</li>
+          <li data-lang="zh">先判断在 <span class="mono">[0,1]</span> 上哪条在上。因为该区间内 $x \ge x^2$，所以上曲线是 $y=x$，下曲线是 $y=x^2$。</li>
+          <li data-lang="en">Set up the integral: $$A=\int_0^1 (x-x^2)\,dx$$</li>
+          <li data-lang="zh">建立积分： $$A=\int_0^1 (x-x^2)\,dx$$</li>
+          <li data-lang="en">Integrate: $$A=\left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1=\frac12-\frac13=\frac16$$</li>
+          <li data-lang="zh">积分： $$A=\left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1=\frac12-\frac13=\frac16$$</li>
         </ol>
       </div>
       <div class="interactive-card" id="areaInteractive">
-        <h3>Interactive Example — Area Between Two Curves</h3>
+        <h3 data-lang="en">Interactive Example — Area Between Two Curves</h3>
+        <h3 data-lang="zh">交互示例——两条曲线之间的面积</h3>
         <div class="interactive-grid">
           <div class="graph-wrap">
             <svg id="areaSvg" viewBox="0 0 420 280" width="100%" aria-label="Area between curves graph"></svg>
-            <div class="graph-caption">Fixed axes. The shaded region updates as the upper line changes slope. The interval remains locked to the intersection points at x = 0 and x = 1.</div>
+            <div class="graph-caption" data-lang="en">Fixed axes. The shaded region updates as the upper line changes slope. The interval remains locked to the intersection points at x = 0 and x = 1.</div>
+            <div class="graph-caption" data-lang="zh">坐标轴固定。随上方直线斜率改变，阴影区域同步更新。积分区间始终锁定在 x = 0 与 x = 1 的交点。</div>
           </div>
           <div class="interactive-panel">
-            <h4>Controls</h4>
-            <div class="control-row"><label><span>Line slope m in y = mx</span><span id="areaMVal">1.00</span></label><input id="areaM" type="range" min="0.4" max="2.2" step="0.05" value="1.0"></div>
+            <h4 data-lang="en">Controls</h4>
+            <h4 data-lang="zh">控制项</h4>
+            <div class="control-row"><label><span data-lang="en">Line slope m in y = mx</span><span data-lang="zh">y = mx 中的斜率 m</span><span id="areaMVal">1.00</span></label><input id="areaM" type="range" min="0.4" max="2.2" step="0.05" value="1.0"></div>
             <div class="live-values" id="areaReadout"></div>
-            <div class="concept-box orange" style="margin-top:12px"><strong>Why this helps</strong><p>As the slope changes, the “top minus bottom” gap changes point-by-point, so the total area changes. This is exactly what the definite integral is measuring.</p></div>
+            <div class="concept-box orange" style="margin-top:12px" data-lang="en"><strong>Why this helps</strong><p>As the slope changes, the “top minus bottom” gap changes point-by-point, so the total area changes. This is exactly what the definite integral is measuring.</p></div>
+            <div class="concept-box orange" style="margin-top:12px" data-lang="zh"><strong>这个交互的意义</strong><p>当斜率变化时，“上减下”的间距逐点变化，因此总面积也随之改变。这正是定积分所衡量的东西。</p></div>
           </div>
         </div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-5">
-      <div class="topic-header"><span class="overline">Topic 8.5 · CHA-5</span><h2>Finding the Area Between Curves Expressed as Functions of y</h2></div>
-      <p>When the left and right boundaries are easier to describe than the top and bottom boundaries, integrate with respect to <span class="mono">y</span>.</p>
+      <div class="topic-header"><span class="overline">Topic 8.5 · CHA-5</span><h2 data-lang="en">Finding the Area Between Curves Expressed as Functions of y</h2><h2 data-lang="zh">求关于 y 轴的两曲线间面积</h2></div>
+      <p data-lang="en">When the left and right boundaries are easier to describe than the top and bottom boundaries, integrate with respect to <span class="mono">y</span>.</p>
+      <p data-lang="zh">若左右边界比上下边界更容易描述，则关于 <span class="mono">y</span> 积分（<code>area between two curves with respect to y</code>）。</p>
       <div class="formula-box">$$A=\int_c^d [\text{right} - \text{left}]\,dy$$</div>
-      <div class="concept-box purple"><strong>Decision rule</strong><p>Use vertical slices when the region is naturally “top minus bottom.” Use horizontal slices when the region is naturally “right minus left.” Choose the variable that produces one clean integral whenever possible.</p></div>
+      <div class="concept-box purple" data-lang="en"><strong>Decision rule</strong><p>Use vertical slices when the region is naturally “top minus bottom.” Use horizontal slices when the region is naturally “right minus left.” Choose the variable that produces one clean integral whenever possible.</p></div>
+      <div class="concept-box purple" data-lang="zh"><strong>判别原则</strong><p>当区域自然呈现“上减下”形式时，用垂直切片；当区域自然呈现“右减左”形式时，用水平切片。尽可能选择能写出一个干净积分的变量。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-6">
-      <div class="topic-header"><span class="overline">Topic 8.6 · CHA-5</span><h2>Finding the Area Between Curves That Intersect at More Than Two Points</h2></div>
-      <p>If the top and bottom curves switch positions, a single integral will no longer work unless you use absolute value. Usually the safest method is to split the interval at every intersection.</p>
+      <div class="topic-header"><span class="overline">Topic 8.6 · CHA-5</span><h2 data-lang="en">Finding the Area Between Curves That Intersect at More Than Two Points</h2><h2 data-lang="zh">求多次相交的两曲线之间的面积</h2></div>
+      <p data-lang="en">If the top and bottom curves switch positions, a single integral will no longer work unless you use absolute value. Usually the safest method is to split the interval at every intersection.</p>
+      <p data-lang="zh">如果上下曲线发生位置互换，一个不带绝对值的积分就不能直接用了。最稳妥的做法通常是在每一个交点处把区间拆开。</p>
       <div class="formula-box">$$A=\int_a^b |f(x)-g(x)|\,dx$$</div>
-      <div class="concept-box red"><strong>Frequent AP error</strong><p>Students often forget to split at an intersection where the graphs cross. That causes cancellation and gives signed area instead of actual area.</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Frequent AP error</strong><p>Students often forget to split at an intersection where the graphs cross. That causes cancellation and gives signed area instead of actual area.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>AP 常见错误</strong><p>学生常常忘记在两条曲线相交处拆分区间，导致正负相消，得到的是带号面积而不是实际面积。</p></div>
 
       <div class="worked-example">
-        <h3>Worked Example — $\displaystyle\int_{-1}^{1} |x^{3} - x|\,dx$</h3>
-        <p>Find the area enclosed between $y = x^{3}$ and $y = x$ on $[-1, 1]$. The graphs cross at $x = -1, 0, 1$, so the "top minus bottom" identity flips at $x = 0$.</p>
+        <h3 data-lang="en">Worked Example — $\displaystyle\int_{-1}^{1} |x^{3} - x|\,dx$</h3>
+        <h3 data-lang="zh">例题——$\displaystyle\int_{-1}^{1} |x^{3} - x|\,dx$</h3>
+        <p data-lang="en">Find the area enclosed between $y = x^{3}$ and $y = x$ on $[-1, 1]$. The graphs cross at $x = -1, 0, 1$, so the "top minus bottom" identity flips at $x = 0$.</p>
+        <p data-lang="zh">求 $y = x^{3}$ 与 $y = x$ 在 $[-1, 1]$ 上所围的面积。两图象在 $x = -1, 0, 1$ 处相交，所以“上减下”的关系在 $x = 0$ 处发生翻转。</p>
         <ol class="example-steps">
-          <li><strong>Locate the zeros of the difference.</strong> $x^{3} - x = x(x-1)(x+1) = 0$ at $x = -1, 0, 1$. These split $[-1, 1]$ into two subintervals.</li>
-          <li><strong>Sign chart on each subinterval.</strong>
+          <li data-lang="en"><strong>Locate the zeros of the difference.</strong> $x^{3} - x = x(x-1)(x+1) = 0$ at $x = -1, 0, 1$. These split $[-1, 1]$ into two subintervals.</li>
+          <li data-lang="zh"><strong>找出差函数的零点。</strong> $x^{3} - x = x(x-1)(x+1) = 0$，零点为 $x = -1, 0, 1$。它们把 $[-1, 1]$ 切成两段。</li>
+          <li data-lang="en"><strong>Sign chart on each subinterval.</strong>
             <ul style="margin-left:18px; margin-top:4px;">
               <li>On $(-1, 0)$, test $x = -\tfrac{1}{2}$: $(-\tfrac{1}{2})^{3} - (-\tfrac{1}{2}) = -\tfrac{1}{8} + \tfrac{1}{2} = \tfrac{3}{8} &gt; 0$. So $x^{3} \ge x$ — cubic is on top.</li>
               <li>On $(0, 1)$, test $x = \tfrac{1}{2}$: $\tfrac{1}{8} - \tfrac{1}{2} = -\tfrac{3}{8} &lt; 0$. So $x \ge x^{3}$ — line is on top.</li>
             </ul>
           </li>
-          <li><strong>Split the absolute-value integral by sign.</strong>
+          <li data-lang="zh"><strong>对每段做符号表。</strong>
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>在 $(-1, 0)$ 上取 $x = -\tfrac{1}{2}$ 试： $(-\tfrac{1}{2})^{3} - (-\tfrac{1}{2}) = -\tfrac{1}{8} + \tfrac{1}{2} = \tfrac{3}{8} &gt; 0$。所以 $x^{3} \ge x$——三次函数在上。</li>
+              <li>在 $(0, 1)$ 上取 $x = \tfrac{1}{2}$ 试： $\tfrac{1}{8} - \tfrac{1}{2} = -\tfrac{3}{8} &lt; 0$。所以 $x \ge x^{3}$——直线在上。</li>
+            </ul>
+          </li>
+          <li data-lang="en"><strong>Split the absolute-value integral by sign.</strong>
             $$\int_{-1}^{1}|x^{3} - x|\,dx \;=\; \int_{-1}^{0}(x^{3} - x)\,dx \;+\; \int_{0}^{1}(x - x^{3})\,dx.$$
           </li>
-          <li><strong>Evaluate each piece.</strong> Use antiderivative $\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}$:
+          <li data-lang="zh"><strong>按符号拆分绝对值积分。</strong>
+            $$\int_{-1}^{1}|x^{3} - x|\,dx \;=\; \int_{-1}^{0}(x^{3} - x)\,dx \;+\; \int_{0}^{1}(x - x^{3})\,dx.$$
+          </li>
+          <li data-lang="en"><strong>Evaluate each piece.</strong> Use antiderivative $\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}$:
             $$\int_{-1}^{0}(x^{3} - x)\,dx \;=\; \Bigl[\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}\Bigr]_{-1}^{0} \;=\; 0 - \!\left(\tfrac{1}{4} - \tfrac{1}{2}\right) \;=\; \tfrac{1}{4}.$$
             $$\int_{0}^{1}(x - x^{3})\,dx \;=\; \Bigl[\tfrac{x^{2}}{2} - \tfrac{x^{4}}{4}\Bigr]_{0}^{1} \;=\; \tfrac{1}{2} - \tfrac{1}{4} \;=\; \tfrac{1}{4}.$$
           </li>
-          <li><strong>Sum.</strong> Total area $= \tfrac{1}{4} + \tfrac{1}{4} = \tfrac{1}{2}$.</li>
+          <li data-lang="zh"><strong>分别计算每一段。</strong> 使用原函数 $\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}$：
+            $$\int_{-1}^{0}(x^{3} - x)\,dx \;=\; \Bigl[\tfrac{x^{4}}{4} - \tfrac{x^{2}}{2}\Bigr]_{-1}^{0} \;=\; 0 - \!\left(\tfrac{1}{4} - \tfrac{1}{2}\right) \;=\; \tfrac{1}{4}.$$
+            $$\int_{0}^{1}(x - x^{3})\,dx \;=\; \Bigl[\tfrac{x^{2}}{2} - \tfrac{x^{4}}{4}\Bigr]_{0}^{1} \;=\; \tfrac{1}{2} - \tfrac{1}{4} \;=\; \tfrac{1}{4}.$$
+          </li>
+          <li data-lang="en"><strong>Sum.</strong> Total area $= \tfrac{1}{4} + \tfrac{1}{4} = \tfrac{1}{2}$.</li>
+          <li data-lang="zh"><strong>求和。</strong> 总面积 $= \tfrac{1}{4} + \tfrac{1}{4} = \tfrac{1}{2}$。</li>
         </ol>
-        <div class="concept-box green"><strong>Symmetry shortcut</strong>
+        <div class="concept-box green" data-lang="en"><strong>Symmetry shortcut</strong>
           <p>$|x^{3} - x|$ is an <em>even</em> function (the absolute value kills the odd-symmetry sign flip), so $\int_{-1}^{1}|x^{3} - x|\,dx = 2\!\int_0^1 |x^{3} - x|\,dx = 2 \cdot \tfrac{1}{4} = \tfrac{1}{2}$. Same answer.</p>
         </div>
-        <div class="concept-box red"><strong>What goes wrong if you don't split</strong>
+        <div class="concept-box green" data-lang="zh"><strong>对称性捷径</strong>
+          <p>$|x^{3} - x|$ 是<em>偶</em>函数（绝对值消去了奇函数的符号反转），所以 $\int_{-1}^{1}|x^{3} - x|\,dx = 2\!\int_0^1 |x^{3} - x|\,dx = 2 \cdot \tfrac{1}{4} = \tfrac{1}{2}$。答案相同。</p>
+        </div>
+        <div class="concept-box red" data-lang="en"><strong>What goes wrong if you don't split</strong>
           <p>Computing $\int_{-1}^{1}(x^{3} - x)\,dx$ <em>without</em> the absolute value gives $0$, because $x^{3} - x$ is odd and the contributions on $(-1,0)$ and $(0,1)$ cancel. That zero is signed area — definitely not the geometric area between the curves.</p>
+        </div>
+        <div class="concept-box red" data-lang="zh"><strong>不拆分会出什么问题</strong>
+          <p>如果<em>不</em>加绝对值直接算 $\int_{-1}^{1}(x^{3} - x)\,dx$，结果为 $0$，因为 $x^{3} - x$ 是奇函数，$(-1,0)$ 和 $(0,1)$ 两段的贡献相互抵消。这个 $0$ 是带号面积——绝对不是两曲线之间的几何面积。</p>
         </div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-volume-roadmap">
-      <div class="topic-header"><span class="overline">Roadmap · Topics 8.7 – 8.12</span><h2>Volume Methods Roadmap</h2></div>
+      <div class="topic-header"><span class="overline">Roadmap · Topics 8.7 – 8.12</span><h2 data-lang="en">Volume Methods Roadmap</h2><h2 data-lang="zh">体积方法路线图</h2></div>
 
-      <div class="concept-box"><strong>The big picture.</strong>
+      <div class="concept-box" data-lang="en"><strong>The big picture.</strong>
         <p style="margin-top:6px;">Every Unit 8 volume problem reduces to the same three moves:</p>
         <ol style="margin-left:18px; margin-top:4px;">
           <li>Pick a <em>typical slice</em> of the solid (perpendicular to one axis).</li>
@@ -437,12 +534,24 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
         </ol>
         <p style="margin-top:6px;">Topics 8.7 – 8.12 differ only in the <em>shape</em> of that slice. The 4-step decision tree below tells you which.</p>
       </div>
-
-      <div class="concept-box"><strong>Step 1 — Cross-sections, or revolved?</strong>
-        <p style="margin-top:6px;">If the problem describes a solid built from <em>specified cross-sectional shapes</em> (squares, equilateral triangles, semicircles, …) sitting over a planar region, use the <strong>Cross-Section Method</strong> (Topics 8.7 – 8.8). Otherwise, if a planar region is <em>revolved</em> about a line, go to Step 2.</p>
+      <div class="concept-box" data-lang="zh"><strong>大局观。</strong>
+        <p style="margin-top:6px;">Unit 8 的每一道体积（<code>volume</code>）题都归结为同样的三步：</p>
+        <ol style="margin-left:18px; margin-top:4px;">
+          <li>取实体的一个<em>典型切片</em>（垂直于某条轴）。</li>
+          <li>把该切片的<em>面积</em>表示为位置的函数。</li>
+          <li>沿该轴积分这个面积。</li>
+        </ol>
+        <p style="margin-top:6px;">小节 8.7 – 8.12 之间的差别仅在切片的<em>形状</em>。下面的四步决策树告诉你该用哪种。</p>
       </div>
 
-      <div class="concept-box"><strong>Step 2 — Disc or Washer?</strong>
+      <div class="concept-box" data-lang="en"><strong>Step 1 — Cross-sections, or revolved?</strong>
+        <p style="margin-top:6px;">If the problem describes a solid built from <em>specified cross-sectional shapes</em> (squares, equilateral triangles, semicircles, …) sitting over a planar region, use the <strong>Cross-Section Method</strong> (Topics 8.7 – 8.8). Otherwise, if a planar region is <em>revolved</em> about a line, go to Step 2.</p>
+      </div>
+      <div class="concept-box" data-lang="zh"><strong>第 1 步——已知横截面，还是旋转体？</strong>
+        <p style="margin-top:6px;">若题目描述的是由<em>给定形状的横截面（<code>cross-section</code>）</em>（正方形、等边三角形、半圆…）落在某平面区域上构成的实体，则使用<strong>已知横截面的体积法</strong>（<code>volume by known cross-sections</code>，小节 8.7 – 8.8）。否则，如果是把平面区域绕某条直线<em>旋转</em>得到旋转体，则进入第 2 步。</p>
+      </div>
+
+      <div class="concept-box" data-lang="en"><strong>Step 2 — Disc or Washer?</strong>
         <p style="margin-top:6px;">Sketch the region together with the axis of revolution and ask:</p>
         <p style="margin-top:6px;"><em>"Does the region share at least one boundary with the axis?"</em></p>
         <ul style="margin-left:18px; margin-top:4px;">
@@ -450,16 +559,31 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
           <li><strong>No</strong> — there is a gap between the region and the axis → <strong>Washer Method</strong>. Each cross-section is annular (hole in the middle). Topics 8.11 (standard axis) and 8.12 (shifted axis).</li>
         </ul>
       </div>
+      <div class="concept-box" data-lang="zh"><strong>第 2 步——圆盘还是圆环？</strong>
+        <p style="margin-top:6px;">把区域与旋转轴（<code>axis of revolution</code>）一起画出来，自问：</p>
+        <p style="margin-top:6px;"><em>“区域是否至少有一条边界落在旋转轴上？”</em></p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li><strong>是</strong>——区域边缘落在轴上 → <strong>圆盘法</strong>（<code>disk method</code>）。每个横截面都是无孔的实心圆盘。涉及小节 8.9（轴为 $x$ 或 $y$ 轴）和 8.10（轴为 $y=k$ 或 $x=k$）。</li>
+          <li><strong>否</strong>——区域与旋转轴之间有间隙 → <strong>圆环法</strong>（<code>washer method</code>）。每个横截面都是环形（中间有孔）。涉及小节 8.11（标准轴）和 8.12（平移过的轴）。</li>
+        </ul>
+      </div>
 
-      <div class="concept-box"><strong>Step 3 — Slice direction: $dx$ or $dy$?</strong>
+      <div class="concept-box" data-lang="en"><strong>Step 3 — Slice direction: $dx$ or $dy$?</strong>
         <p style="margin-top:6px;">Slices must be <em>perpendicular</em> to the axis of revolution.</p>
         <ul style="margin-left:18px; margin-top:4px;">
           <li>Axis is <strong>horizontal</strong> (the $x$-axis, or any $y=k$) → vertical slices → integrate <span class="mono">dx</span>.</li>
           <li>Axis is <strong>vertical</strong> (the $y$-axis, or any $x=k$) → horizontal slices → integrate <span class="mono">dy</span>. (You will likely need to rewrite curves as $x=g(y)$.)</li>
         </ul>
       </div>
+      <div class="concept-box" data-lang="zh"><strong>第 3 步——切片方向：$dx$ 还是 $dy$？</strong>
+        <p style="margin-top:6px;">切片必须<em>垂直于</em>旋转轴。</p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>旋转轴<strong>水平</strong>（$x$ 轴，或任意 $y=k$）→ 垂直切片 → 对 <span class="mono">dx</span> 积分。</li>
+          <li>旋转轴<strong>竖直</strong>（$y$ 轴，或任意 $x=k$）→ 水平切片 → 对 <span class="mono">dy</span> 积分（这时通常需要把曲线改写为 $x=g(y)$）。</li>
+        </ul>
+      </div>
 
-      <div class="concept-box"><strong>Step 4 — What is the radius?</strong>
+      <div class="concept-box" data-lang="en"><strong>Step 4 — What is the radius?</strong>
         <p style="margin-top:6px;">A radius is the <em>perpendicular distance</em> from a boundary point of the region to the axis of revolution — <strong>not</strong> automatically the function value.</p>
         <p style="margin-top:10px;"><strong>Disc</strong> (region edge sits on the axis):</p>
         <ul style="margin-left:18px; margin-top:4px;">
@@ -473,8 +597,22 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
           <li><strong>Critical:</strong> "outer" and "inner" depend on the <em>axis location</em>, not on which curve is called "$f$" or "$g$". Move the axis and the labels can swap. Always re-identify outer/inner from your sketch.</li>
         </ul>
       </div>
+      <div class="concept-box" data-lang="zh"><strong>第 4 步——半径是什么？</strong>
+        <p style="margin-top:6px;">半径是区域边界上的一点到旋转轴的<em>垂直距离</em>——<strong>不一定</strong>等于函数值本身。</p>
+        <p style="margin-top:10px;"><strong>圆盘</strong>（区域边缘落在轴上）：</p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>旋转轴为 $x$ 轴：$R = |f(x)|$。平方会消去符号，所以在被积式中写成 $R = f(x)$ 也可以。</li>
+          <li>旋转轴为 $y = k$：$R = |f(x) - k|$；轴在曲线上方时简化为 $k - f(x)$，轴在曲线下方时为 $f(x) - k$。</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>圆环</strong>（区域与轴之间有间隙）：由两条曲线围成的区域，两条曲线都在轴的<em>同侧</em>。切片是一个环形。</p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>$R$ = 外半径 = 较<em>远</em>的边界曲线到旋转轴的距离。</li>
+          <li>$r$ = 内半径 = 较<em>近</em>的边界曲线到旋转轴的距离。</li>
+          <li><strong>关键：</strong>“外”和“内”取决于<em>旋转轴的位置</em>，与哪条曲线被命名为 “$f$” 或 “$g$” 无关。轴一移动，标签就可能互换。每次都要根据自己的草图重新判定外/内。</li>
+        </ul>
+      </div>
 
-      <table class="content-table" style="margin-top:14px;">
+      <table class="content-table" style="margin-top:14px;" data-lang="en">
         <thead><tr><th>Method</th><th>When</th><th>Integrand</th><th>Topic</th></tr></thead>
         <tbody>
           <tr><td>Cross Section</td><td>Solid built from named cross-sectional shapes</td><td>$A(x)\,dx$ &nbsp;(or $A(y)\,dy$)</td><td>8.7 – 8.8</td></tr>
@@ -484,17 +622,32 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
           <tr><td>Washer, axis = $y=k$ or $x=k$</td><td>Revolved; gap between region and the line</td><td>$\pi\,(R^2 - r^2)\,dx$ &nbsp;where $R, r$ = distances to the axis</td><td>8.12</td></tr>
         </tbody>
       </table>
+      <table class="content-table" style="margin-top:14px;" data-lang="zh">
+        <thead><tr><th>方法</th><th>何时使用</th><th>被积式</th><th>小节</th></tr></thead>
+        <tbody>
+          <tr><td>横截面法</td><td>实体由命名的横截面形状构成</td><td>$A(x)\,dx$ &nbsp;（或 $A(y)\,dy$）</td><td>8.7 – 8.8</td></tr>
+          <tr><td>圆盘法，轴 = $x$ 或 $y$</td><td>旋转体；区域边缘在轴上</td><td>$\pi\,R^2\,dx$ &nbsp;（或 $dy$）</td><td>8.9</td></tr>
+          <tr><td>圆盘法，轴 = $y=k$ 或 $x=k$</td><td>旋转体；区域边缘落在该直线上</td><td>$\pi\,[\,\text{dist}(f, \text{axis})\,]^{\,2}\,dx$</td><td>8.10</td></tr>
+          <tr><td>圆环法，轴 = $x$ 或 $y$</td><td>旋转体；区域与轴之间有间隙</td><td>$\pi\,(R^2 - r^2)\,dx$</td><td>8.11</td></tr>
+          <tr><td>圆环法，轴 = $y=k$ 或 $x=k$</td><td>旋转体；区域与该直线之间有间隙</td><td>$\pi\,(R^2 - r^2)\,dx$ &nbsp;其中 $R, r$ 为到轴的距离</td><td>8.12</td></tr>
+        </tbody>
+      </table>
 
-      <div class="concept-box red" style="margin-top:14px;"><strong>The single most common AP slip — $R^2 - r^2$, NOT $(R - r)^2$</strong>
+      <div class="concept-box red" style="margin-top:14px;" data-lang="en"><strong>The single most common AP slip — $R^2 - r^2$, NOT $(R - r)^2$</strong>
         <p style="margin-top:6px;">Numerical check: with $R = 3$ and $r = 1$, &nbsp;$R^2 - r^2 = 9 - 1 = 8$, &nbsp;but&nbsp; $(R - r)^2 = 2^2 = 4$. They are not equal — and the washer formula uses the first.</p>
+      </div>
+      <div class="concept-box red" style="margin-top:14px;" data-lang="zh"><strong>AP 最常见的失误——是 $R^2 - r^2$，<em>不是</em> $(R - r)^2$</strong>
+        <p style="margin-top:6px;">数值验证：取 $R = 3$，$r = 1$，&nbsp;$R^2 - r^2 = 9 - 1 = 8$，&nbsp;但&nbsp; $(R - r)^2 = 2^2 = 4$。两者不等——圆环公式用的是前者。</p>
       </div>
 
       <hr style="margin: 28px 0; border: 0; border-top: 1px dashed var(--border-light);">
 
-      <h3 style="margin-bottom: 6px;">Same Region, Three Axes — How the Setup Changes</h3>
-      <p>To see the decision tree in action, take one fixed region and revolve it about three different axes. The region: bounded by $y = \sqrt{x}$, &nbsp;$y = 0$, &nbsp;and $x = 4$. (A half-parabola sitting on the $x$-axis, with maximum height $\sqrt{4} = 2$.)</p>
+      <h3 style="margin-bottom: 6px;" data-lang="en">Same Region, Three Axes — How the Setup Changes</h3>
+      <h3 style="margin-bottom: 6px;" data-lang="zh">同一区域，三个旋转轴——设置如何变化</h3>
+      <p data-lang="en">To see the decision tree in action, take one fixed region and revolve it about three different axes. The region: bounded by $y = \sqrt{x}$, &nbsp;$y = 0$, &nbsp;and $x = 4$. (A half-parabola sitting on the $x$-axis, with maximum height $\sqrt{4} = 2$.)</p>
+      <p data-lang="zh">为了看决策树如何运行，取一个固定区域，把它绕三个不同的旋转轴旋转。该区域由 $y = \sqrt{x}$、&nbsp;$y = 0$、&nbsp;$x = 4$ 围成。（一段坐在 $x$ 轴上的半抛物线，最大高度 $\sqrt{4} = 2$。）</p>
 
-      <table class="content-table" style="margin-top:10px;">
+      <table class="content-table" style="margin-top:10px;" data-lang="en">
         <thead><tr><th>Axis of revolution</th><th>Method &amp; reasoning</th><th>Radii</th><th>Volume integral</th></tr></thead>
         <tbody>
           <tr>
@@ -517,37 +670,74 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
           </tr>
         </tbody>
       </table>
+      <table class="content-table" style="margin-top:10px;" data-lang="zh">
+        <thead><tr><th>旋转轴</th><th>方法与判断依据</th><th>半径</th><th>体积积分</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>$y = 0$ &nbsp;（$x$ 轴）</td>
+            <td><strong>圆盘法。</strong> 区域的下边界<em>就是</em>旋转轴。</td>
+            <td>$R = \sqrt{x}$</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 (\sqrt{x})^{\,2}\,dx = \pi\!\int_0^4 x\,dx = 8\pi$</td>
+          </tr>
+          <tr>
+            <td>$y = 3$ &nbsp;（区域上方的直线）</td>
+            <td><strong>圆环法。</strong> 区域最大高度为 $2$，所以轴位于顶部上方 $1$ 个单位——有间隙。</td>
+            <td>$R = 3 - 0 = 3$ &nbsp;（轴到下边界 $y=0$，更<em>远</em>的边界）<br>$r = 3 - \sqrt{x}$ &nbsp;（轴到上曲线，更<em>近</em>的边界）</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 \!\!\left[\,9 - (3 - \sqrt{x})^{\,2}\,\right]dx$</td>
+          </tr>
+          <tr>
+            <td>$y = -1$ &nbsp;（区域下方的直线）</td>
+            <td><strong>圆环法。</strong> 区域底部在 $y=0$；轴在其下方 $1$ 个单位，有间隙。</td>
+            <td>$R = \sqrt{x} - (-1) = \sqrt{x} + 1$ &nbsp;（轴到上曲线，更<em>远</em>的边界）<br>$r = 0 - (-1) = 1$ &nbsp;（轴到下边界，更<em>近</em>的边界）</td>
+            <td>$\displaystyle V = \pi\!\int_0^4 \!\!\left[\,(\sqrt{x}+1)^{\,2} - 1\,\right]dx$</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="concept-box"><strong>What changed across the three rows?</strong>
+      <div class="concept-box" data-lang="en"><strong>What changed across the three rows?</strong>
         <p style="margin-top:6px;">Same region every time. The axis moved, and that flipped <em>which boundary is farther</em>. With $y=3$ above, the lower edge $y=0$ is the outer curve. With $y=-1$ below, the upper curve $y=\sqrt{x}$ is the outer curve. Mechanical reuse of a previous problem's $R$ and $r$ assignments will give a wrong answer here. Always re-derive from a fresh sketch.</p>
       </div>
+      <div class="concept-box" data-lang="zh"><strong>三行之间变了什么？</strong>
+        <p style="margin-top:6px;">每次都是同一区域。轴的位置改变了，从而翻转了<em>哪条边界更远</em>。当 $y=3$ 在上方时，下边界 $y=0$ 是外曲线。当 $y=-1$ 在下方时，上曲线 $y=\sqrt{x}$ 是外曲线。直接照搬上一道题里的 $R$、$r$ 在这里会得出错误答案。每次都要根据新草图重新推导。</p>
+      </div>
 
-      <div class="concept-box green"><strong>30-second sketch routine</strong>
+      <div class="concept-box green" data-lang="en"><strong>30-second sketch routine</strong>
         <p style="margin-top:6px;">Before writing any integral: <strong>(1)</strong> draw the region; <strong>(2)</strong> draw the axis of revolution as a dashed line; <strong>(3)</strong> draw <em>one representative slice</em> perpendicular to that axis; <strong>(4)</strong> on the slice, mark the boundary points and label the perpendicular distance to the axis as $R$ (and $r$ if there's a hole). If your sketch is right, the integrand reads itself off the page.</p>
+      </div>
+      <div class="concept-box green" data-lang="zh"><strong>30 秒草图流程</strong>
+        <p style="margin-top:6px;">写积分前先做：<strong>(1)</strong> 画出区域；<strong>(2)</strong> 把旋转轴画成虚线；<strong>(3)</strong> 在该轴的垂直方向上画<em>一片代表性切片</em>；<strong>(4)</strong> 在切片上标出边界点，并把它到轴的垂直距离标为 $R$（如果有孔，再标一个 $r$）。如果草图画对了，被积式就会自己从图上显现出来。</p>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-7">
-      <div class="topic-header"><span class="overline">Topic 8.7 · CHA-5</span><h2>Volumes with Cross Sections: Squares and Rectangles</h2></div>
-      <p>For solids built from <em>specified</em> cross-sectional shapes (no rotation), the volume reduces to a single question: what is the area of a typical slice as a function of position? Integrate that area along the axis.</p>
+      <div class="topic-header"><span class="overline">Topic 8.7 · CHA-5</span><h2 data-lang="en">Volumes with Cross Sections: Squares and Rectangles</h2><h2 data-lang="zh">已知横截面的体积：正方形与矩形</h2></div>
+      <p data-lang="en">For solids built from <em>specified</em> cross-sectional shapes (no rotation), the volume reduces to a single question: what is the area of a typical slice as a function of position? Integrate that area along the axis.</p>
+      <p data-lang="zh">对于由<em>给定</em>横截面形状构成的实体（非旋转体），求体积归结为一个问题：典型切片的面积如何随位置变化？把该面积沿轴积分即可。</p>
       <div class="formula-box">$$V=\int_a^b A(x)\,dx$$</div>
-      <p>When cross-sections are squares with side equal to the vertical distance between two curves, $A(x)=[f(x)-g(x)]^2$. For rectangles, replace $A(x)$ with the correct length × width matching the problem statement.</p>
+      <p data-lang="en">When cross-sections are squares with side equal to the vertical distance between two curves, $A(x)=[f(x)-g(x)]^2$. For rectangles, replace $A(x)$ with the correct length × width matching the problem statement.</p>
+      <p data-lang="zh">当横截面是正方形（<code>square cross-section</code>），且边长等于两曲线之间的垂直距离时，$A(x)=[f(x)-g(x)]^2$。对于矩形，把 $A(x)$ 替换为题目所述的正确“长 × 宽”。</p>
 
       <div class="worked-example">
-        <h3>Worked Example — Square Cross-Sections</h3>
-        <p>The base of a solid is the region bounded by $y=\sqrt{x}$, &nbsp;$y=0$, &nbsp;and $x=4$. Cross-sections perpendicular to the $x$-axis are <strong>squares</strong> with one side in the base. Find the volume.</p>
+        <h3 data-lang="en">Worked Example — Square Cross-Sections</h3>
+        <h3 data-lang="zh">例题——正方形横截面</h3>
+        <p data-lang="en">The base of a solid is the region bounded by $y=\sqrt{x}$, &nbsp;$y=0$, &nbsp;and $x=4$. Cross-sections perpendicular to the $x$-axis are <strong>squares</strong> with one side in the base. Find the volume.</p>
+        <p data-lang="zh">实体的底面是由 $y=\sqrt{x}$、&nbsp;$y=0$、&nbsp;$x=4$ 围成的区域。垂直于 $x$ 轴的横截面是<strong>正方形</strong>，且其一边位于底面上。求体积。</p>
         <ol class="example-steps">
-          <li><strong>Read the side length off the base.</strong> A vertical slice of the base at position $x$ runs from $y=0$ to $y=\sqrt{x}$, so the square's side is $s = \sqrt{x}$.</li>
-          <li><strong>Cross-sectional area.</strong> $A(x) = s^2 = (\sqrt{x})^2 = x$.</li>
-          <li><strong>Integrate.</strong> $\displaystyle V = \int_0^4 x\,dx = \tfrac{x^2}{2}\Big|_0^4 = 8.$</li>
+          <li data-lang="en"><strong>Read the side length off the base.</strong> A vertical slice of the base at position $x$ runs from $y=0$ to $y=\sqrt{x}$, so the square's side is $s = \sqrt{x}$.</li>
+          <li data-lang="zh"><strong>从底面读出边长。</strong> 在位置 $x$ 处，底面的垂直切片从 $y=0$ 到 $y=\sqrt{x}$，所以正方形的边长为 $s = \sqrt{x}$。</li>
+          <li data-lang="en"><strong>Cross-sectional area.</strong> $A(x) = s^2 = (\sqrt{x})^2 = x$.</li>
+          <li data-lang="zh"><strong>横截面面积。</strong> $A(x) = s^2 = (\sqrt{x})^2 = x$。</li>
+          <li data-lang="en"><strong>Integrate.</strong> $\displaystyle V = \int_0^4 x\,dx = \tfrac{x^2}{2}\Big|_0^4 = 8.$</li>
+          <li data-lang="zh"><strong>积分。</strong> $\displaystyle V = \int_0^4 x\,dx = \tfrac{x^2}{2}\Big|_0^4 = 8.$</li>
         </ol>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-8">
-      <div class="topic-header"><span class="overline">Topic 8.8 · CHA-5</span><h2>Volumes with Cross Sections: Triangles and Semicircles</h2></div>
-      <p>These problems use the same structure as Topic 8.7, but the cross-sectional area now depends on a geometry formula.</p>
-      <table class="content-table">
+      <div class="topic-header"><span class="overline">Topic 8.8 · CHA-5</span><h2 data-lang="en">Volumes with Cross Sections: Triangles and Semicircles</h2><h2 data-lang="zh">已知横截面的体积：三角形与半圆</h2></div>
+      <p data-lang="en">These problems use the same structure as Topic 8.7, but the cross-sectional area now depends on a geometry formula.</p>
+      <p data-lang="zh">这类问题与 8.7 结构相同，只是横截面面积现在要用几何公式计算。</p>
+      <table class="content-table" data-lang="en">
         <thead><tr><th>Cross Section</th><th>Area in terms of side / diameter s</th></tr></thead>
         <tbody>
           <tr><td>Square</td><td>$A=s^2$</td></tr>
@@ -556,22 +746,41 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
           <tr><td>Semicircle (diameter = s)</td><td>$A=\frac{\pi}{8}s^2$</td></tr>
         </tbody>
       </table>
-      <div class="concept-box green"><strong>Semicircle reminder</strong><p>If the region gives you the diameter, do not use it as the radius. Radius is half the diameter.</p></div>
+      <table class="content-table" data-lang="zh">
+        <thead><tr><th>横截面</th><th>用边长 / 直径 s 表示的面积</th></tr></thead>
+        <tbody>
+          <tr><td>正方形（<code>square cross-section</code>）</td><td>$A=s^2$</td></tr>
+          <tr><td>等边三角形横截面（<code>equilateral triangle cross-section</code>）</td><td>$A=\frac{\sqrt3}{4}s^2$</td></tr>
+          <tr><td>等腰直角三角形（直角边 = s）</td><td>$A=\frac12 s^2$</td></tr>
+          <tr><td>半圆横截面（<code>semicircle cross-section</code>，直径 = s）</td><td>$A=\frac{\pi}{8}s^2$</td></tr>
+        </tbody>
+      </table>
+      <div class="concept-box green" data-lang="en"><strong>Semicircle reminder</strong><p>If the region gives you the diameter, do not use it as the radius. Radius is half the diameter.</p></div>
+      <div class="concept-box green" data-lang="zh"><strong>半圆提醒</strong><p>如果题目给出的是直径，不要把它当作半径用。半径等于直径的一半。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-9">
-      <div class="topic-header"><span class="overline">Topic 8.9 · CHA-5</span><h2>Volume with Disc Method: Revolving Around the x- or y-Axis</h2></div>
-      <p>Use the disc method when the region's boundary <em>sits on</em> the axis of revolution — every cross-section is a solid disc with no hole. (See the Roadmap above for the disc-vs-washer decision.)</p>
+      <div class="topic-header"><span class="overline">Topic 8.9 · CHA-5</span><h2 data-lang="en">Volume with Disc Method: Revolving Around the x- or y-Axis</h2><h2 data-lang="zh">圆盘法求体积：绕 x 轴或 y 轴旋转</h2></div>
+      <p data-lang="en">Use the disc method when the region's boundary <em>sits on</em> the axis of revolution — every cross-section is a solid disc with no hole. (See the Roadmap above for the disc-vs-washer decision.)</p>
+      <p data-lang="zh">当区域边界<em>落在</em>旋转轴上时使用圆盘法（<code>disk method</code>）——每个横截面都是无孔的实心圆盘。（圆盘 vs. 圆环的判别见上方路线图。）</p>
       <div class="formula-box">$$V=\pi\int_a^b [R(x)]^2\,dx$$</div>
-      <p>$R$ is the perpendicular distance from the curve to the axis. About the $x$-axis: $R = f(x)$. About the $y$-axis (slicing in $y$): $R = g(y)$ where $x = g(y)$.</p>
+      <p data-lang="en">$R$ is the perpendicular distance from the curve to the axis. About the $x$-axis: $R = f(x)$. About the $y$-axis (slicing in $y$): $R = g(y)$ where $x = g(y)$.</p>
+      <p data-lang="zh">$R$ 是曲线到旋转轴的垂直距离。绕 $x$ 轴旋转（<code>rotating about x-axis</code>）：$R = f(x)$。绕 $y$ 轴旋转（沿 $y$ 切片，<code>rotating about y-axis</code>）：$R = g(y)$，其中 $x = g(y)$。</p>
 
       <div class="worked-example">
-        <h3>Worked Example — Revolve $y = x^2$ on $[0,1]$ about the $x$-axis</h3>
+        <h3 data-lang="en">Worked Example — Revolve $y = x^2$ on $[0,1]$ about the $x$-axis</h3>
+        <h3 data-lang="zh">例题——将 $y = x^2$ 在 $[0,1]$ 上绕 $x$ 轴旋转</h3>
         <ol class="example-steps">
-          <li><strong>Region touches axis?</strong> Yes — the region under $y=x^2$ from $0$ to $1$ has its lower boundary on $y=0$. Disc applies.</li>
-          <li><strong>Slice direction.</strong> Axis is horizontal, so slice vertically and integrate $dx$.</li>
-          <li><strong>Radius.</strong> $R(x) = x^2$ (distance from curve to $x$-axis).</li>
-          <li><strong>Set up and evaluate.</strong>
+          <li data-lang="en"><strong>Region touches axis?</strong> Yes — the region under $y=x^2$ from $0$ to $1$ has its lower boundary on $y=0$. Disc applies.</li>
+          <li data-lang="zh"><strong>区域是否与轴相接？</strong> 是——$y=x^2$ 在 $0$ 到 $1$ 之间下方的区域，下边界落在 $y=0$ 上。可用圆盘法。</li>
+          <li data-lang="en"><strong>Slice direction.</strong> Axis is horizontal, so slice vertically and integrate $dx$.</li>
+          <li data-lang="zh"><strong>切片方向。</strong> 轴水平，故作垂直切片，对 $dx$ 积分。</li>
+          <li data-lang="en"><strong>Radius.</strong> $R(x) = x^2$ (distance from curve to $x$-axis).</li>
+          <li data-lang="zh"><strong>半径。</strong> $R(x) = x^2$（曲线到 $x$ 轴的距离）。</li>
+          <li data-lang="en"><strong>Set up and evaluate.</strong>
+            $$V = \pi\!\int_0^1 (x^2)^{\,2}\,dx = \pi\!\int_0^1 x^4\,dx = \pi \cdot \tfrac{1}{5} = \tfrac{\pi}{5}.$$
+          </li>
+          <li data-lang="zh"><strong>建立并计算。</strong>
             $$V = \pi\!\int_0^1 (x^2)^{\,2}\,dx = \pi\!\int_0^1 x^4\,dx = \pi \cdot \tfrac{1}{5} = \tfrac{\pi}{5}.$$
           </li>
         </ol>
@@ -579,60 +788,88 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-10">
-      <div class="topic-header"><span class="overline">Topic 8.10 · CHA-5</span><h2>Volume with Disc Method: Revolving Around Other Axes</h2></div>
-      <p>When the axis is $y=k$ or $x=k$, the formula is the same — only the radius changes. The radius is now the perpendicular distance from the curve to <em>that line</em>, not to the standard axis.</p>
+      <div class="topic-header"><span class="overline">Topic 8.10 · CHA-5</span><h2 data-lang="en">Volume with Disc Method: Revolving Around Other Axes</h2><h2 data-lang="zh">圆盘法求体积：绕其它轴旋转</h2></div>
+      <p data-lang="en">When the axis is $y=k$ or $x=k$, the formula is the same — only the radius changes. The radius is now the perpendicular distance from the curve to <em>that line</em>, not to the standard axis.</p>
+      <p data-lang="zh">当旋转轴为 $y=k$ 或 $x=k$ 时，公式不变——只是半径变了。半径现在是曲线到<em>该直线</em>的垂直距离，而不是到标准坐标轴的距离。</p>
       <div class="formula-box">$$V=\pi\int_a^b [f(x)-k]^2\,dx \qquad\text{(around } y=k\text{, axis below the curve)}$$</div>
-      <p>If the axis lies <em>above</em> the curve, swap to $\,k - f(x)\,$. Either way, $|f(x)-k|$ is the perpendicular distance — and squaring it makes the sign moot.</p>
+      <p data-lang="en">If the axis lies <em>above</em> the curve, swap to $\,k - f(x)\,$. Either way, $|f(x)-k|$ is the perpendicular distance — and squaring it makes the sign moot.</p>
+      <p data-lang="zh">如果轴在曲线<em>上方</em>，则改写为 $\,k - f(x)\,$。无论如何，$|f(x)-k|$ 才是垂直距离——平方后符号无关紧要。</p>
 
       <div class="worked-example">
-        <h3>Worked Example — Translation Invariance</h3>
-        <p>Revolve $y = x + 3$ on $[0, 2]$ about the line $y = 3$. The region touches the axis at $x = 0$ (where $y = 3$).</p>
+        <h3 data-lang="en">Worked Example — Translation Invariance</h3>
+        <h3 data-lang="zh">例题——平移不变性</h3>
+        <p data-lang="en">Revolve $y = x + 3$ on $[0, 2]$ about the line $y = 3$. The region touches the axis at $x = 0$ (where $y = 3$).</p>
+        <p data-lang="zh">将 $y = x + 3$ 在 $[0, 2]$ 上绕直线 $y = 3$ 旋转。区域在 $x = 0$ 处（此时 $y = 3$）与轴相接。</p>
         <ol class="example-steps">
-          <li><strong>Radius.</strong> $R(x) = (x + 3) - 3 = x$.</li>
-          <li><strong>Volume.</strong>
+          <li data-lang="en"><strong>Radius.</strong> $R(x) = (x + 3) - 3 = x$.</li>
+          <li data-lang="zh"><strong>半径。</strong> $R(x) = (x + 3) - 3 = x$。</li>
+          <li data-lang="en"><strong>Volume.</strong>
             $$V = \pi\!\int_0^2 x^2\,dx = \pi\cdot \tfrac{8}{3} = \tfrac{8\pi}{3}.$$
           </li>
-          <li><strong>Sanity check.</strong> The same line $y = x$ on $[0, 2]$ revolved about the $x$-axis gives $\pi\!\int_0^2 x^2\,dx = \tfrac{8\pi}{3}$. Translating the region and the axis together by the same amount does not change the volume — a useful self-check.</li>
+          <li data-lang="zh"><strong>体积。</strong>
+            $$V = \pi\!\int_0^2 x^2\,dx = \pi\cdot \tfrac{8}{3} = \tfrac{8\pi}{3}.$$
+          </li>
+          <li data-lang="en"><strong>Sanity check.</strong> The same line $y = x$ on $[0, 2]$ revolved about the $x$-axis gives $\pi\!\int_0^2 x^2\,dx = \tfrac{8\pi}{3}$. Translating the region and the axis together by the same amount does not change the volume — a useful self-check.</li>
+          <li data-lang="zh"><strong>验证。</strong> 同一条直线 $y = x$ 在 $[0, 2]$ 上绕 $x$ 轴旋转得到 $\pi\!\int_0^2 x^2\,dx = \tfrac{8\pi}{3}$。把区域与旋转轴一起平移同样的距离不会改变体积——这是一个有用的自检手段。</li>
         </ol>
       </div>
 
-      <div class="concept-box red"><strong>Best habit</strong><p>Draw one representative disc on your sketch and label the radius on the picture. The picture catches "is the axis above or below the curve" before you write a single integral.</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Best habit</strong><p>Draw one representative disc on your sketch and label the radius on the picture. The picture catches "is the axis above or below the curve" before you write a single integral.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>最佳习惯</strong><p>在草图上画一个代表性的圆盘，并在图上标出半径。图像在你写下一个积分之前就能告诉你“轴在曲线上方还是下方”。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-11">
-      <div class="topic-header"><span class="overline">Topic 8.11 · CHA-5</span><h2>Volume with Washer Method: Revolving Around the x- or y-Axis</h2></div>
-      <p>The washer method is used when rotating a region that leaves a hole in the middle. Each cross section is an outer disc with an inner disc removed.</p>
+      <div class="topic-header"><span class="overline">Topic 8.11 · CHA-5</span><h2 data-lang="en">Volume with Washer Method: Revolving Around the x- or y-Axis</h2><h2 data-lang="zh">圆环法求体积：绕 x 轴或 y 轴旋转</h2></div>
+      <p data-lang="en">The washer method is used when rotating a region that leaves a hole in the middle. Each cross section is an outer disc with an inner disc removed.</p>
+      <p data-lang="zh">当旋转一个会在中间留下孔的区域时使用圆环法（<code>washer method</code>）。每个横截面都是从外圆盘中扣掉一个内圆盘后的环。</p>
       <div class="formula-box">$$V=\pi\int_a^b \bigl(R(x)^2-r(x)^2\bigr)\,dx$$</div>
       <div class="worked-example">
-        <h3>Worked Example 3</h3>
-        <p><strong>Find the volume generated by revolving the region between</strong> $y=x$ <strong>and</strong> $y=x^2$ <strong>on</strong> $[0,1]$ <strong>around the x-axis.</strong></p>
+        <h3 data-lang="en">Worked Example 3</h3>
+        <h3 data-lang="zh">例题 3</h3>
+        <p data-lang="en"><strong>Find the volume generated by revolving the region between</strong> $y=x$ <strong>and</strong> $y=x^2$ <strong>on</strong> $[0,1]$ <strong>around the x-axis.</strong></p>
+        <p data-lang="zh"><strong>求</strong> $y=x$ <strong>与</strong> $y=x^2$ <strong>在</strong> $[0,1]$ <strong>上之间的区域绕 $x$ 轴旋转所得的体积。</strong></p>
         <ol class="example-steps">
-          <li>On <span class="mono">[0,1]</span>, the outer radius is $R(x)=x$ and the inner radius is $r(x)=x^2$.</li>
-          <li>Set up the washer integral: $$V=\pi\int_0^1 (x^2-x^4)\,dx$$</li>
-          <li>Evaluate: $$V=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\pi\left(\frac13-\frac15\right)=\frac{2\pi}{15}$$</li>
+          <li data-lang="en">On <span class="mono">[0,1]</span>, the outer radius is $R(x)=x$ and the inner radius is $r(x)=x^2$.</li>
+          <li data-lang="zh">在 <span class="mono">[0,1]</span> 上，外半径为 $R(x)=x$，内半径为 $r(x)=x^2$。</li>
+          <li data-lang="en">Set up the washer integral: $$V=\pi\int_0^1 (x^2-x^4)\,dx$$</li>
+          <li data-lang="zh">写出圆环积分： $$V=\pi\int_0^1 (x^2-x^4)\,dx$$</li>
+          <li data-lang="en">Evaluate: $$V=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\pi\left(\frac13-\frac15\right)=\frac{2\pi}{15}$$</li>
+          <li data-lang="zh">计算： $$V=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\pi\left(\frac13-\frac15\right)=\frac{2\pi}{15}$$</li>
         </ol>
       </div>
-      <div class="concept-box"><strong>Nonnegotiable formula detail</strong><p>Compute <span class="mono">R² − r²</span>, not <span class="mono">(R − r)²</span>. Those are different expressions.</p></div>
+      <div class="concept-box" data-lang="en"><strong>Nonnegotiable formula detail</strong><p>Compute <span class="mono">R² − r²</span>, not <span class="mono">(R − r)²</span>. Those are different expressions.</p></div>
+      <div class="concept-box" data-lang="zh"><strong>不可商量的公式细节</strong><p>计算的是 <span class="mono">R² − r²</span>，不是 <span class="mono">(R − r)²</span>。两者不是同一个表达式。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-12">
-      <div class="topic-header"><span class="overline">Topic 8.12 · CHA-5</span><h2>Volume with Washer Method: Revolving Around Other Axes</h2></div>
-      <p>Same structure as Topic 8.11. The only change: $R$ and $r$ are now perpendicular distances to a <em>shifted</em> axis $y=k$ or $x=k$.</p>
-      <div class="formula-box">$$V=\pi\!\int_a^b \!\bigl(R^2 - r^2\bigr)\,dx$$<p style="font-size:0.9rem;color:var(--text-secondary);margin-top:8px;">where $R, r$ are distances from the <em>farther</em> and <em>nearer</em> boundary curves to the axis, respectively.</p></div>
-      <div class="concept-box red"><strong>Watch which curve is outer.</strong><p>"Outer" depends on the axis location, not on which boundary you happened to call $f$. With axis above the region, the lower boundary is farther (outer); with axis below the region, the upper boundary is farther. Re-identify on every problem from a fresh sketch.</p></div>
+      <div class="topic-header"><span class="overline">Topic 8.12 · CHA-5</span><h2 data-lang="en">Volume with Washer Method: Revolving Around Other Axes</h2><h2 data-lang="zh">圆环法求体积：绕其它轴旋转</h2></div>
+      <p data-lang="en">Same structure as Topic 8.11. The only change: $R$ and $r$ are now perpendicular distances to a <em>shifted</em> axis $y=k$ or $x=k$.</p>
+      <p data-lang="zh">结构与 8.11 完全相同。唯一的变化：$R$ 与 $r$ 现在是到<em>平移</em>过的轴 $y=k$ 或 $x=k$ 的垂直距离。</p>
+      <div class="formula-box">$$V=\pi\!\int_a^b \!\bigl(R^2 - r^2\bigr)\,dx$$<p style="font-size:0.9rem;color:var(--text-secondary);margin-top:8px;" data-lang="en">where $R, r$ are distances from the <em>farther</em> and <em>nearer</em> boundary curves to the axis, respectively.</p><p style="font-size:0.9rem;color:var(--text-secondary);margin-top:8px;" data-lang="zh">其中 $R$、$r$ 分别为<em>较远</em>和<em>较近</em>的边界曲线到旋转轴的距离。</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Watch which curve is outer.</strong><p>"Outer" depends on the axis location, not on which boundary you happened to call $f$. With axis above the region, the lower boundary is farther (outer); with axis below the region, the upper boundary is farther. Re-identify on every problem from a fresh sketch.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>注意哪条曲线是外曲线。</strong><p>“外”取决于旋转轴的位置，而不是你恰好把哪条边界叫作 $f$。轴在区域上方时，下边界更远（外）；轴在区域下方时，上边界更远。每道题都要根据新草图重新判别。</p></div>
 
       <div class="worked-example">
-        <h3>Worked Example — Region $\{y=x, y=x^2\}$ on $[0,1]$ Revolved About $y = -1$</h3>
+        <h3 data-lang="en">Worked Example — Region $\{y=x, y=x^2\}$ on $[0,1]$ Revolved About $y = -1$</h3>
+        <h3 data-lang="zh">例题——把 $\{y=x, y=x^2\}$ 在 $[0,1]$ 上的区域绕 $y = -1$ 旋转</h3>
         <ol class="example-steps">
-          <li><strong>Region touches axis?</strong> No — the region sits above $y=0$, while the axis is at $y=-1$. Gap of at least 1 unit. Washer.</li>
-          <li><strong>Identify outer and inner.</strong> Both boundaries are above the axis. The line $y=x$ is farther from $y=-1$ than the parabola $y=x^2$ is, so $y=x$ is outer.</li>
-          <li><strong>Radii.</strong>
+          <li data-lang="en"><strong>Region touches axis?</strong> No — the region sits above $y=0$, while the axis is at $y=-1$. Gap of at least 1 unit. Washer.</li>
+          <li data-lang="zh"><strong>区域是否接轴？</strong> 否——区域位于 $y=0$ 上方，而轴在 $y=-1$。至少有 1 个单位的间隙。用圆环法。</li>
+          <li data-lang="en"><strong>Identify outer and inner.</strong> Both boundaries are above the axis. The line $y=x$ is farther from $y=-1$ than the parabola $y=x^2$ is, so $y=x$ is outer.</li>
+          <li data-lang="zh"><strong>判别外/内。</strong> 两条边界都在轴上方。直线 $y=x$ 到 $y=-1$ 的距离比抛物线 $y=x^2$ 大，所以 $y=x$ 是外曲线。</li>
+          <li data-lang="en"><strong>Radii.</strong>
             <ul style="margin-left:18px; margin-top:4px;">
               <li>$R = x - (-1) = x + 1$</li>
               <li>$r = x^2 - (-1) = x^2 + 1$</li>
             </ul>
           </li>
-          <li><strong>Set up and evaluate.</strong>
+          <li data-lang="zh"><strong>半径。</strong>
+            <ul style="margin-left:18px; margin-top:4px;">
+              <li>$R = x - (-1) = x + 1$</li>
+              <li>$r = x^2 - (-1) = x^2 + 1$</li>
+            </ul>
+          </li>
+          <li data-lang="en"><strong>Set up and evaluate.</strong>
             $$\begin{aligned}
             V &= \pi\!\int_0^1 \!\bigl[(x+1)^2 - (x^2+1)^2\bigr]\,dx \\[4pt]
               &= \pi\!\int_0^1 \!\bigl[(x^2 + 2x + 1) - (x^4 + 2x^2 + 1)\bigr]\,dx \\[4pt]
@@ -641,122 +878,164 @@ body.sidebar-collapsed .sidebar{transform:translateX(-100%)}.content-inner{max-w
               &= \pi\Bigl(1 - \tfrac{1}{3} - \tfrac{1}{5}\Bigr) = \tfrac{7\pi}{15}.
             \end{aligned}$$
           </li>
-          <li><strong>Compare to Topic 8.11.</strong> The same region revolved about the $x$-axis gives $\tfrac{2\pi}{15}$. Shifting the axis from $y=0$ down to $y=-1$ enlarged the volume to $\tfrac{7\pi}{15}$ — each radius grew by 1, but $R^2 - r^2$ changes in a non-trivial way, so always rewrite from scratch.</li>
+          <li data-lang="zh"><strong>建立并计算。</strong>
+            $$\begin{aligned}
+            V &= \pi\!\int_0^1 \!\bigl[(x+1)^2 - (x^2+1)^2\bigr]\,dx \\[4pt]
+              &= \pi\!\int_0^1 \!\bigl[(x^2 + 2x + 1) - (x^4 + 2x^2 + 1)\bigr]\,dx \\[4pt]
+              &= \pi\!\int_0^1 \!\bigl(2x - x^2 - x^4\bigr)\,dx \\[4pt]
+              &= \pi\Bigl[\,x^2 - \tfrac{x^3}{3} - \tfrac{x^5}{5}\,\Bigr]_0^1 \\[4pt]
+              &= \pi\Bigl(1 - \tfrac{1}{3} - \tfrac{1}{5}\Bigr) = \tfrac{7\pi}{15}.
+            \end{aligned}$$
+          </li>
+          <li data-lang="en"><strong>Compare to Topic 8.11.</strong> The same region revolved about the $x$-axis gives $\tfrac{2\pi}{15}$. Shifting the axis from $y=0$ down to $y=-1$ enlarged the volume to $\tfrac{7\pi}{15}$ — each radius grew by 1, but $R^2 - r^2$ changes in a non-trivial way, so always rewrite from scratch.</li>
+          <li data-lang="zh"><strong>与 8.11 对比。</strong> 同一区域绕 $x$ 轴旋转得到 $\tfrac{2\pi}{15}$。把轴从 $y=0$ 向下移到 $y=-1$，体积扩大到 $\tfrac{7\pi}{15}$——每个半径都增加了 1，但 $R^2 - r^2$ 的变化并非线性，所以每次都要从头重新写。</li>
         </ol>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-8-13">
-      <div class="topic-header"><span class="overline">Topic 8.13 · CHA-6 · BC Only</span><h2>The Arc Length of a Smooth, Planar Curve and Distance Traveled</h2></div>
-      <p>Arc length measures the accumulated length of tiny tangent-like segments along a curve.</p>
+      <div class="topic-header"><span class="overline">Topic 8.13 · CHA-6 · BC Only</span><h2 data-lang="en">The Arc Length of a Smooth, Planar Curve and Distance Traveled</h2><h2 data-lang="zh">光滑平面曲线的弧长与路程</h2></div>
+      <p data-lang="en">Arc length measures the accumulated length of tiny tangent-like segments along a curve.</p>
+      <p data-lang="zh">弧长（<code>arc length</code>）衡量沿曲线累积起来的、近似切向的小段长度之和。</p>
       <div class="formula-box">$$L=\int_a^b \sqrt{1+[f'(x)]^2}\,dx$$</div>
-      <p>For parametric motion in the plane, the total distance traveled is:</p>
+      <p data-lang="en">For parametric motion in the plane, the total distance traveled is:</p>
+      <p data-lang="zh">对于平面参数运动，总路程为：</p>
       <div class="formula-box">$$L=\int_{t_1}^{t_2} \sqrt{[x'(t)]^2+[y'(t)]^2}\,dt$$</div>
 
       <details>
-        <summary>Derivation Sketch — From Polygonal Approximation to the Integral</summary>
+        <summary><span data-lang="en">Derivation Sketch — From Polygonal Approximation to the Integral</span><span data-lang="zh">推导提纲——从折线近似到积分</span></summary>
         <div class="detail-body">
-          <p>The idea: approximate a smooth curve by a chain of straight segments, sum their lengths, then refine.</p>
+          <p data-lang="en">The idea: approximate a smooth curve by a chain of straight segments, sum their lengths, then refine.</p>
+          <p data-lang="zh">思路：用一串直线段去逼近光滑曲线，把它们的长度加起来，再不断加密。</p>
           <ol class="example-steps">
-            <li><strong>Partition.</strong> Split $[a,b]$ into $n$ equal subintervals of width $\Delta x$, with sample points $x_0,x_1,\ldots,x_n$. The curve passes through $\bigl(x_i,\,f(x_i)\bigr)$.</li>
-            <li><strong>Approximate each piece by a line segment.</strong> The straight segment from $\bigl(x_{i-1},f(x_{i-1})\bigr)$ to $\bigl(x_i,f(x_i)\bigr)$ has length, by the distance formula,
+            <li data-lang="en"><strong>Partition.</strong> Split $[a,b]$ into $n$ equal subintervals of width $\Delta x$, with sample points $x_0,x_1,\ldots,x_n$. The curve passes through $\bigl(x_i,\,f(x_i)\bigr)$.</li>
+            <li data-lang="zh"><strong>分划。</strong> 把 $[a,b]$ 等分成 $n$ 个宽度为 $\Delta x$ 的子区间，分点为 $x_0,x_1,\ldots,x_n$。曲线经过 $\bigl(x_i,\,f(x_i)\bigr)$。</li>
+            <li data-lang="en"><strong>Approximate each piece by a line segment.</strong> The straight segment from $\bigl(x_{i-1},f(x_{i-1})\bigr)$ to $\bigl(x_i,f(x_i)\bigr)$ has length, by the distance formula,
               $$ \Delta L_i \;=\; \sqrt{(\Delta x)^2 + (\Delta y_i)^2}, \quad \text{where } \Delta y_i = f(x_i)-f(x_{i-1}). $$
             </li>
-            <li><strong>Factor out $\Delta x$.</strong>
+            <li data-lang="zh"><strong>用线段近似每一小段。</strong> 由距离公式，从 $\bigl(x_{i-1},f(x_{i-1})\bigr)$ 到 $\bigl(x_i,f(x_i)\bigr)$ 的线段长度为
+              $$ \Delta L_i \;=\; \sqrt{(\Delta x)^2 + (\Delta y_i)^2}, \quad \text{其中 } \Delta y_i = f(x_i)-f(x_{i-1}). $$
+            </li>
+            <li data-lang="en"><strong>Factor out $\Delta x$.</strong>
               $$ \Delta L_i \;=\; \sqrt{1 + \!\left(\dfrac{\Delta y_i}{\Delta x}\right)^{\!2}}\;\Delta x. $$
             </li>
-            <li><strong>Mean Value Theorem.</strong> Since $f$ is differentiable, MVT guarantees a point $x_i^{*}\in(x_{i-1},x_i)$ with $\dfrac{\Delta y_i}{\Delta x}=f'(x_i^{*})$. Substitute:
+            <li data-lang="zh"><strong>提出 $\Delta x$。</strong>
+              $$ \Delta L_i \;=\; \sqrt{1 + \!\left(\dfrac{\Delta y_i}{\Delta x}\right)^{\!2}}\;\Delta x. $$
+            </li>
+            <li data-lang="en"><strong>Mean Value Theorem.</strong> Since $f$ is differentiable, MVT guarantees a point $x_i^{*}\in(x_{i-1},x_i)$ with $\dfrac{\Delta y_i}{\Delta x}=f'(x_i^{*})$. Substitute:
               $$ \Delta L_i \;=\; \sqrt{1 + [f'(x_i^{*})]^2}\;\Delta x. $$
             </li>
-            <li><strong>Sum and take the limit.</strong> The total polygonal length is $\displaystyle\sum_{i=1}^{n}\sqrt{1+[f'(x_i^{*})]^2}\,\Delta x$, a Riemann sum. As $n\to\infty$ (so $\Delta x\to 0$),
+            <li data-lang="zh"><strong>中值定理（MVT）。</strong> 因为 $f$ 可微，MVT 保证存在一点 $x_i^{*}\in(x_{i-1},x_i)$，使 $\dfrac{\Delta y_i}{\Delta x}=f'(x_i^{*})$。代入：
+              $$ \Delta L_i \;=\; \sqrt{1 + [f'(x_i^{*})]^2}\;\Delta x. $$
+            </li>
+            <li data-lang="en"><strong>Sum and take the limit.</strong> The total polygonal length is $\displaystyle\sum_{i=1}^{n}\sqrt{1+[f'(x_i^{*})]^2}\,\Delta x$, a Riemann sum. As $n\to\infty$ (so $\Delta x\to 0$),
+              $$ L \;=\; \lim_{n\to\infty}\sum_{i=1}^{n}\sqrt{1+[f'(x_i^{*})]^2}\,\Delta x \;=\; \int_a^b \sqrt{1+[f'(x)]^2}\,dx. $$
+            </li>
+            <li data-lang="zh"><strong>求和并取极限。</strong> 折线总长度为 $\displaystyle\sum_{i=1}^{n}\sqrt{1+[f'(x_i^{*})]^2}\,\Delta x$，这是一个黎曼和（<code>Riemann sum</code>）。当 $n\to\infty$（$\Delta x\to 0$）时，
               $$ L \;=\; \lim_{n\to\infty}\sum_{i=1}^{n}\sqrt{1+[f'(x_i^{*})]^2}\,\Delta x \;=\; \int_a^b \sqrt{1+[f'(x)]^2}\,dx. $$
             </li>
           </ol>
-          <div class="concept-box"><strong>Why $\sqrt{1+(dy/dx)^2}$?</strong><p>Geometrically: if you walk a horizontal step of length $1$ along a curve, you also rise by $\tfrac{dy}{dx}$ vertically, so the actual <em>arc</em> distance is the hypotenuse $\sqrt{1+(dy/dx)^2}$. The integral just accumulates this "speed-along-the-curve" over $[a,b]$.</p></div>
-          <div class="concept-box green"><strong>Parametric form — same idea</strong><p>Repeat the derivation with the segment from $\bigl(x(t_{i-1}),y(t_{i-1})\bigr)$ to $\bigl(x(t_i),y(t_i)\bigr)$. Its length is $\sqrt{(\Delta x)^2+(\Delta y)^2}=\sqrt{(\Delta x/\Delta t)^2+(\Delta y/\Delta t)^2}\,\Delta t$. MVT on each component yields the parametric arc-length integral.</p></div>
+          <div class="concept-box" data-lang="en"><strong>Why $\sqrt{1+(dy/dx)^2}$?</strong><p>Geometrically: if you walk a horizontal step of length $1$ along a curve, you also rise by $\tfrac{dy}{dx}$ vertically, so the actual <em>arc</em> distance is the hypotenuse $\sqrt{1+(dy/dx)^2}$. The integral just accumulates this "speed-along-the-curve" over $[a,b]$.</p></div>
+          <div class="concept-box" data-lang="zh"><strong>为什么是 $\sqrt{1+(dy/dx)^2}$？</strong><p>几何上：沿曲线水平方向走 $1$ 单位，竖直方向同时上升 $\tfrac{dy}{dx}$ 单位，因此真正的<em>弧线</em>距离是斜边 $\sqrt{1+(dy/dx)^2}$。积分就是把这个“沿曲线的速度”在 $[a,b]$ 上累加。</p></div>
+          <div class="concept-box green" data-lang="en"><strong>Parametric form — same idea</strong><p>Repeat the derivation with the segment from $\bigl(x(t_{i-1}),y(t_{i-1})\bigr)$ to $\bigl(x(t_i),y(t_i)\bigr)$. Its length is $\sqrt{(\Delta x)^2+(\Delta y)^2}=\sqrt{(\Delta x/\Delta t)^2+(\Delta y/\Delta t)^2}\,\Delta t$. MVT on each component yields the parametric arc-length integral.</p></div>
+          <div class="concept-box green" data-lang="zh"><strong>参数形式——同样的思路</strong><p>把推导应用到从 $\bigl(x(t_{i-1}),y(t_{i-1})\bigr)$ 到 $\bigl(x(t_i),y(t_i)\bigr)$ 的线段上。其长度为 $\sqrt{(\Delta x)^2+(\Delta y)^2}=\sqrt{(\Delta x/\Delta t)^2+(\Delta y/\Delta t)^2}\,\Delta t$。对每个分量分别用 MVT，就得到参数形式的弧长积分。</p></div>
         </div>
       </details>
 
-      <div class="concept-box red"><strong>Sign trap on $f'(x)$</strong><p>The formula uses $[f'(x)]^2$, not $|f'(x)|$ or $f'(x)$. Because of the square, the sign of $f'$ doesn't matter — but you must square <em>before</em> integrating, never after. A common student error is writing $\int f'(x)\sqrt{\cdots}\,dx$.</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Sign trap on $f'(x)$</strong><p>The formula uses $[f'(x)]^2$, not $|f'(x)|$ or $f'(x)$. Because of the square, the sign of $f'$ doesn't matter — but you must square <em>before</em> integrating, never after. A common student error is writing $\int f'(x)\sqrt{\cdots}\,dx$.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>关于 $f'(x)$ 的符号陷阱</strong><p>公式使用的是 $[f'(x)]^2$，不是 $|f'(x)|$，也不是 $f'(x)$。由于平方，$f'$ 的符号无所谓——但必须在<em>积分前</em>就平方，绝不能积分后再平方。常见学生错误是写成 $\int f'(x)\sqrt{\cdots}\,dx$。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="exam-strategy">
-      <div class="topic-header"><span class="overline">Review</span><h2>Exam Strategy</h2></div>
+      <div class="topic-header"><span class="overline">Review</span><h2 data-lang="en">Exam Strategy</h2><h2 data-lang="zh">考试策略</h2></div>
       <div class="checkpoint-grid">
-        <div class="checkpoint-card"><h4>Identify the quantity</h4><p>Area, volume, net change, average value, and arc length all use different integrands even though they share the same accumulation idea.</p></div>
-        <div class="checkpoint-card"><h4>Match slice direction</h4><p>Vertical slices lead to <span class="mono">dx</span>. Horizontal slices lead to <span class="mono">dy</span>. For disc and washer problems, slices must be perpendicular to the axis of revolution.</p></div>
-        <div class="checkpoint-card"><h4>State the setup first</h4><p>On free response, a correct integral with correct bounds earns meaningful credit even before evaluation.</p></div>
+        <div class="checkpoint-card" data-lang="en"><h4>Identify the quantity</h4><p>Area, volume, net change, average value, and arc length all use different integrands even though they share the same accumulation idea.</p></div>
+        <div class="checkpoint-card" data-lang="zh"><h4>先识别所求量</h4><p>面积、体积、净变化、平均值与弧长虽然都源自同一“累积”思想，但被积式各不相同。</p></div>
+        <div class="checkpoint-card" data-lang="en"><h4>Match slice direction</h4><p>Vertical slices lead to <span class="mono">dx</span>. Horizontal slices lead to <span class="mono">dy</span>. For disc and washer problems, slices must be perpendicular to the axis of revolution.</p></div>
+        <div class="checkpoint-card" data-lang="zh"><h4>切片方向要对</h4><p>垂直切片对 <span class="mono">dx</span> 积分。水平切片对 <span class="mono">dy</span> 积分。圆盘和圆环问题中，切片必须垂直于旋转轴。</p></div>
+        <div class="checkpoint-card" data-lang="en"><h4>State the setup first</h4><p>On free response, a correct integral with correct bounds earns meaningful credit even before evaluation.</p></div>
+        <div class="checkpoint-card" data-lang="zh"><h4>先写出建立式</h4><p>在自由响应题（FRQ）中，写对积分与上下限本身就能拿到相当一部分分数，甚至不必算出最终数值。</p></div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="sec-mistakes">
-      <div class="topic-header"><span class="overline">Review</span><h2>Common Mistakes</h2></div>
-      <div class="concept-box red"><strong>Average value vs. average rate of change</strong><p>One uses an integral divided by interval length. The other uses endpoint outputs divided by endpoint inputs.</p></div>
-      <div class="concept-box red"><strong>Distance without absolute value</strong><p>$\int v(t)\,dt$ is displacement. For total distance, use $\int |v(t)|\,dt$.</p></div>
-      <div class="concept-box red"><strong>Wrong radius</strong><p>Radius is distance to the axis, not automatically the function itself.</p></div>
-      <div class="concept-box red"><strong>Forgetting to split the interval</strong><p>When graphs cross, one “top minus bottom” rule will not work over the full interval.</p></div>
-      <div class="concept-box red"><strong>Squaring after subtracting</strong><p>Washer method is $R^2-r^2$, not $(R-r)^2$.</p></div>
+      <div class="topic-header"><span class="overline">Review</span><h2 data-lang="en">Common Mistakes</h2><h2 data-lang="zh">常见错误</h2></div>
+      <div class="concept-box red" data-lang="en"><strong>Average value vs. average rate of change</strong><p>One uses an integral divided by interval length. The other uses endpoint outputs divided by endpoint inputs.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>函数平均值 vs. 平均变化率</strong><p>一个是积分除以区间长度，另一个是端点输出之差除以端点输入之差。</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Distance without absolute value</strong><p>$\int v(t)\,dt$ is displacement. For total distance, use $\int |v(t)|\,dt$.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>计算路程时忘加绝对值</strong><p>$\int v(t)\,dt$ 是位移。求总路程要用 $\int |v(t)|\,dt$。</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Wrong radius</strong><p>Radius is distance to the axis, not automatically the function itself.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>半径写错</strong><p>半径是到旋转轴的距离，并不一定就是函数本身。</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Forgetting to split the interval</strong><p>When graphs cross, one “top minus bottom” rule will not work over the full interval.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>忘记拆分区间</strong><p>两图象相交时，单一的“上减下”规则不能贯穿整个区间。</p></div>
+      <div class="concept-box red" data-lang="en"><strong>Squaring after subtracting</strong><p>Washer method is $R^2-r^2$, not $(R-r)^2$.</p></div>
+      <div class="concept-box red" data-lang="zh"><strong>把差先减再平方</strong><p>圆环法是 $R^2-r^2$，不是 $(R-r)^2$。</p></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="flashcards">
-      <div class="topic-header"><span class="overline">Review</span><h2>Flashcards</h2></div>
-      <p style="margin-bottom:18px;color:var(--text-secondary);font-size:.9rem">Click a card to reveal the answer.</p>
+      <div class="topic-header"><span class="overline">Review</span><h2 data-lang="en">Flashcards</h2><h2 data-lang="zh">闪卡</h2></div>
+      <p style="margin-bottom:18px;color:var(--text-secondary);font-size:.9rem" data-lang="en">Click a card to reveal the answer.</p>
+      <p style="margin-bottom:18px;color:var(--text-secondary);font-size:.9rem" data-lang="zh">点击卡片查看答案。</p>
       <div class="flashcard-grid">
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Average value formula on $[a,b]$?</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$\frac{1}{b-a}\int_a^b f(x)\,dx$$</span></div></div></div>
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Displacement from velocity?</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$\int_a^b v(t)\,dt$$</span></div></div></div>
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Total distance from velocity?</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$\int_a^b |v(t)|\,dt$$</span></div></div></div>
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Washer method?</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$V=\pi\int_a^b (R^2-r^2)\,dx$$</span></div></div></div>
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Semicircle area in terms of diameter s?</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$A=\frac{\pi}{8}s^2$$</span></div></div></div>
-        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label">Question</span><span class="flashcard-text">Arc length for $y=f(x)$? (BC)</span></div><div class="flashcard-back"><span class="flashcard-label">Answer</span><span class="flashcard-text">$$L=\int_a^b \sqrt{1+[f'(x)]^2}\,dx$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Average value formula on $[a,b]$?</span><span class="flashcard-text" data-lang="zh">$[a,b]$ 上平均值？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$\frac{1}{b-a}\int_a^b f(x)\,dx$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Displacement from velocity?</span><span class="flashcard-text" data-lang="zh">速度积出位移？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$\int_a^b v(t)\,dt$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Total distance from velocity?</span><span class="flashcard-text" data-lang="zh">速度积出总路程？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$\int_a^b |v(t)|\,dt$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Washer method?</span><span class="flashcard-text" data-lang="zh">圆环法？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$V=\pi\int_a^b (R^2-r^2)\,dx$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Semicircle area in terms of diameter s?</span><span class="flashcard-text" data-lang="zh">半圆面积（直径 s）？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$A=\frac{\pi}{8}s^2$$</span></div></div></div>
+        <div class="flashcard" onclick="this.classList.toggle('flipped')"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-label" data-lang="en">Question</span><span class="flashcard-label" data-lang="zh">问题</span><span class="flashcard-text" data-lang="en">Arc length for $y=f(x)$? (BC)</span><span class="flashcard-text" data-lang="zh">$y=f(x)$ 弧长（BC）？</span></div><div class="flashcard-back"><span class="flashcard-label" data-lang="en">Answer</span><span class="flashcard-label" data-lang="zh">答案</span><span class="flashcard-text">$$L=\int_a^b \sqrt{1+[f'(x)]^2}\,dx$$</span></div></div></div>
       </div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="unit-quiz">
-      <div class="topic-header"><span class="overline">Review</span><h2>Unit Quiz</h2></div>
-      <p style="margin-bottom:20px;color:var(--text-secondary);font-size:.9rem">Select an answer for each question.</p>
+      <div class="topic-header"><span class="overline">Review</span><h2 data-lang="en">Unit Quiz</h2><h2 data-lang="zh">单元小测</h2></div>
+      <p style="margin-bottom:20px;color:var(--text-secondary);font-size:.9rem" data-lang="en">Select an answer for each question.</p>
+      <p style="margin-bottom:20px;color:var(--text-secondary);font-size:.9rem" data-lang="zh">为每题选择一个答案。</p>
       <div id="quizContainer">
-        <div class="quiz-question" data-correct="B"><div class="quiz-question-text">1. The average value of $f(x)=x^2$ on $[0,3]$ is:</div><button class="quiz-option" data-choice="A">$\frac{9}{2}$</button><button class="quiz-option" data-choice="B">$3$</button><button class="quiz-option" data-choice="C">$9$</button><button class="quiz-option" data-choice="D">$\frac{27}{2}$</button><div class="quiz-explanation">$\frac{1}{3}\int_0^3 x^2\,dx=\frac{1}{3}\cdot 9=3$.</div></div>
-        <div class="quiz-question" data-correct="C"><div class="quiz-question-text">2. If $v(t)=t-2$ on $[0,4]$, the total distance traveled is:</div><button class="quiz-option" data-choice="A">$0$</button><button class="quiz-option" data-choice="B">$2$</button><button class="quiz-option" data-choice="C">$4$</button><button class="quiz-option" data-choice="D">$8$</button><div class="quiz-explanation">Split at $t=2$: $\int_0^2(2-t)\,dt+\int_2^4(t-2)\,dt=2+2=4$.</div></div>
-        <div class="quiz-question" data-correct="A"><div class="quiz-question-text">3. The area between $y=x$ and $y=x^2$ on $[0,1]$ is:</div><button class="quiz-option" data-choice="A">$\frac16$</button><button class="quiz-option" data-choice="B">$\frac13$</button><button class="quiz-option" data-choice="C">$\frac12$</button><button class="quiz-option" data-choice="D">$\frac14$</button><div class="quiz-explanation">$\int_0^1(x-x^2)\,dx=\frac12-\frac13=\frac16$.</div></div>
-        <div class="quiz-question" data-correct="D"><div class="quiz-question-text">4. A solid has square cross sections over the base from $y=\sqrt{x}$ to $y=0$ on $0\le x\le 4$. Its volume is:</div><button class="quiz-option" data-choice="A">$4$</button><button class="quiz-option" data-choice="B">$\frac{16}{3}$</button><button class="quiz-option" data-choice="C">$4\pi$</button><button class="quiz-option" data-choice="D">$8$</button><div class="quiz-explanation">Side length $=\sqrt{x}$, so area $=x$. Then $V=\int_0^4 x\,dx=8$.</div></div>
-        <div class="quiz-question" data-correct="B"><div class="quiz-question-text">5. Revolving the region under $y=\sqrt{x}$ from $x=0$ to $x=4$ about the x-axis gives volume:</div><button class="quiz-option" data-choice="A">$4\pi$</button><button class="quiz-option" data-choice="B">$8\pi$</button><button class="quiz-option" data-choice="C">$16\pi$</button><button class="quiz-option" data-choice="D">$2\pi$</button><div class="quiz-explanation">$V=\pi\int_0^4 (\sqrt{x})^2\,dx=\pi\int_0^4 x\,dx=8\pi$.</div></div>
+        <div class="quiz-question" data-correct="B"><div class="quiz-question-text" data-lang="en">1. The average value of $f(x)=x^2$ on $[0,3]$ is:</div><div class="quiz-question-text" data-lang="zh">1. $f(x)=x^2$ 在 $[0,3]$ 上的平均值是：</div><button class="quiz-option" data-choice="A">$\frac{9}{2}$</button><button class="quiz-option" data-choice="B">$3$</button><button class="quiz-option" data-choice="C">$9$</button><button class="quiz-option" data-choice="D">$\frac{27}{2}$</button><div class="quiz-explanation"><span data-lang="en">$\frac{1}{3}\int_0^3 x^2\,dx=\frac{1}{3}\cdot 9=3$.</span><span data-lang="zh">$\frac{1}{3}\int_0^3 x^2\,dx=\frac{1}{3}\cdot 9=3$。</span></div></div>
+        <div class="quiz-question" data-correct="C"><div class="quiz-question-text" data-lang="en">2. If $v(t)=t-2$ on $[0,4]$, the total distance traveled is:</div><div class="quiz-question-text" data-lang="zh">2. 若在 $[0,4]$ 上 $v(t)=t-2$，则总路程为：</div><button class="quiz-option" data-choice="A">$0$</button><button class="quiz-option" data-choice="B">$2$</button><button class="quiz-option" data-choice="C">$4$</button><button class="quiz-option" data-choice="D">$8$</button><div class="quiz-explanation"><span data-lang="en">Split at $t=2$: $\int_0^2(2-t)\,dt+\int_2^4(t-2)\,dt=2+2=4$.</span><span data-lang="zh">在 $t=2$ 处分段：$\int_0^2(2-t)\,dt+\int_2^4(t-2)\,dt=2+2=4$。</span></div></div>
+        <div class="quiz-question" data-correct="A"><div class="quiz-question-text" data-lang="en">3. The area between $y=x$ and $y=x^2$ on $[0,1]$ is:</div><div class="quiz-question-text" data-lang="zh">3. $y=x$ 与 $y=x^2$ 在 $[0,1]$ 上之间的面积为：</div><button class="quiz-option" data-choice="A">$\frac16$</button><button class="quiz-option" data-choice="B">$\frac13$</button><button class="quiz-option" data-choice="C">$\frac12$</button><button class="quiz-option" data-choice="D">$\frac14$</button><div class="quiz-explanation"><span data-lang="en">$\int_0^1(x-x^2)\,dx=\frac12-\frac13=\frac16$.</span><span data-lang="zh">$\int_0^1(x-x^2)\,dx=\frac12-\frac13=\frac16$。</span></div></div>
+        <div class="quiz-question" data-correct="D"><div class="quiz-question-text" data-lang="en">4. A solid has square cross sections over the base from $y=\sqrt{x}$ to $y=0$ on $0\le x\le 4$. Its volume is:</div><div class="quiz-question-text" data-lang="zh">4. 一实体在底面 $0\le x\le 4$、$y=0$ 到 $y=\sqrt{x}$ 之间，截面为正方形。其体积为：</div><button class="quiz-option" data-choice="A">$4$</button><button class="quiz-option" data-choice="B">$\frac{16}{3}$</button><button class="quiz-option" data-choice="C">$4\pi$</button><button class="quiz-option" data-choice="D">$8$</button><div class="quiz-explanation"><span data-lang="en">Side length $=\sqrt{x}$, so area $=x$. Then $V=\int_0^4 x\,dx=8$.</span><span data-lang="zh">边长 $=\sqrt{x}$，故面积 $=x$。再 $V=\int_0^4 x\,dx=8$。</span></div></div>
+        <div class="quiz-question" data-correct="B"><div class="quiz-question-text" data-lang="en">5. Revolving the region under $y=\sqrt{x}$ from $x=0$ to $x=4$ about the x-axis gives volume:</div><div class="quiz-question-text" data-lang="zh">5. 把 $y=\sqrt{x}$ 在 $x=0$ 到 $x=4$ 下方的区域绕 $x$ 轴旋转，所得体积为：</div><button class="quiz-option" data-choice="A">$4\pi$</button><button class="quiz-option" data-choice="B">$8\pi$</button><button class="quiz-option" data-choice="C">$16\pi$</button><button class="quiz-option" data-choice="D">$2\pi$</button><div class="quiz-explanation"><span data-lang="en">$V=\pi\int_0^4 (\sqrt{x})^2\,dx=\pi\int_0^4 x\,dx=8\pi$.</span><span data-lang="zh">$V=\pi\int_0^4 (\sqrt{x})^2\,dx=\pi\int_0^4 x\,dx=8\pi$。</span></div></div>
       </div>
       <div class="quiz-score" id="quizScore"></div>
     </section>
     <hr class="section-divider">
     <section class="topic-section" id="checklist">
-      <div class="topic-header"><span class="overline">Self-Assessment</span><h2>Readiness Checklist</h2></div>
-      <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-      <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 16 mastered</div>
+      <div class="topic-header"><span class="overline">Self-Assessment</span><h2 data-lang="en">Readiness Checklist</h2><h2 data-lang="zh">备考清单</h2></div>
+      <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+      <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击你已经掌握的每一项。考前争取 100%。</p>
+      <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 16 mastered</span><span data-lang="zh">已掌握 0 / 16</span></div>
 
       <ul class="checklist" id="checklistUl">
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute the average value of a function on a closed interval</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Relate position, velocity, and acceleration via integration</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish displacement from total distance traveled</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up accumulation / net-change integrals from a rate function</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find area between curves integrating with respect to $x$</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find area between curves integrating with respect to $y$</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Split the integral when curves cross or intersect multiple times</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute volume by known cross sections (squares, triangles, semicircles)</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Disc Method about the $x$- or $y$-axis</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Disc Method about a horizontal or vertical line</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Washer Method for volumes of revolution</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Choose outer/inner radii correctly for non-axis axes of rotation</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute arc length with $\int \sqrt{1 + (f'(x))^2}\,dx$ (BC)</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Sketch the region and axis of rotation before setting up the integral</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate method (disc, washer, cross-section) per problem</li>
-        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use proper notation and units in contextual applications</li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Compute the average value of a function on a closed interval</span><span data-lang="zh">在闭区间上计算函数的平均值</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Relate position, velocity, and acceleration via integration</span><span data-lang="zh">通过积分把位置、速度、加速度联系起来</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Distinguish displacement from total distance traveled</span><span data-lang="zh">区分位移与总路程</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Set up accumulation / net-change integrals from a rate function</span><span data-lang="zh">由变化率函数建立累积 / 净变化积分</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Find area between curves integrating with respect to $x$</span><span data-lang="zh">对 $x$ 积分求两曲线之间的面积</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Find area between curves integrating with respect to $y$</span><span data-lang="zh">对 $y$ 积分求两曲线之间的面积</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Split the integral when curves cross or intersect multiple times</span><span data-lang="zh">在曲线相交或多次相交时拆分积分区间</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Compute volume by known cross sections (squares, triangles, semicircles)</span><span data-lang="zh">用已知横截面（正方形、三角形、半圆）计算体积</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Apply the Disc Method about the $x$- or $y$-axis</span><span data-lang="zh">用圆盘法绕 $x$ 或 $y$ 轴旋转</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Apply the Disc Method about a horizontal or vertical line</span><span data-lang="zh">用圆盘法绕水平或竖直直线旋转</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Apply the Washer Method for volumes of revolution</span><span data-lang="zh">用圆环法求旋转体体积</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Choose outer/inner radii correctly for non-axis axes of rotation</span><span data-lang="zh">在非标准旋转轴情形下正确选择外/内半径</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Compute arc length with $\int \sqrt{1 + (f'(x))^2}\,dx$ (BC)</span><span data-lang="zh">用 $\int \sqrt{1 + (f'(x))^2}\,dx$ 计算弧长（BC）</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Sketch the region and axis of rotation before setting up the integral</span><span data-lang="zh">写积分前先画出区域和旋转轴</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Select the appropriate method (disc, washer, cross-section) per problem</span><span data-lang="zh">针对每道题选择合适方法（圆盘、圆环、横截面）</span></li>
+        <li onclick="toggleCheck(this)"><span class="check-icon">✓</span><span data-lang="en">Use proper notation and units in contextual applications</span><span data-lang="zh">在情境应用题中使用正确的记号与单位</span></li>
       </ul>
     </section>
 
     <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
     <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-      <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-      <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+      <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+      <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;" data-lang="en">AP-Style Practice Problems</h2>
+      <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;" data-lang="zh">AP 风格练习题</h2>
       <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-        <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+        <p style="margin-bottom:16px;" data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+        <p style="margin-bottom:16px;" data-lang="zh">面向本单元的考试级练习——按 AP 评分标准设计的选择题加扩展回答题。专为冲击高分准备；在做完上面的讲解与页内小测后，再到这里训练。</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="../Practice%20Questions/Unit_8_Applications_of_Integration_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+          <a href="../Practice%20Questions/Unit_8_Applications_of_Integration_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
         </div>
       </div>
     </section>

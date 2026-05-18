@@ -38,7 +38,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -769,6 +769,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .nav-btn.active { background: var(--accent, #7A2E2E) !important; color: #FFFFFF !important; border-color: var(--accent, #7A2E2E) !important; }
 #tocToggle { display: inline-flex !important; align-items: center !important; }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
+
 /* ─── CHECKLIST ─── */
 .checklist { list-style: none; padding: 0; }
 .checklist li {
@@ -799,49 +803,57 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     <span class="nav-badge">UNIT 6</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s6-1">6.1 Accumulations of Change</a>
-  <a href="#s6-2">6.2 Riemann Sums</a>
-  <a href="#s6-3">6.3 Summation &amp; Integral Notation</a>
-  <a href="#s6-4">6.4 FTC &amp; Accumulation Functions</a>
-  <a href="#s6-5">6.5 Behavior of Accumulation Fns</a>
-  <a href="#s6-6">6.6 Properties of Definite Integrals</a>
-  <a href="#s6-7">6.7 FTC &amp; Definite Integrals</a>
-  <a href="#s6-8">6.8 Antiderivatives &amp; Basic Rules</a>
-  <a href="#s6-9">6.9 U-Substitution</a>
-  <a href="#s6-10">6.10 Long Division &amp; Completing Square</a>
-  <a href="#s6-11">6.11 Integration by Parts</a>
-  <a href="#s6-12">6.12 Partial Fractions</a>
-  <a href="#s6-13">6.13 Improper Integrals</a>
-  <a href="#s6-14">6.14 Selecting Techniques</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s6-1"><span data-lang="en">6.1 Accumulations of Change</span><span data-lang="zh">6.1 变化的累积</span></a>
+  <a href="#s6-2"><span data-lang="en">6.2 Riemann Sums</span><span data-lang="zh">6.2 黎曼和</span></a>
+  <a href="#s6-3"><span data-lang="en">6.3 Summation &amp; Integral Notation</span><span data-lang="zh">6.3 求和与积分记号</span></a>
+  <a href="#s6-4"><span data-lang="en">6.4 FTC &amp; Accumulation Functions</span><span data-lang="zh">6.4 微积分基本定理与累积函数</span></a>
+  <a href="#s6-5"><span data-lang="en">6.5 Behavior of Accumulation Fns</span><span data-lang="zh">6.5 累积函数的行为</span></a>
+  <a href="#s6-6"><span data-lang="en">6.6 Properties of Definite Integrals</span><span data-lang="zh">6.6 定积分的性质</span></a>
+  <a href="#s6-7"><span data-lang="en">6.7 FTC &amp; Definite Integrals</span><span data-lang="zh">6.7 微积分基本定理与定积分</span></a>
+  <a href="#s6-8"><span data-lang="en">6.8 Antiderivatives &amp; Basic Rules</span><span data-lang="zh">6.8 原函数与基本积分公式</span></a>
+  <a href="#s6-9"><span data-lang="en">6.9 U-Substitution</span><span data-lang="zh">6.9 u 代换法</span></a>
+  <a href="#s6-10"><span data-lang="en">6.10 Long Division &amp; Completing Square</span><span data-lang="zh">6.10 长除法与配方法</span></a>
+  <a href="#s6-11"><span data-lang="en">6.11 Integration by Parts</span><span data-lang="zh">6.11 分部积分法</span></a>
+  <a href="#s6-12"><span data-lang="en">6.12 Partial Fractions</span><span data-lang="zh">6.12 部分分式</span></a>
+  <a href="#s6-13"><span data-lang="en">6.13 Improper Integrals</span><span data-lang="zh">6.13 反常积分</span></a>
+  <a href="#s6-14"><span data-lang="en">6.14 Selecting Techniques</span><span data-lang="zh">6.14 选择积分方法</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-  <h1>Unit 6: Integration and<br>Accumulation of Change</h1>
-  <p class="hero-sub">
+  <h1 data-lang="en">Unit 6: Integration and<br>Accumulation of Change</h1>
+  <h1 data-lang="zh">单元 6：积分与<br>变化的累积</h1>
+  <p class="hero-sub" data-lang="en">
     Connect differentiation and integration through the Fundamental Theorem of Calculus. Master Riemann sums, antiderivatives, and integration techniques.
   </p>
+  <p class="hero-sub" data-lang="zh">
+    通过微积分基本定理把微分与积分联系起来。掌握黎曼和、原函数与各种积分技巧。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">17–20% of AP Exam</span>
-    <span class="chip chip-green">~18–20 Class Periods</span>
-    <span class="chip chip-purple">14 Topics</span>
+    <span class="chip chip-maroon" data-lang="en">17–20% of AP Exam</span>
+    <span class="chip chip-maroon" data-lang="zh">占 AP 考试 17–20%</span>
+    <span class="chip chip-green" data-lang="en">~18–20 Class Periods</span>
+    <span class="chip chip-green" data-lang="zh">约 18–20 课时</span>
+    <span class="chip chip-purple" data-lang="en">14 Topics</span>
+    <span class="chip chip-purple" data-lang="zh">14 个小节</span>
   </div>
 </section>
 
@@ -851,36 +863,60 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- TOPIC 6.1 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-1">
-  <div class="section-label">Topic 6.1</div>
-  <h2>Exploring Accumulations of Change</h2>
+  <div class="section-label" data-lang="en">Topic 6.1</div>
+  <div class="section-label" data-lang="zh">小节 6.1</div>
+  <h2 data-lang="en">Exploring Accumulations of Change</h2>
+  <h2 data-lang="zh">探索变化的累积</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Big Idea</strong>
     If a function tells you <em>how fast</em> something changes, the area under that function tells you <em>how much</em> it changed. The area between the graph of a rate-of-change function and the $x$-axis represents the <strong>total accumulation of change</strong>.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">核心思想</strong>
+    如果一个函数告诉你某个量<em>变化得多快</em>，那么这个函数下方的面积就告诉你它<em>变化了多少</em>。变化率（<code>rate of change</code>）函数的图像与 $x$ 轴之间的面积，代表<strong>变化的累积总量</strong>（<code>total accumulation of change</code>）。
+  </div>
 
-  <p>Suppose $r(t)$ is a rate of change — for example, gallons per minute flowing into a tank. Then the area under the curve $r(t)$ from $t = a$ to $t = b$ gives the total quantity that accumulated over that time interval. In some cases, you can compute this area using basic geometry (triangles, rectangles, trapezoids) before learning any formal integration techniques.</p>
+  <p data-lang="en">Suppose $r(t)$ is a rate of change — for example, gallons per minute flowing into a tank. Then the area under the curve $r(t)$ from $t = a$ to $t = b$ gives the total quantity that accumulated over that time interval. In some cases, you can compute this area using basic geometry (triangles, rectangles, trapezoids) before learning any formal integration techniques.</p>
+  <p data-lang="zh">设 $r(t)$ 是一个变化率——比如流入水箱的加仑/分钟。那么曲线 $r(t)$ 从 $t = a$ 到 $t = b$ 之间的曲线下面积（<code>area under curve</code>），就给出在该时间区间内累积的总量。有时候，无需任何正式的积分技巧，仅用基本几何（三角形、矩形、梯形）就能算出这块面积。</p>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Units Matter</strong>
     The unit of the accumulated quantity equals the unit of the rate <strong>multiplied by</strong> the unit of the independent variable.
     <span style="display:block; margin-top:10px;"><em>Example:</em> Rate in <code>gallons/min</code> and time in <code>min</code> → area has units <code>gallons/min × min = gallons</code>.</span>
     <span style="display:block; margin-top:4px;"><em>Example:</em> Rate in <code>cars/hour</code> and time in <code>hours</code> → area has units <code>cars</code>.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">单位要对</strong>
+    累积量的单位等于变化率的单位<strong>乘以</strong>自变量的单位。
+    <span style="display:block; margin-top:10px;"><em>例：</em>变化率单位是 <code>gallons/min</code>，时间单位是 <code>min</code> → 面积的单位是 <code>gallons/min × min = gallons</code>。</span>
+    <span style="display:block; margin-top:4px;"><em>例：</em>变化率单位是 <code>cars/hour</code>，时间单位是 <code>hours</code> → 面积的单位是 <code>cars</code>。</span>
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Sign Matters</strong>
     <span style="display:block; margin-top:8px;">Rate is <strong>positive</strong> over an interval → accumulated change is <strong>positive</strong> (quantity increases).</span>
     <span style="display:block; margin-top:4px;">Rate is <strong>negative</strong> over an interval → accumulated change is <strong>negative</strong> (quantity decreases).</span>
     <span style="display:block; margin-top:8px;">Area below the $x$-axis counts as <em>negative</em> accumulation — think of water draining vs. filling.</span>
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">正负号要对</strong>
+    <span style="display:block; margin-top:8px;">区间内变化率为<strong>正</strong> → 累积变化为<strong>正</strong>（量增加）。</span>
+    <span style="display:block; margin-top:4px;">区间内变化率为<strong>负</strong> → 累积变化为<strong>负</strong>（量减少）。</span>
+    <span style="display:block; margin-top:8px;">$x$ 轴下方的面积算作<em>负</em>累积——把它想成放水与放水的对比。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Accumulation from a Rate Graph</summary>
+    <summary><span data-lang="en">Worked Example — Accumulation from a Rate Graph</span><span data-lang="zh">例题——由变化率图求累积</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>A tank fills at rate $r(t)$ gallons/hour. The graph of $r(t)$ forms a triangle with base 4 hours and height 6 gal/hr.</p>
 <p>Total water added $=$ area under the rate curve:</p>
+$$\text{Area} = \tfrac{1}{2} \times 4 \times 6 = 12 \text{ gallons}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>水箱以变化率 $r(t)$ 加仑/小时进水。$r(t)$ 的图像是一个底为 4 小时、高为 6 加仑/小时的三角形。</p>
+<p>累积的总水量 $=$ 变化率曲线下面积：</p>
 $$\text{Area} = \tfrac{1}{2} \times 4 \times 6 = 12 \text{ gallons}$$
 </div>
     </div>
@@ -893,41 +929,45 @@ $$\text{Area} = \tfrac{1}{2} \times 4 \times 6 = 12 \text{ gallons}$$
 <!-- TOPIC 6.2 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-2">
-  <div class="section-label">Topic 6.2</div>
-  <h2>Approximating Areas with Riemann Sums</h2>
+  <div class="section-label" data-lang="en">Topic 6.2</div>
+  <div class="section-label" data-lang="zh">小节 6.2</div>
+  <h2 data-lang="en">Approximating Areas with Riemann Sums</h2>
+  <h2 data-lang="zh">用黎曼和近似面积</h2>
 
-  <p>When the region under a curve isn't a simple geometric shape, we <strong>approximate</strong> the area by slicing it into thin rectangles. The total area of those rectangles — called a <strong>Riemann sum</strong> — estimates the true integral. The more rectangles we use, the better the estimate becomes.</p>
+  <p data-lang="en">When the region under a curve isn't a simple geometric shape, we <strong>approximate</strong> the area by slicing it into thin rectangles. The total area of those rectangles — called a <strong>Riemann sum</strong> — estimates the true integral. The more rectangles we use, the better the estimate becomes.</p>
+  <p data-lang="zh">当曲线下区域不是简单几何形状时，我们把它切成很多细长矩形来<strong>近似</strong>面积。这些矩形面积的总和——叫做<strong>黎曼和</strong>（<code>Riemann sum</code>）——就是积分（<code>integral</code>）的估计值。矩形越多，估计越准。</p>
 
   <!-- ─── INTERACTIVE RIEMANN SUM VISUALIZER ─── -->
   <div class="interactive-widget" id="riemann-widget">
-    <div class="widget-header">Interactive Riemann Sum Explorer</div>
+    <div class="widget-header"><span data-lang="en">Interactive Riemann Sum Explorer</span><span data-lang="zh">黎曼和交互探索器</span></div>
     <div class="widget-canvas-wrap">
       <canvas id="riemannCanvas" width="720" height="380"></canvas>
     </div>
     <div class="widget-controls">
-      <label for="riemannN">Rectangles (<em>n</em>):</label>
+      <label for="riemannN"><span data-lang="en">Rectangles (<em>n</em>):</span><span data-lang="zh">矩形数 (<em>n</em>)：</span></label>
       <input type="range" id="riemannN" min="1" max="100" value="4">
       <div class="widget-readout" id="riemannReadout">n = 4</div>
     </div>
     <div class="widget-btn-row">
-      <button class="widget-btn active" data-method="left" onclick="setRiemannMethod('left', this)">Left</button>
-      <button class="widget-btn" data-method="right" onclick="setRiemannMethod('right', this)">Right</button>
-      <button class="widget-btn" data-method="midpoint" onclick="setRiemannMethod('midpoint', this)">Midpoint</button>
-      <button class="widget-btn" data-method="trapezoid" onclick="setRiemannMethod('trapezoid', this)">Trapezoid</button>
+      <button class="widget-btn active" data-method="left" onclick="setRiemannMethod('left', this)"><span data-lang="en">Left</span><span data-lang="zh">左端点</span></button>
+      <button class="widget-btn" data-method="right" onclick="setRiemannMethod('right', this)"><span data-lang="en">Right</span><span data-lang="zh">右端点</span></button>
+      <button class="widget-btn" data-method="midpoint" onclick="setRiemannMethod('midpoint', this)"><span data-lang="en">Midpoint</span><span data-lang="zh">中点</span></button>
+      <button class="widget-btn" data-method="trapezoid" onclick="setRiemannMethod('trapezoid', this)"><span data-lang="en">Trapezoid</span><span data-lang="zh">梯形</span></button>
     </div>
     <div class="widget-sum-readout" id="riemannSumReadout">
-      Riemann Sum ≈ <span class="sum-val">—</span><br>
-      Exact integral = <span class="exact-val">—</span><br>
+      <span data-lang="en">Riemann Sum ≈ <span class="sum-val">—</span><br>Exact integral = <span class="exact-val">—</span><br></span><span data-lang="zh">黎曼和 ≈ <span class="sum-val">—</span><br>精确积分 = <span class="exact-val">—</span><br></span>
       <span class="error-val" id="riemannError"></span>
     </div>
     <div id="riemannConvergeBanner" style="display:none;"></div>
   </div>
 
-  <p style="margin-top: 20px;">Drag the slider above and watch the rectangles multiply. Notice how the gaps and overlaps between the rectangles and the curve <strong>shrink toward zero</strong> as $n$ grows. That's the key geometric intuition: the Riemann sum converges to the exact area under the curve.</p>
+  <p style="margin-top: 20px;" data-lang="en">Drag the slider above and watch the rectangles multiply. Notice how the gaps and overlaps between the rectangles and the curve <strong>shrink toward zero</strong> as $n$ grows. That's the key geometric intuition: the Riemann sum converges to the exact area under the curve.</p>
+  <p style="margin-top: 20px;" data-lang="zh">拖动上方的滑块，看着矩形越来越多。注意当 $n$ 增大时，矩形与曲线之间的缝隙和重叠是怎样<strong>逐步趋近于零</strong>的。这就是核心的几何直觉：黎曼和收敛（<code>convergence</code>）到曲线下精确面积。</p>
 
   <div class="qref">
-    <div class="qref-title">The Four Riemann Sum Approximations</div>
-    <div class="table-wrap">
+    <div class="qref-title" data-lang="en">The Four Riemann Sum Approximations</div>
+    <div class="qref-title" data-lang="zh">四种黎曼和近似</div>
+    <div class="table-wrap" data-lang="en">
       <table>
         <tr><th>Method</th><th>Height Chosen At</th><th>Over/Under?</th></tr>
         <tr><td><strong>Left Riemann Sum (LRS)</strong></td><td>Left endpoint of each subinterval</td><td>Depends on increasing / decreasing</td></tr>
@@ -936,20 +976,36 @@ $$\text{Area} = \tfrac{1}{2} \times 4 \times 6 = 12 \text{ gallons}$$
         <tr><td><strong>Trapezoidal Sum</strong></td><td>Average of left &amp; right (trapezoid, not rectangle)</td><td>Depends on concavity</td></tr>
       </table>
     </div>
+    <div class="table-wrap" data-lang="zh">
+      <table>
+        <tr><th>方法</th><th>高度取在</th><th>高估/低估？</th></tr>
+        <tr><td><strong>左黎曼和（<code>LRS</code>）</strong></td><td>每个子区间的左端点</td><td>取决于递增/递减</td></tr>
+        <tr><td><strong>右黎曼和（<code>RRS</code>）</strong></td><td>每个子区间的右端点</td><td>取决于递增/递减</td></tr>
+        <tr><td><strong>中点黎曼和（<code>MRS</code>）</strong></td><td>每个子区间的中点</td><td>三者中通常最准</td></tr>
+        <tr><td><strong>梯形和（<code>trapezoidal sum</code>）</strong></td><td>左右端点的平均（梯形而非矩形）</td><td>取决于凹凸性</td></tr>
+      </table>
+    </div>
   </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Over vs. Underestimate Rules</strong>
     <span style="display:block; margin-top:8px;">For a function that is <strong>increasing</strong>: LRS underestimates, RRS overestimates.</span>
     <span style="display:block; margin-top:4px;">For a function that is <strong>decreasing</strong>: LRS overestimates, RRS underestimates.</span>
     <span style="display:block; margin-top:8px;">For a function that is <strong>concave up</strong>: Trapezoidal sum overestimates, Midpoint underestimates.</span>
     <span style="display:block; margin-top:4px;">For a function that is <strong>concave down</strong>: Trapezoidal sum underestimates, Midpoint overestimates.</span>
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">高估与低估的规则</strong>
+    <span style="display:block; margin-top:8px;">函数<strong>递增</strong>时：LRS 低估，RRS 高估。</span>
+    <span style="display:block; margin-top:4px;">函数<strong>递减</strong>时：LRS 高估，RRS 低估。</span>
+    <span style="display:block; margin-top:8px;">函数<strong>上凹</strong>时：梯形和高估，中点法低估。</span>
+    <span style="display:block; margin-top:4px;">函数<strong>下凹</strong>时：梯形和低估，中点法高估。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Left Riemann Sum from a Table</summary>
+    <summary><span data-lang="en">Worked Example — Left Riemann Sum from a Table</span><span data-lang="zh">例题——由表格求左黎曼和</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Given table:</p>
 <table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
   <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$t$</td><td style="padding:4px 14px; border:1px solid var(--border);">0</td><td style="padding:4px 14px; border:1px solid var(--border);">1</td><td style="padding:4px 14px; border:1px solid var(--border);">3</td><td style="padding:4px 14px; border:1px solid var(--border);">6</td></tr>
@@ -962,19 +1018,32 @@ $$\begin{aligned}
 &= 2 + 10 + 12 = 24
 \end{aligned}$$
 </div>
+<div class="worked-solution" data-lang="zh">
+<p>给定表格：</p>
+<table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
+  <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$t$</td><td style="padding:4px 14px; border:1px solid var(--border);">0</td><td style="padding:4px 14px; border:1px solid var(--border);">1</td><td style="padding:4px 14px; border:1px solid var(--border);">3</td><td style="padding:4px 14px; border:1px solid var(--border);">6</td></tr>
+  <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$f(t)$</td><td style="padding:4px 14px; border:1px solid var(--border);">2</td><td style="padding:4px 14px; border:1px solid var(--border);">5</td><td style="padding:4px 14px; border:1px solid var(--border);">4</td><td style="padding:4px 14px; border:1px solid var(--border);">7</td></tr>
+</table>
+<p><strong>左黎曼和</strong>（3 个非等距子区间）：$\Delta t_1 = 1,\; \Delta t_2 = 2,\; \Delta t_3 = 3$。</p>
+$$\begin{aligned}
+\text{LRS} &= f(0)\,\Delta t_1 + f(1)\,\Delta t_2 + f(3)\,\Delta t_3 \\[4pt]
+&= 2(1) + 5(2) + 4(3) \\[4pt]
+&= 2 + 10 + 12 = 24
+\end{aligned}$$
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">For a function that is increasing and concave up, which approximation overestimates $\int_a^b f(x)\,dx$?</div>
+    <div class="quiz-q"><span data-lang="en">For a function that is increasing and concave up, which approximation overestimates $\int_a^b f(x)\,dx$?</span><span data-lang="zh">对于一个递增且上凹的函数，下面哪种近似会高估 $\int_a^b f(x)\,dx$？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Left Riemann Sum</div>
-      <div class="quiz-opt" data-idx="1">Right Riemann Sum</div>
-      <div class="quiz-opt" data-idx="2">Midpoint Riemann Sum</div>
-      <div class="quiz-opt" data-idx="3">None — all underestimate</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Left Riemann Sum</span><span data-lang="zh">左黎曼和</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Right Riemann Sum</span><span data-lang="zh">右黎曼和</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Midpoint Riemann Sum</span><span data-lang="zh">中点黎曼和</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">None — all underestimate</span><span data-lang="zh">都不是——它们都低估</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! For an increasing function, the Right Riemann Sum uses the larger (right) value for each rectangle, producing an overestimate. The Trapezoidal Sum also overestimates when the function is concave up.</div>
-    <div class="quiz-explain wrong-exp">For an increasing function, the Right Riemann Sum uses the right (larger) endpoint of each subinterval, so each rectangle is taller than needed → overestimate.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! For an increasing function, the Right Riemann Sum uses the larger (right) value for each rectangle, producing an overestimate. The Trapezoidal Sum also overestimates when the function is concave up.</span><span data-lang="zh">正确！对递增函数，右黎曼和每个矩形取的是较大的（右端点）值，会产生高估。函数上凹时梯形和也是高估。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">For an increasing function, the Right Riemann Sum uses the right (larger) endpoint of each subinterval, so each rectangle is taller than needed → overestimate.</span><span data-lang="zh">对递增函数，右黎曼和取每个子区间右端点（较大值），矩形比实际需要的高 → 高估。</span></div>
   </div>
 </section>
 
@@ -984,54 +1053,85 @@ $$\begin{aligned}
 <!-- TOPIC 6.3 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-3">
-  <div class="section-label">Topic 6.3</div>
-  <h2>Riemann Sums, Summation Notation &amp; Definite Integral Notation</h2>
+  <div class="section-label" data-lang="en">Topic 6.3</div>
+  <div class="section-label" data-lang="zh">小节 6.3</div>
+  <h2 data-lang="en">Riemann Sums, Summation Notation &amp; Definite Integral Notation</h2>
+  <h2 data-lang="zh">黎曼和、求和记号与定积分记号</h2>
 
-  <p>The interactive visualizer above showed you the key idea geometrically. Now we formalize it: <strong>the definite integral is defined as the limit of Riemann sums</strong> as the number of rectangles approaches infinity and their widths approach zero.</p>
+  <p data-lang="en">The interactive visualizer above showed you the key idea geometrically. Now we formalize it: <strong>the definite integral is defined as the limit of Riemann sums</strong> as the number of rectangles approaches infinity and their widths approach zero.</p>
+  <p data-lang="zh">上方的交互可视化已从几何上展示了关键思路。现在把它正式化：<strong>定积分（<code>definite integral</code>）被定义为黎曼和的极限</strong>——当矩形数趋于无穷、宽度趋于零时的极限值。</p>
 
   <div class="formula-box" style="border-top-color: var(--green);">
-    <div class="formula-label" style="color: var(--green);">The Definition of the Definite Integral</div>
+    <div class="formula-label" style="color: var(--green);"><span data-lang="en">The Definition of the Definite Integral</span><span data-lang="zh">定积分的定义</span></div>
     $$ \boxed{\int_a^b f(x)\,dx = \lim_{\max \Delta x_i \to 0} \sum_{i=1}^{n} f(x_i^*)\,\Delta x_i} $$
-    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;">
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-lang="en">
       This is the foundational definition. The integral symbol $\int$ is an elongated "S" for <em>Sum</em>. The $dx$ is the infinitesimal remnant of $\Delta x$. Every time you write $\int_a^b f(x)\,dx$, you are writing a limit of a sum of products — infinitely many, infinitely thin rectangles whose total area equals the exact area under the curve.
+    </p>
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-lang="zh">
+      这是最根本的定义。积分号 $\int$ 是拉长了的字母 “S”，表示 <em>Sum</em>（求和）。$dx$ 是 $\Delta x$ 在取极限后留下的“无穷小”痕迹。每写一个 $\int_a^b f(x)\,dx$，你就是在写一个乘积之和的极限——无穷多个、无穷薄的矩形，其总面积等于曲线下精确面积。
     </p>
   </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Why This Matters</strong>
     The Riemann sum with finitely many rectangles <em>approximates</em>. The limit as $n \to \infty$ (or equivalently, $\max \Delta x_i \to 0$) gives the <em>exact</em> value. That limit is what we call the definite integral. This is analogous to how the derivative is defined as the limit of difference quotients — the integral is defined as the limit of sums.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">为什么重要</strong>
+    有限多个矩形的黎曼和只是<em>近似</em>。当 $n \to \infty$（或等价地，$\max \Delta x_i \to 0$）时的极限（<code>limit</code>）给出<em>精确</em>值。这个极限就是定积分。这与导数（<code>derivative</code>）被定义为差商的极限是类比的——积分被定义为求和的极限。
+  </div>
 
-  <p>For <strong>equal subintervals</strong> of width $\Delta x = \frac{b-a}{n}$, the definition simplifies:</p>
+  <p data-lang="en">For <strong>equal subintervals</strong> of width $\Delta x = \frac{b-a}{n}$, the definition simplifies:</p>
+  <p data-lang="zh">当子区间为<strong>等宽</strong> $\Delta x = \frac{b-a}{n}$ 时，定义可简化为：</p>
 
   <div class="formula-box">
-    <div class="formula-label">Equal Subintervals (Right Endpoint)</div>
+    <div class="formula-label"><span data-lang="en">Equal Subintervals (Right Endpoint)</span><span data-lang="zh">等宽子区间（右端点）</span></div>
     $$ \int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f\!\left(a + i\cdot\frac{b-a}{n}\right) \cdot \frac{b-a}{n} $$
   </div>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">Anatomy of the Notation</strong>
     <span style="display:block; margin-top:10px;">$\displaystyle\int_a^b$ — bounds of integration (start at $a$, end at $b$)</span>
     <span style="display:block; margin-top:6px;">$f(x)$ — the <strong>integrand</strong>, the function whose area we're computing</span>
     <span style="display:block; margin-top:6px;">$dx$ — the <strong>differential</strong>, indicating the variable and reminding us of the infinitesimal width $\Delta x$</span>
     <span style="display:block; margin-top:10px;">Together, $f(x)\,dx$ represents "height × width" of each infinitesimal rectangle.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">记号的各部分</strong>
+    <span style="display:block; margin-top:10px;">$\displaystyle\int_a^b$ —— 积分上下限（从 $a$ 到 $b$）</span>
+    <span style="display:block; margin-top:6px;">$f(x)$ —— <strong>被积函数</strong>（<code>integrand</code>），即我们要算其面积的函数</span>
+    <span style="display:block; margin-top:6px;">$dx$ —— <strong>微分</strong>，标明积分变量，并提醒这是无穷小宽度 $\Delta x$</span>
+    <span style="display:block; margin-top:10px;">合起来，$f(x)\,dx$ 表示每个无穷小矩形的“高 × 宽”。</span>
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Exam Skill — Translating Between Forms</strong>
     <span style="display:block; margin-top:8px;">You must be able to convert a limit of a Riemann sum into a definite integral and vice versa. The key identifiers:</span>
     <span style="display:block; margin-top:6px;">1. Find $\Delta x = \frac{b-a}{n}$ — this tells you $b - a$.</span>
     <span style="display:block; margin-top:4px;">2. The expression inside $f(\ldots)$ starts at $a$ when $i = 0$ (or approaches $a$ when $i = 1$) — this gives you $a$.</span>
     <span style="display:block; margin-top:4px;">3. Then $b = a + (b - a)$.</span>
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">考试技能——两种形式互相转换</strong>
+    <span style="display:block; margin-top:8px;">你必须能把黎曼和的极限改写成定积分，反之亦然。关键识别要点：</span>
+    <span style="display:block; margin-top:6px;">1. 找出 $\Delta x = \frac{b-a}{n}$ —— 它告诉你 $b - a$。</span>
+    <span style="display:block; margin-top:4px;">2. $f(\ldots)$ 内部表达式在 $i = 0$ 时取值为 $a$（或 $i = 1$ 时趋近 $a$）—— 由此得 $a$。</span>
+    <span style="display:block; margin-top:4px;">3. 再算 $b = a + (b - a)$。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Converting Sum to Integral</summary>
+    <summary><span data-lang="en">Worked Example — Converting Sum to Integral</span><span data-lang="zh">例题——把求和改写为积分</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Express as a definite integral:</p>
 $$\lim_{n \to \infty} \sum_{i=1}^{n} \left(3 + \frac{5i}{n}\right)^{\!2} \cdot \frac{5}{n}$$
 <p>Identify the pieces: $\Delta x = \frac{5}{n}$, so $b - a = 5$. The starting value is $a = 3$, giving $b = 8$, and $f(x) = x^2$.</p>
+$$= \int_3^8 x^2\,dx$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>把下式表示为定积分：</p>
+$$\lim_{n \to \infty} \sum_{i=1}^{n} \left(3 + \frac{5i}{n}\right)^{\!2} \cdot \frac{5}{n}$$
+<p>识别各部分：$\Delta x = \frac{5}{n}$，所以 $b - a = 5$。起点 $a = 3$，故 $b = 8$，且 $f(x) = x^2$。</p>
 $$= \int_3^8 x^2\,dx$$
 </div>
     </div>
@@ -1044,35 +1144,58 @@ $$= \int_3^8 x^2\,dx$$
 <!-- TOPIC 6.4 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-4">
-  <div class="section-label">Topic 6.4</div>
-  <h2>The Fundamental Theorem of Calculus &amp; Accumulation Functions</h2>
+  <div class="section-label" data-lang="en">Topic 6.4</div>
+  <div class="section-label" data-lang="zh">小节 6.4</div>
+  <h2 data-lang="en">The Fundamental Theorem of Calculus &amp; Accumulation Functions</h2>
+  <h2 data-lang="zh">微积分基本定理与累积函数</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">The Big Connection</strong>
     The Fundamental Theorem of Calculus (FTC) is the most important result in this unit. It says that differentiation and integration are inverse processes.
   </div>
-
-  <div class="formula-box">
-    <div class="formula-label">FTC Part 1 (Derivative of an Integral)</div>
-    $$ \frac{d}{dx} \int_a^x f(t)\,dt = f(x) $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">where $f$ is continuous on an interval containing $a$</p>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">最关键的联系</strong>
+    微积分基本定理（<code>Fundamental Theorem of Calculus, FTC</code>）是本单元最重要的结论：微分和积分是互为逆运算的过程。
   </div>
 
-  <p>This tells us: if you accumulate a continuous function from a fixed starting point $a$ up to a variable endpoint $x$, then the <em>rate</em> at which that accumulation changes is just the original function evaluated at $x$.</p>
+  <div class="formula-box">
+    <div class="formula-label"><span data-lang="en">FTC Part 1 (Derivative of an Integral)</span><span data-lang="zh">微积分基本定理第一部分（积分的导数）</span></div>
+    $$ \frac{d}{dx} \int_a^x f(t)\,dt = f(x) $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">where $f$ is continuous on an interval containing $a$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">其中 $f$ 在包含 $a$ 的区间上连续</p>
+  </div>
 
-  <div class="concept-box red">
+  <p data-lang="en">This tells us: if you accumulate a continuous function from a fixed starting point $a$ up to a variable endpoint $x$, then the <em>rate</em> at which that accumulation changes is just the original function evaluated at $x$.</p>
+  <p data-lang="zh">这告诉我们：把一个连续函数从固定起点 $a$ 累积到一个可变的端点 $x$，那么这个累积量变化的<em>速率</em>恰好就是原函数在 $x$ 处的值。</p>
+
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Chain Rule Extension — Heavily Tested!</strong>
     <span style="display:block; margin-top:8px;">If the upper limit is a function of $x$:</span>
     $$ \frac{d}{dx} \int_a^{g(x)} f(t)\,dt = f(g(x)) \cdot g'(x) $$
     <span style="display:block; margin-top:8px;">Don't forget the $g'(x)$ factor! This is where most students lose points.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">链式法则推广——高频考点！</strong>
+    <span style="display:block; margin-top:8px;">如果上限是 $x$ 的函数：</span>
+    $$ \frac{d}{dx} \int_a^{g(x)} f(t)\,dt = f(g(x)) \cdot g'(x) $$
+    <span style="display:block; margin-top:8px;">不要漏掉 $g'(x)$ 这个因子！绝大多数同学就是在这丢分的。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — FTC Part 1 with Chain Rule</summary>
+    <summary><span data-lang="en">Worked Example — FTC Part 1 with Chain Rule</span><span data-lang="zh">例题——FTC 第一部分配合链式法则</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Find $F'(x)$ if $\displaystyle F(x) = \int_1^{x^2} \cos(t^3)\,dt$.</p>
 <p>Upper limit $g(x) = x^2 \;\Longrightarrow\; g'(x) = 2x$. Integrand: $f(t) = \cos(t^3)$.</p>
+$$\begin{aligned}
+F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
+&= \cos\bigl((x^2)^3\bigr)\cdot 2x \\[4pt]
+&= 2x\cos(x^6)
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>若 $\displaystyle F(x) = \int_1^{x^2} \cos(t^3)\,dt$，求 $F'(x)$。</p>
+<p>上限 $g(x) = x^2 \;\Longrightarrow\; g'(x) = 2x$。被积函数：$f(t) = \cos(t^3)$。</p>
 $$\begin{aligned}
 F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
 &= \cos\bigl((x^2)^3\bigr)\cdot 2x \\[4pt]
@@ -1083,28 +1206,34 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">If $g(x) = \int_2^{3x} \sqrt{t+1}\,dt$, what is $g'(x)$?</div>
+    <div class="quiz-q"><span data-lang="en">If $g(x) = \int_2^{3x} \sqrt{t+1}\,dt$, what is $g'(x)$?</span><span data-lang="zh">若 $g(x) = \int_2^{3x} \sqrt{t+1}\,dt$，求 $g'(x)$。</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\sqrt{3x + 1}$</div>
       <div class="quiz-opt" data-idx="1">$\frac{3}{\sqrt{3x+1}}$</div>
       <div class="quiz-opt" data-idx="2">$3\sqrt{3x+1}$</div>
       <div class="quiz-opt" data-idx="3">$\sqrt{x+1}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! By FTC Part 1 with chain rule: $g'(x) = \sqrt{3x+1} \cdot 3 = 3\sqrt{3x+1}$. The upper limit is $3x$, so you must multiply by its derivative, $3$.</div>
-    <div class="quiz-explain wrong-exp">Apply FTC Part 1: $g'(x) = f(g(x)) \cdot g'(x) = \sqrt{3x + 1} \cdot 3$. Don't forget to multiply by the derivative of the upper limit!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! By FTC Part 1 with chain rule: $g'(x) = \sqrt{3x+1} \cdot 3 = 3\sqrt{3x+1}$. The upper limit is $3x$, so you must multiply by its derivative, $3$.</span><span data-lang="zh">正确！由 FTC 第一部分加链式法则：$g'(x) = \sqrt{3x+1} \cdot 3 = 3\sqrt{3x+1}$。上限是 $3x$，必须乘上它的导数 $3$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Apply FTC Part 1: $g'(x) = f(g(x)) \cdot g'(x) = \sqrt{3x + 1} \cdot 3$. Don't forget to multiply by the derivative of the upper limit!</span><span data-lang="zh">用 FTC 第一部分：$g'(x) = f(g(x)) \cdot g'(x) = \sqrt{3x + 1} \cdot 3$。别忘了乘以上限的导数！</span></div>
   </div>
 
-  <div class="concept-box red" style="margin-top: 22px;">
+  <div class="concept-box red" style="margin-top: 22px;" data-lang="en">
     <strong style="color: var(--red);">Lower-Limit Variant — Sign Flip!</strong>
     <span style="display:block; margin-top:8px;">If the <em>lower</em> limit is the function of $x$ (and the upper limit is constant), reverse the bounds first to put the variable back on top. Reversing introduces a leading minus sign:</span>
     $$ \frac{d}{dx} \int_{g(x)}^{a} f(t)\,dt \;=\; -\,f\!\bigl(g(x)\bigr) \cdot g'(x) $$
     <span style="display:block; margin-top:8px;">Forgetting that minus sign is one of the most common AP traps for this topic.</span>
   </div>
+  <div class="concept-box red" style="margin-top: 22px;" data-lang="zh">
+    <strong style="color: var(--red);">下限变量版——变号！</strong>
+    <span style="display:block; margin-top:8px;">如果 $x$ 的函数在<em>下限</em>（上限是常数），先把上下限交换，让变量回到上方。交换会带一个负号：</span>
+    $$ \frac{d}{dx} \int_{g(x)}^{a} f(t)\,dt \;=\; -\,f\!\bigl(g(x)\bigr) \cdot g'(x) $$
+    <span style="display:block; margin-top:8px;">忘掉这个负号是这部分最常见的 AP 陷阱之一。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — FTC Part 1 with Chain Rule on the <em>Lower</em> Limit</summary>
+    <summary><span data-lang="en">Worked Example — FTC Part 1 with Chain Rule on the <em>Lower</em> Limit</span><span data-lang="zh">例题——FTC 第一部分作用在<em>下限</em>的链式法则</span></summary>
     <div class="detail-body">
-      <div class="worked-solution">
+      <div class="worked-solution" data-lang="en">
         <p>Find $H'(x)$ if $\displaystyle H(x) = \int_{x^2}^{3} \cos t\,dt$.</p>
         <p><strong>Step 1 — Reverse the bounds.</strong> Use the property $\int_a^b = -\int_b^a$ so the variable bound is on top:</p>
         $$ H(x) \;=\; -\int_{3}^{x^2} \cos t\,dt $$
@@ -1116,19 +1245,31 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
         \end{aligned}$$
         <p><strong>Sanity check.</strong> The minus sign comes from reversing the bounds — not from anything in the integrand. If you skip Step 1 and apply the chain-rule formula directly to a lower-limit integral, you will get the wrong sign.</p>
       </div>
+      <div class="worked-solution" data-lang="zh">
+        <p>若 $\displaystyle H(x) = \int_{x^2}^{3} \cos t\,dt$，求 $H'(x)$。</p>
+        <p><strong>第一步——交换上下限。</strong>用性质 $\int_a^b = -\int_b^a$，把变量限放到上方：</p>
+        $$ H(x) \;=\; -\int_{3}^{x^2} \cos t\,dt $$
+        <p><strong>第二步——对上限用 FTC 第一部分 + 链式法则。</strong>此时 $g(x)=x^2$，$g'(x)=2x$，被积函数 $f(t)=\cos t$：</p>
+        $$\begin{aligned}
+        H'(x) &= -\,f\!\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
+        &= -\cos(x^2)\cdot 2x \\[4pt]
+        &= -\,2x\cos(x^2)
+        \end{aligned}$$
+        <p><strong>核对一下。</strong>负号是因为交换上下限而出现的——不是被积函数带来的。如果跳过第一步，直接把链式公式套到下限变量的积分上，符号一定会算错。</p>
+      </div>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">If $\displaystyle K(x) = \int_{x^3}^{5} e^{t}\,dt$, what is $K'(x)$?</div>
+    <div class="quiz-q"><span data-lang="en">If $\displaystyle K(x) = \int_{x^3}^{5} e^{t}\,dt$, what is $K'(x)$?</span><span data-lang="zh">若 $\displaystyle K(x) = \int_{x^3}^{5} e^{t}\,dt$，求 $K'(x)$。</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$3x^2\, e^{x^3}$</div>
       <div class="quiz-opt" data-idx="1">$-3x^2\, e^{x^3}$</div>
       <div class="quiz-opt" data-idx="2">$e^{x^3}$</div>
       <div class="quiz-opt" data-idx="3">$-e^{x^3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Reverse the bounds: $K(x) = -\int_5^{x^3} e^t\,dt$. Apply FTC + chain rule with $g(x)=x^3$, $g'(x)=3x^2$: $K'(x) = -e^{x^3}\cdot 3x^2 = -3x^2 e^{x^3}$.</div>
-    <div class="quiz-explain wrong-exp">The variable is on the <em>lower</em> limit. Reverse the bounds to introduce a $-$ sign, then apply FTC + chain rule: $K'(x) = -e^{x^3}\cdot 3x^2$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Reverse the bounds: $K(x) = -\int_5^{x^3} e^t\,dt$. Apply FTC + chain rule with $g(x)=x^3$, $g'(x)=3x^2$: $K'(x) = -e^{x^3}\cdot 3x^2 = -3x^2 e^{x^3}$.</span><span data-lang="zh">正确！交换上下限：$K(x) = -\int_5^{x^3} e^t\,dt$。用 FTC + 链式法则，$g(x)=x^3$，$g'(x)=3x^2$：$K'(x) = -e^{x^3}\cdot 3x^2 = -3x^2 e^{x^3}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The variable is on the <em>lower</em> limit. Reverse the bounds to introduce a $-$ sign, then apply FTC + chain rule: $K'(x) = -e^{x^3}\cdot 3x^2$.</span><span data-lang="zh">变量在<em>下限</em>。先交换上下限引入 $-$，再用 FTC + 链式法则：$K'(x) = -e^{x^3}\cdot 3x^2$。</span></div>
   </div>
 </section>
 
@@ -1138,15 +1279,19 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
 <!-- TOPIC 6.5 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-5">
-  <div class="section-label">Topic 6.5</div>
-  <h2>Interpreting the Behavior of Accumulation Functions</h2>
+  <div class="section-label" data-lang="en">Topic 6.5</div>
+  <div class="section-label" data-lang="zh">小节 6.5</div>
+  <h2 data-lang="en">Interpreting the Behavior of Accumulation Functions</h2>
+  <h2 data-lang="zh">解读累积函数的行为</h2>
 
-  <p>If $g(x) = \int_a^x f(t)\,dt$, then the graph of $f$ tells you everything about the behavior of $g$. Since $g'(x) = f(x)$ by FTC Part 1, the graph of $f$ is literally the derivative graph of $g$ — so all the analysis techniques from Unit 5 apply directly.</p>
+  <p data-lang="en">If $g(x) = \int_a^x f(t)\,dt$, then the graph of $f$ tells you everything about the behavior of $g$. Since $g'(x) = f(x)$ by FTC Part 1, the graph of $f$ is literally the derivative graph of $g$ — so all the analysis techniques from Unit 5 apply directly.</p>
+  <p data-lang="zh">若 $g(x) = \int_a^x f(t)\,dt$，则 $f$ 的图像就能告诉你 $g$ 的全部行为。因为由 FTC 第一部分 $g'(x) = f(x)$，$f$ 的图像其实就是 $g$ 的导数图——所以单元 5 的所有分析技巧都可以直接套用。</p>
 
   <!-- ─── INTERACTIVE ACCUMULATION EXPLORER ─── -->
   <div class="interactive-widget" id="accum-widget">
-    <div class="widget-header">Interactive Accumulation Explorer</div>
-    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Drag the slider to move $x$ and watch the shaded area — the value of $g(x) = \int_0^x f(t)\,dt$ — grow and shrink in real time.</p>
+    <div class="widget-header"><span data-lang="en">Interactive Accumulation Explorer</span><span data-lang="zh">累积函数交互探索器</span></div>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="en">Drag the slider to move $x$ and watch the shaded area — the value of $g(x) = \int_0^x f(t)\,dt$ — grow and shrink in real time.</p>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="zh">拖动滑块改变 $x$，看着阴影面积——也就是 $g(x) = \int_0^x f(t)\,dt$ 的值——实时增减。</p>
     <div class="widget-canvas-wrap">
       <canvas id="accumCanvas" width="720" height="420"></canvas>
     </div>
@@ -1161,8 +1306,9 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
   </div>
 
   <div class="qref" style="margin-top: 28px;">
-    <div class="qref-title">Connecting f and g</div>
-    <div class="table-wrap">
+    <div class="qref-title" data-lang="en">Connecting f and g</div>
+    <div class="qref-title" data-lang="zh">$f$ 与 $g$ 的对应关系</div>
+    <div class="table-wrap" data-lang="en">
       <table>
         <tr><th>If $f(t)$ is…</th><th>Then $g(x)$ is…</th><th>Because…</th></tr>
         <tr><td>Positive</td><td>Increasing</td><td>$g' = f > 0$ → accumulation is growing</td></tr>
@@ -1172,17 +1318,36 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
         <tr><td>Decreasing</td><td>Concave down</td><td>$g'' = f' < 0$</td></tr>
       </table>
     </div>
+    <div class="table-wrap" data-lang="zh">
+      <table>
+        <tr><th>若 $f(t)$ 为…</th><th>则 $g(x)$ 为…</th><th>原因…</th></tr>
+        <tr><td>正</td><td>递增</td><td>$g' = f > 0$ → 累积在增长</td></tr>
+        <tr><td>负</td><td>递减</td><td>$g' = f < 0$ → 累积在减少</td></tr>
+        <tr><td>零（变号）</td><td>相对极值</td><td>$g' = 0$ 且变号 → 一阶导数判别法</td></tr>
+        <tr><td>递增</td><td>上凹</td><td>$g'' = f' > 0$</td></tr>
+        <tr><td>递减</td><td>下凹</td><td>$g'' = f' < 0$</td></tr>
+      </table>
+    </div>
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Key Insight</strong>
     The accumulation function $g$ is just the "running total" of signed area under $f$. When $f$ is above the axis, $g$ increases; when $f$ dips below, $g$ decreases. A zero-crossing in $f$ produces an extremum in $g$.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">关键洞察</strong>
+    累积函数（<code>accumulation function</code>） $g$ 就是 $f$ 下方有符号面积的“累计总和”。$f$ 在 $x$ 轴上方时，$g$ 递增；$f$ 落到 $x$ 轴下方时，$g$ 递减。$f$ 的零点（变号点）对应 $g$ 的一个极值点。
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Finding $g(x)$ Values from a Graph</strong>
     <span style="display:block; margin-top:8px;">$g(x) = \int_a^x f(t)\,dt$ = <strong>signed area</strong> under $f$ from $a$ to $x$.</span>
     <span style="display:block; margin-top:6px;">Use geometry (triangles, rectangles, semicircles) when the graph of $f$ has straight-line segments or known shapes. Area below the $x$-axis is negative.</span>
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">从图像读出 $g(x)$ 的值</strong>
+    <span style="display:block; margin-top:8px;">$g(x) = \int_a^x f(t)\,dt$ = $f$ 在 $a$ 到 $x$ 之间的<strong>有符号面积</strong>。</span>
+    <span style="display:block; margin-top:6px;">当 $f$ 的图像由直线段或熟悉的形状组成时，可以用几何方法（三角形、矩形、半圆）。$x$ 轴下方的面积取负值。</span>
   </div>
 </section>
 
@@ -1192,12 +1357,15 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
 <!-- TOPIC 6.6 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-6">
-  <div class="section-label">Topic 6.6</div>
-  <h2>Applying Properties of Definite Integrals</h2>
+  <div class="section-label" data-lang="en">Topic 6.6</div>
+  <div class="section-label" data-lang="zh">小节 6.6</div>
+  <h2 data-lang="en">Applying Properties of Definite Integrals</h2>
+  <h2 data-lang="zh">运用定积分的性质</h2>
 
   <div class="qref">
-    <div class="qref-title">Essential Properties</div>
-    <div class="table-wrap">
+    <div class="qref-title" data-lang="en">Essential Properties</div>
+    <div class="qref-title" data-lang="zh">核心性质</div>
+    <div class="table-wrap" data-lang="en">
       <table>
         <tr><th>Property</th><th>Formula</th></tr>
         <tr><td>Constant Multiple</td><td>$\displaystyle\int_a^b k\cdot f(x)\,dx = k\int_a^b f(x)\,dx$</td></tr>
@@ -1207,16 +1375,37 @@ F'(x) &= f\bigl(g(x)\bigr)\cdot g'(x) \\[4pt]
         <tr><td>Same Limits</td><td>$\displaystyle\int_a^a f(x)\,dx = 0$</td></tr>
       </table>
     </div>
+    <div class="table-wrap" data-lang="zh">
+      <table>
+        <tr><th>性质</th><th>公式</th></tr>
+        <tr><td>常数倍</td><td>$\displaystyle\int_a^b k\cdot f(x)\,dx = k\int_a^b f(x)\,dx$</td></tr>
+        <tr><td>和/差</td><td>$\displaystyle\int_a^b [f(x) \pm g(x)]\,dx = \int_a^b f(x)\,dx \pm \int_a^b g(x)\,dx$</td></tr>
+        <tr><td>上下限交换</td><td>$\displaystyle\int_a^b f(x)\,dx = -\int_b^a f(x)\,dx$</td></tr>
+        <tr><td>相邻区间拼接</td><td>$\displaystyle\int_a^b f(x)\,dx + \int_b^c f(x)\,dx = \int_a^c f(x)\,dx$</td></tr>
+        <tr><td>上下限相同</td><td>$\displaystyle\int_a^a f(x)\,dx = 0$</td></tr>
+      </table>
+    </div>
   </div>
 
   <details>
-    <summary>Worked Example — Using Properties</summary>
+    <summary><span data-lang="en">Worked Example — Using Properties</span><span data-lang="zh">例题——运用积分性质</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Given: $\displaystyle\int_1^4 f(x)\,dx = 7$ and $\displaystyle\int_1^4 g(x)\,dx = 3$.</p>
 <p>Find $\displaystyle\int_1^4 [2f(x) - g(x)]\,dx$:</p>
 $$= 2\int_1^4 f(x)\,dx - \int_1^4 g(x)\,dx = 2(7) - 3 = 11$$
 <p>Given additionally $\displaystyle\int_1^6 f(x)\,dx = 10$, find $\displaystyle\int_4^6 f(x)\,dx$:</p>
+$$\begin{aligned}
+\int_1^6 f(x)\,dx &= \int_1^4 f(x)\,dx + \int_4^6 f(x)\,dx \\[4pt]
+10 &= 7 + \int_4^6 f(x)\,dx \\[4pt]
+\int_4^6 f(x)\,dx &= 3
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>已知 $\displaystyle\int_1^4 f(x)\,dx = 7$，$\displaystyle\int_1^4 g(x)\,dx = 3$。</p>
+<p>求 $\displaystyle\int_1^4 [2f(x) - g(x)]\,dx$：</p>
+$$= 2\int_1^4 f(x)\,dx - \int_1^4 g(x)\,dx = 2(7) - 3 = 11$$
+<p>另已知 $\displaystyle\int_1^6 f(x)\,dx = 10$，求 $\displaystyle\int_4^6 f(x)\,dx$：</p>
 $$\begin{aligned}
 \int_1^6 f(x)\,dx &= \int_1^4 f(x)\,dx + \int_4^6 f(x)\,dx \\[4pt]
 10 &= 7 + \int_4^6 f(x)\,dx \\[4pt]
@@ -1233,26 +1422,41 @@ $$\begin{aligned}
 <!-- TOPIC 6.7 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-7">
-  <div class="section-label">Topic 6.7</div>
-  <h2>The Fundamental Theorem of Calculus &amp; Definite Integrals</h2>
+  <div class="section-label" data-lang="en">Topic 6.7</div>
+  <div class="section-label" data-lang="zh">小节 6.7</div>
+  <h2 data-lang="en">The Fundamental Theorem of Calculus &amp; Definite Integrals</h2>
+  <h2 data-lang="zh">微积分基本定理与定积分</h2>
 
   <div class="formula-box">
-    <div class="formula-label">FTC Part 2 (Evaluation Theorem)</div>
+    <div class="formula-label"><span data-lang="en">FTC Part 2 (Evaluation Theorem)</span><span data-lang="zh">微积分基本定理第二部分（求值定理）</span></div>
     $$ \int_a^b f(x)\,dx = F(b) - F(a) $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">where $F$ is any antiderivative of $f$ (i.e., $F'(x) = f(x)$)</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">where $F$ is any antiderivative of $f$ (i.e., $F'(x) = f(x)$)</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">其中 $F$ 是 $f$ 的任一原函数（<code>antiderivative</code>），即满足 $F'(x) = f(x)$</p>
   </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">What This Means</strong>
     To evaluate a definite integral, find an antiderivative $F$, then compute $F(b) - F(a)$. You don't need a constant of integration $C$ because it cancels: $(F(b) + C) - (F(a) + C) = F(b) - F(a)$.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">这意味着什么</strong>
+    要算一个定积分，先求一个原函数 $F$，然后算 $F(b) - F(a)$。不需要积分常数 $C$，因为它会消去：$(F(b) + C) - (F(a) + C) = F(b) - F(a)$。
+  </div>
 
   <details>
-    <summary>Worked Example — Evaluating a Definite Integral</summary>
+    <summary><span data-lang="en">Worked Example — Evaluating a Definite Integral</span><span data-lang="zh">例题——求定积分</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int_1^3 (3x^2 + 2x)\,dx$.</p>
 <p>Antiderivative: $F(x) = x^3 + x^2$.</p>
+$$\begin{aligned}
+F(3) - F(1) &= (27 + 9) - (1 + 1) \\[4pt]
+&= 36 - 2 = 34
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int_1^3 (3x^2 + 2x)\,dx$。</p>
+<p>原函数：$F(x) = x^3 + x^2$。</p>
 $$\begin{aligned}
 F(3) - F(1) &= (27 + 9) - (1 + 1) \\[4pt]
 &= 36 - 2 = 34
@@ -1268,18 +1472,26 @@ F(3) - F(1) &= (27 + 9) - (1 + 1) \\[4pt]
 <!-- TOPIC 6.8 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-8">
-  <div class="section-label">Topic 6.8</div>
-  <h2>Finding Antiderivatives &amp; Indefinite Integrals: Basic Rules</h2>
+  <div class="section-label" data-lang="en">Topic 6.8</div>
+  <div class="section-label" data-lang="zh">小节 6.8</div>
+  <h2 data-lang="en">Finding Antiderivatives &amp; Indefinite Integrals: Basic Rules</h2>
+  <h2 data-lang="zh">求原函数与不定积分：基本公式</h2>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">Indefinite Integral</strong>
     $\displaystyle\int f(x)\,dx = F(x) + C$, where $F'(x) = f(x)$ and $C$ is an arbitrary constant.
     <span style="display:block; margin-top:8px;"><strong>Always include $+C$ for indefinite integrals.</strong></span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">不定积分（<code>indefinite integral</code>）</strong>
+    $\displaystyle\int f(x)\,dx = F(x) + C$，其中 $F'(x) = f(x)$，$C$ 为任意常数。
+    <span style="display:block; margin-top:8px;"><strong>不定积分必须写 $+C$。</strong></span>
+  </div>
 
   <div class="qref">
-    <div class="qref-title">Basic Antiderivative Rules</div>
-    <div class="table-wrap">
+    <div class="qref-title" data-lang="en">Basic Antiderivative Rules</div>
+    <div class="qref-title" data-lang="zh">基本原函数公式</div>
+    <div class="table-wrap" data-lang="en">
       <table>
         <tr><th>Function $f(x)$</th><th>Antiderivative $F(x) + C$</th></tr>
         <tr><td>$x^n$ &nbsp;($n \neq -1$)</td><td>$\dfrac{x^{n+1}}{n+1} + C$</td></tr>
@@ -1296,13 +1508,36 @@ F(3) - F(1) &= (27 + 9) - (1 + 1) \\[4pt]
         <tr><td>$\dfrac{1}{1+x^2}$</td><td>$\arctan x + C$</td></tr>
       </table>
     </div>
+    <div class="table-wrap" data-lang="zh">
+      <table>
+        <tr><th>函数 $f(x)$</th><th>原函数 $F(x) + C$</th></tr>
+        <tr><td>$x^n$ &nbsp;（$n \neq -1$）</td><td>$\dfrac{x^{n+1}}{n+1} + C$</td></tr>
+        <tr><td>$\dfrac{1}{x}$</td><td>$\ln|x| + C$</td></tr>
+        <tr><td>$e^x$</td><td>$e^x + C$</td></tr>
+        <tr><td>$a^x$</td><td>$\dfrac{a^x}{\ln a} + C$</td></tr>
+        <tr><td>$\cos x$</td><td>$\sin x + C$</td></tr>
+        <tr><td>$\sin x$</td><td>$-\cos x + C$</td></tr>
+        <tr><td>$\sec^2 x$</td><td>$\tan x + C$</td></tr>
+        <tr><td>$\csc^2 x$</td><td>$-\cot x + C$</td></tr>
+        <tr><td>$\sec x \tan x$</td><td>$\sec x + C$</td></tr>
+        <tr><td>$\csc x \cot x$</td><td>$-\csc x + C$</td></tr>
+        <tr><td>$\dfrac{1}{\sqrt{1-x^2}}$</td><td>$\arcsin x + C$</td></tr>
+        <tr><td>$\dfrac{1}{1+x^2}$</td><td>$\arctan x + C$</td></tr>
+      </table>
+    </div>
   </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Common Mistakes</strong>
     <span style="display:block; margin-top:8px;">1. Forgetting $+C$ on indefinite integrals — this loses points on free-response!</span>
     <span style="display:block; margin-top:4px;">2. Confusing $\int \sin x\,dx = -\cos x + C$ (note the negative sign).</span>
     <span style="display:block; margin-top:4px;">3. The power rule does NOT work for $\int \frac{1}{x}\,dx$ — the answer is $\ln|x| + C$, not $\frac{x^0}{0}$.</span>
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">常见错误</strong>
+    <span style="display:block; margin-top:8px;">1. 不定积分忘了写 $+C$——FRQ 上要扣分！</span>
+    <span style="display:block; margin-top:4px;">2. 把 $\int \sin x\,dx = -\cos x + C$ 搞错（注意负号）。</span>
+    <span style="display:block; margin-top:4px;">3. 幂法则（<code>power rule</code>）对 $\int \frac{1}{x}\,dx$ <strong>不</strong>适用——答案是 $\ln|x| + C$，不是 $\frac{x^0}{0}$。</span>
   </div>
 </section>
 
@@ -1312,34 +1547,57 @@ F(3) - F(1) &= (27 + 9) - (1 + 1) \\[4pt]
 <!-- TOPIC 6.9 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-9">
-  <div class="section-label">Topic 6.9</div>
-  <h2>Integrating Using Substitution</h2>
+  <div class="section-label" data-lang="en">Topic 6.9</div>
+  <div class="section-label" data-lang="zh">小节 6.9</div>
+  <h2 data-lang="en">Integrating Using Substitution</h2>
+  <h2 data-lang="zh">用换元积分法</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">When to Use U-Sub</strong>
     Use substitution when you recognize the integrand contains a function <em>and its derivative</em> — this is the reverse of the chain rule.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">什么时候用 u 代换</strong>
+    当你看到被积函数（<code>integrand</code>）中同时出现某个函数<em>和它的导数</em>时，就用换元积分法（<code>integration by substitution</code> / <code>u-substitution</code>）——这是链式法则的逆运算。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">U-Substitution Pattern</div>
+    <div class="formula-label"><span data-lang="en">U-Substitution Pattern</span><span data-lang="zh">u 代换的模式</span></div>
     $$ \int f(g(x)) \cdot g'(x)\,dx = \int f(u)\,du \quad \text{where } u = g(x) $$
   </div>
 
-  <h3>Step-by-Step Process</h3>
-  <div class="card">
+  <h3 data-lang="en">Step-by-Step Process</h3>
+  <h3 data-lang="zh">分步流程</h3>
+  <div class="card" data-lang="en">
     <p style="margin-bottom: 8px;"><strong>Step 1:</strong> Choose $u = g(x)$ (usually the "inside" function).</p>
     <p style="margin-bottom: 8px;"><strong>Step 2:</strong> Compute $du = g'(x)\,dx$.</p>
     <p style="margin-bottom: 8px;"><strong>Step 3:</strong> Rewrite the entire integral in terms of $u$ and $du$.</p>
     <p style="margin-bottom: 8px;"><strong>Step 4:</strong> Integrate with respect to $u$.</p>
     <p><strong>Step 5:</strong> Substitute back (replace $u$ with $g(x)$) — <em>or</em>, for definite integrals, change the limits to $u$-values.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <p style="margin-bottom: 8px;"><strong>第一步：</strong>选 $u = g(x)$（通常是“里层”的函数）。</p>
+    <p style="margin-bottom: 8px;"><strong>第二步：</strong>算出 $du = g'(x)\,dx$。</p>
+    <p style="margin-bottom: 8px;"><strong>第三步：</strong>把整个积分都改写成 $u$ 与 $du$。</p>
+    <p style="margin-bottom: 8px;"><strong>第四步：</strong>对 $u$ 积分。</p>
+    <p><strong>第五步：</strong>把 $u$ 换回 $g(x)$——<em>或者</em>，对定积分，直接把积分上下限换成 $u$ 值。</p>
+  </div>
 
   <details>
-    <summary>Worked Example — Indefinite Integral</summary>
+    <summary><span data-lang="en">Worked Example — Indefinite Integral</span><span data-lang="zh">例题——不定积分</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int 2x\cos(x^2)\,dx$.</p>
 <p>Let $u = x^2 \;\Longrightarrow\; du = 2x\,dx$ (already present).</p>
+$$\begin{aligned}
+\int 2x\cos(x^2)\,dx &= \int \cos(u)\,du \\[4pt]
+&= \sin(u) + C \\[4pt]
+&= \sin(x^2) + C
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int 2x\cos(x^2)\,dx$。</p>
+<p>令 $u = x^2 \;\Longrightarrow\; du = 2x\,dx$（被积函数里已经有了）。</p>
 $$\begin{aligned}
 \int 2x\cos(x^2)\,dx &= \int \cos(u)\,du \\[4pt]
 &= \sin(u) + C \\[4pt]
@@ -1350,11 +1608,20 @@ $$\begin{aligned}
   </details>
 
   <details>
-    <summary>Worked Example — Definite Integral (Change Limits)</summary>
+    <summary><span data-lang="en">Worked Example — Definite Integral (Change Limits)</span><span data-lang="zh">例题——定积分（换上下限）</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int_0^2 x\,e^{x^2}\,dx$.</p>
 <p>Let $u = x^2 \;\Longrightarrow\; du = 2x\,dx \;\Longrightarrow\; x\,dx = \frac{du}{2}$. Change limits: $x=0 \to u=0$; $x=2 \to u=4$.</p>
+$$\begin{aligned}
+\int_0^2 x\,e^{x^2}\,dx &= \frac{1}{2}\int_0^4 e^u\,du \\[4pt]
+&= \frac{1}{2}\bigl[e^u\bigr]_0^4 \\[4pt]
+&= \frac{1}{2}(e^4 - 1)
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int_0^2 x\,e^{x^2}\,dx$。</p>
+<p>令 $u = x^2 \;\Longrightarrow\; du = 2x\,dx \;\Longrightarrow\; x\,dx = \frac{du}{2}$。换上下限：$x=0 \to u=0$；$x=2 \to u=4$。</p>
 $$\begin{aligned}
 \int_0^2 x\,e^{x^2}\,dx &= \frac{1}{2}\int_0^4 e^u\,du \\[4pt]
 &= \frac{1}{2}\bigl[e^u\bigr]_0^4 \\[4pt]
@@ -1364,21 +1631,25 @@ $$\begin{aligned}
     </div>
   </details>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Exam Trap</strong>
     When using substitution on a definite integral, you <strong>must</strong> either change the limits of integration to $u$-values, or substitute back to $x$ before evaluating. Never mix: don't plug $x$-limits into a $u$-antiderivative.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">考试陷阱</strong>
+    定积分用 u 代换时，<strong>必须</strong>要么把上下限改成 $u$ 值，要么在代入前把 $u$ 换回 $x$。绝对不能混着用：不能把 $x$ 上下限代到 $u$ 的原函数里。
+  </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">What is $\int_0^1 \frac{e^{\sqrt{x}}}{\sqrt{x}}\,dx$ after substitution $u = \sqrt{x}$?</div>
+    <div class="quiz-q"><span data-lang="en">What is $\int_0^1 \frac{e^{\sqrt{x}}}{\sqrt{x}}\,dx$ after substitution $u = \sqrt{x}$?</span><span data-lang="zh">令 $u = \sqrt{x}$，则 $\int_0^1 \frac{e^{\sqrt{x}}}{\sqrt{x}}\,dx$ 变为？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\int_0^1 e^u\,du$</div>
       <div class="quiz-opt" data-idx="1">$\int_0^1 \frac{e^u}{u}\,du$</div>
       <div class="quiz-opt" data-idx="2">$\frac{1}{2}\int_0^1 e^u\,du$</div>
       <div class="quiz-opt" data-idx="3">$2\int_0^1 e^u\,du$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! If $u = \sqrt{x} = x^{1/2}$, then $du = \frac{1}{2\sqrt{x}}dx$, so $\frac{dx}{\sqrt{x}} = 2\,du$. Limits: $x=0 \to u=0$, $x=1 \to u=1$. Result: $2\int_0^1 e^u\,du$.</div>
-    <div class="quiz-explain wrong-exp">With $u = \sqrt{x}$: $du = \frac{1}{2\sqrt{x}}dx \Rightarrow \frac{dx}{\sqrt{x}} = 2\,du$. Limits stay $0$ to $1$. So the integral becomes $2\int_0^1 e^u\,du$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! If $u = \sqrt{x} = x^{1/2}$, then $du = \frac{1}{2\sqrt{x}}dx$, so $\frac{dx}{\sqrt{x}} = 2\,du$. Limits: $x=0 \to u=0$, $x=1 \to u=1$. Result: $2\int_0^1 e^u\,du$.</span><span data-lang="zh">正确！若 $u = \sqrt{x} = x^{1/2}$，则 $du = \frac{1}{2\sqrt{x}}dx$，所以 $\frac{dx}{\sqrt{x}} = 2\,du$。上下限：$x=0 \to u=0$，$x=1 \to u=1$。结果：$2\int_0^1 e^u\,du$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">With $u = \sqrt{x}$: $du = \frac{1}{2\sqrt{x}}dx \Rightarrow \frac{dx}{\sqrt{x}} = 2\,du$. Limits stay $0$ to $1$. So the integral becomes $2\int_0^1 e^u\,du$.</span><span data-lang="zh">取 $u = \sqrt{x}$：$du = \frac{1}{2\sqrt{x}}dx \Rightarrow \frac{dx}{\sqrt{x}} = 2\,du$。上下限仍是 $0$ 到 $1$。所以积分变为 $2\int_0^1 e^u\,du$。</span></div>
   </div>
 </section>
 
@@ -1388,23 +1659,40 @@ $$\begin{aligned}
 <!-- TOPIC 6.10 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-10">
-  <div class="section-label">Topic 6.10</div>
-  <h2>Integrating Using Long Division &amp; Completing the Square</h2>
+  <div class="section-label" data-lang="en">Topic 6.10</div>
+  <div class="section-label" data-lang="zh">小节 6.10</div>
+  <h2 data-lang="en">Integrating Using Long Division &amp; Completing the Square</h2>
+  <h2 data-lang="zh">用多项式长除法与配方法积分</h2>
 
-  <p>Some rational integrands need algebraic manipulation before you can integrate.</p>
+  <p data-lang="en">Some rational integrands need algebraic manipulation before you can integrate.</p>
+  <p data-lang="zh">有些有理函数被积式需要先做代数变形才能积分。</p>
 
-  <h3>Long Division</h3>
-  <div class="concept-box">
+  <h3 data-lang="en">Long Division</h3>
+  <h3 data-lang="zh">多项式长除法</h3>
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">When to Use</strong>
     Use long division when the <strong>degree of the numerator ≥ degree of the denominator</strong>. Divide first, then integrate the resulting polynomial + remainder fraction.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">什么时候用</strong>
+    当<strong>分子次数 ≥ 分母次数</strong>时，使用多项式长除法（<code>long division</code>）。先做除法，再对得到的多项式部分 + 余式分式分别积分。
+  </div>
 
   <details>
-    <summary>Worked Example — Long Division</summary>
+    <summary><span data-lang="en">Worked Example — Long Division</span><span data-lang="zh">例题——多项式长除法</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int \frac{x^2 + 3}{x - 1}\,dx$.</p>
 <p>Long division: $x^2 + 3 = (x-1)(x+1) + 4$, so:</p>
+$$\frac{x^2+3}{x-1} = x + 1 + \frac{4}{x-1}$$
+$$\begin{aligned}
+\int \frac{x^2+3}{x-1}\,dx &= \int\!\left(x + 1 + \frac{4}{x-1}\right)dx \\[4pt]
+&= \frac{x^2}{2} + x + 4\ln|x-1| + C
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int \frac{x^2 + 3}{x - 1}\,dx$。</p>
+<p>长除法：$x^2 + 3 = (x-1)(x+1) + 4$，所以：</p>
 $$\frac{x^2+3}{x-1} = x + 1 + \frac{4}{x-1}$$
 $$\begin{aligned}
 \int \frac{x^2+3}{x-1}\,dx &= \int\!\left(x + 1 + \frac{4}{x-1}\right)dx \\[4pt]
@@ -1414,19 +1702,30 @@ $$\begin{aligned}
     </div>
   </details>
 
-  <h3>Completing the Square</h3>
-  <div class="concept-box green">
+  <h3 data-lang="en">Completing the Square</h3>
+  <h3 data-lang="zh">配方法</h3>
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">When to Use</strong>
     Use completing the square when the denominator is an irreducible quadratic and the result matches an $\arctan$ or $\arcsin$ form.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">什么时候用</strong>
+    当分母是不可分解的二次式，且结果对应 $\arctan$ 或 $\arcsin$ 形式时，使用配方法。
+  </div>
 
   <details>
-    <summary>Worked Example — Completing the Square</summary>
+    <summary><span data-lang="en">Worked Example — Completing the Square</span><span data-lang="zh">例题——配方法</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int \frac{1}{x^2 + 4x + 13}\,dx$.</p>
 <p>Complete the square: $x^2 + 4x + 13 = (x+2)^2 + 9$.</p>
 <p>This matches $\displaystyle\int \frac{du}{u^2+a^2} = \frac{1}{a}\arctan\!\left(\frac{u}{a}\right)+C$ with $u = x+2$, $a = 3$:</p>
+$$= \frac{1}{3}\arctan\!\left(\frac{x+2}{3}\right) + C$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int \frac{1}{x^2 + 4x + 13}\,dx$。</p>
+<p>配方：$x^2 + 4x + 13 = (x+2)^2 + 9$。</p>
+<p>对应公式 $\displaystyle\int \frac{du}{u^2+a^2} = \frac{1}{a}\arctan\!\left(\frac{u}{a}\right)+C$，取 $u = x+2$，$a = 3$：</p>
 $$= \frac{1}{3}\arctan\!\left(\frac{x+2}{3}\right) + C$$
 </div>
     </div>
@@ -1439,27 +1738,44 @@ $$= \frac{1}{3}\arctan\!\left(\frac{x+2}{3}\right) + C$$
 <!-- TOPIC 6.11 — BC ONLY -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-11">
-  <div class="section-label">Topic 6.11 · <span style="color: var(--purple);">BC Only</span></div>
-  <h2>Integrating Using Integration by Parts</h2>
+  <div class="section-label" data-lang="en">Topic 6.11 · <span style="color: var(--purple);">BC Only</span></div>
+  <div class="section-label" data-lang="zh">小节 6.11 · <span style="color: var(--purple);">仅 BC</span></div>
+  <h2 data-lang="en">Integrating Using Integration by Parts</h2>
+  <h2 data-lang="zh">用分部积分法</h2>
 
   <div class="formula-box">
-    <div class="formula-label">Integration by Parts</div>
+    <div class="formula-label"><span data-lang="en">Integration by Parts</span><span data-lang="zh">分部积分法（<code>integration by parts</code>）</span></div>
     $$ \int u\,dv = uv - \int v\,du $$
   </div>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">LIATE — Choosing $u$</strong>
     <span style="display:block; margin-top:8px;">Choose $u$ in order of priority (the rest becomes $dv$):</span>
     <span style="display:block; margin-top:4px;"><strong>L</strong>ogarithmic → <strong>I</strong>nverse trig → <strong>A</strong>lgebraic → <strong>T</strong>rig → <strong>E</strong>xponential</span>
     <span style="display:block; margin-top:8px;">The idea: $u$ should be the part that becomes simpler when differentiated.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">LIATE——如何选 $u$</strong>
+    <span style="display:block; margin-top:8px;">按优先级顺序选 $u$（剩下的部分作为 $dv$）：</span>
+    <span style="display:block; margin-top:4px;"><strong>L</strong>ogarithmic（对数）→ <strong>I</strong>nverse trig（反三角）→ <strong>A</strong>lgebraic（代数）→ <strong>T</strong>rig（三角）→ <strong>E</strong>xponential（指数）</span>
+    <span style="display:block; margin-top:8px;">核心：$u$ 应是求导后会变得更简单的那一部分。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Integration by Parts</summary>
+    <summary><span data-lang="en">Worked Example — Integration by Parts</span><span data-lang="zh">例题——分部积分法</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int x\,e^x\,dx$.</p>
 <p>Choose by LIATE: $u = x,\; dv = e^x\,dx \;\Longrightarrow\; du = dx,\; v = e^x$.</p>
+$$\begin{aligned}
+\int x\,e^x\,dx &= x\,e^x - \int e^x\,dx \\[4pt]
+&= x\,e^x - e^x + C \\[4pt]
+&= e^x(x - 1) + C
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int x\,e^x\,dx$。</p>
+<p>按 LIATE 选：$u = x,\; dv = e^x\,dx \;\Longrightarrow\; du = dx,\; v = e^x$。</p>
 $$\begin{aligned}
 \int x\,e^x\,dx &= x\,e^x - \int e^x\,dx \\[4pt]
 &= x\,e^x - e^x + C \\[4pt]
@@ -1469,9 +1785,13 @@ $$\begin{aligned}
     </div>
   </details>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Repeated IBP / Tabular Method</strong>
     For integrals like $\int x^2 \sin x\,dx$, you need to apply IBP multiple times. The <strong>tabular method</strong> speeds this up — alternate signs and multiply diagonally.
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">反复分部积分 / 表格法</strong>
+    像 $\int x^2 \sin x\,dx$ 这类积分需要多次使用分部积分。<strong>表格法</strong>能加快这个过程——交替符号，对角线相乘。
   </div>
 </section>
 
@@ -1481,24 +1801,35 @@ $$\begin{aligned}
 <!-- TOPIC 6.12 — BC ONLY -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-12">
-  <div class="section-label">Topic 6.12 · <span style="color: var(--purple);">BC Only</span></div>
-  <h2>Integrating Using Linear Partial Fractions</h2>
+  <div class="section-label" data-lang="en">Topic 6.12 · <span style="color: var(--purple);">BC Only</span></div>
+  <div class="section-label" data-lang="zh">小节 6.12 · <span style="color: var(--purple);">仅 BC</span></div>
+  <h2 data-lang="en">Integrating Using Linear Partial Fractions</h2>
+  <h2 data-lang="zh">用一次因式的部分分式积分</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">When to Use</strong>
     Use partial fractions when the integrand is a <strong>proper</strong> rational function whose denominator factors into <strong>distinct linear factors</strong>.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">什么时候用</strong>
+    当被积函数是<strong>真分式</strong>的有理函数、且分母可分解为<strong>各不相同的一次因式</strong>时，使用部分分式（<code>partial fractions</code>）。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Step 0 — Check "Proper" First!</strong>
     <span style="display:block; margin-top:8px;">A rational function $\dfrac{P(x)}{Q(x)}$ is <em>proper</em> when $\deg P &lt; \deg Q$. Partial fractions only applies to proper rationals.</span>
     <span style="display:block; margin-top:8px;">If $\deg P \ge \deg Q$, you must <strong>polynomial-divide first</strong> to split the integrand into a polynomial part plus a proper-rational remainder. Then partial-fraction the remainder.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">第 0 步——先检查是不是真分式！</strong>
+    <span style="display:block; margin-top:8px;">有理函数 $\dfrac{P(x)}{Q(x)}$ 当 $\deg P &lt; \deg Q$ 时为<em>真分式</em>。部分分式只适用于真分式。</span>
+    <span style="display:block; margin-top:8px;">若 $\deg P \ge \deg Q$，必须<strong>先做多项式长除法</strong>，把被积函数拆成“多项式 + 真分式余项”。然后再对余项做部分分式分解。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Long Division First, Then Decompose</summary>
+    <summary><span data-lang="en">Worked Example — Long Division First, Then Decompose</span><span data-lang="zh">例题——先做长除法，再分解</span></summary>
     <div class="detail-body">
-      <div class="worked-solution">
+      <div class="worked-solution" data-lang="en">
         <p>Evaluate $\displaystyle\int \frac{x^2 + 1}{x - 2}\,dx$. Note $\deg(\text{num}) = 2 \ge 1 = \deg(\text{denom})$ — improper. Long-divide first.</p>
         <p><strong>Step 1 — Polynomial long division of $x^2 + 1$ by $x - 2$.</strong></p>
         <ul style="margin-left:18px; margin-top:4px;">
@@ -1515,25 +1846,56 @@ $$\begin{aligned}
         &= \frac{x^2}{2} + 2x + 5\ln|x - 2| + C.
         \end{aligned}$$
       </div>
-      <div class="concept-box orange"><strong>Why does long division come first?</strong>
+      <div class="worked-solution" data-lang="zh">
+        <p>求 $\displaystyle\int \frac{x^2 + 1}{x - 2}\,dx$。注意 $\deg(\text{分子}) = 2 \ge 1 = \deg(\text{分母})$——假分式。先做长除法。</p>
+        <p><strong>第一步——用 $x^2 + 1$ 除以 $x - 2$ 做多项式长除法。</strong></p>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>$x^2 \div x = x$。&nbsp;乘回：$x(x-2) = x^2 - 2x$。&nbsp;相减：$(x^2 + 1) - (x^2 - 2x) = 2x + 1$。</li>
+          <li>$2x \div x = 2$。&nbsp;乘回：$2(x-2) = 2x - 4$。&nbsp;相减：$(2x + 1) - (2x - 4) = 5$。</li>
+        </ul>
+        <p>因此</p>
+        $$\frac{x^2 + 1}{x - 2} \;=\; x + 2 + \frac{5}{x - 2}.$$
+        <p>余项 $\dfrac{5}{x - 2}$ 现在是真分式（分子次数 $0 < 1$）。</p>
+        <p><strong>第二步——逐项积分。</strong>余项已经是单个一次因式，不再需要部分分式分解：</p>
+        $$\begin{aligned}
+        \int \frac{x^2 + 1}{x - 2}\,dx
+        &= \int \!\bigl(x + 2 + \tfrac{5}{x - 2}\bigr)\,dx \\[4pt]
+        &= \frac{x^2}{2} + 2x + 5\ln|x - 2| + C.
+        \end{aligned}$$
+      </div>
+      <div class="concept-box orange" data-lang="en"><strong>Why does long division come first?</strong>
         <p style="margin-top:6px;">Partial-fraction decomposition assumes the rational expression behaves like a sum of $\dfrac{A}{x-a}$ pieces (each of which has lower-degree numerator). If you skip the long division, you're trying to decompose a function that has a polynomial growth term — and the system $A = \cdots$ won't have a consistent solution.</p>
+      </div>
+      <div class="concept-box orange" data-lang="zh"><strong>为什么必须先做长除法？</strong>
+        <p style="margin-top:6px;">部分分式分解的前提是这个有理式可以写成若干 $\dfrac{A}{x-a}$ 之和（每一项的分子次数都更低）。若跳过长除法，你实际上是在试图分解一个还带有多项式增长项的函数——求 $A = \cdots$ 的方程组就不会有相容解。</p>
       </div>
     </div>
   </details>
 
   <div class="formula-box">
-    <div class="formula-label">Partial Fraction Decomposition (proper, distinct linear factors)</div>
+    <div class="formula-label"><span data-lang="en">Partial Fraction Decomposition (proper, distinct linear factors)</span><span data-lang="zh">部分分式分解（真分式，互不相同的一次因式）</span></div>
     $$ \frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b} \qquad (\deg P &lt; 2) $$
   </div>
 
   <details>
-    <summary>Worked Example — Partial Fractions</summary>
+    <summary><span data-lang="en">Worked Example — Partial Fractions</span><span data-lang="zh">例题——部分分式</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int \frac{5}{x^2 - x - 6}\,dx$.</p>
 <p>Factor: $x^2 - x - 6 = (x-3)(x+2)$. Set up partial fractions:</p>
 $$\frac{5}{(x-3)(x+2)} = \frac{A}{x-3} + \frac{B}{x+2}$$
 <p>Multiply through: $5 = A(x+2) + B(x-3)$.</p>
+$$x=3:\; 5 = 5A \;\Longrightarrow\; A = 1 \qquad x=-2:\; 5 = -5B \;\Longrightarrow\; B = -1$$
+$$\begin{aligned}
+\int \frac{5}{x^2-x-6}\,dx &= \int\!\left(\frac{1}{x-3} - \frac{1}{x+2}\right)dx \\[4pt]
+&= \ln|x-3| - \ln|x+2| + C
+\end{aligned}$$
+</div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int \frac{5}{x^2 - x - 6}\,dx$。</p>
+<p>分解：$x^2 - x - 6 = (x-3)(x+2)$。设部分分式：</p>
+$$\frac{5}{(x-3)(x+2)} = \frac{A}{x-3} + \frac{B}{x+2}$$
+<p>两边乘上分母：$5 = A(x+2) + B(x-3)$。</p>
 $$x=3:\; 5 = 5A \;\Longrightarrow\; A = 1 \qquad x=-2:\; 5 = -5B \;\Longrightarrow\; B = -1$$
 $$\begin{aligned}
 \int \frac{5}{x^2-x-6}\,dx &= \int\!\left(\frac{1}{x-3} - \frac{1}{x+2}\right)dx \\[4pt]
@@ -1550,29 +1912,39 @@ $$\begin{aligned}
 <!-- TOPIC 6.13 — BC ONLY -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-13">
-  <div class="section-label">Topic 6.13 · <span style="color: var(--purple);">BC Only</span></div>
-  <h2>Evaluating Improper Integrals</h2>
+  <div class="section-label" data-lang="en">Topic 6.13 · <span style="color: var(--purple);">BC Only</span></div>
+  <div class="section-label" data-lang="zh">小节 6.13 · <span style="color: var(--purple);">仅 BC</span></div>
+  <h2 data-lang="en">Evaluating Improper Integrals</h2>
+  <h2 data-lang="zh">计算反常积分</h2>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">What Makes an Integral "Improper"?</strong>
     <span style="display:block; margin-top:8px;"><strong>Case 1.</strong> One or both limits of integration are infinite ($\pm\infty$).</span>
     <span style="display:block; margin-top:4px;"><strong>Case 2.</strong> The integrand is unbounded (has a vertical asymptote) somewhere in the interval — including the endpoints or, importantly, an <em>interior</em> point.</span>
     <span style="display:block; margin-top:8px;">Both cases are evaluated by replacing the trouble point with a limit.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">什么样的积分是“反常”的？</strong>
+    <span style="display:block; margin-top:8px;"><strong>情形 1。</strong>积分上下限至少有一个为无穷（$\pm\infty$）。</span>
+    <span style="display:block; margin-top:4px;"><strong>情形 2。</strong>被积函数在区间内某处无界（存在垂直渐近线）——包括端点上的，或更关键地，<em>内部</em>某点。</span>
+    <span style="display:block; margin-top:8px;">两种情形都用极限替换那个“出问题的点”来计算。</span>
+  </div>
 
-  <h3 style="color: var(--purple);">Case 1 — Infinite Limits of Integration</h3>
+  <h3 style="color: var(--purple);" data-lang="en">Case 1 — Infinite Limits of Integration</h3>
+  <h3 style="color: var(--purple);" data-lang="zh">情形 1 —— 积分上下限为无穷</h3>
 
   <div class="formula-box">
-    <div class="formula-label">Improper Integral — Infinite Limit</div>
+    <div class="formula-label"><span data-lang="en">Improper Integral — Infinite Limit</span><span data-lang="zh">反常积分（<code>improper integral</code>）—— 无穷上限</span></div>
     $$ \int_a^{\infty} f(x)\,dx = \lim_{b \to \infty} \int_a^b f(x)\,dx $$
   </div>
 
-  <p>If the limit exists and is finite, the integral <strong>converges</strong>. If the limit is infinite or does not exist, the integral <strong>diverges</strong>.</p>
+  <p data-lang="en">If the limit exists and is finite, the integral <strong>converges</strong>. If the limit is infinite or does not exist, the integral <strong>diverges</strong>.</p>
+  <p data-lang="zh">如果该极限存在且有限，则积分<strong>收敛</strong>（<code>converges</code>）。如果该极限为无穷或不存在，则积分<strong>发散</strong>（<code>diverges</code>）。</p>
 
   <details>
-    <summary>Worked Example — Convergent Improper Integral</summary>
+    <summary><span data-lang="en">Worked Example — Convergent Improper Integral</span><span data-lang="zh">例题——收敛的反常积分</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int_1^{\infty} \frac{1}{x^2}\,dx$.</p>
 $$\begin{aligned}
 &= \lim_{b \to \infty} \int_1^b x^{-2}\,dx \\[4pt]
@@ -1582,13 +1954,23 @@ $$\begin{aligned}
 \end{aligned}$$
 <p>The integral <strong>converges</strong> to $1$.</p>
 </div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int_1^{\infty} \frac{1}{x^2}\,dx$。</p>
+$$\begin{aligned}
+&= \lim_{b \to \infty} \int_1^b x^{-2}\,dx \\[4pt]
+&= \lim_{b \to \infty} \bigl[-x^{-1}\bigr]_1^b \\[4pt]
+&= \lim_{b \to \infty} \left(-\frac{1}{b} + 1\right) \\[4pt]
+&= 0 + 1 = 1
+\end{aligned}$$
+<p>该积分<strong>收敛</strong>于 $1$。</p>
+</div>
     </div>
   </details>
 
   <details>
-    <summary>Worked Example — Divergent Improper Integral</summary>
+    <summary><span data-lang="en">Worked Example — Divergent Improper Integral</span><span data-lang="zh">例题——发散的反常积分</span></summary>
     <div class="detail-body">
-<div class="worked-solution">
+<div class="worked-solution" data-lang="en">
 <p>Evaluate $\displaystyle\int_1^{\infty} \frac{1}{x}\,dx$.</p>
 $$\begin{aligned}
 &= \lim_{b \to \infty} \int_1^b \frac{1}{x}\,dx \\[4pt]
@@ -1598,35 +1980,56 @@ $$\begin{aligned}
 \end{aligned}$$
 <p>The integral <strong>diverges</strong>.</p>
 </div>
+<div class="worked-solution" data-lang="zh">
+<p>求 $\displaystyle\int_1^{\infty} \frac{1}{x}\,dx$。</p>
+$$\begin{aligned}
+&= \lim_{b \to \infty} \int_1^b \frac{1}{x}\,dx \\[4pt]
+&= \lim_{b \to \infty} \bigl[\ln|x|\bigr]_1^b \\[4pt]
+&= \lim_{b \to \infty} (\ln b - \ln 1) \\[4pt]
+&= \lim_{b \to \infty} \ln b = \infty
+\end{aligned}$$
+<p>该积分<strong>发散</strong>。</p>
+</div>
     </div>
   </details>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">p-Series Test for Integrals</strong>
     $\displaystyle\int_1^{\infty} \frac{1}{x^p}\,dx$ converges if $p > 1$ and diverges if $p \leq 1$.
+  </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">积分的 p 判别</strong>
+    $\displaystyle\int_1^{\infty} \frac{1}{x^p}\,dx$ 当 $p > 1$ 时收敛，当 $p \leq 1$ 时发散。
   </div>
 
   <hr style="margin: 28px 0; border: 0; border-top: 1px dashed var(--border-light);">
 
-  <h3 style="color: var(--purple);">Case 2 — Discontinuity Inside the Interval</h3>
+  <h3 style="color: var(--purple);" data-lang="en">Case 2 — Discontinuity Inside the Interval</h3>
+  <h3 style="color: var(--purple);" data-lang="zh">情形 2 —— 区间内部存在间断点</h3>
 
-  <p>If the integrand has a vertical asymptote at an <em>interior</em> point $c$ with $a \lt c \lt b$, the integral is improper at $c$ and you <strong>must split it</strong> at the discontinuity before evaluating. Each piece becomes a one-sided limit.</p>
+  <p data-lang="en">If the integrand has a vertical asymptote at an <em>interior</em> point $c$ with $a \lt c \lt b$, the integral is improper at $c$ and you <strong>must split it</strong> at the discontinuity before evaluating. Each piece becomes a one-sided limit.</p>
+  <p data-lang="zh">若被积函数在<em>内部</em>某点 $c$（满足 $a \lt c \lt b$）有垂直渐近线，则该积分在 $c$ 处是反常的，计算前<strong>必须在该间断点处拆开</strong>。每一段都写成一个单侧极限。</p>
 
   <div class="formula-box">
-    <div class="formula-label">Improper Integral — Interior Discontinuity at $x=c$</div>
+    <div class="formula-label"><span data-lang="en">Improper Integral — Interior Discontinuity at $x=c$</span><span data-lang="zh">反常积分——$x=c$ 处的内部间断</span></div>
     $$ \int_a^b f(x)\,dx \;=\; \lim_{t \to c^{-}} \int_a^{t} f(x)\,dx \;+\; \lim_{s \to c^{+}} \int_{s}^{b} f(x)\,dx $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The full integral converges only if <strong>both</strong> one-sided pieces converge. If either piece diverges, the whole integral diverges.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">The full integral converges only if <strong>both</strong> one-sided pieces converge. If either piece diverges, the whole integral diverges.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">只有<strong>两段</strong>单侧极限都收敛，整体积分才收敛。任一段发散，整体就发散。</p>
   </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Critical — Don't Skip the Split!</strong>
     <span style="display:block; margin-top:8px;">Plugging the bounds straight into the antiderivative on an interval that <em>contains</em> a vertical asymptote gives a meaningless number. The interior point must be quarantined into its own one-sided limits.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">关键——别跳过拆分！</strong>
+    <span style="display:block; margin-top:8px;">若区间<em>包含</em>垂直渐近线，直接把上下限代入原函数会得到一个无意义的数。必须把内部那个点单独隔离成它自己的单侧极限。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Splitting at an Interior Discontinuity ($\displaystyle\int_0^{2}\frac{1}{(x-1)^{1/3}}\,dx$)</summary>
+    <summary><span data-lang="en">Worked Example — Splitting at an Interior Discontinuity ($\displaystyle\int_0^{2}\frac{1}{(x-1)^{1/3}}\,dx$)</span><span data-lang="zh">例题——在内部间断点处拆分（$\displaystyle\int_0^{2}\frac{1}{(x-1)^{1/3}}\,dx$）</span></summary>
     <div class="detail-body">
-      <div class="worked-solution">
+      <div class="worked-solution" data-lang="en">
         <p><strong>Step 1 — Locate the discontinuity.</strong> The integrand $(x-1)^{-1/3}$ blows up as $x \to 1$. Since $0 \lt 1 \lt 2$, this is an <em>interior</em> singularity — split at $x=1$:</p>
         $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; \underbrace{\lim_{t\to 1^{-}}\int_0^{t}(x-1)^{-1/3}\,dx}_{\text{Piece A}} \;+\; \underbrace{\lim_{s\to 1^{+}}\int_{s}^{2}(x-1)^{-1/3}\,dx}_{\text{Piece B}} $$
         <p><strong>Step 2 — Antiderivative.</strong> Using $u = x-1$, $du = dx$:</p>
@@ -1648,23 +2051,49 @@ $$\begin{aligned}
         $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; -\tfrac{3}{2} + \tfrac{3}{2} \;=\; 0 $$
         <p style="margin-top: 10px;"><strong>Sanity check.</strong> The integrand is an <em>odd</em> function about $x=1$, so by symmetry the signed area on $[0,1]$ exactly cancels the signed area on $[1,2]$. The answer of $0$ matches that intuition.</p>
       </div>
-      <div class="concept-box orange" style="margin-top: 14px;">
+      <div class="worked-solution" data-lang="zh">
+        <p><strong>第一步——找到间断点。</strong>被积函数 $(x-1)^{-1/3}$ 在 $x \to 1$ 时趋向无穷。由于 $0 \lt 1 \lt 2$，这是<em>内部</em>奇点——在 $x=1$ 处拆开：</p>
+        $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; \underbrace{\lim_{t\to 1^{-}}\int_0^{t}(x-1)^{-1/3}\,dx}_{\text{A 段}} \;+\; \underbrace{\lim_{s\to 1^{+}}\int_{s}^{2}(x-1)^{-1/3}\,dx}_{\text{B 段}} $$
+        <p><strong>第二步——求原函数。</strong>令 $u = x-1$，$du = dx$：</p>
+        $$ \int (x-1)^{-1/3}\,dx \;=\; \tfrac{3}{2}\,(x-1)^{2/3} + C $$
+        <p><strong>第三步——算 A 段。</strong></p>
+        $$\begin{aligned}
+        \lim_{t\to 1^{-}} \tfrac{3}{2}(x-1)^{2/3}\Big|_0^{t}
+        &= \lim_{t\to 1^{-}}\!\left[\tfrac{3}{2}(t-1)^{2/3} - \tfrac{3}{2}(-1)^{2/3}\right] \\[4pt]
+        &= 0 - \tfrac{3}{2}(1) \;=\; -\tfrac{3}{2}
+        \end{aligned}$$
+        <p>（注意：$(-1)^{2/3} = \bigl((-1)^2\bigr)^{1/3} = 1$；因 $2/3 \gt 0$，$(t-1)^{2/3} \to 0$。）</p>
+        <p><strong>第四步——算 B 段。</strong></p>
+        $$\begin{aligned}
+        \lim_{s\to 1^{+}} \tfrac{3}{2}(x-1)^{2/3}\Big|_s^{2}
+        &= \lim_{s\to 1^{+}}\!\left[\tfrac{3}{2}(1)^{2/3} - \tfrac{3}{2}(s-1)^{2/3}\right] \\[4pt]
+        &= \tfrac{3}{2} - 0 \;=\; \tfrac{3}{2}
+        \end{aligned}$$
+        <p><strong>第五步——把两段加起来。</strong>两段都是有限值，故原积分收敛：</p>
+        $$ \int_0^{2}(x-1)^{-1/3}\,dx \;=\; -\tfrac{3}{2} + \tfrac{3}{2} \;=\; 0 $$
+        <p style="margin-top: 10px;"><strong>核对一下。</strong>被积函数关于 $x=1$ 是<em>奇</em>函数，由对称性，$[0,1]$ 上的有符号面积正好抵消 $[1,2]$ 上的有符号面积。答案 $0$ 与直觉吻合。</p>
+      </div>
+      <div class="concept-box orange" style="margin-top: 14px;" data-lang="en">
         <strong>Cautionary contrast</strong>
         If the same split produced an answer like $\frac{3}{2} + \infty$ — i.e., one piece diverged — the whole integral would <strong>diverge</strong>. You don't get to cancel an infinity against a finite negative; convergence requires <em>both</em> one-sided limits to be finite.
+      </div>
+      <div class="concept-box orange" style="margin-top: 14px;" data-lang="zh">
+        <strong>反面对比</strong>
+        如果同样拆分后得到形如 $\frac{3}{2} + \infty$ 的结果——即有一段发散——那整个积分就<strong>发散</strong>。不能用一个有限的负数去“抵消”一个无穷大；收敛要求<em>两段</em>单侧极限都是有限的。
       </div>
     </div>
   </details>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">Which of the following is the correct setup for $\displaystyle\int_{-1}^{1}\frac{1}{x^{2}}\,dx$?</div>
+    <div class="quiz-q"><span data-lang="en">Which of the following is the correct setup for $\displaystyle\int_{-1}^{1}\frac{1}{x^{2}}\,dx$?</span><span data-lang="zh">下面哪个是 $\displaystyle\int_{-1}^{1}\frac{1}{x^{2}}\,dx$ 的正确写法？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$\displaystyle\bigl[-1/x\bigr]_{-1}^{1} = -1 - 1 = -2$ (just plug in the bounds)</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$\displaystyle\bigl[-1/x\bigr]_{-1}^{1} = -1 - 1 = -2$ (just plug in the bounds)</span><span data-lang="zh">$\displaystyle\bigl[-1/x\bigr]_{-1}^{1} = -1 - 1 = -2$（直接代入上下限）</span></div>
       <div class="quiz-opt" data-idx="1">$\displaystyle\lim_{b\to\infty}\int_{-1}^{b}\frac{1}{x^{2}}\,dx$</div>
-      <div class="quiz-opt" data-idx="2">$\displaystyle\int_{-1}^{0}\frac{1}{x^{2}}\,dx + \int_{0}^{1}\frac{1}{x^{2}}\,dx$ (no limits needed)</div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$\displaystyle\int_{-1}^{0}\frac{1}{x^{2}}\,dx + \int_{0}^{1}\frac{1}{x^{2}}\,dx$ (no limits needed)</span><span data-lang="zh">$\displaystyle\int_{-1}^{0}\frac{1}{x^{2}}\,dx + \int_{0}^{1}\frac{1}{x^{2}}\,dx$（不需要极限）</span></div>
       <div class="quiz-opt" data-idx="3">$\displaystyle\lim_{t\to 0^{-}}\int_{-1}^{t}\frac{1}{x^{2}}\,dx + \lim_{s\to 0^{+}}\int_{s}^{1}\frac{1}{x^{2}}\,dx$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $1/x^2$ has a vertical asymptote at $x=0$, which is interior to $[-1,1]$. The integral is improper there and must be split into two one-sided limits. (The answer turns out to be $\infty$ — both pieces diverge — but that's a separate evaluation step.)</div>
-    <div class="quiz-explain wrong-exp">$1/x^{2}$ blows up at $x=0$, which sits inside the interval $[-1,1]$. You can't just plug in bounds — you must split at $x=0$ and use one-sided limits.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $1/x^2$ has a vertical asymptote at $x=0$, which is interior to $[-1,1]$. The integral is improper there and must be split into two one-sided limits. (The answer turns out to be $\infty$ — both pieces diverge — but that's a separate evaluation step.)</span><span data-lang="zh">正确！$1/x^2$ 在 $x=0$ 处有垂直渐近线，而 $0$ 在区间 $[-1,1]$ 内部。该积分在此为反常积分，必须拆成两个单侧极限。（最终结果其实是 $\infty$——两段都发散——但那是另一个计算步骤。）</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$1/x^{2}$ blows up at $x=0$, which sits inside the interval $[-1,1]$. You can't just plug in bounds — you must split at $x=0$ and use one-sided limits.</span><span data-lang="zh">$1/x^{2}$ 在 $x=0$ 处趋于无穷，而 $0$ 在区间 $[-1,1]$ 内部。不能直接代入上下限——必须在 $x=0$ 处拆开并用单侧极限。</span></div>
   </div>
 </section>
 
@@ -1674,12 +2103,15 @@ $$\begin{aligned}
 <!-- TOPIC 6.14 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s6-14">
-  <div class="section-label">Topic 6.14</div>
-  <h2>Selecting Techniques for Antidifferentiation</h2>
+  <div class="section-label" data-lang="en">Topic 6.14</div>
+  <div class="section-label" data-lang="zh">小节 6.14</div>
+  <h2 data-lang="en">Selecting Techniques for Antidifferentiation</h2>
+  <h2 data-lang="zh">选择求原函数的方法</h2>
 
-  <p>On the AP exam, you must quickly identify <em>which</em> technique to use. Here's a decision flowchart:</p>
+  <p data-lang="en">On the AP exam, you must quickly identify <em>which</em> technique to use. Here's a decision flowchart:</p>
+  <p data-lang="zh">AP 考试中，你必须迅速判断该用<em>哪种</em>方法。下面是决策流程：</p>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <div class="card-header">
       <div class="card-icon icon-blue">?</div>
       <div class="card-title">Which Technique Do I Use?</div>
@@ -1692,10 +2124,27 @@ $$\begin{aligned}
     <p style="margin-bottom: 8px;"><strong>6. Integration by parts?</strong> <span style="color: var(--purple);">BC</span> Product of two different "types" (e.g., polynomial × exponential)?</p>
     <p><strong>7. Partial fractions?</strong> <span style="color: var(--purple);">BC</span> Proper fraction with factorable denominator?</p>
   </div>
+  <div class="card" data-lang="zh">
+    <div class="card-header">
+      <div class="card-icon icon-blue">?</div>
+      <div class="card-title">我该用哪种方法？</div>
+    </div>
+    <p style="margin-bottom: 8px;"><strong>1. 基本公式？</strong>看看被积函数是不是直接匹配一个已知原函数。</p>
+    <p style="margin-bottom: 8px;"><strong>2. 代数化简？</strong>能不能先展开、因式分解、化简或拆分分式？</p>
+    <p style="margin-bottom: 8px;"><strong>3. u 代换？</strong>是否看到一个复合函数，并且它的导数也（差不多）出现在被积式里？</p>
+    <p style="margin-bottom: 8px;"><strong>4. 多项式长除法？</strong>分子次数是否 ≥ 分母次数？</p>
+    <p style="margin-bottom: 8px;"><strong>5. 配方法？</strong>分母是不可分解的二次式 → $\arctan$ 或 $\arcsin$ 形式？</p>
+    <p style="margin-bottom: 8px;"><strong>6. 分部积分？</strong> <span style="color: var(--purple);">BC</span> 两种不同“类型”的乘积（例如多项式 × 指数）？</p>
+    <p><strong>7. 部分分式？</strong> <span style="color: var(--purple);">BC</span> 分母可因式分解的真分式？</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Pro Tip</strong>
     Always try the simplest technique first. Many students jump to u-sub when simple algebra (like splitting a fraction) would make the problem trivial.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">实战提示</strong>
+    永远先试最简单的方法。很多同学一上来就冲 u 代换，其实先用一点代数（比如拆分分式）题目就解决了。
   </div>
 </section>
 
@@ -1705,10 +2154,12 @@ $$\begin{aligned}
 <!-- EXAM STRATEGY -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 6 Appears on the AP Exam</h2>
+  <div class="section-label" data-lang="en">Exam Strategy</div>
+  <div class="section-label" data-lang="zh">考试策略</div>
+  <h2 data-lang="en">How Unit 6 Appears on the AP Exam</h2>
+  <h2 data-lang="zh">单元 6 在 AP 考试中的考法</h2>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <div class="card-header">
       <div class="card-icon icon-blue">MC</div>
       <div class="card-title">MCQ — Common Question Styles</div>
@@ -1719,8 +2170,19 @@ $$\begin{aligned}
     <p><strong>Interpret</strong> accumulated change in a real-world context (rate × time = total).</p>
     <p><strong>Translate</strong> between a limit of a Riemann sum and a definite integral.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <div class="card-header">
+      <div class="card-icon icon-blue">MC</div>
+      <div class="card-title">选择题——常见题型</div>
+    </div>
+    <p><strong>计算</strong>一个定积分或不定积分，用 FTC、u 代换或基本公式。</p>
+    <p><strong>求 $F'(x)$</strong>，其中 $F(x)$ 是带变上下限的积分定义（FTC 第一部分 + 链式法则）。</p>
+    <p><strong>近似</strong>计算定积分：由给定的数据表用黎曼和或梯形和近似。</p>
+    <p><strong>解释</strong>真实情境中的累积变化（变化率 × 时间 = 总量）。</p>
+    <p><strong>转换</strong>：在黎曼和的极限与定积分之间互相改写。</p>
+  </div>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <div class="card-header">
       <div class="card-icon icon-green">FR</div>
       <div class="card-title">FRQ — Common Question Styles</div>
@@ -1729,14 +2191,31 @@ $$\begin{aligned}
     <p><strong>Table problems:</strong> Approximate an integral using a Riemann or trapezoidal sum from given data, then determine if it's an over- or underestimate.</p>
     <p><strong>Graph of $f$:</strong> Given a graph of $f$, analyze the accumulation function $g(x) = \int_a^x f(t)\,dt$ — find where $g$ has extrema, inflection points, is increasing/decreasing.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <div class="card-header">
+      <div class="card-icon icon-green">FR</div>
+      <div class="card-title">FRQ——常见题型</div>
+    </div>
+    <p><strong>情境中的累积：</strong>给出一个变化率函数，要求解释或计算某区间上的总变化（<code>net change</code>）。</p>
+    <p><strong>表格题：</strong>用给定数据通过黎曼和或梯形和近似积分，然后判断它是高估还是低估。</p>
+    <p><strong>$f$ 的图像题：</strong>给出 $f$ 的图像，分析累积函数 $g(x) = \int_a^x f(t)\,dt$——找 $g$ 的极值点、拐点（<code>inflection point</code>）、递增/递减区间。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Top Mistakes That Lose Points</strong>
     <span style="display:block; margin-top:8px;">1. Forgetting $+C$ on indefinite integrals.</span>
     <span style="display:block; margin-top:4px;">2. Forgetting the chain rule factor when differentiating $\int_a^{g(x)} f(t)\,dt$.</span>
     <span style="display:block; margin-top:4px;">3. Mixing up $x$-limits and $u$-limits during substitution.</span>
     <span style="display:block; margin-top:4px;">4. Not including units on accumulation problems ("gallons", not just a number).</span>
     <span style="display:block; margin-top:4px;">5. Writing the integral setup without $dx$ — the differential is required for full credit.</span>
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">最容易丢分的几个错误</strong>
+    <span style="display:block; margin-top:8px;">1. 不定积分忘了 $+C$。</span>
+    <span style="display:block; margin-top:4px;">2. 对 $\int_a^{g(x)} f(t)\,dt$ 求导时忘了链式法则的因子。</span>
+    <span style="display:block; margin-top:4px;">3. 换元时把 $x$ 上下限和 $u$ 上下限搞混。</span>
+    <span style="display:block; margin-top:4px;">4. 累积题没写单位（要写“gallons”，不能只写一个数）。</span>
+    <span style="display:block; margin-top:4px;">5. 写积分时漏掉 $dx$——微分必须写全才能拿满分。</span>
   </div>
 </section>
 
@@ -1746,26 +2225,28 @@ $$\begin{aligned}
 <!-- FLASHCARDS -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <div class="section-label" data-lang="en">Review</div>
+  <div class="section-label" data-lang="zh">复习</div>
+  <h2 data-lang="en">Flashcards — Click to Flip</h2>
+  <h2 data-lang="zh">闪卡——点击翻转</h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">FTC Part 1:<br>$\frac{d}{dx}\int_a^x f(t)\,dt = \;?$</div>
-        <div class="flashcard-back"><br>$$ f(x) $$<br>The derivative of the accumulation is the original function.</div>
+        <div class="flashcard-front"><span data-lang="en">FTC Part 1:<br>$\frac{d}{dx}\int_a^x f(t)\,dt = \;?$</span><span data-lang="zh">FTC 第一部分：<br>$\frac{d}{dx}\int_a^x f(t)\,dt = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ f(x) $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">FTC Part 1 + Chain Rule:<br>$\frac{d}{dx}\int_a^{g(x)} f(t)\,dt = \;?$</div>
-        <div class="flashcard-back"><br>$$ f(g(x)) \cdot g'(x) $$<br>Don't forget the $g'(x)$!</div>
+        <div class="flashcard-front"><span data-lang="en">FTC Part 1 + Chain Rule:<br>$\frac{d}{dx}\int_a^{g(x)} f(t)\,dt = \;?$</span><span data-lang="zh">FTC 第一部分 + 链式法则：<br>$\frac{d}{dx}\int_a^{g(x)} f(t)\,dt = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ f(g(x)) \cdot g'(x) $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">FTC Part 2:<br>$\int_a^b f(x)\,dx = \;?$</div>
-        <div class="flashcard-back"><br>$$ F(b) - F(a) $$<br>where $F'(x) = f(x)$</div>
+        <div class="flashcard-front"><span data-lang="en">FTC Part 2:<br>$\int_a^b f(x)\,dx = \;?$</span><span data-lang="zh">FTC 第二部分：<br>$\int_a^b f(x)\,dx = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ F(b) - F(a) $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1777,24 +2258,24 @@ $$\begin{aligned}
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">$\int \frac{1}{x}\,dx = \;?$</div>
-        <div class="flashcard-back"><br>$$ \ln|x| + C $$<br>Don't forget the absolute value!</div>
+        <div class="flashcard-back"><br>$$ \ln|x| + C $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">When does a trapezoidal sum overestimate?</div>
-        <div class="flashcard-back"><br>$$f'' > 0 \;\Rightarrow\; T_n > \int_a^b f\,dx$$<br>concave up overestimates</div>
+        <div class="flashcard-front"><span data-lang="en">When does a trapezoidal sum overestimate?</span><span data-lang="zh">梯形和何时高估？</span></div>
+        <div class="flashcard-back"><br>$$f'' > 0 \;\Rightarrow\; T_n > \int_a^b f\,dx$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Integration by Parts formula?<br><span style="color: var(--purple); font-size:0.8rem;">BC Only</span></div>
-        <div class="flashcard-back"><br>$$ \int u\,dv = uv - \int v\,du $$<br>LIATE: Log, Inverse trig, Algebraic, Trig, Exp</div>
+        <div class="flashcard-front"><span data-lang="en">Integration by Parts formula?<br><span style="color: var(--purple); font-size:0.8rem;">BC Only</span></span><span data-lang="zh">分部积分公式？<br><span style="color: var(--purple); font-size:0.8rem;">仅 BC</span></span></div>
+        <div class="flashcard-back"><br>$$ \int u\,dv = uv - \int v\,du $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$\int_1^{\infty} \frac{1}{x^p}\,dx$ converges when…?<br><span style="color: var(--purple); font-size:0.8rem;">BC Only</span></div>
+        <div class="flashcard-front"><span data-lang="en">$\int_1^{\infty} \frac{1}{x^p}\,dx$ converges when…?<br><span style="color: var(--purple); font-size:0.8rem;">BC Only</span></span><span data-lang="zh">$\int_1^{\infty} \frac{1}{x^p}\,dx$ 何时收敛？<br><span style="color: var(--purple); font-size:0.8rem;">仅 BC</span></span></div>
         <div class="flashcard-back"><br>$$\text{converges} \iff p > 1$$</div>
       </div>
     </div>
@@ -1807,8 +2288,10 @@ $$\begin{aligned}
 <!-- UNIT QUIZ -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 6 — Practice Quiz</h2>
+  <div class="section-label" data-lang="en">Assessment</div>
+  <div class="section-label" data-lang="zh">测验</div>
+  <h2 data-lang="en">Unit 6 — Practice Quiz</h2>
+  <h2 data-lang="zh">单元 6——练习小测</h2>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-q">1. $\displaystyle\int_0^4 (3x^2 - 2x)\,dx = $</div>
@@ -1818,20 +2301,20 @@ $$\begin{aligned}
       <div class="quiz-opt" data-idx="2">$56$</div>
       <div class="quiz-opt" data-idx="3">$32$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Antiderivative: $F(x) = x^3 - x^2$. $F(4) - F(0) = (64 - 16) - 0 = 48$.</div>
-    <div class="quiz-explain wrong-exp">Find the antiderivative $F(x) = x^3 - x^2$. Then $F(4) - F(0) = (64 - 16) - (0) = 48$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Antiderivative: $F(x) = x^3 - x^2$. $F(4) - F(0) = (64 - 16) - 0 = 48$.</span><span data-lang="zh">正确！原函数：$F(x) = x^3 - x^2$。$F(4) - F(0) = (64 - 16) - 0 = 48$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Find the antiderivative $F(x) = x^3 - x^2$. Then $F(4) - F(0) = (64 - 16) - (0) = 48$.</span><span data-lang="zh">先求原函数 $F(x) = x^3 - x^2$。然后 $F(4) - F(0) = (64 - 16) - (0) = 48$。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">2. If $F(x) = \int_1^{x^3} \cos(t)\,dt$, then $F'(x) = $</div>
+    <div class="quiz-q"><span data-lang="en">2. If $F(x) = \int_1^{x^3} \cos(t)\,dt$, then $F'(x) = $</span><span data-lang="zh">2. 若 $F(x) = \int_1^{x^3} \cos(t)\,dt$，则 $F'(x) = $</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\cos(x^3)$</div>
       <div class="quiz-opt" data-idx="1">$\cos(x)$</div>
       <div class="quiz-opt" data-idx="2">$3x^2\cos(x^3)$</div>
       <div class="quiz-opt" data-idx="3">$-\sin(x^3) \cdot 3x^2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! By FTC Part 1 + Chain Rule: $F'(x) = \cos(x^3) \cdot 3x^2$. Don't forget to multiply by the derivative of the upper limit!</div>
-    <div class="quiz-explain wrong-exp">Apply FTC Part 1 with chain rule: $F'(x) = f(g(x)) \cdot g'(x) = \cos(x^3) \cdot 3x^2$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! By FTC Part 1 + Chain Rule: $F'(x) = \cos(x^3) \cdot 3x^2$. Don't forget to multiply by the derivative of the upper limit!</span><span data-lang="zh">正确！由 FTC 第一部分 + 链式法则：$F'(x) = \cos(x^3) \cdot 3x^2$。别忘了乘以上限的导数！</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Apply FTC Part 1 with chain rule: $F'(x) = f(g(x)) \cdot g'(x) = \cos(x^3) \cdot 3x^2$.</span><span data-lang="zh">用 FTC 第一部分配合链式法则：$F'(x) = f(g(x)) \cdot g'(x) = \cos(x^3) \cdot 3x^2$。</span></div>
   </div>
 
   <div class="quiz" data-answer="0">
@@ -1842,91 +2325,114 @@ $$\begin{aligned}
       <div class="quiz-opt" data-idx="2">$\frac{1}{x^2+1} + C$</div>
       <div class="quiz-opt" data-idx="3">$2\ln|x| + C$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Let $u = x^2 + 1$, $du = 2x\,dx$. The integral becomes $\int \frac{du}{u} = \ln|u| + C = \ln(x^2+1) + C$. (Absolute value optional since $x^2+1 > 0$ always.)</div>
-    <div class="quiz-explain wrong-exp">Use u-sub: $u = x^2+1$, $du = 2x\,dx$. Integral becomes $\int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2+1)+C$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Let $u = x^2 + 1$, $du = 2x\,dx$. The integral becomes $\int \frac{du}{u} = \ln|u| + C = \ln(x^2+1) + C$. (Absolute value optional since $x^2+1 > 0$ always.)</span><span data-lang="zh">正确！令 $u = x^2 + 1$，$du = 2x\,dx$。积分变为 $\int \frac{du}{u} = \ln|u| + C = \ln(x^2+1) + C$。（因为 $x^2+1 > 0$ 恒成立，绝对值可省。）</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use u-sub: $u = x^2+1$, $du = 2x\,dx$. Integral becomes $\int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2+1)+C$.</span><span data-lang="zh">用 u 代换：$u = x^2+1$，$du = 2x\,dx$。积分变为 $\int \frac{1}{u}\,du = \ln|u| + C = \ln(x^2+1)+C$。</span></div>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">4. Which integral is <strong>divergent</strong>? <span style="color: var(--purple); font-size:0.85rem;">BC</span></div>
+    <div class="quiz-q"><span data-lang="en">4. Which integral is <strong>divergent</strong>? <span style="color: var(--purple); font-size:0.85rem;">BC</span></span><span data-lang="zh">4. 下列哪个积分<strong>发散</strong>？<span style="color: var(--purple); font-size:0.85rem;">BC</span></span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\int_1^{\infty} \frac{1}{x^2}\,dx$</div>
       <div class="quiz-opt" data-idx="1">$\int_1^{\infty} \frac{1}{x^3}\,dx$</div>
       <div class="quiz-opt" data-idx="2">$\int_1^{\infty} e^{-x}\,dx$</div>
       <div class="quiz-opt" data-idx="3">$\int_1^{\infty} \frac{1}{\sqrt{x}}\,dx$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{1}{\sqrt{x}} = x^{-1/2}$, so $p = 1/2 < 1$, and the integral diverges by the $p$-test.</div>
-    <div class="quiz-explain wrong-exp">$\int_1^{\infty} x^{-p}\,dx$ diverges when $p \leq 1$. Here $\frac{1}{\sqrt{x}} = x^{-1/2}$, so $p = 1/2 \leq 1$ → diverges.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{1}{\sqrt{x}} = x^{-1/2}$, so $p = 1/2 < 1$, and the integral diverges by the $p$-test.</span><span data-lang="zh">正确！$\frac{1}{\sqrt{x}} = x^{-1/2}$，故 $p = 1/2 < 1$，由 $p$ 判别法该积分发散。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$\int_1^{\infty} x^{-p}\,dx$ diverges when $p \leq 1$. Here $\frac{1}{\sqrt{x}} = x^{-1/2}$, so $p = 1/2 \leq 1$ → diverges.</span><span data-lang="zh">$\int_1^{\infty} x^{-p}\,dx$ 当 $p \leq 1$ 时发散。此处 $\frac{1}{\sqrt{x}} = x^{-1/2}$，故 $p = 1/2 \leq 1$ → 发散。</span></div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">5. A left Riemann sum with 4 equal subintervals approximates $\int_0^8 f(x)\,dx$ for an <strong>increasing</strong> function $f$. This approximation is:</div>
+    <div class="quiz-q"><span data-lang="en">5. A left Riemann sum with 4 equal subintervals approximates $\int_0^8 f(x)\,dx$ for an <strong>increasing</strong> function $f$. This approximation is:</span><span data-lang="zh">5. 对一个<strong>递增</strong>函数 $f$，用 4 个等宽子区间的左黎曼和近似 $\int_0^8 f(x)\,dx$。这个近似是：</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">An overestimate</div>
-      <div class="quiz-opt" data-idx="1">An underestimate</div>
-      <div class="quiz-opt" data-idx="2">Exact</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">An overestimate</span><span data-lang="zh">高估</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">An underestimate</span><span data-lang="zh">低估</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Exact</span><span data-lang="zh">精确值</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined</span><span data-lang="zh">无法判定</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! For an increasing function, each left-endpoint rectangle has a height smaller than the function's maximum on that subinterval, so the sum underestimates the true area.</div>
-    <div class="quiz-explain wrong-exp">For an increasing function, the left endpoint is always less than or equal to the function on the rest of the subinterval, so LRS gives an underestimate.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! For an increasing function, each left-endpoint rectangle has a height smaller than the function's maximum on that subinterval, so the sum underestimates the true area.</span><span data-lang="zh">正确！对递增函数，每个左端点矩形的高都小于该子区间上函数的最大值，所以总和会低估真实面积。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">For an increasing function, the left endpoint is always less than or equal to the function on the rest of the subinterval, so LRS gives an underestimate.</span><span data-lang="zh">对递增函数，左端点的值始终小于或等于子区间其余部分上的函数值，因此 LRS 给出低估。</span></div>
   </div>
 </section>
 
 <!-- ═══════════════ READINESS CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 16 mastered</div>
+  <div class="section-label" data-lang="en">Self-Assessment</div>
+  <div class="section-label" data-lang="zh">自我评估</div>
+  <h2 data-lang="en">Readiness Checklist</h2>
+  <h2 data-lang="zh">备考清单</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">已掌握的逐条点勾。考前目标 100%。</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 16 <span data-lang="en">mastered</span><span data-lang="zh">已掌握</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret a definite integral as an accumulation of change</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute left, right, midpoint, and trapezoid Riemann sums</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Express a Riemann sum in sigma notation and as an integral</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply the Fundamental Theorem of Calculus (Part 1)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Evaluate definite integrals using the FTC (Part 2)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate accumulation functions $F(x) = \int_a^{g(x)} f(t)\,dt$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply linearity and splitting properties of definite integrals</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute antiderivatives of basic power, exponential, and trig functions</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply u-substitution for definite and indefinite integrals</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Integrate rational functions using long division or completing the square</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply integration by parts (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Decompose into partial fractions and integrate (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Evaluate improper integrals with a limit definition (BC)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Determine convergence vs. divergence of an improper integral</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate technique for a given integral</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use proper integral notation including limits of integration and $dx$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Interpret a definite integral as an accumulation of change</span><span data-lang="zh">把定积分解读为变化的累积</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute left, right, midpoint, and trapezoid Riemann sums</span><span data-lang="zh">计算左、右、中点、梯形黎曼和</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Express a Riemann sum in sigma notation and as an integral</span><span data-lang="zh">用求和记号和积分形式表示黎曼和</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and apply the Fundamental Theorem of Calculus (Part 1)</span><span data-lang="zh">陈述并运用微积分基本定理（第一部分）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Evaluate definite integrals using the FTC (Part 2)</span><span data-lang="zh">用 FTC（第二部分）求定积分</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate accumulation functions $F(x) = \int_a^{g(x)} f(t)\,dt$</span><span data-lang="zh">对累积函数 $F(x) = \int_a^{g(x)} f(t)\,dt$ 求导</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply linearity and splitting properties of definite integrals</span><span data-lang="zh">运用定积分的线性与区间拼接性质</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute antiderivatives of basic power, exponential, and trig functions</span><span data-lang="zh">求基本幂、指数、三角函数的原函数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply u-substitution for definite and indefinite integrals</span><span data-lang="zh">对定积分与不定积分使用 u 代换</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Integrate rational functions using long division or completing the square</span><span data-lang="zh">用长除法或配方法对有理函数积分</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply integration by parts (BC)</span><span data-lang="zh">使用分部积分法（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Decompose into partial fractions and integrate (BC)</span><span data-lang="zh">做部分分式分解并积分（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Evaluate improper integrals with a limit definition (BC)</span><span data-lang="zh">用极限定义计算反常积分（BC）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Determine convergence vs. divergence of an improper integral</span><span data-lang="zh">判断反常积分收敛或发散</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Select the appropriate technique for a given integral</span><span data-lang="zh">为给定积分选用合适的方法</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use proper integral notation including limits of integration and $dx$</span><span data-lang="zh">使用规范的积分记号，含上下限和 $dx$</span></li>
   </ul>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;" data-lang="en">AP-Style Practice Problems</h2>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;" data-lang="zh">AP 风格练习题</h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="zh">本单元的考试级练习——按 AP 评分标准设计的选择题 + 解答题。冲刺顶分使用；先完成笔记和上方小测后再来。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_6_Integration_and_Accumulation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_6_Integration_and_Accumulation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
 
 <div style="text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem;">
-  <p>AP Calculus AB &amp; BC — Unit 6 Notes</p>
+  <p data-lang="en">AP Calculus AB &amp; BC — Unit 6 Notes</p>
+  <p data-lang="zh">AP 微积分 AB &amp; BC——单元 6 笔记</p>
 </div>
 
 </main>
 
 <script>
 // ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 
 // Close sidebar when clicking outside
@@ -2135,10 +2641,10 @@ document.querySelectorAll('.quiz').forEach(quiz => {
     sumReadout.querySelector('.exact-val').textContent = exactVal.toFixed(4);
     const errorSpan = document.getElementById('riemannError');
     if (pctError < 0.01) {
-      errorSpan.textContent = 'Error: ≈ 0 — Converged!';
+      errorSpan.innerHTML = '<span data-lang="en">Error: ≈ 0 — Converged!</span><span data-lang="zh">误差：≈ 0 —— 已收敛！</span>';
       errorSpan.style.color = 'var(--green)';
     } else {
-      errorSpan.textContent = 'Error: ' + error.toFixed(4) + ' (' + pctError.toFixed(2) + '%)';
+      errorSpan.innerHTML = '<span data-lang="en">Error: ' + error.toFixed(4) + ' (' + pctError.toFixed(2) + '%)</span><span data-lang="zh">误差：' + error.toFixed(4) + '（' + pctError.toFixed(2) + '%）</span>';
       errorSpan.style.color = '';
     }
 
@@ -2147,14 +2653,14 @@ document.querySelectorAll('.quiz').forEach(quiz => {
       banner.style.display = 'block';
       banner.className = 'converge-banner';
       banner.style.background = ''; banner.style.borderColor = ''; banner.style.color = '';
-      banner.innerHTML = 'As <em>n</em> → ∞, the Riemann sum → the definite integral. <strong>The integral is defined as this limit.</strong>';
+      banner.innerHTML = '<span data-lang="en">As <em>n</em> → ∞, the Riemann sum → the definite integral. <strong>The integral is defined as this limit.</strong></span><span data-lang="zh">当 <em>n</em> → ∞ 时，黎曼和 → 定积分。<strong>积分就是被这个极限定义的。</strong></span>';
     } else if (n >= 30) {
       banner.style.display = 'block';
       banner.className = 'converge-banner';
       banner.style.background = 'var(--orange-light)';
       banner.style.borderColor = 'var(--orange)';
       banner.style.color = 'var(--orange)';
-      banner.innerHTML = 'Getting close! The rectangles are filling nearly all the space under the curve.';
+      banner.innerHTML = '<span data-lang="en">Getting close! The rectangles are filling nearly all the space under the curve.</span><span data-lang="zh">越来越接近了！矩形几乎填满了曲线下的整块区域。</span>';
     } else {
       banner.style.display = 'none';
     }
@@ -2421,7 +2927,7 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const prog = document.getElementById('checkProgress');
-  if (prog) prog.textContent = checked + ' / ' + total + ' mastered';
+  if (prog) prog.innerHTML = checked + ' / ' + total + ' <span data-lang="en">mastered</span><span data-lang="zh">已掌握</span>';
 }
 </script>
 </body>

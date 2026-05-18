@@ -38,7 +38,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -845,6 +845,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 }
 .checklist li.checked { background: var(--green-light); border-color: var(--green); }
 .checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -855,45 +859,53 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     <span class="nav-badge">UNIT 2</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s2-1">2.1 Average &amp; Instantaneous Rates</a>
-  <a href="#s2-2">2.2 Defining the Derivative</a>
-  <a href="#s2-3">2.3 Estimating Derivatives</a>
-  <a href="#s2-4">2.4 Differentiability &amp; Continuity</a>
-  <a href="#s2-5">2.5 The Power Rule</a>
-  <a href="#s2-6">2.6 Constant, Sum, Difference Rules</a>
-  <a href="#s2-7">2.7 Derivatives of sin, cos, eˣ, ln x</a>
-  <a href="#s2-8">2.8 The Product Rule</a>
-  <a href="#s2-9">2.9 The Quotient Rule</a>
-  <a href="#s2-10">2.10 Derivatives of tan, cot, sec, csc</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s2-1"><span data-lang="en">2.1 Average &amp; Instantaneous Rates</span><span data-lang="zh">2.1 平均与瞬时变化率</span></a>
+  <a href="#s2-2"><span data-lang="en">2.2 Defining the Derivative</span><span data-lang="zh">2.2 导数的定义</span></a>
+  <a href="#s2-3"><span data-lang="en">2.3 Estimating Derivatives</span><span data-lang="zh">2.3 估计导数</span></a>
+  <a href="#s2-4"><span data-lang="en">2.4 Differentiability &amp; Continuity</span><span data-lang="zh">2.4 可微性与连续性</span></a>
+  <a href="#s2-5"><span data-lang="en">2.5 The Power Rule</span><span data-lang="zh">2.5 幂法则</span></a>
+  <a href="#s2-6"><span data-lang="en">2.6 Constant, Sum, Difference Rules</span><span data-lang="zh">2.6 常数、求和与求差法则</span></a>
+  <a href="#s2-7"><span data-lang="en">2.7 Derivatives of sin, cos, eˣ, ln x</span><span data-lang="zh">2.7 sin、cos、eˣ、ln x 的导数</span></a>
+  <a href="#s2-8"><span data-lang="en">2.8 The Product Rule</span><span data-lang="zh">2.8 乘积法则</span></a>
+  <a href="#s2-9"><span data-lang="en">2.9 The Quotient Rule</span><span data-lang="zh">2.9 商的法则</span></a>
+  <a href="#s2-10"><span data-lang="en">2.10 Derivatives of tan, cot, sec, csc</span><span data-lang="zh">2.10 tan、cot、sec、csc 的导数</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">就绪自查清单</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-  <h1>Unit 2: Differentiation<br>Definition &amp; Fundamental Properties</h1>
-  <p class="hero-sub">
+  <h1 data-lang="en">Unit 2: Differentiation<br>Definition &amp; Fundamental Properties</h1>
+  <h1 data-lang="zh">单元 2：求导<br>定义与基本性质</h1>
+  <p class="hero-sub" data-lang="en">
     Build the derivative from limits, master the core differentiation rules, and connect instantaneous rates of change to the tangent line.
   </p>
+  <p class="hero-sub" data-lang="zh">
+    从极限出发构建导数，掌握核心求导法则,并把瞬时变化率与切线联系起来。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–12% of AP Exam</span>
-    <span class="chip chip-green">~13–14 Class Periods</span>
-    <span class="chip chip-purple">10 Topics</span>
+    <span class="chip chip-maroon" data-lang="en">10–12% of AP Exam</span>
+    <span class="chip chip-maroon" data-lang="zh">占 AP 考试 10–12%</span>
+    <span class="chip chip-green" data-lang="en">~13–14 Class Periods</span>
+    <span class="chip chip-green" data-lang="zh">约 13–14 课时</span>
+    <span class="chip chip-purple" data-lang="en">10 Topics</span>
+    <span class="chip chip-purple" data-lang="zh">10 个小节</span>
   </div>
 </section>
 
@@ -905,44 +917,65 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- TOPIC 2.1 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-1">
-  <div class="section-label">Topic 2.1</div>
-  <h2>Defining Average and Instantaneous Rates of Change at a Point</h2>
+  <div class="section-label" data-lang="en">Topic 2.1</div>
+  <div class="section-label" data-lang="zh">小节 2.1</div>
+  <h2 data-lang="en">Defining Average and Instantaneous Rates of Change at a Point</h2>
+  <h2 data-lang="zh">定义某一点处的平均变化率与瞬时变化率</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Big Idea</strong>
     The derivative starts with a simple question: <em>how fast is something changing right now?</em> We answer it by first computing <strong>average rates of change</strong> over an interval, then shrinking that interval to zero.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">核心思想</strong>
+    导数（<code>derivative</code>）起源于一个简单的问题：<em>某个量此刻变化得有多快？</em>我们先在一个区间上计算<strong>平均变化率（<code>average rate of change</code>）</strong>，再让这个区间收缩为零。
+  </div>
 
   <div class="formula-box" style="border-top-color: var(--green);">
-    <div class="formula-label" style="color: var(--green);">Average Rate of Change (Difference Quotient)</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="en">Average Rate of Change (Difference Quotient)</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="zh">平均变化率（差商）</div>
     $$ \text{AROC} = \frac{f(b) - f(a)}{b - a} $$
-    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;">
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-lang="en">
       This is the slope of the <strong>secant line</strong> connecting $(a, f(a))$ and $(b, f(b))$. It tells you how much $f$ changes, on average, per unit change in $x$ over the interval $[a, b]$.
+    </p>
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-lang="zh">
+      这就是连接 $(a, f(a))$ 与 $(b, f(b))$ 两点的<strong>割线（<code>secant line</code>）</strong>的斜率。它表示在区间 $[a, b]$ 上，$x$ 每变化一个单位，$f$ 平均变化多少。
     </p>
   </div>
 
-  <p>The <strong>instantaneous rate of change</strong> at $x = a$ is the limit of the average rate of change as the interval shrinks to zero — that is, as $b \to a$ (or equivalently, as $h \to 0$).</p>
+  <p data-lang="en">The <strong>instantaneous rate of change</strong> at $x = a$ is the limit of the average rate of change as the interval shrinks to zero — that is, as $b \to a$ (or equivalently, as $h \to 0$).</p>
+  <p data-lang="zh">$x = a$ 处的<strong>瞬时变化率（<code>instantaneous rate of change</code>）</strong>就是当区间收缩为零时（即 $b \to a$，等价地 $h \to 0$）平均变化率的极限。</p>
 
   <div class="formula-box">
-    <div class="formula-label">Instantaneous Rate of Change (Two Equivalent Forms)</div>
+    <div class="formula-label" data-lang="en">Instantaneous Rate of Change (Two Equivalent Forms)</div>
+    <div class="formula-label" data-lang="zh">瞬时变化率（两种等价形式）</div>
     $$ f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} $$
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Geometric Meaning</strong>
     <span style="display:block; margin-top:8px;">The <strong>average rate of change</strong> = slope of the <strong>secant line</strong> through two points.</span>
     <span style="display:block; margin-top:4px;">The <strong>instantaneous rate of change</strong> = slope of the <strong>tangent line</strong> at a single point.</span>
     <span style="display:block; margin-top:8px;">As the two points on the secant line get closer and closer together, the secant line becomes the tangent line.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">几何意义</strong>
+    <span style="display:block; margin-top:8px;"><strong>平均变化率</strong> = 过两点的<strong>割线</strong>的斜率。</span>
+    <span style="display:block; margin-top:4px;"><strong>瞬时变化率</strong> = 单点处<strong>切线（<code>tangent line</code>）</strong>的斜率。</span>
+    <span style="display:block; margin-top:8px;">当割线上的两点不断靠近时，割线就变成了切线。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Average vs. Instantaneous Rate</summary>
+    <summary><span data-lang="en">Worked Example — Average vs. Instantaneous Rate</span><span data-lang="zh">例题——平均变化率 vs. 瞬时变化率</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Given $f(x) = x^2 + 1$.</p>
-<p><strong>AROC on $[1, 3]$:</strong></p>
+<p data-lang="en">Given $f(x) = x^2 + 1$.</p>
+<p data-lang="zh">已知 $f(x) = x^2 + 1$。</p>
+<p data-lang="en"><strong>AROC on $[1, 3]$:</strong></p>
+<p data-lang="zh"><strong>区间 $[1, 3]$ 上的平均变化率：</strong></p>
 $$\frac{f(3) - f(1)}{3 - 1} = \frac{(9+1)-(1+1)}{2} = \frac{8}{2} = 4$$
-<p><strong>Instantaneous rate at $x = 1$:</strong></p>
+<p data-lang="en"><strong>Instantaneous rate at $x = 1$:</strong></p>
+<p data-lang="zh"><strong>$x = 1$ 处的瞬时变化率：</strong></p>
 $$\begin{aligned}
 f'(1) &= \lim_{h \to 0} \frac{f(1+h) - f(1)}{h} \\[4pt]
 &= \lim_{h \to 0} \frac{(1+h)^2 + 1 - 2}{h} \\[4pt]
@@ -954,15 +987,16 @@ f'(1) &= \lim_{h \to 0} \frac{f(1+h) - f(1)}{h} \\[4pt]
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">The average rate of change of $f(x) = x^3$ on the interval $[1, 4]$ is:</div>
+    <div class="quiz-q" data-lang="en">The average rate of change of $f(x) = x^3$ on the interval $[1, 4]$ is:</div>
+    <div class="quiz-q" data-lang="zh">$f(x) = x^3$ 在区间 $[1, 4]$ 上的平均变化率是：</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$12$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$27$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$21$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$63$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$.</div>
-    <div class="quiz-explain wrong-exp">AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$. Don't forget to divide by the interval width!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$.</span><span data-lang="zh">✓ 正确！平均变化率 $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. AROC $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$. Don't forget to divide by the interval width!</span><span data-lang="zh">✗ 还差一点。平均变化率 $= \frac{f(4) - f(1)}{4 - 1} = \frac{64 - 1}{3} = \frac{63}{3} = 21$。别忘了要除以区间长度！</span></div>
   </div>
 </section>
 
@@ -972,18 +1006,23 @@ f'(1) &= \lim_{h \to 0} \frac{f(1+h) - f(1)}{h} \\[4pt]
 <!-- TOPIC 2.2 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-2">
-  <div class="section-label">Topic 2.2</div>
-  <h2>Defining the Derivative of a Function and Using Derivative Notation</h2>
+  <div class="section-label" data-lang="en">Topic 2.2</div>
+  <div class="section-label" data-lang="zh">小节 2.2</div>
+  <h2 data-lang="en">Defining the Derivative of a Function and Using Derivative Notation</h2>
+  <h2 data-lang="zh">定义函数的导数与使用导数记号</h2>
 
-  <p>In Topic 2.1 we found the derivative <em>at a single point</em>. Now we generalize: the derivative of $f$ is itself a <strong>function</strong> that gives the slope of the tangent line at every point where the limit exists.</p>
+  <p data-lang="en">In Topic 2.1 we found the derivative <em>at a single point</em>. Now we generalize: the derivative of $f$ is itself a <strong>function</strong> that gives the slope of the tangent line at every point where the limit exists.</p>
+  <p data-lang="zh">在 2.1 中我们求出了<em>某一点处</em>的导数。现在把它推广：$f$ 的导数本身就是一个<strong>函数</strong>，它在每个极限存在的点处给出切线的斜率。</p>
 
   <div class="formula-box">
-    <div class="formula-label">Definition of the Derivative Function</div>
+    <div class="formula-label" data-lang="en">Definition of the Derivative Function</div>
+    <div class="formula-label" data-lang="zh">导数函数的定义</div>
     $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">provided this limit exists</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">provided this limit exists</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">前提是该极限（<code>limit</code>）存在</p>
   </div>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">Notation — All Mean the Same Thing</strong>
     <span style="display:block; margin-top:10px;">$f'(x)$ — "f prime of x" (Lagrange notation)</span>
     <span style="display:block; margin-top:6px;">$\dfrac{dy}{dx}$ — "dy dx" (Leibniz notation — looks like a fraction but is a single symbol)</span>
@@ -991,18 +1030,32 @@ f'(1) &= \lim_{h \to 0} \frac{f(1+h) - f(1)}{h} \\[4pt]
     <span style="display:block; margin-top:6px;">$\dfrac{d}{dx}[f(x)]$ — operator notation: "the derivative with respect to $x$ of $f(x)$"</span>
     <span style="display:block; margin-top:10px;">You must be comfortable reading and writing all of these — the AP exam uses them interchangeably.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">记号——含义相同</strong>
+    <span style="display:block; margin-top:10px;">$f'(x)$ ——“f prime of x”（拉格朗日记号）</span>
+    <span style="display:block; margin-top:6px;">$\dfrac{dy}{dx}$ ——“dy dx”（莱布尼茨记号——形如分数，但实际上是单一符号）</span>
+    <span style="display:block; margin-top:6px;">$y'$ ——当 $y = f(x)$ 时的简写</span>
+    <span style="display:block; margin-top:6px;">$\dfrac{d}{dx}[f(x)]$ ——算子记号：“$f(x)$ 对 $x$ 求导”</span>
+    <span style="display:block; margin-top:10px;">这几种记号都必须熟练读写——AP 考试会混用。</span>
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Tangent Line Equation</strong>
     <span style="display:block; margin-top:8px;">The derivative at a point gives the slope of the tangent line at that point. The equation of the tangent line to $y = f(x)$ at $x = a$ is:</span>
     $$ y - f(a) = f'(a)(x - a) $$
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">切线方程</strong>
+    <span style="display:block; margin-top:8px;">某点处的导数即该点切线的斜率（<code>slope</code>）。曲线 $y = f(x)$ 在 $x = a$ 处的切线方程为：</span>
+    $$ y - f(a) = f'(a)(x - a) $$
+  </div>
 
   <details>
-    <summary>Worked Example — Finding Derivative from the Definition</summary>
+    <summary><span data-lang="en">Worked Example — Finding Derivative from the Definition</span><span data-lang="zh">例题——用定义求导</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $f'(x)$ for $f(x) = 3x^2$ using the limit definition.</p>
+<p data-lang="en">Find $f'(x)$ for $f(x) = 3x^2$ using the limit definition.</p>
+<p data-lang="zh">用极限定义求 $f(x) = 3x^2$ 的导数 $f'(x)$。</p>
 $$\begin{aligned}
 f'(x) &= \lim_{h \to 0} \frac{3(x+h)^2 - 3x^2}{h} \\[4pt]
 &= \lim_{h \to 0} \frac{3x^2 + 6xh + 3h^2 - 3x^2}{h} \\[4pt]
@@ -1014,13 +1067,17 @@ f'(x) &= \lim_{h \to 0} \frac{3(x+h)^2 - 3x^2}{h} \\[4pt]
   </details>
 
   <details>
-    <summary>Worked Example — Equation of a Tangent Line</summary>
+    <summary><span data-lang="en">Worked Example — Equation of a Tangent Line</span><span data-lang="zh">例题——切线方程</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find the equation of the tangent line to $f(x) = x^2$ at $x = 3$.</p>
-<p><strong>Step 1:</strong> $f(3) = 9$</p>
-<p><strong>Step 2:</strong> $f'(x) = 2x \;\Longrightarrow\; f'(3) = 6$</p>
-<p><strong>Step 3:</strong> Point-slope form:</p>
+<p data-lang="en">Find the equation of the tangent line to $f(x) = x^2$ at $x = 3$.</p>
+<p data-lang="zh">求 $f(x) = x^2$ 在 $x = 3$ 处的切线方程。</p>
+<p data-lang="en"><strong>Step 1:</strong> $f(3) = 9$</p>
+<p data-lang="zh"><strong>第 1 步：</strong>$f(3) = 9$</p>
+<p data-lang="en"><strong>Step 2:</strong> $f'(x) = 2x \;\Longrightarrow\; f'(3) = 6$</p>
+<p data-lang="zh"><strong>第 2 步：</strong>$f'(x) = 2x \;\Longrightarrow\; f'(3) = 6$</p>
+<p data-lang="en"><strong>Step 3:</strong> Point-slope form:</p>
+<p data-lang="zh"><strong>第 3 步：</strong>点斜式：</p>
 $$\begin{aligned}
 y - 9 &= 6(x - 3) \\
 y &= 6x - 9
@@ -1030,15 +1087,16 @@ y &= 6x - 9
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">Which of the following represents $\dfrac{d}{dx}[x^3]$ evaluated at $x = 2$ using the limit definition?</div>
+    <div class="quiz-q" data-lang="en">Which of the following represents $\dfrac{d}{dx}[x^3]$ evaluated at $x = 2$ using the limit definition?</div>
+    <div class="quiz-q" data-lang="zh">下列哪一个表示用极限定义在 $x = 2$ 处求 $\dfrac{d}{dx}[x^3]$？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$\displaystyle\lim_{h \to 0} \frac{(x+h)^3 - x^3}{h}$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$\displaystyle\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$\displaystyle\lim_{h \to 0} \frac{2^3 - h^3}{h}$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$\displaystyle\lim_{h \to 0} \frac{(2+h)^3 - (2-h)^3}{h}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The limit definition of the derivative at $x = 2$ is $f'(2) = \lim_{h \to 0} \frac{f(2+h) - f(2)}{h} = \lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</div>
-    <div class="quiz-explain wrong-exp">Use the limit definition $f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$. With $f(x) = x^3$ and $a = 2$, this becomes $\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! The limit definition of the derivative at $x = 2$ is $f'(2) = \lim_{h \to 0} \frac{f(2+h) - f(2)}{h} = \lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</span><span data-lang="zh">✓ 正确！$x = 2$ 处导数的极限定义为 $f'(2) = \lim_{h \to 0} \frac{f(2+h) - f(2)}{h} = \lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Use the limit definition $f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$. With $f(x) = x^3$ and $a = 2$, this becomes $\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$.</span><span data-lang="zh">✗ 还差一点。使用极限定义 $f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$。代入 $f(x) = x^3$ 与 $a = 2$，得 $\lim_{h \to 0} \frac{(2+h)^3 - 8}{h}$。</span></div>
   </div>
 </section>
 
@@ -1048,29 +1106,45 @@ y &= 6x - 9
 <!-- TOPIC 2.3 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-3">
-  <div class="section-label">Topic 2.3</div>
-  <h2>Estimating Derivatives of a Function at a Point</h2>
+  <div class="section-label" data-lang="en">Topic 2.3</div>
+  <div class="section-label" data-lang="zh">小节 2.3</div>
+  <h2 data-lang="en">Estimating Derivatives of a Function at a Point</h2>
+  <h2 data-lang="zh">估计函数在某点处的导数</h2>
 
-  <p>When you don't have a formula for $f$ but have a table of values or a graph, you can still <strong>estimate</strong> the derivative using a difference quotient with nearby points.</p>
+  <p data-lang="en">When you don't have a formula for $f$ but have a table of values or a graph, you can still <strong>estimate</strong> the derivative using a difference quotient with nearby points.</p>
+  <p data-lang="zh">当没有 $f$ 的解析式，只有一张数值表或一张图像时，仍可以用相邻点的差商（<code>difference quotient</code>）来<strong>估计</strong>导数。</p>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Key Technique</strong>
     <span style="display:block; margin-top:8px;">To estimate $f'(a)$ from a table, use the two values closest to $a$:</span>
     $$ f'(a) \approx \frac{f(b) - f(c)}{b - c} $$
     <span style="display:block; margin-top:8px;">where $b$ and $c$ are the table values flanking $a$ (or closest available).</span>
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">关键技巧</strong>
+    <span style="display:block; margin-top:8px;">要从表格中估计 $f'(a)$，取与 $a$ 最接近的两个值：</span>
+    $$ f'(a) \approx \frac{f(b) - f(c)}{b - c} $$
+    <span style="display:block; margin-top:8px;">其中 $b$、$c$ 是表中夹住 $a$ 的两个值（若不可用，则取最近的两点）。</span>
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Exam Skill — Show Your Setup!</strong>
     <span style="display:block; margin-top:8px;">You <em>must</em> write the difference quotient before evaluating. Just writing the numerical answer — even if correct — will not earn full credit on free-response questions.</span>
     <span style="display:block; margin-top:8px;">Example of proper presentation:</span>
     <span style="display:block; margin-top:4px;">$f'(3) \approx \dfrac{f(4) - f(3)}{4 - 3} = \dfrac{12.8 - 11.2}{1} = 1.6$</span>
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">考试技巧——写出过程！</strong>
+    <span style="display:block; margin-top:8px;">在计算前<em>必须</em>写出差商表达式。在自由作答题中，仅写出数值答案——即使正确——也得不到满分。</span>
+    <span style="display:block; margin-top:8px;">规范作答示例：</span>
+    <span style="display:block; margin-top:4px;">$f'(3) \approx \dfrac{f(4) - f(3)}{4 - 3} = \dfrac{12.8 - 11.2}{1} = 1.6$</span>
+  </div>
 
   <!-- ─── INTERACTIVE SECANT → TANGENT VISUALIZER ─── -->
   <div class="interactive-widget" id="secant-widget">
-    <div class="widget-header">Interactive · Secant → Tangent Line Explorer</div>
-    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Drag the slider to move point $Q$ toward point $P$ and watch the secant line approach the tangent line.</p>
+    <div class="widget-header"><span data-lang="en">Interactive · Secant → Tangent Line Explorer</span><span data-lang="zh">互动 · 割线 → 切线探索器</span></div>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="en">Drag the slider to move point $Q$ toward point $P$ and watch the secant line approach the tangent line.</p>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="zh">拖动滑块，让点 $Q$ 逼近点 $P$，观察割线如何逼近切线。</p>
     <div class="widget-canvas-wrap">
       <canvas id="secantCanvas" width="720" height="400"></canvas>
     </div>
@@ -1080,22 +1154,25 @@ y &= 6x - 9
       <div class="widget-readout" id="secantReadout">h = 3.00</div>
     </div>
     <div class="widget-sum-readout" id="secantSlopeReadout">
-      Secant slope = <span class="sum-val" id="secantSlope">—</span> &nbsp;|&nbsp; Tangent slope = <span class="exact-val" id="tangentSlope">—</span>
+      <span data-lang="en">Secant slope</span><span data-lang="zh">割线斜率</span> = <span class="sum-val" id="secantSlope">—</span> &nbsp;|&nbsp; <span data-lang="en">Tangent slope</span><span data-lang="zh">切线斜率</span> = <span class="exact-val" id="tangentSlope">—</span>
     </div>
   </div>
 
   <details>
-    <summary>Worked Example — Estimating from a Table</summary>
+    <summary><span data-lang="en">Worked Example — Estimating from a Table</span><span data-lang="zh">例题——根据表格估计导数</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Given table:</p>
+<p data-lang="en">Given table:</p>
+<p data-lang="zh">已知下表：</p>
 <table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
   <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$x$</td><td style="padding:4px 14px; border:1px solid var(--border);">1</td><td style="padding:4px 14px; border:1px solid var(--border);">3</td><td style="padding:4px 14px; border:1px solid var(--border);">4</td><td style="padding:4px 14px; border:1px solid var(--border);">6</td></tr>
   <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$f(x)$</td><td style="padding:4px 14px; border:1px solid var(--border);">2</td><td style="padding:4px 14px; border:1px solid var(--border);">8</td><td style="padding:4px 14px; border:1px solid var(--border);">11</td><td style="padding:4px 14px; border:1px solid var(--border);">20</td></tr>
 </table>
-<p>Estimate $f'(3)$ using symmetric values around $x=3$:</p>
+<p data-lang="en">Estimate $f'(3)$ using symmetric values around $x=3$:</p>
+<p data-lang="zh">用 $x = 3$ 两侧对称的值估计 $f'(3)$：</p>
 $$f'(3) \approx \frac{f(4) - f(1)}{4 - 1} = \frac{11 - 2}{3} = 3$$
-<p>Or, using the closest points on each side:</p>
+<p data-lang="en">Or, using the closest points on each side:</p>
+<p data-lang="zh">或者取两侧距离最近的点：</p>
 $$f'(3) \approx \frac{f(4) - f(3)}{4 - 3} = \frac{11 - 8}{1} = 3$$
 </div>
     </div>
@@ -1108,68 +1185,98 @@ $$f'(3) \approx \frac{f(4) - f(3)}{4 - 3} = \frac{11 - 8}{1} = 3$$
 <!-- TOPIC 2.4 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-4">
-  <div class="section-label">Topic 2.4</div>
-  <h2>Connecting Differentiability and Continuity</h2>
+  <div class="section-label" data-lang="en">Topic 2.4</div>
+  <div class="section-label" data-lang="zh">小节 2.4</div>
+  <h2 data-lang="en">Connecting Differentiability and Continuity</h2>
+  <h2 data-lang="zh">可微性与连续性的联系</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">The Key Theorem</strong>
     <span style="display:block; margin-top:8px;">If $f$ is <strong>differentiable</strong> at $x = a$, then $f$ is <strong>continuous</strong> at $x = a$.</span>
     <span style="display:block; margin-top:10px;"><em>Equivalently (contrapositive):</em> If $f$ is <em>not</em> continuous at $x = a$, then $f$ is <em>not</em> differentiable at $x = a$.</span>
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">关键定理</strong>
+    <span style="display:block; margin-top:8px;">若 $f$ 在 $x = a$ 处<strong>可微（<code>differentiable</code>）</strong>，则 $f$ 在 $x = a$ 处<strong>连续（<code>continuous</code>）</strong>。</span>
+    <span style="display:block; margin-top:10px;"><em>等价（逆否命题）：</em>若 $f$ 在 $x = a$ 处<em>不</em>连续，则 $f$ 在 $x = a$ 处<em>不</em>可微。</span>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Caution — The Converse is False!</strong>
     <span style="display:block; margin-top:8px;">A function can be continuous at a point but <strong>not differentiable</strong> there. Differentiability is a stronger condition than continuity.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">注意——逆命题不成立！</strong>
+    <span style="display:block; margin-top:8px;">函数在某点可以连续但<strong>不可微</strong>（即“连续但不可微”）。可微性是比连续性更强的条件。</span>
+  </div>
 
   <div class="qref">
-    <div class="qref-title">Where Does the Derivative Fail to Exist?</div>
+    <div class="qref-title" data-lang="en">Where Does the Derivative Fail to Exist?</div>
+    <div class="qref-title" data-lang="zh">导数在哪些情形下不存在？</div>
     <div class="table-wrap">
-      <table>
+      <table data-lang="en">
         <tr><th>Type</th><th>What It Looks Like</th><th>Example</th></tr>
         <tr><td><strong>Corner / Cusp</strong></td><td>Sharp change in direction; left and right derivatives differ</td><td>$f(x) = |x|$ at $x = 0$</td></tr>
         <tr><td><strong>Vertical Tangent</strong></td><td>Tangent line is vertical (slope → $\pm\infty$)</td><td>$f(x) = \sqrt[3]{x}$ at $x = 0$</td></tr>
         <tr><td><strong>Discontinuity</strong></td><td>Jump, removable, or infinite discontinuity</td><td>Piecewise function with a jump</td></tr>
       </table>
+      <table data-lang="zh">
+        <tr><th>类型</th><th>表现</th><th>例子</th></tr>
+        <tr><td><strong>拐角 / 尖点（<code>corner / cusp</code>）</strong></td><td>方向急剧改变；左、右导数不相等</td><td>$f(x) = |x|$ 在 $x = 0$</td></tr>
+        <tr><td><strong>垂直切线（<code>vertical tangent</code>）</strong></td><td>切线为竖直方向（斜率 → $\pm\infty$）</td><td>$f(x) = \sqrt[3]{x}$ 在 $x = 0$</td></tr>
+        <tr><td><strong>不连续点</strong></td><td>跳跃、可去或无穷不连续点</td><td>含跳跃的分段函数</td></tr>
+      </table>
     </div>
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">How to Check Differentiability</strong>
     <span style="display:block; margin-top:8px;">1. Is $f$ continuous at the point? If not → not differentiable.</span>
     <span style="display:block; margin-top:4px;">2. Do the left-hand and right-hand derivatives exist and are they equal?</span>
     $$ \lim_{h \to 0^-} \frac{f(a+h) - f(a)}{h} = \lim_{h \to 0^+} \frac{f(a+h) - f(a)}{h} $$
     <span style="display:block; margin-top:4px;">If both conditions hold, the function is differentiable at $x = a$.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">如何判断可微性</strong>
+    <span style="display:block; margin-top:8px;">1. $f$ 在该点是否连续？若不连续 → 不可微。</span>
+    <span style="display:block; margin-top:4px;">2. 左导数与右导数是否都存在且相等？</span>
+    $$ \lim_{h \to 0^-} \frac{f(a+h) - f(a)}{h} = \lim_{h \to 0^+} \frac{f(a+h) - f(a)}{h} $$
+    <span style="display:block; margin-top:4px;">两条都满足时，函数在 $x = a$ 处可微。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Checking Differentiability of a Piecewise Function</summary>
+    <summary><span data-lang="en">Worked Example — Checking Differentiability of a Piecewise Function</span><span data-lang="zh">例题——判断分段函数的可微性</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Is $f$ differentiable at $x = 2$?</p>
+<p data-lang="en">Is $f$ differentiable at $x = 2$?</p>
+<p data-lang="zh">$f$ 在 $x = 2$ 处是否可微？</p>
 $$f(x) = \begin{cases} x^2, & x \le 2 \\ 4x - 4, & x > 2 \end{cases}$$
-<p><strong>Step 1 — Continuity:</strong></p>
+<p data-lang="en"><strong>Step 1 — Continuity:</strong></p>
+<p data-lang="zh"><strong>第 1 步 —— 连续性：</strong></p>
 $$\lim_{x \to 2^-} x^2 = 4, \quad \lim_{x \to 2^+}(4x-4) = 4, \quad f(2) = 4 \;\;\checkmark$$
-<p><strong>Step 2 — Derivatives from each side:</strong></p>
+<p data-lang="en"><strong>Step 2 — Derivatives from each side:</strong></p>
+<p data-lang="zh"><strong>第 2 步 —— 两侧的导数：</strong></p>
 $$\begin{aligned}
 \text{Left: } &\frac{d}{dx}(x^2) = 2x \;\Longrightarrow\; 2(2) = 4 \\[4pt]
 \text{Right: } &\frac{d}{dx}(4x-4) = 4
 \end{aligned}$$
-<p>Left $=$ Right $= 4$, so $f$ is differentiable at $x=2$ and $f'(2) = 4$. ✓</p>
+<p data-lang="en">Left $=$ Right $= 4$, so $f$ is differentiable at $x=2$ and $f'(2) = 4$. ✓</p>
+<p data-lang="zh">左 $=$ 右 $= 4$，因此 $f$ 在 $x=2$ 处可微，$f'(2) = 4$。✓</p>
 </div>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">If $f$ is differentiable at $x = 5$, which of the following must be true?</div>
+    <div class="quiz-q" data-lang="en">If $f$ is differentiable at $x = 5$, which of the following must be true?</div>
+    <div class="quiz-q" data-lang="zh">若 $f$ 在 $x = 5$ 处可微，下列哪一项必然成立？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$f'(5) = 0$</div>
-      <div class="quiz-opt" data-idx="1" data-label="B">$f$ is continuous at $x = 5$</div>
-      <div class="quiz-opt" data-idx="2" data-label="C">$f$ has no sharp corners anywhere</div>
-      <div class="quiz-opt" data-idx="3" data-label="D">$f$ is defined for all real numbers</div>
+      <div class="quiz-opt" data-idx="1" data-label="B"><span data-lang="en">$f$ is continuous at $x = 5$</span><span data-lang="zh">$f$ 在 $x = 5$ 处连续</span></div>
+      <div class="quiz-opt" data-idx="2" data-label="C"><span data-lang="en">$f$ has no sharp corners anywhere</span><span data-lang="zh">$f$ 处处没有尖角</span></div>
+      <div class="quiz-opt" data-idx="3" data-label="D"><span data-lang="en">$f$ is defined for all real numbers</span><span data-lang="zh">$f$ 对所有实数都有定义</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Differentiability implies continuity. If a function is differentiable at a point, it must be continuous there.</div>
-    <div class="quiz-explain wrong-exp">Differentiability at a point implies continuity at that point. It does not mean the derivative is zero, nor that the function is smooth everywhere or defined everywhere.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Differentiability implies continuity. If a function is differentiable at a point, it must be continuous there.</span><span data-lang="zh">✓ 正确！可微蕴含连续。若函数在某点可微，则它在该点必然连续。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Differentiability at a point implies continuity at that point. It does not mean the derivative is zero, nor that the function is smooth everywhere or defined everywhere.</span><span data-lang="zh">✗ 还差一点。某点可微仅蕴含该点连续，并不意味着导数为零，也不意味着函数处处光滑或处处有定义。</span></div>
   </div>
 </section>
 
@@ -1179,34 +1286,51 @@ $$\begin{aligned}
 <!-- TOPIC 2.5 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-5">
-  <div class="section-label">Topic 2.5</div>
-  <h2>Applying the Power Rule</h2>
+  <div class="section-label" data-lang="en">Topic 2.5</div>
+  <div class="section-label" data-lang="zh">小节 2.5</div>
+  <h2 data-lang="en">Applying the Power Rule</h2>
+  <h2 data-lang="zh">应用幂法则</h2>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Why This Matters</strong>
     The power rule is the single most-used differentiation rule. It works for any real exponent and replaces the tedious limit definition for polynomial-type functions.
   </div>
-
-  <div class="formula-box">
-    <div class="formula-label">The Power Rule</div>
-    $$ \frac{d}{dx}\left[x^n\right] = n \cdot x^{n-1} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">for any real number $n$</p>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">为什么重要</strong>
+    幂法则（<code>power rule</code>）是使用率最高的求导（<code>differentiate</code>）法则。它适用于任意实指数，可以替代对多项式类函数繁琐的极限定义。
   </div>
 
-  <div class="concept-box orange">
+  <div class="formula-box">
+    <div class="formula-label" data-lang="en">The Power Rule</div>
+    <div class="formula-label" data-lang="zh">幂法则</div>
+    $$ \frac{d}{dx}\left[x^n\right] = n \cdot x^{n-1} $$
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">for any real number $n$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">对任意实数 $n$ 都成立</p>
+  </div>
+
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Rewriting Before Differentiating</strong>
     <span style="display:block; margin-top:8px;">Many functions must be rewritten in the form $x^n$ before applying the power rule:</span>
     <span style="display:block; margin-top:6px;">$\sqrt{x} = x^{1/2}$ &nbsp;→&nbsp; $\frac{d}{dx}[\sqrt{x}] = \frac{1}{2}x^{-1/2}$</span>
     <span style="display:block; margin-top:4px;">$\dfrac{1}{x^3} = x^{-3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\frac{1}{x^3}\right] = -3x^{-4}$</span>
     <span style="display:block; margin-top:4px;">$\sqrt[3]{x^2} = x^{2/3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\sqrt[3]{x^2}\right] = \frac{2}{3}x^{-1/3}$</span>
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">求导前先改写</strong>
+    <span style="display:block; margin-top:8px;">许多函数必须先改写成 $x^n$ 的形式，才能套用幂法则：</span>
+    <span style="display:block; margin-top:6px;">$\sqrt{x} = x^{1/2}$ &nbsp;→&nbsp; $\frac{d}{dx}[\sqrt{x}] = \frac{1}{2}x^{-1/2}$</span>
+    <span style="display:block; margin-top:4px;">$\dfrac{1}{x^3} = x^{-3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\frac{1}{x^3}\right] = -3x^{-4}$</span>
+    <span style="display:block; margin-top:4px;">$\sqrt[3]{x^2} = x^{2/3}$ &nbsp;→&nbsp; $\frac{d}{dx}\left[\sqrt[3]{x^2}\right] = \frac{2}{3}x^{-1/3}$</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Power Rule with Rewriting</summary>
+    <summary><span data-lang="en">Worked Example — Power Rule with Rewriting</span><span data-lang="zh">例题——改写后应用幂法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find the derivative of $f(x) = 5x^4 - \dfrac{2}{\sqrt{x}}$.</p>
-<p>Rewrite: $f(x) = 5x^4 - 2x^{-1/2}$</p>
+<p data-lang="en">Find the derivative of $f(x) = 5x^4 - \dfrac{2}{\sqrt{x}}$.</p>
+<p data-lang="zh">求 $f(x) = 5x^4 - \dfrac{2}{\sqrt{x}}$ 的导数。</p>
+<p data-lang="en">Rewrite: $f(x) = 5x^4 - 2x^{-1/2}$</p>
+<p data-lang="zh">改写：$f(x) = 5x^4 - 2x^{-1/2}$</p>
 $$\begin{aligned}
 f'(x) &= 5 \cdot 4 x^3 - 2\!\left(-\tfrac{1}{2}\right)x^{-3/2} \\[4pt]
 &= 20x^3 + x^{-3/2} \\[4pt]
@@ -1224,8 +1348,8 @@ f'(x) &= 5 \cdot 4 x^3 - 2\!\left(-\tfrac{1}{2}\right)x^{-3/2} \\[4pt]
       <div class="quiz-opt" data-idx="2" data-label="C">$-\dfrac{3}{2x^{3/2}}$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$\dfrac{3}{2x^{3/2}}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Rewrite: $\frac{3}{\sqrt{x}} = 3x^{-1/2}$. Then $\frac{d}{dx}[3x^{-1/2}] = 3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2}x^{-3/2} = -\frac{3}{2x^{3/2}}$.</div>
-    <div class="quiz-explain wrong-exp">First rewrite as $3x^{-1/2}$, then apply the power rule: $3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2x^{3/2}}$. Watch the sign from the negative exponent!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Rewrite: $\frac{3}{\sqrt{x}} = 3x^{-1/2}$. Then $\frac{d}{dx}[3x^{-1/2}] = 3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2}x^{-3/2} = -\frac{3}{2x^{3/2}}$.</span><span data-lang="zh">✓ 正确！改写：$\frac{3}{\sqrt{x}} = 3x^{-1/2}$。然后 $\frac{d}{dx}[3x^{-1/2}] = 3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2}x^{-3/2} = -\frac{3}{2x^{3/2}}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. First rewrite as $3x^{-1/2}$, then apply the power rule: $3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2x^{3/2}}$. Watch the sign from the negative exponent!</span><span data-lang="zh">✗ 还差一点。先改写为 $3x^{-1/2}$，再应用幂法则：$3 \cdot (-\frac{1}{2}) x^{-3/2} = -\frac{3}{2x^{3/2}}$。注意负指数带来的符号！</span></div>
   </div>
 </section>
 
@@ -1235,32 +1359,47 @@ f'(x) &= 5 \cdot 4 x^3 - 2\!\left(-\tfrac{1}{2}\right)x^{-3/2} \\[4pt]
 <!-- TOPIC 2.6 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-6">
-  <div class="section-label">Topic 2.6</div>
-  <h2>Derivative Rules: Constant, Sum, Difference, and Constant Multiple</h2>
+  <div class="section-label" data-lang="en">Topic 2.6</div>
+  <div class="section-label" data-lang="zh">小节 2.6</div>
+  <h2 data-lang="en">Derivative Rules: Constant, Sum, Difference, and Constant Multiple</h2>
+  <h2 data-lang="zh">导数法则：常数、求和、求差与常数倍</h2>
 
   <div class="qref">
-    <div class="qref-title">Fundamental Differentiation Rules</div>
+    <div class="qref-title" data-lang="en">Fundamental Differentiation Rules</div>
+    <div class="qref-title" data-lang="zh">基本求导法则</div>
     <div class="table-wrap">
-      <table>
+      <table data-lang="en">
         <tr><th>Rule</th><th>Formula</th></tr>
         <tr><td>Constant</td><td>$\dfrac{d}{dx}[c] = 0$</td></tr>
         <tr><td>Constant Multiple</td><td>$\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$</td></tr>
         <tr><td>Sum</td><td>$\dfrac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$</td></tr>
         <tr><td>Difference</td><td>$\dfrac{d}{dx}[f(x) - g(x)] = f'(x) - g'(x)$</td></tr>
       </table>
+      <table data-lang="zh">
+        <tr><th>法则</th><th>公式</th></tr>
+        <tr><td>常数（<code>constant</code>）</td><td>$\dfrac{d}{dx}[c] = 0$</td></tr>
+        <tr><td>常数倍（<code>constant multiple</code>）</td><td>$\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$</td></tr>
+        <tr><td>求和（<code>sum</code>）</td><td>$\dfrac{d}{dx}[f(x) + g(x)] = f'(x) + g'(x)$</td></tr>
+        <tr><td>求差（<code>difference</code>）</td><td>$\dfrac{d}{dx}[f(x) - g(x)] = f'(x) - g'(x)$</td></tr>
+      </table>
     </div>
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Key Takeaway</strong>
     <span style="display:block; margin-top:8px;">You can differentiate polynomial functions <strong>term by term</strong>. Constants "come along for the ride" (constant multiple rule), and the derivative of any standalone constant is zero.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">要点</strong>
+    <span style="display:block; margin-top:8px;">多项式可以<strong>逐项求导</strong>。常数会“跟着出来”（常数倍法则），而任何孤立常数的导数都为零。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Combining Rules</summary>
+    <summary><span data-lang="en">Worked Example — Combining Rules</span><span data-lang="zh">例题——综合运用各法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\dfrac{dy}{dx}$ if $y = 7x^5 - 3x^3 + 4x - 9$.</p>
+<p data-lang="en">Find $\dfrac{dy}{dx}$ if $y = 7x^5 - 3x^3 + 4x - 9$.</p>
+<p data-lang="zh">求 $y = 7x^5 - 3x^3 + 4x - 9$ 的 $\dfrac{dy}{dx}$。</p>
 $$\begin{aligned}
 \frac{dy}{dx} &= 7 \cdot 5x^4 - 3 \cdot 3x^2 + 4 \cdot 1 - 0 \\[4pt]
 &= 35x^4 - 9x^2 + 4
@@ -1276,14 +1415,24 @@ $$\begin{aligned}
 <!-- TOPIC 2.7 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-7">
-  <div class="section-label">Topic 2.7</div>
-  <h2>Derivatives of cos x, sin x, e<sup>x</sup>, and ln x</h2>
+  <div class="section-label" data-lang="en">Topic 2.7</div>
+  <div class="section-label" data-lang="zh">小节 2.7</div>
+  <h2 data-lang="en">Derivatives of cos x, sin x, e<sup>x</sup>, and ln x</h2>
+  <h2 data-lang="zh">cos x、sin x、e<sup>x</sup> 与 ln x 的导数</h2>
 
   <div class="qref">
-    <div class="qref-title">Essential Derivatives to Memorize</div>
+    <div class="qref-title" data-lang="en">Essential Derivatives to Memorize</div>
+    <div class="qref-title" data-lang="zh">必背的基本导数</div>
     <div class="table-wrap">
-      <table>
+      <table data-lang="en">
         <tr><th>Function $f(x)$</th><th>Derivative $f'(x)$</th></tr>
+        <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
+        <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
+        <tr><td>$e^x$</td><td>$e^x$</td></tr>
+        <tr><td>$\ln x$</td><td>$\dfrac{1}{x}$</td></tr>
+      </table>
+      <table data-lang="zh">
+        <tr><th>函数 $f(x)$</th><th>导数 $f'(x)$</th></tr>
         <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
         <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
         <tr><td>$e^x$</td><td>$e^x$</td></tr>
@@ -1292,24 +1441,36 @@ $$\begin{aligned}
     </div>
   </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Watch the Sign!</strong>
     <span style="display:block; margin-top:8px;">The derivative of $\cos x$ is $\mathbf{-}\sin x$ — note the negative sign. Many students forget this.</span>
     <span style="display:block; margin-top:8px;">Memory aid: the "co-" functions (cosine, cotangent, cosecant) all pick up a <strong>negative sign</strong> when differentiated.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">小心符号！</strong>
+    <span style="display:block; margin-top:8px;">$\cos x$ 的导数是 $\mathbf{-}\sin x$——注意那个负号。许多同学会忘记。</span>
+    <span style="display:block; margin-top:8px;">记忆口诀：以“co-”开头的函数（余弦、余切、余割）求导后都会多出一个<strong>负号</strong>。</span>
+  </div>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">Recognizing Limit Definitions</strong>
     <span style="display:block; margin-top:8px;">Sometimes a limit on the exam is secretly the definition of a derivative in disguise:</span>
     $$ \lim_{h \to 0} \frac{\sin\left(\frac{\pi}{3} + h\right) - \sin\left(\frac{\pi}{3}\right)}{h} $$
     <span style="display:block; margin-top:8px;">This is $f'(\pi/3)$ where $f(x) = \sin x$, so the answer is $\cos(\pi/3) = 1/2$.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">识别导数的极限定义</strong>
+    <span style="display:block; margin-top:8px;">考试中的极限有时其实就是导数定义的“伪装”：</span>
+    $$ \lim_{h \to 0} \frac{\sin\left(\frac{\pi}{3} + h\right) - \sin\left(\frac{\pi}{3}\right)}{h} $$
+    <span style="display:block; margin-top:8px;">这就是 $f(x) = \sin x$ 时的 $f'(\pi/3)$，所以答案是 $\cos(\pi/3) = 1/2$。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Derivatives of Transcendental Functions</summary>
+    <summary><span data-lang="en">Worked Example — Derivatives of Transcendental Functions</span><span data-lang="zh">例题——超越函数的导数</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $f'(x)$ for $f(x) = 3e^x + 5\sin x - 2\ln x$.</p>
+<p data-lang="en">Find $f'(x)$ for $f(x) = 3e^x + 5\sin x - 2\ln x$.</p>
+<p data-lang="zh">求 $f(x) = 3e^x + 5\sin x - 2\ln x$ 的导数 $f'(x)$。</p>
 $$\begin{aligned}
 f'(x) &= 3e^x + 5\cos x - 2 \cdot \frac{1}{x} \\[4pt]
 &= 3e^x + 5\cos x - \frac{2}{x}
@@ -1319,60 +1480,79 @@ f'(x) &= 3e^x + 5\cos x - 2 \cdot \frac{1}{x} \\[4pt]
   </details>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">$\displaystyle\lim_{h \to 0} \frac{e^{2+h} - e^2}{h}$ equals:</div>
+    <div class="quiz-q">$\displaystyle\lim_{h \to 0} \frac{e^{2+h} - e^2}{h}$ <span data-lang="en">equals:</span><span data-lang="zh">等于：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$2e$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$1$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$e^2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! This limit is the definition of $f'(2)$ where $f(x) = e^x$. Since $\frac{d}{dx}[e^x] = e^x$, we get $f'(2) = e^2$.</div>
-    <div class="quiz-explain wrong-exp">Recognize this as $f'(2)$ where $f(x) = e^x$. The derivative of $e^x$ is $e^x$, so the answer is $e^2$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! This limit is the definition of $f'(2)$ where $f(x) = e^x$. Since $\frac{d}{dx}[e^x] = e^x$, we get $f'(2) = e^2$.</span><span data-lang="zh">✓ 正确！该极限就是 $f(x) = e^x$ 时 $f'(2)$ 的定义。由于 $\frac{d}{dx}[e^x] = e^x$，所以 $f'(2) = e^2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Recognize this as $f'(2)$ where $f(x) = e^x$. The derivative of $e^x$ is $e^x$, so the answer is $e^2$.</span><span data-lang="zh">✗ 还差一点。把它认作 $f(x) = e^x$ 时的 $f'(2)$。$e^x$ 的导数仍是 $e^x$，因此答案是 $e^2$。</span></div>
   </div>
 
   <details style="margin-top: 18px;">
-    <summary><strong>Derivation — Why $\dfrac{d}{dx}[\sin x] = \cos x$ (from the limit definition)</strong></summary>
+    <summary><strong><span data-lang="en">Derivation — Why $\dfrac{d}{dx}[\sin x] = \cos x$ (from the limit definition)</span><span data-lang="zh">推导——为何 $\dfrac{d}{dx}[\sin x] = \cos x$（从极限定义出发）</span></strong></summary>
     <div class="detail-body">
-      <p>This proof uses two limits from <strong>Unit 1</strong> as building blocks:</p>
+      <p data-lang="en">This proof uses two limits from <strong>Unit 1</strong> as building blocks:</p>
+      <p data-lang="zh">本证明用到<strong>单元 1</strong> 中的两个极限作为基础：</p>
       <div class="formula-box">
         $$\lim_{h \to 0}\frac{\sin h}{h} = 1 \qquad\text{and}\qquad \lim_{h \to 0}\frac{\cos h - 1}{h} = 0$$
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The first comes from the Squeeze Theorem on $\cos h \le \frac{\sin h}{h} \le 1$. The second follows from the first via the identity $\cos h - 1 = -\dfrac{\sin^2 h}{\cos h + 1}$.</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">The first comes from the Squeeze Theorem on $\cos h \le \frac{\sin h}{h} \le 1$. The second follows from the first via the identity $\cos h - 1 = -\dfrac{\sin^2 h}{\cos h + 1}$.</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">第一个来自夹逼定理 $\cos h \le \frac{\sin h}{h} \le 1$。第二个由第一个借助恒等式 $\cos h - 1 = -\dfrac{\sin^2 h}{\cos h + 1}$ 推出。</p>
       </div>
 
       <div class="worked-solution">
-        <p><strong>Step 1 — Apply the limit definition.</strong></p>
+        <p data-lang="en"><strong>Step 1 — Apply the limit definition.</strong></p>
+        <p data-lang="zh"><strong>第 1 步 —— 套用极限定义。</strong></p>
         $$\frac{d}{dx}[\sin x] \;=\; \lim_{h\to 0}\frac{\sin(x+h)-\sin x}{h}$$
-        <p><strong>Step 2 — Expand using the sum-of-angles identity</strong> $\sin(x+h) = \sin x \cos h + \cos x \sin h$:</p>
+        <p data-lang="en"><strong>Step 2 — Expand using the sum-of-angles identity</strong> $\sin(x+h) = \sin x \cos h + \cos x \sin h$:</p>
+        <p data-lang="zh"><strong>第 2 步 —— 用和角公式展开</strong>$\sin(x+h) = \sin x \cos h + \cos x \sin h$：</p>
         $$= \lim_{h\to 0}\frac{\sin x \cos h + \cos x \sin h - \sin x}{h}$$
-        <p><strong>Step 3 — Group the $\sin x$ terms.</strong></p>
+        <p data-lang="en"><strong>Step 3 — Group the $\sin x$ terms.</strong></p>
+        <p data-lang="zh"><strong>第 3 步 —— 合并含 $\sin x$ 的项。</strong></p>
         $$= \lim_{h\to 0}\frac{\sin x\,(\cos h - 1) + \cos x \,\sin h}{h}
         \;=\; \sin x \cdot \lim_{h\to 0}\frac{\cos h - 1}{h} \;+\; \cos x \cdot \lim_{h\to 0}\frac{\sin h}{h}$$
-        <p style="font-size: 0.9rem; color: var(--text-secondary);">($\sin x$ and $\cos x$ are constants with respect to $h$, so they pull out of the $h$-limit.)</p>
-        <p><strong>Step 4 — Substitute the two known limits.</strong></p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);" data-lang="en">($\sin x$ and $\cos x$ are constants with respect to $h$, so they pull out of the $h$-limit.)</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);" data-lang="zh">（$\sin x$ 与 $\cos x$ 对 $h$ 而言都是常数，所以可以提到极限外面。）</p>
+        <p data-lang="en"><strong>Step 4 — Substitute the two known limits.</strong></p>
+        <p data-lang="zh"><strong>第 4 步 —— 代入两个已知极限。</strong></p>
         $$= \sin x \cdot 0 \;+\; \cos x \cdot 1 \;=\; \cos x$$
-        <p><strong>Therefore</strong> $\;\dfrac{d}{dx}[\sin x] = \cos x$. The derivation for $\dfrac{d}{dx}[\cos x] = -\sin x$ is structurally identical, using $\cos(x+h) = \cos x\cos h - \sin x \sin h$.</p>
+        <p data-lang="en"><strong>Therefore</strong> $\;\dfrac{d}{dx}[\sin x] = \cos x$. The derivation for $\dfrac{d}{dx}[\cos x] = -\sin x$ is structurally identical, using $\cos(x+h) = \cos x\cos h - \sin x \sin h$.</p>
+        <p data-lang="zh"><strong>因此</strong>$\;\dfrac{d}{dx}[\sin x] = \cos x$。$\dfrac{d}{dx}[\cos x] = -\sin x$ 的推导结构完全相同，只需使用 $\cos(x+h) = \cos x\cos h - \sin x \sin h$。</p>
       </div>
     </div>
   </details>
 
   <details style="margin-top: 14px;">
-    <summary><strong>Generalization — $\dfrac{d}{dx}[a^x] = a^x \ln a$ for any base $a &gt; 0$</strong></summary>
+    <summary><strong><span data-lang="en">Generalization — $\dfrac{d}{dx}[a^x] = a^x \ln a$ for any base $a &gt; 0$</span><span data-lang="zh">推广——对任意底 $a &gt; 0$ 有 $\dfrac{d}{dx}[a^x] = a^x \ln a$</span></strong></summary>
     <div class="detail-body">
-      <p>The exponential rule $\frac{d}{dx}[e^x] = e^x$ generalizes to any base $a > 0$. The trick is to <em>rewrite $a^x$ as a composition involving $e$</em>, then apply the chain rule.</p>
+      <p data-lang="en">The exponential rule $\frac{d}{dx}[e^x] = e^x$ generalizes to any base $a > 0$. The trick is to <em>rewrite $a^x$ as a composition involving $e$</em>, then apply the chain rule.</p>
+      <p data-lang="zh">指数函数（<code>exponential</code>）的法则 $\frac{d}{dx}[e^x] = e^x$ 可推广到任意底 $a > 0$。技巧是<em>把 $a^x$ 改写为含 $e$ 的复合函数</em>，再使用链式法则（<code>chain rule</code>）。</p>
       <div class="worked-solution">
-        <p><strong>Step 1 — Rewrite using the identity $a = e^{\ln a}$.</strong></p>
-        <p>For any $a > 0$, raising both sides to the $x$ gives</p>
+        <p data-lang="en"><strong>Step 1 — Rewrite using the identity $a = e^{\ln a}$.</strong></p>
+        <p data-lang="zh"><strong>第 1 步 —— 利用恒等式 $a = e^{\ln a}$ 进行改写。</strong></p>
+        <p data-lang="en">For any $a > 0$, raising both sides to the $x$ gives</p>
+        <p data-lang="zh">对任意 $a > 0$，两边同时取 $x$ 次幂得</p>
         $$a^x \;=\; \bigl(e^{\ln a}\bigr)^{x} \;=\; e^{x \ln a}.$$
-        <p><strong>Step 2 — Differentiate using the chain rule.</strong> The outer function is $e^u$ with $u = x \ln a$; note $\ln a$ is a <em>constant</em> with respect to $x$, so $\dfrac{du}{dx} = \ln a$:</p>
+        <p data-lang="en"><strong>Step 2 — Differentiate using the chain rule.</strong> The outer function is $e^u$ with $u = x \ln a$; note $\ln a$ is a <em>constant</em> with respect to $x$, so $\dfrac{du}{dx} = \ln a$:</p>
+        <p data-lang="zh"><strong>第 2 步 —— 用链式法则求导。</strong>外层函数为 $e^u$，其中 $u = x \ln a$；注意 $\ln a$ 对 $x$ 而言是<em>常数</em>，所以 $\dfrac{du}{dx} = \ln a$：</p>
         $$\frac{d}{dx}\bigl[e^{x \ln a}\bigr] \;=\; e^{x \ln a} \cdot \ln a.$$
-        <p><strong>Step 3 — Convert back to $a^x$.</strong> Using $e^{x \ln a} = a^x$ from Step 1:</p>
+        <p data-lang="en"><strong>Step 3 — Convert back to $a^x$.</strong> Using $e^{x \ln a} = a^x$ from Step 1:</p>
+        <p data-lang="zh"><strong>第 3 步 —— 换回 $a^x$。</strong>利用第 1 步的 $e^{x \ln a} = a^x$：</p>
         $$\frac{d}{dx}\bigl[a^x\bigr] \;=\; a^x \ln a. \qquad\Box$$
       </div>
-      <div class="concept-box"><strong>Sanity check at $a = e$.</strong>
+      <div class="concept-box" data-lang="en"><strong>Sanity check at $a = e$.</strong>
         <p style="margin-top:6px;">Plugging $a = e$ into $a^x \ln a$ gives $e^x \ln e = e^x \cdot 1 = e^x$, matching the rule for $e^x$. The factor $\ln a$ is the price you pay for picking a base other than $e$.</p>
       </div>
-      <div class="concept-box orange"><strong>Worked numerical example</strong>
+      <div class="concept-box" data-lang="zh"><strong>$a = e$ 时的核对。</strong>
+        <p style="margin-top:6px;">把 $a = e$ 代入 $a^x \ln a$，得 $e^x \ln e = e^x \cdot 1 = e^x$，正与 $e^x$ 的法则一致。$\ln a$ 这个因子就是“底不取 $e$”所要付出的代价。</p>
+      </div>
+      <div class="concept-box orange" data-lang="en"><strong>Worked numerical example</strong>
         <p style="margin-top:6px;">$\displaystyle\frac{d}{dx}\bigl[3^x\bigr] = 3^x \ln 3$. &nbsp;At $x = 2$: &nbsp;$3^2 \ln 3 = 9 \ln 3 \approx 9.89$.</p>
+      </div>
+      <div class="concept-box orange" data-lang="zh"><strong>数值例题</strong>
+        <p style="margin-top:6px;">$\displaystyle\frac{d}{dx}\bigl[3^x\bigr] = 3^x \ln 3$。&nbsp;在 $x = 2$ 处：&nbsp;$3^2 \ln 3 = 9 \ln 3 \approx 9.89$。</p>
       </div>
     </div>
   </details>
@@ -1384,28 +1564,40 @@ f'(x) &= 3e^x + 5\cos x - 2 \cdot \frac{1}{x} \\[4pt]
 <!-- TOPIC 2.8 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-8">
-  <div class="section-label">Topic 2.8</div>
-  <h2>The Product Rule</h2>
+  <div class="section-label" data-lang="en">Topic 2.8</div>
+  <div class="section-label" data-lang="zh">小节 2.8</div>
+  <h2 data-lang="en">The Product Rule</h2>
+  <h2 data-lang="zh">乘积法则</h2>
 
   <div class="formula-box">
-    <div class="formula-label">The Product Rule</div>
+    <div class="formula-label" data-lang="en">The Product Rule</div>
+    <div class="formula-label" data-lang="zh">乘积法则</div>
     $$ \frac{d}{dx}\left[f(x) \cdot g(x)\right] = f'(x) \cdot g(x) + f(x) \cdot g'(x) $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Mnemonic: "derivative of the first times the second, plus the first times the derivative of the second"</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">Mnemonic: "derivative of the first times the second, plus the first times the derivative of the second"</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">口诀：“前导后不导加前不导后导”——即第一项的导数乘第二项，加上第一项乘第二项的导数。</p>
   </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Common Mistake</strong>
     <span style="display:block; margin-top:8px;">The derivative of a product is <strong>NOT</strong> the product of the derivatives:</span>
     $$ \frac{d}{dx}[f \cdot g] \neq f' \cdot g' $$
     <span style="display:block; margin-top:8px;">This is one of the most frequent errors on the AP exam.</span>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">常见错误</strong>
+    <span style="display:block; margin-top:8px;">乘积的导数<strong>不是</strong>导数的乘积：</span>
+    $$ \frac{d}{dx}[f \cdot g] \neq f' \cdot g' $$
+    <span style="display:block; margin-top:8px;">这是 AP 考试中最常见的错误之一。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Product Rule</summary>
+    <summary><span data-lang="en">Worked Example — Product Rule</span><span data-lang="zh">例题——乘积法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\dfrac{d}{dx}\bigl[x^2 \cdot \sin x\bigr]$.</p>
-<p>Let $f = x^2,\; g = \sin x$, so $f' = 2x,\; g' = \cos x$:</p>
+<p data-lang="en">Find $\dfrac{d}{dx}\bigl[x^2 \cdot \sin x\bigr]$.</p>
+<p data-lang="zh">求 $\dfrac{d}{dx}\bigl[x^2 \cdot \sin x\bigr]$。</p>
+<p data-lang="en">Let $f = x^2,\; g = \sin x$, so $f' = 2x,\; g' = \cos x$:</p>
+<p data-lang="zh">令 $f = x^2,\; g = \sin x$，则 $f' = 2x,\; g' = \cos x$：</p>
 $$\begin{aligned}
 \frac{d}{dx}[x^2 \sin x] &= f'g + fg' \\[4pt]
 &= 2x\sin x + x^2 \cos x
@@ -1415,10 +1607,11 @@ $$\begin{aligned}
   </details>
 
   <details>
-    <summary>Worked Example — Product Rule with Table Values</summary>
+    <summary><span data-lang="en">Worked Example — Product Rule with Table Values</span><span data-lang="zh">例题——结合表格数值使用乘积法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Given: $u(3)=5,\; u'(3)=-2,\; v(3)=4,\; v'(3)=7$. Find $\dfrac{d}{dx}[u(x)\cdot v(x)]$ at $x=3$.</p>
+<p data-lang="en">Given: $u(3)=5,\; u'(3)=-2,\; v(3)=4,\; v'(3)=7$. Find $\dfrac{d}{dx}[u(x)\cdot v(x)]$ at $x=3$.</p>
+<p data-lang="zh">已知：$u(3)=5,\; u'(3)=-2,\; v(3)=4,\; v'(3)=7$。求 $\dfrac{d}{dx}[u(x)\cdot v(x)]$ 在 $x=3$ 处的值。</p>
 $$\begin{aligned}
 &= u'(3)\cdot v(3) + u(3)\cdot v'(3) \\[4pt]
 &= (-2)(4) + (5)(7) \\[4pt]
@@ -1429,15 +1622,16 @@ $$\begin{aligned}
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">If $f(x) = x \cdot \ln x$, then $f'(x) =$</div>
+    <div class="quiz-q" data-lang="en">If $f(x) = x \cdot \ln x$, then $f'(x) =$</div>
+    <div class="quiz-q" data-lang="zh">若 $f(x) = x \cdot \ln x$，则 $f'(x) =$</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$\dfrac{1}{x}$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$\ln x + 1$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$\ln x$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$x \ln x + 1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Product rule: $f'(x) = (1)(\ln x) + (x)\!\left(\frac{1}{x}\right) = \ln x + 1$.</div>
-    <div class="quiz-explain wrong-exp">Apply the product rule with $u = x$ and $v = \ln x$: $f'(x) = (1)(\ln x) + (x)(1/x) = \ln x + 1$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Product rule: $f'(x) = (1)(\ln x) + (x)\!\left(\frac{1}{x}\right) = \ln x + 1$.</span><span data-lang="zh">✓ 正确！乘积法则：$f'(x) = (1)(\ln x) + (x)\!\left(\frac{1}{x}\right) = \ln x + 1$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Apply the product rule with $u = x$ and $v = \ln x$: $f'(x) = (1)(\ln x) + (x)(1/x) = \ln x + 1$.</span><span data-lang="zh">✗ 还差一点。令 $u = x,\; v = \ln x$ 套用乘积法则：$f'(x) = (1)(\ln x) + (x)(1/x) = \ln x + 1$。</span></div>
   </div>
 </section>
 
@@ -1447,28 +1641,40 @@ $$\begin{aligned}
 <!-- TOPIC 2.9 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-9">
-  <div class="section-label">Topic 2.9</div>
-  <h2>The Quotient Rule</h2>
+  <div class="section-label" data-lang="en">Topic 2.9</div>
+  <div class="section-label" data-lang="zh">小节 2.9</div>
+  <h2 data-lang="en">The Quotient Rule</h2>
+  <h2 data-lang="zh">商的法则</h2>
 
   <div class="formula-box">
-    <div class="formula-label">The Quotient Rule</div>
+    <div class="formula-label" data-lang="en">The Quotient Rule</div>
+    <div class="formula-label" data-lang="zh">商的法则</div>
     $$ \frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{[g(x)]^2} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Mnemonic: "Low d-High minus High d-Low, over Low squared" (Lo·dHi − Hi·dLo) / Lo²</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">Mnemonic: "Low d-High minus High d-Low, over Low squared" (Lo·dHi − Hi·dLo) / Lo²</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">口诀：“下导上减上导下，除以下的平方”（Lo·dHi − Hi·dLo）/ Lo²</p>
   </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">When to Use Which Rule?</strong>
     <span style="display:block; margin-top:8px;"><strong>Product rule</strong> when you see $f(x) \cdot g(x)$.</span>
     <span style="display:block; margin-top:4px;"><strong>Quotient rule</strong> when you see $\dfrac{f(x)}{g(x)}$.</span>
     <span style="display:block; margin-top:8px;"><em>Pro tip:</em> Sometimes you can avoid the quotient rule by rewriting a fraction as a product with a negative exponent, then using the product rule or power rule instead.</span>
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">该用哪条法则？</strong>
+    <span style="display:block; margin-top:8px;">看到 $f(x) \cdot g(x)$ 时用<strong>乘积法则</strong>。</span>
+    <span style="display:block; margin-top:4px;">看到 $\dfrac{f(x)}{g(x)}$ 时用<strong>商的法则</strong>。</span>
+    <span style="display:block; margin-top:8px;"><em>小窍门：</em>有时可以把分式改写成带负指数的乘积，从而绕开商的法则，改用乘积法则或幂法则。</span>
+  </div>
 
   <details>
-    <summary>Worked Example — Quotient Rule</summary>
+    <summary><span data-lang="en">Worked Example — Quotient Rule</span><span data-lang="zh">例题——商的法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{x^2}\right]$.</p>
-<p>Let $f = \sin x,\; g = x^2$, so $f' = \cos x,\; g' = 2x$:</p>
+<p data-lang="en">Find $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{x^2}\right]$.</p>
+<p data-lang="zh">求 $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{x^2}\right]$。</p>
+<p data-lang="en">Let $f = \sin x,\; g = x^2$, so $f' = \cos x,\; g' = 2x$:</p>
+<p data-lang="zh">令 $f = \sin x,\; g = x^2$，则 $f' = \cos x,\; g' = 2x$：</p>
 $$\begin{aligned}
 \frac{d}{dx}\!\left[\frac{\sin x}{x^2}\right] &= \frac{\cos x \cdot x^2 - \sin x \cdot 2x}{(x^2)^2} \\[4pt]
 &= \frac{x^2\cos x - 2x\sin x}{x^4} \\[4pt]
@@ -1479,15 +1685,16 @@ $$\begin{aligned}
   </details>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">If $h(x) = \dfrac{e^x}{x+1}$, then $h'(0) = $</div>
+    <div class="quiz-q" data-lang="en">If $h(x) = \dfrac{e^x}{x+1}$, then $h'(0) = $</div>
+    <div class="quiz-q" data-lang="zh">若 $h(x) = \dfrac{e^x}{x+1}$，则 $h'(0) = $</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$1$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$e$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$-1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $h'(x) = \frac{e^x(x+1) - e^x \cdot 1}{(x+1)^2} = \frac{e^x \cdot x}{(x+1)^2}$. At $x = 0$: $h'(0) = \frac{e^0 \cdot 0}{1^2} = 0$.</div>
-    <div class="quiz-explain wrong-exp">Apply the quotient rule: $h'(x) = \frac{e^x(x+1) - e^x}{(x+1)^2} = \frac{x \cdot e^x}{(x+1)^2}$. At $x=0$: $h'(0) = \frac{0}{1} = 0$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! $h'(x) = \frac{e^x(x+1) - e^x \cdot 1}{(x+1)^2} = \frac{e^x \cdot x}{(x+1)^2}$. At $x = 0$: $h'(0) = \frac{e^0 \cdot 0}{1^2} = 0$.</span><span data-lang="zh">✓ 正确！$h'(x) = \frac{e^x(x+1) - e^x \cdot 1}{(x+1)^2} = \frac{e^x \cdot x}{(x+1)^2}$。在 $x = 0$ 处：$h'(0) = \frac{e^0 \cdot 0}{1^2} = 0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Apply the quotient rule: $h'(x) = \frac{e^x(x+1) - e^x}{(x+1)^2} = \frac{x \cdot e^x}{(x+1)^2}$. At $x=0$: $h'(0) = \frac{0}{1} = 0$.</span><span data-lang="zh">✗ 还差一点。套用商的法则：$h'(x) = \frac{e^x(x+1) - e^x}{(x+1)^2} = \frac{x \cdot e^x}{(x+1)^2}$。在 $x=0$ 处：$h'(0) = \frac{0}{1} = 0$。</span></div>
   </div>
 </section>
 
@@ -1497,16 +1704,29 @@ $$\begin{aligned}
 <!-- TOPIC 2.10 -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s2-10">
-  <div class="section-label">Topic 2.10</div>
-  <h2>Finding the Derivatives of Tangent, Cotangent, Secant, and Cosecant</h2>
+  <div class="section-label" data-lang="en">Topic 2.10</div>
+  <div class="section-label" data-lang="zh">小节 2.10</div>
+  <h2 data-lang="en">Finding the Derivatives of Tangent, Cotangent, Secant, and Cosecant</h2>
+  <h2 data-lang="zh">求正切、余切、正割与余割的导数</h2>
 
-  <p>These derivatives are derived from the quotient rule applied to the basic trig functions. You should memorize the results.</p>
+  <p data-lang="en">These derivatives are derived from the quotient rule applied to the basic trig functions. You should memorize the results.</p>
+  <p data-lang="zh">这些导数都是把商的法则用于基本三角函数（<code>trig functions</code>）推出的，结果必须背下来。</p>
 
   <div class="qref">
-    <div class="qref-title">Derivatives of All Six Trig Functions</div>
+    <div class="qref-title" data-lang="en">Derivatives of All Six Trig Functions</div>
+    <div class="qref-title" data-lang="zh">六个三角函数的导数</div>
     <div class="table-wrap">
-      <table>
+      <table data-lang="en">
         <tr><th>Function</th><th>Derivative</th></tr>
+        <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
+        <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
+        <tr><td>$\tan x$</td><td>$\sec^2 x$</td></tr>
+        <tr><td>$\cot x$</td><td>$-\csc^2 x$</td></tr>
+        <tr><td>$\sec x$</td><td>$\sec x \tan x$</td></tr>
+        <tr><td>$\csc x$</td><td>$-\csc x \cot x$</td></tr>
+      </table>
+      <table data-lang="zh">
+        <tr><th>函数</th><th>导数</th></tr>
         <tr><td>$\sin x$</td><td>$\cos x$</td></tr>
         <tr><td>$\cos x$</td><td>$-\sin x$</td></tr>
         <tr><td>$\tan x$</td><td>$\sec^2 x$</td></tr>
@@ -1517,18 +1737,25 @@ $$\begin{aligned}
     </div>
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Pattern to Remember</strong>
     <span style="display:block; margin-top:8px;">Notice the "co-" pattern: every cofunction's derivative has a <strong>negative sign</strong>.</span>
     <span style="display:block; margin-top:6px;">$\cos x → -\sin x$ &nbsp;|&nbsp; $\cot x → -\csc^2 x$ &nbsp;|&nbsp; $\csc x → -\csc x \cot x$</span>
     <span style="display:block; margin-top:8px;">Also note the "sec/csc families" pair nicely: $\sec$ goes with $\sec \cdot \tan$, while $\csc$ goes with $\csc \cdot \cot$.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">规律</strong>
+    <span style="display:block; margin-top:8px;">注意“co-”规律：每个余函数（cofunction）的导数都带<strong>负号</strong>。</span>
+    <span style="display:block; margin-top:6px;">$\cos x → -\sin x$ &nbsp;|&nbsp; $\cot x → -\csc^2 x$ &nbsp;|&nbsp; $\csc x → -\csc x \cot x$</span>
+    <span style="display:block; margin-top:8px;">另外，“正割族”与“余割族”各自配对得很好：$\sec$ 配 $\sec \cdot \tan$，$\csc$ 配 $\csc \cdot \cot$。</span>
+  </div>
 
   <details>
-    <summary>Derivation — Why d/dx[tan x] = sec²x</summary>
+    <summary><span data-lang="en">Derivation — Why d/dx[tan x] = sec²x</span><span data-lang="zh">推导——为何 d/dx[tan x] = sec²x</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Derive $\dfrac{d}{dx}[\tan x]$ using the quotient rule on $\tan x = \dfrac{\sin x}{\cos x}$:</p>
+<p data-lang="en">Derive $\dfrac{d}{dx}[\tan x]$ using the quotient rule on $\tan x = \dfrac{\sin x}{\cos x}$:</p>
+<p data-lang="zh">把 $\tan x = \dfrac{\sin x}{\cos x}$ 用商的法则求导：</p>
 $$\begin{aligned}
 \frac{d}{dx}[\tan x] &= \frac{\cos x \cdot \cos x - \sin x \cdot (-\sin x)}{\cos^2 x} \\[4pt]
 &= \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \\[4pt]
@@ -1540,10 +1767,11 @@ $$\begin{aligned}
   </details>
 
   <details>
-    <summary>Worked Example — Using Trig Derivatives</summary>
+    <summary><span data-lang="en">Worked Example — Using Trig Derivatives</span><span data-lang="zh">例题——使用三角函数的导数</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $f'(x)$ for $f(x) = 3\sec x + 2\tan x$.</p>
+<p data-lang="en">Find $f'(x)$ for $f(x) = 3\sec x + 2\tan x$.</p>
+<p data-lang="zh">求 $f(x) = 3\sec x + 2\tan x$ 的导数 $f'(x)$。</p>
 $$\begin{aligned}
 f'(x) &= 3\sec x\tan x + 2\sec^2 x
 \end{aligned}$$
@@ -1552,15 +1780,16 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
   </details>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">$\dfrac{d}{dx}[\csc x]$ equals:</div>
+    <div class="quiz-q" data-lang="en">$\dfrac{d}{dx}[\csc x]$ equals:</div>
+    <div class="quiz-q" data-lang="zh">$\dfrac{d}{dx}[\csc x]$ 等于：</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$\csc x \cot x$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$\sec x \cot x$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$-\sec x \tan x$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$-\csc x \cot x$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The derivative of $\csc x$ is $-\csc x \cot x$. Remember, the "co-" functions always pick up a negative sign.</div>
-    <div class="quiz-explain wrong-exp">The derivative of $\csc x$ is $-\csc x \cot x$. The negative sign is key — all "co-" function derivatives are negative.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! The derivative of $\csc x$ is $-\csc x \cot x$. Remember, the "co-" functions always pick up a negative sign.</span><span data-lang="zh">✓ 正确！$\csc x$ 的导数是 $-\csc x \cot x$。记住，所有“co-”函数求导后都带负号。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. The derivative of $\csc x$ is $-\csc x \cot x$. The negative sign is key — all "co-" function derivatives are negative.</span><span data-lang="zh">✗ 还差一点。$\csc x$ 的导数是 $-\csc x \cot x$。负号是关键——所有“co-”函数求导后都是负的。</span></div>
   </div>
 </section>
 
@@ -1570,10 +1799,12 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 <!-- EXAM STRATEGY -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 2 Appears on the AP Exam</h2>
+  <div class="section-label" data-lang="en">Exam Strategy</div>
+  <div class="section-label" data-lang="zh">考试策略</div>
+  <h2 data-lang="en">How Unit 2 Appears on the AP Exam</h2>
+  <h2 data-lang="zh">单元 2 在 AP 考试中的考法</h2>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <div class="card-header">
       <div class="card-icon icon-blue">MC</div>
       <div class="card-title">MCQ — Common Question Styles</div>
@@ -1584,8 +1815,19 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
     <p style="margin-bottom:6px;"><strong>Determine</strong> where a function is or is not differentiable, and explain why.</p>
     <p><strong>Find</strong> the equation of a tangent line at a given point.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <div class="card-header">
+      <div class="card-icon icon-blue">MC</div>
+      <div class="card-title">选择题——常见题型</div>
+    </div>
+    <p style="margin-bottom:6px;"><strong>计算</strong>导数，使用幂、乘积、商的法则，或三角/指数/对数函数公式。</p>
+    <p style="margin-bottom:6px;"><strong>求极限</strong>，识别出它其实是导数定义的“伪装”。</p>
+    <p style="margin-bottom:6px;"><strong>估计</strong>导数：根据数值表或图像。</p>
+    <p style="margin-bottom:6px;"><strong>判断</strong>函数在何处可微、何处不可微，并说明原因。</p>
+    <p><strong>求</strong>某点处的切线方程。</p>
+  </div>
 
-  <div class="card">
+  <div class="card" data-lang="en">
     <div class="card-header">
       <div class="card-icon icon-green">FR</div>
       <div class="card-title">FRQ — Common Question Styles</div>
@@ -1595,14 +1837,32 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
     <p style="margin-bottom:6px;"><strong>Tangent line:</strong> Find the equation and use it to approximate a function value (local linearization).</p>
     <p><strong>Justify:</strong> Explain whether a function is differentiable at a point, citing continuity and equal one-sided derivatives.</p>
   </div>
+  <div class="card" data-lang="zh">
+    <div class="card-header">
+      <div class="card-icon icon-green">FR</div>
+      <div class="card-title">自由作答题——常见题型</div>
+    </div>
+    <p style="margin-bottom:6px;"><strong>表格题：</strong>用已知数据通过差商估计导数——必须写出过程。</p>
+    <p style="margin-bottom:6px;"><strong>带数值的乘积/商的法则：</strong>已知 $f(a)$、$f'(a)$、$g(a)$、$g'(a)$，求 $(fg)'(a)$ 或 $(f/g)'(a)$。</p>
+    <p style="margin-bottom:6px;"><strong>切线：</strong>求切线方程并用它估算函数值（局部线性化）。</p>
+    <p><strong>解释：</strong>说明函数在某点是否可微，依据连续性与左右导数相等。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Top 5 Mistakes That Lose Points</strong>
     <span style="display:block; margin-top:8px;">1. Not showing the difference quotient setup when estimating a derivative from a table.</span>
     <span style="display:block; margin-top:4px;">2. Taking the derivative of a product by differentiating each factor separately (must use product rule).</span>
     <span style="display:block; margin-top:4px;">3. Sign errors with $\cos x$ derivatives and the quotient rule's subtraction.</span>
     <span style="display:block; margin-top:4px;">4. Forgetting to square the denominator in the quotient rule.</span>
     <span style="display:block; margin-top:4px;">5. Using incorrect notation — e.g., writing $\frac{dy}{dx}$ when you mean $\frac{d}{dx}[f(x)]$, or dropping primes.</span>
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">最容易失分的 5 个错误</strong>
+    <span style="display:block; margin-top:8px;">1. 用表格估计导数时不写出差商表达式。</span>
+    <span style="display:block; margin-top:4px;">2. 对乘积求导时分别对每个因子求导（必须用乘积法则）。</span>
+    <span style="display:block; margin-top:4px;">3. $\cos x$ 的导数和商的法则减法处出现符号错误。</span>
+    <span style="display:block; margin-top:4px;">4. 商的法则中忘记对分母平方。</span>
+    <span style="display:block; margin-top:4px;">5. 记号使用不规范——例如想写 $\frac{d}{dx}[f(x)]$ 却写成 $\frac{dy}{dx}$，或漏掉撇号。</span>
   </div>
 </section>
 
@@ -1612,26 +1872,28 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 <!-- FLASHCARDS -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <div class="section-label" data-lang="en">Review</div>
+  <div class="section-label" data-lang="zh">复习</div>
+  <h2 data-lang="en">Flashcards — Click to Flip</h2>
+  <h2 data-lang="zh">闪卡——点击翻面</h2>
 
   <div class="flashcard-controls">
-    <button onclick="shuffleFlashcards()">Shuffle</button>
-    <button onclick="resetFlashcards()">Reset All</button>
-    <span class="flashcard-counter" id="flashcardCounter">0 / 10 flipped</span>
+    <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">打乱</span></button>
+    <button onclick="resetFlashcards()"><span data-lang="en">Reset All</span><span data-lang="zh">全部重置</span></button>
+    <span class="flashcard-counter" id="flashcardCounter"><span data-lang="en">0 / 10 flipped</span><span data-lang="zh">0 / 10 已翻</span></span>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Limit definition<br>of the derivative?</div>
+        <div class="flashcard-front"><span data-lang="en">Limit definition<br>of the derivative?</span><span data-lang="zh">导数的极限定义？</span></div>
         <div class="flashcard-back"><br>$$ f'(x) = \lim_{h \to 0}\frac{f(x+h)-f(x)}{h} $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Power Rule:<br>$\frac{d}{dx}[x^n] = \;?$</div>
-        <div class="flashcard-back"><br>$$ n x^{n-1} $$<br>Works for any real $n$.</div>
+        <div class="flashcard-front"><span data-lang="en">Power Rule:<br>$\frac{d}{dx}[x^n] = \;?$</span><span data-lang="zh">幂法则：<br>$\frac{d}{dx}[x^n] = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ n x^{n-1} $$<br><span data-lang="en">Works for any real $n$.</span><span data-lang="zh">对任意实数 $n$ 都成立。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1643,13 +1905,13 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">$\frac{d}{dx}[\cos x] = \;?$</div>
-        <div class="flashcard-back"><br>$$ -\sin x $$<br>Don't forget the negative!</div>
+        <div class="flashcard-back"><br>$$ -\sin x $$<br><span data-lang="en">Don't forget the negative!</span><span data-lang="zh">别漏负号！</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
         <div class="flashcard-front">$\frac{d}{dx}[e^x] = \;?$</div>
-        <div class="flashcard-back"><br>$$ e^x $$<br>The only function equal to its own derivative.</div>
+        <div class="flashcard-back"><br>$$ e^x $$<br><span data-lang="en">The only function equal to its own derivative.</span><span data-lang="zh">唯一与自己的导数相等的函数。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1660,14 +1922,14 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Product Rule:<br>$\frac{d}{dx}[f \cdot g] = \;?$</div>
-        <div class="flashcard-back"><br>$$ f' g + f g' $$<br>"d-first × second + first × d-second"</div>
+        <div class="flashcard-front"><span data-lang="en">Product Rule:<br>$\frac{d}{dx}[f \cdot g] = \;?$</span><span data-lang="zh">乘积法则：<br>$\frac{d}{dx}[f \cdot g] = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ f' g + f g' $$<br><span data-lang="en">"d-first × second + first × d-second"</span><span data-lang="zh">“前导×后 + 前×后导”</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Quotient Rule:<br>$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \;?$</div>
-        <div class="flashcard-back"><br>$$ \frac{f'g - fg'}{g^2} $$<br>"Lo dHi − Hi dLo over Lo²"</div>
+        <div class="flashcard-front"><span data-lang="en">Quotient Rule:<br>$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \;?$</span><span data-lang="zh">商的法则：<br>$\frac{d}{dx}\!\left[\frac{f}{g}\right] = \;?$</span></div>
+        <div class="flashcard-back"><br>$$ \frac{f'g - fg'}{g^2} $$<br><span data-lang="en">"Lo dHi − Hi dLo over Lo²"</span><span data-lang="zh">“下导上 − 上导下，除以下²”</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1678,8 +1940,8 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Differentiable at a point implies…?</div>
-        <div class="flashcard-back"><br>$$\text{Differentiable} \Rightarrow \text{Continuous}$$<br>(converse fails)</div>
+        <div class="flashcard-front"><span data-lang="en">Differentiable at a point implies…?</span><span data-lang="zh">某点可微 ⇒ ？</span></div>
+        <div class="flashcard-back"><br>$$\text{Differentiable} \Rightarrow \text{Continuous}$$<br><span data-lang="en">(converse fails)</span><span data-lang="zh">（逆命题不成立）</span></div>
       </div>
     </div>
   </div>
@@ -1691,98 +1953,108 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 <!-- UNIT QUIZ -->
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 2 — Practice Quiz</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 24px;">Test yourself across the full unit. Your score updates live in the navigation bar.</p>
+  <div class="section-label" data-lang="en">Assessment</div>
+  <div class="section-label" data-lang="zh">测评</div>
+  <h2 data-lang="en">Unit 2 — Practice Quiz</h2>
+  <h2 data-lang="zh">单元 2 ——综合小测</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang="en">Test yourself across the full unit. Your score updates live in the navigation bar.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 24px;" data-lang="zh">用本测验自检全单元掌握情况。分数会在导航栏实时更新。</p>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">1. If $f(x) = x^4 - 3x^2 + 5$, then $f'(2) = $</div>
+    <div class="quiz-q" data-lang="en">1. If $f(x) = x^4 - 3x^2 + 5$, then $f'(2) = $</div>
+    <div class="quiz-q" data-lang="zh">1. 若 $f(x) = x^4 - 3x^2 + 5$，则 $f'(2) = $</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$17$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$24$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$20$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$26$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $f'(x) = 4x^3 - 6x$. So $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</div>
-    <div class="quiz-explain wrong-exp">$f'(x) = 4x^3 - 6x$. Evaluate at $x = 2$: $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! $f'(x) = 4x^3 - 6x$. So $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</span><span data-lang="zh">✓ 正确！$f'(x) = 4x^3 - 6x$，因此 $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. $f'(x) = 4x^3 - 6x$. Evaluate at $x = 2$: $f'(2) = 4(8) - 6(2) = 32 - 12 = 20$.</span><span data-lang="zh">✗ 还差一点。$f'(x) = 4x^3 - 6x$。在 $x = 2$ 处：$f'(2) = 4(8) - 6(2) = 32 - 12 = 20$。</span></div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">2. The equation of the tangent line to $y = \sin x$ at $x = 0$ is:</div>
+    <div class="quiz-q" data-lang="en">2. The equation of the tangent line to $y = \sin x$ at $x = 0$ is:</div>
+    <div class="quiz-q" data-lang="zh">2. $y = \sin x$ 在 $x = 0$ 处的切线方程是：</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$y = 0$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$y = x$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$y = -x$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$y = 1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! At $x = 0$: $y = \sin(0) = 0$ and $y' = \cos(0) = 1$. Tangent line: $y - 0 = 1(x - 0)$, so $y = x$.</div>
-    <div class="quiz-explain wrong-exp">$y(0) = \sin(0) = 0$, $y'(0) = \cos(0) = 1$. Tangent line: $y = 0 + 1 \cdot (x - 0) = x$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! At $x = 0$: $y = \sin(0) = 0$ and $y' = \cos(0) = 1$. Tangent line: $y - 0 = 1(x - 0)$, so $y = x$.</span><span data-lang="zh">✓ 正确！在 $x = 0$ 处：$y = \sin(0) = 0$，$y' = \cos(0) = 1$。切线：$y - 0 = 1(x - 0)$，即 $y = x$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. $y(0) = \sin(0) = 0$, $y'(0) = \cos(0) = 1$. Tangent line: $y = 0 + 1 \cdot (x - 0) = x$.</span><span data-lang="zh">✗ 还差一点。$y(0) = \sin(0) = 0$，$y'(0) = \cos(0) = 1$。切线：$y = 0 + 1 \cdot (x - 0) = x$。</span></div>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">3. $\frac{d}{dx}\left[x^2 e^x\right] = $</div>
+    <div class="quiz-q" data-lang="en">3. $\frac{d}{dx}\left[x^2 e^x\right] = $</div>
+    <div class="quiz-q" data-lang="zh">3. $\frac{d}{dx}\left[x^2 e^x\right] = $</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$2x \cdot e^x$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$x^2 \cdot e^x$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$2x + e^x$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$e^x(2x + x^2)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Product rule: $\frac{d}{dx}[x^2 e^x] = 2x \cdot e^x + x^2 \cdot e^x = e^x(2x + x^2)$.</div>
-    <div class="quiz-explain wrong-exp">Use the product rule: $(x^2)' \cdot e^x + x^2 \cdot (e^x)' = 2x e^x + x^2 e^x = e^x(2x + x^2)$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Product rule: $\frac{d}{dx}[x^2 e^x] = 2x \cdot e^x + x^2 \cdot e^x = e^x(2x + x^2)$.</span><span data-lang="zh">✓ 正确！乘积法则：$\frac{d}{dx}[x^2 e^x] = 2x \cdot e^x + x^2 \cdot e^x = e^x(2x + x^2)$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Use the product rule: $(x^2)' \cdot e^x + x^2 \cdot (e^x)' = 2x e^x + x^2 e^x = e^x(2x + x^2)$.</span><span data-lang="zh">✗ 还差一点。用乘积法则：$(x^2)' \cdot e^x + x^2 \cdot (e^x)' = 2x e^x + x^2 e^x = e^x(2x + x^2)$。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">4. At which of the following points is $f(x) = |x - 3|$ NOT differentiable?</div>
+    <div class="quiz-q" data-lang="en">4. At which of the following points is $f(x) = |x - 3|$ NOT differentiable?</div>
+    <div class="quiz-q" data-lang="zh">4. $f(x) = |x - 3|$ 在以下哪个点<strong>不可微</strong>？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$x = 0$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$x = 1$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$x = 3$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$x = -3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The absolute value function has a sharp corner at $x = 3$ where the left derivative is $-1$ and the right derivative is $+1$. Since these are not equal, $f$ is not differentiable there.</div>
-    <div class="quiz-explain wrong-exp">$|x - 3|$ has a corner at $x = 3$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$ — they don't match, so $f$ is not differentiable at $x = 3$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! The absolute value function has a sharp corner at $x = 3$ where the left derivative is $-1$ and the right derivative is $+1$. Since these are not equal, $f$ is not differentiable there.</span><span data-lang="zh">✓ 正确！绝对值函数在 $x = 3$ 处出现尖角，左导数为 $-1$，右导数为 $+1$。两者不相等，所以 $f$ 在该点不可微。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. $|x - 3|$ has a corner at $x = 3$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$ — they don't match, so $f$ is not differentiable at $x = 3$.</span><span data-lang="zh">✗ 还差一点。$|x - 3|$ 在 $x = 3$ 处有拐角。左导数为 $-1$，右导数为 $+1$——两者不相等，所以 $f$ 在 $x = 3$ 处不可微。</span></div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">5. Given $f(3) = 2$, $f'(3) = -1$, $g(3) = 4$, $g'(3) = 3$, find $\left(\frac{f}{g}\right)'(3)$.</div>
+    <div class="quiz-q" data-lang="en">5. Given $f(3) = 2$, $f'(3) = -1$, $g(3) = 4$, $g'(3) = 3$, find $\left(\frac{f}{g}\right)'(3)$.</div>
+    <div class="quiz-q" data-lang="zh">5. 已知 $f(3) = 2$、$f'(3) = -1$、$g(3) = 4$、$g'(3) = 3$，求 $\left(\frac{f}{g}\right)'(3)$。</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$\dfrac{2}{16}$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$-\dfrac{5}{8}$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$\dfrac{10}{16}$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$-\dfrac{1}{4}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Quotient rule: $\frac{f'g - fg'}{g^2} = \frac{(-1)(4) - (2)(3)}{4^2} = \frac{-4 - 6}{16} = \frac{-10}{16} = -\frac{5}{8}$.</div>
-    <div class="quiz-explain wrong-exp">Quotient rule: $\frac{f'(3) g(3) - f(3) g'(3)}{[g(3)]^2} = \frac{(-1)(4) - (2)(3)}{16} = \frac{-10}{16} = -\frac{5}{8}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Quotient rule: $\frac{f'g - fg'}{g^2} = \frac{(-1)(4) - (2)(3)}{4^2} = \frac{-4 - 6}{16} = \frac{-10}{16} = -\frac{5}{8}$.</span><span data-lang="zh">✓ 正确！商的法则：$\frac{f'g - fg'}{g^2} = \frac{(-1)(4) - (2)(3)}{4^2} = \frac{-4 - 6}{16} = \frac{-10}{16} = -\frac{5}{8}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Quotient rule: $\frac{f'(3) g(3) - f(3) g'(3)}{[g(3)]^2} = \frac{(-1)(4) - (2)(3)}{16} = \frac{-10}{16} = -\frac{5}{8}$.</span><span data-lang="zh">✗ 还差一点。商的法则：$\frac{f'(3) g(3) - f(3) g'(3)}{[g(3)]^2} = \frac{(-1)(4) - (2)(3)}{16} = \frac{-10}{16} = -\frac{5}{8}$。</span></div>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">6. If the tangent line to $y = f(x)$ at $x = 4$ is $y = 3x - 7$, what is $f(4)$?</div>
+    <div class="quiz-q" data-lang="en">6. If the tangent line to $y = f(x)$ at $x = 4$ is $y = 3x - 7$, what is $f(4)$?</div>
+    <div class="quiz-q" data-lang="zh">6. 若 $y = f(x)$ 在 $x = 4$ 处的切线是 $y = 3x - 7$，则 $f(4)$ 等于多少？</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$5$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$3$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$-7$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$12$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The tangent line passes through the point of tangency. Substituting $x = 4$ into $y = 3x - 7$ gives $y = 12 - 7 = 5$, so $f(4) = 5$.</div>
-    <div class="quiz-explain wrong-exp">The tangent line touches the curve at $x = 4$, so $f(4) = 3(4) - 7 = 5$. The slope tells us $f'(4) = 3$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! The tangent line passes through the point of tangency. Substituting $x = 4$ into $y = 3x - 7$ gives $y = 12 - 7 = 5$, so $f(4) = 5$.</span><span data-lang="zh">✓ 正确！切线必过切点。把 $x = 4$ 代入 $y = 3x - 7$，得 $y = 12 - 7 = 5$，所以 $f(4) = 5$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. The tangent line touches the curve at $x = 4$, so $f(4) = 3(4) - 7 = 5$. The slope tells us $f'(4) = 3$.</span><span data-lang="zh">✗ 还差一点。切线在 $x = 4$ 处与曲线相切，所以 $f(4) = 3(4) - 7 = 5$。斜率告诉我们 $f'(4) = 3$。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">7. $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{e^x}\right]$ at $x = 0$ equals:</div>
+    <div class="quiz-q" data-lang="en">7. $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{e^x}\right]$ at $x = 0$ equals:</div>
+    <div class="quiz-q" data-lang="zh">7. $\dfrac{d}{dx}\!\left[\dfrac{\sin x}{e^x}\right]$ 在 $x = 0$ 处等于：</div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0" data-label="A">$0$</div>
       <div class="quiz-opt" data-idx="1" data-label="B">$-1$</div>
       <div class="quiz-opt" data-idx="2" data-label="C">$1$</div>
       <div class="quiz-opt" data-idx="3" data-label="D">$\dfrac{1}{e}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Quotient rule: $\frac{\cos x \cdot e^x - \sin x \cdot e^x}{(e^x)^2} = \frac{e^x(\cos x - \sin x)}{e^{2x}} = \frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{1 - 0}{1} = 1$.</div>
-    <div class="quiz-explain wrong-exp">Apply the quotient rule, then simplify: $\frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{\cos 0 - \sin 0}{e^0} = \frac{1 - 0}{1} = 1$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">✓ Correct! Quotient rule: $\frac{\cos x \cdot e^x - \sin x \cdot e^x}{(e^x)^2} = \frac{e^x(\cos x - \sin x)}{e^{2x}} = \frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{1 - 0}{1} = 1$.</span><span data-lang="zh">✓ 正确！商的法则：$\frac{\cos x \cdot e^x - \sin x \cdot e^x}{(e^x)^2} = \frac{e^x(\cos x - \sin x)}{e^{2x}} = \frac{\cos x - \sin x}{e^x}$。在 $x = 0$ 处：$\frac{1 - 0}{1} = 1$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">✗ Not quite. Apply the quotient rule, then simplify: $\frac{\cos x - \sin x}{e^x}$. At $x = 0$: $\frac{\cos 0 - \sin 0}{e^0} = \frac{1 - 0}{1} = 1$.</span><span data-lang="zh">✗ 还差一点。先用商的法则，再化简得 $\frac{\cos x - \sin x}{e^x}$。在 $x = 0$ 处：$\frac{\cos 0 - \sin 0}{e^0} = \frac{1 - 0}{1} = 1$。</span></div>
   </div>
 
   <!-- Results bar appears after all quizzes answered -->
   <div class="quiz-results-bar" id="quizResultsBar">
     <div class="results-header">
-      <div class="results-title">Quiz Complete!</div>
+      <div class="results-title"><span data-lang="en">Quiz Complete!</span><span data-lang="zh">测验完成！</span></div>
       <div class="results-score" id="resultsScore"></div>
     </div>
     <div class="results-bar-track">
@@ -1794,37 +2066,41 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 
 <!-- ═══════════════ READINESS CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+  <div class="section-label" data-lang="en">Self-Assessment</div>
+  <div class="section-label" data-lang="zh">自我评估</div>
+  <h2 data-lang="en">Readiness Checklist</h2>
+  <h2 data-lang="zh">就绪自查清单</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击每条已掌握的内容。考试前争取做到 100%。</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">已掌握 0 / 14</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute the derivative from the limit definition</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish average rate of change from instantaneous rate</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Estimate derivatives numerically from tables and graphs</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Determine differentiability and its relationship to continuity</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Power Rule to polynomial and radical expressions</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use the constant multiple, sum, and difference rules</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate $\sin x$, $\cos x$, $e^x$, and $\ln x$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Product Rule correctly and simplify</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Quotient Rule correctly and simplify</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate $\tan x$, $\cot x$, $\sec x$, $\csc x$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Write an equation of the tangent line at a given point</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Identify points where a function fails to be differentiable</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate differentiation rule for a given expression</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret the derivative as slope of the tangent line</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute the derivative from the limit definition</span><span data-lang="zh">用极限定义计算导数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Distinguish average rate of change from instantaneous rate</span><span data-lang="zh">区分平均变化率与瞬时变化率</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Estimate derivatives numerically from tables and graphs</span><span data-lang="zh">通过数值表和图像估计导数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Determine differentiability and its relationship to continuity</span><span data-lang="zh">判断可微性及其与连续性的关系</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Power Rule to polynomial and radical expressions</span><span data-lang="zh">对多项式与根式应用幂法则</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use the constant multiple, sum, and difference rules</span><span data-lang="zh">使用常数倍、求和与求差法则</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate $\sin x$, $\cos x$, $e^x$, and $\ln x$</span><span data-lang="zh">对 $\sin x$、$\cos x$、$e^x$、$\ln x$ 求导</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Product Rule correctly and simplify</span><span data-lang="zh">正确应用乘积法则并化简</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Quotient Rule correctly and simplify</span><span data-lang="zh">正确应用商的法则并化简</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate $\tan x$, $\cot x$, $\sec x$, $\csc x$</span><span data-lang="zh">对 $\tan x$、$\cot x$、$\sec x$、$\csc x$ 求导</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Write an equation of the tangent line at a given point</span><span data-lang="zh">写出给定点处的切线方程</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Identify points where a function fails to be differentiable</span><span data-lang="zh">识别函数不可微的点</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Select the appropriate differentiation rule for a given expression</span><span data-lang="zh">为给定表达式选择恰当的求导法则</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Interpret the derivative as slope of the tangent line</span><span data-lang="zh">把导数解读为切线的斜率</span></li>
   </ul>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;"><span data-lang="en">AP-Style Practice Problems</span><span data-lang="zh">AP 风格练习题</span></h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="zh">本单元的考试级练习——按 AP 评分标准编写的选择题与拓展作答题。为冲刺高分而设计，建议在完成上面的笔记与页面内小测后再做。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_2_Differentiation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_2_Differentiation_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
@@ -1832,12 +2108,13 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 <!-- ─── FOOTER ─── -->
 <div class="footer">
   <div class="footer-brand">AP Calculus AB &amp; BC — Unit 2 Study Notes</div>
-  <p>Interactive exam prep — formulas, worked examples, flashcards, and practice quizzes.</p>
+  <p data-lang="en">Interactive exam prep — formulas, worked examples, flashcards, and practice quizzes.</p>
+  <p data-lang="zh">交互式考试备考——公式、例题、闪卡与练习测验。</p>
   <div class="footer-badges">
-    <span>10 Topics</span>
-    <span>9 Practice Quizzes</span>
-    <span>10 Flashcards</span>
-    <span>Interactive Visualizer</span>
+    <span><span data-lang="en">10 Topics</span><span data-lang="zh">10 个小节</span></span>
+    <span><span data-lang="en">9 Practice Quizzes</span><span data-lang="zh">9 道练习小测</span></span>
+    <span><span data-lang="en">10 Flashcards</span><span data-lang="zh">10 张闪卡</span></span>
+    <span><span data-lang="en">Interactive Visualizer</span><span data-lang="zh">交互可视化</span></span>
   </div>
 </div>
 
@@ -1845,15 +2122,30 @@ f'(x) &= 3\sec x\tan x + 2\sec^2 x
 
 <script>
 // ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 
 // ─── PROGRESS BAR ───
@@ -1892,23 +2184,26 @@ let totalAnswered = 0;
 const totalQuizzes = document.querySelectorAll('.quiz').length;
 
 function updateScoreDisplay() {
-  document.getElementById('scoreDisplay').textContent = `${totalCorrect} / ${totalAnswered}`;
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  if (scoreDisplay) scoreDisplay.textContent = `${totalCorrect} / ${totalAnswered}`;
   // Update pill color
   const pill = document.getElementById('scorePill');
-  if (totalAnswered === 0) return;
+  if (totalAnswered === 0) { updateDashboard(); checkAllQuizzesDone(); return; }
   const pct = totalCorrect / totalAnswered;
-  if (pct >= 0.8) {
-    pill.style.borderColor = 'var(--green)';
-    pill.style.background = 'var(--green-light)';
-    pill.style.color = 'var(--green)';
-  } else if (pct >= 0.5) {
-    pill.style.borderColor = 'var(--orange)';
-    pill.style.background = 'var(--orange-light)';
-    pill.style.color = 'var(--orange)';
-  } else {
-    pill.style.borderColor = 'var(--red)';
-    pill.style.background = 'var(--red-light)';
-    pill.style.color = 'var(--red)';
+  if (pill) {
+    if (pct >= 0.8) {
+      pill.style.borderColor = 'var(--green)';
+      pill.style.background = 'var(--green-light)';
+      pill.style.color = 'var(--green)';
+    } else if (pct >= 0.5) {
+      pill.style.borderColor = 'var(--orange)';
+      pill.style.background = 'var(--orange-light)';
+      pill.style.color = 'var(--orange)';
+    } else {
+      pill.style.borderColor = 'var(--red)';
+      pill.style.background = 'var(--red-light)';
+      pill.style.color = 'var(--red)';
+    }
   }
   updateDashboard();
   checkAllQuizzesDone();
@@ -1916,11 +2211,15 @@ function updateScoreDisplay() {
 
 function updateDashboard() {
   const pct = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
-  document.getElementById('dashScore').textContent = pct + '%';
-  document.getElementById('dashSections').textContent = readSections.size + '/13';
+  const dashScore = document.getElementById('dashScore');
+  if (dashScore) dashScore.textContent = pct + '%';
+  const dashSections = document.getElementById('dashSections');
+  if (dashSections) dashSections.textContent = readSections.size + '/13';
   const flipped = document.querySelectorAll('.flashcard.flipped').length;
-  document.getElementById('dashCards').textContent = flipped + '/10';
-  document.getElementById('flashcardCounter').textContent = flipped + ' / 10 flipped';
+  const dashCards = document.getElementById('dashCards');
+  if (dashCards) dashCards.textContent = flipped + '/10';
+  const fc = document.getElementById('flashcardCounter');
+  if (fc) fc.innerHTML = '<span data-lang="en">' + flipped + ' / 10 flipped</span><span data-lang="zh">' + flipped + ' / 10 已翻</span>';
 }
 
 function checkAllQuizzesDone() {
@@ -1929,12 +2228,12 @@ function checkAllQuizzesDone() {
   const pct = Math.round((totalCorrect / totalAnswered) * 100);
   document.getElementById('resultsScore').textContent = `${totalCorrect} / ${totalAnswered} (${pct}%)`;
   document.getElementById('resultsBarFill').style.width = pct + '%';
-  let msg = '';
-  if (pct === 100) msg = 'Perfect score! You\'ve mastered Unit 2.';
-  else if (pct >= 80) msg = 'Strong performance! Review the topics you missed and you\'ll be exam-ready.';
-  else if (pct >= 60) msg = 'Good foundation. Focus on the sections where you missed questions.';
-  else msg = 'Keep studying — revisit the worked examples and flashcards, then try again.';
-  document.getElementById('resultsMsg').textContent = msg;
+  let msgEn = '', msgZh = '';
+  if (pct === 100) { msgEn = 'Perfect score! You\'ve mastered Unit 2.'; msgZh = '满分！你已经掌握了单元 2。'; }
+  else if (pct >= 80) { msgEn = 'Strong performance! Review the topics you missed and you\'ll be exam-ready.'; msgZh = '表现优秀！复习一下错题，你就可以应考了。'; }
+  else if (pct >= 60) { msgEn = 'Good foundation. Focus on the sections where you missed questions.'; msgZh = '基础不错。重点复习答错的小节。'; }
+  else { msgEn = 'Keep studying — revisit the worked examples and flashcards, then try again.'; msgZh = '继续努力——回看例题和闪卡，然后再来一次。'; }
+  document.getElementById('resultsMsg').innerHTML = '<span data-lang="en">' + msgEn + '</span><span data-lang="zh">' + msgZh + '</span>';
   bar.classList.add('show');
   
   // Color the score
@@ -2190,7 +2489,7 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const prog = document.getElementById('checkProgress');
-  if (prog) prog.textContent = checked + ' / ' + total + ' mastered';
+  if (prog) prog.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
 }
 </script>
 </body>

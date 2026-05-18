@@ -34,7 +34,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,30,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 280px;
@@ -744,6 +744,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   transform: translateY(-1px) !important;
 }
 .nav-btn.active { background: var(--accent, #7A2E2E) !important; color: #FFFFFF !important; border-color: var(--accent, #7A2E2E) !important; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -754,51 +758,56 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     <span class="nav-badge">UNIT 10</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s10-1">10.1 Convergent &amp; Divergent Series</a>
-  <a href="#s10-2">10.2 Geometric Series</a>
-  <a href="#s10-3">10.3 nth Term Test</a>
-  <a href="#s10-4">10.4 Integral Test</a>
-  <a href="#s10-5">10.5 Harmonic &amp; p-Series</a>
-  <a href="#s10-6">10.6 Comparison Tests</a>
-  <a href="#s10-7">10.7 Alternating Series Test</a>
-  <a href="#s10-8">10.8 Ratio Test</a>
-  <a href="#s10-9">10.9 Absolute vs. Conditional</a>
-  <a href="#s10-10">10.10 Alternating Series Error</a>
-  <a href="#s10-11">10.11 Taylor Polynomials</a>
-  <a href="#s10-12">10.12 Lagrange Error Bound</a>
-  <a href="#s10-13">10.13 Radius &amp; Interval of Convergence</a>
-  <a href="#s10-14">10.14 Taylor &amp; Maclaurin Series</a>
-  <a href="#s10-15">10.15 Functions as Power Series</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s10-1"><span data-lang="en">10.1 Convergent &amp; Divergent Series</span><span data-lang="zh">10.1 收敛与发散级数</span></a>
+  <a href="#s10-2"><span data-lang="en">10.2 Geometric Series</span><span data-lang="zh">10.2 等比级数</span></a>
+  <a href="#s10-3"><span data-lang="en">10.3 nth Term Test</span><span data-lang="zh">10.3 第 n 项判别法</span></a>
+  <a href="#s10-4"><span data-lang="en">10.4 Integral Test</span><span data-lang="zh">10.4 积分判别法</span></a>
+  <a href="#s10-5"><span data-lang="en">10.5 Harmonic &amp; p-Series</span><span data-lang="zh">10.5 调和级数与 p 级数</span></a>
+  <a href="#s10-6"><span data-lang="en">10.6 Comparison Tests</span><span data-lang="zh">10.6 比较判别法</span></a>
+  <a href="#s10-7"><span data-lang="en">10.7 Alternating Series Test</span><span data-lang="zh">10.7 交错级数判别法</span></a>
+  <a href="#s10-8"><span data-lang="en">10.8 Ratio Test</span><span data-lang="zh">10.8 比值判别法</span></a>
+  <a href="#s10-9"><span data-lang="en">10.9 Absolute vs. Conditional</span><span data-lang="zh">10.9 绝对收敛与条件收敛</span></a>
+  <a href="#s10-10"><span data-lang="en">10.10 Alternating Series Error</span><span data-lang="zh">10.10 交错级数误差界</span></a>
+  <a href="#s10-11"><span data-lang="en">10.11 Taylor Polynomials</span><span data-lang="zh">10.11 泰勒多项式</span></a>
+  <a href="#s10-12"><span data-lang="en">10.12 Lagrange Error Bound</span><span data-lang="zh">10.12 拉格朗日误差界</span></a>
+  <a href="#s10-13"><span data-lang="en">10.13 Radius &amp; Interval of Convergence</span><span data-lang="zh">10.13 收敛半径与收敛区间</span></a>
+  <a href="#s10-14"><span data-lang="en">10.14 Taylor &amp; Maclaurin Series</span><span data-lang="zh">10.14 泰勒与麦克劳林级数</span></a>
+  <a href="#s10-15"><span data-lang="en">10.15 Functions as Power Series</span><span data-lang="zh">10.15 函数的幂级数表示</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB/BC · 鼎睿学苑</div>
-  <h1>Unit 10: Infinite Sequences<br>and Series</h1>
-  <p class="hero-sub">
+  <h1 data-lang="en">Unit 10: Infinite Sequences<br>and Series</h1>
+  <h1 data-lang="zh">单元 10：无穷数列<br>与级数</h1>
+  <p class="hero-sub" data-lang="en">
     Discover how the sum of infinitely many terms can converge to a finite value. Master convergence tests, Taylor &amp; Maclaurin series, and error bounds.
   </p>
+  <p class="hero-sub" data-lang="zh">
+    探索无穷多项之和如何收敛到一个有限值。掌握各类收敛判别法、泰勒与麦克劳林级数，以及误差界。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">17–18% of AP Exam</span>
-    <span class="chip chip-green">~17–18 Class Periods</span>
-    <span class="chip chip-purple">15 Topics · BC Only</span>
+    <span class="chip chip-maroon"><span data-lang="en">17–18% of AP Exam</span><span data-lang="zh">占 AP 考试 17–18%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~17–18 Class Periods</span><span data-lang="zh">约 17–18 课时</span></span>
+    <span class="chip chip-purple"><span data-lang="en">15 Topics · BC Only</span><span data-lang="zh">15 个主题 · 仅 BC</span></span>
   </div>
 </section>
 
@@ -809,44 +818,53 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-1">
   <div class="section-label">Topic 10.1</div>
-  <h2>Defining Convergent &amp; Divergent Infinite Series</h2>
+  <h2 data-lang="en">Defining Convergent &amp; Divergent Infinite Series</h2>
+  <h2 data-lang="zh">定义收敛与发散的无穷级数</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Big Idea</strong>
-    An <strong>infinite series</strong> is the sum of infinitely many terms: $\displaystyle\sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \cdots$. The central question is: does this sum approach a finite number, or does it grow without bound?
+    <strong style="color: var(--accent);" data-lang="en">Big Idea</strong>
+    <strong style="color: var(--accent);" data-lang="zh">核心思想</strong>
+    <span data-lang="en">An <strong>infinite series</strong> is the sum of infinitely many terms: $\displaystyle\sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \cdots$. The central question is: does this sum approach a finite number, or does it grow without bound?</span>
+    <span data-lang="zh"><strong>无穷级数（<code>infinite series</code>）</strong>是无穷多项之和：$\displaystyle\sum_{n=1}^{\infty} a_n = a_1 + a_2 + a_3 + \cdots$。核心问题是：此和会趋近于某个有限值，还是无界增长？</span>
   </div>
 
-  <p>We answer this by looking at <strong>partial sums</strong>. The $n$th partial sum is $S_n = a_1 + a_2 + \cdots + a_n$. If the sequence of partial sums $\{S_n\}$ converges to a finite limit $S$, then the series converges to $S$. Otherwise, it diverges.</p>
+  <p data-lang="en">We answer this by looking at <strong>partial sums</strong>. The $n$th partial sum is $S_n = a_1 + a_2 + \cdots + a_n$. If the sequence of partial sums $\{S_n\}$ converges to a finite limit $S$, then the series converges to $S$. Otherwise, it diverges.</p>
+  <p data-lang="zh">我们通过<strong>部分和（<code>partial sum</code>）</strong>来回答。第 $n$ 个部分和为 $S_n = a_1 + a_2 + \cdots + a_n$。若<strong>部分和数列（<code>sequence of partial sums</code>）</strong> $\{S_n\}$ 收敛（<code>converge</code>）到有限极限 $S$，则该级数收敛到 $S$；否则，该级数发散（<code>diverge</code>）。</p>
 
   <div class="formula-box" style="border-top-color: var(--green);">
-    <div class="formula-label" style="color: var(--green);">Definition of Convergence</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="en">Definition of Convergence</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="zh">收敛的定义</div>
     $$ \sum_{n=1}^{\infty} a_n = S \quad \Longleftrightarrow \quad \lim_{n \to \infty} S_n = S \quad \text{where } S_n = \sum_{k=1}^{n} a_k $$
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Key Distinction</strong>
-    <span style="display:block; margin-top:8px;"><strong>Sequence:</strong> An ordered list of numbers $\{a_n\}$ — does each <em>term</em> approach a value?</span>
-    <span style="display:block; margin-top:4px;"><strong>Series:</strong> The <em>sum</em> of a sequence — does the running total approach a value?</span>
-    <span style="display:block; margin-top:8px;">A sequence can converge while its corresponding series diverges. For example, $a_n = 1/n \to 0$, but $\sum 1/n = \infty$.</span>
+    <strong style="color: var(--orange);" data-lang="en">Key Distinction</strong>
+    <strong style="color: var(--orange);" data-lang="zh">关键区别</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en"><strong>Sequence:</strong> An ordered list of numbers $\{a_n\}$ — does each <em>term</em> approach a value?</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>数列（<code>sequence</code>）：</strong>有序的数字列表 $\{a_n\}$ —— 看每一<em>项（<code>term</code>）</em>是否趋近某个值。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>Series:</strong> The <em>sum</em> of a sequence — does the running total approach a value?</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>级数（<code>series</code>）：</strong>数列各项的<em>累加</em> —— 看累加和是否趋近某个值。</span>
+    <span style="display:block; margin-top:8px;" data-lang="en">A sequence can converge while its corresponding series diverges. For example, $a_n = 1/n \to 0$, but $\sum 1/n = \infty$.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">数列可以收敛而对应的级数发散。例如，$a_n = 1/n \to 0$，但 $\sum 1/n = \infty$。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Telescoping Series</summary>
+    <summary><span data-lang="en">Worked Example — Telescoping Series</span><span data-lang="zh">例题 —— 裂项相消级数</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Determine if the series converges:</span>
+<pre><span class="cm" data-lang="en">Determine if the series converges:</span><span class="cm" data-lang="zh">判断该级数是否收敛：</span>
 $$ \sum_{n=1}^{\infty} \frac{1}{n(n+1)} $$
 
-<span class="cm">Use partial fractions:</span>
+<span class="cm" data-lang="en">Use partial fractions:</span><span class="cm" data-lang="zh">使用部分分式分解：</span>
   1/[n(n+1)] = 1/n − 1/(n+1)
 
-<span class="cm">Write partial sums (terms cancel!):</span>
+<span class="cm" data-lang="en">Write partial sums (terms cancel!):</span><span class="cm" data-lang="zh">写出部分和（各项相消！）：</span>
   S_n = (1 − 1/2) + (1/2 − 1/3) + ⋯ + (1/n − 1/(n+1))
       = 1 − 1/(n+1)
 
-<span class="cm">Take the limit:</span>
+<span class="cm" data-lang="en">Take the limit:</span><span class="cm" data-lang="zh">取极限：</span>
   lim(n→∞) S_n = 1 − 0 = <span class="num">1</span>
 
-<span class="str">The series converges to 1.</span></pre>
+<span class="str" data-lang="en">The series converges to 1.</span><span class="str" data-lang="zh">该级数收敛到 1。</span></pre>
     </div>
   </details>
 </section>
@@ -858,49 +876,58 @@ $$ \sum_{n=1}^{\infty} \frac{1}{n(n+1)} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-2">
   <div class="section-label">Topic 10.2</div>
-  <h2>Working with Geometric Series</h2>
+  <h2 data-lang="en">Working with Geometric Series</h2>
+  <h2 data-lang="zh">处理等比级数</h2>
 
-  <p>A <strong>geometric series</strong> has a constant ratio $r$ between consecutive terms. It is the most important series to recognize on the AP exam because it has a clean closed-form sum.</p>
+  <p data-lang="en">A <strong>geometric series</strong> has a constant ratio $r$ between consecutive terms. It is the most important series to recognize on the AP exam because it has a clean closed-form sum.</p>
+  <p data-lang="zh"><strong>等比级数（<code>geometric series</code>）</strong>相邻两项之比为常数 $r$。这是 AP 考试中最重要的可识别级数，因为它有简洁的闭式求和公式。</p>
 
   <div class="formula-box">
-    <div class="formula-label">Geometric Series</div>
+    <div class="formula-label" data-lang="en">Geometric Series</div>
+    <div class="formula-label" data-lang="zh">等比级数</div>
     $$ \sum_{n=0}^{\infty} ar^n = a + ar + ar^2 + \cdots = \frac{a}{1-r}, \quad |r| < 1 $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">Converges if and only if $|r| < 1$. Diverges if $|r| \geq 1$.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">Converges if and only if $|r| < 1$. Diverges if $|r| \geq 1$.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">当且仅当 $|r| < 1$ 时收敛；当 $|r| \geq 1$ 时发散。</p>
   </div>
 
   <!-- ─── INTERACTIVE GEOMETRIC SERIES VISUALIZER ─── -->
   <div class="interactive-widget" id="geo-widget">
-    <div class="widget-header">Interactive Geometric Series Explorer</div>
-    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Adjust $r$ and watch the partial sums converge (or diverge). The bars show each term; the line tracks the running total.</p>
+    <div class="widget-header" data-lang="en">Interactive Geometric Series Explorer</div>
+    <div class="widget-header" data-lang="zh">交互式等比级数探索器</div>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="en">Adjust $r$ and watch the partial sums converge (or diverge). The bars show each term; the line tracks the running total.</p>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="zh">调节 $r$ 观察部分和如何收敛（或发散）。柱状图显示每一项，折线追踪累加和。</p>
     <div class="widget-canvas-wrap">
       <canvas id="geoCanvas" width="720" height="380"></canvas>
     </div>
     <div class="widget-controls">
-      <label for="geoR">Ratio $r$:</label>
+      <label for="geoR"><span data-lang="en">Ratio $r$:</span><span data-lang="zh">公比 $r$：</span></label>
       <input type="range" id="geoR" min="-95" max="95" value="50" step="5">
       <div class="widget-readout" id="geoReadout">r = 0.50</div>
     </div>
     <div class="widget-sum-readout" id="geoSumReadout">
-      Partial sum $S_{20}$ = <span class="sum-val" id="geoPartialVal">—</span><br>
-      Exact sum $\frac{a}{1-r}$ = <span class="exact-val" id="geoExactVal">—</span>
+      <span data-lang="en">Partial sum $S_{20}$ = </span><span data-lang="zh">部分和 $S_{20}$ = </span><span class="sum-val" id="geoPartialVal">—</span><br>
+      <span data-lang="en">Exact sum $\frac{a}{1-r}$ = </span><span data-lang="zh">精确和 $\frac{a}{1-r}$ = </span><span class="exact-val" id="geoExactVal">—</span>
     </div>
     <div id="geoConvergeBanner" style="display:none;"></div>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Recognizing Geometric Series</strong>
-    <span style="display:block; margin-top:8px;">Look for a series where each term is obtained by multiplying the previous term by a constant. The first term $a$ and ratio $r$ may be hidden — extract them by rewriting.</span>
-    <span style="display:block; margin-top:8px;"><em>Example:</em> $\displaystyle\sum_{n=1}^{\infty} \frac{3}{5^n} = \sum_{n=1}^{\infty} 3 \cdot \left(\frac{1}{5}\right)^n = \frac{3/5}{1 - 1/5} = \frac{3}{4}$.</span>
+    <strong style="color: var(--green);" data-lang="en">Recognizing Geometric Series</strong>
+    <strong style="color: var(--green);" data-lang="zh">识别等比级数</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Look for a series where each term is obtained by multiplying the previous term by a constant. The first term $a$ and ratio $r$ may be hidden — extract them by rewriting.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">寻找每项由前项乘以常数得到的级数。首项 $a$ 和公比 $r$ 可能被掩藏——通过改写形式将其提取出来。</span>
+    <span style="display:block; margin-top:8px;" data-lang="en"><em>Example:</em> $\displaystyle\sum_{n=1}^{\infty} \frac{3}{5^n} = \sum_{n=1}^{\infty} 3 \cdot \left(\frac{1}{5}\right)^n = \frac{3/5}{1 - 1/5} = \frac{3}{4}$.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><em>例：</em> $\displaystyle\sum_{n=1}^{\infty} \frac{3}{5^n} = \sum_{n=1}^{\infty} 3 \cdot \left(\frac{1}{5}\right)^n = \frac{3/5}{1 - 1/5} = \frac{3}{4}$。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Geometric Series</summary>
+    <summary><span data-lang="en">Worked Example — Geometric Series</span><span data-lang="zh">例题 —— 等比级数</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find the sum:</span>
+<pre><span class="cm" data-lang="en">Find the sum:</span><span class="cm" data-lang="zh">求和：</span>
 $$ \sum_{n=0}^{\infty} \frac{(-1)^n \cdot 2^n}{3^n} = \sum_{n=0}^{\infty} \left(\frac{-2}{3}\right)^n $$
 
-<span class="cm">Identify: a = 1, r = −2/3</span>
-<span class="cm">Since |r| = 2/3 < 1, it converges:</span>
+<span class="cm" data-lang="en">Identify: a = 1, r = −2/3</span><span class="cm" data-lang="zh">识别：a = 1，r = −2/3</span>
+<span class="cm" data-lang="en">Since |r| = 2/3 < 1, it converges:</span><span class="cm" data-lang="zh">因为 |r| = 2/3 < 1，所以收敛：</span>
 
   S = a/(1−r) = 1/(1−(−2/3))
     = 1/(1 + 2/3) = 1/(5/3) = <span class="num">3/5</span></pre>
@@ -908,17 +935,17 @@ $$ \sum_{n=0}^{\infty} \frac{(-1)^n \cdot 2^n}{3^n} = \sum_{n=0}^{\infty} \left(
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">What is $\displaystyle\sum_{n=1}^{\infty} \left(\frac{2}{3}\right)^n$?</div>
+    <div class="quiz-q"><span data-lang="en">What is $\displaystyle\sum_{n=1}^{\infty} \left(\frac{2}{3}\right)^n$?</span><span data-lang="zh">$\displaystyle\sum_{n=1}^{\infty} \left(\frac{2}{3}\right)^n$ 等于多少？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$3$</div>
       <div class="quiz-opt" data-idx="1">$\frac{3}{2}$</div>
       <div class="quiz-opt" data-idx="2">$2$</div>
       <div class="quiz-opt" data-idx="3">$\frac{2}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! This is geometric with first term $a = 2/3$ (when $n=1$) and $r = 2/3$. Sum $= \frac{2/3}{1 - 2/3} = \frac{2/3}{1/3} = 2$.</div>
-    <div class="quiz-explain wrong-exp">Starting at $n=1$: first term $a_1 = 2/3$, common ratio $r = 2/3$. Sum $= \frac{a_1}{1-r} = \frac{2/3}{1/3} = 2$.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! This is geometric with first term $a = 2/3$ (when $n=1$) and $r = 2/3$. Sum $= \frac{2/3}{1 - 2/3} = \frac{2/3}{1/3} = 2$.</span><span data-lang="zh">正确！这是等比级数，首项 $a = 2/3$（当 $n=1$ 时），公比 $r = 2/3$。和 $= \frac{2/3}{1 - 2/3} = \frac{2/3}{1/3} = 2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Starting at $n=1$: first term $a_1 = 2/3$, common ratio $r = 2/3$. Sum $= \frac{a_1}{1-r} = \frac{2/3}{1/3} = 2$.</span><span data-lang="zh">从 $n=1$ 开始：首项 $a_1 = 2/3$，公比 $r = 2/3$。和 $= \frac{a_1}{1-r} = \frac{2/3}{1/3} = 2$。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -929,34 +956,41 @@ $$ \sum_{n=0}^{\infty} \frac{(-1)^n \cdot 2^n}{3^n} = \sum_{n=0}^{\infty} \left(
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-3">
   <div class="section-label">Topic 10.3</div>
-  <h2>The $n$th Term Test for Divergence</h2>
+  <h2 data-lang="en">The $n$th Term Test for Divergence</h2>
+  <h2 data-lang="zh">第 $n$ 项发散判别法</h2>
 
   <div class="formula-box" style="border-top-color: var(--red);">
-    <div class="formula-label" style="color: var(--red);">nth Term Test (Divergence Test)</div>
+    <div class="formula-label" style="color: var(--red);" data-lang="en">nth Term Test (Divergence Test)</div>
+    <div class="formula-label" style="color: var(--red);" data-lang="zh">第 n 项判别法（<code>nth-term test</code>）</div>
     $$ \text{If } \lim_{n \to \infty} a_n \neq 0, \text{ then } \sum_{n=1}^{\infty} a_n \text{ diverges.} $$
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Critical Warning — One-Way Test!</strong>
-    <span style="display:block; margin-top:8px;">The nth Term Test can only prove <strong>divergence</strong>. If $\lim a_n = 0$, the test is <strong>inconclusive</strong> — the series may converge or diverge.</span>
-    <span style="display:block; margin-top:8px;"><em>Classic trap:</em> $a_n = 1/n \to 0$, but $\sum 1/n$ diverges (harmonic series). So "$\lim a_n = 0$" does NOT mean the series converges.</span>
+    <strong style="color: var(--red);" data-lang="en">Critical Warning — One-Way Test!</strong>
+    <strong style="color: var(--red);" data-lang="zh">重要警示 —— 单向判别！</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">The nth Term Test can only prove <strong>divergence</strong>. If $\lim a_n = 0$, the test is <strong>inconclusive</strong> — the series may converge or diverge.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">第 n 项判别法只能证明<strong>发散</strong>。若 $\lim a_n = 0$，则判别法<strong>不能下结论</strong> —— 级数可能收敛也可能发散。</span>
+    <span style="display:block; margin-top:8px;" data-lang="en"><em>Classic trap:</em> $a_n = 1/n \to 0$, but $\sum 1/n$ diverges (harmonic series). So "$\lim a_n = 0$" does NOT mean the series converges.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><em>经典陷阱：</em> $a_n = 1/n \to 0$，但 $\sum 1/n$ 发散（调和级数（<code>harmonic series</code>））。因此 “$\lim a_n = 0$” <strong>不</strong>意味着级数收敛。</span>
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">When to Use It</strong>
-    <span style="display:block; margin-top:8px;">This should be your <strong>first check</strong> on every series problem. If the terms don't go to zero, you're done — it diverges. Only if $a_n \to 0$ do you need to apply a more sophisticated test.</span>
+    <strong style="color: var(--accent);" data-lang="en">When to Use It</strong>
+    <strong style="color: var(--accent);" data-lang="zh">何时使用</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">This should be your <strong>first check</strong> on every series problem. If the terms don't go to zero, you're done — it diverges. Only if $a_n \to 0$ do you need to apply a more sophisticated test.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">每道级数题都应将此作为<strong>首要检查</strong>。若各项不趋于零，则结论已得 —— 发散。仅当 $a_n \to 0$ 时才需要使用更复杂的判别法。</span>
   </div>
 
   <details>
-    <summary>Worked Example — nth Term Test</summary>
+    <summary><span data-lang="en">Worked Example — nth Term Test</span><span data-lang="zh">例题 —— 第 n 项判别法</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does this series converge or diverge?</span>
+<pre><span class="cm" data-lang="en">Does this series converge or diverge?</span><span class="cm" data-lang="zh">该级数收敛还是发散？</span>
 $$ \sum_{n=1}^{\infty} \frac{n}{2n+1} $$
 
-<span class="cm">Apply nth term test:</span>
+<span class="cm" data-lang="en">Apply nth term test:</span><span class="cm" data-lang="zh">应用第 n 项判别法：</span>
   lim(n→∞) n/(2n+1) = lim(n→∞) 1/(2 + 1/n) = <span class="num">1/2 ≠ 0</span>
 
-<span class="str">By the nth Term Test, the series diverges.</span></pre>
+<span class="str" data-lang="en">By the nth Term Test, the series diverges.</span><span class="str" data-lang="zh">由第 n 项判别法，级数发散。</span></pre>
     </div>
   </details>
 </section>
@@ -968,41 +1002,47 @@ $$ \sum_{n=1}^{\infty} \frac{n}{2n+1} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-4">
   <div class="section-label">Topic 10.4</div>
-  <h2>Integral Test for Convergence</h2>
+  <h2 data-lang="en">Integral Test for Convergence</h2>
+  <h2 data-lang="zh">收敛的积分判别法</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">The Connection</strong>
-    The integral test bridges series and improper integrals. If $f$ is a positive, continuous, decreasing function on $[1, \infty)$ and $a_n = f(n)$, then $\sum a_n$ and $\int_1^{\infty} f(x)\,dx$ either both converge or both diverge.
+    <strong style="color: var(--accent);" data-lang="en">The Connection</strong>
+    <strong style="color: var(--accent);" data-lang="zh">联系</strong>
+    <span data-lang="en">The integral test bridges series and improper integrals. If $f$ is a positive, continuous, decreasing function on $[1, \infty)$ and $a_n = f(n)$, then $\sum a_n$ and $\int_1^{\infty} f(x)\,dx$ either both converge or both diverge.</span>
+    <span data-lang="zh"><strong>积分判别法（<code>integral test</code>）</strong>将级数与反常积分联系起来。若 $f$ 在 $[1, \infty)$ 上为正、连续且单调递减，并且 $a_n = f(n)$，则 $\sum a_n$ 与 $\int_1^{\infty} f(x)\,dx$ 同时收敛或同时发散。</span>
   </div>
 
   <div class="formula-box" style="border-top-color: var(--purple);">
-    <div class="formula-label" style="color: var(--purple);">Integral Test</div>
+    <div class="formula-label" style="color: var(--purple);" data-lang="en">Integral Test</div>
+    <div class="formula-label" style="color: var(--purple);" data-lang="zh">积分判别法</div>
     $$ \text{If } f \text{ is positive, continuous, decreasing for } x \geq 1 \text{ and } a_n = f(n): $$
     $$ \sum_{n=1}^{\infty} a_n \text{ and } \int_1^{\infty} f(x)\,dx \text{ both converge or both diverge.} $$
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Conditions Matter!</strong>
-    <span style="display:block; margin-top:8px;">On the AP exam, you must verify that $f$ is positive, continuous, and decreasing. Stating "by the integral test" without checking conditions loses points.</span>
+    <strong style="color: var(--orange);" data-lang="en">Conditions Matter!</strong>
+    <strong style="color: var(--orange);" data-lang="zh">条件必须满足！</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">On the AP exam, you must verify that $f$ is positive, continuous, and decreasing. Stating "by the integral test" without checking conditions loses points.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">AP 考试中必须验证 $f$ 为正、连续且单调递减。仅写“由积分判别法”而不检验条件会被扣分。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Integral Test</summary>
+    <summary><span data-lang="en">Worked Example — Integral Test</span><span data-lang="zh">例题 —— 积分判别法</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does the series converge?</span>
+<pre><span class="cm" data-lang="en">Does the series converge?</span><span class="cm" data-lang="zh">该级数是否收敛？</span>
 $$ \sum_{n=1}^{\infty} \frac{1}{n^2 + 1} $$
 
-<span class="cm">Let f(x) = 1/(x² + 1). It is positive, continuous,</span>
-<span class="cm">and decreasing for x ≥ 1. ✓</span>
+<span class="cm" data-lang="en">Let f(x) = 1/(x² + 1). It is positive, continuous,</span><span class="cm" data-lang="zh">设 f(x) = 1/(x² + 1)。它在 x ≥ 1 上</span>
+<span class="cm" data-lang="en">and decreasing for x ≥ 1. ✓</span><span class="cm" data-lang="zh">为正、连续且单调递减。✓</span>
 
-<span class="cm">Evaluate the improper integral:</span>
+<span class="cm" data-lang="en">Evaluate the improper integral:</span><span class="cm" data-lang="zh">计算反常积分：</span>
 ∫₁∞ 1/(x²+1) dx = lim(b→∞) [arctan(x)]₁ᵇ
                  = lim(b→∞) [arctan(b) − arctan(1)]
                  = π/2 − π/4 = <span class="num">π/4</span>
 
-<span class="str">The integral converges, so the series converges.</span>
-<span class="cm">(Note: the series sum ≠ π/4; the integral test</span>
-<span class="cm"> only tells us convergence, not the exact sum.)</span></pre>
+<span class="str" data-lang="en">The integral converges, so the series converges.</span><span class="str" data-lang="zh">积分收敛，因此级数收敛。</span>
+<span class="cm" data-lang="en">(Note: the series sum ≠ π/4; the integral test</span><span class="cm" data-lang="zh">（注意：级数和 ≠ π/4；积分判别法</span>
+<span class="cm" data-lang="en"> only tells us convergence, not the exact sum.)</span><span class="cm" data-lang="zh"> 只判断收敛性，不给出精确和。）</span></pre>
     </div>
   </details>
 </section>
@@ -1014,32 +1054,57 @@ $$ \sum_{n=1}^{\infty} \frac{1}{n^2 + 1} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-5">
   <div class="section-label">Topic 10.5</div>
-  <h2>Harmonic Series and $p$-Series</h2>
+  <h2 data-lang="en">Harmonic Series and $p$-Series</h2>
+  <h2 data-lang="zh">调和级数与 $p$ 级数</h2>
 
-  <p>Two important families of series that you should know by name and be able to classify instantly.</p>
+  <p data-lang="en">Two important families of series that you should know by name and be able to classify instantly.</p>
+  <p data-lang="zh">两类重要的级数族 —— 必须能按名称识别并立刻判断其收敛性。</p>
 
   <div class="qref">
-    <div class="qref-title">Key Series to Memorize</div>
+    <div class="qref-title" data-lang="en">Key Series to Memorize</div>
+    <div class="qref-title" data-lang="zh">必记关键级数</div>
     <div class="table-wrap">
       <table>
-        <tr><th>Series</th><th>Form</th><th>Convergence</th></tr>
-        <tr><td><strong>Harmonic Series</strong></td><td>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$</td><td style="color: var(--red); font-weight: 700;">Diverges</td></tr>
-        <tr><td><strong>Alternating Harmonic</strong></td><td>$\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$</td><td style="color: var(--green); font-weight: 700;">Converges (to $\ln 2$)</td></tr>
-        <tr><td><strong>$p$-Series</strong></td><td>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$</td><td>Converges if $p > 1$; diverges if $p \leq 1$</td></tr>
+        <tr>
+          <th><span data-lang="en">Series</span><span data-lang="zh">级数</span></th>
+          <th><span data-lang="en">Form</span><span data-lang="zh">形式</span></th>
+          <th><span data-lang="en">Convergence</span><span data-lang="zh">收敛性</span></th>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Harmonic Series</span><span data-lang="zh">调和级数（<code>harmonic series</code>）</span></strong></td>
+          <td>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$</td>
+          <td style="color: var(--red); font-weight: 700;"><span data-lang="en">Diverges</span><span data-lang="zh">发散</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Alternating Harmonic</span><span data-lang="zh">交错调和级数</span></strong></td>
+          <td>$\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$</td>
+          <td style="color: var(--green); font-weight: 700;"><span data-lang="en">Converges (to $\ln 2$)</span><span data-lang="zh">收敛（到 $\ln 2$）</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">$p$-Series</span><span data-lang="zh">$p$ 级数（<code>p-series</code>）</span></strong></td>
+          <td>$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^p}$</td>
+          <td><span data-lang="en">Converges if $p > 1$; diverges if $p \leq 1$</span><span data-lang="zh">$p > 1$ 时收敛；$p \leq 1$ 时发散</span></td>
+        </tr>
       </table>
     </div>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Why the Harmonic Series Diverges</strong>
-    <span style="display:block; margin-top:8px;">Even though $1/n \to 0$, the terms decrease so slowly that the partial sums grow without bound. This is proved using the integral test: $\int_1^{\infty} 1/x\,dx = \infty$.</span>
+    <strong style="color: var(--green);" data-lang="en">Why the Harmonic Series Diverges</strong>
+    <strong style="color: var(--green);" data-lang="zh">为何调和级数发散</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Even though $1/n \to 0$, the terms decrease so slowly that the partial sums grow without bound. This is proved using the integral test: $\int_1^{\infty} 1/x\,dx = \infty$.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">尽管 $1/n \to 0$，但各项下降太慢，部分和会无界增长。可用积分判别法证明：$\int_1^{\infty} 1/x\,dx = \infty$。</span>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">$p$-Series Quick Check</strong>
-    <span style="display:block; margin-top:8px;">$\sum 1/n^2$ → $p = 2 > 1$ → <strong>converges</strong></span>
-    <span style="display:block; margin-top:4px;">$\sum 1/n^{1/2}$ → $p = 1/2 \leq 1$ → <strong>diverges</strong></span>
-    <span style="display:block; margin-top:4px;">$\sum 1/n$ → $p = 1$ → <strong>diverges</strong> (boundary case!)</span>
+    <strong style="color: var(--purple);" data-lang="en">$p$-Series Quick Check</strong>
+    <strong style="color: var(--purple);" data-lang="zh">$p$ 级数速查</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">$\sum 1/n^2$ → $p = 2 > 1$ → <strong>converges</strong></span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">$\sum 1/n^2$ → $p = 2 > 1$ → <strong>收敛</strong></span>
+    <span style="display:block; margin-top:4px;" data-lang="en">$\sum 1/n^{1/2}$ → $p = 1/2 \leq 1$ → <strong>diverges</strong></span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">$\sum 1/n^{1/2}$ → $p = 1/2 \leq 1$ → <strong>发散</strong></span>
+    <span style="display:block; margin-top:4px;" data-lang="en">$\sum 1/n$ → $p = 1$ → <strong>diverges</strong> (boundary case!)</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">$\sum 1/n$ → $p = 1$ → <strong>发散</strong>（临界情形！）</span>
   </div>
 </section>
 
@@ -1050,47 +1115,58 @@ $$ \sum_{n=1}^{\infty} \frac{1}{n^2 + 1} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-6">
   <div class="section-label">Topic 10.6</div>
-  <h2>Comparison Tests for Convergence</h2>
+  <h2 data-lang="en">Comparison Tests for Convergence</h2>
+  <h2 data-lang="zh">收敛的比较判别法</h2>
 
-  <h3>Direct Comparison Test (DCT)</h3>
+  <h3 data-lang="en">Direct Comparison Test (DCT)</h3>
+  <h3 data-lang="zh">比较判别法（<code>direct comparison test</code>，DCT）</h3>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Direct Comparison Test</strong>
-    <span style="display:block; margin-top:8px;">For positive-term series $\sum a_n$ and $\sum b_n$ where $0 \leq a_n \leq b_n$ for all $n$:</span>
-    <span style="display:block; margin-top:6px;">If $\sum b_n$ converges → $\sum a_n$ converges (smaller than a convergent series).</span>
-    <span style="display:block; margin-top:4px;">If $\sum a_n$ diverges → $\sum b_n$ diverges (bigger than a divergent series).</span>
+    <strong style="color: var(--accent);" data-lang="en">Direct Comparison Test</strong>
+    <strong style="color: var(--accent);" data-lang="zh">比较判别法</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">For positive-term series $\sum a_n$ and $\sum b_n$ where $0 \leq a_n \leq b_n$ for all $n$:</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">对正项级数 $\sum a_n$ 与 $\sum b_n$，若对所有 $n$ 有 $0 \leq a_n \leq b_n$：</span>
+    <span style="display:block; margin-top:6px;" data-lang="en">If $\sum b_n$ converges → $\sum a_n$ converges (smaller than a convergent series).</span>
+    <span style="display:block; margin-top:6px;" data-lang="zh">若 $\sum b_n$ 收敛 → $\sum a_n$ 收敛（小于收敛级数）。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">If $\sum a_n$ diverges → $\sum b_n$ diverges (bigger than a divergent series).</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">若 $\sum a_n$ 发散 → $\sum b_n$ 发散（大于发散级数）。</span>
   </div>
 
-  <h3>Limit Comparison Test (LCT)</h3>
+  <h3 data-lang="en">Limit Comparison Test (LCT)</h3>
+  <h3 data-lang="zh">极限比较判别法（<code>limit comparison test</code>，LCT）</h3>
 
   <div class="formula-box">
-    <div class="formula-label">Limit Comparison Test</div>
+    <div class="formula-label" data-lang="en">Limit Comparison Test</div>
+    <div class="formula-label" data-lang="zh">极限比较判别法</div>
     $$ \text{If } \lim_{n\to\infty} \frac{a_n}{b_n} = L, \quad 0 < L < \infty $$
     $$ \text{then } \sum a_n \text{ and } \sum b_n \text{ both converge or both diverge.} $$
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">When to Use Which</strong>
-    <span style="display:block; margin-top:8px;"><strong>Direct Comparison:</strong> When you can easily show $a_n \leq b_n$ (or $a_n \geq b_n$) for all $n$.</span>
-    <span style="display:block; margin-top:4px;"><strong>Limit Comparison:</strong> When the terms have similar "dominant behavior" but the inequality is hard to establish. This is usually the easier test to apply.</span>
+    <strong style="color: var(--green);" data-lang="en">When to Use Which</strong>
+    <strong style="color: var(--green);" data-lang="zh">何时使用哪一种</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en"><strong>Direct Comparison:</strong> When you can easily show $a_n \leq b_n$ (or $a_n \geq b_n$) for all $n$.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>比较判别法：</strong>能轻松证明对所有 $n$ 都有 $a_n \leq b_n$（或 $a_n \geq b_n$）时使用。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>Limit Comparison:</strong> When the terms have similar "dominant behavior" but the inequality is hard to establish. This is usually the easier test to apply.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>极限比较：</strong>当各项有相近的“主导行为”但不等式不易建立时使用。通常更易操作。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Limit Comparison Test</summary>
+    <summary><span data-lang="en">Worked Example — Limit Comparison Test</span><span data-lang="zh">例题 —— 极限比较判别法</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does this converge?</span>
+<pre><span class="cm" data-lang="en">Does this converge?</span><span class="cm" data-lang="zh">该级数是否收敛？</span>
 $$ \sum_{n=1}^{\infty} \frac{3n+1}{n^3 - 2} $$
 
-<span class="cm">For large n, the dominant behavior is ≈ 3n/n³ = 3/n².</span>
-<span class="cm">Compare with b_n = 1/n² (p-series, p=2, converges).</span>
+<span class="cm" data-lang="en">For large n, the dominant behavior is ≈ 3n/n³ = 3/n².</span><span class="cm" data-lang="zh">当 n 很大时，主导项 ≈ 3n/n³ = 3/n²。</span>
+<span class="cm" data-lang="en">Compare with b_n = 1/n² (p-series, p=2, converges).</span><span class="cm" data-lang="zh">与 b_n = 1/n² 比较（p 级数，p=2，收敛）。</span>
 
   lim(n→∞) a_n/b_n = lim(n→∞) [(3n+1)/(n³−2)] / [1/n²]
                     = lim(n→∞) (3n+1)·n²/(n³−2)
                     = lim(n→∞) (3n³+n²)/(n³−2)
                     = <span class="num">3</span>
 
-<span class="cm">Since 0 < 3 < ∞ and Σ 1/n² converges:</span>
-<span class="str">By the Limit Comparison Test, the series converges.</span></pre>
+<span class="cm" data-lang="en">Since 0 < 3 < ∞ and Σ 1/n² converges:</span><span class="cm" data-lang="zh">因为 0 < 3 < ∞ 且 Σ 1/n² 收敛：</span>
+<span class="str" data-lang="en">By the Limit Comparison Test, the series converges.</span><span class="str" data-lang="zh">由极限比较判别法，级数收敛。</span></pre>
     </div>
   </details>
 </section>
@@ -1102,55 +1178,63 @@ $$ \sum_{n=1}^{\infty} \frac{3n+1}{n^3 - 2} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-7">
   <div class="section-label">Topic 10.7</div>
-  <h2>Alternating Series Test for Convergence</h2>
+  <h2 data-lang="en">Alternating Series Test for Convergence</h2>
+  <h2 data-lang="zh">交错级数收敛判别法</h2>
 
   <div class="formula-box" style="border-top-color: var(--green);">
-    <div class="formula-label" style="color: var(--green);">Alternating Series Test (Leibniz Test)</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="en">Alternating Series Test (Leibniz Test)</div>
+    <div class="formula-label" style="color: var(--green);" data-lang="zh">交错级数判别法（<code>alternating series test</code>，莱布尼茨判别法）</div>
     $$ \text{The series } \sum_{n=1}^{\infty} (-1)^{n+1} b_n \text{ converges if:} $$
     $$ \text{1. } b_n > 0 \quad \text{2. } b_{n+1} \leq b_n \text{ (decreasing)} \quad \text{3. } \lim_{n\to\infty} b_n = 0 $$
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">All Three Conditions Required!</strong>
-    <span style="display:block; margin-top:8px;">On the AP exam, you must explicitly verify all three conditions when justifying with the alternating series test. Simply saying "it alternates and goes to zero" is not sufficient — you must also show the terms are decreasing in absolute value.</span>
+    <strong style="color: var(--red);" data-lang="en">All Three Conditions Required!</strong>
+    <strong style="color: var(--red);" data-lang="zh">三个条件缺一不可！</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">On the AP exam, you must explicitly verify all three conditions when justifying with the alternating series test. Simply saying "it alternates and goes to zero" is not sufficient — you must also show the terms are decreasing in absolute value.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">在 AP 考试中使用交错级数判别法时必须显式验证全部三个条件。仅写“交错且趋于零”是不够的 —— 还必须证明各项的绝对值单调递减。</span>
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Showing $b_n$ is Decreasing</strong>
-    <span style="display:block; margin-top:8px;">Two common approaches:</span>
-    <span style="display:block; margin-top:4px;">1. Show $b_{n+1} < b_n$ directly (algebraic manipulation).</span>
-    <span style="display:block; margin-top:4px;">2. Let $f(x) = b_x$ and show $f'(x) < 0$ for $x \geq 1$ (calculus approach).</span>
+    <strong style="color: var(--orange);" data-lang="en">Showing $b_n$ is Decreasing</strong>
+    <strong style="color: var(--orange);" data-lang="zh">证明 $b_n$ 单调递减</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Two common approaches:</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">两种常用方法：</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">1. Show $b_{n+1} < b_n$ directly (algebraic manipulation).</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">1. 直接证明 $b_{n+1} < b_n$（代数变形）。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">2. Let $f(x) = b_x$ and show $f'(x) < 0$ for $x \geq 1$ (calculus approach).</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">2. 令 $f(x) = b_x$，证明在 $x \geq 1$ 上 $f'(x) < 0$（微积分方法）。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Alternating Series Test</summary>
+    <summary><span data-lang="en">Worked Example — Alternating Series Test</span><span data-lang="zh">例题 —— 交错级数判别法</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does this converge?</span>
+<pre><span class="cm" data-lang="en">Does this converge?</span><span class="cm" data-lang="zh">该级数是否收敛？</span>
 $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^2} $$
 
-<span class="cm">Here b_n = 1/n².</span>
+<span class="cm" data-lang="en">Here b_n = 1/n².</span><span class="cm" data-lang="zh">此处 b_n = 1/n²。</span>
 
-<span class="cm">✓ b_n > 0 for all n</span>
-<span class="cm">✓ b_{n+1} = 1/(n+1)² < 1/n² = b_n (decreasing)</span>
-<span class="cm">✓ lim(n→∞) 1/n² = 0</span>
+<span class="cm" data-lang="en">✓ b_n > 0 for all n</span><span class="cm" data-lang="zh">✓ 对所有 n，b_n > 0</span>
+<span class="cm" data-lang="en">✓ b_{n+1} = 1/(n+1)² < 1/n² = b_n (decreasing)</span><span class="cm" data-lang="zh">✓ b_{n+1} = 1/(n+1)² < 1/n² = b_n（递减）</span>
+<span class="cm" data-lang="en">✓ lim(n→∞) 1/n² = 0</span><span class="cm" data-lang="zh">✓ lim(n→∞) 1/n² = 0</span>
 
-<span class="str">All three conditions met → series converges</span>
-<span class="str">by the Alternating Series Test.</span></pre>
+<span class="str" data-lang="en">All three conditions met → series converges</span><span class="str" data-lang="zh">三个条件全部满足 → 由交错级数判别法，</span>
+<span class="str" data-lang="en">by the Alternating Series Test.</span><span class="str" data-lang="zh">级数收敛。</span></pre>
   </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">Does $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n \cdot n}{n+1}$ converge?</div>
+    <div class="quiz-q"><span data-lang="en">Does $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n \cdot n}{n+1}$ converge?</span><span data-lang="zh">$\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n \cdot n}{n+1}$ 是否收敛？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Yes, by the Alternating Series Test</div>
-      <div class="quiz-opt" data-idx="1">No, by the nth Term Test</div>
-      <div class="quiz-opt" data-idx="2">Yes, by the Ratio Test</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Yes, by the Alternating Series Test</span><span data-lang="zh">是，由交错级数判别法</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">No, by the nth Term Test</span><span data-lang="zh">否，由第 n 项判别法</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Yes, by the Ratio Test</span><span data-lang="zh">是，由比值判别法</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined</span><span data-lang="zh">无法判断</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\lim_{n\to\infty} \frac{(-1)^n \cdot n}{n+1}$ does not equal $0$ — the absolute value approaches $1$. The nth Term Test immediately tells us the series diverges.</div>
-    <div class="quiz-explain wrong-exp">Check: $\lim |a_n| = \lim n/(n+1) = 1 \neq 0$. Since the terms don't approach zero, the series diverges by the nth Term Test.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\lim_{n\to\infty} \frac{(-1)^n \cdot n}{n+1}$ does not equal $0$ — the absolute value approaches $1$. The nth Term Test immediately tells us the series diverges.</span><span data-lang="zh">正确！$\lim_{n\to\infty} \frac{(-1)^n \cdot n}{n+1}$ 不等于 $0$ —— 绝对值趋于 $1$。第 n 项判别法立即告诉我们级数发散。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Check: $\lim |a_n| = \lim n/(n+1) = 1 \neq 0$. Since the terms don't approach zero, the series diverges by the nth Term Test.</span><span data-lang="zh">检查：$\lim |a_n| = \lim n/(n+1) = 1 \neq 0$。各项不趋于零，因此由第 n 项判别法发散。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1161,30 +1245,39 @@ $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^2} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-8">
   <div class="section-label">Topic 10.8</div>
-  <h2>Ratio Test for Convergence</h2>
+  <h2 data-lang="en">Ratio Test for Convergence</h2>
+  <h2 data-lang="zh">收敛的比值判别法</h2>
 
   <div class="formula-box">
-    <div class="formula-label">Ratio Test</div>
+    <div class="formula-label" data-lang="en">Ratio Test</div>
+    <div class="formula-label" data-lang="zh">比值判别法（<code>ratio test</code>）</div>
     $$ L = \lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right| $$
-    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.8;">
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.8;" data-lang="en">
       If $L < 1$ → series <strong>converges absolutely</strong><br>
       If $L > 1$ (or $L = \infty$) → series <strong>diverges</strong><br>
       If $L = 1$ → <strong>inconclusive</strong>
     </p>
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 12px; line-height: 1.8;" data-lang="zh">
+      若 $L < 1$ → 级数<strong>绝对收敛（<code>absolute convergence</code>）</strong><br>
+      若 $L > 1$（或 $L = \infty$） → 级数<strong>发散</strong><br>
+      若 $L = 1$ → <strong>不能下结论</strong>
+    </p>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">When the Ratio Test Shines</strong>
-    <span style="display:block; margin-top:8px;">Use the ratio test when the series involves <strong>factorials</strong> ($n!$), <strong>exponentials</strong> ($a^n$), or <strong>combinations of both</strong>. These are the situations where the ratio simplifies beautifully.</span>
+    <strong style="color: var(--green);" data-lang="en">When the Ratio Test Shines</strong>
+    <strong style="color: var(--green);" data-lang="zh">比值判别法的最佳场景</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Use the ratio test when the series involves <strong>factorials</strong> ($n!$), <strong>exponentials</strong> ($a^n$), or <strong>combinations of both</strong>. These are the situations where the ratio simplifies beautifully.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">当级数含<strong>阶乘</strong>（$n!$）、<strong>指数</strong>（$a^n$）或<strong>两者组合</strong>时使用比值判别法。这些场景下比值能优雅地化简。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Ratio Test</summary>
+    <summary><span data-lang="en">Worked Example — Ratio Test</span><span data-lang="zh">例题 —— 比值判别法</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does this converge?</span>
+<pre><span class="cm" data-lang="en">Does this converge?</span><span class="cm" data-lang="zh">该级数是否收敛？</span>
 $$ \sum_{n=1}^{\infty} \frac{n!}{3^n} $$
 
-<span class="cm">Compute the ratio:</span>
+<span class="cm" data-lang="en">Compute the ratio:</span><span class="cm" data-lang="zh">计算比值：</span>
   |a_{n+1}/a_n| = [(n+1)!/3^(n+1)] / [n!/3^n]
                = (n+1)!/n! · 3^n/3^(n+1)
                = (n+1) · 1/3
@@ -1192,25 +1285,25 @@ $$ \sum_{n=1}^{\infty} \frac{n!}{3^n} $$
 
   L = lim(n→∞) (n+1)/3 = <span class="num">∞ > 1</span>
 
-<span class="str">By the Ratio Test, the series diverges.</span>
-<span class="cm">(Factorials grow faster than exponentials!)</span></pre>
+<span class="str" data-lang="en">By the Ratio Test, the series diverges.</span><span class="str" data-lang="zh">由比值判别法，级数发散。</span>
+<span class="cm" data-lang="en">(Factorials grow faster than exponentials!)</span><span class="cm" data-lang="zh">（阶乘增长比指数更快！）</span></pre>
     </div>
   </details>
 
   <details>
-    <summary>Worked Example — Ratio Test (Convergent)</summary>
+    <summary><span data-lang="en">Worked Example — Ratio Test (Convergent)</span><span data-lang="zh">例题 —— 比值判别法（收敛情形）</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Does this converge?</span>
+<pre><span class="cm" data-lang="en">Does this converge?</span><span class="cm" data-lang="zh">该级数是否收敛？</span>
 $$ \sum_{n=0}^{\infty} \frac{5^n}{n!} $$
 
-<span class="cm">Compute the ratio:</span>
+<span class="cm" data-lang="en">Compute the ratio:</span><span class="cm" data-lang="zh">计算比值：</span>
   |a_{n+1}/a_n| = [5^(n+1)/(n+1)!] / [5^n/n!]
                = 5/(n+1)
 
   L = lim(n→∞) 5/(n+1) = <span class="num">0 < 1</span>
 
-<span class="str">By the Ratio Test, the series converges absolutely.</span>
-<span class="cm">(This is actually the series for e⁵!)</span></pre>
+<span class="str" data-lang="en">By the Ratio Test, the series converges absolutely.</span><span class="str" data-lang="zh">由比值判别法，级数绝对收敛。</span>
+<span class="cm" data-lang="en">(This is actually the series for e⁵!)</span><span class="cm" data-lang="zh">（这其实就是 e⁵ 的级数！）</span></pre>
     </div>
   </details>
 </section>
@@ -1222,29 +1315,40 @@ $$ \sum_{n=0}^{\infty} \frac{5^n}{n!} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-9">
   <div class="section-label">Topic 10.9</div>
-  <h2>Determining Absolute or Conditional Convergence</h2>
+  <h2 data-lang="en">Determining Absolute or Conditional Convergence</h2>
+  <h2 data-lang="zh">判别绝对收敛或条件收敛</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Definitions</strong>
-    <span style="display:block; margin-top:8px;"><strong>Absolutely convergent:</strong> $\sum |a_n|$ converges (and therefore $\sum a_n$ also converges).</span>
-    <span style="display:block; margin-top:6px;"><strong>Conditionally convergent:</strong> $\sum a_n$ converges, but $\sum |a_n|$ diverges.</span>
-    <span style="display:block; margin-top:6px;"><strong>Divergent:</strong> $\sum a_n$ does not converge.</span>
+    <strong style="color: var(--accent);" data-lang="en">Definitions</strong>
+    <strong style="color: var(--accent);" data-lang="zh">定义</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en"><strong>Absolutely convergent:</strong> $\sum |a_n|$ converges (and therefore $\sum a_n$ also converges).</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>绝对收敛（<code>absolute convergence</code>）：</strong>$\sum |a_n|$ 收敛（因此 $\sum a_n$ 也收敛）。</span>
+    <span style="display:block; margin-top:6px;" data-lang="en"><strong>Conditionally convergent:</strong> $\sum a_n$ converges, but $\sum |a_n|$ diverges.</span>
+    <span style="display:block; margin-top:6px;" data-lang="zh"><strong>条件收敛（<code>conditional convergence</code>）：</strong>$\sum a_n$ 收敛，但 $\sum |a_n|$ 发散。</span>
+    <span style="display:block; margin-top:6px;" data-lang="en"><strong>Divergent:</strong> $\sum a_n$ does not converge.</span>
+    <span style="display:block; margin-top:6px;" data-lang="zh"><strong>发散：</strong>$\sum a_n$ 不收敛。</span>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Key Theorem</strong>
-    <span style="display:block; margin-top:8px;">Absolute convergence implies convergence. If $\sum |a_n|$ converges, then $\sum a_n$ converges. The converse is false.</span>
-    <span style="display:block; margin-top:8px;"><em>Classic example:</em> The alternating harmonic series $\sum (-1)^{n+1}/n$ converges (AST), but $\sum 1/n$ diverges → <strong>conditionally convergent</strong>.</span>
+    <strong style="color: var(--purple);" data-lang="en">Key Theorem</strong>
+    <strong style="color: var(--purple);" data-lang="zh">关键定理</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Absolute convergence implies convergence. If $\sum |a_n|$ converges, then $\sum a_n$ converges. The converse is false.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">绝对收敛蕴含收敛。若 $\sum |a_n|$ 收敛，则 $\sum a_n$ 收敛；反之不成立。</span>
+    <span style="display:block; margin-top:8px;" data-lang="en"><em>Classic example:</em> The alternating harmonic series $\sum (-1)^{n+1}/n$ converges (AST), but $\sum 1/n$ diverges → <strong>conditionally convergent</strong>.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><em>经典例子：</em>交错调和级数 $\sum (-1)^{n+1}/n$ 由交错级数判别法收敛，但 $\sum 1/n$ 发散 → <strong>条件收敛</strong>。</span>
   </div>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-blue">→</div>
-      <div class="card-title">Decision Process</div>
+      <div class="card-title"><span data-lang="en">Decision Process</span><span data-lang="zh">判别流程</span></div>
     </div>
-    <p style="margin-bottom: 8px;"><strong>Step 1:</strong> Does $\sum |a_n|$ converge? If yes → <strong>absolutely convergent</strong>. Done.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 2:</strong> If $\sum |a_n|$ diverges, does $\sum a_n$ converge (e.g., by AST)? If yes → <strong>conditionally convergent</strong>.</p>
-    <p><strong>Step 3:</strong> If $\sum a_n$ also diverges → <strong>divergent</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 1:</strong> Does $\sum |a_n|$ converge? If yes → <strong>absolutely convergent</strong>. Done.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 1：</strong>$\sum |a_n|$ 是否收敛？若是 → <strong>绝对收敛</strong>，结束。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 2:</strong> If $\sum |a_n|$ diverges, does $\sum a_n$ converge (e.g., by AST)? If yes → <strong>conditionally convergent</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 2：</strong>若 $\sum |a_n|$ 发散，则 $\sum a_n$ 是否收敛（例如由交错级数判别法）？若是 → <strong>条件收敛</strong>。</p>
+    <p data-lang="en"><strong>Step 3:</strong> If $\sum a_n$ also diverges → <strong>divergent</strong>.</p>
+    <p data-lang="zh"><strong>步骤 3：</strong>若 $\sum a_n$ 也发散 → <strong>发散</strong>。</p>
   </div>
 </section>
 
@@ -1255,36 +1359,41 @@ $$ \sum_{n=0}^{\infty} \frac{5^n}{n!} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-10">
   <div class="section-label">Topic 10.10</div>
-  <h2>Alternating Series Error Bound</h2>
+  <h2 data-lang="en">Alternating Series Error Bound</h2>
+  <h2 data-lang="zh">交错级数误差界</h2>
 
   <div class="formula-box" style="border-top-color: var(--orange);">
-    <div class="formula-label" style="color: var(--orange);">Alternating Series Error Bound</div>
+    <div class="formula-label" style="color: var(--orange);" data-lang="en">Alternating Series Error Bound</div>
+    <div class="formula-label" style="color: var(--orange);" data-lang="zh">交错级数误差界（<code>alternating series error bound</code>）</div>
     $$ |S - S_n| \leq |a_{n+1}| = b_{n+1} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The error from using the $n$th partial sum is at most the absolute value of the <strong>first omitted term</strong>.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">The error from using the $n$th partial sum is at most the absolute value of the <strong>first omitted term</strong>.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">用第 $n$ 个部分和近似时的误差至多为<strong>第一个被舍弃项</strong>的绝对值。</p>
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Why This Works</strong>
-    For an alternating series satisfying the AST, the partial sums oscillate around the true value $S$, and each new term brings the sum closer. So the maximum error is bounded by the size of the next term.
+    <strong style="color: var(--accent);" data-lang="en">Why This Works</strong>
+    <strong style="color: var(--accent);" data-lang="zh">原理</strong>
+    <span data-lang="en">For an alternating series satisfying the AST, the partial sums oscillate around the true value $S$, and each new term brings the sum closer. So the maximum error is bounded by the size of the next term.</span>
+    <span data-lang="zh">对满足交错级数判别法的级数，部分和绕真值 $S$ 振荡，每加一项都更接近 $S$。因此最大误差由下一项的大小所控制。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Alternating Series Error Bound</summary>
+    <summary><span data-lang="en">Worked Example — Alternating Series Error Bound</span><span data-lang="zh">例题 —— 交错级数误差界</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Approximate the sum of the series to within 0.01:</span>
+<pre><span class="cm" data-lang="en">Approximate the sum of the series to within 0.01:</span><span class="cm" data-lang="zh">将该级数之和近似到误差 0.01 以内：</span>
 $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^3} $$
 
-<span class="cm">We need |a_{n+1}| = 1/(n+1)³ < 0.01</span>
+<span class="cm" data-lang="en">We need |a_{n+1}| = 1/(n+1)³ < 0.01</span><span class="cm" data-lang="zh">需要 |a_{n+1}| = 1/(n+1)³ < 0.01</span>
   (n+1)³ > 100
   n+1 > 4.64...
-  n ≥ 4  →  use <span class="num">S₄</span>
+  n ≥ 4  →  <span data-lang="en">use </span><span data-lang="zh">使用 </span><span class="num">S₄</span>
 
-<span class="cm">Compute:</span>
+<span class="cm" data-lang="en">Compute:</span><span class="cm" data-lang="zh">计算：</span>
   S₄ = 1/1 − 1/8 + 1/27 − 1/64
      = 1 − 0.125 + 0.0370 − 0.0156
      ≈ <span class="num">0.8965</span>
 
-<span class="str">S₄ approximates the sum with error ≤ 1/125 = 0.008 < 0.01. ✓</span></pre>
+<span class="str" data-lang="en">S₄ approximates the sum with error ≤ 1/125 = 0.008 < 0.01. ✓</span><span class="str" data-lang="zh">S₄ 近似该和，误差 ≤ 1/125 = 0.008 < 0.01。✓</span></pre>
     </div>
   </details>
 </section>
@@ -1296,33 +1405,41 @@ $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^3} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-11">
   <div class="section-label">Topic 10.11</div>
-  <h2>Finding Taylor Polynomial Approximations of Functions</h2>
+  <h2 data-lang="en">Finding Taylor Polynomial Approximations of Functions</h2>
+  <h2 data-lang="zh">求函数的泰勒多项式近似</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">The Big Idea</strong>
-    A Taylor polynomial approximates a function near a point $x = a$ using derivatives at that point. The more terms you include, the better the approximation — and in many cases, the infinite Taylor series equals the function exactly.
+    <strong style="color: var(--accent);" data-lang="en">The Big Idea</strong>
+    <strong style="color: var(--accent);" data-lang="zh">核心思想</strong>
+    <span data-lang="en">A Taylor polynomial approximates a function near a point $x = a$ using derivatives at that point. The more terms you include, the better the approximation — and in many cases, the infinite Taylor series equals the function exactly.</span>
+    <span data-lang="zh"><strong>泰勒多项式（<code>Taylor polynomial</code>）</strong>使用函数在点 $x = a$ 处的各阶导数来近似该点附近的函数。所含项越多，近似越好 —— 很多情况下，无穷<strong>泰勒级数（<code>Taylor series</code>）</strong>恰等于该函数本身。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Taylor Polynomial of Degree $n$</div>
+    <div class="formula-label" data-lang="en">Taylor Polynomial of Degree $n$</div>
+    <div class="formula-label" data-lang="zh">$n$ 次泰勒多项式（<code>nth-degree Taylor polynomial</code>）</div>
     $$ P_n(x) = \sum_{k=0}^{n} \frac{f^{(k)}(a)}{k!}(x-a)^k = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots $$
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Maclaurin Polynomial = Taylor at $a = 0$</strong>
-    <span style="display:block; margin-top:8px;">A Maclaurin polynomial is simply a Taylor polynomial centered at $x = 0$:</span>
+    <strong style="color: var(--green);" data-lang="en">Maclaurin Polynomial = Taylor at $a = 0$</strong>
+    <strong style="color: var(--green);" data-lang="zh">麦克劳林多项式 = $a = 0$ 处的泰勒多项式</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">A Maclaurin polynomial is simply a Taylor polynomial centered at $x = 0$:</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>麦克劳林多项式（<code>Maclaurin series</code> 的多项式版本）</strong>就是以 $x = 0$ 为<strong>中心（<code>center of a power series</code>）</strong>的泰勒多项式：</span>
     $$ P_n(x) = f(0) + f'(0)x + \frac{f''(0)}{2!}x^2 + \frac{f'''(0)}{3!}x^3 + \cdots $$
   </div>
 
   <!-- ─── INTERACTIVE TAYLOR POLYNOMIAL VISUALIZER ─── -->
   <div class="interactive-widget" id="taylor-widget">
-    <div class="widget-header">Interactive Taylor Polynomial Explorer</div>
-    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;">Increase the degree and watch the polynomial "hug" the function more closely.</p>
+    <div class="widget-header" data-lang="en">Interactive Taylor Polynomial Explorer</div>
+    <div class="widget-header" data-lang="zh">交互式泰勒多项式探索器</div>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="en">Increase the degree and watch the polynomial "hug" the function more closely.</p>
+    <p style="text-align:center; font-size:0.9rem; color:var(--text-secondary); margin-bottom:12px;" data-lang="zh">增加次数，观察多项式如何越来越贴近原函数。</p>
     <div class="widget-canvas-wrap">
       <canvas id="taylorCanvas" width="720" height="380"></canvas>
     </div>
     <div class="widget-controls">
-      <label for="taylorDeg">Degree $n$:</label>
+      <label for="taylorDeg"><span data-lang="en">Degree $n$:</span><span data-lang="zh">次数 $n$：</span></label>
       <input type="range" id="taylorDeg" min="0" max="15" value="1" step="1">
       <div class="widget-readout" id="taylorReadout">n = 1</div>
     </div>
@@ -1335,11 +1452,11 @@ $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^3} $$
   </div>
 
   <details>
-    <summary>Worked Example — Taylor Polynomial for $e^x$ at $a = 0$</summary>
+    <summary><span data-lang="en">Worked Example — Taylor Polynomial for $e^x$ at $a = 0$</span><span data-lang="zh">例题 —— $e^x$ 在 $a = 0$ 处的泰勒多项式</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find the 4th-degree Maclaurin polynomial for f(x) = eˣ.</span>
+<pre><span class="cm" data-lang="en">Find the 4th-degree Maclaurin polynomial for f(x) = eˣ.</span><span class="cm" data-lang="zh">求 f(x) = eˣ 的 4 次麦克劳林多项式。</span>
 
-<span class="cm">All derivatives of eˣ are eˣ, and e⁰ = 1:</span>
+<span class="cm" data-lang="en">All derivatives of eˣ are eˣ, and e⁰ = 1:</span><span class="cm" data-lang="zh">eˣ 的各阶导数都是 eˣ，且 e⁰ = 1：</span>
   f(0) = 1,  f'(0) = 1,  f''(0) = 1,  f'''(0) = 1,  f⁴(0) = 1
 
 <span class="cm">P₄(x) = 1 + x + x²/2! + x³/3! + x⁴/4!</span>
@@ -1355,44 +1472,54 @@ $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^3} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-12">
   <div class="section-label">Topic 10.12</div>
-  <h2>Lagrange Error Bound</h2>
+  <h2 data-lang="en">Lagrange Error Bound</h2>
+  <h2 data-lang="zh">拉格朗日误差界</h2>
 
   <div class="formula-box" style="border-top-color: var(--red);">
-    <div class="formula-label" style="color: var(--red);">Lagrange Error Bound (Taylor's Remainder)</div>
+    <div class="formula-label" style="color: var(--red);" data-lang="en">Lagrange Error Bound (Taylor's Remainder)</div>
+    <div class="formula-label" style="color: var(--red);" data-lang="zh">拉格朗日误差界（<code>Lagrange error bound</code>，泰勒余项（<code>remainder term</code>））</div>
     $$ |R_n(x)| = |f(x) - P_n(x)| \leq \frac{M}{(n+1)!}|x - a|^{n+1} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">where $M = \max |f^{(n+1)}(c)|$ for $c$ between $a$ and $x$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">where $M = \max |f^{(n+1)}(c)|$ for $c$ between $a$ and $x$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">其中 $M = \max |f^{(n+1)}(c)|$，$c$ 在 $a$ 与 $x$ 之间</p>
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">How to Use the Lagrange Error Bound</strong>
-    <span style="display:block; margin-top:8px;"><strong>Step 1:</strong> Identify $f$, $a$, $n$, and $x$.</span>
-    <span style="display:block; margin-top:4px;"><strong>Step 2:</strong> Find the $(n+1)$th derivative of $f$.</span>
-    <span style="display:block; margin-top:4px;"><strong>Step 3:</strong> Find the maximum of $|f^{(n+1)}(c)|$ for $c$ between $a$ and $x$. This is $M$.</span>
-    <span style="display:block; margin-top:4px;"><strong>Step 4:</strong> Plug into the formula.</span>
+    <strong style="color: var(--accent);" data-lang="en">How to Use the Lagrange Error Bound</strong>
+    <strong style="color: var(--accent);" data-lang="zh">使用拉格朗日误差界的步骤</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en"><strong>Step 1:</strong> Identify $f$, $a$, $n$, and $x$.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>步骤 1：</strong>确定 $f$、$a$、$n$ 和 $x$。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>Step 2:</strong> Find the $(n+1)$th derivative of $f$.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>步骤 2：</strong>求出 $f$ 的 $(n+1)$ 阶导数。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>Step 3:</strong> Find the maximum of $|f^{(n+1)}(c)|$ for $c$ between $a$ and $x$. This is $M$.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>步骤 3：</strong>求 $c$ 在 $a$ 与 $x$ 之间时 $|f^{(n+1)}(c)|$ 的最大值，记为 $M$。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>Step 4:</strong> Plug into the formula.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>步骤 4：</strong>代入公式。</span>
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Lagrange vs. Alternating Series Error</strong>
-    <span style="display:block; margin-top:8px;">If the Taylor series is alternating and satisfies the AST conditions, you can use the simpler <strong>alternating series error bound</strong> instead. Use Lagrange when the series is not alternating.</span>
+    <strong style="color: var(--orange);" data-lang="en">Lagrange vs. Alternating Series Error</strong>
+    <strong style="color: var(--orange);" data-lang="zh">拉格朗日 vs. 交错级数误差</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">If the Taylor series is alternating and satisfies the AST conditions, you can use the simpler <strong>alternating series error bound</strong> instead. Use Lagrange when the series is not alternating.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">若泰勒级数为交错级数且满足交错级数判别法的条件，可改用更简单的<strong>交错级数误差界</strong>。当级数非交错时使用拉格朗日误差界。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Lagrange Error Bound</summary>
+    <summary><span data-lang="en">Worked Example — Lagrange Error Bound</span><span data-lang="zh">例题 —— 拉格朗日误差界</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Use the 3rd-degree Maclaurin polynomial for sin(x)</span>
-<span class="cm">to approximate sin(0.5). Bound the error.</span>
+<pre><span class="cm" data-lang="en">Use the 3rd-degree Maclaurin polynomial for sin(x)</span><span class="cm" data-lang="zh">用 sin(x) 的 3 次麦克劳林多项式</span>
+<span class="cm" data-lang="en">to approximate sin(0.5). Bound the error.</span><span class="cm" data-lang="zh">近似 sin(0.5)，并估计误差界。</span>
 
 <span class="cm">P₃(x) = x − x³/6</span>
 <span class="cm">P₃(0.5) = 0.5 − 0.125/6 = 0.5 − 0.02083 ≈ 0.47917</span>
 
-<span class="cm">Error bound: n = 3, a = 0, x = 0.5</span>
-<span class="cm">f⁴(x) = sin(x), so |f⁴(c)| ≤ 1 for all c → M = 1</span>
+<span class="cm" data-lang="en">Error bound: n = 3, a = 0, x = 0.5</span><span class="cm" data-lang="zh">误差界：n = 3，a = 0，x = 0.5</span>
+<span class="cm" data-lang="en">f⁴(x) = sin(x), so |f⁴(c)| ≤ 1 for all c → M = 1</span><span class="cm" data-lang="zh">f⁴(x) = sin(x)，所以对所有 c 有 |f⁴(c)| ≤ 1 → M = 1</span>
 
   |R₃| ≤ M · |x−a|⁴ / 4! = 1 · (0.5)⁴ / 24
        = 0.0625/24 ≈ <span class="num">0.0026</span>
 
-<span class="str">The approximation 0.47917 has error ≤ 0.0026.</span>
-<span class="cm">(Actual: sin(0.5) ≈ 0.47943, error ≈ 0.00026)</span></pre>
+<span class="str" data-lang="en">The approximation 0.47917 has error ≤ 0.0026.</span><span class="str" data-lang="zh">近似值 0.47917 的误差 ≤ 0.0026。</span>
+<span class="cm" data-lang="en">(Actual: sin(0.5) ≈ 0.47943, error ≈ 0.00026)</span><span class="cm" data-lang="zh">（实际：sin(0.5) ≈ 0.47943，误差 ≈ 0.00026）</span></pre>
     </div>
   </details>
 </section>
@@ -1404,60 +1531,73 @@ $$ \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^3} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-13">
   <div class="section-label">Topic 10.13</div>
-  <h2>Radius and Interval of Convergence of Power Series</h2>
+  <h2 data-lang="en">Radius and Interval of Convergence of Power Series</h2>
+  <h2 data-lang="zh">幂级数的收敛半径与收敛区间</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Power Series</strong>
-    <span style="display:block; margin-top:8px;">A power series centered at $x = c$ has the form $\displaystyle\sum_{n=0}^{\infty} a_n(x - c)^n$. It converges for some values of $x$ and diverges for others.</span>
+    <strong style="color: var(--accent);" data-lang="en">Power Series</strong>
+    <strong style="color: var(--accent);" data-lang="zh">幂级数（<code>power series</code>）</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">A power series centered at $x = c$ has the form $\displaystyle\sum_{n=0}^{\infty} a_n(x - c)^n$. It converges for some values of $x$ and diverges for others.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">以 $x = c$ 为中心的幂级数形如 $\displaystyle\sum_{n=0}^{\infty} a_n(x - c)^n$。它对某些 $x$ 收敛，对其他 $x$ 发散。</span>
   </div>
 
   <div class="formula-box" style="border-top-color: var(--purple);">
-    <div class="formula-label" style="color: var(--purple);">Finding Radius of Convergence</div>
+    <div class="formula-label" style="color: var(--purple);" data-lang="en">Finding Radius of Convergence</div>
+    <div class="formula-label" style="color: var(--purple);" data-lang="zh">求收敛半径（<code>radius of convergence</code>）</div>
     $$ R = \lim_{n\to\infty} \left|\frac{a_n}{a_{n+1}}\right| \quad \text{(or use the ratio test on the series)} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">The series converges when $|x - c| < R$ and diverges when $|x - c| > R$.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">The series converges when $|x - c| < R$ and diverges when $|x - c| > R$.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">当 $|x - c| < R$ 时级数收敛，当 $|x - c| > R$ 时发散。</p>
   </div>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-blue">→</div>
-      <div class="card-title">Finding the Interval of Convergence</div>
+      <div class="card-title"><span data-lang="en">Finding the Interval of Convergence</span><span data-lang="zh">求收敛区间（<code>interval of convergence</code>）</span></div>
     </div>
-    <p style="margin-bottom: 8px;"><strong>Step 1:</strong> Use the ratio test to find $R$ (the radius of convergence).</p>
-    <p style="margin-bottom: 8px;"><strong>Step 2:</strong> Write the open interval $(c - R, c + R)$.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 3:</strong> Test the endpoints $x = c - R$ and $x = c + R$ <em>individually</em> by plugging them back into the original series.</p>
-    <p><strong>Step 4:</strong> Include or exclude each endpoint based on whether the resulting series converges.</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 1:</strong> Use the ratio test to find $R$ (the radius of convergence).</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 1：</strong>使用比值判别法求 $R$（收敛半径）。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 2:</strong> Write the open interval $(c - R, c + R)$.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 2：</strong>写出开区间 $(c - R, c + R)$。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 3:</strong> Test the endpoints $x = c - R$ and $x = c + R$ <em>individually</em> by plugging them back into the original series.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 3：</strong><em>分别</em>将端点 $x = c - R$ 和 $x = c + R$ 代回原级数检验。</p>
+    <p data-lang="en"><strong>Step 4:</strong> Include or exclude each endpoint based on whether the resulting series converges.</p>
+    <p data-lang="zh"><strong>步骤 4：</strong>根据各端点处所得级数是否收敛，决定端点的取舍。</p>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Don't Forget the Endpoints!</strong>
-    <span style="display:block; margin-top:8px;">The ratio test gives you the open interval of convergence. You must separately test both endpoints. This is where p-series, harmonic series, and alternating series tests come in handy.</span>
+    <strong style="color: var(--red);" data-lang="en">Don't Forget the Endpoints!</strong>
+    <strong style="color: var(--red);" data-lang="zh">别忘了检验端点！</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">The ratio test gives you the open interval of convergence. You must separately test both endpoints. This is where p-series, harmonic series, and alternating series tests come in handy.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">比值判别法给出的是收敛的开区间。必须分别检验两个端点。这正是 p 级数、调和级数与交错级数判别法发挥作用的地方。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Interval of Convergence</summary>
+    <summary><span data-lang="en">Worked Example — Interval of Convergence</span><span data-lang="zh">例题 —— 收敛区间</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find the interval of convergence:</span>
+<pre><span class="cm" data-lang="en">Find the interval of convergence:</span><span class="cm" data-lang="zh">求收敛区间：</span>
 $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 
-<span class="cm">Ratio test:</span>
+<span class="cm" data-lang="en">Ratio test:</span><span class="cm" data-lang="zh">比值判别法：</span>
   |a_{n+1}/a_n| = |(x−3)^(n+1)/[(n+1)2^(n+1)]| / |(x−3)^n/[n·2^n]|
                = |x−3|/2 · n/(n+1)
 
   lim = |x−3|/2
 
-<span class="cm">Converges when |x−3|/2 < 1  →  |x−3| < 2  →  R = 2</span>
-<span class="cm">Open interval: (1, 5)</span>
+<span class="cm" data-lang="en">Converges when |x−3|/2 < 1  →  |x−3| < 2  →  R = 2</span><span class="cm" data-lang="zh">当 |x−3|/2 < 1 时收敛  →  |x−3| < 2  →  R = 2</span>
+<span class="cm" data-lang="en">Open interval: (1, 5)</span><span class="cm" data-lang="zh">开区间：(1, 5)</span>
 
-<span class="cm">Test x = 1:</span>  Σ (-1)^n/n → alternating harmonic → <span class="str">converges</span>
-<span class="cm">Test x = 5:</span>  Σ 1/n → harmonic → <span class="str">diverges</span>
+<span class="cm" data-lang="en">Test x = 1:</span><span class="cm" data-lang="zh">检验 x = 1：</span>  Σ (-1)^n/n → <span data-lang="en">alternating harmonic → </span><span data-lang="zh">交错调和级数 → </span><span class="str" data-lang="en">converges</span><span class="str" data-lang="zh">收敛</span>
+<span class="cm" data-lang="en">Test x = 5:</span><span class="cm" data-lang="zh">检验 x = 5：</span>  Σ 1/n → <span data-lang="en">harmonic → </span><span data-lang="zh">调和级数 → </span><span class="str" data-lang="en">diverges</span><span class="str" data-lang="zh">发散</span>
 
-<span class="str">Interval of convergence: [1, 5)</span></pre>
+<span class="str" data-lang="en">Interval of convergence: [1, 5)</span><span class="str" data-lang="zh">收敛区间：[1, 5)</span></pre>
     </div>
   </details>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Important Properties</strong>
-    <span style="display:block; margin-top:8px;">Term-by-term differentiation and integration preserve the radius of convergence (but endpoints may change).</span>
+    <strong style="color: var(--green);" data-lang="en">Important Properties</strong>
+    <strong style="color: var(--green);" data-lang="zh">重要性质</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">Term-by-term differentiation and integration preserve the radius of convergence (but endpoints may change).</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">逐项求导与逐项积分保持收敛半径不变（但端点的收敛性可能改变）。</span>
   </div>
 </section>
 
@@ -1468,40 +1608,52 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-14">
   <div class="section-label">Topic 10.14</div>
-  <h2>Finding Taylor or Maclaurin Series for a Function</h2>
+  <h2 data-lang="en">Finding Taylor or Maclaurin Series for a Function</h2>
+  <h2 data-lang="zh">求函数的泰勒或麦克劳林级数</h2>
 
-  <p>These four Maclaurin series are the building blocks for the AP exam. Memorize them.</p>
+  <p data-lang="en">These four Maclaurin series are the building blocks for the AP exam. Memorize them.</p>
+  <p data-lang="zh">这四条<strong>常见的麦克劳林级数（<code>common Maclaurin series</code>）</strong>是 AP 考试的基本砖块。请熟记。</p>
 
   <div class="qref">
-    <div class="qref-title">Essential Maclaurin Series — Memorize These!</div>
+    <div class="qref-title" data-lang="en">Essential Maclaurin Series — Memorize These!</div>
+    <div class="qref-title" data-lang="zh">必记的麦克劳林级数</div>
     <div class="table-wrap">
       <table>
-        <tr><th>Function</th><th>Maclaurin Series</th><th>Converges for</th></tr>
-        <tr><td>$e^x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$</td><td>all $x$</td></tr>
-        <tr><td>$\sin x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$</td><td>all $x$</td></tr>
-        <tr><td>$\cos x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$</td><td>all $x$</td></tr>
+        <tr>
+          <th><span data-lang="en">Function</span><span data-lang="zh">函数</span></th>
+          <th><span data-lang="en">Maclaurin Series</span><span data-lang="zh">麦克劳林级数</span></th>
+          <th><span data-lang="en">Converges for</span><span data-lang="zh">收敛域</span></th>
+        </tr>
+        <tr><td>$e^x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$</td><td><span data-lang="en">all $x$</span><span data-lang="zh">所有 $x$</span></td></tr>
+        <tr><td>$\sin x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$</td><td><span data-lang="en">all $x$</span><span data-lang="zh">所有 $x$</span></td></tr>
+        <tr><td>$\cos x$</td><td>$\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$</td><td><span data-lang="en">all $x$</span><span data-lang="zh">所有 $x$</span></td></tr>
         <tr><td>$\dfrac{1}{1-x}$</td><td>$\displaystyle\sum_{n=0}^{\infty} x^n = 1 + x + x^2 + x^3 + \cdots$</td><td>$|x| < 1$</td></tr>
       </table>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Notice the Patterns</strong>
-    <span style="display:block; margin-top:8px;">$\sin x$ uses only <strong>odd powers</strong>. $\cos x$ uses only <strong>even powers</strong>.</span>
-    <span style="display:block; margin-top:4px;">Both $\sin x$ and $\cos x$ <strong>alternate in sign</strong>.</span>
-    <span style="display:block; margin-top:4px;">$e^x$ uses <strong>all powers</strong> with <strong>all positive signs</strong>.</span>
-    <span style="display:block; margin-top:4px;">$1/(1-x)$ is just the <strong>geometric series</strong>!</span>
+    <strong style="color: var(--purple);" data-lang="en">Notice the Patterns</strong>
+    <strong style="color: var(--purple);" data-lang="zh">注意规律</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">$\sin x$ uses only <strong>odd powers</strong>. $\cos x$ uses only <strong>even powers</strong>.</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">$\sin x$ 只含<strong>奇次幂</strong>。$\cos x$ 只含<strong>偶次幂</strong>。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">Both $\sin x$ and $\cos x$ <strong>alternate in sign</strong>.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">$\sin x$ 与 $\cos x$ 都<strong>正负交替</strong>。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">$e^x$ uses <strong>all powers</strong> with <strong>all positive signs</strong>.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">$e^x$ 含<strong>所有幂次</strong>且<strong>全为正号</strong>。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">$1/(1-x)$ is just the <strong>geometric series</strong>!</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">$1/(1-x)$ 就是<strong>等比级数</strong>！</span>
   </div>
 
   <details>
-    <summary>Worked Example — Constructing from a Known Series</summary>
+    <summary><span data-lang="en">Worked Example — Constructing from a Known Series</span><span data-lang="zh">例题 —— 从已知级数构造</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find the Maclaurin series for f(x) = e^(−x²).</span>
+<pre><span class="cm" data-lang="en">Find the Maclaurin series for f(x) = e^(−x²).</span><span class="cm" data-lang="zh">求 f(x) = e^(−x²) 的麦克劳林级数。</span>
 
-<span class="cm">Start with the known series for eᵘ:</span>
+<span class="cm" data-lang="en">Start with the known series for eᵘ:</span><span class="cm" data-lang="zh">从已知的 eᵘ 级数出发：</span>
   eᵘ = Σ uⁿ/n!
 
-<span class="cm">Substitute u = −x²:</span>
+<span class="cm" data-lang="en">Substitute u = −x²:</span><span class="cm" data-lang="zh">代入 u = −x²：</span>
   e^(−x²) = Σ (−x²)ⁿ/n!
            = Σ (−1)ⁿ x^(2n) / n!
 
@@ -1519,65 +1671,72 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="s10-15">
   <div class="section-label">Topic 10.15</div>
-  <h2>Representing Functions as Power Series</h2>
+  <h2 data-lang="en">Representing Functions as Power Series</h2>
+  <h2 data-lang="zh">将函数表示为幂级数</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">The Toolkit</strong>
-    You can derive new power series from known ones using these operations:
-    <span style="display:block; margin-top:8px;"><strong>1. Substitution:</strong> Replace $x$ with an expression (e.g., $-x$, $x^2$, $3x$).</span>
-    <span style="display:block; margin-top:4px;"><strong>2. Multiplication:</strong> Multiply the series by $x$, $x^2$, a constant, etc.</span>
-    <span style="display:block; margin-top:4px;"><strong>3. Term-by-term differentiation:</strong> Differentiating each term gives the series for $f'(x)$.</span>
-    <span style="display:block; margin-top:4px;"><strong>4. Term-by-term integration:</strong> Integrating each term gives the series for $\int f(x)\,dx$.</span>
+    <strong style="color: var(--accent);" data-lang="en">The Toolkit</strong>
+    <strong style="color: var(--accent);" data-lang="zh">工具箱</strong>
+    <span data-lang="en">You can derive new power series from known ones using these operations:</span>
+    <span data-lang="zh">利用以下操作可从已知幂级数推导新幂级数：</span>
+    <span style="display:block; margin-top:8px;" data-lang="en"><strong>1. Substitution:</strong> Replace $x$ with an expression (e.g., $-x$, $x^2$, $3x$).</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh"><strong>1. 代换：</strong>用表达式（如 $-x$、$x^2$、$3x$）替换 $x$。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>2. Multiplication:</strong> Multiply the series by $x$, $x^2$, a constant, etc.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>2. 乘法：</strong>将级数乘以 $x$、$x^2$、常数等。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>3. Term-by-term differentiation:</strong> Differentiating each term gives the series for $f'(x)$.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>3. 逐项求导：</strong>对每一项求导得到 $f'(x)$ 的级数。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en"><strong>4. Term-by-term integration:</strong> Integrating each term gives the series for $\int f(x)\,dx$.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh"><strong>4. 逐项积分：</strong>对每一项积分得到 $\int f(x)\,dx$ 的级数。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Substitution</summary>
+    <summary><span data-lang="en">Worked Example — Substitution</span><span data-lang="zh">例题 —— 代换</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find a power series for 1/(1+x²).</span>
+<pre><span class="cm" data-lang="en">Find a power series for 1/(1+x²).</span><span class="cm" data-lang="zh">求 1/(1+x²) 的幂级数。</span>
 
-<span class="cm">Start with: 1/(1−u) = Σ uⁿ for |u| < 1</span>
-<span class="cm">Let u = −x²:</span>
+<span class="cm" data-lang="en">Start with: 1/(1−u) = Σ uⁿ for |u| < 1</span><span class="cm" data-lang="zh">从已知出发：当 |u| < 1 时 1/(1−u) = Σ uⁿ</span>
+<span class="cm" data-lang="en">Let u = −x²:</span><span class="cm" data-lang="zh">令 u = −x²：</span>
 
   1/(1−(−x²)) = 1/(1+x²)
               = Σ (−x²)ⁿ
               = Σ (−1)ⁿ x^(2n)
 
               = <span class="num">1 − x² + x⁴ − x⁶ + ⋯</span>
-<span class="cm">for |x| < 1</span></pre>
+<span class="cm" data-lang="en">for |x| < 1</span><span class="cm" data-lang="zh">|x| < 1</span></pre>
     </div>
   </details>
 
   <details>
-    <summary>Worked Example — Term-by-Term Integration</summary>
+    <summary><span data-lang="en">Worked Example — Term-by-Term Integration</span><span data-lang="zh">例题 —— 逐项积分</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find a power series for arctan(x).</span>
+<pre><span class="cm" data-lang="en">Find a power series for arctan(x).</span><span class="cm" data-lang="zh">求 arctan(x) 的幂级数。</span>
 
-<span class="cm">We know d/dx[arctan(x)] = 1/(1+x²)</span>
-<span class="cm">So arctan(x) = ∫ 1/(1+x²) dx</span>
+<span class="cm" data-lang="en">We know d/dx[arctan(x)] = 1/(1+x²)</span><span class="cm" data-lang="zh">已知 d/dx[arctan(x)] = 1/(1+x²)</span>
+<span class="cm" data-lang="en">So arctan(x) = ∫ 1/(1+x²) dx</span><span class="cm" data-lang="zh">所以 arctan(x) = ∫ 1/(1+x²) dx</span>
 
-<span class="cm">From above: 1/(1+x²) = Σ (−1)ⁿ x^(2n)</span>
+<span class="cm" data-lang="en">From above: 1/(1+x²) = Σ (−1)ⁿ x^(2n)</span><span class="cm" data-lang="zh">由上：1/(1+x²) = Σ (−1)ⁿ x^(2n)</span>
 
-<span class="cm">Integrate term by term:</span>
+<span class="cm" data-lang="en">Integrate term by term:</span><span class="cm" data-lang="zh">逐项积分：</span>
   arctan(x) = Σ (−1)ⁿ x^(2n+1)/(2n+1) + C
 
-<span class="cm">Since arctan(0) = 0, we get C = 0:</span>
+<span class="cm" data-lang="en">Since arctan(0) = 0, we get C = 0:</span><span class="cm" data-lang="zh">因为 arctan(0) = 0，所以 C = 0：</span>
   arctan(x) = <span class="num">x − x³/3 + x⁵/5 − x⁷/7 + ⋯</span>
-<span class="cm">for |x| ≤ 1</span></pre>
+<span class="cm" data-lang="en">for |x| ≤ 1</span><span class="cm" data-lang="zh">|x| ≤ 1</span></pre>
   </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">The Maclaurin series for $xe^x$ is:</div>
+    <div class="quiz-q"><span data-lang="en">The Maclaurin series for $xe^x$ is:</span><span data-lang="zh">$xe^x$ 的麦克劳林级数为：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!}$</div>
       <div class="quiz-opt" data-idx="1">$\displaystyle\sum_{n=0}^{\infty} \frac{x^{n+1}}{n!}$</div>
       <div class="quiz-opt" data-idx="2">$\displaystyle\sum_{n=1}^{\infty} \frac{x^{n-1}}{n!}$</div>
       <div class="quiz-opt" data-idx="3">$\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{n+1}}{n!}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Multiply $e^x = \sum x^n/n!$ by $x$: $xe^x = \sum x^{n+1}/n! = x + x^2 + x^3/2! + \cdots$</div>
-    <div class="quiz-explain wrong-exp">Since $e^x = \sum_{n=0}^{\infty} x^n/n!$, multiplying by $x$ gives $xe^x = \sum_{n=0}^{\infty} x^{n+1}/n!$.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Multiply $e^x = \sum x^n/n!$ by $x$: $xe^x = \sum x^{n+1}/n! = x + x^2 + x^3/2! + \cdots$</span><span data-lang="zh">正确！将 $e^x = \sum x^n/n!$ 乘以 $x$：$xe^x = \sum x^{n+1}/n! = x + x^2 + x^3/2! + \cdots$</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Since $e^x = \sum_{n=0}^{\infty} x^n/n!$, multiplying by $x$ gives $xe^x = \sum_{n=0}^{\infty} x^{n+1}/n!$.</span><span data-lang="zh">由 $e^x = \sum_{n=0}^{\infty} x^n/n!$，乘以 $x$ 得 $xe^x = \sum_{n=0}^{\infty} x^{n+1}/n!$。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1588,35 +1747,80 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="convergence-flowchart">
   <div class="section-label">Reference</div>
-  <h2>Which Convergence Test Should I Use?</h2>
+  <h2 data-lang="en">Which Convergence Test Should I Use?</h2>
+  <h2 data-lang="zh">应该使用哪个收敛判别法？</h2>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-blue">?</div>
-      <div class="card-title">Decision Flowchart</div>
+      <div class="card-title"><span data-lang="en">Decision Flowchart</span><span data-lang="zh">判别决策流程</span></div>
     </div>
-    <p style="margin-bottom: 8px;"><strong>Step 0 — Always start here:</strong> Does $\lim a_n = 0$? If NO → <strong>diverges</strong> (nth Term Test). If YES → continue.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 1 — Is it geometric?</strong> $\sum ar^n$ → converges if $|r| < 1$, diverges if $|r| \geq 1$.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 2 — Is it a $p$-series?</strong> $\sum 1/n^p$ → converges if $p > 1$, diverges if $p \leq 1$.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 3 — Does it alternate?</strong> Try the <strong>Alternating Series Test</strong>.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 4 — Factorials or exponentials?</strong> Try the <strong>Ratio Test</strong>.</p>
-    <p style="margin-bottom: 8px;"><strong>Step 5 — Looks like a known series?</strong> Try <strong>Direct or Limit Comparison</strong>.</p>
-    <p><strong>Step 6 — None of the above?</strong> Try the <strong>Integral Test</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 0 — Always start here:</strong> Does $\lim a_n = 0$? If NO → <strong>diverges</strong> (nth Term Test). If YES → continue.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 0 —— 永远先做：</strong>$\lim a_n = 0$ 吗？若否 → <strong>发散</strong>（第 n 项判别法）。若是 → 继续。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 1 — Is it geometric?</strong> $\sum ar^n$ → converges if $|r| < 1$, diverges if $|r| \geq 1$.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 1 —— 是等比级数吗？</strong>$\sum ar^n$ → $|r| < 1$ 时收敛，$|r| \geq 1$ 时发散。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 2 — Is it a $p$-series?</strong> $\sum 1/n^p$ → converges if $p > 1$, diverges if $p \leq 1$.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 2 —— 是 $p$ 级数吗？</strong>$\sum 1/n^p$ → $p > 1$ 时收敛，$p \leq 1$ 时发散。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 3 — Does it alternate?</strong> Try the <strong>Alternating Series Test</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 3 —— 是否交错？</strong>尝试<strong>交错级数判别法</strong>。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 4 — Factorials or exponentials?</strong> Try the <strong>Ratio Test</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 4 —— 含阶乘或指数？</strong>尝试<strong>比值判别法</strong>。</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 5 — Looks like a known series?</strong> Try <strong>Direct or Limit Comparison</strong>.</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>步骤 5 —— 与已知级数相似？</strong>尝试<strong>比较判别法或极限比较判别法</strong>。</p>
+    <p data-lang="en"><strong>Step 6 — None of the above?</strong> Try the <strong>Integral Test</strong>.</p>
+    <p data-lang="zh"><strong>步骤 6 —— 以上都不是？</strong>尝试<strong>积分判别法</strong>。</p>
   </div>
 
   <div class="qref">
-    <div class="qref-title">Convergence Tests at a Glance</div>
+    <div class="qref-title" data-lang="en">Convergence Tests at a Glance</div>
+    <div class="qref-title" data-lang="zh">收敛判别法一览</div>
     <div class="table-wrap">
       <table>
-        <tr><th>Test</th><th>Applies To</th><th>Conclusion</th></tr>
-        <tr><td><strong>nth Term</strong></td><td>All series</td><td>Diverges if $\lim a_n \neq 0$ (only proves divergence)</td></tr>
-        <tr><td><strong>Geometric</strong></td><td>$\sum ar^n$</td><td>Converges to $a/(1-r)$ if $|r| < 1$</td></tr>
-        <tr><td><strong>$p$-Series</strong></td><td>$\sum 1/n^p$</td><td>Converges if $p > 1$</td></tr>
-        <tr><td><strong>Integral</strong></td><td>Positive, decreasing $f(n)$</td><td>Same as $\int_1^{\infty} f(x)\,dx$</td></tr>
-        <tr><td><strong>Direct Comparison</strong></td><td>Positive series</td><td>Bounded by convergent → converges</td></tr>
-        <tr><td><strong>Limit Comparison</strong></td><td>Positive series</td><td>Limit is finite &amp; positive → same behavior</td></tr>
-        <tr><td><strong>Alternating Series</strong></td><td>$\sum (-1)^n b_n$</td><td>Converges if $b_n$ decreasing → $0$</td></tr>
-        <tr><td><strong>Ratio</strong></td><td>All series</td><td>$L < 1$ converges; $L > 1$ diverges; $L = 1$ inconclusive</td></tr>
+        <tr>
+          <th><span data-lang="en">Test</span><span data-lang="zh">判别法</span></th>
+          <th><span data-lang="en">Applies To</span><span data-lang="zh">适用对象</span></th>
+          <th><span data-lang="en">Conclusion</span><span data-lang="zh">结论</span></th>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">nth Term</span><span data-lang="zh">第 n 项</span></strong></td>
+          <td><span data-lang="en">All series</span><span data-lang="zh">所有级数</span></td>
+          <td><span data-lang="en">Diverges if $\lim a_n \neq 0$ (only proves divergence)</span><span data-lang="zh">$\lim a_n \neq 0$ 时发散（只能判发散）</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Geometric</span><span data-lang="zh">等比</span></strong></td>
+          <td>$\sum ar^n$</td>
+          <td><span data-lang="en">Converges to $a/(1-r)$ if $|r| < 1$</span><span data-lang="zh">$|r| < 1$ 时收敛到 $a/(1-r)$</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">$p$-Series</span><span data-lang="zh">$p$ 级数</span></strong></td>
+          <td>$\sum 1/n^p$</td>
+          <td><span data-lang="en">Converges if $p > 1$</span><span data-lang="zh">$p > 1$ 时收敛</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Integral</span><span data-lang="zh">积分</span></strong></td>
+          <td><span data-lang="en">Positive, decreasing $f(n)$</span><span data-lang="zh">正、单调递减的 $f(n)$</span></td>
+          <td><span data-lang="en">Same as $\int_1^{\infty} f(x)\,dx$</span><span data-lang="zh">与 $\int_1^{\infty} f(x)\,dx$ 同性质</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Direct Comparison</span><span data-lang="zh">比较</span></strong></td>
+          <td><span data-lang="en">Positive series</span><span data-lang="zh">正项级数</span></td>
+          <td><span data-lang="en">Bounded by convergent → converges</span><span data-lang="zh">被收敛级数控制 → 收敛</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Limit Comparison</span><span data-lang="zh">极限比较</span></strong></td>
+          <td><span data-lang="en">Positive series</span><span data-lang="zh">正项级数</span></td>
+          <td><span data-lang="en">Limit is finite &amp; positive → same behavior</span><span data-lang="zh">极限有限且为正 → 同收敛或同发散</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Alternating Series</span><span data-lang="zh">交错级数</span></strong></td>
+          <td>$\sum (-1)^n b_n$</td>
+          <td><span data-lang="en">Converges if $b_n$ decreasing → $0$</span><span data-lang="zh">$b_n$ 递减且 → $0$ 时收敛</span></td>
+        </tr>
+        <tr>
+          <td><strong><span data-lang="en">Ratio</span><span data-lang="zh">比值</span></strong></td>
+          <td><span data-lang="en">All series</span><span data-lang="zh">所有级数</span></td>
+          <td><span data-lang="en">$L < 1$ converges; $L > 1$ diverges; $L = 1$ inconclusive</span><span data-lang="zh">$L < 1$ 收敛；$L > 1$ 发散；$L = 1$ 不能判断</span></td>
+        </tr>
       </table>
     </div>
   </div>
@@ -1629,38 +1833,54 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="exam-strategy">
   <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 10 Appears on the AP Exam</h2>
+  <h2 data-lang="en">How Unit 10 Appears on the AP Exam</h2>
+  <h2 data-lang="zh">单元 10 在 AP 考试中的考查形式</h2>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-blue">MC</div>
-      <div class="card-title">MCQ — Common Question Styles</div>
+      <div class="card-title"><span data-lang="en">MCQ — Common Question Styles</span><span data-lang="zh">选择题 —— 常见题型</span></div>
     </div>
-    <p><strong>Determine convergence/divergence</strong> of a given series using the appropriate test.</p>
-    <p><strong>Find the sum</strong> of a geometric or telescoping series.</p>
-    <p><strong>Find the interval of convergence</strong> of a power series using the ratio test + endpoint checks.</p>
-    <p><strong>Identify</strong> the Taylor or Maclaurin series for a function, or match a series to its function.</p>
-    <p><strong>Compute Taylor polynomial coefficients</strong> from given derivative values.</p>
+    <p data-lang="en"><strong>Determine convergence/divergence</strong> of a given series using the appropriate test.</p>
+    <p data-lang="zh"><strong>判断收敛/发散：</strong>对给定级数使用合适的判别法。</p>
+    <p data-lang="en"><strong>Find the sum</strong> of a geometric or telescoping series.</p>
+    <p data-lang="zh"><strong>求和：</strong>等比级数或裂项相消级数的和。</p>
+    <p data-lang="en"><strong>Find the interval of convergence</strong> of a power series using the ratio test + endpoint checks.</p>
+    <p data-lang="zh"><strong>求幂级数的收敛区间：</strong>使用比值判别法并检验端点。</p>
+    <p data-lang="en"><strong>Identify</strong> the Taylor or Maclaurin series for a function, or match a series to its function.</p>
+    <p data-lang="zh"><strong>识别：</strong>函数的泰勒或麦克劳林级数，或将级数与对应函数匹配。</p>
+    <p data-lang="en"><strong>Compute Taylor polynomial coefficients</strong> from given derivative values.</p>
+    <p data-lang="zh"><strong>由给定导数值计算泰勒多项式系数。</strong></p>
   </div>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-green">FR</div>
-      <div class="card-title">FRQ — Common Question Styles</div>
+      <div class="card-title"><span data-lang="en">FRQ — Common Question Styles</span><span data-lang="zh">解答题 —— 常见题型</span></div>
     </div>
-    <p><strong>Series FRQ:</strong> Usually involves finding a Taylor polynomial from a table of derivatives, using it to approximate a value, and bounding the error.</p>
-    <p><strong>Deriving a new series</strong> from a known one via substitution, differentiation, or integration.</p>
-    <p><strong>Finding the interval of convergence</strong> with complete endpoint analysis.</p>
-    <p><strong>Using the Lagrange error bound</strong> or alternating series error bound to justify that an approximation is within a given tolerance.</p>
+    <p data-lang="en"><strong>Series FRQ:</strong> Usually involves finding a Taylor polynomial from a table of derivatives, using it to approximate a value, and bounding the error.</p>
+    <p data-lang="zh"><strong>级数解答题：</strong>通常给出导数值表，要求构造泰勒多项式、用它近似某值并估计误差界。</p>
+    <p data-lang="en"><strong>Deriving a new series</strong> from a known one via substitution, differentiation, or integration.</p>
+    <p data-lang="zh"><strong>由已知级数推导新级数：</strong>通过代换、求导或积分。</p>
+    <p data-lang="en"><strong>Finding the interval of convergence</strong> with complete endpoint analysis.</p>
+    <p data-lang="zh"><strong>求收敛区间：</strong>含完整的端点分析。</p>
+    <p data-lang="en"><strong>Using the Lagrange error bound</strong> or alternating series error bound to justify that an approximation is within a given tolerance.</p>
+    <p data-lang="zh"><strong>使用拉格朗日误差界</strong>或交错级数误差界，论证近似值在给定容差内。</p>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Top Mistakes That Lose Points</strong>
-    <span style="display:block; margin-top:8px;">1. Not verifying conditions for a convergence test (especially the AST).</span>
-    <span style="display:block; margin-top:4px;">2. Saying "by the nth Term Test, the series converges" — it only proves divergence!</span>
-    <span style="display:block; margin-top:4px;">3. Forgetting to check endpoints when finding the interval of convergence.</span>
-    <span style="display:block; margin-top:4px;">4. Confusing the Lagrange error bound with the alternating series error bound.</span>
-    <span style="display:block; margin-top:4px;">5. Writing the general term of a Taylor series with the wrong factorial or exponent.</span>
+    <strong style="color: var(--red);" data-lang="en">Top Mistakes That Lose Points</strong>
+    <strong style="color: var(--red);" data-lang="zh">最常见的失分错误</strong>
+    <span style="display:block; margin-top:8px;" data-lang="en">1. Not verifying conditions for a convergence test (especially the AST).</span>
+    <span style="display:block; margin-top:8px;" data-lang="zh">1. 不验证收敛判别法的前提条件（尤其是交错级数判别法）。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">2. Saying "by the nth Term Test, the series converges" — it only proves divergence!</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">2. 写“由第 n 项判别法级数收敛” —— 第 n 项判别法只能证明发散！</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">3. Forgetting to check endpoints when finding the interval of convergence.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">3. 求收敛区间时忘记检验端点。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">4. Confusing the Lagrange error bound with the alternating series error bound.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">4. 混淆拉格朗日误差界与交错级数误差界。</span>
+    <span style="display:block; margin-top:4px;" data-lang="en">5. Writing the general term of a Taylor series with the wrong factorial or exponent.</span>
+    <span style="display:block; margin-top:4px;" data-lang="zh">5. 泰勒级数通项的阶乘或指数写错。</span>
   </div>
 </section>
 
@@ -1671,63 +1891,64 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="flashcards">
   <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <h2 data-lang="en">Flashcards — Click to Flip</h2>
+  <h2 data-lang="zh">闪卡 —— 点击翻面</h2>
 
   <div class="flashcard-toolbar">
-    <span class="fc-count" id="fcCount">0 / 8 flipped</span>
+    <span class="fc-count" id="fcCount"><span data-lang="en">0 / 8 flipped</span><span data-lang="zh">已翻 0 / 8 张</span></span>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Geometric Series Sum<br>$\displaystyle\sum_{n=0}^{\infty} ar^n = \;?$</div>
+        <div class="flashcard-front"><span data-lang="en">Geometric Series Sum<br>$\displaystyle\sum_{n=0}^{\infty} ar^n = \;?$</span><span data-lang="zh">等比级数和<br>$\displaystyle\sum_{n=0}^{\infty} ar^n = \;?$</span></div>
         <div class="flashcard-back"><br>$$ \frac{a}{1-r}, \quad |r| < 1 $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">nth Term Test:<br>If $\lim a_n \neq 0$, then…?</div>
-        <div class="flashcard-back"><br>$$\lim a_n \neq 0 \;\Rightarrow\; \sum a_n \text{ diverges}$$<br>converse fails</div>
+        <div class="flashcard-front"><span data-lang="en">nth Term Test:<br>If $\lim a_n \neq 0$, then…?</span><span data-lang="zh">第 n 项判别法：<br>若 $\lim a_n \neq 0$，则……？</span></div>
+        <div class="flashcard-back"><br>$$\lim a_n \neq 0 \;\Rightarrow\; \sum a_n \text{ diverges}$$<br><span data-lang="en">converse fails</span><span data-lang="zh">逆命题不成立</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$p$-Series:<br>$\sum 1/n^p$ converges when…?</div>
+        <div class="flashcard-front"><span data-lang="en">$p$-Series:<br>$\sum 1/n^p$ converges when…?</span><span data-lang="zh">$p$ 级数：<br>$\sum 1/n^p$ 何时收敛？</span></div>
         <div class="flashcard-back"><br>$$\sum \frac{1}{n^p} \text{ converges} \iff p > 1$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Ratio Test:<br>$L = \lim |a_{n+1}/a_n|$<br>What do the outcomes mean?</div>
-        <div class="flashcard-back"><br>$L < 1$: converges absolutely<br>$L > 1$: diverges<br>$L = 1$: inconclusive</div>
+        <div class="flashcard-front"><span data-lang="en">Ratio Test:<br>$L = \lim |a_{n+1}/a_n|$<br>What do the outcomes mean?</span><span data-lang="zh">比值判别法：<br>$L = \lim |a_{n+1}/a_n|$<br>各结果的含义？</span></div>
+        <div class="flashcard-back"><br><span data-lang="en">$L < 1$: converges absolutely<br>$L > 1$: diverges<br>$L = 1$: inconclusive</span><span data-lang="zh">$L < 1$：绝对收敛<br>$L > 1$：发散<br>$L = 1$：不能判断</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Maclaurin series for $e^x$?</div>
-        <div class="flashcard-back"><br>$$ \sum_{n=0}^{\infty} \frac{x^n}{n!} $$<br>Converges for all $x$.</div>
+        <div class="flashcard-front"><span data-lang="en">Maclaurin series for $e^x$?</span><span data-lang="zh">$e^x$ 的麦克劳林级数？</span></div>
+        <div class="flashcard-back"><br>$$ \sum_{n=0}^{\infty} \frac{x^n}{n!} $$<br><span data-lang="en">Converges for all $x$.</span><span data-lang="zh">对所有 $x$ 收敛。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Maclaurin series for $\sin x$?</div>
-        <div class="flashcard-back"><br>$$ \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} $$<br>Odd powers only, alternating signs.</div>
+        <div class="flashcard-front"><span data-lang="en">Maclaurin series for $\sin x$?</span><span data-lang="zh">$\sin x$ 的麦克劳林级数？</span></div>
+        <div class="flashcard-back"><br>$$ \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} $$<br><span data-lang="en">Odd powers only, alternating signs.</span><span data-lang="zh">只含奇次幂，正负交替。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Alternating Series Error Bound?</div>
-        <div class="flashcard-back"><br>$|S - S_n| \leq |a_{n+1}|$<br>Error ≤ the first omitted term.</div>
+        <div class="flashcard-front"><span data-lang="en">Alternating Series Error Bound?</span><span data-lang="zh">交错级数误差界？</span></div>
+        <div class="flashcard-back"><br>$|S - S_n| \leq |a_{n+1}|$<br><span data-lang="en">Error ≤ the first omitted term.</span><span data-lang="zh">误差 ≤ 第一个被舍弃项。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Lagrange Error Bound formula?</div>
-        <div class="flashcard-back"><br>$|R_n(x)| \leq \dfrac{M}{(n+1)!}|x-a|^{n+1}$<br>where $M = \max|f^{(n+1)}(c)|$</div>
+        <div class="flashcard-front"><span data-lang="en">Lagrange Error Bound formula?</span><span data-lang="zh">拉格朗日误差界公式？</span></div>
+        <div class="flashcard-back"><br>$|R_n(x)| \leq \dfrac{M}{(n+1)!}|x-a|^{n+1}$<br><span data-lang="en">where $M = \max|f^{(n+1)}(c)|$</span><span data-lang="zh">其中 $M = \max|f^{(n+1)}(c)|$</span></div>
       </div>
     </div>
   </div>
@@ -1741,76 +1962,77 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <section class="section" id="unit-quiz">
   <div class="section-label">Assessment
   </div>
-  <h2>Unit 10 — Practice Quiz</h2>
+  <h2 data-lang="en">Unit 10 — Practice Quiz</h2>
+  <h2 data-lang="zh">单元 10 —— 练习小测</h2>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">1. Which series converges?</div>
+    <div class="quiz-q"><span data-lang="en">1. Which series converges?</span><span data-lang="zh">1. 下列级数中哪一个收敛？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\displaystyle\sum_{n=1}^{\infty} \frac{1}{\sqrt{n}}$</div>
       <div class="quiz-opt" data-idx="1">$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n}$</div>
       <div class="quiz-opt" data-idx="2">$\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$</div>
       <div class="quiz-opt" data-idx="3">$\displaystyle\sum_{n=1}^{\infty} \frac{n}{n+1}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\sum 1/n^2$ is a $p$-series with $p = 2 > 1$, so it converges. The others all diverge: $1/\sqrt{n}$ is $p = 1/2$, $1/n$ is harmonic, and $n/(n+1) \to 1 \neq 0$.</div>
-    <div class="quiz-explain wrong-exp">$\sum 1/n^2$ is a $p$-series with $p = 2 > 1$, so it converges. All other options diverge.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\sum 1/n^2$ is a $p$-series with $p = 2 > 1$, so it converges. The others all diverge: $1/\sqrt{n}$ is $p = 1/2$, $1/n$ is harmonic, and $n/(n+1) \to 1 \neq 0$.</span><span data-lang="zh">正确！$\sum 1/n^2$ 是 $p = 2 > 1$ 的 $p$ 级数，故收敛。其余均发散：$1/\sqrt{n}$ 是 $p = 1/2$；$1/n$ 是调和级数；$n/(n+1) \to 1 \neq 0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$\sum 1/n^2$ is a $p$-series with $p = 2 > 1$, so it converges. All other options diverge.</span><span data-lang="zh">$\sum 1/n^2$ 是 $p = 2 > 1$ 的 $p$ 级数，因此收敛。其余选项都发散。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">2. What is $\displaystyle\sum_{n=0}^{\infty} \frac{(-3)^n}{4^n}$?</div>
+    <div class="quiz-q"><span data-lang="en">2. What is $\displaystyle\sum_{n=0}^{\infty} \frac{(-3)^n}{4^n}$?</span><span data-lang="zh">2. $\displaystyle\sum_{n=0}^{\infty} \frac{(-3)^n}{4^n}$ 等于多少？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\frac{3}{7}$</div>
       <div class="quiz-opt" data-idx="1">$\frac{4}{3}$</div>
       <div class="quiz-opt" data-idx="2">$\frac{3}{4}$</div>
       <div class="quiz-opt" data-idx="3">$\frac{4}{7}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! This is geometric: $\sum (-3/4)^n$ with $a = 1$, $r = -3/4$. Sum $= 1/(1 - (-3/4)) = 1/(7/4) = 4/7$.</div>
-    <div class="quiz-explain wrong-exp">Rewrite as $\sum (-3/4)^n$, geometric with $a = 1$, $r = -3/4$. Sum $= 1/(1+3/4) = 4/7$.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! This is geometric: $\sum (-3/4)^n$ with $a = 1$, $r = -3/4$. Sum $= 1/(1 - (-3/4)) = 1/(7/4) = 4/7$.</span><span data-lang="zh">正确！这是等比级数：$\sum (-3/4)^n$，$a = 1$，$r = -3/4$。和 $= 1/(1 - (-3/4)) = 1/(7/4) = 4/7$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Rewrite as $\sum (-3/4)^n$, geometric with $a = 1$, $r = -3/4$. Sum $= 1/(1+3/4) = 4/7$.</span><span data-lang="zh">改写为 $\sum (-3/4)^n$，是 $a = 1$、$r = -3/4$ 的等比级数。和 $= 1/(1+3/4) = 4/7$。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">3. The series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$ is:</div>
+    <div class="quiz-q"><span data-lang="en">3. The series $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$ is:</span><span data-lang="zh">3. 级数 $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$ 是：</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Conditionally convergent</div>
-      <div class="quiz-opt" data-idx="1">Absolutely convergent</div>
-      <div class="quiz-opt" data-idx="2">Divergent</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Conditionally convergent</span><span data-lang="zh">条件收敛</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Absolutely convergent</span><span data-lang="zh">绝对收敛</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Divergent</span><span data-lang="zh">发散</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined</span><span data-lang="zh">无法判断</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The alternating harmonic series converges by the AST, but $\sum 1/n$ (harmonic) diverges. So it converges conditionally, not absolutely.</div>
-    <div class="quiz-explain wrong-exp">The series converges by the AST, but $\sum |a_n| = \sum 1/n$ diverges. This is the definition of conditional convergence.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! The alternating harmonic series converges by the AST, but $\sum 1/n$ (harmonic) diverges. So it converges conditionally, not absolutely.</span><span data-lang="zh">正确！交错调和级数由交错级数判别法收敛，但 $\sum 1/n$（调和级数）发散，因此是条件收敛而非绝对收敛。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The series converges by the AST, but $\sum |a_n| = \sum 1/n$ diverges. This is the definition of conditional convergence.</span><span data-lang="zh">级数由交错级数判别法收敛，但 $\sum |a_n| = \sum 1/n$ 发散。这正是条件收敛的定义。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">4. The coefficient of $x^3$ in the Maclaurin series for $\sin x$ is:</div>
+    <div class="quiz-q"><span data-lang="en">4. The coefficient of $x^3$ in the Maclaurin series for $\sin x$ is:</span><span data-lang="zh">4. $\sin x$ 的麦克劳林级数中 $x^3$ 的系数为：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\frac{1}{3}$</div>
       <div class="quiz-opt" data-idx="1">$-\frac{1}{6}$</div>
       <div class="quiz-opt" data-idx="2">$\frac{1}{6}$</div>
       <div class="quiz-opt" data-idx="3">$-\frac{1}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\sin x = x - x^3/3! + \cdots = x - x^3/6 + \cdots$, so the coefficient of $x^3$ is $-1/6$.</div>
-    <div class="quiz-explain wrong-exp">$\sin x = x - x^3/3! + x^5/5! - \cdots$, so the $x^3$ coefficient is $-1/3! = -1/6$.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\sin x = x - x^3/3! + \cdots = x - x^3/6 + \cdots$, so the coefficient of $x^3$ is $-1/6$.</span><span data-lang="zh">正确！$\sin x = x - x^3/3! + \cdots = x - x^3/6 + \cdots$，故 $x^3$ 的系数为 $-1/6$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$\sin x = x - x^3/3! + x^5/5! - \cdots$, so the $x^3$ coefficient is $-1/3! = -1/6$.</span><span data-lang="zh">$\sin x = x - x^3/3! + x^5/5! - \cdots$，故 $x^3$ 的系数为 $-1/3! = -1/6$。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">5. The interval of convergence of $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n+1}$ is:</div>
+    <div class="quiz-q"><span data-lang="en">5. The interval of convergence of $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n+1}$ is:</span><span data-lang="zh">5. $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n+1}$ 的收敛区间为：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-1, 1)$</div>
       <div class="quiz-opt" data-idx="1">$(-1, 1]$</div>
       <div class="quiz-opt" data-idx="2">$[-1, 1)$</div>
       <div class="quiz-opt" data-idx="3">$[-1, 1]$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Ratio test gives $R = 1$, so the open interval is $(-1, 1)$. At $x = 1$: $\sum 1/(n+1) =$ harmonic → diverges. At $x = -1$: $\sum (-1)^n/(n+1) =$ alternating harmonic → converges. So the interval is $[-1, 1)$.</div>
-    <div class="quiz-explain wrong-exp">Ratio test: $R = 1$. At $x = 1$: harmonic (diverges). At $x = -1$: alternating harmonic (converges). Interval: $[-1, 1)$.</div>
-  
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Ratio test gives $R = 1$, so the open interval is $(-1, 1)$. At $x = 1$: $\sum 1/(n+1) =$ harmonic → diverges. At $x = -1$: $\sum (-1)^n/(n+1) =$ alternating harmonic → converges. So the interval is $[-1, 1)$.</span><span data-lang="zh">正确！比值判别法给出 $R = 1$，故开区间为 $(-1, 1)$。$x = 1$ 时：$\sum 1/(n+1)$ 是调和级数 → 发散。$x = -1$ 时：$\sum (-1)^n/(n+1)$ 是交错调和级数 → 收敛。所以收敛区间为 $[-1, 1)$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Ratio test: $R = 1$. At $x = 1$: harmonic (diverges). At $x = -1$: alternating harmonic (converges). Interval: $[-1, 1)$.</span><span data-lang="zh">比值判别法：$R = 1$。$x = 1$ 时为调和级数（发散）；$x = -1$ 时为交错调和级数（收敛）。区间为 $[-1, 1)$。</span></div>
+
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1821,32 +2043,35 @@ $$ \sum_{n=1}^{\infty} \frac{(x-3)^n}{n \cdot 2^n} $$
 <!-- ═══════════════════════════════════════════════ -->
 <section class="section" id="checklist">
   <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 15 mastered</div>
+  <h2 data-lang="en">Readiness Checklist</h2>
+  <h2 data-lang="zh">备考清单</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击勾选已掌握的项目，争取在考试前达到 100%。</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 15 mastered</span><span data-lang="zh">已掌握 0 / 15</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Define convergence/divergence using partial sums</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize and evaluate geometric series ($|r| &lt; 1$)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the nth Term Test for Divergence</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Integral Test (with conditions)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Classify p-series convergence ($p &gt; 1$ vs $p \leq 1$)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use Direct and Limit Comparison Tests</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Alternating Series Test (all 3 conditions)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Ratio Test for absolute convergence</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish absolute vs. conditional convergence</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use the Alternating Series Error Bound</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Construct Taylor/Maclaurin polynomials from derivatives</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Lagrange Error Bound</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find the radius and interval of convergence (including endpoints)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Write the 4 essential Maclaurin series from memory</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Derive new series via substitution, differentiation, integration</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Define convergence/divergence using partial sums</span><span data-lang="zh">用部分和定义收敛/发散</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Recognize and evaluate geometric series ($|r| &lt; 1$)</span><span data-lang="zh">识别并求等比级数的值（$|r| &lt; 1$）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the nth Term Test for Divergence</span><span data-lang="zh">应用第 n 项发散判别法</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Integral Test (with conditions)</span><span data-lang="zh">应用积分判别法（含条件检验）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Classify p-series convergence ($p &gt; 1$ vs $p \leq 1$)</span><span data-lang="zh">判断 p 级数的收敛性（$p &gt; 1$ vs $p \leq 1$）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use Direct and Limit Comparison Tests</span><span data-lang="zh">使用比较判别法与极限比较判别法</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Alternating Series Test (all 3 conditions)</span><span data-lang="zh">应用交错级数判别法（三条件齐验）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Ratio Test for absolute convergence</span><span data-lang="zh">用比值判别法判定绝对收敛</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Distinguish absolute vs. conditional convergence</span><span data-lang="zh">区分绝对收敛与条件收敛</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use the Alternating Series Error Bound</span><span data-lang="zh">使用交错级数误差界</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Construct Taylor/Maclaurin polynomials from derivatives</span><span data-lang="zh">由导数值构造泰勒/麦克劳林多项式</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Lagrange Error Bound</span><span data-lang="zh">应用拉格朗日误差界</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find the radius and interval of convergence (including endpoints)</span><span data-lang="zh">求收敛半径与收敛区间（含端点）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Write the 4 essential Maclaurin series from memory</span><span data-lang="zh">默写 4 条常见的麦克劳林级数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Derive new series via substitution, differentiation, integration</span><span data-lang="zh">通过代换、求导、积分推导新级数</span></li>
   </ul>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
-  <p>AP Calculus AB/BC — Unit 10: Infinite Sequences and Series · 2025 Edition</p>
+  <p data-lang="en">AP Calculus AB/BC — Unit 10: Infinite Sequences and Series · 2025 Edition</p>
+  <p data-lang="zh">AP 微积分 AB/BC —— 单元 10：无穷数列与级数 · 2025 版</p>
 </div>
 
 </main>
@@ -1885,15 +2110,32 @@ function updateDashboard() {
 }
 
 // ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 // ─── SIDEBAR ───
 
@@ -1996,13 +2238,13 @@ function checkPractice(inputId, correct, feedbackId) {
   if (fb.classList.contains('correct')) return;
   fb.classList.remove('correct', 'wrong', 'show');
   if (val === correct) {
-    fb.textContent = '✓ Correct!';
+    fb.innerHTML = '<span data-lang="en">✓ Correct!</span><span data-lang="zh">✓ 正确！</span>';
     fb.classList.add('correct', 'show');
     input.style.borderColor = 'var(--green)';
     practiceScore.correct++;
     updateDashboard();
   } else {
-    fb.textContent = '✗ Not quite — try again or the answer is ' + correct + '.';
+    fb.innerHTML = '<span data-lang="en">✗ Not quite — try again or the answer is ' + correct + '.</span><span data-lang="zh">✗ 还差一点 — 再试一次，正确答案是 ' + correct + '。</span>';
     fb.classList.add('wrong', 'show');
   }
 }
@@ -2016,7 +2258,7 @@ function updateFlashcardCount() {
   const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
   const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
   const el = document.getElementById('fcCount');
-  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+  if (el) el.innerHTML = '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span><span data-lang="zh">已翻 ' + flipped + ' / ' + total + ' 张</span>';
 }
 function resetFlashcards() {
   document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
@@ -2038,7 +2280,7 @@ function toggleCheck(li) {
   li.classList.toggle('checked');
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
-  document.getElementById('checkProgress').textContent = checked + ' / ' + total + ' mastered';
+  document.getElementById('checkProgress').innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
   updateDashboard();
 }
 

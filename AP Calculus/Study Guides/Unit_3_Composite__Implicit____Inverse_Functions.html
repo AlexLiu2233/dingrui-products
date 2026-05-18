@@ -39,7 +39,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -1152,6 +1152,10 @@ input[type="range"]::-moz-range-thumb {
 }
 .checklist li.checked { background: var(--green-light); border-color: var(--green); }
 .checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -1165,12 +1169,10 @@ input[type="range"]::-moz-range-thumb {
     <span class="nav-badge">UNIT 3</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-label="Toggle table of contents">Contents</button>
-    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      <span id="themeLabel">Dark</span>
-    </button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-label="Toggle table of contents"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
@@ -1184,18 +1186,18 @@ input[type="range"]::-moz-range-thumb {
      SIDEBAR TABLE OF CONTENTS
      ═══════════════════════════════════════════ -->
 <aside class="sidebar" id="sidebar" aria-label="Table of contents">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#sec-3-1">3.1 The Chain Rule</a>
-  <a href="#sec-3-2">3.2 Implicit Differentiation</a>
-  <a href="#sec-3-3">3.3 Differentiating Inverse Functions</a>
-  <a href="#sec-3-4">3.4 Inverse Trigonometric Derivatives</a>
-  <a href="#sec-3-5">3.5 Selecting Procedures</a>
-  <a href="#sec-3-6">3.6 Higher-Order Derivatives</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#sec-3-1"><span data-lang="en">3.1 The Chain Rule</span><span data-lang="zh">3.1 链式法则</span></a>
+  <a href="#sec-3-2"><span data-lang="en">3.2 Implicit Differentiation</span><span data-lang="zh">3.2 隐函数求导</span></a>
+  <a href="#sec-3-3"><span data-lang="en">3.3 Differentiating Inverse Functions</span><span data-lang="zh">3.3 反函数求导</span></a>
+  <a href="#sec-3-4"><span data-lang="en">3.4 Inverse Trigonometric Derivatives</span><span data-lang="zh">3.4 反三角函数导数</span></a>
+  <a href="#sec-3-5"><span data-lang="en">3.5 Selecting Procedures</span><span data-lang="zh">3.5 选择求导方法</span></a>
+  <a href="#sec-3-6"><span data-lang="en">3.6 Higher-Order Derivatives</span><span data-lang="zh">3.6 高阶导数</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元小测</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <!-- ═══════════════════════════════════════════
@@ -1207,14 +1209,21 @@ input[type="range"]::-moz-range-thumb {
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-  <h1>Unit 3: Composite, Implicit<br>&amp; Inverse Functions</h1>
-  <p class="hero-sub">
+  <h1 data-lang="en">Unit 3: Composite, Implicit<br>&amp; Inverse Functions</h1>
+  <h1 data-lang="zh">单元 3：复合函数、隐函数<br>与反函数</h1>
+  <p class="hero-sub" data-lang="en">
     Master the chain rule and its extensions to implicit, inverse, and higher-order derivatives — essential groundwork for integration techniques in Unit 6 and beyond.
   </p>
+  <p class="hero-sub" data-lang="zh">
+    掌握链式法则及其在隐函数、反函数与高阶导数上的延伸——这是单元 6 及之后积分技巧的必备基础。
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">9–13% of AP Exam</span>
-    <span class="chip chip-green">~10–11 Class Periods</span>
-    <span class="chip chip-purple">6 Topics</span>
+    <span class="chip chip-maroon" data-lang="en">9–13% of AP Exam</span>
+    <span class="chip chip-maroon" data-lang="zh">占 AP 考试 9–13%</span>
+    <span class="chip chip-green" data-lang="en">~10–11 Class Periods</span>
+    <span class="chip chip-green" data-lang="zh">约 10–11 课时</span>
+    <span class="chip chip-purple" data-lang="en">6 Topics</span>
+    <span class="chip chip-purple" data-lang="zh">6 个小节</span>
   </div>
 </section>
 
@@ -1223,39 +1232,53 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-1">
   <div class="content-inner">
-    <div class="section-label">Topic 3.1 · FUN-3.C</div>
-    <h2>The Chain Rule</h2>
+    <div class="section-label" data-lang="en">Topic 3.1 · FUN-3.C</div>
+    <div class="section-label" data-lang="zh">小节 3.1 · FUN-3.C</div>
+    <h2 data-lang="en">The Chain Rule</h2>
+    <h2 data-lang="zh">链式法则（<code>chain rule</code>）</h2>
 
-    <p>The chain rule is the single most important differentiation technique you will learn in this unit — and arguably in the entire course. It allows you to differentiate <strong>composite functions</strong>: functions built by nesting one function inside another.</p>
+    <p data-lang="en">The chain rule is the single most important differentiation technique you will learn in this unit — and arguably in the entire course. It allows you to differentiate <strong>composite functions</strong>: functions built by nesting one function inside another.</p>
+    <p data-lang="zh">链式法则是本单元——甚至可以说整门课程中最重要的一种求导（<code>differentiate</code>）技巧。它让你能够对<strong>复合函数（<code>composite function</code>）</strong>求导：复合函数是把一个函数嵌套在另一个函数里构造而成的。</p>
 
-    <p>If $y = f(g(x))$, then the derivative is found by differentiating the <strong>outer function</strong> evaluated at the inner function, then multiplying by the derivative of the <strong>inner function</strong>:</p>
+    <p data-lang="en">If $y = f(g(x))$, then the derivative is found by differentiating the <strong>outer function</strong> evaluated at the inner function, then multiplying by the derivative of the <strong>inner function</strong>:</p>
+    <p data-lang="zh">若 $y = f(g(x))$，则其导数（<code>derivative</code>）通过先对<strong>外函数（<code>outer function</code>）</strong>在内函数处求导，再乘以<strong>内函数（<code>inner function</code>）</strong>的导数来得到：</p>
 
     <div class="formula-box">
-      <div class="formula-box-label">Chain Rule — Prime Notation</div>
+      <div class="formula-box-label" data-lang="en">Chain Rule — Prime Notation</div>
+      <div class="formula-box-label" data-lang="zh">链式法则——撇号记法</div>
       $$\frac{d}{dx}\bigl[f(g(x))\bigr] = f'(g(x)) \cdot g'(x)$$
     </div>
 
-    <p>In Leibniz notation, if $y = f(u)$ and $u = g(x)$, then:</p>
+    <p data-lang="en">In Leibniz notation, if $y = f(u)$ and $u = g(x)$, then:</p>
+    <p data-lang="zh">在莱布尼茨记法（<code>Leibniz notation</code>）下，若 $y = f(u)$ 且 $u = g(x)$，则：</p>
 
     <div class="formula-box">
-      <div class="formula-box-label">Chain Rule — Leibniz Notation</div>
+      <div class="formula-box-label" data-lang="en">Chain Rule — Leibniz Notation</div>
+      <div class="formula-box-label" data-lang="zh">链式法则——莱布尼茨记法</div>
       $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
     </div>
 
-    <p>A practical mnemonic: every time you apply the chain rule, say to yourself <strong>"times the derivative of what's inside."</strong> This simple habit prevents the most common chain rule error — forgetting to multiply by the inner derivative.</p>
+    <p data-lang="en">A practical mnemonic: every time you apply the chain rule, say to yourself <strong>"times the derivative of what's inside."</strong> This simple habit prevents the most common chain rule error — forgetting to multiply by the inner derivative.</p>
+    <p data-lang="zh">一个实用的口诀：每次使用链式法则时，对自己念一句<strong>"再乘以里面那一层的导数。"</strong>这个小习惯能够防止链式法则中最常见的错误——忘记乘以内函数的导数。</p>
 
-    <div class="concept-box green">
+    <div class="concept-box green" data-lang="en">
       <strong>Key Insight</strong>
       <p>Think of the chain rule as an extension of unit analysis. Just as $\dfrac{\text{psi}}{\text{min}} = \dfrac{\text{psi}}{\text{m}} \cdot \dfrac{\text{m}}{\text{min}}$, the Leibniz notation $\dfrac{dy}{dx} = \dfrac{dy}{du} \cdot \dfrac{du}{dx}$ "cancels" the intermediate variable $u$.</p>
     </div>
+    <div class="concept-box green" data-lang="zh">
+      <strong>关键洞察</strong>
+      <p>可以把链式法则看作单位分析的推广。正如 $\dfrac{\text{psi}}{\text{min}} = \dfrac{\text{psi}}{\text{m}} \cdot \dfrac{\text{m}}{\text{min}}$ 那样，莱布尼茨记法 $\dfrac{dy}{dx} = \dfrac{dy}{du} \cdot \dfrac{du}{dx}$ 把中间变量 $u$ "约掉了"。</p>
+    </div>
 
-    <h3>Decomposing Composite Functions</h3>
+    <h3 data-lang="en">Decomposing Composite Functions</h3>
+    <h3 data-lang="zh">分解复合函数</h3>
 
-    <p>Before applying the chain rule, you must identify which function is the <strong>outer</strong> function and which is the <strong>inner</strong> function. Practice decomposing expressions into their component layers:</p>
+    <p data-lang="en">Before applying the chain rule, you must identify which function is the <strong>outer</strong> function and which is the <strong>inner</strong> function. Practice decomposing expressions into their component layers:</p>
+    <p data-lang="zh">在使用链式法则之前，必须先识别哪一部分是<strong>外函数</strong>，哪一部分是<strong>内函数</strong>。多练习把一个表达式拆解成它的各个嵌套层：</p>
 
     <div class="table-wrapper">
       <table class="styled-table">
-        <thead><tr><th>Function $y$</th><th>Outer $f(u)$</th><th>Inner $u = g(x)$</th><th>$\frac{dy}{dx}$</th></tr></thead>
+        <thead><tr><th><span data-lang="en">Function $y$</span><span data-lang="zh">函数 $y$</span></th><th><span data-lang="en">Outer $f(u)$</span><span data-lang="zh">外函数 $f(u)$</span></th><th><span data-lang="en">Inner $u = g(x)$</span><span data-lang="zh">内函数 $u = g(x)$</span></th><th>$\frac{dy}{dx}$</th></tr></thead>
         <tbody>
           <tr><td>$\sin(4x)$</td><td>$\sin(u)$</td><td>$4x$</td><td>$\cos(4x) \cdot 4$</td></tr>
           <tr><td>$(\sin x)^4$</td><td>$u^4$</td><td>$\sin x$</td><td>$4(\sin x)^3 \cdot \cos x$</td></tr>
@@ -1267,12 +1290,16 @@ input[type="range"]::-moz-range-thumb {
       </table>
     </div>
 
-    <h3>Nested Chains</h3>
-    <p>Some functions have multiple layers of composition. Apply the chain rule from the <strong>outermost layer inward</strong>, multiplying each inner derivative as you go.</p>
+    <h3 data-lang="en">Nested Chains</h3>
+    <h3 data-lang="zh">嵌套链式法则</h3>
+    <p data-lang="en">Some functions have multiple layers of composition. Apply the chain rule from the <strong>outermost layer inward</strong>, multiplying each inner derivative as you go.</p>
+    <p data-lang="zh">有些函数包含多层复合（<code>composition</code>）。要从<strong>最外层向内</strong>逐层使用链式法则，每深入一层就乘以那一层内函数的导数。</p>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example — Double Chain</div>
-      <p>Find $\dfrac{d}{dx}\bigl[\sin(e^{3x})\bigr]$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example — Double Chain</div>
+      <div class="example-box-title" data-lang="zh">例题——两层链式</div>
+      <p data-lang="en">Find $\dfrac{d}{dx}\bigl[\sin(e^{3x})\bigr]$.</p>
+      <p data-lang="zh">求 $\dfrac{d}{dx}\bigl[\sin(e^{3x})\bigr]$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         y &= \sin\!\left(e^{3x}\right) \\
@@ -1287,30 +1314,37 @@ input[type="range"]::-moz-range-thumb {
     <!-- ═══════ INTERACTIVE: Chain Rule Visualizer ═══════ -->
     <div class="interactive-container" id="chainRuleViz">
       <div class="interactive-topbar">
-        <div class="interactive-title">Interactive — Chain Rule Explorer</div>
+        <div class="interactive-title" data-lang="en">Interactive — Chain Rule Explorer</div>
+        <div class="interactive-title" data-lang="zh">交互——链式法则探索器</div>
         <div class="interactive-actions">
-          <button class="mini-btn" type="button" id="chainPlayBtn">Animate</button>
+          <button class="mini-btn" type="button" id="chainPlayBtn"><span data-lang="en">Animate</span><span data-lang="zh">动画</span></button>
         </div>
       </div>
-      <p class="interactive-caption">Adjust the parameter $a$ in $y = \sin(ax)$ to see how the chain rule scales the derivative. Fixed axes make it easier to compare how the function and derivative change as $a$ varies.</p>
+      <p class="interactive-caption" data-lang="en">Adjust the parameter $a$ in $y = \sin(ax)$ to see how the chain rule scales the derivative. Fixed axes make it easier to compare how the function and derivative change as $a$ varies.</p>
+      <p class="interactive-caption" data-lang="zh">调整 $y = \sin(ax)$ 中的参数 $a$，观察链式法则如何对导数进行缩放。坐标轴固定，便于比较 $a$ 变化时函数及其导数的变化。</p>
       <div class="interactive-canvas-wrap">
         <canvas id="chainCanvas" width="700" height="340"></canvas>
       </div>
       <div class="interactive-controls">
         <div class="slider-group">
-          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="chainAVal">2</span></div>
+          <div class="slider-label"><span><span data-lang="en">Parameter $a$</span><span data-lang="zh">参数 $a$</span></span><span class="val" id="chainAVal">2</span></div>
           <input type="range" id="chainASlider" min="0.5" max="6" step="0.1" value="2">
         </div>
       </div>
       <div class="interactive-readout" id="chainReadout">
         $y = \sin(2x)$, &nbsp; $\dfrac{dy}{dx} = 2\cos(2x)$
       </div>
-      <div class="graph-note">Maroon shows the original function. Rose shows its derivative.</div>
+      <div class="graph-note" data-lang="en">Maroon shows the original function. Rose shows its derivative.</div>
+      <div class="graph-note" data-lang="zh">酒红色为原函数，玫红色为其导数。</div>
     </div>
 
-    <div class="concept-box orange">
+    <div class="concept-box orange" data-lang="en">
       <strong>Watch Out</strong>
       <p>Do not confuse $\sin^2 x$ (which means $(\sin x)^2$) with $\sin(x^2)$. The outer and inner functions are different in each case, producing completely different derivatives.</p>
+    </div>
+    <div class="concept-box orange" data-lang="zh">
+      <strong>注意</strong>
+      <p>不要把 $\sin^2 x$（意思是 $(\sin x)^2$）与 $\sin(x^2)$ 弄混。这两种写法的外函数和内函数都不同，得到的导数也完全不同。</p>
     </div>
 
   </div>
@@ -1321,25 +1355,39 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-2">
   <div class="content-inner">
-    <div class="section-label">Topic 3.2 · FUN-3.D</div>
-    <h2>Implicit Differentiation</h2>
+    <div class="section-label" data-lang="en">Topic 3.2 · FUN-3.D</div>
+    <div class="section-label" data-lang="zh">小节 3.2 · FUN-3.D</div>
+    <h2 data-lang="en">Implicit Differentiation</h2>
+    <h2 data-lang="zh">隐函数求导（<code>implicit differentiation</code>）</h2>
 
-    <p>Not every relationship between $x$ and $y$ can be neatly written as $y = f(x)$. When $x$ and $y$ appear together in an equation such as $x^2 + y^2 = 25$, the function is defined <strong>implicitly</strong>. Implicit differentiation lets you find $\frac{dy}{dx}$ without solving for $y$ first.</p>
+    <p data-lang="en">Not every relationship between $x$ and $y$ can be neatly written as $y = f(x)$. When $x$ and $y$ appear together in an equation such as $x^2 + y^2 = 25$, the function is defined <strong>implicitly</strong>. Implicit differentiation lets you find $\frac{dy}{dx}$ without solving for $y$ first.</p>
+    <p data-lang="zh">并非每一种 $x$ 与 $y$ 的关系都能整齐地写成 $y = f(x)$ 的形式。当 $x$ 与 $y$ 同时出现在像 $x^2 + y^2 = 25$ 这样的方程里时，函数是<strong>隐式</strong>地被定义的。隐函数求导让你不必先解出 $y$ 就能求 $\frac{dy}{dx}$。</p>
 
-    <h3>The Procedure</h3>
-    <p>The key insight is that <strong>the chain rule applies to $y$</strong> because $y$ depends on $x$. Whenever you differentiate a term containing $y$, you must multiply by $\frac{dy}{dx}$.</p>
+    <h3 data-lang="en">The Procedure</h3>
+    <h3 data-lang="zh">操作步骤</h3>
+    <p data-lang="en">The key insight is that <strong>the chain rule applies to $y$</strong> because $y$ depends on $x$. Whenever you differentiate a term containing $y$, you must multiply by $\frac{dy}{dx}$.</p>
+    <p data-lang="zh">关键的认识是：<strong>链式法则对 $y$ 适用</strong>，因为 $y$ 依赖于 $x$。每当你对含有 $y$ 的项求导时，都必须乘以一个因子 $\frac{dy}{dx}$。</p>
 
-    <div class="concept-box">
+    <div class="concept-box" data-lang="en">
       <strong>Implicit Differentiation Steps</strong>
       <p>1. Differentiate every term on both sides with respect to $x$.</p>
       <p>2. Whenever you differentiate an expression involving $y$, apply the chain rule — attach a factor of $\frac{dy}{dx}$.</p>
       <p>3. Collect all terms containing $\frac{dy}{dx}$ on one side.</p>
       <p>4. Factor out $\frac{dy}{dx}$ and solve algebraically.</p>
     </div>
+    <div class="concept-box" data-lang="zh">
+      <strong>隐函数求导步骤</strong>
+      <p>1. 两边的每一项都对 $x$ 求导。</p>
+      <p>2. 每当对含有 $y$ 的表达式求导时，都要使用链式法则——附上一个因子 $\frac{dy}{dx}$。</p>
+      <p>3. 把所有含 $\frac{dy}{dx}$ 的项整理到方程的一侧。</p>
+      <p>4. 提取公因子 $\frac{dy}{dx}$ 并用代数方法解出。</p>
+    </div>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example</div>
-      <p>Find $\dfrac{dy}{dx}$ given $x^2 + y^2 = 25$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example</div>
+      <div class="example-box-title" data-lang="zh">例题</div>
+      <p data-lang="en">Find $\dfrac{dy}{dx}$ given $x^2 + y^2 = 25$.</p>
+      <p data-lang="zh">已知 $x^2 + y^2 = 25$，求 $\dfrac{dy}{dx}$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         x^2 + y^2 &= 25 \\
@@ -1354,32 +1402,37 @@ input[type="range"]::-moz-range-thumb {
     <!-- ═══════ INTERACTIVE: Implicit Circle Tangent ═══════ -->
     <div class="interactive-container" id="implicitViz">
       <div class="interactive-topbar">
-        <div class="interactive-title">Interactive — Implicit Tangent Lines on $x^2 + y^2 = r^2$</div>
+        <div class="interactive-title" data-lang="en">Interactive — Implicit Tangent Lines on $x^2 + y^2 = r^2$</div>
+        <div class="interactive-title" data-lang="zh">交互——$x^2 + y^2 = r^2$ 上的隐式切线</div>
         <div class="interactive-actions">
-          <button class="mini-btn" type="button" id="implicitPlayBtn">Animate</button>
+          <button class="mini-btn" type="button" id="implicitPlayBtn"><span data-lang="en">Animate</span><span data-lang="zh">动画</span></button>
         </div>
       </div>
-      <p class="interactive-caption">Move a point around the circle and watch the tangent update from the implicit derivative $\dfrac{dy}{dx}=-\dfrac{x}{y}$. The viewing window stays fixed with equal x/y scaling, and the tangent is extended to the graph edges so the geometry is visually accurate.</p>
+      <p class="interactive-caption" data-lang="en">Move a point around the circle and watch the tangent update from the implicit derivative $\dfrac{dy}{dx}=-\dfrac{x}{y}$. The viewing window stays fixed with equal x/y scaling, and the tangent is extended to the graph edges so the geometry is visually accurate.</p>
+      <p class="interactive-caption" data-lang="zh">沿着圆移动一个点，看切线（<code>tangent line</code>）如何根据隐式导数 $\dfrac{dy}{dx}=-\dfrac{x}{y}$ 实时更新。视图窗口保持固定且 $x$、$y$ 等比例缩放，切线延伸至图边缘，几何关系视觉上严格准确。</p>
       <div class="interactive-canvas-wrap">
         <canvas id="implicitCanvas" width="700" height="400"></canvas>
       </div>
       <div class="interactive-controls">
         <div class="slider-group">
-          <div class="slider-label"><span>Angle $\theta$</span><span class="val" id="implicitAngleVal">45°</span></div>
+          <div class="slider-label"><span><span data-lang="en">Angle $\theta$</span><span data-lang="zh">角度 $\theta$</span></span><span class="val" id="implicitAngleVal">45°</span></div>
           <input type="range" id="implicitAngleSlider" min="5" max="355" step="1" value="45">
         </div>
         <div class="slider-group">
-          <div class="slider-label"><span>Radius $r$</span><span class="val" id="implicitRVal">5</span></div>
+          <div class="slider-label"><span><span data-lang="en">Radius $r$</span><span data-lang="zh">半径 $r$</span></span><span class="val" id="implicitRVal">5</span></div>
           <input type="range" id="implicitRSlider" min="2" max="7" step="0.5" value="5">
         </div>
       </div>
       <div class="interactive-readout" id="implicitReadout"></div>
-      <div class="graph-note">As the point approaches the left or right edge of the circle, the tangent becomes vertical and $\dfrac{dy}{dx}$ is undefined. The dashed radius helps show that the tangent is perpendicular to the radius at the point of contact.</div>
+      <div class="graph-note" data-lang="en">As the point approaches the left or right edge of the circle, the tangent becomes vertical and $\dfrac{dy}{dx}$ is undefined. The dashed radius helps show that the tangent is perpendicular to the radius at the point of contact.</div>
+      <div class="graph-note" data-lang="zh">当点逼近圆的左端或右端时，切线变为竖直方向，$\dfrac{dy}{dx}$ 没有定义。虚线半径有助于看出切线在切点处与半径垂直。</div>
     </div>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example — Product &amp; Chain Combined</div>
-      <p>Find $\dfrac{dy}{dx}$ given $x^2 y + y^3 = 8$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example — Product &amp; Chain Combined</div>
+      <div class="example-box-title" data-lang="zh">例题——乘积法则与链式法则结合</div>
+      <p data-lang="en">Find $\dfrac{dy}{dx}$ given $x^2 y + y^3 = 8$.</p>
+      <p data-lang="zh">已知 $x^2 y + y^3 = 8$，求 $\dfrac{dy}{dx}$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         x^2y + y^3 &= 8 \\
@@ -1392,9 +1445,13 @@ input[type="range"]::-moz-range-thumb {
       </div>
     </div>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Common Pitfall</strong>
       <p>In expressions like $\dfrac{y}{3y - x^2}$, students sometimes forget that differentiating $y$ with respect to $x$ requires the chain rule. Every $y$ term produces a $\frac{dy}{dx}$ factor — no exceptions.</p>
+    </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>常见陷阱</strong>
+      <p>在像 $\dfrac{y}{3y - x^2}$ 这样的表达式中，学生有时会忘记对 $y$ 关于 $x$ 求导需要使用链式法则。每一个 $y$ 项都要产生一个因子 $\frac{dy}{dx}$——没有例外。</p>
     </div>
 
   </div>
@@ -1405,51 +1462,71 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-3">
   <div class="content-inner">
-    <div class="section-label">Topic 3.3 · FUN-3.E</div>
-    <h2>Differentiating Inverse Functions</h2>
+    <div class="section-label" data-lang="en">Topic 3.3 · FUN-3.E</div>
+    <div class="section-label" data-lang="zh">小节 3.3 · FUN-3.E</div>
+    <h2 data-lang="en">Differentiating Inverse Functions</h2>
+    <h2 data-lang="zh">反函数求导（<code>inverse function</code>）</h2>
 
-    <p>If $f$ is a one-to-one differentiable function with inverse $f^{-1}$, you can find the derivative of the inverse without knowing its explicit formula. The relationship rests on the chain rule applied to the identity $f(f^{-1}(x)) = x$.</p>
+    <p data-lang="en">If $f$ is a one-to-one differentiable function with inverse $f^{-1}$, you can find the derivative of the inverse without knowing its explicit formula. The relationship rests on the chain rule applied to the identity $f(f^{-1}(x)) = x$.</p>
+    <p data-lang="zh">若 $f$ 是一个一一对应、可导的函数，其反函数为 $f^{-1}$，那么即使不知道反函数的显式公式，也可以求出反函数的导数。这一关系来自对恒等式 $f(f^{-1}(x)) = x$ 使用链式法则。</p>
 
     <div class="formula-box">
-      <div class="formula-box-label">Inverse Function Derivative</div>
+      <div class="formula-box-label" data-lang="en">Inverse Function Derivative</div>
+      <div class="formula-box-label" data-lang="zh">反函数的导数（<code>derivative of an inverse</code>）</div>
       $$(f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$$
     </div>
 
-    <p>Equivalently, if the point $(a, b)$ lies on the graph of $f$ (so $f(a) = b$), then the slope of $f^{-1}$ at $x = b$ is the reciprocal of the slope of $f$ at $x = a$:</p>
+    <p data-lang="en">Equivalently, if the point $(a, b)$ lies on the graph of $f$ (so $f(a) = b$), then the slope of $f^{-1}$ at $x = b$ is the reciprocal of the slope of $f$ at $x = a$:</p>
+    <p data-lang="zh">等价地，若点 $(a, b)$ 在 $f$ 的图像上（即 $f(a) = b$），那么 $f^{-1}$ 在 $x = b$ 处的斜率（<code>slope</code>）就是 $f$ 在 $x = a$ 处斜率的倒数：</p>
 
     <div class="formula-box">
-      <div class="formula-box-label">Point-Based Form</div>
+      <div class="formula-box-label" data-lang="en">Point-Based Form</div>
+      <div class="formula-box-label" data-lang="zh">基于点的形式</div>
       $$(f^{-1})'(b) = \frac{1}{f'(a)} \quad \text{where } f(a) = b$$
     </div>
 
     <details style="margin: 14px 0;">
-      <summary><strong>Derivation — Chain Rule on $f(f^{-1}(x)) = x$</strong></summary>
+      <summary><strong><span data-lang="en">Derivation — Chain Rule on $f(f^{-1}(x)) = x$</span><span data-lang="zh">推导——对 $f(f^{-1}(x)) = x$ 使用链式法则</span></strong></summary>
       <div class="detail-body">
-        <p>Suppose $f$ is differentiable and one-to-one on an open interval, with differentiable inverse $f^{-1}$. By definition of inverse, the identity</p>
+        <p data-lang="en">Suppose $f$ is differentiable and one-to-one on an open interval, with differentiable inverse $f^{-1}$. By definition of inverse, the identity</p>
+        <p data-lang="zh">设 $f$ 在某开区间上可导且一一对应，其反函数 $f^{-1}$ 也可导。由反函数的定义，恒等式</p>
         $$f\!\bigl(f^{-1}(x)\bigr) = x$$
-        <p>holds for every $x$ in the range of $f$.</p>
+        <p data-lang="en">holds for every $x$ in the range of $f$.</p>
+        <p data-lang="zh">对 $f$ 的值域中的每一个 $x$ 都成立。</p>
         <div class="worked-solution">
-          <p><strong>Step 1 — Differentiate both sides with respect to $x$.</strong> The right side is just $1$. The left side is a composition, so apply the <strong>chain rule</strong> with outer function $f$ and inner function $f^{-1}(x)$:</p>
+          <p data-lang="en"><strong>Step 1 — Differentiate both sides with respect to $x$.</strong> The right side is just $1$. The left side is a composition, so apply the <strong>chain rule</strong> with outer function $f$ and inner function $f^{-1}(x)$:</p>
+          <p data-lang="zh"><strong>第 1 步——两边对 $x$ 求导。</strong>右边的导数就是 $1$。左边是一个复合，所以使用<strong>链式法则</strong>，外函数为 $f$，内函数为 $f^{-1}(x)$：</p>
           $$f'\!\bigl(f^{-1}(x)\bigr) \cdot \bigl(f^{-1}\bigr)'(x) \;=\; 1.$$
-          <p><strong>Step 2 — Solve for $(f^{-1})'(x)$.</strong> Divide both sides by $f'(f^{-1}(x))$ — this requires $f'(f^{-1}(x)) \ne 0$:</p>
+          <p data-lang="en"><strong>Step 2 — Solve for $(f^{-1})'(x)$.</strong> Divide both sides by $f'(f^{-1}(x))$ — this requires $f'(f^{-1}(x)) \ne 0$:</p>
+          <p data-lang="zh"><strong>第 2 步——解出 $(f^{-1})'(x)$。</strong>两边同时除以 $f'(f^{-1}(x))$——这一步要求 $f'(f^{-1}(x)) \ne 0$：</p>
           $$\bigl(f^{-1}\bigr)'(x) \;=\; \frac{1}{f'\!\bigl(f^{-1}(x)\bigr)}.$$
-          <p><strong>Step 3 — Specialize to a point.</strong> If $f(a) = b$, then $f^{-1}(b) = a$, so substituting $x = b$ gives the point form:</p>
+          <p data-lang="en"><strong>Step 3 — Specialize to a point.</strong> If $f(a) = b$, then $f^{-1}(b) = a$, so substituting $x = b$ gives the point form:</p>
+          <p data-lang="zh"><strong>第 3 步——具体化到一个点。</strong>若 $f(a) = b$，则 $f^{-1}(b) = a$，代入 $x = b$ 即得基于点的形式：</p>
           $$\bigl(f^{-1}\bigr)'(b) \;=\; \frac{1}{f'(a)}. \qquad\Box$$
         </div>
-        <div class="concept-box orange"><strong>Where the "$f'(a) \neq 0$" condition comes from</strong>
+        <div class="concept-box orange" data-lang="en"><strong>Where the "$f'(a) \neq 0$" condition comes from</strong>
           <p>It is the divide-by-zero step. Geometrically, $f'(a) = 0$ means $f$ has a horizontal tangent at $a$; reflecting that horizontal tangent across $y = x$ produces a <em>vertical</em> tangent on $f^{-1}$, where the derivative does not exist.</p>
+        </div>
+        <div class="concept-box orange" data-lang="zh"><strong>"$f'(a) \neq 0$" 这个条件从何而来</strong>
+          <p>它来自避免除以零这一步。从几何上看，$f'(a) = 0$ 意味着 $f$ 在 $a$ 处有水平切线；把这条水平切线沿 $y = x$ 反射，就得到 $f^{-1}$ 上的<em>竖直</em>切线，那里反函数的导数不存在。</p>
         </div>
       </div>
     </details>
 
-    <div class="concept-box green">
+    <div class="concept-box green" data-lang="en">
       <strong>Graphical Intuition</strong>
       <p>The graph of $f^{-1}$ is the reflection of $f$ over the line $y = x$. Reflecting a tangent line swaps the rise and run, which is why the slopes are reciprocals.</p>
     </div>
+    <div class="concept-box green" data-lang="zh">
+      <strong>图像直觉</strong>
+      <p>$f^{-1}$ 的图像是 $f$ 关于直线 $y = x$ 的反射。反射一条切线会把"升"与"行"互换，因此两者的斜率互为倒数。</p>
+    </div>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example — From a Table</div>
-      <p>Suppose $f(3) = 7$ and $f'(3) = 4$. Find $(f^{-1})'(7)$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example — From a Table</div>
+      <div class="example-box-title" data-lang="zh">例题——读取表格</div>
+      <p data-lang="en">Suppose $f(3) = 7$ and $f'(3) = 4$. Find $(f^{-1})'(7)$.</p>
+      <p data-lang="zh">设 $f(3) = 7$ 且 $f'(3) = 4$，求 $(f^{-1})'(7)$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         f(3) &= 7 \Rightarrow f^{-1}(7) = 3 \\
@@ -1460,9 +1537,13 @@ input[type="range"]::-moz-range-thumb {
       </div>
     </div>
 
-    <div class="concept-box orange">
+    <div class="concept-box orange" data-lang="en">
       <strong>Watch Out</strong>
       <p>This formula requires $f'(a) \neq 0$. If the original function has a horizontal tangent at $x = a$, the inverse has a vertical tangent at the corresponding point, and the derivative does not exist there.</p>
+    </div>
+    <div class="concept-box orange" data-lang="zh">
+      <strong>注意</strong>
+      <p>这个公式要求 $f'(a) \neq 0$。如果原函数在 $x = a$ 处有水平切线，反函数在对应点就会有竖直切线，那里的导数不存在。</p>
     </div>
 
   </div>
@@ -1473,83 +1554,111 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-4">
   <div class="content-inner">
-    <div class="section-label">Topic 3.4 · FUN-3.E</div>
-    <h2>Differentiating Inverse Trigonometric Functions</h2>
+    <div class="section-label" data-lang="en">Topic 3.4 · FUN-3.E</div>
+    <div class="section-label" data-lang="zh">小节 3.4 · FUN-3.E</div>
+    <h2 data-lang="en">Differentiating Inverse Trigonometric Functions</h2>
+    <h2 data-lang="zh">反三角函数（<code>inverse trigonometric function</code>）求导</h2>
 
-    <p>The derivatives of the inverse trigonometric functions can be derived using implicit differentiation (e.g., let $y = \arcsin(x)$, so $\sin(y) = x$, and differentiate implicitly). You should <strong>memorize</strong> these results:</p>
+    <p data-lang="en">The derivatives of the inverse trigonometric functions can be derived using implicit differentiation (e.g., let $y = \arcsin(x)$, so $\sin(y) = x$, and differentiate implicitly). You should <strong>memorize</strong> these results:</p>
+    <p data-lang="zh">反三角函数的导数可以借助隐函数求导得到（例如，令 $y = \arcsin(x)$，于是 $\sin(y) = x$，再用隐函数求导）。下列结果需要<strong>背熟</strong>：</p>
 
     <div class="table-wrapper">
       <table class="styled-table">
-        <thead><tr><th>Function</th><th>Derivative</th><th>Domain</th></tr></thead>
+        <thead><tr><th><span data-lang="en">Function</span><span data-lang="zh">函数</span></th><th><span data-lang="en">Derivative</span><span data-lang="zh">导数</span></th><th><span data-lang="en">Domain</span><span data-lang="zh">定义域</span></th></tr></thead>
         <tbody>
           <tr><td>$\arcsin(x)$</td><td>$\dfrac{1}{\sqrt{1 - x^2}}$</td><td>$-1 &lt; x &lt; 1$</td></tr>
           <tr><td>$\arccos(x)$</td><td>$\dfrac{-1}{\sqrt{1 - x^2}}$</td><td>$-1 &lt; x &lt; 1$</td></tr>
-          <tr><td>$\arctan(x)$</td><td>$\dfrac{1}{1 + x^2}$</td><td>all real $x$</td></tr>
-          <tr><td>$\text{arccot}(x)$</td><td>$\dfrac{-1}{1 + x^2}$</td><td>all real $x$</td></tr>
+          <tr><td>$\arctan(x)$</td><td>$\dfrac{1}{1 + x^2}$</td><td><span data-lang="en">all real $x$</span><span data-lang="zh">全体实数 $x$</span></td></tr>
+          <tr><td>$\text{arccot}(x)$</td><td>$\dfrac{-1}{1 + x^2}$</td><td><span data-lang="en">all real $x$</span><span data-lang="zh">全体实数 $x$</span></td></tr>
           <tr><td>$\text{arcsec}(x)$</td><td>$\dfrac{1}{|x|\sqrt{x^2 - 1}}$</td><td>$|x| &gt; 1$</td></tr>
           <tr><td>$\text{arccsc}(x)$</td><td>$\dfrac{-1}{|x|\sqrt{x^2 - 1}}$</td><td>$|x| &gt; 1$</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="concept-box purple">
+    <div class="concept-box purple" data-lang="en">
       <strong>Pattern to Remember</strong>
       <p>Notice that the "co-" functions ($\arccos$, $\text{arccot}$, $\text{arccsc}$) each have derivatives that are the <strong>negatives</strong> of their non-"co" counterparts. Memorize three formulas and add a minus sign for the cofunctions.</p>
     </div>
+    <div class="concept-box purple" data-lang="zh">
+      <strong>记忆要点</strong>
+      <p>注意到带 "co-" 前缀的反三角函数（$\arccos$、$\text{arccot}$、$\text{arccsc}$）的导数都是其对应不带 "co-" 函数导数的<strong>相反数</strong>。只需记三条公式，再给余函数加上负号即可。</p>
+    </div>
 
     <details style="margin: 14px 0;">
-      <summary><strong>Derivation — $\dfrac{d}{dx}[\arcsin x]$ via implicit differentiation</strong></summary>
+      <summary><strong><span data-lang="en">Derivation — $\dfrac{d}{dx}[\arcsin x]$ via implicit differentiation</span><span data-lang="zh">推导——用隐函数求导求 $\dfrac{d}{dx}[\arcsin x]$</span></strong></summary>
       <div class="detail-body">
         <div class="worked-solution">
-          <p><strong>Step 1 — Set up.</strong> Let $y = \arcsin(x)$. By definition of the principal branch, $\sin y = x$ with $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$.</p>
-          <p><strong>Step 2 — Differentiate implicitly with respect to $x$.</strong> Chain rule on the left:</p>
+          <p data-lang="en"><strong>Step 1 — Set up.</strong> Let $y = \arcsin(x)$. By definition of the principal branch, $\sin y = x$ with $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$.</p>
+          <p data-lang="zh"><strong>第 1 步——设定。</strong>令 $y = \arcsin(x)$。按主值支（principal branch）的定义，$\sin y = x$，且 $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$。</p>
+          <p data-lang="en"><strong>Step 2 — Differentiate implicitly with respect to $x$.</strong> Chain rule on the left:</p>
+          <p data-lang="zh"><strong>第 2 步——两边对 $x$ 隐式求导。</strong>左侧使用链式法则：</p>
           $$\begin{aligned}
           \cos y \cdot \frac{dy}{dx} &= 1 \\[4pt]
           \frac{dy}{dx} &= \frac{1}{\cos y}.
           \end{aligned}$$
-          <p><strong>Step 3 — Convert $\cos y$ back to $x$.</strong> By the Pythagorean identity, $\cos^2 y = 1 - \sin^2 y = 1 - x^2$, so $\cos y = \pm\sqrt{1 - x^2}$.</p>
-          <p><strong>Step 4 — Pick the correct branch.</strong> On $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$, cosine is non-negative. Take the $+$ sign: $\cos y = \sqrt{1 - x^2}$.</p>
-          <p><strong>Step 5 — Conclude.</strong></p>
+          <p data-lang="en"><strong>Step 3 — Convert $\cos y$ back to $x$.</strong> By the Pythagorean identity, $\cos^2 y = 1 - \sin^2 y = 1 - x^2$, so $\cos y = \pm\sqrt{1 - x^2}$.</p>
+          <p data-lang="zh"><strong>第 3 步——把 $\cos y$ 换回 $x$。</strong>由毕达哥拉斯恒等式，$\cos^2 y = 1 - \sin^2 y = 1 - x^2$，故 $\cos y = \pm\sqrt{1 - x^2}$。</p>
+          <p data-lang="en"><strong>Step 4 — Pick the correct branch.</strong> On $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$, cosine is non-negative. Take the $+$ sign: $\cos y = \sqrt{1 - x^2}$.</p>
+          <p data-lang="zh"><strong>第 4 步——选取正确的符号支。</strong>在 $-\tfrac{\pi}{2} \le y \le \tfrac{\pi}{2}$ 上，余弦非负，取正号：$\cos y = \sqrt{1 - x^2}$。</p>
+          <p data-lang="en"><strong>Step 5 — Conclude.</strong></p>
+          <p data-lang="zh"><strong>第 5 步——得出结论。</strong></p>
           $$\frac{d}{dx}[\arcsin x] = \frac{1}{\sqrt{1 - x^2}}, \quad -1 &lt; x &lt; 1.$$
         </div>
-        <div class="concept-box"><strong>Why the open interval $-1 &lt; x &lt; 1$?</strong>
+        <div class="concept-box" data-lang="en"><strong>Why the open interval $-1 &lt; x &lt; 1$?</strong>
           <p style="margin-top:6px;">At $x = \pm 1$, $\cos y = 0$, and the formula divides by zero. Geometrically, $\arcsin$ has a vertical tangent at $\pm 1$ — its derivative is undefined there.</p>
+        </div>
+        <div class="concept-box" data-lang="zh"><strong>为什么是开区间 $-1 &lt; x &lt; 1$？</strong>
+          <p style="margin-top:6px;">当 $x = \pm 1$ 时，$\cos y = 0$，公式会除以零。从几何上看，$\arcsin$ 在 $\pm 1$ 处有竖直切线——那里的导数没有定义。</p>
         </div>
       </div>
     </details>
 
     <details style="margin: 14px 0;">
-      <summary><strong>Derivation — $\dfrac{d}{dx}[\arccos x]$ via implicit differentiation</strong></summary>
+      <summary><strong><span data-lang="en">Derivation — $\dfrac{d}{dx}[\arccos x]$ via implicit differentiation</span><span data-lang="zh">推导——用隐函数求导求 $\dfrac{d}{dx}[\arccos x]$</span></strong></summary>
       <div class="detail-body">
         <div class="worked-solution">
-          <p>Same recipe. Let $y = \arccos(x)$, so $\cos y = x$ with $0 \le y \le \pi$.</p>
-          <p><strong>Differentiate implicitly:</strong></p>
+          <p data-lang="en">Same recipe. Let $y = \arccos(x)$, so $\cos y = x$ with $0 \le y \le \pi$.</p>
+          <p data-lang="zh">套路相同。令 $y = \arccos(x)$，于是 $\cos y = x$，且 $0 \le y \le \pi$。</p>
+          <p data-lang="en"><strong>Differentiate implicitly:</strong></p>
+          <p data-lang="zh"><strong>隐式求导：</strong></p>
           $$\begin{aligned}
           -\sin y \cdot \frac{dy}{dx} &= 1 \\[4pt]
           \frac{dy}{dx} &= -\frac{1}{\sin y}.
           \end{aligned}$$
-          <p><strong>Convert $\sin y$:</strong> $\sin^2 y = 1 - \cos^2 y = 1 - x^2$, so $\sin y = \pm\sqrt{1 - x^2}$.</p>
-          <p><strong>Pick the branch:</strong> on $0 \le y \le \pi$, sine is non-negative, so $\sin y = +\sqrt{1 - x^2}$.</p>
-          <p><strong>Conclude:</strong></p>
+          <p data-lang="en"><strong>Convert $\sin y$:</strong> $\sin^2 y = 1 - \cos^2 y = 1 - x^2$, so $\sin y = \pm\sqrt{1 - x^2}$.</p>
+          <p data-lang="zh"><strong>把 $\sin y$ 换回 $x$：</strong>$\sin^2 y = 1 - \cos^2 y = 1 - x^2$，故 $\sin y = \pm\sqrt{1 - x^2}$。</p>
+          <p data-lang="en"><strong>Pick the branch:</strong> on $0 \le y \le \pi$, sine is non-negative, so $\sin y = +\sqrt{1 - x^2}$.</p>
+          <p data-lang="zh"><strong>选取符号支：</strong>在 $0 \le y \le \pi$ 上，正弦非负，所以 $\sin y = +\sqrt{1 - x^2}$。</p>
+          <p data-lang="en"><strong>Conclude:</strong></p>
+          <p data-lang="zh"><strong>得出结论：</strong></p>
           $$\frac{d}{dx}[\arccos x] = -\frac{1}{\sqrt{1 - x^2}}, \quad -1 &lt; x &lt; 1.$$
         </div>
-        <div class="concept-box green"><strong>Why the negative sign?</strong>
+        <div class="concept-box green" data-lang="en"><strong>Why the negative sign?</strong>
           <p style="margin-top:6px;">$\arcsin x + \arccos x = \tfrac{\pi}{2}$ for all $x \in [-1, 1]$. Differentiating both sides gives $\dfrac{d}{dx}[\arcsin x] + \dfrac{d}{dx}[\arccos x] = 0$, so $\arccos$'s derivative is the negative of $\arcsin$'s — consistent with our result.</p>
+        </div>
+        <div class="concept-box green" data-lang="zh"><strong>负号从何而来？</strong>
+          <p style="margin-top:6px;">对所有 $x \in [-1, 1]$ 都有 $\arcsin x + \arccos x = \tfrac{\pi}{2}$。两边求导得 $\dfrac{d}{dx}[\arcsin x] + \dfrac{d}{dx}[\arccos x] = 0$，所以 $\arccos$ 的导数就是 $\arcsin$ 导数的相反数——与我们得到的结果一致。</p>
         </div>
       </div>
     </details>
 
-    <h3>With the Chain Rule</h3>
-    <p>On the AP Exam, these functions almost always appear with a non-trivial inner function. Apply the chain rule:</p>
+    <h3 data-lang="en">With the Chain Rule</h3>
+    <h3 data-lang="zh">与链式法则结合</h3>
+    <p data-lang="en">On the AP Exam, these functions almost always appear with a non-trivial inner function. Apply the chain rule:</p>
+    <p data-lang="zh">在 AP 考试中，这些函数几乎总是带有一个非平凡的内函数出现。要使用链式法则：</p>
 
     <div class="formula-box">
-      <div class="formula-box-label">Arctan with Chain Rule</div>
+      <div class="formula-box-label" data-lang="en">Arctan with Chain Rule</div>
+      <div class="formula-box-label" data-lang="zh">反正切（<code>arctan</code>）与链式法则</div>
       $$\frac{d}{dx}\bigl[\arctan(g(x))\bigr] = \frac{g'(x)}{1 + [g(x)]^2}$$
     </div>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example</div>
-      <p>Find $\dfrac{d}{dx}\bigl[\arcsin(3x^2)\bigr]$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example</div>
+      <div class="example-box-title" data-lang="zh">例题</div>
+      <p data-lang="en">Find $\dfrac{d}{dx}\bigl[\arcsin(3x^2)\bigr]$.</p>
+      <p data-lang="zh">求 $\dfrac{d}{dx}\bigl[\arcsin(3x^2)\bigr]$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         \frac{d}{dx}\left[\arcsin(3x^2)\right]
@@ -1563,25 +1672,28 @@ input[type="range"]::-moz-range-thumb {
     <!-- ═══════ INTERACTIVE: Arctan Derivative Visualizer ═══════ -->
     <div class="interactive-container" id="arctanViz">
       <div class="interactive-topbar">
-        <div class="interactive-title">Interactive — $\arctan(ax)$ and Its Derivative</div>
+        <div class="interactive-title" data-lang="en">Interactive — $\arctan(ax)$ and Its Derivative</div>
+        <div class="interactive-title" data-lang="zh">交互——$\arctan(ax)$ 及其导数</div>
         <div class="interactive-actions">
-          <button class="mini-btn" type="button" id="arctanPlayBtn">Animate</button>
+          <button class="mini-btn" type="button" id="arctanPlayBtn"><span data-lang="en">Animate</span><span data-lang="zh">动画</span></button>
         </div>
       </div>
-      <p class="interactive-caption">Vary $a$ to see how the chain rule factor changes the steepness of $\arctan(ax)$ and the height of its derivative peak. The graph window stays fixed for direct visual comparison.</p>
+      <p class="interactive-caption" data-lang="en">Vary $a$ to see how the chain rule factor changes the steepness of $\arctan(ax)$ and the height of its derivative peak. The graph window stays fixed for direct visual comparison.</p>
+      <p class="interactive-caption" data-lang="zh">改变 $a$，观察链式法则的因子如何改变 $\arctan(ax)$ 的陡峭程度以及其导数峰值的高度。图像窗口固定，便于直接比较。</p>
       <div class="interactive-canvas-wrap">
         <canvas id="arctanCanvas" width="700" height="340"></canvas>
       </div>
       <div class="interactive-controls">
         <div class="slider-group">
-          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="arctanAVal">1</span></div>
+          <div class="slider-label"><span><span data-lang="en">Parameter $a$</span><span data-lang="zh">参数 $a$</span></span><span class="val" id="arctanAVal">1</span></div>
           <input type="range" id="arctanASlider" min="0.2" max="5" step="0.1" value="1">
         </div>
       </div>
       <div class="interactive-readout" id="arctanReadout">
         $y = \arctan(x)$, &nbsp; $\dfrac{dy}{dx} = \dfrac{1}{1+x^2}$
       </div>
-      <div class="graph-note">Dashed horizontal lines mark the asymptotes $y=\pm\dfrac{\pi}{2}$.</div>
+      <div class="graph-note" data-lang="en">Dashed horizontal lines mark the asymptotes $y=\pm\dfrac{\pi}{2}$.</div>
+      <div class="graph-note" data-lang="zh">虚线水平线标出渐近线 $y=\pm\dfrac{\pi}{2}$。</div>
     </div>
 
   </div>
@@ -1592,72 +1704,104 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-5">
   <div class="content-inner">
-    <div class="section-label">Topic 3.5 · Skill 1.C</div>
-    <h2>Selecting Procedures for Calculating Derivatives</h2>
+    <div class="section-label" data-lang="en">Topic 3.5 · Skill 1.C</div>
+    <div class="section-label" data-lang="zh">小节 3.5 · Skill 1.C</div>
+    <h2 data-lang="en">Selecting Procedures for Calculating Derivatives</h2>
+    <h2 data-lang="zh">选择计算导数的方法</h2>
 
-    <p>By this point in the course, you have accumulated a large toolkit of differentiation rules: the power rule, product rule, quotient rule, chain rule, implicit differentiation, and inverse function derivatives. The challenge on the AP Exam is often not executing a rule, but <strong>recognizing which rules to apply and in what order</strong>.</p>
+    <p data-lang="en">By this point in the course, you have accumulated a large toolkit of differentiation rules: the power rule, product rule, quotient rule, chain rule, implicit differentiation, and inverse function derivatives. The challenge on the AP Exam is often not executing a rule, but <strong>recognizing which rules to apply and in what order</strong>.</p>
+    <p data-lang="zh">学到这里，你已经积累了一整套求导工具：幂法则（<code>power rule</code>）、乘积法则（<code>product rule</code>）、商的法则（<code>quotient rule</code>）、链式法则、隐函数求导以及反函数的导数。AP 考试的挑战往往不在于使用某一条法则，而在于<strong>识别要用哪些法则、以什么顺序使用</strong>。</p>
 
-    <h3>Decision Framework</h3>
-    <p>When you encounter a derivative problem, ask yourself the following questions in order:</p>
+    <h3 data-lang="en">Decision Framework</h3>
+    <h3 data-lang="zh">决策框架</h3>
+    <p data-lang="en">When you encounter a derivative problem, ask yourself the following questions in order:</p>
+    <p data-lang="zh">遇到求导题时，按以下顺序自问以下几个问题：</p>
 
     <div class="checklist-box">
-      <div class="checklist-box-title">Procedure Selection Checklist</div>
+      <div class="checklist-box-title" data-lang="en">Procedure Selection Checklist</div>
+      <div class="checklist-box-title" data-lang="zh">选择方法的检查清单</div>
       <div class="checklist-list">
         <div class="checklist-item">
           <div class="checklist-num">1</div>
-          <p><strong>Simplify first.</strong> Expand, factor, rewrite radicals as powers, or simplify fractions before differentiating.</p>
+          <p data-lang="en"><strong>Simplify first.</strong> Expand, factor, rewrite radicals as powers, or simplify fractions before differentiating.</p>
+          <p data-lang="zh"><strong>先化简。</strong>在求导之前先展开、因式分解、把根号写成幂，或化简分式。</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">2</div>
-          <p><strong>Product?</strong> If the expression is a product of two or more functions, use the <strong>product rule</strong> — often together with the chain rule.</p>
+          <p data-lang="en"><strong>Product?</strong> If the expression is a product of two or more functions, use the <strong>product rule</strong> — often together with the chain rule.</p>
+          <p data-lang="zh"><strong>是乘积吗？</strong>如果表达式是两个或多个函数的乘积，就使用<strong>乘积法则</strong>——通常还要配合链式法则。</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">3</div>
-          <p><strong>Quotient?</strong> Use the <strong>quotient rule</strong>, or rewrite the expression as a product with a negative exponent when that makes the derivative cleaner.</p>
+          <p data-lang="en"><strong>Quotient?</strong> Use the <strong>quotient rule</strong>, or rewrite the expression as a product with a negative exponent when that makes the derivative cleaner.</p>
+          <p data-lang="zh"><strong>是商吗？</strong>使用<strong>商的法则</strong>；当负指数的乘积形式让导数更整齐时，也可以把表达式改写成那种形式。</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">4</div>
-          <p><strong>Function inside a function?</strong> That is a composition, so apply the <strong>chain rule</strong>.</p>
+          <p data-lang="en"><strong>Function inside a function?</strong> That is a composition, so apply the <strong>chain rule</strong>.</p>
+          <p data-lang="zh"><strong>函数套在函数里？</strong>这就是一个复合，使用<strong>链式法则</strong>。</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">5</div>
-          <p><strong>$x$ and $y$ mixed together?</strong> Use <strong>implicit differentiation</strong>.</p>
+          <p data-lang="en"><strong>$x$ and $y$ mixed together?</strong> Use <strong>implicit differentiation</strong>.</p>
+          <p data-lang="zh"><strong>$x$ 与 $y$ 混在一起？</strong>使用<strong>隐函数求导</strong>。</p>
         </div>
         <div class="checklist-item">
           <div class="checklist-num">6</div>
-          <p><strong>Derivative of an inverse?</strong> Use the <strong>inverse function derivative formula</strong>.</p>
+          <p data-lang="en"><strong>Derivative of an inverse?</strong> Use the <strong>inverse function derivative formula</strong>.</p>
+          <p data-lang="zh"><strong>反函数的导数？</strong>使用<strong>反函数的导数公式</strong>。</p>
         </div>
       </div>
     </div>
 
     <div class="rule-combo-box">
       <div class="rule-combo-header">
-        <div class="rule-combo-eyebrow">Mixed-Rule Recognition</div>
-        <div class="rule-combo-title">Multiple Rules at Once</div>
+        <div class="rule-combo-eyebrow" data-lang="en">Mixed-Rule Recognition</div>
+        <div class="rule-combo-eyebrow" data-lang="zh">混合法则识别</div>
+        <div class="rule-combo-title" data-lang="en">Multiple Rules at Once</div>
+        <div class="rule-combo-title" data-lang="zh">多条法则同时使用</div>
       </div>
       <div class="rule-combo-body">
-        <p class="rule-combo-intro">Many AP problems do <strong>not</strong> fit into just one rule. Read the expression in layers, then combine the correct tools in the correct order.</p>
+        <p class="rule-combo-intro" data-lang="en">Many AP problems do <strong>not</strong> fit into just one rule. Read the expression in layers, then combine the correct tools in the correct order.</p>
+        <p class="rule-combo-intro" data-lang="zh">很多 AP 题目<strong>无法</strong>只用一条法则解决。要分层阅读表达式，然后按正确顺序组合使用合适的工具。</p>
 
         <div class="rule-combo-grid">
-          <div class="rule-combo-card">
+          <div class="rule-combo-card" data-lang="en">
             <strong>Product + Chain</strong>
             <p>Outside structure: a <strong>product</strong>. Inside, a <strong>composition</strong>. Use the <strong>product rule</strong>, and inside one term use the <strong>chain rule</strong>.</p>
           </div>
-          <div class="rule-combo-card">
+          <div class="rule-combo-card" data-lang="zh">
+            <strong>乘积法则 + 链式法则</strong>
+            <p>外层结构：<strong>乘积</strong>。内层包含一个<strong>复合</strong>。先使用<strong>乘积法则</strong>，再对其中某一项使用<strong>链式法则</strong>。</p>
+          </div>
+          <div class="rule-combo-card" data-lang="en">
             <strong>Quotient + Chain</strong>
             <p>Overall structure: a <strong>quotient</strong>. Inside the numerator, a <strong>composition</strong>. Use the <strong>quotient rule</strong> together with the <strong>chain rule</strong>.</p>
           </div>
-          <div class="rule-combo-card">
+          <div class="rule-combo-card" data-lang="zh">
+            <strong>商的法则 + 链式法则</strong>
+            <p>整体结构：<strong>商</strong>。分子中含一个<strong>复合</strong>。结合使用<strong>商的法则</strong>与<strong>链式法则</strong>。</p>
+          </div>
+          <div class="rule-combo-card" data-lang="en">
             <strong>Implicit + Product / Chain</strong>
             <p>Because the two variables are <strong>mixed together</strong>, start with <strong>implicit differentiation</strong>. Then differentiate any product term with the <strong>product rule</strong>.</p>
           </div>
-          <div class="rule-combo-card">
+          <div class="rule-combo-card" data-lang="zh">
+            <strong>隐函数 + 乘积法则 / 链式法则</strong>
+            <p>由于两个变量<strong>混在一起</strong>，先用<strong>隐函数求导</strong>。然后对任何乘积项使用<strong>乘积法则</strong>。</p>
+          </div>
+          <div class="rule-combo-card" data-lang="en">
             <strong>Inverse + Chain</strong>
             <p>Recognize the outer function as an <strong>inverse trig function</strong>, then apply its derivative formula and multiply by the derivative of the inside using the <strong>chain rule</strong>.</p>
           </div>
+          <div class="rule-combo-card" data-lang="zh">
+            <strong>反三角 + 链式法则</strong>
+            <p>识别出外函数是<strong>反三角函数</strong>，使用相应的导数公式，再借助<strong>链式法则</strong>乘以内函数的导数。</p>
+          </div>
         </div>
 
-        <div class="rule-combo-note"><strong>Best habit:</strong> identify the <strong>outermost structure first</strong>, then look inside each piece for any additional composition, product, quotient, or implicit relationship.</div>
+        <div class="rule-combo-note" data-lang="en"><strong>Best habit:</strong> identify the <strong>outermost structure first</strong>, then look inside each piece for any additional composition, product, quotient, or implicit relationship.</div>
+        <div class="rule-combo-note" data-lang="zh"><strong>最佳习惯：</strong>先识别<strong>最外层的结构</strong>，再向各个组成部分内部查找是否还有复合、乘积、商或隐式关系。</div>
       </div>
     </div>
 
@@ -1669,34 +1813,45 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-3-6">
   <div class="content-inner">
-    <div class="section-label">Topic 3.6 · FUN-3.F</div>
-    <h2>Calculating Higher-Order Derivatives</h2>
+    <div class="section-label" data-lang="en">Topic 3.6 · FUN-3.F</div>
+    <div class="section-label" data-lang="zh">小节 3.6 · FUN-3.F</div>
+    <h2 data-lang="en">Calculating Higher-Order Derivatives</h2>
+    <h2 data-lang="zh">计算高阶导数（<code>higher-order derivative</code>）</h2>
 
-    <p>A <strong>higher-order derivative</strong> is simply the derivative of a derivative. Differentiating $f'(x)$ gives the second derivative $f''(x)$, differentiating again gives $f'''(x)$, and so on.</p>
+    <p data-lang="en">A <strong>higher-order derivative</strong> is simply the derivative of a derivative. Differentiating $f'(x)$ gives the second derivative $f''(x)$, differentiating again gives $f'''(x)$, and so on.</p>
+    <p data-lang="zh"><strong>高阶导数</strong>就是导数的导数。对 $f'(x)$ 求导得到二阶导数（<code>second derivative</code>）$f''(x)$，再求一次导得到 $f'''(x)$，依此类推。</p>
 
-    <h3>Notation</h3>
-    <p>Higher-order derivatives can be written in several equivalent ways:</p>
+    <h3 data-lang="en">Notation</h3>
+    <h3 data-lang="zh">记号</h3>
+    <p data-lang="en">Higher-order derivatives can be written in several equivalent ways:</p>
+    <p data-lang="zh">高阶导数可以用以下几种等价的写法：</p>
 
     <div class="table-wrapper">
       <table class="styled-table">
-        <thead><tr><th>Order</th><th>Prime Notation</th><th>Leibniz Notation</th></tr></thead>
+        <thead><tr><th><span data-lang="en">Order</span><span data-lang="zh">阶数</span></th><th><span data-lang="en">Prime Notation</span><span data-lang="zh">撇号记法</span></th><th><span data-lang="en">Leibniz Notation</span><span data-lang="zh">莱布尼茨记法</span></th></tr></thead>
         <tbody>
-          <tr><td>First</td><td>$f'(x)$ or $y'$</td><td>$\dfrac{dy}{dx}$</td></tr>
-          <tr><td>Second</td><td>$f''(x)$ or $y''$</td><td>$\dfrac{d^2y}{dx^2}$</td></tr>
-          <tr><td>Third</td><td>$f'''(x)$ or $y'''$</td><td>$\dfrac{d^3y}{dx^3}$</td></tr>
-          <tr><td>$n$th</td><td>$f^{(n)}(x)$</td><td>$\dfrac{d^ny}{dx^n}$</td></tr>
+          <tr><td><span data-lang="en">First</span><span data-lang="zh">一阶</span></td><td><span data-lang="en">$f'(x)$ or $y'$</span><span data-lang="zh">$f'(x)$ 或 $y'$</span></td><td>$\dfrac{dy}{dx}$</td></tr>
+          <tr><td><span data-lang="en">Second</span><span data-lang="zh">二阶</span></td><td><span data-lang="en">$f''(x)$ or $y''$</span><span data-lang="zh">$f''(x)$ 或 $y''$</span></td><td>$\dfrac{d^2y}{dx^2}$</td></tr>
+          <tr><td><span data-lang="en">Third</span><span data-lang="zh">三阶</span></td><td><span data-lang="en">$f'''(x)$ or $y'''$</span><span data-lang="zh">$f'''(x)$ 或 $y'''$</span></td><td>$\dfrac{d^3y}{dx^3}$</td></tr>
+          <tr><td><span data-lang="en">$n$th</span><span data-lang="zh">$n$ 阶</span></td><td>$f^{(n)}(x)$</td><td>$\dfrac{d^ny}{dx^n}$</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="concept-box green">
+    <div class="concept-box green" data-lang="en">
       <strong>Key Insight</strong>
       <p>The process of finding higher-order derivatives mirrors the original differentiation process. "Function is to first derivative as first derivative is to second derivative." There is no new rule — you apply the same techniques repeatedly.</p>
     </div>
+    <div class="concept-box green" data-lang="zh">
+      <strong>关键洞察</strong>
+      <p>求高阶导数的过程与原本的求导过程完全一样。"函数与一阶导数的关系，正如一阶导数与二阶导数的关系。"没有新的法则——只是反复使用相同的技巧而已。</p>
+    </div>
 
     <div class="example-box">
-      <div class="example-box-title">Worked Example</div>
-      <p>Find $f''(x)$ if $f(x) = \sin(2x)$.</p>
+      <div class="example-box-title" data-lang="en">Worked Example</div>
+      <div class="example-box-title" data-lang="zh">例题</div>
+      <p data-lang="en">Find $f''(x)$ if $f(x) = \sin(2x)$.</p>
+      <p data-lang="zh">已知 $f(x) = \sin(2x)$，求 $f''(x)$。</p>
       <div class="worked-solution">
         $$\begin{aligned}
         f(x) &= \sin(2x) \\
@@ -1710,35 +1865,44 @@ input[type="range"]::-moz-range-thumb {
     <!-- ═══════ INTERACTIVE: Higher-Order Derivative Visualizer ═══════ -->
     <div class="interactive-container" id="higherOrderViz">
       <div class="interactive-topbar">
-        <div class="interactive-title">Interactive — Successive Derivatives of $\sin(ax)$</div>
+        <div class="interactive-title" data-lang="en">Interactive — Successive Derivatives of $\sin(ax)$</div>
+        <div class="interactive-title" data-lang="zh">交互——$\sin(ax)$ 的连续高阶导数</div>
         <div class="interactive-actions">
-          <button class="mini-btn" type="button" id="higherPlayBtn">Animate</button>
+          <button class="mini-btn" type="button" id="higherPlayBtn"><span data-lang="en">Animate</span><span data-lang="zh">动画</span></button>
         </div>
       </div>
-      <p class="interactive-caption">Observe how each successive derivative of $\sin(ax)$ picks up another factor of $a$. Use the order slider to reveal the pattern one derivative at a time.</p>
+      <p class="interactive-caption" data-lang="en">Observe how each successive derivative of $\sin(ax)$ picks up another factor of $a$. Use the order slider to reveal the pattern one derivative at a time.</p>
+      <p class="interactive-caption" data-lang="zh">观察 $\sin(ax)$ 的每一次连续求导都会多出一个因子 $a$。用阶数滑块逐阶揭示这一规律。</p>
       <div class="interactive-canvas-wrap">
         <canvas id="higherCanvas" width="700" height="340"></canvas>
       </div>
       <div class="interactive-controls">
         <div class="slider-group">
-          <div class="slider-label"><span>Parameter $a$</span><span class="val" id="higherAVal">2</span></div>
+          <div class="slider-label"><span><span data-lang="en">Parameter $a$</span><span data-lang="zh">参数 $a$</span></span><span class="val" id="higherAVal">2</span></div>
           <input type="range" id="higherASlider" min="0.5" max="4" step="0.1" value="2">
         </div>
         <div class="slider-group">
-          <div class="slider-label"><span>Show up to derivative order</span><span class="val" id="higherOrderVal">2</span></div>
+          <div class="slider-label"><span><span data-lang="en">Show up to derivative order</span><span data-lang="zh">显示到第几阶导数</span></span><span class="val" id="higherOrderVal">2</span></div>
           <input type="range" id="higherOrderSlider" min="0" max="4" step="1" value="2">
         </div>
       </div>
       <div class="interactive-readout" id="higherReadout"></div>
-      <div class="graph-note">Each derivative multiplies the amplitude by another factor of $a$ and rotates sine through its 4-step cycle.</div>
+      <div class="graph-note" data-lang="en">Each derivative multiplies the amplitude by another factor of $a$ and rotates sine through its 4-step cycle.</div>
+      <div class="graph-note" data-lang="zh">每求一阶导数，振幅就乘上一个因子 $a$，并让正弦在其 4 步循环中前进一格。</div>
     </div>
 
-    <h3>Implicit Second Derivatives</h3>
-    <p>To find $\frac{d^2 y}{dx^2}$ implicitly, differentiate $\frac{dy}{dx}$ (which itself contains $y$ and possibly $\frac{dy}{dx}$) with respect to $x$. Then substitute your expression for $\frac{dy}{dx}$ back in to express the result in terms of $x$ and $y$ only.</p>
+    <h3 data-lang="en">Implicit Second Derivatives</h3>
+    <h3 data-lang="zh">隐函数的二阶导数</h3>
+    <p data-lang="en">To find $\frac{d^2 y}{dx^2}$ implicitly, differentiate $\frac{dy}{dx}$ (which itself contains $y$ and possibly $\frac{dy}{dx}$) with respect to $x$. Then substitute your expression for $\frac{dy}{dx}$ back in to express the result in terms of $x$ and $y$ only.</p>
+    <p data-lang="zh">要用隐函数法求 $\frac{d^2 y}{dx^2}$，就对 $\frac{dy}{dx}$（其本身含有 $y$，可能还含 $\frac{dy}{dx}$）再对 $x$ 求导。然后把已经求好的 $\frac{dy}{dx}$ 的表达式代回，使最终结果只用 $x$ 和 $y$ 表示。</p>
 
-    <div class="concept-box orange">
+    <div class="concept-box orange" data-lang="en">
       <strong>Watch Out</strong>
       <p>When differentiating $\frac{dy}{dx}$ implicitly, remember that $y$ is still a function of $x$. You will need the chain rule (and often the quotient rule) in this step.</p>
+    </div>
+    <div class="concept-box orange" data-lang="zh">
+      <strong>注意</strong>
+      <p>用隐函数法对 $\frac{dy}{dx}$ 求导时，要记住 $y$ 仍是 $x$ 的函数。这一步会用到链式法则（常常还要用到商的法则）。</p>
     </div>
 
   </div>
@@ -1749,22 +1913,36 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="exam-strategy">
   <div class="content-inner">
-    <div class="section-label">Review</div>
-    <h2>Exam Strategy</h2>
+    <div class="section-label" data-lang="en">Review</div>
+    <div class="section-label" data-lang="zh">复习</div>
+    <h2 data-lang="en">Exam Strategy</h2>
+    <h2 data-lang="zh">考试策略</h2>
 
-    <p>Unit 3 content accounts for <strong>9-13%</strong> of the AP Calculus AB exam and <strong>4-7%</strong> of the BC exam. However, the chain rule is a foundational skill that appears indirectly in many questions across other units (related rates, optimization, integration by substitution, differential equations, and series). Mastering it here pays dividends throughout the course.</p>
+    <p data-lang="en">Unit 3 content accounts for <strong>9-13%</strong> of the AP Calculus AB exam and <strong>4-7%</strong> of the BC exam. However, the chain rule is a foundational skill that appears indirectly in many questions across other units (related rates, optimization, integration by substitution, differential equations, and series). Mastering it here pays dividends throughout the course.</p>
+    <p data-lang="zh">单元 3 的内容占 AP 微积分 AB 考试的 <strong>9–13%</strong>、BC 考试的 <strong>4–7%</strong>。但链式法则是一项基础技能，它会以间接方式出现在许多其他单元的题目里（相关变化率、最优化、换元积分、微分方程、级数）。在这里把它学扎实，整门课程都会受益。</p>
 
-    <div class="concept-box">
+    <div class="concept-box" data-lang="en">
       <strong>Exam Tips</strong>
       <p><strong>Read the entire problem first.</strong> Determine which rules are needed before you start differentiating.</p>
       <p><strong>Show every application of the chain rule explicitly.</strong> On free-response questions, skipping the inner derivative is a guaranteed point deduction.</p>
       <p><strong>Practice with functions named $h$, $k$, $p$, etc.</strong> The AP Exam deliberately uses unfamiliar function names. Being comfortable with generic notation is essential.</p>
       <p><strong>Tables and graphs are common.</strong> Be ready to find derivatives of compositions and inverses using tabulated values — without an explicit formula.</p>
     </div>
+    <div class="concept-box" data-lang="zh">
+      <strong>考试要点</strong>
+      <p><strong>先把整道题读完。</strong>在动笔求导之前先确定要用哪些法则。</p>
+      <p><strong>每一次使用链式法则都要明确写出来。</strong>在简答题（free-response）上，跳过内函数的导数是一定要扣分的。</p>
+      <p><strong>多用 $h$、$k$、$p$ 等函数名练习。</strong>AP 考试故意使用不熟悉的函数名。熟悉抽象记号是必不可少的能力。</p>
+      <p><strong>表格和图像很常见。</strong>要做好准备，用表格中给出的数值——而不是显式公式——来求复合函数和反函数的导数。</p>
+    </div>
 
-    <div class="concept-box green">
+    <div class="concept-box green" data-lang="en">
       <strong>Free-Response Advice</strong>
       <p>When justifying answers, write the differentiation rule you are using. For example: "By the chain rule, $\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$." This demonstrates understanding and earns methodology points.</p>
+    </div>
+    <div class="concept-box green" data-lang="zh">
+      <strong>简答题建议</strong>
+      <p>在说明答案时，写出所使用的求导法则。例如："由链式法则，$\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$。"这能展示出你对概念的理解，并拿到方法分。</p>
     </div>
 
   </div>
@@ -1775,32 +1953,54 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="sec-mistakes">
   <div class="content-inner">
-    <div class="section-label">Review</div>
-    <h2>Common Mistakes</h2>
+    <div class="section-label" data-lang="en">Review</div>
+    <div class="section-label" data-lang="zh">复习</div>
+    <h2 data-lang="en">Common Mistakes</h2>
+    <h2 data-lang="zh">常见错误</h2>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Mistake #1 — Forgetting the Inner Derivative</strong>
       <p>The most frequent error: writing $\frac{d}{dx}[\sin(3x)] = \cos(3x)$ instead of $3\cos(3x)$. Always multiply by $g'(x)$.</p>
     </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>错误 #1 ——忘记乘内函数的导数</strong>
+      <p>最常见的错误：把 $\frac{d}{dx}[\sin(3x)]$ 写成 $\cos(3x)$，而不是 $3\cos(3x)$。永远要乘以 $g'(x)$。</p>
+    </div>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Mistake #2 — Missing the Chain Rule for $y$</strong>
       <p>In implicit differentiation, every differentiated $y$ term must carry a $\frac{dy}{dx}$ factor. Writing $\frac{d}{dx}[y^3] = 3y^2$ instead of $3y^2 \frac{dy}{dx}$ is incorrect.</p>
     </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>错误 #2 ——对 $y$ 忘记用链式法则</strong>
+      <p>在隐函数求导中，每一个被求导的 $y$ 项都必须带上一个因子 $\frac{dy}{dx}$。把 $\frac{d}{dx}[y^3]$ 写成 $3y^2$ 而不是 $3y^2 \frac{dy}{dx}$ 是错的。</p>
+    </div>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Mistake #3 — Confusing $(\sin x)^n$ and $\sin(x^n)$</strong>
       <p>These have different outer/inner structures. $(\sin x)^4$ has outer $u^4$ and inner $\sin x$. But $\sin(x^4)$ has outer $\sin u$ and inner $x^4$. Misidentifying gives a wrong answer.</p>
     </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>错误 #3 ——把 $(\sin x)^n$ 与 $\sin(x^n)$ 搞混</strong>
+      <p>这两种写法的外/内函数结构不同。$(\sin x)^4$ 的外函数是 $u^4$，内函数是 $\sin x$；而 $\sin(x^4)$ 的外函数是 $\sin u$，内函数是 $x^4$。识别错误就会得到错误答案。</p>
+    </div>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Mistake #4 — Inverse Derivative Evaluation Errors</strong>
       <p>When using $(f^{-1})'(b) = \frac{1}{f'(a)}$ where $f(a)=b$, students sometimes evaluate $f'$ at $b$ instead of at $a$. Remember: evaluate the original function's derivative at the <em>input</em> that maps to $b$.</p>
     </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>错误 #4 ——反函数求导中的代值错误</strong>
+      <p>使用 $(f^{-1})'(b) = \frac{1}{f'(a)}$ 时（其中 $f(a)=b$），学生有时会把 $f'$ 代到 $b$ 处而不是 $a$ 处。要记住：原函数的导数应代入<em>那个映射到 $b$ 的自变量值</em>。</p>
+    </div>
 
-    <div class="concept-box red">
+    <div class="concept-box red" data-lang="en">
       <strong>Mistake #5 — Stopping Too Early with $e^x$ or Trig</strong>
       <p>Students sometimes apply the chain rule to the outermost layer but forget that $e^{g(x)}$ still needs $g'(x)$, or that $\cos(g(x))$ needs $g'(x)$. Carry the chain through every layer.</p>
+    </div>
+    <div class="concept-box red" data-lang="zh">
+      <strong>错误 #5 ——遇到 $e^x$ 或三角函数过早停手</strong>
+      <p>学生有时只对最外层用了链式法则，却忘了 $e^{g(x)}$ 还要乘 $g'(x)$，或 $\cos(g(x))$ 也要乘 $g'(x)$。要把链式贯穿到每一层。</p>
     </div>
 
   </div>
@@ -1811,16 +2011,20 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="flashcards">
   <div class="content-inner">
-    <div class="section-label">Review</div>
-    <h2>Flashcards</h2>
-    <p>Click any card to reveal the answer. Click again to flip back.</p>
+    <div class="section-label" data-lang="en">Review</div>
+    <div class="section-label" data-lang="zh">复习</div>
+    <h2 data-lang="en">Flashcards</h2>
+    <h2 data-lang="zh">闪卡</h2>
+    <p data-lang="en">Click any card to reveal the answer. Click again to flip back.</p>
+    <p data-lang="zh">点击任意一张卡查看答案。再次点击翻回正面。</p>
 
     <div class="flashcard-grid">
 
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
         <div class="flashcard-inner">
           <div class="flashcard-front">
-            <div>State the chain rule in Leibniz notation.</div>
+            <div data-lang="en">State the chain rule in Leibniz notation.</div>
+            <div data-lang="zh">写出链式法则的莱布尼茨记法。</div>
           </div>
           <div class="flashcard-back">
             $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
@@ -1853,7 +2057,8 @@ input[type="range"]::-moz-range-thumb {
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
         <div class="flashcard-inner">
           <div class="flashcard-front">
-            <div>What is the key step in implicit differentiation?</div>
+            <div data-lang="en">What is the key step in implicit differentiation?</div>
+            <div data-lang="zh">隐函数求导的关键一步是什么？</div>
           </div>
           <div class="flashcard-back">
             $$\frac{d}{dx}[f(y)] = f'(y)\cdot\frac{dy}{dx}$$
@@ -1864,11 +2069,12 @@ input[type="range"]::-moz-range-thumb {
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
         <div class="flashcard-inner">
           <div class="flashcard-front">
-            <div>$(f^{-1})'(b) = \;?$<br>given $f(a) = b$</div>
+            <div data-lang="en">$(f^{-1})'(b) = \;?$<br>given $f(a) = b$</div>
+            <div data-lang="zh">$(f^{-1})'(b) = \;?$<br>已知 $f(a) = b$</div>
           </div>
           <div class="flashcard-back">
             $$\frac{1}{f'(a)}$$
-            where $f(a)=b$ and $f'(a)\neq 0$.
+            <span data-lang="en">where $f(a)=b$ and $f'(a)\neq 0$.</span><span data-lang="zh">其中 $f(a)=b$ 且 $f'(a)\neq 0$。</span>
           </div>
         </div>
       </div>
@@ -1876,7 +2082,8 @@ input[type="range"]::-moz-range-thumb {
       <div class="flashcard" onclick="this.classList.toggle('flipped')">
         <div class="flashcard-inner">
           <div class="flashcard-front">
-            <div>What notation represents the second derivative in Leibniz form?</div>
+            <div data-lang="en">What notation represents the second derivative in Leibniz form?</div>
+            <div data-lang="zh">二阶导数的莱布尼茨记法是什么？</div>
           </div>
           <div class="flashcard-back">
             $$\frac{d^2 y}{dx^2}$$
@@ -1915,109 +2122,112 @@ input[type="range"]::-moz-range-thumb {
      ═══════════════════════════════════════════ -->
 <section class="section" id="unit-quiz">
   <div class="content-inner">
-    <div class="section-label">Assessment</div>
-    <h2>Unit Quiz</h2>
-    <p>Test your understanding. Select an answer for each question, then check the explanation.</p>
+    <div class="section-label" data-lang="en">Assessment</div>
+    <div class="section-label" data-lang="zh">测评</div>
+    <h2 data-lang="en">Unit Quiz</h2>
+    <h2 data-lang="zh">单元小测</h2>
+    <p data-lang="en">Test your understanding. Select an answer for each question, then check the explanation.</p>
+    <p data-lang="zh">检验你的理解。为每道题选择一个答案，再查看解释。</p>
 
     <div id="quizContainer">
 
       <!-- Q1 -->
       <div class="quiz-question" data-correct="B">
-        <div class="quiz-question-number">Question 1</div>
-        <div class="quiz-question-text">What is $\dfrac{d}{dx}[\cos(5x)]$?</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 1</span><span data-lang="zh">第 1 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">What is $\dfrac{d}{dx}[\cos(5x)]$?</span><span data-lang="zh">$\dfrac{d}{dx}[\cos(5x)]$ 等于多少？</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $5\cos(5x)$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $-5\sin(5x)$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $-\sin(5x)$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $\sin(5x) \cdot 5$</div>
         </div>
-        <div class="quiz-explanation">The outer function is $\cos(u)$ with derivative $-\sin(u)$. The inner function is $5x$ with derivative $5$. By the chain rule: $-\sin(5x) \cdot 5 = -5\sin(5x)$.</div>
+        <div class="quiz-explanation"><span data-lang="en">The outer function is $\cos(u)$ with derivative $-\sin(u)$. The inner function is $5x$ with derivative $5$. By the chain rule: $-\sin(5x) \cdot 5 = -5\sin(5x)$.</span><span data-lang="zh">外函数是 $\cos(u)$，其导数为 $-\sin(u)$；内函数是 $5x$，其导数为 $5$。由链式法则：$-\sin(5x) \cdot 5 = -5\sin(5x)$。</span></div>
       </div>
 
       <!-- Q2 -->
       <div class="quiz-question" data-correct="C">
-        <div class="quiz-question-number">Question 2</div>
-        <div class="quiz-question-text">Find $\dfrac{dy}{dx}$ if $x^2 + y^2 = 16$.</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 2</span><span data-lang="zh">第 2 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">Find $\dfrac{dy}{dx}$ if $x^2 + y^2 = 16$.</span><span data-lang="zh">已知 $x^2 + y^2 = 16$，求 $\dfrac{dy}{dx}$。</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{x}{y}$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{-2x}{y}$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{-x}{y}$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{y}{x}$</div>
         </div>
-        <div class="quiz-explanation">Differentiating: $2x + 2y\frac{dy}{dx} = 0$. Solving: $\frac{dy}{dx} = \frac{-2x}{2y} = \frac{-x}{y}$.</div>
+        <div class="quiz-explanation"><span data-lang="en">Differentiating: $2x + 2y\frac{dy}{dx} = 0$. Solving: $\frac{dy}{dx} = \frac{-2x}{2y} = \frac{-x}{y}$.</span><span data-lang="zh">求导得：$2x + 2y\frac{dy}{dx} = 0$。解出：$\frac{dy}{dx} = \frac{-2x}{2y} = \frac{-x}{y}$。</span></div>
       </div>
 
       <!-- Q3 -->
       <div class="quiz-question" data-correct="A">
-        <div class="quiz-question-number">Question 3</div>
-        <div class="quiz-question-text">If $f(2) = 5$ and $f'(2) = 3$, what is $(f^{-1})'(5)$?</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 3</span><span data-lang="zh">第 3 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">If $f(2) = 5$ and $f'(2) = 3$, what is $(f^{-1})'(5)$?</span><span data-lang="zh">若 $f(2) = 5$ 且 $f'(2) = 3$，则 $(f^{-1})'(5)$ 等于多少？</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{1}{3}$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $3$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{1}{5}$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $5$</div>
         </div>
-        <div class="quiz-explanation">Since $f(2) = 5$, we know $f^{-1}(5) = 2$. The inverse derivative formula gives $(f^{-1})'(5) = \frac{1}{f'(2)} = \frac{1}{3}$.</div>
+        <div class="quiz-explanation"><span data-lang="en">Since $f(2) = 5$, we know $f^{-1}(5) = 2$. The inverse derivative formula gives $(f^{-1})'(5) = \frac{1}{f'(2)} = \frac{1}{3}$.</span><span data-lang="zh">由 $f(2) = 5$，得 $f^{-1}(5) = 2$。由反函数的导数公式：$(f^{-1})'(5) = \frac{1}{f'(2)} = \frac{1}{3}$。</span></div>
       </div>
 
       <!-- Q4 -->
       <div class="quiz-question" data-correct="D">
-        <div class="quiz-question-number">Question 4</div>
-        <div class="quiz-question-text">What is $\dfrac{d}{dx}[e^{3x^2}]$?</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 4</span><span data-lang="zh">第 4 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">What is $\dfrac{d}{dx}[e^{3x^2}]$?</span><span data-lang="zh">$\dfrac{d}{dx}[e^{3x^2}]$ 等于多少？</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $e^{3x^2}$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $3x^2 \cdot e^{3x^2-1}$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $3e^{3x^2}$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $6x\,e^{3x^2}$</div>
         </div>
-        <div class="quiz-explanation">The outer function is $e^u$ (derivative $e^u$), and the inner function is $3x^2$ (derivative $6x$). Chain rule: $e^{3x^2} \cdot 6x = 6xe^{3x^2}$.</div>
+        <div class="quiz-explanation"><span data-lang="en">The outer function is $e^u$ (derivative $e^u$), and the inner function is $3x^2$ (derivative $6x$). Chain rule: $e^{3x^2} \cdot 6x = 6xe^{3x^2}$.</span><span data-lang="zh">外函数是 $e^u$（其导数为 $e^u$），内函数是 $3x^2$（其导数为 $6x$）。由链式法则：$e^{3x^2} \cdot 6x = 6xe^{3x^2}$。</span></div>
       </div>
 
       <!-- Q5 -->
       <div class="quiz-question" data-correct="B">
-        <div class="quiz-question-number">Question 5</div>
-        <div class="quiz-question-text">What is $\dfrac{d}{dx}[\arctan(2x)]$?</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 5</span><span data-lang="zh">第 5 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">What is $\dfrac{d}{dx}[\arctan(2x)]$?</span><span data-lang="zh">$\dfrac{d}{dx}[\arctan(2x)]$ 等于多少？</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $\dfrac{1}{1+4x^2}$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{2}{1+4x^2}$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{2}{1+2x^2}$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{1}{\sqrt{1-4x^2}}$</div>
         </div>
-        <div class="quiz-explanation">$\frac{d}{dx}[\arctan(u)] = \frac{1}{1+u^2} \cdot u'$. With $u = 2x$: $\frac{1}{1+(2x)^2}\cdot 2 = \frac{2}{1+4x^2}$.</div>
+        <div class="quiz-explanation"><span data-lang="en">$\frac{d}{dx}[\arctan(u)] = \frac{1}{1+u^2} \cdot u'$. With $u = 2x$: $\frac{1}{1+(2x)^2}\cdot 2 = \frac{2}{1+4x^2}$.</span><span data-lang="zh">$\frac{d}{dx}[\arctan(u)] = \frac{1}{1+u^2} \cdot u'$。代入 $u = 2x$：$\frac{1}{1+(2x)^2}\cdot 2 = \frac{2}{1+4x^2}$。</span></div>
       </div>
 
       <!-- Q6 -->
       <div class="quiz-question" data-correct="C">
-        <div class="quiz-question-number">Question 6</div>
-        <div class="quiz-question-text">If $f(x) = \sin(x^2)$, what is $f''(x)$?</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 6</span><span data-lang="zh">第 6 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">If $f(x) = \sin(x^2)$, what is $f''(x)$?</span><span data-lang="zh">若 $f(x) = \sin(x^2)$，则 $f''(x)$ 等于多少？</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $-4x^2\sin(x^2)$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $2\cos(x^2) + 4x^2\sin(x^2)$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $2\cos(x^2) - 4x^2\sin(x^2)$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $-2\sin(x^2)$</div>
         </div>
-        <div class="quiz-explanation">$f'(x) = 2x\cos(x^2)$. Using the product rule on $f'$: $f''(x) = 2\cos(x^2) + 2x\cdot(-\sin(x^2)\cdot 2x) = 2\cos(x^2) - 4x^2\sin(x^2)$.</div>
+        <div class="quiz-explanation"><span data-lang="en">$f'(x) = 2x\cos(x^2)$. Using the product rule on $f'$: $f''(x) = 2\cos(x^2) + 2x\cdot(-\sin(x^2)\cdot 2x) = 2\cos(x^2) - 4x^2\sin(x^2)$.</span><span data-lang="zh">$f'(x) = 2x\cos(x^2)$。对 $f'$ 使用乘积法则：$f''(x) = 2\cos(x^2) + 2x\cdot(-\sin(x^2)\cdot 2x) = 2\cos(x^2) - 4x^2\sin(x^2)$。</span></div>
       </div>
 
       <!-- Q7 -->
       <div class="quiz-question" data-correct="A">
-        <div class="quiz-question-number">Question 7</div>
-        <div class="quiz-question-text">Find $\dfrac{dy}{dx}$ for $\ln(xy) = 1$.</div>
+        <div class="quiz-question-number"><span data-lang="en">Question 7</span><span data-lang="zh">第 7 题</span></div>
+        <div class="quiz-question-text"><span data-lang="en">Find $\dfrac{dy}{dx}$ for $\ln(xy) = 1$.</span><span data-lang="zh">已知 $\ln(xy) = 1$，求 $\dfrac{dy}{dx}$。</span></div>
         <div class="quiz-options">
           <div class="quiz-option" data-value="A"><span class="letter">A</span> $-\dfrac{y}{x}$</div>
           <div class="quiz-option" data-value="B"><span class="letter">B</span> $\dfrac{y}{x}$</div>
           <div class="quiz-option" data-value="C"><span class="letter">C</span> $\dfrac{-1}{x}$</div>
           <div class="quiz-option" data-value="D"><span class="letter">D</span> $\dfrac{1}{xy}$</div>
         </div>
-        <div class="quiz-explanation">Rewrite: $\ln x + \ln y = 1$. Differentiate: $\frac{1}{x} + \frac{1}{y}\frac{dy}{dx} = 0$. So $\frac{dy}{dx} = -\frac{y}{x}$.</div>
+        <div class="quiz-explanation"><span data-lang="en">Rewrite: $\ln x + \ln y = 1$. Differentiate: $\frac{1}{x} + \frac{1}{y}\frac{dy}{dx} = 0$. So $\frac{dy}{dx} = -\frac{y}{x}$.</span><span data-lang="zh">先改写：$\ln x + \ln y = 1$。求导：$\frac{1}{x} + \frac{1}{y}\frac{dy}{dx} = 0$，故 $\frac{dy}{dx} = -\frac{y}{x}$。</span></div>
       </div>
 
     </div>
 
     <div class="quiz-score-bar" id="quizScore" style="display:none;">
-      <div>Your Score</div>
+      <div><span data-lang="en">Your Score</span><span data-lang="zh">你的得分</span></div>
       <div class="score-display" id="scoreDisplay"></div>
-      <button class="quiz-reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      <button class="quiz-reset-btn" onclick="resetQuiz()"><span data-lang="en">Reset Quiz</span><span data-lang="zh">重做小测</span></button>
     </div>
 
   </div>
@@ -2026,38 +2236,42 @@ input[type="range"]::-moz-range-thumb {
 <!-- ═══════════════ READINESS CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
   <div class="content-inner">
-    <div class="section-label">Self-Assessment</div>
-    <h2>Readiness Checklist</h2>
-    <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-    <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+    <div class="section-label" data-lang="en">Self-Assessment</div>
+    <div class="section-label" data-lang="zh">自我评估</div>
+    <h2 data-lang="en">Readiness Checklist</h2>
+    <h2 data-lang="zh">备考清单</h2>
+    <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+    <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击每一条你已经掌握的内容。目标是在考试前达到 100%。</p>
+    <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">已掌握 0 / 14</span></div>
 
     <ul class="checklist" id="checklistUl">
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Chain Rule to nested composite functions</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate triple-composed functions without losing a factor</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Combine the Chain Rule with Product and Quotient Rules</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Perform implicit differentiation to find $dy/dx$</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Write tangent line equations to implicitly defined curves</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate an inverse function using $(f^{-1})'(a) = 1/f'(f^{-1}(a))$</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate $\arcsin$, $\arccos$, $\arctan$ and related expressions</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute higher-order derivatives $f''$, $f'''$, $f^{(n)}$</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find $d^2y/dx^2$ implicitly in terms of $x$ and $y$</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the correct differentiation procedure for a given expression</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize when logarithmic differentiation simplifies the work</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Simplify derivative expressions and factor out common terms</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use the Chain Rule in Leibniz form $dy/dx = (dy/du)(du/dx)$</li>
-      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Interpret $f''$ qualitatively (concavity, acceleration)</li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Chain Rule to nested composite functions</span><span data-lang="zh">对嵌套的复合函数使用链式法则</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate triple-composed functions without losing a factor</span><span data-lang="zh">对三层复合的函数求导时不遗漏任何一个因子</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Combine the Chain Rule with Product and Quotient Rules</span><span data-lang="zh">把链式法则与乘积法则、商的法则结合使用</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Perform implicit differentiation to find $dy/dx$</span><span data-lang="zh">使用隐函数求导求 $dy/dx$</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Write tangent line equations to implicitly defined curves</span><span data-lang="zh">写出隐式定义曲线的切线方程</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate an inverse function using $(f^{-1})'(a) = 1/f'(f^{-1}(a))$</span><span data-lang="zh">用 $(f^{-1})'(a) = 1/f'(f^{-1}(a))$ 对反函数求导</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate $\arcsin$, $\arccos$, $\arctan$ and related expressions</span><span data-lang="zh">对 $\arcsin$、$\arccos$、$\arctan$ 及相关表达式求导</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute higher-order derivatives $f''$, $f'''$, $f^{(n)}$</span><span data-lang="zh">计算高阶导数 $f''$、$f'''$、$f^{(n)}$</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find $d^2y/dx^2$ implicitly in terms of $x$ and $y$</span><span data-lang="zh">用隐函数法求 $d^2y/dx^2$，结果用 $x$ 和 $y$ 表示</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Select the correct differentiation procedure for a given expression</span><span data-lang="zh">为给定表达式选择正确的求导方法</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Recognize when logarithmic differentiation simplifies the work</span><span data-lang="zh">识别何时使用对数求导法（<code>logarithmic differentiation</code>）能简化运算</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Simplify derivative expressions and factor out common terms</span><span data-lang="zh">化简导数表达式并提取公因子</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use the Chain Rule in Leibniz form $dy/dx = (dy/du)(du/dx)$</span><span data-lang="zh">用莱布尼茨形式的链式法则 $dy/dx = (dy/du)(du/dx)$</span></li>
+      <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Interpret $f''$ qualitatively (concavity, acceleration)</span><span data-lang="zh">从定性角度解读 $f''$（凹凸性、加速度）</span></li>
     </ul>
   </div>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;"><span data-lang="en">AP-Style Practice Problems</span><span data-lang="zh">AP 风格练习题</span></h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;" data-lang="zh">本单元的考试级练习——按 AP 评分标准设计的多项选择题与简答题。为冲击高分而准备；学完上方笔记和页内小测后再做。</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_3_Composite_Implicit_Inverse_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_3_Composite_Implicit_Inverse_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
@@ -2077,12 +2291,12 @@ input[type="range"]::-moz-range-thumb {
         <p>778-885-6368</p>
       </div>
       <div class="footer-col">
-        <h4>Follow Us</h4>
-        <p>WeChat: dingruischolars</p>
-        <p>Rednote ID: dingruischolars</p>
+        <h4><span data-lang="en">Follow Us</span><span data-lang="zh">关注我们</span></h4>
+        <p><span data-lang="en">WeChat: dingruischolars</span><span data-lang="zh">微信：dingruischolars</span></p>
+        <p><span data-lang="en">Rednote ID: dingruischolars</span><span data-lang="zh">小红书 ID：dingruischolars</span></p>
       </div>
       <div class="footer-col">
-        <h4>Website</h4>
+        <h4><span data-lang="en">Website</span><span data-lang="zh">官网</span></h4>
         <p><a href="https://dingruischolars.com" target="_blank" rel="noopener">dingruischolars.com</a></p>
       </div>
     </div>
@@ -2096,51 +2310,40 @@ input[type="range"]::-moz-range-thumb {
      JAVASCRIPT
      ═══════════════════════════════════════════ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── Theme Toggle ──
-(function() {
-  const html = document.documentElement;
-  const toggle = document.getElementById('themeToggle');
-  const label = document.getElementById('themeLabel');
-  const icon = document.getElementById('themeIcon');
-  const storageKey = 'dingrui-unit3-theme';
-
-  const sunPath = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
-  const moonPath = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-
-  function redrawInteractive() {
-    window.requestAnimationFrame(() => {
-      if (typeof drawChainRule === 'function') drawChainRule();
-      if (typeof drawImplicit === 'function') drawImplicit();
-      if (typeof drawArctan === 'function') drawArctan();
-      if (typeof drawHigherOrder === 'function') drawHigherOrder();
-    });
-  }
-
-  function setTheme(theme, persist = true) {
-    html.setAttribute('data-theme', theme);
-    label.textContent = theme === 'dark' ? 'Light' : 'Dark';
-    icon.innerHTML = theme === 'dark' ? moonPath : sunPath;
-    toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-    if (persist) {
-      try { localStorage.setItem(storageKey, theme); } catch (e) {}
-    }
-    redrawInteractive();
-  }
-
-  let initialTheme = 'light';
-  try {
-    initialTheme = localStorage.getItem(storageKey) || initialTheme;
-  } catch (e) {}
-  if (!['light', 'dark'].includes(initialTheme)) {
-    initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  setTheme(initialTheme, false);
-
-  toggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    setTheme(current === 'dark' ? 'light' : 'dark');
+// ── Theme + Language Toggles ──
+function redrawInteractive() {
+  window.requestAnimationFrame(() => {
+    if (typeof drawChainRule === 'function') drawChainRule();
+    if (typeof drawImplicit === 'function') drawImplicit();
+    if (typeof drawArctan === 'function') drawArctan();
+    if (typeof drawHigherOrder === 'function') drawHigherOrder();
   });
-})();
+}
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  setThemeBtnLabel(!isDark);
+  redrawInteractive();
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  setThemeBtnLabel(true);
+}
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 // ── Progress Bar ──
 window.addEventListener('scroll', () => {
@@ -2252,7 +2455,7 @@ function bindAutoAnimate(buttonId, slider, drawFn, config) {
   function stop() {
     if (frame) clearTimeout(frame);
     frame = null;
-    button.textContent = 'Animate';
+    button.innerHTML = '<span data-lang="en">Animate</span><span data-lang="zh">动画</span>';
     button.setAttribute('aria-pressed', 'false');
   }
 
@@ -2276,7 +2479,7 @@ function bindAutoAnimate(buttonId, slider, drawFn, config) {
       clearTimeout(frame);
       stop();
     } else {
-      button.textContent = 'Pause';
+      button.innerHTML = '<span data-lang="en">Pause</span><span data-lang="zh">暂停</span>';
       button.setAttribute('aria-pressed', 'true');
       tick();
     }
@@ -2837,7 +3040,7 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const prog = document.getElementById('checkProgress');
-  if (prog) prog.textContent = checked + ' / ' + total + ' mastered';
+  if (prog) prog.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
 }
 </script>
 </body>

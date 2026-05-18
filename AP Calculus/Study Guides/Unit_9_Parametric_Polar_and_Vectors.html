@@ -33,7 +33,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,30,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 280px;
@@ -670,6 +670,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   transform: translateY(-1px) !important;
 }
 .nav-btn.active { background: var(--accent, #7A2E2E) !important; color: #FFFFFF !important; border-color: var(--accent, #7A2E2E) !important; }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -680,44 +684,49 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     <span class="nav-badge">UNIT 9</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" aria-label="Toggle table of contents" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" aria-label="Toggle dark mode" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s9-1">9.1 Parametric Derivatives</a>
-  <a href="#s9-2">9.2 Second Derivatives</a>
-  <a href="#s9-3">9.3 Arc Length</a>
-  <a href="#s9-4">9.4 Vector Derivatives</a>
-  <a href="#s9-5">9.5 Integrating Vectors</a>
-  <a href="#s9-6">9.6 Planar Motion</a>
-  <a href="#s9-7">9.7 Polar Derivatives</a>
-  <a href="#s9-8">9.8 Polar Area (Single)</a>
-  <a href="#s9-9">9.9 Polar Area (Two)</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#s9-1"><span data-lang="en">9.1 Parametric Derivatives</span><span data-lang="zh">9.1 参数方程的导数</span></a>
+  <a href="#s9-2"><span data-lang="en">9.2 Second Derivatives</span><span data-lang="zh">9.2 二阶导数</span></a>
+  <a href="#s9-3"><span data-lang="en">9.3 Arc Length</span><span data-lang="zh">9.3 弧长</span></a>
+  <a href="#s9-4"><span data-lang="en">9.4 Vector Derivatives</span><span data-lang="zh">9.4 向量值函数的导数</span></a>
+  <a href="#s9-5"><span data-lang="en">9.5 Integrating Vectors</span><span data-lang="zh">9.5 向量值函数的积分</span></a>
+  <a href="#s9-6"><span data-lang="en">9.6 Planar Motion</span><span data-lang="zh">9.6 平面运动</span></a>
+  <a href="#s9-7"><span data-lang="en">9.7 Polar Derivatives</span><span data-lang="zh">9.7 极坐标导数</span></a>
+  <a href="#s9-8"><span data-lang="en">9.8 Polar Area (Single)</span><span data-lang="zh">9.8 极坐标面积（单曲线）</span></a>
+  <a href="#s9-9"><span data-lang="en">9.9 Polar Area (Two)</span><span data-lang="zh">9.9 极坐标面积（两曲线）</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB/BC · 鼎睿学苑</div>
-  <h1>Unit 9: Parametric Equations,<br>Polar Coordinates &amp; Vector-Valued Functions</h1>
-  <p class="hero-sub">
+  <h1 data-lang="en">Unit 9: Parametric Equations,<br>Polar Coordinates &amp; Vector-Valued Functions</h1>
+  <h1 data-lang="zh">单元 9：参数方程、<br>极坐标与向量值函数</h1>
+  <p class="hero-sub" data-lang="en">
     Extend calculus to curves in the plane — parametric &amp; polar derivatives, arc length, vector motion, and polar areas. <strong>BC Only.</strong>
   </p>
+  <p class="hero-sub" data-lang="zh">
+    将微积分扩展到平面曲线 —— 参数方程与极坐标的导数、弧长、向量运动以及极坐标面积。<strong>仅 BC。</strong>
+  </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">11–12% of AP Exam</span>
-    <span class="chip chip-green">~10–11 Class Periods</span>
-    <span class="chip chip-purple">9 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">11–12% of AP Exam</span><span data-lang="zh">占 AP 考试 11–12%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~10–11 Class Periods</span><span data-lang="zh">约 10–11 课时</span></span>
+    <span class="chip chip-purple"><span data-lang="en">9 Topics</span><span data-lang="zh">9 个主题</span></span>
   </div>
 </section>
 
@@ -725,28 +734,34 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <section class="section" id="s9-1">
   <div class="section-label">Topic 9.1</div>
-  <h2>Defining and Differentiating Parametric Equations</h2>
+  <h2 data-lang="en">Defining and Differentiating Parametric Equations</h2>
+  <h2 data-lang="zh">参数方程（<code>parametric equations</code>）的定义与求导</h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Parametric Equations</strong>
-    A curve is defined by $x = f(t)$ and $y = g(t)$, where $t$ is the parameter. Each value of $t$ gives a point $(x, y)$ on the curve.
+    <strong style="color: var(--accent);"><span data-lang="en">Parametric Equations</span><span data-lang="zh">参数方程</span></strong>
+    <span data-lang="en">A curve is defined by $x = f(t)$ and $y = g(t)$, where $t$ is the parameter. Each value of $t$ gives a point $(x, y)$ on the curve.</span>
+    <span data-lang="zh">一条参数曲线（<code>parametric curve</code>）由 $x = f(t)$ 与 $y = g(t)$ 定义，其中 $t$ 是参数（<code>parameter</code>）。每一个 $t$ 值对应曲线上的一个点 $(x, y)$。</span>
   </div>
 
-  <p>The slope of the tangent line to a parametric curve is found using the <strong>chain rule</strong>:</p>
+  <p data-lang="en">The slope of the tangent line to a parametric curve is found using the <strong>chain rule</strong>:</p>
+  <p data-lang="zh">参数曲线切线（<code>tangent line</code>）的斜率（<code>slope</code>）通过<strong>链式法则（<code>chain rule</code>）</strong>得到：</p>
 
   <div class="formula-box">
-    <div class="formula-label">First Derivative — Parametric</div>
+    <div class="formula-label"><span data-lang="en">First Derivative — Parametric</span><span data-lang="zh">一阶导数 —— 参数方程</span></div>
     $$ \frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}} $$
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">provided $\frac{dx}{dt} \neq 0$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="en">provided $\frac{dx}{dt} \neq 0$</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-lang="zh">前提是 $\frac{dx}{dt} \neq 0$</p>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Common Exam Trap</strong>
-    Students often compute $\frac{dy}{dt}$ or $\frac{dx}{dt}$ alone and forget to divide. The slope of the tangent is the <em>ratio</em> $\frac{dy}{dx}$, not either derivative alone.
+    <strong style="color: var(--red);"><span data-lang="en">Common Exam Trap</span><span data-lang="zh">常见考试陷阱</span></strong>
+    <span data-lang="en">Students often compute $\frac{dy}{dt}$ or $\frac{dx}{dt}$ alone and forget to divide. The slope of the tangent is the <em>ratio</em> $\frac{dy}{dx}$, not either derivative alone.</span>
+    <span data-lang="zh">学生常常只算出 $\frac{dy}{dt}$ 或 $\frac{dx}{dt}$，却忘了相除。切线斜率是<em>比值</em> $\frac{dy}{dx}$，而不是其中任何一个导数本身。</span>
   </div>
 
-  <h3>Worked Example</h3>
-<pre><span class="cm">Given: x = t² + 1,  y = t³ − 3t</span>
+  <h3 data-lang="en">Worked Example</h3>
+  <h3 data-lang="zh">例题</h3>
+<pre data-lang="en"><span class="cm">Given: x = t² + 1,  y = t³ − 3t</span>
 
 <span class="cm">Find dy/dx at t = 2.</span>
 
@@ -754,28 +769,38 @@ dx/dt = <span class="num">2t</span>       →  at t=2:  dx/dt = <span class="num
 dy/dt = <span class="num">3t² − 3</span>  →  at t=2:  dy/dt = <span class="num">9</span>
 
 dy/dx = <span class="num">9/4</span></pre>
+<pre data-lang="zh"><span class="cm">已知：x = t² + 1，y = t³ − 3t</span>
+
+<span class="cm">求 t = 2 处的 dy/dx。</span>
+
+dx/dt = <span class="num">2t</span>       →  当 t=2 时：dx/dt = <span class="num">4</span>
+dy/dt = <span class="num">3t² − 3</span>  →  当 t=2 时：dy/dt = <span class="num">9</span>
+
+dy/dx = <span class="num">9/4</span></pre>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Key Exam Concept</strong>
-    A parametric curve has a <strong>horizontal tangent</strong> when $\frac{dy}{dt} = 0$ (and $\frac{dx}{dt} \neq 0$), and a <strong>vertical tangent</strong> when $\frac{dx}{dt} = 0$ (and $\frac{dy}{dt} \neq 0$).
+    <strong style="color: var(--green);"><span data-lang="en">Key Exam Concept</span><span data-lang="zh">关键考点</span></strong>
+    <span data-lang="en">A parametric curve has a <strong>horizontal tangent</strong> when $\frac{dy}{dt} = 0$ (and $\frac{dx}{dt} \neq 0$), and a <strong>vertical tangent</strong> when $\frac{dx}{dt} = 0$ (and $\frac{dy}{dt} \neq 0$).</span>
+    <span data-lang="zh">参数曲线在 $\frac{dy}{dt} = 0$（且 $\frac{dx}{dt} \neq 0$）时有<strong>水平切线</strong>；在 $\frac{dx}{dt} = 0$（且 $\frac{dy}{dt} \neq 0$）时有<strong>垂直切线</strong>。</span>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">Given $x = \sin(t)$, $y = \cos(t)$, what is $\frac{dy}{dx}$?</div>
+    <div class="quiz-q"><span data-lang="en">Given $x = \sin(t)$, $y = \cos(t)$, what is $\frac{dy}{dx}$?</span><span data-lang="zh">已知 $x = \sin(t)$，$y = \cos(t)$，求 $\frac{dy}{dx}$。</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\frac{\cos(t)}{\sin(t)}$</div>
       <div class="quiz-opt" data-idx="1">$\frac{\sin(t)}{\cos(t)}$</div>
       <div class="quiz-opt" data-idx="2">$-\frac{\sin(t)}{\cos(t)}$</div>
       <div class="quiz-opt" data-idx="3">$-\frac{\cos(t)}{\sin(t)}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{dy}{dt} = -\sin(t)$, $\frac{dx}{dt} = \cos(t)$. So $\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)} = -\tan(t)$.</div>
-    <div class="quiz-explain wrong-exp">Find $\frac{dy}{dt} = -\sin(t)$ and $\frac{dx}{dt} = \cos(t)$. Divide them: $\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{dy}{dt} = -\sin(t)$, $\frac{dx}{dt} = \cos(t)$. So $\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)} = -\tan(t)$.</span><span data-lang="zh">正确！$\frac{dy}{dt} = -\sin(t)$，$\frac{dx}{dt} = \cos(t)$。所以 $\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)} = -\tan(t)$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Find $\frac{dy}{dt} = -\sin(t)$ and $\frac{dx}{dt} = \cos(t)$. Divide them: $\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)}$.</span><span data-lang="zh">先求 $\frac{dy}{dt} = -\sin(t)$ 与 $\frac{dx}{dt} = \cos(t)$，再相除：$\frac{dy}{dx} = \frac{-\sin(t)}{\cos(t)}$。</span></div>
   </div>
 
   <!-- Interactive Parametric Curve Tracer -->
   <div class="interactive-widget" id="param-widget">
-    <div class="widget-header">Interactive Parametric Curve Tracer</div>
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;">Drag the slider to trace the curve $x = 2\cos(t), \; y = \sin(t)$ and see the tangent vector at each point.</p>
+    <div class="widget-header"><span data-lang="en">Interactive Parametric Curve Tracer</span><span data-lang="zh">参数曲线交互演示</span></div>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;" data-lang="en">Drag the slider to trace the curve $x = 2\cos(t), \; y = \sin(t)$ and see the tangent vector at each point.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;" data-lang="zh">拖动滑块描绘曲线 $x = 2\cos(t), \; y = \sin(t)$，并观察每一点处的切向量。</p>
     <div class="widget-canvas-wrap">
       <canvas id="paramCanvas" width="720" height="420"></canvas>
     </div>
@@ -785,8 +810,8 @@ dy/dx = <span class="num">9/4</span></pre>
       <div class="widget-readout" id="paramReadout">t = 0.00</div>
     </div>
     <div class="widget-sum-readout">
-      Position: <span class="sum-val" id="paramPos">(2.00, 0.00)</span> &emsp;
-      Slope $\frac{dy}{dx}$: <span class="sum-val" id="paramSlope">0.00</span>
+      <span data-lang="en">Position:</span><span data-lang="zh">位置：</span> <span class="sum-val" id="paramPos">(2.00, 0.00)</span> &emsp;
+      <span data-lang="en">Slope</span><span data-lang="zh">斜率</span> $\frac{dy}{dx}$: <span class="sum-val" id="paramSlope">0.00</span>
     </div>
   </div>
 </section>
@@ -795,31 +820,38 @@ dy/dx = <span class="num">9/4</span></pre>
 
 <section class="section" id="s9-2">
   <div class="section-label">Topic 9.2</div>
-  <h2>Second Derivatives of Parametric Equations</h2>
+  <h2 data-lang="en">Second Derivatives of Parametric Equations</h2>
+  <h2 data-lang="zh">参数方程的二阶导数（<code>second derivative</code>）</h2>
 
-  <p>To find the concavity of a parametric curve, compute the <strong>second derivative</strong> $\frac{d^2y}{dx^2}$.</p>
+  <p data-lang="en">To find the concavity of a parametric curve, compute the <strong>second derivative</strong> $\frac{d^2y}{dx^2}$.</p>
+  <p data-lang="zh">要判断参数曲线的凹凸性，需要计算<strong>二阶导数</strong> $\frac{d^2y}{dx^2}$。</p>
 
   <div class="formula-box">
-    <div class="formula-label">Second Derivative — Parametric</div>
+    <div class="formula-label"><span data-lang="en">Second Derivative — Parametric</span><span data-lang="zh">二阶导数 —— 参数方程</span></div>
     $$ \frac{d^2y}{dx^2} = \frac{\frac{d}{dt} \left[ \frac{dy}{dx} \right]}{\frac{dx}{dt}} $$
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Biggest Exam Trap in Unit 9</strong>
-    Students often compute $\frac{d^2y}{dt^2} \div \frac{d^2x}{dt^2}$. This is <strong>WRONG</strong>. You must first find $\frac{dy}{dx}$ as a function of $t$, differentiate <em>that</em> with respect to $t$, then divide by $\frac{dx}{dt}$.
+    <strong style="color: var(--red);"><span data-lang="en">Biggest Exam Trap in Unit 9</span><span data-lang="zh">单元 9 最大陷阱</span></strong>
+    <span data-lang="en">Students often compute $\frac{d^2y}{dt^2} \div \frac{d^2x}{dt^2}$. This is <strong>WRONG</strong>. You must first find $\frac{dy}{dx}$ as a function of $t$, differentiate <em>that</em> with respect to $t$, then divide by $\frac{dx}{dt}$.</span>
+    <span data-lang="zh">学生常常去算 $\frac{d^2y}{dt^2} \div \frac{d^2x}{dt^2}$，这是<strong>错误</strong>的。正确做法是先把 $\frac{dy}{dx}$ 写成关于 $t$ 的函数，再对<em>它</em>关于 $t$ 求导，最后除以 $\frac{dx}{dt}$。</span>
   </div>
 
-  <h3>Step-by-Step Process</h3>
+  <h3 data-lang="en">Step-by-Step Process</h3>
+  <h3 data-lang="zh">分步流程</h3>
   <div class="card">
-    <p style="margin-bottom: 8px;"><strong>Step 1:</strong> Find $\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}$</p>
-    <p style="margin-bottom: 8px;"><strong>Step 2:</strong> Differentiate $\frac{dy}{dx}$ with respect to $t \rightarrow$ get $\frac{d}{dt}\left(\frac{dy}{dx}\right)$</p>
-    <p><strong>Step 3:</strong> Divide by $\frac{dx}{dt} \rightarrow \frac{d^2y}{dx^2} = \frac{\frac{d}{dt}\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}}$</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 1:</strong> Find $\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}$</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>第 1 步：</strong>求 $\frac{dy}{dx} = \frac{\frac{dy}{dt}}{\frac{dx}{dt}}$</p>
+    <p style="margin-bottom: 8px;" data-lang="en"><strong>Step 2:</strong> Differentiate $\frac{dy}{dx}$ with respect to $t \rightarrow$ get $\frac{d}{dt}\left(\frac{dy}{dx}\right)$</p>
+    <p style="margin-bottom: 8px;" data-lang="zh"><strong>第 2 步：</strong>对 $\frac{dy}{dx}$ 关于 $t$ 求导 $\rightarrow$ 得到 $\frac{d}{dt}\left(\frac{dy}{dx}\right)$</p>
+    <p data-lang="en"><strong>Step 3:</strong> Divide by $\frac{dx}{dt} \rightarrow \frac{d^2y}{dx^2} = \frac{\frac{d}{dt}\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}}$</p>
+    <p data-lang="zh"><strong>第 3 步：</strong>再除以 $\frac{dx}{dt}$ $\rightarrow$ $\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}}$</p>
   </div>
 
   <details>
-    <summary>Worked Example — Second Derivative</summary>
+    <summary><span data-lang="en">Worked Example — Second Derivative</span><span data-lang="zh">例题 —— 二阶导数</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Given: x = t², y = t³</span>
+<pre data-lang="en"><span class="cm">Given: x = t², y = t³</span>
 
 <span class="cm">Step 1:</span> dy/dx = (3t²)/(2t) = <span class="num">3t/2</span>
 
@@ -828,6 +860,15 @@ dy/dx = <span class="num">9/4</span></pre>
 <span class="cm">Step 3:</span> d²y/dx² = (3/2) / (2t) = <span class="num">3/(4t)</span>
 
 <span class="cm">At t = 1: d²y/dx² = 3/4 > 0 → concave up</span></pre>
+<pre data-lang="zh"><span class="cm">已知：x = t²，y = t³</span>
+
+<span class="cm">第 1 步：</span> dy/dx = (3t²)/(2t) = <span class="num">3t/2</span>
+
+<span class="cm">第 2 步：</span> d/dt [3t/2] = <span class="num">3/2</span>
+
+<span class="cm">第 3 步：</span> d²y/dx² = (3/2) / (2t) = <span class="num">3/(4t)</span>
+
+<span class="cm">当 t = 1：d²y/dx² = 3/4 > 0 → 凹向上</span></pre>
     </div>
   </details>
 </section>
@@ -836,41 +877,52 @@ dy/dx = <span class="num">9/4</span></pre>
 
 <section class="section" id="s9-3">
   <div class="section-label">Topic 9.3</div>
-  <h2>Finding Arc Lengths of Parametric Curves</h2>
+  <h2 data-lang="en">Finding Arc Lengths of Parametric Curves</h2>
+  <h2 data-lang="zh">参数曲线的弧长（<code>arc length</code>）</h2>
 
   <div class="formula-box">
-    <div class="formula-label">Arc Length — Parametric</div>
+    <div class="formula-label"><span data-lang="en">Arc Length — Parametric</span><span data-lang="zh">弧长 —— 参数方程</span></div>
     $$ L = \int_{a}^{b} \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} dt $$
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Key Idea</strong>
-    The integrand $\sqrt{(x'(t))^2 + (y'(t))^2}$ represents the <strong>speed</strong> of the particle at time $t$. Integrating speed over time gives the total distance (arc length).
+    <strong style="color: var(--accent);"><span data-lang="en">Key Idea</span><span data-lang="zh">核心思想</span></strong>
+    <span data-lang="en">The integrand $\sqrt{(x'(t))^2 + (y'(t))^2}$ represents the <strong>speed</strong> of the particle at time $t$. Integrating speed over time gives the total distance (arc length).</span>
+    <span data-lang="zh">被积函数 $\sqrt{(x'(t))^2 + (y'(t))^2}$ 表示质点在时间 $t$ 处的<strong>速率</strong>（<code>speed</code>）。对速率沿时间积分，得到的就是总路程（即弧长）。</span>
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Note</strong>
-    On the AP exam, you'll typically set up the integral and evaluate with a calculator. Focus on writing the correct integrand and limits of integration.
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Note</span><span data-lang="zh">考试提示</span></strong>
+    <span data-lang="en">On the AP exam, you'll typically set up the integral and evaluate with a calculator. Focus on writing the correct integrand and limits of integration.</span>
+    <span data-lang="zh">在 AP 考试中，通常你只需要列出积分式并用计算器求值。重点是写对被积函数和积分上下限。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Arc Length</summary>
+    <summary><span data-lang="en">Worked Example — Arc Length</span><span data-lang="zh">例题 —— 弧长</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Find the length of the curve x = 3t, y = 4t, for 0 ≤ t ≤ 5.</span>
+<pre data-lang="en"><span class="cm">Find the length of the curve x = 3t, y = 4t, for 0 ≤ t ≤ 5.</span>
 
 dx/dt = <span class="num">3</span>,  dy/dt = <span class="num">4</span>
 
 L = ∫₀⁵ √(9 + 16) dt = ∫₀⁵ <span class="num">5</span> dt = <span class="num">25</span>
 
 <span class="cm">(This is just a line segment of length 25 — makes sense!)</span></pre>
+<pre data-lang="zh"><span class="cm">求曲线 x = 3t、y = 4t 在 0 ≤ t ≤ 5 上的长度。</span>
+
+dx/dt = <span class="num">3</span>，dy/dt = <span class="num">4</span>
+
+L = ∫₀⁵ √(9 + 16) dt = ∫₀⁵ <span class="num">5</span> dt = <span class="num">25</span>
+
+<span class="cm">（这就是一段长度为 25 的线段 —— 合情合理！）</span></pre>
     </div>
   </details>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: Find the arc length of $x = 5\cos(t), \; y = 5\sin(t)$ for $0 \leq t \leq 2\pi$. (Hint: this is a circle of radius 5.)</div>
+    <div class="practice-prompt" data-lang="en">Practice: Find the arc length of $x = 5\cos(t), \; y = 5\sin(t)$ for $0 \leq t \leq 2\pi$. (Hint: this is a circle of radius 5.)</div>
+    <div class="practice-prompt" data-lang="zh">练习：求 $x = 5\cos(t), \; y = 5\sin(t)$ 在 $0 \leq t \leq 2\pi$ 上的弧长。（提示：这是半径为 5 的圆。）</div>
     <div class="practice-row">
       <input type="text" id="prac1" placeholder="Enter answer (e.g. 10pi)...">
-      <button onclick="checkPractice('prac1', '10pi', 'pfb1')">Check</button>
+      <button onclick="checkPractice('prac1', '10pi', 'pfb1')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb1"></div>
   </div>
@@ -880,25 +932,30 @@ L = ∫₀⁵ √(9 + 16) dt = ∫₀⁵ <span class="num">5</span> dt = <span c
 
 <section class="section" id="s9-4">
   <div class="section-label">Topic 9.4</div>
-  <h2>Defining and Differentiating Vector-Valued Functions</h2>
+  <h2 data-lang="en">Defining and Differentiating Vector-Valued Functions</h2>
+  <h2 data-lang="zh">向量值函数（<code>vector-valued function</code>）的定义与求导</h2>
 
   <div class="concept-box purple">
-  <strong style="color: var(--purple);">Vector-Valued Function</strong>
-  A function of the form $\mathbf{r}(t) = \langle x(t), y(t) \rangle = x(t)\mathbf{i} + y(t)\mathbf{j}$. It gives the position of a particle in the plane at time $t$.
+  <strong style="color: var(--purple);"><span data-lang="en">Vector-Valued Function</span><span data-lang="zh">向量值函数</span></strong>
+  <span data-lang="en">A function of the form $\mathbf{r}(t) = \langle x(t), y(t) \rangle = x(t)\mathbf{i} + y(t)\mathbf{j}$. It gives the position of a particle in the plane at time $t$.</span>
+  <span data-lang="zh">形如 $\mathbf{r}(t) = \langle x(t), y(t) \rangle = x(t)\mathbf{i} + y(t)\mathbf{j}$ 的函数，给出质点在时间 $t$ 处于平面中的位置（<code>position</code>）。</span>
 </div>
 
-  <p>Differentiation works <strong>component-wise</strong>:</p>
+  <p data-lang="en">Differentiation works <strong>component-wise</strong>:</p>
+  <p data-lang="zh">求导按<strong>分量</strong>逐一进行：</p>
 
   <div class="formula-box">
-    <div class="formula-label">Derivative of Vector Function</div>
+    <div class="formula-label"><span data-lang="en">Derivative of Vector Function</span><span data-lang="zh">向量值函数的导数</span></div>
     $$ \mathbf{r}'(t) = \langle x'(t), y'(t) \rangle $$
   </div>
 
-  <p>The derivative $\mathbf{r}'(t)$ gives the <strong>velocity vector</strong> $\mathbf{v}(t)$. Its direction is tangent to the curve at that point.</p>
+  <p data-lang="en">The derivative $\mathbf{r}'(t)$ gives the <strong>velocity vector</strong> $\mathbf{v}(t)$. Its direction is tangent to the curve at that point.</p>
+  <p data-lang="zh">导数 $\mathbf{r}'(t)$ 即为<strong>速度向量（<code>velocity vector</code>）</strong> $\mathbf{v}(t)$。它的方向（<code>direction</code>）与曲线在该点处的切线相切。</p>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Connection</strong>
-    Parametric equations and vector-valued functions describe the exact same thing — planar motion. The notation is different, but the calculus is identical.
+    <strong style="color: var(--green);"><span data-lang="en">Connection</span><span data-lang="zh">联系</span></strong>
+    <span data-lang="en">Parametric equations and vector-valued functions describe the exact same thing — planar motion. The notation is different, but the calculus is identical.</span>
+    <span data-lang="zh">参数方程与向量值函数描述的是同一件事 —— 平面运动（<code>planar motion</code>）。记号不同，但微积分的内容完全一样。</span>
   </div>
 </section>
 
@@ -906,24 +963,27 @@ L = ∫₀⁵ √(9 + 16) dt = ∫₀⁵ <span class="num">5</span> dt = <span c
 
 <section class="section" id="s9-5">
   <div class="section-label">Topic 9.5</div>
-  <h2>Integrating Vector-Valued Functions</h2>
+  <h2 data-lang="en">Integrating Vector-Valued Functions</h2>
+  <h2 data-lang="zh">向量值函数的积分（<code>integral</code>）</h2>
 
-  <p>Integration also works <strong>component-wise</strong>:</p>
+  <p data-lang="en">Integration also works <strong>component-wise</strong>:</p>
+  <p data-lang="zh">积分同样按<strong>分量</strong>逐一进行：</p>
 
   <div class="formula-box">
-    <div class="formula-label">Integral of Vector Function</div>
+    <div class="formula-label"><span data-lang="en">Integral of Vector Function</span><span data-lang="zh">向量值函数的积分</span></div>
     $$ \int \mathbf{r}(t) dt = \left\langle \int x(t) dt, \int y(t) dt \right\rangle + \mathbf{C} $$
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Initial Value Problems</strong>
-    Given $\mathbf{v}(t) = \langle x'(t), y'(t) \rangle$ and an initial position $\mathbf{r}(t_0) = \langle x_0, y_0 \rangle$, integrate each component and solve for the constants using the initial conditions.
+    <strong style="color: var(--orange);"><span data-lang="en">Initial Value Problems</span><span data-lang="zh">初值问题</span></strong>
+    <span data-lang="en">Given $\mathbf{v}(t) = \langle x'(t), y'(t) \rangle$ and an initial position $\mathbf{r}(t_0) = \langle x_0, y_0 \rangle$, integrate each component and solve for the constants using the initial conditions.</span>
+    <span data-lang="zh">已知 $\mathbf{v}(t) = \langle x'(t), y'(t) \rangle$ 和初始位置 $\mathbf{r}(t_0) = \langle x_0, y_0 \rangle$，对每个分量积分，再用初始条件解出积分常数。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Vector IVP</summary>
+    <summary><span data-lang="en">Worked Example — Vector IVP</span><span data-lang="zh">例题 —— 向量初值问题</span></summary>
     <div class="detail-body">
-<pre><span class="cm">Given: r'(t) = ⟨2t, eᵗ⟩, r(0) = ⟨3, 1⟩</span>
+<pre data-lang="en"><span class="cm">Given: r'(t) = ⟨2t, eᵗ⟩, r(0) = ⟨3, 1⟩</span>
 
 <span class="cm">Integrate component-wise:</span>
 x(t) = t² + C₁     y(t) = eᵗ + C₂
@@ -933,6 +993,16 @@ x(0) = 0 + C₁ = 3  →  C₁ = <span class="num">3</span>
 y(0) = 1 + C₂ = 1  →  C₂ = <span class="num">0</span>
 
 <span class="cm">Solution:</span> <b>r(t)</b> = ⟨t² + 3, eᵗ⟩</pre>
+<pre data-lang="zh"><span class="cm">已知：r'(t) = ⟨2t, eᵗ⟩，r(0) = ⟨3, 1⟩</span>
+
+<span class="cm">按分量积分：</span>
+x(t) = t² + C₁     y(t) = eᵗ + C₂
+
+<span class="cm">代入初始条件 r(0) = ⟨3, 1⟩：</span>
+x(0) = 0 + C₁ = 3  →  C₁ = <span class="num">3</span>
+y(0) = 1 + C₂ = 1  →  C₂ = <span class="num">0</span>
+
+<span class="cm">解：</span> <b>r(t)</b> = ⟨t² + 3, eᵗ⟩</pre>
     </div>
   </details>
 </section>
@@ -941,50 +1011,54 @@ y(0) = 1 + C₂ = 1  →  C₂ = <span class="num">0</span>
 
 <section class="section" id="s9-6">
   <div class="section-label">Topic 9.6</div>
-  <h2>Solving Motion Problems — Parametric &amp; Vector-Valued</h2>
+  <h2 data-lang="en">Solving Motion Problems — Parametric &amp; Vector-Valued</h2>
+  <h2 data-lang="zh">求解运动问题 —— 参数方程与向量值函数</h2>
 
   <div class="qref">
-    <div class="qref-title">Quick Reference — Planar Motion</div>
+    <div class="qref-title"><span data-lang="en">Quick Reference — Planar Motion</span><span data-lang="zh">速查表 —— 平面运动</span></div>
     <div class="table-wrap">
       <table>
-        <tr><th>Quantity</th><th>Formula</th></tr>
-        <tr><td><strong>Position</strong></td><td>$\mathbf{r}(t) = \langle x(t), y(t) \rangle$</td></tr>
-        <tr><td><strong>Velocity</strong></td><td>$\mathbf{v}(t) = \langle x'(t), y'(t) \rangle$</td></tr>
-        <tr><td><strong>Speed</strong></td><td>$|\mathbf{v}(t)| = \sqrt{(x'(t))^2 + (y'(t))^2}$</td></tr>
-        <tr><td><strong>Acceleration</strong></td><td>$\mathbf{a}(t) = \langle x''(t), y''(t) \rangle$</td></tr>
-        <tr><td><strong>Displacement</strong></td><td>$\int_{a}^{b} \mathbf{v}(t) dt = \left\langle \int_{a}^{b} x'(t) dt, \int_{a}^{b} y'(t) dt \right\rangle$</td></tr>
-        <tr><td><strong>Total Distance</strong></td><td>$\int_{a}^{b} |\mathbf{v}(t)| dt \quad$ (Arc Length)</td></tr>
+        <tr><th><span data-lang="en">Quantity</span><span data-lang="zh">量</span></th><th><span data-lang="en">Formula</span><span data-lang="zh">公式</span></th></tr>
+        <tr><td><strong><span data-lang="en">Position</span><span data-lang="zh">位置</span></strong></td><td>$\mathbf{r}(t) = \langle x(t), y(t) \rangle$</td></tr>
+        <tr><td><strong><span data-lang="en">Velocity</span><span data-lang="zh">速度</span></strong></td><td>$\mathbf{v}(t) = \langle x'(t), y'(t) \rangle$</td></tr>
+        <tr><td><strong><span data-lang="en">Speed</span><span data-lang="zh">速率</span></strong></td><td>$|\mathbf{v}(t)| = \sqrt{(x'(t))^2 + (y'(t))^2}$</td></tr>
+        <tr><td><strong><span data-lang="en">Acceleration</span><span data-lang="zh">加速度</span></strong></td><td>$\mathbf{a}(t) = \langle x''(t), y''(t) \rangle$</td></tr>
+        <tr><td><strong><span data-lang="en">Displacement</span><span data-lang="zh">位移</span></strong></td><td>$\int_{a}^{b} \mathbf{v}(t) dt = \left\langle \int_{a}^{b} x'(t) dt, \int_{a}^{b} y'(t) dt \right\rangle$</td></tr>
+        <tr><td><strong><span data-lang="en">Total Distance</span><span data-lang="zh">总路程</span></strong></td><td>$\int_{a}^{b} |\mathbf{v}(t)| dt \quad$ <span data-lang="en">(Arc Length)</span><span data-lang="zh">（即弧长）</span></td></tr>
       </table>
     </div>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Displacement ≠ Distance</strong>
-    <strong>Displacement</strong> = net change in position (a vector). <strong>Distance</strong> = total path length (always a positive scalar). Integrate the velocity vector for displacement; integrate <em>speed</em> (magnitude of velocity) for distance.
+    <strong style="color: var(--red);"><span data-lang="en">Displacement ≠ Distance</span><span data-lang="zh">位移 ≠ 路程</span></strong>
+    <span data-lang="en"><strong>Displacement</strong> = net change in position (a vector). <strong>Distance</strong> = total path length (always a positive scalar). Integrate the velocity vector for displacement; integrate <em>speed</em> (magnitude of velocity) for distance.</span>
+    <span data-lang="zh"><strong>位移</strong>是位置的净变化（一个向量）；<strong>路程</strong>是总路径长度（一个正的标量）。对速度向量积分得到位移；对<em>速率</em>（速度的模，<code>magnitude</code>）积分得到路程。</span>
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Speed Increasing vs Decreasing</strong>
-    Speed is increasing when the velocity and acceleration vectors "agree" — specifically, when the dot product $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$. Speed is decreasing when $\mathbf{v}(t) \cdot \mathbf{a}(t) < 0$.
+    <strong style="color: var(--accent);"><span data-lang="en">Speed Increasing vs Decreasing</span><span data-lang="zh">速率递增还是递减</span></strong>
+    <span data-lang="en">Speed is increasing when the velocity and acceleration vectors "agree" — specifically, when the dot product $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$. Speed is decreasing when $\mathbf{v}(t) \cdot \mathbf{a}(t) < 0$.</span>
+    <span data-lang="zh">当速度向量与加速度向量（<code>acceleration vector</code>）"方向一致"时，速率在增加 —— 具体来说，就是点积 $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$。当 $\mathbf{v}(t) \cdot \mathbf{a}(t) < 0$ 时，速率在减小。</span>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">A particle moves with velocity $\mathbf{v}(t) = \langle 3, 4 \rangle$. What is its speed?</div>
+    <div class="quiz-q"><span data-lang="en">A particle moves with velocity $\mathbf{v}(t) = \langle 3, 4 \rangle$. What is its speed?</span><span data-lang="zh">质点（<code>particle</code>）以速度 $\mathbf{v}(t) = \langle 3, 4 \rangle$ 运动，其速率是多少？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">7</div>
       <div class="quiz-opt" data-idx="1">5</div>
       <div class="quiz-opt" data-idx="2">$\sqrt{7}$</div>
       <div class="quiz-opt" data-idx="3">12</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Speed = $|\mathbf{v}(t)| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$.</div>
-    <div class="quiz-explain wrong-exp">Speed is the magnitude of the velocity vector: $\sqrt{3^2 + 4^2} = \sqrt{25} = 5$. Don't just add the components!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Speed = $|\mathbf{v}(t)| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$.</span><span data-lang="zh">正确！速率 = $|\mathbf{v}(t)| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Speed is the magnitude of the velocity vector: $\sqrt{3^2 + 4^2} = \sqrt{25} = 5$. Don't just add the components!</span><span data-lang="zh">速率是速度向量的模：$\sqrt{3^2 + 4^2} = \sqrt{25} = 5$。不要直接把两个分量相加！</span></div>
   </div>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: A particle has velocity $\mathbf{v}(t) = \langle 2t, 3 \rangle$ and position $\mathbf{r}(0) = \langle 1, -2 \rangle$. Find $x(2)$.</div>
+    <div class="practice-prompt" data-lang="en">Practice: A particle has velocity $\mathbf{v}(t) = \langle 2t, 3 \rangle$ and position $\mathbf{r}(0) = \langle 1, -2 \rangle$. Find $x(2)$.</div>
+    <div class="practice-prompt" data-lang="zh">练习：质点速度为 $\mathbf{v}(t) = \langle 2t, 3 \rangle$，位置 $\mathbf{r}(0) = \langle 1, -2 \rangle$。求 $x(2)$。</div>
     <div class="practice-row">
       <input type="text" id="prac2" placeholder="Enter your answer...">
-      <button onclick="checkPractice('prac2', '5', 'pfb2')">Check</button>
+      <button onclick="checkPractice('prac2', '5', 'pfb2')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb2"></div>
   </div>
@@ -994,29 +1068,34 @@ y(0) = 1 + C₂ = 1  →  C₂ = <span class="num">0</span>
 
 <section class="section" id="s9-7">
   <div class="section-label">Topic 9.7</div>
-  <h2>Defining Polar Coordinates &amp; Differentiating in Polar Form</h2>
+  <h2 data-lang="en">Defining Polar Coordinates &amp; Differentiating in Polar Form</h2>
+  <h2 data-lang="zh">极坐标（<code>polar coordinate</code>）的定义与极坐标求导</h2>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Polar Coordinates</strong>
-    A point is described by $(r, \theta)$ where $r$ = directed distance from origin and $\theta$ = angle from positive x-axis. Convert to rectangular: $x = r\cos(\theta)$, $y = r\sin(\theta)$.
+    <strong style="color: var(--purple);"><span data-lang="en">Polar Coordinates</span><span data-lang="zh">极坐标</span></strong>
+    <span data-lang="en">A point is described by $(r, \theta)$ where $r$ = directed distance from origin and $\theta$ = angle from positive x-axis. Convert to rectangular: $x = r\cos(\theta)$, $y = r\sin(\theta)$.</span>
+    <span data-lang="zh">一个点用 $(r, \theta)$ 表示，其中 $r$ 是从极点（<code>pole</code>）出发的有向距离（极径，<code>radius</code>），$\theta$ 是从极轴（<code>polar axis</code>）量起的角度（极角，<code>angle</code>）。极坐标与直角坐标的转换：$x = r\cos(\theta)$，$y = r\sin(\theta)$。</span>
   </div>
 
-  <p>A polar curve $r = f(\theta)$ is a special case of parametric equations where $\theta$ is the parameter:</p>
+  <p data-lang="en">A polar curve $r = f(\theta)$ is a special case of parametric equations where $\theta$ is the parameter:</p>
+  <p data-lang="zh">极坐标曲线（<code>polar curve</code>）$r = f(\theta)$ 是参数方程的特殊情形，其中 $\theta$ 担任参数：</p>
 
   <div class="card" style="text-align: center; font-size: 1.1rem; font-family: var(--font-mono);">
     <p>$x(\theta) = f(\theta)\cos(\theta)$</p>
     <p style="margin-top: 10px;">$y(\theta) = f(\theta)\sin(\theta)$</p>
   </div>
 
-  <h3>Derivative in Polar</h3>
+  <h3 data-lang="en">Derivative in Polar</h3>
+  <h3 data-lang="zh">极坐标下的导数</h3>
   <div class="formula-box">
-    <div class="formula-label">Slope of Polar Curve</div>
+    <div class="formula-label"><span data-lang="en">Slope of Polar Curve</span><span data-lang="zh">极坐标曲线的斜率</span></div>
     $$ \frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}} = \frac{f'(\theta)\sin(\theta) + f(\theta)\cos(\theta)}{f'(\theta)\cos(\theta) - f(\theta)\sin(\theta)} $$
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Product Rule Required!</strong>
-    Because $x = r\cos(\theta)$ and $y = r\sin(\theta)$, you must use the product rule when differentiating with respect to $\theta$. Remember: $r$ is a function of $\theta$.
+    <strong style="color: var(--orange);"><span data-lang="en">Product Rule Required!</span><span data-lang="zh">必须用乘积法则！</span></strong>
+    <span data-lang="en">Because $x = r\cos(\theta)$ and $y = r\sin(\theta)$, you must use the product rule when differentiating with respect to $\theta$. Remember: $r$ is a function of $\theta$.</span>
+    <span data-lang="zh">因为 $x = r\cos(\theta)$、$y = r\sin(\theta)$，对 $\theta$ 求导时必须使用乘积法则。记住：$r$ 是 $\theta$ 的函数。</span>
   </div>
 
 </section>
@@ -1025,29 +1104,34 @@ y(0) = 1 + C₂ = 1  →  C₂ = <span class="num">0</span>
 
 <section class="section" id="s9-8">
   <div class="section-label">Topic 9.8</div>
-  <h2>Area of a Polar Region — Single Curve</h2>
+  <h2 data-lang="en">Area of a Polar Region — Single Curve</h2>
+  <h2 data-lang="zh">极坐标区域的面积 —— 单曲线</h2>
 
   <div class="formula-box">
-    <div class="formula-label">Polar Area Formula</div>
+    <div class="formula-label"><span data-lang="en">Polar Area Formula</span><span data-lang="zh">极坐标面积公式</span></div>
     $$ A = \frac{1}{2} \int_{\alpha}^{\beta} [r(\theta)]^2 d\theta $$
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Where It Comes From</strong>
-    The area of a thin circular sector with radius $r$ and angle $d\theta$ is $\frac{1}{2}r^2 d\theta$. Integrating these sectors from $\theta = \alpha$ to $\theta = \beta$ gives total area.
+    <strong style="color: var(--accent);"><span data-lang="en">Where It Comes From</span><span data-lang="zh">公式由来</span></strong>
+    <span data-lang="en">The area of a thin circular sector with radius $r$ and angle $d\theta$ is $\frac{1}{2}r^2 d\theta$. Integrating these sectors from $\theta = \alpha$ to $\theta = \beta$ gives total area.</span>
+    <span data-lang="zh">半径为 $r$、角度为 $d\theta$ 的薄圆扇形的面积是 $\frac{1}{2}r^2 d\theta$。把这些扇形从 $\theta = \alpha$ 到 $\theta = \beta$ 积分，就得到极坐标曲线所围面积。</span>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Common Exam Traps</strong>
-    <span style="display:block; margin-top:8px;">1. Forgetting the $\frac{1}{2}$ in front of the integral.</span>
-    <span style="display:block; margin-top:4px;">2. Forgetting to <strong>square</strong> $r$ — the integrand is $[r(\theta)]^2$.</span>
-    <span style="display:block; margin-top:4px;">3. Using wrong limits — sketch the curve first to identify bounds!</span>
+    <strong style="color: var(--red);"><span data-lang="en">Common Exam Traps</span><span data-lang="zh">常见考试陷阱</span></strong>
+    <span data-lang="en" style="display:block; margin-top:8px;">1. Forgetting the $\frac{1}{2}$ in front of the integral.</span>
+    <span data-lang="zh" style="display:block; margin-top:8px;">1. 忘记积分前的 $\frac{1}{2}$。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">2. Forgetting to <strong>square</strong> $r$ — the integrand is $[r(\theta)]^2$.</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">2. 忘记把 $r$ <strong>平方</strong> —— 被积函数是 $[r(\theta)]^2$。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">3. Using wrong limits — sketch the curve first to identify bounds!</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">3. 积分上下限写错 —— 先画出极坐标曲线再确定边界！</span>
   </div>
 
   <details>
-    <summary>Worked Example — Area of One Petal of $r = \cos(2\theta)$</summary>
+    <summary><span data-lang="en">Worked Example — Area of One Petal of $r = \cos(2\theta)$</span><span data-lang="zh">例题 —— 求 $r = \cos(2\theta)$ 一个花瓣的面积</span></summary>
     <div class="detail-body">
-<pre><span class="cm">r = cos(2θ) is a rose with 4 petals.</span>
+<pre data-lang="en"><span class="cm">r = cos(2θ) is a rose with 4 petals.</span>
 <span class="cm">One petal: from θ = −π/4 to θ = π/4 (where r ≥ 0).</span>
 
 A = ½ ∫<sub>−π/4</sub><sup>π/4</sup> [cos(2θ)]² dθ
@@ -1055,25 +1139,34 @@ A = ½ ∫<sub>−π/4</sub><sup>π/4</sup> [cos(2θ)]² dθ
 <span class="cm">Use identity: cos²(u) = (1 + cos(2u))/2</span>
 A = ½ ∫<sub>−π/4</sub><sup>π/4</sup> (1 + cos(4θ))/2 dθ = ¼ [θ + sin(4θ)/4]<sub>−π/4</sub><sup>π/4</sup>
 A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</span></pre>
+<pre data-lang="zh"><span class="cm">r = cos(2θ) 是一个 4 瓣玫瑰线。</span>
+<span class="cm">一个花瓣：θ 从 −π/4 到 π/4（此时 r ≥ 0）。</span>
+
+A = ½ ∫<sub>−π/4</sub><sup>π/4</sup> [cos(2θ)]² dθ
+
+<span class="cm">用恒等式：cos²(u) = (1 + cos(2u))/2</span>
+A = ½ ∫<sub>−π/4</sub><sup>π/4</sup> (1 + cos(4θ))/2 dθ = ¼ [θ + sin(4θ)/4]<sub>−π/4</sub><sup>π/4</sup>
+A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</span></pre>
     </div>
   </details>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">What is the area enclosed by the polar curve $r = 3$ from $\theta = 0$ to $\theta = 2\pi$?</div>
+    <div class="quiz-q"><span data-lang="en">What is the area enclosed by the polar curve $r = 3$ from $\theta = 0$ to $\theta = 2\pi$?</span><span data-lang="zh">极坐标曲线 $r = 3$ 在 $\theta = 0$ 到 $\theta = 2\pi$ 所围的面积是多少？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$9\pi$</div>
       <div class="quiz-opt" data-idx="1">$3\pi$</div>
       <div class="quiz-opt" data-idx="2">$6\pi$</div>
       <div class="quiz-opt" data-idx="3">$18\pi$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $A = \frac{1}{2} \int_{0}^{2\pi} (3)^2 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$. Makes sense, as it's a circle of radius $3$ ($\pi r^2 = 9\pi$).</div>
-    <div class="quiz-explain wrong-exp">$A = \frac{1}{2} \int_{0}^{2\pi} r^2 d\theta = \frac{1}{2} \int_{0}^{2\pi} 9 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$. Remember the $\frac{1}{2}$ and to square $r$!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $A = \frac{1}{2} \int_{0}^{2\pi} (3)^2 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$. Makes sense, as it's a circle of radius $3$ ($\pi r^2 = 9\pi$).</span><span data-lang="zh">正确！$A = \frac{1}{2} \int_{0}^{2\pi} (3)^2 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$。这正是半径为 $3$ 的圆的面积（$\pi r^2 = 9\pi$）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$A = \frac{1}{2} \int_{0}^{2\pi} r^2 d\theta = \frac{1}{2} \int_{0}^{2\pi} 9 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$. Remember the $\frac{1}{2}$ and to square $r$!</span><span data-lang="zh">$A = \frac{1}{2} \int_{0}^{2\pi} r^2 d\theta = \frac{1}{2} \int_{0}^{2\pi} 9 d\theta = \frac{1}{2}(9)(2\pi) = 9\pi$。别忘了那个 $\frac{1}{2}$，也别忘了把 $r$ 平方！</span></div>
   </div>
 
   <!-- Interactive Polar Area Visualizer -->
   <div class="interactive-widget" id="polar-widget">
-    <div class="widget-header">Interactive Polar Area Visualizer</div>
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;">See the shaded area swept out by $r = 1 + \cos(\theta)$ (cardioid) as $\beta$ increases. The area accumulates as $\frac{1}{2}\int_0^{\beta} r^2\,d\theta$.</p>
+    <div class="widget-header"><span data-lang="en">Interactive Polar Area Visualizer</span><span data-lang="zh">极坐标面积交互演示</span></div>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;" data-lang="en">See the shaded area swept out by $r = 1 + \cos(\theta)$ (cardioid) as $\beta$ increases. The area accumulates as $\frac{1}{2}\int_0^{\beta} r^2\,d\theta$.</p>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;" data-lang="zh">观察心脏线 $r = 1 + \cos(\theta)$ 随 $\beta$ 增大所扫出的阴影面积。累计面积按 $\frac{1}{2}\int_0^{\beta} r^2\,d\theta$ 增长。</p>
     <div class="widget-canvas-wrap">
       <canvas id="polarCanvas" width="720" height="480"></canvas>
     </div>
@@ -1083,8 +1176,8 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
       <div class="widget-readout" id="polarReadout">β = π</div>
     </div>
     <div class="widget-sum-readout">
-      Area so far: <span class="sum-val" id="polarArea">—</span> &emsp;
-      Full area ($0$ to $2\pi$): <span class="sum-val" style="color: var(--green);">3π/2 ≈ 4.712</span>
+      <span data-lang="en">Area so far:</span><span data-lang="zh">当前面积：</span> <span class="sum-val" id="polarArea">—</span> &emsp;
+      <span data-lang="en">Full area ($0$ to $2\pi$):</span><span data-lang="zh">完整面积（$0$ 到 $2\pi$）：</span> <span class="sum-val" style="color: var(--green);">3π/2 ≈ 4.712</span>
     </div>
   </div>
 </section>
@@ -1093,18 +1186,22 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 
 <section class="section" id="s9-9">
   <div class="section-label">Topic 9.9</div>
-  <h2>Area Between Two Polar Curves</h2>
+  <h2 data-lang="en">Area Between Two Polar Curves</h2>
+  <h2 data-lang="zh">两条极坐标曲线之间的面积</h2>
 
   <div class="formula-box">
-    <div class="formula-label">Area Between Polar Curves</div>
+    <div class="formula-label"><span data-lang="en">Area Between Polar Curves</span><span data-lang="zh">两极坐标曲线之间的面积</span></div>
     $$ A = \frac{1}{2} \int_{\alpha}^{\beta} \left( [r_{\text{outer}}(\theta)]^2 - [r_{\text{inner}}(\theta)]^2 \right) d\theta $$
   </div>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Key Steps</strong>
-    <span style="display:block; margin-top:8px;">1. Sketch both curves to identify which is outer vs inner.</span>
-    <span style="display:block; margin-top:4px;">2. Find intersection points by setting $r_1 = r_2$ (these determine $\alpha$ and $\beta$).</span>
-    <span style="display:block; margin-top:4px;">3. Apply the formula: subtract squares <em>inside</em> the integral, not outside.</span>
+    <strong style="color: var(--accent);"><span data-lang="en">Key Steps</span><span data-lang="zh">关键步骤</span></strong>
+    <span data-lang="en" style="display:block; margin-top:8px;">1. Sketch both curves to identify which is outer vs inner.</span>
+    <span data-lang="zh" style="display:block; margin-top:8px;">1. 画出两条曲线，分辨外曲线与内曲线。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">2. Find intersection points by setting $r_1 = r_2$ (these determine $\alpha$ and $\beta$).</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">2. 解 $r_1 = r_2$ 找出交点（这些点确定 $\alpha$ 与 $\beta$）。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">3. Apply the formula: subtract squares <em>inside</em> the integral, not outside.</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">3. 代公式：把两个平方放到积分<em>内部</em>相减，不要在积分外面相减。</span>
   </div>
 
 </section>
@@ -1113,34 +1210,45 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 
 <section class="section" id="exam-strategy">
   <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 9 Appears on the AP Exam</h2>
+  <h2 data-lang="en">How Unit 9 Appears on the AP Exam</h2>
+  <h2 data-lang="zh">单元 9 在 AP 考试中的考法</h2>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-blue">MC</div>
-      <div class="card-title">MCQ — Common Question Styles</div>
+      <div class="card-title"><span data-lang="en">MCQ — Common Question Styles</span><span data-lang="zh">选择题 —— 常见题型</span></div>
     </div>
-    <p><strong>Find $\frac{dy}{dx}$</strong> for a parametric curve at a specific t-value.</p>
-    <p><strong>Set up</strong> an arc length or polar area integral (frequently without evaluating).</p>
-    <p><strong>Determine</strong> speed, velocity, or acceleration from vector components.</p>
-    <p><strong>Identify</strong> horizontal/vertical tangents on parametric curves.</p>
+    <p data-lang="en"><strong>Find $\frac{dy}{dx}$</strong> for a parametric curve at a specific t-value.</p>
+    <p data-lang="zh"><strong>在指定的 t 值处求 $\frac{dy}{dx}$</strong>（参数曲线）。</p>
+    <p data-lang="en"><strong>Set up</strong> an arc length or polar area integral (frequently without evaluating).</p>
+    <p data-lang="zh"><strong>列出</strong>弧长或极坐标面积的积分（常常无需求值）。</p>
+    <p data-lang="en"><strong>Determine</strong> speed, velocity, or acceleration from vector components.</p>
+    <p data-lang="zh"><strong>由向量分量</strong>求速率、速度或加速度。</p>
+    <p data-lang="en"><strong>Identify</strong> horizontal/vertical tangents on parametric curves.</p>
+    <p data-lang="zh"><strong>判断</strong>参数曲线上的水平切线或垂直切线。</p>
   </div>
 
   <div class="card">
     <div class="card-header">
       <div class="card-icon icon-green">FR</div>
-      <div class="card-title">FRQ — Common Question Styles</div>
+      <div class="card-title"><span data-lang="en">FRQ — Common Question Styles</span><span data-lang="zh">自由作答题 —— 常见题型</span></div>
     </div>
-    <p><strong>Particle in the plane:</strong> Given velocity components, find position, speed, total distance, or acceleration. Heavily involves initial value problems.</p>
-    <p><strong>Polar area:</strong> Set up and evaluate area integrals, often between two curves or for one petal of a rose.</p>
+    <p data-lang="en"><strong>Particle in the plane:</strong> Given velocity components, find position, speed, total distance, or acceleration. Heavily involves initial value problems.</p>
+    <p data-lang="zh"><strong>平面内的质点：</strong>给出速度分量，求位置、速率、总路程或加速度。这类题往往涉及初值问题。</p>
+    <p data-lang="en"><strong>Polar area:</strong> Set up and evaluate area integrals, often between two curves or for one petal of a rose.</p>
+    <p data-lang="zh"><strong>极坐标面积：</strong>列出并计算面积积分，常见的是两条曲线之间的面积，或玫瑰线一个花瓣的面积。</p>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Top Mistakes That Lose Points</strong>
-    <span style="display:block; margin-top:8px;">1. Computing $\frac{d^2y}{dx^2}$ by dividing $\frac{d^2y}{dt^2}$ by $\frac{d^2x}{dt^2}$.</span>
-    <span style="display:block; margin-top:4px;">2. Forgetting the $\frac{1}{2}$ or the square in polar area integrals.</span>
-    <span style="display:block; margin-top:4px;">3. Confusing displacement (vector) with distance traveled (scalar integral of speed).</span>
-    <span style="display:block; margin-top:4px;">4. Forgetting initial conditions $+C$ in vector IVPs.</span>
+    <strong style="color: var(--red);"><span data-lang="en">Top Mistakes That Lose Points</span><span data-lang="zh">最常失分的错误</span></strong>
+    <span data-lang="en" style="display:block; margin-top:8px;">1. Computing $\frac{d^2y}{dx^2}$ by dividing $\frac{d^2y}{dt^2}$ by $\frac{d^2x}{dt^2}$.</span>
+    <span data-lang="zh" style="display:block; margin-top:8px;">1. 用 $\frac{d^2y}{dt^2}$ 除以 $\frac{d^2x}{dt^2}$ 来算 $\frac{d^2y}{dx^2}$。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">2. Forgetting the $\frac{1}{2}$ or the square in polar area integrals.</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">2. 极坐标面积积分里忘掉 $\frac{1}{2}$ 或忘记把 $r$ 平方。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">3. Confusing displacement (vector) with distance traveled (scalar integral of speed).</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">3. 把位移（向量）与路程（速率的标量积分）弄混。</span>
+    <span data-lang="en" style="display:block; margin-top:4px;">4. Forgetting initial conditions $+C$ in vector IVPs.</span>
+    <span data-lang="zh" style="display:block; margin-top:4px;">4. 在向量初值问题里忘记加初始条件给出的 $+C$。</span>
   </div>
 </section>
 
@@ -1148,43 +1256,44 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 
 <section class="section" id="flashcards">
   <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <h2 data-lang="en">Flashcards — Click to Flip</h2>
+  <h2 data-lang="zh">闪卡 —— 点击翻面</h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">First derivative $\frac{dy}{dx}$ for parametric curves?</div>
-        <div class="flashcard-back"><br>$$ \frac{\frac{dy}{dt}}{\frac{dx}{dt}} $$<br>provided $\frac{dx}{dt} \neq 0$</div>
+        <div class="flashcard-front"><span data-lang="en">First derivative $\frac{dy}{dx}$ for parametric curves?</span><span data-lang="zh">参数曲线的一阶导数 $\frac{dy}{dx}$？</span></div>
+        <div class="flashcard-back"><br>$$ \frac{\frac{dy}{dt}}{\frac{dx}{dt}} $$<br><span data-lang="en">provided $\frac{dx}{dt} \neq 0$</span><span data-lang="zh">前提 $\frac{dx}{dt} \neq 0$</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Second derivative $\frac{d^2y}{dx^2}$ for parametric curves?</div>
-        <div class="flashcard-back"><br>$$ \frac{\frac{d}{dt}\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}} $$<br><strong>NOT</strong> quotient of 2nd derivatives.</div>
+        <div class="flashcard-front"><span data-lang="en">Second derivative $\frac{d^2y}{dx^2}$ for parametric curves?</span><span data-lang="zh">参数曲线的二阶导数 $\frac{d^2y}{dx^2}$？</span></div>
+        <div class="flashcard-back"><br>$$ \frac{\frac{d}{dt}\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}} $$<br><span data-lang="en"><strong>NOT</strong> quotient of 2nd derivatives.</span><span data-lang="zh"><strong>不是</strong>两个二阶导数相除。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Arc length (parametric distance)?</div>
+        <div class="flashcard-front"><span data-lang="en">Arc length (parametric distance)?</span><span data-lang="zh">参数曲线弧长？</span></div>
         <div class="flashcard-back"><br>$$ \int_{a}^{b} \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2} dt $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Speed of a particle in the plane?</div>
+        <div class="flashcard-front"><span data-lang="en">Speed of a particle in the plane?</span><span data-lang="zh">平面内质点的速率？</span></div>
         <div class="flashcard-back"><br>$$ |\mathbf{v}(t)| = \sqrt{(x'(t))^2 + (y'(t))^2} $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Polar area formula?</div>
+        <div class="flashcard-front"><span data-lang="en">Polar area formula?</span><span data-lang="zh">极坐标面积公式？</span></div>
         <div class="flashcard-back"><br>$$ A = \frac{1}{2} \int_{\alpha}^{\beta} [r(\theta)]^2 d\theta $$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">When is speed increasing?</div>
-        <div class="flashcard-back"><br>When $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$<br>(Velocity and acceleration agree)</div>
+        <div class="flashcard-front"><span data-lang="en">When is speed increasing?</span><span data-lang="zh">速率何时递增？</span></div>
+        <div class="flashcard-back"><br><span data-lang="en">When $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$<br>(Velocity and acceleration agree)</span><span data-lang="zh">当 $\mathbf{v}(t) \cdot \mathbf{a}(t) > 0$ 时<br>（速度与加速度方向一致）</span></div>
       </div>
     </div>
   </div>
@@ -1194,66 +1303,67 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 
 <section class="section" id="unit-quiz">
   <div class="section-label">Assessment</div>
-  <h2>Unit 9 — Practice Quiz</h2>
+  <h2 data-lang="en">Unit 9 — Practice Quiz</h2>
+  <h2 data-lang="zh">单元 9 —— 练习测验</h2>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">1. Given $x = t^2 - 1$, $y = 2t + 3$, find $\frac{dy}{dx}$.</div>
+    <div class="quiz-q"><span data-lang="en">1. Given $x = t^2 - 1$, $y = 2t + 3$, find $\frac{dy}{dx}$.</span><span data-lang="zh">1. 已知 $x = t^2 - 1$、$y = 2t + 3$，求 $\frac{dy}{dx}$。</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$t$</div>
       <div class="quiz-opt" data-idx="1">$2t$</div>
       <div class="quiz-opt" data-idx="2">$\frac{2}{2t} = t$</div>
       <div class="quiz-opt" data-idx="3">$\frac{1}{t}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{dx}{dt} = 2t$, $\frac{dy}{dt} = 2$. So $\frac{dy}{dx} = \frac{2}{2t} = \frac{1}{t}$.</div>
-    <div class="quiz-explain wrong-exp">$\frac{dx}{dt} = 2t$ and $\frac{dy}{dt} = 2$. Divide $\frac{dy}{dt}$ by $\frac{dx}{dt}$ to get $\frac{2}{2t} = \frac{1}{t}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{dx}{dt} = 2t$, $\frac{dy}{dt} = 2$. So $\frac{dy}{dx} = \frac{2}{2t} = \frac{1}{t}$.</span><span data-lang="zh">正确！$\frac{dx}{dt} = 2t$，$\frac{dy}{dt} = 2$。所以 $\frac{dy}{dx} = \frac{2}{2t} = \frac{1}{t}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$\frac{dx}{dt} = 2t$ and $\frac{dy}{dt} = 2$. Divide $\frac{dy}{dt}$ by $\frac{dx}{dt}$ to get $\frac{2}{2t} = \frac{1}{t}$.</span><span data-lang="zh">$\frac{dx}{dt} = 2t$、$\frac{dy}{dt} = 2$。用 $\frac{dy}{dt}$ 除以 $\frac{dx}{dt}$ 得到 $\frac{2}{2t} = \frac{1}{t}$。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">2. To find $\frac{d^2y}{dx^2}$ for a parametric curve, you should:</div>
+    <div class="quiz-q"><span data-lang="en">2. To find $\frac{d^2y}{dx^2}$ for a parametric curve, you should:</span><span data-lang="zh">2. 求参数曲线的 $\frac{d^2y}{dx^2}$，应当：</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Divide $\frac{d^2y}{dt^2}$ by $\frac{d^2x}{dt^2}$</div>
-      <div class="quiz-opt" data-idx="1">Take the derivative of $\frac{dy}{dx}$ with respect to $x$</div>
-      <div class="quiz-opt" data-idx="2">Take $\frac{d}{dt}\left[\frac{dy}{dx}\right]$ and divide by $\frac{dx}{dt}$</div>
-      <div class="quiz-opt" data-idx="3">Square $\frac{dy}{dx}$</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Divide $\frac{d^2y}{dt^2}$ by $\frac{d^2x}{dt^2}$</span><span data-lang="zh">用 $\frac{d^2y}{dt^2}$ 除以 $\frac{d^2x}{dt^2}$</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Take the derivative of $\frac{dy}{dx}$ with respect to $x$</span><span data-lang="zh">对 $\frac{dy}{dx}$ 关于 $x$ 求导</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Take $\frac{d}{dt}\left[\frac{dy}{dx}\right]$ and divide by $\frac{dx}{dt}$</span><span data-lang="zh">先算 $\frac{d}{dt}\left[\frac{dy}{dx}\right]$，再除以 $\frac{dx}{dt}$</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Square $\frac{dy}{dx}$</span><span data-lang="zh">把 $\frac{dy}{dx}$ 平方</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}(\frac{dy}{dx})}{\frac{dx}{dt}}$. This is heavily tested!</div>
-    <div class="quiz-explain wrong-exp">The correct process is to differentiate $\frac{dy}{dx}$ with respect to $t$, then divide that result by $\frac{dx}{dt}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}(\frac{dy}{dx})}{\frac{dx}{dt}}$. This is heavily tested!</span><span data-lang="zh">正确！$\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}(\frac{dy}{dx})}{\frac{dx}{dt}}$。这一点几乎每年都考！</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The correct process is to differentiate $\frac{dy}{dx}$ with respect to $t$, then divide that result by $\frac{dx}{dt}$.</span><span data-lang="zh">正确流程：先对 $\frac{dy}{dx}$ 关于 $t$ 求导，再把结果除以 $\frac{dx}{dt}$。</span></div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">3. The total distance traveled by a particle with velocity $\mathbf{v}(t) = \langle \cos t, \sin t \rangle$ from $t = 0$ to $t = \pi$ is:</div>
+    <div class="quiz-q"><span data-lang="en">3. The total distance traveled by a particle with velocity $\mathbf{v}(t) = \langle \cos t, \sin t \rangle$ from $t = 0$ to $t = \pi$ is:</span><span data-lang="zh">3. 质点速度为 $\mathbf{v}(t) = \langle \cos t, \sin t \rangle$，从 $t = 0$ 到 $t = \pi$ 的总路程是：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$0$</div>
       <div class="quiz-opt" data-idx="1">$\pi$</div>
       <div class="quiz-opt" data-idx="2">$2\pi$</div>
       <div class="quiz-opt" data-idx="3">$2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Speed = $\sqrt{\cos^2 t + \sin^2 t} = 1$. Distance = $\int_0^{\pi} 1\,dt = \pi$.</div>
-    <div class="quiz-explain wrong-exp">Speed = $|\mathbf{v}(t)| = \sqrt{\cos^2 t + \sin^2 t} = 1$. Total distance = $\int_0^{\pi} 1\,dt = \pi$. Don't confuse distance with displacement!</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Speed = $\sqrt{\cos^2 t + \sin^2 t} = 1$. Distance = $\int_0^{\pi} 1\,dt = \pi$.</span><span data-lang="zh">正确！速率 = $\sqrt{\cos^2 t + \sin^2 t} = 1$。路程 = $\int_0^{\pi} 1\,dt = \pi$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Speed = $|\mathbf{v}(t)| = \sqrt{\cos^2 t + \sin^2 t} = 1$. Total distance = $\int_0^{\pi} 1\,dt = \pi$. Don't confuse distance with displacement!</span><span data-lang="zh">速率 = $|\mathbf{v}(t)| = \sqrt{\cos^2 t + \sin^2 t} = 1$。总路程 = $\int_0^{\pi} 1\,dt = \pi$。注意不要把路程与位移混淆！</span></div>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">4. The area of one petal of $r = \sin(2\theta)$ is:</div>
+    <div class="quiz-q"><span data-lang="en">4. The area of one petal of $r = \sin(2\theta)$ is:</span><span data-lang="zh">4. 曲线 $r = \sin(2\theta)$ 一个花瓣的面积是：</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\frac{\pi}{8}$</div>
       <div class="quiz-opt" data-idx="1">$\frac{\pi}{4}$</div>
       <div class="quiz-opt" data-idx="2">$\frac{\pi}{2}$</div>
       <div class="quiz-opt" data-idx="3">$\pi$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! One petal runs from $\theta = 0$ to $\theta = \frac{\pi}{2}$. $A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{1}{2} \cdot \frac{\pi}{4} = \frac{\pi}{8}$.</div>
-    <div class="quiz-explain wrong-exp">One petal of $r = \sin(2\theta)$ goes from $0$ to $\frac{\pi}{2}$. Using the half-angle identity: $A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{\pi}{8}$.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! One petal runs from $\theta = 0$ to $\theta = \frac{\pi}{2}$. $A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{1}{2} \cdot \frac{\pi}{4} = \frac{\pi}{8}$.</span><span data-lang="zh">正确！一个花瓣对应 $\theta$ 从 $0$ 到 $\frac{\pi}{2}$。$A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{1}{2} \cdot \frac{\pi}{4} = \frac{\pi}{8}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">One petal of $r = \sin(2\theta)$ goes from $0$ to $\frac{\pi}{2}$. Using the half-angle identity: $A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{\pi}{8}$.</span><span data-lang="zh">$r = \sin(2\theta)$ 的一个花瓣对应 $\theta \in [0, \frac{\pi}{2}]$。用半角恒等式：$A = \frac{1}{2}\int_0^{\pi/2} \sin^2(2\theta)\,d\theta = \frac{\pi}{8}$。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">5. A particle has $\mathbf{v}(t) = \langle 2, -3 \rangle$ and $\mathbf{a}(t) = \langle 1, 4 \rangle$. Is its speed increasing or decreasing?</div>
+    <div class="quiz-q"><span data-lang="en">5. A particle has $\mathbf{v}(t) = \langle 2, -3 \rangle$ and $\mathbf{a}(t) = \langle 1, 4 \rangle$. Is its speed increasing or decreasing?</span><span data-lang="zh">5. 质点的 $\mathbf{v}(t) = \langle 2, -3 \rangle$，$\mathbf{a}(t) = \langle 1, 4 \rangle$。此时其速率在递增还是递减？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Increasing, because acceleration is nonzero</div>
-      <div class="quiz-opt" data-idx="1">Increasing, because $|\mathbf{a}| > 0$</div>
-      <div class="quiz-opt" data-idx="2">Decreasing, because $\mathbf{v} \cdot \mathbf{a} < 0$</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Increasing, because acceleration is nonzero</span><span data-lang="zh">递增，因为加速度不为零</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Increasing, because $|\mathbf{a}| > 0$</span><span data-lang="zh">递增，因为 $|\mathbf{a}| > 0$</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Decreasing, because $\mathbf{v} \cdot \mathbf{a} < 0$</span><span data-lang="zh">递减，因为 $\mathbf{v} \cdot \mathbf{a} < 0$</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined</span><span data-lang="zh">无法判断</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = 2 - 12 = -10 < 0$. Since the dot product is negative, speed is decreasing.</div>
-    <div class="quiz-explain wrong-exp">Check the dot product: $\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = -10 < 0$. When $\mathbf{v} \cdot \mathbf{a} < 0$, velocity and acceleration oppose each other, so speed decreases.</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = 2 - 12 = -10 < 0$. Since the dot product is negative, speed is decreasing.</span><span data-lang="zh">正确！$\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = 2 - 12 = -10 < 0$。点积为负，说明速率正在减小。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Check the dot product: $\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = -10 < 0$. When $\mathbf{v} \cdot \mathbf{a} < 0$, velocity and acceleration oppose each other, so speed decreases.</span><span data-lang="zh">先算点积：$\mathbf{v} \cdot \mathbf{a} = (2)(1) + (-3)(4) = -10 < 0$。当 $\mathbf{v} \cdot \mathbf{a} < 0$ 时，速度与加速度方向相反，速率递减。</span></div>
   </div>
 </section>
 
@@ -1262,26 +1372,28 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 <!-- ═══════════════ CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
   <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 15 mastered</div>
+  <h2 data-lang="en">Readiness Checklist</h2>
+  <h2 data-lang="zh">备考清单</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</p>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;" data-lang="zh">点击你已经掌握的每一项。考试前争取做到 100%。</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 15 mastered</span><span data-lang="zh">0 / 15 已掌握</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find $\frac{dy}{dx}$ for a parametric curve using $\frac{dy/dt}{dx/dt}$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find $\frac{d^2y}{dx^2}$ correctly (not by dividing second derivatives)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Identify horizontal and vertical tangent lines on parametric curves</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up and evaluate parametric arc length integrals</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Differentiate and integrate vector-valued functions component-wise</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve vector initial value problems (position from velocity + initial condition)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute speed, displacement, and total distance from velocity components</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Determine when speed is increasing vs. decreasing ($\mathbf{v} \cdot \mathbf{a}$)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find position at a later time using $\int$ of velocity components</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Compute acceleration magnitude and direction from vector components</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Convert between polar and rectangular coordinates</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Sketch a polar curve and identify its symmetry</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find $\frac{dy}{dx}$ for a polar curve using the product rule</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up and evaluate polar area integrals (single curve and between two curves)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish displacement (vector) from distance (scalar) on FRQs</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find $\frac{dy}{dx}$ for a parametric curve using $\frac{dy/dt}{dx/dt}$</span><span data-lang="zh">用 $\frac{dy/dt}{dx/dt}$ 求参数曲线的 $\frac{dy}{dx}$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find $\frac{d^2y}{dx^2}$ correctly (not by dividing second derivatives)</span><span data-lang="zh">正确求出 $\frac{d^2y}{dx^2}$（不是用两个二阶导数相除）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Identify horizontal and vertical tangent lines on parametric curves</span><span data-lang="zh">识别参数曲线上的水平切线与垂直切线</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Set up and evaluate parametric arc length integrals</span><span data-lang="zh">列出并计算参数曲线的弧长积分</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Differentiate and integrate vector-valued functions component-wise</span><span data-lang="zh">按分量对向量值函数求导与积分</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Solve vector initial value problems (position from velocity + initial condition)</span><span data-lang="zh">解向量初值问题（由速度与初始条件求位置）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute speed, displacement, and total distance from velocity components</span><span data-lang="zh">由速度分量求速率、位移与总路程</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Determine when speed is increasing vs. decreasing ($\mathbf{v} \cdot \mathbf{a}$)</span><span data-lang="zh">用 $\mathbf{v} \cdot \mathbf{a}$ 判断速率递增或递减</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find position at a later time using $\int$ of velocity components</span><span data-lang="zh">用速度分量的 $\int$ 求之后时刻的位置</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Compute acceleration magnitude and direction from vector components</span><span data-lang="zh">由向量分量求加速度的模与方向</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Convert between polar and rectangular coordinates</span><span data-lang="zh">在极坐标与直角坐标之间互相转换</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Sketch a polar curve and identify its symmetry</span><span data-lang="zh">画出极坐标曲线并判断其对称性</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find $\frac{dy}{dx}$ for a polar curve using the product rule</span><span data-lang="zh">使用乘积法则求极坐标曲线的 $\frac{dy}{dx}$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Set up and evaluate polar area integrals (single curve and between two curves)</span><span data-lang="zh">列出并计算极坐标面积积分（单曲线与两曲线之间）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Distinguish displacement (vector) from distance (scalar) on FRQs</span><span data-lang="zh">在自由作答题中区分位移（向量）与路程（标量）</span></li>
   </ul>
 </section>
 
@@ -1293,15 +1405,32 @@ A = ¼ [(π/4 + 0) − (−π/4 + 0)] = ¼ · π/2 = <span class="num">π/8</spa
 
 <script>
 // ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 // ─── SIDEBAR ───
 
@@ -1390,10 +1519,11 @@ function checkPractice(inputId, correct, feedbackId) {
   const val = input.value.trim().replace(/\s/g, '');
   fb.classList.remove('correct', 'wrong', 'show');
   if (val === correct) {
-    fb.textContent = '✓ Correct!';
+    fb.innerHTML = '<span data-lang="en">✓ Correct!</span><span data-lang="zh">✓ 正确！</span>';
     fb.classList.add('correct', 'show');
   } else {
-    fb.textContent = '✗ Not quite. The answer is ' + correct + '.';
+    fb.innerHTML = '<span data-lang="en">✗ Not quite. The answer is ' + correct + '.</span>' +
+                   '<span data-lang="zh">✗ 不太对。正确答案是 ' + correct + '。</span>';
     fb.classList.add('wrong', 'show');
   }
 }
@@ -1403,7 +1533,9 @@ function toggleCheck(li) {
   li.classList.toggle('checked');
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
-  document.getElementById('checkProgress').textContent = checked + ' / ' + total + ' mastered';
+  document.getElementById('checkProgress').innerHTML =
+    '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+    '<span data-lang="zh">' + checked + ' / ' + total + ' 已掌握</span>';
 }
 
 // ═══════════════════════════════════════════════

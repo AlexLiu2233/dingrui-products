@@ -38,7 +38,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -764,6 +764,9 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -774,37 +777,38 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     <span class="nav-badge">UNIT 1</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s1-1">1.1 Can Change Occur at an Instant?</a>
-  <a href="#s1-2">1.2 Defining Limits &amp; Notation</a>
-  <a href="#s1-3">1.3 Limits from Graphs</a>
-  <a href="#s1-4">1.4 Limits from Tables</a>
-  <a href="#s1-5">1.5 Algebraic Properties</a>
-  <a href="#s1-6">1.6 Algebraic Manipulation</a>
-  <a href="#s1-7">1.7 Selecting Procedures</a>
-  <a href="#s1-8">1.8 Squeeze Theorem</a>
-  <a href="#s1-9">1.9 Multiple Representations</a>
-  <a href="#s1-10">1.10 Types of Discontinuities</a>
-  <a href="#s1-11">1.11 Continuity at a Point</a>
-  <a href="#s1-12">1.12 Continuity over an Interval</a>
-  <a href="#s1-13">1.13 Removing Discontinuities</a>
-  <a href="#s1-14">1.14 Infinite Limits &amp; Vertical Asymptotes</a>
-  <a href="#s1-15">1.15 Limits at Infinity &amp; Horizontal Asymptotes</a>
-  <a href="#s1-16">1.16 Intermediate Value Theorem</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s1-1"><span data-lang="en">1.1 Can Change Occur at an Instant?</span><span data-lang="zh">1.1 变化能否在某一瞬间发生？</span></a>
+  <a href="#s1-2"><span data-lang="en">1.2 Defining Limits &amp; Notation</span><span data-lang="zh">1.2 极限的定义与记号</span></a>
+  <a href="#s1-3"><span data-lang="en">1.3 Limits from Graphs</span><span data-lang="zh">1.3 由图像估计极限</span></a>
+  <a href="#s1-4"><span data-lang="en">1.4 Limits from Tables</span><span data-lang="zh">1.4 由表格估计极限</span></a>
+  <a href="#s1-5"><span data-lang="en">1.5 Algebraic Properties</span><span data-lang="zh">1.5 极限的代数性质</span></a>
+  <a href="#s1-6"><span data-lang="en">1.6 Algebraic Manipulation</span><span data-lang="zh">1.6 代数变形求极限</span></a>
+  <a href="#s1-7"><span data-lang="en">1.7 Selecting Procedures</span><span data-lang="zh">1.7 选择求极限的方法</span></a>
+  <a href="#s1-8"><span data-lang="en">1.8 Squeeze Theorem</span><span data-lang="zh">1.8 夹逼定理</span></a>
+  <a href="#s1-9"><span data-lang="en">1.9 Multiple Representations</span><span data-lang="zh">1.9 极限的多种表示</span></a>
+  <a href="#s1-10"><span data-lang="en">1.10 Types of Discontinuities</span><span data-lang="zh">1.10 不连续点的类型</span></a>
+  <a href="#s1-11"><span data-lang="en">1.11 Continuity at a Point</span><span data-lang="zh">1.11 在某点处的连续性</span></a>
+  <a href="#s1-12"><span data-lang="en">1.12 Continuity over an Interval</span><span data-lang="zh">1.12 在区间上的连续性</span></a>
+  <a href="#s1-13"><span data-lang="en">1.13 Removing Discontinuities</span><span data-lang="zh">1.13 去除不连续点</span></a>
+  <a href="#s1-14"><span data-lang="en">1.14 Infinite Limits &amp; Vertical Asymptotes</span><span data-lang="zh">1.14 无穷极限与垂直渐近线</span></a>
+  <a href="#s1-15"><span data-lang="en">1.15 Limits at Infinity &amp; Horizontal Asymptotes</span><span data-lang="zh">1.15 无穷处的极限与水平渐近线</span></a>
+  <a href="#s1-16"><span data-lang="en">1.16 Intermediate Value Theorem</span><span data-lang="zh">1.16 介值定理</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">备考策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">应考清单</span></a>
 </aside>
 
 <main class="main-wrap">
@@ -812,14 +816,15 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Calculus AB &amp; BC · 鼎睿学苑</div>
-  <h1>Unit 1: Limits<br>&amp; Continuity</h1>
+  <h1><span data-lang="en">Unit 1: Limits<br>&amp; Continuity</span><span data-lang="zh">第 1 单元：极限<br>与连续性</span></h1>
   <p class="hero-sub">
-    The foundation of calculus. Master how functions behave near a point, formal limit evaluation, continuity, asymptotes, and the Intermediate Value Theorem.
+    <span data-lang="en">The foundation of calculus. Master how functions behave near a point, formal limit evaluation, continuity, asymptotes, and the Intermediate Value Theorem.</span>
+    <span data-lang="zh">微积分的基础。掌握函数在某点附近的行为、极限的严格求值、连续性、渐近线与介值定理。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–12% of AP Exam</span>
-    <span class="chip chip-green">~22–23 Class Periods</span>
-    <span class="chip chip-purple">16 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">10–12% of AP Exam</span><span data-lang="zh">占 AP 考试 10–12%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~22–23 Class Periods</span><span data-lang="zh">约 22–23 课时</span></span>
+    <span class="chip chip-purple"><span data-lang="en">16 Topics</span><span data-lang="zh">16 个专题</span></span>
   </div>
 </section>
 
@@ -829,41 +834,43 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <!-- ═══════════════ 1.1 ═══════════════ -->
 <section class="section" id="s1-1">
-  <div class="section-label">Topic 1.1</div>
-  <h2>Introducing Calculus: Can Change Occur at an Instant?</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.1</span><span data-lang="zh">专题 1.1</span></div>
+  <h2><span data-lang="en">Introducing Calculus: Can Change Occur at an Instant?</span><span data-lang="zh">微积分导引：变化能否在某一瞬间发生？</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Core Idea</strong>
-    Calculus uses limits to understand and model dynamic change. An average rate of change over an interval can approximate the instantaneous rate of change at a point — and as the interval shrinks to zero, the limit gives the exact instantaneous rate.
+    <strong style="color: var(--accent);"><span data-lang="en">Core Idea</span><span data-lang="zh">核心思想</span></strong>
+    <span data-lang="en">Calculus uses limits to understand and model dynamic change. An average rate of change over an interval can approximate the instantaneous rate of change at a point — and as the interval shrinks to zero, the limit gives the exact instantaneous rate.</span>
+    <span data-lang="zh">微积分用极限（<code>limit</code>）来刻画与建模动态变化。区间上的平均变化率（<code>average rate of change</code>）可以近似某一点处的瞬时变化率（<code>instantaneous rate of change</code>）——当区间长度趋于零时，极限给出精确的瞬时变化率。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Average Rate of Change</div>
+    <div class="formula-label"><span data-lang="en">Average Rate of Change</span><span data-lang="zh">平均变化率</span></div>
     $$ \text{AROC} = \frac{f(b) - f(a)}{b - a} $$
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Instantaneous Rate of Change (Preview)</div>
+    <div class="formula-label"><span data-lang="en">Instantaneous Rate of Change (Preview)</span><span data-lang="zh">瞬时变化率（预览）</span></div>
     $$ \text{IROC at } x = a = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} $$
   </div>
 
-  <p>The average rate of change is the slope of a secant line. As $b \to a$, the secant line approaches the tangent line, and the AROC approaches the IROC.</p>
+  <p><span data-lang="en">The average rate of change is the slope of a secant line. As $b \to a$, the secant line approaches the tangent line, and the AROC approaches the IROC.</span><span data-lang="zh">平均变化率是割线（<code>secant line</code>）的斜率。当 $b \to a$ 时，割线趋近于切线（<code>tangent line</code>），平均变化率也就趋近于瞬时变化率。</span></p>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Tip</strong>
-    AP free-response questions often provide a table of values and ask you to approximate an instantaneous rate of change. Use the average rate of change over the smallest interval containing that point. Always include units.
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Tip</span><span data-lang="zh">考试提示</span></strong>
+    <span data-lang="en">AP free-response questions often provide a table of values and ask you to approximate an instantaneous rate of change. Use the average rate of change over the smallest interval containing that point. Always include units.</span>
+    <span data-lang="zh">AP 自由回答题常给出一组数值表，并要求近似某点处的瞬时变化率。使用包含该点的最小区间上的平均变化率作答，并务必带上单位。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Approximating IROC</summary>
+    <summary><span data-lang="en">Worked Example — Approximating IROC</span><span data-lang="zh">例题——近似瞬时变化率</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p><strong>Given:</strong> Temperature $T(t)$ in °F at time $t$ (minutes):</p>
+<p><strong><span data-lang="en">Given:</span><span data-lang="zh">已知：</span></strong> <span data-lang="en">Temperature $T(t)$ in °F at time $t$ (minutes):</span><span data-lang="zh">在时刻 $t$（分钟）的温度 $T(t)$（单位：°F）：</span></p>
 <table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
   <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$t$</td><td style="padding:4px 14px; border:1px solid var(--border);">0</td><td style="padding:4px 14px; border:1px solid var(--border);">2</td><td style="padding:4px 14px; border:1px solid var(--border);">5</td><td style="padding:4px 14px; border:1px solid var(--border);">8</td><td style="padding:4px 14px; border:1px solid var(--border);">12</td></tr>
   <tr><td style="padding:4px 14px; border:1px solid var(--border); font-weight:600;">$T(t)$</td><td style="padding:4px 14px; border:1px solid var(--border);">72</td><td style="padding:4px 14px; border:1px solid var(--border);">75</td><td style="padding:4px 14px; border:1px solid var(--border);">80</td><td style="padding:4px 14px; border:1px solid var(--border);">83</td><td style="padding:4px 14px; border:1px solid var(--border);">88</td></tr>
 </table>
-<p>Approximate $T'(5)$ using the symmetric interval $[2, 8]$:</p>
+<p><span data-lang="en">Approximate $T'(5)$ using the symmetric interval $[2, 8]$:</span><span data-lang="zh">用对称区间 $[2, 8]$ 近似 $T'(5)$：</span></p>
 $$\begin{aligned}
 T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
 &= \frac{83 - 75}{6} \\[4pt]
@@ -875,7 +882,7 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">The average rate of change of $f(x) = x^2$ on $[1, 4]$ is:</div>
+      <div class="quiz-q"><span data-lang="en">The average rate of change of $f(x) = x^2$ on $[1, 4]$ is:</span><span data-lang="zh">函数 $f(x) = x^2$ 在 $[1, 4]$ 上的平均变化率为：</span></div>
       <span class="quiz-number">1.1</span>
     </div>
     <div class="quiz-options">
@@ -884,9 +891,9 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
       <div class="quiz-opt" data-idx="2">$8$</div>
       <div class="quiz-opt" data-idx="3">$15$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$.</div>
-    <div class="quiz-explain wrong-exp">$\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$. The AROC is the change in output over the change in input.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$.</span><span data-lang="zh">正确！$\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$. The AROC is the change in output over the change in input.</span><span data-lang="zh">$\frac{f(4) - f(1)}{4 - 1} = \frac{16 - 1}{3} = \frac{15}{3} = 5$。平均变化率即输出的改变量除以输入的改变量。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -894,34 +901,37 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
 
 <!-- ═══════════════ 1.2 ═══════════════ -->
 <section class="section" id="s1-2">
-  <div class="section-label">Topic 1.2</div>
-  <h2>Defining Limits and Using Limit Notation</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.2</span><span data-lang="zh">专题 1.2</span></div>
+  <h2><span data-lang="en">Defining Limits and Using Limit Notation</span><span data-lang="zh">极限的定义与记号</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Formal Definition</strong>
-    Given a function $f$, the limit of $f(x)$ as $x$ approaches $c$ is a real number $R$ if $f(x)$ can be made arbitrarily close to $R$ by taking $x$ sufficiently close to $c$ (but not equal to $c$).
+    <strong style="color: var(--accent);"><span data-lang="en">Formal Definition</span><span data-lang="zh">严格定义</span></strong>
+    <span data-lang="en">Given a function $f$, the limit of $f(x)$ as $x$ approaches $c$ is a real number $R$ if $f(x)$ can be made arbitrarily close to $R$ by taking $x$ sufficiently close to $c$ (but not equal to $c$).</span>
+    <span data-lang="zh">给定函数（<code>function</code>）$f$，当 $x$ 趋于 $c$ 时 $f(x)$ 的极限（<code>limit</code>）为实数 $R$，是指：只要 $x$ 充分接近 $c$（但不等于 $c$），就能使 $f(x)$ 任意接近 $R$。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Limit Notation</div>
+    <div class="formula-label"><span data-lang="en">Limit Notation</span><span data-lang="zh">极限记号</span></div>
     $$ \lim_{x \to c} f(x) = R $$
   </div>
 
-  <p>Key insight: the limit describes what the function <em>approaches</em> — not what the function <em>equals</em> at that point. The value $f(c)$ may or may not equal the limit, or $f(c)$ may not even exist.</p>
+  <p><span data-lang="en">Key insight: the limit describes what the function <em>approaches</em> — not what the function <em>equals</em> at that point. The value $f(c)$ may or may not equal the limit, or $f(c)$ may not even exist.</span><span data-lang="zh">关键认识：极限描述函数在该点附近所<em>趋近</em>的值，而不是函数在该点处<em>等于</em>多少。$f(c)$ 不一定等于极限，甚至可能不存在。</span></p>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">One-Sided Limits</strong>
-    The <strong>left-hand limit</strong> $\lim_{x \to c^-} f(x)$ considers values of $x$ approaching $c$ from below. The <strong>right-hand limit</strong> $\lim_{x \to c^+} f(x)$ considers values from above. The two-sided limit exists only when both one-sided limits exist and are equal.
+    <strong style="color: var(--green);"><span data-lang="en">One-Sided Limits</span><span data-lang="zh">单侧极限</span></strong>
+    <span data-lang="en">The <strong>left-hand limit</strong> $\lim_{x \to c^-} f(x)$ considers values of $x$ approaching $c$ from below. The <strong>right-hand limit</strong> $\lim_{x \to c^+} f(x)$ considers values from above. The two-sided limit exists only when both one-sided limits exist and are equal.</span>
+    <span data-lang="zh"><strong>左极限</strong>（<code>left-hand limit</code>）$\lim_{x \to c^-} f(x)$ 考察 $x$ 从小于 $c$ 一侧趋于 $c$ 的情形；<strong>右极限</strong>（<code>right-hand limit</code>）$\lim_{x \to c^+} f(x)$ 考察 $x$ 从大于 $c$ 一侧趋于 $c$ 的情形。双侧极限存在当且仅当两个单侧极限均存在且相等。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Key Relationship</div>
+    <div class="formula-label"><span data-lang="en">Key Relationship</span><span data-lang="zh">关键关系</span></div>
     $$ \lim_{x \to c} f(x) = L \iff \lim_{x \to c^-} f(x) = L \text{ and } \lim_{x \to c^+} f(x) = L $$
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Common Exam Trap</strong>
-    Students confuse $f(c)$ with $\lim_{x \to c} f(x)$. The limit depends only on function values <em>near</em> $c$, not at $c$ itself. A function can have a limit at a point where it is undefined.
+    <strong style="color: var(--red);"><span data-lang="en">Common Exam Trap</span><span data-lang="zh">考试常见陷阱</span></strong>
+    <span data-lang="en">Students confuse $f(c)$ with $\lim_{x \to c} f(x)$. The limit depends only on function values <em>near</em> $c$, not at $c$ itself. A function can have a limit at a point where it is undefined.</span>
+    <span data-lang="zh">学生常把 $f(c)$ 与 $\lim_{x \to c} f(x)$ 混为一谈。极限只取决于 $c$ <em>附近</em>的函数值，而与 $c$ 处本身的取值无关。在函数无定义的点处，极限仍可能存在。</span>
   </div>
 </section>
 
@@ -929,25 +939,27 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
 
 <!-- ═══════════════ 1.3 ═══════════════ -->
 <section class="section" id="s1-3">
-  <div class="section-label">Topic 1.3</div>
-  <h2>Estimating Limit Values from Graphs</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.3</span><span data-lang="zh">专题 1.3</span></div>
+  <h2><span data-lang="en">Estimating Limit Values from Graphs</span><span data-lang="zh">由图像估计极限值</span></h2>
 
-  <p>Reading limits from a graph requires careful attention to what the $y$-values approach, not just where the point is plotted.</p>
+  <p><span data-lang="en">Reading limits from a graph requires careful attention to what the $y$-values approach, not just where the point is plotted.</span><span data-lang="zh">从图像读取极限时，要仔细观察 $y$ 值趋向何处，而不仅仅是图上画出的点的位置。</span></p>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Key Skills</strong>
-    Identify left- and right-hand limits from a graph. Look for open circles (holes), filled circles, jump breaks, and vertical asymptotes. A limit might not exist when: the function is unbounded, the function oscillates, or the left- and right-hand limits differ.
+    <strong style="color: var(--accent);"><span data-lang="en">Key Skills</span><span data-lang="zh">关键技能</span></strong>
+    <span data-lang="en">Identify left- and right-hand limits from a graph. Look for open circles (holes), filled circles, jump breaks, and vertical asymptotes. A limit might not exist when: the function is unbounded, the function oscillates, or the left- and right-hand limits differ.</span>
+    <span data-lang="zh">从图像辨认左极限与右极限。注意空心圆（图像分析（<code>analyzing graphs</code>）中的"洞"）、实心圆、跳跃间断与垂直渐近线（<code>vertical asymptote</code>）。当函数无界、函数无限振荡或左右极限不相等时，极限可能不存在。</span>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">When Limits Do Not Exist (DNE)</strong>
-    A limit fails to exist when: (1) the left- and right-hand limits are different values (jump), (2) the function increases or decreases without bound (vertical asymptote), or (3) the function oscillates infinitely near the point, e.g. $\lim_{x \to 0} \sin\!\left(\frac{1}{x}\right)$.
+    <strong style="color: var(--red);"><span data-lang="en">When Limits Do Not Exist (DNE)</span><span data-lang="zh">极限不存在（DNE）的情形</span></strong>
+    <span data-lang="en">A limit fails to exist when: (1) the left- and right-hand limits are different values (jump), (2) the function increases or decreases without bound (vertical asymptote), or (3) the function oscillates infinitely near the point, e.g. $\lim_{x \to 0} \sin\!\left(\frac{1}{x}\right)$.</span>
+    <span data-lang="zh">极限不存在的情形：(1) 左极限与右极限不相等（跳跃间断点）；(2) 函数无界地增大或减小（垂直渐近线）；(3) 函数在该点附近无限振荡，例如 $\lim_{x \to 0} \sin\!\left(\frac{1}{x}\right)$。</span>
   </div>
 
   <!-- Interactive Widget: Limit Explorer -->
   <div class="interactive-widget">
-    <div class="widget-header">Interactive Limit Explorer</div>
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;">Drag the slider to move the hole. Watch how $f(x)$ approaches the limit from both sides — the function value at $x = a$ is undefined, but the limit exists.</p>
+    <div class="widget-header"><span data-lang="en">Interactive Limit Explorer</span><span data-lang="zh">交互式极限演示</span></div>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;"><span data-lang="en">Drag the slider to move the hole. Watch how $f(x)$ approaches the limit from both sides — the function value at $x = a$ is undefined, but the limit exists.</span><span data-lang="zh">拖动滑块以移动"洞"的位置。观察 $f(x)$ 如何从两侧趋近于极限——在 $x = a$ 处函数无定义，但极限仍然存在。</span></p>
     <div class="widget-canvas-wrap">
       <canvas id="limitCanvas" width="720" height="400"></canvas>
     </div>
@@ -957,24 +969,24 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
       <div class="widget-readout" id="limitValA">a = 1.0</div>
     </div>
     <div class="widget-sum-readout">
-      Limit = <span class="sum-val" id="limitResult">2.0</span>
+      <span data-lang="en">Limit =</span><span data-lang="zh">极限 =</span> <span class="sum-val" id="limitResult">2.0</span>
     </div>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">If $\lim_{x \to 3^-} f(x) = 5$ and $\lim_{x \to 3^+} f(x) = 7$, then $\lim_{x \to 3} f(x)$ is:</div>
+      <div class="quiz-q"><span data-lang="en">If $\lim_{x \to 3^-} f(x) = 5$ and $\lim_{x \to 3^+} f(x) = 7$, then $\lim_{x \to 3} f(x)$ is:</span><span data-lang="zh">若 $\lim_{x \to 3^-} f(x) = 5$ 且 $\lim_{x \to 3^+} f(x) = 7$，则 $\lim_{x \to 3} f(x)$ 为：</span></div>
       <span class="quiz-number">1.3</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$5$</div>
       <div class="quiz-opt" data-idx="1">$7$</div>
-      <div class="quiz-opt" data-idx="2">Does not exist</div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Does not exist</span><span data-lang="zh">不存在</span></div>
       <div class="quiz-opt" data-idx="3">$6$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Since the left- and right-hand limits are not equal ($5 \neq 7$), the two-sided limit does not exist.</div>
-    <div class="quiz-explain wrong-exp">The two-sided limit exists only when the left- and right-hand limits are equal. Since $5 \neq 7$, the limit does not exist.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Since the left- and right-hand limits are not equal ($5 \neq 7$), the two-sided limit does not exist.</span><span data-lang="zh">正确！因为左极限与右极限不相等（$5 \neq 7$），所以双侧极限不存在。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The two-sided limit exists only when the left- and right-hand limits are equal. Since $5 \neq 7$, the limit does not exist.</span><span data-lang="zh">双侧极限存在当且仅当左极限与右极限相等。由于 $5 \neq 7$，该极限不存在。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -982,39 +994,41 @@ T'(5) &\approx \frac{T(8) - T(2)}{8 - 2} \\[4pt]
 
 <!-- ═══════════════ 1.4 ═══════════════ -->
 <section class="section" id="s1-4">
-  <div class="section-label">Topic 1.4</div>
-  <h2>Estimating Limit Values from Tables</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.4</span><span data-lang="zh">专题 1.4</span></div>
+  <h2><span data-lang="en">Estimating Limit Values from Tables</span><span data-lang="zh">由表格估计极限值</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Strategy</strong>
-    To estimate $\lim_{x \to c} f(x)$ from a table, evaluate $f(x)$ at values approaching $c$ from both sides. If $f(x)$ values converge to the same number from both sides, that number is the estimated limit.
+    <strong style="color: var(--accent);"><span data-lang="en">Strategy</span><span data-lang="zh">解题策略</span></strong>
+    <span data-lang="en">To estimate $\lim_{x \to c} f(x)$ from a table, evaluate $f(x)$ at values approaching $c$ from both sides. If $f(x)$ values converge to the same number from both sides, that number is the estimated limit.</span>
+    <span data-lang="zh">由表格估计 $\lim_{x \to c} f(x)$，需在 $c$ 的两侧取若干趋于 $c$ 的 $x$ 值计算 $f(x)$。若 $f(x)$ 的值从两侧都收敛到同一个数，该数即为估计的极限值。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Estimating from a Table</summary>
+    <summary><span data-lang="en">Worked Example — Estimating from a Table</span><span data-lang="zh">例题——由表格估计极限</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Estimate $\displaystyle\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$</p>
+<p><span data-lang="en">Estimate $\displaystyle\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$</span><span data-lang="zh">估计 $\displaystyle\lim_{x \to 2} \frac{x^2 - 4}{x - 2}$</span></p>
 <table class="data-table" style="margin:0.8rem auto; border-collapse:collapse; text-align:center; font-size:0.92rem;">
   <tr><td style="padding:4px 12px; border:1px solid var(--border); font-weight:600;">$x$</td><td style="padding:4px 12px; border:1px solid var(--border);">1.9</td><td style="padding:4px 12px; border:1px solid var(--border);">1.99</td><td style="padding:4px 12px; border:1px solid var(--border);">1.999</td><td style="padding:4px 12px; border:1px solid var(--border);">2.001</td><td style="padding:4px 12px; border:1px solid var(--border);">2.01</td><td style="padding:4px 12px; border:1px solid var(--border);">2.1</td></tr>
   <tr><td style="padding:4px 12px; border:1px solid var(--border); font-weight:600;">$f(x)$</td><td style="padding:4px 12px; border:1px solid var(--border);">3.9</td><td style="padding:4px 12px; border:1px solid var(--border);">3.99</td><td style="padding:4px 12px; border:1px solid var(--border);">3.999</td><td style="padding:4px 12px; border:1px solid var(--border);">4.001</td><td style="padding:4px 12px; border:1px solid var(--border);">4.01</td><td style="padding:4px 12px; border:1px solid var(--border);">4.1</td></tr>
 </table>
-<p>From the left: $f(x) \to 4$. From the right: $f(x) \to 4$.</p>
+<p><span data-lang="en">From the left: $f(x) \to 4$. From the right: $f(x) \to 4$.</span><span data-lang="zh">从左侧：$f(x) \to 4$。从右侧：$f(x) \to 4$。</span></p>
 $$\therefore \lim_{x \to 2} \frac{x^2 - 4}{x - 2} = 4$$
 </div>
     </div>
   </details>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Tip</strong>
-    When building a table on your calculator, choose values very close to $c$ on both sides (like $c \pm 0.001$). Be careful about rounding — don't declare a limit based on values that are far from $c$.
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Tip</span><span data-lang="zh">考试提示</span></strong>
+    <span data-lang="en">When building a table on your calculator, choose values very close to $c$ on both sides (like $c \pm 0.001$). Be careful about rounding — don't declare a limit based on values that are far from $c$.</span>
+    <span data-lang="zh">用计算器列表时，在 $c$ 的两侧都选取与 $c$ 非常接近的值（例如 $c \pm 0.001$）。注意四舍五入——不要根据离 $c$ 较远的值就断定极限值。</span>
   </div>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: If the table shows $f(1.9) = 7.9$, $f(1.99) = 7.99$, $f(2.01) = 8.01$, $f(2.1) = 8.1$, estimate $\lim_{x \to 2} f(x)$.</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: If the table shows $f(1.9) = 7.9$, $f(1.99) = 7.99$, $f(2.01) = 8.01$, $f(2.1) = 8.1$, estimate $\lim_{x \to 2} f(x)$.</span><span data-lang="zh">练习：若表格显示 $f(1.9) = 7.9$，$f(1.99) = 7.99$，$f(2.01) = 8.01$，$f(2.1) = 8.1$，估计 $\lim_{x \to 2} f(x)$。</span></div>
     <div class="practice-row">
       <input type="text" id="prac1" placeholder="Enter your answer...">
-      <button onclick="checkPractice('prac1', '8', 'pfb1')">Check</button>
+      <button onclick="checkPractice('prac1', '8', 'pfb1')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb1"></div>
   </div>
@@ -1024,27 +1038,28 @@ $$\therefore \lim_{x \to 2} \frac{x^2 - 4}{x - 2} = 4$$
 
 <!-- ═══════════════ 1.5 ═══════════════ -->
 <section class="section" id="s1-5">
-  <div class="section-label">Topic 1.5</div>
-  <h2>Determining Limits Using Algebraic Properties of Limits</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.5</span><span data-lang="zh">专题 1.5</span></div>
+  <h2><span data-lang="en">Determining Limits Using Algebraic Properties of Limits</span><span data-lang="zh">利用极限的代数性质求极限</span></h2>
 
   <div class="formula-box">
-    <div class="formula-label">Limit Laws</div>
+    <div class="formula-label"><span data-lang="en">Limit Laws</span><span data-lang="zh">极限法则</span></div>
     $$ \lim_{x \to c}[f(x) \pm g(x)] = L \pm M $$
     $$ \lim_{x \to c}[f(x) \cdot g(x)] = L \cdot M \qquad \lim_{x \to c}\frac{f(x)}{g(x)} = \frac{L}{M}, \; M \neq 0 $$
     $$ \lim_{x \to c}[kf(x)] = kL \qquad \lim_{x \to c}[f(x)]^n = L^n $$
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Key Insight</strong>
-    Polynomials and rational functions (where the denominator is nonzero) can be evaluated by direct substitution. Always try direct substitution first — if it gives a real number, you're done.
+    <strong style="color: var(--green);"><span data-lang="en">Key Insight</span><span data-lang="zh">关键洞察</span></strong>
+    <span data-lang="en">Polynomials and rational functions (where the denominator is nonzero) can be evaluated by direct substitution. Always try direct substitution first — if it gives a real number, you're done.</span>
+    <span data-lang="zh">多项式以及分母非零的有理函数都可直接代入（<code>direct substitution</code>）求极限。优先尝试直接代入——若结果是实数即可结束。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Using Limit Laws</summary>
+    <summary><span data-lang="en">Worked Example — Using Limit Laws</span><span data-lang="zh">例题——使用极限法则</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\displaystyle\lim_{x \to 3}\bigl[2x^2 + 5x - 1\bigr]$.</p>
-<p>This is a polynomial — use direct substitution:</p>
+<p><span data-lang="en">Find $\displaystyle\lim_{x \to 3}\bigl[2x^2 + 5x - 1\bigr]$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to 3}\bigl[2x^2 + 5x - 1\bigr]$。</span></p>
+<p><span data-lang="en">This is a polynomial — use direct substitution:</span><span data-lang="zh">该式为多项式——直接代入：</span></p>
 $$\begin{aligned}
 &= 2(3)^2 + 5(3) - 1 \\
 &= 2(9) + 15 - 1 \\
@@ -1057,7 +1072,7 @@ $$\begin{aligned}
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">If $\lim_{x \to 2} f(x) = 3$ and $\lim_{x \to 2} g(x) = -1$, then $\lim_{x \to 2} [f(x) \cdot g(x)]$ is:</div>
+      <div class="quiz-q"><span data-lang="en">If $\lim_{x \to 2} f(x) = 3$ and $\lim_{x \to 2} g(x) = -1$, then $\lim_{x \to 2} [f(x) \cdot g(x)]$ is:</span><span data-lang="zh">若 $\lim_{x \to 2} f(x) = 3$ 且 $\lim_{x \to 2} g(x) = -1$，则 $\lim_{x \to 2} [f(x) \cdot g(x)]$ 为：</span></div>
       <span class="quiz-number">1.5</span>
     </div>
     <div class="quiz-options">
@@ -1066,9 +1081,9 @@ $$\begin{aligned}
       <div class="quiz-opt" data-idx="2">$2$</div>
       <div class="quiz-opt" data-idx="3">DNE</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! By the product law, $\lim [f(x) \cdot g(x)] = 3 \cdot (-1) = -3$.</div>
-    <div class="quiz-explain wrong-exp">By the product law, $\lim [f(x) \cdot g(x)] = L \cdot M = 3 \cdot (-1) = -3$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! By the product law, $\lim [f(x) \cdot g(x)] = 3 \cdot (-1) = -3$.</span><span data-lang="zh">正确！由乘积法则，$\lim [f(x) \cdot g(x)] = 3 \cdot (-1) = -3$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">By the product law, $\lim [f(x) \cdot g(x)] = L \cdot M = 3 \cdot (-1) = -3$.</span><span data-lang="zh">由乘积法则，$\lim [f(x) \cdot g(x)] = L \cdot M = 3 \cdot (-1) = -3$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1076,22 +1091,23 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.6 ═══════════════ -->
 <section class="section" id="s1-6">
-  <div class="section-label">Topic 1.6</div>
-  <h2>Determining Limits Using Algebraic Manipulation</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.6</span><span data-lang="zh">专题 1.6</span></div>
+  <h2><span data-lang="en">Determining Limits Using Algebraic Manipulation</span><span data-lang="zh">通过代数变形求极限</span></h2>
 
-  <p>When direct substitution gives $\frac{0}{0}$ (an indeterminate form), algebraic manipulation is needed to simplify the expression before re-attempting substitution.</p>
+  <p><span data-lang="en">When direct substitution gives $\frac{0}{0}$ (an indeterminate form), algebraic manipulation is needed to simplify the expression before re-attempting substitution.</span><span data-lang="zh">当直接代入得到 $\frac{0}{0}$，即不定式（<code>indeterminate form</code>）时，需要先做代数变形化简，再重新代入。</span></p>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Three Key Techniques</strong>
-    (1) <strong>Factoring</strong> — factor and cancel common factors. (2) <strong>Conjugate multiplication</strong> — rationalize expressions with radicals. (3) <strong>Trig identities</strong> — rewrite using identities before evaluating.
+    <strong style="color: var(--accent);"><span data-lang="en">Three Key Techniques</span><span data-lang="zh">三大关键技巧</span></strong>
+    <span data-lang="en">(1) <strong>Factoring</strong> — factor and cancel common factors. (2) <strong>Conjugate multiplication</strong> — rationalize expressions with radicals. (3) <strong>Trig identities</strong> — rewrite using identities before evaluating.</span>
+    <span data-lang="zh">(1) <strong>因式分解</strong>——分解并消去公因式；(2) <strong>共轭相乘</strong>——对含根号的表达式进行有理化；(3) <strong>三角恒等式</strong>——用恒等式改写后再求极限。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Factoring</summary>
+    <summary><span data-lang="en">Worked Example — Factoring</span><span data-lang="zh">例题——因式分解</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$.</p>
-<p>Direct substitution gives $\frac{9-9}{3-3} = \frac{0}{0}$ — indeterminate. Factor the numerator:</p>
+<p><span data-lang="en">Find $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to 3} \frac{x^2 - 9}{x - 3}$。</span></p>
+<p><span data-lang="en">Direct substitution gives $\frac{9-9}{3-3} = \frac{0}{0}$ — indeterminate. Factor the numerator:</span><span data-lang="zh">直接代入得到 $\frac{9-9}{3-3} = \frac{0}{0}$，为不定式。对分子做因式分解：</span></p>
 $$\begin{aligned}
 &= \lim_{x \to 3} \frac{(x-3)(x+3)}{x-3} \\[4pt]
 &= \lim_{x \to 3} (x+3) \qquad\text{(cancel } x-3\text{)} \\[4pt]
@@ -1102,11 +1118,11 @@ $$\begin{aligned}
   </details>
 
   <details>
-    <summary>Worked Example — Conjugate</summary>
+    <summary><span data-lang="en">Worked Example — Conjugate</span><span data-lang="zh">例题——共轭相乘</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$.</p>
-<p>Direct substitution gives $\frac{0}{0}$ — multiply by the conjugate:</p>
+<p><span data-lang="en">Find $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to 0} \frac{\sqrt{x+4} - 2}{x}$。</span></p>
+<p><span data-lang="en">Direct substitution gives $\frac{0}{0}$ — multiply by the conjugate:</span><span data-lang="zh">直接代入得到 $\frac{0}{0}$，乘以共轭式：</span></p>
 $$\begin{aligned}
 &= \lim_{x \to 0} \frac{(\sqrt{x+4}-2)(\sqrt{x+4}+2)}{x(\sqrt{x+4}+2)} \\[4pt]
 &= \lim_{x \to 0} \frac{(x+4)-4}{x(\sqrt{x+4}+2)} \\[4pt]
@@ -1119,10 +1135,10 @@ $$\begin{aligned}
   </details>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: Evaluate $\lim_{x \to 5} \dfrac{x^2 - 25}{x - 5}$.</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: Evaluate $\lim_{x \to 5} \dfrac{x^2 - 25}{x - 5}$.</span><span data-lang="zh">练习：求 $\lim_{x \to 5} \dfrac{x^2 - 25}{x - 5}$。</span></div>
     <div class="practice-row">
       <input type="text" id="prac2" placeholder="Enter your answer...">
-      <button onclick="checkPractice('prac2', '10', 'pfb2')">Check</button>
+      <button onclick="checkPractice('prac2', '10', 'pfb2')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb2"></div>
   </div>
@@ -1132,36 +1148,41 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.7 ═══════════════ -->
 <section class="section" id="s1-7">
-  <div class="section-label">Topic 1.7</div>
-  <h2>Selecting Procedures for Determining Limits</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.7</span><span data-lang="zh">专题 1.7</span></div>
+  <h2><span data-lang="en">Selecting Procedures for Determining Limits</span><span data-lang="zh">选择求极限的方法</span></h2>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Decision Flowchart</strong>
-    <strong>Step 1:</strong> Try direct substitution. If you get a number, you're done.<br>
+    <strong style="color: var(--purple);"><span data-lang="en">Decision Flowchart</span><span data-lang="zh">决策流程图</span></strong>
+    <span data-lang="en"><strong>Step 1:</strong> Try direct substitution. If you get a number, you're done.<br>
     <strong>Step 2:</strong> If you get $\frac{0}{0}$, try: factoring → conjugate → trig identities → L'Hôpital's (if learned).<br>
     <strong>Step 3:</strong> If you get $\frac{k}{0}$ (where $k \neq 0$), the limit is $\pm \infty$ or DNE — check one-sided limits.<br>
-    <strong>Step 4:</strong> If the form is $\frac{\infty}{\infty}$, divide by the highest power of $x$ in the denominator.
+    <strong>Step 4:</strong> If the form is $\frac{\infty}{\infty}$, divide by the highest power of $x$ in the denominator.</span>
+    <span data-lang="zh"><strong>第 1 步：</strong>先尝试直接代入。若得到一个数，即可结束。<br>
+    <strong>第 2 步：</strong>若得到 $\frac{0}{0}$，依次尝试：因式分解 → 共轭相乘 → 三角恒等式 → 洛必达法则（<code>L'Hôpital</code>，若已学）。<br>
+    <strong>第 3 步：</strong>若得到 $\frac{k}{0}$（$k \neq 0$），极限为 $\pm \infty$ 或不存在——需检查单侧极限。<br>
+    <strong>第 4 步：</strong>若为 $\frac{\infty}{\infty}$ 型，可同时除以分母中 $x$ 的最高次幂。</span>
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Tip</strong>
-    AP questions on Topic 1.7 specifically test your ability to <em>choose</em> the right technique, not just execute it. Practice classifying limit problems before solving them. Ask yourself: "What form does direct substitution give me?"
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Tip</span><span data-lang="zh">考试提示</span></strong>
+    <span data-lang="en">AP questions on Topic 1.7 specifically test your ability to <em>choose</em> the right technique, not just execute it. Practice classifying limit problems before solving them. Ask yourself: "What form does direct substitution give me?"</span>
+    <span data-lang="zh">AP 在 1.7 中重点考察你<em>选择</em>合适方法的能力，而不仅仅是执行。先对极限题做分类再下手。问自己："直接代入得到什么形式？"</span>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">Direct substitution in $\lim_{x \to 2} \frac{x^2 - 4}{x^2 - 3x + 2}$ gives $\frac{0}{0}$. The best next step is:</div>
+      <div class="quiz-q"><span data-lang="en">Direct substitution in $\lim_{x \to 2} \frac{x^2 - 4}{x^2 - 3x + 2}$ gives $\frac{0}{0}$. The best next step is:</span><span data-lang="zh">对 $\lim_{x \to 2} \frac{x^2 - 4}{x^2 - 3x + 2}$ 直接代入得 $\frac{0}{0}$，下一步最合适的是：</span></div>
       <span class="quiz-number">1.7</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Multiply by the conjugate</div>
-      <div class="quiz-opt" data-idx="1">Use a table of values</div>
-      <div class="quiz-opt" data-idx="2">Factor both numerator and denominator</div>
-      <div class="quiz-opt" data-idx="3">The limit does not exist</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Multiply by the conjugate</span><span data-lang="zh">乘以共轭式</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Use a table of values</span><span data-lang="zh">使用数值表</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Factor both numerator and denominator</span><span data-lang="zh">对分子和分母同时做因式分解</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The limit does not exist</span><span data-lang="zh">极限不存在</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Both $x^2 - 4 = (x-2)(x+2)$ and $x^2 - 3x + 2 = (x-2)(x-1)$ share the factor $(x-2)$. After canceling: $\frac{x+2}{x-1}$, which gives $\frac{4}{1} = 4$ at $x = 2$.</div>
-    <div class="quiz-explain wrong-exp">When you get $\frac{0}{0}$, factor first. $\frac{(x-2)(x+2)}{(x-2)(x-1)} = \frac{x+2}{x-1}$. At $x = 2$: $\frac{4}{1} = 4$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Both $x^2 - 4 = (x-2)(x+2)$ and $x^2 - 3x + 2 = (x-2)(x-1)$ share the factor $(x-2)$. After canceling: $\frac{x+2}{x-1}$, which gives $\frac{4}{1} = 4$ at $x = 2$.</span><span data-lang="zh">正确！$x^2 - 4 = (x-2)(x+2)$ 与 $x^2 - 3x + 2 = (x-2)(x-1)$ 同时含有因式 $(x-2)$。消去后得到 $\frac{x+2}{x-1}$，代入 $x = 2$ 得 $\frac{4}{1} = 4$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">When you get $\frac{0}{0}$, factor first. $\frac{(x-2)(x+2)}{(x-2)(x-1)} = \frac{x+2}{x-1}$. At $x = 2$: $\frac{4}{1} = 4$.</span><span data-lang="zh">出现 $\frac{0}{0}$ 时首选因式分解。$\frac{(x-2)(x+2)}{(x-2)(x-1)} = \frac{x+2}{x-1}$，代入 $x = 2$ 得 $\frac{4}{1} = 4$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1169,44 +1190,46 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.8 ═══════════════ -->
 <section class="section" id="s1-8">
-  <div class="section-label">Topic 1.8</div>
-  <h2>Determining Limits Using the Squeeze Theorem</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.8</span><span data-lang="zh">专题 1.8</span></div>
+  <h2><span data-lang="en">Determining Limits Using the Squeeze Theorem</span><span data-lang="zh">利用夹逼定理求极限</span></h2>
 
   <div class="formula-box">
-    <div class="formula-label">The Squeeze Theorem</div>
+    <div class="formula-label"><span data-lang="en">The Squeeze Theorem</span><span data-lang="zh">夹逼定理</span></div>
     $$ \text{If } g(x) \leq f(x) \leq h(x) \text{ near } c, \text{ and } \lim_{x \to c} g(x) = \lim_{x \to c} h(x) = L, \text{ then } \lim_{x \to c} f(x) = L $$
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Classic Results from the Squeeze Theorem</strong>
-    These two limits are proved using the Squeeze Theorem and appear constantly on the AP exam:<br><br>
-    $\displaystyle\lim_{x \to 0} \frac{\sin x}{x} = 1$ &emsp; &emsp; $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x} = 0$
+    <strong style="color: var(--green);"><span data-lang="en">Classic Results from the Squeeze Theorem</span><span data-lang="zh">由夹逼定理得出的经典结论</span></strong>
+    <span data-lang="en">These two limits are proved using the Squeeze Theorem and appear constantly on the AP exam:<br><br>
+    $\displaystyle\lim_{x \to 0} \frac{\sin x}{x} = 1$ &emsp; &emsp; $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x} = 0$</span>
+    <span data-lang="zh">下面两个极限可由夹逼定理（<code>squeeze theorem</code>）证明，是 AP 考试常考的重要结果：<br><br>
+    $\displaystyle\lim_{x \to 0} \frac{\sin x}{x} = 1$ &emsp; &emsp; $\displaystyle\lim_{x \to 0} \frac{1 - \cos x}{x} = 0$</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Must-Know Trig Limits</div>
+    <div class="formula-label"><span data-lang="en">Must-Know Trig Limits</span><span data-lang="zh">必记三角极限</span></div>
     $$ \lim_{x \to 0} \frac{\sin x}{x} = 1 \qquad \lim_{x \to 0} \frac{1 - \cos x}{x} = 0 $$
   </div>
 
   <details>
-    <summary>Worked Example — Squeeze Theorem</summary>
+    <summary><span data-lang="en">Worked Example — Squeeze Theorem</span><span data-lang="zh">例题——夹逼定理</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Show that $\displaystyle\lim_{x \to 0} x^2 \sin\!\left(\tfrac{1}{x}\right) = 0$.</p>
-<p>We know $-1 \le \sin(1/x) \le 1$ for all $x \neq 0$. Multiply through by $x^2 \ge 0$:</p>
+<p><span data-lang="en">Show that $\displaystyle\lim_{x \to 0} x^2 \sin\!\left(\tfrac{1}{x}\right) = 0$.</span><span data-lang="zh">证明 $\displaystyle\lim_{x \to 0} x^2 \sin\!\left(\tfrac{1}{x}\right) = 0$。</span></p>
+<p><span data-lang="en">We know $-1 \le \sin(1/x) \le 1$ for all $x \neq 0$. Multiply through by $x^2 \ge 0$:</span><span data-lang="zh">已知对所有 $x \neq 0$，$-1 \le \sin(1/x) \le 1$。整体乘以 $x^2 \ge 0$：</span></p>
 $$-x^2 \;\le\; x^2 \sin\!\left(\tfrac{1}{x}\right) \;\le\; x^2$$
-<p>Since $\lim_{x \to 0}(-x^2) = 0$ and $\lim_{x \to 0} x^2 = 0$, by the <strong>Squeeze Theorem</strong>:</p>
+<p><span data-lang="en">Since $\lim_{x \to 0}(-x^2) = 0$ and $\lim_{x \to 0} x^2 = 0$, by the <strong>Squeeze Theorem</strong>:</span><span data-lang="zh">由于 $\lim_{x \to 0}(-x^2) = 0$ 且 $\lim_{x \to 0} x^2 = 0$，由<strong>夹逼定理</strong>：</span></p>
 $$\lim_{x \to 0} x^2 \sin\!\left(\tfrac{1}{x}\right) = 0$$
 </div>
     </div>
   </details>
 
   <details>
-    <summary>Worked Example — Using sin(x)/x</summary>
+    <summary><span data-lang="en">Worked Example — Using sin(x)/x</span><span data-lang="zh">例题——使用 sin(x)/x</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find $\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{5x}$.</p>
-<p>Rewrite to match the standard form $\frac{\sin u}{u} \to 1$:</p>
+<p><span data-lang="en">Find $\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{5x}$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to 0} \frac{\sin(3x)}{5x}$。</span></p>
+<p><span data-lang="en">Rewrite to match the standard form $\frac{\sin u}{u} \to 1$:</span><span data-lang="zh">改写以匹配标准形式 $\frac{\sin u}{u} \to 1$：</span></p>
 $$\begin{aligned}
 &= \lim_{x \to 0} \frac{\sin(3x)}{3x} \cdot \frac{3x}{5x} \\[4pt]
 &= \lim_{x \to 0} \frac{\sin(3x)}{3x} \cdot \frac{3}{5} \\[4pt]
@@ -1217,15 +1240,16 @@ $$\begin{aligned}
   </details>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Common Exam Trap</strong>
-    $\lim_{x \to 0} \frac{\sin x}{x} = 1$ but $\lim_{x \to 0} \frac{x}{\sin x} = 1$ as well. However, $\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$, not 1. Always match the argument: $\frac{\sin(kx)}{kx} \to 1$, so $\frac{\sin(kx)}{x} \to k$.
+    <strong style="color: var(--red);"><span data-lang="en">Common Exam Trap</span><span data-lang="zh">考试常见陷阱</span></strong>
+    <span data-lang="en">$\lim_{x \to 0} \frac{\sin x}{x} = 1$ but $\lim_{x \to 0} \frac{x}{\sin x} = 1$ as well. However, $\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$, not 1. Always match the argument: $\frac{\sin(kx)}{kx} \to 1$, so $\frac{\sin(kx)}{x} \to k$.</span>
+    <span data-lang="zh">$\lim_{x \to 0} \frac{\sin x}{x} = 1$，同样 $\lim_{x \to 0} \frac{x}{\sin x} = 1$。但是 $\lim_{x \to 0} \frac{\sin(3x)}{x} = 3$，而不是 1。务必保持自变量匹配：$\frac{\sin(kx)}{kx} \to 1$，所以 $\frac{\sin(kx)}{x} \to k$。</span>
   </div>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: Evaluate $\lim_{x \to 0} \dfrac{\sin(7x)}{x}$.</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: Evaluate $\lim_{x \to 0} \dfrac{\sin(7x)}{x}$.</span><span data-lang="zh">练习：求 $\lim_{x \to 0} \dfrac{\sin(7x)}{x}$。</span></div>
     <div class="practice-row">
       <input type="text" id="prac3" placeholder="Enter your answer...">
-      <button onclick="checkPractice('prac3', '7', 'pfb3')">Check</button>
+      <button onclick="checkPractice('prac3', '7', 'pfb3')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb3"></div>
   </div>
@@ -1235,33 +1259,35 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.9 ═══════════════ -->
 <section class="section" id="s1-9">
-  <div class="section-label">Topic 1.9</div>
-  <h2>Connecting Multiple Representations of Limits</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.9</span><span data-lang="zh">专题 1.9</span></div>
+  <h2><span data-lang="en">Connecting Multiple Representations of Limits</span><span data-lang="zh">联系极限的多种表示</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Four Representations</strong>
-    A limit can be expressed and estimated <strong>graphically</strong> (reading a graph), <strong>numerically</strong> (from a table), <strong>analytically</strong> (algebraic evaluation), and <strong>verbally</strong> (in words). You must be fluent in all four and able to translate between them.
+    <strong style="color: var(--accent);"><span data-lang="en">Four Representations</span><span data-lang="zh">四种表示方式</span></strong>
+    <span data-lang="en">A limit can be expressed and estimated <strong>graphically</strong> (reading a graph), <strong>numerically</strong> (from a table), <strong>analytically</strong> (algebraic evaluation), and <strong>verbally</strong> (in words). You must be fluent in all four and able to translate between them.</span>
+    <span data-lang="zh">极限可以通过<strong>图像</strong>（读图）、<strong>数值</strong>（由表格）、<strong>解析</strong>（代数求值）以及<strong>语言</strong>（用文字描述）四种方式来表达与估计。这四种方式都要熟练，并能在它们之间互相转换。</span>
   </div>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Tip</strong>
-    Free-response questions often present data in one representation and ask you to use another. Practice: given a table, sketch the graph. Given a graph, write the limit in analytical notation. Given a formula, describe the limit behavior in words.
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Tip</span><span data-lang="zh">考试提示</span></strong>
+    <span data-lang="en">Free-response questions often present data in one representation and ask you to use another. Practice: given a table, sketch the graph. Given a graph, write the limit in analytical notation. Given a formula, describe the limit behavior in words.</span>
+    <span data-lang="zh">自由回答题常用一种表示给出数据，并要求用另一种作答。多多练习：给表格，画图像；给图像，用解析记号写极限；给公式，用语言描述极限行为。</span>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">If $\lim_{x \to 2} f(x) = 5$, which is guaranteed?</div>
+      <div class="quiz-q"><span data-lang="en">If $\lim_{x \to 2} f(x) = 5$, which is guaranteed?</span><span data-lang="zh">若 $\lim_{x \to 2} f(x) = 5$，下列哪一项必然成立？</span></div>
       <span class="quiz-number">1.9</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$f(2) = 5$</div>
-      <div class="quiz-opt" data-idx="1">$f$ is continuous at $x = 2$</div>
-      <div class="quiz-opt" data-idx="2">$f$ is defined at $x = 2$</div>
-      <div class="quiz-opt" data-idx="3">$f(x)$ approaches 5 as $x$ approaches 2</div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$f$ is continuous at $x = 2$</span><span data-lang="zh">$f$ 在 $x = 2$ 处连续</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$f$ is defined at $x = 2$</span><span data-lang="zh">$f$ 在 $x = 2$ 处有定义</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">$f(x)$ approaches 5 as $x$ approaches 2</span><span data-lang="zh">当 $x$ 趋于 2 时，$f(x)$ 趋近于 5</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The limit tells us what $f(x)$ approaches — it says nothing about whether $f(2)$ exists, let alone equals 5.</div>
-    <div class="quiz-explain wrong-exp">The limit describes what $f(x)$ approaches near $x = 2$. It does not guarantee $f(2)$ exists or that $f$ is continuous.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! The limit tells us what $f(x)$ approaches — it says nothing about whether $f(2)$ exists, let alone equals 5.</span><span data-lang="zh">正确！极限只告诉我们 $f(x)$ 所趋近的值——并不说明 $f(2)$ 是否存在，更不必等于 5。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The limit describes what $f(x)$ approaches near $x = 2$. It does not guarantee $f(2)$ exists or that $f$ is continuous.</span><span data-lang="zh">极限刻画的是 $x = 2$ 附近 $f(x)$ 所趋近的值，并不保证 $f(2)$ 存在或 $f$ 在该点连续。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1269,35 +1295,39 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.10 ═══════════════ -->
 <section class="section" id="s1-10">
-  <div class="section-label">Topic 1.10</div>
-  <h2>Exploring Types of Discontinuities</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.10</span><span data-lang="zh">专题 1.10</span></div>
+  <h2><span data-lang="en">Exploring Types of Discontinuities</span><span data-lang="zh">探究不连续点的类型</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Three Types of Discontinuities</strong>
-    <strong>Removable (hole):</strong> The limit exists, but $f(c)$ is either undefined or $f(c) \neq \lim_{x \to c} f(x)$. Can be "fixed" by redefining $f(c)$.<br><br>
+    <strong style="color: var(--accent);"><span data-lang="en">Three Types of Discontinuities</span><span data-lang="zh">不连续点（<code>discontinuity</code>）的三种类型</span></strong>
+    <span data-lang="en"><strong>Removable (hole):</strong> The limit exists, but $f(c)$ is either undefined or $f(c) \neq \lim_{x \to c} f(x)$. Can be "fixed" by redefining $f(c)$.<br><br>
     <strong>Jump:</strong> Both one-sided limits exist but are not equal: $\lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x)$. Common in piecewise functions.<br><br>
-    <strong>Infinite (vertical asymptote):</strong> At least one of the one-sided limits is $\pm\infty$.
+    <strong>Infinite (vertical asymptote):</strong> At least one of the one-sided limits is $\pm\infty$.</span>
+    <span data-lang="zh"><strong>可去间断点（洞）：</strong>极限存在，但 $f(c)$ 无定义或 $f(c) \neq \lim_{x \to c} f(x)$。可通过重新定义 $f(c)$ 来"修补"。<br><br>
+    <strong>跳跃间断点：</strong>两个单侧极限都存在但不相等：$\lim_{x \to c^-} f(x) \neq \lim_{x \to c^+} f(x)$。常见于分段函数。<br><br>
+    <strong>无穷间断点（垂直渐近线）：</strong>至少一个单侧极限为 $\pm\infty$。</span>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Common Exam Trap</strong>
-    Don't confuse the <em>type</em> of discontinuity with whether a limit exists. At a removable discontinuity, the limit <em>does</em> exist. At a jump discontinuity, the two-sided limit <em>does not</em> exist.
+    <strong style="color: var(--red);"><span data-lang="en">Common Exam Trap</span><span data-lang="zh">考试常见陷阱</span></strong>
+    <span data-lang="en">Don't confuse the <em>type</em> of discontinuity with whether a limit exists. At a removable discontinuity, the limit <em>does</em> exist. At a jump discontinuity, the two-sided limit <em>does not</em> exist.</span>
+    <span data-lang="zh">不要把不连续点的<em>类型</em>与极限是否存在混为一谈。在可去间断点处，极限<em>确实</em>存在；在跳跃间断点处，双侧极限<em>不</em>存在。</span>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">$f(x) = \frac{x^2 - 1}{x - 1}$ has what type of discontinuity at $x = 1$?</div>
+      <div class="quiz-q"><span data-lang="en">$f(x) = \frac{x^2 - 1}{x - 1}$ has what type of discontinuity at $x = 1$?</span><span data-lang="zh">$f(x) = \frac{x^2 - 1}{x - 1}$ 在 $x = 1$ 处的不连续类型为：</span></div>
       <span class="quiz-number">1.10</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Jump</div>
-      <div class="quiz-opt" data-idx="1">Removable</div>
-      <div class="quiz-opt" data-idx="2">Infinite</div>
-      <div class="quiz-opt" data-idx="3">No discontinuity</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Jump</span><span data-lang="zh">跳跃</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Removable</span><span data-lang="zh">可去</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Infinite</span><span data-lang="zh">无穷</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">No discontinuity</span><span data-lang="zh">不存在不连续</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{x^2 - 1}{x - 1} = \frac{(x-1)(x+1)}{x-1} = x + 1$ for $x \neq 1$. The limit is 2, but $f(1)$ is undefined — a hole.</div>
-    <div class="quiz-explain wrong-exp">Factor: $\frac{(x-1)(x+1)}{x-1} = x+1$ for $x \neq 1$. The limit as $x \to 1$ is 2, but $f(1)$ is undefined. This is a removable discontinuity (hole).</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{x^2 - 1}{x - 1} = \frac{(x-1)(x+1)}{x-1} = x + 1$ for $x \neq 1$. The limit is 2, but $f(1)$ is undefined — a hole.</span><span data-lang="zh">正确！当 $x \neq 1$ 时，$\frac{x^2 - 1}{x - 1} = \frac{(x-1)(x+1)}{x-1} = x + 1$。极限为 2，但 $f(1)$ 无定义——为一个"洞"。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factor: $\frac{(x-1)(x+1)}{x-1} = x+1$ for $x \neq 1$. The limit as $x \to 1$ is 2, but $f(1)$ is undefined. This is a removable discontinuity (hole).</span><span data-lang="zh">因式分解：当 $x \neq 1$ 时，$\frac{(x-1)(x+1)}{x-1} = x+1$。$x \to 1$ 时极限为 2，但 $f(1)$ 无定义。这是可去间断点（洞）。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1305,43 +1335,44 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.11 ═══════════════ -->
 <section class="section" id="s1-11">
-  <div class="section-label">Topic 1.11</div>
-  <h2>Defining Continuity at a Point</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.11</span><span data-lang="zh">专题 1.11</span></div>
+  <h2><span data-lang="en">Defining Continuity at a Point</span><span data-lang="zh">某点处连续性的定义</span></h2>
 
   <div class="formula-box">
-    <div class="formula-label">Three Conditions for Continuity at $x = c$</div>
+    <div class="formula-label"><span data-lang="en">Three Conditions for Continuity at $x = c$</span><span data-lang="zh">$x = c$ 处连续的三个条件</span></div>
     $$ \text{1. } f(c) \text{ is defined} \qquad \text{2. } \lim_{x \to c} f(x) \text{ exists} \qquad \text{3. } \lim_{x \to c} f(x) = f(c) $$
   </div>
 
-  <p>All three conditions must hold. If any one fails, $f$ is discontinuous at $c$.</p>
+  <p><span data-lang="en">All three conditions must hold. If any one fails, $f$ is discontinuous at $c$.</span><span data-lang="zh">三个条件必须同时满足。任意一个不成立，$f$ 在 $c$ 处就不连续。</span></p>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Exam Tip — Showing Your Work</strong>
-    When justifying continuity on the AP exam, always explicitly verify all three conditions. Write: "$f(c) = \ldots$", "The limit equals $\ldots$", and "Since $f(c)$ equals the limit, $f$ is continuous at $c$." If discontinuous, state which condition fails.
+    <strong style="color: var(--orange);"><span data-lang="en">Exam Tip — Showing Your Work</span><span data-lang="zh">考试提示——书写过程</span></strong>
+    <span data-lang="en">When justifying continuity on the AP exam, always explicitly verify all three conditions. Write: "$f(c) = \ldots$", "The limit equals $\ldots$", and "Since $f(c)$ equals the limit, $f$ is continuous at $c$." If discontinuous, state which condition fails.</span>
+    <span data-lang="zh">在 AP 考试中论证连续性时，务必明确地验证全部三个条件。写出："$f(c) = \ldots$"、"极限等于 $\ldots$"、"由于 $f(c)$ 等于极限，$f$ 在 $c$ 处连续。"若不连续，说明哪一条不满足。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Testing Continuity</summary>
+    <summary><span data-lang="en">Worked Example — Testing Continuity</span><span data-lang="zh">例题——判断连续性</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Is $f$ continuous at $x = 2$?</p>
+<p><span data-lang="en">Is $f$ continuous at $x = 2$?</span><span data-lang="zh">$f$ 在 $x = 2$ 处连续吗？</span></p>
 $$f(x) = \begin{cases} x^2 - 1, & x < 2 \\ 5, & x = 2 \\ 2x + 1, & x > 2 \end{cases}$$
-<p><strong>Condition 1:</strong> $f(2) = 5$ ✓ (defined)</p>
-<p><strong>Condition 2:</strong> Check the limit:</p>
+<p><span data-lang="en"><strong>Condition 1:</strong> $f(2) = 5$ ✓ (defined)</span><span data-lang="zh"><strong>条件 1：</strong>$f(2) = 5$ ✓（有定义）</span></p>
+<p><span data-lang="en"><strong>Condition 2:</strong> Check the limit:</span><span data-lang="zh"><strong>条件 2：</strong>检查极限：</span></p>
 $$\begin{aligned}
 \text{Left: } &\lim_{x \to 2^-}(x^2 - 1) = 4 - 1 = 3 \\[4pt]
 \text{Right: } &\lim_{x \to 2^+}(2x + 1) = 4 + 1 = 5
 \end{aligned}$$
-<p>Left $\neq$ Right, so the limit does not exist. Condition 2 fails — $f$ is <strong>discontinuous</strong> at $x = 2$ (jump discontinuity).</p>
+<p><span data-lang="en">Left $\neq$ Right, so the limit does not exist. Condition 2 fails — $f$ is <strong>discontinuous</strong> at $x = 2$ (jump discontinuity).</span><span data-lang="zh">左 $\neq$ 右，所以极限不存在。条件 2 不满足——$f$ 在 $x = 2$ 处<strong>不连续</strong>（跳跃间断点）。</span></p>
 </div>
     </div>
   </details>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: If $f(x) = \begin{cases} x+1, & x \neq 3 \\ 7, & x = 3 \end{cases}$, what is $\lim_{x \to 3} f(x)$?</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: If $f(x) = \begin{cases} x+1, & x \neq 3 \\ 7, & x = 3 \end{cases}$, what is $\lim_{x \to 3} f(x)$?</span><span data-lang="zh">练习：若 $f(x) = \begin{cases} x+1, & x \neq 3 \\ 7, & x = 3 \end{cases}$，则 $\lim_{x \to 3} f(x)$ 为多少？</span></div>
     <div class="practice-row">
       <input type="text" id="prac4" placeholder="Enter your answer...">
-      <button onclick="checkPractice('prac4', '4', 'pfb4')">Check</button>
+      <button onclick="checkPractice('prac4', '4', 'pfb4')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb4"></div>
   </div>
@@ -1351,17 +1382,19 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.12 ═══════════════ -->
 <section class="section" id="s1-12">
-  <div class="section-label">Topic 1.12</div>
-  <h2>Confirming Continuity over an Interval</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.12</span><span data-lang="zh">专题 1.12</span></div>
+  <h2><span data-lang="en">Confirming Continuity over an Interval</span><span data-lang="zh">确认在区间上的连续性</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Continuity on an Interval</strong>
-    A function is continuous on an open interval $(a, b)$ if it is continuous at every point in the interval. For a closed interval $[a, b]$, we also require that $\lim_{x \to a^+} f(x) = f(a)$ and $\lim_{x \to b^-} f(x) = f(b)$.
+    <strong style="color: var(--accent);"><span data-lang="en">Continuity on an Interval</span><span data-lang="zh">区间上的连续性（<code>continuity</code>）</span></strong>
+    <span data-lang="en">A function is continuous on an open interval $(a, b)$ if it is continuous at every point in the interval. For a closed interval $[a, b]$, we also require that $\lim_{x \to a^+} f(x) = f(a)$ and $\lim_{x \to b^-} f(x) = f(b)$.</span>
+    <span data-lang="zh">函数在开区间 $(a, b)$ 上连续，是指它在区间内每一点都连续。对于闭区间 $[a, b]$，还要求 $\lim_{x \to a^+} f(x) = f(a)$ 且 $\lim_{x \to b^-} f(x) = f(b)$。</span>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Functions Continuous on Their Domains</strong>
-    Polynomial, rational, power, exponential, logarithmic, and trigonometric functions are all continuous at every point in their respective domains. Use this fact to identify intervals of continuity quickly.
+    <strong style="color: var(--green);"><span data-lang="en">Functions Continuous on Their Domains</span><span data-lang="zh">在定义域上处处连续的函数</span></strong>
+    <span data-lang="en">Polynomial, rational, power, exponential, logarithmic, and trigonometric functions are all continuous at every point in their respective domains. Use this fact to identify intervals of continuity quickly.</span>
+    <span data-lang="zh">多项式函数、有理函数、幂函数、指数函数、对数函数与三角函数在各自的定义域（<code>domain</code>）内每一点都连续。利用这一事实可以迅速判定连续区间。</span>
   </div>
 </section>
 
@@ -1369,36 +1402,37 @@ $$\begin{aligned}
 
 <!-- ═══════════════ 1.13 ═══════════════ -->
 <section class="section" id="s1-13">
-  <div class="section-label">Topic 1.13</div>
-  <h2>Removing Discontinuities</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.13</span><span data-lang="zh">专题 1.13</span></div>
+  <h2><span data-lang="en">Removing Discontinuities</span><span data-lang="zh">去除不连续点</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Removable Discontinuities</strong>
-    If $\lim_{x \to c} f(x) = L$ exists but $f(c) \neq L$ (or $f(c)$ is undefined), redefining $f(c) = L$ removes the discontinuity.
+    <strong style="color: var(--accent);"><span data-lang="en">Removable Discontinuities</span><span data-lang="zh">可去间断点（<code>removable discontinuity</code>）</span></strong>
+    <span data-lang="en">If $\lim_{x \to c} f(x) = L$ exists but $f(c) \neq L$ (or $f(c)$ is undefined), redefining $f(c) = L$ removes the discontinuity.</span>
+    <span data-lang="zh">若 $\lim_{x \to c} f(x) = L$ 存在，但 $f(c) \neq L$（或 $f(c)$ 无定义），则将 $f(c)$ 重新定义为 $L$ 即可去除该不连续。</span>
   </div>
 
   <details>
-    <summary>Worked Example — Piecewise Continuity</summary>
+    <summary><span data-lang="en">Worked Example — Piecewise Continuity</span><span data-lang="zh">例题——分段函数的连续性</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Find the value of $k$ that makes $f$ continuous at $x = 2$:</p>
+<p><span data-lang="en">Find the value of $k$ that makes $f$ continuous at $x = 2$:</span><span data-lang="zh">求使 $f$ 在 $x = 2$ 处连续的 $k$ 值：</span></p>
 $$f(x) = \begin{cases} kx + 1, & x \le 2 \\ x^2 - 1, & x > 2 \end{cases}$$
-<p>For continuity, the left and right limits must equal $f(2)$:</p>
+<p><span data-lang="en">For continuity, the left and right limits must equal $f(2)$:</span><span data-lang="zh">连续要求左极限与右极限都等于 $f(2)$：</span></p>
 $$\begin{aligned}
 \text{Left: } &\lim_{x \to 2^-}(kx+1) = 2k + 1 \\[4pt]
 \text{Right: } &\lim_{x \to 2^+}(x^2 - 1) = 3
 \end{aligned}$$
-<p>Set equal and solve:</p>
+<p><span data-lang="en">Set equal and solve:</span><span data-lang="zh">令两者相等并求解：</span></p>
 $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
 </div>
     </div>
   </details>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: Find $k$ so that $f(x) = \begin{cases} 3x + k, & x \leq 1 \\ 5x - 2, & x > 1 \end{cases}$ is continuous at $x = 1$.</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: Find $k$ so that $f(x) = \begin{cases} 3x + k, & x \leq 1 \\ 5x - 2, & x > 1 \end{cases}$ is continuous at $x = 1$.</span><span data-lang="zh">练习：求 $k$，使得 $f(x) = \begin{cases} 3x + k, & x \leq 1 \\ 5x - 2, & x > 1 \end{cases}$ 在 $x = 1$ 处连续。</span></div>
     <div class="practice-row">
       <input type="text" id="prac5" placeholder="k = ...">
-      <button onclick="checkPractice('prac5', '0', 'pfb5')">Check</button>
+      <button onclick="checkPractice('prac5', '0', 'pfb5')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb5"></div>
   </div>
@@ -1408,22 +1442,24 @@ $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
 
 <!-- ═══════════════ 1.14 ═══════════════ -->
 <section class="section" id="s1-14">
-  <div class="section-label">Topic 1.14</div>
-  <h2>Connecting Infinite Limits and Vertical Asymptotes</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.14</span><span data-lang="zh">专题 1.14</span></div>
+  <h2><span data-lang="en">Connecting Infinite Limits and Vertical Asymptotes</span><span data-lang="zh">无穷极限与垂直渐近线的联系</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Vertical Asymptotes</strong>
-    If $\lim_{x \to c^+} f(x) = \pm\infty$ or $\lim_{x \to c^-} f(x) = \pm\infty$, then $x = c$ is a <strong>vertical asymptote</strong>. This occurs when the denominator approaches $0$ while the numerator approaches a nonzero value.
+    <strong style="color: var(--accent);"><span data-lang="en">Vertical Asymptotes</span><span data-lang="zh">垂直渐近线（<code>vertical asymptote</code>）</span></strong>
+    <span data-lang="en">If $\lim_{x \to c^+} f(x) = \pm\infty$ or $\lim_{x \to c^-} f(x) = \pm\infty$, then $x = c$ is a <strong>vertical asymptote</strong>. This occurs when the denominator approaches $0$ while the numerator approaches a nonzero value.</span>
+    <span data-lang="zh">若 $\lim_{x \to c^+} f(x) = \pm\infty$ 或 $\lim_{x \to c^-} f(x) = \pm\infty$，则 $x = c$ 是<strong>垂直渐近线</strong>。当分母趋于 $0$ 而分子趋于非零值时即出现这种情形。</span>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Sign Analysis Technique</strong>
-    To determine whether the limit is $+\infty$ or $-\infty$, analyze the sign of the function on each side of $c$. Check: is the numerator positive or negative? Is the denominator approaching $0^+$ or $0^-$? Combine the signs.
+    <strong style="color: var(--purple);"><span data-lang="en">Sign Analysis Technique</span><span data-lang="zh">符号分析法</span></strong>
+    <span data-lang="en">To determine whether the limit is $+\infty$ or $-\infty$, analyze the sign of the function on each side of $c$. Check: is the numerator positive or negative? Is the denominator approaching $0^+$ or $0^-$? Combine the signs.</span>
+    <span data-lang="zh">要判断极限是 $+\infty$ 还是 $-\infty$，分别在 $c$ 两侧分析函数的符号。先看：分子是正还是负？分母趋于 $0^+$ 还是 $0^-$？再综合两个符号。</span>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">$\lim_{x \to 0^+} \dfrac{1}{x}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">$\lim_{x \to 0^+} \dfrac{1}{x}$ equals:</span><span data-lang="zh">$\lim_{x \to 0^+} \dfrac{1}{x}$ 等于：</span></div>
       <span class="quiz-number">1.14</span>
     </div>
     <div class="quiz-options">
@@ -1432,9 +1468,9 @@ $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
       <div class="quiz-opt" data-idx="2">$0$</div>
       <div class="quiz-opt" data-idx="3">DNE</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! As $x \to 0^+$, both the numerator (1) and denominator ($x$) are positive. Positive divided by a small positive number gives a large positive number, so the limit is $+\infty$.</div>
-    <div class="quiz-explain wrong-exp">As $x \to 0^+$, $x$ is small and positive, so $1/x$ is large and positive. The limit is $+\infty$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! As $x \to 0^+$, both the numerator (1) and denominator ($x$) are positive. Positive divided by a small positive number gives a large positive number, so the limit is $+\infty$.</span><span data-lang="zh">正确！当 $x \to 0^+$ 时，分子（1）与分母（$x$）都为正。正数除以一个小正数得到一个大的正数，故极限为 $+\infty$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">As $x \to 0^+$, $x$ is small and positive, so $1/x$ is large and positive. The limit is $+\infty$.</span><span data-lang="zh">当 $x \to 0^+$ 时，$x$ 为很小的正数，所以 $1/x$ 为很大的正数。极限为 $+\infty$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1442,20 +1478,24 @@ $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
 
 <!-- ═══════════════ 1.15 ═══════════════ -->
 <section class="section" id="s1-15">
-  <div class="section-label">Topic 1.15</div>
-  <h2>Connecting Limits at Infinity and Horizontal Asymptotes</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.15</span><span data-lang="zh">专题 1.15</span></div>
+  <h2><span data-lang="en">Connecting Limits at Infinity and Horizontal Asymptotes</span><span data-lang="zh">无穷处的极限与水平渐近线的联系</span></h2>
 
   <div class="concept-box">
-    <strong style="color: var(--accent);">Horizontal Asymptote Rules for Rational Functions</strong>
-    For $f(x) = \frac{a_n x^n + \cdots}{b_m x^m + \cdots}$:<br><br>
+    <strong style="color: var(--accent);"><span data-lang="en">Horizontal Asymptote Rules for Rational Functions</span><span data-lang="zh">有理函数的水平渐近线（<code>horizontal asymptote</code>）规则</span></strong>
+    <span data-lang="en">For $f(x) = \frac{a_n x^n + \cdots}{b_m x^m + \cdots}$:<br><br>
     <strong>If $n < m$:</strong> HA at $y = 0$. Numerator's degree is smaller — denominator "wins."<br><br>
     <strong>If $n = m$:</strong> HA at $y = \frac{a_n}{b_m}$ (ratio of leading coefficients).<br><br>
-    <strong>If $n > m$:</strong> No horizontal asymptote. The function grows without bound.
+    <strong>If $n > m$:</strong> No horizontal asymptote. The function grows without bound.</span>
+    <span data-lang="zh">对 $f(x) = \frac{a_n x^n + \cdots}{b_m x^m + \cdots}$：<br><br>
+    <strong>若 $n < m$：</strong>水平渐近线为 $y = 0$。分子次数较小——分母"取胜"。<br><br>
+    <strong>若 $n = m$：</strong>水平渐近线为 $y = \frac{a_n}{b_m}$（首项系数之比）。<br><br>
+    <strong>若 $n > m$：</strong>无水平渐近线，函数无界增大。</span>
   </div>
 
   <div class="interactive-widget">
-    <div class="widget-header">Interactive End Behavior Explorer</div>
-    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;">Explore $f(x) = \frac{ax^n}{x^m + 1}$ — adjust the degree of the numerator and denominator to see how horizontal asymptotes depend on the degree comparison.</p>
+    <div class="widget-header"><span data-lang="en">Interactive End Behavior Explorer</span><span data-lang="zh">交互式末端行为演示</span></div>
+    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: center;"><span data-lang="en">Explore $f(x) = \frac{ax^n}{x^m + 1}$ — adjust the degree of the numerator and denominator to see how horizontal asymptotes depend on the degree comparison.</span><span data-lang="zh">探索 $f(x) = \frac{ax^n}{x^m + 1}$——调整分子与分母的次数，观察水平渐近线如何依赖于次数比较。</span></p>
     <div class="widget-canvas-wrap">
       <canvas id="haCanvas" width="720" height="400"></canvas>
     </div>
@@ -1475,15 +1515,15 @@ $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
       <div class="widget-readout" id="haValM">m = 1</div>
     </div>
     <div class="widget-sum-readout" id="haResult">
-      HA: <span class="sum-val">y = 2.0</span> (equal degrees)
+      <span data-lang="en">HA: <span class="sum-val">y = 2.0</span> (equal degrees)</span><span data-lang="zh">水平渐近线：<span class="sum-val">y = 2.0</span>（次数相同）</span>
     </div>
   </div>
 
   <div class="practice-input-group">
-    <div class="practice-prompt">Practice: What is $\lim_{x \to \infty} \dfrac{3x^2 + 1}{5x^2 - 2}$?</div>
+    <div class="practice-prompt"><span data-lang="en">Practice: What is $\lim_{x \to \infty} \dfrac{3x^2 + 1}{5x^2 - 2}$?</span><span data-lang="zh">练习：$\lim_{x \to \infty} \dfrac{3x^2 + 1}{5x^2 - 2}$ 等于多少？</span></div>
     <div class="practice-row">
       <input type="text" id="prac6" placeholder="Enter your answer (as a fraction)...">
-      <button onclick="checkPractice('prac6', '3/5', 'pfb6')">Check</button>
+      <button onclick="checkPractice('prac6', '3/5', 'pfb6')"><span data-lang="en">Check</span><span data-lang="zh">检查</span></button>
     </div>
     <div class="practice-feedback" id="pfb6"></div>
   </div>
@@ -1493,55 +1533,57 @@ $$2k + 1 = 3 \;\;\Longrightarrow\;\; 2k = 2 \;\;\Longrightarrow\;\; k = 1$$
 
 <!-- ═══════════════ 1.16 ═══════════════ -->
 <section class="section" id="s1-16">
-  <div class="section-label">Topic 1.16</div>
-  <h2>Working with the Intermediate Value Theorem (IVT)</h2>
+  <div class="section-label"><span data-lang="en">Topic 1.16</span><span data-lang="zh">专题 1.16</span></div>
+  <h2><span data-lang="en">Working with the Intermediate Value Theorem (IVT)</span><span data-lang="zh">介值定理（<code>IVT</code>）的应用</span></h2>
 
   <div class="formula-box">
-    <div class="formula-label">Intermediate Value Theorem</div>
+    <div class="formula-label"><span data-lang="en">Intermediate Value Theorem</span><span data-lang="zh">介值定理</span></div>
     $$ \text{If } f \text{ is continuous on } [a, b] \text{ and } d \text{ is between } f(a) \text{ and } f(b), $$
     $$ \text{then there exists at least one } c \in (a, b) \text{ such that } f(c) = d. $$
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">What IVT Says Intuitively</strong>
-    A continuous function can't "skip" values. If $f$ starts below a line and ends above it (or vice versa), $f$ must cross that line at least once. This is used to guarantee the existence of roots.
+    <strong style="color: var(--green);"><span data-lang="en">What IVT Says Intuitively</span><span data-lang="zh">介值定理的直观含义</span></strong>
+    <span data-lang="en">A continuous function can't "skip" values. If $f$ starts below a line and ends above it (or vice versa), $f$ must cross that line at least once. This is used to guarantee the existence of roots.</span>
+    <span data-lang="zh">连续函数不能"跳过"取值。若 $f$ 在起点处低于某条水平线，而在终点处高于该线（或相反），则 $f$ 至少穿越该线一次。常用于保证根的存在性。</span>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">IVT Justification Checklist</strong>
-    On the AP exam, you MUST state: (1) $f$ is continuous on $[a, b]$ (say <em>why</em>), (2) $d$ is between $f(a)$ and $f(b)$ (compute both), and (3) <em>therefore</em> by the IVT, there exists a $c$ in $(a, b)$ such that $f(c) = d$. Missing any of these loses points.
+    <strong style="color: var(--red);"><span data-lang="en">IVT Justification Checklist</span><span data-lang="zh">介值定理论证清单</span></strong>
+    <span data-lang="en">On the AP exam, you MUST state: (1) $f$ is continuous on $[a, b]$ (say <em>why</em>), (2) $d$ is between $f(a)$ and $f(b)$ (compute both), and (3) <em>therefore</em> by the IVT, there exists a $c$ in $(a, b)$ such that $f(c) = d$. Missing any of these loses points.</span>
+    <span data-lang="zh">AP 考试中必须明确写出：(1) $f$ 在 $[a, b]$ 上连续（说明<em>原因</em>）；(2) $d$ 位于 $f(a)$ 与 $f(b)$ 之间（两端点的值都要算出来）；(3) <em>因此</em>由介值定理，存在 $c \in (a, b)$ 使 $f(c) = d$。缺一即扣分。</span>
   </div>
 
   <details>
-    <summary>Worked Example — IVT to Show a Root Exists</summary>
+    <summary><span data-lang="en">Worked Example — IVT to Show a Root Exists</span><span data-lang="zh">例题——用介值定理证明根存在</span></summary>
     <div class="detail-body">
 <div class="worked-solution">
-<p>Show that $f(x) = x^3 - 2x - 5$ has a root on $[2,\,3]$.</p>
-<p><strong>Step 1:</strong> $f$ is a polynomial, so it is continuous everywhere, including on $[2, 3]$.</p>
-<p><strong>Step 2:</strong> Evaluate the endpoints:</p>
+<p><span data-lang="en">Show that $f(x) = x^3 - 2x - 5$ has a root on $[2,\,3]$.</span><span data-lang="zh">证明 $f(x) = x^3 - 2x - 5$ 在 $[2,\,3]$ 上有根。</span></p>
+<p><span data-lang="en"><strong>Step 1:</strong> $f$ is a polynomial, so it is continuous everywhere, including on $[2, 3]$.</span><span data-lang="zh"><strong>第 1 步：</strong>$f$ 是多项式，所以处处连续，在 $[2, 3]$ 上也连续。</span></p>
+<p><span data-lang="en"><strong>Step 2:</strong> Evaluate the endpoints:</span><span data-lang="zh"><strong>第 2 步：</strong>计算两个端点的值：</span></p>
 $$\begin{aligned}
 f(2) &= 8 - 4 - 5 = -1 \quad (\text{negative}) \\[4pt]
 f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
 \end{aligned}$$
-<p><strong>Step 3:</strong> Since $f(2) < 0 < f(3)$ and $f$ is continuous on $[2, 3]$, the IVT guarantees at least one $c \in (2, 3)$ where $f(c) = 0$. ✓</p>
+<p><span data-lang="en"><strong>Step 3:</strong> Since $f(2) < 0 < f(3)$ and $f$ is continuous on $[2, 3]$, the IVT guarantees at least one $c \in (2, 3)$ where $f(c) = 0$. ✓</span><span data-lang="zh"><strong>第 3 步：</strong>由于 $f(2) < 0 < f(3)$ 且 $f$ 在 $[2, 3]$ 上连续，由介值定理至少存在一个 $c \in (2, 3)$ 使 $f(c) = 0$。✓</span></p>
 </div>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">To apply the IVT to show $f(c) = 0$ for some $c$ in $[1, 5]$, you need:</div>
+      <div class="quiz-q"><span data-lang="en">To apply the IVT to show $f(c) = 0$ for some $c$ in $[1, 5]$, you need:</span><span data-lang="zh">要用介值定理证明存在 $c \in [1, 5]$ 使 $f(c) = 0$，需要：</span></div>
       <span class="quiz-number">1.16</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$f(1) = 0$ or $f(5) = 0$</div>
-      <div class="quiz-opt" data-idx="1">$f$ is differentiable on $[1, 5]$</div>
-      <div class="quiz-opt" data-idx="2">$f$ is continuous on $[1, 5]$ and $f(1)$ and $f(5)$ have opposite signs</div>
-      <div class="quiz-opt" data-idx="3">$f$ is a polynomial</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$f(1) = 0$ or $f(5) = 0$</span><span data-lang="zh">$f(1) = 0$ 或 $f(5) = 0$</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$f$ is differentiable on $[1, 5]$</span><span data-lang="zh">$f$ 在 $[1, 5]$ 上可导</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$f$ is continuous on $[1, 5]$ and $f(1)$ and $f(5)$ have opposite signs</span><span data-lang="zh">$f$ 在 $[1, 5]$ 上连续，且 $f(1)$ 与 $f(5)$ 异号</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">$f$ is a polynomial</span><span data-lang="zh">$f$ 是多项式</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The IVT requires continuity on the closed interval and that 0 lies between $f(1)$ and $f(5)$ — which happens when they have opposite signs.</div>
-    <div class="quiz-explain wrong-exp">The IVT requires (1) $f$ continuous on $[1, 5]$, and (2) 0 is between $f(1)$ and $f(5)$, i.e., they have opposite signs.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! The IVT requires continuity on the closed interval and that 0 lies between $f(1)$ and $f(5)$ — which happens when they have opposite signs.</span><span data-lang="zh">正确！介值定理要求函数在闭区间上连续，且 0 位于 $f(1)$ 与 $f(5)$ 之间——即两者异号。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The IVT requires (1) $f$ continuous on $[1, 5]$, and (2) 0 is between $f(1)$ and $f(5)$, i.e., they have opposite signs.</span><span data-lang="zh">介值定理要求：(1) $f$ 在 $[1, 5]$ 上连续；(2) 0 介于 $f(1)$ 与 $f(5)$ 之间，即两者异号。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1549,49 +1591,55 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Review</div>
-  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Exam Strategy &amp; Common Pitfalls</span><span data-lang="zh">备考策略与常见陷阱</span></h2>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-green">M</div>
-        <div class="card-title">Memorize</div>
+        <div class="card-title"><span data-lang="en">Memorize</span><span data-lang="zh">熟记</span></div>
       </div>
       <ul style="margin-left: 18px; line-height: 2;">
-        <li>Three conditions for continuity</li>
+        <li><span data-lang="en">Three conditions for continuity</span><span data-lang="zh">连续性的三个条件</span></li>
         <li>$\lim_{x \to 0} \frac{\sin x}{x} = 1$</li>
         <li>$\lim_{x \to 0} \frac{1 - \cos x}{x} = 0$</li>
-        <li>Limit laws (sum, product, quotient)</li>
-        <li>IVT statement &amp; conditions</li>
-        <li>Rational function HA rules ($n &lt; m$, $n = m$, $n &gt; m$)</li>
+        <li><span data-lang="en">Limit laws (sum, product, quotient)</span><span data-lang="zh">极限法则（和、积、商）</span></li>
+        <li><span data-lang="en">IVT statement &amp; conditions</span><span data-lang="zh">介值定理的陈述与前提</span></li>
+        <li><span data-lang="en">Rational function HA rules ($n &lt; m$, $n = m$, $n &gt; m$)</span><span data-lang="zh">有理函数水平渐近线规则（$n &lt; m$、$n = m$、$n &gt; m$）</span></li>
       </ul>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">U</div>
-        <div class="card-title">Understand</div>
+        <div class="card-title"><span data-lang="en">Understand</span><span data-lang="zh">理解</span></div>
       </div>
       <ul style="margin-left: 18px; line-height: 2;">
-        <li>Why $\lim_{x \to c} f(x) \neq f(c)$ in general</li>
-        <li>How to classify discontinuities</li>
-        <li>When and why each algebraic technique works</li>
-        <li>Squeeze Theorem logic</li>
-        <li>Reading limits from graphs and tables</li>
-        <li>Sign analysis for infinite limits</li>
+        <li><span data-lang="en">Why $\lim_{x \to c} f(x) \neq f(c)$ in general</span><span data-lang="zh">为何一般而言 $\lim_{x \to c} f(x) \neq f(c)$</span></li>
+        <li><span data-lang="en">How to classify discontinuities</span><span data-lang="zh">如何对不连续点分类</span></li>
+        <li><span data-lang="en">When and why each algebraic technique works</span><span data-lang="zh">每种代数技巧何时、为何奏效</span></li>
+        <li><span data-lang="en">Squeeze Theorem logic</span><span data-lang="zh">夹逼定理的逻辑</span></li>
+        <li><span data-lang="en">Reading limits from graphs and tables</span><span data-lang="zh">从图像与表格读出极限</span></li>
+        <li><span data-lang="en">Sign analysis for infinite limits</span><span data-lang="zh">无穷极限的符号分析</span></li>
       </ul>
     </div>
   </div>
 
-  <h3>Common Pitfalls</h3>
+  <h3><span data-lang="en">Common Pitfalls</span><span data-lang="zh">常见陷阱</span></h3>
   <div class="concept-box red">
-    <strong style="color: var(--red);">Top Student Errors</strong>
-    <strong>1.</strong> Assuming $\lim_{x \to c} f(x) = f(c)$ without checking continuity.<br>
+    <strong style="color: var(--red);"><span data-lang="en">Top Student Errors</span><span data-lang="zh">学生最易犯的错误</span></strong>
+    <span data-lang="en"><strong>1.</strong> Assuming $\lim_{x \to c} f(x) = f(c)$ without checking continuity.<br>
     <strong>2.</strong> Writing "limit = $\frac{0}{0}$" — $\frac{0}{0}$ is <em>not</em> a limit value, it's a signal to do more work.<br>
     <strong>3.</strong> Forgetting to check both one-sided limits when claiming a limit exists.<br>
     <strong>4.</strong> On IVT problems, failing to state that $f$ is continuous — the hypothesis is required.<br>
     <strong>5.</strong> Confusing "the limit is $\infty$" with "the limit exists" — an infinite limit means the limit DNE as a real number.<br>
-    <strong>6.</strong> Incorrectly simplifying $\frac{\sin(kx)}{x}$ — the answer is $k$, not $1$.
+    <strong>6.</strong> Incorrectly simplifying $\frac{\sin(kx)}{x}$ — the answer is $k$, not $1$.</span>
+    <span data-lang="zh"><strong>1.</strong> 不验证连续性就直接假定 $\lim_{x \to c} f(x) = f(c)$。<br>
+    <strong>2.</strong> 写出"极限 = $\frac{0}{0}$"——$\frac{0}{0}$ <em>不是</em>极限值，它只是要求你继续化简的信号。<br>
+    <strong>3.</strong> 断言极限存在时漏掉对左右两侧单侧极限的验证。<br>
+    <strong>4.</strong> 介值定理题中遗漏"$f$ 连续"这一前提——该前提是必要的。<br>
+    <strong>5.</strong> 把"极限为 $\infty$"与"极限存在"混为一谈——无穷极限意味着该极限作为实数不存在（DNE）。<br>
+    <strong>6.</strong> 对 $\frac{\sin(kx)}{x}$ 化简错误——答案是 $k$，而不是 $1$。</span>
   </div>
 </section>
 
@@ -1599,58 +1647,58 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
 
   <div class="flashcard-toolbar">
-    <span class="fc-count" id="fcCount">0 / 8 flipped</span>
+    <span class="fc-count" id="fcCount"><span data-lang="en">0 / 8 flipped</span><span data-lang="zh">0 / 8 已翻</span></span>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">打乱</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is $\lim_{x \to 0} \frac{\sin x}{x}$?</div>
+        <div class="flashcard-front"><span data-lang="en">What is $\lim_{x \to 0} \frac{\sin x}{x}$?</span><span data-lang="zh">$\lim_{x \to 0} \frac{\sin x}{x} = ?$</span></div>
         <div class="flashcard-back">$1$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Three conditions for continuity at $x = c$?</div>
-        <div class="flashcard-back">1. $f(c)$ defined<br>2. $\lim_{x \to c} f(x)$ exists<br>3. $\lim_{x \to c} f(x) = f(c)$</div>
+        <div class="flashcard-front"><span data-lang="en">Three conditions for continuity at $x = c$?</span><span data-lang="zh">在 $x = c$ 处连续的三个条件？</span></div>
+        <div class="flashcard-back"><span data-lang="en">1. $f(c)$ defined<br>2. $\lim_{x \to c} f(x)$ exists<br>3. $\lim_{x \to c} f(x) = f(c)$</span><span data-lang="zh">1. $f(c)$ 有定义<br>2. $\lim_{x \to c} f(x)$ 存在<br>3. $\lim_{x \to c} f(x) = f(c)$</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is a removable discontinuity?</div>
+        <div class="flashcard-front"><span data-lang="en">What is a removable discontinuity?</span><span data-lang="zh">什么是可去间断点？</span></div>
         <div class="flashcard-back">$$\lim_{x\to c} f(x) \text{ exists, but } \neq f(c)$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">IVT requires what hypothesis?</div>
-        <div class="flashcard-back">$f$ must be continuous on $[a, b]$, and $d$ must be between $f(a)$ and $f(b)$.</div>
+        <div class="flashcard-front"><span data-lang="en">IVT requires what hypothesis?</span><span data-lang="zh">介值定理需要哪些前提？</span></div>
+        <div class="flashcard-back"><span data-lang="en">$f$ must be continuous on $[a, b]$, and $d$ must be between $f(a)$ and $f(b)$.</span><span data-lang="zh">$f$ 在 $[a, b]$ 上连续，且 $d$ 介于 $f(a)$ 与 $f(b)$ 之间。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">HA when degree of numerator = degree of denominator?</div>
+        <div class="flashcard-front"><span data-lang="en">HA when degree of numerator = degree of denominator?</span><span data-lang="zh">分子分母次数相等时的水平渐近线？</span></div>
         <div class="flashcard-back">$y = \frac{\text{leading coeff of num}}{\text{leading coeff of den}}$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$\frac{0}{0}$ means…</div>
+        <div class="flashcard-front"><span data-lang="en">$\frac{0}{0}$ means…</span><span data-lang="zh">$\frac{0}{0}$ 意味着……</span></div>
         <div class="flashcard-back">$$\text{Indeterminate} \Rightarrow \text{factor, conjugate, or identity}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is the Squeeze Theorem?</div>
-        <div class="flashcard-back">If $g(x) \leq f(x) \leq h(x)$ near $c$ and both outer limits equal $L$, then $\lim_{x \to c} f(x) = L$.</div>
+        <div class="flashcard-front"><span data-lang="en">What is the Squeeze Theorem?</span><span data-lang="zh">夹逼定理是什么？</span></div>
+        <div class="flashcard-back"><span data-lang="en">If $g(x) \leq f(x) \leq h(x)$ near $c$ and both outer limits equal $L$, then $\lim_{x \to c} f(x) = L$.</span><span data-lang="zh">若在 $c$ 附近 $g(x) \leq f(x) \leq h(x)$，且两侧极限都等于 $L$，则 $\lim_{x \to c} f(x) = L$。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1666,13 +1714,13 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 1 — Practice Quiz</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 20px;">Test your understanding. Your score updates in real time at the top of the page.</p>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测验</span></div>
+  <h2><span data-lang="en">Unit 1 — Practice Quiz</span><span data-lang="zh">第 1 单元——练习测验</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;"><span data-lang="en">Test your understanding. Your score updates in real time at the top of the page.</span><span data-lang="zh">检验你的理解。页面顶部的分数会实时更新。</span></p>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">1. $\lim_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">1. $\lim_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ equals:</span><span data-lang="zh">1. $\lim_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ 等于：</span></div>
       <span class="quiz-number">Q1</span>
     </div>
     <div class="quiz-options">
@@ -1681,14 +1729,14 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
       <div class="quiz-opt" data-idx="2">$0$</div>
       <div class="quiz-opt" data-idx="3">DNE</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Factor: $\frac{(x-2)(x+2)}{x-2} = x+2$. At $x = 2$: $2 + 2 = 4$.</div>
-    <div class="quiz-explain wrong-exp">Factor the numerator: $\frac{(x-2)(x+2)}{x-2} = x + 2$. Substituting $x = 2$ gives $4$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Factor: $\frac{(x-2)(x+2)}{x-2} = x+2$. At $x = 2$: $2 + 2 = 4$.</span><span data-lang="zh">正确！因式分解：$\frac{(x-2)(x+2)}{x-2} = x+2$。代入 $x = 2$：$2 + 2 = 4$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factor the numerator: $\frac{(x-2)(x+2)}{x-2} = x + 2$. Substituting $x = 2$ gives $4$.</span><span data-lang="zh">对分子因式分解：$\frac{(x-2)(x+2)}{x-2} = x + 2$。代入 $x = 2$ 得 $4$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">2. $\lim_{x \to 0} \dfrac{\sin(5x)}{x}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">2. $\lim_{x \to 0} \dfrac{\sin(5x)}{x}$ equals:</span><span data-lang="zh">2. $\lim_{x \to 0} \dfrac{\sin(5x)}{x}$ 等于：</span></div>
       <span class="quiz-number">Q2</span>
     </div>
     <div class="quiz-options">
@@ -1697,14 +1745,14 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
       <div class="quiz-opt" data-idx="2">$0$</div>
       <div class="quiz-opt" data-idx="3">$\frac{1}{5}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x}$. As $x \to 0$, $\frac{\sin(5x)}{5x} \to 1$, so the answer is $5$.</div>
-    <div class="quiz-explain wrong-exp">Rewrite: $\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x} \to 5 \cdot 1 = 5$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! $\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x}$. As $x \to 0$, $\frac{\sin(5x)}{5x} \to 1$, so the answer is $5$.</span><span data-lang="zh">正确！$\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x}$。当 $x \to 0$，$\frac{\sin(5x)}{5x} \to 1$，所以答案为 $5$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Rewrite: $\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x} \to 5 \cdot 1 = 5$.</span><span data-lang="zh">改写：$\frac{\sin(5x)}{x} = 5 \cdot \frac{\sin(5x)}{5x} \to 5 \cdot 1 = 5$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">3. If $f(x) = \frac{1}{(x - 3)^2}$, then $\lim_{x \to 3} f(x)$ is:</div>
+      <div class="quiz-q"><span data-lang="en">3. If $f(x) = \frac{1}{(x - 3)^2}$, then $\lim_{x \to 3} f(x)$ is:</span><span data-lang="zh">3. 若 $f(x) = \frac{1}{(x - 3)^2}$，则 $\lim_{x \to 3} f(x)$ 为：</span></div>
       <span class="quiz-number">Q3</span>
     </div>
     <div class="quiz-options">
@@ -1713,14 +1761,14 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
       <div class="quiz-opt" data-idx="2">$\infty$</div>
       <div class="quiz-opt" data-idx="3">$1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! As $x \to 3$, $(x-3)^2 \to 0^+$, so $\frac{1}{(x-3)^2} \to +\infty$ from both sides.</div>
-    <div class="quiz-explain wrong-exp">Since $(x-3)^2$ is always positive and approaches 0, $\frac{1}{(x-3)^2}$ grows without bound toward $+\infty$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! As $x \to 3$, $(x-3)^2 \to 0^+$, so $\frac{1}{(x-3)^2} \to +\infty$ from both sides.</span><span data-lang="zh">正确！当 $x \to 3$，$(x-3)^2 \to 0^+$，所以 $\frac{1}{(x-3)^2}$ 从两侧都趋于 $+\infty$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Since $(x-3)^2$ is always positive and approaches 0, $\frac{1}{(x-3)^2}$ grows without bound toward $+\infty$.</span><span data-lang="zh">由于 $(x-3)^2$ 始终为正且趋于 0，$\frac{1}{(x-3)^2}$ 无界地增大到 $+\infty$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">4. $\lim_{x \to \infty} \dfrac{2x^3 + x}{4x^3 - 7}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">4. $\lim_{x \to \infty} \dfrac{2x^3 + x}{4x^3 - 7}$ equals:</span><span data-lang="zh">4. $\lim_{x \to \infty} \dfrac{2x^3 + x}{4x^3 - 7}$ 等于：</span></div>
       <span class="quiz-number">Q4</span>
     </div>
     <div class="quiz-options">
@@ -1729,30 +1777,30 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
       <div class="quiz-opt" data-idx="2">$2$</div>
       <div class="quiz-opt" data-idx="3">$\frac{1}{2}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Same degree ($n = m = 3$), so the limit equals the ratio of leading coefficients: $\frac{2}{4} = \frac{1}{2}$.</div>
-    <div class="quiz-explain wrong-exp">When the degrees are equal, take the ratio of leading coefficients: $\frac{2}{4} = \frac{1}{2}$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Same degree ($n = m = 3$), so the limit equals the ratio of leading coefficients: $\frac{2}{4} = \frac{1}{2}$.</span><span data-lang="zh">正确！分子分母次数相同（$n = m = 3$），极限等于首项系数之比：$\frac{2}{4} = \frac{1}{2}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">When the degrees are equal, take the ratio of leading coefficients: $\frac{2}{4} = \frac{1}{2}$.</span><span data-lang="zh">次数相同时，取首项系数之比：$\frac{2}{4} = \frac{1}{2}$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">5. Which condition is <strong>NOT</strong> required for $f$ to be continuous at $x = c$?</div>
+      <div class="quiz-q"><span data-lang="en">5. Which condition is <strong>NOT</strong> required for $f$ to be continuous at $x = c$?</span><span data-lang="zh">5. 下列哪一项<strong>不是</strong> $f$ 在 $x = c$ 处连续所需的条件？</span></div>
       <span class="quiz-number">Q5</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$f(c)$ is defined</div>
-      <div class="quiz-opt" data-idx="1">$f'(c)$ exists</div>
-      <div class="quiz-opt" data-idx="2">$\lim_{x \to c} f(x)$ exists</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$f(c)$ is defined</span><span data-lang="zh">$f(c)$ 有定义</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$f'(c)$ exists</span><span data-lang="zh">$f'(c)$ 存在</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$\lim_{x \to c} f(x)$ exists</span><span data-lang="zh">$\lim_{x \to c} f(x)$ 存在</span></div>
       <div class="quiz-opt" data-idx="3">$\lim_{x \to c} f(x) = f(c)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Differentiability ($f'(c)$ exists) implies continuity, but continuity does NOT require differentiability. Example: $f(x) = |x|$ is continuous but not differentiable at $x = 0$.</div>
-    <div class="quiz-explain wrong-exp">The three conditions for continuity are: $f(c)$ defined, limit exists, and limit equals $f(c)$. Differentiability is not required.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Differentiability ($f'(c)$ exists) implies continuity, but continuity does NOT require differentiability. Example: $f(x) = |x|$ is continuous but not differentiable at $x = 0$.</span><span data-lang="zh">正确！可导（$f'(c)$ 存在）蕴含连续，但连续并不要求可导。例如 $f(x) = |x|$ 在 $x = 0$ 处连续但不可导。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The three conditions for continuity are: $f(c)$ defined, limit exists, and limit equals $f(c)$. Differentiability is not required.</span><span data-lang="zh">连续性的三个条件是：$f(c)$ 有定义、极限存在、极限等于 $f(c)$。并不要求可导。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">6. $\lim_{x \to 0} \dfrac{1 - \cos(4x)}{x}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">6. $\lim_{x \to 0} \dfrac{1 - \cos(4x)}{x}$ equals:</span><span data-lang="zh">6. $\lim_{x \to 0} \dfrac{1 - \cos(4x)}{x}$ 等于：</span></div>
       <span class="quiz-number">Q6</span>
     </div>
     <div class="quiz-options">
@@ -1761,25 +1809,25 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
       <div class="quiz-opt" data-idx="2">$4$</div>
       <div class="quiz-opt" data-idx="3">$-4$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Rewrite as $4 \cdot \frac{1 - \cos(4x)}{4x}$. Since $\frac{1 - \cos u}{u} \to 0$ as $u \to 0$, this equals $4 \cdot 0 = 0$.</div>
-    <div class="quiz-explain wrong-exp">Rewrite as $4 \cdot \frac{1 - \cos(4x)}{4x}$. Since $\lim_{u \to 0} \frac{1 - \cos u}{u} = 0$, the answer is $4 \cdot 0 = 0$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Rewrite as $4 \cdot \frac{1 - \cos(4x)}{4x}$. Since $\frac{1 - \cos u}{u} \to 0$ as $u \to 0$, this equals $4 \cdot 0 = 0$.</span><span data-lang="zh">正确！改写为 $4 \cdot \frac{1 - \cos(4x)}{4x}$。由于当 $u \to 0$ 时 $\frac{1 - \cos u}{u} \to 0$，结果为 $4 \cdot 0 = 0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Rewrite as $4 \cdot \frac{1 - \cos(4x)}{4x}$. Since $\lim_{u \to 0} \frac{1 - \cos u}{u} = 0$, the answer is $4 \cdot 0 = 0$.</span><span data-lang="zh">改写为 $4 \cdot \frac{1 - \cos(4x)}{4x}$。因为 $\lim_{u \to 0} \frac{1 - \cos u}{u} = 0$，所以答案为 $4 \cdot 0 = 0$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">7. $f(x) = \frac{x+1}{x^2 - 1}$ has a vertical asymptote at:</div>
+      <div class="quiz-q"><span data-lang="en">7. $f(x) = \frac{x+1}{x^2 - 1}$ has a vertical asymptote at:</span><span data-lang="zh">7. $f(x) = \frac{x+1}{x^2 - 1}$ 的垂直渐近线位于：</span></div>
       <span class="quiz-number">Q7</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$x = 1$ and $x = -1$</div>
-      <div class="quiz-opt" data-idx="1">$x = -1$ only</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$x = 1$ and $x = -1$</span><span data-lang="zh">$x = 1$ 与 $x = -1$</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$x = -1$ only</span><span data-lang="zh">仅 $x = -1$</span></div>
       <div class="quiz-opt" data-idx="2">$x = 0$</div>
-      <div class="quiz-opt" data-idx="3">$x = 1$ only</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">$x = 1$ only</span><span data-lang="zh">仅 $x = 1$</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Factor: $\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$ for $x \neq -1$. At $x = -1$ there's a removable discontinuity (hole), and at $x = 1$ there's a vertical asymptote.</div>
-    <div class="quiz-explain wrong-exp">Factor: $\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$. The $(x+1)$ cancels, leaving a hole at $x = -1$. Only $x = 1$ produces a vertical asymptote.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Factor: $\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$ for $x \neq -1$. At $x = -1$ there's a removable discontinuity (hole), and at $x = 1$ there's a vertical asymptote.</span><span data-lang="zh">正确！因式分解：当 $x \neq -1$ 时 $\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$。在 $x = -1$ 处是可去间断点（洞），在 $x = 1$ 处是垂直渐近线。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factor: $\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$. The $(x+1)$ cancels, leaving a hole at $x = -1$. Only $x = 1$ produces a vertical asymptote.</span><span data-lang="zh">因式分解：$\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$。$(x+1)$ 被约去，$x = -1$ 处只留下一个洞。只有 $x = 1$ 是垂直渐近线。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1787,46 +1835,46 @@ f(3) &= 27 - 6 - 5 = 16 \quad (\text{positive})
 
 <!-- ═══════════════ CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 16 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-Assessment</span><span data-lang="zh">自评</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">应考清单</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;"><span data-lang="en">Click each item you've mastered. Aim for 100% before exam day.</span><span data-lang="zh">点击每一项已掌握的条目。考试前争取达到 100%。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 16 mastered</span><span data-lang="zh">已掌握 0 / 16</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Approximate instantaneous rate of change from average rate of change</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use correct limit notation (one-sided and two-sided)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Estimate limits from graphs (including DNE cases)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Estimate limits from tables of values</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply limit laws (sum, product, quotient, composite)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Evaluate limits by factoring and canceling</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Evaluate limits by conjugate multiplication</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Select the appropriate limit technique for a given problem</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the Squeeze Theorem</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Evaluate $\lim \frac{\sin(kx)}{x}$ and $\lim \frac{1 - \cos x}{x}$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Classify discontinuities (removable, jump, infinite)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Verify all three conditions for continuity at a point</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve for parameters to make piecewise functions continuous</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find vertical asymptotes via infinite limits</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find horizontal asymptotes via limits at infinity</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the IVT with full justification</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Approximate instantaneous rate of change from average rate of change</span><span data-lang="zh">用平均变化率近似瞬时变化率</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use correct limit notation (one-sided and two-sided)</span><span data-lang="zh">正确使用极限记号（单侧与双侧）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Estimate limits from graphs (including DNE cases)</span><span data-lang="zh">由图像估计极限（含 DNE 情形）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Estimate limits from tables of values</span><span data-lang="zh">由数值表估计极限</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply limit laws (sum, product, quotient, composite)</span><span data-lang="zh">运用极限法则（和、积、商、复合）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Evaluate limits by factoring and canceling</span><span data-lang="zh">通过因式分解与约分求极限</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Evaluate limits by conjugate multiplication</span><span data-lang="zh">通过共轭相乘求极限</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Select the appropriate limit technique for a given problem</span><span data-lang="zh">为给定题目选择合适的求极限方法</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the Squeeze Theorem</span><span data-lang="zh">应用夹逼定理</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Evaluate $\lim \frac{\sin(kx)}{x}$ and $\lim \frac{1 - \cos x}{x}$</span><span data-lang="zh">求 $\lim \frac{\sin(kx)}{x}$ 与 $\lim \frac{1 - \cos x}{x}$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Classify discontinuities (removable, jump, infinite)</span><span data-lang="zh">对不连续点分类（可去、跳跃、无穷）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Verify all three conditions for continuity at a point</span><span data-lang="zh">验证某点处连续的全部三个条件</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Solve for parameters to make piecewise functions continuous</span><span data-lang="zh">求参数使分段函数连续</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find vertical asymptotes via infinite limits</span><span data-lang="zh">借助无穷极限求垂直渐近线</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find horizontal asymptotes via limits at infinity</span><span data-lang="zh">借助无穷处极限求水平渐近线</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the IVT with full justification</span><span data-lang="zh">完整论证地应用介值定理</span></li>
   </ul>
 </section>
 
 <!-- ═══════════════ AP-STYLE PRACTICE ═══════════════ -->
 <section style="max-width:860px;margin:32px auto;padding:0 24px;">
-  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Next Step</div>
-  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;">AP-Style Practice Problems</h2>
+  <div style="font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;"><span data-lang="en">Next Step</span><span data-lang="zh">下一步</span></div>
+  <h2 style="font-family:var(--font-display);font-size:1.65rem;line-height:1.25;border-bottom:2px solid var(--accent-light);padding-bottom:8px;display:inline-block;margin-bottom:16px;"><span data-lang="en">AP-Style Practice Problems</span><span data-lang="zh">AP 风格练习题</span></h2>
   <div style="background:var(--accent-light);border-left:4px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:12px 0;">
-    <p style="margin-bottom:16px;">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</p>
+    <p style="margin-bottom:16px;"><span data-lang="en">Exam-level practice for this unit — multiple-choice plus extended-response items modeled on the AP rubric. Built for top-score prep; go here after you've worked through the notes and the in-page quizzes above.</span><span data-lang="zh">本单元考试级别的练习——按 AP 评分标准设计的多选题与拓展回答题。专为冲击高分而设；请在完成上方笔记与页内测验后再到此练习。</span></p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="../Practice%20Questions/Unit_1_Limits_and_Continuity_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;">Practice Problems →</a>
+      <a href="../Practice%20Questions/Unit_1_Limits_and_Continuity_Practice_Problems.html" style="display:inline-block;padding:10px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem;"><span data-lang="en">Practice Problems →</span><span data-lang="zh">练习题 →</span></a>
     </div>
   </div>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
-  <p>AP Calculus AB — Unit 1: Limits and Continuity · 2025 Edition</p>
+  <p><span data-lang="en">AP Calculus AB — Unit 1: Limits and Continuity · 2025 Edition</span><span data-lang="zh">AP 微积分 AB——第 1 单元：极限与连续性 · 2025 版</span></p>
 </div>
 
 </main>
@@ -1855,15 +1903,32 @@ function updateDashboard() {
   }
 
 // ─── THEME ───
+function setThemeBtnLabel(toLight) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = toLight
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  const isZh = document.body.classList.contains('lang-zh');
+  document.body.classList.toggle('lang-zh', !isZh);
+  try { localStorage.setItem('drs.lang', isZh ? 'en' : 'zh'); } catch(e) {}
+}
+try {
+  if (localStorage.getItem('drs.lang') === 'zh') document.body.classList.add('lang-zh');
+} catch(e) {}
 
 
 // ─── PROGRESS BAR ───
@@ -1935,13 +2000,14 @@ function checkPractice(inputId, correct, feedbackId) {
   if (fb.classList.contains('correct')) return; // already correct
   fb.classList.remove('correct', 'wrong', 'show');
   if (val === correct) {
-    fb.textContent = '✓ Correct!';
+    fb.innerHTML = '<span data-lang="en">✓ Correct!</span><span data-lang="zh">✓ 正确！</span>';
     fb.classList.add('correct', 'show');
     input.style.borderColor = 'var(--green)';
     practiceScore.correct++;
     updateDashboard();
   } else {
-    fb.textContent = '✗ Not quite — try again or the answer is ' + correct + '.';
+    fb.innerHTML = '<span data-lang="en">✗ Not quite — try again or the answer is ' + correct + '.</span>' +
+                   '<span data-lang="zh">✗ 不对——再试一次，或答案为 ' + correct + '。</span>';
     fb.classList.add('wrong', 'show');
   }
 }
@@ -1954,7 +2020,9 @@ function flipCard(el) {
 function updateFlashcardCount() {
   const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
   const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
-  document.getElementById('fcCount').textContent = flipped + ' / ' + total + ' flipped';
+  document.getElementById('fcCount').innerHTML =
+    '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span>' +
+    '<span data-lang="zh">' + flipped + ' / ' + total + ' 已翻</span>';
 }
 function resetFlashcards() {
   document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
@@ -1975,7 +2043,9 @@ function toggleCheck(li) {
   li.classList.toggle('checked');
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
-  document.getElementById('checkProgress').textContent = checked + ' / ' + total + ' mastered';
+  document.getElementById('checkProgress').innerHTML =
+    '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+    '<span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
   updateDashboard();
 }
 
@@ -2220,9 +2290,19 @@ updateDashboard();
 
     // Update result readout
     if (resultEl) {
-      if (n < m) resultEl.innerHTML = 'HA: <span class="sum-val">y = 0</span> (degree of numerator &lt; degree of denominator)';
-      else if (n === m) resultEl.innerHTML = 'HA: <span class="sum-val">y = ' + a.toFixed(1) + '</span> (equal degrees \u2192 ratio of leading coefficients)';
-      else resultEl.innerHTML = '<span class="sum-val" style="color: var(--orange);">No horizontal asymptote</span> (degree of numerator &gt; degree of denominator)';
+      if (n < m) {
+        resultEl.innerHTML =
+          '<span data-lang="en">HA: <span class="sum-val">y = 0</span> (degree of numerator &lt; degree of denominator)</span>' +
+          '<span data-lang="zh">\u6c34\u5e73\u6e10\u8fd1\u7ebf\uff1a<span class="sum-val">y = 0</span>\uff08\u5206\u5b50\u6b21\u6570 &lt; \u5206\u6bcd\u6b21\u6570\uff09</span>';
+      } else if (n === m) {
+        resultEl.innerHTML =
+          '<span data-lang="en">HA: <span class="sum-val">y = ' + a.toFixed(1) + '</span> (equal degrees \u2192 ratio of leading coefficients)</span>' +
+          '<span data-lang="zh">\u6c34\u5e73\u6e10\u8fd1\u7ebf\uff1a<span class="sum-val">y = ' + a.toFixed(1) + '</span>\uff08\u6b21\u6570\u76f8\u540c \u2192 \u9996\u9879\u7cfb\u6570\u4e4b\u6bd4\uff09</span>';
+      } else {
+        resultEl.innerHTML =
+          '<span data-lang="en"><span class="sum-val" style="color: var(--orange);">No horizontal asymptote</span> (degree of numerator &gt; degree of denominator)</span>' +
+          '<span data-lang="zh"><span class="sum-val" style="color: var(--orange);">\u65e0\u6c34\u5e73\u6e10\u8fd1\u7ebf</span>\uff08\u5206\u5b50\u6b21\u6570 &gt; \u5206\u6bcd\u6b21\u6570\uff09</span>';
+      }
     }
   }
 
