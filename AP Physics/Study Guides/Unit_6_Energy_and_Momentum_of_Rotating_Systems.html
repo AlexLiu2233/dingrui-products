@@ -40,7 +40,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -108,6 +108,10 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 
 /* ─── PROGRESS BAR ─── */
 .progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
@@ -541,7 +545,7 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="top-nav">
   <div class="nav-left">
@@ -549,26 +553,27 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     <span class="nav-badge">UNIT 6</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s6-1">6.1 Rotational Kinetic Energy</a>
-  <a href="#s6-2">6.2 Torque and Work</a>
-  <a href="#s6-3">6.3 Angular Momentum &amp; Impulse</a>
-  <a href="#s6-4">6.4 Conservation of Angular Momentum</a>
-  <a href="#s6-5">6.5 Rolling</a>
-  <a href="#s6-6">6.6 Orbiting Satellites</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s6-1"><span data-lang="en">6.1 Rotational Kinetic Energy</span><span data-lang="zh">6.1 转动动能</span></a>
+  <a href="#s6-2"><span data-lang="en">6.2 Torque and Work</span><span data-lang="zh">6.2 力矩与功</span></a>
+  <a href="#s6-3"><span data-lang="en">6.3 Angular Momentum &amp; Impulse</span><span data-lang="zh">6.3 角动量与角冲量</span></a>
+  <a href="#s6-4"><span data-lang="en">6.4 Conservation of Angular Momentum</span><span data-lang="zh">6.4 角动量守恒</span></a>
+  <a href="#s6-5"><span data-lang="en">6.5 Rolling</span><span data-lang="zh">6.5 滚动</span></a>
+  <a href="#s6-6"><span data-lang="en">6.6 Orbiting Satellites</span><span data-lang="zh">6.6 轨道卫星</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <button class="backtotop" id="backToTop" aria-label="Back to top">↑</button>
@@ -578,14 +583,14 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Physics C: Mechanics</div>
-  <h1>Unit 6: Energy &amp; Momentum of Rotating Systems</h1>
+  <h1><span data-lang="en">Unit 6: Energy &amp; Momentum of Rotating Systems</span><span data-lang="zh">第 6 单元：转动系统的能量与动量</span></h1>
   <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
     Rotational kinetic energy, work by torque, angular momentum and impulse, conservation laws, rolling motion, and orbital mechanics.
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–15% Exam Weight</span>
-    <span class="chip chip-green">~13–19 Class Periods</span>
-    <span class="chip chip-gold">6 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">10–15% Exam Weight</span><span data-lang="zh">考试占分 10–15%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~13–19 Class Periods</span><span data-lang="zh">约 13–19 课时</span></span>
+    <span class="chip chip-gold"><span data-lang="en">6 Topics</span><span data-lang="zh">6 个专题</span></span>
   </div>
 </section>
 
@@ -593,8 +598,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.1 ═══════════════ -->
 <section class="section" id="s6-1">
-  <div class="section-label">Topic 6.1</div>
-  <h2>Rotational Kinetic Energy</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.1</span><span data-lang="zh">专题 6.1</span></div>
+  <h2><span data-lang="en">Rotational Kinetic Energy</span><span data-lang="zh">转动动能</span></h2>
 
   <p>In Unit 3 you learned that an object in translational motion carries kinetic energy $K = \frac{1}{2}mv^2$. A spinning object carries energy too, even if its center of mass is stationary — think of a merry-go-round bolted to the ground. The rotational kinetic energy depends on the rotational inertia $I$ and the angular velocity $\omega$, in a formula that perfectly mirrors the translational version.</p>
 
@@ -659,8 +664,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.2 ═══════════════ -->
 <section class="section" id="s6-2">
-  <div class="section-label">Topic 6.2</div>
-  <h2>Torque and Work</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.2</span><span data-lang="zh">专题 6.2</span></div>
+  <h2><span data-lang="en">Torque and Work</span><span data-lang="zh">力矩与功</span></h2>
 
   <p>In translational mechanics, work is done when a force displaces an object: $W = \int F\,dx$. The rotational analog replaces force with torque and linear displacement with angular displacement. A torque that rotates a body through some angle transfers energy into or out of the system.</p>
 
@@ -771,8 +776,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.3 ═══════════════ -->
 <section class="section" id="s6-3">
-  <div class="section-label">Topic 6.3</div>
-  <h2>Angular Momentum &amp; Angular Impulse</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.3</span><span data-lang="zh">专题 6.3</span></div>
+  <h2><span data-lang="en">Angular Momentum &amp; Angular Impulse</span><span data-lang="zh">角动量与角冲量</span></h2>
 
   <p>Angular momentum is the rotational counterpart of linear momentum. Just as linear momentum $p = mv$ quantifies how hard it is to stop a translating object, angular momentum $L$ quantifies how hard it is to stop a spinning one.</p>
 
@@ -877,8 +882,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.4 ═══════════════ -->
 <section class="section" id="s6-4">
-  <div class="section-label">Topic 6.4</div>
-  <h2>Conservation of Angular Momentum</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.4</span><span data-lang="zh">专题 6.4</span></div>
+  <h2><span data-lang="en">Conservation of Angular Momentum</span><span data-lang="zh">角动量守恒</span></h2>
 
   <p>Conservation of angular momentum is one of the most profound and widely applied principles in physics. It governs everything from figure skating spins to the collapse of interstellar gas clouds into stars.</p>
 
@@ -1045,8 +1050,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.5 ═══════════════ -->
 <section class="section" id="s6-5">
-  <div class="section-label">Topic 6.5</div>
-  <h2>Rolling</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.5</span><span data-lang="zh">专题 6.5</span></div>
+  <h2><span data-lang="en">Rolling</span><span data-lang="zh">滚动</span></h2>
 
   <p>Rolling combines translation and rotation into a single motion. A wheel rolling down the road translates forward while simultaneously spinning about its center. The energy, momentum, and dynamics of rolling objects are among the most exam-tested topics in AP Physics C.</p>
 
@@ -1195,8 +1200,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 6.6 ═══════════════ -->
 <section class="section" id="s6-6">
-  <div class="section-label">Topic 6.6</div>
-  <h2>Motion of Orbiting Satellites</h2>
+  <div class="section-label"><span data-lang="en">Topic 6.6</span><span data-lang="zh">专题 6.6</span></div>
+  <h2><span data-lang="en">Motion of Orbiting Satellites</span><span data-lang="zh">轨道卫星的运动</span></h2>
 
   <p>Orbital mechanics is where conservation of energy and angular momentum come together beautifully. A satellite orbiting a massive body follows paths dictated by Newton's law of gravitation, and the conservation laws govern what is constant and what changes throughout its orbit.</p>
 
@@ -1423,8 +1428,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 6 Appears on the AP Exam</h2>
+  <div class="section-label"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">How Unit 6 Appears on the AP Exam</span><span data-lang="zh">第 6 单元在 AP 考试中的形式</span></h2>
 
   <div class="card">
     <div class="card-header">
@@ -1461,8 +1466,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards — Click to Flip</span><span data-lang="zh">闪卡 —— 点击翻面</span></h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1520,8 +1525,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 6 — Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测评</span></div>
+  <h2><span data-lang="en">Unit 6 — Practice Quiz</span><span data-lang="zh">第 6 单元 —— 练习测验</span></h2>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-q">1. A solid cylinder rolls without slipping down an incline of height $h$. What fraction of its total kinetic energy at the bottom is rotational?</div>
@@ -1592,16 +1597,28 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 </main>
 
 <script>
+
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+function setThemeBtnLabel(isDark) {
+  var b = document.getElementById('themeToggle');
+  if (!b) return;
+  b.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 // ─── THEME ───
 function toggleTheme() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(false);
   drawTorqueWork(); drawAngMom(); drawRollingEnergy(); drawOrbit();
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
 
 // ─── SIDEBAR ───

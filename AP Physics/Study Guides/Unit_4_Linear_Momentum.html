@@ -37,7 +37,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -105,6 +105,10 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 
 /* ─── PROGRESS BAR ─── */
 .progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
@@ -516,7 +520,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="top-nav">
   <div class="nav-left">
@@ -524,25 +528,26 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <span class="nav-badge">UNIT 4</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s4-1">4.1 Linear Momentum</a>
-  <a href="#s4-2">4.2 Change in Momentum & Impulse</a>
-  <a href="#s4-3">4.3 Conservation of Momentum</a>
-  <a href="#s4-4">4.4 Elastic & Inelastic Collisions</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#common-mistakes">Common Mistakes</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s4-1"><span data-lang="en">4.1 Linear Momentum</span><span data-lang="zh">4.1 线动量</span></a>
+  <a href="#s4-2"><span data-lang="en">4.2 Change in Momentum & Impulse</span><span data-lang="zh">4.2 动量变化与冲量</span></a>
+  <a href="#s4-3"><span data-lang="en">4.3 Conservation of Momentum</span><span data-lang="zh">4.3 动量守恒</span></a>
+  <a href="#s4-4"><span data-lang="en">4.4 Elastic & Inelastic Collisions</span><span data-lang="zh">4.4 弹性碰撞与非弹性碰撞</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#common-mistakes"><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <main class="main-wrap" id="main-content">
@@ -550,14 +555,14 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Physics C: Mechanics</div>
-  <h1>Unit 4: Linear Momentum</h1>
+  <h1><span data-lang="en">Unit 4: Linear Momentum</span><span data-lang="zh">第 4 单元：线动量</span></h1>
   <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
     Impulse, collisions, and the conservation law that governs every interaction. Master the vector nature of momentum and learn when energy methods fail but momentum methods succeed.
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–20% Exam Weight</span>
-    <span class="chip chip-green">~11–15 Class Periods</span>
-    <span class="chip chip-gold">4 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">10–20% Exam Weight</span><span data-lang="zh">考试占分 10–20%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~11–15 Class Periods</span><span data-lang="zh">约 11–15 课时</span></span>
+    <span class="chip chip-gold"><span data-lang="en">4 Topics</span><span data-lang="zh">4 个专题</span></span>
   </div>
 </section>
 
@@ -565,8 +570,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 4.1 ═══════════════ -->
 <section class="section" id="s4-1">
-  <div class="section-label">Topic 4.1</div>
-  <h2>Linear Momentum</h2>
+  <div class="section-label"><span data-lang="en">Topic 4.1</span><span data-lang="zh">专题 4.1</span></div>
+  <h2><span data-lang="en">Linear Momentum</span><span data-lang="zh">线动量</span></h2>
 
   <p>Momentum is the quantity that captures how much "motion" an object has — and in what direction. Unlike kinetic energy, momentum is a <em>vector</em>. Two identical cars traveling at the same speed in opposite directions have the same kinetic energy but <em>opposite</em> momenta. This distinction is essential for collision analysis — it's why momentum, not energy, captures the full picture of a system's state of motion.</p>
 
@@ -626,8 +631,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 4.2 ═══════════════ -->
 <section class="section" id="s4-2">
-  <div class="section-label">Topic 4.2</div>
-  <h2>Change in Momentum and Impulse</h2>
+  <div class="section-label"><span data-lang="en">Topic 4.2</span><span data-lang="zh">专题 4.2</span></div>
+  <h2><span data-lang="en">Change in Momentum and Impulse</span><span data-lang="zh">动量变化与冲量</span></h2>
 
   <h3>Newton's Second Law: The Momentum Form</h3>
   <p>Newton's second law is often written as $\vec{F} = m\vec{a}$, but this is actually a special case that assumes constant mass. Newton himself stated the law in terms of momentum: the net external force on a system equals the rate of change of that system's momentum. This more general formulation handles situations like rockets (where mass changes) and collisions (where force varies rapidly).</p>
@@ -799,8 +804,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 4.3 ═══════════════ -->
 <section class="section" id="s4-3">
-  <div class="section-label">Topic 4.3</div>
-  <h2>Conservation of Linear Momentum</h2>
+  <div class="section-label"><span data-lang="en">Topic 4.3</span><span data-lang="zh">专题 4.3</span></div>
+  <h2><span data-lang="en">Conservation of Linear Momentum</span><span data-lang="zh">线动量守恒</span></h2>
 
   <p>Conservation of momentum is one of the most fundamental principles in all of physics. During the brief instant of a collision, external forces like gravity and friction are dwarfed by the enormous contact forces between the colliding objects. So we model the system as having zero net external force during the collision, and momentum is conserved.</p>
 
@@ -876,8 +881,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 4.4 ═══════════════ -->
 <section class="section" id="s4-4">
-  <div class="section-label">Topic 4.4</div>
-  <h2>Elastic and Inelastic Collisions</h2>
+  <div class="section-label"><span data-lang="en">Topic 4.4</span><span data-lang="zh">专题 4.4</span></div>
+  <h2><span data-lang="en">Elastic and Inelastic Collisions</span><span data-lang="zh">弹性碰撞与非弹性碰撞</span></h2>
 
   <p>Momentum is conserved in <em>all</em> collisions (provided no external forces act). But kinetic energy is not necessarily conserved — and the amount of kinetic energy retained is what distinguishes different types of collisions.</p>
 
@@ -1120,8 +1125,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Preparation</div>
-  <h2>Exam Strategy</h2>
+  <div class="section-label"><span data-lang="en">Exam Preparation</span><span data-lang="zh">考试备考</span></div>
+  <h2><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></h2>
 
   <div class="card">
     <div class="card-header">✎ Multiple-Choice Questions</div>
@@ -1147,8 +1152,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ COMMON MISTAKES ═══════════════ -->
 <section class="section" id="common-mistakes">
-  <div class="section-label">Pitfalls</div>
-  <h2>Common Mistakes</h2>
+  <div class="section-label"><span data-lang="en">Pitfalls</span><span data-lang="zh">陷阱</span></div>
+  <h2><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></h2>
 
   <div class="concept-box red">
     <strong style="color: var(--red);">Top Point-Losing Errors</strong>
@@ -1166,8 +1171,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <p>Click a card to flip it.</p>
 
   <div class="flashcard-grid">
@@ -1226,8 +1231,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit Quiz</h2>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测评</span></div>
+  <h2><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></h2>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-q"><strong>Q1.</strong> A 60 kg person jumps off a 200 kg boat (both initially at rest on frictionless water). If the person's velocity is 3 m/s relative to the dock, the boat's velocity is:</div>
@@ -1421,6 +1426,18 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 </main>
 
 <script>
+
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+function setThemeBtnLabel(isDark) {
+  var b = document.getElementById('themeToggle');
+  if (!b) return;
+  b.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 // ═══ THEME ═══
 function toggleTheme() {
   var html = document.documentElement;
@@ -1431,7 +1448,7 @@ function toggleTheme() {
 }
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
 
 // ═══ SIDEBAR ═══

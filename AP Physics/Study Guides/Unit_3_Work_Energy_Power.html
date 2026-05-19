@@ -37,7 +37,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -105,6 +105,10 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 
 /* ─── PROGRESS BAR ─── */
 .progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
@@ -547,7 +551,7 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <!-- ═══ TOP NAV ═══ -->
 <nav class="top-nav">
@@ -556,9 +560,10 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <span class="nav-badge">UNIT 3</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
@@ -567,17 +572,17 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══ SIDEBAR ═══ -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s3-1">3.1 Translational Kinetic Energy</a>
-  <a href="#s3-2">3.2 Work</a>
-  <a href="#s3-3">3.3 Potential Energy</a>
-  <a href="#s3-4">3.4 Conservation of Energy</a>
-  <a href="#s3-5">3.5 Power</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#common-mistakes">Common Mistakes</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s3-1"><span data-lang="en">3.1 Translational Kinetic Energy</span><span data-lang="zh">3.1 平动动能</span></a>
+  <a href="#s3-2"><span data-lang="en">3.2 Work</span><span data-lang="zh">3.2 功</span></a>
+  <a href="#s3-3"><span data-lang="en">3.3 Potential Energy</span><span data-lang="zh">3.3 势能</span></a>
+  <a href="#s3-4"><span data-lang="en">3.4 Conservation of Energy</span><span data-lang="zh">3.4 能量守恒</span></a>
+  <a href="#s3-5"><span data-lang="en">3.5 Power</span><span data-lang="zh">3.5 功率</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#common-mistakes"><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <!-- ═══ MAIN ═══ -->
@@ -586,19 +591,19 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- HERO -->
 <div class="hero" id="hero">
   <div class="hero-overline">AP Physics C: Mechanics</div>
-  <h1>Unit 3: Work, Energy, &amp; Power</h1>
+  <h1><span data-lang="en">Unit 3: Work, Energy, &amp; Power</span><span data-lang="zh">第 3 单元：功、能量与功率</span></h1>
   <p class="hero-sub">Conservation as a foundational principle of physics, with work as the primary agent of change for energy. Master scalar quantities, integral formulations, and graphical techniques the AP exam demands.</p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">15–25% Exam Weight</span>
-    <span class="chip chip-green">~12–17 Class Periods</span>
-    <span class="chip chip-gold">5 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">15–25% Exam Weight</span><span data-lang="zh">考试占分 15–25%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~12–17 Class Periods</span><span data-lang="zh">约 12–17 课时</span></span>
+    <span class="chip chip-gold"><span data-lang="en">5 Topics</span><span data-lang="zh">5 个专题</span></span>
   </div>
 </div>
 
 <!-- ═══════════════ 3.1 ═══════════════ -->
 <section class="section" id="s3-1">
-  <div class="section-label">Topic 3.1</div>
-  <h2>Translational Kinetic Energy</h2>
+  <div class="section-label"><span data-lang="en">Topic 3.1</span><span data-lang="zh">专题 3.1</span></div>
+  <h2><span data-lang="en">Translational Kinetic Energy</span><span data-lang="zh">平动动能</span></h2>
 
   <p>Kinetic energy is the energy an object possesses because it is moving. In AP Physics C: Mechanics, we focus on <em>translational</em> kinetic energy — the energy associated with an object's center-of-mass motion through space (rotational kinetic energy appears in Unit 6).</p>
 
@@ -656,8 +661,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 3.2 ═══════════════ -->
 <section class="section" id="s3-2">
-  <div class="section-label">Topic 3.2</div>
-  <h2>Work</h2>
+  <div class="section-label"><span data-lang="en">Topic 3.2</span><span data-lang="zh">专题 3.2</span></div>
+  <h2><span data-lang="en">Work</span><span data-lang="zh">功</span></h2>
 
   <p>Work is the mechanism by which energy is transferred into or out of a system by a force acting over a displacement. Forces cause accelerations (Unit 2), but they also cause energy changes — and work is the bridge between force and energy.</p>
 
@@ -833,8 +838,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 3.3 ═══════════════ -->
 <section class="section" id="s3-3">
-  <div class="section-label">Topic 3.3</div>
-  <h2>Potential Energy</h2>
+  <div class="section-label"><span data-lang="en">Topic 3.3</span><span data-lang="zh">专题 3.3</span></div>
+  <h2><span data-lang="en">Potential Energy</span><span data-lang="zh">势能</span></h2>
 
   <p>Potential energy is the energy stored in a system by virtue of the positions or configurations of the objects within it. Unlike kinetic energy, potential energy is a property of a <em>system</em> of interacting objects. A ball held above the ground has gravitational PE, but that energy belongs to the ball–Earth system, not the ball alone.</p>
 
@@ -971,8 +976,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 3.4 ═══════════════ -->
 <section class="section" id="s3-4">
-  <div class="section-label">Topic 3.4</div>
-  <h2>Conservation of Energy</h2>
+  <div class="section-label"><span data-lang="en">Topic 3.4</span><span data-lang="zh">专题 3.4</span></div>
+  <h2><span data-lang="en">Conservation of Energy</span><span data-lang="zh">能量守恒</span></h2>
 
   <p>Energy conservation is one of the most profound principles in all of science. The total energy of an isolated system never changes — energy can be transformed and transferred, but never created or destroyed.</p>
 
@@ -1115,8 +1120,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ 3.5 ═══════════════ -->
 <section class="section" id="s3-5">
-  <div class="section-label">Topic 3.5</div>
-  <h2>Power</h2>
+  <div class="section-label"><span data-lang="en">Topic 3.5</span><span data-lang="zh">专题 3.5</span></div>
+  <h2><span data-lang="en">Power</span><span data-lang="zh">功率</span></h2>
 
   <p>Power measures how <em>quickly</em> energy is transferred or converted. Two machines might do the same total work, but the faster one delivers more power. The SI unit is the Watt (W = J/s). One horsepower ≈ 746 W.</p>
 
@@ -1232,8 +1237,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Preparation</div>
-  <h2>Exam Strategy</h2>
+  <div class="section-label"><span data-lang="en">Exam Preparation</span><span data-lang="zh">考试备考</span></div>
+  <h2><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></h2>
 
   <div class="card">
     <div class="card-header">
@@ -1256,8 +1261,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ COMMON MISTAKES ═══════════════ -->
 <section class="section" id="common-mistakes">
-  <div class="section-label">Pitfalls</div>
-  <h2>Common Mistakes</h2>
+  <div class="section-label"><span data-lang="en">Pitfalls</span><span data-lang="zh">陷阱</span></div>
+  <h2><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></h2>
 
   <div class="concept-box red">
     <strong style="color: var(--red);">Top Point-Losing Errors</strong>
@@ -1275,8 +1280,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <p>Click a card to flip it.</p>
 
   <div class="flashcard-grid">
@@ -1335,8 +1340,8 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit Quiz</h2>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测评</span></div>
+  <h2><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></h2>
 
   <div class="score-bar" id="scoreBar">
     Score: <span class="score-num" id="quizScore">0</span> / <span id="quizTotal">8</span>
@@ -1635,14 +1640,27 @@ function drawArrow(ctx, x1, y1, x2, y2, color, lw) {
   ctx.fill();
 }
 
+// ═══ LANGUAGE (default English; toggle persists only within the page) ═══
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+function setThemeBtnLabel(isDark) {
+  var b = document.getElementById('themeToggle');
+  if (!b) return;
+  b.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
+
 // ═══ THEME ═══
 document.getElementById('themeToggle').addEventListener('click', function() {
   var html = document.documentElement;
   var dark = html.getAttribute('data-theme') === 'dark';
   html.setAttribute('data-theme', dark ? '' : 'dark');
-  this.textContent = dark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!dark);
   drawWork(); drawUx(); drawSpring();
 });
+function toggleTheme() { document.getElementById('themeToggle').click(); }
 
 // ═══ SIDEBAR ═══
 function toggleSidebar() {

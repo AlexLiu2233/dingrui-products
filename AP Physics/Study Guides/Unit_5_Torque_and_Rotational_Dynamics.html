@@ -40,7 +40,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -111,6 +111,10 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 
 /* ─── PROGRESS BAR ─── */
 .progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
@@ -596,7 +600,7 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="top-nav">
   <div class="nav-left">
@@ -604,26 +608,27 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
     <span class="nav-badge">UNIT 5</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">← All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">← All Units</span><span data-lang="zh">← 返回单元列表</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()" aria-expanded="false" aria-controls="sidebar"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s5-1">5.1 Rotational Kinematics</a>
-  <a href="#s5-2">5.2 Linear &amp; Rotational Motion</a>
-  <a href="#s5-3">5.3 Torque</a>
-  <a href="#s5-4">5.4 Rotational Inertia</a>
-  <a href="#s5-5">5.5 Rotational Equilibrium</a>
-  <a href="#s5-6">5.6 Newton's 2nd Law (Rotation)</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">单元概览</span></a>
+  <a href="#s5-1"><span data-lang="en">5.1 Rotational Kinematics</span><span data-lang="zh">5.1 转动运动学</span></a>
+  <a href="#s5-2"><span data-lang="en">5.2 Linear &amp; Rotational Motion</span><span data-lang="zh">5.2 平动与转动的联系</span></a>
+  <a href="#s5-3"><span data-lang="en">5.3 Torque</span><span data-lang="zh">5.3 力矩</span></a>
+  <a href="#s5-4"><span data-lang="en">5.4 Rotational Inertia</span><span data-lang="zh">5.4 转动惯量</span></a>
+  <a href="#s5-5"><span data-lang="en">5.5 Rotational Equilibrium</span><span data-lang="zh">5.5 转动平衡</span></a>
+  <a href="#s5-6"><span data-lang="en">5.6 Newton's 2nd Law (Rotation)</span><span data-lang="zh">5.6 牛顿第二定律（转动）</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <button class="backtotop" id="backToTop" aria-label="Back to top">↑</button>
@@ -633,14 +638,14 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">AP Physics C: Mechanics</div>
-  <h1>Unit 5: Torque &amp; Rotational Dynamics</h1>
+  <h1><span data-lang="en">Unit 5: Torque &amp; Rotational Dynamics</span><span data-lang="zh">第 5 单元：力矩与转动动力学</span></h1>
   <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
     Extend Newton's laws to rotating systems. Master rotational kinematics, torque, rotational inertia, equilibrium, and combined translation-rotation problems using calculus-based methods.
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">10–15% Exam Weight</span>
-    <span class="chip chip-green">~14–20 Class Periods</span>
-    <span class="chip chip-gold">6 Topics</span>
+    <span class="chip chip-maroon"><span data-lang="en">10–15% Exam Weight</span><span data-lang="zh">考试占分 10–15%</span></span>
+    <span class="chip chip-green"><span data-lang="en">~14–20 Class Periods</span><span data-lang="zh">约 14–20 课时</span></span>
+    <span class="chip chip-gold"><span data-lang="en">6 Topics</span><span data-lang="zh">6 个专题</span></span>
   </div>
 </section>
 
@@ -648,8 +653,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 5.1 ═══════════════ -->
 <section class="section" id="s5-1">
-  <div class="section-label">Topic 5.1</div>
-  <h2>Rotational Kinematics</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.1</span><span data-lang="zh">专题 5.1</span></div>
+  <h2><span data-lang="en">Rotational Kinematics</span><span data-lang="zh">转动运动学</span></h2>
 
   <p>If you have mastered one-dimensional kinematics from Unit 1, you already know the skeleton of rotational kinematics — only the variable names change. Instead of position $x$, velocity $v$, and acceleration $a$, you work with angular displacement $\theta$, angular velocity $\omega$, and angular acceleration $\alpha$. The mathematics is identical; the physics shifts from straight-line motion to rotation about a fixed axis.</p>
 
@@ -821,8 +826,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 5.2 ═══════════════ -->
 <section class="section" id="s5-2">
-  <div class="section-label">Topic 5.2</div>
-  <h2>Connecting Linear &amp; Rotational Motion</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.2</span><span data-lang="zh">专题 5.2</span></div>
+  <h2><span data-lang="en">Connecting Linear &amp; Rotational Motion</span><span data-lang="zh">平动与转动的联系</span></h2>
 
   <p>Every point on a rotating rigid body simultaneously undergoes rotational motion (described by $\theta$, $\omega$, $\alpha$) and linear motion (described by $s$, $v$, $a_T$). The bridge between these descriptions is the distance $r$ from the point to the axis of rotation.</p>
 
@@ -940,8 +945,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 5.3 ═══════════════ -->
 <section class="section" id="s5-3">
-  <div class="section-label">Topic 5.3</div>
-  <h2>Torque</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.3</span><span data-lang="zh">专题 5.3</span></div>
+  <h2><span data-lang="en">Torque</span><span data-lang="zh">力矩</span></h2>
 
   <p>Torque is to rotation what force is to translation. A force pushes an object across the floor; a torque makes it spin. Torque depends on three factors: the magnitude of the force, the distance from the axis of rotation to the point where the force is applied, and the angle between the force vector and the position vector.</p>
 
@@ -1049,8 +1054,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 5.4 ═══════════════ -->
 <section class="section" id="s5-4">
-  <div class="section-label">Topic 5.4</div>
-  <h2>Rotational Inertia</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.4</span><span data-lang="zh">专题 5.4</span></div>
+  <h2><span data-lang="en">Rotational Inertia</span><span data-lang="zh">转动惯量</span></h2>
 
   <p>Rotational inertia (moment of inertia) is the rotational analog of mass. While mass measures resistance to changes in <em>linear</em> motion, rotational inertia $I$ measures resistance to changes in <em>rotational</em> motion. Crucially, $I$ depends not only on total mass but on how that mass is <em>distributed</em> relative to the axis of rotation.</p>
 
@@ -1259,8 +1264,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ 5.5 ═══════════════ -->
 <section class="section" id="s5-5">
-  <div class="section-label">Topic 5.5</div>
-  <h2>Rotational Equilibrium</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.5</span><span data-lang="zh">专题 5.5</span></div>
+  <h2><span data-lang="en">Rotational Equilibrium</span><span data-lang="zh">转动平衡</span></h2>
 
   <p>Just as translational equilibrium requires zero net force and constant velocity, <strong>rotational equilibrium</strong> requires zero net torque and constant angular velocity. These two kinds of equilibrium are independent — an object can be in rotational equilibrium without being in translational equilibrium, and vice versa.</p>
 
@@ -1360,8 +1365,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 <!-- ═══════════════ 5.6 ═══════════════ -->
 
 <section class="section" id="s5-6">
-  <div class="section-label">Topic 5.6</div>
-  <h2>Newton's Second Law — Rotational Form</h2>
+  <div class="section-label"><span data-lang="en">Topic 5.6</span><span data-lang="zh">专题 5.6</span></div>
+  <h2><span data-lang="en">Newton's Second Law — Rotational Form</span><span data-lang="zh">牛顿第二定律 —— 转动形式</span></h2>
 
   <p>The crown jewel of rotational dynamics: just as $\vec{F}_{\text{net}} = m\vec{a}$ governs translation, the net torque on a rigid body determines its angular acceleration, scaled by its rotational inertia:</p>
 
@@ -1548,8 +1553,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Strategy</div>
-  <h2>How Unit 5 Appears on the AP Exam</h2>
+  <div class="section-label"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">How Unit 5 Appears on the AP Exam</span><span data-lang="zh">第 5 单元在 AP 考试中的形式</span></h2>
 
   <div class="card">
     <div class="card-header">
@@ -1587,8 +1592,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards — Click to Flip</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards — Click to Flip</span><span data-lang="zh">闪卡 —— 点击翻面</span></h2>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
@@ -1646,8 +1651,8 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit 5 — Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">测评</span></div>
+  <h2><span data-lang="en">Unit 5 — Practice Quiz</span><span data-lang="zh">第 5 单元 —— 练习测验</span></h2>
 
 
   <details class="isee-example">
@@ -1834,6 +1839,18 @@ button:focus-visible, .quiz-opt:focus-visible, summary:focus-visible, a:focus-vi
 </main>
 
 <script>
+
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+function setThemeBtnLabel(isDark) {
+  var b = document.getElementById('themeToggle');
+  if (!b) return;
+  b.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 // ─── THEME ───
 document.addEventListener('DOMContentLoaded', function () {
   if (window.renderMathInElement) {
@@ -1850,12 +1867,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function toggleTheme() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(false);
   drawRotKin(); drawLinRot(); drawTorque(); drawRolling();
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  document.getElementById('themeToggle').textContent = 'Light';
+  setThemeBtnLabel(true);
 }
 
 // ─── SIDEBAR ───
