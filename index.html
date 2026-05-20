@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="AP Calculus AB/BC, AP Physics C, AP Computer Science A, IB Chemistry HL, and IB Math AA HL study guides from Dingrui Scholars — worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
+<meta name="description" content="Dingrui Scholars study guides organized in three tiers: High School Foundations (BC, Ontario, Alberta, US Common Core), College Credit Courses (AP & IB), and upcoming University Level courses — with worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
 <meta name="theme-color" content="#7A2E2E">
 <meta name="color-scheme" content="light dark">
 <title>Study Guides | Dingrui Scholars</title>
@@ -145,6 +145,115 @@ body.lang-zh       [data-lang="en"] { display: none; }
 .chip-purple { border: 1px solid var(--purple); color: var(--purple); }
 .chip-gold   { border: 1px solid var(--gold);   color: var(--gold);   }
 
+/* ─── TIER NAV (in hero) ─── */
+.tier-nav {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  justify-content: center; margin-top: 28px;
+  position: relative;
+}
+.tier-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px 8px 12px;
+  transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.tier-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--tier-color, var(--accent));
+  box-shadow: var(--shadow);
+}
+.tier-pill__num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--bg-card);
+  background: var(--tier-color, var(--accent));
+  padding: 3px 8px; border-radius: 999px;
+  line-height: 1;
+}
+.tier-pill__name {
+  font-family: var(--font-body); font-weight: 600;
+  font-size: 0.9rem; color: var(--text);
+}
+.tier-pill--soon .tier-pill__name { color: var(--text-secondary); }
+.tier-pill--soon { opacity: 0.85; }
+
+/* ─── TIER (organizing band) ─── */
+.tier {
+  position: relative;
+  padding-top: 8px;
+  margin: 0 0 56px;
+  scroll-margin-top: 80px;
+}
+.tier__head {
+  display: flex; align-items: baseline;
+  flex-wrap: wrap; gap: 10px 16px;
+  margin: 0 0 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.tier__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--bg-card);
+  background: var(--tier-color, var(--accent));
+  padding: 5px 10px; border-radius: 4px;
+  line-height: 1;
+}
+.tier__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 400; line-height: 1.1;
+  margin: 0; color: var(--text);
+}
+.tier__sub {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  max-width: 720px;
+}
+.tier-1 { --tier-color: var(--gold); }
+.tier-2 { --tier-color: var(--accent); }
+.tier-3 { --tier-color: var(--purple); }
+
+/* Subject subgroups inside a tier */
+.subject-group { margin-bottom: 36px; }
+.subject-group:last-child { margin-bottom: 0; }
+
+/* Empty / coming-soon tier panel */
+.tier__empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 36px 24px;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, var(--accent-light) 140%);
+}
+.tier__empty-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--tier-color, var(--accent));
+  margin-bottom: 10px;
+}
+.tier__empty-title {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 1.35rem; line-height: 1.3;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.tier__empty-body {
+  color: var(--text-secondary);
+  margin: 0 auto;
+  max-width: 560px;
+  font-size: 0.96rem;
+}
+
 /* ─── SECTION HEADER ─── */
 .section-title {
   font-family: var(--font-mono);
@@ -230,6 +339,10 @@ footer {
   .hero { padding: 36px 16px 32px; margin-bottom: 36px; }
   .hero-logo { height: 60px; }
   .nav-wordmark { display: none; }
+  .tier { margin-bottom: 40px; }
+  .tier__head { gap: 8px 12px; margin-bottom: 22px; padding-bottom: 14px; }
+  .tier-pill { padding: 6px 12px 6px 8px; }
+  .tier-pill__name { font-size: 0.85rem; }
 }
 </style>
 </head>
@@ -253,10 +366,45 @@ footer {
     <div class="hero-overline">Dingrui Scholars</div>
     <h1><span data-lang="en">Study Guides</span><span data-lang="zh">学习指南</span></h1>
     <p class="hero-sub">
-      <span data-lang="en">AP and IB study guides built for top scores — worked examples in exam style, retrieval-practice quizzes, and AP-style problem sets with full solutions.</span><span data-lang="zh">面向 AP 与 IB 高分目标的学习指南——考试风格的例题、检索式记忆测验，以及配有完整解析的 AP 风格练习题集。</span>
+      <span data-lang="en">A three-tier library — from high-school foundations through AP &amp; IB college-credit courses to university-level material. Worked examples in exam style, retrieval-practice quizzes, and full solutions throughout.</span><span data-lang="zh">三层课程体系——从高中基础课程，到 AP 与 IB 大学学分课程，再到大学水平课程。考试风格例题、检索式记忆测验，配有完整解析。</span>
     </p>
+    <nav class="tier-nav" aria-label="Course tiers">
+      <a class="tier-pill tier-1" href="#tier-1">
+        <span class="tier-pill__num">01</span>
+        <span class="tier-pill__name"><span data-lang="en">High School</span><span data-lang="zh">高中基础</span></span>
+      </a>
+      <a class="tier-pill tier-2" href="#tier-2">
+        <span class="tier-pill__num">02</span>
+        <span class="tier-pill__name"><span data-lang="en">AP &amp; IB</span><span data-lang="zh">AP 与 IB</span></span>
+      </a>
+      <a class="tier-pill tier-3 tier-pill--soon" href="#tier-3">
+        <span class="tier-pill__num">03</span>
+        <span class="tier-pill__name"><span data-lang="en">University · soon</span><span data-lang="zh">大学 · 即将推出</span></span>
+      </a>
+    </nav>
   </section>
 
+  <section class="tier tier-1" id="tier-1">
+    <header class="tier__head">
+      <span class="tier__num">Tier 01</span>
+      <h2 class="tier__title"><span data-lang="en">High School Foundations</span><span data-lang="zh">高中基础课程</span></h2>
+      <p class="tier__sub"><span data-lang="en">Provincial &amp; Common Core curricula — BC, Ontario, Alberta, and US schools. Build the groundwork before tackling AP/IB.</span><span data-lang="zh">省级与 Common Core 课程——面向不列颠哥伦比亚、安大略、阿尔伯塔及美国学校。在进入 AP/IB 之前打牢基础。</span></p>
+    </header>
+    <div class="tier__empty">
+      <div class="tier__empty-eyebrow"><span data-lang="en">Launching soon</span><span data-lang="zh">即将推出</span></div>
+      <p class="tier__empty-title"><span data-lang="en">High School Math — Linear Functions, Quadratics &amp; more</span><span data-lang="zh">高中数学——线性函数、二次函数等</span></p>
+      <p class="tier__empty-body"><span data-lang="en">First Year 9–12 study guides are in active drafting. The first units land here as soon as they ship.</span><span data-lang="zh">首批 9–12 年级学习指南正在起草中。第一批单元上线后会直接出现在此处。</span></p>
+    </div>
+  </section>
+
+  <section class="tier tier-2" id="tier-2">
+    <header class="tier__head">
+      <span class="tier__num">Tier 02</span>
+      <h2 class="tier__title"><span data-lang="en">College Credit Courses</span><span data-lang="zh">大学学分课程</span></h2>
+      <p class="tier__sub"><span data-lang="en">AP &amp; IB study guides built for top scores — exam-style worked examples, retrieval-practice quizzes, and AP-style problem sets with full solutions.</span><span data-lang="zh">面向 AP 与 IB 高分目标的学习指南——考试风格例题、检索式记忆测验，配有完整解析的 AP 风格练习题集。</span></p>
+    </header>
+
+  <div class="subject-group">
   <h2 class="section-title">AP Calculus AB/BC</h2>
 
   <div class="grid">
@@ -314,7 +462,10 @@ footer {
     <!-- END cards:AP_Calculus -->
   </div>
 
-  <h2 class="section-title" style="margin-top:56px;">AP Physics C: Mechanics</h2>
+  </div>
+
+  <div class="subject-group">
+  <h2 class="section-title">AP Physics C: Mechanics</h2>
 
   <div class="grid">
     <!-- BEGIN cards:AP_Physics -->
@@ -356,7 +507,10 @@ footer {
     <!-- END cards:AP_Physics -->
   </div>
 
-  <h2 class="section-title" style="margin-top:56px;">IB Chemistry HL</h2>
+  </div>
+
+  <div class="subject-group">
+  <h2 class="section-title">IB Chemistry HL</h2>
 
   <div class="grid">
     <!-- BEGIN cards:IB_Chemistry_HL -->
@@ -383,7 +537,10 @@ footer {
     <!-- END cards:IB_Chemistry_HL -->
   </div>
 
-  <h2 class="section-title" style="margin-top:56px;">AP Computer Science A</h2>
+  </div>
+
+  <div class="subject-group">
+  <h2 class="section-title">AP Computer Science A</h2>
 
   <div class="grid">
     <!-- BEGIN cards:AP_CSA -->
@@ -410,7 +567,10 @@ footer {
     <!-- END cards:AP_CSA -->
   </div>
 
-  <h2 class="section-title" style="margin-top:56px;">IB Math AA HL</h2>
+  </div>
+
+  <div class="subject-group">
+  <h2 class="section-title">IB Math AA HL</h2>
 
   <div class="grid">
     <!-- BEGIN cards:IB_Math_HL -->
@@ -436,8 +596,23 @@ footer {
     </a>
     <!-- END cards:IB_Math_HL -->
   </div>
+  </div>
+  </section>
 
-  <footer><span data-lang="en">© Dingrui Scholars · AP Calculus AB/BC · AP Physics C · AP Computer Science A · IB Chemistry HL · IB Math AA HL</span><span data-lang="zh">© 鼎睿学苑 · AP 微积分 AB/BC · AP 物理 C · AP 计算机科学 A · IB 化学 HL · IB 数学 AA HL</span></footer>
+  <section class="tier tier-3" id="tier-3">
+    <header class="tier__head">
+      <span class="tier__num">Tier 03</span>
+      <h2 class="tier__title"><span data-lang="en">University Level Courses</span><span data-lang="zh">大学水平课程</span></h2>
+      <p class="tier__sub"><span data-lang="en">Calculus III, Linear Algebra, intro physics &amp; more — the next tier of the library, designed to extend straight past AP/IB into first- and second-year university material.</span><span data-lang="zh">微积分 III、线性代数、大学物理入门等——课程库的下一层级，从 AP/IB 直接延伸至大学一、二年级内容。</span></p>
+    </header>
+    <div class="tier__empty">
+      <div class="tier__empty-eyebrow"><span data-lang="en">On the roadmap</span><span data-lang="zh">规划中</span></div>
+      <p class="tier__empty-title"><span data-lang="en">Reserved for university-level study guides</span><span data-lang="zh">为大学水平学习指南预留</span></p>
+      <p class="tier__empty-body"><span data-lang="en">This slot is held for upcoming releases. As university units ship, they'll appear here alongside the AP/IB library above.</span><span data-lang="zh">此处为即将发布的大学课程预留位置。大学单元上线后将显示在此处，与上方 AP/IB 课程库并列。</span></p>
+    </div>
+  </section>
+
+  <footer><span data-lang="en">© Dingrui Scholars · High School Foundations · College Credit (AP &amp; IB) · University Level</span><span data-lang="zh">© 鼎睿学苑 · 高中基础 · 大学学分（AP 与 IB） · 大学水平</span></footer>
 </div>
 
 <script>
