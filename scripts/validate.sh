@@ -8,27 +8,33 @@ cd "$(git rev-parse --show-toplevel)"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 ERRORS=0
 
+# Bash pitfall: with `set -e`, `((ERRORS++))` exits the script when ERRORS=0
+# because the post-increment expression returns the pre-value (0), which the
+# shell treats as exit status 1. Use this helper instead so we never trip
+# set -e and the run actually accumulates failures across all files.
+fail_count() { ERRORS=$((ERRORS + 1)); }
+
 validate_file() {
   local f="$1"
   echo -e "\n${YELLOW}Validating:${NC} $f"
 
   # Check file exists and is non-empty
   if [[ ! -s "$f" ]]; then
-    echo -e "  ${RED}FAIL${NC}: File is empty or missing"; ((ERRORS++)); return
+    echo -e "  ${RED}FAIL${NC}: File is empty or missing"; fail_count; return
   fi
 
   # Universal structure checks (apply to every product)
   for pattern in '<!DOCTYPE html>' '<meta charset' 'DM Serif Display'; do
     if ! grep -qi "$pattern" "$f"; then
       echo -e "  ${RED}FAIL${NC}: Missing '$pattern'"
-      ((ERRORS++))
+      fail_count
     fi
   done
 
   # Theme support is required except for print-targeted Practice Questions
   if [[ "$f" != *"Practice Questions"* ]] && ! grep -qi 'data-theme' "$f"; then
     echo -e "  ${RED}FAIL${NC}: Missing 'data-theme'"
-    ((ERRORS++))
+    fail_count
   fi
 
   # KaTeX is conditional: required only when the file actually uses math syntax
@@ -40,7 +46,7 @@ validate_file() {
   fi
   if $needs_katex && ! grep -qi 'katex' "$f"; then
     echo -e "  ${RED}FAIL${NC}: Uses math delimiters but missing KaTeX"
-    ((ERRORS++))
+    fail_count
   fi
 
   # Unclosed-math heuristic only meaningful when the file uses math
@@ -55,7 +61,7 @@ validate_file() {
   # Check dark mode CSS exists (skipped for print-targeted Practice Questions products)
   if [[ "$f" != *"Practice Questions"* ]] && ! grep -q '\[data-theme="dark"\]' "$f"; then
     echo -e "  ${RED}FAIL${NC}: Missing dark mode styles"
-    ((ERRORS++))
+    fail_count
   fi
 
   # File size sanity check
@@ -77,17 +83,21 @@ validate_file() {
     sol="$pdir/Solutions/${pbase}_Solutions.html"
     if [[ -f "$sol" ]]; then
       local pv sv
-      pv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$f"   | head -1 | awk '{print $2}')
-      sv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$sol" | head -1 | awk '{print $2}')
+      # Each pipeline can grep-find nothing, which under `set -o pipefail`
+      # would kill the script before we get to the missing-tag FAIL message.
+      # `|| true` keeps the empty-match path producing an empty $pv/$sv so
+      # the [[ -z ]] checks below can fire normally.
+      pv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$f"   | head -1 | awk '{print $2}' || true)
+      sv=$(grep -oE 'dingrui:version[[:space:]]+v[0-9][0-9.]*' "$sol" | head -1 | awk '{print $2}' || true)
       if [[ -z "$pv" ]]; then
         echo -e "  ${RED}FAIL${NC}: Practice missing 'dingrui:version' tag (Solutions present at $sol)"
-        ((ERRORS++))
+        fail_count
       elif [[ -z "$sv" ]]; then
         echo -e "  ${RED}FAIL${NC}: Solutions missing 'dingrui:version' tag ($sol)"
-        ((ERRORS++))
+        fail_count
       elif [[ "$pv" != "$sv" ]]; then
         echo -e "  ${RED}FAIL${NC}: Practice/Solutions version mismatch — practice=$pv, solutions=$sv ($sol)"
-        ((ERRORS++))
+        fail_count
       fi
     fi
   fi
@@ -98,9 +108,21 @@ validate_file() {
 if [[ $# -gt 0 ]]; then
   for f in "$@"; do validate_file "$f"; done
 else
+  # Skip directories that the deploy workflow's `strip_internals` removes
+  # before publishing — there's no point holding them to deploy-grade
+  # validation. Mirror the list in .github/workflows/deploy.yml.
   while IFS= read -r -d '' f; do
     validate_file "$f"
-  done < <(find . -name '*.html' -print0)
+  done < <(find . \
+            \( -path './_site' \
+            -o -path './Performance Update' \
+            -o -path './scripts' \
+            -o -path './prompts' \
+            -o -path './rag' \
+            -o -path './.git' \
+            -o -path './.github' \
+            -o -path './.claude' \) -prune \
+            -o -name '*.html' -print0)
 fi
 
 if (( ERRORS > 0 )); then
