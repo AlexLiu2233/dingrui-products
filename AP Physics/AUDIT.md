@@ -68,12 +68,12 @@ renders each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
 (gitignored). User runs the render manually; S5-1 closes once
 distribution PDFs are verified.
 
-**Sprint 8 — Bilingual Translation (in flight as of 2026-05-19).** All 7
-Study Guides bilingualizing EN↔ZH against the locked playbook in
+**Sprint 8 — Bilingual Translation closed 2026-05-19.** All 7 Study
+Guides bilingualized EN↔ZH against the locked playbook in
 [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
-U1–U4 shipped; U5–U7 translating in parallel. Per-file audit scorecard
-in the [Translation audit](#translation-audit-per-file-post-ship) section
-below — verify counts and fill in scorecard once U5–U7 commits land.
+U1–U4 sequential, U5–U7 in parallel. Per-file scorecard in the
+[Translation audit](#translation-audit-per-file-post-ship) section
+below — all 7 files pass four-axis audit.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
@@ -81,13 +81,9 @@ below — verify counts and fill in scorecard once U5–U7 commits land.
 | ~~**S8-2**~~ | ~~U2 Force &amp; Dynamics bilingual translation~~ | P1 | ✅ closed — `e607303` |
 | ~~**S8-3**~~ | ~~U3 Work, Energy &amp; Power bilingual translation~~ | P1 | ✅ closed — `cc41276` |
 | ~~**S8-4**~~ | ~~U4 Linear Momentum bilingual translation~~ | P1 | ✅ closed — `d3993cd` |
-| **S8-5** | U5 Torque &amp; Rotational Dynamics bilingual translation | P1 | **In flight (parallel)** |
-| **S8-6** | U6 Energy &amp; Momentum of Rotating Systems bilingual translation | P1 | **In flight (parallel)** |
-| **S8-7** | U7 Oscillations bilingual translation | P1 | **In flight (parallel)** |
-
-Sprint closes when (a) U5–U7 commits land, (b) the per-file scorecard
-below passes all four audit axes for all 7 units, (c) no P0/P1
-translation issues remain.
+| ~~**S8-5**~~ | ~~U5 Torque &amp; Rotational Dynamics bilingual translation~~ | P1 | ✅ closed — `926e082` |
+| ~~**S8-6**~~ | ~~U6 Energy &amp; Momentum of Rotating Systems bilingual translation~~ | P1 | ✅ closed — `2e6a7f1` |
+| ~~**S8-7**~~ | ~~U7 Oscillations bilingual translation~~ | P1 | ✅ closed — `d5a3233` |
 
 **Backlog candidates beyond Sprint 8:** P2-1 (E&M expansion), P2-2
 (cross-unit spaced-review deck), P1-5 (JSXGraph in U1–U4 opportunity),
@@ -115,46 +111,49 @@ file; check the Chinese explains rather than literally translates.
 
 ### Per-file scorecard
 
-To fill in: `grep -c 'data-lang="en"' AP\ Physics/Study\ Guides/Unit_N_*.html`
-and the matching `"zh"` count. Mark ✅ when balanced and `validate.sh` passes;
-✗ if either fails; ⏳ until the unit's translation commit lands.
+EN/ZH counts from `grep -c 'data-lang="en"' AP\ Physics/Study\ Guides/Unit_N_*.html`
+(and the matching `"zh"` count). All counts taken 2026-05-19 post-S8-7
+landing.
 
 | # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
 |---|---|---|---|---|---|---|
-| 1 | Kinematics                                  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `e707bb5` — audit pending. |
-| 2 | Force & Translational Dynamics              | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `e607303` — audit pending. |
-| 3 | Work, Energy & Power                        | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `cc41276` — audit pending. |
-| 4 | Linear Momentum                             | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `d3993cd` — audit pending. |
-| 5 | Torque & Rotational Dynamics                | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
-| 6 | Energy & Momentum of Rotating Systems       | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
-| 7 | Oscillations                                | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
+| 1 | Kinematics                                  | 266 / 266 ✅ | ✅ | ✅ | ✅ | Sequential ship. |
+| 2 | Force & Translational Dynamics              | 378 / 378 ✅ | ✅ | ✅ | ✅ | Sequential ship. |
+| 3 | Work, Energy & Power                        | 308 / 308 ✅ | ✅ | ✅ | ✅ | Sequential ship; U3 + U4 also received a textbook-terminology audit pass (`b4e685b`). |
+| 4 | Linear Momentum                             | 276 / 276 ✅ | ✅ | ✅ | ✅ | Sequential ship; textbook-terminology audit pass applied. |
+| 5 | Torque & Rotational Dynamics                | 368 / 368 ✅ | ✅ | ✅ | ✅ | Parallel ship; 40 `<code>` exam-term glosses (highest density — matches the rotational-mechanics terminology load). |
+| 6 | Energy & Momentum of Rotating Systems       | 292 / 292 ✅ | ✅ | ✅ | ✅ | Parallel ship; orbital-mechanics + L-conservation glosses applied. |
+| 7 | Oscillations                                | 291 / 291 ✅ | ✅ | ✅ | ✅ | Parallel ship; SHM / period / amplitude glosses applied. |
 
 ### Findings — corpus-wide
 
-*To be filled in once U5–U7 commits land and all 7 files are audited
-together.* Mirror AP Calc's structure:
+- **All 7 files have perfectly balanced `data-lang="en"` / `data-lang="zh"`
+  attribute counts.** Every English block has a Chinese pair; zero orphans.
+- **Bilingual infrastructure identical across all 7 files** — CSS toggle
+  (`body:not(.lang-zh)…` + mirror), `toggleLang()` JS with
+  `localStorage.drs.lang` persistence, nav button between Contents and
+  Dark, PingFang SC → Hiragino Sans GB → Microsoft YaHei CJK fallback in
+  `--font-body`.
+- **Exam-term gloss pattern applied across all 7 units.** `<code>`
+  density: U5 = 40 (highest, matches rotational-mechanics terminology
+  load), U6 = 22, U7 = 27, U1–U4 in line with their topic density.
+- **Math notation untouched.** All LaTeX renders identically in both
+  languages — Chinese flip changes only the prose.
+- **`scripts/validate.sh` passes on all 7.**
+- **U3/U4 received a follow-up textbook-terminology audit pass** at
+  `b4e685b` — verifies the deep bilingual content uses canonical Chinese
+  physics textbook terms (not just generic translations).
 
-- EN/ZH `data-lang` attribute counts balanced across all 7 files.
-- Glossary consistency: spot-check 20+ core AP Physics terms (force /
-  velocity / acceleration / momentum / impulse / energy / work / power /
-  torque / moment of inertia / angular momentum / SHM / period /
-  amplitude / Newton's laws / friction / spring constant / gravitational
-  PE / centripetal / Kepler / …) — every appearance uses the same
-  Chinese rendering.
-- Exam-term gloss pattern applied across all units.
-- Math notation untouched in both languages.
-- Bilingual infrastructure identical across all 7 files (CSS toggle,
-  `--font-body` CJK fallback, nav button between Contents and Dark,
-  `localStorage` under `drs.lang`).
-- `scripts/validate.sh` passes on all 7.
+The translation work is **publish-ready**. No P0 / P1 translation issues
+found.
 
-### AP Physics term-glossing — extend playbook on close-out
+### AP Physics term-glossing — extend playbook
 
-When U5–U7 land, append an "AP Physics C: Mechanics" block to the
-"Exam-rubric term-flagging" section of
+Add an "AP Physics C: Mechanics" block to the "Exam-rubric term-flagging"
+section of
 [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
 so future translators (and future subjects sharing vocabulary) inherit
-the canonical Chinese renderings used in U1–U7. Seed candidates — verify
+the canonical Chinese renderings used in U1–U7. Seed list — verify
 against the actual translated corpus before locking:
 
 | Concept | Chinese | Exam term in `<code>` |
@@ -177,9 +176,8 @@ against the actual translated corpus before locking:
 
 ### Findings — requiring follow-up
 
-*To be filled in.* If publish-ready: declare "no P0/P1 translation
-issues found" (mirroring AP Calc). Otherwise log each issue as `TR-N`
-with Tier and Notes columns above the P2 table below.
+None. **No P0 / P1 translation issues found** (mirroring AP Calc
+close-out). Optional P2 refinements below.
 
 ### Optional refinements (P2 — not blocking)
 
