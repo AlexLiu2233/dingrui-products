@@ -39,7 +39,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -571,6 +571,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 }
 [data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+
 </style>
 </head>
 <body>
@@ -582,29 +586,30 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-a1-1">A1.1 Arithmetic Sequences</a>
-  <a href="#s-a1-2">A1.2 Arithmetic Series</a>
-  <a href="#s-a1-3">A1.3 Geometric Sequences</a>
-  <a href="#s-a1-4">A1.4 Geometric Series</a>
-  <a href="#s-a1-5">A1.5 Sigma Notation</a>
-  <a href="#s-a1-6">A1.6 Infinite Geometric Series</a>
-  <a href="#s-a1-7">A1.7 Financial Applications</a>
-  <a href="#s-a1-8">A1.8 Mixed &amp; Hybrid Patterns</a>
-  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">使用指南</span></a>
+  <a href="#s-a1-1"><span data-lang="en">A1.1 Arithmetic Sequences</span><span data-lang="zh">A1.1 等差数列</span></a>
+  <a href="#s-a1-2"><span data-lang="en">A1.2 Arithmetic Series</span><span data-lang="zh">A1.2 等差级数</span></a>
+  <a href="#s-a1-3"><span data-lang="en">A1.3 Geometric Sequences</span><span data-lang="zh">A1.3 等比数列</span></a>
+  <a href="#s-a1-4"><span data-lang="en">A1.4 Geometric Series</span><span data-lang="zh">A1.4 等比级数</span></a>
+  <a href="#s-a1-5"><span data-lang="en">A1.5 Sigma Notation</span><span data-lang="zh">A1.5 求和记号</span></a>
+  <a href="#s-a1-6"><span data-lang="en">A1.6 Infinite Geometric Series</span><span data-lang="zh">A1.6 无穷等比级数</span></a>
+  <a href="#s-a1-7"><span data-lang="en">A1.7 Financial Applications</span><span data-lang="zh">A1.7 金融应用</span></a>
+  <a href="#s-a1-8"><span data-lang="en">A1.8 Mixed &amp; Hybrid Patterns</span><span data-lang="zh">A1.8 混合与综合题型</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy &amp; Pitfalls</span><span data-lang="zh">考试策略与陷阱</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
@@ -612,44 +617,46 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">IB Mathematics: Analysis &amp; Approaches HL · 鼎睿学苑</div>
-  <h1>Unit A1: Sequences<br>&amp; Series</h1>
+  <h1><span data-lang="en">Unit A1: Sequences<br>&amp; Series</span><span data-lang="zh">单元 A1：数列与级数</span></h1>
   <p class="hero-sub">
-    The first sub-unit of Topic 1 (Number &amp; Algebra). Master arithmetic and geometric progressions, sigma notation, the convergence of an infinite GP, financial applications, and the patterns IB rewards on Papers 1 and 2.
+    <span data-lang="en">The first sub-unit of Topic 1 (Number &amp; Algebra). Master arithmetic and geometric progressions, sigma notation, the convergence of an infinite GP, financial applications, and the patterns IB rewards on Papers 1 and 2.</span><span data-lang="zh">Topic 1（数与代数）的第一个子单元。掌握等差与等比数列（<code>arithmetic</code> &amp; <code>geometric progression</code>）、求和记号（<code>sigma notation</code>）、无穷等比级数的收敛（<code>convergence</code>）、金融应用，以及 IB Paper 1 和 Paper 2 反复出现的考法。</span>
   </p>
   <div class="hero-meta">
     <span class="chip chip-maroon">IB AA HL · Topic 1.2–1.4, 1.8</span>
     <span class="chip chip-green">Papers 1 · 2</span>
-    <span class="chip chip-purple">8 Concepts</span>
+    <span class="chip chip-purple"><span data-lang="en">8 Concepts</span><span data-lang="zh">8 个核心概念</span></span>
   </div>
 </section>
 
 <!-- ═══════════════ HOW TO USE ═══════════════ -->
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">本指南使用说明</span></h2>
 
-  <p>This guide is built to serve <strong>two students at once</strong>:</p>
+  <p><span data-lang="en">This guide is built to serve <strong>two students at once</strong>:</span><span data-lang="zh">本指南同时为<strong>两类学生</strong>设计：</span></p>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-orange">!</div>
-        <div class="card-title">If you're cramming</div>
+        <div class="card-title"><span data-lang="en">If you're cramming</span><span data-lang="zh">如果你在临阵磨枪</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 30-minute pass.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 30-minute pass.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">只看每节顶端的金色虚线 <strong>"Cram-Mode Cheat"</strong> 速记框和公式框（<code>formula box</code>）。每节挑一道 worked example（例题）扫一眼，跳过 <code>▸</code> 折叠的"深入"部分，做一次练习测验。约 30 分钟过完一遍。</p>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">★</div>
-        <div class="card-title">If you're going for a 7</div>
+        <div class="card-title"><span data-lang="en">If you're going for a 7</span><span data-lang="zh">如果你目标是 7 分</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where derivations and proofs live. Do every worked example with the solution covered first. Re-do the quiz with no hints. Owning the <em>why</em> is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where derivations and proofs live. Do every worked example with the solution covered first. Re-do the quiz with no hints. Owning the <em>why</em> is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">从头读到尾。打开每个 <code>▸ Going deeper</code> 折叠块——推导和证明都在里面。每道 worked example 先遮住答案自己做，再对照解析。再做一遍测验不看提示。真正吃透 <em>为什么</em>，才是 5 分到 7 分的关键。</p>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">HL flag</strong>
-    Sections marked <span class="hl-flag">HL</span> contain content that is HL-only on the AA syllabus (most prominently the convergence proof for an infinite GP and any induction-style argument). SL students can skim these but should not panic if they don't click — they aren't on the SL papers.
+    <strong style="color: var(--purple);"><span data-lang="en">HL flag</span><span data-lang="zh">HL 标记说明</span></strong>
+    <span data-lang="en">Sections marked <span class="hl-flag">HL</span> contain content that is HL-only on the AA syllabus (most prominently the convergence proof for an infinite GP and any induction-style argument). SL students can skim these but should not panic if they don't click — they aren't on the SL papers.</span><span data-lang="zh">带 <span class="hl-flag">HL</span> 标的小节是 AA 大纲中仅 HL 涉及的内容（最典型的是无穷等比级数的收敛性证明以及任何归纳法论证）。SL 学生可以浏览，但若一时不懂不必慌——SL 试卷不考。</span>
   </div>
 </section>
 
@@ -657,46 +664,71 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <!-- ═══════════════ A1.1 ARITHMETIC SEQUENCES ═══════════════ -->
 <section class="section" id="s-a1-1">
-  <div class="section-label">Topic A1.1 · Sequences</div>
-  <h2>Arithmetic Sequences</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.1 · Sequences</span><span data-lang="zh">Topic A1.1 · 数列</span></div>
+  <h2><span data-lang="en">Arithmetic Sequences</span><span data-lang="zh">等差数列</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>An arithmetic sequence adds a fixed amount each step.</strong> The fixed amount is the <em>common difference</em> $d = u_{n+1} - u_n$. The $n$-th term is
     $$ u_n = u_1 + (n-1)d. $$
     Two facts in $u_1$ and $d$ → $2\times 2$ system → unique sequence. That single sentence answers ~80% of Paper 1 AP questions.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>等差数列（<code>arithmetic sequence</code>）每一步加一个固定的量。</strong>这个固定的量就是公差（<code>common difference</code>）$d = u_{n+1} - u_n$。第 $n$ 项为
+    $$ u_n = u_1 + (n-1)d. $$
+    给两个关于 $u_1$ 和 $d$ 的条件 → $2\times 2$ 方程组 → 唯一确定的数列。这一句话能解决约 80% 的 Paper 1 AP（<code>arithmetic progression</code>）题。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Definition</strong>
     A sequence $\{u_n\}$ is <strong>arithmetic</strong> iff the difference between consecutive terms is constant:
     $$ u_{n+1} - u_n = d \quad \text{for every } n \ge 1. $$
     Equivalently, $u_n = u_1 + (n-1)d$. The constant $d$ is the <em>common difference</em>; it can be positive (increasing), negative (decreasing), or zero (constant).
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">定义</strong>
+    数列 $\{u_n\}$ 是<strong>等差</strong>（<code>arithmetic</code>）的，当且仅当相邻两项之差为常数：
+    $$ u_{n+1} - u_n = d \quad \text{for every } n \ge 1. $$
+    等价地，$u_n = u_1 + (n-1)d$。常数 $d$ 是公差（<code>common difference</code>），可以为正（递增）、为负（递减）或为零（常数列）。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">$n$-th Term Formula</div>
+    <div class="formula-label"><span data-lang="en">$n$-th Term Formula</span><span data-lang="zh">通项公式</span></div>
     $$ u_n = u_1 + (n-1)d $$
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Three useful identities</strong>
     <strong>(1)</strong> $u_m - u_n = (m - n)d$ — any two terms tell you $d$.<br>
     <strong>(2)</strong> The arithmetic mean: $u_{n+1} = \tfrac{u_n + u_{n+2}}{2}$ — middle term is the average of its neighbours.<br>
     <strong>(3)</strong> Symmetry: $u_k + u_{n-k+1}$ is constant across $k$ for the first $n$ terms.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">三条实用恒等式</strong>
+    <strong>(1)</strong> $u_m - u_n = (m - n)d$——任意两项就能反推出 $d$。<br>
+    <strong>(2)</strong> 等差中项（<code>arithmetic mean</code>）：$u_{n+1} = \tfrac{u_n + u_{n+2}}{2}$——中间项等于左右相邻两项的平均。<br>
+    <strong>(3)</strong> 对称性：在前 $n$ 项中，$u_k + u_{n-k+1}$ 对所有 $k$ 都相等。
+  </div>
 
-  <h3>Worked Example — Find a specific term</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Find a specific term</span><span data-lang="zh">例题——求指定项</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> An arithmetic sequence has $u_3 = 11$ and $u_8 = 26$. Find $u_{20}$.</p>
     <p><strong>Set up.</strong> Two facts in two unknowns. From identity (1):</p>
     $$ u_8 - u_3 = (8 - 3)d \;\Rightarrow\; 26 - 11 = 5d \;\Rightarrow\; d = 3. $$
     <p><strong>Find $u_1$.</strong> $u_3 = u_1 + 2d$, so $u_1 = 11 - 6 = 5$.</p>
     <p><strong>Apply.</strong> $u_{20} = 5 + 19(3) = 62$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>已知等差数列中 $u_3 = 11$，$u_8 = 26$。求 $u_{20}$。</p>
+    <p><strong>建立方程。</strong>两条信息、两个未知量。由恒等式 (1)：</p>
+    $$ u_8 - u_3 = (8 - 3)d \;\Rightarrow\; 26 - 11 = 5d \;\Rightarrow\; d = 3. $$
+    <p><strong>求 $u_1$。</strong>$u_3 = u_1 + 2d$，故 $u_1 = 11 - 6 = 5$。</p>
+    <p><strong>代入。</strong>$u_{20} = 5 + 19(3) = 62$。</p>
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Why "$2$ facts → unique sequence"</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why "$2$ facts → unique sequence"</span><span data-lang="zh">▸ 深入——为何"两条信息就能唯一确定数列"</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>An AP has two parameters: $u_1$ and $d$. Each condition is one linear equation in them.</p>
 $$
 \begin{aligned}
@@ -707,12 +739,25 @@ $$
 <p>Two <em>independent</em> equations $\Rightarrow$ unique $(u_1, d)$. Independence fails when one is a scalar multiple of the other — e.g.</p>
 $$ u_3 = 11 \;\;\text{and}\;\; u_3 + u_5 = 26 $$
 <p>The second is $2u_1 + 6d = 26$, but $u_3 = 11$ gives $2u_1 + 4d = 22$, so subtracting yields $2d = 4$ alone — $u_1$ stays free. <strong>Recipe:</strong> write both as $\alpha u_1 + \beta d = \gamma$, then check $\det\!\begin{pmatrix}\alpha_1 & \beta_1 \\ \alpha_2 & \beta_2\end{pmatrix} \ne 0$.</p>
+</div>
+<div data-lang="zh">
+<p>一个 AP 只有两个参数：$u_1$ 和 $d$。每个条件就是关于它们的一条线性方程：</p>
+$$
+\begin{aligned}
+u_p = a \;\;&\Longleftrightarrow\;\; u_1 + (p-1)\,d = a \\
+S_q = b \;\;&\Longleftrightarrow\;\; q\,u_1 + \tfrac{q(q-1)}{2}\,d = b
+\end{aligned}
+$$
+<p>两条<em>独立</em>方程 $\Rightarrow$ 唯一的 $(u_1, d)$。当一条是另一条的常数倍时独立性失败，例如：</p>
+$$ u_3 = 11 \;\;\text{and}\;\; u_3 + u_5 = 26 $$
+<p>第二条化为 $2u_1 + 6d = 26$，而 $u_3 = 11$ 给出 $2u_1 + 4d = 22$，相减只得到 $2d = 4$——$u_1$ 仍是自由的。<strong>套路：</strong>把两条都写成 $\alpha u_1 + \beta d = \gamma$，然后验证行列式 $\det\!\begin{pmatrix}\alpha_1 & \beta_1 \\ \alpha_2 & \beta_2\end{pmatrix} \ne 0$。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">In an arithmetic sequence, $u_5 = 14$ and $u_{12} = 49$. The value of $u_1$ is:</div>
+      <div class="quiz-q"><span data-lang="en">In an arithmetic sequence, $u_5 = 14$ and $u_{12} = 49$. The value of $u_1$ is:</span><span data-lang="zh">某等差数列满足 $u_5 = 14$，$u_{12} = 49$。则 $u_1 = $</span></div>
       <span class="quiz-number">A1.1</span>
     </div>
     <div class="quiz-options">
@@ -721,9 +766,11 @@ $$ u_3 = 11 \;\;\text{and}\;\; u_3 + u_5 = 26 $$
       <div class="quiz-opt" data-idx="2">$-6$</div>
       <div class="quiz-opt" data-idx="3">$3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $u_{12} - u_5 = 7d = 35 \Rightarrow d = 5$. Then $u_1 = u_5 - 4d = 14 - 20 = -6$.</div>
-    <div class="quiz-explain wrong-exp">Use $u_m - u_n = (m-n)d$ to find $d = 5$, then $u_1 = u_5 - 4d = -6$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $u_{12} - u_5 = 7d = 35 \Rightarrow d = 5$. Then $u_1 = u_5 - 4d = 14 - 20 = -6$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$u_{12} - u_5 = 7d = 35 \Rightarrow d = 5$。再由 $u_1 = u_5 - 4d = 14 - 20 = -6$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Use $u_m - u_n = (m-n)d$ to find $d = 5$, then $u_1 = u_5 - 4d = -6$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">用 $u_m - u_n = (m-n)d$ 先求出 $d = 5$，再算 $u_1 = u_5 - 4d = -6$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -731,21 +778,25 @@ $$ u_3 = 11 \;\;\text{and}\;\; u_3 + u_5 = 26 $$
 
 <!-- ═══════════════ A1.2 ARITHMETIC SERIES ═══════════════ -->
 <section class="section" id="s-a1-2">
-  <div class="section-label">Topic A1.2 · Series</div>
-  <h2>Arithmetic Series</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.2 · Series</span><span data-lang="zh">Topic A1.2 · 级数</span></div>
+  <h2><span data-lang="en">Arithmetic Series</span><span data-lang="zh">等差级数</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>The sum of the first $n$ arithmetic terms is $\boxed{\,S_n = \tfrac{n}{2}(u_1 + u_n) = \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)\,}$.</strong> Use the first form when you already know $u_n$; the second when you only have $u_1$ and $d$. Both give the same answer.
+  </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>等差级数（<code>arithmetic series</code>）前 $n$ 项之和为 $\boxed{\,S_n = \tfrac{n}{2}(u_1 + u_n) = \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)\,}$。</strong>已知 $u_n$ 时用第一式；只有 $u_1$ 和 $d$ 时用第二式。两式恒等。
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Sum of an Arithmetic Series</div>
+    <div class="formula-label"><span data-lang="en">Sum of an Arithmetic Series</span><span data-lang="zh">等差级数求和公式</span></div>
     $$ S_n = \frac{n}{2}(u_1 + u_n) = \frac{n}{2}\bigl(2u_1 + (n-1)d\bigr) $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — The Gauss-pairing derivation</summary>
+    <summary><span data-lang="en">▸ Going deeper — The Gauss-pairing derivation</span><span data-lang="zh">▸ 深入——高斯配对推导</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Write the sum forwards and backwards on top of each other:</p>
 $$
 \begin{aligned}
@@ -756,16 +807,33 @@ $$
 <p>Add column-wise. Each column gives $u_1 + u_n$, and there are $n$ columns:</p>
 $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
 <p>Substituting $u_n = u_1 + (n-1)d$ gives the second form. The trick is named for Gauss who reportedly used it as a child to sum $1 + 2 + \cdots + 100$ in seconds — pair $1$ with $100$, $2$ with $99$, etc., to get $50$ pairs each summing to $101$.</p>
+</div>
+<div data-lang="zh">
+<p>把同一个和正序、逆序上下对齐写：</p>
+$$
+\begin{aligned}
+S_n &= u_1 + (u_1 + d) + (u_1 + 2d) + \cdots + (u_1 + (n-1)d) \\
+S_n &= u_n + (u_n - d) + (u_n - 2d) + \cdots + (u_n - (n-1)d).
+\end{aligned}
+$$
+<p>按列相加，每一列都是 $u_1 + u_n$，共 $n$ 列：</p>
+$$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
+<p>代入 $u_n = u_1 + (n-1)d$ 即得第二式。这一技巧得名于高斯——传说他童年时用 $50$ 对 $\,1\!+\!100,\,2\!+\!99,\ldots\,$ 每对都等于 $101$，瞬间算出 $1+2+\cdots+100$。</p>
+</div>
     </div>
   </details>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Exam Tip — Two-condition systems</strong>
     "$u_p = a$ and $S_q = b$" is the canonical Paper 1 setup. Translate both to linear equations in $u_1, d$, solve the $2\times 2$, then answer the question. The same recipe handles "consecutive terms" prompts ("the $4$th, $9$th, $16$th terms are themselves an AP").
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">考试 Tip——双条件方程组</strong>
+    "$u_p = a$ 且 $S_q = b$" 是 Paper 1 的标准设题。把两条都翻译成关于 $u_1$ 和 $d$ 的线性方程，解 $2\times 2$ 方程组，再回答题目所问。"连续若干项本身构成新 AP" 类题目也走同一套路（例如题目说"第 4、9、16 项本身又是一个 AP"）。
+  </div>
 
-  <h3>Worked Example — System for $u_1$ and $d$</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — System for $u_1$ and $d$</span><span data-lang="zh">例题——求 $u_1$ 与 $d$ 的方程组</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> An arithmetic sequence has $u_4 = 11$ and $S_8 = 76$. Find $u_1$ and $d$.</p>
     <p>Translate:</p>
     $$ u_4 = u_1 + 3d = 11 \tag{1} $$
@@ -774,18 +842,33 @@ $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
     $$ 2(11 - 3d) + 7d = 19 \;\Rightarrow\; 22 + d = 19 \;\Rightarrow\; d = -3. $$
     <p>Then $u_1 = 11 - 3(-3) = 20$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>等差数列满足 $u_4 = 11$，$S_8 = 76$。求 $u_1$ 和 $d$。</p>
+    <p>翻译为方程：</p>
+    $$ u_4 = u_1 + 3d = 11 \tag{1} $$
+    $$ S_8 = \tfrac{8}{2}\bigl(2u_1 + 7d\bigr) = 4(2u_1 + 7d) = 76 \;\Rightarrow\; 2u_1 + 7d = 19. \tag{2} $$
+    <p>由 (1)：$u_1 = 11 - 3d$。代入 (2)：</p>
+    $$ 2(11 - 3d) + 7d = 19 \;\Rightarrow\; 22 + d = 19 \;\Rightarrow\; d = -3. $$
+    <p>故 $u_1 = 11 - 3(-3) = 20$。</p>
+  </div>
 
-  <h3>Worked Example — Sum of integers in a range</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Sum of integers in a range</span><span data-lang="zh">例题——区间内整数求和</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find the sum of all multiples of $7$ between $100$ and $400$ inclusive.</p>
     <p><strong>Find $u_1$, $u_n$, $n$.</strong> First multiple $\ge 100$ is $105 = 7\cdot 15$; last $\le 400$ is $399 = 7 \cdot 57$. Number of terms: $57 - 15 + 1 = 43$.</p>
     $$ S_{43} = \tfrac{43}{2}(105 + 399) = \tfrac{43}{2}\cdot 504 = 43 \cdot 252 = 10\,836. $$
     <p>Sanity check: the average term is $(105 + 399)/2 = 252$, times $43$ terms = $10\,836$. ✓</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求 $100$ 到 $400$（含端点）之间所有 $7$ 的倍数之和。</p>
+    <p><strong>求 $u_1$、$u_n$、$n$。</strong>$\ge 100$ 的第一个倍数是 $105 = 7\cdot 15$；$\le 400$ 的最后一个是 $399 = 7 \cdot 57$。项数：$57 - 15 + 1 = 43$。</p>
+    $$ S_{43} = \tfrac{43}{2}(105 + 399) = \tfrac{43}{2}\cdot 504 = 43 \cdot 252 = 10\,836. $$
+    <p>验算：平均项为 $(105 + 399)/2 = 252$，乘以 $43$ 项 $= 10\,836$。✓</p>
+  </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">In an arithmetic sequence, $u_1 = 7$ and $d = 4$. The sum $S_{20}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">In an arithmetic sequence, $u_1 = 7$ and $d = 4$. The sum $S_{20}$ equals:</span><span data-lang="zh">等差数列中 $u_1 = 7$，$d = 4$。则 $S_{20} = $</span></div>
       <span class="quiz-number">A1.2</span>
     </div>
     <div class="quiz-options">
@@ -794,9 +877,11 @@ $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
       <div class="quiz-opt" data-idx="2">$900$</div>
       <div class="quiz-opt" data-idx="3">$1060$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $S_{20} = \tfrac{20}{2}(2(7) + 19(4)) = 10(14 + 76) = 900$.</div>
-    <div class="quiz-explain wrong-exp">Use $S_n = \tfrac{n}{2}(2u_1 + (n-1)d)$: $S_{20} = 10(14 + 76) = 900$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $S_{20} = \tfrac{20}{2}(2(7) + 19(4)) = 10(14 + 76) = 900$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$S_{20} = \tfrac{20}{2}(2(7) + 19(4)) = 10(14 + 76) = 900$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Use $S_n = \tfrac{n}{2}(2u_1 + (n-1)d)$: $S_{20} = 10(14 + 76) = 900$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">用 $S_n = \tfrac{n}{2}(2u_1 + (n-1)d)$：$S_{20} = 10(14 + 76) = 900$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -804,68 +889,105 @@ $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
 
 <!-- ═══════════════ A1.3 GEOMETRIC SEQUENCES ═══════════════ -->
 <section class="section" id="s-a1-3">
-  <div class="section-label">Topic A1.3 · Sequences</div>
-  <h2>Geometric Sequences</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.3 · Sequences</span><span data-lang="zh">Topic A1.3 · 数列</span></div>
+  <h2><span data-lang="en">Geometric Sequences</span><span data-lang="zh">等比数列</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>A geometric sequence multiplies by a fixed amount each step.</strong> The fixed amount is the <em>common ratio</em> $r = u_{n+1}/u_n$. The $n$-th term is
     $$ u_n = u_1 \, r^{\,n-1}. $$
     Compound interest, depreciation, and exponential growth are all GP problems in disguise.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>等比数列（<code>geometric sequence</code>）每一步乘以一个固定的量。</strong>这个固定的量就是公比（<code>common ratio</code>）$r = u_{n+1}/u_n$。第 $n$ 项为
+    $$ u_n = u_1 \, r^{\,n-1}. $$
+    复利（<code>compound interest</code>）、折旧（<code>depreciation</code>）、指数增长本质上都是 GP（<code>geometric progression</code>）问题。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Definition</strong>
     A sequence is <strong>geometric</strong> iff the ratio of consecutive terms is constant:
     $$ \frac{u_{n+1}}{u_n} = r \quad \text{for every } n. $$
     Equivalently, $u_n = u_1 \, r^{n-1}$ with $u_1 \ne 0$ and $r \ne 0$.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">定义</strong>
+    数列是<strong>等比</strong>（<code>geometric</code>）的，当且仅当相邻两项之比为常数：
+    $$ \frac{u_{n+1}}{u_n} = r \quad \text{for every } n. $$
+    等价地，$u_n = u_1 \, r^{n-1}$，其中 $u_1 \ne 0$ 且 $r \ne 0$。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">$n$-th Term of a GP</div>
+    <div class="formula-label"><span data-lang="en">$n$-th Term of a GP</span><span data-lang="zh">等比数列通项公式</span></div>
     $$ u_n = u_1 \, r^{\,n-1} $$
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Geometric mean &amp; ratio identities</strong>
     <strong>Ratio of two terms:</strong> $\dfrac{u_m}{u_n} = r^{m-n}$. Useful when you have two terms and need $r$.<br>
     <strong>Geometric mean:</strong> if $a, b, c$ are consecutive terms of a GP with $a, c > 0$, then $b = \pm\sqrt{ac}$.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">等比中项与比值恒等式</strong>
+    <strong>两项之比：</strong>$\dfrac{u_m}{u_n} = r^{m-n}$。已知两项求 $r$ 时最常用。<br>
+    <strong>等比中项（<code>geometric mean</code>）：</strong>若 $a, b, c$ 为某 GP 的连续三项且 $a, c > 0$，则 $b = \pm\sqrt{ac}$。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Three signs to keep straight</strong>
     <strong>$|r| > 1$:</strong> terms grow without bound (in magnitude).<br>
     <strong>$|r| < 1$:</strong> terms shrink toward $0$.<br>
     <strong>$r < 0$:</strong> terms alternate sign. So $r = -\tfrac{1}{2}$ shrinks AND alternates.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">三种符号情况要分清</strong>
+    <strong>$|r| > 1$：</strong>项的绝对值无界增长。<br>
+    <strong>$|r| < 1$：</strong>项趋近于 $0$。<br>
+    <strong>$r < 0$：</strong>项的符号交替。所以 $r = -\tfrac{1}{2}$ 同时缩小且交替变号。
+  </div>
 
-  <h3>Worked Example — Finding $r$ and $u_1$ from two terms</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Finding $r$ and $u_1$ from two terms</span><span data-lang="zh">例题——由两项求 $r$ 与 $u_1$</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A geometric sequence has $u_2 = 6$ and $u_5 = 48$. Find $u_1$ and $u_{10}$.</p>
     <p><strong>Eliminate $u_1$.</strong> Take ratios:</p>
     $$ \frac{u_5}{u_2} = r^{5-2} = r^3 = \frac{48}{6} = 8 \;\Rightarrow\; r = 2. $$
     <p><strong>Solve for $u_1$.</strong> $u_2 = u_1 r \Rightarrow u_1 = 6/2 = 3$.</p>
     <p><strong>Apply.</strong> $u_{10} = 3 \cdot 2^9 = 3 \cdot 512 = 1536$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>等比数列满足 $u_2 = 6$，$u_5 = 48$。求 $u_1$ 与 $u_{10}$。</p>
+    <p><strong>消去 $u_1$。</strong>作比：</p>
+    $$ \frac{u_5}{u_2} = r^{5-2} = r^3 = \frac{48}{6} = 8 \;\Rightarrow\; r = 2. $$
+    <p><strong>求 $u_1$。</strong>$u_2 = u_1 r \Rightarrow u_1 = 6/2 = 3$。</p>
+    <p><strong>代入。</strong>$u_{10} = 3 \cdot 2^9 = 3 \cdot 512 = 1536$。</p>
+  </div>
 
-  <h3>Worked Example — "Smallest $n$ such that"</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — "Smallest $n$ such that"</span><span data-lang="zh">例题——"使……的最小 $n$"</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A GP has $u_1 = 5$ and $r = 3$. Find the smallest $n$ such that $u_n > 10\,000$.</p>
     $$ u_n = 5 \cdot 3^{\,n-1} > 10\,000 \;\Rightarrow\; 3^{\,n-1} > 2000. $$
     <p>Take log:</p>
     $$ (n-1)\log 3 > \log 2000 \;\Rightarrow\; n - 1 > \frac{\log 2000}{\log 3} \approx 6.92. $$
     <p>So $n - 1 \ge 7 \Rightarrow n = 8$. Check: $u_8 = 5\cdot 3^7 = 10\,935 > 10\,000$. ✓</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>GP 满足 $u_1 = 5$，$r = 3$。求使 $u_n > 10\,000$ 的最小 $n$。</p>
+    $$ u_n = 5 \cdot 3^{\,n-1} > 10\,000 \;\Rightarrow\; 3^{\,n-1} > 2000. $$
+    <p>取对数：</p>
+    $$ (n-1)\log 3 > \log 2000 \;\Rightarrow\; n - 1 > \frac{\log 2000}{\log 3} \approx 6.92. $$
+    <p>故 $n - 1 \ge 7 \Rightarrow n = 8$。验证：$u_8 = 5\cdot 3^7 = 10\,935 > 10\,000$。✓</p>
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Negative $r$ makes "first term exceeding $M$" subtle</summary>
+    <summary><span data-lang="en">▸ Going deeper — Negative $r$ makes "first term exceeding $M$" subtle</span><span data-lang="zh">▸ 深入——$r$ 为负时"首次超过 $M$"的微妙之处</span></summary>
     <div class="detail-body">
-<p>If $r$ is negative, "exceeds $M$" usually means $|u_n| > M$, since the sequence alternates sign. Always read whether the question wants <em>magnitude</em> exceeded or the term itself to be greater than $M$ (a positive bound is unreachable from a negative term). Worked-out IB markschemes are explicit about this — match their convention by stating clearly whether you're working with $u_n$ or $|u_n|$.</p>
+<p data-lang="en">If $r$ is negative, "exceeds $M$" usually means $|u_n| > M$, since the sequence alternates sign. Always read whether the question wants <em>magnitude</em> exceeded or the term itself to be greater than $M$ (a positive bound is unreachable from a negative term). Worked-out IB markschemes are explicit about this — match their convention by stating clearly whether you're working with $u_n$ or $|u_n|$.</p>
+<p data-lang="zh">$r$ 为负时，由于符号交替，"超过 $M$" 通常指 $|u_n| > M$。务必看清题目要求的是<em>幅值</em>超出，还是项本身大于 $M$（负数项永远达不到正的上界）。IB 标答（markscheme）一向写得很明确——你在解答中也要清楚指出处理的是 $u_n$ 还是 $|u_n|$。</p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">The 5th term of a geometric sequence is $48$ and the 2nd term is $6$. Find $u_1$.</div>
+      <div class="quiz-q"><span data-lang="en">The 5th term of a geometric sequence is $48$ and the 2nd term is $6$. Find $u_1$.</span><span data-lang="zh">某等比数列的第 5 项为 $48$，第 2 项为 $6$。求 $u_1$。</span></div>
       <span class="quiz-number">A1.3</span>
     </div>
     <div class="quiz-options">
@@ -874,9 +996,11 @@ $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
       <div class="quiz-opt" data-idx="2">$4$</div>
       <div class="quiz-opt" data-idx="3">$6$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $u_5/u_2 = r^3 = 8 \Rightarrow r = 2$. Then $u_1 = u_2/r = 3$.</div>
-    <div class="quiz-explain wrong-exp">Divide to eliminate $u_1$: $r^3 = 8 \Rightarrow r = 2$, so $u_1 = 6/2 = 3$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $u_5/u_2 = r^3 = 8 \Rightarrow r = 2$. Then $u_1 = u_2/r = 3$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$u_5/u_2 = r^3 = 8 \Rightarrow r = 2$，再由 $u_1 = u_2/r = 3$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Divide to eliminate $u_1$: $r^3 = 8 \Rightarrow r = 2$, so $u_1 = 6/2 = 3$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">作比消去 $u_1$：$r^3 = 8 \Rightarrow r = 2$，故 $u_1 = 6/2 = 3$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -884,22 +1008,27 @@ $$ 2 S_n = n(u_1 + u_n) \;\Rightarrow\; S_n = \tfrac{n}{2}(u_1 + u_n). $$
 
 <!-- ═══════════════ A1.4 GEOMETRIC SERIES ═══════════════ -->
 <section class="section" id="s-a1-4">
-  <div class="section-label">Topic A1.4 · Series</div>
-  <h2>Geometric Series</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.4 · Series</span><span data-lang="zh">Topic A1.4 · 级数</span></div>
+  <h2><span data-lang="en">Geometric Series</span><span data-lang="zh">等比级数</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>The sum of the first $n$ geometric terms is $\boxed{\,S_n = \dfrac{u_1(r^n - 1)}{r - 1} = \dfrac{u_1(1 - r^n)}{1 - r}\,}$, $r \ne 1$.</strong> The two forms are algebraically identical — pick the one that makes your numerator and denominator both positive (less arithmetic). When $r = 1$ the formula fails; instead $S_n = nu_1$.
+  </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>等比级数（<code>geometric series</code>）前 $n$ 项之和为 $\boxed{\,S_n = \dfrac{u_1(r^n - 1)}{r - 1} = \dfrac{u_1(1 - r^n)}{1 - r}\,}$，$r \ne 1$。</strong>两式代数等价——选分子和分母都为正的那个（更少算账）。$r = 1$ 时公式失效，此时 $S_n = nu_1$。
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Partial Sum of a GP</div>
+    <div class="formula-label"><span data-lang="en">Partial Sum of a GP</span><span data-lang="zh">等比数列的部分和（<code>partial sum</code>）</span></div>
     $$ S_n = \frac{u_1(r^n - 1)}{r - 1} = \frac{u_1(1 - r^n)}{1 - r} \quad (r \ne 1). $$
-    <p>If $r = 1$ then every term is $u_1$ and $S_n = nu_1$.</p>
+    <p data-lang="en">If $r = 1$ then every term is $u_1$ and $S_n = nu_1$.</p>
+    <p data-lang="zh">$r = 1$ 时每项都等于 $u_1$，故 $S_n = nu_1$。</p>
   </div>
 
   <details>
-    <summary>▸ Going deeper — Derivation by $S_n - rS_n$</summary>
+    <summary><span data-lang="en">▸ Going deeper — Derivation by $S_n - rS_n$</span><span data-lang="zh">▸ 深入——用 $S_n - rS_n$ 推导</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Write the sum:</p>
 $$ S_n = u_1 + u_1 r + u_1 r^2 + \cdots + u_1 r^{n-1}. $$
 <p>Multiply by $r$:</p>
@@ -909,27 +1038,50 @@ $$ S_n - r S_n = u_1 - u_1 r^n \;\Rightarrow\; (1 - r) S_n = u_1(1 - r^n). $$
 <p>Divide by $(1 - r)$ (legal since $r \ne 1$):</p>
 $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
 <p>The other form follows from multiplying numerator and denominator by $-1$.</p>
+</div>
+<div data-lang="zh">
+<p>写出和式：</p>
+$$ S_n = u_1 + u_1 r + u_1 r^2 + \cdots + u_1 r^{n-1}. $$
+<p>两端乘 $r$：</p>
+$$ r S_n = u_1 r + u_1 r^2 + \cdots + u_1 r^{n-1} + u_1 r^n. $$
+<p>相减，大部分项相互抵消：</p>
+$$ S_n - r S_n = u_1 - u_1 r^n \;\Rightarrow\; (1 - r) S_n = u_1(1 - r^n). $$
+<p>两边除以 $(1 - r)$（因 $r \ne 1$ 合法）：</p>
+$$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
+<p>另一形式只需分子分母同乘 $-1$ 即可。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Direct sum</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Direct sum</span><span data-lang="zh">例题——直接求和</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Compute $2 + 6 + 18 + \cdots$ for the first $10$ terms.</p>
     <p>$u_1 = 2$, $r = 3$, $n = 10$. Use the form with $r > 1$:</p>
     $$ S_{10} = \frac{2(3^{10} - 1)}{3 - 1} = \frac{2 \cdot 59\,048}{2} = 59\,048. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求 $2 + 6 + 18 + \cdots$ 前 $10$ 项之和。</p>
+    <p>$u_1 = 2$，$r = 3$，$n = 10$。$r > 1$，选第一式：</p>
+    $$ S_{10} = \frac{2(3^{10} - 1)}{3 - 1} = \frac{2 \cdot 59\,048}{2} = 59\,048. $$
+  </div>
 
-  <h3>Worked Example — Solving for $n$</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Solving for $n$</span><span data-lang="zh">例题——反解 $n$</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A GP has $u_1 = 4$ and $r = \tfrac{3}{2}$. Find the smallest $n$ such that $S_n > 200$.</p>
     $$ S_n = \frac{4\bigl((3/2)^n - 1\bigr)}{(3/2) - 1} = 8\bigl((3/2)^n - 1\bigr) > 200. $$
     $$ (3/2)^n > 26 \;\Rightarrow\; n > \frac{\log 26}{\log(3/2)} \approx 8.04. $$
     <p>So $n = 9$. Check: $S_9 = 8((3/2)^9 - 1) \approx 8(25.629) \approx 205.0 > 200$. ✓</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>GP 满足 $u_1 = 4$，$r = \tfrac{3}{2}$。求使 $S_n > 200$ 的最小 $n$。</p>
+    $$ S_n = \frac{4\bigl((3/2)^n - 1\bigr)}{(3/2) - 1} = 8\bigl((3/2)^n - 1\bigr) > 200. $$
+    $$ (3/2)^n > 26 \;\Rightarrow\; n > \frac{\log 26}{\log(3/2)} \approx 8.04. $$
+    <p>故 $n = 9$。验证：$S_9 = 8((3/2)^9 - 1) \approx 8(25.629) \approx 205.0 > 200$。✓</p>
+  </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">The sum of the first $6$ terms of a GP with $u_1 = 5$ and $r = 2$ is:</div>
+      <div class="quiz-q"><span data-lang="en">The sum of the first $6$ terms of a GP with $u_1 = 5$ and $r = 2$ is:</span><span data-lang="zh">GP 中 $u_1 = 5$，$r = 2$，前 $6$ 项之和为</span></div>
       <span class="quiz-number">A1.4</span>
     </div>
     <div class="quiz-options">
@@ -938,9 +1090,11 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
       <div class="quiz-opt" data-idx="2">$310$</div>
       <div class="quiz-opt" data-idx="3">$315$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $S_6 = \tfrac{5(2^6 - 1)}{2 - 1} = 5(63) = 315$.</div>
-    <div class="quiz-explain wrong-exp">Apply $S_n = \tfrac{u_1(r^n - 1)}{r - 1}$: $\tfrac{5(64 - 1)}{1} = 315$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $S_6 = \tfrac{5(2^6 - 1)}{2 - 1} = 5(63) = 315$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$S_6 = \tfrac{5(2^6 - 1)}{2 - 1} = 5(63) = 315$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Apply $S_n = \tfrac{u_1(r^n - 1)}{r - 1}$: $\tfrac{5(64 - 1)}{1} = 315$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">代入 $S_n = \tfrac{u_1(r^n - 1)}{r - 1}$：$\tfrac{5(64 - 1)}{1} = 315$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -948,61 +1102,95 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
 
 <!-- ═══════════════ A1.5 SIGMA NOTATION ═══════════════ -->
 <section class="section" id="s-a1-5">
-  <div class="section-label">Topic A1.5 · Notation</div>
-  <h2>Sigma Notation</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.5 · Notation</span><span data-lang="zh">Topic A1.5 · 记号</span></div>
+  <h2><span data-lang="en">Sigma Notation</span><span data-lang="zh">求和记号</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Sigma is shorthand for a sum.</strong> $\displaystyle\sum_{k=1}^{n} a_k = a_1 + a_2 + \cdots + a_n$. The strategy on every IB sigma question: <em>recognize the underlying AP or GP, then use the sum formula</em>. Don't add term by term.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>求和记号（<code>sigma notation</code>）就是求和的缩写。</strong>$\displaystyle\sum_{k=1}^{n} a_k = a_1 + a_2 + \cdots + a_n$。IB 所有 sigma 题的通用策略：<em>识别底层是 AP 还是 GP，再套求和公式</em>。不要逐项相加。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Anatomy</strong>
     $$ \sum_{k=\,m}^{\,n} a_k = a_m + a_{m+1} + \cdots + a_n. $$
     The <em>index</em> $k$ runs from the lower bound $m$ to the upper bound $n$, inclusive. The expression after $\Sigma$ is the formula for each term as a function of $k$.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">结构解析</strong>
+    $$ \sum_{k=\,m}^{\,n} a_k = a_m + a_{m+1} + \cdots + a_n. $$
+    指标（<code>index</code>）$k$ 从下界 $m$ 走到上界 $n$，两端含。$\Sigma$ 后的表达式就是每一项关于 $k$ 的公式。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Linearity Properties</div>
+    <div class="formula-label"><span data-lang="en">Linearity Properties</span><span data-lang="zh">线性性质</span></div>
     $$ \sum_{k=1}^{n}(a_k + b_k) = \sum_{k=1}^{n} a_k + \sum_{k=1}^{n} b_k $$
     $$ \sum_{k=1}^{n} c\, a_k = c\sum_{k=1}^{n} a_k \qquad \sum_{k=1}^{n} c = nc \;\;(c \text{ const.}) $$
   </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Recognition Strategy</strong>
     <strong>Linear in $k$:</strong> $\sum (ak + b)$ — arithmetic with $u_1 = a + b$, $d = a$, $u_n = an + b$.<br>
     <strong>Exponential in $k$:</strong> $\sum c \cdot r^{\,k-1}$ — geometric with $u_1 = c$, common ratio $r$.<br>
     <strong>Mixed:</strong> split with linearity, e.g. $\sum (3k + 2 \cdot 5^k) = 3\sum k + 2\sum 5^k$.
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">识别策略</strong>
+    <strong>$k$ 的一次式：</strong>$\sum (ak + b)$——等差，$u_1 = a + b$，$d = a$，$u_n = an + b$。<br>
+    <strong>$k$ 的指数式：</strong>$\sum c \cdot r^{\,k-1}$——等比，$u_1 = c$，公比 $r$。<br>
+    <strong>混合式：</strong>用线性性拆开，例如 $\sum (3k + 2 \cdot 5^k) = 3\sum k + 2\sum 5^k$。
+  </div>
 
-  <h3>Worked Example — Linear summand (AP)</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Linear summand (AP)</span><span data-lang="zh">例题——一次式被加项（AP）</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Evaluate:</strong> $\displaystyle\sum_{k=1}^{15}(4k - 3)$.</p>
     <p>Arithmetic with $u_1 = 4(1) - 3 = 1$, $u_{15} = 4(15) - 3 = 57$, $n = 15$.</p>
     $$ S_{15} = \tfrac{15}{2}(1 + 57) = \tfrac{15}{2}\cdot 58 = 435. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>求值：</strong>$\displaystyle\sum_{k=1}^{15}(4k - 3)$。</p>
+    <p>等差，$u_1 = 4(1) - 3 = 1$，$u_{15} = 4(15) - 3 = 57$，$n = 15$。</p>
+    $$ S_{15} = \tfrac{15}{2}(1 + 57) = \tfrac{15}{2}\cdot 58 = 435. $$
+  </div>
 
-  <h3>Worked Example — Exponential summand (GP)</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Exponential summand (GP)</span><span data-lang="zh">例题——指数式被加项（GP）</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Evaluate:</strong> $\displaystyle\sum_{k=1}^{8} 3 \cdot 2^{\,k-1}$.</p>
     <p>Geometric with $u_1 = 3$, $r = 2$, $n = 8$.</p>
     $$ S_8 = \frac{3(2^8 - 1)}{2 - 1} = 3 \cdot 255 = 765. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>求值：</strong>$\displaystyle\sum_{k=1}^{8} 3 \cdot 2^{\,k-1}$。</p>
+    <p>等比，$u_1 = 3$，$r = 2$，$n = 8$。</p>
+    $$ S_8 = \frac{3(2^8 - 1)}{2 - 1} = 3 \cdot 255 = 765. $$
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Index shift</summary>
+    <summary><span data-lang="en">▸ Going deeper — Index shift</span><span data-lang="zh">▸ 深入——指标平移</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Sometimes the lower bound isn't $1$. The trick is to substitute $j = k - m + 1$ so $j$ runs from $1$:</p>
 $$ \sum_{k=m}^{n} a_k = \sum_{j=1}^{n - m + 1} a_{j + m - 1}. $$
 <p>For example, $\sum_{k=3}^{10} 2k = \sum_{j=1}^{8} 2(j+2) = \sum_{j=1}^{8}(2j + 4)$ which is now a clean AP on $j$.</p>
 <p>Equivalently, use the <em>"big sum minus small sum"</em> identity:</p>
 $$ \sum_{k=m}^{n} a_k = \sum_{k=1}^{n} a_k - \sum_{k=1}^{m-1} a_k. $$
 <p>Both work; pick whichever leaves cleaner arithmetic.</p>
+</div>
+<div data-lang="zh">
+<p>下界有时并非 $1$。诀窍是令 $j = k - m + 1$，让 $j$ 从 $1$ 开始：</p>
+$$ \sum_{k=m}^{n} a_k = \sum_{j=1}^{n - m + 1} a_{j + m - 1}. $$
+<p>例如 $\sum_{k=3}^{10} 2k = \sum_{j=1}^{8} 2(j+2) = \sum_{j=1}^{8}(2j + 4)$，这是关于 $j$ 的干净 AP。</p>
+<p>等价做法是用<em>"大和减小和"</em>恒等式：</p>
+$$ \sum_{k=m}^{n} a_k = \sum_{k=1}^{n} a_k - \sum_{k=1}^{m-1} a_k. $$
+<p>两法皆可，挑算账更轻松的那个。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">$\displaystyle\sum_{k=1}^{20}(3k + 1)$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">$\displaystyle\sum_{k=1}^{20}(3k + 1)$ equals:</span><span data-lang="zh">$\displaystyle\sum_{k=1}^{20}(3k + 1)$ 等于</span></div>
       <span class="quiz-number">A1.5</span>
     </div>
     <div class="quiz-options">
@@ -1011,9 +1199,11 @@ $$ \sum_{k=m}^{n} a_k = \sum_{k=1}^{n} a_k - \sum_{k=1}^{m-1} a_k. $$
       <div class="quiz-opt" data-idx="2">$650$</div>
       <div class="quiz-opt" data-idx="3">$670$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! AP with $u_1 = 4$, $u_{20} = 61$, $n = 20$. $S_{20} = \tfrac{20}{2}(4 + 61) = 10 \cdot 65 = 650$.</div>
-    <div class="quiz-explain wrong-exp">Recognize an AP: $u_1 = 4$, $u_{20} = 61$, so $S_{20} = \tfrac{20}{2}(4 + 61) = 650$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! AP with $u_1 = 4$, $u_{20} = 61$, $n = 20$. $S_{20} = \tfrac{20}{2}(4 + 61) = 10 \cdot 65 = 650$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！AP 中 $u_1 = 4$，$u_{20} = 61$，$n = 20$。$S_{20} = \tfrac{20}{2}(4 + 61) = 10 \cdot 65 = 650$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Recognize an AP: $u_1 = 4$, $u_{20} = 61$, so $S_{20} = \tfrac{20}{2}(4 + 61) = 650$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">识别为 AP：$u_1 = 4$，$u_{20} = 61$，故 $S_{20} = \tfrac{20}{2}(4 + 61) = 650$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1021,28 +1211,38 @@ $$ \sum_{k=m}^{n} a_k = \sum_{k=1}^{n} a_k - \sum_{k=1}^{m-1} a_k. $$
 
 <!-- ═══════════════ A1.6 INFINITE GP ═══════════════ -->
 <section class="section" id="s-a1-6">
-  <div class="section-label">Topic A1.6 · Convergence</div>
-  <h2>Infinite Geometric Series <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A1.6 · Convergence</span><span data-lang="zh">Topic A1.6 · 收敛性</span></div>
+  <h2><span data-lang="en">Infinite Geometric Series</span><span data-lang="zh">无穷等比级数</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>An infinite GP converges iff $|r| < 1$,</strong> with sum
     $$ S_\infty = \frac{u_1}{1 - r}. $$
     <strong>Always check $|r| < 1$ first.</strong> If you blindly apply the formula to $|r| \ge 1$ you'll get a finite-looking number for a divergent sum — instant zero on Paper 1.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>无穷等比级数（<code>infinite geometric series</code>）收敛（<code>converge</code>）当且仅当 $|r| < 1$，</strong>其和为
+    $$ S_\infty = \frac{u_1}{1 - r}. $$
+    <strong>先检验 $|r| < 1$，再用公式。</strong>若 $|r| \ge 1$ 仍硬套公式，会给发散（<code>diverge</code>）的级数算出一个有限的"伪和"——Paper 1 这步必扣分。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Convergence condition</strong>
     The infinite series $u_1 + u_1 r + u_1 r^2 + \cdots$ converges (i.e. has a finite sum) <strong>if and only if $|r| < 1$</strong>. Otherwise it <em>diverges</em> — it grows without bound (if $r > 1$ or $r < -1$) or oscillates without settling (if $|r| = 1$ with $r = -1$, which alternates between $0$ and $u_1$).
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">收敛条件</strong>
+    无穷级数 $u_1 + u_1 r + u_1 r^2 + \cdots$ 收敛（有有限和）<strong>当且仅当 $|r| < 1$</strong>。否则<em>发散</em>——无界增长（$r > 1$ 或 $r < -1$）或振荡不收敛（$r = -1$ 时部分和在 $0$ 和 $u_1$ 间交替）。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Sum to Infinity</div>
+    <div class="formula-label"><span data-lang="en">Sum to Infinity</span><span data-lang="zh">无穷和（<code>sum to infinity</code>）</span></div>
     $$ S_\infty = \frac{u_1}{1 - r}, \qquad |r| < 1. $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — Why the condition is $|r| < 1$ and not just $r &lt; 1$</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why the condition is $|r| < 1$ and not just $r &lt; 1$</span><span data-lang="zh">▸ 深入——为何条件是 $|r| < 1$ 而非仅 $r < 1$</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Recall the partial sum:</p>
 $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
 <p>For $S_n$ to settle to a finite limit as $n \to \infty$, the term $r^n$ must approach a finite value. Examine cases:</p>
@@ -1053,34 +1253,65 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
   <li><strong>$|r| &gt; 1$:</strong> $|r^n| \to \infty$, so $|S_n| \to \infty$.</li>
 </ul>
 <p>Only the first case yields a finite limit. The condition is therefore $|r| &lt; 1$, strict on both sides.</p>
+</div>
+<div data-lang="zh">
+<p>回顾部分和：</p>
+$$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
+<p>$S_n$ 当 $n \to \infty$ 时要收敛到有限值，关键看 $r^n$ 的极限。分情况：</p>
+<ul style="margin: 8px 0 8px 22px;">
+  <li><strong>$|r| &lt; 1$：</strong>$r^n \to 0$，故 $S_n \to \tfrac{u_1}{1 - r}$。✓ 收敛。</li>
+  <li><strong>$r = 1$：</strong>公式失效（分母为 $0$）；每项都等于 $u_1$，$S_n = nu_1$，$u_1 \ne 0$ 时无界。</li>
+  <li><strong>$r = -1$：</strong>$r^n$ 在 $\{-1, 1, -1, \ldots\}$ 间交替，永不稳定。$S_n$ 在 $u_1$ 和 $0$ 间反复。</li>
+  <li><strong>$|r| &gt; 1$：</strong>$|r^n| \to \infty$，故 $|S_n| \to \infty$。</li>
+</ul>
+<p>只有第一种情形给出有限极限。所以条件就是 $|r| &lt; 1$，两端严格不等。</p>
+</div>
     </div>
   </details>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Geometric intuition</strong>
     Each new term is $|r|$ times the previous, so when $|r| &lt; 1$ the terms shrink. Visually: think of Zeno's arrow halving its remaining distance — the partial distances pile up to a finite total.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">几何直观</strong>
+    每一新项是上一项的 $|r|$ 倍，所以 $|r| &lt; 1$ 时项越来越小。直观地：想象芝诺之箭每次飞过剩余距离的一半——所有片段累加起来仍是有限的总距离。
+  </div>
 
-  <h3>Worked Example — Recurring decimal as a fraction</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Recurring decimal as a fraction</span><span data-lang="zh">例题——循环小数化分数</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Express $0.\overline{63} = 0.636363\ldots$ as a fraction in lowest terms.</p>
     <p>Write as a geometric series:</p>
     $$ 0.\overline{63} = 0.63 + 0.0063 + 0.000063 + \cdots $$
     <p>$u_1 = 0.63 = \tfrac{63}{100}$, $r = \tfrac{1}{100}$, so $|r| &lt; 1$.</p>
     $$ S_\infty = \frac{63/100}{1 - 1/100} = \frac{63/100}{99/100} = \frac{63}{99} = \frac{7}{11}. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>把 $0.\overline{63} = 0.636363\ldots$ 写成最简分数。</p>
+    <p>写成等比级数：</p>
+    $$ 0.\overline{63} = 0.63 + 0.0063 + 0.000063 + \cdots $$
+    <p>$u_1 = 0.63 = \tfrac{63}{100}$，$r = \tfrac{1}{100}$，故 $|r| &lt; 1$。</p>
+    $$ S_\infty = \frac{63/100}{1 - 1/100} = \frac{63/100}{99/100} = \frac{63}{99} = \frac{7}{11}. $$
+  </div>
 
-  <h3>Worked Example — Geometric series with given infinite sum</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Geometric series with given infinite sum</span><span data-lang="zh">例题——已知无穷和求 GP</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A convergent GP has $u_1 = 12$ and $S_\infty = 18$. Find $r$, and the sum of the first $5$ terms.</p>
     $$ S_\infty = \frac{12}{1 - r} = 18 \;\Rightarrow\; 1 - r = \tfrac{12}{18} = \tfrac{2}{3} \;\Rightarrow\; r = \tfrac{1}{3}. $$
     <p>Check $|r| &lt; 1$. ✓ Then</p>
     $$ S_5 = \frac{12\bigl(1 - (1/3)^5\bigr)}{1 - 1/3} = \frac{12(1 - 1/243)}{2/3} = 18 \cdot \tfrac{242}{243} = \tfrac{1452}{81} \approx 17.93. $$
     <p>(Sanity: $S_5$ should be close to but less than $S_\infty = 18$. ✓)</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>收敛的 GP 满足 $u_1 = 12$，$S_\infty = 18$。求 $r$ 和前 $5$ 项之和。</p>
+    $$ S_\infty = \frac{12}{1 - r} = 18 \;\Rightarrow\; 1 - r = \tfrac{12}{18} = \tfrac{2}{3} \;\Rightarrow\; r = \tfrac{1}{3}. $$
+    <p>检验 $|r| &lt; 1$ ✓。再算</p>
+    $$ S_5 = \frac{12\bigl(1 - (1/3)^5\bigr)}{1 - 1/3} = \frac{12(1 - 1/243)}{2/3} = 18 \cdot \tfrac{242}{243} = \tfrac{1452}{81} \approx 17.93. $$
+    <p>（验算：$S_5$ 应接近但小于 $S_\infty = 18$。✓）</p>
+  </div>
 
-  <h3>Worked Example — Bouncing ball (classic AP problem)</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Bouncing ball (classic AP problem)</span><span data-lang="zh">例题——弹跳球（经典应用题）</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A ball is dropped from $5$ m. Each bounce returns to $80\%$ of the previous height. Find the total vertical distance travelled before it comes to rest.</p>
     <p>Down distances: $5, 4, 3.2, \ldots$ (a GP with $u_1 = 5$, $r = 0.8$).</p>
     <p>Up distances: $4, 3.2, 2.56, \ldots$ (the same GP starting one term later: $u_1 = 4$, $r = 0.8$).</p>
@@ -1088,21 +1319,31 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
     $$ \text{Total} = 25 + 20 = 45 \text{ m}. $$
     <p><strong>Common slip:</strong> double-counting the first drop or forgetting that the up-and-down distances are different series.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>从 $5$ 米高度释放一个球。每次弹回上一高度的 $80\%$。求球静止前在竖直方向上经过的总路程。</p>
+    <p>下落距离：$5, 4, 3.2, \ldots$（GP，$u_1 = 5$，$r = 0.8$）。</p>
+    <p>上升距离：$4, 3.2, 2.56, \ldots$（同一 GP 但晚一项起：$u_1 = 4$，$r = 0.8$）。</p>
+    $$ D_{\text{down}} = \frac{5}{1 - 0.8} = 25 \text{ m}, \qquad D_{\text{up}} = \frac{4}{1 - 0.8} = 20 \text{ m}. $$
+    $$ \text{Total} = 25 + 20 = 45 \text{ m}. $$
+    <p><strong>常见错误：</strong>把首次下落算两遍；或忘了上行与下行是两个不同的级数。</p>
+  </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">The series $16 + 12 + 9 + \tfrac{27}{4} + \cdots$ converges to:</div>
+      <div class="quiz-q"><span data-lang="en">The series $16 + 12 + 9 + \tfrac{27}{4} + \cdots$ converges to:</span><span data-lang="zh">级数 $16 + 12 + 9 + \tfrac{27}{4} + \cdots$ 的极限为</span></div>
       <span class="quiz-number">A1.6</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$48$</div>
       <div class="quiz-opt" data-idx="1">$32$</div>
       <div class="quiz-opt" data-idx="2">$64$</div>
-      <div class="quiz-opt" data-idx="3">Diverges</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Diverges</span><span data-lang="zh">发散</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $r = \tfrac{12}{16} = \tfrac{3}{4}$, $|r| &lt; 1$. $S_\infty = \tfrac{16}{1 - 3/4} = 64$.</div>
-    <div class="quiz-explain wrong-exp">$r = 3/4$, $|r| &lt; 1$, so $S_\infty = u_1/(1-r) = 16/(1/4) = 64$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $r = \tfrac{12}{16} = \tfrac{3}{4}$, $|r| &lt; 1$. $S_\infty = \tfrac{16}{1 - 3/4} = 64$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$r = \tfrac{12}{16} = \tfrac{3}{4}$，$|r| &lt; 1$。$S_\infty = \tfrac{16}{1 - 3/4} = 64$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$r = 3/4$, $|r| &lt; 1$, so $S_\infty = u_1/(1-r) = 16/(1/4) = 64$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$r = 3/4$，$|r| &lt; 1$，故 $S_\infty = u_1/(1-r) = 16/(1/4) = 64$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1110,62 +1351,94 @@ $$ S_n = \frac{u_1(1 - r^n)}{1 - r}. $$
 
 <!-- ═══════════════ A1.7 FINANCIAL APPLICATIONS ═══════════════ -->
 <section class="section" id="s-a1-7">
-  <div class="section-label">Topic A1.7 · Applications</div>
-  <h2>Financial Applications</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.7 · Applications</span><span data-lang="zh">Topic A1.7 · 应用</span></div>
+  <h2><span data-lang="en">Financial Applications</span><span data-lang="zh">金融应用</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Compound interest is a GP.</strong> After $n$ compounding periods at rate $r$ per period, $A = P(1 + r)^n$. If interest compounds $k$ times per year at annual rate $r$ for $t$ years, $A = P\bigl(1 + \tfrac{r}{k}\bigr)^{kt}$. Depreciation: same formula with $(1 - r)^n$. <strong>Always state your "per-period" rate before plugging in.</strong>
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>复利（<code>compound interest</code>）本质上是 GP。</strong>以每期利率 $r$ 复利 $n$ 期后，$A = P(1 + r)^n$。年利率 $r$、每年复利 $k$ 次、共 $t$ 年时，$A = P\bigl(1 + \tfrac{r}{k}\bigr)^{kt}$。折旧（<code>depreciation</code>）公式相同，但用 $(1 - r)^n$。<strong>下笔前先写清楚"每期利率"是多少。</strong>
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Compound Interest</div>
+    <div class="formula-label"><span data-lang="en">Compound Interest</span><span data-lang="zh">复利公式</span></div>
     $$ A = P\left(1 + \frac{r}{k}\right)^{kt} $$
-    <p>$P$ = principal, $r$ = annual rate (decimal), $k$ = compounds per year, $t$ = years, $A$ = future value.</p>
+    <p data-lang="en">$P$ = principal, $r$ = annual rate (decimal), $k$ = compounds per year, $t$ = years, $A$ = future value.</p>
+    <p data-lang="zh">$P$ = 本金（<code>principal</code>），$r$ = 年利率（小数），$k$ = 每年复利次数，$t$ = 年数，$A$ = 未来值（<code>future value</code>）。</p>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Depreciation (linear-decay GP)</div>
+    <div class="formula-label"><span data-lang="en">Depreciation (linear-decay GP)</span><span data-lang="zh">折旧（指数衰减 GP）</span></div>
     $$ V = V_0 (1 - r)^{n} $$
-    <p>$V_0$ = initial value, $r$ = depreciation rate per period, $n$ = number of periods, $V$ = final value.</p>
+    <p data-lang="en">$V_0$ = initial value, $r$ = depreciation rate per period, $n$ = number of periods, $V$ = final value.</p>
+    <p data-lang="zh">$V_0$ = 初值，$r$ = 每期折旧率，$n$ = 期数，$V$ = 终值。</p>
   </div>
 
-  <h3>Worked Example — Compound interest, quarterly</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Compound interest, quarterly</span><span data-lang="zh">例题——按季度复利</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> $\$5000$ invested at $4\%$ p.a. compounded quarterly. Find the value after $7$ years.</p>
     <p>Per-period rate $\tfrac{r}{k} = \tfrac{0.04}{4} = 0.01$; periods $kt = 28$.</p>
     $$ A = 5000(1.01)^{28} \approx \$6606.45. $$
     <p>The balance is the GP $P, P(1.01), P(1.01)^2, \ldots$ ; the formula reads off the term after $28$ compoundings.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>$\$5000$ 投资，年利率 $4\%$，按季度（每年 4 次）复利。求 $7$ 年后的本利和。</p>
+    <p>每期利率 $\tfrac{r}{k} = \tfrac{0.04}{4} = 0.01$；总期数 $kt = 28$。</p>
+    $$ A = 5000(1.01)^{28} \approx \$6606.45. $$
+    <p>余额本身就是 GP $P, P(1.01), P(1.01)^2, \ldots$；公式给出第 $28$ 期之后的那一项。</p>
+  </div>
 
-  <h3>Worked Example — Depreciation</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Depreciation</span><span data-lang="zh">例题——折旧</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A car bought for $\$24\,000$ depreciates by $15\%$ each year. How long until its value drops below $\$10\,000$?</p>
     $$ 24\,000(0.85)^n &lt; 10\,000 \;\Rightarrow\; (0.85)^n &lt; \tfrac{5}{12}. $$
     <p>Take log (note $\log 0.85 &lt; 0$, so flip the inequality):</p>
     $$ n \log 0.85 &lt; \log(5/12) \;\Rightarrow\; n &gt; \frac{\log(5/12)}{\log(0.85)} \approx 5.39. $$
     <p>So in the $6$th year. (Year $5$ value: $24000 \cdot 0.85^5 \approx \$10{,}649$; Year $6$: $\approx \$9051$.)</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>$\$24\,000$ 购入的车每年折旧 $15\%$。多少年后价值首次低于 $\$10\,000$？</p>
+    $$ 24\,000(0.85)^n &lt; 10\,000 \;\Rightarrow\; (0.85)^n &lt; \tfrac{5}{12}. $$
+    <p>取对数（注意 $\log 0.85 &lt; 0$，除以负数要变号）：</p>
+    $$ n \log 0.85 &lt; \log(5/12) \;\Rightarrow\; n &gt; \frac{\log(5/12)}{\log(0.85)} \approx 5.39. $$
+    <p>故在第 $6$ 年。（第 $5$ 年值 $24000 \cdot 0.85^5 \approx \$10{,}649$；第 $6$ 年值 $\approx \$9051$。）</p>
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Annuity formulas (HL Paper 2 territory)</summary>
+    <summary><span data-lang="en">▸ Going deeper — Annuity formulas (HL Paper 2 territory)</span><span data-lang="zh">▸ 深入——年金公式（HL Paper 2 范畴）</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>An <strong>annuity</strong> is a sequence of equal payments $P$ made each period at rate $r$. The future value of an annuity (ordinary, with payments at end of each period) is the GP-sum</p>
 $$ FV = P + P(1+r) + P(1+r)^2 + \cdots + P(1+r)^{n-1} = P \cdot \frac{(1+r)^n - 1}{r}. $$
 <p>The present value is</p>
 $$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cdot \frac{1 - (1+r)^{-n}}{r}. $$
 <p>Both follow directly from the GP partial-sum formula — no need to memorize them as separate facts. On Paper 2, IB usually wants you to set up the GP from scratch and then sum it; calculator handles the arithmetic.</p>
 <p><strong>Annuity-due variant:</strong> if payments are at the <em>start</em> of each period instead, multiply by $(1+r)$ — every payment earns one extra period of interest.</p>
+</div>
+<div data-lang="zh">
+<p><strong>年金（<code>annuity</code>）</strong>是一系列等额支付：每期支付 $P$，利率为 $r$。普通年金（每期末支付）的未来值就是 GP 之和</p>
+$$ FV = P + P(1+r) + P(1+r)^2 + \cdots + P(1+r)^{n-1} = P \cdot \frac{(1+r)^n - 1}{r}. $$
+<p>现值（<code>present value</code>）为</p>
+$$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cdot \frac{1 - (1+r)^{-n}}{r}. $$
+<p>两者直接由 GP 部分和公式推出——不必当成独立公式背。Paper 2 通常希望你从头建立 GP 再求和；算账交给计算器。</p>
+<p><strong>期初年金（<code>annuity-due</code>）：</strong>若每期支付改在期初，整体乘 $(1+r)$——每笔多享一期利息。</p>
+</div>
     </div>
   </details>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Per-period rate trap</strong>
     A statement of "$6\%$ per annum compounded monthly" means a per-period rate of $0.06/12 = 0.005$, not $0.06$. Forgetting to divide is the most common single error in financial-math IB questions. Always write down "per-period rate" and "number of periods" as your first line of working.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">每期利率陷阱</strong>
+    "年利率 $6\%$、按月复利"意味着每期利率 $0.06/12 = 0.005$，不是 $0.06$。忘记除以期数是 IB 金融题最高频的单点错误。下笔第一行先写"每期利率 = ?"和"总期数 = ?"。
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">$\$2000$ is invested at $5\%$ per annum compounded annually. After how many full years does the balance first exceed $\$3000$?</div>
+      <div class="quiz-q"><span data-lang="en">$\$2000$ is invested at $5\%$ per annum compounded annually. After how many full years does the balance first exceed $\$3000$?</span><span data-lang="zh">$\$2000$ 以年利率 $5\%$ 按年复利投资。多少整年后余额首次超过 $\$3000$？</span></div>
       <span class="quiz-number">A1.7</span>
     </div>
     <div class="quiz-options">
@@ -1174,9 +1447,11 @@ $$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cd
       <div class="quiz-opt" data-idx="2">$10$</div>
       <div class="quiz-opt" data-idx="3">$12$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $2000(1.05)^n &gt; 3000 \Rightarrow (1.05)^n &gt; 1.5 \Rightarrow n &gt; \tfrac{\log 1.5}{\log 1.05} \approx 8.31$, so $n = 9$.</div>
-    <div class="quiz-explain wrong-exp">Solve $(1.05)^n &gt; 1.5$ via logs: $n &gt; \log 1.5 / \log 1.05 \approx 8.31$. First integer is $9$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $2000(1.05)^n &gt; 3000 \Rightarrow (1.05)^n &gt; 1.5 \Rightarrow n &gt; \tfrac{\log 1.5}{\log 1.05} \approx 8.31$, so $n = 9$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$2000(1.05)^n &gt; 3000 \Rightarrow (1.05)^n &gt; 1.5 \Rightarrow n &gt; \tfrac{\log 1.5}{\log 1.05} \approx 8.31$，故 $n = 9$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Solve $(1.05)^n &gt; 1.5$ via logs: $n &gt; \log 1.5 / \log 1.05 \approx 8.31$. First integer is $9$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">取对数解 $(1.05)^n &gt; 1.5$：$n &gt; \log 1.5 / \log 1.05 \approx 8.31$。首个满足条件的整数是 $9$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1184,37 +1459,56 @@ $$ PV = \frac{P}{(1+r)} + \frac{P}{(1+r)^2} + \cdots + \frac{P}{(1+r)^n} = P \cd
 
 <!-- ═══════════════ A1.8 MIXED & HYBRID ═══════════════ -->
 <section class="section" id="s-a1-8">
-  <div class="section-label">Topic A1.8 · Synthesis</div>
-  <h2>Mixed &amp; Hybrid Patterns</h2>
+  <div class="section-label"><span data-lang="en">Topic A1.8 · Synthesis</span><span data-lang="zh">Topic A1.8 · 综合</span></div>
+  <h2><span data-lang="en">Mixed &amp; Hybrid Patterns</span><span data-lang="zh">混合与综合题型</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>The three patterns IB loves to mix:</strong> (1) a sequence that's both AP and GP (must be constant); (2) inserting <em>means</em> between two given terms; (3) a system involving both a sum and a term. None require new formulas — they all reduce to the AP/GP toolkit by careful set-up.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>IB 最爱出的三种综合题型：</strong>(1) 同时是 AP 又是 GP 的数列（必为常数列）；(2) 在两已知项之间插入若干<em>中项</em>（means）；(3) 同时给出 sum 和 term 的方程组。三者都不需要新公式——只要建立得当，全部归约到 AP/GP 工具箱里。
+  </div>
 
-  <h3>Pattern 1 — Both AP and GP</h3>
-  <div class="concept-box">
+  <h3><span data-lang="en">Pattern 1 — Both AP and GP</span><span data-lang="zh">题型 1——同时是 AP 又是 GP</span></h3>
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Claim</strong>
     A sequence that is simultaneously arithmetic <em>and</em> geometric is constant ($d = 0$, $r = 1$, all terms equal).
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">结论</strong>
+    若一个数列同时为等差<em>且</em>等比，则它必为常数列（$d = 0$，$r = 1$，每项相等）。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Quick proof</summary>
+    <summary><span data-lang="en">▸ Going deeper — Quick proof</span><span data-lang="zh">▸ 深入——快速证明</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>AP: $u_{n+1} = u_n + d$. GP: $u_{n+1} = r\, u_n$. Equate for every $n$:</p>
 $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
 <p>RHS depends on $n$, LHS does not — only possible if $r = 1$ (so $d = 0$) or $u_n$ is constant. Either case gives a constant sequence. $\blacksquare$</p>
+</div>
+<div data-lang="zh">
+<p>AP：$u_{n+1} = u_n + d$。GP：$u_{n+1} = r\, u_n$。对每个 $n$ 取等：</p>
+$$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
+<p>右边依赖 $n$，左边不依赖——只有当 $r = 1$（即 $d = 0$）或 $u_n$ 是常数时才可能成立。两种情形都给出常数列。$\blacksquare$</p>
+</div>
     </div>
   </details>
 
-  <h3>Pattern 2 — Inserting means between given terms</h3>
-  <div class="concept-box green">
+  <h3><span data-lang="en">Pattern 2 — Inserting means between given terms</span><span data-lang="zh">题型 2——在已知两项间插入中项</span></h3>
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Recipe</strong>
     To insert $k$ arithmetic means between $a$ and $b$: the result is an AP with $u_1 = a$ and $u_{k+2} = b$, so $b - a = (k+1)d \Rightarrow d = \tfrac{b - a}{k + 1}$. The means are $a + d, a + 2d, \ldots, a + kd$. <br>
     For geometric means, replace differences with ratios: $r = \bigl(\tfrac{b}{a}\bigr)^{1/(k+1)}$, requiring $a, b$ same sign.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">套路</strong>
+    在 $a$ 和 $b$ 之间插入 $k$ 个等差中项（<code>arithmetic means</code>）：得到一个 AP，$u_1 = a$，$u_{k+2} = b$，故 $b - a = (k+1)d \Rightarrow d = \tfrac{b - a}{k + 1}$。中项为 $a + d, a + 2d, \ldots, a + kd$。<br>
+    插入等比中项（<code>geometric means</code>）时，把差换成比：$r = \bigl(\tfrac{b}{a}\bigr)^{1/(k+1)}$，要求 $a, b$ 同号。
+  </div>
 
-  <h3>Worked Example — System with sum + term condition</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — System with sum + term condition</span><span data-lang="zh">例题——同时含和与项的方程组</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A GP has $u_1 + u_2 + u_3 = 14$ and $u_3 = 8$. Find all possible values of $r$.</p>
     <p>Use $u_2 = u_1 r$, $u_3 = u_1 r^2 = 8$:</p>
     $$ u_1(1 + r + r^2) = 14 \quad\text{and}\quad u_1 r^2 = 8. $$
@@ -1223,29 +1517,46 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
     <p>Quadratic formula: $r = \tfrac{4 \pm \sqrt{16 + 48}}{6} = \tfrac{4 \pm 8}{6}$, giving $r = 2$ or $r = -\tfrac{2}{3}$.</p>
     <p><strong>Both are valid.</strong> Don't drop the negative root without checking — IB markschemes credit both.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>GP 满足 $u_1 + u_2 + u_3 = 14$ 且 $u_3 = 8$。求 $r$ 的所有可能值。</p>
+    <p>用 $u_2 = u_1 r$，$u_3 = u_1 r^2 = 8$：</p>
+    $$ u_1(1 + r + r^2) = 14 \quad\text{and}\quad u_1 r^2 = 8. $$
+    <p>两式相除：</p>
+    $$ \frac{1 + r + r^2}{r^2} = \frac{14}{8} = \tfrac{7}{4} \;\Rightarrow\; 4(1 + r + r^2) = 7 r^2 \;\Rightarrow\; 3 r^2 - 4 r - 4 = 0. $$
+    <p>求根公式：$r = \tfrac{4 \pm \sqrt{16 + 48}}{6} = \tfrac{4 \pm 8}{6}$，得 $r = 2$ 或 $r = -\tfrac{2}{3}$。</p>
+    <p><strong>两根都有效。</strong>别不验证就丢掉负根——IB markscheme 两根都给分。</p>
+  </div>
 
-  <h3>Pattern 3 — Telescoping (light intro)</h3>
-  <div class="concept-box orange">
+  <h3><span data-lang="en">Pattern 3 — Telescoping (light intro)</span><span data-lang="zh">题型 3——裂项相消（简介）</span></h3>
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Why this works</strong>
     A telescoping sum is one where adjacent terms cancel. The classic example: $\tfrac{1}{k(k+1)} = \tfrac{1}{k} - \tfrac{1}{k+1}$. Then
     $$ \sum_{k=1}^{n} \frac{1}{k(k+1)} = \left(1 - \tfrac{1}{2}\right) + \left(\tfrac{1}{2} - \tfrac{1}{3}\right) + \cdots + \left(\tfrac{1}{n} - \tfrac{1}{n+1}\right) = 1 - \tfrac{1}{n+1}. $$
     Most middle terms cancel; only the first and last survive. Useful when partial fractions appear.
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">原理</strong>
+    裂项相消（<code>telescoping</code>）和式中相邻项互相抵消。经典例子：$\tfrac{1}{k(k+1)} = \tfrac{1}{k} - \tfrac{1}{k+1}$。于是
+    $$ \sum_{k=1}^{n} \frac{1}{k(k+1)} = \left(1 - \tfrac{1}{2}\right) + \left(\tfrac{1}{2} - \tfrac{1}{3}\right) + \cdots + \left(\tfrac{1}{n} - \tfrac{1}{n+1}\right) = 1 - \tfrac{1}{n+1}. $$
+    中间项几乎全部抵消，只剩首末两项。出现部分分式（<code>partial fractions</code>）时最常用。
+  </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">Three positive numbers form an arithmetic sequence. They also form a geometric sequence. What can you conclude?</div>
+      <div class="quiz-q"><span data-lang="en">Three positive numbers form an arithmetic sequence. They also form a geometric sequence. What can you conclude?</span><span data-lang="zh">三个正数同时构成等差数列与等比数列。可以得出什么结论？</span></div>
       <span class="quiz-number">A1.8</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">All three numbers are equal.</div>
-      <div class="quiz-opt" data-idx="1">The middle number is the average of the other two.</div>
-      <div class="quiz-opt" data-idx="2">The middle number is the square root of the product of the other two.</div>
-      <div class="quiz-opt" data-idx="3">No such sequence exists.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">All three numbers are equal.</span><span data-lang="zh">三数相等。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The middle number is the average of the other two.</span><span data-lang="zh">中间数等于另两数的平均。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The middle number is the square root of the product of the other two.</span><span data-lang="zh">中间数等于另两数乘积的平方根。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">No such sequence exists.</span><span data-lang="zh">不存在这样的数列。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Both AP and GP forces $d = 0$ and $r = 1$, i.e. a constant sequence — all three values equal.</div>
-    <div class="quiz-explain wrong-exp">Both AP and GP forces $d = 0$, $r = 1$ (constant). Options (B) and (C) are individually true (AP-mean and GP-mean), but only (A) captures both at once.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Both AP and GP forces $d = 0$ and $r = 1$, i.e. a constant sequence — all three values equal.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！同时是 AP 与 GP 强制 $d = 0$ 且 $r = 1$，即常数列——三数相等。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Both AP and GP forces $d = 0$, $r = 1$ (constant). Options (B) and (C) are individually true (AP-mean and GP-mean), but only (A) captures both at once.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">同时是 AP 与 GP 强制 $d = 0$、$r = 1$（常数列）。(B) 和 (C) 单独看分别成立（AP 中项、GP 中项），但只有 (A) 同时满足两者。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1253,16 +1564,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Review</div>
-  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Exam Strategy &amp; Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-green">M</div>
-        <div class="card-title">Memorize</div>
+        <div class="card-title"><span data-lang="en">Memorize</span><span data-lang="zh">必背</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>$u_n = u_1 + (n-1)d$ &amp; both forms of $S_n$ for an AP</li>
         <li>$u_n = u_1 r^{n-1}$ &amp; both forms of $S_n$ for a GP (and the $r=1$ exception)</li>
         <li>$S_\infty = \tfrac{u_1}{1-r}$, valid <strong>only</strong> when $|r| &lt; 1$</li>
@@ -1270,13 +1581,21 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
         <li>Identity: $u_m - u_n = (m-n)d$ (AP), $u_m / u_n = r^{m-n}$ (GP)</li>
         <li>Sigma linearity properties</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>AP 的 $u_n = u_1 + (n-1)d$ 和两式 $S_n$</li>
+        <li>GP 的 $u_n = u_1 r^{n-1}$ 和两式 $S_n$（以及 $r=1$ 的例外）</li>
+        <li>$S_\infty = \tfrac{u_1}{1-r}$，<strong>仅在</strong> $|r| &lt; 1$ 时有效</li>
+        <li>复利公式 $A = P(1 + r/k)^{kt}$</li>
+        <li>恒等式：$u_m - u_n = (m-n)d$（AP），$u_m / u_n = r^{m-n}$（GP）</li>
+        <li>$\Sigma$ 的线性性质</li>
+      </ul>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">U</div>
-        <div class="card-title">Understand</div>
+        <div class="card-title"><span data-lang="en">Understand</span><span data-lang="zh">必懂</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>Why $|r| &lt; 1$ is the <em>exact</em> convergence condition</li>
         <li>Gauss-pairing derivation of $S_n^{\text{AP}}$</li>
         <li>The $S_n - r S_n$ trick for $S_n^{\text{GP}}$</li>
@@ -1284,11 +1603,19 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
         <li>Recognizing AP / GP under sigma — picking the right sum formula</li>
         <li>Why the per-period rate is $r/k$, not $r$, in compound interest</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>为何 $|r| &lt; 1$ 是<em>精确</em>的收敛条件</li>
+        <li>$S_n^{\text{AP}}$ 的高斯配对推导</li>
+        <li>$S_n^{\text{GP}}$ 的 $S_n - r S_n$ 技巧</li>
+        <li>为何 $r = 1$ 与 $r = -1$ 同被 $S_\infty$ 排除</li>
+        <li>识别 sigma 后面的 AP / GP——选对求和公式</li>
+        <li>为何复利里每期利率是 $r/k$ 而不是 $r$</li>
+      </ul>
     </div>
   </div>
 
-  <h3>Common Pitfalls</h3>
-  <div class="concept-box red">
+  <h3><span data-lang="en">Common Pitfalls</span><span data-lang="zh">常见陷阱</span></h3>
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Top student errors</strong>
     <strong>1.</strong> Using $S_\infty$ without verifying $|r| &lt; 1$.<br>
     <strong>2.</strong> Off-by-one on the index — confusing $u_5$ ("$5$th term") with $u_4 = u_1 + 3d$ ("$4$ steps from $u_1$").<br>
@@ -1298,11 +1625,26 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
     <strong>6.</strong> Bouncing-ball: counting the initial drop twice or forgetting that "up" and "down" distances form different series.<br>
     <strong>7.</strong> On a sigma question, expanding term-by-term instead of recognizing the AP/GP — works but eats clock.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">学生高频错误</strong>
+    <strong>1.</strong> 不验证 $|r| &lt; 1$ 就用 $S_\infty$。<br>
+    <strong>2.</strong> 指标差一——把 $u_5$（"第 5 项"）和 $u_4 = u_1 + 3d$（"从 $u_1$ 走 4 步"）搞混。<br>
+    <strong>3.</strong> 忘记 GP 求和的 $r = 1$ 情形（公式分母为零）。<br>
+    <strong>4.</strong> 误判数列性质：$\{1, 2, 4, 7, 11, \ldots\}$ 的差是 $1, 2, 3, 4, \ldots$——这是<em>二次</em>，既非 AP 也非 GP。<br>
+    <strong>5.</strong> 复利题里没把年利率除以复利频率，直接套年利率。<br>
+    <strong>6.</strong> 弹跳球：把首次下落算两遍，或忘了上行与下行是两个不同的级数。<br>
+    <strong>7.</strong> sigma 题逐项展开而不识别底层 AP/GP——也能做对，但浪费考试时间。
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Paper-specific notes</strong>
     <strong>Paper 1 (no calc):</strong> exact-value AP and GP sums, recurring-decimal-as-fraction problems, AP/GP system-solving by hand. Logs of "nice" arguments only.<br>
     <strong>Paper 2 (calc):</strong> long compound-interest problems, "smallest $n$ such that" with non-trivial bases, multi-stage financial problems. Don't over-use the calculator on the AP/GP set-up — they're testing whether you can identify the structure first.
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">两份试卷各自的特点</strong>
+    <strong>Paper 1（不可用计算器）：</strong>精确值的 AP/GP 求和、循环小数化分数、手算 AP/GP 方程组。对数题里只出现"友好"的真数。<br>
+    <strong>Paper 2（可用计算器）：</strong>长复利题、底数非平凡的"最小 $n$"题、多阶段金融题。AP/GP 建模阶段别过度依赖计算器——他们要先考你识别结构的能力。
   </div>
 </section>
 
@@ -1310,88 +1652,88 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
 
   <div class="flashcard-toolbar">
-    <span class="fc-count" id="fcCount">0 / 12 flipped</span>
+    <span class="fc-count" id="fcCount"><span data-lang="en">0 / 12 flipped</span><span data-lang="zh">已翻 0 / 12</span></span>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$u_n$ for an AP?</div>
+        <div class="flashcard-front"><span data-lang="en">$u_n$ for an AP?</span><span data-lang="zh">AP 的 $u_n$？</span></div>
         <div class="flashcard-back">$$u_n = u_1 + (n-1)d$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$S_n$ for an AP?</div>
+        <div class="flashcard-front"><span data-lang="en">$S_n$ for an AP?</span><span data-lang="zh">AP 的 $S_n$？</span></div>
         <div class="flashcard-back">$$S_n = \tfrac{n}{2}(u_1 + u_n)$$ $$= \tfrac{n}{2}\bigl(2u_1 + (n-1)d\bigr)$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$u_n$ for a GP?</div>
+        <div class="flashcard-front"><span data-lang="en">$u_n$ for a GP?</span><span data-lang="zh">GP 的 $u_n$？</span></div>
         <div class="flashcard-back">$$u_n = u_1\, r^{\,n-1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$S_n$ for a GP $\;(r \ne 1)$?</div>
+        <div class="flashcard-front"><span data-lang="en">$S_n$ for a GP $\;(r \ne 1)$?</span><span data-lang="zh">GP $(r \ne 1)$ 的 $S_n$？</span></div>
         <div class="flashcard-back">$$S_n = \dfrac{u_1(r^n - 1)}{r - 1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Infinite GP — converges when?</div>
+        <div class="flashcard-front"><span data-lang="en">Infinite GP — converges when?</span><span data-lang="zh">无穷 GP 何时收敛？</span></div>
         <div class="flashcard-back">$|r| &lt; 1$ $$S_\infty = \dfrac{u_1}{1 - r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Compound interest?</div>
+        <div class="flashcard-front"><span data-lang="en">Compound interest?</span><span data-lang="zh">复利公式？</span></div>
         <div class="flashcard-back">$$A = P\!\left(1 + \tfrac{r}{k}\right)^{kt}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Term-relation identities?</div>
+        <div class="flashcard-front"><span data-lang="en">Term-relation identities?</span><span data-lang="zh">项与项的恒等式？</span></div>
         <div class="flashcard-back">AP:&nbsp;$u_m - u_n = (m - n)d$<br>GP:&nbsp;$u_m / u_n = r^{m-n}$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sigma linearity?</div>
+        <div class="flashcard-front"><span data-lang="en">Sigma linearity?</span><span data-lang="zh">$\Sigma$ 的线性性？</span></div>
         <div class="flashcard-back">$\sum(a_k + b_k) = \sum a_k + \sum b_k$<br>$\sum c\, a_k = c \sum a_k$<br>$\sum_{k=1}^{n} c = nc$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sequence both AP and GP?</div>
-        <div class="flashcard-back">Constant. $d = 0,\; r = 1$.</div>
+        <div class="flashcard-front"><span data-lang="en">Sequence both AP and GP?</span><span data-lang="zh">同时是 AP 和 GP 的数列？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Constant.</span><span data-lang="zh">常数列。</span> $d = 0,\; r = 1$.</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Geometric mean of $a, c &gt; 0$?</div>
+        <div class="flashcard-front"><span data-lang="en">Geometric mean of $a, c &gt; 0$?</span><span data-lang="zh">$a, c &gt; 0$ 的等比中项？</span></div>
         <div class="flashcard-back">$$\sqrt{ac}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$0.\overline{N}$ as a fraction&nbsp;($N$ has $k$ digits)?</div>
+        <div class="flashcard-front"><span data-lang="en">$0.\overline{N}$ as a fraction&nbsp;($N$ has $k$ digits)?</span><span data-lang="zh">$0.\overline{N}$ 化分数（$N$ 有 $k$ 位）？</span></div>
         <div class="flashcard-back">$$\dfrac{N}{10^k - 1}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Solving $r^n &lt; \varepsilon$ — gotcha?</div>
-        <div class="flashcard-back">$\log r &lt; 0$ when $|r| &lt; 1$,<br>so dividing <strong>flips</strong> the inequality.</div>
+        <div class="flashcard-front"><span data-lang="en">Solving $r^n &lt; \varepsilon$ — gotcha?</span><span data-lang="zh">解 $r^n &lt; \varepsilon$ 的坑？</span></div>
+        <div class="flashcard-back"><span data-lang="en">$\log r &lt; 0$ when $|r| &lt; 1$,<br>so dividing <strong>flips</strong> the inequality.</span><span data-lang="zh">$|r| &lt; 1$ 时 $\log r &lt; 0$，<br>除以负数<strong>不等号变号</strong>。</span></div>
       </div>
     </div>
   </div>
@@ -1401,13 +1743,13 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit A1 — Practice Quiz</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">综合测验</span></div>
+  <h2><span data-lang="en">Unit A1 — Practice Quiz</span><span data-lang="zh">单元 A1——练习测验</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;"><span data-lang="en">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</span><span data-lang="zh">十道难度不一的题。得分实时显示在页面顶部。考前目标 8/10。</span></p>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">1. In an arithmetic sequence, $u_3 = 10$ and $u_7 = 22$. Then $u_{15}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">1. In an arithmetic sequence, $u_3 = 10$ and $u_7 = 22$. Then $u_{15}$ equals:</span><span data-lang="zh">1. 某等差数列满足 $u_3 = 10$，$u_7 = 22$。则 $u_{15} = $</span></div>
       <span class="quiz-number">Q1</span>
     </div>
     <div class="quiz-options">
@@ -1416,14 +1758,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$46$</div>
       <div class="quiz-opt" data-idx="3">$52$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $u_7 - u_3 = 4d = 12 \Rightarrow d = 3$. Then $u_1 = 4$, $u_{15} = 4 + 14(3) = 46$.</div>
-    <div class="quiz-explain wrong-exp">From $4d = 12$, $d = 3$. Then $u_1 = 4$, so $u_{15} = 4 + 14(3) = 46$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $u_7 - u_3 = 4d = 12 \Rightarrow d = 3$. Then $u_1 = 4$, $u_{15} = 4 + 14(3) = 46$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$u_7 - u_3 = 4d = 12 \Rightarrow d = 3$。再由 $u_1 = 4$，$u_{15} = 4 + 14(3) = 46$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">From $4d = 12$, $d = 3$. Then $u_1 = 4$, so $u_{15} = 4 + 14(3) = 46$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">由 $4d = 12$ 得 $d = 3$。再求 $u_1 = 4$，故 $u_{15} = 4 + 14(3) = 46$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">2. The first three terms of an AP are $x - 1$, $2x + 1$, $7x - 5$. The value of $x$ is:</div>
+      <div class="quiz-q"><span data-lang="en">2. The first three terms of an AP are $x - 1$, $2x + 1$, $7x - 5$. The value of $x$ is:</span><span data-lang="zh">2. 某等差数列前三项为 $x - 1$，$2x + 1$，$7x - 5$。则 $x = $</span></div>
       <span class="quiz-number">Q2</span>
     </div>
     <div class="quiz-options">
@@ -1432,14 +1776,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$3$</div>
       <div class="quiz-opt" data-idx="3">$4$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Equal differences: $(2x+1) - (x-1) = (7x-5) - (2x+1) \Rightarrow x + 2 = 5x - 6 \Rightarrow x = 2$.</div>
-    <div class="quiz-explain wrong-exp">Use the AP-mean: $2(2x+1) = (x-1) + (7x-5)$, giving $4x + 2 = 8x - 6 \Rightarrow x = 2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Equal differences: $(2x+1) - (x-1) = (7x-5) - (2x+1) \Rightarrow x + 2 = 5x - 6 \Rightarrow x = 2$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！相邻两项差相等：$(2x+1) - (x-1) = (7x-5) - (2x+1) \Rightarrow x + 2 = 5x - 6 \Rightarrow x = 2$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Use the AP-mean: $2(2x+1) = (x-1) + (7x-5)$, giving $4x + 2 = 8x - 6 \Rightarrow x = 2$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">用等差中项：$2(2x+1) = (x-1) + (7x-5)$，得 $4x + 2 = 8x - 6 \Rightarrow x = 2$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">3. The sum of the first $n$ terms of a GP with $u_1 = 3$ and $r = 2$ first exceeds $1500$ when $n$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">3. The sum of the first $n$ terms of a GP with $u_1 = 3$ and $r = 2$ first exceeds $1500$ when $n$ equals:</span><span data-lang="zh">3. 某等比数列 $u_1 = 3$，$r = 2$。其前 $n$ 项和首次超过 $1500$ 时，$n = $</span></div>
       <span class="quiz-number">Q3</span>
     </div>
     <div class="quiz-options">
@@ -1448,14 +1794,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$9$</div>
       <div class="quiz-opt" data-idx="3">$10$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. Since $2^8 = 256$ and $2^9 = 512$, the smallest $n$ is $9$. Check: $S_9 = 3 \cdot 511 = 1533 &gt; 1500$. ✓</div>
-    <div class="quiz-explain wrong-exp">$S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. $2^9 = 512 &gt; 501$ but $2^8 = 256 &lt; 501$, so $n = 9$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. Since $2^8 = 256$ and $2^9 = 512$, the smallest $n$ is $9$. Check: $S_9 = 3 \cdot 511 = 1533 &gt; 1500$. ✓</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$。由 $2^8 = 256$，$2^9 = 512$，最小 $n = 9$。验算：$S_9 = 3 \cdot 511 = 1533 &gt; 1500$。✓</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$. $2^9 = 512 &gt; 501$ but $2^8 = 256 &lt; 501$, so $n = 9$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$S_n = 3(2^n - 1) &gt; 1500 \Rightarrow 2^n &gt; 501$。$2^9 = 512 &gt; 501$ 而 $2^8 = 256 &lt; 501$，故 $n = 9$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">4. $\displaystyle\sum_{k=1}^{12}(2k - 5)$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">4. $\displaystyle\sum_{k=1}^{12}(2k - 5)$ equals:</span><span data-lang="zh">4. $\displaystyle\sum_{k=1}^{12}(2k - 5) = $</span></div>
       <span class="quiz-number">Q4</span>
     </div>
     <div class="quiz-options">
@@ -1464,14 +1812,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$96$</div>
       <div class="quiz-opt" data-idx="3">$108$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! AP with $u_1 = -3$, $u_{12} = 19$, $n = 12$. $S_{12} = \tfrac{12}{2}(-3 + 19) = 6 \cdot 16 = 96$.</div>
-    <div class="quiz-explain wrong-exp">$u_1 = 2(1) - 5 = -3$, $u_{12} = 2(12) - 5 = 19$. $S_{12} = 6 \cdot 16 = 96$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! AP with $u_1 = -3$, $u_{12} = 19$, $n = 12$. $S_{12} = \tfrac{12}{2}(-3 + 19) = 6 \cdot 16 = 96$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！等差数列，$u_1 = -3$，$u_{12} = 19$，$n = 12$。$S_{12} = \tfrac{12}{2}(-3 + 19) = 6 \cdot 16 = 96$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$u_1 = 2(1) - 5 = -3$, $u_{12} = 2(12) - 5 = 19$. $S_{12} = 6 \cdot 16 = 96$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$u_1 = 2(1) - 5 = -3$，$u_{12} = 2(12) - 5 = 19$。$S_{12} = 6 \cdot 16 = 96$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">5. An infinite GP has $u_1 = 9$ and $S_\infty = 12$. The common ratio is:</div>
+      <div class="quiz-q"><span data-lang="en">5. An infinite GP has $u_1 = 9$ and $S_\infty = 12$. The common ratio is:</span><span data-lang="zh">5. 某无穷等比数列 $u_1 = 9$，$S_\infty = 12$。则公比为</span></div>
       <span class="quiz-number">Q5</span>
     </div>
     <div class="quiz-options">
@@ -1480,14 +1830,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$\tfrac{1}{3}$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{2}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\tfrac{9}{1 - r} = 12 \Rightarrow 1 - r = \tfrac{9}{12} = \tfrac{3}{4} \Rightarrow r = \tfrac{1}{4}$. $|r| &lt; 1$ ✓.</div>
-    <div class="quiz-explain wrong-exp">$1 - r = u_1 / S_\infty = 9/12 = 3/4 \Rightarrow r = 1/4$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $\tfrac{9}{1 - r} = 12 \Rightarrow 1 - r = \tfrac{9}{12} = \tfrac{3}{4} \Rightarrow r = \tfrac{1}{4}$. $|r| &lt; 1$ ✓.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$\tfrac{9}{1 - r} = 12 \Rightarrow 1 - r = \tfrac{9}{12} = \tfrac{3}{4} \Rightarrow r = \tfrac{1}{4}$。$|r| &lt; 1$ ✓。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$1 - r = u_1 / S_\infty = 9/12 = 3/4 \Rightarrow r = 1/4$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$1 - r = u_1 / S_\infty = 9/12 = 3/4 \Rightarrow r = 1/4$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">6. $0.\overline{27} = 0.272727\ldots$ as a fraction in lowest terms is:</div>
+      <div class="quiz-q"><span data-lang="en">6. $0.\overline{27} = 0.272727\ldots$ as a fraction in lowest terms is:</span><span data-lang="zh">6. 将 $0.\overline{27} = 0.272727\ldots$ 化为最简分数为</span></div>
       <span class="quiz-number">Q6</span>
     </div>
     <div class="quiz-options">
@@ -1496,14 +1848,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$\tfrac{3}{11}$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{9}{33}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! GP with $u_1 = 27/100$, $r = 1/100$. $S_\infty = \tfrac{27/100}{99/100} = \tfrac{27}{99} = \tfrac{3}{11}$.</div>
-    <div class="quiz-explain wrong-exp">$\tfrac{27}{99}$ is correct but not in lowest terms — divide by $9$ to get $\tfrac{3}{11}$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! GP with $u_1 = 27/100$, $r = 1/100$. $S_\infty = \tfrac{27/100}{99/100} = \tfrac{27}{99} = \tfrac{3}{11}$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！这是 $u_1 = 27/100$，$r = 1/100$ 的等比级数。$S_\infty = \tfrac{27/100}{99/100} = \tfrac{27}{99} = \tfrac{3}{11}$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$\tfrac{27}{99}$ is correct but not in lowest terms — divide by $9$ to get $\tfrac{3}{11}$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$\tfrac{27}{99}$ 数值正确但未化简——上下同除以 $9$ 得到 $\tfrac{3}{11}$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">7. $\$8000$ is invested at $6\%$ p.a. compounded monthly. The balance after $4$ years is closest to:</div>
+      <div class="quiz-q"><span data-lang="en">7. $\$8000$ is invested at $6\%$ p.a. compounded monthly. The balance after $4$ years is closest to:</span><span data-lang="zh">7. 将 $\$8000$ 以年利率 $6\%$ 按月计复利投资。$4$ 年后余额最接近</span></div>
       <span class="quiz-number">Q7</span>
     </div>
     <div class="quiz-options">
@@ -1512,14 +1866,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$\$9920$</div>
       <div class="quiz-opt" data-idx="3">$\$10\,162$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Per-period rate $0.06/12 = 0.005$, periods $48$. $A = 8000(1.005)^{48} \approx 8000 \cdot 1.27049 \approx 10162$.</div>
-    <div class="quiz-explain wrong-exp">$A = 8000(1 + 0.06/12)^{48} = 8000(1.005)^{48} \approx \$10\,162$. (If you forgot to divide by $12$, you would have computed $8000(1.06)^4 \approx 10100$ — close but wrong methodology.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Per-period rate $0.06/12 = 0.005$, periods $48$. $A = 8000(1.005)^{48} \approx 8000 \cdot 1.27049 \approx 10162$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！每期利率 $0.06/12 = 0.005$，期数 $48$。$A = 8000(1.005)^{48} \approx 8000 \cdot 1.27049 \approx 10162$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$A = 8000(1 + 0.06/12)^{48} = 8000(1.005)^{48} \approx \$10\,162$. (If you forgot to divide by $12$, you would have computed $8000(1.06)^4 \approx 10100$ — close but wrong methodology.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$A = 8000(1 + 0.06/12)^{48} = 8000(1.005)^{48} \approx \$10\,162$。（若忘记除以 $12$，会算成 $8000(1.06)^4 \approx 10100$——数值接近但方法错误。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">8. The first three terms of a GP are $x$, $x + 4$, $x + 12$. The common ratio is:</div>
+      <div class="quiz-q"><span data-lang="en">8. The first three terms of a GP are $x$, $x + 4$, $x + 12$. The common ratio is:</span><span data-lang="zh">8. 某等比数列前三项为 $x$，$x + 4$，$x + 12$。则公比为</span></div>
       <span class="quiz-number">Q8</span>
     </div>
     <div class="quiz-options">
@@ -1528,14 +1884,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$3$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{4}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Equal ratios: $\tfrac{x+4}{x} = \tfrac{x+12}{x+4}$. Cross-multiply: $(x+4)^2 = x(x+12) \Rightarrow x^2 + 8x + 16 = x^2 + 12x \Rightarrow x = 4$. Then $r = (x+4)/x = 8/4 = 2$.</div>
-    <div class="quiz-explain wrong-exp">Use the GP-mean: $(x+4)^2 = x(x+12)$, giving $x = 4$. Then $r = 8/4 = 2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Equal ratios: $\tfrac{x+4}{x} = \tfrac{x+12}{x+4}$. Cross-multiply: $(x+4)^2 = x(x+12) \Rightarrow x^2 + 8x + 16 = x^2 + 12x \Rightarrow x = 4$. Then $r = (x+4)/x = 8/4 = 2$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！相邻两项比相等：$\tfrac{x+4}{x} = \tfrac{x+12}{x+4}$。交叉相乘：$(x+4)^2 = x(x+12) \Rightarrow x^2 + 8x + 16 = x^2 + 12x \Rightarrow x = 4$。再由 $r = (x+4)/x = 8/4 = 2$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Use the GP-mean: $(x+4)^2 = x(x+12)$, giving $x = 4$. Then $r = 8/4 = 2$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">用等比中项：$(x+4)^2 = x(x+12)$，得 $x = 4$。再由 $r = 8/4 = 2$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">9. A ball is dropped from $10$ m and rebounds to $\tfrac{3}{4}$ of its previous height each time. The total vertical distance travelled is:</div>
+      <div class="quiz-q"><span data-lang="en">9. A ball is dropped from $10$ m and rebounds to $\tfrac{3}{4}$ of its previous height each time. The total vertical distance travelled is:</span><span data-lang="zh">9. 一小球从 $10$ m 高自由下落，每次反弹至上一次高度的 $\tfrac{3}{4}$。其总竖直路程为</span></div>
       <span class="quiz-number">Q9</span>
     </div>
     <div class="quiz-options">
@@ -1544,14 +1902,16 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$60$ m</div>
       <div class="quiz-opt" data-idx="3">$70$ m</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Down: GP with $u_1 = 10$, $r = 3/4$, sum $= 40$. Up: GP with $u_1 = 7.5$, $r = 3/4$, sum $= 30$. Total $= 70$ m.</div>
-    <div class="quiz-explain wrong-exp">$D_{\text{down}} = 10/(1-3/4) = 40$. $D_{\text{up}} = 7.5/(1 - 3/4) = 30$. Sum $= 70$ m. (Common slip: forgetting that "up" and "down" are different series.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Down: GP with $u_1 = 10$, $r = 3/4$, sum $= 40$. Up: GP with $u_1 = 7.5$, $r = 3/4$, sum $= 30$. Total $= 70$ m.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！下落：$u_1 = 10$，$r = 3/4$ 的等比级数，和 $= 40$。上升：$u_1 = 7.5$，$r = 3/4$ 的等比级数，和 $= 30$。总计 $= 70$ m。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$D_{\text{down}} = 10/(1-3/4) = 40$. $D_{\text{up}} = 7.5/(1 - 3/4) = 30$. Sum $= 70$ m. (Common slip: forgetting that "up" and "down" are different series.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$D_{\text{down}} = 10/(1-3/4) = 40$。$D_{\text{up}} = 7.5/(1 - 3/4) = 30$。总和 $= 70$ m。（常见错误：把"上升"和"下落"当成同一个级数。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">10. A GP has $u_1 + u_2 = 12$ and $u_3 + u_4 = 27$. Find $r$, given $r &gt; 0$.</div>
+      <div class="quiz-q"><span data-lang="en">10. A GP has $u_1 + u_2 = 12$ and $u_3 + u_4 = 27$. Find $r$, given $r &gt; 0$.</span><span data-lang="zh">10. 某等比数列满足 $u_1 + u_2 = 12$，$u_3 + u_4 = 27$。已知 $r &gt; 0$，求 $r$。</span></div>
       <span class="quiz-number">Q10</span>
     </div>
     <div class="quiz-options">
@@ -1560,9 +1920,11 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
       <div class="quiz-opt" data-idx="2">$\tfrac{3}{2}$</div>
       <div class="quiz-opt" data-idx="3">$2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Note $u_3 + u_4 = r^2(u_1 + u_2)$. So $27 = r^2 \cdot 12 \Rightarrow r^2 = 9/4 \Rightarrow r = \tfrac{3}{2}$ (positive root).</div>
-    <div class="quiz-explain wrong-exp">Factor: $u_3 + u_4 = r^2(u_1 + u_2) \Rightarrow r^2 = 27/12 = 9/4 \Rightarrow r = 3/2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Note $u_3 + u_4 = r^2(u_1 + u_2)$. So $27 = r^2 \cdot 12 \Rightarrow r^2 = 9/4 \Rightarrow r = \tfrac{3}{2}$ (positive root).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！注意 $u_3 + u_4 = r^2(u_1 + u_2)$。故 $27 = r^2 \cdot 12 \Rightarrow r^2 = 9/4 \Rightarrow r = \tfrac{3}{2}$（取正根）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Factor: $u_3 + u_4 = r^2(u_1 + u_2) \Rightarrow r^2 = 27/12 = 9/4 \Rightarrow r = 3/2$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">提取公因式：$u_3 + u_4 = r^2(u_1 + u_2) \Rightarrow r^2 = 27/12 = 9/4 \Rightarrow r = 3/2$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1570,32 +1932,32 @@ $$ u_n + d = r\, u_n \;\Longrightarrow\; d = (r - 1)\, u_n. $$
 
 <!-- ═══════════════ CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are HL-only.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-Assessment</span><span data-lang="zh">自我评估</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;"><span data-lang="en">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are HL-only.</span><span data-lang="zh">点击你已经掌握的条目。考前目标 100%。标有 <span class="hl-flag">HL</span> 的为 HL 专属内容。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">已掌握 0 / 14</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $u_n = u_1 + (n-1)d$ for an AP</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve $2\times 2$ systems in $u_1$ and $d$ from two AP conditions</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use both forms of $S_n$ for an AP and choose the cleaner one</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the Gauss-pairing derivation of $S_n^{\text{AP}}$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $u_n = u_1 r^{n-1}$ for a GP</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use $u_m/u_n = r^{m-n}$ to recover $r$ from two terms</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and use $S_n^{\text{GP}}$ in both forms; handle the $r = 1$ case</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the $S_n - r S_n$ derivation of the GP sum formula</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Translate sigma notation into AP or GP form before summing</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply linearity and index-shift identities for sigma sums</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Recognize when an infinite GP converges (exact condition $|r| &lt; 1$)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Compute $S_\infty$ and convert recurring decimals into fractions</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Set up and solve compound-interest / depreciation problems with the right per-period rate</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize and resolve mixed AP+GP and "both AP and GP" patterns</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and use $u_n = u_1 + (n-1)d$ for an AP</span><span data-lang="zh">写出并应用等差数列（<code>AP</code>）的通项 $u_n = u_1 + (n-1)d$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Solve $2\times 2$ systems in $u_1$ and $d$ from two AP conditions</span><span data-lang="zh">由两条 AP 条件解关于 $u_1$ 与 $d$ 的 $2\times 2$ 方程组</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use both forms of $S_n$ for an AP and choose the cleaner one</span><span data-lang="zh">熟练 AP 求和 $S_n$ 的两种形式，按题目条件选用更简洁的一种</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Reproduce the Gauss-pairing derivation of $S_n^{\text{AP}}$</span><span data-lang="zh">能复现 $S_n^{\text{AP}}$ 的高斯配对推导</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and use $u_n = u_1 r^{n-1}$ for a GP</span><span data-lang="zh">写出并应用等比数列（<code>GP</code>）的通项 $u_n = u_1 r^{n-1}$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use $u_m/u_n = r^{m-n}$ to recover $r$ from two terms</span><span data-lang="zh">利用 $u_m/u_n = r^{m-n}$ 由任意两项反推公比 $r$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and use $S_n^{\text{GP}}$ in both forms; handle the $r = 1$ case</span><span data-lang="zh">写出并应用 GP 求和 $S_n^{\text{GP}}$ 的两种形式，能单独处理 $r = 1$ 的退化情形</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Reproduce the $S_n - r S_n$ derivation of the GP sum formula</span><span data-lang="zh">能复现 $S_n - r S_n$ 推导出 GP 求和公式的过程</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Translate sigma notation into AP or GP form before summing</span><span data-lang="zh">求和前先把求和记号（<code>sigma notation</code>）化为 AP 或 GP 形式</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply linearity and index-shift identities for sigma sums</span><span data-lang="zh">熟练 $\Sigma$ 的线性性和换元（index shift）恒等式</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> <span data-lang="en">Recognize when an infinite GP converges (exact condition $|r| &lt; 1$)</span><span data-lang="zh">辨认无穷 GP 收敛（<code>convergence</code>）的精确条件 $|r| &lt; 1$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> <span data-lang="en">Compute $S_\infty$ and convert recurring decimals into fractions</span><span data-lang="zh">能计算 $S_\infty$ 并将循环小数化为分数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Set up and solve compound-interest / depreciation problems with the right per-period rate</span><span data-lang="zh">能正确设定每期利率（per-period rate）解复利与折旧问题</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Recognize and resolve mixed AP+GP and "both AP and GP" patterns</span><span data-lang="zh">能识别并求解 AP 与 GP 混合题型及"同时为 AP 和 GP"的特例</span></li>
   </ul>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
-  <p>IB Math Analysis &amp; Approaches HL — Unit A1: Sequences &amp; Series · First Assessment 2029</p>
+  <p><span data-lang="en">IB Math Analysis &amp; Approaches HL — Unit A1: Sequences &amp; Series · First Assessment 2029</span><span data-lang="zh">IB 数学分析与方法 HL——单元 A1：数列与级数 · 首次考核 2029</span></p>
 </div>
 
 </main>
@@ -1616,16 +1978,38 @@ function updateScoreBadge() {
 }
 
 // ─── THEME ───
+function setThemeBtnLabel(isDark) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  const tt = document.getElementById('themeToggle');
-  if (tt) tt.textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  try {
+    localStorage.setItem('drs.lang',
+      document.body.classList.contains('lang-zh') ? 'zh' : 'en');
+  } catch (e) { /* ignore quota / privacy errors */ }
+}
+(function () {
+  try {
+    if (localStorage.getItem('drs.lang') === 'zh') {
+      document.body.classList.add('lang-zh');
+    }
+  } catch (e) { /* ignore */ }
+})();
 
 // ─── PROGRESS BAR ───
 window.addEventListener('scroll', () => {
@@ -1697,7 +2081,9 @@ function updateFlashcardCount() {
   const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
   const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
   const el = document.getElementById('fcCount');
-  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span>' +
+    '<span data-lang="zh">已翻 ' + flipped + ' / ' + total + '</span>';
 }
 function resetFlashcards() {
   document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
@@ -1720,7 +2106,9 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const el = document.getElementById('checkProgress');
-  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+    '<span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
 }
 
 // ─── SIDEBAR TOGGLE ───

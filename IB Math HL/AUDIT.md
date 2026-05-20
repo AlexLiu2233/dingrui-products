@@ -34,8 +34,8 @@ below — fill in as each unit ships.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **T-1** | Unit A1 Sequences &amp; Series bilingual translation | P1 | **Open** — first up |
-| **T-2** | Unit A3 Combinatorics bilingual translation | P1 | **Open** |
+| ~~**T-1**~~ | Unit A1 Sequences &amp; Series bilingual translation | P1 | ✅ **Shipped** — 260/260 `data-lang` markers; 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed) + how-to + exam-strategy + flashcards + 10-item unit quiz + 14-item readiness checklist all bilingualized. Pending review-then-merge. |
+| **T-2** | Unit A3 Combinatorics bilingual translation | P1 | **Open** — next up |
 | **T-3** | Unit A4 Complex Numbers bilingual translation | P1 | **Open** |
 | **T-4** | Unit C Geometry bilingual translation | P1 | **Open** |
 
@@ -130,7 +130,7 @@ the matching `"zh"` count.
 
 | # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
 |---|---|---|---|---|---|---|
-| A1 | Sequences & Series       | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-1 — first up under this sprint. Playbook's `af27baf` reference is stale (translation reverted during A1-A6 refactor); re-translating from scratch. |
+| A1 | Sequences & Series       | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped. Playbook's `af27baf` reference superseded — point future translators here once the commit lands. |
 | A3 | Combinatorics            | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-2 — queued. |
 | A4 | Complex Numbers          | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-3 — queued. Heavy on Argand / De Moivre / modulus-argument terminology — exercise the playbook IB Math glossary. |
 | C  | Geometry & Trigonometry  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-4 — queued. Largest file (2381 lines); glossary additions likely (sine/cosine rule, vector cross/dot product, etc.). |
