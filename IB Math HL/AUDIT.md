@@ -23,6 +23,43 @@ A1 + A3 + A4 study guides shipped; A1 + A3 practice question sets shipped).
 
 ## Active Sprint — what we're working on now
 
+**Translation Sprint — Bilingual EN↔ZH for shipped study guides (in flight
+as of 2026-05-20).** All currently-shipped IB Math HL study guides
+(A1, A3, A4, C) bilingualizing EN↔ZH against the locked playbook in
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+Sequential, one file at a time, review-then-merge per file. Branch:
+`ib_math_hl_translation`. Per-file scorecard in the
+[Translation audit](#translation-audit-per-file-post-ship) section
+below — fill in as each unit ships.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **T-1** | Unit A1 Sequences &amp; Series bilingual translation | P1 | **Open** — first up |
+| **T-2** | Unit A3 Combinatorics bilingual translation | P1 | **Open** |
+| **T-3** | Unit A4 Complex Numbers bilingual translation | P1 | **Open** |
+| **T-4** | Unit C Geometry bilingual translation | P1 | **Open** |
+
+**Audience contract** — Mandarin-Chinese-language students preparing to
+write the IB Math AA HL exam in English. Chinese is a *teaching
+translation*; English exam-rubric terminology (sequence / series /
+binomial theorem / De Moivre / Argand / modulus / argument / etc.) stays
+in `<code>` inline. Math notation untouched.
+
+**Note on stale playbook reference.** The playbook
+(`prompts/create-bilingual-translation.md`) cites commit `af27baf` as the
+locked example for Unit A1 — that translation was effectively reverted
+during the A1-A6 refactor (`9a0faaf`), so A1 is being re-translated from
+scratch under the current convention. Once T-1 ships, update the playbook
+to point at the new T-1 commit instead.
+
+Sprint closes when (a) all 4 files ship, (b) per-file scorecard passes
+four axes (EN/ZH balance + glossary fit + pedagogical + validates) for
+all 4, (c) no P0/P1 translation issues remain. A2/A5/A6 will be
+translated as they ship (separate Translation Sprint Wave 2 entry to be
+opened when those files land).
+
+### Sprint 1 — Refactor Unit A into focused sub-units (paused for translation)
+
 **Sprint 1 — Refactor Unit A into focused sub-units.** The original
 `Unit_A_Number_and_Algebra.html` is a 2588-line monolith covering 24
 sub-topics. Per 2026-05-08 decision, it's being split into 6 focused
@@ -64,6 +101,83 @@ and mark allocation pills. Question-only — no embedded answers.
 Once Sprint 1 closes, Sprint 2 picks up the missing units (B Functions,
 D Statistics &amp; Probability, E Calculus). Build order: **B → D → E**.
 Original P0 work; preserved here so it isn't lost.
+
+---
+
+## Translation audit (per-file, post-ship)
+
+**Audit target.** All currently-shipped IB Math AA HL study guides
+bilingualized to support a Mandarin-Chinese-language student writing the
+IB exam in English. Chinese is a *teaching translation* — explains the
+concept; English exam-rubric terms remain in `<code>` inline so the
+student recognizes them on the exam paper. Playbook:
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+
+**Audit method.** (1) Structural — count `data-lang="en"` vs
+`data-lang="zh"` attributes; they must be equal. (2) Lexical — verify
+core IB Math AA HL terminology is consistently rendered across files
+(glossary in `prompts/create-bilingual-translation.md`). (3)
+Pedagogical — spot-read sample concept-boxes / worked-examples in each
+file; check the Chinese explains rather than literally translates.
+(4) Validation — `scripts/validate.sh` passes on each file.
+
+### Per-file scorecard
+
+Mark ✅ when balanced and `validate.sh` passes; ✗ if either fails;
+⏳ until the unit's translation commit lands. Fill in EN/ZH counts via
+`grep -c 'data-lang="en"' "IB Math HL/Study Guides/Unit_*.html"` and
+the matching `"zh"` count.
+
+| # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
+|---|---|---|---|---|---|---|
+| A1 | Sequences & Series       | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-1 — first up under this sprint. Playbook's `af27baf` reference is stale (translation reverted during A1-A6 refactor); re-translating from scratch. |
+| A3 | Combinatorics            | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-2 — queued. |
+| A4 | Complex Numbers          | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-3 — queued. Heavy on Argand / De Moivre / modulus-argument terminology — exercise the playbook IB Math glossary. |
+| C  | Geometry & Trigonometry  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-4 — queued. Largest file (2381 lines); glossary additions likely (sine/cosine rule, vector cross/dot product, etc.). |
+
+A2, A5, A6 not in this sprint — they have not yet shipped (open in
+Sprint 1 above). Translate as they ship.
+
+### Findings — corpus-wide
+
+*To be filled in once all 4 files ship and are audited together.* Mirror
+AP Calc / AP Physics structure:
+
+- EN/ZH `data-lang` attribute counts balanced across all 4 files.
+- Glossary consistency: spot-check 15+ core IB Math AA HL terms
+  (sequence / series / arithmetic / geometric / common difference / common
+  ratio / binomial theorem / Pascal's triangle / permutation /
+  combination / complex number / Argand diagram / De Moivre / modulus /
+  argument / extended binomial) — every appearance uses the same Chinese
+  rendering.
+- Exam-term gloss pattern applied across all 4 units.
+- Math notation untouched in both languages.
+- Bilingual infrastructure identical across all 4 files (CSS toggle,
+  `--font-body` CJK fallback, nav button between Contents and Dark,
+  `localStorage` under `drs.lang`).
+- `scripts/validate.sh` passes on all 4.
+
+### Findings — requiring follow-up
+
+*To be filled in.* If publish-ready: declare "no P0/P1 translation
+issues found" (mirroring AP Calc / AP Physics). Otherwise log each issue
+as `TR-N` with Tier and Notes columns above the P2 table below.
+
+### Optional refinements (P2 — not blocking)
+
+| ID | Item | Why P2 |
+|---|---|---|
+| TR-1 | Add `lang="en"` / `lang="zh"` attribute (HTML standard) on toggled spans/divs to enhance screen-reader behavior | A11y polish; current behavior works fine for sighted users which is the dominant use case |
+| TR-2 | Print stylesheet: decide whether `@media print` should default to EN or to the currently-toggled language | Edge case; consult once a Chinese-language student requests printable practice |
+| TR-3 | Translation of `<title>` tags so browser tab reads in Chinese when in zh mode (currently `<title>` is EN-only) | Minor browser-chrome polish |
+
+### Translation contract — standing principle (mirrors AP Calc / AP Physics close-out 2026-05-18 / 2026-05-19)
+
+Chinese is a teaching translation, not literal. English exam-rubric
+terminology stays in `<code>` inline. Math notation untouched. See
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+This standing principle is co-equal with the Dual-Goal Philosophy
+below — every future unit must conform to both.
 
 ---
 
