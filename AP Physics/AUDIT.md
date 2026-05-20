@@ -68,9 +68,134 @@ renders each `Practice Questions/*.html` to `dist/practice-pdfs/AP-Physics/`
 (gitignored). User runs the render manually; S5-1 closes once
 distribution PDFs are verified.
 
-No active sprint right now. Backlog candidates: P2-1 (E&M expansion),
-P2-2 (cross-unit spaced-review deck), P1-5 (JSXGraph in U1–U4
-opportunity), P1-6 (U6 practice FRQ 3 bullet-speed fix — see below).
+**Sprint 8 — Bilingual Translation (in flight as of 2026-05-19).** All 7
+Study Guides bilingualizing EN↔ZH against the locked playbook in
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+U1–U4 shipped; U5–U7 translating in parallel. Per-file audit scorecard
+in the [Translation audit](#translation-audit-per-file-post-ship) section
+below — verify counts and fill in scorecard once U5–U7 commits land.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S8-1**~~ | ~~U1 Kinematics bilingual translation~~ | P1 | ✅ closed — `e707bb5` |
+| ~~**S8-2**~~ | ~~U2 Force &amp; Dynamics bilingual translation~~ | P1 | ✅ closed — `e607303` |
+| ~~**S8-3**~~ | ~~U3 Work, Energy &amp; Power bilingual translation~~ | P1 | ✅ closed — `cc41276` |
+| ~~**S8-4**~~ | ~~U4 Linear Momentum bilingual translation~~ | P1 | ✅ closed — `d3993cd` |
+| **S8-5** | U5 Torque &amp; Rotational Dynamics bilingual translation | P1 | **In flight (parallel)** |
+| **S8-6** | U6 Energy &amp; Momentum of Rotating Systems bilingual translation | P1 | **In flight (parallel)** |
+| **S8-7** | U7 Oscillations bilingual translation | P1 | **In flight (parallel)** |
+
+Sprint closes when (a) U5–U7 commits land, (b) the per-file scorecard
+below passes all four audit axes for all 7 units, (c) no P0/P1
+translation issues remain.
+
+**Backlog candidates beyond Sprint 8:** P2-1 (E&M expansion), P2-2
+(cross-unit spaced-review deck), P1-5 (JSXGraph in U1–U4 opportunity),
+P1-6 (U6 practice FRQ 3 bullet-speed fix — see below).
+
+---
+
+## Translation audit (per-file, post-ship)
+
+**Audit target.** All 7 AP Physics C: Mechanics study guides bilingualized
+to support a Mandarin-Chinese-language student writing the AP exam in
+English. Chinese is a *teaching translation* — explains the concept;
+English exam-rubric terms remain in `<code>` inline so the student
+recognizes them on the exam paper. Playbook:
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+
+**Audit method.** (1) Structural — count `data-lang="en"` vs
+`data-lang="zh"` attributes; they must be equal. (2) Lexical — verify
+core AP Physics C terminology is consistently rendered across files
+(extend the glossary in `prompts/create-bilingual-translation.md` with
+an AP Physics C: Mechanics block once the corpus stabilizes). (3)
+Pedagogical — spot-read sample concept-boxes / worked-examples in each
+file; check the Chinese explains rather than literally translates.
+(4) Validation — `scripts/validate.sh` passes on each file.
+
+### Per-file scorecard
+
+To fill in: `grep -c 'data-lang="en"' AP\ Physics/Study\ Guides/Unit_N_*.html`
+and the matching `"zh"` count. Mark ✅ when balanced and `validate.sh` passes;
+✗ if either fails; ⏳ until the unit's translation commit lands.
+
+| # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
+|---|---|---|---|---|---|---|
+| 1 | Kinematics                                  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `e707bb5` — audit pending. |
+| 2 | Force & Translational Dynamics              | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `e607303` — audit pending. |
+| 3 | Work, Energy & Power                        | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `cc41276` — audit pending. |
+| 4 | Linear Momentum                             | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Shipped `d3993cd` — audit pending. |
+| 5 | Torque & Rotational Dynamics                | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
+| 6 | Energy & Momentum of Rotating Systems       | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
+| 7 | Oscillations                                | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | Translation in flight (parallel). |
+
+### Findings — corpus-wide
+
+*To be filled in once U5–U7 commits land and all 7 files are audited
+together.* Mirror AP Calc's structure:
+
+- EN/ZH `data-lang` attribute counts balanced across all 7 files.
+- Glossary consistency: spot-check 20+ core AP Physics terms (force /
+  velocity / acceleration / momentum / impulse / energy / work / power /
+  torque / moment of inertia / angular momentum / SHM / period /
+  amplitude / Newton's laws / friction / spring constant / gravitational
+  PE / centripetal / Kepler / …) — every appearance uses the same
+  Chinese rendering.
+- Exam-term gloss pattern applied across all units.
+- Math notation untouched in both languages.
+- Bilingual infrastructure identical across all 7 files (CSS toggle,
+  `--font-body` CJK fallback, nav button between Contents and Dark,
+  `localStorage` under `drs.lang`).
+- `scripts/validate.sh` passes on all 7.
+
+### AP Physics term-glossing — extend playbook on close-out
+
+When U5–U7 land, append an "AP Physics C: Mechanics" block to the
+"Exam-rubric term-flagging" section of
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
+so future translators (and future subjects sharing vocabulary) inherit
+the canonical Chinese renderings used in U1–U7. Seed candidates — verify
+against the actual translated corpus before locking:
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| velocity / acceleration / speed | 速度 / 加速度 / 速率 | `velocity` / `acceleration` / `speed` |
+| force / friction / normal force | 力 / 摩擦力 / 法向力 | `force` / `friction` / `normal force` |
+| momentum / impulse | 动量 / 冲量 | `momentum` / `impulse` |
+| work / energy / power | 功 / 能量 / 功率 | `work` / `energy` / `power` |
+| kinetic / potential energy | 动能 / 势能 | `kinetic energy` / `potential energy` |
+| conservation of momentum/energy | 动量守恒 / 能量守恒 | `conservation of momentum` / `conservation of energy` |
+| torque / moment of inertia | 力矩 / 转动惯量 | `torque` / `moment of inertia` |
+| angular velocity / acceleration | 角速度 / 角加速度 | `angular velocity` / `angular acceleration` |
+| angular momentum | 角动量 | `angular momentum` |
+| rotational kinetic energy | 转动动能 | `rotational kinetic energy` |
+| simple harmonic motion | 简谐运动 | `SHM` / `simple harmonic motion` |
+| period / frequency / amplitude | 周期 / 频率 / 振幅 | `period` / `frequency` / `amplitude` |
+| centripetal | 向心 | `centripetal` |
+| Kepler's laws | 开普勒定律 | `Kepler's laws` |
+| Newton's second law | 牛顿第二定律 | `Newton's second law` |
+
+### Findings — requiring follow-up
+
+*To be filled in.* If publish-ready: declare "no P0/P1 translation
+issues found" (mirroring AP Calc). Otherwise log each issue as `TR-N`
+with Tier and Notes columns above the P2 table below.
+
+### Optional refinements (P2 — not blocking)
+
+| ID | Item | Why P2 |
+|---|---|---|
+| TR-1 | Add `lang="en"` / `lang="zh"` attribute (HTML standard) on toggled spans/divs to enhance screen-reader behavior | A11y polish; current behavior works fine for sighted users which is the dominant use case |
+| TR-2 | Print stylesheet: decide whether `@media print` should default to EN or to the currently-toggled language | Edge case; consult once a Chinese-language student requests printable practice |
+| TR-3 | Translation of `<title>` tags so browser tab reads in Chinese when in zh mode (currently `<title>` is EN-only) | Minor browser-chrome polish |
+
+### Translation contract — standing principle (locked 2026-05-18)
+
+Chinese is a teaching translation, not literal. English exam-rubric
+terminology stays in `<code>` inline. Math notation untouched. See
+[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+This standing principle is co-equal with the Interactive Component
+Philosophy below — any future content sprint must conform to both.
 
 ---
 
