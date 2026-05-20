@@ -258,8 +258,72 @@ English** — they are the exact symbols the student types on the exam.
 8. Audit: `grep -c 'data-lang="en"'` and `grep -c 'data-lang="zh"'`
    should be **equal** in the final file. Any imbalance = something
    was missed.
-9. Open in a browser, click the "中文" button, page should flip cleanly.
-   Click "EN" — page flips back. Reload — language sticks.
+9. **Terminology audit** (locked 2026-05-19 after AP Physics U3/U4
+   landed `折返点 → 转折点`, `点积 → 标量积`, `路径长度 → 路程`,
+   `缓冲溃缩区 → 溃缩区`, `冲量—动量定理 → 动量定理`). Dispatch a
+   general-purpose Agent with WebSearch + WebFetch to verify your
+   Chinese terminology against mainland-China textbook convention
+   — see the next section for the exact brief and which terms to skip.
+   Apply corrections **before** committing.
+10. Open in a browser, click the "中文" button, page should flip cleanly.
+    Click "EN" — page flips back. Reload — language sticks.
+
+## Terminology audit — the brief to send the agent
+
+The audit is not optional. The risk it catches is invisible to anyone
+who can't read Chinese fluently: a translation that is *grammatically*
+correct but uses CS-jargon (e.g. `点积`) or translationese
+(e.g. `折返点`, `缓冲溃缩区`) where mainland 教材 has a different
+canonical term.
+
+**When to skip a term:** generic high-frequency words that exist
+identically in every Chinese physics text — `动能`, `功`, `势能`,
+`动量`, `冲量`, `质量`, `弹性碰撞`, `非弹性碰撞`, `参考系`,
+`惯性系`, `保守力`, `质心` — are safe and don't need verification.
+
+**When to audit a term:** anything where you made a translation choice
+between plausible alternatives. Compound nouns
+(`crumple zone`, `ballistic pendulum`), discipline-specific names
+(`work–energy theorem`, `impulse–momentum theorem`), and any term where
+the English has two natural Chinese renderings (`dot product` →
+`点积` vs `标量积`; `path length` → `路径长度` vs `路程`).
+
+Brief template (paste into Agent prompt, fill in the term list):
+
+```
+I'm doing a teaching translation of <Subject> study guides from English
+into Mandarin. Audience: Mandarin-speaking students who will sit the
+exam IN ENGLISH. The Chinese is a teaching translation — concept in
+Chinese, exam terms preserved in <code>…</code>.
+
+Verify the following English → Chinese choices against mainland Chinese
+physics-textbook convention (人教版高中物理, 大学物理 / 普通物理学
+e.g. 程守洙/江之永, 漆安慎/杜婵英, 上海交大普物). Use WebSearch on
+百度百科, 维基百科 zh, university course pages, and Chinese science
+term databases (termonline.cn if accessible).
+
+For each, answer one of:
+  ✓ confirmed standard
+  ⚠ acceptable but a textbook variant exists (state it)
+  ✗ non-standard — use X instead
+
+Terms:
+  1. "<EN term>" → <ZH choice>
+  2. ...
+
+End with a prioritized list of corrections in this format:
+  replace: "A" → "B" (reason, with source URL if non-trivial)
+
+Keep the entire response under 600 words.
+```
+
+When the agent reports back, apply each `replace:` directive. Preserve
+the `<code>english term</code>` gloss at first mention — the corrected
+Chinese sits next to the English, not in place of it.
+
+If a candidate correction conflicts with a term already shipped in an
+earlier, user-approved unit on the same branch, keep the cross-unit
+consistency unless the user explicitly authorizes a sweep.
 
 ## Cross-references
 
