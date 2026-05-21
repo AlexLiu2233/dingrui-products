@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dingrui Scholars study guides organized in three tiers: High School Foundations (BC, Ontario, Alberta, US Common Core), College Credit Courses (AP & IB), and upcoming University Level courses — with worked examples, interactive quizzes, dark mode, and print-friendly formatting.">
+<meta name="description" content="Dingrui Scholars study guides for High School Foundations (BC, Ontario, Alberta, US Common Core), College Credit Courses (AP and IB), and University Level coursework. Worked examples, retrieval practice quizzes, dark mode, and print friendly formatting.">
 <meta name="theme-color" content="#7A2E2E">
 <meta name="color-scheme" content="light dark">
 <title>Study Guides | Dingrui Scholars</title>
@@ -57,7 +57,7 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-/* ─── TOP NAV ─── */
+/* Top nav */
 .top-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(245, 240, 235, 0.92);
@@ -84,15 +84,15 @@ body {
 }
 .nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
 
-/* ─── BILINGUAL TOGGLE ─── */
+/* Bilingual toggle */
 body:not(.lang-zh) [data-lang="zh"] { display: none; }
 body.lang-zh       [data-lang="en"] { display: none; }
 .nav-group { display: flex; align-items: center; gap: 8px; }
 
-/* ─── LAYOUT ─── */
+/* Layout */
 .wrap { max-width: var(--max-w); margin: 0 auto; padding: 96px 24px 64px; }
 
-/* ─── HERO ─── */
+/* Hero */
 .hero {
   text-align: center; padding: 48px 24px 40px;
   background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
@@ -145,7 +145,7 @@ body.lang-zh       [data-lang="en"] { display: none; }
 .chip-purple { border: 1px solid var(--purple); color: var(--purple); }
 .chip-gold   { border: 1px solid var(--gold);   color: var(--gold);   }
 
-/* ─── TIER NAV (in hero) ─── */
+/* Tier nav (in hero) */
 .tier-nav {
   display: flex; gap: 10px; flex-wrap: wrap;
   justify-content: center; margin-top: 28px;
@@ -182,7 +182,7 @@ body.lang-zh       [data-lang="en"] { display: none; }
 .tier-pill--soon .tier-pill__name { color: var(--text-secondary); }
 .tier-pill--soon { opacity: 0.85; }
 
-/* ─── TIER (organizing band) ─── */
+/* Tier (organizing band) */
 .tier {
   position: relative;
   padding-top: 8px;
@@ -222,11 +222,75 @@ body.lang-zh       [data-lang="en"] { display: none; }
 .tier-2 { --tier-color: var(--accent); }
 .tier-3 { --tier-color: var(--purple); }
 
-/* Subject subgroups inside a tier */
-.subject-group { margin-bottom: 36px; }
+/* Subject subgroups inside a tier (collapsible) */
+.subject-group {
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
 .subject-group:last-child { margin-bottom: 0; }
+.subject-group:hover { border-color: var(--accent); }
+.subject-group[open] { box-shadow: var(--shadow); }
 
-/* Empty / coming-soon tier panel */
+.subject-group__toggle {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  display: flex; align-items: center; gap: 14px;
+  user-select: none;
+  outline: none;
+}
+.subject-group__toggle::-webkit-details-marker { display: none; }
+.subject-group__toggle:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+  border-radius: var(--radius);
+}
+
+.subject-group__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  flex: 0 0 22px;
+  border-radius: 4px;
+  color: var(--accent);
+  background: var(--accent-light);
+  font-family: var(--font-mono);
+  font-size: 0.85rem; font-weight: 700;
+  line-height: 1;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
+.subject-group[open] .subject-group__chevron { transform: rotate(90deg); }
+
+.subject-group__title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.subject-group__count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.subject-group__body {
+  padding: 0 22px 22px;
+}
+
+/* Empty / coming soon tier panel */
 .tier__empty {
   border: 1px dashed var(--border);
   border-radius: var(--radius);
@@ -254,19 +318,7 @@ body.lang-zh       [data-lang="en"] { display: none; }
   font-size: 0.96rem;
 }
 
-/* ─── SECTION HEADER ─── */
-.section-title {
-  font-family: var(--font-mono);
-  font-size: 0.78rem; font-weight: 700;
-  color: var(--accent); text-transform: uppercase;
-  letter-spacing: 1.5px; margin: 0 0 20px;
-  display: flex; align-items: center; gap: 12px;
-}
-.section-title::after {
-  content: ''; flex: 1; height: 1px; background: var(--border);
-}
-
-/* ─── GRID ─── */
+/* Grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -323,7 +375,7 @@ body.lang-zh       [data-lang="en"] { display: none; }
 .card:nth-child(6n+5) { --card-color: var(--gold); }
 .card:nth-child(6n)   { --card-color: var(--red); }
 
-/* ─── FOOTER ─── */
+/* Footer */
 footer {
   margin-top: 64px; padding-top: 24px;
   border-top: 1px solid var(--border);
@@ -333,7 +385,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ─── RESPONSIVE ─── */
+/* Responsive */
 @media (max-width: 600px) {
   .wrap { padding: 80px 16px 48px; }
   .hero { padding: 36px 16px 32px; margin-bottom: 36px; }
@@ -343,6 +395,9 @@ footer {
   .tier__head { gap: 8px 12px; margin-bottom: 22px; padding-bottom: 14px; }
   .tier-pill { padding: 6px 12px 6px 8px; }
   .tier-pill__name { font-size: 0.85rem; }
+  .subject-group__toggle { padding: 16px 18px; }
+  .subject-group__title { font-size: 1.1rem; }
+  .subject-group__body { padding: 0 18px 18px; }
 }
 </style>
 </head>
@@ -366,7 +421,7 @@ footer {
     <div class="hero-overline">Dingrui Scholars</div>
     <h1><span data-lang="en">Study Guides</span><span data-lang="zh">学习指南</span></h1>
     <p class="hero-sub">
-      <span data-lang="en">A three-tier library — from high-school foundations through AP &amp; IB college-credit courses to university-level material. Worked examples in exam style, retrieval-practice quizzes, and full solutions throughout.</span><span data-lang="zh">三层课程体系——从高中基础课程，到 AP 与 IB 大学学分课程，再到大学水平课程。考试风格例题、检索式记忆测验，配有完整解析。</span>
+      <span data-lang="en">Comprehensive study materials for High School Foundations, AP and IB college credit courses, and University Level subjects. Every unit includes exam style worked examples, retrieval practice quizzes, and complete solutions.</span><span data-lang="zh">覆盖高中基础、AP 与 IB 大学学分课程及大学水平课程的完整学习资料。每个单元配有考试风格例题、检索练习测验与完整解析。</span>
     </p>
     <nav class="tier-nav" aria-label="Course tiers">
       <a class="tier-pill tier-1" href="#tier-1">
@@ -388,12 +443,12 @@ footer {
     <header class="tier__head">
       <span class="tier__num">Tier 01</span>
       <h2 class="tier__title"><span data-lang="en">High School Foundations</span><span data-lang="zh">高中基础课程</span></h2>
-      <p class="tier__sub"><span data-lang="en">Provincial &amp; Common Core curricula — BC, Ontario, Alberta, and US schools. Build the groundwork before tackling AP/IB.</span><span data-lang="zh">省级与 Common Core 课程——面向不列颠哥伦比亚、安大略、阿尔伯塔及美国学校。在进入 AP/IB 之前打牢基础。</span></p>
+      <p class="tier__sub"><span data-lang="en">Provincial and Common Core curricula for British Columbia, Ontario, Alberta, and US schools. Builds the foundation students need before progressing to AP and IB coursework.</span><span data-lang="zh">省级与 Common Core 课程，面向不列颠哥伦比亚、安大略、阿尔伯塔及美国学校，为学生进入 AP 与 IB 课程之前奠定扎实基础。</span></p>
     </header>
     <div class="tier__empty">
-      <div class="tier__empty-eyebrow"><span data-lang="en">Launching soon</span><span data-lang="zh">即将推出</span></div>
-      <p class="tier__empty-title"><span data-lang="en">High School Math — Linear Functions, Quadratics &amp; more</span><span data-lang="zh">高中数学——线性函数、二次函数等</span></p>
-      <p class="tier__empty-body"><span data-lang="en">First Year 9–12 study guides are in active drafting. The first units land here as soon as they ship.</span><span data-lang="zh">首批 9–12 年级学习指南正在起草中。第一批单元上线后会直接出现在此处。</span></p>
+      <div class="tier__empty-eyebrow"><span data-lang="en">In Development</span><span data-lang="zh">编写中</span></div>
+      <p class="tier__empty-title"><span data-lang="en">High School Math: Linear Functions, Quadratics, and More</span><span data-lang="zh">高中数学：线性函数、二次函数与更多内容</span></p>
+      <p class="tier__empty-body"><span data-lang="en">Year 9 through 12 study guides are currently in development. New units will be published here as they are released.</span><span data-lang="zh">9 至 12 年级学习指南正在编写中，新单元发布后将在此处上线。</span></p>
     </div>
   </section>
 
@@ -401,214 +456,235 @@ footer {
     <header class="tier__head">
       <span class="tier__num">Tier 02</span>
       <h2 class="tier__title"><span data-lang="en">College Credit Courses</span><span data-lang="zh">大学学分课程</span></h2>
-      <p class="tier__sub"><span data-lang="en">AP &amp; IB study guides built for top scores — exam-style worked examples, retrieval-practice quizzes, and AP-style problem sets with full solutions.</span><span data-lang="zh">面向 AP 与 IB 高分目标的学习指南——考试风格例题、检索式记忆测验，配有完整解析的 AP 风格练习题集。</span></p>
+      <p class="tier__sub"><span data-lang="en">AP and IB study guides built for top scores. Each unit includes exam style worked examples, retrieval practice quizzes, and AP style problem sets with complete solutions.</span><span data-lang="zh">面向 AP 与 IB 高分目标的学习指南。每个单元配有考试风格例题、检索练习测验，以及 AP 风格练习题集与完整解析。</span></p>
     </header>
 
-  <div class="subject-group">
-  <h2 class="section-title">AP Calculus AB/BC</h2>
+  <details class="subject-group">
+    <summary class="subject-group__toggle">
+      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
+      <span class="subject-group__title">AP Calculus AB/BC</span>
+      <span class="subject-group__count"><span data-lang="en">10 units</span><span data-lang="zh">10 个单元</span></span>
+    </summary>
+    <div class="subject-group__body">
+      <div class="grid">
+        <!-- BEGIN cards:AP_Calculus -->
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_1_Limits_and_Continuity.html">
+          <div class="card__num">Unit 01</div>
+          <h3 class="card__title"><span data-lang="en">Limits and Continuity</span><span data-lang="zh">极限与连续</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_2_Differentiation_Definition_Fundamental_Properties.html">
+          <div class="card__num">Unit 02</div>
+          <h3 class="card__title"><span data-lang="en">Differentiation: Definition and Fundamental Properties</span><span data-lang="zh">微分：定义与基本性质</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_3_Composite__Implicit____Inverse_Functions.html">
+          <div class="card__num">Unit 03</div>
+          <h3 class="card__title"><span data-lang="en">Composite, Implicit, and Inverse Functions</span><span data-lang="zh">复合函数、隐函数与反函数</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_4_Contextual_Applications_of_Differentiation.html">
+          <div class="card__num">Unit 04</div>
+          <h3 class="card__title"><span data-lang="en">Contextual Applications of Differentiation</span><span data-lang="zh">微分的情境应用</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_5_Analytical_Applications_of_Differentiation.html">
+          <div class="card__num">Unit 05</div>
+          <h3 class="card__title"><span data-lang="en">Analytical Applications of Differentiation</span><span data-lang="zh">微分的分析应用</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_6_Integration_Accumulation.html">
+          <div class="card__num">Unit 06</div>
+          <h3 class="card__title"><span data-lang="en">Integration and Accumulation of Change</span><span data-lang="zh">积分与变化量的累积</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_7_Differential_Equations.html">
+          <div class="card__num">Unit 07</div>
+          <h3 class="card__title"><span data-lang="en">Differential Equations</span><span data-lang="zh">微分方程</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_8_Applications_of_Integration.html">
+          <div class="card__num">Unit 08</div>
+          <h3 class="card__title"><span data-lang="en">Applications of Integration</span><span data-lang="zh">积分的应用</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_9_Parametric_Polar_and_Vectors.html">
+          <div class="card__num">Unit 09</div>
+          <h3 class="card__title"><span data-lang="en">Parametric Equations, Polar Coordinates, and Vector-Valued Functions</span><span data-lang="zh">参数方程、极坐标与向量值函数</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Calculus/Study%20Guides/Unit_10_Sequences_and_Series.html">
+          <div class="card__num">Unit 10</div>
+          <h3 class="card__title"><span data-lang="en">Infinite Sequences and Series</span><span data-lang="zh">无穷数列与级数</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <!-- END cards:AP_Calculus -->
+      </div>
+    </div>
+  </details>
 
-  <div class="grid">
-    <!-- BEGIN cards:AP_Calculus -->
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_1_Limits_and_Continuity.html">
-      <div class="card__num">Unit 01</div>
-      <h3 class="card__title"><span data-lang="en">Limits and Continuity</span><span data-lang="zh">极限与连续</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_2_Differentiation_Definition_Fundamental_Properties.html">
-      <div class="card__num">Unit 02</div>
-      <h3 class="card__title"><span data-lang="en">Differentiation: Definition and Fundamental Properties</span><span data-lang="zh">微分：定义与基本性质</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_3_Composite__Implicit____Inverse_Functions.html">
-      <div class="card__num">Unit 03</div>
-      <h3 class="card__title"><span data-lang="en">Composite, Implicit, and Inverse Functions</span><span data-lang="zh">复合函数、隐函数与反函数</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_4_Contextual_Applications_of_Differentiation.html">
-      <div class="card__num">Unit 04</div>
-      <h3 class="card__title"><span data-lang="en">Contextual Applications of Differentiation</span><span data-lang="zh">微分的情境应用</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_5_Analytical_Applications_of_Differentiation.html">
-      <div class="card__num">Unit 05</div>
-      <h3 class="card__title"><span data-lang="en">Analytical Applications of Differentiation</span><span data-lang="zh">微分的分析应用</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_6_Integration_Accumulation.html">
-      <div class="card__num">Unit 06</div>
-      <h3 class="card__title"><span data-lang="en">Integration and Accumulation of Change</span><span data-lang="zh">积分与变化量的累积</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_7_Differential_Equations.html">
-      <div class="card__num">Unit 07</div>
-      <h3 class="card__title"><span data-lang="en">Differential Equations</span><span data-lang="zh">微分方程</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_8_Applications_of_Integration.html">
-      <div class="card__num">Unit 08</div>
-      <h3 class="card__title"><span data-lang="en">Applications of Integration</span><span data-lang="zh">积分的应用</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_9_Parametric_Polar_and_Vectors.html">
-      <div class="card__num">Unit 09</div>
-      <h3 class="card__title"><span data-lang="en">Parametric Equations, Polar Coordinates, and Vector-Valued Functions</span><span data-lang="zh">参数方程、极坐标与向量值函数</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Calculus/Study%20Guides/Unit_10_Sequences_and_Series.html">
-      <div class="card__num">Unit 10</div>
-      <h3 class="card__title"><span data-lang="en">Infinite Sequences and Series</span><span data-lang="zh">无穷数列与级数</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <!-- END cards:AP_Calculus -->
-  </div>
+  <details class="subject-group">
+    <summary class="subject-group__toggle">
+      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
+      <span class="subject-group__title">AP Physics C: Mechanics</span>
+      <span class="subject-group__count"><span data-lang="en">7 units</span><span data-lang="zh">7 个单元</span></span>
+    </summary>
+    <div class="subject-group__body">
+      <div class="grid">
+        <!-- BEGIN cards:AP_Physics -->
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_1_Kinematics.html">
+          <div class="card__num">Unit 01</div>
+          <h3 class="card__title"><span data-lang="en">Kinematics</span><span data-lang="zh">运动学</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_2_Force_and_Dynamics.html">
+          <div class="card__num">Unit 02</div>
+          <h3 class="card__title"><span data-lang="en">Force &amp; Translational Dynamics</span><span data-lang="zh">力与平动动力学</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_3_Work_Energy_Power.html">
+          <div class="card__num">Unit 03</div>
+          <h3 class="card__title"><span data-lang="en">Work, Energy, and Power</span><span data-lang="zh">功、能量与功率</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_4_Linear_Momentum.html">
+          <div class="card__num">Unit 04</div>
+          <h3 class="card__title"><span data-lang="en">Linear Momentum</span><span data-lang="zh">线动量</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_5_Torque_and_Rotational_Dynamics.html">
+          <div class="card__num">Unit 05</div>
+          <h3 class="card__title"><span data-lang="en">Torque &amp; Rotational Dynamics</span><span data-lang="zh">力矩与转动动力学</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_6_Energy_and_Momentum_of_Rotating_Systems.html">
+          <div class="card__num">Unit 06</div>
+          <h3 class="card__title"><span data-lang="en">Energy &amp; Momentum of Rotating Systems</span><span data-lang="zh">转动系统的能量与动量</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20Physics/Study%20Guides/Unit_7_Oscillations.html">
+          <div class="card__num">Unit 07</div>
+          <h3 class="card__title"><span data-lang="en">Oscillations</span><span data-lang="zh">振动</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <!-- END cards:AP_Physics -->
+      </div>
+    </div>
+  </details>
 
-  </div>
+  <details class="subject-group">
+    <summary class="subject-group__toggle">
+      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
+      <span class="subject-group__title">IB Chemistry HL</span>
+      <span class="subject-group__count"><span data-lang="en">4 units</span><span data-lang="zh">4 个单元</span></span>
+    </summary>
+    <div class="subject-group__body">
+      <div class="grid">
+        <!-- BEGIN cards:IB_Chemistry_HL -->
+        <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Structure_1_Particulate_Nature_of_Matter.html">
+          <div class="card__num">Structure 1</div>
+          <h3 class="card__title"><span data-lang="en">Models of the Particulate Nature of Matter</span><span data-lang="zh">物质粒子本性的模型</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Structure_2_Bonding_and_Structure.html">
+          <div class="card__num">Structure 2</div>
+          <h3 class="card__title"><span data-lang="en">Models of Bonding and Structure</span><span data-lang="zh">化学键与结构的模型</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Reactivity_1_What_Drives_Chemical_Reactions.html">
+          <div class="card__num">Reactivity 1</div>
+          <h3 class="card__title"><span data-lang="en">What Drives Chemical Reactions?</span><span data-lang="zh">化学反应的驱动力？</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Reactivity_2_How_Much_How_Fast_How_Far.html">
+          <div class="card__num">Reactivity 2</div>
+          <h3 class="card__title"><span data-lang="en">How Much, How Fast, How Far</span><span data-lang="zh">反应量、速率与限度</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <!-- END cards:IB_Chemistry_HL -->
+      </div>
+    </div>
+  </details>
 
-  <div class="subject-group">
-  <h2 class="section-title">AP Physics C: Mechanics</h2>
+  <details class="subject-group">
+    <summary class="subject-group__toggle">
+      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
+      <span class="subject-group__title">AP Computer Science A</span>
+      <span class="subject-group__count"><span data-lang="en">4 units</span><span data-lang="zh">4 个单元</span></span>
+    </summary>
+    <div class="subject-group__body">
+      <div class="grid">
+        <!-- BEGIN cards:AP_CSA -->
+        <a class="card" href="AP%20CSA/Study%20Guides/Unit_1_Using_Objects_and_Methods.html">
+          <div class="card__num">Unit 01</div>
+          <h3 class="card__title"><span data-lang="en">Using Objects and Methods</span><span data-lang="zh">使用对象与方法</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20CSA/Study%20Guides/Unit_2_Selection_and_Iteration.html">
+          <div class="card__num">Unit 02</div>
+          <h3 class="card__title"><span data-lang="en">Selection and Iteration</span><span data-lang="zh">选择与循环</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20CSA/Study%20Guides/Unit_3_Class_Creation.html">
+          <div class="card__num">Unit 03</div>
+          <h3 class="card__title"><span data-lang="en">Class Creation</span><span data-lang="zh">类的创建</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="AP%20CSA/Study%20Guides/Unit_4_Data_Collection.html">
+          <div class="card__num">Unit 04</div>
+          <h3 class="card__title"><span data-lang="en">Data Collections</span><span data-lang="zh">数据集合</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <!-- END cards:AP_CSA -->
+      </div>
+    </div>
+  </details>
 
-  <div class="grid">
-    <!-- BEGIN cards:AP_Physics -->
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_1_Kinematics.html">
-      <div class="card__num">Unit 01</div>
-      <h3 class="card__title"><span data-lang="en">Kinematics</span><span data-lang="zh">运动学</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_2_Force_and_Dynamics.html">
-      <div class="card__num">Unit 02</div>
-      <h3 class="card__title"><span data-lang="en">Force &amp; Translational Dynamics</span><span data-lang="zh">力与平动动力学</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_3_Work_Energy_Power.html">
-      <div class="card__num">Unit 03</div>
-      <h3 class="card__title"><span data-lang="en">Work, Energy, and Power</span><span data-lang="zh">功、能量与功率</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_4_Linear_Momentum.html">
-      <div class="card__num">Unit 04</div>
-      <h3 class="card__title"><span data-lang="en">Linear Momentum</span><span data-lang="zh">线动量</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_5_Torque_and_Rotational_Dynamics.html">
-      <div class="card__num">Unit 05</div>
-      <h3 class="card__title"><span data-lang="en">Torque &amp; Rotational Dynamics</span><span data-lang="zh">力矩与转动动力学</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_6_Energy_and_Momentum_of_Rotating_Systems.html">
-      <div class="card__num">Unit 06</div>
-      <h3 class="card__title"><span data-lang="en">Energy &amp; Momentum of Rotating Systems</span><span data-lang="zh">转动系统的能量与动量</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20Physics/Study%20Guides/Unit_7_Oscillations.html">
-      <div class="card__num">Unit 07</div>
-      <h3 class="card__title"><span data-lang="en">Oscillations</span><span data-lang="zh">振动</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <!-- END cards:AP_Physics -->
-  </div>
-
-  </div>
-
-  <div class="subject-group">
-  <h2 class="section-title">IB Chemistry HL</h2>
-
-  <div class="grid">
-    <!-- BEGIN cards:IB_Chemistry_HL -->
-    <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Structure_1_Particulate_Nature_of_Matter.html">
-      <div class="card__num">Structure 1</div>
-      <h3 class="card__title"><span data-lang="en">Models of the Particulate Nature of Matter</span><span data-lang="zh">物质粒子本性的模型</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Structure_2_Bonding_and_Structure.html">
-      <div class="card__num">Structure 2</div>
-      <h3 class="card__title"><span data-lang="en">Models of Bonding and Structure</span><span data-lang="zh">化学键与结构的模型</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Reactivity_1_What_Drives_Chemical_Reactions.html">
-      <div class="card__num">Reactivity 1</div>
-      <h3 class="card__title"><span data-lang="en">What Drives Chemical Reactions?</span><span data-lang="zh">化学反应的驱动力？</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Chemistry%20HL/Study%20Guides/Reactivity_2_How_Much_How_Fast_How_Far.html">
-      <div class="card__num">Reactivity 2</div>
-      <h3 class="card__title"><span data-lang="en">How Much, How Fast, How Far</span><span data-lang="zh">反应量、速率与限度</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <!-- END cards:IB_Chemistry_HL -->
-  </div>
-
-  </div>
-
-  <div class="subject-group">
-  <h2 class="section-title">AP Computer Science A</h2>
-
-  <div class="grid">
-    <!-- BEGIN cards:AP_CSA -->
-    <a class="card" href="AP%20CSA/Study%20Guides/Unit_1_Using_Objects_and_Methods.html">
-      <div class="card__num">Unit 01</div>
-      <h3 class="card__title"><span data-lang="en">Using Objects and Methods</span><span data-lang="zh">使用对象与方法</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20CSA/Study%20Guides/Unit_2_Selection_and_Iteration.html">
-      <div class="card__num">Unit 02</div>
-      <h3 class="card__title"><span data-lang="en">Selection and Iteration</span><span data-lang="zh">选择与循环</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20CSA/Study%20Guides/Unit_3_Class_Creation.html">
-      <div class="card__num">Unit 03</div>
-      <h3 class="card__title"><span data-lang="en">Class Creation</span><span data-lang="zh">类的创建</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="AP%20CSA/Study%20Guides/Unit_4_Data_Collection.html">
-      <div class="card__num">Unit 04</div>
-      <h3 class="card__title"><span data-lang="en">Data Collections</span><span data-lang="zh">数据集合</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <!-- END cards:AP_CSA -->
-  </div>
-
-  </div>
-
-  <div class="subject-group">
-  <h2 class="section-title">IB Math AA HL</h2>
-
-  <div class="grid">
-    <!-- BEGIN cards:IB_Math_HL -->
-    <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A1_Sequences_and_Series.html">
-      <div class="card__num">Unit A1</div>
-      <h3 class="card__title"><span data-lang="en">Sequences &amp; Series</span><span data-lang="zh">数列与级数</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A3_Combinatorics.html">
-      <div class="card__num">Unit A3</div>
-      <h3 class="card__title"><span data-lang="en">Combinatorics</span><span data-lang="zh">组合学</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A4_Complex_Numbers.html">
-      <div class="card__num">Unit A4</div>
-      <h3 class="card__title"><span data-lang="en">Complex Numbers</span><span data-lang="zh">复数</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_C_Geometry.html">
-      <div class="card__num">Unit C</div>
-      <h3 class="card__title"><span data-lang="en">Geometry</span><span data-lang="zh">几何</span></h3>
-      <span class="card__arrow"><span data-lang="en">Open guide →</span><span data-lang="zh">打开指南 →</span></span>
-    </a>
-    <!-- END cards:IB_Math_HL -->
-  </div>
-  </div>
+  <details class="subject-group">
+    <summary class="subject-group__toggle">
+      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
+      <span class="subject-group__title">IB Math AA HL</span>
+      <span class="subject-group__count"><span data-lang="en">4 units</span><span data-lang="zh">4 个单元</span></span>
+    </summary>
+    <div class="subject-group__body">
+      <div class="grid">
+        <!-- BEGIN cards:IB_Math_HL -->
+        <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A1_Sequences_and_Series.html">
+          <div class="card__num">Unit A1</div>
+          <h3 class="card__title"><span data-lang="en">Sequences &amp; Series</span><span data-lang="zh">数列与级数</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A3_Combinatorics.html">
+          <div class="card__num">Unit A3</div>
+          <h3 class="card__title"><span data-lang="en">Combinatorics</span><span data-lang="zh">组合学</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_A4_Complex_Numbers.html">
+          <div class="card__num">Unit A4</div>
+          <h3 class="card__title"><span data-lang="en">Complex Numbers</span><span data-lang="zh">复数</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <a class="card" href="IB%20Math%20HL/Study%20Guides/Unit_C_Geometry.html">
+          <div class="card__num">Unit C</div>
+          <h3 class="card__title"><span data-lang="en">Geometry</span><span data-lang="zh">几何</span></h3>
+          <span class="card__arrow"><span data-lang="en">Open guide &rarr;</span><span data-lang="zh">打开指南 &rarr;</span></span>
+        </a>
+        <!-- END cards:IB_Math_HL -->
+      </div>
+    </div>
+  </details>
   </section>
 
   <section class="tier tier-3" id="tier-3">
     <header class="tier__head">
       <span class="tier__num">Tier 03</span>
       <h2 class="tier__title"><span data-lang="en">University Level Courses</span><span data-lang="zh">大学水平课程</span></h2>
-      <p class="tier__sub"><span data-lang="en">Calculus III, Linear Algebra, intro physics &amp; more — the next tier of the library, designed to extend straight past AP/IB into first- and second-year university material.</span><span data-lang="zh">微积分 III、线性代数、大学物理入门等——课程库的下一层级，从 AP/IB 直接延伸至大学一、二年级内容。</span></p>
+      <p class="tier__sub"><span data-lang="en">Calculus III, Linear Algebra, introductory physics, and additional first and second year university subjects. This tier extends the library beyond AP and IB into university level material.</span><span data-lang="zh">微积分 III、线性代数、大学物理入门，以及更多大学一、二年级课程。此层级将课程库从 AP 与 IB 延伸至大学水平。</span></p>
     </header>
     <div class="tier__empty">
-      <div class="tier__empty-eyebrow"><span data-lang="en">On the roadmap</span><span data-lang="zh">规划中</span></div>
-      <p class="tier__empty-title"><span data-lang="en">Reserved for university-level study guides</span><span data-lang="zh">为大学水平学习指南预留</span></p>
-      <p class="tier__empty-body"><span data-lang="en">This slot is held for upcoming releases. As university units ship, they'll appear here alongside the AP/IB library above.</span><span data-lang="zh">此处为即将发布的大学课程预留位置。大学单元上线后将显示在此处，与上方 AP/IB 课程库并列。</span></p>
+      <div class="tier__empty-eyebrow"><span data-lang="en">Forthcoming Releases</span><span data-lang="zh">即将发布</span></div>
+      <p class="tier__empty-title"><span data-lang="en">University Level Study Guides In Development</span><span data-lang="zh">大学水平学习指南正在开发中</span></p>
+      <p class="tier__empty-body"><span data-lang="en">Forthcoming university units will be published here alongside the AP and IB study guides as they are released.</span><span data-lang="zh">即将发布的大学单元将与上方 AP 与 IB 学习指南并列展示。</span></p>
     </div>
   </section>
 
@@ -616,7 +692,6 @@ footer {
 </div>
 
 <script>
-// ─── LANGUAGE (default English; toggle persists only within the page) ───
 function toggleLang() {
   document.body.classList.toggle('lang-zh');
 }
