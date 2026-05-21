@@ -39,7 +39,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -603,6 +603,9 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .argand-figure .arc { stroke: var(--accent); stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
 .argand-figure .unit-circle { stroke: var(--text-secondary); stroke-width: 1; fill: none; stroke-dasharray: 3 3; opacity: 0.5; }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -614,27 +617,28 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-a4-1">A4.1 Cartesian Form</a>
-  <a href="#s-a4-2">A4.2 Argand Diagram &amp; Polar Form</a>
-  <a href="#s-a4-3">A4.3 Euler Form &amp; Multiplication</a>
-  <a href="#s-a4-4">A4.4 De Moivre's Theorem</a>
-  <a href="#s-a4-5">A4.5 Roots of Complex Numbers</a>
-  <a href="#s-a4-6">A4.6 Polynomials over ℂ</a>
-  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">使用指南</span></a>
+  <a href="#s-a4-1"><span data-lang="en">A4.1 Cartesian Form</span><span data-lang="zh">A4.1 笛卡尔形式</span></a>
+  <a href="#s-a4-2"><span data-lang="en">A4.2 Argand Diagram &amp; Polar Form</span><span data-lang="zh">A4.2 阿尔冈图与极坐标形式</span></a>
+  <a href="#s-a4-3"><span data-lang="en">A4.3 Euler Form &amp; Multiplication</span><span data-lang="zh">A4.3 欧拉形式与乘法</span></a>
+  <a href="#s-a4-4"><span data-lang="en">A4.4 De Moivre's Theorem</span><span data-lang="zh">A4.4 棣莫弗定理</span></a>
+  <a href="#s-a4-5"><span data-lang="en">A4.5 Roots of Complex Numbers</span><span data-lang="zh">A4.5 复数的根</span></a>
+  <a href="#s-a4-6"><span data-lang="en">A4.6 Polynomials over ℂ</span><span data-lang="zh">A4.6 复数域上的多项式</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy &amp; Pitfalls</span><span data-lang="zh">考试策略与陷阱</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
@@ -642,50 +646,52 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">IB Mathematics: Analysis &amp; Approaches HL · 鼎睿学苑</div>
-  <h1>Unit A4: Complex<br>Numbers</h1>
+  <h1><span data-lang="en">Unit A4: Complex<br>Numbers</span><span data-lang="zh">单元 A4：复数</span></h1>
   <p class="hero-sub">
-    The fourth sub-unit of Topic 1 (Number &amp; Algebra). Master Cartesian, polar, and Euler forms; De Moivre's theorem; nth roots and roots of unity; and the conjugate root theorem for real polynomials. HL-heavy: most of this unit does not appear on the SL syllabus.
+    <span data-lang="en">The fourth sub-unit of Topic 1 (Number &amp; Algebra). Master Cartesian, polar, and Euler forms; De Moivre's theorem; nth roots and roots of unity; and the conjugate root theorem for real polynomials. HL-heavy: most of this unit does not appear on the SL syllabus.</span><span data-lang="zh">Topic 1（数与代数）的第四个子单元。掌握笛卡尔形式（<code>Cartesian form</code>）、极坐标形式（<code>polar form</code>）与欧拉形式（<code>Euler form</code>）；棣莫弗定理（<code>De Moivre's theorem</code>）；n 次根与单位根（<code>roots of unity</code>）；以及实系数多项式的共轭根定理（<code>conjugate root theorem</code>）。本单元偏 HL：绝大部分内容不在 SL 大纲中。</span>
   </p>
   <div class="hero-meta">
     <span class="chip chip-maroon">IB AA HL · Topic 1.12–1.14</span>
-    <span class="chip chip-green">Papers 1 · 2</span>
-    <span class="chip chip-purple">6 Concepts</span>
-    <span class="chip chip-gold">HL-only</span>
+    <span class="chip chip-green"><span data-lang="en">Papers 1 · 2</span><span data-lang="zh">Paper 1 · 2</span></span>
+    <span class="chip chip-purple"><span data-lang="en">6 Concepts</span><span data-lang="zh">6 个核心概念</span></span>
+    <span class="chip chip-gold"><span data-lang="en">HL-only</span><span data-lang="zh">仅 HL</span></span>
   </div>
 </section>
 
 <!-- ═══════════════ HOW TO USE ═══════════════ -->
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">本指南使用说明</span></h2>
 
-  <p>This guide is built to serve <strong>two students at once</strong>:</p>
+  <p><span data-lang="en">This guide is built to serve <strong>two students at once</strong>:</span><span data-lang="zh">本指南同时为<strong>两类学生</strong>设计：</span></p>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-orange">!</div>
-        <div class="card-title">If you're cramming</div>
+        <div class="card-title"><span data-lang="en">If you're cramming</span><span data-lang="zh">如果你在临阵磨枪</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 35-minute pass.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. Skim one worked example per section. Skip the <code>▸</code> expandable details. Take the practice quiz. That's a 35-minute pass.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">只看每节顶端的金色虚线 <strong>"Cram-Mode Cheat"</strong> 速记框和公式框（<code>formula box</code>）。每节挑一道 worked example（例题）扫一眼，跳过 <code>▸</code> 折叠的"深入"部分，做一次练习测验。约 35 分钟过完一遍。</p>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">★</div>
-        <div class="card-title">If you're going for a 7</div>
+        <div class="card-title"><span data-lang="en">If you're going for a 7</span><span data-lang="zh">如果你目标是 7 分</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where the De Moivre induction proof, the convergence of roots-of-unity sums, and the fundamental theorem of algebra context live. Re-do the quiz with no hints. Owning the geometry of multiplication in the Argand plane is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Read straight through. Open every <code>▸ Going deeper</code> details block — that's where the De Moivre induction proof, the convergence of roots-of-unity sums, and the fundamental theorem of algebra context live. Re-do the quiz with no hints. Owning the geometry of multiplication in the Argand plane is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">逐字读完。把每个 <code>▸ Going deeper</code>（深入）折叠块都打开——棣莫弗定理（<code>De Moivre's theorem</code>）的归纳法证明、单位根求和的收敛、以及代数基本定理（<code>fundamental theorem of algebra</code>）的背景都在那里。再做一次测验，不看提示。真正吃透阿尔冈平面（<code>Argand diagram</code>）上"乘法 = 旋转 + 缩放"的几何意义，就是 5 分与 7 分的分水岭。</p>
     </div>
   </div>
 
   <div class="concept-box purple">
     <strong style="color: var(--purple);">HL flag</strong>
-    The entire unit is <span class="hl-flag">HL</span> on the AA syllabus — SL students do not see complex numbers at all. Inside the unit, callouts flagged <span class="hl-flag">HL+</span> highlight especially deep material (multiple-angle derivations from De Moivre, the fundamental theorem of algebra) that is unlikely on Paper 1 but routine on Paper 2 / Paper 3.
+    <span data-lang="en">The entire unit is <span class="hl-flag">HL</span> on the AA syllabus — SL students do not see complex numbers at all. Inside the unit, callouts flagged <span class="hl-flag">HL+</span> highlight especially deep material (multiple-angle derivations from De Moivre, the fundamental theorem of algebra) that is unlikely on Paper 1 but routine on Paper 2 / Paper 3.</span><span data-lang="zh">整个单元在 AA 大纲中都是 <span class="hl-flag">HL</span>——SL 学生完全不接触复数（<code>complex number</code>）。单元内标有 <span class="hl-flag">HL+</span> 的提示框表示更深层的内容（由棣莫弗定理推导的多倍角公式、代数基本定理），它们在 Paper 1 上较少出现，但在 Paper 2 / Paper 3 上很常见。</span>
   </div>
 
   <div class="concept-box orange">
     <strong style="color: var(--orange);">Paper note — calculator vs. no-calc</strong>
-    Paper 1 (no-calc) tests <em>exact-value</em> manipulations: division by conjugate, polar form with "nice" arguments ($\pi/6, \pi/4, \pi/3, \pi/2$), De Moivre on small integer exponents. Paper 2 (calc) lets you use the GDC's complex mode — but you still need to set up the problem in the right form. Always double-check the GDC argument convention (most return values in $(-\pi, \pi]$).
+    <span data-lang="en">Paper 1 (no-calc) tests <em>exact-value</em> manipulations: division by conjugate, polar form with "nice" arguments ($\pi/6, \pi/4, \pi/3, \pi/2$), De Moivre on small integer exponents. Paper 2 (calc) lets you use the GDC's complex mode — but you still need to set up the problem in the right form. Always double-check the GDC argument convention (most return values in $(-\pi, \pi]$).</span><span data-lang="zh">Paper 1（不可用计算器）考<em>精确值</em>的操作：用共轭（<code>conjugate</code>）做除法、"漂亮"辐角（$\pi/6, \pi/4, \pi/3, \pi/2$）下的极坐标形式、小整数指数下的棣莫弗定理。Paper 2（可用计算器）允许使用 GDC 的复数模式，但你仍要把题目以正确的形式列出来。永远要核对 GDC 的辐角约定（大多返回 $(-\pi, \pi]$ 内的值）。</span>
   </div>
 </section>
 
@@ -693,41 +699,60 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <!-- ═══════════════ A4.1 CARTESIAN FORM ═══════════════ -->
 <section class="section" id="s-a4-1">
-  <div class="section-label">Topic A4.1 · Definitions &amp; arithmetic</div>
-  <h2>Cartesian Form</h2>
+  <div class="section-label"><span data-lang="en">Topic A4.1 · Definitions &amp; arithmetic</span><span data-lang="zh">Topic A4.1 · 定义与运算</span></div>
+  <h2><span data-lang="en">Cartesian Form</span><span data-lang="zh">笛卡尔形式</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Define $i$ by $i^2 = -1$.</strong> Every complex number has a unique <em>Cartesian form</em> $z = a + bi$ with $a, b \in \mathbb{R}$. Add componentwise, multiply by FOIL using $i^2 = -1$, and divide by multiplying top and bottom by the <em>conjugate</em> $\bar{z} = a - bi$. The key identity is
     $$ z\bar{z} = a^2 + b^2 = |z|^2. $$
     That single fact lets you rationalize any denominator in one step.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>用 $i^2 = -1$ 定义虚数单位（<code>imaginary unit</code>）$i$。</strong>每个复数（<code>complex number</code>）都有唯一的<em>笛卡尔形式</em>（<code>Cartesian form</code>）$z = a + bi$，其中 $a, b \in \mathbb{R}$。加法按分量相加，乘法用 FOIL 展开后把 $i^2 = -1$ 收掉；除法则把分子分母同乘共轭（<code>conjugate</code>）$\bar{z} = a - bi$。关键恒等式是
+    $$ z\bar{z} = a^2 + b^2 = |z|^2. $$
+    凭这一条就能一步有理化任何分母。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Definition</strong>
     The <strong>imaginary unit</strong> is the symbol $i$ satisfying $i^2 = -1$. A <strong>complex number</strong> is an expression $z = a + bi$ where $a, b \in \mathbb{R}$. We call $a = \operatorname{Re}(z)$ the <em>real part</em> and $b = \operatorname{Im}(z)$ the <em>imaginary part</em> (note: $\operatorname{Im}(z)$ is a real number — the coefficient of $i$, not $bi$).
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">定义</strong>
+    <strong>虚数单位</strong>（<code>imaginary unit</code>）是满足 $i^2 = -1$ 的符号 $i$。<strong>复数</strong>（<code>complex number</code>）是形如 $z = a + bi$ 的表达式，其中 $a, b \in \mathbb{R}$。称 $a = \operatorname{Re}(z)$ 为<em>实部</em>，$b = \operatorname{Im}(z)$ 为<em>虚部</em>（注意：$\operatorname{Im}(z)$ 本身是一个实数——即 $i$ 的系数，而不是 $bi$）。
+  </div>
 
-  <h3>Equality and arithmetic</h3>
+  <h3><span data-lang="en">Equality and arithmetic</span><span data-lang="zh">相等与四则运算</span></h3>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Three rules</strong>
     <strong>(1) Equality.</strong> $a + bi = c + di \iff a = c \text{ and } b = d$. Two complex equations become two real equations.<br>
     <strong>(2) Addition.</strong> $(a + bi) + (c + di) = (a + c) + (b + d)i$ — componentwise.<br>
     <strong>(3) Multiplication.</strong> $(a + bi)(c + di) = (ac - bd) + (ad + bc)i$ — FOIL, then collapse $i^2 = -1$.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">三条规则</strong>
+    <strong>（1）相等。</strong>$a + bi = c + di \iff a = c \text{ 且 } b = d$。一个复数方程拆成两个实方程。<br>
+    <strong>（2）加法。</strong>$(a + bi) + (c + di) = (a + c) + (b + d)i$——按分量相加。<br>
+    <strong>（3）乘法。</strong>$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$——FOIL 展开后把 $i^2 = -1$ 收掉。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Conjugate &amp; Modulus</div>
+    <div class="formula-label"><span data-lang="en">Conjugate &amp; Modulus</span><span data-lang="zh">共轭与模</span></div>
     $$ \bar{z} = a - bi, \qquad |z| = \sqrt{a^2 + b^2}, \qquad z\bar{z} = |z|^2. $$
   </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Why "multiply by the conjugate" works</strong>
     Multiplying numerator and denominator of $\dfrac{a + bi}{c + di}$ by $c - di$ turns the denominator into $(c + di)(c - di) = c^2 + d^2$ — a real number — so the result lands in Cartesian form. This is the complex analogue of rationalizing $\dfrac{1}{\sqrt{2} + 1}$ by multiplying by $\sqrt{2} - 1$.
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">为什么"乘以共轭"奏效</strong>
+    把 $\dfrac{a + bi}{c + di}$ 的分子分母同乘 $c - di$，分母变成 $(c + di)(c - di) = c^2 + d^2$——一个实数——所以结果落回笛卡尔形式（<code>Cartesian form</code>）。这是 $\dfrac{1}{\sqrt{2} + 1}$ 用 $\sqrt{2} - 1$ 有理化在复数下的对应。
+  </div>
 
-  <h3>Worked Example — Arithmetic in Cartesian form</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Arithmetic in Cartesian form</span><span data-lang="zh">例题——笛卡尔形式下的运算</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Let $z_1 = 3 + 2i$ and $z_2 = 1 - 4i$. Compute (a) $z_1 + z_2$, (b) $z_1 z_2$, (c) $\dfrac{z_1}{z_2}$, (d) $|z_1|$.</p>
     <p><strong>(a) Sum.</strong> $z_1 + z_2 = (3 + 1) + (2 - 4)i = 4 - 2i$.</p>
     <p><strong>(b) Product.</strong></p>
@@ -736,29 +761,53 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
     $$ \frac{z_1}{z_2} = \frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \frac{3 + 12i + 2i + 8i^2}{1 + 16} = \frac{-5 + 14i}{17} = -\tfrac{5}{17} + \tfrac{14}{17} i. $$
     <p><strong>(d) Modulus.</strong> $|z_1| = \sqrt{3^2 + 2^2} = \sqrt{13}$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>设 $z_1 = 3 + 2i$，$z_2 = 1 - 4i$。计算 (a) $z_1 + z_2$，(b) $z_1 z_2$，(c) $\dfrac{z_1}{z_2}$，(d) $|z_1|$。</p>
+    <p><strong>(a) 和。</strong>$z_1 + z_2 = (3 + 1) + (2 - 4)i = 4 - 2i$。</p>
+    <p><strong>(b) 积。</strong></p>
+    $$ z_1 z_2 = (3 + 2i)(1 - 4i) = 3 - 12i + 2i - 8i^2 = 3 - 10i + 8 = 11 - 10i. $$
+    <p><strong>(c) 商。</strong>分子分母同乘 $\bar{z}_2 = 1 + 4i$：</p>
+    $$ \frac{z_1}{z_2} = \frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \frac{3 + 12i + 2i + 8i^2}{1 + 16} = \frac{-5 + 14i}{17} = -\tfrac{5}{17} + \tfrac{14}{17} i. $$
+    <p><strong>(d) 模（<code>modulus</code>）。</strong>$|z_1| = \sqrt{3^2 + 2^2} = \sqrt{13}$。</p>
+  </div>
 
-  <h3>Conjugate identities</h3>
+  <h3><span data-lang="en">Conjugate identities</span><span data-lang="zh">共轭恒等式</span></h3>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">The five must-know conjugate rules</strong>
     For any $z, w \in \mathbb{C}$:
     $$ \overline{z + w} = \bar{z} + \bar{w}, \qquad \overline{zw} = \bar{z}\bar{w}, \qquad \overline{\bar{z}} = z. $$
     $$ z + \bar{z} = 2\operatorname{Re}(z), \qquad z - \bar{z} = 2i\operatorname{Im}(z). $$
     The first two say "conjugation respects $+$ and $\times$" — so for any real polynomial $p$, $\overline{p(z)} = p(\bar z)$. That's the engine of the conjugate root theorem in §A4.6.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">五条必背的共轭规则</strong>
+    对任意 $z, w \in \mathbb{C}$：
+    $$ \overline{z + w} = \bar{z} + \bar{w}, \qquad \overline{zw} = \bar{z}\bar{w}, \qquad \overline{\bar{z}} = z. $$
+    $$ z + \bar{z} = 2\operatorname{Re}(z), \qquad z - \bar{z} = 2i\operatorname{Im}(z). $$
+    前两条说"共轭（<code>conjugate</code>）保持 $+$ 与 $\times$"——所以对任何实系数多项式 $p$，都有 $\overline{p(z)} = p(\bar z)$。这正是 §A4.6 中共轭根定理（<code>conjugate root theorem</code>）的发动机。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Why "$\mathbb{C}$ is a field" matters</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why "$\mathbb{C}$ is a field" matters</span><span data-lang="zh">▸ 深入——"$\mathbb{C}$ 是一个域"为什么重要</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>The point of insisting that <em>every</em> non-zero complex number has a multiplicative inverse is that $\mathbb{C}$ is closed under division: every quotient lives in $\mathbb{C}$ again. The formula is</p>
 $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
 <p>This guarantees that all the algebra you know — polynomial long division, partial fractions, factoring — works over $\mathbb{C}$ exactly as it does over $\mathbb{R}$. The bonus is that $\mathbb{C}$ is also <em>algebraically closed</em> (every non-constant polynomial has a root) — that's the fundamental theorem of algebra. We'll see one consequence in §A4.6: a real polynomial of degree $n$ has exactly $n$ roots when complex roots are allowed.</p>
 <p>One thing $\mathbb{C}$ <em>loses</em> compared to $\mathbb{R}$: there is no consistent ordering "$z &lt; w$" that respects arithmetic. So inequalities only ever apply to real quantities — modulus, real part, imaginary part — not to complex numbers themselves.</p>
+</div>
+<div data-lang="zh">
+<p>之所以坚持<em>每个</em>非零复数都有乘法逆元，是因为 $\mathbb{C}$ 对除法封闭：任何商仍属于 $\mathbb{C}$。具体公式是</p>
+$$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
+<p>这保证了你熟悉的所有代数——多项式长除法、部分分式、因式分解——在 $\mathbb{C}$ 上的运作方式与 $\mathbb{R}$ 上完全一致。额外的好处是 $\mathbb{C}$ 还是<em>代数封闭的</em>（任何非常数多项式都有根）——这就是代数基本定理（<code>fundamental theorem of algebra</code>）。§A4.6 中会看到一个推论：$n$ 次实系数多项式在允许复根时恰好有 $n$ 个根。</p>
+<p>$\mathbb{C}$ 相对于 $\mathbb{R}$ 也<em>失去</em>了一样东西：不存在与算术兼容的统一序"$z &lt; w$"。所以不等式只能用于实量——模、实部、虚部——而不能用于复数本身。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Solving $z^2 = w$ in Cartesian form</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Solving $z^2 = w$ in Cartesian form</span><span data-lang="zh">例题——在笛卡尔形式下解 $z^2 = w$</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find all $z \in \mathbb{C}$ such that $z^2 = 3 + 4i$.</p>
     <p><strong>Set up.</strong> Let $z = a + bi$. Then $z^2 = (a^2 - b^2) + 2abi$. Equate real and imaginary parts:</p>
     $$ a^2 - b^2 = 3, \qquad 2ab = 4 \;\Rightarrow\; ab = 2. $$
@@ -767,21 +816,32 @@ $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
     <p>Real solutions: $a^2 = 4$, so $a = \pm 2$. Then $b = 2/a$, giving $z = 2 + i$ or $z = -2 - i$.</p>
     <p><strong>Check.</strong> $(2 + i)^2 = 4 + 4i + i^2 = 3 + 4i$ ✓. Polar form (next section) gives the same answer in one line.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求所有满足 $z^2 = 3 + 4i$ 的 $z \in \mathbb{C}$。</p>
+    <p><strong>设元。</strong>设 $z = a + bi$。则 $z^2 = (a^2 - b^2) + 2abi$。让实部、虚部分别相等：</p>
+    $$ a^2 - b^2 = 3, \qquad 2ab = 4 \;\Rightarrow\; ab = 2. $$
+    <p><strong>求解。</strong>由 $ab = 2$ 得 $b = 2/a$。代入：</p>
+    $$ a^2 - \tfrac{4}{a^2} = 3 \;\Rightarrow\; a^4 - 3a^2 - 4 = 0 \;\Rightarrow\; (a^2 - 4)(a^2 + 1) = 0. $$
+    <p>实数解：$a^2 = 4$，所以 $a = \pm 2$，再由 $b = 2/a$ 得 $z = 2 + i$ 或 $z = -2 - i$。</p>
+    <p><strong>验证。</strong>$(2 + i)^2 = 4 + 4i + i^2 = 3 + 4i$ ✓。下一节的极坐标形式一行就能给出同样答案。</p>
+  </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">$\dfrac{2 + 3i}{1 - i}$ in the form $a + bi$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">$\dfrac{2 + 3i}{1 - i}$ in the form $a + bi$ equals:</span><span data-lang="zh">$\dfrac{2 + 3i}{1 - i}$ 写成 $a + bi$ 形式等于：</span></div>
       <span class="quiz-number">A4.1</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$-\tfrac{1}{2} + \tfrac{5}{2} i$</div>
       <div class="quiz-opt" data-idx="1">$\tfrac{1}{2} + \tfrac{5}{2} i$</div>
-      <div class="quiz-opt" data-idx="2">$-\tfrac{1}{2} + \tfrac{5}{2} i$ (after multiplying by $\bar{z}_2$)</div>
+      <div class="quiz-opt" data-idx="2">$-\tfrac{1}{2} + \tfrac{5}{2} i$ <span data-lang="en">(after multiplying by $\bar{z}_2$)</span><span data-lang="zh">（乘以 $\bar{z}_2$ 之后）</span></div>
       <div class="quiz-opt" data-idx="3">$2 + 3i$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Multiply top and bottom by $1 + i$: numerator $= (2+3i)(1+i) = 2+2i+3i+3i^2 = -1 + 5i$, denominator $= 1^2 + 1^2 = 2$. So the result is $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
-    <div class="quiz-explain wrong-exp">Multiply top and bottom by the conjugate $1 + i$: $(2+3i)(1+i) = -1 + 5i$, denominator $= 2$. Answer: $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Multiply top and bottom by $1 + i$: numerator $= (2+3i)(1+i) = 2+2i+3i+3i^2 = -1 + 5i$, denominator $= 1^2 + 1^2 = 2$. So the result is $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！分子分母同乘 $1 + i$：分子 $= (2+3i)(1+i) = 2+2i+3i+3i^2 = -1 + 5i$，分母 $= 1^2 + 1^2 = 2$。所以结果是 $-\tfrac{1}{2} + \tfrac{5}{2}i$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Multiply top and bottom by the conjugate $1 + i$: $(2+3i)(1+i) = -1 + 5i$, denominator $= 2$. Answer: $-\tfrac{1}{2} + \tfrac{5}{2}i$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">分子分母同乘共轭 $1 + i$：$(2+3i)(1+i) = -1 + 5i$，分母 $= 2$。答案：$-\tfrac{1}{2} + \tfrac{5}{2}i$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -789,18 +849,27 @@ $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
 
 <!-- ═══════════════ A4.2 ARGAND & POLAR ═══════════════ -->
 <section class="section" id="s-a4-2">
-  <div class="section-label">Topic A4.2 · Geometric view</div>
-  <h2>Argand Diagram &amp; Polar Form</h2>
+  <div class="section-label"><span data-lang="en">Topic A4.2 · Geometric view</span><span data-lang="zh">Topic A4.2 · 几何观点</span></div>
+  <h2><span data-lang="en">Argand Diagram &amp; Polar Form</span><span data-lang="zh">阿尔冈图与极坐标形式</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Plot $z = a + bi$ at the point $(a, b)$ in the plane.</strong> Then $|z|$ is the distance from the origin and $\arg(z) = \theta$ is the angle from the positive real axis, measured counter-clockwise. The <em>polar (modulus-argument) form</em> is
     $$ z = r(\cos\theta + i\sin\theta) = r\operatorname{cis}\theta, \qquad r = |z|,\; \theta = \arg(z). $$
     Conversions: $a = r\cos\theta$, $b = r\sin\theta$, $r = \sqrt{a^2 + b^2}$, $\tan\theta = b/a$ <em>with quadrant care</em>.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>把 $z = a + bi$ 画在平面上点 $(a, b)$ 处。</strong>则 $|z|$ 是到原点的距离，$\arg(z) = \theta$ 是从正实轴起逆时针测量的角度。<em>极坐标（模-辐角）形式</em>（<code>polar form</code> / <code>modulus-argument form</code>）为
+    $$ z = r(\cos\theta + i\sin\theta) = r\operatorname{cis}\theta, \qquad r = |z|,\; \theta = \arg(z). $$
+    互换公式：$a = r\cos\theta$，$b = r\sin\theta$，$r = \sqrt{a^2 + b^2}$，$\tan\theta = b/a$（<em>必须留意象限</em>）。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">The Argand diagram</strong>
     The complex plane has the real axis horizontal and the imaginary axis vertical. The number $z = a + bi$ corresponds to the point $(a, b)$ — equivalently, the position vector $\binom{a}{b}$. Addition of complex numbers is then vector addition: $(z_1 + z_2)$ is the tip of the parallelogram built from $z_1$ and $z_2$. Multiplication is <em>not</em> coordinate-wise — its geometric meaning (rotation + scaling) is unlocked by polar form.
+  </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">阿尔冈图</strong>
+    复平面以实轴为水平轴、虚轴为垂直轴。复数 $z = a + bi$ 对应点 $(a, b)$——也即位置向量 $\binom{a}{b}$。这样复数的加法就是向量加法：$(z_1 + z_2)$ 在以 $z_1$、$z_2$ 为邻边的平行四边形的顶端。乘法<em>不是</em>按分量相乘——其几何意义（旋转 + 缩放）要靠极坐标形式（<code>polar form</code>）才能看清。
   </div>
 
   <div class="argand-figure">
@@ -827,16 +896,16 @@ $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
       <text x="225" y="125" class="lbl-accent">θ</text>
       <text x="220" y="95" class="lbl-accent">r</text>
     </svg>
-    <div class="argand-caption">Fig 1 — Argand diagram: $z = a + bi$ at $(a, b)$, modulus $r$, argument $\theta$.</div>
+    <div class="argand-caption"><span data-lang="en">Fig 1 — Argand diagram: $z = a + bi$ at $(a, b)$, modulus $r$, argument $\theta$.</span><span data-lang="zh">图 1——阿尔冈图（<code>Argand diagram</code>）：$z = a + bi$ 位于 $(a, b)$，模为 $r$，辐角为 $\theta$。</span></div>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Polar form</div>
+    <div class="formula-label"><span data-lang="en">Polar form</span><span data-lang="zh">极坐标形式</span></div>
     $$ z = r\bigl(\cos\theta + i\sin\theta\bigr) = r\operatorname{cis}\theta $$
     $$ r = \sqrt{a^2 + b^2}, \qquad \cos\theta = \tfrac{a}{r}, \qquad \sin\theta = \tfrac{b}{r}. $$
   </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Argument — beware the quadrant</strong>
     The principal argument $\arg(z)$ is conventionally in $(-\pi, \pi]$ (the IB convention; some books use $[0, 2\pi)$). The shortcut $\theta = \arctan(b/a)$ <strong>only</strong> works in quadrants I and IV (where $a &gt; 0$). For quadrants II and III, add or subtract $\pi$:
     <div class="table-wrap" style="margin-top: 10px;">
@@ -851,9 +920,24 @@ $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
       </table>
     </div>
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">辐角——小心象限</strong>
+    主辐角（<code>principal argument</code>）$\arg(z)$ 通常取在 $(-\pi, \pi]$（IB 约定；有些书用 $[0, 2\pi)$）。捷径 $\theta = \arctan(b/a)$ <strong>只</strong>在第 I、IV 象限（$a &gt; 0$）成立。在第 II、III 象限要加或减 $\pi$：
+    <div class="table-wrap" style="margin-top: 10px;">
+      <table>
+        <thead><tr><th>象限</th><th>$a, b$ 的符号</th><th>$\arg(z)$</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>$a &gt; 0, b \ge 0$</td><td>$\arctan(b/a) \in [0, \pi/2)$</td></tr>
+          <tr><td>II</td><td>$a &lt; 0, b &gt; 0$</td><td>$\arctan(b/a) + \pi \in (\pi/2, \pi)$</td></tr>
+          <tr><td>III</td><td>$a &lt; 0, b &lt; 0$</td><td>$\arctan(b/a) - \pi \in (-\pi, -\pi/2)$</td></tr>
+          <tr><td>IV</td><td>$a &gt; 0, b &lt; 0$</td><td>$\arctan(b/a) \in (-\pi/2, 0)$</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-  <h3>Worked Example — Cartesian to polar</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Cartesian to polar</span><span data-lang="zh">例题——笛卡尔形式转极坐标形式</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Express $z = -1 + i\sqrt{3}$ in polar form with $\theta \in (-\pi, \pi]$.</p>
     <p><strong>Modulus.</strong> $|z| = \sqrt{(-1)^2 + (\sqrt 3)^2} = \sqrt{1 + 3} = 2$.</p>
     <p><strong>Argument.</strong> $a = -1 &lt; 0$, $b = \sqrt{3} &gt; 0$ — quadrant II. Reference angle $\arctan(\sqrt{3}/1) = \pi/3$, so</p>
@@ -861,25 +945,44 @@ $$ \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2}, \qquad (a, b) \ne (0, 0). $$
     <p><strong>Polar form.</strong> $z = 2\bigl(\cos\tfrac{2\pi}{3} + i\sin\tfrac{2\pi}{3}\bigr) = 2\operatorname{cis}\tfrac{2\pi}{3}$.</p>
     <p><strong>Sanity check.</strong> $2\cos(2\pi/3) = 2(-\tfrac{1}{2}) = -1$ ✓, $2\sin(2\pi/3) = 2(\tfrac{\sqrt 3}{2}) = \sqrt 3$ ✓.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>将 $z = -1 + i\sqrt{3}$ 写成极坐标形式，$\theta \in (-\pi, \pi]$。</p>
+    <p><strong>模。</strong>$|z| = \sqrt{(-1)^2 + (\sqrt 3)^2} = \sqrt{1 + 3} = 2$。</p>
+    <p><strong>辐角。</strong>$a = -1 &lt; 0$，$b = \sqrt{3} &gt; 0$——第 II 象限。参考角 $\arctan(\sqrt{3}/1) = \pi/3$，所以</p>
+    $$ \theta = \pi - \pi/3 = \tfrac{2\pi}{3}. $$
+    <p><strong>极坐标形式。</strong>$z = 2\bigl(\cos\tfrac{2\pi}{3} + i\sin\tfrac{2\pi}{3}\bigr) = 2\operatorname{cis}\tfrac{2\pi}{3}$。</p>
+    <p><strong>验证。</strong>$2\cos(2\pi/3) = 2(-\tfrac{1}{2}) = -1$ ✓，$2\sin(2\pi/3) = 2(\tfrac{\sqrt 3}{2}) = \sqrt 3$ ✓。</p>
+  </div>
 
-  <h3>Worked Example — Polar to Cartesian</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Polar to Cartesian</span><span data-lang="zh">例题——极坐标形式转笛卡尔形式</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Write $z = 4\operatorname{cis}(-\tfrac{\pi}{6})$ in Cartesian form.</p>
+    $$ z = 4\cos(-\tfrac{\pi}{6}) + 4i\sin(-\tfrac{\pi}{6}) = 4 \cdot \tfrac{\sqrt 3}{2} - 4i \cdot \tfrac{1}{2} = 2\sqrt 3 - 2i. $$
+  </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>将 $z = 4\operatorname{cis}(-\tfrac{\pi}{6})$ 写成笛卡尔形式。</p>
     $$ z = 4\cos(-\tfrac{\pi}{6}) + 4i\sin(-\tfrac{\pi}{6}) = 4 \cdot \tfrac{\sqrt 3}{2} - 4i \cdot \tfrac{1}{2} = 2\sqrt 3 - 2i. $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — Why "$\tan\theta = b/a$" loses two quadrants</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why "$\tan\theta = b/a$" loses two quadrants</span><span data-lang="zh">▸ 深入——为什么"$\tan\theta = b/a$"会漏掉两个象限</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>The function $\arctan$ has range $(-\pi/2, \pi/2)$ — it can only return arguments in quadrants I and IV. But the four pairs $(a, b)$ and $(-a, -b)$ have the <em>same</em> ratio $b/a$, so $\arctan$ can't distinguish them. The fix is to track the sign of $a$ separately:</p>
 $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt; 0, b \ge 0 \\ \arctan(b/a) - \pi & a &lt; 0, b &lt; 0 \\ \pi/2 & a = 0, b &gt; 0 \\ -\pi/2 & a = 0, b &lt; 0 \end{cases} $$
 <p>Programmers will recognize this as the <code>atan2(b, a)</code> function. The IB markscheme expects you to <em>state which quadrant</em> the point lies in before writing the argument — points are lost for naked $\arctan(b/a)$ when the answer should have been in quadrant II or III.</p>
+</div>
+<div data-lang="zh">
+<p>函数 $\arctan$ 的值域是 $(-\pi/2, \pi/2)$——只能返回第 I、IV 象限的辐角。但是 $(a, b)$ 与 $(-a, -b)$ 这两对的比值 $b/a$ <em>相同</em>，所以 $\arctan$ 无法区分它们。解决办法是单独追踪 $a$ 的符号：</p>
+$$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt; 0, b \ge 0 \\ \arctan(b/a) - \pi & a &lt; 0, b &lt; 0 \\ \pi/2 & a = 0, b &gt; 0 \\ -\pi/2 & a = 0, b &lt; 0 \end{cases} $$
+<p>程序员会一眼认出这就是 <code>atan2(b, a)</code> 函数。IB 评分要求你在写下辐角之前要<em>明确指出点位于哪个象限</em>——若答案本应落在第 II 或第 III 象限却只写了裸的 $\arctan(b/a)$，会被扣分。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">The principal argument of $z = -2 - 2i$ is:</div>
+      <div class="quiz-q"><span data-lang="en">The principal argument of $z = -2 - 2i$ is:</span><span data-lang="zh">$z = -2 - 2i$ 的主辐角（<code>principal argument</code>）是：</span></div>
       <span class="quiz-number">A4.2</span>
     </div>
     <div class="quiz-options">
@@ -888,9 +991,11 @@ $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt
       <div class="quiz-opt" data-idx="2">$\tfrac{3\pi}{4}$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{5\pi}{4}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $a = -2 &lt; 0$, $b = -2 &lt; 0$ — quadrant III. Reference angle $\arctan(2/2) = \pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$ (in the principal range $(-\pi, \pi]$).</div>
-    <div class="quiz-explain wrong-exp">Quadrant III means subtract $\pi$ from the reference angle: $\arg(-2-2i) = \pi/4 - \pi = -3\pi/4$. ($5\pi/4$ is the same direction but outside the principal range.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $a = -2 &lt; 0$, $b = -2 &lt; 0$ — quadrant III. Reference angle $\arctan(2/2) = \pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$ (in the principal range $(-\pi, \pi]$).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$a = -2 &lt; 0$，$b = -2 &lt; 0$——第 III 象限。参考角 $\arctan(2/2) = \pi/4$，所以 $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$（落在主辐角范围 $(-\pi, \pi]$ 内）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Quadrant III means subtract $\pi$ from the reference angle: $\arg(-2-2i) = \pi/4 - \pi = -3\pi/4$. ($5\pi/4$ is the same direction but outside the principal range.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">第 III 象限要从参考角减去 $\pi$：$\arg(-2-2i) = \pi/4 - \pi = -3\pi/4$。（$5\pi/4$ 方向相同，但不在主辐角范围内。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -898,18 +1003,25 @@ $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt
 
 <!-- ═══════════════ A4.3 EULER FORM ═══════════════ -->
 <section class="section" id="s-a4-3">
-  <div class="section-label">Topic A4.3 · Exponential form</div>
-  <h2>Euler Form &amp; Multiplication <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A4.3 · Exponential form</span><span data-lang="zh">Topic A4.3 · 指数形式</span></div>
+  <h2><span data-lang="en">Euler Form &amp; Multiplication</span><span data-lang="zh">欧拉形式与乘法</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Euler's formula: $e^{i\theta} = \cos\theta + i\sin\theta$.</strong> So every complex number can be written as
     $$ z = r e^{i\theta}, \qquad r \ge 0,\;\theta \in \mathbb{R}. $$
     In Euler form, <strong>multiplication is rotation + scaling</strong>:
     $$ z_1 z_2 = r_1 r_2 \, e^{i(\theta_1 + \theta_2)}, \qquad \frac{z_1}{z_2} = \frac{r_1}{r_2} e^{i(\theta_1 - \theta_2)}. $$
     Multiplying by $e^{i\alpha}$ rotates by $\alpha$. Multiplying by a real $r &gt; 0$ scales by $r$. That single picture is half of the unit.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>欧拉公式（<code>Euler's formula</code>）：$e^{i\theta} = \cos\theta + i\sin\theta$。</strong>因此每个复数都可以写成欧拉形式（<code>Euler form</code>）：
+    $$ z = r e^{i\theta}, \qquad r \ge 0,\;\theta \in \mathbb{R}. $$
+    在欧拉形式下，<strong>乘法即旋转 + 伸缩</strong>：
+    $$ z_1 z_2 = r_1 r_2 \, e^{i(\theta_1 + \theta_2)}, \qquad \frac{z_1}{z_2} = \frac{r_1}{r_2} e^{i(\theta_1 - \theta_2)}. $$
+    乘以 $e^{i\alpha}$ 即旋转 $\alpha$；乘以实数 $r &gt; 0$ 即按 $r$ 倍伸缩。这一张图就占了本单元的一半内容。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Three equivalent forms</strong>
     For one complex number $z$ with modulus $r$ and argument $\theta$:
     <div class="table-wrap" style="margin-top: 10px;">
@@ -923,18 +1035,37 @@ $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt
       </table>
     </div>
   </div>
-
-  <div class="formula-box">
-    <div class="formula-label">Multiplication &amp; Division in polar/Euler form</div>
-    $$ z_1 z_2 = r_1 r_2 \,\operatorname{cis}(\theta_1 + \theta_2) = r_1 r_2 \, e^{i(\theta_1 + \theta_2)} $$
-    $$ \frac{z_1}{z_2} = \frac{r_1}{r_2}\,\operatorname{cis}(\theta_1 - \theta_2) = \frac{r_1}{r_2}\, e^{i(\theta_1 - \theta_2)} $$
-    <p>"Moduli multiply, arguments add."</p>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">三种等价形式</strong>
+    对模为 $r$、辐角为 $\theta$ 的同一个复数 $z$：
+    <div class="table-wrap" style="margin-top: 10px;">
+      <table>
+        <thead><tr><th>形式</th><th>表达式</th><th>最适合</th></tr></thead>
+        <tbody>
+          <tr><td>笛卡尔（<code>Cartesian</code>）</td><td>$z = a + bi$</td><td>加法、减法，与实多项式比较系数。</td></tr>
+          <tr><td>极坐标 cis（<code>polar</code>）</td><td>$z = r\operatorname{cis}\theta$</td><td>直接读出 $r$ 与 $\theta$。</td></tr>
+          <tr><td>欧拉（<code>Euler</code>）</td><td>$z = re^{i\theta}$</td><td>乘法、除法、乘方、开根。</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="concept-box green">
+  <div class="formula-box">
+    <div class="formula-label"><span data-lang="en">Multiplication &amp; Division in polar/Euler form</span><span data-lang="zh">极坐标 / 欧拉形式下的乘法与除法</span></div>
+    $$ z_1 z_2 = r_1 r_2 \,\operatorname{cis}(\theta_1 + \theta_2) = r_1 r_2 \, e^{i(\theta_1 + \theta_2)} $$
+    $$ \frac{z_1}{z_2} = \frac{r_1}{r_2}\,\operatorname{cis}(\theta_1 - \theta_2) = \frac{r_1}{r_2}\, e^{i(\theta_1 - \theta_2)} $$
+    <p><span data-lang="en">"Moduli multiply, arguments add."</span><span data-lang="zh">"模相乘，辐角相加。"</span></p>
+  </div>
+
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Conjugate &amp; reciprocal in Euler form</strong>
     $$ \overline{re^{i\theta}} = r e^{-i\theta}, \qquad \frac{1}{re^{i\theta}} = \frac{1}{r} e^{-i\theta} \;\; (r &gt; 0). $$
     So conjugation reflects across the real axis (negate the argument); taking the reciprocal both reflects and rescales by $1/r$. If $|z| = 1$, then $1/z = \bar z$ — a constant gem for unit-modulus problems.
+  </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">欧拉形式下的共轭与倒数</strong>
+    $$ \overline{re^{i\theta}} = r e^{-i\theta}, \qquad \frac{1}{re^{i\theta}} = \frac{1}{r} e^{-i\theta} \;\; (r &gt; 0). $$
+    因此共轭（<code>conjugate</code>）即关于实轴对称（辐角取反）；倒数则既对称又按 $1/r$ 缩放。若 $|z| = 1$，则 $1/z = \bar z$——这是单位模问题中的常用结论。
   </div>
 
   <div class="argand-figure">
@@ -959,11 +1090,11 @@ $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt
       <path class="arc" d="M 210 140 A 30 30 0 0 1 208 158" style="stroke: var(--green);"/>
       <text x="200" y="160" class="lbl-green">θ₂</text>
     </svg>
-    <div class="argand-caption">Fig 2 — Multiplication in the Argand plane: $z_1 z_2$ has modulus $|z_1||z_2|$ and argument $\theta_1 + \theta_2$.</div>
+    <div class="argand-caption"><span data-lang="en">Fig 2 — Multiplication in the Argand plane: $z_1 z_2$ has modulus $|z_1||z_2|$ and argument $\theta_1 + \theta_2$.</span><span data-lang="zh">图 2——阿尔冈平面上的乘法：$z_1 z_2$ 的模为 $|z_1||z_2|$，辐角为 $\theta_1 + \theta_2$。</span></div>
   </div>
 
-  <h3>Worked Example — Multiplication via polar form</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Multiplication via polar form</span><span data-lang="zh">例题——用极坐标形式相乘</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Let $z_1 = \sqrt 2 \,\operatorname{cis}\tfrac{\pi}{4}$ and $z_2 = 3\operatorname{cis}\tfrac{\pi}{6}$. Find $z_1 z_2$ in Cartesian form.</p>
     <p><strong>Multiply in polar.</strong> $r_1 r_2 = 3\sqrt 2$, $\theta_1 + \theta_2 = \tfrac{\pi}{4} + \tfrac{\pi}{6} = \tfrac{5\pi}{12}$. So</p>
     $$ z_1 z_2 = 3\sqrt 2 \,\operatorname{cis}\tfrac{5\pi}{12}. $$
@@ -971,29 +1102,52 @@ $$ \arg(z) = \begin{cases} \arctan(b/a) & a &gt; 0 \\ \arctan(b/a) + \pi & a &lt
     $$ z_1 z_2 = 3\sqrt 2 \cdot \tfrac{\sqrt 6 - \sqrt 2}{4} + 3\sqrt 2 i \cdot \tfrac{\sqrt 6 + \sqrt 2}{4} = \tfrac{3(\sqrt{12} - 2)}{4} + i\tfrac{3(\sqrt{12} + 2)}{4} = \tfrac{6\sqrt 3 - 6}{4} + i\tfrac{6\sqrt 3 + 6}{4}. $$
     <p>Simplify: $z_1 z_2 = \tfrac{3}{2}(\sqrt 3 - 1) + \tfrac{3}{2}(\sqrt 3 + 1) i$. (You can double-check by multiplying the Cartesian forms $z_1 = 1 + i$ and $z_2 = \tfrac{3\sqrt 3}{2} + \tfrac{3}{2} i$ — same answer.)</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>设 $z_1 = \sqrt 2 \,\operatorname{cis}\tfrac{\pi}{4}$，$z_2 = 3\operatorname{cis}\tfrac{\pi}{6}$。求 $z_1 z_2$ 的笛卡尔形式。</p>
+    <p><strong>在极坐标中相乘。</strong>$r_1 r_2 = 3\sqrt 2$，$\theta_1 + \theta_2 = \tfrac{\pi}{4} + \tfrac{\pi}{6} = \tfrac{5\pi}{12}$。故</p>
+    $$ z_1 z_2 = 3\sqrt 2 \,\operatorname{cis}\tfrac{5\pi}{12}. $$
+    <p><strong>转换为笛卡尔形式。</strong>使用精确值 $\cos\tfrac{5\pi}{12} = \tfrac{\sqrt 6 - \sqrt 2}{4}$，$\sin\tfrac{5\pi}{12} = \tfrac{\sqrt 6 + \sqrt 2}{4}$：</p>
+    $$ z_1 z_2 = 3\sqrt 2 \cdot \tfrac{\sqrt 6 - \sqrt 2}{4} + 3\sqrt 2 i \cdot \tfrac{\sqrt 6 + \sqrt 2}{4} = \tfrac{3(\sqrt{12} - 2)}{4} + i\tfrac{3(\sqrt{12} + 2)}{4} = \tfrac{6\sqrt 3 - 6}{4} + i\tfrac{6\sqrt 3 + 6}{4}. $$
+    <p>化简：$z_1 z_2 = \tfrac{3}{2}(\sqrt 3 - 1) + \tfrac{3}{2}(\sqrt 3 + 1) i$。（也可以把笛卡尔形式 $z_1 = 1 + i$ 与 $z_2 = \tfrac{3\sqrt 3}{2} + \tfrac{3}{2} i$ 直接相乘验证——答案相同。）</p>
+  </div>
 
-  <h3>Worked Example — Quotient as rotation</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Quotient as rotation</span><span data-lang="zh">例题——商即旋转</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Let $z = 4 e^{i\,\pi/3}$ and $w = 2 e^{i\,\pi/6}$. Find $z/w$ and $w/z$.</p>
     $$ \frac{z}{w} = \frac{4}{2} e^{i(\pi/3 - \pi/6)} = 2 e^{i\,\pi/6}, \qquad \frac{w}{z} = \tfrac{1}{2} e^{i(\pi/6 - \pi/3)} = \tfrac{1}{2} e^{-i\,\pi/6}. $$
     <p>Note that $w/z = 1/(z/w)$, just as you'd hope: moduli reciprocate, arguments negate.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>设 $z = 4 e^{i\,\pi/3}$，$w = 2 e^{i\,\pi/6}$。求 $z/w$ 与 $w/z$。</p>
+    $$ \frac{z}{w} = \frac{4}{2} e^{i(\pi/3 - \pi/6)} = 2 e^{i\,\pi/6}, \qquad \frac{w}{z} = \tfrac{1}{2} e^{i(\pi/6 - \pi/3)} = \tfrac{1}{2} e^{-i\,\pi/6}. $$
+    <p>注意 $w/z = 1/(z/w)$，正如所期望的：模取倒数，辐角取反。</p>
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Where does Euler's formula come from?</summary>
+    <summary><span data-lang="en">▸ Going deeper — Where does Euler's formula come from?</span><span data-lang="zh">▸ 深入——欧拉公式从何而来？</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>One clean route uses the Maclaurin (Taylor at $0$) series:</p>
 $$ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \qquad \cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}, \qquad \sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}. $$
 <p>Plug $x = i\theta$ into the exponential series. The powers cycle: $i^0 = 1,\, i^1 = i,\, i^2 = -1,\, i^3 = -i$, and back to $1$. Splitting even-index from odd-index terms:</p>
 $$ e^{i\theta} = \underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n}}{(2n)!}}_{\cos\theta} + i\underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n+1}}{(2n+1)!}}_{\sin\theta} = \cos\theta + i\sin\theta. $$
 <p>A second route (more suited to a Paper 3): show that the function $f(\theta) = (\cos\theta + i\sin\theta) \cdot e^{-i\theta}$ has derivative $0$ everywhere (using the chain rule and the trig derivatives), so $f$ is constant; check $f(0) = 1$ to conclude $f \equiv 1$. Either way, the multiplicative-additive translation $e^{i(\alpha + \beta)} = e^{i\alpha} e^{i\beta}$ is exactly the trig product-to-sum identity for cosine and sine — Euler's formula <em>is</em> the angle-addition formula in disguise.</p>
 <p><strong>One-line corollary (Euler's identity).</strong> Setting $\theta = \pi$: $e^{i\pi} + 1 = 0$. The five most important constants of mathematics in a single equation.</p>
+</div>
+<div data-lang="zh">
+<p>一种简洁的推导是利用麦克劳林（在 $0$ 处的泰勒）级数：</p>
+$$ e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \qquad \cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}, \qquad \sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}. $$
+<p>把 $x = i\theta$ 代入指数级数。$i$ 的幂呈循环：$i^0 = 1,\, i^1 = i,\, i^2 = -1,\, i^3 = -i$，再回到 $1$。将偶数项与奇数项分开：</p>
+$$ e^{i\theta} = \underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n}}{(2n)!}}_{\cos\theta} + i\underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n+1}}{(2n+1)!}}_{\sin\theta} = \cos\theta + i\sin\theta. $$
+<p>第二种路径（更适合 Paper 3）：证明函数 $f(\theta) = (\cos\theta + i\sin\theta) \cdot e^{-i\theta}$ 处处导数为 $0$（用链式法则与三角函数导数），故 $f$ 为常数；再由 $f(0) = 1$ 得 $f \equiv 1$。无论哪种方式，"乘法换成加法" 的恒等式 $e^{i(\alpha + \beta)} = e^{i\alpha} e^{i\beta}$ 恰好就是余弦与正弦的积化和差公式——欧拉公式<em>本质上就是</em>角度加法公式的另一种伪装。</p>
+<p><strong>一行推论（欧拉恒等式 <code>Euler's identity</code>）。</strong>取 $\theta = \pi$：$e^{i\pi} + 1 = 0$。数学中最重要的五个常数在一个方程里相遇。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">If $z = 2 e^{i\pi/3}$ and $w = 3 e^{-i\pi/4}$, then $\arg(zw)$ is:</div>
+      <div class="quiz-q"><span data-lang="en">If $z = 2 e^{i\pi/3}$ and $w = 3 e^{-i\pi/4}$, then $\arg(zw)$ is:</span><span data-lang="zh">若 $z = 2 e^{i\pi/3}$，$w = 3 e^{-i\pi/4}$，则 $\arg(zw)$ 为</span></div>
       <span class="quiz-number">A4.3</span>
     </div>
     <div class="quiz-options">
@@ -1002,9 +1156,11 @@ $$ e^{i\theta} = \underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n}}{(2n)!}
       <div class="quiz-opt" data-idx="2">$-\tfrac{\pi}{12}$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{\pi}{4}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Arguments add: $\pi/3 + (-\pi/4) = 4\pi/12 - 3\pi/12 = \pi/12$. Modulus would be $6$.</div>
-    <div class="quiz-explain wrong-exp">Multiplication adds arguments: $\arg(zw) = \pi/3 - \pi/4 = \pi/12$. ($7\pi/12$ would be the sum if both arguments were positive.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Arguments add: $\pi/3 + (-\pi/4) = 4\pi/12 - 3\pi/12 = \pi/12$. Modulus would be $6$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！辐角相加：$\pi/3 + (-\pi/4) = 4\pi/12 - 3\pi/12 = \pi/12$。模为 $6$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Multiplication adds arguments: $\arg(zw) = \pi/3 - \pi/4 = \pi/12$. ($7\pi/12$ would be the sum if both arguments were positive.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">乘法时辐角相加：$\arg(zw) = \pi/3 - \pi/4 = \pi/12$。（$7\pi/12$ 是两辐角都为正时的和。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1012,24 +1168,30 @@ $$ e^{i\theta} = \underbrace{\sum_{n=0}^{\infty}\frac{(-1)^n \theta^{2n}}{(2n)!}
 
 <!-- ═══════════════ A4.4 DE MOIVRE ═══════════════ -->
 <section class="section" id="s-a4-4">
-  <div class="section-label">Topic A4.4 · Powers</div>
-  <h2>De Moivre's Theorem <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A4.4 · Powers</span><span data-lang="zh">Topic A4.4 · 乘方</span></div>
+  <h2><span data-lang="en">De Moivre's Theorem</span><span data-lang="zh">棣莫弗定理</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>For every integer $n$:</strong>
     $$ \bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta), $$
     or equivalently $\bigl(re^{i\theta}\bigr)^n = r^n e^{i\,n\theta}$. Raising to the $n$-th power <em>multiplies the argument by $n$</em> and <em>raises the modulus to the $n$-th</em>. Two big uses: computing $(1 + i)^{10}$ in one line, and deriving multiple-angle identities for $\cos(n\theta)$ and $\sin(n\theta)$.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>棣莫弗定理（<code>De Moivre's theorem</code>）——对所有整数 $n$：</strong>
+    $$ \bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta), $$
+    等价地 $\bigl(re^{i\theta}\bigr)^n = r^n e^{i\,n\theta}$。乘 $n$ 次方时<em>辐角乘以 $n$</em>、<em>模取 $n$ 次方</em>。两大用途：一行算出 $(1 + i)^{10}$；推导 $\cos(n\theta)$ 与 $\sin(n\theta)$ 的多倍角恒等式。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">De Moivre's Theorem</div>
+    <div class="formula-label"><span data-lang="en">De Moivre's Theorem</span><span data-lang="zh">棣莫弗定理</span></div>
     $$ \bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta), \quad n \in \mathbb{Z}. $$
     $$ \bigl(re^{i\theta}\bigr)^n = r^n e^{i\,n\theta}, \quad r &gt; 0, n \in \mathbb{Z}. $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — Proof of De Moivre by induction <span class="hl-flag">HL+</span></summary>
+    <summary><span data-lang="en">▸ Going deeper — Proof of De Moivre by induction</span><span data-lang="zh">▸ 深入——用数学归纳法证明棣莫弗定理</span> <span class="hl-flag">HL+</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p><strong>Statement.</strong> For every positive integer $n$, $\bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta)$.</p>
 <p><strong>Base case ($n = 1$).</strong> Both sides equal $\cos\theta + i\sin\theta$. ✓</p>
 <p><strong>Inductive step.</strong> Assume the identity holds for $n = k$. Then</p>
@@ -1044,11 +1206,28 @@ $$
 $$
 <p>using the angle-addition formulas for cosine and sine in the last step. By induction the identity holds for all $n \ge 1$. (For $n = 0$ both sides equal $1$; for $n &lt; 0$, write $\bigl(\cos\theta + i\sin\theta\bigr)^{-1} = \cos\theta - i\sin\theta = \cos(-\theta) + i\sin(-\theta)$ and apply the positive case.)</p>
 <p><strong>Why the proof "feels right."</strong> In Euler form the statement is $\bigl(e^{i\theta}\bigr)^n = e^{i\,n\theta}$, which is just the law of exponents — once you accept Euler's formula, De Moivre is one line. The induction proof is what you write when the question asks you to prove it <em>without</em> assuming Euler.</p>
+</div>
+<div data-lang="zh">
+<p><strong>命题。</strong>对每个正整数 $n$，$\bigl(\cos\theta + i\sin\theta\bigr)^n = \cos(n\theta) + i\sin(n\theta)$。</p>
+<p><strong>基础步骤（$n = 1$）。</strong>两边都等于 $\cos\theta + i\sin\theta$。 ✓</p>
+<p><strong>归纳步骤。</strong>假设当 $n = k$ 时恒等式成立。则</p>
+$$
+\begin{aligned}
+\bigl(\cos\theta + i\sin\theta\bigr)^{k+1}
+&amp;= \bigl(\cos\theta + i\sin\theta\bigr)^k \cdot \bigl(\cos\theta + i\sin\theta\bigr) \\
+&amp;\stackrel{(IH)}{=} \bigl(\cos(k\theta) + i\sin(k\theta)\bigr) \cdot \bigl(\cos\theta + i\sin\theta\bigr) \\
+&amp;= \cos(k\theta)\cos\theta - \sin(k\theta)\sin\theta + i\bigl(\sin(k\theta)\cos\theta + \cos(k\theta)\sin\theta\bigr) \\
+&amp;= \cos\bigl((k+1)\theta\bigr) + i\sin\bigl((k+1)\theta\bigr),
+\end{aligned}
+$$
+<p>最后一步用了余弦与正弦的角度加法公式。由归纳原理，恒等式对所有 $n \ge 1$ 成立。（$n = 0$ 时两边均为 $1$；$n &lt; 0$ 时，写 $\bigl(\cos\theta + i\sin\theta\bigr)^{-1} = \cos\theta - i\sin\theta = \cos(-\theta) + i\sin(-\theta)$，再套用正整数情形。）</p>
+<p><strong>为什么这个证明"自然"。</strong>在欧拉形式下，命题就是 $\bigl(e^{i\theta}\bigr)^n = e^{i\,n\theta}$，这只不过是指数律——一旦承认欧拉公式，棣莫弗定理就只剩一行。归纳法证明是<em>不</em>假设欧拉公式时该写的版本。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Compute $(1 + i)^{10}$</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Compute $(1 + i)^{10}$</span><span data-lang="zh">例题——计算 $(1 + i)^{10}$</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find $(1 + i)^{10}$ in Cartesian form.</p>
     <p><strong>Polar form.</strong> $|1 + i| = \sqrt 2$, $\arg(1+i) = \pi/4$, so $1 + i = \sqrt 2 \, e^{i\pi/4}$.</p>
     <p><strong>Apply De Moivre.</strong></p>
@@ -1057,9 +1236,18 @@ $$
     <p><strong>Answer.</strong> $(1 + i)^{10} = 32i$.</p>
     <p>Try this with the binomial theorem and you'll see why De Moivre is worth the polar conversion.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求 $(1 + i)^{10}$ 的笛卡尔形式。</p>
+    <p><strong>极坐标形式。</strong>$|1 + i| = \sqrt 2$，$\arg(1+i) = \pi/4$，故 $1 + i = \sqrt 2 \, e^{i\pi/4}$。</p>
+    <p><strong>应用棣莫弗定理（<code>De Moivre's theorem</code>）。</strong></p>
+    $$ (1 + i)^{10} = \bigl(\sqrt 2\bigr)^{10} e^{i\cdot 10\pi/4} = 32 \, e^{i\,5\pi/2}. $$
+    <p><strong>化简辐角。</strong>$5\pi/2 = 2\pi + \pi/2$，所以 $e^{i\,5\pi/2} = e^{i\pi/2} = i$。</p>
+    <p><strong>答案。</strong>$(1 + i)^{10} = 32i$。</p>
+    <p>试着用二项式定理算一遍，就明白为何"换到极坐标再算"是值得的。</p>
+  </div>
 
-  <h3>Worked Example — Triple-angle formula <span class="hl-flag">HL+</span></h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Triple-angle formula</span><span data-lang="zh">例题——三倍角公式</span> <span class="hl-flag">HL+</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Use De Moivre to derive $\cos(3\theta)$ and $\sin(3\theta)$ in terms of $\cos\theta$ and $\sin\theta$.</p>
     <p><strong>Expand both sides of De Moivre with $n = 3$.</strong> Left side: by the binomial theorem,</p>
     $$ (\cos\theta + i\sin\theta)^3 = \cos^3\theta + 3i\cos^2\theta\sin\theta + 3i^2\cos\theta\sin^2\theta + i^3\sin^3\theta. $$
@@ -1069,15 +1257,29 @@ $$
     $$ \cos(3\theta) = \cos^3\theta - 3\cos\theta\sin^2\theta, \qquad \sin(3\theta) = 3\cos^2\theta\sin\theta - \sin^3\theta. $$
     <p>Using $\sin^2\theta = 1 - \cos^2\theta$, the first identity becomes $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$. Likewise, $\sin(3\theta) = 3\sin\theta - 4\sin^3\theta$. Two classical identities falling out of De Moivre in three lines.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>用棣莫弗定理推出 $\cos(3\theta)$ 与 $\sin(3\theta)$ 用 $\cos\theta$、$\sin\theta$ 表示的公式。</p>
+    <p><strong>对 $n = 3$ 展开两边。</strong>左边——由二项式定理（<code>binomial theorem</code>）：</p>
+    $$ (\cos\theta + i\sin\theta)^3 = \cos^3\theta + 3i\cos^2\theta\sin\theta + 3i^2\cos\theta\sin^2\theta + i^3\sin^3\theta. $$
+    <p>代入 $i^2 = -1$、$i^3 = -i$：</p>
+    $$ = \bigl(\cos^3\theta - 3\cos\theta\sin^2\theta\bigr) + i\bigl(3\cos^2\theta\sin\theta - \sin^3\theta\bigr). $$
+    <p><strong>右边</strong>为 $\cos(3\theta) + i\sin(3\theta)$。比较实部与虚部：</p>
+    $$ \cos(3\theta) = \cos^3\theta - 3\cos\theta\sin^2\theta, \qquad \sin(3\theta) = 3\cos^2\theta\sin\theta - \sin^3\theta. $$
+    <p>由 $\sin^2\theta = 1 - \cos^2\theta$，第一个恒等式化为 $\cos(3\theta) = 4\cos^3\theta - 3\cos\theta$；同理 $\sin(3\theta) = 3\sin\theta - 4\sin^3\theta$。两条经典恒等式三行从棣莫弗定理推出。</p>
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Exam pattern — "Find $z^n$"</strong>
     <strong>(1)</strong> Convert $z$ to polar form (modulus + argument). <strong>(2)</strong> Raise: modulus to the $n$-th, multiply argument by $n$. <strong>(3)</strong> Reduce the argument mod $2\pi$ to the principal range. <strong>(4)</strong> Convert back to Cartesian if asked. The whole flow takes about 90 seconds once practised; you save several minutes vs. expanding the binomial.
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">考试套路——"求 $z^n$"</strong>
+    <strong>(1)</strong> 把 $z$ 化为极坐标形式（模 + 辐角）。<strong>(2)</strong> 乘方：模取 $n$ 次方，辐角乘以 $n$。<strong>(3)</strong> 将辐角对 $2\pi$ 取模、归到主辐角范围。<strong>(4)</strong> 若题目要求，再转回笛卡尔形式。熟练后整个流程约 90 秒；相比展开二项式可省好几分钟。
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">$(\sqrt{3} + i)^6$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">$(\sqrt{3} + i)^6$ equals:</span><span data-lang="zh">$(\sqrt{3} + i)^6$ 等于</span></div>
       <span class="quiz-number">A4.4</span>
     </div>
     <div class="quiz-options">
@@ -1086,9 +1288,11 @@ $$
       <div class="quiz-opt" data-idx="2">$-64$</div>
       <div class="quiz-opt" data-idx="3">$64i$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Polar: $|\sqrt 3 + i| = 2$, $\arg = \pi/6$. So $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = 64(-1) = -64$.</div>
-    <div class="quiz-explain wrong-exp">$\sqrt 3 + i = 2e^{i\pi/6}$, so $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = -64$. (You get $64$ only if you forgot $e^{i\pi} = -1$.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Polar: $|\sqrt 3 + i| = 2$, $\arg = \pi/6$. So $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = 64(-1) = -64$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！极坐标：$|\sqrt 3 + i| = 2$，$\arg = \pi/6$。故 $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = 64(-1) = -64$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$\sqrt 3 + i = 2e^{i\pi/6}$, so $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = -64$. (You get $64$ only if you forgot $e^{i\pi} = -1$.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$\sqrt 3 + i = 2e^{i\pi/6}$，所以 $(\sqrt 3 + i)^6 = 2^6 e^{i\pi} = -64$。（若忘了 $e^{i\pi} = -1$ 会算成 $64$。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1096,24 +1300,33 @@ $$
 
 <!-- ═══════════════ A4.5 ROOTS ═══════════════ -->
 <section class="section" id="s-a4-5">
-  <div class="section-label">Topic A4.5 · Roots</div>
-  <h2>Roots of Complex Numbers <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A4.5 · Roots</span><span data-lang="zh">Topic A4.5 · 根</span></div>
+  <h2><span data-lang="en">Roots of Complex Numbers</span><span data-lang="zh">复数的根</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>The $n$ distinct $n$-th roots of $z = re^{i\theta}$ are</strong>
     $$ w_k = r^{1/n} \, e^{i(\theta + 2\pi k)/n}, \qquad k = 0, 1, 2, \ldots, n - 1. $$
     They sit on a circle of radius $r^{1/n}$, equally spaced by $2\pi/n$. The $n$-th <em>roots of unity</em> (the case $z = 1$) are $e^{2\pi i k/n}$, $k = 0, \ldots, n-1$ — they form a regular $n$-gon on the unit circle.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>$z = re^{i\theta}$ 的 $n$ 个不同的 $n$ 次根（<code>n-th roots</code>）为</strong>
+    $$ w_k = r^{1/n} \, e^{i(\theta + 2\pi k)/n}, \qquad k = 0, 1, 2, \ldots, n - 1. $$
+    它们位于半径为 $r^{1/n}$ 的圆上，按 $2\pi/n$ 等间距分布。$n$ 次<em>单位根（<code>roots of unity</code>）</em>（即 $z = 1$ 的情形）为 $e^{2\pi i k/n}$，$k = 0, \ldots, n-1$——它们构成单位圆上的正 $n$ 边形。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Why $n$ roots, and why this formula</strong>
     Write the unknown root as $w = se^{i\varphi}$. Then $w^n = s^n e^{i n\varphi}$. Setting $w^n = re^{i\theta}$ forces $s^n = r$ (so $s = r^{1/n}$, the positive real $n$-th root) and $n\varphi = \theta + 2\pi k$ for some integer $k$. As $k$ ranges over $0, 1, \ldots, n-1$ we hit $n$ distinct arguments (in the principal range); $k = n$ wraps back to $k = 0$.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">为何有 $n$ 个根、为何是这个公式</strong>
+    将未知根写为 $w = se^{i\varphi}$。则 $w^n = s^n e^{i n\varphi}$。令 $w^n = re^{i\theta}$ 给出 $s^n = r$（即 $s = r^{1/n}$，正实数 $n$ 次根）以及 $n\varphi = \theta + 2\pi k$（对某个整数 $k$）。当 $k$ 取 $0, 1, \ldots, n-1$ 时，得到 $n$ 个不同的辐角（在主辐角范围内）；$k = n$ 又回到 $k = 0$。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">$n$-th roots formula</div>
+    <div class="formula-label"><span data-lang="en">$n$-th roots formula</span><span data-lang="zh">$n$ 次根公式</span></div>
     $$ z^{1/n} = r^{1/n} \, e^{i(\theta + 2\pi k)/n}, \qquad k = 0, 1, \ldots, n - 1. $$
-    <p>$n$ distinct roots, equally spaced by $2\pi/n$, all of modulus $r^{1/n}$.</p>
+    <p><span data-lang="en">$n$ distinct roots, equally spaced by $2\pi/n$, all of modulus $r^{1/n}$.</span><span data-lang="zh">$n$ 个不同的根，按 $2\pi/n$ 等间距分布，模都等于 $r^{1/n}$。</span></p>
   </div>
 
   <div class="argand-figure">
@@ -1139,11 +1352,11 @@ $$
       <!-- pentagon outlines -->
       <path d="M 280 140 L 211 45 L 99 81 L 99 199 L 211 235 Z" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 2" opacity="0.6"/>
     </svg>
-    <div class="argand-caption">Fig 3 — Fifth roots of unity: $w_k = e^{2\pi i k/5}$ for $k = 0, \ldots, 4$. Regular pentagon on the unit circle.</div>
+    <div class="argand-caption"><span data-lang="en">Fig 3 — Fifth roots of unity: $w_k = e^{2\pi i k/5}$ for $k = 0, \ldots, 4$. Regular pentagon on the unit circle.</span><span data-lang="zh">图 3——五次单位根：$w_k = e^{2\pi i k/5}$，$k = 0, \ldots, 4$。单位圆上的正五边形。</span></div>
   </div>
 
-  <h3>Worked Example — Fourth roots of $-16$</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Fourth roots of $-16$</span><span data-lang="zh">例题——$-16$ 的四次方根</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find all $w \in \mathbb{C}$ with $w^4 = -16$.</p>
     <p><strong>Polar form of $-16$.</strong> Modulus $16$, argument $\pi$, so $-16 = 16 e^{i\pi}$.</p>
     <p><strong>Apply the roots formula with $n = 4$.</strong></p>
@@ -1162,29 +1375,63 @@ $$
     </div>
     <p>The four roots form a square of "radius" $2$ centred at the origin, rotated $45°$ from the axes. ✓</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求所有 $w \in \mathbb{C}$ 使 $w^4 = -16$。</p>
+    <p><strong>$-16$ 的极坐标形式。</strong>模为 $16$，辐角为 $\pi$，故 $-16 = 16 e^{i\pi}$。</p>
+    <p><strong>取 $n = 4$ 应用 $n$ 次根公式。</strong></p>
+    $$ w_k = 16^{1/4} \, e^{i(\pi + 2\pi k)/4} = 2 \, e^{i(\pi/4 + \pi k/2)}, \quad k = 0, 1, 2, 3. $$
+    <p><strong>逐项列出。</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>$k$</th><th>辐角</th><th>笛卡尔形式</th></tr></thead>
+        <tbody>
+          <tr><td>$0$</td><td>$\pi/4$</td><td>$\sqrt 2 + i\sqrt 2$</td></tr>
+          <tr><td>$1$</td><td>$3\pi/4$</td><td>$-\sqrt 2 + i\sqrt 2$</td></tr>
+          <tr><td>$2$</td><td>$5\pi/4 \;(\equiv -3\pi/4)$</td><td>$-\sqrt 2 - i\sqrt 2$</td></tr>
+          <tr><td>$3$</td><td>$7\pi/4 \;(\equiv -\pi/4)$</td><td>$\sqrt 2 - i\sqrt 2$</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>四个根构成以原点为中心、"半径"为 $2$、相对坐标轴旋转 $45°$ 的正方形。 ✓</p>
+  </div>
 
-  <h3>Roots of unity</h3>
+  <h3><span data-lang="en">Roots of unity</span><span data-lang="zh">单位根</span></h3>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">The $n$-th roots of unity</strong>
     The $n$ solutions of $z^n = 1$ are
     $$ \omega_k = e^{2\pi i k/n}, \qquad k = 0, 1, \ldots, n - 1. $$
     Write $\omega = e^{2\pi i/n}$ (the "primitive" root). Then the full list is $1, \omega, \omega^2, \ldots, \omega^{n-1}$ — the powers of $\omega$ — and they form a regular $n$-gon on the unit circle with one vertex at $z = 1$.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">$n$ 次单位根（<code>roots of unity</code>）</strong>
+    $z^n = 1$ 的 $n$ 个解为
+    $$ \omega_k = e^{2\pi i k/n}, \qquad k = 0, 1, \ldots, n - 1. $$
+    记 $\omega = e^{2\pi i/n}$（即"本原根"<code>primitive root</code>）。则全体根为 $1, \omega, \omega^2, \ldots, \omega^{n-1}$——$\omega$ 的幂——它们在单位圆上构成正 $n$ 边形，其中一个顶点位于 $z = 1$。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Sum of the $n$-th roots of unity is $0$ (for $n \ge 2$) <span class="hl-flag">HL+</span></summary>
+    <summary><span data-lang="en">▸ Going deeper — Sum of the $n$-th roots of unity is $0$ (for $n \ge 2$)</span><span data-lang="zh">▸ 深入——$n$ 次单位根之和为 $0$（$n \ge 2$）</span> <span class="hl-flag">HL+</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Let $\omega = e^{2\pi i/n}$. The roots of unity are $1, \omega, \omega^2, \ldots, \omega^{n-1}$. Their sum is a finite geometric series with first term $1$ and ratio $\omega$:</p>
 $$ S = 1 + \omega + \omega^2 + \cdots + \omega^{n-1} = \frac{\omega^n - 1}{\omega - 1}. $$
 <p>But $\omega^n = e^{2\pi i} = 1$, so the numerator is $0$. Since $\omega \ne 1$ (we assumed $n \ge 2$), the denominator is non-zero, giving $S = 0$.</p>
 <p><strong>Geometric reading.</strong> The roots of unity are the vertices of a regular $n$-gon centred at the origin — by symmetry their centroid (= average position) is the centre, $0$. So their sum (= $n \times$ centroid) is also $0$. The algebraic and geometric proofs say the same thing.</p>
 <p><strong>Consequence.</strong> For the cube roots of unity ($n = 3$), writing $\omega = e^{2\pi i/3}$, we get $1 + \omega + \omega^2 = 0$, i.e. $\omega^2 = -1 - \omega$. This single identity is the entire content of "the cube roots of unity" on Paper 1 — memorize it.</p>
+</div>
+<div data-lang="zh">
+<p>设 $\omega = e^{2\pi i/n}$。单位根为 $1, \omega, \omega^2, \ldots, \omega^{n-1}$。它们的和是首项为 $1$、公比为 $\omega$ 的有限等比数列：</p>
+$$ S = 1 + \omega + \omega^2 + \cdots + \omega^{n-1} = \frac{\omega^n - 1}{\omega - 1}. $$
+<p>但 $\omega^n = e^{2\pi i} = 1$，所以分子为 $0$。因为 $\omega \ne 1$（已假设 $n \ge 2$），分母非零，故 $S = 0$。</p>
+<p><strong>几何解读。</strong>单位根是以原点为中心的正 $n$ 边形的顶点——由对称性，它们的形心（即平均位置）就是中心 $0$。所以它们的和（$= n \times$ 形心）也是 $0$。代数证明与几何证明殊途同归。</p>
+<p><strong>推论。</strong>对三次单位根（$n = 3$），记 $\omega = e^{2\pi i/3}$，则 $1 + \omega + \omega^2 = 0$，即 $\omega^2 = -1 - \omega$。这条恒等式就是 Paper 1 上"三次单位根"题目的全部内容——务必记住。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Cube roots of $-8i$</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Cube roots of $-8i$</span><span data-lang="zh">例题——$-8i$ 的三次方根</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find all $z \in \mathbb{C}$ with $z^3 = -8i$.</p>
     <p><strong>Polar of $-8i$.</strong> $|-8i| = 8$, $\arg(-8i) = -\pi/2$. So $-8i = 8 e^{-i\pi/2}$.</p>
     <p><strong>Apply formula with $n = 3$.</strong></p>
@@ -1193,21 +1440,32 @@ $$ S = 1 + \omega + \omega^2 + \cdots + \omega^{n-1} = \frac{\omega^n - 1}{\omeg
     $$ z_0 = 2 e^{-i\pi/6} = \sqrt 3 - i, \quad z_1 = 2 e^{i\pi/2} = 2i, \quad z_2 = 2 e^{-i\,5\pi/6} = -\sqrt 3 - i. $$
     <p>Three roots on the circle $|z| = 2$, equally spaced by $2\pi/3$. ✓</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求所有 $z \in \mathbb{C}$ 使 $z^3 = -8i$。</p>
+    <p><strong>$-8i$ 的极坐标。</strong>$|-8i| = 8$，$\arg(-8i) = -\pi/2$。故 $-8i = 8 e^{-i\pi/2}$。</p>
+    <p><strong>取 $n = 3$ 套公式。</strong></p>
+    $$ z_k = 8^{1/3} e^{i(-\pi/2 + 2\pi k)/3} = 2 e^{i(-\pi/6 + 2\pi k/3)}, \quad k = 0, 1, 2. $$
+    <p><strong>列出各辐角。</strong>$-\pi/6$，$-\pi/6 + 2\pi/3 = \pi/2$，$-\pi/6 + 4\pi/3 = 7\pi/6 \equiv -5\pi/6$。故</p>
+    $$ z_0 = 2 e^{-i\pi/6} = \sqrt 3 - i, \quad z_1 = 2 e^{i\pi/2} = 2i, \quad z_2 = 2 e^{-i\,5\pi/6} = -\sqrt 3 - i. $$
+    <p>三个根都在圆 $|z| = 2$ 上，按 $2\pi/3$ 等间距分布。 ✓</p>
+  </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">How many distinct complex solutions does $z^6 = 64$ have?</div>
+      <div class="quiz-q"><span data-lang="en">How many distinct complex solutions does $z^6 = 64$ have?</span><span data-lang="zh">$z^6 = 64$ 有多少个不同的复数解？</span></div>
       <span class="quiz-number">A4.5</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$1$</div>
       <div class="quiz-opt" data-idx="1">$6$</div>
       <div class="quiz-opt" data-idx="2">$2$</div>
-      <div class="quiz-opt" data-idx="3">infinitely many</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">infinitely many</span><span data-lang="zh">无穷多</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Every non-zero complex number has exactly $n$ distinct $n$-th roots. Two of them ($\pm 2$) are real, the other four are non-real complex.</div>
-    <div class="quiz-explain wrong-exp">Every non-zero complex number has $n$ distinct $n$-th roots, so $6$. (The two real roots $\pm 2$ are the only real ones — the rest are non-real.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Every non-zero complex number has exactly $n$ distinct $n$-th roots. Two of them ($\pm 2$) are real, the other four are non-real complex.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！每个非零复数恰好有 $n$ 个不同的 $n$ 次根。其中两个（$\pm 2$）是实数，另外四个是非实复数。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Every non-zero complex number has $n$ distinct $n$-th roots, so $6$. (The two real roots $\pm 2$ are the only real ones — the rest are non-real.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">每个非零复数有 $n$ 个不同的 $n$ 次根，故为 $6$。（两个实根 $\pm 2$ 是仅有的实数解，其余都是非实复数。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1215,25 +1473,37 @@ $$ S = 1 + \omega + \omega^2 + \cdots + \omega^{n-1} = \frac{\omega^n - 1}{\omeg
 
 <!-- ═══════════════ A4.6 POLYNOMIALS ═══════════════ -->
 <section class="section" id="s-a4-6">
-  <div class="section-label">Topic A4.6 · Polynomials</div>
-  <h2>Polynomials over &Copf; <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A4.6 · Polynomials</span><span data-lang="zh">Topic A4.6 · 多项式</span></div>
+  <h2><span data-lang="en">Polynomials over &Copf;</span><span data-lang="zh">复数域 &Copf; 上的多项式</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Conjugate root theorem.</strong> If $p(x)$ is a polynomial with <em>real</em> coefficients and $z_0$ is a non-real root, then $\bar z_0$ is also a root. So complex roots of real polynomials come in conjugate pairs, and each pair gives a real quadratic factor
     $$ (x - z_0)(x - \bar z_0) = x^2 - 2\operatorname{Re}(z_0)\,x + |z_0|^2. $$
     A real polynomial of odd degree therefore has at least one real root.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>共轭根定理（<code>conjugate root theorem</code>）。</strong>若 $p(x)$ 是<em>实</em>系数多项式且 $z_0$ 是它的非实根，则 $\bar z_0$ 也是根。所以实系数多项式的复根成对出现（共轭对），每对给出一个实二次因子
+    $$ (x - z_0)(x - \bar z_0) = x^2 - 2\operatorname{Re}(z_0)\,x + |z_0|^2. $$
+    因此奇次实系数多项式至少有一个实根。
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Fundamental theorem of algebra (statement)</strong>
     Every non-constant polynomial $p(x) \in \mathbb{C}[x]$ of degree $n$ has exactly $n$ roots in $\mathbb{C}$, counted with multiplicity. So
     $$ p(x) = a_n (x - r_1)(x - r_2)\cdots(x - r_n), $$
     where $r_1, \ldots, r_n \in \mathbb{C}$ are the roots (possibly with repeats). Over the reals, the factorization may instead use real <em>quadratic</em> factors — one for each conjugate pair of complex roots.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">代数基本定理（陈述）</strong>
+    代数基本定理（<code>fundamental theorem of algebra</code>）说：每个 $n$ 次非常数多项式 $p(x) \in \mathbb{C}[x]$ 在 $\mathbb{C}$ 中恰好有 $n$ 个根（按重数计）。所以
+    $$ p(x) = a_n (x - r_1)(x - r_2)\cdots(x - r_n), $$
+    其中 $r_1, \ldots, r_n \in \mathbb{C}$ 是这些根（可以有重复）。在实数域上分解时，会用实<em>二次</em>因子代替每对共轭复根。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Proof of the conjugate root theorem <span class="hl-flag">HL+</span></summary>
+    <summary><span data-lang="en">▸ Going deeper — Proof of the conjugate root theorem</span><span data-lang="zh">▸ 深入——共轭根定理的证明</span> <span class="hl-flag">HL+</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Let $p(x) = \sum_{k=0}^{n} a_k x^k$ with every $a_k \in \mathbb{R}$, and suppose $p(z_0) = 0$. Apply conjugation to both sides:</p>
 $$ 0 = \overline{0} = \overline{p(z_0)} = \overline{\sum_{k=0}^{n} a_k z_0^k} = \sum_{k=0}^{n} \overline{a_k z_0^k} = \sum_{k=0}^{n} \bar a_k \, \bar z_0^{\,k} = \sum_{k=0}^{n} a_k \, \bar z_0^{\,k} = p(\bar z_0), $$
 <p>where we used (i) $\overline{\sum} = \sum \overline{(\cdot)}$ (conjugation respects addition), (ii) $\overline{ab} = \bar a\, \bar b$ (respects multiplication, hence powers), and (iii) $\bar a_k = a_k$ because $a_k$ is real. So $\bar z_0$ is also a root. ∎</p>
@@ -1241,11 +1511,21 @@ $$ 0 = \overline{0} = \overline{p(z_0)} = \overline{\sum_{k=0}^{n} a_k z_0^k} = 
 <p><strong>Consequence — quadratic factor.</strong> If $z_0 = a + bi$ ($b \ne 0$) is a root of a real polynomial, then so is $\bar z_0 = a - bi$, and</p>
 $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x + (a^2 + b^2) $$
 <p>is a real quadratic factor of $p(x)$.</p>
+</div>
+<div data-lang="zh">
+<p>设 $p(x) = \sum_{k=0}^{n} a_k x^k$，其中每个 $a_k \in \mathbb{R}$，又假设 $p(z_0) = 0$。两边取共轭（<code>conjugate</code>）：</p>
+$$ 0 = \overline{0} = \overline{p(z_0)} = \overline{\sum_{k=0}^{n} a_k z_0^k} = \sum_{k=0}^{n} \overline{a_k z_0^k} = \sum_{k=0}^{n} \bar a_k \, \bar z_0^{\,k} = \sum_{k=0}^{n} a_k \, \bar z_0^{\,k} = p(\bar z_0), $$
+<p>这里用了 (i) $\overline{\sum} = \sum \overline{(\cdot)}$（共轭保持加法），(ii) $\overline{ab} = \bar a\, \bar b$（保持乘法，因此保持乘方），以及 (iii) $\bar a_k = a_k$（因为 $a_k$ 是实数）。所以 $\bar z_0$ 也是根。∎</p>
+<p><strong>"实系数"假设为什么不可少。</strong>若 $p(x) = x - i$，唯一的根是 $z_0 = i$，而它的共轭 $\bar z_0 = -i$ <em>不是</em>根：$p(-i) = -2i \ne 0$。只要有一个系数离开 $\mathbb{R}$，共轭根定理就立刻失效。</p>
+<p><strong>推论——二次因子。</strong>若 $z_0 = a + bi$（$b \ne 0$）是实系数多项式的根，则 $\bar z_0 = a - bi$ 也是根，且</p>
+$$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x + (a^2 + b^2) $$
+<p>是 $p(x)$ 的一个实二次因子。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Build a polynomial from a complex root</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Build a polynomial from a complex root</span><span data-lang="zh">例题——由复根构造多项式</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find a monic polynomial $p(x)$ with real coefficients of <em>smallest</em> possible degree such that $p(2 + 3i) = 0$ and $p(-1) = 0$.</p>
     <p><strong>Force the conjugate.</strong> Real coefficients $\Rightarrow$ $2 - 3i$ is also a root.</p>
     <p><strong>Three roots, three factors.</strong></p>
@@ -1255,9 +1535,19 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
     $$ p(x) = (x + 1)(x^2 - 4x + 13) = x^3 - 4x^2 + 13x + x^2 - 4x + 13 = x^3 - 3x^2 + 9x + 13. $$
     <p>Degree $3$ — odd — so $p$ must have at least one real root, and indeed $p(-1) = 0$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求次数<em>尽可能小</em>的首一实系数多项式 $p(x)$，使 $p(2 + 3i) = 0$ 且 $p(-1) = 0$。</p>
+    <p><strong>强制共轭。</strong>实系数 $\Rightarrow$ $2 - 3i$ 也是根。</p>
+    <p><strong>三根，三因子。</strong></p>
+    $$ p(x) = (x + 1)\bigl(x - (2 + 3i)\bigr)\bigl(x - (2 - 3i)\bigr) = (x + 1)\bigl(x^2 - 4x + 13\bigr). $$
+    <p>这里 $z_0 + \bar z_0 = 4$，$z_0 \bar z_0 = 4 + 9 = 13$。</p>
+    <p><strong>展开。</strong></p>
+    $$ p(x) = (x + 1)(x^2 - 4x + 13) = x^3 - 4x^2 + 13x + x^2 - 4x + 13 = x^3 - 3x^2 + 9x + 13. $$
+    <p>次数 $3$——奇数——所以 $p$ 必有至少一个实根，确实 $p(-1) = 0$。</p>
+  </div>
 
-  <h3>Worked Example — Recovering all roots from one</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Recovering all roots from one</span><span data-lang="zh">例题——由一个根恢复其余所有根</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> $p(x) = x^4 - 4x^3 + 14x^2 - 4x + 13$ has $i$ as a root. Find the remaining three roots.</p>
     <p><strong>Conjugate.</strong> By the conjugate root theorem, $-i$ is also a root. So $(x - i)(x + i) = x^2 + 1$ divides $p$.</p>
     <p><strong>Polynomial long division.</strong></p>
@@ -1267,26 +1557,42 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
     $$ x = \frac{4 \pm \sqrt{16 - 52}}{2} = \frac{4 \pm \sqrt{-36}}{2} = 2 \pm 3i. $$
     <p><strong>Four roots:</strong> $i,\, -i,\, 2 + 3i,\, 2 - 3i$ — two conjugate pairs, as required.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>已知 $p(x) = x^4 - 4x^3 + 14x^2 - 4x + 13$ 以 $i$ 为根。求其余三个根。</p>
+    <p><strong>共轭。</strong>由共轭根定理（<code>conjugate root theorem</code>），$-i$ 也是根。所以 $(x - i)(x + i) = x^2 + 1$ 整除 $p$。</p>
+    <p><strong>多项式长除法。</strong></p>
+    $$ p(x) \div (x^2 + 1) = x^2 - 4x + 13. $$
+    <p>（反向验算：$(x^2 + 1)(x^2 - 4x + 13) = x^4 - 4x^3 + 13x^2 + x^2 - 4x + 13 = x^4 - 4x^3 + 14x^2 - 4x + 13$。✓）</p>
+    <p><strong>解二次方程。</strong></p>
+    $$ x = \frac{4 \pm \sqrt{16 - 52}}{2} = \frac{4 \pm \sqrt{-36}}{2} = 2 \pm 3i. $$
+    <p><strong>四个根：</strong>$i,\, -i,\, 2 + 3i,\, 2 - 3i$——两对共轭对，正如所料。</p>
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Watch for: the "one root, find the rest" pattern</strong>
     Whenever a problem hands you one non-real root of a real-coefficient polynomial, the conjugate is <em>free</em> — write it down before doing any work. Then divide out the corresponding real quadratic factor, leaving a lower-degree polynomial that you finish by other means (factor theorem, quadratic formula, GDC). About one Paper 2 question per session uses this pattern.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">留意"已知一根，求其余"题型</strong>
+    每当题目给你实系数多项式的一个非实根时，它的共轭就<em>白送</em>给你了——动笔之前先写出来。然后除去对应的实二次因子，剩下一个低次多项式，再用其他方法（因式定理、求根公式、GDC）做完。每场 Paper 2 大约都有一道题用这个套路。
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">A polynomial $p(x)$ has real coefficients, degree $5$, and roots $2,\; 1 + i,\; -3$ (each simple). How many <em>real</em> roots does $p$ have?</div>
+      <div class="quiz-q"><span data-lang="en">A polynomial $p(x)$ has real coefficients, degree $5$, and roots $2,\; 1 + i,\; -3$ (each simple). How many <em>real</em> roots does $p$ have?</span><span data-lang="zh">实系数多项式 $p(x)$ 次数为 $5$，已知根有 $2,\; 1 + i,\; -3$（各为单根）。$p$ 有多少个<em>实</em>根？</span></div>
       <span class="quiz-number">A4.6</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$3$ — namely $2, -3$, and one more.</div>
+      <div class="quiz-opt" data-idx="0">$3$ — <span data-lang="en">namely $2, -3$, and one more.</span><span data-lang="zh">即 $2, -3$ 再加一个。</span></div>
       <div class="quiz-opt" data-idx="1">$2$</div>
       <div class="quiz-opt" data-idx="2">$5$</div>
       <div class="quiz-opt" data-idx="3">$1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The complex root $1 + i$ forces conjugate $1 - i$, accounting for $2$ non-real roots. With $2$ and $-3$ that's $4$ roots. A degree-$5$ polynomial has $5$ roots total, so one more real root must exist. Total real: $2, -3,$ and one unspecified $\Rightarrow$ $3$.</div>
-    <div class="quiz-explain wrong-exp">Conjugate pair contributes $2$ non-real roots. $5 - 2 = 3$ real roots in total ($2$, $-3$, plus a third forced by the degree count).</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! The complex root $1 + i$ forces conjugate $1 - i$, accounting for $2$ non-real roots. With $2$ and $-3$ that's $4$ roots. A degree-$5$ polynomial has $5$ roots total, so one more real root must exist. Total real: $2, -3,$ and one unspecified $\Rightarrow$ $3$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！复根 $1 + i$ 强制了共轭 $1 - i$，贡献 $2$ 个非实根。加上 $2$ 与 $-3$ 共 $4$ 根。$5$ 次多项式共有 $5$ 个根，所以还必须有一个实根。实根总数：$2, -3$ 再加一个未指定的 $\Rightarrow$ $3$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Conjugate pair contributes $2$ non-real roots. $5 - 2 = 3$ real roots in total ($2$, $-3$, plus a third forced by the degree count).</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">共轭对贡献 $2$ 个非实根。$5 - 2 = 3$ 个实根（$2$、$-3$，再加一个由次数计数强制的第三个）。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 再试一次</span></button>
   </div>
 </section>
 
@@ -1294,16 +1600,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Review</div>
-  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Exam Strategy &amp; Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-green">M</div>
-        <div class="card-title">Memorize</div>
+        <div class="card-title"><span data-lang="en">Memorize</span><span data-lang="zh">背诵</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>$i^2 = -1$, $\bar z = a - bi$, $|z|^2 = z\bar z = a^2 + b^2$</li>
         <li>Divide-by-conjugate recipe</li>
         <li>Quadrant rules for $\arg(z)$</li>
@@ -1312,13 +1618,22 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
         <li>$n$-th roots formula: spacing $2\pi/n$, modulus $r^{1/n}$</li>
         <li>Conjugate root theorem &amp; real-quadratic factor formula</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>$i^2 = -1$，$\bar z = a - bi$，$|z|^2 = z\bar z = a^2 + b^2$</li>
+        <li>"乘以共轭（<code>conjugate</code>）做除法"的套路</li>
+        <li>$\arg(z)$ 的象限规则</li>
+        <li>欧拉公式（<code>Euler's formula</code>）$e^{i\theta} = \cos\theta + i\sin\theta$ 与 $z_1 z_2 = r_1 r_2 e^{i(\theta_1 + \theta_2)}$</li>
+        <li>棣莫弗定理（<code>De Moivre's theorem</code>）：$(re^{i\theta})^n = r^n e^{i n\theta}$，$n \in \mathbb{Z}$</li>
+        <li>$n$ 次根公式：间距 $2\pi/n$，模 $r^{1/n}$</li>
+        <li>共轭根定理与实二次因子公式</li>
+      </ul>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">U</div>
-        <div class="card-title">Understand</div>
+        <div class="card-title"><span data-lang="en">Understand</span><span data-lang="zh">理解</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>Multiplication = rotation + scaling in the Argand plane</li>
         <li>Why Cartesian/polar/Euler are the same number, different forms</li>
         <li>The induction proof of De Moivre</li>
@@ -1327,11 +1642,20 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
         <li>Why the conjugate root theorem needs real coefficients</li>
         <li>Why every odd-degree real polynomial has a real root</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>在阿尔冈平面（<code>Argand diagram</code>）上，乘法 = 旋转 + 缩放</li>
+        <li>为什么笛卡尔（<code>Cartesian</code>）、极坐标（<code>polar</code>）、欧拉（<code>Euler</code>）三种形式是同一个数</li>
+        <li>棣莫弗定理的归纳法证明</li>
+        <li>为什么 $\arctan(b/a)$ 会"漏掉"第 II、III 象限</li>
+        <li>$n$ 次单位根（<code>roots of unity</code>）之和为 $0$——代数论证与几何论证</li>
+        <li>为什么共轭根定理必须以实系数为前提</li>
+        <li>为什么每个奇次实系数多项式必有实根</li>
+      </ul>
     </div>
   </div>
 
-  <h3>Common Pitfalls</h3>
-  <div class="concept-box red">
+  <h3><span data-lang="en">Common Pitfalls</span><span data-lang="zh">常见陷阱</span></h3>
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Top student errors</strong>
     <strong>1.</strong> Writing $\arg(z) = \arctan(b/a)$ without checking the quadrant — instant mark loss in quadrants II and III.<br>
     <strong>2.</strong> Forgetting that $|z|$ is defined to be the <em>positive</em> square root: $\sqrt{a^2 + b^2}$, not $\pm$.<br>
@@ -1342,12 +1666,29 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
     <strong>7.</strong> Forgetting the conjugate when you're handed a single complex root of a real polynomial.<br>
     <strong>8.</strong> Treating the conjugate root theorem as if it applied to complex-coefficient polynomials.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">学生常见错误</strong>
+    <strong>1.</strong> 写 $\arg(z) = \arctan(b/a)$ 而不检查象限——在第 II、III 象限立即丢分。<br>
+    <strong>2.</strong> 忘了 $|z|$ 按定义是<em>正</em>的平方根：$\sqrt{a^2 + b^2}$，不带 $\pm$。<br>
+    <strong>3.</strong> 把 $\operatorname{Im}(z) = b$（一个实数）与 $bi$ 混为一谈。<br>
+    <strong>4.</strong> 在负实数之间套用 $\sqrt{ab} = \sqrt a \sqrt b$——此恒等式失效：$\sqrt{(-1)(-1)} = 1$，而 $i \cdot i = -1$。<br>
+    <strong>5.</strong> 用棣莫弗定理后忘了把辐角对 $2\pi$ 取模——把 $e^{i\,15\pi/4}$ 留在那里而不化为 $e^{-i\pi/4}$。<br>
+    <strong>6.</strong> 当题目要全部 $n$ 个 $n$ 次根时只列出一个——"find all $z$"（求所有 $z$）的措辞不可商量。<br>
+    <strong>7.</strong> 拿到实系数多项式的一个复根却忘了它的共轭。<br>
+    <strong>8.</strong> 把共轭根定理（<code>conjugate root theorem</code>）当成对复系数多项式也成立——它不成立。
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Paper-specific notes</strong>
     <strong>Paper 1 (no calc):</strong> exact-value arithmetic in Cartesian form (especially division), conversions between Cartesian and polar for "nice" angles, De Moivre on small integer powers, recovering polynomial roots from one given complex root.<br>
     <strong>Paper 2 (calc):</strong> longer factoring problems, larger De Moivre powers, $n$-th roots displayed on a numerical Argand plot. You can use the GDC's complex mode, but write your set-up in proper notation — the marks are for the method, not the final number.<br>
     <strong>Paper 3 (HL extension):</strong> derivations using De Moivre (multiple-angle identities, sums of $\cos n\theta$), proofs of the conjugate root theorem and the roots-of-unity sum.
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">各 Paper 备考要点</strong>
+    <strong>Paper 1（不可用计算器）：</strong>笛卡尔形式下的精确值运算（尤其是除法）、"漂亮"角度下的 Cartesian ↔ polar 互换、小整数指数的棣莫弗定理、由一个已知复根还原多项式所有根。<br>
+    <strong>Paper 2（可用计算器）：</strong>更长的因式分解、更大的棣莫弗指数、把 $n$ 次根画在数值阿尔冈图（<code>Argand diagram</code>）上。可用 GDC 的复数模式，但解题过程要按标准记号写出来——分数给的是方法，不是最终数字。<br>
+    <strong>Paper 3（HL 延伸）：</strong>用棣莫弗定理推导（多倍角恒等式、$\sum \cos n\theta$ 等）、共轭根定理与单位根求和的证明。
   </div>
 </section>
 
@@ -1355,33 +1696,33 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
 
   <div class="flashcard-toolbar">
-    <span class="fc-count" id="fcCount">0 / 14 flipped</span>
+    <span class="fc-count" id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">已翻 0 / 14</span></span>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">打乱</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Defining property of $i$?</div>
+        <div class="flashcard-front"><span data-lang="en">Defining property of $i$?</span><span data-lang="zh">$i$ 的定义性质？</span></div>
         <div class="flashcard-back">$$i^2 = -1$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Conjugate of $a + bi$?</div>
+        <div class="flashcard-front"><span data-lang="en">Conjugate of $a + bi$?</span><span data-lang="zh">$a + bi$ 的共轭？</span></div>
         <div class="flashcard-back">$$\bar z = a - bi$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Modulus of $a + bi$?</div>
+        <div class="flashcard-front"><span data-lang="en">Modulus of $a + bi$?</span><span data-lang="zh">$a + bi$ 的模？</span></div>
         <div class="flashcard-back">$$|z| = \sqrt{a^2 + b^2}$$</div>
       </div>
     </div>
@@ -1393,61 +1734,61 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">How to divide $(a+bi)/(c+di)$?</div>
-        <div class="flashcard-back">Multiply top &amp; bottom by $c - di$. $$\frac{a+bi}{c+di} = \frac{(a+bi)(c-di)}{c^2 + d^2}$$</div>
+        <div class="flashcard-front"><span data-lang="en">How to divide $(a+bi)/(c+di)$?</span><span data-lang="zh">如何做 $(a+bi)/(c+di)$？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Multiply top &amp; bottom by $c - di$.</span><span data-lang="zh">分子分母同乘 $c - di$。</span> $$\frac{a+bi}{c+di} = \frac{(a+bi)(c-di)}{c^2 + d^2}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Polar form of $z$?</div>
+        <div class="flashcard-front"><span data-lang="en">Polar form of $z$?</span><span data-lang="zh">$z$ 的极坐标形式？</span></div>
         <div class="flashcard-back">$$z = r\operatorname{cis}\theta = re^{i\theta}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Euler's formula?</div>
+        <div class="flashcard-front"><span data-lang="en">Euler's formula?</span><span data-lang="zh">欧拉公式？</span></div>
         <div class="flashcard-back">$$e^{i\theta} = \cos\theta + i\sin\theta$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Product in polar form?</div>
-        <div class="flashcard-back">Moduli multiply, arguments add. $$z_1 z_2 = r_1 r_2\, e^{i(\theta_1 + \theta_2)}$$</div>
+        <div class="flashcard-front"><span data-lang="en">Product in polar form?</span><span data-lang="zh">极坐标形式下的积？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Moduli multiply, arguments add.</span><span data-lang="zh">模相乘，辐角相加。</span> $$z_1 z_2 = r_1 r_2\, e^{i(\theta_1 + \theta_2)}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">De Moivre's theorem?</div>
+        <div class="flashcard-front"><span data-lang="en">De Moivre's theorem?</span><span data-lang="zh">棣莫弗定理？</span></div>
         <div class="flashcard-back">$$(re^{i\theta})^n = r^n e^{i n\theta}$$ $$n \in \mathbb{Z}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">$n$-th roots of $re^{i\theta}$?</div>
+        <div class="flashcard-front"><span data-lang="en">$n$-th roots of $re^{i\theta}$?</span><span data-lang="zh">$re^{i\theta}$ 的 $n$ 次根？</span></div>
         <div class="flashcard-back">$$w_k = r^{1/n} e^{i(\theta + 2\pi k)/n}$$ $$k = 0, 1, \ldots, n-1$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sum of $n$-th roots of unity, $n \ge 2$?</div>
+        <div class="flashcard-front"><span data-lang="en">Sum of $n$-th roots of unity, $n \ge 2$?</span><span data-lang="zh">$n$ 次单位根之和（$n \ge 2$）？</span></div>
         <div class="flashcard-back">$$0$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Cube roots of unity identity?</div>
-        <div class="flashcard-back">$$1 + \omega + \omega^2 = 0$$ where $\omega = e^{2\pi i/3}$</div>
+        <div class="flashcard-front"><span data-lang="en">Cube roots of unity identity?</span><span data-lang="zh">三次单位根恒等式？</span></div>
+        <div class="flashcard-back">$$1 + \omega + \omega^2 = 0$$ <span data-lang="en">where $\omega = e^{2\pi i/3}$</span><span data-lang="zh">其中 $\omega = e^{2\pi i/3}$</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Conjugate root theorem?</div>
-        <div class="flashcard-back">Real-coefficient polynomial: $p(z_0) = 0 \Rightarrow p(\bar z_0) = 0$. Complex roots come in conjugate pairs.</div>
+        <div class="flashcard-front"><span data-lang="en">Conjugate root theorem?</span><span data-lang="zh">共轭根定理？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Real-coefficient polynomial: $p(z_0) = 0 \Rightarrow p(\bar z_0) = 0$. Complex roots come in conjugate pairs.</span><span data-lang="zh">实系数多项式：$p(z_0) = 0 \Rightarrow p(\bar z_0) = 0$。复根成对（共轭对）出现。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Real quadratic from conjugate pair $a \pm bi$?</div>
+        <div class="flashcard-front"><span data-lang="en">Real quadratic from conjugate pair $a \pm bi$?</span><span data-lang="zh">由共轭对 $a \pm bi$ 得到的实二次因子？</span></div>
         <div class="flashcard-back">$$x^2 - 2ax + (a^2 + b^2)$$</div>
       </div>
     </div>
@@ -1458,13 +1799,13 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit A4 — Practice Quiz</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">综合测验</span></div>
+  <h2><span data-lang="en">Unit A4 — Practice Quiz</span><span data-lang="zh">单元 A4——练习测验</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;"><span data-lang="en">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</span><span data-lang="zh">十道难度不一的题。得分实时显示在页面顶部。考前目标 8/10。</span></p>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">1. $(2 - i)(3 + 4i)$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">1. $(2 - i)(3 + 4i)$ equals:</span><span data-lang="zh">1. $(2 - i)(3 + 4i) = $</span></div>
       <span class="quiz-number">Q1</span>
     </div>
     <div class="quiz-options">
@@ -1473,14 +1814,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$6 + 5i$</div>
       <div class="quiz-opt" data-idx="3">$10 - 5i$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $(2-i)(3+4i) = 6 + 8i - 3i - 4i^2 = 6 + 5i + 4 = 10 + 5i$.</div>
-    <div class="quiz-explain wrong-exp">FOIL then collapse $i^2 = -1$: $(2-i)(3+4i) = 6 + 8i - 3i + 4 = 10 + 5i$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $(2-i)(3+4i) = 6 + 8i - 3i - 4i^2 = 6 + 5i + 4 = 10 + 5i$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$(2-i)(3+4i) = 6 + 8i - 3i - 4i^2 = 6 + 5i + 4 = 10 + 5i$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">FOIL then collapse $i^2 = -1$: $(2-i)(3+4i) = 6 + 8i - 3i + 4 = 10 + 5i$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">FOIL 展开后用 $i^2 = -1$：$(2-i)(3+4i) = 6 + 8i - 3i + 4 = 10 + 5i$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">2. $\dfrac{1}{3 - 4i}$ in Cartesian form is:</div>
+      <div class="quiz-q"><span data-lang="en">2. $\dfrac{1}{3 - 4i}$ in Cartesian form is:</span><span data-lang="zh">2. $\dfrac{1}{3 - 4i}$ 化为笛卡尔形式为</span></div>
       <span class="quiz-number">Q2</span>
     </div>
     <div class="quiz-options">
@@ -1489,14 +1832,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$\tfrac{3}{25} + \tfrac{4}{25} i$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{1}{3} + \tfrac{1}{4} i$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Multiply top &amp; bottom by $3 + 4i$: $\dfrac{3 + 4i}{(3-4i)(3+4i)} = \dfrac{3 + 4i}{9 + 16} = \dfrac{3 + 4i}{25}$, i.e. $\tfrac{3}{25} + \tfrac{4}{25}i$.</div>
-    <div class="quiz-explain wrong-exp">$\dfrac{1}{3 - 4i} \cdot \dfrac{3 + 4i}{3 + 4i} = \dfrac{3 + 4i}{25} = \tfrac{3}{25} + \tfrac{4}{25}i$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Multiply top &amp; bottom by $3 + 4i$: $\dfrac{3 + 4i}{(3-4i)(3+4i)} = \dfrac{3 + 4i}{9 + 16} = \dfrac{3 + 4i}{25}$, i.e. $\tfrac{3}{25} + \tfrac{4}{25}i$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！分子分母同乘 $3 + 4i$：$\dfrac{3 + 4i}{(3-4i)(3+4i)} = \dfrac{3 + 4i}{9 + 16} = \dfrac{3 + 4i}{25}$，即 $\tfrac{3}{25} + \tfrac{4}{25}i$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$\dfrac{1}{3 - 4i} \cdot \dfrac{3 + 4i}{3 + 4i} = \dfrac{3 + 4i}{25} = \tfrac{3}{25} + \tfrac{4}{25}i$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$\dfrac{1}{3 - 4i} \cdot \dfrac{3 + 4i}{3 + 4i} = \dfrac{3 + 4i}{25} = \tfrac{3}{25} + \tfrac{4}{25}i$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">3. The modulus of $z = (1 - i\sqrt 3)^4$ is:</div>
+      <div class="quiz-q"><span data-lang="en">3. The modulus of $z = (1 - i\sqrt 3)^4$ is:</span><span data-lang="zh">3. $z = (1 - i\sqrt 3)^4$ 的模为</span></div>
       <span class="quiz-number">Q3</span>
     </div>
     <div class="quiz-options">
@@ -1505,14 +1850,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$16$</div>
       <div class="quiz-opt" data-idx="3">$4$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $|1 - i\sqrt 3| = \sqrt{1 + 3} = 2$, so $|z| = 2^4 = 16$ (modulus is multiplicative under powers).</div>
-    <div class="quiz-explain wrong-exp">$|z^n| = |z|^n$. Here $|1 - i\sqrt 3| = 2$, so $|z| = 2^4 = 16$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $|1 - i\sqrt 3| = \sqrt{1 + 3} = 2$, so $|z| = 2^4 = 16$ (modulus is multiplicative under powers).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$|1 - i\sqrt 3| = \sqrt{1 + 3} = 2$，故 $|z| = 2^4 = 16$（模在乘方下相乘）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$|z^n| = |z|^n$. Here $|1 - i\sqrt 3| = 2$, so $|z| = 2^4 = 16$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$|z^n| = |z|^n$。此处 $|1 - i\sqrt 3| = 2$，故 $|z| = 2^4 = 16$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">4. The principal argument of $z = -1 - i$ is:</div>
+      <div class="quiz-q"><span data-lang="en">4. The principal argument of $z = -1 - i$ is:</span><span data-lang="zh">4. $z = -1 - i$ 的主辐角为</span></div>
       <span class="quiz-number">Q4</span>
     </div>
     <div class="quiz-options">
@@ -1521,14 +1868,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$\tfrac{3\pi}{4}$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{5\pi}{4}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Quadrant III: reference angle $\pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$.</div>
-    <div class="quiz-explain wrong-exp">In quadrant III, principal argument is $\arctan(b/a) - \pi = \pi/4 - \pi = -3\pi/4$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Quadrant III: reference angle $\pi/4$, so $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！第三象限：参考角 $\pi/4$，故 $\arg = \pi/4 - \pi = -\tfrac{3\pi}{4}$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">In quadrant III, principal argument is $\arctan(b/a) - \pi = \pi/4 - \pi = -3\pi/4$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">第三象限：主辐角 $= \arctan(b/a) - \pi = \pi/4 - \pi = -3\pi/4$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">5. $(1 + i)^{8}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">5. $(1 + i)^{8}$ equals:</span><span data-lang="zh">5. $(1 + i)^{8} = $</span></div>
       <span class="quiz-number">Q5</span>
     </div>
     <div class="quiz-options">
@@ -1537,30 +1886,34 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$256 i$</div>
       <div class="quiz-opt" data-idx="3">$16$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $1 + i = \sqrt 2 \, e^{i\pi/4}$. So $(1+i)^8 = (\sqrt 2)^8 e^{i\,2\pi} = 16 \cdot 1 = 16$.</div>
-    <div class="quiz-explain wrong-exp">$(1+i)^8 = (\sqrt 2)^8 e^{i\,8\pi/4} = 2^4 \cdot e^{i\,2\pi} = 16$. (You get $256$ if you forgot the modulus is $\sqrt 2$, not $2$.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $1 + i = \sqrt 2 \, e^{i\pi/4}$. So $(1+i)^8 = (\sqrt 2)^8 e^{i\,2\pi} = 16 \cdot 1 = 16$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$1 + i = \sqrt 2 \, e^{i\pi/4}$。故 $(1+i)^8 = (\sqrt 2)^8 e^{i\,2\pi} = 16 \cdot 1 = 16$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$(1+i)^8 = (\sqrt 2)^8 e^{i\,8\pi/4} = 2^4 \cdot e^{i\,2\pi} = 16$. (You get $256$ if you forgot the modulus is $\sqrt 2$, not $2$.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$(1+i)^8 = (\sqrt 2)^8 e^{i\,8\pi/4} = 2^4 \cdot e^{i\,2\pi} = 16$。（若误以为模是 $2$ 而非 $\sqrt 2$ 才会得到 $256$。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">6. The three cube roots of $-1$ are:</div>
+      <div class="quiz-q"><span data-lang="en">6. The three cube roots of $-1$ are:</span><span data-lang="zh">6. $-1$ 的三个立方根为</span></div>
       <span class="quiz-number">Q6</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$-1$ only</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$-1$ only</span><span data-lang="zh">仅 $-1$</span></div>
       <div class="quiz-opt" data-idx="1">$\pm 1, \, i$</div>
       <div class="quiz-opt" data-idx="2">$-1, \, \tfrac{1 + i\sqrt 3}{2}, \, \tfrac{1 - i\sqrt 3}{2}$</div>
       <div class="quiz-opt" data-idx="3">$-1, \, i, \, -i$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $-1 = e^{i\pi}$, so cube roots are $e^{i(\pi + 2\pi k)/3}$ for $k = 0, 1, 2$. Arguments $\pi/3, \pi, 5\pi/3$ (i.e. $-\pi/3$), giving $\tfrac{1 + i\sqrt 3}{2}, \, -1, \, \tfrac{1 - i\sqrt 3}{2}$.</div>
-    <div class="quiz-explain wrong-exp">Apply the $n$-th roots formula with $z = -1$, $n = 3$. The three roots are $e^{i\pi/3}, e^{i\pi}, e^{-i\pi/3}$ — the second is $-1$; the other two are $\tfrac{1 \pm i\sqrt 3}{2}$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $-1 = e^{i\pi}$, so cube roots are $e^{i(\pi + 2\pi k)/3}$ for $k = 0, 1, 2$. Arguments $\pi/3, \pi, 5\pi/3$ (i.e. $-\pi/3$), giving $\tfrac{1 + i\sqrt 3}{2}, \, -1, \, \tfrac{1 - i\sqrt 3}{2}$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$-1 = e^{i\pi}$，三次方根为 $e^{i(\pi + 2\pi k)/3}$（$k = 0, 1, 2$）。辐角 $\pi/3, \pi, 5\pi/3$（即 $-\pi/3$），对应 $\tfrac{1 + i\sqrt 3}{2}, \, -1, \, \tfrac{1 - i\sqrt 3}{2}$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Apply the $n$-th roots formula with $z = -1$, $n = 3$. The three roots are $e^{i\pi/3}, e^{i\pi}, e^{-i\pi/3}$ — the second is $-1$; the other two are $\tfrac{1 \pm i\sqrt 3}{2}$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">套 $n$ 次方根公式（$z = -1$，$n = 3$）。三根为 $e^{i\pi/3}, e^{i\pi}, e^{-i\pi/3}$——第二个是 $-1$，其余两个为 $\tfrac{1 \pm i\sqrt 3}{2}$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">7. If $\omega = e^{2\pi i/7}$, then $1 + \omega + \omega^2 + \cdots + \omega^6$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">7. If $\omega = e^{2\pi i/7}$, then $1 + \omega + \omega^2 + \cdots + \omega^6$ equals:</span><span data-lang="zh">7. 设 $\omega = e^{2\pi i/7}$，则 $1 + \omega + \omega^2 + \cdots + \omega^6 = $</span></div>
       <span class="quiz-number">Q7</span>
     </div>
     <div class="quiz-options">
@@ -1569,14 +1922,16 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$7$</div>
       <div class="quiz-opt" data-idx="3">$e^{2\pi i}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! These are the seven $7$-th roots of unity. Their sum is the geometric series $\dfrac{\omega^7 - 1}{\omega - 1} = \dfrac{0}{\omega - 1} = 0$ (since $\omega^7 = 1$, $\omega \ne 1$).</div>
-    <div class="quiz-explain wrong-exp">The sum of the $n$-th roots of unity is $0$ for any $n \ge 2$, by the geometric-series argument or by symmetry of the regular $n$-gon centred at $0$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! These are the seven $7$-th roots of unity. Their sum is the geometric series $\dfrac{\omega^7 - 1}{\omega - 1} = \dfrac{0}{\omega - 1} = 0$ (since $\omega^7 = 1$, $\omega \ne 1$).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！这些是 $7$ 次单位根。求和为等比级数 $\dfrac{\omega^7 - 1}{\omega - 1} = \dfrac{0}{\omega - 1} = 0$（因 $\omega^7 = 1$，$\omega \ne 1$）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">The sum of the $n$-th roots of unity is $0$ for any $n \ge 2$, by the geometric-series argument or by symmetry of the regular $n$-gon centred at $0$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$n$ 次单位根之和（$n \ge 2$）恒为 $0$——可用等比级数证，也可由以原点为中心的正 $n$ 边形对称性看出。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">8. $p(x)$ has real coefficients, is monic, and degree $3$ with $1 + 2i$ as a root. If $p(0) = 5$, then $p(x)$ is:</div>
+      <div class="quiz-q"><span data-lang="en">8. $p(x)$ has real coefficients, is monic, and degree $3$ with $1 + 2i$ as a root. If $p(0) = 5$, then $p(x)$ is:</span><span data-lang="zh">8. 实系数首一三次多项式 $p(x)$ 以 $1 + 2i$ 为根。若 $p(0) = 5$，则 $p(x) = $</span></div>
       <span class="quiz-number">Q8</span>
     </div>
     <div class="quiz-options">
@@ -1585,41 +1940,47 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
       <div class="quiz-opt" data-idx="2">$x^3 + 5$</div>
       <div class="quiz-opt" data-idx="3">$(x^2 - 2x + 5)(x + 1)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The conjugate root $1 - 2i$ gives the real quadratic factor $(x - (1+2i))(x - (1-2i)) = x^2 - 2x + 5$. Let the third root be $r$, so $p(x) = (x^2 - 2x + 5)(x - r)$. Then $p(0) = 5 \cdot (-r) = -5r = 5 \Rightarrow r = -1$, i.e. linear factor $(x + 1)$.</div>
-    <div class="quiz-explain wrong-exp">Conjugate forces the real factor $x^2 - 2x + 5$. The third root $r$ is determined by $p(0) = 5(-r) = 5 \Rightarrow r = -1$, so the linear factor is $(x + 1)$, giving $(x^2 - 2x + 5)(x + 1)$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! The conjugate root $1 - 2i$ gives the real quadratic factor $(x - (1+2i))(x - (1-2i)) = x^2 - 2x + 5$. Let the third root be $r$, so $p(x) = (x^2 - 2x + 5)(x - r)$. Then $p(0) = 5 \cdot (-r) = -5r = 5 \Rightarrow r = -1$, i.e. linear factor $(x + 1)$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！共轭根 $1 - 2i$ 给出实二次因式 $(x - (1+2i))(x - (1-2i)) = x^2 - 2x + 5$。设第三根为 $r$，则 $p(x) = (x^2 - 2x + 5)(x - r)$。由 $p(0) = 5 \cdot (-r) = -5r = 5 \Rightarrow r = -1$，对应一次因式 $(x + 1)$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Conjugate forces the real factor $x^2 - 2x + 5$. The third root $r$ is determined by $p(0) = 5(-r) = 5 \Rightarrow r = -1$, so the linear factor is $(x + 1)$, giving $(x^2 - 2x + 5)(x + 1)$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">共轭强制实因式 $x^2 - 2x + 5$。由 $p(0) = 5(-r) = 5 \Rightarrow r = -1$ 确定第三根，故一次因式为 $(x + 1)$，得 $(x^2 - 2x + 5)(x + 1)$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">9. Using De Moivre, $\cos(2\theta)$ in terms of $\cos\theta$ alone is:</div>
+      <div class="quiz-q"><span data-lang="en">9. Using De Moivre, $\cos(2\theta)$ in terms of $\cos\theta$ alone is:</span><span data-lang="zh">9. 用棣莫弗，仅用 $\cos\theta$ 表示 $\cos(2\theta)$，结果为</span></div>
       <span class="quiz-number">Q9</span>
     </div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\cos^2\theta + \sin^2\theta$</div>
       <div class="quiz-opt" data-idx="1">$1 - \cos^2\theta$</div>
       <div class="quiz-opt" data-idx="2">$2\cos^2\theta - 1$</div>
-      <div class="quiz-opt" data-idx="3">$\cos^2\theta - \sin^2\theta$ (cannot be reduced further)</div>
+      <div class="quiz-opt" data-idx="3">$\cos^2\theta - \sin^2\theta$ <span data-lang="en">(cannot be reduced further)</span><span data-lang="zh">（不能进一步化简）</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $(\cos\theta + i\sin\theta)^2 = \cos^2\theta - \sin^2\theta + 2i\sin\theta\cos\theta = \cos(2\theta) + i\sin(2\theta)$. Equating real parts: $\cos(2\theta) = \cos^2\theta - \sin^2\theta = \cos^2\theta - (1 - \cos^2\theta) = 2\cos^2\theta - 1$.</div>
-    <div class="quiz-explain wrong-exp">From De Moivre, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$. Substituting $\sin^2\theta = 1 - \cos^2\theta$ gives $2\cos^2\theta - 1$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $(\cos\theta + i\sin\theta)^2 = \cos^2\theta - \sin^2\theta + 2i\sin\theta\cos\theta = \cos(2\theta) + i\sin(2\theta)$. Equating real parts: $\cos(2\theta) = \cos^2\theta - \sin^2\theta = \cos^2\theta - (1 - \cos^2\theta) = 2\cos^2\theta - 1$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$(\cos\theta + i\sin\theta)^2 = \cos^2\theta - \sin^2\theta + 2i\sin\theta\cos\theta = \cos(2\theta) + i\sin(2\theta)$。比较实部：$\cos(2\theta) = \cos^2\theta - \sin^2\theta = \cos^2\theta - (1 - \cos^2\theta) = 2\cos^2\theta - 1$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">From De Moivre, $\cos(2\theta) = \cos^2\theta - \sin^2\theta$. Substituting $\sin^2\theta = 1 - \cos^2\theta$ gives $2\cos^2\theta - 1$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">由棣莫弗 $\cos(2\theta) = \cos^2\theta - \sin^2\theta$。代入 $\sin^2\theta = 1 - \cos^2\theta$ 得 $2\cos^2\theta - 1$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">10. The set of complex numbers $z$ with $|z - 2| = |z + 2i|$ is:</div>
+      <div class="quiz-q"><span data-lang="en">10. The set of complex numbers $z$ with $|z - 2| = |z + 2i|$ is:</span><span data-lang="zh">10. 满足 $|z - 2| = |z + 2i|$ 的复数 $z$ 全体构成</span></div>
       <span class="quiz-number">Q10</span>
     </div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">A circle centred at the origin.</div>
-      <div class="quiz-opt" data-idx="1">A circle centred at $1 - i$.</div>
-      <div class="quiz-opt" data-idx="2">The single point $z = 1 - i$.</div>
-      <div class="quiz-opt" data-idx="3">A straight line (the perpendicular bisector of the segment from $2$ to $-2i$).</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">A circle centred at the origin.</span><span data-lang="zh">以原点为圆心的圆</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">A circle centred at $1 - i$.</span><span data-lang="zh">以 $1 - i$ 为圆心的圆</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The single point $z = 1 - i$.</span><span data-lang="zh">仅一点 $z = 1 - i$</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">A straight line (the perpendicular bisector of the segment from $2$ to $-2i$).</span><span data-lang="zh">一条直线（线段 $2$ 到 $-2i$ 的垂直平分线）</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $|z - w|$ is the distance between $z$ and $w$. The condition "distance to $2$ equals distance to $-2i$" picks out the perpendicular bisector of the segment from $2$ to $-2i$ — the line $y = -x$ (or $\operatorname{Re}(z) + \operatorname{Im}(z) = 0$).</div>
-    <div class="quiz-explain wrong-exp">$|z - w|$ is a distance, so $|z - z_1| = |z - z_2|$ defines the perpendicular bisector of the segment $z_1 z_2$ — a straight line. (Concentric circles correspond to $|z - c| = r$, a single equality with one centre.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $|z - w|$ is the distance between $z$ and $w$. The condition "distance to $2$ equals distance to $-2i$" picks out the perpendicular bisector of the segment from $2$ to $-2i$ — the line $y = -x$ (or $\operatorname{Re}(z) + \operatorname{Im}(z) = 0$).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$|z - w|$ 是 $z$ 与 $w$ 间的距离。"到 $2$ 的距离等于到 $-2i$ 的距离" 即为该线段的垂直平分线——直线 $y = -x$（即 $\operatorname{Re}(z) + \operatorname{Im}(z) = 0$）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$|z - w|$ is a distance, so $|z - z_1| = |z - z_2|$ defines the perpendicular bisector of the segment $z_1 z_2$ — a straight line. (Concentric circles correspond to $|z - c| = r$, a single equality with one centre.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$|z - w|$ 为距离，故 $|z - z_1| = |z - z_2|$ 定义线段 $z_1 z_2$ 的垂直平分线——一条直线。（$|z - c| = r$ 对应同心圆，单一等式、单一圆心。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1627,32 +1988,32 @@ $$ (x - z_0)(x - \bar z_0) = x^2 - (z_0 + \bar z_0)x + z_0 \bar z_0 = x^2 - 2a x
 
 <!-- ═══════════════ CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL+</span> are deeper-tier mastery (Paper 3 / top-mark territory).</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-Assessment</span><span data-lang="zh">自我评估</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;"><span data-lang="en">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL+</span> are deeper-tier mastery (Paper 3 / top-mark territory).</span><span data-lang="zh">点击你已经掌握的条目。考前目标 100%。标有 <span class="hl-flag">HL+</span> 的为更深层掌握（Paper 3 / 拉分题）。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">已掌握 0 / 14</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Add, subtract, multiply, and divide complex numbers in Cartesian form</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use $z \bar z = |z|^2$ to rationalize denominators</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Solve $z^2 = w$ by equating real and imaginary parts</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Plot complex numbers on the Argand diagram &amp; read off modulus and argument</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Convert between Cartesian and polar (or Euler) form with correct quadrant</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Multiply and divide in polar form by adding/subtracting arguments</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply De Moivre's theorem to compute integer powers</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Reproduce the inductive proof of De Moivre</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Derive multiple-angle identities ($\cos n\theta$, $\sin n\theta$) using De Moivre</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Find all $n$ distinct $n$-th roots of a given complex number</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> Show that the $n$-th roots of unity sum to $0$ (algebraically and geometrically)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply the conjugate root theorem to factor real polynomials</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Build the real quadratic factor $x^2 - 2ax + (a^2+b^2)$ from a conjugate pair $a \pm bi$</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Add, subtract, multiply, and divide complex numbers in Cartesian form</span><span data-lang="zh">能在笛卡尔形式下对复数加、减、乘、除</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use $z \bar z = |z|^2$ to rationalize denominators</span><span data-lang="zh">用 $z \bar z = |z|^2$ 把复数分母实化</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Solve $z^2 = w$ by equating real and imaginary parts</span><span data-lang="zh">通过比较实部、虚部解 $z^2 = w$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Plot complex numbers on the Argand diagram &amp; read off modulus and argument</span><span data-lang="zh">能在阿尔冈图上画出复数，并读取模与辐角</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Convert between Cartesian and polar (or Euler) form with correct quadrant</span><span data-lang="zh">能在笛卡尔与极坐标 / 欧拉形式间互转，并选对象限</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and apply Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$</span><span data-lang="zh">写出并应用欧拉公式 $e^{i\theta} = \cos\theta + i\sin\theta$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Multiply and divide in polar form by adding/subtracting arguments</span><span data-lang="zh">在极坐标形式下通过辐角加 / 减做乘除</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply De Moivre's theorem to compute integer powers</span><span data-lang="zh">用棣莫弗定理计算整数次幂</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> <span data-lang="en">Reproduce the inductive proof of De Moivre</span><span data-lang="zh">能复现棣莫弗的归纳证明</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> <span data-lang="en">Derive multiple-angle identities ($\cos n\theta$, $\sin n\theta$) using De Moivre</span><span data-lang="zh">用棣莫弗推导多倍角恒等式 $\cos n\theta$、$\sin n\theta$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Find all $n$ distinct $n$-th roots of a given complex number</span><span data-lang="zh">求出给定复数的全部 $n$ 个 $n$ 次方根</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL+</span> <span data-lang="en">Show that the $n$-th roots of unity sum to $0$ (algebraically and geometrically)</span><span data-lang="zh">证明 $n$ 次单位根之和为 $0$（代数与几何两种）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and apply the conjugate root theorem to factor real polynomials</span><span data-lang="zh">写出并应用共轭根定理来因式分解实多项式</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Build the real quadratic factor $x^2 - 2ax + (a^2+b^2)$ from a conjugate pair $a \pm bi$</span><span data-lang="zh">由共轭对 $a \pm bi$ 构造实二次因式 $x^2 - 2ax + (a^2+b^2)$</span></li>
   </ul>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
-  <p>IB Math Analysis &amp; Approaches HL — Unit A4: Complex Numbers · First Assessment 2029</p>
+  <p><span data-lang="en">IB Math Analysis &amp; Approaches HL — Unit A4: Complex Numbers · First Assessment 2029</span><span data-lang="zh">IB 数学分析与方法 HL——单元 A4：复数 · 首次考核 2029</span></p>
 </div>
 
 </main>
@@ -1673,16 +2034,38 @@ function updateScoreBadge() {
 }
 
 // ─── THEME ───
+function setThemeBtnLabel(isDark) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  const tt = document.getElementById('themeToggle');
-  if (tt) tt.textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  try {
+    localStorage.setItem('drs.lang',
+      document.body.classList.contains('lang-zh') ? 'zh' : 'en');
+  } catch (e) { /* ignore */ }
+}
+(function () {
+  try {
+    if (localStorage.getItem('drs.lang') === 'zh') {
+      document.body.classList.add('lang-zh');
+    }
+  } catch (e) { /* ignore */ }
+})();
 
 // ─── PROGRESS BAR ───
 window.addEventListener('scroll', () => {
@@ -1754,7 +2137,9 @@ function updateFlashcardCount() {
   const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
   const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
   const el = document.getElementById('fcCount');
-  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span>' +
+    '<span data-lang="zh">已翻 ' + flipped + ' / ' + total + '</span>';
 }
 function resetFlashcards() {
   document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
@@ -1777,7 +2162,9 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const el = document.getElementById('checkProgress');
-  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+    '<span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
 }
 
 // ─── SIDEBAR TOGGLE ───
