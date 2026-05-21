@@ -23,40 +23,32 @@ A1 + A3 + A4 study guides shipped; A1 + A3 practice question sets shipped).
 
 ## Active Sprint — what we're working on now
 
-**Translation Sprint — Bilingual EN↔ZH for shipped study guides (in flight
-as of 2026-05-20).** All currently-shipped IB Math HL study guides
-(A1, A3, A4, C) bilingualizing EN↔ZH against the locked playbook in
+**Translation Sprint closed 2026-05-21.** All currently-shipped IB Math
+HL study guides (A1, A3, A4, C) bilingualized EN↔ZH against the locked
+playbook in
 [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
 Sequential, one file at a time, review-then-merge per file. Branch:
 `ib_math_hl_translation`. Per-file scorecard in the
 [Translation audit](#translation-audit-per-file-post-ship) section
-below — fill in as each unit ships.
+below — all 4 files pass four-axis audit.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| ~~**T-1**~~ | Unit A1 Sequences &amp; Series bilingual translation | P1 | ✅ **Shipped** — 260/260 `data-lang` markers; 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed) + how-to + exam-strategy + flashcards + 10-item unit quiz + 14-item readiness checklist all bilingualized. Pending review-then-merge. |
-| ~~**T-2**~~ | Unit A3 Combinatorics bilingual translation | P1 | ✅ **Shipped** — 213/213 `data-lang` markers; 6 sections (counting principles, permutations, combinations, binomial theorem, Pascal's triangle, extended binomial HL) + how-to + exam-strategy + flashcards + 10-item unit quiz + 14-item readiness checklist all bilingualized. Pending review-then-merge. |
-| **T-3** | Unit A4 Complex Numbers bilingual translation | P1 | **Open** — next up |
-| **T-4** | Unit C Geometry bilingual translation | P1 | **Open** |
+| ~~**T-1**~~ | Unit A1 Sequences &amp; Series bilingual translation | P1 | ✅ closed — `cdca220` |
+| ~~**T-2**~~ | Unit A3 Combinatorics bilingual translation | P1 | ✅ closed — `ea3124d` |
+| ~~**T-3**~~ | Unit A4 Complex Numbers bilingual translation | P1 | ✅ closed — `12dc6ad` (+ Argand-gloss polish in follow-up) |
+| ~~**T-4**~~ | Unit C Geometry bilingual translation | P1 | ✅ closed — `ebf8d11` |
 
 **Audience contract** — Mandarin-Chinese-language students preparing to
 write the IB Math AA HL exam in English. Chinese is a *teaching
 translation*; English exam-rubric terminology (sequence / series /
 binomial theorem / De Moivre / Argand / modulus / argument / etc.) stays
-in `<code>` inline. Math notation untouched.
-
-**Note on stale playbook reference.** The playbook
-(`prompts/create-bilingual-translation.md`) cites commit `af27baf` as the
-locked example for Unit A1 — that translation was effectively reverted
-during the A1-A6 refactor (`9a0faaf`), so A1 is being re-translated from
-scratch under the current convention. Once T-1 ships, update the playbook
-to point at the new T-1 commit instead.
-
-Sprint closes when (a) all 4 files ship, (b) per-file scorecard passes
-four axes (EN/ZH balance + glossary fit + pedagogical + validates) for
-all 4, (c) no P0/P1 translation issues remain. A2/A5/A6 will be
+in `<code>` inline. Math notation untouched. A2 / A5 / A6 will be
 translated as they ship (separate Translation Sprint Wave 2 entry to be
 opened when those files land).
+
+**Backlog candidates beyond this sprint:** Sprint 1 (Unit A refactor —
+A2, A5, A6 study guides) and Sprint 2 (Units B / D / E).
 
 ### Sprint 1 — Refactor Unit A into focused sub-units (paused for translation)
 
@@ -130,38 +122,43 @@ the matching `"zh"` count.
 
 | # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
 |---|---|---|---|---|---|---|
-| A1 | Sequences & Series       | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped. Playbook's `af27baf` reference superseded — point future translators here once the commit lands. |
-| A3 | Combinatorics            | 213 / 213 ✅ | ✅ | ✅ | ✅ | T-2 shipped. Glossary covers <code>permutation</code>, <code>combination</code>, <code>binomial theorem</code>, <code>Pascal's triangle</code>, <code>Pascal's identity</code>, <code>circular arrangement</code>, <code>combinatorial proof</code>. |
-| A4 | Complex Numbers          | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-3 — queued. Heavy on Argand / De Moivre / modulus-argument terminology — exercise the playbook IB Math glossary. |
-| C  | Geometry & Trigonometry  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-4 — queued. Largest file (2381 lines); glossary additions likely (sine/cosine rule, vector cross/dot product, etc.). |
+| A1 | Sequences & Series       | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped `cdca220`. Supersedes playbook's stale `af27baf` reference. |
+| A3 | Combinatorics            | 213 / 213 ✅ | ✅ | ✅ | ✅ | T-2 shipped `ea3124d`. Glossary covers <code>permutation</code>, <code>combination</code>, <code>binomial theorem</code>, <code>Pascal's triangle</code>, <code>Pascal's identity</code>, <code>circular arrangement</code>, <code>combinatorial proof</code>. |
+| A4 | Complex Numbers          | 241 / 241 ✅ | ✅ | ✅ | ✅ | T-3 shipped `12dc6ad`. Glossary covers <code>Cartesian form</code>, <code>polar form</code>, <code>Euler form</code>, <code>Euler's formula</code>, <code>De Moivre's theorem</code>, <code>roots of unity</code>, <code>primitive root</code>, <code>conjugate root theorem</code>, <code>fundamental theorem of algebra</code>. Argand-gloss polish landed as follow-up. |
+| C  | Geometry & Trigonometry  | 356 / 356 ✅ | ✅ | ✅ | ✅ | T-4 shipped `ebf8d11`. Largest file (2381 → 2909 lines). Glossary covers <code>sine rule</code>, <code>cosine rule</code>, <code>radian</code>, <code>arc length</code>, <code>sector area</code>, <code>dot product</code> (→ 数量积（点积）), <code>vector product</code> / <code>cross product</code> (→ 向量积（叉积）), <code>skew lines</code> (→ 异面), <code>magnitude</code>, <code>normal vector</code>, <code>vector equation of a line</code>, <code>vector equation of a plane</code>, plus <code>bearing</code> / <code>angle of elevation/depression</code>. |
 
 A2, A5, A6 not in this sprint — they have not yet shipped (open in
 Sprint 1 above). Translate as they ship.
 
-### Findings — corpus-wide
+### Findings — corpus-wide (closed 2026-05-21)
 
-*To be filled in once all 4 files ship and are audited together.* Mirror
-AP Calc / AP Physics structure:
-
-- EN/ZH `data-lang` attribute counts balanced across all 4 files.
-- Glossary consistency: spot-check 15+ core IB Math AA HL terms
-  (sequence / series / arithmetic / geometric / common difference / common
-  ratio / binomial theorem / Pascal's triangle / permutation /
+- **All 4 files have perfectly balanced `data-lang="en"` / `data-lang="zh"`
+  attribute counts** (A1: 260/260, A3: 213/213, A4: 241/241, C: 356/356).
+- **Bilingual infrastructure identical across all 4 files** — CSS toggle
+  (`body:not(.lang-zh)…` + mirror), `toggleLang()` JS with
+  `localStorage.drs.lang` persistence, nav button between Contents and
+  Dark, `PingFang SC → Hiragino Sans GB → Microsoft YaHei` CJK fallback
+  in `--font-body`.
+- **Exam-term gloss pattern applied uniformly.** Every IB Math AA HL
+  rubric term appears once in `<code>` on its first mention per Chinese
+  passage; subsequent mentions left as plain Chinese.
+- **Math notation untouched.** All LaTeX renders identically in both
+  languages — Chinese flip changes only the prose.
+- **Glossary consistency.** Core terms (sequence / series / arithmetic /
+  geometric / binomial theorem / Pascal's triangle / permutation /
   combination / complex number / Argand diagram / De Moivre / modulus /
-  argument / extended binomial) — every appearance uses the same Chinese
-  rendering.
-- Exam-term gloss pattern applied across all 4 units.
-- Math notation untouched in both languages.
-- Bilingual infrastructure identical across all 4 files (CSS toggle,
-  `--font-body` CJK fallback, nav button between Contents and Dark,
-  `localStorage` under `drs.lang`).
-- `scripts/validate.sh` passes on all 4.
+  argument / sine rule / cosine rule / dot product / cross product /
+  skew lines) render identically across files.
+- **`scripts/validate.sh` passes on all 4.**
+
+Translation work is **publish-ready**. No P0 / P1 translation issues
+remain.
 
 ### Findings — requiring follow-up
 
-*To be filled in.* If publish-ready: declare "no P0/P1 translation
-issues found" (mirroring AP Calc / AP Physics). Otherwise log each issue
-as `TR-N` with Tier and Notes columns above the P2 table below.
+None. Sprint cleared with a small polish commit fixing three
+`Argand plane` vs `Argand diagram` gloss mismatches in A4 (commit
+follow-up to `12dc6ad`). Optional P2 refinements below.
 
 ### Optional refinements (P2 — not blocking)
 
