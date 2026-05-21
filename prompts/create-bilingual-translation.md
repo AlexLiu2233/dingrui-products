@@ -1,33 +1,43 @@
 # Create Bilingual (EN ↔ ZH) Translation for a Study Guide
 
-You are producing a Mandarin Chinese translation of an existing Dingrui
-Scholars English study guide. This is a **teaching translation**, not a
-literal one. The locked conventions below were established on AP CSA
-U1–U4 (commits `12cef14` + `d1b6257`), refined on IB Math HL Unit A1
-(`af27baf`), and applied to AP Calculus U1–U10 (`3ab03d5`).
+<task>
+Produce a Mandarin Chinese translation of an existing Dingrui Scholars
+English study guide (or Practice / Solutions file). This is a
+**teaching translation**, not a literal one. The locked conventions in
+this file were established on AP CSA U1–U4 (commits `12cef14` +
+`d1b6257`), refined on IB Math HL Unit A1 (`af27baf`), applied to
+AP Calculus U1–U10 (`3ab03d5`), and hardened on AP Physics U1–U7
+(2026-05-19, including the terminology-audit pass that corrected
+`折返点 → 转折点`, `点积 → 标量积`, `路径长度 → 路程`,
+`缓冲溃缩区 → 溃缩区`, `冲量—动量定理 → 动量定理`).
+</task>
 
-## Inputs
-- **Source file**: `<Subject>/Study Guides/<Unit_X_Topic>.html` (or Practice / Solutions equivalent)
-- **Subject glossary**: lives in `prompts/create-bilingual-translation.md`
-  (this file — extend it as new subjects are translated)
+<inputs>
+- **Source file**: `<Subject>/Study Guides/<Unit_X_Topic>.html`
+  (or `Practice Questions/…` or `Practice Questions/Solutions/…` equivalent)
+- **Subject glossary**: lives in this file (extend it as new subjects translate)
+</inputs>
 
-## Audience — locked
+<audience>
 
-Mandarin-Chinese-language students preparing to write the AP / IB / SAT
+Mandarin-Chinese-speaking students preparing to sit the AP / IB / SAT
 exam **in English**. The Chinese is a teaching translation:
+
 - **Math notation, code, and exam-rubric terminology stay in English.**
   The student must recognize them on the exam paper. The Chinese
   *explains* the concept; the English *carries* the exam vocabulary.
-- **Pedagogical prose translates to natural Chinese.** Not word-for-word.
-  Idiomatic, clear, in the register a Chinese math/CS textbook uses.
+- **Pedagogical prose translates to natural Chinese.** Not
+  word-for-word. Idiomatic, in the register a Chinese math/CS textbook
+  uses.
 
-This is the opposite of a literal translation. If a sentence reads
+This is the **opposite of a literal translation.** If a sentence reads
 fluently to a Chinese student but doesn't preserve the English exam
-term, **fix the translation, not the term**.
+term, **fix the translation, not the term.**
+</audience>
 
-## Locked design
+<locked_design>
 
-### CSS toggle (single-source)
+### CSS toggle — single source
 
 ```css
 body:not(.lang-zh) [data-lang="zh"] { display: none; }
@@ -46,14 +56,13 @@ under a `/* ─── BILINGUAL TOGGLE ─── */` comment.
 ```
 
 Without this, Chinese characters render in a system fallback that may
-look thin / inconsistent cross-platform. PingFang SC covers macOS / iOS;
-Hiragino Sans GB is the legacy macOS fallback; Microsoft YaHei covers
-Windows; everything else picks up the sans-serif.
+look thin or inconsistent cross-platform. PingFang SC covers macOS /
+iOS; Hiragino Sans GB is the legacy macOS fallback; Microsoft YaHei
+covers Windows.
 
 ### Nav button + JS toggle
 
-Insert the language button between **Contents** and **Dark** in the
-nav:
+Insert the language button between **Contents** and **Dark** in the nav:
 
 ```html
 <button class="nav-btn" id="langToggle" onclick="toggleLang()"
@@ -82,18 +91,17 @@ function toggleLang() {
 
 `localStorage` key namespace: `drs.lang` (drs = dingrui scholars).
 
-### Two markup forms (use whichever fits)
+### Two markup forms — use whichever fits
 
-**Form A — inline `<span>` pair** for short labels, headings,
-sentences:
+**Form A — inline `<span>` pair** for short labels, headings, single sentences:
 
 ```html
 <span data-lang="en">Limit Laws</span><span data-lang="zh">极限法则</span>
 ```
 
 **Form B — parallel block siblings** for long worked examples,
-multi-line callouts, tables. Each block carries the `data-lang`
-attribute on its own root element:
+multi-line callouts, tables. Each block carries `data-lang` on its own
+root element:
 
 ```html
 <div class="worked-solution" data-lang="en">
@@ -106,15 +114,13 @@ attribute on its own root element:
 </div>
 ```
 
-Children inside a Form-B block do **not** need `data-lang`
-attributes — the parent's `data-lang` flips visibility via the CSS
-rule.
+Children inside a Form-B block do **not** need `data-lang` attributes
+— the parent's `data-lang` flips visibility via the CSS rule.
 
-### Exam-term glosses inside Chinese text
+### Exam-term glosses inside Chinese text — the single most important pattern
 
-The single most important pattern. Any English term the student must
-recognize on the exam paper appears parenthesised in `<code>` inside
-the Chinese:
+Any English term the student must recognize on the exam paper appears
+parenthesised in `<code>` inside the Chinese:
 
 ```
 多项式以及分母非零的有理函数都可直接代入（<code>direct substitution</code>）求极限。
@@ -124,22 +130,29 @@ the Chinese:
 Reading rule for the student: *the Chinese tells you what the concept
 means; the English in `<code>` is the exact phrase the AP exam will
 use.*
+</locked_design>
+
+<negative_space>
 
 ### What NOT to translate
 
 - **Math notation**: $\lim$, $\int$, $\frac{d}{dx}$, $\binom{n}{r}$ —
   LaTeX renders identically in either language. Leave untouched.
 - **Code identifiers and Java keywords** (AP CSA): `int`, `String`,
-  `ArrayList`, `Math.random()`, etc. Stay in English. Code comments
-  inside `<pre>` blocks: **don't translate them** — the student types
-  them in English on the exam.
-- **AP rubric language**: "AP-Style Practice", "Free-Response
-  Question", "Multiple Choice", "Calculator Permitted / No
-  Calculator". Keep in English; the AP exam uses these phrases.
+  `ArrayList`, `Math.random()`, etc. Stay in English. **Code comments
+  inside `<pre>` blocks do not translate** — the student types them in
+  English on the exam.
+- **AP rubric language**: "AP-Style Practice", "Free-Response Question",
+  "Multiple Choice", "Calculator Permitted / No Calculator". Keep in
+  English; the AP exam uses these phrases.
+- **Locked term-flagged glosses** (see tables below) — the English in
+  `<code>` is not a translation candidate, it's part of the rendered
+  output that goes to the student.
+</negative_space>
 
-### Surface coverage per file
+<surface_coverage>
 
-Translate every user-facing string. The checklist:
+Translate every user-facing string. The checklist (per file):
 
 - [ ] Hero (overline, h1, subtitle, "Read me first" intro)
 - [ ] Sidebar TOC (every link label)
@@ -147,7 +160,8 @@ Translate every user-facing string. The checklist:
 - [ ] Concept boxes (header + body, both languages, all colors)
 - [ ] Worked-example titles + step labels + prose
 - [ ] Tables (cell prose, header cells, captions)
-- [ ] Inline quizzes (question + 4 options + correct-explanation + wrong-explanation + "Try Again" button)
+- [ ] Inline quizzes (question + 4 options + correct-explanation +
+      wrong-explanation + "Try Again" button)
 - [ ] Flashcards (front + back if prose; math stays untouched)
 - [ ] MCQ Patterns / Exam Strategy sections
 - [ ] Unit Quiz items
@@ -156,14 +170,19 @@ Translate every user-facing string. The checklist:
 - [ ] Footer prose
 - [ ] Nav buttons (already in design)
 - [ ] Skip-link, back-link, brand subtitle (Form A)
-- [ ] JS-generated text (template literals inside `toggleCheck`, etc. — both languages span-paired)
+- [ ] JS-generated text (template literals inside `toggleCheck`, etc.
+      — both languages span-paired)
+</surface_coverage>
 
-### Exam-rubric term-flagging — examples
+<glossary>
 
-Below are the canonical English terms whose preservation is non-negotiable
-across each subject. Add to this list when a new subject is translated.
+### Exam-rubric term-flagging — locked tables
 
-#### AP Calculus AB/BC
+These are the canonical English terms whose preservation is
+**non-negotiable** across each subject. Add to a table when a new
+subject is translated.
+
+#### AP Calculus AB / BC
 
 | Concept | Chinese | Exam term in `<code>` |
 |---|---|---|
@@ -237,58 +256,76 @@ English** — they are the exact symbols the student types on the exam.
 | modulus / argument | 模 / 辐角 |
 | extended binomial | 推广二项式 / 广义二项式 |
 
-## Build order
+#### AP Physics C: Mechanics
 
-1. Read the source file fully. Note which surface elements need
-   translation per the checklist above.
-2. Add the bilingual CSS rules + CJK font fallback to `:root` /
+Locked after the 2026-05-19 terminology audit. Generic high-frequency
+terms (`动能`, `功`, `势能`, `动量`, `冲量`, `质量`, `弹性碰撞`,
+`非弹性碰撞`, `参考系`, `惯性系`, `保守力`, `质心`) are safe and don't
+need extra flagging. The corrections below are the audit-locked ones —
+do not regress.
+
+| Concept | Chinese | Notes |
+|---|---|---|
+| turning point | 转折点 | not `折返点` (translationese) |
+| dot product | 标量积 | not `点积` (CS jargon) |
+| path length | 路程 | not `路径长度` (over-literal) |
+| crumple zone | 溃缩区 | not `缓冲溃缩区` |
+| impulse-momentum theorem | 动量定理 | not `冲量—动量定理` |
+</glossary>
+
+<build_order>
+
+1. **Read the source file fully.** Note which surface elements need
+   translation per `<surface_coverage>`.
+2. **Add the bilingual CSS rules + CJK font fallback** to `:root` /
    `<style>` block (one-time per file).
-3. Insert the language toggle button + `toggleLang()` JS + restore-on-load
-   block (one-time per file).
-4. Translate top-to-bottom, **applying both Form A and Form B as fits the
-   element size.** Short labels → Form A. Multi-line worked examples →
+3. **Insert the language toggle button + `toggleLang()` JS +
+   restore-on-load block** (one-time per file).
+4. **Translate top-to-bottom**, applying Form A and Form B as fits
+   element size. Short labels → Form A. Multi-line worked examples →
    Form B.
-5. Apply the exam-term gloss pattern: every English term in the
-   subject glossary above gets a `<code>english term</code>` inline
-   inside its first Chinese mention per section.
-6. Sweep the JS-generated strings (look for template literals that
-   build HTML — `toggleCheck`, `setThemeBtnLabel`, etc.) and wrap their
+5. **Apply the exam-term gloss pattern**: every English term in the
+   subject glossary gets a `<code>english term</code>` inline inside
+   its first Chinese mention per section.
+6. **Sweep JS-generated strings.** Look for template literals that
+   build HTML (`toggleCheck`, `setThemeBtnLabel`, etc.) and wrap their
    text in `<span data-lang>` pairs.
-7. Run `scripts/validate.sh <file>` — must pass.
-8. Audit: `grep -c 'data-lang="en"'` and `grep -c 'data-lang="zh"'`
-   should be **equal** in the final file. Any imbalance = something
-   was missed.
-9. **Terminology audit** (locked 2026-05-19 after AP Physics U3/U4
-   landed `折返点 → 转折点`, `点积 → 标量积`, `路径长度 → 路程`,
-   `缓冲溃缩区 → 溃缩区`, `冲量—动量定理 → 动量定理`). Dispatch a
-   general-purpose Agent with WebSearch + WebFetch to verify your
-   Chinese terminology against mainland-China textbook convention
-   — see the next section for the exact brief and which terms to skip.
+7. **Validate** — `bash scripts/validate.sh <file>` must pass.
+8. **Audit `data-lang` parity**:
+   ```bash
+   grep -c 'data-lang="en"' <file>
+   grep -c 'data-lang="zh"' <file>
+   ```
+   Counts must be **equal**. Imbalance = something was missed.
+9. **Terminology audit** (locked step — do not skip).
+   See `<terminology_audit>` below for the agent brief.
    Apply corrections **before** committing.
-10. Open in a browser, click the "中文" button, page should flip cleanly.
-    Click "EN" — page flips back. Reload — language sticks.
+10. **Browser smoke test.** Open the file, click "中文", page flips
+    cleanly. Click "EN", flips back. Reload — language sticks.
+</build_order>
 
-## Terminology audit — the brief to send the agent
+<terminology_audit>
 
-The audit is not optional. The risk it catches is invisible to anyone
-who can't read Chinese fluently: a translation that is *grammatically*
-correct but uses CS-jargon (e.g. `点积`) or translationese
-(e.g. `折返点`, `缓冲溃缩区`) where mainland 教材 has a different
-canonical term.
+The terminology audit is **not optional**. The risk it catches is
+invisible to anyone who can't read Chinese fluently: a translation
+that is grammatically correct but uses CS-jargon (e.g. `点积`) or
+translationese (e.g. `折返点`, `缓冲溃缩区`) where mainland 教材 has a
+different canonical term.
 
-**When to skip a term:** generic high-frequency words that exist
-identically in every Chinese physics text — `动能`, `功`, `势能`,
-`动量`, `冲量`, `质量`, `弹性碰撞`, `非弹性碰撞`, `参考系`,
-`惯性系`, `保守力`, `质心` — are safe and don't need verification.
+### When to skip a term
+Generic high-frequency words that exist identically in every Chinese
+physics text — `动能`, `功`, `势能`, `动量`, `冲量`, `质量`, `弹性碰撞`,
+`非弹性碰撞`, `参考系`, `惯性系`, `保守力`, `质心` — are safe.
 
-**When to audit a term:** anything where you made a translation choice
-between plausible alternatives. Compound nouns
-(`crumple zone`, `ballistic pendulum`), discipline-specific names
-(`work–energy theorem`, `impulse–momentum theorem`), and any term where
-the English has two natural Chinese renderings (`dot product` →
-`点积` vs `标量积`; `path length` → `路径长度` vs `路程`).
+### When to audit a term
+Anything where you made a translation choice between plausible
+alternatives. Compound nouns (`crumple zone`, `ballistic pendulum`),
+discipline-specific names (`work–energy theorem`,
+`impulse–momentum theorem`), and any term where the English has two
+natural Chinese renderings (`dot product` → `点积` vs `标量积`;
+`path length` → `路径长度` vs `路程`).
 
-Brief template (paste into Agent prompt, fill in the term list):
+### Brief template — paste into Agent prompt, fill in the term list
 
 ```
 I'm doing a teaching translation of <Subject> study guides from English
@@ -317,19 +354,42 @@ End with a prioritized list of corrections in this format:
 Keep the entire response under 600 words.
 ```
 
-When the agent reports back, apply each `replace:` directive. Preserve
-the `<code>english term</code>` gloss at first mention — the corrected
-Chinese sits next to the English, not in place of it.
+When the agent reports back, apply each `replace:` directive. **Preserve
+the `<code>english term</code>` gloss at first mention** — the
+corrected Chinese sits next to the English, not in place of it.
 
-If a candidate correction conflicts with a term already shipped in an
-earlier, user-approved unit on the same branch, keep the cross-unit
-consistency unless the user explicitly authorizes a sweep.
+**Cross-unit consistency rule:** if a candidate correction conflicts
+with a term already shipped in an earlier, user-approved unit on the
+same branch, **keep the cross-unit consistency** unless the user
+explicitly authorizes a sweep.
+</terminology_audit>
 
-## Cross-references
+<cross_references>
 
 - Locked example commits to mirror:
   - AP CSA U1–U4 — `12cef14` (translation) + `d1b6257` (glosses)
   - IB Math HL Unit A1 — `af27baf`
   - AP Calculus U1–U10 — `3ab03d5`
-- Audit pattern: `<Subject>/AUDIT.md` has a "Translation audit" section
-  (see `AP Calculus/AUDIT.md` for the locked template).
+  - AP Physics U1–U7 — `e707bb5` through `d5a3233` (with terminology audit `b4e685b`)
+- Audit pattern: `<Subject>/AUDIT.md` has a "Translation audit"
+  section (see `AP Calculus/AUDIT.md` for the locked template).
+- Outer-loop sprint workflow:
+  [`improve-existing-product.md`](improve-existing-product.md).
+- Inner-loop edit review:
+  [`review-changes.md`](review-changes.md).
+</cross_references>
+
+<reminders>
+The five rules most often violated when the file gets long —
+re-stated at the tail because they're the highest-leverage:
+
+1. **Teaching translation, not literal.** Chinese explains; English in
+   `<code>` carries the exam vocabulary. Fix the prose, not the term.
+2. **`data-lang` parity is the gate.** `grep -c` counts must match.
+3. **Don't translate code, math, or AP rubric language.** See
+   `<negative_space>`.
+4. **Terminology audit is locked-in, not optional.** Step 9 of the
+   build order. Skip it and you ship `点积` where `标量积` belongs.
+5. **Cross-unit consistency beats new-best-translation.** If a term
+   already shipped on the branch, don't churn it without user approval.
+</reminders>
