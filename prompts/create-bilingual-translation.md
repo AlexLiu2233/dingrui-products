@@ -72,24 +72,19 @@ Insert the language button between **Contents** and **Dark** in the nav:
 ```
 
 ```js
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
 function toggleLang() {
   document.body.classList.toggle('lang-zh');
-  try {
-    localStorage.setItem('drs.lang',
-      document.body.classList.contains('lang-zh') ? 'zh' : 'en');
-  } catch (e) { /* ignore quota / privacy errors */ }
 }
-// Restore on load:
-(function () {
-  try {
-    if (localStorage.getItem('drs.lang') === 'zh') {
-      document.body.classList.add('lang-zh');
-    }
-  } catch (e) { /* ignore */ }
-})();
 ```
 
-`localStorage` key namespace: `drs.lang` (drs = dingrui scholars).
+**No `localStorage` persistence** — until the landing page is also
+bilingualized, every page must default to English on load. Restoring a
+prior `zh` choice across pages would leave a Chinese-language student
+on study guides linked from an English-only landing page, which the
+shipping subjects (AP Calc / AP Physics / AP CSA) all avoid. Convention
+locked 2026-05-21 after fixing an IB Math HL regression where stored
+`drs.lang=zh` from earlier subjects caused IB Math to boot Chinese.
 
 ### Two markup forms — use whichever fits
 
