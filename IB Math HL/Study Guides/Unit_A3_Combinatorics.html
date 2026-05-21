@@ -39,7 +39,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -572,6 +572,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .pascal-tri .num { display: inline-block; width: 2.4em; }
 .pascal-tri .hi { color: var(--accent); font-weight: 700; }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+
 </style>
 </head>
 <body>
@@ -583,27 +587,28 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-a3-1">A3.1 Counting Principles</a>
-  <a href="#s-a3-2">A3.2 Permutations</a>
-  <a href="#s-a3-3">A3.3 Combinations</a>
-  <a href="#s-a3-4">A3.4 Binomial Theorem</a>
-  <a href="#s-a3-5">A3.5 Pascal's Triangle &amp; Identities</a>
-  <a href="#s-a3-6">A3.6 Extended Binomial (HL)</a>
-  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">使用指南</span></a>
+  <a href="#s-a3-1"><span data-lang="en">A3.1 Counting Principles</span><span data-lang="zh">A3.1 计数原理</span></a>
+  <a href="#s-a3-2"><span data-lang="en">A3.2 Permutations</span><span data-lang="zh">A3.2 排列</span></a>
+  <a href="#s-a3-3"><span data-lang="en">A3.3 Combinations</span><span data-lang="zh">A3.3 组合</span></a>
+  <a href="#s-a3-4"><span data-lang="en">A3.4 Binomial Theorem</span><span data-lang="zh">A3.4 二项式定理</span></a>
+  <a href="#s-a3-5"><span data-lang="en">A3.5 Pascal's Triangle &amp; Identities</span><span data-lang="zh">A3.5 帕斯卡三角与恒等式</span></a>
+  <a href="#s-a3-6"><span data-lang="en">A3.6 Extended Binomial (HL)</span><span data-lang="zh">A3.6 推广二项式 (HL)</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy &amp; Pitfalls</span><span data-lang="zh">考试策略与陷阱</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></a>
 </aside>
 
 <main class="main-wrap">
@@ -611,42 +616,44 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero" id="hero">
   <div class="hero-overline">IB Mathematics: Analysis &amp; Approaches HL · 鼎睿学苑</div>
-  <h1>Unit A3:<br>Combinatorics</h1>
+  <h1><span data-lang="en">Unit A3:<br>Combinatorics</span><span data-lang="zh">单元 A3：<br>组合数学</span></h1>
   <p class="hero-sub">
-    The third sub-unit of Topic 1. Counting principles, permutations, combinations, and the binomial theorem — including the HL extended (rational-exponent) form. The unit IB rewards twice: once for setup, once for the right combinatorial identity.
+    <span data-lang="en">The third sub-unit of Topic 1. Counting principles, permutations, combinations, and the binomial theorem — including the HL extended (rational-exponent) form. The unit IB rewards twice: once for setup, once for the right combinatorial identity.</span><span data-lang="zh">Topic 1 的第三个子单元。计数原理、排列（<code>permutation</code>）、组合（<code>combination</code>）以及二项式定理（<code>binomial theorem</code>）——含 HL 推广（有理指数）形式。IB 在本单元会双重给分：一次给"列式"，一次给"用对组合恒等式"。</span>
   </p>
   <div class="hero-meta">
     <span class="chip chip-maroon">IB AA HL · Topic 1.9–1.10</span>
-    <span class="chip chip-green">Papers 1 · 2</span>
-    <span class="chip chip-purple">6 Concepts</span>
+    <span class="chip chip-green"><span data-lang="en">Papers 1 · 2</span><span data-lang="zh">Paper 1 · 2</span></span>
+    <span class="chip chip-purple"><span data-lang="en">6 Concepts</span><span data-lang="zh">6 个核心概念</span></span>
   </div>
 </section>
 
 <!-- ═══════════════ HOW TO USE ═══════════════ -->
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">本指南使用说明</span></h2>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-orange">!</div>
-        <div class="card-title">If you're cramming</div>
+        <div class="card-title"><span data-lang="en">If you're cramming</span><span data-lang="zh">如果你在临阵磨枪</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. The single sentence to leave with: <em>multiply for sequential choices, $\binom{n}{r}$ for unordered, $T_{r+1} = \binom{n}{r}a^{n-r}b^r$ for binomial</em>. Skim one worked example per section. Take the practice quiz.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Read only the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. The single sentence to leave with: <em>multiply for sequential choices, $\binom{n}{r}$ for unordered, $T_{r+1} = \binom{n}{r}a^{n-r}b^r$ for binomial</em>. Skim one worked example per section. Take the practice quiz.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">只看每节顶端的金色虚线 <strong>"Cram-Mode Cheat"</strong> 速记框和公式框。一句话带走：<em>顺序相乘、无序用 $\binom{n}{r}$、二项式用 $T_{r+1} = \binom{n}{r}a^{n-r}b^r$</em>。每节扫一道 worked example（例题），最后做一次练习测验。</p>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">★</div>
-        <div class="card-title">If you're going for a 7</div>
+        <div class="card-title"><span data-lang="en">If you're going for a 7</span><span data-lang="zh">如果你目标是 7 分</span></div>
       </div>
-      <p style="font-size: 0.95rem;">Open every <code>▸ Going deeper</code>. Combinatorics is the topic where the right <em>combinatorial argument</em> often beats the algebraic one — especially for Pascal's identity and the binomial theorem itself. Owning both views is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="en">Open every <code>▸ Going deeper</code>. Combinatorics is the topic where the right <em>combinatorial argument</em> often beats the algebraic one — especially for Pascal's identity and the binomial theorem itself. Owning both views is what separates a 5 from a 7.</p>
+      <p style="font-size: 0.95rem;" data-lang="zh">打开每个 <code>▸ Going deeper</code>。组合数学是"<em>组合论证（combinatorial argument）</em>胜过代数推导"的典型话题——尤其是帕斯卡恒等式（<code>Pascal's identity</code>）和二项式定理本身。同时掌握两种视角，正是 5 分到 7 分的分水岭。</p>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">HL flag</strong>
-    Section <span class="hl-flag">A3.6</span> (Extended Binomial Theorem with rational exponents) is HL-only. Sections A3.1–A3.5 are core for both SL and HL students.
+    <strong style="color: var(--purple);"><span data-lang="en">HL flag</span><span data-lang="zh">HL 标记说明</span></strong>
+    <span data-lang="en">Section <span class="hl-flag">A3.6</span> (Extended Binomial Theorem with rational exponents) is HL-only. Sections A3.1–A3.5 are core for both SL and HL students.</span><span data-lang="zh">第 <span class="hl-flag">A3.6</span> 节（有理指数的推广二项式定理）为 HL 专属。A3.1–A3.5 是 SL 与 HL 共同核心。</span>
   </div>
 </section>
 
@@ -654,44 +661,66 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 
 <!-- ═══════════════ A3.1 COUNTING PRINCIPLES ═══════════════ -->
 <section class="section" id="s-a3-1">
-  <div class="section-label">Topic A3.1 · Foundations</div>
-  <h2>Counting Principles</h2>
+  <div class="section-label"><span data-lang="en">Topic A3.1 · Foundations</span><span data-lang="zh">Topic A3.1 · 基础</span></div>
+  <h2><span data-lang="en">Counting Principles</span><span data-lang="zh">计数原理</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Two rules cover almost every counting problem.</strong>
     <strong>Multiplication rule:</strong> if step $A$ has $m$ outcomes and step $B$ has $n$ outcomes, doing both gives $m \cdot n$ outcomes. Use when steps are <em>sequential</em>.<br>
     <strong>Addition rule:</strong> if cases $A$ and $B$ are <em>mutually exclusive</em>, then $|A \cup B| = |A| + |B|$. Use when cases are <em>alternatives</em>.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>两条规则几乎能涵盖所有计数题。</strong>
+    <strong>乘法原理（<code>multiplication rule</code>）：</strong>若步骤 $A$ 有 $m$ 种结果，步骤 $B$ 有 $n$ 种结果，两步连做共 $m \cdot n$ 种。适用于<em>顺序进行</em>的步骤。<br>
+    <strong>加法原理（<code>addition rule</code>）：</strong>若情形 $A$ 与 $B$ <em>互斥</em>（<code>mutually exclusive</code>），则 $|A \cup B| = |A| + |B|$。适用于<em>互不相交的可选情形</em>。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Multiplication and Addition Rules</div>
+    <div class="formula-label"><span data-lang="en">Multiplication and Addition Rules</span><span data-lang="zh">乘法原理与加法原理</span></div>
     $$ |\text{sequential}| = m \cdot n \qquad |\text{disjoint cases}| = |A| + |B| $$
   </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">When to use which</strong>
     Read the connector word. <strong>"AND"</strong> (do step 1 AND step 2 …) → multiply. <strong>"OR"</strong> (case 1 OR case 2 …, mutually exclusive) → add. If "OR" cases overlap, use inclusion-exclusion: $|A \cup B| = |A| + |B| - |A \cap B|$.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">何时用哪条</strong>
+    看连接词。<strong>"AND（且）"</strong>（先做 1 再做 2 ⋯）→ 乘。<strong>"OR（或）"</strong>（情形 1 或情形 2 ⋯，互斥）→ 加。若 "OR" 情形有重叠，用容斥原理（<code>inclusion-exclusion</code>）：$|A \cup B| = |A| + |B| - |A \cap B|$。
+  </div>
 
-  <h3>Worked Example — License plate (multiplication)</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — License plate (multiplication)</span><span data-lang="zh">例题——车牌（乘法）</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A plate has 3 letters followed by 4 digits. Letters can repeat; digits cannot. How many plates are possible?</p>
     <p>Letters: $26 \cdot 26 \cdot 26 = 26^3$. Digits (no repeats): $10 \cdot 9 \cdot 8 \cdot 7$. Plates are letters AND digits — multiply:</p>
     $$ 26^3 \cdot (10 \cdot 9 \cdot 8 \cdot 7) = 17\,576 \cdot 5040 = 88\,583\,040. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>车牌由 3 个字母加 4 个数字组成。字母可重复，数字不可重复。共有多少种车牌？</p>
+    <p>字母部分：$26 \cdot 26 \cdot 26 = 26^3$。数字部分（不可重复）：$10 \cdot 9 \cdot 8 \cdot 7$。字母 AND 数字——相乘：</p>
+    $$ 26^3 \cdot (10 \cdot 9 \cdot 8 \cdot 7) = 17\,576 \cdot 5040 = 88\,583\,040. $$
+  </div>
 
-  <h3>Worked Example — Casework (addition + multiplication)</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Casework (addition + multiplication)</span><span data-lang="zh">例题——分类讨论（加法 + 乘法）</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> How many 3-digit positive integers are divisible by $5$?</p>
     <p>Divisible by $5 \Leftrightarrow$ last digit is $0$ or $5$. These cases are disjoint, so add:</p>
     <p><strong>Last digit $= 0$:</strong> first digit $\in \{1, \ldots, 9\}$ (9 choices), middle digit $\in \{0, \ldots, 9\}$ (10 choices) → $9 \cdot 10 = 90$.</p>
     <p><strong>Last digit $= 5$:</strong> same shape → $9 \cdot 10 = 90$.</p>
     $$ \text{Total} = 90 + 90 = 180. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>有多少个能被 $5$ 整除的三位正整数？</p>
+    <p>被 $5$ 整除 $\Leftrightarrow$ 末位为 $0$ 或 $5$。两情形互斥，相加即可：</p>
+    <p><strong>末位 $= 0$：</strong>首位 $\in \{1, \ldots, 9\}$（9 选），中位 $\in \{0, \ldots, 9\}$（10 选）→ $9 \cdot 10 = 90$。</p>
+    <p><strong>末位 $= 5$：</strong>同样形式 → $9 \cdot 10 = 90$。</p>
+    $$ \text{Total} = 90 + 90 = 180. $$
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Inclusion-exclusion when cases overlap</summary>
+    <summary><span data-lang="en">▸ Going deeper — Inclusion-exclusion when cases overlap</span><span data-lang="zh">▸ 深入——情形重叠时的容斥原理</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>When "or" cases <em>can</em> happen together, simple addition double-counts the overlap. The fix:</p>
 $$ |A \cup B| = |A| + |B| - |A \cap B|. $$
 <p>For three sets:</p>
@@ -699,12 +728,22 @@ $$ |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + 
 <p><strong>Example.</strong> Out of 100 students, 40 study French, 35 Spanish, 15 study both. How many study at least one?</p>
 $$ 40 + 35 - 15 = 60. $$
 <p>The IB usually phrases this as a Venn-diagram problem (see Unit D Statistics &amp; Probability), but the underlying counting identity lives here.</p>
+</div>
+<div data-lang="zh">
+<p>当 "or" 的两种情形<em>可以同时发生</em>时，单纯相加会把交集多算一次。修正：</p>
+$$ |A \cup B| = |A| + |B| - |A \cap B|. $$
+<p>三集合情形：</p>
+$$ |A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C|. $$
+<p><strong>例：</strong>100 名学生中 40 人学法语，35 人学西班牙语，15 人两者都学。至少学一门的有多少人？</p>
+$$ 40 + 35 - 15 = 60. $$
+<p>IB 通常把这类题包装成 Venn 图问题（见 Unit D 统计与概率），但底层的计数恒等式就是这一条。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">A 4-character password uses one letter (26 options) followed by 3 digits (no repeats). How many passwords are possible?</div>
+      <div class="quiz-q"><span data-lang="en">A 4-character password uses one letter (26 options) followed by 3 digits (no repeats). How many passwords are possible?</span><span data-lang="zh">某 4 位密码由 1 个字母（26 选）加 3 个互不相同的数字组成。共有多少种密码？</span></div>
       <span class="quiz-number">A3.1</span>
     </div>
     <div class="quiz-options">
@@ -713,9 +752,11 @@ $$ 40 + 35 - 15 = 60. $$
       <div class="quiz-opt" data-idx="2">$26 \cdot 10 \cdot 9 \cdot 8 = 18\,720$</div>
       <div class="quiz-opt" data-idx="3">$26 + 10 \cdot 9 \cdot 8 = 746$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Sequential and ordered: $26$ letters, then $10$, $9$, $8$ for digits without repetition. Multiplication rule.</div>
-    <div class="quiz-explain wrong-exp">Sequential choices → multiply. $26 \cdot 10 \cdot 9 \cdot 8 = 18\,720$. (Option A would be correct if digits could repeat; option B divides by $3!$ as if order didn't matter — but the password is an ordered string.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Sequential and ordered: $26$ letters, then $10$, $9$, $8$ for digits without repetition. Multiplication rule.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！顺序选取、有序：$26$ 个字母，再加 $10$、$9$、$8$ 个不重复数字。乘法原理。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Sequential choices → multiply. $26 \cdot 10 \cdot 9 \cdot 8 = 18\,720$. (Option A would be correct if digits could repeat; option B divides by $3!$ as if order didn't matter — but the password is an ordered string.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">顺序连做 → 相乘。$26 \cdot 10 \cdot 9 \cdot 8 = 18\,720$。（选项 A 是数字可重复的答案；选项 B 多除了一个 $3!$，把顺序当成了无序——但密码是有序字符串。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -723,56 +764,85 @@ $$ 40 + 35 - 15 = 60. $$
 
 <!-- ═══════════════ A3.2 PERMUTATIONS ═══════════════ -->
 <section class="section" id="s-a3-2">
-  <div class="section-label">Topic A3.2 · Order matters</div>
-  <h2>Permutations</h2>
+  <div class="section-label"><span data-lang="en">Topic A3.2 · Order matters</span><span data-lang="zh">Topic A3.2 · 有序</span></div>
+  <h2><span data-lang="en">Permutations</span><span data-lang="zh">排列</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>A permutation is an <em>ordered</em> arrangement.</strong> The number of ways to arrange $r$ items chosen from $n$ distinct items is
     $$ {}^nP_r = \frac{n!}{(n-r)!} = n(n-1)(n-2)\cdots(n-r+1). $$
     All $n$ items, all in a row: ${}^nP_n = n!$. Repetition allowed: $n^r$. Identical items: divide $n!$ by the factorial of each repeat count.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>排列（<code>permutation</code>）是<em>有序</em>的安排。</strong>从 $n$ 个互异元素中取出 $r$ 个再排序的方法数为
+    $$ {}^nP_r = \frac{n!}{(n-r)!} = n(n-1)(n-2)\cdots(n-r+1). $$
+    全取 $n$ 个排成一排：${}^nP_n = n!$。允许重复：$n^r$。含相同元素时：把 $n!$ 除以每组重复个数的阶乘。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Permutation Formulas</div>
+    <div class="formula-label"><span data-lang="en">Permutation Formulas</span><span data-lang="zh">排列公式</span></div>
     $$ {}^nP_r = \frac{n!}{(n-r)!} \quad\;\; \text{(distinct, no repeat)} $$
     $$ n^r \quad\;\; \text{(distinct, with repeat)} $$
     $$ \frac{n!}{n_1!\,n_2!\,\cdots\,n_k!} \quad\;\; \text{($n$ items with groups of identicals)} $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — Why ${}^nP_r = n!/(n-r)!$</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why ${}^nP_r = n!/(n-r)!$</span><span data-lang="zh">▸ 深入——为何 ${}^nP_r = n!/(n-r)!$</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Pick the first item: $n$ ways. The second: $n - 1$ ways (one used). The $r$-th: $n - r + 1$ ways. By the multiplication rule:</p>
 $$ {}^nP_r = n \cdot (n-1) \cdot (n-2) \cdots (n-r+1). $$
 <p>Multiply numerator and denominator by $(n-r)!$:</p>
 $$ {}^nP_r = \frac{n(n-1)\cdots(n-r+1)\cdot(n-r)!}{(n-r)!} = \frac{n!}{(n-r)!}. \;\;\blacksquare $$
+</div>
+<div data-lang="zh">
+<p>第一个位置：$n$ 种选法。第二个：$n - 1$ 种（已用掉一个）。第 $r$ 个：$n - r + 1$ 种。由乘法原理：</p>
+$$ {}^nP_r = n \cdot (n-1) \cdot (n-2) \cdots (n-r+1). $$
+<p>分子分母同乘 $(n-r)!$：</p>
+$$ {}^nP_r = \frac{n(n-1)\cdots(n-r+1)\cdot(n-r)!}{(n-r)!} = \frac{n!}{(n-r)!}. \;\;\blacksquare $$
+</div>
     </div>
   </details>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Common variants</strong>
     <strong>Adjacent items.</strong> "$X$ and $Y$ next to each other": glue them as one block, arrange ($n-1$ items, so $(n-1)!$), then multiply by $2!$ for the internal order $XY$ vs. $YX$.<br>
     <strong>Forbidden positions.</strong> "$X$ <em>not</em> at position 1": total $n!$ minus arrangements with $X$ at position 1 ($(n-1)!$). So $n! - (n-1)! = (n-1)\cdot(n-1)!$.<br>
     <strong>Circular arrangements.</strong> $n$ distinct people around a round table: $(n-1)!$ arrangements (fix one person to remove rotational symmetry). If reflections are also identical, divide by $2$.
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">常见变型</strong>
+    <strong>相邻元素。</strong>"$X$ 与 $Y$ 相邻"：把它们粘成一个整体，按 $n-1$ 个元素排（$(n-1)!$），再乘 $2!$（块内有 $XY$ 与 $YX$ 两种顺序）。<br>
+    <strong>禁位。</strong>"$X$ 不在第 1 位"：总数 $n!$ 减去 $X$ 在第 1 位的排数 $(n-1)!$，即 $n! - (n-1)! = (n-1)\cdot(n-1)!$。<br>
+    <strong>圆排列（<code>circular arrangement</code>）。</strong>$n$ 个互异元素围圆桌：$(n-1)!$ 种（固定一人以消除旋转对称）。若同时认为镜像相同，再除以 $2$。
+  </div>
 
-  <h3>Worked Example — Arranging with constraints</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Arranging with constraints</span><span data-lang="zh">例题——带约束的排列</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> In how many ways can the letters of MATHS be arranged so that M and A are adjacent?</p>
     <p>Glue MA into a single block. Now arrange 4 items (block, T, H, S): $4! = 24$. The block has 2 internal orders (MA, AM): multiply by $2$.</p>
     $$ 4! \cdot 2! = 24 \cdot 2 = 48. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>把 MATHS 的字母重新排列，要求 M 与 A 相邻，共有多少种？</p>
+    <p>把 MA 粘成一块。现在排 4 个对象（块、T、H、S）：$4! = 24$ 种。块内有 MA、AM 两种顺序：再乘 $2$。</p>
+    $$ 4! \cdot 2! = 24 \cdot 2 = 48. $$
+  </div>
 
-  <h3>Worked Example — Identical letters</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Identical letters</span><span data-lang="zh">例题——重复字母</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> How many distinguishable arrangements of the letters in MISSISSIPPI?</p>
     <p>$11$ letters: $1$ M, $4$ I, $4$ S, $2$ P. Use the multiset formula:</p>
+    $$ \frac{11!}{1! \cdot 4! \cdot 4! \cdot 2!} = \frac{39\,916\,800}{1 \cdot 24 \cdot 24 \cdot 2} = \frac{39\,916\,800}{1152} = 34\,650. $$
+  </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>MISSISSIPPI 各字母排列共有多少种可区分的方式？</p>
+    <p>$11$ 个字母：$1$ 个 M，$4$ 个 I，$4$ 个 S，$2$ 个 P。用多重集排列公式：</p>
     $$ \frac{11!}{1! \cdot 4! \cdot 4! \cdot 2!} = \frac{39\,916\,800}{1 \cdot 24 \cdot 24 \cdot 2} = \frac{39\,916\,800}{1152} = 34\,650. $$
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">In how many ways can $5$ distinct books be arranged on a shelf if the math book must be at one of the ends?</div>
+      <div class="quiz-q"><span data-lang="en">In how many ways can $5$ distinct books be arranged on a shelf if the math book must be at one of the ends?</span><span data-lang="zh">将 $5$ 本不同的书放在书架上，数学书必须放在两端之一。有多少种排法？</span></div>
       <span class="quiz-number">A3.2</span>
     </div>
     <div class="quiz-options">
@@ -781,9 +851,11 @@ $$ {}^nP_r = \frac{n(n-1)\cdots(n-r+1)\cdot(n-r)!}{(n-r)!} = \frac{n!}{(n-r)!}. 
       <div class="quiz-opt" data-idx="2">$5! = 120$</div>
       <div class="quiz-opt" data-idx="3">$4! = 24$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $2$ choices for which end; then arrange the remaining $4$ books in $4!$ ways. Total $2 \cdot 4! = 48$.</div>
-    <div class="quiz-explain wrong-exp">Two-step count: choose end ($2$ ways), then arrange the rest ($4! = 24$). Multiplication rule → $48$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $2$ choices for which end; then arrange the remaining $4$ books in $4!$ ways. Total $2 \cdot 4! = 48$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！选哪一端：$2$ 种；其余 $4$ 本书随意排：$4!$ 种。合计 $2 \cdot 4! = 48$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Two-step count: choose end ($2$ ways), then arrange the rest ($4! = 24$). Multiplication rule → $48$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">两步计数：选端点（$2$ 种），再排其余（$4! = 24$）。乘法原理 → $48$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -791,55 +863,85 @@ $$ {}^nP_r = \frac{n(n-1)\cdots(n-r+1)\cdot(n-r)!}{(n-r)!} = \frac{n!}{(n-r)!}. 
 
 <!-- ═══════════════ A3.3 COMBINATIONS ═══════════════ -->
 <section class="section" id="s-a3-3">
-  <div class="section-label">Topic A3.3 · Order doesn't matter</div>
-  <h2>Combinations</h2>
+  <div class="section-label"><span data-lang="en">Topic A3.3 · Order doesn't matter</span><span data-lang="zh">Topic A3.3 · 无序</span></div>
+  <h2><span data-lang="en">Combinations</span><span data-lang="zh">组合</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>A combination is an <em>unordered</em> selection.</strong> The number of ways to choose $r$ items from $n$ distinct items is
     $$ {}^nC_r = \binom{n}{r} = \frac{n!}{r!\,(n-r)!}. $$
     Read $\binom{n}{r}$ as "$n$ choose $r$." The link to permutations: every unordered selection has $r!$ orderings, so ${}^nP_r = r! \cdot {}^nC_r$.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>组合（<code>combination</code>）是<em>无序</em>的选取。</strong>从 $n$ 个互异元素中选出 $r$ 个的方法数为
+    $$ {}^nC_r = \binom{n}{r} = \frac{n!}{r!\,(n-r)!}. $$
+    $\binom{n}{r}$ 读作 "$n$ choose $r$"。与排列的联系：每个无序选法对应 $r!$ 种排序，故 ${}^nP_r = r! \cdot {}^nC_r$。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Combination Formula</div>
+    <div class="formula-label"><span data-lang="en">Combination Formula</span><span data-lang="zh">组合公式</span></div>
     $$ \binom{n}{r} = \frac{n!}{r!\,(n-r)!} = \frac{{}^nP_r}{r!} $$
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Useful identities</strong>
     $$ \binom{n}{0} = \binom{n}{n} = 1 \qquad \binom{n}{1} = n \qquad \binom{n}{r} = \binom{n}{n-r} $$
     The symmetry $\binom{n}{r} = \binom{n}{n-r}$ is enormously useful: choosing $r$ to include $\Leftrightarrow$ choosing $n-r$ to exclude.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">常用恒等式</strong>
+    $$ \binom{n}{0} = \binom{n}{n} = 1 \qquad \binom{n}{1} = n \qquad \binom{n}{r} = \binom{n}{n-r} $$
+    对称性 $\binom{n}{r} = \binom{n}{n-r}$ 极其好用：选出 $r$ 个 $\Leftrightarrow$ 剔除 $n-r$ 个。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Algebraic vs. combinatorial proofs</summary>
+    <summary><span data-lang="en">▸ Going deeper — Algebraic vs. combinatorial proofs</span><span data-lang="zh">▸ 深入——代数证法 vs. 组合证法</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Take the symmetry identity $\binom{n}{r} = \binom{n}{n-r}$.</p>
 <p><strong>Algebraic:</strong> plug in:</p>
 $$ \binom{n}{n-r} = \frac{n!}{(n-r)!\,(n - (n-r))!} = \frac{n!}{(n-r)!\,r!} = \binom{n}{r}. $$
 <p><strong>Combinatorial:</strong> selecting $r$ to include is the same act as selecting the $n-r$ to leave out. Both descriptions count the same set of subsets. No algebra needed.</p>
 <p>The combinatorial argument generalizes faster (e.g. to Pascal's identity below) and is what IB markschemes often want when a question says "explain" rather than "show."</p>
+</div>
+<div data-lang="zh">
+<p>以对称恒等式 $\binom{n}{r} = \binom{n}{n-r}$ 为例。</p>
+<p><strong>代数证：</strong>代入公式：</p>
+$$ \binom{n}{n-r} = \frac{n!}{(n-r)!\,(n - (n-r))!} = \frac{n!}{(n-r)!\,r!} = \binom{n}{r}. $$
+<p><strong>组合证（<code>combinatorial proof</code>）：</strong>"选出 $r$ 个保留" 和 "选出 $n-r$ 个剔除" 描述的是同一件事，两种说法数的是同一族子集。无需代数。</p>
+<p>组合证更容易推广（例如下面的帕斯卡恒等式），而且当 IB 题目用 "explain" 而非 "show" 提问时，markscheme 通常想要这种证法。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Committee with constraint</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Committee with constraint</span><span data-lang="zh">例题——带条件的委员会</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A committee of $4$ is chosen from $6$ boys and $5$ girls. How many committees have at least one girl?</p>
     <p><strong>Trick: complement.</strong> Total committees minus committees with no girls.</p>
     $$ \binom{11}{4} - \binom{6}{4} = 330 - 15 = 315. $$
     <p>Direct case-split would also work (1 girl, 2 girls, 3 girls, 4 girls = $\binom{5}{1}\binom{6}{3} + \binom{5}{2}\binom{6}{2} + \binom{5}{3}\binom{6}{1} + \binom{5}{4}\binom{6}{0}$ = $100 + 150 + 60 + 5 = 315$ ✓), but is four times the work. Always check whether a complement is faster.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>从 $6$ 男 $5$ 女中选 $4$ 人组成委员会。至少有一名女生的方案数？</p>
+    <p><strong>套路：补集。</strong>总数减去全无女生的方案数。</p>
+    $$ \binom{11}{4} - \binom{6}{4} = 330 - 15 = 315. $$
+    <p>直接分类（1 女、2 女、3 女、4 女）也行：$\binom{5}{1}\binom{6}{3} + \binom{5}{2}\binom{6}{2} + \binom{5}{3}\binom{6}{1} + \binom{5}{4}\binom{6}{0} = 100 + 150 + 60 + 5 = 315$ ✓，但工作量是补集法的四倍。先想想"补集"是否更快。</p>
+  </div>
 
-  <h3>Worked Example — Cards</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Cards</span><span data-lang="zh">例题——扑克牌</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> A 5-card hand is dealt from a standard 52-card deck. How many hands contain exactly two aces?</p>
     <p>Choose 2 aces from 4: $\binom{4}{2}$. Choose the remaining 3 cards from the 48 non-aces: $\binom{48}{3}$. Multiply:</p>
+    $$ \binom{4}{2} \cdot \binom{48}{3} = 6 \cdot 17\,296 = 103\,776. $$
+  </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>从标准 52 张牌中发 5 张。恰好含 2 张 A 的牌型有多少种？</p>
+    <p>从 4 张 A 中选 2 张：$\binom{4}{2}$。再从 48 张非 A 中选 3 张：$\binom{48}{3}$。相乘：</p>
     $$ \binom{4}{2} \cdot \binom{48}{3} = 6 \cdot 17\,296 = 103\,776. $$
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">From $8$ candidates, $3$ are to be selected for an unranked working group. How many groups are possible?</div>
+      <div class="quiz-q"><span data-lang="en">From $8$ candidates, $3$ are to be selected for an unranked working group. How many groups are possible?</span><span data-lang="zh">从 $8$ 名候选人中无序选出 $3$ 人组成工作组，共有多少种？</span></div>
       <span class="quiz-number">A3.3</span>
     </div>
     <div class="quiz-options">
@@ -848,9 +950,11 @@ $$ \binom{n}{n-r} = \frac{n!}{(n-r)!\,(n - (n-r))!} = \frac{n!}{(n-r)!\,r!} = \b
       <div class="quiz-opt" data-idx="2">$336$</div>
       <div class="quiz-opt" data-idx="3">$56$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Unranked → combination: $\binom{8}{3} = \tfrac{8!}{3! \cdot 5!} = 56$.</div>
-    <div class="quiz-explain wrong-exp">Order doesn't matter → use $\binom{8}{3} = 56$. (Option C, $336 = {}^8P_3$, would be right if positions were ranked.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Unranked → combination: $\binom{8}{3} = \tfrac{8!}{3! \cdot 5!} = 56$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！无序 → 用组合：$\binom{8}{3} = \tfrac{8!}{3! \cdot 5!} = 56$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Order doesn't matter → use $\binom{8}{3} = 56$. (Option C, $336 = {}^8P_3$, would be right if positions were ranked.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">无序 → 用 $\binom{8}{3} = 56$。（选项 C 的 $336 = {}^8P_3$ 是有序选法，本题不适用。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -858,61 +962,90 @@ $$ \binom{n}{n-r} = \frac{n!}{(n-r)!\,(n - (n-r))!} = \frac{n!}{(n-r)!\,r!} = \b
 
 <!-- ═══════════════ A3.4 BINOMIAL THEOREM ═══════════════ -->
 <section class="section" id="s-a3-4">
-  <div class="section-label">Topic A3.4 · Polynomial expansion</div>
-  <h2>The Binomial Theorem</h2>
+  <div class="section-label"><span data-lang="en">Topic A3.4 · Polynomial expansion</span><span data-lang="zh">Topic A3.4 · 多项式展开</span></div>
+  <h2><span data-lang="en">The Binomial Theorem</span><span data-lang="zh">二项式定理</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>For $n \in \mathbb{Z}^+$:</strong>
     $$ (a + b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r} b^{r}. $$
     The general term is $\boxed{\,T_{r+1} = \binom{n}{r} a^{n-r} b^{r}\,}$. To find a specific power of a variable, write $T_{r+1}$, set the exponent of the variable equal to the target, solve for $r$, plug back in. Don't expand the whole thing.
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>当 $n \in \mathbb{Z}^+$ 时：</strong>
+    $$ (a + b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r} b^{r}. $$
+    通项（<code>general term</code>）为 $\boxed{\,T_{r+1} = \binom{n}{r} a^{n-r} b^{r}\,}$。求某变量某次方的系数：写出 $T_{r+1}$，让变量的指数等于目标值，解出 $r$，再代回。<em>不要</em>整体展开。
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Binomial Expansion ($n \in \mathbb{Z}^+$)</div>
+    <div class="formula-label"><span data-lang="en">Binomial Expansion ($n \in \mathbb{Z}^+$)</span><span data-lang="zh">二项展开 ($n \in \mathbb{Z}^+$)</span></div>
     $$ (a + b)^n = \sum_{r=0}^{n} \binom{n}{r} a^{n-r} b^{r} $$
     $$ = \binom{n}{0} a^n + \binom{n}{1} a^{n-1} b + \binom{n}{2} a^{n-2} b^2 + \cdots + \binom{n}{n} b^n $$
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">General Term</div>
+    <div class="formula-label"><span data-lang="en">General Term</span><span data-lang="zh">通项</span></div>
     $$ T_{r+1} = \binom{n}{r}\, a^{n-r}\, b^{r} $$
-    <p>Indexed so $T_1 = a^n$ (no $b$), $T_2 = \binom{n}{1} a^{n-1}b$, etc. The subscript matches the power of $b$ plus one.</p>
+    <p><span data-lang="en">Indexed so $T_1 = a^n$ (no $b$), $T_2 = \binom{n}{1} a^{n-1}b$, etc. The subscript matches the power of $b$ plus one.</span><span data-lang="zh">下标约定：$T_1 = a^n$（不含 $b$），$T_2 = \binom{n}{1} a^{n-1}b$，依次类推。下标等于 $b$ 的次幂加 1。</span></p>
   </div>
 
   <details>
-    <summary>▸ Going deeper — Combinatorial proof</summary>
+    <summary><span data-lang="en">▸ Going deeper — Combinatorial proof</span><span data-lang="zh">▸ 深入——组合证法</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>$(a+b)^n$ is the product of $n$ identical factors $(a+b)$. To distribute, from each factor pick either $a$ or $b$. A term with $b^r$ requires picking $b$ from exactly $r$ of the $n$ factors — there are $\binom{n}{r}$ ways to choose which $r$, and each contributes $a^{n-r} b^r$. Sum over $r = 0, \ldots, n$:</p>
 $$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
 <p>This proof <em>explains</em> the formula rather than merely deriving it. It also generalizes: the multinomial theorem follows by counting ways to split $n$ factors into $k$ groups.</p>
+</div>
+<div data-lang="zh">
+<p>$(a+b)^n$ 是 $n$ 个相同因子 $(a+b)$ 的乘积。展开时，从每个因子中选 $a$ 或选 $b$。含 $b^r$ 的项要求恰好在 $n$ 个因子中选了 $r$ 个 $b$——选法数为 $\binom{n}{r}$，每个选法贡献 $a^{n-r} b^r$。对 $r = 0, \ldots, n$ 求和：</p>
+$$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
+<p>这个证法<em>解释</em>了公式，不只是推导。它还能推广：把 $n$ 个因子分成 $k$ 组的方法数，就给出了多项式定理（multinomial theorem）。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Coefficient of a specific power</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Coefficient of a specific power</span><span data-lang="zh">例题——求指定次幂的系数</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find the coefficient of $x^6$ in the expansion of $\bigl(2x^2 - \tfrac{1}{x}\bigr)^9$.</p>
     <p><strong>Write the general term.</strong> Here $a = 2x^2$, $b = -1/x$, $n = 9$:</p>
     $$ T_{r+1} = \binom{9}{r}(2x^2)^{9-r}\!\left(-\tfrac{1}{x}\right)^{\!r} = \binom{9}{r}\, 2^{9-r}\,(-1)^r\, x^{2(9-r) - r} = \binom{9}{r}\, 2^{9-r}\,(-1)^r\, x^{18 - 3r}. $$
     <p><strong>Set exponent $= 6$.</strong> $18 - 3r = 6 \Rightarrow r = 4$.</p>
     $$ \text{Coefficient} = \binom{9}{4}\, 2^{5}\,(-1)^4 = 126 \cdot 32 \cdot 1 = 4032. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求 $\bigl(2x^2 - \tfrac{1}{x}\bigr)^9$ 展开式中 $x^6$ 的系数。</p>
+    <p><strong>写出通项。</strong>此处 $a = 2x^2$，$b = -1/x$，$n = 9$：</p>
+    $$ T_{r+1} = \binom{9}{r}(2x^2)^{9-r}\!\left(-\tfrac{1}{x}\right)^{\!r} = \binom{9}{r}\, 2^{9-r}\,(-1)^r\, x^{2(9-r) - r} = \binom{9}{r}\, 2^{9-r}\,(-1)^r\, x^{18 - 3r}. $$
+    <p><strong>令指数 $= 6$：</strong>$18 - 3r = 6 \Rightarrow r = 4$。</p>
+    $$ \text{Coefficient} = \binom{9}{4}\, 2^{5}\,(-1)^4 = 126 \cdot 32 \cdot 1 = 4032. $$
+  </div>
 
-  <h3>Worked Example — Constant term</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Constant term</span><span data-lang="zh">例题——常数项</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Find the constant term in the expansion of $\bigl(x + \tfrac{2}{x^2}\bigr)^{12}$.</p>
     <p>$T_{r+1} = \binom{12}{r}\, x^{12 - r}\, (2/x^2)^r = \binom{12}{r}\, 2^r\, x^{12 - r - 2r} = \binom{12}{r}\, 2^r\, x^{12 - 3r}$.</p>
     <p>Constant term has exponent $0$: $12 - 3r = 0 \Rightarrow r = 4$.</p>
     $$ T_5 = \binom{12}{4}\, 2^4 = 495 \cdot 16 = 7920. $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>求 $\bigl(x + \tfrac{2}{x^2}\bigr)^{12}$ 展开式中的常数项。</p>
+    <p>$T_{r+1} = \binom{12}{r}\, x^{12 - r}\, (2/x^2)^r = \binom{12}{r}\, 2^r\, x^{12 - r - 2r} = \binom{12}{r}\, 2^r\, x^{12 - 3r}$。</p>
+    <p>常数项指数为 $0$：$12 - 3r = 0 \Rightarrow r = 4$。</p>
+    $$ T_5 = \binom{12}{4}\, 2^4 = 495 \cdot 16 = 7920. $$
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Off-by-one trap</strong>
     "The 5th term" means $T_5$, which corresponds to $r = 4$ (since $T_{r+1}$). Read the question carefully: "$5$th term" $\ne$ "$r = 5$." Mismatch is the most common single error in Paper 1 binomial questions.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">差一陷阱</strong>
+    "第 5 项" 指 $T_5$，对应 $r = 4$（通项是 $T_{r+1}$）。注意区分 "第 5 项" $\ne$ "$r = 5$"。这是 Paper 1 二项式题最常见的单一错误。
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">The coefficient of $x^4$ in $(1 + 2x)^6$ is:</div>
+      <div class="quiz-q"><span data-lang="en">The coefficient of $x^4$ in $(1 + 2x)^6$ is:</span><span data-lang="zh">$(1 + 2x)^6$ 展开式中 $x^4$ 的系数为</span></div>
       <span class="quiz-number">A3.4</span>
     </div>
     <div class="quiz-options">
@@ -921,9 +1054,11 @@ $$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
       <div class="quiz-opt" data-idx="2">$240$</div>
       <div class="quiz-opt" data-idx="3">$480$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $T_{r+1} = \binom{6}{r}(2x)^r = \binom{6}{r}\, 2^r\, x^r$. For $x^4$, $r = 4$: coefficient $= \binom{6}{4}\, 2^4 = 15 \cdot 16 = 240$.</div>
-    <div class="quiz-explain wrong-exp">$T_{r+1} = \binom{6}{r}(2x)^r$. For $x^4$ take $r = 4$: $\binom{6}{4} \cdot 16 = 240$. (Option A forgets the $2^4$; option B forgets the $\binom{6}{4}$ factor.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $T_{r+1} = \binom{6}{r}(2x)^r = \binom{6}{r}\, 2^r\, x^r$. For $x^4$, $r = 4$: coefficient $= \binom{6}{4}\, 2^4 = 15 \cdot 16 = 240$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$T_{r+1} = \binom{6}{r}(2x)^r = \binom{6}{r}\, 2^r\, x^r$。$x^4$ 项 $r = 4$：系数 $= \binom{6}{4}\, 2^4 = 15 \cdot 16 = 240$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$T_{r+1} = \binom{6}{r}(2x)^r$. For $x^4$ take $r = 4$: $\binom{6}{4} \cdot 16 = 240$. (Option A forgets the $2^4$; option B forgets the $\binom{6}{4}$ factor.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$T_{r+1} = \binom{6}{r}(2x)^r$。$x^4$ 项取 $r = 4$：$\binom{6}{4} \cdot 16 = 240$。（选项 A 漏了 $2^4$；选项 B 漏了 $\binom{6}{4}$。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -931,15 +1066,18 @@ $$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
 
 <!-- ═══════════════ A3.5 PASCAL'S TRIANGLE ═══════════════ -->
 <section class="section" id="s-a3-5">
-  <div class="section-label">Topic A3.5 · Patterns &amp; identities</div>
-  <h2>Pascal's Triangle &amp; Identities</h2>
+  <div class="section-label"><span data-lang="en">Topic A3.5 · Patterns &amp; identities</span><span data-lang="zh">Topic A3.5 · 规律与恒等式</span></div>
+  <h2><span data-lang="en">Pascal's Triangle &amp; Identities</span><span data-lang="zh">帕斯卡三角与恒等式</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>Each row of Pascal's triangle is the row of binomial coefficients $\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}$.</strong> Each entry is the sum of the two above it (Pascal's identity). Row sum $= 2^n$. Symmetric: $\binom{n}{r} = \binom{n}{n-r}$. For small $n$, reading off the triangle is faster than computing factorials.
+  </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>帕斯卡三角（<code>Pascal's triangle</code>）每一行就是一行二项式系数 $\binom{n}{0}, \binom{n}{1}, \ldots, \binom{n}{n}$。</strong>每个数等于它"肩上"两数之和（帕斯卡恒等式，<code>Pascal's identity</code>）。行内之和 $= 2^n$。对称：$\binom{n}{r} = \binom{n}{n-r}$。$n$ 较小时直接从三角形读取比算阶乘更快。
   </div>
 
   <div class="pascal-tri" aria-label="Pascal's triangle, rows 0 through 6">
-    <div class="row head">$n$ &nbsp;&nbsp; · &nbsp;&nbsp; binomial coefficients &nbsp;&nbsp; · &nbsp;&nbsp; row sum $= 2^n$</div>
+    <div class="row head"><span data-lang="en">$n$ &nbsp;&nbsp; · &nbsp;&nbsp; binomial coefficients &nbsp;&nbsp; · &nbsp;&nbsp; row sum $= 2^n$</span><span data-lang="zh">$n$ &nbsp;&nbsp; · &nbsp;&nbsp; 二项式系数 &nbsp;&nbsp; · &nbsp;&nbsp; 行内之和 $= 2^n$</span></div>
     <div class="row"><span class="hi">0</span> &nbsp;·&nbsp; <span class="num">1</span> &nbsp;·&nbsp; $1$</div>
     <div class="row"><span class="hi">1</span> &nbsp;·&nbsp; <span class="num">1</span><span class="num">1</span> &nbsp;·&nbsp; $2$</div>
     <div class="row"><span class="hi">2</span> &nbsp;·&nbsp; <span class="num">1</span><span class="num">2</span><span class="num">1</span> &nbsp;·&nbsp; $4$</div>
@@ -950,15 +1088,16 @@ $$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Three Identities to Memorize</div>
+    <div class="formula-label"><span data-lang="en">Three Identities to Memorize</span><span data-lang="zh">三条必背恒等式</span></div>
     $$ \binom{n}{r} = \binom{n}{n-r} \quad\;\; \text{(symmetry)} $$
     $$ \binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r} \quad\;\; \text{(Pascal)} $$
     $$ \sum_{r=0}^{n} \binom{n}{r} = 2^{n} \quad\;\; \text{(row sum)} $$
   </div>
 
   <details>
-    <summary>▸ Going deeper — Combinatorial proof of Pascal's identity</summary>
+    <summary><span data-lang="en">▸ Going deeper — Combinatorial proof of Pascal's identity</span><span data-lang="zh">▸ 深入——帕斯卡恒等式的组合证</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p><strong>Claim:</strong> $\displaystyle \binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$.</p>
 <p><strong>Setup.</strong> Count subsets of size $r$ from $\{1, 2, \ldots, n\}$. There are $\binom{n}{r}$ of them.</p>
 <p><strong>Split by whether they contain element $n$.</strong></p>
@@ -969,22 +1108,43 @@ $$ (a+b)^n = \sum_{r=0}^{n} \binom{n}{r}\, a^{n-r}\, b^{r}. \;\;\blacksquare $$
 <p>Every $r$-subset falls into exactly one case, so</p>
 $$ \binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}. \;\;\blacksquare $$
 <p>This is the prototypical "combinatorial proof": case-splitting by a chosen element, then matching counts on both sides.</p>
+</div>
+<div data-lang="zh">
+<p><strong>命题：</strong>$\displaystyle \binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$。</p>
+<p><strong>构思：</strong>数 $\{1, 2, \ldots, n\}$ 中大小为 $r$ 的子集，共 $\binom{n}{r}$ 个。</p>
+<p><strong>按"是否含元素 $n$"分类：</strong></p>
+<ul style="margin: 8px 0 8px 22px;">
+  <li><em>含 $n$：</em>剩下的 $r - 1$ 个要从其余 $n - 1$ 个元素中选——$\binom{n-1}{r-1}$ 种。</li>
+  <li><em>不含 $n$：</em>$r$ 个全部从其余 $n - 1$ 个元素中选——$\binom{n-1}{r}$ 种。</li>
+</ul>
+<p>每个 $r$ 子集恰好落在一种情形里，故</p>
+$$ \binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}. \;\;\blacksquare $$
+<p>这是最典型的"组合证法"：按某个特定元素分类，再两边数同一族对象。</p>
+</div>
     </div>
   </details>
 
   <details>
-    <summary>▸ Going deeper — Why the row sum is $2^n$</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why the row sum is $2^n$</span><span data-lang="zh">▸ 深入——为何行内之和为 $2^n$</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>Set $a = b = 1$ in the binomial theorem:</p>
 $$ (1 + 1)^n = \sum_{r=0}^{n} \binom{n}{r}\, 1^{n-r}\, 1^{r} = \sum_{r=0}^{n} \binom{n}{r}. $$
 <p>The LHS is $2^n$, so the row sums to $2^n$.</p>
 <p><strong>Combinatorial reading:</strong> $\binom{n}{r}$ counts subsets of size $r$ from an $n$-element set; summing over all $r$ counts <em>all</em> subsets. There are $2^n$ subsets of an $n$-element set (each element is in or out — multiplication rule). Same number, two viewpoints.</p>
+</div>
+<div data-lang="zh">
+<p>在二项式定理中取 $a = b = 1$：</p>
+$$ (1 + 1)^n = \sum_{r=0}^{n} \binom{n}{r}\, 1^{n-r}\, 1^{r} = \sum_{r=0}^{n} \binom{n}{r}. $$
+<p>左边等于 $2^n$，故该行之和为 $2^n$。</p>
+<p><strong>组合视角：</strong>$\binom{n}{r}$ 数的是 $n$ 元集中大小为 $r$ 的子集；对所有 $r$ 求和数的就是<em>全部</em>子集。$n$ 元集共有 $2^n$ 个子集（每个元素"选 / 不选"——乘法原理）。同一数，两种视角。</p>
+</div>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">$\displaystyle\sum_{r=0}^{8}\binom{8}{r}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">$\displaystyle\sum_{r=0}^{8}\binom{8}{r}$ equals:</span><span data-lang="zh">$\displaystyle\sum_{r=0}^{8}\binom{8}{r} = $</span></div>
       <span class="quiz-number">A3.5</span>
     </div>
     <div class="quiz-options">
@@ -993,9 +1153,11 @@ $$ (1 + 1)^n = \sum_{r=0}^{n} \binom{n}{r}\, 1^{n-r}\, 1^{r} = \sum_{r=0}^{n} \b
       <div class="quiz-opt" data-idx="2">$512$</div>
       <div class="quiz-opt" data-idx="3">$1024$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Row $n = 8$ sums to $2^8 = 256$. (Or set $a = b = 1$ in $(a+b)^8$.)</div>
-    <div class="quiz-explain wrong-exp">Row $n$ sums to $2^n$. Here $n = 8$, so the sum is $2^8 = 256$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Row $n = 8$ sums to $2^8 = 256$. (Or set $a = b = 1$ in $(a+b)^8$.)</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$n = 8$ 行之和为 $2^8 = 256$。（或在 $(a+b)^8$ 中取 $a = b = 1$。）</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Row $n$ sums to $2^n$. Here $n = 8$, so the sum is $2^8 = 256$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$n$ 行之和等于 $2^n$。此处 $n = 8$，故为 $2^8 = 256$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1003,48 +1165,72 @@ $$ (1 + 1)^n = \sum_{r=0}^{n} \binom{n}{r}\, 1^{n-r}\, 1^{r} = \sum_{r=0}^{n} \b
 
 <!-- ═══════════════ A3.6 EXTENDED BINOMIAL ═══════════════ -->
 <section class="section" id="s-a3-6">
-  <div class="section-label">Topic A3.6 · HL only</div>
-  <h2>Extended Binomial Theorem <span class="hl-flag">HL</span></h2>
+  <div class="section-label"><span data-lang="en">Topic A3.6 · HL only</span><span data-lang="zh">Topic A3.6 · 仅 HL</span></div>
+  <h2><span data-lang="en">Extended Binomial Theorem</span><span data-lang="zh">推广二项式定理</span> <span class="hl-flag">HL</span></h2>
 
-  <div class="cram-cheat">
+  <div class="cram-cheat" data-lang="en">
     <strong>For $n \in \mathbb{Q}$ (rational, possibly negative or fractional):</strong>
     $$ (1 + x)^n = 1 + nx + \frac{n(n-1)}{2!}\,x^2 + \frac{n(n-1)(n-2)}{3!}\,x^3 + \cdots $$
     valid for $\boxed{\,|x| < 1\,}$. The series is <strong>infinite</strong> when $n \notin \mathbb{Z}^+$. For $(a + bx)^n$, factor out $a^n$ first; convergence becomes $|x| < |a/b|$. <em>Always state the radius of convergence — it's a marked answer.</em>
   </div>
+  <div class="cram-cheat" data-lang="zh">
+    <strong>当 $n \in \mathbb{Q}$（有理数，可为负或分数）时：</strong>
+    $$ (1 + x)^n = 1 + nx + \frac{n(n-1)}{2!}\,x^2 + \frac{n(n-1)(n-2)}{3!}\,x^3 + \cdots $$
+    在 $\boxed{\,|x| < 1\,}$ 内成立。当 $n \notin \mathbb{Z}^+$ 时级数为<strong>无穷级数</strong>。对 $(a + bx)^n$，先把 $a^n$ 提出；收敛条件变为 $|x| < |a/b|$。<em>务必写出收敛区间（<code>radius of convergence</code>）——是给分点。</em>
+  </div>
 
   <div class="formula-box">
-    <div class="formula-label">Extended Binomial Series</div>
+    <div class="formula-label"><span data-lang="en">Extended Binomial Series</span><span data-lang="zh">推广二项式级数</span></div>
     $$ (1 + x)^n = \sum_{r=0}^{\infty} \binom{n}{r}\, x^r, \qquad |x| < 1, $$
-    <p>where the generalized binomial coefficient is</p>
+    <p><span data-lang="en">where the generalized binomial coefficient is</span><span data-lang="zh">其中推广二项式系数为</span></p>
     $$ \binom{n}{r} = \frac{n(n-1)(n-2)\cdots(n-r+1)}{r!}. $$
   </div>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Two reductions you'll use</strong>
     <strong>$(a + bx)^n$ → $(1 + \cdot)^n$.</strong> Factor: $a^n\bigl(1 + \tfrac{b}{a}x\bigr)^n$. Convergence: $\bigl|\tfrac{b}{a}x\bigr| &lt; 1$, i.e. $|x| &lt; \bigl|\tfrac{a}{b}\bigr|$.<br>
     <strong>$(1 - x)^n$.</strong> Apply with $-x$ in place of $x$; the series alternates if you don't, so signs come from the $(-x)^r = (-1)^r x^r$ factor.
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">两步常见化简</strong>
+    <strong>$(a + bx)^n$ → $(1 + \cdot)^n$。</strong>提因式：$a^n\bigl(1 + \tfrac{b}{a}x\bigr)^n$。收敛条件：$\bigl|\tfrac{b}{a}x\bigr| &lt; 1$，即 $|x| &lt; \bigl|\tfrac{a}{b}\bigr|$。<br>
+    <strong>$(1 - x)^n$。</strong>把公式里的 $x$ 替换成 $-x$；不这样做级数会交错，符号由 $(-x)^r = (-1)^r x^r$ 给出。
+  </div>
 
   <details>
-    <summary>▸ Going deeper — Why the series only converges for $|x| < 1$</summary>
+    <summary><span data-lang="en">▸ Going deeper — Why the series only converges for $|x| < 1$</span><span data-lang="zh">▸ 深入——为何级数仅在 $|x| < 1$ 内收敛</span></summary>
     <div class="detail-body">
+<div data-lang="en">
 <p>For positive-integer $n$, the binomial expansion is a finite sum (terminates at $r = n$ since $\binom{n}{r} = 0$ for $r > n$), so it converges for all $x$.</p>
 <p>For non-integer $n$, the coefficients $\binom{n}{r} = \tfrac{n(n-1)\cdots(n-r+1)}{r!}$ never vanish, so the series is genuinely infinite. Apply the ratio test:</p>
 $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xrightarrow{r \to \infty} |x|. $$
 <p>The series converges absolutely when $|x| &lt; 1$ and diverges when $|x| > 1$. The boundary case $|x| = 1$ depends on $n$ — IB doesn't pursue boundary subtleties; just write "$|x| &lt; 1$" and you're safe.</p>
+</div>
+<div data-lang="zh">
+<p>当 $n$ 为正整数时，二项展开是<em>有限</em>和（$r > n$ 时 $\binom{n}{r} = 0$，于 $r = n$ 处自然截断），对一切 $x$ 都收敛。</p>
+<p>当 $n$ 非正整数时，$\binom{n}{r} = \tfrac{n(n-1)\cdots(n-r+1)}{r!}$ 永远不为零，级数真正是无穷的。用比值判别法（<code>ratio test</code>）：</p>
+$$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xrightarrow{r \to \infty} |x|. $$
+<p>故 $|x| &lt; 1$ 时绝对收敛，$|x| > 1$ 时发散。边界 $|x| = 1$ 的情形取决于 $n$——IB 不深究边界细节，写 "$|x| &lt; 1$" 即可拿分。</p>
+</div>
     </div>
   </details>
 
-  <h3>Worked Example — Square root via series</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Square root via series</span><span data-lang="zh">例题——级数法求平方根</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Expand $\sqrt{1 + x}$ up to and including the $x^3$ term.</p>
     <p>$\sqrt{1+x} = (1+x)^{1/2}$. Apply the formula with $n = \tfrac{1}{2}$:</p>
     $$ (1+x)^{1/2} = 1 + \tfrac{1}{2}x + \tfrac{(1/2)(-1/2)}{2!}\,x^2 + \tfrac{(1/2)(-1/2)(-3/2)}{3!}\,x^3 + \cdots $$
     $$ = 1 + \tfrac{1}{2}x - \tfrac{1}{8}x^2 + \tfrac{1}{16}x^3 - \cdots \qquad (|x| &lt; 1). $$
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>将 $\sqrt{1 + x}$ 展开到 $x^3$ 项（含）。</p>
+    <p>$\sqrt{1+x} = (1+x)^{1/2}$。取 $n = \tfrac{1}{2}$ 代入公式：</p>
+    $$ (1+x)^{1/2} = 1 + \tfrac{1}{2}x + \tfrac{(1/2)(-1/2)}{2!}\,x^2 + \tfrac{(1/2)(-1/2)(-3/2)}{3!}\,x^3 + \cdots $$
+    $$ = 1 + \tfrac{1}{2}x - \tfrac{1}{8}x^2 + \tfrac{1}{16}x^3 - \cdots \qquad (|x| &lt; 1). $$
+  </div>
 
-  <h3>Worked Example — Factor first</h3>
-  <div class="worked-solution">
+  <h3><span data-lang="en">Worked Example — Factor first</span><span data-lang="zh">例题——先提因式</span></h3>
+  <div class="worked-solution" data-lang="en">
     <p><strong>Problem:</strong> Expand $(4 + 2x)^{-1/2}$ up to $x^2$, stating the radius of convergence.</p>
     <p>Factor out $4^{-1/2} = \tfrac{1}{2}$:</p>
     $$ (4 + 2x)^{-1/2} = 4^{-1/2}\!\left(1 + \tfrac{x}{2}\right)^{-1/2} = \tfrac{1}{2}\!\left(1 + \tfrac{x}{2}\right)^{-1/2}. $$
@@ -1054,10 +1240,20 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
     $$ (4 + 2x)^{-1/2} = \tfrac{1}{2} - \tfrac{x}{8} + \tfrac{3 x^2}{64} + \cdots $$
     <p>Convergence: $\bigl|\tfrac{x}{2}\bigr| &lt; 1 \Leftrightarrow |x| &lt; 2$.</p>
   </div>
+  <div class="worked-solution" data-lang="zh">
+    <p><strong>题目：</strong>将 $(4 + 2x)^{-1/2}$ 展开到 $x^2$ 项，并写出收敛区间。</p>
+    <p>先提 $4^{-1/2} = \tfrac{1}{2}$：</p>
+    $$ (4 + 2x)^{-1/2} = 4^{-1/2}\!\left(1 + \tfrac{x}{2}\right)^{-1/2} = \tfrac{1}{2}\!\left(1 + \tfrac{x}{2}\right)^{-1/2}. $$
+    <p>取 $n = -\tfrac{1}{2}$，并把公式里的 $x$ 替换为 $\tfrac{x}{2}$：</p>
+    $$ \left(1 + \tfrac{x}{2}\right)^{-1/2} = 1 + (-\tfrac{1}{2})\!\cdot\!\tfrac{x}{2} + \tfrac{(-1/2)(-3/2)}{2!}\!\cdot\!\tfrac{x^2}{4} + \cdots = 1 - \tfrac{x}{4} + \tfrac{3 x^2}{32} - \cdots $$
+    <p>再乘上 $\tfrac{1}{2}$：</p>
+    $$ (4 + 2x)^{-1/2} = \tfrac{1}{2} - \tfrac{x}{8} + \tfrac{3 x^2}{64} + \cdots $$
+    <p>收敛：$\bigl|\tfrac{x}{2}\bigr| &lt; 1 \Leftrightarrow |x| &lt; 2$。</p>
+  </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">In the expansion of $(1 + x)^{-2}$, the coefficient of $x^3$ is:</div>
+      <div class="quiz-q"><span data-lang="en">In the expansion of $(1 + x)^{-2}$, the coefficient of $x^3$ is:</span><span data-lang="zh">$(1 + x)^{-2}$ 展开式中 $x^3$ 的系数为</span></div>
       <span class="quiz-number">A3.6</span>
     </div>
     <div class="quiz-options">
@@ -1066,9 +1262,11 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$-4$</div>
       <div class="quiz-opt" data-idx="3">$4$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = \tfrac{-24}{6} = -4$.</div>
-    <div class="quiz-explain wrong-exp">$\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = -4$. (You can also recall $(1+x)^{-2} = \sum_{r\ge 0}(-1)^r(r+1)x^r$, giving $-(3+1) = -4$ for $r = 3$.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = \tfrac{-24}{6} = -4$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = \tfrac{-24}{6} = -4$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = -4$. (You can also recall $(1+x)^{-2} = \sum_{r\ge 0}(-1)^r(r+1)x^r$, giving $-(3+1) = -4$ for $r = 3$.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$\binom{-2}{3} = \tfrac{(-2)(-3)(-4)}{3!} = -4$。（也可记住 $(1+x)^{-2} = \sum_{r\ge 0}(-1)^r(r+1)x^r$，$r = 3$ 给出 $-(3+1) = -4$。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1076,16 +1274,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
 
 <!-- ═══════════════ EXAM STRATEGY ═══════════════ -->
 <section class="section" id="exam-strategy">
-  <div class="section-label">Review</div>
-  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Exam Strategy &amp; Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
 
   <div class="two-col">
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-green">M</div>
-        <div class="card-title">Memorize</div>
+        <div class="card-title"><span data-lang="en">Memorize</span><span data-lang="zh">背熟</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>${}^nP_r = \tfrac{n!}{(n-r)!}$ and $\binom{n}{r} = \tfrac{n!}{r!(n-r)!}$</li>
         <li>Pascal's identity and the row-sum identity</li>
         <li>$T_{r+1} = \binom{n}{r}\, a^{n-r}\, b^{r}$ for binomial</li>
@@ -1093,13 +1291,21 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
         <li>Pascal rows up to $n = 6$ at sight</li>
         <li>Multiset permutation $\tfrac{n!}{n_1!\,n_2!\cdots n_k!}$</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>${}^nP_r = \tfrac{n!}{(n-r)!}$ 与 $\binom{n}{r} = \tfrac{n!}{r!(n-r)!}$</li>
+        <li>帕斯卡恒等式以及行和恒等式</li>
+        <li>二项式通项 $T_{r+1} = \binom{n}{r}\, a^{n-r}\, b^{r}$</li>
+        <li>推广二项式——公式及收敛条件 $|x| &lt; 1$ <span class="hl-flag">HL</span></li>
+        <li>帕斯卡三角至 $n = 6$ 行能默写</li>
+        <li>多重集排列公式 $\tfrac{n!}{n_1!\,n_2!\cdots n_k!}$</li>
+      </ul>
     </div>
     <div class="card">
       <div class="card-header">
         <div class="card-icon icon-purple">U</div>
-        <div class="card-title">Understand</div>
+        <div class="card-title"><span data-lang="en">Understand</span><span data-lang="zh">理解</span></div>
       </div>
-      <ul style="margin-left: 18px; line-height: 2;">
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="en">
         <li>When to multiply (sequential) vs. add (mutually exclusive)</li>
         <li>Why ${}^nP_r = r!\cdot\binom{n}{r}$ — orderings of an unordered selection</li>
         <li>Pascal's identity via case-split on a chosen element</li>
@@ -1107,11 +1313,19 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
         <li>Why the extended binomial fails for $|x| \ge 1$ (ratio test) <span class="hl-flag">HL</span></li>
         <li>Complement-counting: when is $|U| - |\text{not-}A|$ faster than direct?</li>
       </ul>
+      <ul style="margin-left: 18px; line-height: 2;" data-lang="zh">
+        <li>何时用乘法（顺序）何时用加法（互斥）</li>
+        <li>为何 ${}^nP_r = r!\cdot\binom{n}{r}$——把"无序选取"再排序</li>
+        <li>帕斯卡恒等式：按某元素分类</li>
+        <li>二项式定理的组合证（从 $r$ 个因子中选 $b$）</li>
+        <li>推广二项式为何在 $|x| \ge 1$ 时失效（比值判别） <span class="hl-flag">HL</span></li>
+        <li>补集计数：何时 $|U| - |\text{非 } A|$ 比直接分类更快</li>
+      </ul>
     </div>
   </div>
 
-  <h3>Common Pitfalls</h3>
-  <div class="concept-box red">
+  <h3><span data-lang="en">Common Pitfalls</span><span data-lang="zh">常见陷阱</span></h3>
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Top student errors</strong>
     <strong>1.</strong> Confusing "the $r$-th term" with "$T_r$" (= $r = r-1$, off by one).<br>
     <strong>2.</strong> Forgetting the sign on $(-x)^r$ — the $(-1)^r$ factor changes parity.<br>
@@ -1122,11 +1336,27 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
     <strong>7.</strong> Multiset permutations: forgetting to divide by all repeat-factorials, e.g. dividing only once for MISSISSIPPI.<br>
     <strong>8.</strong> Off-by-one on circular arrangements: $n$ around a circle is $(n-1)!$, not $n!$.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">学生常犯错</strong>
+    <strong>1.</strong> 把"第 $r$ 项"当成 "$T_r$"（其实差一位）。<br>
+    <strong>2.</strong> 忘记 $(-x)^r$ 的符号——$(-1)^r$ 会改变奇偶号。<br>
+    <strong>3.</strong> 把排列当组合（或反之）。注意题面里的"顺序"提示词。<br>
+    <strong>4.</strong> 在<em>有重叠</em>的情形上直接用加法，忘了容斥原理。<br>
+    <strong>5.</strong> 不先提因式就用推广二项式——$(2 + x)^n$ 不是 $(1 + \cdots)^n$ 的直接形式。<br>
+    <strong>6.</strong> Paper 1 推广二项式题忘写收敛区间。<br>
+    <strong>7.</strong> 多重集排列：忘记把<em>所有</em>重复个数的阶乘都除掉，比如 MISSISSIPPI 只除一个。<br>
+    <strong>8.</strong> 圆排列差一：$n$ 人围成圆是 $(n-1)!$，不是 $n!$。
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Paper-specific notes</strong>
     <strong>Paper 1 (no calc):</strong> Extracting a specific coefficient algebraically; small Pascal-row entries by sight; counting problems with clean factorials. Extended-binomial expansions to $x^3$ or $x^4$ — radius of convergence required.<br>
     <strong>Paper 2 (calc):</strong> Larger committee/probability counts (you'll evaluate factorials on calc); approximations using extended binomial (e.g. $\sqrt{1.04}$ via the series with $x = 0.04$).
+  </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">分卷提示</strong>
+    <strong>Paper 1（不可用计算器）：</strong>代数提取某项系数；目测帕斯卡小行；阶乘很"干净"的计数题。推广二项式展开到 $x^3$ 或 $x^4$——必须写收敛区间。<br>
+    <strong>Paper 2（可用计算器）：</strong>较大的委员会 / 概率计数（用计算器算阶乘）；用推广二项式做近似（如 $\sqrt{1.04}$ 取 $x = 0.04$）。
   </div>
 </section>
 
@@ -1134,87 +1364,87 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
 
 <!-- ═══════════════ FLASHCARDS ═══════════════ -->
 <section class="section" id="flashcards">
-  <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Review</span><span data-lang="zh">复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
 
   <div class="flashcard-toolbar">
-    <span class="fc-count" id="fcCount">0 / 12 flipped</span>
+    <span class="fc-count" id="fcCount"><span data-lang="en">0 / 12 flipped</span><span data-lang="zh">已翻 0 / 12</span></span>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
 
   <div class="flashcard-grid" id="flashcardGrid">
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Multiplication vs. addition rule?</div>
-        <div class="flashcard-back">Sequential AND → multiply<br>Mutually exclusive OR → add</div>
+        <div class="flashcard-front"><span data-lang="en">Multiplication vs. addition rule?</span><span data-lang="zh">乘法 vs. 加法原理？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Sequential AND → multiply<br>Mutually exclusive OR → add</span><span data-lang="zh">顺序 AND → 乘<br>互斥 OR → 加</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Permutation formula?</div>
+        <div class="flashcard-front"><span data-lang="en">Permutation formula?</span><span data-lang="zh">排列公式？</span></div>
         <div class="flashcard-back">$${}^nP_r = \dfrac{n!}{(n-r)!}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Combination formula?</div>
+        <div class="flashcard-front"><span data-lang="en">Combination formula?</span><span data-lang="zh">组合公式？</span></div>
         <div class="flashcard-back">$$\binom{n}{r} = \dfrac{n!}{r!\,(n-r)!}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Permutations of a multiset?</div>
+        <div class="flashcard-front"><span data-lang="en">Permutations of a multiset?</span><span data-lang="zh">多重集的排列？</span></div>
         <div class="flashcard-back">$$\dfrac{n!}{n_1!\,n_2!\,\cdots\,n_k!}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Circular arrangement of $n$ distinct items?</div>
+        <div class="flashcard-front"><span data-lang="en">Circular arrangement of $n$ distinct items?</span><span data-lang="zh">$n$ 个互异元素的圆排列？</span></div>
         <div class="flashcard-back">$$(n - 1)!$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Binomial theorem $(a+b)^n$, $n\in\mathbb{Z}^+$?</div>
+        <div class="flashcard-front"><span data-lang="en">Binomial theorem $(a+b)^n$, $n\in\mathbb{Z}^+$?</span><span data-lang="zh">$n\in\mathbb{Z}^+$ 时 $(a+b)^n$ 的二项展开？</span></div>
         <div class="flashcard-back">$$\sum_{r=0}^{n}\binom{n}{r} a^{n-r} b^{r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">General term $T_{r+1}$ of $(a+b)^n$?</div>
+        <div class="flashcard-front"><span data-lang="en">General term $T_{r+1}$ of $(a+b)^n$?</span><span data-lang="zh">$(a+b)^n$ 的通项 $T_{r+1}$？</span></div>
         <div class="flashcard-back">$$T_{r+1} = \binom{n}{r}\, a^{n-r}\, b^{r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Symmetry of $\binom{n}{r}$?</div>
+        <div class="flashcard-front"><span data-lang="en">Symmetry of $\binom{n}{r}$?</span><span data-lang="zh">$\binom{n}{r}$ 的对称性？</span></div>
         <div class="flashcard-back">$$\binom{n}{r} = \binom{n}{n-r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Pascal's identity?</div>
+        <div class="flashcard-front"><span data-lang="en">Pascal's identity?</span><span data-lang="zh">帕斯卡恒等式？</span></div>
         <div class="flashcard-back">$$\binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Sum of row $n$ of Pascal?</div>
+        <div class="flashcard-front"><span data-lang="en">Sum of row $n$ of Pascal?</span><span data-lang="zh">帕斯卡第 $n$ 行之和？</span></div>
         <div class="flashcard-back">$$\sum_{r=0}^{n}\binom{n}{r} = 2^{n}$$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Extended binomial — formula &amp; condition?</div>
+        <div class="flashcard-front"><span data-lang="en">Extended binomial — formula &amp; condition?</span><span data-lang="zh">推广二项式——公式与条件？</span></div>
         <div class="flashcard-back">$(1+x)^n = \sum_{r\ge 0}\binom{n}{r} x^r$<br>$|x| &lt; 1$</div>
       </div>
     </div>
     <div class="flashcard" onclick="flipCard(this)">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Generalized $\binom{n}{r}$ for $n\in\mathbb{Q}$?</div>
+        <div class="flashcard-front"><span data-lang="en">Generalized $\binom{n}{r}$ for $n\in\mathbb{Q}$?</span><span data-lang="zh">$n\in\mathbb{Q}$ 的推广 $\binom{n}{r}$？</span></div>
         <div class="flashcard-back">$$\dfrac{n(n-1)\cdots(n-r+1)}{r!}$$</div>
       </div>
     </div>
@@ -1225,13 +1455,13 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
 
 <!-- ═══════════════ UNIT QUIZ ═══════════════ -->
 <section class="section" id="unit-quiz">
-  <div class="section-label">Assessment</div>
-  <h2>Unit A3 — Practice Quiz</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+  <div class="section-label"><span data-lang="en">Assessment</span><span data-lang="zh">综合测验</span></div>
+  <h2><span data-lang="en">Unit A3 — Practice Quiz</span><span data-lang="zh">单元 A3——练习测验</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;"><span data-lang="en">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</span><span data-lang="zh">十道难度不一的题。得分实时显示在页面顶部。考前目标 8/10。</span></p>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">1. The number of ways to arrange the letters of EQUATION (no repeats) is:</div>
+      <div class="quiz-q"><span data-lang="en">1. The number of ways to arrange the letters of EQUATION (no repeats) is:</span><span data-lang="zh">1. EQUATION 的字母排列（无重复）共有多少种？</span></div>
       <span class="quiz-number">Q1</span>
     </div>
     <div class="quiz-options">
@@ -1240,14 +1470,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$40\,320$</div>
       <div class="quiz-opt" data-idx="3">$362\,880$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $8$ distinct letters arranged: $8! = 40\,320$.</div>
-    <div class="quiz-explain wrong-exp">$8$ distinct letters → $8! = 40\,320$ arrangements.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $8$ distinct letters arranged: $8! = 40\,320$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$8$ 个互异字母排列：$8! = 40\,320$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$8$ distinct letters → $8! = 40\,320$ arrangements.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$8$ 个互异字母 → $8! = 40\,320$ 种。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">2. From a class of $20$, $4$ students are to form a panel with distinct roles (chair, secretary, treasurer, member). Number of ways:</div>
+      <div class="quiz-q"><span data-lang="en">2. From a class of $20$, $4$ students are to form a panel with distinct roles (chair, secretary, treasurer, member). Number of ways:</span><span data-lang="zh">2. 从 $20$ 人班级中选 $4$ 人担任不同职务（主席、秘书、财务、委员）。方法数为</span></div>
       <span class="quiz-number">Q2</span>
     </div>
     <div class="quiz-options">
@@ -1256,14 +1488,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$20^4 = 160\,000$</div>
       <div class="quiz-opt" data-idx="3">$4! = 24$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Distinct roles → ordered selection → permutation: $20 \cdot 19 \cdot 18 \cdot 17 = 116\,280$.</div>
-    <div class="quiz-explain wrong-exp">Roles are distinct, so order matters → ${}^{20}P_4 = 116\,280$. (Option A treats the panel as unordered.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Distinct roles → ordered selection → permutation: $20 \cdot 19 \cdot 18 \cdot 17 = 116\,280$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！职务不同 → 有序选取 → 排列：$20 \cdot 19 \cdot 18 \cdot 17 = 116\,280$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Roles are distinct, so order matters → ${}^{20}P_4 = 116\,280$. (Option A treats the panel as unordered.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">职务互不相同，顺序敏感 → ${}^{20}P_4 = 116\,280$。（选项 A 把它当成无序了。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">3. How many distinguishable arrangements of the letters in BANANA?</div>
+      <div class="quiz-q"><span data-lang="en">3. How many distinguishable arrangements of the letters in BANANA?</span><span data-lang="zh">3. BANANA 字母可区分的排列共有多少种？</span></div>
       <span class="quiz-number">Q3</span>
     </div>
     <div class="quiz-options">
@@ -1272,14 +1506,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$60$</div>
       <div class="quiz-opt" data-idx="3">$720$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $6$ letters: $1$ B, $3$ A, $2$ N. $\tfrac{6!}{1!\,3!\,2!} = \tfrac{720}{12} = 60$.</div>
-    <div class="quiz-explain wrong-exp">Multiset formula: $\tfrac{6!}{1!\,3!\,2!} = 60$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $6$ letters: $1$ B, $3$ A, $2$ N. $\tfrac{6!}{1!\,3!\,2!} = \tfrac{720}{12} = 60$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$6$ 个字母：$1$ B、$3$ A、$2$ N。$\tfrac{6!}{1!\,3!\,2!} = \tfrac{720}{12} = 60$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Multiset formula: $\tfrac{6!}{1!\,3!\,2!} = 60$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">多重集公式：$\tfrac{6!}{1!\,3!\,2!} = 60$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">4. A team of $5$ is chosen from $7$ men and $6$ women, with at least $2$ women. Number of teams:</div>
+      <div class="quiz-q"><span data-lang="en">4. A team of $5$ is chosen from $7$ men and $6$ women, with at least $2$ women. Number of teams:</span><span data-lang="zh">4. 从 $7$ 男 $6$ 女中选 $5$ 人组成小组，至少 $2$ 名女生。方案数为</span></div>
       <span class="quiz-number">Q4</span>
     </div>
     <div class="quiz-options">
@@ -1288,14 +1524,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$\binom{13}{5} - \binom{7}{5} - \binom{6}{1}\binom{7}{4} = 1056$</div>
       <div class="quiz-opt" data-idx="3">$\binom{6}{2}\binom{11}{3} = 2475$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Total $-$ (no women) $-$ (exactly 1 woman) $= 1287 - 21 - 6\cdot 35 = 1287 - 21 - 210 = 1056$.</div>
-    <div class="quiz-explain wrong-exp">Use complement: total $-$ teams with $0$ or $1$ woman. $\binom{13}{5} - \binom{7}{5} - \binom{6}{1}\binom{7}{4} = 1287 - 21 - 210 = 1056$. (Option A is "exactly $2$ women," not "at least.")</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Total $-$ (no women) $-$ (exactly 1 woman) $= 1287 - 21 - 6\cdot 35 = 1287 - 21 - 210 = 1056$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！总数 $-$（$0$ 女）$-$（恰好 $1$ 女）$= 1287 - 21 - 6\cdot 35 = 1287 - 21 - 210 = 1056$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Use complement: total $-$ teams with $0$ or $1$ woman. $\binom{13}{5} - \binom{7}{5} - \binom{6}{1}\binom{7}{4} = 1287 - 21 - 210 = 1056$. (Option A is "exactly $2$ women," not "at least.")</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">用补集：总数 $-$ "$0$ 或 $1$ 女" 的方案。$\binom{13}{5} - \binom{7}{5} - \binom{6}{1}\binom{7}{4} = 1287 - 21 - 210 = 1056$。（选项 A 是"恰好 $2$ 女"，不是"至少"。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">5. The coefficient of $x^5$ in $(1 - x)^{10}$ is:</div>
+      <div class="quiz-q"><span data-lang="en">5. The coefficient of $x^5$ in $(1 - x)^{10}$ is:</span><span data-lang="zh">5. $(1 - x)^{10}$ 展开式中 $x^5$ 的系数为</span></div>
       <span class="quiz-number">Q5</span>
     </div>
     <div class="quiz-options">
@@ -1304,14 +1542,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$-252$</div>
       <div class="quiz-opt" data-idx="3">$-210$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $T_{r+1} = \binom{10}{r}(1)^{10-r}(-x)^r$. For $x^5$, $r = 5$: coefficient $= \binom{10}{5}(-1)^5 = -252$.</div>
-    <div class="quiz-explain wrong-exp">$T_{r+1} = \binom{10}{r}(-1)^r x^r$. For $x^5$: $\binom{10}{5}(-1)^5 = -252$. Don't drop the sign.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $T_{r+1} = \binom{10}{r}(1)^{10-r}(-x)^r$. For $x^5$, $r = 5$: coefficient $= \binom{10}{5}(-1)^5 = -252$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$T_{r+1} = \binom{10}{r}(1)^{10-r}(-x)^r$。$x^5$ 项 $r = 5$：系数 $= \binom{10}{5}(-1)^5 = -252$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$T_{r+1} = \binom{10}{r}(-1)^r x^r$. For $x^5$: $\binom{10}{5}(-1)^5 = -252$. Don't drop the sign.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$T_{r+1} = \binom{10}{r}(-1)^r x^r$。$x^5$ 项：$\binom{10}{5}(-1)^5 = -252$。别漏负号。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header">
-      <div class="quiz-q">6. The constant term in $\bigl(2x - \tfrac{3}{x^2}\bigr)^{6}$ is:</div>
+      <div class="quiz-q"><span data-lang="en">6. The constant term in $\bigl(2x - \tfrac{3}{x^2}\bigr)^{6}$ is:</span><span data-lang="zh">6. $\bigl(2x - \tfrac{3}{x^2}\bigr)^{6}$ 展开式中的常数项为</span></div>
       <span class="quiz-number">Q6</span>
     </div>
     <div class="quiz-options">
@@ -1320,14 +1560,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$-2160$</div>
       <div class="quiz-opt" data-idx="3">$2160$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! $T_{r+1} = \binom{6}{r}(2x)^{6-r}(-3/x^2)^r = \binom{6}{r}\, 2^{6-r}(-3)^r\, x^{6 - 3r}$. Constant: $6 - 3r = 0 \Rightarrow r = 2$. $\binom{6}{2}\, 2^4\, (-3)^2 = 15 \cdot 16 \cdot 9 = 2160$ (positive — even power of the negative term).</div>
-    <div class="quiz-explain wrong-exp">$6 - 3r = 0 \Rightarrow r = 2$, so $(-3)^r = (-3)^2 = +9$. Coefficient $= \binom{6}{2}\cdot 2^4\cdot 9 = 2160$. (Sign trap: $r$ is even, so the constant is positive.)</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! $T_{r+1} = \binom{6}{r}(2x)^{6-r}(-3/x^2)^r = \binom{6}{r}\, 2^{6-r}(-3)^r\, x^{6 - 3r}$. Constant: $6 - 3r = 0 \Rightarrow r = 2$. $\binom{6}{2}\, 2^4\, (-3)^2 = 15 \cdot 16 \cdot 9 = 2160$ (positive — even power of the negative term).</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！$T_{r+1} = \binom{6}{r}(2x)^{6-r}(-3/x^2)^r = \binom{6}{r}\, 2^{6-r}(-3)^r\, x^{6 - 3r}$。常数：$6 - 3r = 0 \Rightarrow r = 2$。$\binom{6}{2}\, 2^4\, (-3)^2 = 15 \cdot 16 \cdot 9 = 2160$（取正，因 $(-3)^r$ 的指数为偶数）。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">$6 - 3r = 0 \Rightarrow r = 2$, so $(-3)^r = (-3)^2 = +9$. Coefficient $= \binom{6}{2}\cdot 2^4\cdot 9 = 2160$. (Sign trap: $r$ is even, so the constant is positive.)</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">$6 - 3r = 0 \Rightarrow r = 2$，故 $(-3)^r = (-3)^2 = +9$。系数 $= \binom{6}{2}\cdot 2^4\cdot 9 = 2160$。（符号陷阱：$r$ 为偶数，常数为正。）</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">7. $\binom{12}{3} + \binom{12}{4}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">7. $\binom{12}{3} + \binom{12}{4}$ equals:</span><span data-lang="zh">7. $\binom{12}{3} + \binom{12}{4} = $</span></div>
       <span class="quiz-number">Q7</span>
     </div>
     <div class="quiz-options">
@@ -1336,14 +1578,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$\binom{24}{7}$</div>
       <div class="quiz-opt" data-idx="3">$\binom{12}{7}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Pascal's identity: $\binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$. Here $n - 1 = 12$, $r = 4$, so the sum is $\binom{13}{4}$.</div>
-    <div class="quiz-explain wrong-exp">Pascal's identity matches with $n = 13$, $r = 4$: $\binom{12}{3} + \binom{12}{4} = \binom{13}{4}$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Pascal's identity: $\binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$. Here $n - 1 = 12$, $r = 4$, so the sum is $\binom{13}{4}$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！帕斯卡恒等式：$\binom{n-1}{r-1} + \binom{n-1}{r} = \binom{n}{r}$。此处 $n - 1 = 12$，$r = 4$，故和为 $\binom{13}{4}$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Pascal's identity matches with $n = 13$, $r = 4$: $\binom{12}{3} + \binom{12}{4} = \binom{13}{4}$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">帕斯卡恒等式对应 $n = 13$，$r = 4$：$\binom{12}{3} + \binom{12}{4} = \binom{13}{4}$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
     <div class="quiz-header">
-      <div class="quiz-q">8. $5$ couples are seated around a round table. The number of arrangements where each couple sits together is:</div>
+      <div class="quiz-q"><span data-lang="en">8. $5$ couples are seated around a round table. The number of arrangements where each couple sits together is:</span><span data-lang="zh">8. $5$ 对夫妇围圆桌而坐。要求每对都相邻，方案数为</span></div>
       <span class="quiz-number">Q8</span>
     </div>
     <div class="quiz-options">
@@ -1352,14 +1596,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$10!$</div>
       <div class="quiz-opt" data-idx="3">$5!$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Treat each couple as one block ($5$ blocks). Circular: $(5-1)! = 4!$. Each block has $2!$ internal orders, and there are $5$ blocks: $2^5$. Total $4! \cdot 2^5 = 24 \cdot 32 = 768$.</div>
-    <div class="quiz-explain wrong-exp">Couples-as-blocks → $5$ blocks circular = $4!$. Internal orders per couple = $2$, so $2^5$. Total $4! \cdot 2^5 = 768$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Treat each couple as one block ($5$ blocks). Circular: $(5-1)! = 4!$. Each block has $2!$ internal orders, and there are $5$ blocks: $2^5$. Total $4! \cdot 2^5 = 24 \cdot 32 = 768$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！每对夫妇看作一个块（$5$ 块）。圆排列：$(5-1)! = 4!$。每块内部 $2!$ 种顺序，共 $5$ 块：$2^5$。合计 $4! \cdot 2^5 = 24 \cdot 32 = 768$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Couples-as-blocks → $5$ blocks circular = $4!$. Internal orders per couple = $2$, so $2^5$. Total $4! \cdot 2^5 = 768$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">夫妇捆绑为块 → $5$ 块圆排列 = $4!$。每对内部 $2$ 种 → $2^5$。合计 $4! \cdot 2^5 = 768$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
     <div class="quiz-header">
-      <div class="quiz-q">9. Up to and including the $x^2$ term, $(1 + 3x)^{1/3}$ equals:</div>
+      <div class="quiz-q"><span data-lang="en">9. Up to and including the $x^2$ term, $(1 + 3x)^{1/3}$ equals:</span><span data-lang="zh">9. 将 $(1 + 3x)^{1/3}$ 展开到 $x^2$ 项（含），结果为</span></div>
       <span class="quiz-number">Q9</span>
     </div>
     <div class="quiz-options">
@@ -1368,14 +1614,16 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$1 + x - x^2$</div>
       <div class="quiz-opt" data-idx="3">$1 - x - x^2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Apply with $n = \tfrac{1}{3}$ and $x \to 3x$: $1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2!}(3x)^2 = 1 + x - x^2$. Valid for $|3x| &lt; 1$, i.e. $|x| &lt; \tfrac{1}{3}$.</div>
-    <div class="quiz-explain wrong-exp">Substitute $3x$ for $x$ in $(1+x)^{1/3}$: $1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2}(3x)^2 = 1 + x - x^2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Apply with $n = \tfrac{1}{3}$ and $x \to 3x$: $1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2!}(3x)^2 = 1 + x - x^2$. Valid for $|3x| &lt; 1$, i.e. $|x| &lt; \tfrac{1}{3}$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！取 $n = \tfrac{1}{3}$，把 $x$ 替换为 $3x$：$1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2!}(3x)^2 = 1 + x - x^2$。收敛于 $|3x| &lt; 1$，即 $|x| &lt; \tfrac{1}{3}$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Substitute $3x$ for $x$ in $(1+x)^{1/3}$: $1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2}(3x)^2 = 1 + x - x^2$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">把 $(1+x)^{1/3}$ 中的 $x$ 换成 $3x$：$1 + \tfrac{1}{3}(3x) + \tfrac{(1/3)(-2/3)}{2}(3x)^2 = 1 + x - x^2$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header">
-      <div class="quiz-q">10. $7$ books (4 different math, 3 different physics) are shelved so that all math books are adjacent. Number of arrangements:</div>
+      <div class="quiz-q"><span data-lang="en">10. $7$ books (4 different math, 3 different physics) are shelved so that all math books are adjacent. Number of arrangements:</span><span data-lang="zh">10. $7$ 本书（$4$ 本不同数学、$3$ 本不同物理）放在书架上，要求数学书全部相邻。方案数为</span></div>
       <span class="quiz-number">Q10</span>
     </div>
     <div class="quiz-options">
@@ -1384,9 +1632,11 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
       <div class="quiz-opt" data-idx="2">$7! = 5040$</div>
       <div class="quiz-opt" data-idx="3">$2 \cdot 4! \cdot 3! = 288$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Math books glued = 1 block. Now $4$ items (block + $3$ physics): $4!$ arrangements. Internal math orders: $4!$. Total $4! \cdot 4! = 24 \cdot 24 = 576$.</div>
-    <div class="quiz-explain wrong-exp">Glue the $4$ math books → $4$ items to arrange ($4!$), times the $4!$ orders inside the math block. Total $576$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">↻ Try Again</button>
+    <div class="quiz-explain correct-exp" data-lang="en">Correct! Math books glued = 1 block. Now $4$ items (block + $3$ physics): $4!$ arrangements. Internal math orders: $4!$. Total $4! \cdot 4! = 24 \cdot 24 = 576$.</div>
+    <div class="quiz-explain correct-exp" data-lang="zh">正确！数学书绑成 1 块。现在有 $4$ 个对象（块 + 3 本物理）：$4!$ 种排列。块内数学书顺序：$4!$。合计 $4! \cdot 4! = 24 \cdot 24 = 576$。</div>
+    <div class="quiz-explain wrong-exp" data-lang="en">Glue the $4$ math books → $4$ items to arrange ($4!$), times the $4!$ orders inside the math block. Total $576$.</div>
+    <div class="quiz-explain wrong-exp" data-lang="zh">把 $4$ 本数学书粘成一块 → 共 $4$ 个对象（$4!$），再乘块内 $4!$ 种顺序。合计 $576$。</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">↻ Try Again</span><span data-lang="zh">↻ 重试</span></button>
   </div>
 </section>
 
@@ -1394,32 +1644,32 @@ $$ \left|\frac{T_{r+2}}{T_{r+1}}\right| = \left|\frac{(n-r)\, x}{r+1}\right| \xr
 
 <!-- ═══════════════ CHECKLIST ═══════════════ -->
 <section class="section" id="checklist">
-  <div class="section-label">Self-Assessment</div>
-  <h2>Readiness Checklist</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are HL-only.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-Assessment</span><span data-lang="zh">自我评估</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">备考清单</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;"><span data-lang="en">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are HL-only.</span><span data-lang="zh">点击你已经掌握的条目。考前目标 100%。标有 <span class="hl-flag">HL</span> 的为 HL 专属内容。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 14 mastered</span><span data-lang="zh">已掌握 0 / 14</span></div>
 
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use multiplication and addition rules; recognize when cases overlap</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply ${}^nP_r = n!/(n-r)!$, including small-$r$ shortcuts</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Handle multiset permutations and circular arrangements</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> State and apply $\binom{n}{r}$; use the symmetry $\binom{n}{r} = \binom{n}{n-r}$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Use complement counting when faster than direct casework</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Apply the binomial theorem to find specific terms or coefficients</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Distinguish "$r$-th term" from "$T_r$" — index correctly</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the combinatorial proof of the binomial theorem</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Recognize Pascal rows up to $n = 6$ and use Pascal's identity</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Prove the row sum is $2^n$ by both algebraic and combinatorial routes</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> Reproduce the combinatorial proof of Pascal's identity (case-split on element $n$)</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Apply the extended binomial theorem to rational/negative $n$</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Factor $(a + bx)^n$ before applying the series; state radius of convergence</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> Use the extended binomial to approximate roots and reciprocals</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use multiplication and addition rules; recognize when cases overlap</span><span data-lang="zh">熟练使用乘法与加法原理；识别情形是否重叠</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and apply ${}^nP_r = n!/(n-r)!$, including small-$r$ shortcuts</span><span data-lang="zh">写出并应用 ${}^nP_r = n!/(n-r)!$，含小 $r$ 时的快速算法</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Handle multiset permutations and circular arrangements</span><span data-lang="zh">能处理多重集排列与圆排列</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">State and apply $\binom{n}{r}$; use the symmetry $\binom{n}{r} = \binom{n}{n-r}$</span><span data-lang="zh">写出并应用 $\binom{n}{r}$；活用对称性 $\binom{n}{r} = \binom{n}{n-r}$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Use complement counting when faster than direct casework</span><span data-lang="zh">能在补集法比直接分类更快时果断切换</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Apply the binomial theorem to find specific terms or coefficients</span><span data-lang="zh">用二项式定理求指定项或指定系数</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Distinguish "$r$-th term" from "$T_r$" — index correctly</span><span data-lang="zh">区分"第 $r$ 项"与 "$T_r$"——下标对齐</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Reproduce the combinatorial proof of the binomial theorem</span><span data-lang="zh">能复现二项式定理的组合证</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Recognize Pascal rows up to $n = 6$ and use Pascal's identity</span><span data-lang="zh">识别帕斯卡三角前 $n = 6$ 行并运用帕斯卡恒等式</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Prove the row sum is $2^n$ by both algebraic and combinatorial routes</span><span data-lang="zh">能用代数法与组合法分别证明行和为 $2^n$</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span data-lang="en">Reproduce the combinatorial proof of Pascal's identity (case-split on element $n$)</span><span data-lang="zh">能复现帕斯卡恒等式的组合证（按元素 $n$ 分类）</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> <span data-lang="en">Apply the extended binomial theorem to rational/negative $n$</span><span data-lang="zh">能对有理 / 负指数 $n$ 应用推广二项式定理</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> <span data-lang="en">Factor $(a + bx)^n$ before applying the series; state radius of convergence</span><span data-lang="zh">展开 $(a + bx)^n$ 前先提因式；写出收敛区间</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">✓</span> <span class="hl-flag">HL</span> <span data-lang="en">Use the extended binomial to approximate roots and reciprocals</span><span data-lang="zh">用推广二项式做开方与倒数的近似</span></li>
   </ul>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">鼎睿学苑 · Dingrui Scholars</div>
-  <p>IB Math Analysis &amp; Approaches HL — Unit A3: Combinatorics · First Assessment 2029</p>
+  <p><span data-lang="en">IB Math Analysis &amp; Approaches HL — Unit A3: Combinatorics · First Assessment 2029</span><span data-lang="zh">IB 数学分析与方法 HL——单元 A3：组合数学 · 首次考核 2029</span></p>
 </div>
 
 </main>
@@ -1438,16 +1688,38 @@ function updateScoreBadge() {
   }
 }
 
+function setThemeBtnLabel(isDark) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.innerHTML = isDark
+    ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>'
+    : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+}
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeToggle').textContent = isDark ? 'Dark' : 'Light';
+  setThemeBtnLabel(!isDark);
 }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
   document.documentElement.setAttribute('data-theme', 'dark');
-  const tt = document.getElementById('themeToggle');
-  if (tt) tt.textContent = 'Light';
+  setThemeBtnLabel(true);
 }
+
+// ─── LANGUAGE ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+  try {
+    localStorage.setItem('drs.lang',
+      document.body.classList.contains('lang-zh') ? 'zh' : 'en');
+  } catch (e) { /* ignore */ }
+}
+(function () {
+  try {
+    if (localStorage.getItem('drs.lang') === 'zh') {
+      document.body.classList.add('lang-zh');
+    }
+  } catch (e) { /* ignore */ }
+})();
 
 window.addEventListener('scroll', () => {
   const h = document.documentElement.scrollHeight - window.innerHeight;
@@ -1515,7 +1787,9 @@ function updateFlashcardCount() {
   const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
   const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
   const el = document.getElementById('fcCount');
-  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span>' +
+    '<span data-lang="zh">已翻 ' + flipped + ' / ' + total + '</span>';
 }
 function resetFlashcards() {
   document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
@@ -1537,7 +1811,9 @@ function toggleCheck(li) {
   const total = document.querySelectorAll('#checklistUl li').length;
   const checked = document.querySelectorAll('#checklistUl li.checked').length;
   const el = document.getElementById('checkProgress');
-  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+  if (el) el.innerHTML =
+    '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span>' +
+    '<span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>';
 }
 
 function toggleSidebar() {

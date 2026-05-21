@@ -35,8 +35,8 @@ below — fill in as each unit ships.
 | ID | Item | Tier | Status |
 |---|---|---|---|
 | ~~**T-1**~~ | Unit A1 Sequences &amp; Series bilingual translation | P1 | ✅ **Shipped** — 260/260 `data-lang` markers; 8 sections (AP, GP, sigma, infinite-GP convergence, financial apps, mixed) + how-to + exam-strategy + flashcards + 10-item unit quiz + 14-item readiness checklist all bilingualized. Pending review-then-merge. |
-| **T-2** | Unit A3 Combinatorics bilingual translation | P1 | **Open** — next up |
-| **T-3** | Unit A4 Complex Numbers bilingual translation | P1 | **Open** |
+| ~~**T-2**~~ | Unit A3 Combinatorics bilingual translation | P1 | ✅ **Shipped** — 213/213 `data-lang` markers; 6 sections (counting principles, permutations, combinations, binomial theorem, Pascal's triangle, extended binomial HL) + how-to + exam-strategy + flashcards + 10-item unit quiz + 14-item readiness checklist all bilingualized. Pending review-then-merge. |
+| **T-3** | Unit A4 Complex Numbers bilingual translation | P1 | **Open** — next up |
 | **T-4** | Unit C Geometry bilingual translation | P1 | **Open** |
 
 **Audience contract** — Mandarin-Chinese-language students preparing to
@@ -131,7 +131,7 @@ the matching `"zh"` count.
 | # | Unit | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
 |---|---|---|---|---|---|---|
 | A1 | Sequences & Series       | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped. Playbook's `af27baf` reference superseded — point future translators here once the commit lands. |
-| A3 | Combinatorics            | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-2 — queued. |
+| A3 | Combinatorics            | 213 / 213 ✅ | ✅ | ✅ | ✅ | T-2 shipped. Glossary covers <code>permutation</code>, <code>combination</code>, <code>binomial theorem</code>, <code>Pascal's triangle</code>, <code>Pascal's identity</code>, <code>circular arrangement</code>, <code>combinatorial proof</code>. |
 | A4 | Complex Numbers          | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-3 — queued. Heavy on Argand / De Moivre / modulus-argument terminology — exercise the playbook IB Math glossary. |
 | C  | Geometry & Trigonometry  | _ / _ ⏳ | ⏳ | ⏳ | ⏳ | T-4 — queued. Largest file (2381 lines); glossary additions likely (sine/cosine rule, vector cross/dot product, etc.). |
 
