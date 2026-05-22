@@ -30,7 +30,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -74,16 +74,23 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ─── BILINGUAL TOGGLE ─── */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}#langToggle{display:none !important;}}
 </style>
 </head>
 <body data-theme="light">
 
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+
 <div class="brand">I&nbsp;B&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H&nbsp;&nbsp;A&nbsp;A&nbsp;&nbsp;H&nbsp;L</div>
-<div class="chapter-tag">Unit A3 &middot; Solutions</div>
-<h1 class="chapter-title">Combinatorics &mdash; Solutions</h1>
-<p class="chapter-sub">Companion to the IB-Style Practice Set</p>
+<div class="chapter-tag"><span data-lang="en">Unit A3 &middot; Solutions</span><span data-lang="zh">Unit A3 &middot; 解析</span></div>
+<h1 class="chapter-title"><span data-lang="en">Combinatorics &mdash; Solutions</span><span data-lang="zh">组合数学 —— 解析</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the IB-Style Practice Set</span><span data-lang="zh">IB 风格练习题的解析配套</span></p>
 <div class="legend">
   <span class="pill med">MEDIUM</span>
   <span class="pill hard">HARD</span>
@@ -91,23 +98,23 @@
   <span class="pill p1b">Paper 1B</span>
   <span class="pill p2">Paper 2</span>
 </div>
-<p class="topics-line">Syllabus <b>1.9 – 1.11</b><span class="scope">AA HL</span></p>
+<p class="topics-line"><span data-lang="en">Syllabus <b>1.9 – 1.11</b></span><span data-lang="zh">考纲 <b>1.9 – 1.11</b></span><span class="scope">AA HL</span></p>
 <hr class="thick"><hr class="thin">
 
-<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.1</code> &middot; companion to <code>Unit_A3_Combinatorics_Practice.html</code> v1.1 &middot; 12 Qs &middot; 100 marks &middot; IB-style method walk with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> mark callouts</p>
+<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.1</code> &middot; <span data-lang="en">companion to <code>Unit_A3_Combinatorics_Practice.html</code> v1.1 &middot; 12 Qs &middot; 100 marks &middot; IB-style method walk with</span><span data-lang="zh"><code>Unit_A3_Combinatorics_Practice.html</code> v1.1 配套 &middot; 12 题 &middot; 100 分 &middot; 按 IB 风格逐步给出解题方法，附</span> <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> <span data-lang="en">mark callouts</span><span data-lang="zh">分点标注</span></p>
 
 <!-- ════════════════════════════════ PART I ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART I &nbsp;·&nbsp; PAPER 1 SECTION A &mdash; SOLUTIONS</span><span class="part-meta">No calculator &middot; 28 marks</span></div>
-<h2 class="section-head">Section A &mdash; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;·&nbsp; PAPER 1 SECTION A &mdash; SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;·&nbsp; 第一卷 A 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator &middot; 28 marks</span><span data-lang="zh">不可使用计算器 &middot; 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &mdash; Worked Solutions</span><span data-lang="zh">A 节 —— 详细解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q1</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">1.9 Binomial &mdash; Term Hunt</span><span class="pill marks">[6 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Expansion of $\left(2x^{2} - \dfrac{1}{x}\right)^{9}$ &mdash; (a) general term, (b) coefficient of $x^{6}$, (c) term independent of $x$.</p>
+    <p class="prompt"><span data-lang="en">Expansion of $\left(2x^{2} - \dfrac{1}{x}\right)^{9}$ &mdash; (a) general term, (b) coefficient of $x^{6}$, (c) term independent of $x$.</span><span data-lang="zh">$\left(2x^{2} - \dfrac{1}{x}\right)^{9}$ 的展开式 —— (a) 通项，(b) $x^{6}$ 的系数，(c) 不含 $x$ 的项。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{9}{r}\,2^{9-r}\,(-1)^{r}\,x^{18-3r}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $4032$ &nbsp;·&nbsp; <span class="ans">(c)</span> $672$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{9}{r}\,2^{9-r}\,(-1)^{r}\,x^{18-3r}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $4032$ &nbsp;·&nbsp; <span class="ans">(c)</span> $672$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) General term <span class="marks-call">M1·A1</span></h4>
       The binomial theorem gives $\displaystyle (a+b)^{n} = \sum_{r=0}^{n}\binom{n}{r}a^{n-r}b^{r}$. Apply with $a = 2x^{2}$, $b = -x^{-1}$, $n = 9$:
       $$ T_{r+1} \;=\; \binom{9}{r}\,(2x^{2})^{9-r}\,(-x^{-1})^{r} \;=\; \binom{9}{r}\,2^{\,9-r}\,(-1)^{r}\,x^{\,2(9-r)}\,x^{-r}. $$
@@ -126,17 +133,36 @@
 
       <div class="insight"><strong>Trap to avoid:</strong> students often forget the $(-1)^{r}$ factor from the negative second term, or square the exponent of $x^{2}$ wrong (it's $2(9-r)$, not $(9-r)^{2}$). Always combine the two $x$-powers into a single exponent <em>before</em> hunting for the target $r$.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 通项 <span class="marks-call">M1·A1</span></h4>
+      二项定理（<code>binomial theorem</code>）给出 $\displaystyle (a+b)^{n} = \sum_{r=0}^{n}\binom{n}{r}a^{n-r}b^{r}$。取 $a = 2x^{2}$、$b = -x^{-1}$、$n = 9$：
+      $$ T_{r+1} \;=\; \binom{9}{r}\,(2x^{2})^{9-r}\,(-x^{-1})^{r} \;=\; \binom{9}{r}\,2^{\,9-r}\,(-1)^{r}\,x^{\,2(9-r)}\,x^{-r}. $$
+      合并 $x$ 的幂次：$x^{18-2r-r} = x^{18-3r}$。因此
+      $$ T_{r+1} = \binom{9}{r}\,2^{9-r}\,(-1)^{r}\,x^{18-3r}, \qquad r = 0, 1, \ldots, 9. $$
+
+      <h4>(b) $x^{6}$ 的系数 <span class="marks-call">M1·A1</span></h4>
+      令指数等于 $6$：$18 - 3r = 6 \Rightarrow r = 4$。$r = 4$ 项为
+      $$ \binom{9}{4}\,2^{\,5}\,(-1)^{4}\,x^{6} \;=\; 126 \cdot 32 \cdot 1 \cdot x^{6} \;=\; 4032\,x^{6}. $$
+      系数 $= \boxed{4032}$。
+
+      <h4>(c) 不含 $x$ 的项 <span class="marks-call">M1·A1</span></h4>
+      令 $18 - 3r = 0 \Rightarrow r = 6$。$r = 6$ 项为
+      $$ \binom{9}{6}\,2^{\,3}\,(-1)^{6} \;=\; 84 \cdot 8 \cdot 1 \;=\; 672. $$
+      所以展开式中的常数项（<code>constant term</code>）为 $\boxed{672}$。
+
+      <div class="insight"><strong>常见陷阱：</strong>学生经常忽略第二项为负带来的 $(-1)^{r}$ 因子，或把 $x^{2}$ 的指数算错（应为 $2(9-r)$，而非 $(9-r)^{2}$）。一律先把两个 $x$ 的幂次合并为单一指数，<em>再</em>去找目标 $r$。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q2</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">1.10 Multiset Perms + Gap Method</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">MISSISSIPPI &mdash; (a) total distinguishable arrangements, (b) arrangements with no two I's adjacent.</p>
+    <p class="prompt"><span data-lang="en">MISSISSIPPI &mdash; (a) total distinguishable arrangements, (b) arrangements with no two I's adjacent.</span><span data-lang="zh">MISSISSIPPI —— (a) 可区分排列总数，(b) 任意两个 I 都不相邻的排列数。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\dfrac{11!}{4!\,4!\,2!} = 34\,650$ &nbsp;·&nbsp; <span class="ans">(b)</span> $7350$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\dfrac{11!}{4!\,4!\,2!} = 34\,650$ &nbsp;·&nbsp; <span class="ans">(b)</span> $7350$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Total arrangements <span class="marks-call">M1·A1</span></h4>
       Letter counts: $\mathrm{M}\!\times\!1,\ \mathrm{I}\!\times\!4,\ \mathrm{S}\!\times\!4,\ \mathrm{P}\!\times\!2$ — total $11$ letters. The number of distinguishable orderings of a multiset is
       $$ \frac{11!}{1!\,4!\,4!\,2!} \;=\; \frac{39\,916\,800}{1\cdot 24\cdot 24\cdot 2} \;=\; \frac{39\,916\,800}{1152} \;=\; 34\,650. $$
@@ -160,17 +186,41 @@
 
       <div class="insight"><strong>Why the gap method works.</strong> Treating the "no two adjacent" constraint as a slot-choice problem decouples the constraint from the arrangement of the other letters. If you instead try inclusion–exclusion on "at least one I-pair adjacent" it works, but the bookkeeping is brutal. The gap method is the canonical IB approach &mdash; identify the constrained letters and place them <em>into gaps</em> of the rest.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 排列总数 <span class="marks-call">M1·A1</span></h4>
+      字母个数：$\mathrm{M}\!\times\!1,\ \mathrm{I}\!\times\!4,\ \mathrm{S}\!\times\!4,\ \mathrm{P}\!\times\!2$ —— 共 $11$ 个字母。多重集（<code>multiset</code>）的可区分排列数为
+      $$ \frac{11!}{1!\,4!\,4!\,2!} \;=\; \frac{39\,916\,800}{1\cdot 24\cdot 24\cdot 2} \;=\; \frac{39\,916\,800}{1152} \;=\; 34\,650. $$
+      （M 对应的 $1!$ 通常省略，其值等于 $1$，与题目表达式一致。）
+
+      <h4>(b) 任意两个 I 都不相邻 —— <em>插空法</em>（<code>gap method</code>） <span class="marks-call">M1·M1·A1·R1·A1</span></h4>
+      把四个 I <em>放到最后再插</em>，于是不相邻的约束就变成一个干净的"选不同槽位"问题。
+      <ol>
+        <li><strong>先排其余字母。</strong>共七个字母：$\mathrm{M, S, S, S, S, P, P}$。可区分排列数：
+          $$ \frac{7!}{4!\,2!\,1!} \;=\; \frac{5040}{48} \;=\; 105. $$
+        </li>
+        <li><strong>找出可插的"空隙"。</strong>把七个字母排成一行后，恰好有 $\boxed{8}$ 个"槽位"可以放 I 而不会形成新的 I-I 相邻：行首一个、行尾一个、每对相邻字母之间各一个（$7$ 个字母 $\Rightarrow 6$ 个中间槽 $\Rightarrow 6 + 2 = 8$ 个槽）。</li>
+        <li><strong>从 $8$ 个槽中选 $4$ 个放 I。</strong>因为四个 I 是相同的，这是组合（<code>choose</code>）而非排列：
+          $$ \binom{8}{4} \;=\; 70. $$
+        </li>
+        <li><strong>相乘。</strong>
+          $$ 105 \times 70 \;=\; 7350. $$
+        </li>
+      </ol>
+      因此任意两个 I 都不相邻的排列数为 $\boxed{7350}$。
+
+      <div class="insight"><strong>插空法为什么有效。</strong>把"任意两个不相邻"的约束转化为"选槽位"问题，可以让约束与其他字母的排列方式相互解耦。如果改用容斥原理（<code>inclusion–exclusion</code>）枚举"至少有一对 I 相邻"也能做，但记账非常痛苦。插空法是 IB 的标准做法 —— 识别出受约束的字母，然后把它们<em>放入其他字母的空隙</em>。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q3</span><span class="pill hard">HARD</span><span class="pill p1a">Paper 1A</span><span class="pill topic">1.10 Consecutive Coefficient Ratios</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Find $n$ and $r$ such that $\binom{n}{r} : \binom{n}{r+1} : \binom{n}{r+2} = 6 : 14 : 21$.</p>
+    <p class="prompt"><span data-lang="en">Find $n$ and $r$ such that $\binom{n}{r} : \binom{n}{r+1} : \binom{n}{r+2} = 6 : 14 : 21$.</span><span data-lang="zh">求 $n$ 与 $r$，使 $\binom{n}{r} : \binom{n}{r+1} : \binom{n}{r+2} = 6 : 14 : 21$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">$n = 9$, &nbsp;$r = 2$</span></div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">$n = 9$, &nbsp;$r = 2$</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Ratio formula <span class="marks-call">M1·A1</span></h4>
       $$ \frac{\binom{n}{r+1}}{\binom{n}{r}} \;=\; \frac{\dfrac{n!}{(r+1)!\,(n-r-1)!}}{\dfrac{n!}{r!\,(n-r)!}} \;=\; \frac{r!\,(n-r)!}{(r+1)!\,(n-r-1)!} \;=\; \frac{n-r}{r+1}. $$
       (Cancel $n!$ top and bottom, then cancel factorials: $r!/(r+1)! = 1/(r+1)$ and $(n-r)!/(n-r-1)! = n-r$.)
@@ -189,17 +239,36 @@
 
       <div class="insight"><strong>Why this question is &ldquo;extending.&rdquo;</strong> Most textbook problems stop at one ratio (i.e., a single equation $\binom{n}{r+1}/\binom{n}{r} = c$ and one of $n$ or $r$ already given). Using <em>two</em> consecutive ratios pins down both unknowns from a single chain &mdash; the key trick is recognising that the same lemma applies with $r \mapsto r+1$. This is a high-yield Paper 1A pattern; the same machinery handles $\binom{n}{r-1}:\binom{n}{r}:\binom{n}{r+1} = a:b:c$ problems.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 比值公式 <span class="marks-call">M1·A1</span></h4>
+      $$ \frac{\binom{n}{r+1}}{\binom{n}{r}} \;=\; \frac{\dfrac{n!}{(r+1)!\,(n-r-1)!}}{\dfrac{n!}{r!\,(n-r)!}} \;=\; \frac{r!\,(n-r)!}{(r+1)!\,(n-r-1)!} \;=\; \frac{n-r}{r+1}. $$
+      （上下消去 $n!$，再消阶乘：$r!/(r+1)! = 1/(r+1)$，$(n-r)!/(n-r-1)! = n-r$。）
+
+      <h4>(b) 两个未知数的两个方程 <span class="marks-call">M1·M1·A1·A1·A1</span></h4>
+      由题目给定的比例，
+      $$ \frac{\binom{n}{r+1}}{\binom{n}{r}} = \frac{14}{6} = \frac{7}{3} \quad \Longrightarrow \quad \frac{n-r}{r+1} = \frac{7}{3} \quad \Longrightarrow \quad 3(n-r) = 7(r+1) \quad \Longrightarrow \quad 3n = 10r + 7. \tag{1} $$
+      对下一对应用同样的比例（在 (a) 中把 $r$ 替换为 $r+1$）：
+      $$ \frac{\binom{n}{r+2}}{\binom{n}{r+1}} = \frac{21}{14} = \frac{3}{2} \quad \Longrightarrow \quad \frac{n-r-1}{r+2} = \frac{3}{2} \quad \Longrightarrow \quad 2(n-r-1) = 3(r+2) \quad \Longrightarrow \quad 2n = 5r + 8. \tag{2} $$
+      消去 $n$：将 $(2)$ 两边乘以 $2$ 得 $4n = 10r + 16$，再减去 $(1)$：
+      $$ 4n - 3n \;=\; (10r + 16) - (10r + 7) \quad \Longrightarrow \quad n = 9. $$
+      代回 $(2)$：$18 = 5r + 8 \Rightarrow r = 2$。
+
+      <h4>验证</h4>
+      $\binom{9}{2} = 36$、$\binom{9}{3} = 84$、$\binom{9}{4} = 126$。将三数除以 $\gcd = 6$：$36 : 84 : 126 = 6 : 14 : 21$。✓
+
+      <div class="insight"><strong>本题的"延伸性"所在。</strong>多数教材题只给出一个比值（即单一方程 $\binom{n}{r+1}/\binom{n}{r} = c$，且 $n$ 或 $r$ 之一已给定）。利用<em>两个</em>相邻比值就能从同一条链上锁定两个未知数 —— 关键在于意识到把 $r$ 替换为 $r+1$ 时同一引理依旧成立。这是 Paper 1A 的高价值题型；同一套机制也能处理 $\binom{n}{r-1}:\binom{n}{r}:\binom{n}{r+1} = a:b:c$ 之类的问题。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q4</span><span class="pill hard">HARD</span><span class="pill p1a">Paper 1A</span><span class="pill topic">1.9 Identity via Differentiation</span><span class="pill marks">[8 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Prove three weighted-sum identities for $\sum r \binom{n}{r}$, $\sum r(r-1)\binom{n}{r}$, and $\sum r^{2}\binom{n}{r}$ for $n \ge 2$.</p>
+    <p class="prompt"><span data-lang="en">Prove three weighted-sum identities for $\sum r \binom{n}{r}$, $\sum r(r-1)\binom{n}{r}$, and $\sum r^{2}\binom{n}{r}$ for $n \ge 2$.</span><span data-lang="zh">当 $n \ge 2$ 时，分别证明 $\sum r \binom{n}{r}$、$\sum r(r-1)\binom{n}{r}$ 与 $\sum r^{2}\binom{n}{r}$ 的三个加权求和恒等式。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">All three identities proved; see derivation.</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">All three identities proved; see derivation.</span><span data-lang="zh">三个恒等式均已证明；推导见下。</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) First derivative <span class="marks-call">M1·A1·R1</span></h4>
       Start from the binomial expansion
       $$ (1+x)^{n} \;=\; \sum_{r=0}^{n}\binom{n}{r}\,x^{r}. \tag{$\star$} $$
@@ -222,23 +291,46 @@
 
       <div class="insight"><strong>The pattern.</strong> Differentiating $(1+x)^{n}$ $k$ times and substituting $x = 1$ gives a closed form for $\sum r(r-1)\cdots(r-k+1)\,\binom{n}{r}$ — these are the <em>falling-factorial</em> weights. Any polynomial weight $p(r)$ can be expanded as a sum of falling factorials and evaluated in one line. This is the bridge from binomial sums to (HL) discrete moment problems &mdash; the same algebra computes $E(X)$ and $E(X^{2})$ for $X \sim \mathrm{Bin}(n, \tfrac{1}{2})$.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 一阶导数 <span class="marks-call">M1·A1·R1</span></h4>
+      从二项展开式出发：
+      $$ (1+x)^{n} \;=\; \sum_{r=0}^{n}\binom{n}{r}\,x^{r}. \tag{$\star$} $$
+      两边对 $x$ 求导（左边用链式法则，右边逐项求导）：
+      $$ n(1+x)^{n-1} \;=\; \sum_{r=1}^{n} r\,\binom{n}{r}\,x^{r-1}. $$
+      （$r=0$ 项 $\binom{n}{0}$ 是常数，导数为 $0$，所以求和从 $r = 1$ 开始。）代入 $x = 1$：
+      $$ n\cdot 2^{\,n-1} \;=\; \sum_{r=1}^{n} r\,\binom{n}{r}. \qquad \blacksquare $$
+
+      <h4>(b) 二阶导数 <span class="marks-call">M1·A1·R1</span></h4>
+      对 (a) 中等式再求一次导：
+      $$ n(n-1)(1+x)^{n-2} \;=\; \sum_{r=2}^{n} r(r-1)\,\binom{n}{r}\,x^{r-2}. $$
+      $r=1$ 项 $r\binom{n}{r} = 1\cdot\binom{n}{1}$ 是常数，导数为 $0$，故求和从 $r=2$ 开始。代入 $x = 1$：
+      $$ n(n-1)\cdot 2^{\,n-2} \;=\; \sum_{r=2}^{n} r(r-1)\,\binom{n}{r}. \qquad \blacksquare $$
+
+      <h4>(c) 利用 $r^{2} = r(r-1) + r$ 合并 <span class="marks-call">M1·A1</span></h4>
+      将平方权重拆分：
+      $$ \sum_{r=0}^{n} r^{2}\binom{n}{r} \;=\; \sum_{r=0}^{n}\bigl[\,r(r-1) + r\,\bigr]\binom{n}{r} \;=\; \sum_{r=2}^{n} r(r-1)\binom{n}{r} \,+\, \sum_{r=1}^{n} r\binom{n}{r}. $$
+      （$r(r-1)$ 求和中 $r=0$、$r=1$ 项消失；$r$ 求和中 $r=0$ 项消失。）应用 (a) 与 (b)：
+      $$ = n(n-1)\,2^{\,n-2} + n\,2^{\,n-1} \;=\; 2^{\,n-2}\bigl[\,n(n-1) + 2n\,\bigr] \;=\; 2^{\,n-2}\cdot n(n+1) \;=\; n(n+1)\,2^{\,n-2}. \qquad \blacksquare $$
+
+      <div class="insight"><strong>规律。</strong>对 $(1+x)^{n}$ 求 $k$ 次导后代入 $x = 1$，可得 $\sum r(r-1)\cdots(r-k+1)\,\binom{n}{r}$ 的闭合形式 —— 这就是<em>降阶乘</em>（<code>falling factorial</code>）权重。任意多项式权重 $p(r)$ 都可以展开为若干降阶乘之和，从而一行算出。这正是二项求和通向 HL 离散矩问题的桥梁 —— 同一套代数也能算出 $X \sim \mathrm{Bin}(n, \tfrac{1}{2})$ 的 $E(X)$ 与 $E(X^{2})$。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART II ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART II &nbsp;·&nbsp; PAPER 1 SECTION B &mdash; SOLUTIONS</span><span class="part-meta">No calculator &middot; 36 marks</span></div>
-<h2 class="section-head">Section B &mdash; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;·&nbsp; PAPER 1 SECTION B &mdash; SOLUTIONS</span><span data-lang="zh">第二部分 &nbsp;·&nbsp; 第一卷 B 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator &middot; 36 marks</span><span data-lang="zh">不可使用计算器 &middot; 36 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &mdash; Worked Solutions</span><span data-lang="zh">B 节 —— 详细解析</span></h2>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q5</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">1.9 Binomial &mdash; System &amp; Largest Coefficient</span><span class="pill marks">[12 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">$(1 + ax)^{n}$ has coefficient of $x$ equal to $24$ and coefficient of $x^{2}$ equal to $252$. Find $n$, $a$, the coefficient of $x^{3}$, and the largest coefficient in the expansion.</p>
+    <p class="prompt"><span data-lang="en">$(1 + ax)^{n}$ has coefficient of $x$ equal to $24$ and coefficient of $x^{2}$ equal to $252$. Find $n$, $a$, the coefficient of $x^{3}$, and the largest coefficient in the expansion.</span><span data-lang="zh">$(1 + ax)^{n}$ 中 $x$ 的系数为 $24$，$x^{2}$ 的系数为 $252$。求 $n$、$a$、$x^{3}$ 的系数，以及展开式中的最大系数。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{n}{r}a^{r}x^{r}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $n = 8,\ a = 3$ &nbsp;·&nbsp; <span class="ans">(d)</span> $1512$ &nbsp;·&nbsp; <span class="ans">(e)</span> $T_{7}$ is largest with coefficient $20\,412$ (at $r = 6$).</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{n}{r}a^{r}x^{r}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $n = 8,\ a = 3$ &nbsp;·&nbsp; <span class="ans">(d)</span> $1512$ &nbsp;·&nbsp; <span class="ans">(e)</span> <span data-lang="en">$T_{7}$ is largest with coefficient $20\,412$ (at $r = 6$).</span><span data-lang="zh">$T_{7}$ 最大，系数为 $20\,412$（$r = 6$）。</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) General term <span class="marks-call">A1</span></h4>
       With $a$-of-binomial $= 1$ and $b$-of-binomial $= ax$:
       $$ T_{r+1} \;=\; \binom{n}{r}\,(1)^{n-r}\,(ax)^{r} \;=\; \binom{n}{r}\,a^{r}\,x^{r}. $$
@@ -267,6 +359,35 @@
 
       <div class="insight"><strong>Sanity-check the table.</strong> $c_{r} = \binom{8}{r}3^{r}$ gives $1,\,24,\,252,\,1512,\,5670,\,13\,608,\,20\,412,\,17\,496,\,6561$ — increasing then decreasing, peaking at $r = 6$. This <em>consecutive-ratio test</em> is the canonical IB approach to "largest coefficient" questions; it works for any $(1 + bx)^{n}$ and avoids brute-force enumeration.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 通项 <span class="marks-call">A1</span></h4>
+      取二项中 $a$-端 $= 1$、$b$-端 $= ax$：
+      $$ T_{r+1} \;=\; \binom{n}{r}\,(1)^{n-r}\,(ax)^{r} \;=\; \binom{n}{r}\,a^{r}\,x^{r}. $$
+
+      <h4>(b) $x^{k}$ 的系数 <span class="marks-call">M1·A1</span></h4>
+      $T_{r+1} = \binom{n}{r}a^{r}x^{r}$，所以 $x^{k}$ 来自 $r = k$ 项，其系数为 $\binom{n}{k}\,a^{k}$。$\blacksquare$
+
+      <h4>(c)(i) 两个方程 <span class="marks-call">M1·A1</span></h4>
+      $$ x \text{ 的系数：} \;\; \binom{n}{1}\,a = na = 24. \qquad\quad x^{2} \text{ 的系数：} \;\; \binom{n}{2}\,a^{2} = \frac{n(n-1)}{2}\,a^{2} = 252. $$
+
+      <h4>(c)(ii) 求解 <span class="marks-call">M1·A1·A1</span></h4>
+      由 $na = 24$：$a = 24/n$。代入 $\tfrac{n(n-1)}{2}a^{2} = 252$：
+      $$ \frac{n(n-1)}{2}\cdot\frac{576}{n^{2}} \;=\; 252 \quad \Longrightarrow \quad \frac{288(n-1)}{n} \;=\; 252 \quad \Longrightarrow \quad \frac{n-1}{n} = \frac{252}{288} = \frac{7}{8}. $$
+      交叉相乘：$8(n-1) = 7n \Rightarrow n = 8$。&nbsp;再得 $a = 24/8 = 3$。$\;\Box$
+
+      <h4>(d) $x^{3}$ 的系数 <span class="marks-call">A1</span></h4>
+      由 (b)：$\binom{8}{3}\,3^{3} = 56 \cdot 27 = 1512$。
+
+      <h4>(e) 最大系数 <span class="marks-call">M1·A1·A1</span></h4>
+      系数为 $c_{r} = \binom{8}{r}\,3^{r}$，$r = 0, 1, \ldots, 8$。考虑相邻系数之比：
+      $$ \frac{c_{r+1}}{c_{r}} \;=\; \frac{\binom{8}{r+1}\,3^{r+1}}{\binom{8}{r}\,3^{r}} \;=\; 3\cdot\frac{8-r}{r+1}. $$
+      系数<em>递增</em>当且仅当该比值 $> 1$：
+      $$ 3(8 - r) > r + 1 \;\Longleftrightarrow\; 24 - 3r > r + 1 \;\Longleftrightarrow\; 4r < 23 \;\Longleftrightarrow\; r < 5.75. $$
+      所以 $r = 0, 1, \ldots, 5$ 时 $c_{r+1} > c_{r}$，$r \ge 6$ 时 $c_{r+1} < c_{r}$。最大值出现在 $r = 6$ —— 即展开式中的 $T_{7}$。其系数为
+      $$ c_{6} \;=\; \binom{8}{6}\,3^{6} \;=\; 28\cdot 729 \;=\; 20\,412. $$
+
+      <div class="insight"><strong>用系数表反查。</strong>$c_{r} = \binom{8}{r}3^{r}$ 依次为 $1,\,24,\,252,\,1512,\,5670,\,13\,608,\,20\,412,\,17\,496,\,6561$ —— 先递增后递减，在 $r = 6$ 取峰值。这种<em>相邻比值法</em>（<code>consecutive-ratio test</code>）是 IB"求最大系数"问题的标准做法；适用于任意 $(1 + bx)^{n}$，避免暴力枚举。</div>
+    </div>
   </div>
 </div>
 
@@ -275,11 +396,11 @@
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">1.10 Hockey-Stick Identity</span><span class="pill marks">[13 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">$\binom{r}{r} + \binom{r+1}{r} + \cdots + \binom{n}{r} = \binom{n+1}{r+1}$. (a) Verify $r=2, n=5$. (b) Combinatorial proof. (c) Evaluate $\sum_{k=3}^{20}\binom{k}{3}$. (d) Prove $1+2+\cdots+n = n(n+1)/2$.</p>
+    <p class="prompt"><span data-lang="en">$\binom{r}{r} + \binom{r+1}{r} + \cdots + \binom{n}{r} = \binom{n+1}{r+1}$. (a) Verify $r=2, n=5$. (b) Combinatorial proof. (c) Evaluate $\sum_{k=3}^{20}\binom{k}{3}$. (d) Prove $1+2+\cdots+n = n(n+1)/2$.</span><span data-lang="zh">$\binom{r}{r} + \binom{r+1}{r} + \cdots + \binom{n}{r} = \binom{n+1}{r+1}$。(a) 验证 $r=2, n=5$。(b) 组合学证明。(c) 计算 $\sum_{k=3}^{20}\binom{k}{3}$。(d) 证明 $1+2+\cdots+n = n(n+1)/2$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> Both sides $= 20$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\binom{21}{4} = 5985$ &nbsp;·&nbsp; (b) and (d) proofs below.</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> <span data-lang="en">Both sides $= 20$</span><span data-lang="zh">两边均等于 $20$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> $\binom{21}{4} = 5985$ &nbsp;·&nbsp; <span data-lang="en">(b) and (d) proofs below.</span><span data-lang="zh">(b) 与 (d) 的证明见下。</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Verification, $r = 2, n = 5$ <span class="marks-call">M1·A1·A1</span></h4>
       <p>LHS:</p>
       $$ \binom{2}{2} + \binom{3}{2} + \binom{4}{2} + \binom{5}{2} \;=\; 1 + 3 + 6 + 10 \;=\; 20. $$
@@ -310,6 +431,37 @@
 
       <div class="insight"><strong>Why the hockey stick is named the hockey stick.</strong> Highlight the entries on Pascal's triangle: each summand $\binom{k}{r}$ runs <em>diagonally</em> down one side, and the answer $\binom{n+1}{r+1}$ sits one row below at the elbow &mdash; the highlighted shape looks like a hockey stick. The combinatorial proof above generalises every identity of the form "sum down a diagonal of Pascal's triangle equals one entry below the elbow" &mdash; including the formulas for higher-order figurate numbers ($\binom{k}{2}$ gives triangular numbers, $\binom{k}{3}$ gives tetrahedral numbers, etc.).</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 验证 $r = 2, n = 5$ <span class="marks-call">M1·A1·A1</span></h4>
+      <p>LHS：</p>
+      $$ \binom{2}{2} + \binom{3}{2} + \binom{4}{2} + \binom{5}{2} \;=\; 1 + 3 + 6 + 10 \;=\; 20. $$
+      RHS：$\binom{6}{3} = \dfrac{6!}{3!\,3!} = \dfrac{6\cdot 5\cdot 4}{6} = 20$。两边相等。✓
+
+      <h4>(b) 组合学证明 —— 按最大元素分类 <span class="marks-call">M1·M1·R1·R1·A1</span></h4>
+      <p><strong>共同计数对象。</strong>设 $S = \{1, 2, 3, \ldots, n+1\}$。我们用两种不同方法计数 $S$ 的所有 $(r+1)$-元子集。</p>
+      <p><strong>右边。</strong>直接计数：$(n+1)$-元集合的 $(r+1)$-元子集数为 $\binom{n+1}{r+1}$。</p>
+      <p><strong>左边。</strong>按每个 $(r+1)$-子集的<em>最大元素</em>进行分类。设最大元素为 $k$。由于子集含 $r+1$ 个元素且最大为 $k$，$k$ 最小可取 $r+1$（对应子集 $\{1, 2, \ldots, r+1\}$），最大可取 $n+1$。对每个 $k \in \{r+1, r+2, \ldots, n+1\}$：</p>
+      <ul>
+        <li>$k$ 必在该子集中。</li>
+        <li>余下 $r$ 个元素须从 $\{1, 2, \ldots, k-1\}$ 中选 —— 共 $\binom{k-1}{r}$ 种选法。</li>
+      </ul>
+      <p>因此所有 $(r+1)$-子集的总数为</p>
+      $$ \sum_{k=r+1}^{n+1}\binom{k-1}{r} \;=\; \sum_{j = r}^{n}\binom{j}{r} \quad\text{（令 $j = k-1$ 换元）} \;=\; \binom{r}{r} + \binom{r+1}{r} + \cdots + \binom{n}{r}. $$
+      <p>同一集合的两种计数必然相等：</p>
+      $$ \binom{r}{r} + \binom{r+1}{r} + \cdots + \binom{n}{r} \;=\; \binom{n+1}{r+1}. \qquad \blacksquare $$
+
+      <h4>(c) 应用 <span class="marks-call">M1·A1</span></h4>
+      在恒等式中取 $r = 3$、$n = 20$：
+      $$ \sum_{k=3}^{20}\binom{k}{3} \;=\; \binom{21}{4} \;=\; \frac{21\cdot 20\cdot 19\cdot 18}{4!} \;=\; \frac{143\,640}{24} \;=\; 5985. $$
+
+      <h4>(d) 三角形数公式的推导 <span class="marks-call">M1·M1·A1</span></h4>
+      注意到 $k = \binom{k}{1}$（从 $k$ 个中选 $1$ 个）。在恒等式中取 $r = 1$：
+      $$ \binom{1}{1} + \binom{2}{1} + \binom{3}{1} + \cdots + \binom{n}{1} \;=\; \binom{n+1}{2}. $$
+      代入 $\binom{k}{1} = k$ 与 $\binom{n+1}{2} = \dfrac{(n+1)n}{2}$：
+      $$ 1 + 2 + 3 + \cdots + n \;=\; \frac{n(n+1)}{2}. \qquad \blacksquare $$
+
+      <div class="insight"><strong>"曲棍球棒"得名的由来。</strong>在 Pascal 三角形上高亮各项：每个加项 $\binom{k}{r}$ <em>沿对角线</em>向下延伸，而答案 $\binom{n+1}{r+1}$ 位于"弯钩处"下一行 —— 高亮出来的形状像极了一根曲棍球棒。上述组合学证明可推广到所有形如"沿 Pascal 三角形对角线求和等于弯钩处下方某一格"的恒等式 —— 也包括高阶 figurate 数（图形数）的公式（$\binom{k}{2}$ 给出三角形数，$\binom{k}{3}$ 给出四面体数等等）。</div>
+    </div>
   </div>
 </div>
 
@@ -318,11 +470,11 @@
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">1.10 Lattice Paths &mdash; Combinations on a Grid</span><span class="pill marks">[11 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Monotone lattice paths from $(0,0)$ to $(5,4)$ on the integer grid (each step is $R$ or $U$). Count: total, through $(3,2)$, not through $(3,2)$, through $(3,2)$ but not $(1,1)$, and the probability that a random path passes through both $(1,1)$ and $(3,2)$.</p>
+    <p class="prompt"><span data-lang="en">Monotone lattice paths from $(0,0)$ to $(5,4)$ on the integer grid (each step is $R$ or $U$). Count: total, through $(3,2)$, not through $(3,2)$, through $(3,2)$ but not $(1,1)$, and the probability that a random path passes through both $(1,1)$ and $(3,2)$.</span><span data-lang="zh">整数格上从 $(0,0)$ 到 $(5,4)$ 的单调格点路径（每步为 $R$ 或 $U$）。求：总数、经过 $(3,2)$ 的、不经过 $(3,2)$ 的、经过 $(3,2)$ 但不经过 $(1,1)$ 的，以及随机路径同时经过 $(1,1)$ 与 $(3,2)$ 的概率。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\binom{9}{4} = 126$ &nbsp;·&nbsp; <span class="ans">(b)</span> $60$ &nbsp;·&nbsp; <span class="ans">(c)</span> $66$ &nbsp;·&nbsp; <span class="ans">(d)</span> $24$ &nbsp;·&nbsp; <span class="ans">(e)</span> $\dfrac{36}{126} = \dfrac{2}{7}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\binom{9}{4} = 126$ &nbsp;·&nbsp; <span class="ans">(b)</span> $60$ &nbsp;·&nbsp; <span class="ans">(c)</span> $66$ &nbsp;·&nbsp; <span class="ans">(d)</span> $24$ &nbsp;·&nbsp; <span class="ans">(e)</span> $\dfrac{36}{126} = \dfrac{2}{7}$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Total monotone paths <span class="marks-call">M1·A1</span></h4>
       Each path from $(0,0)$ to $(5,4)$ takes exactly $5$ right-steps and $4$ up-steps, in some order: a sequence of $9$ symbols, of which $5$ are $R$ and $4$ are $U$. The number of such sequences is the number of ways to choose <em>which $4$ of the $9$ positions</em> are $U$'s (equivalently which $5$ are $R$'s):
       $$ \binom{9}{4} \;=\; \binom{9}{5} \;=\; \frac{9!}{4!\,5!} \;=\; \frac{9\cdot 8\cdot 7\cdot 6}{4!} \;=\; \frac{3024}{24} \;=\; 126. $$
@@ -355,23 +507,56 @@
 
       <div class="insight"><strong>Multiplication principle, by sub-segments.</strong> Lattice-path counting is the canonical visual setting for combinations: each path corresponds to a binary word of $R$s and $U$s, and $\binom{m+n}{m}$ counts them. The technique generalises directly to <em>constraint counting</em> &mdash; "must pass through $P_{1}, P_{2}, \ldots, P_{k}$" splits the path into $k+1$ independent legs whose counts multiply. "Must avoid $P$" is the complement; "avoid one but include another" is inclusion–exclusion. This same machinery underlies <em>Catalan-number</em> counts (paths that don't cross a diagonal), which is the next extending question if you've enjoyed this one.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 单调路径总数 <span class="marks-call">M1·A1</span></h4>
+      从 $(0,0)$ 到 $(5,4)$ 的每条路径恰由 $5$ 步右移和 $4$ 步上移按某顺序构成：长度为 $9$ 的符号序列，其中 $5$ 个为 $R$、$4$ 个为 $U$。这样的序列数等于在 $9$ 个位置中<em>选哪 $4$ 个</em>放 $U$（等价地选 $5$ 个放 $R$）：
+      $$ \binom{9}{4} \;=\; \binom{9}{5} \;=\; \frac{9!}{4!\,5!} \;=\; \frac{9\cdot 8\cdot 7\cdot 6}{4!} \;=\; \frac{3024}{24} \;=\; 126. $$
+
+      <h4>(b) 经过 $(3,2)$ 的路径数 <span class="marks-call">M1·M1·A1</span></h4>
+      路径经过 $(3,2)$ 当且仅当其可拆分为两段独立子路径：$(0,0)\to(3,2)$ 与 $(3,2)\to(5,4)$。分别计数：
+      <ul>
+        <li>$(0,0)\to(3,2)$：$3$ 步右 + $2$ 步上，任意顺序 $\Rightarrow \binom{5}{2} = 10$ 条。</li>
+        <li>$(3,2)\to(5,4)$：$2$ 步右 + $2$ 步上，任意顺序 $\Rightarrow \binom{4}{2} = 6$ 条。</li>
+      </ul>
+      由乘法原理（<code>multiplication principle</code>），总数 $= 10\cdot 6 = 60$。
+
+      <h4>(c) 不经过 $(3,2)$ 的路径数 <span class="marks-call">A1</span></h4>
+      取 (b) 的补集：$126 - 60 = 66$。
+
+      <h4>(d) 经过 $(3,2)$ 但不经过 $(1,1)$ <span class="marks-call">M1·M1·A1·A1</span></h4>
+      对"经过 $(3,2)$ 的路径集合"做容斥（<code>inclusion–exclusion</code>）：
+      $$ \#\bigl(\text{经过 }(3,2)\bigr) \;=\; \#\bigl(\text{同时经过 }(1,1)\text{ 与 }(3,2)\bigr) \;+\; \#\bigl(\text{经过 }(3,2)\text{ 但不经过 }(1,1)\bigr). $$
+      计数同时经过 $(1,1)$ 与 $(3,2)$ 的路径 —— 拆为三段：
+      <ul>
+        <li>$(0,0)\to(1,1)$：$1R + 1U \Rightarrow \binom{2}{1} = 2$。</li>
+        <li>$(1,1)\to(3,2)$：$2R + 1U \Rightarrow \binom{3}{1} = 3$。</li>
+        <li>$(3,2)\to(5,4)$：$2R + 2U \Rightarrow \binom{4}{2} = 6$。</li>
+      </ul>
+      乘积：$2\cdot 3\cdot 6 = 36$。再得 $\#\bigl(\text{经过 }(3,2)\text{ 但不经过 }(1,1)\bigr) = 60 - 36 = 24$。
+
+      <h4>(e) 同时经过两个检查点的概率 <span class="marks-call">R1·A1</span></h4>
+      (a) 中均匀随机抽取路径：$126$ 条路径每条等概率。由 (d) 的子计数知有 $36$ 条同时经过两点：
+      $$ P\bigl(\text{经过 }(1,1)\text{ 和 }(3,2)\bigr) \;=\; \frac{36}{126} \;=\; \frac{2}{7}. $$
+
+      <div class="insight"><strong>按子段使用乘法原理。</strong>格点路径计数是组合数的经典视觉化设定：每条路径对应一个由 $R$ 和 $U$ 组成的二进制串，$\binom{m+n}{m}$ 即为其数目。这一技巧可直接推广到<em>约束计数</em> —— "必须经过 $P_{1}, P_{2}, \ldots, P_{k}$" 将路径拆为 $k+1$ 段独立子路径，路径数相乘即可。"必须绕开 $P$"取补集；"绕开一个但必经另一个"用容斥。同样这套机制也支撑 <em>Catalan 数</em>（不越过某条对角线的路径数），若本题做得顺手，下一道延伸题正是该方向。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART III ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART III &nbsp;·&nbsp; PAPER 2 &mdash; SOLUTIONS</span><span class="part-meta">Calculator &middot; 36 marks</span></div>
-<h2 class="section-head">Paper 2 &mdash; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;·&nbsp; PAPER 2 &mdash; SOLUTIONS</span><span data-lang="zh">第三部分 &nbsp;·&nbsp; 第二卷 —— 解析</span></span><span class="part-meta"><span data-lang="en">Calculator &middot; 36 marks</span><span data-lang="zh">可使用计算器 &middot; 36 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Paper 2 &mdash; Worked Solutions</span><span data-lang="zh">第二卷 —— 详细解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span><span class="pill p2">Paper 2</span><span class="pill topic">1.10 Combinations + Conditional Probability</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Committee of $4$ from $5$ IB $+$ $7$ AP students. (a) P(exactly $2$ IB), (b) P(at least $2$ IB), (c) P(exactly $2$ IB $|$ at least $1$ IB).</p>
+    <p class="prompt"><span data-lang="en">Committee of $4$ from $5$ IB $+$ $7$ AP students. (a) P(exactly $2$ IB), (b) P(at least $2$ IB), (c) P(exactly $2$ IB $|$ at least $1$ IB).</span><span data-lang="zh">从 $5$ 名 IB + $7$ 名 AP 学生中选 $4$ 人组成委员会。(a) P(恰好 $2$ 名 IB)，(b) P(至少 $2$ 名 IB)，(c) P(恰好 $2$ 名 IB $|$ 至少 $1$ 名 IB)。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\dfrac{14}{33}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{19}{33}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{21}{46}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\dfrac{14}{33}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{19}{33}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{21}{46}$</div>
+    <div class="rationale" data-lang="en">
       <h4>Set-up</h4>
       Sample space size $= \binom{12}{4} = 495$. Each of the $495$ committees is equally likely.
 
@@ -392,17 +577,38 @@
 
       <div class="insight"><strong>Tip.</strong> In (b), always check that "at least $k$" is small enough to compute the complement cheaply &mdash; here $P(0)$ and $P(1)$ are two terms vs. three for $P(2) + P(3) + P(4)$. Method marks are awarded for the strategy, so state &ldquo;use complement&rdquo; explicitly.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>列式</h4>
+      样本空间大小 $= \binom{12}{4} = 495$。每个委员会等概率出现。
+
+      <h4>(a) 恰好 $2$ 名 IB <span class="marks-call">M1·A1</span></h4>
+      从 $5$ 名 IB 中选 $2$、从 $7$ 名 AP 中选 $2$：
+      $$ P(\text{2 IB}) \;=\; \frac{\binom{5}{2}\binom{7}{2}}{\binom{12}{4}} \;=\; \frac{10\cdot 21}{495} \;=\; \frac{210}{495} \;=\; \frac{14}{33}. $$
+
+      <h4>(b) 至少 $2$ 名 IB —— 用补集 <span class="marks-call">M1·M1·A1</span></h4>
+      $P(\ge 2) = 1 - P(0) - P(1)$。
+      $$ P(0) \;=\; \frac{\binom{5}{0}\binom{7}{4}}{495} \;=\; \frac{35}{495} \;=\; \frac{7}{99}, \qquad P(1) \;=\; \frac{\binom{5}{1}\binom{7}{3}}{495} \;=\; \frac{5\cdot 35}{495} \;=\; \frac{175}{495} \;=\; \frac{35}{99}. $$
+      因此
+      $$ P(\ge 2) \;=\; 1 - \frac{7}{99} - \frac{35}{99} \;=\; \frac{99 - 7 - 35}{99} \;=\; \frac{57}{99} \;=\; \frac{19}{33}. $$
+
+      <h4>(c) 条件概率 <span class="marks-call">M1·A1</span></h4>
+      $\{\text{恰好 2 名 IB}\} \subseteq \{\text{至少 1 名 IB}\}$，所以
+      $$ P(\text{恰好 2} \mid \text{至少 1}) \;=\; \frac{P(\text{恰好 2})}{P(\text{至少 1})} \;=\; \frac{14/33}{1 - 7/99} \;=\; \frac{14/33}{92/99}. $$
+      分子分母同乘 $99$：$= \dfrac{14\cdot 3}{92} = \dfrac{42}{92} = \dfrac{21}{46}$。
+
+      <div class="insight"><strong>小贴士。</strong>做 (b) 时，先检查"至少 $k$"是否便于用补集 —— 这里 $P(0) + P(1)$ 是两项，而正面计算 $P(2) + P(3) + P(4)$ 是三项。方法分认的是策略，所以要明确写出"使用补集"。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q8</span><span class="pill med">MEDIUM</span><span class="pill p2">Paper 2</span><span class="pill topic">1.10 Linear Perms &mdash; Gap Method</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">$6$ boys and $4$ girls in a row of $10$. (a) Total. (b) No two girls adjacent. (c) Probability. (d) $B_{1}\,G\,B_{2}$ or $B_{2}\,G\,B_{1}$ as a consecutive block.</p>
+    <p class="prompt"><span data-lang="en">$6$ boys and $4$ girls in a row of $10$. (a) Total. (b) No two girls adjacent. (c) Probability. (d) $B_{1}\,G\,B_{2}$ or $B_{2}\,G\,B_{1}$ as a consecutive block.</span><span data-lang="zh">$6$ 男 $4$ 女坐成 $10$ 人一行。(a) 总数。(b) 任意两女不相邻。(c) 概率。(d) $B_{1}\,G\,B_{2}$ 或 $B_{2}\,G\,B_{1}$ 作为连续块。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $10! = 3\,628\,800$ &nbsp;·&nbsp; <span class="ans">(b)</span> $604\,800$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $80\,640$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $10! = 3\,628\,800$ &nbsp;·&nbsp; <span class="ans">(b)</span> $604\,800$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $80\,640$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Total <span class="marks-call">A1</span></h4>
       All $10$ students distinguishable, all seats distinguishable: $10! = 3\,628\,800$.
 
@@ -420,17 +626,35 @@
 
       <div class="insight"><strong>"Gap method" vs. "block method".</strong> Part (b) uses the gap method (constrained items go into gaps of the rest). Part (d) uses the block method (constrained items glue together into a single super-unit). Knowing which to reach for is the IB skill being tested &mdash; in general, <em>separation</em> constraints want gaps, <em>togetherness</em> constraints want blocks.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 总数 <span class="marks-call">A1</span></h4>
+      $10$ 名学生彼此可区分，$10$ 张椅子彼此可区分：$10! = 3\,628\,800$。
+
+      <h4>(b) 任意两女不相邻 —— 插空法（直线版） <span class="marks-call">M1·M1·A1</span></h4>
+      先排男生：$6! = 720$ 种。$6$ 名男生产生 $7$ 个空隙（行首一个、相邻男生之间 $5$ 个、行尾一个）。从 $7$ 个空隙中选 $4$ 个安置女生，再排女生：
+      $$ \binom{7}{4}\cdot 4! \;=\; 35\cdot 24 \;=\; 840. $$
+      总数：$720 \cdot 840 = 604\,800$。
+
+      <h4>(c) 概率 <span class="marks-call">A1</span></h4>
+      $$ P(\text{任意两女不相邻}) \;=\; \frac{604\,800}{3\,628\,800} \;=\; \frac{1}{6}. $$
+
+      <h4>(d) 指定三人 $B_{1}\,G\,B_{2}$ 作为块 <span class="marks-call">M1·A1</span></h4>
+      将三人视为一个块。块内排法为 $B_{1}\,G\,B_{2}$ 或 $B_{2}\,G\,B_{1}$（题目指定 $G$ 在中间），即 $2$ 种内部顺序。块加上其余 $7$ 人 $= 8$ 个单位排成一行：
+      $$ 2 \cdot 8! \;=\; 2 \cdot 40\,320 \;=\; 80\,640. $$
+
+      <div class="insight"><strong>"插空法" vs."捆绑法"。</strong>(b) 用的是插空法（受约束的元素放入其余元素的空隙）。(d) 用的是捆绑法（<code>block method</code>，受约束的元素粘成一个超级单位）。判断该用哪一种正是 IB 在考的技能 —— 总体上，<em>分离</em>类约束用插空，<em>聚合</em>类约束用捆绑。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill p2">Paper 2</span><span class="pill topic">1.10 Circular Perms &mdash; Cases &amp; Gaps</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">$10$ people incl. sisters A, B, C around a round table. (a) Total. (b) Sisters all together. (c) No two of A, B, C adjacent.</p>
+    <p class="prompt"><span data-lang="en">$10$ people incl. sisters A, B, C around a round table. (a) Total. (b) Sisters all together. (c) No two of A, B, C adjacent.</span><span data-lang="zh">$10$ 人（含三姐妹 A、B、C）围圆桌。(a) 总数。(b) 三姐妹全相邻。(c) A、B、C 任意两人都不相邻。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $9! = 362\,880$ &nbsp;·&nbsp; <span class="ans">(b)</span> $30\,240$ &nbsp;·&nbsp; <span class="ans">(c)</span> $151\,200$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $9! = 362\,880$ &nbsp;·&nbsp; <span class="ans">(b)</span> $30\,240$ &nbsp;·&nbsp; <span class="ans">(c)</span> $151\,200$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Total circular arrangements <span class="marks-call">A1</span></h4>
       $n$ distinguishable people round a circular table: $(n-1)!$ arrangements. With $n = 10$: $9! = 362\,880$.
 
@@ -448,17 +672,35 @@
 
       <div class="insight"><strong>Circle gaps vs. line gaps.</strong> The most common slip on this question is reusing the "row" gap count (which would give $8$ gaps from $7$ items). On a circle, $n$ items give exactly $n$ gaps because the row "wraps around" &mdash; the slot &ldquo;after the last person&rdquo; and &ldquo;before the first person&rdquo; are the <em>same</em> slot. Always draw a small circle of $4$–$5$ dots to convince yourself before counting.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 圆排列总数 <span class="marks-call">A1</span></h4>
+      $n$ 个可区分的人围圆桌坐下：圆排列（<code>circular permutation</code>）数为 $(n-1)!$。$n = 10$ 时：$9! = 362\,880$。
+
+      <h4>(b) 三姐妹全相邻 —— 圆上的捆绑法 <span class="marks-call">M1·A1</span></h4>
+      把 A、B、C 视为一个 $3$ 人块。块内顺序：$3! = 6$。块 + 其余 $7$ 人 $= 8$ 个单位围圆排列：$(8 - 1)! = 7! = 5040$。总数：
+      $$ 3!\cdot 7! \;=\; 6\cdot 5040 \;=\; 30\,240. $$
+
+      <h4>(c) 三姐妹两两不相邻 —— 圆上的插空法 <span class="marks-call">M1·M1·A1·A1</span></h4>
+      <ol>
+        <li><strong>先让其余 $7$ 名非姐妹围桌就座。</strong>圆排列：$(7-1)! = 6! = 720$ 种。</li>
+        <li><strong>找空隙。</strong>$7$ 个人围一圈，相邻人之间恰有 $7$ 个空隙。（注意：$n$ 个人的<em>圆</em>排列恰有 $n$ 个空隙，不是直线排列的 $n+1$ 个。）</li>
+        <li><strong>把 A、B、C 安置在 $3$ 个不同空隙并排序。</strong>$\binom{7}{3}\cdot 3! = 35\cdot 6 = 210$ 种。</li>
+        <li><strong>相乘。</strong>$720 \cdot 210 = 151\,200$。</li>
+      </ol>
+
+      <div class="insight"><strong>圆上空隙 vs. 直线空隙。</strong>本题最常见的失误是套用"直线"的空隙数（那样会得 $7$ 人产生 $8$ 个空隙）。在圆上，$n$ 个元素恰产生 $n$ 个空隙，因为直线"接首尾" —— "最后一人之后"与"第一人之前"是<em>同一个</em>空隙。计数前，先在草稿上画一个 $4$–$5$ 个点的小圆自我验证。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill p2">Paper 2</span><span class="pill topic">1.11 Extended Binomial &mdash; Scaling Trick</span><span class="pill marks">[7 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Approximate $\sqrt{2}$ using the extended binomial expansion of $\sqrt{1+x}$, applying a scaling trick because $x = 1$ is outside the radius of convergence.</p>
+    <p class="prompt"><span data-lang="en">Approximate $\sqrt{2}$ using the extended binomial expansion of $\sqrt{1+x}$, applying a scaling trick because $x = 1$ is outside the radius of convergence.</span><span data-lang="zh">使用 $\sqrt{1+x}$ 的广义二项展开逼近 $\sqrt{2}$；由于 $x = 1$ 在收敛半径外，需用换元技巧。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\sqrt{1+x} \approx 1 + \tfrac{x}{2} - \tfrac{x^{2}}{8} + \tfrac{x^{3}}{16}$, valid for $|x| < 1$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\sqrt{2} \approx 1.41421$ (error $\lesssim 10^{-7}$)</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\sqrt{1+x} \approx 1 + \tfrac{x}{2} - \tfrac{x^{2}}{8} + \tfrac{x^{3}}{16}$, <span data-lang="en">valid for $|x| < 1$</span><span data-lang="zh">在 $|x| < 1$ 时成立</span> &nbsp;·&nbsp; <span class="ans">(d)</span> $\sqrt{2} \approx 1.41421$ <span data-lang="en">(error $\lesssim 10^{-7}$)</span><span data-lang="zh">（误差 $\lesssim 10^{-7}$）</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Expansion of $\sqrt{1+x}$ <span class="marks-call">M1·A1·A1</span></h4>
       $\sqrt{1+x} = (1+x)^{1/2}$. The extended binomial theorem with $n = \tfrac{1}{2}$:
       $$ (1+x)^{1/2} \;=\; 1 + \tfrac{1}{2}x + \frac{(\tfrac{1}{2})(-\tfrac{1}{2})}{2!}x^{2} + \frac{(\tfrac{1}{2})(-\tfrac{1}{2})(-\tfrac{3}{2})}{3!}x^{3} + \cdots $$
@@ -493,17 +735,52 @@
 
       <div class="insight"><strong>Why the trick works &mdash; and where it generalises.</strong> The series for $(1+x)^{n}$ converges fast when $|x|$ is small. Direct evaluation at the &ldquo;target&rdquo; $x$ may lie outside the radius of convergence (or converge so slowly the truncation error swamps the answer). The trick is to factor the target as $C\cdot\sqrt{1 + r}$ where $C$ is a rational rational-approximation of the answer and $r$ is the tiny correction. Here $\tfrac{7}{5} = 1.4$ is the simple rational close to $\sqrt{2}$; the correction $r = \tfrac{1}{49}$ is small enough that even four series terms give $5$-dp accuracy. The same idea (using $\tfrac{17}{12}$ instead of $\tfrac{7}{5}$, with $r = -\tfrac{1}{288}$) gives $\sqrt{2}$ to $8$ dp. This is the standard route Paper 2 / Paper 3 questions take when the &ldquo;obvious&rdquo; substitution is outside the radius of convergence.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) $\sqrt{1+x}$ 的展开 <span class="marks-call">M1·A1·A1</span></h4>
+      $\sqrt{1+x} = (1+x)^{1/2}$。在广义二项定理中取 $n = \tfrac{1}{2}$：
+      $$ (1+x)^{1/2} \;=\; 1 + \tfrac{1}{2}x + \frac{(\tfrac{1}{2})(-\tfrac{1}{2})}{2!}x^{2} + \frac{(\tfrac{1}{2})(-\tfrac{1}{2})(-\tfrac{3}{2})}{3!}x^{3} + \cdots $$
+      化简每个广义系数：
+      <ul>
+        <li>$r = 2$：$\dfrac{(\tfrac{1}{2})(-\tfrac{1}{2})}{2} = \dfrac{-\tfrac{1}{4}}{2} = -\dfrac{1}{8}$。</li>
+        <li>$r = 3$：$\dfrac{(\tfrac{1}{2})(-\tfrac{1}{2})(-\tfrac{3}{2})}{6} = \dfrac{\tfrac{3}{8}}{6} = \dfrac{1}{16}$。</li>
+      </ul>
+      因此
+      $$ \sqrt{1+x} \;\approx\; 1 + \tfrac{x}{2} - \tfrac{x^{2}}{8} + \tfrac{x^{3}}{16}, \qquad |x| < 1. $$
+
+      <h4>(b) 为何 $x = 1$ 不可行 <span class="marks-call">R1</span></h4>
+      级数仅在 $|x| < 1$（严格不等式）时收敛。$x = 1$ 恰位于边界 —— 收敛半径条件被破坏 —— 故不能用该级数直接求 $\sqrt{2} = \sqrt{1 + 1}$。
+
+      <h4>(c) 换元恒等式 <span class="marks-call">A1</span></h4>
+      $\sqrt{2} = \tfrac{7}{5}\,\sqrt{1+r}$。两边平方：
+      $$ 2 \;=\; \tfrac{49}{25}\,(1+r) \quad\Longrightarrow\quad 1+r = \tfrac{50}{49} \quad\Longrightarrow\quad r = \tfrac{1}{49}. \;\;\checkmark $$
+      注意 $|r| = \tfrac{1}{49} \ll 1$，因此级数收敛且收敛极快。
+
+      <h4>(d) $5$ 位小数的逼近 <span class="marks-call">M1·A1</span></h4>
+      对 $x = \tfrac{1}{49}$ 应用四项级数：
+      $$ \sqrt{1 + \tfrac{1}{49}} \;\approx\; 1 + \tfrac{1}{2\cdot 49} - \tfrac{1}{8\cdot 49^{2}} + \tfrac{1}{16\cdot 49^{3}}. $$
+      用 GDC 逐项算：
+      <ul>
+        <li>$\tfrac{1}{98} \approx 0.0102040816$</li>
+        <li>$\tfrac{1}{8\cdot 2401} = \tfrac{1}{19\,208} \approx -0.0000520617$</li>
+        <li>$\tfrac{1}{16\cdot 117\,649} = \tfrac{1}{1\,882\,384} \approx +0.0000005313$</li>
+      </ul>
+      $\sqrt{1+\tfrac{1}{49}} \approx 1 + 0.0102040816 - 0.0000520617 + 0.0000005313 \approx 1.01015255$。再乘以 $\tfrac{7}{5} = 1.4$：
+      $$ \sqrt{2} \;\approx\; 1.4 \cdot 1.01015255 \;\approx\; 1.41421357. $$
+      保留 $5$ 位小数：$\boxed{\,\sqrt{2} \approx 1.41421\,}$。GDC 值：$\sqrt{2} = 1.41421356\ldots \to 1.41421$。两者在 $5$ 位小数上完全一致。实际误差 $\lvert 1.41421357 - 1.41421356\rvert \approx 10^{-8}$ —— 远小于 $5$ 位小数精度。
+
+      <div class="insight"><strong>为何该技巧有效，又能推广到何处。</strong>$(1+x)^{n}$ 的级数在 $|x|$ 很小时收敛很快。在"目标" $x$ 处直接代入可能落在收敛半径外（或收敛极慢，使截断误差淹没答案）。技巧是把目标分解为 $C\cdot\sqrt{1 + r}$，其中 $C$ 是接近目标值的简单有理数，$r$ 是微小的修正。这里 $\tfrac{7}{5} = 1.4$ 是接近 $\sqrt{2}$ 的简单有理数；修正项 $r = \tfrac{1}{49}$ 足够小，仅四项级数即可达到 $5$ 位小数精度。同样的思路（把 $\tfrac{7}{5}$ 换成 $\tfrac{17}{12}$，$r = -\tfrac{1}{288}$）可将 $\sqrt{2}$ 精确到 $8$ 位小数。Paper 2 / Paper 3 在"直接代入"超出收敛半径时，标准做法就是这个。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill p2">Paper 2</span><span class="pill topic">1.10 Permutation-Order Probability</span><span class="pill marks">[8 marks]</span></div>
   <div class="q-body">
-    <p class="prompt">Random permutation of $\{1, 2, \ldots, 10\}$ (uniform over $10!$ permutations). Find: (a) P($1$ and $2$ adjacent), (b) P($1$ before $2$), (c) P($1, 2, 3$ in increasing positional order), (d) P($k$ specified digits in increasing order).</p>
+    <p class="prompt"><span data-lang="en">Random permutation of $\{1, 2, \ldots, 10\}$ (uniform over $10!$ permutations). Find: (a) P($1$ and $2$ adjacent), (b) P($1$ before $2$), (c) P($1, 2, 3$ in increasing positional order), (d) P($k$ specified digits in increasing order).</span><span data-lang="zh">$\{1, 2, \ldots, 10\}$ 的随机排列（在 $10!$ 个排列上均匀分布）。求：(a) P($1$ 与 $2$ 相邻)，(b) P($1$ 在 $2$ 前)，(c) P($1, 2, 3$ 按位置递增)，(d) P(指定 $k$ 个数字按位置递增)。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\dfrac{1}{5}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{1}{2}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\dfrac{1}{k!}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\dfrac{1}{5}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{1}{2}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\dfrac{1}{k!}$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) $1$ and $2$ adjacent &mdash; block method <span class="marks-call">M1·A1</span></h4>
       Glue $1$ and $2$ together as a single super-element &mdash; this can be done in $2$ internal orders ("$12$" or "$21$"). The block plus the remaining $8$ digits gives $9$ units to permute: $9!$ arrangements. So:
       $$ P(\text{1 and 2 adjacent}) \;=\; \frac{2\cdot 9!}{10!} \;=\; \frac{2}{10} \;=\; \frac{1}{5}. $$
@@ -522,13 +799,38 @@
 
       <div class="insight"><strong>The point.</strong> When the question asks about <em>relative order</em> of a small subset within a long random permutation, the long permutation is a red herring &mdash; the relative order of any $k$ items is uniform over the $k!$ orderings of those items, independent of the rest. This collapses problems of size $n!$ to size $k!$. The same idea drives Selection Sort / Quicksort average-case analyses and the "$95\%$ of comparisons" intuition behind randomised algorithms &mdash; once you know it, you'll see it in every "what's the chance a list is sorted on its first $k$ entries" question.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) $1$ 与 $2$ 相邻 —— 捆绑法 <span class="marks-call">M1·A1</span></h4>
+      把 $1$ 与 $2$ 粘成一个超级元素 —— 内部顺序可为"$12$"或"$21$"，共 $2$ 种。该块与其余 $8$ 个数字共构成 $9$ 个单位，进行 $9!$ 种排列。故
+      $$ P(\text{1 与 2 相邻}) \;=\; \frac{2\cdot 9!}{10!} \;=\; \frac{2}{10} \;=\; \frac{1}{5}. $$
+
+      <h4>(b) $1$ 在 $2$ 的左侧 —— 对称性 <span class="marks-call">R1·A1</span></h4>
+      考虑任意排列 $\pi$，以及把 $1$ 与 $2$ 位置互换（其余不变）得到的排列 $\pi'$。映射 $\pi \mapsto \pi'$ 是从 $\{\pi : 1 \text{ 在 } 2 \text{ 左}\}$ 到 $\{\pi : 2 \text{ 在 } 1 \text{ 左}\}$ 的双射。两个集合互不相交，合起来是全部 $10!$ 个排列，且大小相等。因此
+      $$ P(\text{1 在 2 左}) \;=\; \tfrac{1}{2}. $$
+
+      <h4>(c) $1, 2, 3$ 按位置递增出现 <span class="marks-call">M1·A1</span></h4>
+      固定任意排列；只看 $1$、$2$、$3$ 所占的三个位置。给定这三个位置后，三个数字落在其中的 $3! = 6$ 种顺序各以同样概率出现（在 $10!$ 上均匀 $\Rightarrow$ 条件分布也均匀）。$6$ 种中恰有 $1$ 种是递增排列。故
+      $$ P(1\text{ 在 }2\text{ 左、}2\text{ 在 }3\text{ 左}) \;=\; \frac{1}{3!} \;=\; \frac{1}{6}. $$
+
+      <h4>(d) 指定 $k$ 个数字按位置递增 <span class="marks-call">R1·A1</span></h4>
+      同样的对称性论证：任意 $k$ 个指定数字的相对顺序在它们的 $k!$ 种排列上均匀分布，与所占位置无关。$k!$ 中恰有 $1$ 种是递增的，所以概率为
+      $$ \frac{1}{k!}. $$
+
+      <div class="insight"><strong>核心观察。</strong>当题目问的是长随机排列中<em>某个小子集</em>的<em>相对顺序</em>，长排列其实是一个"红鲱鱼"（干扰项） —— 任意 $k$ 个元素的相对顺序，在该 $k$ 个元素的 $k!$ 种顺序上均匀分布，与其余无关。这把规模 $n!$ 的问题缩到规模 $k!$。同一思想也驱动选择排序 / 快速排序的平均情形分析，以及随机算法中"$95\%$ 比较次数"那类直觉 —— 一旦掌握，你会在所有"前 $k$ 项已排好序的概率是多少"的问题里看到它。</div>
+    </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; IB Math AA HL &mdash; Unit A3 Solutions <code style="color:#555;">v1.1</code></span>
-  <span>Companion to Practice v1.1 &middot; 100 marks total</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; <span data-lang="en">IB Math AA HL &mdash; Unit A3 Solutions</span><span data-lang="zh">IB Math AA HL —— Unit A3 解析</span> <code style="color:#555;">v1.1</code></span>
+  <span><span data-lang="en">Companion to Practice v1.1 &middot; 100 marks total</span><span data-lang="zh">练习 v1.1 配套 &middot; 共 100 分</span></span>
 </footer>
+
+<script>
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+</script>
 
 </body>
 </html>
