@@ -33,8 +33,8 @@ Mandarin follow-up commit picks up the same file per
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S2-1** | **U6** `Unit_6_Integration_Accumulation.html`: CJK characters inside `\text{...}` at lines 1850 (`\text{分子}`, `\text{分母}`) and 2056 (`\text{A 段}`, `\text{B 段}`) — math renders broken (A6 hygiene). Replace with `\mathrm{}` or move Chinese outside math. | P0 | **Open** |
-| **S2-2** | **U8** `Unit_8_Applications_of_Integration.html`: CJK in `\text{}` at lines 390 (`\text{净流入量}`) and 917 (`\text{其中 }`). Same fix (A6). | P0 | **Open** |
+| ~~**S2-1**~~ | ~~**U6** `Unit_6_Integration_Accumulation.html`: CJK characters inside `\text{...}` at lines 1850 (`\text{分子}`, `\text{分母}`) and 2056 (`\text{A 段}`, `\text{B 段}`) — math renders broken (A6 hygiene). Replace with `\mathrm{}` or move Chinese outside math.~~ | P0 | ✅ closed — `495cb23` |
+| ~~**S2-2**~~ | ~~**U8** `Unit_8_Applications_of_Integration.html`: CJK in `\text{}` at lines 390 (`\text{净流入量}`) and 917 (`\text{其中 }`). Same fix (A6).~~ | P0 | ✅ closed — `c70cede` |
 | **S2-3** | **U5** `Unit_5_Analytical_Applications_of_Differentiation.html`: topics 5.3–5.10 and 5.12 have **no worked example** (only prose + concept boxes). Add ≥1 visible worked example per topic (E1 dual-goal). | P0 | **Open** |
 | **S2-4** | **U9** `Unit_9_Parametric_Polar_and_Vectors.html`: worked examples in topics 9.2, 9.3, 9.5, 9.8 are collapsed inside `<details>` — crammer can't lift in <1 min. Surface them (E1 / B2). | P0 | **Open** |
 | **S2-5** | **U10** `Unit_10_Sequences_and_Series.html`: all 14 worked examples are collapsed inside `<details>` — same structural inversion. Surface them (E1 / B2). | P0 | **Open** |

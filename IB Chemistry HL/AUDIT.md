@@ -37,9 +37,9 @@ per `prompts/create-bilingual-translation.md`.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S2-1** | **Reactivity 1**: unicode superscripts `⁻¹` / `⁻³` inside `\text{...}` at lines 625, 644, 701, 720, 912, 1067 — math renders broken (A6 hygiene). Replace with `\mathrm{J\,mol^{-1}}` or `\text{J mol}^{-1}`. | P0 | **Open** |
+| ~~**S2-1**~~ | ~~**Reactivity 1**: unicode superscripts `⁻¹` / `⁻³` inside `\text{...}` at lines 625, 644, 701, 720, 912, 1067 — math renders broken (A6 hygiene). Replace with `\mathrm{J\,mol^{-1}}` or `\text{J mol}^{-1}`.~~ | P0 | ✅ closed — `bb6c557` |
 | **S2-2** | **Structure 2**: only 1 worked example across 4 topic sections. Add worked examples to 2.1 (ionic), 2.3 (metallic), 2.4 (materials) (E1 dual-goal). | P0 | **Open** |
-| **S2-3** | **Page-fill / column parity (A14, user-flagged).** All 4 IB Chem HL files render narrower than sibling subjects do. Diagnose: check `--max-w` value, `.main-wrap` width/margin rules, whether sidebar reserves a column vs. overlays. Side-by-side screenshot vs an AP Physics or IB Math HL sibling at the same viewport. Fix to match. | P1 | **Open** |
+| ~~**S2-3**~~ | ~~**Page-fill / column parity (A14, user-flagged).** All 4 IB Chem HL files render narrower than sibling subjects do. Diagnose: check `--max-w` value, `.main-wrap` width/margin rules, whether sidebar reserves a column vs. overlays. Side-by-side screenshot vs an AP Physics or IB Math HL sibling at the same viewport. Fix to match.~~ | P1 | ✅ closed — `88a32b5` (added `@media (min-width: 1100px)` block to all 4 files; matches IB Math HL / AP Calc convention) |
 | **S2-4** | **Structure 1** add worked example to 1.1 Particulate Nature. **Reactivity 1** add to 1.3 Energy from Fuels. (E1) | P1 | **Open** |
 | **S2-5** | **Reactivity 2**: add `#unit-quiz` section with 3 MCQs (sibling parity — other 3 files have one). | P1 | **Open** |
 | **S2-6** | All 4 files: per-major-topic exam-tip callout (E2). Currently every file has *one* Exam Strategy section at the bottom. Distribute the strategy guidance to each topic — Paper 1 (no calc) vs Paper 2 framing, mark-allocation cues, "data booklet" reminders, common rubric-loss traps. | P1 | **Open** |
