@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IB Math AA HL — Unit D2: Probability | Dingrui Scholars. Sample spaces, combined events, conditional probability, independence, and Bayes' theorem (HL). Covers SL 4.5, SL 4.6, and AHL 4.10 with cram-mode cheats and 7-chaser derivations side by side. Interactive quizzes, flashcards, dark mode, print-friendly.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>IB Math AA HL — Unit D2: Probability | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--green); background: var(--green-light);
+  border: 1px solid var(--green);
+  padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.3s;
+}
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.88rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 16px;
+  position: relative;
+}
+.hero-sub {
+  color: var(--text-secondary); max-width: 650px; margin: 0 auto;
+  position: relative;
+}
+.hero-meta {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+.hl-flag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--purple); background: var(--purple-light);
+  border: 1px solid var(--purple);
+  padding: 2px 7px; border-radius: 6px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  vertical-align: middle; margin-left: 8px;
+}
+
+.ib-ref {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: 6px;
+  letter-spacing: 0.5px;
+  vertical-align: middle; margin-left: 10px;
+}
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin: 32px 0 12px;
+  line-height: 1.3; color: var(--text);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+.concept-box {
+  border-left: 5px solid var(--accent);
+  background: var(--bg-card);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 8px; border-radius: 6px;
+  flex-shrink: 0; margin-left: 12px;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+  position: relative;
+}
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry {
+  display: none; margin-top: 12px;
+  padding: 8px 18px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+.flashcard-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 12px 0 4px;
+  font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.flashcard-toolbar button {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 12px;
+  border-radius: 8px; font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-left: 6px;
+}
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner {
+  display: grid;
+  grid-template-areas: "card";
+  min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  grid-area: card;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; box-shadow: var(--shadow);
+  overflow: hidden; word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--accent); font-weight: 600;
+  font-size: clamp(0.92rem, 2.1vw, 1.05rem);
+  line-height: 1.45;
+  padding: 22px 20px 34px; gap: 8px;
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP';
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px;
+}
+.flashcard-back {
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.6;
+  padding: 26px 22px; gap: 12px;
+  word-break: normal; hyphens: manual;
+  overflow-wrap: break-word; text-wrap: pretty;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 1.25em;
+  max-width: 100%; overflow: hidden;
+}
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+.worked-solution {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+
+.formula-box {
+  background: var(--bg-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  cursor: pointer; font-size: 0.95rem;
+  background: var(--bg-card); transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+  font-size: 0.8rem; color: transparent;
+}
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+.footer-wrap {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-secondary); font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem; color: var(--text);
+  margin-bottom: 4px;
+}
+
+.formula-box .katex-display {
+  margin: 14px 0 !important;
+  overflow-x: auto; overflow-y: hidden;
+  padding: 2px 0;
+}
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+
+.section-label + h2 { margin-top: 0.2rem; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  .formula-box { padding: 16px; }
+  .top-nav { padding: 0 16px; }
+}
+
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry,
+  .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.cram-cheat {
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%);
+  border: 2px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  margin: 20px 0;
+  position: relative;
+}
+.cram-cheat::before {
+  content: 'CRAM-MODE CHEAT';
+  position: absolute; top: -10px; left: 18px;
+  background: var(--gold); color: #fff;
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;
+}
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* Venn diagram styling */
+.venn-wrap {
+  display: flex; justify-content: center; align-items: center;
+  margin: 20px 0; padding: 16px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow-x: auto;
+}
+.venn-wrap svg { max-width: 100%; height: auto; }
+.venn-circle { fill-opacity: 0.35; stroke-width: 2; }
+.venn-label { font-family: var(--font-display); font-size: 18px; fill: var(--text); }
+.venn-region { font-family: var(--font-mono); font-size: 13px; fill: var(--text); }
+
+/* Tree diagram styling */
+.tree {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+.tree ul { list-style: none; padding-left: 1.6em; position: relative; }
+.tree > ul { padding-left: 0; }
+.tree li { position: relative; padding: 4px 0 4px 18px; }
+.tree li::before {
+  content: ''; position: absolute; left: 0; top: 0;
+  border-left: 1px solid var(--border);
+  height: 100%;
+}
+.tree li::after {
+  content: ''; position: absolute; left: 0; top: 14px;
+  border-top: 1px solid var(--border);
+  width: 14px;
+}
+.tree > ul > li::before, .tree > ul > li::after { display: none; }
+.tree .branch-label {
+  color: var(--accent); font-weight: 700; margin-right: 4px;
+}
+.tree .leaf-prob {
+  color: var(--text-secondary); margin-left: 8px;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">UNIT D2</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#how-to-use">How to use this guide</a>
+  <a href="#cram-sheet">Unit Cram Cheat-Sheet</a>
+  <a href="#s-d2-1">2.1 Sample Spaces &amp; Events</a>
+  <a href="#s-d2-2">2.2 Complementary Events &amp; Expected Frequency</a>
+  <a href="#s-d2-3">2.3 Combined Events &amp; Addition Rule</a>
+  <a href="#s-d2-4">2.4 Venn, Tree &amp; Sample-Space Diagrams</a>
+  <a href="#s-d2-5">2.5 Conditional Probability</a>
+  <a href="#s-d2-6">2.6 Independent Events</a>
+  <a href="#s-d2-7">2.7 Bayes' Theorem (HL)</a>
+  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Practice Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
+</aside>
+
+<main class="main-wrap">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-overline">IB AA HL &middot; Topic 4 &mdash; Statistics &amp; Probability</div>
+  <h1>Probability</h1>
+  <p class="hero-sub">
+    Sub-topics 4.5, 4.6 (SL core) and 4.10 (AHL &mdash; HL only) of IB AA HL Topic 4. Sample spaces, combined events, conditional probability, independence, Bayes' theorem.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">IB AA HL &middot; 4.5 &middot; 4.6 &middot; 4.10</span>
+    <span class="chip chip-green">Papers 1 &middot; 2</span>
+    <span class="chip chip-purple">Includes HL-only Bayes</span>
+    <span class="chip chip-gold">7 Sections</span>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="section" id="how-to-use">
+  <div class="section-label">Read me first</div>
+  <h2>How to use this guide</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">!</div>
+        <div class="card-title">If you're cramming</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read only the <strong>Unit Cram Cheat-Sheet</strong> at the top and the gold-dashed <strong>Cram-Mode Cheat</strong> at the head of each section. Memorize four formulas: $P(A) = n(A)/n(U)$, $P(A\cup B) = P(A)+P(B)-P(A\cap B)$, $P(A\mid B) = P(A\cap B)/P(B)$, and (HL) Bayes. Skim one worked example per section. Take the practice quiz.</p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#9733;</div>
+        <div class="card-title">If you're going for a 7</div>
+      </div>
+      <p style="font-size: 0.95rem;">Open every <code>&#9656; Going deeper</code>. Probability is the topic where Paper 2 sets a Venn / tree / table scenario and then layers conditional and Bayes parts on top &mdash; the marks come from <em>fluently translating</em> between the diagram and the formula. Practice the Bayes partition setup until it's a reflex.</p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">HL flag</strong>
+    Section <span class="hl-flag">2.7</span> (Bayes' theorem, AHL 4.10) is HL-only. Sections 2.1&ndash;2.6 are core for both SL and HL students. The IB AA HL syllabus caps Bayes at <strong>a maximum of three events</strong> in a partition.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- CRAM CHEAT-SHEET -->
+<section class="section" id="cram-sheet">
+  <div class="section-label">One-page overview</div>
+  <h2>Unit Cram Cheat-Sheet</h2>
+
+  <div class="cram-cheat">
+    <strong>Everything in this unit, on one card.</strong>
+    <p style="margin-top: 8px;"><strong>Core (SL 4.5, 4.6 &mdash; always-on):</strong></p>
+    $$ P(A) = \frac{n(A)}{n(U)} \qquad 0 \le P(A) \le 1 \qquad P(A') = 1 - P(A) $$
+    $$ P(A \cup B) = P(A) + P(B) - P(A \cap B) $$
+    $$ \text{Mutually exclusive: } P(A \cap B) = 0,\;\; P(A \cup B) = P(A) + P(B) $$
+    $$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} \quad (P(B) > 0) $$
+    $$ \text{Independent: } P(A \cap B) = P(A)\,P(B) \;\Longleftrightarrow\; P(A \mid B) = P(A) $$
+    $$ \text{Expected number of occurrences of } A \text{ in } n \text{ trials} = n\,P(A) $$
+    <p style="margin-top: 14px;"><strong>HL only (AHL 4.10 &mdash; Bayes, up to 3 events):</strong></p>
+    $$ P(A_i \mid B) = \frac{P(B \mid A_i)\,P(A_i)}{\displaystyle\sum_{j} P(B \mid A_j)\,P(A_j)} \quad \text{for partition } \{A_1, A_2, A_3\} $$
+    <p style="margin-top: 12px; font-size: 0.92rem; color: var(--text-secondary);"><strong>Decision tree:</strong> "<em>and</em>" between events &rarr; intersection (multiply if independent or use conditional); "<em>or</em>" &rarr; union (subtract the overlap unless mutually exclusive); "<em>given</em>" &rarr; conditional; "reverse the conditional" &rarr; Bayes.</p>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.1 SAMPLE SPACES -->
+<section class="section" id="s-d2-1">
+  <div class="section-label">Topic 2.1 &middot; Foundations</div>
+  <h2>Sample Spaces and Events <span class="ib-ref">SL 4.5</span></h2>
+
+  <div class="cram-cheat">
+    <strong>The basic vocabulary.</strong>
+    A <em>trial</em> is one run of a random experiment. An <em>outcome</em> is a possible result. The <em>sample space</em> $U$ is the set of all outcomes. An <em>event</em> $A$ is a subset of $U$. When outcomes are <em>equally likely</em>,
+    $$ P(A) = \frac{n(A)}{n(U)}, $$
+    where $n(\cdot)$ counts elements. Probabilities lie in $[0, 1]$. The probability of the certain event is $1$; of the impossible event, $0$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Classical Probability Formula</div>
+    $$ P(A) = \frac{n(A)}{n(U)} \qquad 0 \le P(A) \le 1 $$
+    <p>Valid whenever all outcomes in $U$ are equally likely. If they aren't, fall back to relative frequency: $P(A) \approx \dfrac{\text{number of times } A \text{ occurs}}{\text{number of trials}}$ as the number of trials grows large.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Vocabulary you must use precisely</strong>
+    <strong>Trial.</strong> One run (one toss, one roll, one draw).<br>
+    <strong>Outcome.</strong> A single element of $U$ (HEADS, the integer $4$, the queen of spades).<br>
+    <strong>Sample space $U$.</strong> The set of <em>all</em> outcomes. For one die: $U = \{1, 2, 3, 4, 5, 6\}$, $n(U) = 6$.<br>
+    <strong>Event.</strong> A subset of $U$. "Even score on a die" is $A = \{2, 4, 6\}$, $n(A) = 3$.<br>
+    <strong>Equally likely.</strong> Each outcome has the same probability $1/n(U)$. State this assumption explicitly when you use $P(A) = n(A)/n(U)$.<br>
+    <strong>Relative frequency.</strong> Empirical estimate from observed data; the IB uses it to <em>motivate</em> probability but expects exact answers wherever possible.
+  </div>
+
+  <h3>Worked Example &mdash; Two dice, sum equals 7</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Two fair six-sided dice are rolled. Find the probability the sum is $7$.</p>
+    <p><strong>Sample space.</strong> Ordered pairs $(d_1, d_2)$ with each $d_i \in \{1, \ldots, 6\}$, so $n(U) = 36$. Each pair is equally likely.</p>
+    <p><strong>Event.</strong> Sum $= 7$ gives $A = \{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\}$, $n(A) = 6$.</p>
+    $$ P(A) = \frac{6}{36} = \frac{1}{6}. $$
+  </div>
+
+  <h3>Worked Example &mdash; Drawing a card</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> One card is drawn from a standard $52$-card deck. What is the probability the card is a face card (J, Q, K)?</p>
+    <p>$n(U) = 52$. Face cards: $3$ ranks $\times$ $4$ suits $= 12$. So $n(A) = 12$ and</p>
+    $$ P(A) = \frac{12}{52} = \frac{3}{13}. $$
+    <p>Notice we keep the answer as an exact fraction &mdash; Paper 1 is non-calculator, and decimals lose marks when an exact form was available.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; The three Kolmogorov axioms</summary>
+    <div class="detail-body">
+      <p>Every probability statement in IB AA HL ultimately rests on three axioms:</p>
+      <p><strong>Axiom 1 (non-negativity).</strong> $P(A) \ge 0$ for every event $A$.</p>
+      <p><strong>Axiom 2 (unit measure).</strong> $P(U) = 1$.</p>
+      <p><strong>Axiom 3 (additivity for disjoint events).</strong> If $A \cap B = \varnothing$, then $P(A \cup B) = P(A) + P(B)$.</p>
+      <p>The complement rule, the addition rule for overlapping events, and the bounds $0 \le P(A) \le 1$ are all <em>derived</em> from these three. For instance, $P(A) + P(A') = P(U) = 1$ follows from Axiom 3 (since $A$ and $A'$ are disjoint and their union is $U$) and Axiom 2.</p>
+      <p>You won't be asked to recite the axioms, but Paper 2 "show that" questions sometimes ask you to justify a step &mdash; quoting "by the addition rule for mutually exclusive events" is exactly Axiom 3 in disguise.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">A fair six-sided die is rolled once. What is the probability of rolling a prime number?</div>
+      <span class="quiz-number">SL 4.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{1}{6}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{2}{3}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{1}{3}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Primes in $\{1, \ldots, 6\}$ are $\{2, 3, 5\}$, so $n(A) = 3$ and $P = 3/6 = 1/2$. (Watch: $1$ is <em>not</em> prime.)</div>
+    <div class="quiz-explain wrong-exp">Primes on a die: $\{2, 3, 5\}$ ($1$ is not prime). $P = 3/6 = 1/2$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.2 COMPLEMENTARY EVENTS -->
+<section class="section" id="s-d2-2">
+  <div class="section-label">Topic 2.2 &middot; Complement &amp; expectation</div>
+  <h2>Complementary Events and Expected Frequency <span class="ib-ref">SL 4.5</span></h2>
+
+  <div class="cram-cheat">
+    <strong>The complement rule.</strong> The complement $A'$ contains every outcome not in $A$:
+    $$ P(A') = 1 - P(A). $$
+    Use it whenever "$P(\text{at least one})$" or "$P(\text{not } X)$" is faster than direct enumeration. For $n$ independent trials, the <em>expected number</em> of occurrences of $A$ is $n\,P(A)$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Complement &amp; Expected Frequency</div>
+    $$ P(A') = 1 - P(A) $$
+    $$ E[\text{occurrences of } A \text{ in } n \text{ trials}] = n\,P(A) $$
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">When to flip to the complement</strong>
+    Anything phrased <strong>"at least one"</strong> is almost always faster via $1 - P(\text{none})$. For "at least one six in $4$ rolls of a fair die": direct casework needs four cases (exactly $1$, $2$, $3$, $4$ sixes); the complement is one line.
+    $$ P(\text{at least one six}) = 1 - P(\text{no sixes}) = 1 - \left(\tfrac{5}{6}\right)^{\!4} = 1 - \tfrac{625}{1296} = \tfrac{671}{1296}. $$
+  </div>
+
+  <h3>Worked Example &mdash; At least one of something</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A bag contains $5$ red and $3$ blue marbles. Three marbles are drawn without replacement. Find $P(\text{at least one blue})$.</p>
+    <p><strong>Use the complement.</strong> "At least one blue" $=$ NOT "all red":</p>
+    $$ P(\text{all red}) = \frac{5}{8} \cdot \frac{4}{7} \cdot \frac{3}{6} = \frac{60}{336} = \frac{5}{28}. $$
+    $$ P(\text{at least one blue}) = 1 - \frac{5}{28} = \frac{23}{28}. $$
+  </div>
+
+  <h3>Worked Example &mdash; Expected frequency</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A spinner shows red with probability $0.3$. It is spun $200$ times. How many times is it expected to land on red?</p>
+    <p>The expected number of occurrences is $n\,P(A)$:</p>
+    $$ E = 200 \times 0.3 = 60. $$
+    <p>This is the <em>theoretical</em> expectation, not a prediction of the exact count. In a real $200$-spin trial the count will fluctuate around $60$.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why $E = nP(A)$</summary>
+    <div class="detail-body">
+      <p>Let $X_i$ be the indicator of $A$ on trial $i$ ($X_i = 1$ if $A$ occurs, $0$ otherwise). Then $E[X_i] = 1 \cdot P(A) + 0 \cdot P(A') = P(A)$. The total count $X = X_1 + X_2 + \cdots + X_n$ has expectation</p>
+      $$ E[X] = E[X_1] + E[X_2] + \cdots + E[X_n] = n\,P(A), $$
+      <p>using linearity of expectation. Linearity holds even when the $X_i$ are <em>not</em> independent, which is why $E[X] = nP(A)$ also works for drawing without replacement (where each trial has the same marginal probability $P(A)$ even though the trials are dependent). This is the symptom-free way to read IB problems that say "in the long run."</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">A biased coin shows heads with probability $0.4$. It is flipped $5$ times. What is $P(\text{at least one head})$?</div>
+      <span class="quiz-number">SL 4.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.4 \cdot 5 = 2$</div>
+      <div class="quiz-opt" data-idx="1">$0.4^5 = 0.01024$</div>
+      <div class="quiz-opt" data-idx="2">$1 - 0.6^5 = 0.92224$</div>
+      <div class="quiz-opt" data-idx="3">$1 - 0.4^5 = 0.98976$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(\text{at least one H}) = 1 - P(\text{all T}) = 1 - 0.6^5 = 1 - 0.07776 = 0.92224$.</div>
+    <div class="quiz-explain wrong-exp">Use the complement: $P(\text{at least one H}) = 1 - P(\text{no H}) = 1 - (0.6)^5$. (Option D inverts the wrong probability &mdash; $0.4$ is heads, so "no heads" is $0.6^5$.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.3 COMBINED EVENTS -->
+<section class="section" id="s-d2-3">
+  <div class="section-label">Topic 2.3 &middot; Union &amp; intersection</div>
+  <h2>Combined Events and the Addition Rule <span class="ib-ref">SL 4.6</span></h2>
+
+  <div class="cram-cheat">
+    <strong>For any two events $A$ and $B$:</strong>
+    $$ P(A \cup B) = P(A) + P(B) - P(A \cap B). $$
+    Subtract the overlap so it isn't double-counted. When $A$ and $B$ are <em>mutually exclusive</em> (cannot happen together), $P(A \cap B) = 0$ and the formula collapses to $P(A) + P(B)$. Read every probability question for the words <em>"and"</em> (intersection) and <em>"or"</em> (union).
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Addition Rule for Combined Events</div>
+    $$ P(A \cup B) = P(A) + P(B) - P(A \cap B) $$
+    $$ \text{Mutually exclusive: } P(A \cap B) = 0 \;\Rightarrow\; P(A \cup B) = P(A) + P(B) $$
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">"Mutually exclusive" vs. "independent" &mdash; do not confuse</strong>
+    These two phrases sound similar in English but mean opposite things in probability:<br>
+    <strong>Mutually exclusive.</strong> $A$ and $B$ <em>cannot both</em> occur. $P(A \cap B) = 0$.<br>
+    <strong>Independent.</strong> Knowing one does not change the probability of the other. $P(A \cap B) = P(A)\,P(B)$.<br>
+    Two non-trivial events ($P(A), P(B) > 0$) cannot be both mutually exclusive and independent &mdash; if they were exclusive then $P(A\cap B) = 0 \ne P(A)P(B)$.
+  </div>
+
+  <h3>Worked Example &mdash; Card from a deck</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> One card is drawn from a standard deck. Let $A = \{\text{card is a heart}\}$, $B = \{\text{card is a face card}\}$. Find $P(A \cup B)$.</p>
+    <p>$P(A) = 13/52$, $P(B) = 12/52$. Overlap (hearts that are face cards): J$\heartsuit$, Q$\heartsuit$, K$\heartsuit$, so $P(A \cap B) = 3/52$.</p>
+    $$ P(A \cup B) = \frac{13}{52} + \frac{12}{52} - \frac{3}{52} = \frac{22}{52} = \frac{11}{26}. $$
+  </div>
+
+  <h3>Worked Example &mdash; Disjoint cases</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A single ball is drawn from an urn containing $4$ red, $6$ green and $5$ blue balls. Find $P(\text{red or green})$.</p>
+    <p>Red and green are mutually exclusive (the ball has one colour), so:</p>
+    $$ P(R \cup G) = P(R) + P(G) = \frac{4}{15} + \frac{6}{15} = \frac{10}{15} = \frac{2}{3}. $$
+    <p>Equivalently, complement of blue: $1 - 5/15 = 2/3$.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Inclusion-exclusion for three events</summary>
+    <div class="detail-body">
+      <p>The two-event addition rule generalizes. For three events,</p>
+      $$ P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C). $$
+      <p><strong>Reading.</strong> Add the singletons, subtract every pairwise overlap (each was added twice in the singletons but should appear once), then add back the triple overlap (it was added three times and subtracted three times, so we need it once more). This pattern is called <em>inclusion-exclusion</em>; the IB usually presents it as a Venn-diagram problem.</p>
+      <p><strong>Example.</strong> Of $100$ students, $50$ study French ($F$), $40$ study Spanish ($S$), $30$ study German ($G$). $20$ study French and Spanish, $15$ French and German, $10$ Spanish and German; $5$ study all three. How many study at least one language?</p>
+      $$ |F \cup S \cup G| = 50 + 40 + 30 - 20 - 15 - 10 + 5 = 80. $$
+      <p>So $80$ study at least one and $20$ study none.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">Events $A$ and $B$ satisfy $P(A) = 0.5$, $P(B) = 0.4$, and $P(A \cap B) = 0.15$. Find $P(A \cup B)$.</div>
+      <span class="quiz-number">SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.9$</div>
+      <div class="quiz-opt" data-idx="1">$0.55$</div>
+      <div class="quiz-opt" data-idx="2">$0.75$</div>
+      <div class="quiz-opt" data-idx="3">$0.65$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.5 + 0.4 - 0.15 = 0.75$.</div>
+    <div class="quiz-explain wrong-exp">$P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.5 + 0.4 - 0.15 = 0.75$. Don't forget to subtract the overlap.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.4 DIAGRAMS -->
+<section class="section" id="s-d2-4">
+  <div class="section-label">Topic 2.4 &middot; Visual tools</div>
+  <h2>Venn, Tree, and Sample-Space Diagrams <span class="ib-ref">SL 4.6</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Three diagrams; choose by structure.</strong>
+    <strong>Venn diagram</strong> &mdash; events that <em>overlap</em>; read counts off regions.<br>
+    <strong>Tree diagram</strong> &mdash; <em>sequential</em> events; multiply along branches, add over leaves.<br>
+    <strong>Sample-space table</strong> &mdash; <em>two independent</em> trials with small outcome sets (dice, coins).<br>
+    The IB markscheme awards setup marks for the <em>correct diagram</em>; draw it before computing.
+  </div>
+
+  <h3>Venn diagram &mdash; two events</h3>
+
+  <div class="venn-wrap" aria-label="Venn diagram of two overlapping events A and B inside universe U">
+    <svg viewBox="0 0 360 220" width="360" height="220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="6" width="348" height="208" fill="none" stroke="#7A2E2E" stroke-width="2"/>
+      <text class="venn-label" x="14" y="26" font-family="DM Serif Display, serif" font-size="18" fill="#2C1B1F">U</text>
+      <circle class="venn-circle" cx="135" cy="115" r="70" fill="#7A2E2E" stroke="#7A2E2E"/>
+      <circle class="venn-circle" cx="225" cy="115" r="70" fill="#5E3D7A" stroke="#5E3D7A"/>
+      <text class="venn-label" x="78" y="60" font-family="DM Serif Display, serif" font-size="20" fill="#2C1B1F">A</text>
+      <text class="venn-label" x="270" y="60" font-family="DM Serif Display, serif" font-size="20" fill="#2C1B1F">B</text>
+      <text class="venn-region" x="92" y="120" font-family="JetBrains Mono, monospace" font-size="13" fill="#2C1B1F">A only</text>
+      <text class="venn-region" x="244" y="120" font-family="JetBrains Mono, monospace" font-size="13" fill="#2C1B1F">B only</text>
+      <text class="venn-region" x="160" y="120" font-family="JetBrains Mono, monospace" font-size="13" fill="#2C1B1F">A&#8745;B</text>
+      <text class="venn-region" x="20" y="200" font-family="JetBrains Mono, monospace" font-size="13" fill="#2C1B1F">neither</text>
+    </svg>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Reading the Venn</strong>
+    Four disjoint regions: $A$ only, $B$ only, $A \cap B$, and neither. Their counts sum to $n(U)$.
+    $$ n(A) = n(A \text{ only}) + n(A \cap B), \qquad n(A \cup B) = n(U) - n(\text{neither}). $$
+    Always fill in $A \cap B$ <strong>first</strong> (you usually know this from the problem); then deduce $A$ only and $B$ only by subtraction.
+  </div>
+
+  <h3>Sample-space table &mdash; two dice</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>1</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+        <tr><th>2</th><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+        <tr><th>3</th><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+        <tr><th>4</th><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+        <tr><th>5</th><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+        <tr><th>6</th><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size: 0.92rem; color: var(--text-secondary);">Each of the $36$ cells is equally likely. Read off probabilities by counting cells: $P(\text{sum} = 7) = 6/36 = 1/6$; $P(\text{sum} \ge 10) = 6/36 = 1/6$; $P(\text{sum is prime}) = 15/36 = 5/12$.</p>
+
+  <h3>Tree diagram &mdash; two-stage experiment</h3>
+
+  <div class="tree" aria-label="Tree diagram for drawing two marbles without replacement from a bag of 3 red and 2 blue">
+    <p style="font-family: var(--font-body); margin-bottom: 10px; color: var(--text-secondary);">Bag: $3$ red, $2$ blue. Draw two without replacement.</p>
+    <ul>
+      <li>
+        <span class="branch-label">Draw 1</span>: R <span class="leaf-prob">($3/5$)</span>
+        <ul>
+          <li><span class="branch-label">Draw 2</span>: R <span class="leaf-prob">($2/4$) &rarr; RR : $3/5 \cdot 2/4 = 6/20$</span></li>
+          <li><span class="branch-label">Draw 2</span>: B <span class="leaf-prob">($2/4$) &rarr; RB : $3/5 \cdot 2/4 = 6/20$</span></li>
+        </ul>
+      </li>
+      <li>
+        <span class="branch-label">Draw 1</span>: B <span class="leaf-prob">($2/5$)</span>
+        <ul>
+          <li><span class="branch-label">Draw 2</span>: R <span class="leaf-prob">($3/4$) &rarr; BR : $2/5 \cdot 3/4 = 6/20$</span></li>
+          <li><span class="branch-label">Draw 2</span>: B <span class="leaf-prob">($1/4$) &rarr; BB : $2/5 \cdot 1/4 = 2/20$</span></li>
+        </ul>
+      </li>
+    </ul>
+    <p style="font-family: var(--font-body); margin-top: 10px;">Leaves sum to $6/20 + 6/20 + 6/20 + 2/20 = 20/20 = 1$.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Tree-diagram rules</strong>
+    <strong>Branches from a node sum to $1$.</strong> Check this before computing &mdash; a wrong branch probability propagates to every leaf.<br>
+    <strong>Multiply along a path.</strong> Each leaf probability is the product of the branches that reach it.<br>
+    <strong>Add over leaves.</strong> To find $P(\text{event})$, sum the leaf probabilities for every path that satisfies the event.<br>
+    For <em>with replacement</em>, every branch repeats the same probabilities. For <em>without replacement</em>, the second-stage probabilities depend on the first-stage outcome (as above).
+  </div>
+
+  <h3>Worked Example &mdash; Tree, two-colour draw</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Using the bag $3$ R, $2$ B above, find $P(\text{exactly one red})$.</p>
+    <p>"Exactly one red" $=$ RB or BR &mdash; two leaves:</p>
+    $$ P(\text{exactly one R}) = \frac{6}{20} + \frac{6}{20} = \frac{12}{20} = \frac{3}{5}. $$
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why tree diagrams encode the multiplication rule</summary>
+    <div class="detail-body">
+      <p>A path from root to leaf is a <em>sequence</em> of outcomes. The probability that all of those outcomes happen is, by the multiplication rule for conditional probabilities (chain rule),</p>
+      $$ P(E_1 \cap E_2 \cap \cdots \cap E_k) = P(E_1)\,P(E_2 \mid E_1)\,P(E_3 \mid E_1 \cap E_2)\cdots $$
+      <p>Each branch probability is exactly the conditional one needed for the next step. Multiplying along the path therefore gives the joint probability of that whole path. Summing over disjoint paths gives the probability of any union of paths &mdash; which is what events on tree diagrams always are.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">From the bag above ($3$ R, $2$ B, two drawn without replacement), what is $P(\text{both red})$?</div>
+      <span class="quiz-number">SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{9}{25}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{3}{10}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{6}{25}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(\text{RR}) = \tfrac{3}{5} \cdot \tfrac{2}{4} = \tfrac{6}{20} = \tfrac{3}{10}$. Without replacement, the second branch is $2/4$, not $3/5$.</div>
+    <div class="quiz-explain wrong-exp">Without replacement, the second draw has only $4$ marbles left, $2$ of them red. $P(\text{RR}) = \tfrac{3}{5} \cdot \tfrac{2}{4} = \tfrac{3}{10}$. (Option A treats the draws as <em>with</em> replacement.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.5 CONDITIONAL PROBABILITY -->
+<section class="section" id="s-d2-5">
+  <div class="section-label">Topic 2.5 &middot; "Given that"</div>
+  <h2>Conditional Probability <span class="ib-ref">SL 4.6</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Conditional probability of $A$ given $B$:</strong>
+    $$ P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0. $$
+    Reading: "of the times $B$ happens, what fraction also have $A$?" Equivalently, restrict the sample space to $B$ and look at the proportion in $A \cap B$. Multiplication rearrangement:
+    $$ P(A \cap B) = P(B)\,P(A \mid B) = P(A)\,P(B \mid A). $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Conditional Probability</div>
+    $$ P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0 $$
+    $$ \Longleftrightarrow \quad P(A \cap B) = P(B)\,P(A \mid B) $$
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">"Given" rewires the sample space</strong>
+    The bar "$\mid B$" replaces $U$ with $B$. Every conditional probability is just a classical probability on the reduced sample space:
+    $$ P(A \mid B) = \frac{n(A \cap B)}{n(B)} \quad \text{when outcomes in } B \text{ are equally likely}. $$
+    Whenever you see "given," restrict to the $B$ column / region / branch and recompute from there.
+  </div>
+
+  <h3>Worked Example &mdash; Two-way table</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A school surveys $200$ students about sports preferences:</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th></th><th>Soccer (S)</th><th>Not soccer ($S'$)</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Boys (B)</th><td>60</td><td>40</td><td>100</td></tr>
+          <tr><th>Girls (B')</th><td>30</td><td>70</td><td>100</td></tr>
+          <tr><th>Total</th><td>90</td><td>110</td><td>200</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>A student is chosen at random. Find (a) $P(S \mid B)$ and (b) $P(B \mid S)$.</p>
+    <p><strong>(a)</strong> Restrict to boys ($n = 100$); $60$ of them prefer soccer:</p>
+    $$ P(S \mid B) = \frac{60}{100} = \frac{3}{5}. $$
+    <p><strong>(b)</strong> Restrict to soccer ($n = 90$); $60$ of them are boys:</p>
+    $$ P(B \mid S) = \frac{60}{90} = \frac{2}{3}. $$
+    <p>Note that $P(S \mid B) \ne P(B \mid S)$ &mdash; the order of the conditional matters. This is the seed of Bayes' theorem.</p>
+  </div>
+
+  <h3>Worked Example &mdash; From the formula</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> $P(A) = 0.6$, $P(B) = 0.4$, $P(A \cap B) = 0.24$. Find $P(A \mid B)$ and $P(B \mid A)$.</p>
+    $$ P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{0.24}{0.4} = 0.6, $$
+    $$ P(B \mid A) = \frac{P(A \cap B)}{P(A)} = \frac{0.24}{0.6} = 0.4. $$
+    <p>Notice $P(A \mid B) = P(A)$ and $P(B \mid A) = P(B)$ &mdash; the events are independent. (Equivalent check: $P(A)P(B) = 0.24 = P(A \cap B)$.)</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; The multiplication rule and the chain rule</summary>
+    <div class="detail-body">
+      <p>Rearranging the conditional formula gives the <em>multiplication rule</em>:</p>
+      $$ P(A \cap B) = P(B)\,P(A \mid B). $$
+      <p>By symmetry, the same intersection equals $P(A)\,P(B \mid A)$. Equating gives Bayes' theorem in its smallest form (see Section 2.7).</p>
+      <p>Extending to three events:</p>
+      $$ P(A \cap B \cap C) = P(A)\,P(B \mid A)\,P(C \mid A \cap B). $$
+      <p>This is the chain rule and it underwrites every tree diagram: each branch probability is a conditional, and a leaf is a product of conditionals along its path.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">$P(A) = 0.7$, $P(B) = 0.5$, $P(A \cap B) = 0.35$. Find $P(B \mid A)$.</div>
+      <span class="quiz-number">SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.5$</div>
+      <div class="quiz-opt" data-idx="1">$0.7$</div>
+      <div class="quiz-opt" data-idx="2">$0.35$</div>
+      <div class="quiz-opt" data-idx="3">$0.245$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(B \mid A) = P(A \cap B)/P(A) = 0.35/0.7 = 0.5$. (Notice $P(B \mid A) = P(B) = 0.5$, so $A$ and $B$ are independent.)</div>
+    <div class="quiz-explain wrong-exp">$P(B \mid A) = P(A \cap B)/P(A) = 0.35/0.7 = 0.5$. (Option D is $P(A)\,P(B) = 0.35$, which equals $P(A\cap B)$ here &mdash; the events are independent &mdash; but that's not the conditional.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.6 INDEPENDENT EVENTS -->
+<section class="section" id="s-d2-6">
+  <div class="section-label">Topic 2.6 &middot; No information transfer</div>
+  <h2>Independent Events <span class="ib-ref">SL 4.6</span></h2>
+
+  <div class="cram-cheat">
+    <strong>$A$ and $B$ are independent iff</strong>
+    $$ P(A \cap B) = P(A)\,P(B). $$
+    Equivalent characterizations: $P(A \mid B) = P(A)$ (when $P(B) > 0$), or $P(B \mid A) = P(B)$ (when $P(A) > 0$). Independence is a <em>numerical</em> property &mdash; you must check the equation, you cannot just argue "they look unrelated."
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Independence Criterion</div>
+    $$ A,B \text{ independent} \;\Longleftrightarrow\; P(A \cap B) = P(A)\,P(B) $$
+    $$ \Longleftrightarrow\; P(A \mid B) = P(A) \;\Longleftrightarrow\; P(B \mid A) = P(B) $$
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Common confusions</strong>
+    <strong>Independence is not "different events."</strong> Drawing a king and drawing a heart from one card are independent ($P(K \cap H) = 1/52 = (4/52)(13/52) = $ ✓) even though they're "different."<br>
+    <strong>Independence is not "disjoint."</strong> Two disjoint non-trivial events are <em>dependent</em>, not independent (knowing one happened tells you the other did not).<br>
+    <strong>With replacement &rArr; independent across trials.</strong> Without replacement &rArr; dependent.<br>
+    <strong>"Show that $A$ and $B$ are independent"</strong> means compute both sides of $P(A)P(B) = P(A \cap B)$ and confirm equality.
+  </div>
+
+  <h3>Worked Example &mdash; Verifying independence</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A single card is drawn from a $52$-card deck. Let $A = \{\text{ace}\}$, $B = \{\text{spade}\}$. Are $A$ and $B$ independent?</p>
+    <p>$P(A) = 4/52 = 1/13$; $P(B) = 13/52 = 1/4$; $P(A \cap B) = P(\text{ace of spades}) = 1/52$. Check:</p>
+    $$ P(A)\,P(B) = \frac{1}{13} \cdot \frac{1}{4} = \frac{1}{52} = P(A \cap B). $$
+    <p>So $A$ and $B$ are independent.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Sequential independent trials</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A biased coin shows heads with probability $0.6$. It is tossed three times. Find $P(\text{exactly two heads})$.</p>
+    <p>Each toss is independent. Three orderings of two heads: HHT, HTH, THH. Each has probability $0.6 \cdot 0.6 \cdot 0.4 = 0.144$.</p>
+    $$ P(\text{exactly 2 H}) = 3 \cdot 0.144 = 0.432. $$
+    <p>This is the binomial probability $\binom{3}{2}\,p^2\,(1-p)^{1} = 3 \cdot 0.36 \cdot 0.4 = 0.432$ &mdash; the bridge to Unit D3.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Pairwise vs. mutual independence</summary>
+    <div class="detail-body">
+      <p>For three or more events, <em>pairwise independence</em> ($P(A_i \cap A_j) = P(A_i)P(A_j)$ for every pair) is <em>not</em> the same as <em>mutual independence</em> (every subset factors). The IB AA HL syllabus only requires the two-event criterion, so this is mostly trivia &mdash; but it's a classic counterexample worth knowing.</p>
+      <p><strong>Counterexample.</strong> Toss two fair coins. Let $A = \{\text{first is H}\}$, $B = \{\text{second is H}\}$, $C = \{\text{exactly one H}\}$. Then $P(A) = P(B) = P(C) = 1/2$ and every pairwise intersection equals $1/4 = (1/2)(1/2)$. But $A \cap B \cap C = \varnothing$ (if both are H, you don't have exactly one), so $P(A \cap B \cap C) = 0 \ne 1/8$. Pairwise yes, mutually no.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">Events $A$ and $B$ are independent with $P(A) = 0.3$ and $P(B) = 0.5$. Find $P(A \cup B)$.</div>
+      <span class="quiz-number">SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.8$</div>
+      <div class="quiz-opt" data-idx="1">$0.15$</div>
+      <div class="quiz-opt" data-idx="2">$0.65$</div>
+      <div class="quiz-opt" data-idx="3">$0.5$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Independence gives $P(A \cap B) = (0.3)(0.5) = 0.15$. Then $P(A \cup B) = 0.3 + 0.5 - 0.15 = 0.65$.</div>
+    <div class="quiz-explain wrong-exp">First use independence: $P(A \cap B) = P(A)P(B) = 0.15$. Then the addition rule: $0.3 + 0.5 - 0.15 = 0.65$. (Option A forgets to subtract the overlap.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 2.7 BAYES (HL) -->
+<section class="section" id="s-d2-7">
+  <div class="section-label">Topic 2.7 &middot; HL extension</div>
+  <h2>Bayes' Theorem <span class="ib-ref">AHL 4.10</span> <span class="hl-flag">HL</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Reversing the conditional.</strong> For a partition $\{A_1, A_2, A_3\}$ of the sample space and any event $B$ with $P(B) > 0$,
+    $$ P(A_i \mid B) = \frac{P(B \mid A_i)\,P(A_i)}{\displaystyle\sum_{j} P(B \mid A_j)\,P(A_j)}. $$
+    The IB AA HL syllabus caps Bayes at a <strong>maximum of three events</strong> in the partition. Numerator: the joint $P(A_i \cap B) = P(B\mid A_i)P(A_i)$. Denominator: the total probability $P(B)$, summed across all $A_j$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Bayes' Theorem (partition of up to 3 events)</div>
+    $$ P(A_i \mid B) = \frac{P(B \mid A_i)\,P(A_i)}{\sum_{j} P(B \mid A_j)\,P(A_j)} $$
+    <p>For two events ($\{A, A'\}$):</p>
+    $$ P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B \mid A)\,P(A) + P(B \mid A')\,P(A')} $$
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">When to reach for Bayes</strong>
+    The problem gives you <em>forward</em> conditionals &mdash; $P(\text{positive test} \mid \text{disease})$, $P(\text{defect} \mid \text{factory})$, $P(\text{spam word} \mid \text{spam})$ &mdash; and asks for the <em>reverse</em>: $P(\text{disease} \mid \text{positive test})$, $P(\text{factory} \mid \text{defect})$, $P(\text{spam} \mid \text{contains word})$. Whenever the question reads "given a [downstream observation], what is $P([\text{upstream cause}])$?" the answer is Bayes.<br><br>
+    <strong>Setup ritual.</strong> Identify the partition $\{A_1, \ldots, A_k\}$ (the causes). Write the prior $P(A_i)$ for each. Write the likelihood $P(B \mid A_i)$ for each. Plug into the formula.
+  </div>
+
+  <h3>Worked Example &mdash; Medical test (two events)</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A disease affects $1\%$ of a population. A test has $95\%$ sensitivity ($P(+ \mid D) = 0.95$) and $90\%$ specificity ($P(- \mid D') = 0.90$, so $P(+ \mid D') = 0.10$). A randomly chosen person tests positive. Find $P(D \mid +)$.</p>
+    <p><strong>Partition:</strong> $\{D, D'\}$ with priors $P(D) = 0.01$, $P(D') = 0.99$.</p>
+    <p><strong>Likelihoods:</strong> $P(+ \mid D) = 0.95$, $P(+ \mid D') = 0.10$.</p>
+    <p><strong>Total probability of testing positive:</strong></p>
+    $$ P(+) = P(+ \mid D)P(D) + P(+ \mid D')P(D') = (0.95)(0.01) + (0.10)(0.99) = 0.0095 + 0.099 = 0.1085. $$
+    <p><strong>Bayes:</strong></p>
+    $$ P(D \mid +) = \frac{(0.95)(0.01)}{0.1085} = \frac{0.0095}{0.1085} = \frac{19}{217} \approx 0.0876. $$
+    <p>Even a $95\%$-sensitive test on a rare disease gives only about $8.8\%$ posterior &mdash; the base rate dominates. This is the classic "base-rate" lesson Bayes teaches.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Three factories</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A company sources widgets from three factories: $A_1$ supplies $50\%$, $A_2$ supplies $30\%$, $A_3$ supplies $20\%$. The defect rates are $1\%$, $2\%$, $5\%$ respectively. A widget is selected at random and found to be defective ($B$). Find $P(A_2 \mid B)$.</p>
+    <p><strong>Partition:</strong> $\{A_1, A_2, A_3\}$ with $P(A_1) = 0.5$, $P(A_2) = 0.3$, $P(A_3) = 0.2$.</p>
+    <p><strong>Likelihoods:</strong> $P(B \mid A_1) = 0.01$, $P(B \mid A_2) = 0.02$, $P(B \mid A_3) = 0.05$.</p>
+    <p><strong>Total probability of a defective widget:</strong></p>
+    $$ P(B) = (0.01)(0.5) + (0.02)(0.3) + (0.05)(0.2) = 0.005 + 0.006 + 0.010 = 0.021. $$
+    <p><strong>Posterior for factory 2:</strong></p>
+    $$ P(A_2 \mid B) = \frac{(0.02)(0.3)}{0.021} = \frac{0.006}{0.021} = \frac{6}{21} = \frac{2}{7}. $$
+    <p>So about $28.6\%$ of defective widgets come from factory $2$. Sanity check: $P(A_1 \mid B) + P(A_2 \mid B) + P(A_3 \mid B) = 5/21 + 6/21 + 10/21 = 21/21 = 1$. ✓</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Deriving Bayes from the chain rule</summary>
+    <div class="detail-body">
+      <p>From the multiplication rule, the joint probability of $A_i$ and $B$ can be written two ways:</p>
+      $$ P(A_i \cap B) = P(A_i)\,P(B \mid A_i) = P(B)\,P(A_i \mid B). $$
+      <p>Solve for $P(A_i \mid B)$:</p>
+      $$ P(A_i \mid B) = \frac{P(B \mid A_i)\,P(A_i)}{P(B)}. $$
+      <p>The denominator $P(B)$ comes from the <em>law of total probability</em>: if $\{A_1, A_2, A_3\}$ partitions $U$ then</p>
+      $$ P(B) = P(B \cap A_1) + P(B \cap A_2) + P(B \cap A_3) = \sum_j P(B \mid A_j)\,P(A_j). $$
+      <p>Substituting gives the full Bayes formula. The IB syllabus stops at three partition elements, but the same derivation generalizes to any number.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; "Likelihood times prior" reading</summary>
+    <div class="detail-body">
+      <p>Three pieces of vocabulary worth knowing:</p>
+      <ul style="margin: 8px 0 8px 22px;">
+        <li><strong>Prior</strong> $P(A_i)$ &mdash; what you believed about cause $A_i$ before seeing $B$.</li>
+        <li><strong>Likelihood</strong> $P(B \mid A_i)$ &mdash; how plausible the observation $B$ is under cause $A_i$.</li>
+        <li><strong>Posterior</strong> $P(A_i \mid B)$ &mdash; updated belief about $A_i$ after observing $B$.</li>
+      </ul>
+      <p>The formula reads <strong>posterior $\propto$ likelihood $\times$ prior</strong>, normalized by the total probability of the evidence. This reading is what makes Bayes intuitive: rare causes (small prior) can still dominate if their likelihood for the evidence is much higher than competitors' &mdash; and vice versa, common causes win even with mediocre likelihoods.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">$P(A) = 0.4$, $P(B \mid A) = 0.7$, $P(B \mid A') = 0.2$. Find $P(A \mid B)$.</div>
+      <span class="quiz-number">AHL 4.10</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.28$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{7}{10}$</div>
+      <div class="quiz-opt" data-idx="2">$0.7$</div>
+      <div class="quiz-opt" data-idx="3">$0.4$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(B) = (0.7)(0.4) + (0.2)(0.6) = 0.28 + 0.12 = 0.40$. Then $P(A \mid B) = (0.7)(0.4)/0.40 = 0.28/0.40 = 7/10$.</div>
+    <div class="quiz-explain wrong-exp">Total probability: $P(B) = (0.7)(0.4) + (0.2)(0.6) = 0.40$. Bayes: $P(A \mid B) = (0.7)(0.4)/0.40 = 7/10$. (Option A is just the numerator $P(A \cap B) = 0.28$, not the conditional.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- EXAM STRATEGY -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Review</div>
+  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">M</div>
+        <div class="card-title">Memorize</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>$P(A) = n(A)/n(U)$ and $P(A') = 1 - P(A)$</li>
+        <li>$P(A \cup B) = P(A) + P(B) - P(A \cap B)$</li>
+        <li>$P(A \mid B) = P(A \cap B)/P(B)$</li>
+        <li>Independent $\Leftrightarrow P(A \cap B) = P(A)P(B)$</li>
+        <li>$E[\text{occurrences}] = n\,P(A)$</li>
+        <li>Bayes' theorem (up to 3 events) <span class="hl-flag">HL</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">U</div>
+        <div class="card-title">Understand</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>"and" $\to$ intersection; "or" $\to$ union; "given" $\to$ conditional</li>
+        <li>Mutually exclusive $\ne$ independent &mdash; opposite ideas</li>
+        <li>Tree diagrams encode the chain rule (multiply along, add across)</li>
+        <li>When complement is faster than direct enumeration</li>
+        <li>Why $P(A \mid B) \ne P(B \mid A)$ in general</li>
+        <li>Posterior $\propto$ likelihood $\times$ prior (Bayes intuition) <span class="hl-flag">HL</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Common Pitfalls</h3>
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top student errors</strong>
+    <strong>1.</strong> Confusing "mutually exclusive" with "independent" &mdash; they almost never coexist.<br>
+    <strong>2.</strong> Forgetting to subtract the overlap in $P(A \cup B)$ when the events are not exclusive.<br>
+    <strong>3.</strong> Inverting the conditional: writing $P(A \mid B)$ when the question asks for $P(B \mid A)$.<br>
+    <strong>4.</strong> Treating "without replacement" trials as independent &mdash; the second-stage probabilities change.<br>
+    <strong>5.</strong> Not labelling tree branches, then summing the wrong leaves.<br>
+    <strong>6.</strong> Filling in a Venn diagram from outside in. Always start with the central intersection.<br>
+    <strong>7.</strong> For Bayes (HL): forgetting the denominator is the <em>total</em> probability of the evidence, summed over the whole partition &mdash; not just one branch.<br>
+    <strong>8.</strong> Giving decimal answers on Paper 1 when an exact fraction was reachable.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Paper-specific notes</strong>
+    <strong>Paper 1 (no calc):</strong> Most probability questions live here. Expect exact-fraction answers. Tree diagrams, Venn diagrams, two-way tables. Short Bayes parts (HL) with clean numbers chosen so the arithmetic cancels.<br>
+    <strong>Paper 2 (calc):</strong> Longer multi-part scenarios that combine several sub-topics &mdash; e.g. set up a Venn, then ask for a conditional, then ask for "given $B$, find $P(A)$" (Bayes for HL). Decimal answers acceptable but write the exact form first if available.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- FLASHCARDS -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+
+  <div class="flashcard-toolbar">
+    <span class="fc-count" id="fcCount">0 / 14 flipped</span>
+    <div>
+      <button onclick="shuffleFlashcards()">Shuffle</button>
+      <button onclick="resetFlashcards()">Reset</button>
+    </div>
+  </div>
+
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Classical probability formula?</div>
+        <div class="flashcard-back">$$P(A) = \dfrac{n(A)}{n(U)}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Complement rule?</div>
+        <div class="flashcard-back">$$P(A') = 1 - P(A)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Expected number of occurrences in $n$ trials?</div>
+        <div class="flashcard-back">$$n\,P(A)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Addition rule for combined events?</div>
+        <div class="flashcard-back">$$P(A\cup B) = P(A) + P(B) - P(A\cap B)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Mutually exclusive condition?</div>
+        <div class="flashcard-back">$$P(A\cap B) = 0$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Conditional probability?</div>
+        <div class="flashcard-back">$$P(A\mid B) = \dfrac{P(A\cap B)}{P(B)}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Multiplication rule (from conditional)?</div>
+        <div class="flashcard-back">$$P(A\cap B) = P(B)\,P(A\mid B)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Independence criterion?</div>
+        <div class="flashcard-back">$$P(A\cap B) = P(A)\,P(B)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Independence via conditional?</div>
+        <div class="flashcard-back">$$P(A\mid B) = P(A)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Tree-diagram rule: branches from one node?</div>
+        <div class="flashcard-back">Sum to $1$<br>Multiply along a path<br>Add across leaves</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Venn-diagram fill order?</div>
+        <div class="flashcard-back">$A\cap B$ first<br>then $A$-only, $B$-only<br>then "neither"</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Law of total probability (partition $\{A_1, A_2, A_3\}$)? <span class="hl-flag">HL</span></div>
+        <div class="flashcard-back">$$P(B) = \sum_{j} P(B\mid A_j)\,P(A_j)$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Bayes' theorem? <span class="hl-flag">HL</span></div>
+        <div class="flashcard-back">$$P(A_i\mid B) = \dfrac{P(B\mid A_i)\,P(A_i)}{\sum_{j} P(B\mid A_j)\,P(A_j)}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Bayes for two events $\{A, A'\}$? <span class="hl-flag">HL</span></div>
+        <div class="flashcard-back">$$P(A\mid B) = \dfrac{P(B\mid A)\,P(A)}{P(B\mid A)P(A) + P(B\mid A')P(A')}$$</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- UNIT QUIZ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit D2 &mdash; Practice Quiz</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items in IB Paper-style flavour. Your score updates in real time at the top of the page. Aim for 8/10 before exam day. Items tagged <span class="hl-flag">HL</span> are AHL 4.10 (Bayes).</p>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">1. Two fair six-sided dice are rolled. What is $P(\text{sum is at most } 4)$?</div>
+      <span class="quiz-number">Q1 &middot; SL 4.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{3}{36}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{4}{36}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{6}{36}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{10}{36}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Sums $\le 4$: $(1,1), (1,2), (2,1), (1,3), (3,1), (2,2)$ &mdash; six outcomes. $P = 6/36 = 1/6$.</div>
+    <div class="quiz-explain wrong-exp">Outcomes with sum $\le 4$: $\{(1,1),(1,2),(2,1),(1,3),(3,1),(2,2)\}$ &mdash; six of $36$. $P = 6/36 = 1/6$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">2. A fair coin is tossed $6$ times. Find $P(\text{at least one tail})$.</div>
+      <span class="quiz-number">Q2 &middot; SL 4.5</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{1}{64}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{31}{32}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{63}{64}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Complement: $P(\text{no tails}) = (1/2)^6 = 1/64$. So $P(\text{at least one T}) = 1 - 1/64 = 63/64$.</div>
+    <div class="quiz-explain wrong-exp">Use complement: $1 - P(\text{all H}) = 1 - (1/2)^6 = 1 - 1/64 = 63/64$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">3. Events $A$ and $B$ satisfy $P(A) = 0.6$, $P(B) = 0.5$, $P(A \cup B) = 0.8$. Find $P(A \cap B)$.</div>
+      <span class="quiz-number">Q3 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.1$</div>
+      <div class="quiz-opt" data-idx="1">$0.3$</div>
+      <div class="quiz-opt" data-idx="2">$0.5$</div>
+      <div class="quiz-opt" data-idx="3">$0.7$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Rearrange the addition rule: $P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.6 + 0.5 - 0.8 = 0.3$.</div>
+    <div class="quiz-explain wrong-exp">From $P(A \cup B) = P(A) + P(B) - P(A \cap B)$, solve: $P(A \cap B) = 0.6 + 0.5 - 0.8 = 0.3$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">4. A bag contains $4$ red and $6$ blue balls. Two are drawn without replacement. Find $P(\text{both same colour})$.</div>
+      <span class="quiz-number">Q4 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{7}{15}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{8}{15}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{13}{25}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(\text{RR}) = \tfrac{4}{10}\cdot\tfrac{3}{9} = \tfrac{12}{90}$; $P(\text{BB}) = \tfrac{6}{10}\cdot\tfrac{5}{9} = \tfrac{30}{90}$. Sum $= 42/90 = 7/15$.</div>
+    <div class="quiz-explain wrong-exp">Two cases (RR or BB). $P(\text{RR}) = (4/10)(3/9) = 12/90$; $P(\text{BB}) = (6/10)(5/9) = 30/90$. Sum $= 42/90 = 7/15$. Option D would be right if drawn <em>with</em> replacement.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">5. Of $80$ students, $50$ play tennis, $35$ play basketball, $20$ play both. A student is chosen at random. Given they play tennis, what is the probability they also play basketball?</div>
+      <span class="quiz-number">Q5 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{20}{80}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{20}{35}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{2}{5}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{50}{80}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(B \mid T) = n(B \cap T) / n(T) = 20/50 = 2/5$. Conditioning restricts to tennis players.</div>
+    <div class="quiz-explain wrong-exp">"Given tennis" restricts the sample space to $50$ tennis players, $20$ of whom also play basketball. $P(B \mid T) = 20/50 = 2/5$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">6. Events $A$ and $B$ are independent with $P(A) = 0.5$ and $P(A \cup B) = 0.7$. Find $P(B)$.</div>
+      <span class="quiz-number">Q6 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.4$</div>
+      <div class="quiz-opt" data-idx="1">$0.2$</div>
+      <div class="quiz-opt" data-idx="2">$0.5$</div>
+      <div class="quiz-opt" data-idx="3">$0.35$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Independence: $P(A \cap B) = 0.5\,P(B)$. Addition rule: $0.7 = 0.5 + P(B) - 0.5\,P(B) = 0.5 + 0.5\,P(B)$. So $P(B) = 0.4$.</div>
+    <div class="quiz-explain wrong-exp">Combine independence with the addition rule: $0.7 = 0.5 + P(B) - (0.5)P(B)$, giving $0.2 = 0.5\,P(B)$, so $P(B) = 0.4$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">7. A spinner lands on $\{1, 2, 3, 4\}$ with probabilities $0.2, 0.3, 0.4, 0.1$. It is spun once. Find $P(\text{outcome is even} \mid \text{outcome} \ge 2)$.</div>
+      <span class="quiz-number">Q7 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{4}{10}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{1}{2}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{3}{8}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{7}{10}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Numerator: $P(\text{even and} \ge 2) = P(2) + P(4) = 0.3 + 0.1 = 0.4$. Denominator: $P(\ge 2) = 0.3 + 0.4 + 0.1 = 0.8$. Ratio $= 0.4/0.8 = 1/2$.</div>
+    <div class="quiz-explain wrong-exp">$P(\text{even} \cap \ge 2) = P(\{2,4\}) = 0.4$. $P(\ge 2) = 0.8$. Conditional $= 0.4/0.8 = 1/2$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">8. The probability a randomly selected student studies Spanish is $0.4$, French is $0.3$, and both is $0.1$. Find $P(\text{exactly one of the two languages})$.</div>
+      <span class="quiz-number">Q8 &middot; SL 4.6</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.7$</div>
+      <div class="quiz-opt" data-idx="1">$0.6$</div>
+      <div class="quiz-opt" data-idx="2">$0.5$</div>
+      <div class="quiz-opt" data-idx="3">$0.4$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! "Exactly one" $= P(S \cup F) - P(S \cap F) = 0.6 - 0.1 = 0.5$. (Or: $S$-only $+$ $F$-only $= (0.4 - 0.1) + (0.3 - 0.1) = 0.3 + 0.2 = 0.5$.)</div>
+    <div class="quiz-explain wrong-exp">Exactly one of two events $= P(S\cup F) - P(S \cap F) = 0.6 - 0.1 = 0.5$. Equivalently, $S$-only plus $F$-only $= 0.3 + 0.2 = 0.5$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">9. <span class="hl-flag">HL</span> A disease affects $2\%$ of a population. A test gives a positive result for $90\%$ of those who have the disease and for $5\%$ of those who do not. Given a positive test, find the probability the person has the disease.</div>
+      <span class="quiz-number">Q9 &middot; AHL 4.10</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$0.90$</div>
+      <div class="quiz-opt" data-idx="1">$0.50$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{18}{50}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{18}{67}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(+) = (0.9)(0.02) + (0.05)(0.98) = 0.018 + 0.049 = 0.067$. $P(D \mid +) = 0.018/0.067 = 18/67 \approx 0.269$.</div>
+    <div class="quiz-explain wrong-exp">Total probability: $P(+) = (0.9)(0.02) + (0.05)(0.98) = 0.067$. Bayes: $P(D \mid +) = 0.018/0.067 = 18/67$. Base rates dominate when the disease is rare.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">10. <span class="hl-flag">HL</span> Three boxes contain marbles: box $1$ has $2$ red and $3$ blue; box $2$ has $4$ red and $1$ blue; box $3$ has $3$ red and $2$ blue. A box is chosen at random (each equally likely) and one marble is drawn. Given the marble is red, what is the probability it came from box $2$?</div>
+      <span class="quiz-number">Q10 &middot; AHL 4.10</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\dfrac{1}{3}$</div>
+      <div class="quiz-opt" data-idx="1">$\dfrac{4}{9}$</div>
+      <div class="quiz-opt" data-idx="2">$\dfrac{4}{15}$</div>
+      <div class="quiz-opt" data-idx="3">$\dfrac{1}{2}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $P(R \mid B_i) = 2/5, 4/5, 3/5$ for the three boxes. Prior $1/3$ each. Total $P(R) = \tfrac{1}{3}(\tfrac{2}{5} + \tfrac{4}{5} + \tfrac{3}{5}) = \tfrac{1}{3}\cdot\tfrac{9}{5} = \tfrac{3}{5}$. Bayes: $P(B_2 \mid R) = \tfrac{(4/5)(1/3)}{3/5} = \tfrac{4/15}{3/5} = \tfrac{4}{9}$.</div>
+    <div class="quiz-explain wrong-exp">Three-event Bayes. Priors $1/3$; likelihoods $P(R \mid B_i) = 2/5, 4/5, 3/5$. Numerator for box $2$: $(4/5)(1/3) = 4/15$. Denominator $= 9/15$. Ratio $= 4/9$. (Option C is just the numerator, not the conditional.)</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#x21BB; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-label">Self-Assessment</div>
+  <h2>Readiness Checklist</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. Items marked <span class="hl-flag">HL</span> are AHL 4.10 (Bayes) and apply only to HL students.</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Define trial, outcome, sample space $U$, and event; compute $P(A) = n(A)/n(U)$ <span class="ib-ref">SL 4.5</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Apply the complement rule $P(A') = 1 - P(A)$ and recognize "at least one" cues <span class="ib-ref">SL 4.5</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Compute the expected number of occurrences in $n$ trials using $n\,P(A)$ <span class="ib-ref">SL 4.5</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Apply the addition rule $P(A\cup B) = P(A) + P(B) - P(A\cap B)$ for any two events <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Identify mutually exclusive events and use the collapsed addition rule <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Build and interpret Venn diagrams; fill in the intersection first <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Build and interpret tree diagrams; multiply along paths and add over leaves <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Use sample-space tables for two-trial experiments (dice, coins) <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Apply the conditional probability formula $P(A \mid B) = P(A\cap B)/P(B)$ <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Read two-way tables and extract conditional probabilities by restricting the sample space <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Test independence using $P(A \cap B) = P(A)P(B)$ and distinguish it from "mutually exclusive" <span class="ib-ref">SL 4.6</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> State Bayes' theorem for a partition of up to three events and identify priors / likelihoods / posteriors <span class="hl-flag">HL</span> <span class="ib-ref">AHL 4.10</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Apply Bayes to two-event problems (e.g. medical tests) and derive the posterior given an observation <span class="hl-flag">HL</span> <span class="ib-ref">AHL 4.10</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> Apply Bayes to three-event partition problems (e.g. multiple factories / sources) and sanity-check that posteriors sum to $1$ <span class="hl-flag">HL</span> <span class="ib-ref">AHL 4.10</span></li>
+  </ul>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">&#40180;&#30585;&#23398;&#33489; &middot; Dingrui Scholars</div>
+  <p>IB Math Analysis &amp; Approaches HL &mdash; Unit D2: Probability &middot; First Assessment 2029</p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+
+function updateScoreBadge() {
+  const badge = document.getElementById('scoreBadge');
+  if (!badge) return;
+  if (quizScore.total === 0) {
+    badge.textContent = '0 / 0';
+    badge.classList.add('zero');
+  } else {
+    badge.textContent = quizScore.correct + ' / ' + quizScore.total;
+    badge.classList.remove('zero');
+  }
+}
+
+function setThemeBtnLabel(isDark) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.textContent = isDark ? 'Light' : 'Dark';
+}
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  setThemeBtnLabel(!isDark);
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  setThemeBtnLabel(true);
+}
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.width = pct + '%';
+});
+
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if(opt.classList.contains('disabled')) return;
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      quizScore.total++;
+      if (idx === answer) {
+        opt.classList.add('correct');
+        quizScore.correct++;
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+        const retry = quiz.querySelector('.quiz-retry');
+        if (retry) retry.classList.add('show');
+      }
+      updateScoreBadge();
+    });
+  });
+});
+
+function retryQuiz(btn) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => {
+    o.classList.remove('disabled', 'correct', 'wrong');
+  });
+  quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show'));
+  btn.classList.remove('show');
+  quizScore.total--;
+  updateScoreBadge();
+}
+
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  updateFlashcardCount();
+}
+function updateFlashcardCount() {
+  const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
+  const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
+  const el = document.getElementById('fcCount');
+  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+}
+function resetFlashcards() {
+  document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
+  updateFlashcardCount();
+}
+function shuffleFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  if (!grid) return;
+  const cards = [...grid.children];
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(cards[j]);
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+}
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const total = document.querySelectorAll('#checklistUl li').length;
+  const checked = document.querySelectorAll('#checklistUl li.checked').length;
+  const el = document.getElementById('checkProgress');
+  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+}
+
+function toggleSidebar() {
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+updateScoreBadge();
+</script>
+</body>
+</html>
