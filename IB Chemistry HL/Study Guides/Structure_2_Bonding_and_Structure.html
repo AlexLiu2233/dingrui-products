@@ -37,7 +37,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px;
   --toc-w: 260px;
@@ -504,10 +504,14 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
   font-style: italic; margin-top: 4px;
 }
 
+/* ─── BILINGUAL TOGGLE ─── */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Skip to content</a>
+<a class="skip-link" href="#main-content"><span data-lang="en">Skip to content</span><span data-lang="zh">跳到正文</span></a>
 
 <nav class="top-nav">
   <div class="nav-left">
@@ -515,40 +519,41 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <span class="nav-badge">STRUCTURE 2</span>
   </div>
   <div class="nav-right">
-    <a class="nav-btn" href="../index.html" aria-label="Back to all units">&larr; All Units</a>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <a class="nav-btn" href="../index.html" aria-label="Back to all units"><span data-lang="en">&larr; All Units</span><span data-lang="zh">&larr; 全部单元</span></a>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#s2-1">2.1 The Ionic Model</a>
-  <a href="#s2-2">2.2 The Covalent Model</a>
-  <a href="#s2-3">2.3 The Metallic Model</a>
-  <a href="#s2-4">2.4 From Models to Materials</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#common-mistakes">Common Mistakes</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Unit Quiz</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#s2-1"><span data-lang="en">2.1 The Ionic Model</span><span data-lang="zh">2.1 离子模型</span></a>
+  <a href="#s2-2"><span data-lang="en">2.2 The Covalent Model</span><span data-lang="zh">2.2 共价模型</span></a>
+  <a href="#s2-3"><span data-lang="en">2.3 The Metallic Model</span><span data-lang="zh">2.3 金属模型</span></a>
+  <a href="#s2-4"><span data-lang="en">2.4 From Models to Materials</span><span data-lang="zh">2.4 从模型到材料</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#common-mistakes"><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></a>
 </aside>
 
 <main class="main-wrap" id="main-content">
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-overline">IB Chemistry &mdash; Structure 2</div>
-  <h1>Models of Bonding and Structure</h1>
+  <div class="hero-overline">IB Chemistry &mdash; Structure 2 &middot; 鼎睿学苑</div>
+  <h1><span data-lang="en">Models of Bonding and Structure</span><span data-lang="zh">化学键与结构模型</span></h1>
   <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto;">
-    Ionic lattices, covalent molecules, metallic seas of electrons, and everything in between. This unit explains why substances have the properties they do &mdash; from melting points to conductivity to solubility &mdash; by connecting structure to bonding.
+    <span data-lang="en">Ionic lattices, covalent molecules, metallic seas of electrons, and everything in between. This unit explains why substances have the properties they do &mdash; from melting points to conductivity to solubility &mdash; by connecting structure to bonding.</span><span data-lang="zh">离子晶格（<code>lattice</code>）、共价分子（<code>covalent bond</code>）、金属"电子海"（<code>metallic bond</code>），以及介于它们之间的各种情况。本单元通过把结构与化学键联系起来，解释物质的熔点、导电性、溶解度等性质从何而来。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-maroon">SL: 20 hrs &middot; HL: 30 hrs</span>
-    <span class="chip chip-green">4 Sub-topics</span>
-    <span class="chip chip-gold">HL adds resonance, hybridization, expanded octets</span>
+    <span class="chip chip-maroon"><span data-lang="en">SL: 20 hrs &middot; HL: 30 hrs</span><span data-lang="zh">SL：20 课时 &middot; HL：30 课时</span></span>
+    <span class="chip chip-green"><span data-lang="en">4 Sub-topics</span><span data-lang="zh">4 个子主题</span></span>
+    <span class="chip chip-gold"><span data-lang="en">HL adds resonance, hybridization, expanded octets</span><span data-lang="zh">HL 加入共振、杂化、扩展八隅体</span></span>
   </div>
 </section>
 
@@ -557,44 +562,62 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- 2.1 -->
 <section class="section" id="s2-1">
   <div class="section-label">Structure 2.1</div>
-  <h2>The Ionic Model</h2>
+  <h2><span data-lang="en">The Ionic Model</span><span data-lang="zh">离子模型</span></h2>
 
-  <p>Ionic bonding occurs between metals and non-metals. Metal atoms lose electrons to form <strong>cations</strong> (positive ions); non-metal atoms gain electrons to form <strong>anions</strong> (negative ions). The ionic bond is the electrostatic attraction between these oppositely charged ions.</p>
+  <p data-lang="en">Ionic bonding occurs between metals and non-metals. Metal atoms lose electrons to form <strong>cations</strong> (positive ions); non-metal atoms gain electrons to form <strong>anions</strong> (negative ions). The ionic bond is the electrostatic attraction between these oppositely charged ions.</p>
+  <p data-lang="zh">离子键（<code>ionic bond</code>）发生在金属与非金属之间。金属原子失去电子形成<strong>阳离子</strong>（<code>cation</code>，带正电的离子）；非金属原子得到电子形成<strong>阴离子</strong>（<code>anion</code>，带负电的离子）。离子键就是这两种带相反电荷的离子之间的静电吸引。</p>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Predicting Ion Charges</strong>
     Group 1 metals form +1 ions, Group 2 form +2, Group 13 form +3 (for main group). Group 17 non-metals form &minus;1, Group 16 form &minus;2, Group 15 form &minus;3. Transition metals can form multiple charges (e.g., Fe$^{2+}$ and Fe$^{3+}$) &mdash; the charge must be specified in the name using Roman numerals: iron(II) chloride, iron(III) chloride.
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">判断离子电荷</strong>
+    主族中：第 1 族金属形成 +1 离子，第 2 族形成 +2，第 13 族形成 +3；第 17 族非金属形成 &minus;1，第 16 族形成 &minus;2，第 15 族形成 &minus;3。过渡金属可以形成多种电荷（例如 Fe$^{2+}$ 和 Fe$^{3+}$），命名时必须用罗马数字标明电荷：iron(II) chloride（氯化亚铁）、iron(III) chloride（氯化铁）。
+  </div>
 
-  <h3>Naming and Formulas</h3>
-  <p>Binary ionic compounds are named with the cation first, then the anion with the suffix "-ide" (e.g., sodium chloride). For compounds containing polyatomic ions, you must know these by name and formula: ammonium (NH$_4^+$), hydroxide (OH$^-$), nitrate (NO$_3^-$), hydrogencarbonate (HCO$_3^-$), carbonate (CO$_3^{2-}$), sulfate (SO$_4^{2-}$), phosphate (PO$_4^{3-}$).</p>
+  <h3><span data-lang="en">Naming and Formulas</span><span data-lang="zh">命名与化学式</span></h3>
+  <p data-lang="en">Binary ionic compounds are named with the cation first, then the anion with the suffix "-ide" (e.g., sodium chloride). For compounds containing polyatomic ions, you must know these by name and formula: ammonium (NH$_4^+$), hydroxide (OH$^-$), nitrate (NO$_3^-$), hydrogencarbonate (HCO$_3^-$), carbonate (CO$_3^{2-}$), sulfate (SO$_4^{2-}$), phosphate (PO$_4^{3-}$).</p>
+  <p data-lang="zh">二元离子化合物的英文命名：先阳离子，后阴离子加 "-ide" 后缀（如 sodium chloride 氯化钠）。含多原子离子（polyatomic ion）的化合物必须记住下列名称与化学式：ammonium（铵 NH$_4^+$）、hydroxide（氢氧根 OH$^-$）、nitrate（硝酸根 NO$_3^-$）、hydrogencarbonate（碳酸氢根 HCO$_3^-$）、carbonate（碳酸根 CO$_3^{2-}$）、sulfate（硫酸根 SO$_4^{2-}$）、phosphate（磷酸根 PO$_4^{3-}$）。</p>
 
-  <h3>Ionic Lattice Structures and Properties</h3>
-  <p>Ionic compounds form three-dimensional lattice structures represented by empirical formulas (not molecular formulas, since discrete molecules do not exist). Their properties follow directly from this structure:</p>
+  <h3><span data-lang="en">Ionic Lattice Structures and Properties</span><span data-lang="zh">离子晶格结构与性质</span></h3>
+  <p data-lang="en">Ionic compounds form three-dimensional lattice structures represented by empirical formulas (not molecular formulas, since discrete molecules do not exist). Their properties follow directly from this structure:</p>
+  <p data-lang="zh">离子化合物形成三维晶格（<code>lattice</code>）结构，用实验式（<code>empirical formula</code>）而非分子式表示——因为根本不存在独立的"分子"。下列性质都可直接由这种结构推出：</p>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Properties of Ionic Compounds</strong>
     <span style="display:block; margin-top: 8px;"><strong>High melting/boiling points:</strong> Strong electrostatic attractions between ions require a lot of energy to overcome.</span>
     <span style="display:block; margin-top: 4px;"><strong>Electrical conductivity:</strong> Do not conduct when solid (ions fixed in lattice). Conduct when molten or dissolved in water (ions free to move).</span>
     <span style="display:block; margin-top: 4px;"><strong>Solubility:</strong> Many ionic compounds dissolve in water because polar water molecules can surround and stabilize the ions (hydration).</span>
     <span style="display:block; margin-top: 4px;"><strong>Brittleness:</strong> When layers shift, like charges align and repel, shattering the crystal.</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">离子化合物的性质</strong>
+    <span style="display:block; margin-top: 8px;"><strong>熔沸点高：</strong>离子之间的静电吸引力很强，要破坏晶格需要大量能量。</span>
+    <span style="display:block; margin-top: 4px;"><strong>导电性：</strong>固态时不导电（离子被锁在晶格里）；熔融或溶于水后才导电（离子可以自由移动）。</span>
+    <span style="display:block; margin-top: 4px;"><strong>溶解性：</strong>许多离子化合物可溶于水，因为极性（<code>polar</code>）的水分子能包围并稳定离子（水合作用）。</span>
+    <span style="display:block; margin-top: 4px;"><strong>脆性：</strong>当晶格层发生错位时，同号电荷彼此对齐而相互排斥，晶体被撕开。</span>
+  </div>
 
-  <div class="concept-box orange">
+  <div class="concept-box orange" data-lang="en">
     <strong style="color: var(--orange);">Lattice Enthalpy</strong>
     Lattice enthalpy measures the strength of the ionic bond. It increases with higher ion charges and smaller ion radii (both increase the electrostatic attraction). For example, MgO has a much higher lattice enthalpy than NaCl because Mg$^{2+}$ and O$^{2-}$ have greater charges and smaller radii than Na$^+$ and Cl$^-$.
   </div>
+  <div class="concept-box orange" data-lang="zh">
+    <strong style="color: var(--orange);">晶格焓（lattice enthalpy）</strong>
+    晶格焓（<code>lattice enthalpy</code>）衡量离子键的强度。离子电荷越高、离子半径越小，晶格焓越大（两者都增强静电吸引）。例如 MgO 的晶格焓远大于 NaCl，因为 Mg$^{2+}$、O$^{2-}$ 比 Na$^+$、Cl$^-$ 电荷更高、半径更小。
+  </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">Which compound would be expected to have the highest melting point?</div>
+    <div class="quiz-q"><span data-lang="en">Which compound would be expected to have the highest melting point?</span><span data-lang="zh">下列哪种化合物预计熔点最高？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">NaCl</div>
       <div class="quiz-opt" data-idx="1">KBr</div>
       <div class="quiz-opt" data-idx="2">MgO</div>
       <div class="quiz-opt" data-idx="3">CsI</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! MgO has the highest charges (2+ and 2&minus;) and the smallest ions, giving it the strongest lattice enthalpy and highest melting point.</div>
-    <div class="quiz-explain wrong-exp">Lattice enthalpy (and melting point) increases with higher ion charges and smaller ion radii. MgO (Mg$^{2+}$, O$^{2-}$) wins on both counts. Answer: (C).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! MgO has the highest charges (2+ and 2&minus;) and the smallest ions, giving it the strongest lattice enthalpy and highest melting point.</span><span data-lang="zh">正确！MgO 的电荷最高（2+ 与 2&minus;）、离子半径又最小，因此晶格焓最大、熔点最高。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Lattice enthalpy (and melting point) increases with higher ion charges and smaller ion radii. MgO (Mg$^{2+}$, O$^{2-}$) wins on both counts. Answer: (C).</span><span data-lang="zh">晶格焓（以及熔点）随离子电荷增大、半径减小而升高。MgO（Mg$^{2+}$、O$^{2-}$）在两方面都占优。答案：(C)。</span></div>
   </div>
 </section>
 
@@ -603,20 +626,24 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- 2.2 -->
 <section class="section" id="s2-2">
   <div class="section-label">Structure 2.2</div>
-  <h2>The Covalent Model</h2>
+  <h2><span data-lang="en">The Covalent Model</span><span data-lang="zh">共价模型</span></h2>
 
-  <p>A covalent bond forms when two atoms share a pair of electrons. The electrostatic attraction between the shared electron pair and both positively charged nuclei holds the atoms together. The <strong>octet rule</strong> states that atoms tend to gain, lose, or share electrons to achieve 8 valence electrons (with exceptions).</p>
+  <p data-lang="en">A covalent bond forms when two atoms share a pair of electrons. The electrostatic attraction between the shared electron pair and both positively charged nuclei holds the atoms together. The <strong>octet rule</strong> states that atoms tend to gain, lose, or share electrons to achieve 8 valence electrons (with exceptions).</p>
+  <p data-lang="zh">两个原子共用一对电子时形成共价键（<code>covalent bond</code>）。共用电子对与两端带正电的原子核之间的静电吸引把两个原子连在一起。<strong>八隅体规则</strong>（octet rule）指出，原子倾向于通过得失或共用电子，使最外层达到 8 个价电子（有例外）。</p>
 
-  <h3>Lewis Formulas</h3>
-  <p>Lewis formulas show all valence electrons &mdash; both bonding pairs and lone (non-bonding) pairs. You must be able to draw these for molecules and ions with up to four electron domains on each atom. Remember: some atoms can have fewer than an octet (e.g., BF$_3$ has only 6 electrons around boron).</p>
+  <h3><span data-lang="en">Lewis Formulas</span><span data-lang="zh">路易斯结构式</span></h3>
+  <p data-lang="en">Lewis formulas show all valence electrons &mdash; both bonding pairs and lone (non-bonding) pairs. You must be able to draw these for molecules and ions with up to four electron domains on each atom. Remember: some atoms can have fewer than an octet (e.g., BF$_3$ has only 6 electrons around boron).</p>
+  <p data-lang="zh">路易斯结构（<code>Lewis structure</code>）画出所有价电子——既包括成键电子对，也包括孤对电子（lone pair）。你必须能为每个原子最多含 4 个电子域的分子和离子画出路易斯结构。注意：有些原子可以不满八隅体（例如 BF$_3$ 中硼周围只有 6 个电子）。</p>
 
-  <h3>Bond Types and Strength</h3>
-  <p>Single bonds share one pair, double bonds share two pairs, triple bonds share three pairs. As bond order increases: bond strength increases and bond length decreases. A <strong>coordination bond</strong> (dative bond) is a covalent bond where both electrons come from the same atom (e.g., in NH$_4^+$, the N donates a lone pair to H$^+$).</p>
+  <h3><span data-lang="en">Bond Types and Strength</span><span data-lang="zh">键的类型与强度</span></h3>
+  <p data-lang="en">Single bonds share one pair, double bonds share two pairs, triple bonds share three pairs. As bond order increases: bond strength increases and bond length decreases. A <strong>coordination bond</strong> (dative bond) is a covalent bond where both electrons come from the same atom (e.g., in NH$_4^+$, the N donates a lone pair to H$^+$).</p>
+  <p data-lang="zh">单键共用 1 对电子，双键共用 2 对，三键共用 3 对。键级越高，键能（<code>bond enthalpy</code>）越大、键长（<code>bond length</code>）越短。<strong>配位键</strong>（<code>coordinate bond</code> / <code>dative bond</code>）是一种特殊的共价键，共用的两个电子全部来自同一个原子（例如 NH$_4^+$ 中，N 把自己的一对孤对电子给 H$^+$）。</p>
 
-  <h3>VSEPR and Molecular Geometry</h3>
-  <p>The <strong>Valence Shell Electron Pair Repulsion</strong> model predicts molecular shapes by minimizing repulsion between electron domains around a central atom. Lone pairs repel more than bonding pairs, reducing bond angles.</p>
+  <h3><span data-lang="en">VSEPR and Molecular Geometry</span><span data-lang="zh">VSEPR 与分子几何</span></h3>
+  <p data-lang="en">The <strong>Valence Shell Electron Pair Repulsion</strong> model predicts molecular shapes by minimizing repulsion between electron domains around a central atom. Lone pairs repel more than bonding pairs, reducing bond angles.</p>
+  <p data-lang="zh"><strong>价层电子对互斥理论</strong>（<code>VSEPR</code>）通过让中心原子周围各电子域的排斥力最小，来预测分子几何（<code>molecular geometry</code>）。孤对电子的排斥力大于成键对，会把键角压小。</p>
 
-  <div class="qref">
+  <div class="qref" data-lang="en">
     <div class="qref-title">VSEPR Shapes &mdash; Up to 4 Electron Domains (SL)</div>
     <div class="table-wrap">
       <table>
@@ -630,38 +657,71 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       </table>
     </div>
   </div>
+  <div class="qref" data-lang="zh">
+    <div class="qref-title">VSEPR 几何形状 &mdash; 最多 4 个电子域（SL）</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>电子域数</th><th>成键对</th><th>孤对</th><th>分子几何</th><th>键角</th><th>例子</th></tr>
+        <tr><td>2</td><td>2</td><td>0</td><td>直线形（Linear）</td><td>180&deg;</td><td>CO$_2$</td></tr>
+        <tr><td>3</td><td>3</td><td>0</td><td>平面三角形（Trigonal planar）</td><td>120&deg;</td><td>BF$_3$</td></tr>
+        <tr><td>3</td><td>2</td><td>1</td><td>V 形（Bent）</td><td>&lt;120&deg;</td><td>SO$_2$</td></tr>
+        <tr><td>4</td><td>4</td><td>0</td><td>正四面体（Tetrahedral）</td><td>109.5&deg;</td><td>CH$_4$</td></tr>
+        <tr><td>4</td><td>3</td><td>1</td><td>三角锥（Trigonal pyramidal）</td><td>~107&deg;</td><td>NH$_3$</td></tr>
+        <tr><td>4</td><td>2</td><td>2</td><td>V 形（Bent）</td><td>~104.5&deg;</td><td>H$_2$O</td></tr>
+      </table>
+    </div>
+  </div>
 
-  <h3>Bond Polarity and Molecular Polarity</h3>
-  <p><strong>Bond polarity</strong> arises from a difference in electronegativity between bonded atoms. The greater the difference, the more polar the bond. <strong>Molecular polarity</strong> depends on both bond polarity and molecular geometry &mdash; symmetrical molecules can have polar bonds but be non-polar overall (e.g., CO$_2$, CCl$_4$) because the dipoles cancel.</p>
+  <h3><span data-lang="en">Bond Polarity and Molecular Polarity</span><span data-lang="zh">键的极性与分子极性</span></h3>
+  <p data-lang="en"><strong>Bond polarity</strong> arises from a difference in electronegativity between bonded atoms. The greater the difference, the more polar the bond. <strong>Molecular polarity</strong> depends on both bond polarity and molecular geometry &mdash; symmetrical molecules can have polar bonds but be non-polar overall (e.g., CO$_2$, CCl$_4$) because the dipoles cancel.</p>
+  <p data-lang="zh"><strong>键的极性</strong>来自两个成键原子之间的电负性（<code>electronegativity</code>）差。差值越大，键越极性（<code>polar</code>）。<strong>分子极性</strong>同时取决于键的极性和分子几何——对称的分子即使含有极性键，整体也可能是非极性（<code>non-polar</code>）的（如 CO$_2$、CCl$_4$），因为各键的偶极相互抵消。</p>
 
-  <h3>Covalent Network Structures</h3>
-  <p>Carbon and silicon form <strong>covalent network structures</strong> &mdash; giant lattices of covalently bonded atoms. Diamond (each C bonded to 4 others tetrahedrally) is extremely hard and does not conduct. Graphite (layers of hexagonal C with delocalized electrons between layers) conducts electricity and is a lubricant. Graphene is a single layer of graphite. Fullerenes (C$_{60}$) are spherical molecules. Silicon and SiO$_2$ also form network structures.</p>
+  <h3><span data-lang="en">Covalent Network Structures</span><span data-lang="zh">共价网状结构</span></h3>
+  <p data-lang="en">Carbon and silicon form <strong>covalent network structures</strong> &mdash; giant lattices of covalently bonded atoms. Diamond (each C bonded to 4 others tetrahedrally) is extremely hard and does not conduct. Graphite (layers of hexagonal C with delocalized electrons between layers) conducts electricity and is a lubricant. Graphene is a single layer of graphite. Fullerenes (C$_{60}$) are spherical molecules. Silicon and SiO$_2$ also form network structures.</p>
+  <p data-lang="zh">碳和硅可以形成<strong>共价网状结构</strong>——由共价键连接的巨型晶格（<code>lattice</code>）。金刚石（每个 C 与 4 个 C 以正四面体方式成键）极硬、不导电。石墨（六元环碳层之间夹着可离域电子）能导电、可作润滑剂。石墨烯是单层石墨。富勒烯（C$_{60}$）是球形分子。硅与 SiO$_2$ 同样形成网状结构。</p>
 
-  <h3>Intermolecular Forces</h3>
-  <p>The forces <em>between</em> molecules (not within them) determine physical properties like boiling point, volatility, and solubility. From weakest to strongest:</p>
+  <h3><span data-lang="en">Intermolecular Forces</span><span data-lang="zh">分子间作用力</span></h3>
+  <p data-lang="en">The forces <em>between</em> molecules (not within them) determine physical properties like boiling point, volatility, and solubility. From weakest to strongest:</p>
+  <p data-lang="zh">分子<em>之间</em>（而非分子内部）的作用力——即分子间作用力（<code>intermolecular force</code>）——决定了沸点、挥发性、溶解度等物理性质。按强度从弱到强：</p>
 
-  <div class="concept-box purple">
+  <div class="concept-box purple" data-lang="en">
     <strong style="color: var(--purple);">Intermolecular Forces (Ranked by Strength)</strong>
     <span style="display:block; margin-top: 8px;"><strong>London (dispersion) forces:</strong> Present in ALL molecules. Caused by temporary dipoles from fluctuating electron density. Strength increases with molecular size (more electrons = more polarizable).</span>
     <span style="display:block; margin-top: 4px;"><strong>Dipole&ndash;dipole forces:</strong> Between polar molecules. The &delta;+ end of one molecule attracts the &delta;&minus; end of another.</span>
     <span style="display:block; margin-top: 4px;"><strong>Hydrogen bonding:</strong> A special, strong dipole&ndash;dipole force. Occurs when H is bonded to N, O, or F and interacts with a lone pair on a neighbouring N, O, or F atom. Explains the anomalously high boiling points of H$_2$O, NH$_3$, and HF.</span>
   </div>
+  <div class="concept-box purple" data-lang="zh">
+    <strong style="color: var(--purple);">分子间作用力（按强度排序）</strong>
+    <span style="display:block; margin-top: 8px;"><strong>伦敦色散力（<code>London dispersion force</code>）：</strong>存在于<em>所有</em>分子之中。电子密度瞬时涨落产生瞬时偶极，互相诱导而产生吸引。分子越大、电子越多、越易极化，色散力就越强。这也是范德华力（<code>van der Waals force</code>）的主要组成之一。</span>
+    <span style="display:block; margin-top: 4px;"><strong>偶极-偶极作用力（<code>dipole-dipole</code>）：</strong>极性分子之间。一个分子的 &delta;+ 端吸引另一个分子的 &delta;&minus; 端。</span>
+    <span style="display:block; margin-top: 4px;"><strong>氢键（<code>hydrogen bond</code>）：</strong>一种特殊、较强的偶极-偶极作用。当 H 与 N、O 或 F 直接成键，并与相邻分子上 N、O、F 的孤对电子相互作用时形成。它解释了 H$_2$O、NH$_3$、HF 异常偏高的沸点。</span>
+  </div>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Properties of Covalent Substances</strong>
     <span style="display:block; margin-top: 8px;"><strong>Simple molecular:</strong> Low melting/boiling points (weak IMFs), do not conduct electricity, many are insoluble in water (non-polar) but dissolve in organic solvents.</span>
     <span style="display:block; margin-top: 4px;"><strong>Covalent network:</strong> Very high melting points (strong covalent bonds throughout), generally do not conduct (exception: graphite), insoluble.</span>
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">共价物质的性质</strong>
+    <span style="display:block; margin-top: 8px;"><strong>简单分子型：</strong>分子间作用力弱，熔沸点低；不导电；多数不溶于水（非极性），但溶于有机溶剂。</span>
+    <span style="display:block; margin-top: 4px;"><strong>共价网状型：</strong>整块固体由共价键连接，熔点极高；一般不导电（例外：石墨）；不溶解。</span>
+  </div>
 
-  <h3>Chromatography</h3>
-  <p>Chromatography separates mixture components based on their different affinities (via intermolecular forces) for a mobile phase and a stationary phase. The retardation factor $R_f$ quantifies how far a substance moves relative to the solvent front:</p>
+  <h3><span data-lang="en">Chromatography</span><span data-lang="zh">色谱法</span></h3>
+  <p data-lang="en">Chromatography separates mixture components based on their different affinities (via intermolecular forces) for a mobile phase and a stationary phase. The retardation factor $R_f$ quantifies how far a substance moves relative to the solvent front:</p>
+  <p data-lang="zh">色谱法（chromatography）利用混合物各组分对流动相（mobile phase）和固定相（stationary phase）亲和力的差异（这种亲和力来自分子间作用力）来分离。比移值（retardation factor）$R_f$ 衡量物质相对溶剂前沿移动的距离：</p>
 
-  <div class="formula-box">
+  <div class="formula-box" data-lang="en">
     <div class="formula-label">Retardation Factor</div>
     $$R_f = \frac{\text{distance travelled by substance}}{\text{distance travelled by solvent front}}$$
   </div>
+  <div class="formula-box" data-lang="zh">
+    <div class="formula-label">比移值 $R_f$</div>
+    $$R_f = \frac{\text{distance travelled by substance}}{\text{distance travelled by solvent front}}$$
+  </div>
 
-  <div class="concept-box gold">
+  <div class="concept-box gold" data-lang="en">
     <strong style="color: var(--gold);">HL Only &mdash; Additional Topics in 2.2</strong>
     <span style="display:block; margin-top: 8px;"><strong>Resonance (2.2.11&ndash;12):</strong> When multiple valid Lewis structures exist. The real structure is a weighted average. Benzene is the key example &mdash; all C&ndash;C bonds are equal in length (between single and double).</span>
     <span style="display:block; margin-top: 4px;"><strong>Expanded octets (2.2.13):</strong> Atoms in period 3+ can have 5 or 6 electron domains (e.g., PCl$_5$, SF$_6$). Use VSEPR for trigonal bipyramidal and octahedral geometries.</span>
@@ -669,8 +729,16 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
     <span style="display:block; margin-top: 4px;"><strong>Sigma and pi bonds (2.2.15):</strong> Sigma ($\sigma$) bonds form by head-on orbital overlap along the bond axis. Pi ($\pi$) bonds form by lateral overlap of p-orbitals above and below the bond axis. A single bond = 1$\sigma$. A double bond = 1$\sigma$ + 1$\pi$. A triple bond = 1$\sigma$ + 2$\pi$.</span>
     <span style="display:block; margin-top: 4px;"><strong>Hybridization (2.2.16):</strong> sp$^3$ = tetrahedral (4 domains). sp$^2$ = trigonal planar (3 domains). sp = linear (2 domains). The hybridization matches the electron domain geometry.</span>
   </div>
+  <div class="concept-box gold" data-lang="zh">
+    <strong style="color: var(--gold);">HL 专属 &mdash; 2.2 中的补充内容</strong>
+    <span style="display:block; margin-top: 8px;"><strong>共振（<code>resonance</code>，2.2.11&ndash;12）：</strong>同一物种存在多种合理的路易斯结构时，真实结构是这些结构的加权平均。苯是经典例子——所有 C&ndash;C 键长完全相等，介于单键和双键之间。</span>
+    <span style="display:block; margin-top: 4px;"><strong>扩展八隅体（expanded octet，2.2.13）：</strong>第 3 周期及以下的原子可以有 5 或 6 个电子域（例如 PCl$_5$、SF$_6$）。用 VSEPR 处理三角双锥和八面体几何。</span>
+    <span style="display:block; margin-top: 4px;"><strong>形式电荷（<code>formal charge</code>，2.2.14）：</strong>用于判断哪种路易斯结构最合理。形式电荷 = 价电子数 &minus; 孤对电子数 &minus; 1/2(成键电子数)。各原子形式电荷越接近零，结构越优。</span>
+    <span style="display:block; margin-top: 4px;"><strong>σ 键与 π 键（<code>sigma bond</code> / <code>pi bond</code>，2.2.15）：</strong>σ ($\sigma$) 键由轨道沿键轴正面重叠形成；π ($\pi$) 键由 p 轨道在键轴上下方侧面重叠形成。单键 = 1σ；双键 = 1σ + 1π；三键 = 1σ + 2π。</span>
+    <span style="display:block; margin-top: 4px;"><strong>杂化（<code>hybridization</code>，2.2.16）：</strong>sp$^3$ = 正四面体（4 域）；sp$^2$ = 平面三角形（3 域）；sp = 直线形（2 域）。杂化方式与电子域几何一一对应。</span>
+  </div>
 
-  <details>
+  <details data-lang="en">
     <summary>Worked Example &mdash; Predicting Shape and Polarity</summary>
     <div class="detail-body">
       <p class="worked-problem">Determine the shape, bond angle, and polarity of SCl$_2$.</p>
@@ -690,17 +758,37 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
       </div>
     </div>
   </details>
+  <details data-lang="zh">
+    <summary>例题 &mdash; 预测 SCl$_2$ 的形状和极性</summary>
+    <div class="detail-body">
+      <p class="worked-problem">判断 SCl$_2$ 的分子几何、键角和极性。</p>
+      <div class="worked-steps">
+        <div class="worked-step">
+          <div class="step-label">第 1 步 &mdash; 路易斯结构</div>
+          <div class="step-text">S 有 6 个价电子；每个 Cl 与 S 共用一对电子。S 周围共有 2 个成键对 + 2 个孤对 = 4 个电子域。</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">第 2 步 &mdash; VSEPR</div>
+          <div class="step-text">4 个电子域 = 电子域几何为正四面体；2 成键 + 2 孤对 = 分子几何为 V 形（bent）。键角约 104&ndash;105&deg;，由于孤对的额外排斥而小于 109.5&deg;。</div>
+        </div>
+        <div class="worked-step">
+          <div class="step-label">第 3 步 &mdash; 极性</div>
+          <div class="step-text">S&ndash;Cl 键是极性的（Cl 电负性更大）。V 形几何使两个偶极<em>不能</em>抵消。SCl$_2$ 是极性分子。</div>
+        </div>
+      </div>
+    </div>
+  </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">Which molecule is non-polar despite having polar bonds?</div>
+    <div class="quiz-q"><span data-lang="en">Which molecule is non-polar despite having polar bonds?</span><span data-lang="zh">下列哪个分子虽含有极性键，整体却是非极性？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">H$_2$O</div>
       <div class="quiz-opt" data-idx="1">CCl$_4$</div>
       <div class="quiz-opt" data-idx="2">NH$_3$</div>
       <div class="quiz-opt" data-idx="3">HCl</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! CCl$_4$ has 4 polar C&ndash;Cl bonds, but the tetrahedral symmetry means all bond dipoles cancel perfectly, making the molecule non-polar overall.</div>
-    <div class="quiz-explain wrong-exp">CCl$_4$ is tetrahedral &mdash; the 4 identical polar bonds cancel by symmetry. H$_2$O and NH$_3$ are bent/pyramidal so dipoles do not cancel. Answer: (B).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! CCl$_4$ has 4 polar C&ndash;Cl bonds, but the tetrahedral symmetry means all bond dipoles cancel perfectly, making the molecule non-polar overall.</span><span data-lang="zh">正确！CCl$_4$ 有 4 条极性 C&ndash;Cl 键，但正四面体的对称性让所有键偶极完全相消，整体表现为非极性。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">CCl$_4$ is tetrahedral &mdash; the 4 identical polar bonds cancel by symmetry. H$_2$O and NH$_3$ are bent/pyramidal so dipoles do not cancel. Answer: (B).</span><span data-lang="zh">CCl$_4$ 是正四面体——4 条相同的极性键因对称而相消。H$_2$O 与 NH$_3$ 是 V 形/三角锥形，偶极无法抵消。答案：(B)。</span></div>
   </div>
 </section>
 
@@ -709,35 +797,47 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- 2.3 -->
 <section class="section" id="s2-3">
   <div class="section-label">Structure 2.3</div>
-  <h2>The Metallic Model</h2>
+  <h2><span data-lang="en">The Metallic Model</span><span data-lang="zh">金属模型</span></h2>
 
-  <p>A <strong>metallic bond</strong> is the electrostatic attraction between a lattice of metal cations and a "sea" of delocalized electrons. This model elegantly explains all characteristic metallic properties.</p>
+  <p data-lang="en">A <strong>metallic bond</strong> is the electrostatic attraction between a lattice of metal cations and a "sea" of delocalized electrons. This model elegantly explains all characteristic metallic properties.</p>
+  <p data-lang="zh"><strong>金属键</strong>（<code>metallic bond</code>）是金属阳离子晶格（<code>lattice</code>）与离域电子"海"之间的静电吸引。这个简单模型可以漂亮地解释金属几乎所有的特征性质。</p>
 
-  <div class="concept-box green">
+  <div class="concept-box green" data-lang="en">
     <strong style="color: var(--green);">Properties Explained by the Metallic Model</strong>
     <span style="display:block; margin-top: 8px;"><strong>Electrical conductivity:</strong> Delocalized electrons are free to move and carry charge.</span>
     <span style="display:block; margin-top: 4px;"><strong>Thermal conductivity:</strong> Delocalized electrons transfer kinetic energy rapidly through the lattice.</span>
     <span style="display:block; margin-top: 4px;"><strong>Malleability and ductility:</strong> Layers of cations can slide past each other without breaking the bond &mdash; the electron sea simply adjusts. (Contrast with ionic compounds, which shatter.)</span>
   </div>
+  <div class="concept-box green" data-lang="zh">
+    <strong style="color: var(--green);">金属模型可解释的性质</strong>
+    <span style="display:block; margin-top: 8px;"><strong>导电性：</strong>离域电子可以自由移动、携带电荷。</span>
+    <span style="display:block; margin-top: 4px;"><strong>导热性：</strong>离域电子在晶格中快速传递动能。</span>
+    <span style="display:block; margin-top: 4px;"><strong>延展性（可锻、可拉丝）：</strong>阳离子层可以彼此滑动而不破坏金属键——电子海会随之调整。（与离子化合物的"层错位即破碎"形成对比。）</span>
+  </div>
 
-  <h3>Factors Affecting Metallic Bond Strength</h3>
-  <p>The strength of the metallic bond (and therefore the melting point) depends on the charge of the cation and the radius of the metal ion. Higher charge and smaller radius both increase the attraction between cations and the electron sea. This explains why Na (1+ charge, larger) has a lower melting point than Mg (2+ charge, smaller).</p>
+  <h3><span data-lang="en">Factors Affecting Metallic Bond Strength</span><span data-lang="zh">影响金属键强度的因素</span></h3>
+  <p data-lang="en">The strength of the metallic bond (and therefore the melting point) depends on the charge of the cation and the radius of the metal ion. Higher charge and smaller radius both increase the attraction between cations and the electron sea. This explains why Na (1+ charge, larger) has a lower melting point than Mg (2+ charge, smaller).</p>
+  <p data-lang="zh">金属键的强度（进而决定熔点）取决于阳离子的电荷和半径。电荷越高、半径越小，阳离子与电子海的吸引越强。这就解释了为什么 Na（电荷 +1、半径较大）的熔点低于 Mg（电荷 +2、半径较小）。</p>
 
-  <div class="concept-box gold">
+  <div class="concept-box gold" data-lang="en">
     <strong style="color: var(--gold);">HL Only &mdash; Transition Elements (2.3.3)</strong>
     Transition elements have delocalized d-electrons in addition to s-electrons, giving them more delocalized electrons per atom. This explains their characteristically high melting points and good electrical conductivity compared to s- and p-block metals.
   </div>
+  <div class="concept-box gold" data-lang="zh">
+    <strong style="color: var(--gold);">HL 专属 &mdash; 过渡元素（2.3.3）</strong>
+    过渡元素除 s 电子外，还有可离域的 d 电子，因此每个原子贡献的离域电子更多。这解释了过渡金属为何普遍比 s 区、p 区金属熔点更高、导电性更好。
+  </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">Why is aluminium a better electrical conductor than sodium?</div>
+    <div class="quiz-q"><span data-lang="en">Why is aluminium a better electrical conductor than sodium?</span><span data-lang="zh">为什么铝的导电性比钠好？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Al has a higher cation charge (3+) and more delocalized electrons per atom</div>
-      <div class="quiz-opt" data-idx="1">Al has a lower melting point than Na</div>
-      <div class="quiz-opt" data-idx="2">Al is more electronegative than Na</div>
-      <div class="quiz-opt" data-idx="3">Al has fewer protons than Na</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Al has a higher cation charge (3+) and more delocalized electrons per atom</span><span data-lang="zh">Al 阳离子电荷更高（+3），每个原子提供的离域电子更多</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Al has a lower melting point than Na</span><span data-lang="zh">Al 的熔点比 Na 低</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Al is more electronegative than Na</span><span data-lang="zh">Al 的电负性比 Na 大</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Al has fewer protons than Na</span><span data-lang="zh">Al 的质子数比 Na 少</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Al$^{3+}$ contributes 3 delocalized electrons per atom compared to Na$^+$'s 1. More mobile electrons and stronger metallic bonding both contribute to better conductivity.</div>
-    <div class="quiz-explain wrong-exp">Al forms Al$^{3+}$ ions with 3 delocalized electrons per atom vs Na$^+$ with 1. More free electrons means better conductivity. Answer: (A).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Al$^{3+}$ contributes 3 delocalized electrons per atom compared to Na$^+$'s 1. More mobile electrons and stronger metallic bonding both contribute to better conductivity.</span><span data-lang="zh">正确！每个 Al 原子贡献 3 个离域电子（形成 Al$^{3+}$），而 Na 只贡献 1 个。可移动电子更多、金属键更强，都让导电性更好。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Al forms Al$^{3+}$ ions with 3 delocalized electrons per atom vs Na$^+$ with 1. More free electrons means better conductivity. Answer: (A).</span><span data-lang="zh">Al 形成 Al$^{3+}$，每原子贡献 3 个离域电子；Na 形成 Na$^+$，只有 1 个。自由电子越多导电性越好。答案：(A)。</span></div>
   </div>
 </section>
 
@@ -746,33 +846,41 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- 2.4 -->
 <section class="section" id="s2-4">
   <div class="section-label">Structure 2.4</div>
-  <h2>From Models to Materials</h2>
+  <h2><span data-lang="en">From Models to Materials</span><span data-lang="zh">从模型到材料</span></h2>
 
-  <h3>The Bonding Triangle</h3>
-  <p>Real bonding is not purely ionic, covalent, or metallic &mdash; it exists on a continuum. The <strong>bonding triangle</strong> (provided in the data booklet) places compounds according to the relative contributions of all three bonding types. A compound's position is determined by electronegativity differences and average electronegativities of the atoms involved. The position predicts physical properties.</p>
+  <h3><span data-lang="en">The Bonding Triangle</span><span data-lang="zh">成键三角形（bonding triangle）</span></h3>
+  <p data-lang="en">Real bonding is not purely ionic, covalent, or metallic &mdash; it exists on a continuum. The <strong>bonding triangle</strong> (provided in the data booklet) places compounds according to the relative contributions of all three bonding types. A compound's position is determined by electronegativity differences and average electronegativities of the atoms involved. The position predicts physical properties.</p>
+  <p data-lang="zh">真实化学键并非纯粹的离子、共价或金属键——三者是一个连续过渡。<strong>成键三角形</strong>（bonding triangle，数据手册中提供）按三种成键方式各自的贡献，把化合物放在三角形不同位置。位置由原子电负性（<code>electronegativity</code>）的差值与平均值共同决定，进而可以预测物理性质。</p>
 
-  <h3>Alloys</h3>
-  <p><strong>Alloys</strong> are mixtures of a metal with other metals or non-metals. The different-sized atoms disrupt the regular lattice, preventing layers from sliding as easily. This makes alloys harder and stronger than pure metals. Examples include bronze (Cu + Sn), brass (Cu + Zn), and stainless steel (Fe + Cr + Ni). Alloys are mixtures, not compounds &mdash; they have no fixed ratio.</p>
+  <h3><span data-lang="en">Alloys</span><span data-lang="zh">合金</span></h3>
+  <p data-lang="en"><strong>Alloys</strong> are mixtures of a metal with other metals or non-metals. The different-sized atoms disrupt the regular lattice, preventing layers from sliding as easily. This makes alloys harder and stronger than pure metals. Examples include bronze (Cu + Sn), brass (Cu + Zn), and stainless steel (Fe + Cr + Ni). Alloys are mixtures, not compounds &mdash; they have no fixed ratio.</p>
+  <p data-lang="zh"><strong>合金</strong>（alloys）是金属与其他金属或非金属的混合物。大小不同的原子打乱了规则晶格，使各层不易彼此滑动，因此合金通常比纯金属更硬、更强。常见例子：青铜（Cu + Sn）、黄铜（Cu + Zn）、不锈钢（Fe + Cr + Ni）。合金属于混合物，不是化合物——配比不固定。</p>
 
-  <h3>Polymers</h3>
-  <p><strong>Polymers</strong> are large molecules (macromolecules) built from repeating units called monomers.</p>
+  <h3><span data-lang="en">Polymers</span><span data-lang="zh">聚合物（polymers）</span></h3>
+  <p data-lang="en"><strong>Polymers</strong> are large molecules (macromolecules) built from repeating units called monomers.</p>
+  <p data-lang="zh"><strong>聚合物</strong>（polymers）是由重复单元（单体，monomer）连接而成的大分子（macromolecule）。</p>
 
-  <div class="concept-box">
+  <div class="concept-box" data-lang="en">
     <strong style="color: var(--accent);">Addition vs. Condensation Polymers</strong>
     <span style="display:block; margin-top: 8px;"><strong>Addition polymers</strong> form when alkene monomers break their double bonds and link together. No atoms are lost &mdash; atom economy is 100%. Example: polyethene from ethene.</span>
     <span style="display:block; margin-top: 4px;"><strong>Condensation polymers (HL)</strong> form when monomers with two functional groups react, releasing a small molecule (usually H$_2$O) with each linkage. Polyesters form from diols + dicarboxylic acids. Polyamides form from diamines + dicarboxylic acids. All biological macromolecules (proteins, polysaccharides, nucleic acids) are condensation polymers.</span>
   </div>
+  <div class="concept-box" data-lang="zh">
+    <strong style="color: var(--accent);">加成聚合 vs. 缩合聚合</strong>
+    <span style="display:block; margin-top: 8px;"><strong>加成聚合物</strong>（addition polymers）由烯烃单体打开 C=C 双键后首尾相连而成，不脱去任何原子——原子经济性 100%。例如：由乙烯聚合成聚乙烯（polyethene）。</span>
+    <span style="display:block; margin-top: 4px;"><strong>缩合聚合物</strong>（condensation polymers，HL）由带两个官能团的单体反应而成，每形成一个连接就脱去一个小分子（通常是 H$_2$O）。聚酯由二元醇 + 二元羧酸生成；聚酰胺由二元胺 + 二元羧酸生成。生物大分子（蛋白质、多糖、核酸）都是缩合聚合物。</span>
+  </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-q">Why are alloys generally harder than pure metals?</div>
+    <div class="quiz-q"><span data-lang="en">Why are alloys generally harder than pure metals?</span><span data-lang="zh">为什么合金通常比纯金属更硬？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Alloys have stronger covalent bonds</div>
-      <div class="quiz-opt" data-idx="1">Alloys conduct electricity better</div>
-      <div class="quiz-opt" data-idx="2">Alloys have higher electronegativity</div>
-      <div class="quiz-opt" data-idx="3">Different-sized atoms prevent layers from sliding easily</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Alloys have stronger covalent bonds</span><span data-lang="zh">合金的共价键更强</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Alloys conduct electricity better</span><span data-lang="zh">合金导电性更好</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Alloys have higher electronegativity</span><span data-lang="zh">合金的电负性更高</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Different-sized atoms prevent layers from sliding easily</span><span data-lang="zh">大小不同的原子让晶格层不易滑动</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! The presence of atoms with different radii disrupts the regular arrangement of the lattice, making it more difficult for layers of cations to slide past each other.</div>
-    <div class="quiz-explain wrong-exp">In alloys, different-sized atoms disrupt the regular lattice, preventing layers from sliding &mdash; increasing hardness. Answer: (D).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! The presence of atoms with different radii disrupts the regular arrangement of the lattice, making it more difficult for layers of cations to slide past each other.</span><span data-lang="zh">正确！半径不同的原子破坏了晶格的规则排列，阳离子层之间更难滑动。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">In alloys, different-sized atoms disrupt the regular lattice, preventing layers from sliding &mdash; increasing hardness. Answer: (D).</span><span data-lang="zh">合金中大小不同的原子打乱规则晶格，使各层不能轻易滑动——硬度因此升高。答案：(D)。</span></div>
   </div>
 </section>
 
@@ -781,21 +889,24 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- EXAM STRATEGY -->
 <section class="section" id="exam-strategy">
   <div class="section-label">Preparation</div>
-  <h2>Exam Strategy</h2>
+  <h2><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></h2>
 
   <div class="card">
-    <div class="card-header">Paper 1 (Multiple Choice)</div>
-    <p>VSEPR questions are very common &mdash; memorize the shapes table and practise drawing Lewis structures quickly. Polarity questions require two steps: identify polar bonds, then check if geometry cancels them. Know which intermolecular forces are present from the molecular structure (is there H bonded to N/O/F? is it polar? what is the molar mass?).</p>
+    <div class="card-header"><span data-lang="en">Paper 1 (Multiple Choice)</span><span data-lang="zh">Paper 1（多项选择）</span></div>
+    <p data-lang="en">VSEPR questions are very common &mdash; memorize the shapes table and practise drawing Lewis structures quickly. Polarity questions require two steps: identify polar bonds, then check if geometry cancels them. Know which intermolecular forces are present from the molecular structure (is there H bonded to N/O/F? is it polar? what is the molar mass?).</p>
+    <p data-lang="zh">VSEPR 题非常常见——把分子几何表背熟，路易斯结构要画得又快又准。判断分子极性分两步：先识别极性键，再看几何是否让偶极相消。学会从分子结构直接判断分子间作用力：是否有 H 直接连 N/O/F？分子是否极性？摩尔质量多大？</p>
   </div>
 
   <div class="card">
-    <div class="card-header">Paper 2 (Extended Response)</div>
-    <p>When asked to "explain" physical properties, always link to the type of bonding or intermolecular force AND the strength of that interaction. "High melting point because of strong ionic bonds" is not enough &mdash; say "strong electrostatic attractions between oppositely charged ions in the lattice require a large amount of energy to overcome." Be specific.</p>
+    <div class="card-header"><span data-lang="en">Paper 2 (Extended Response)</span><span data-lang="zh">Paper 2（论述题）</span></div>
+    <p data-lang="en">When asked to "explain" physical properties, always link to the type of bonding or intermolecular force AND the strength of that interaction. "High melting point because of strong ionic bonds" is not enough &mdash; say "strong electrostatic attractions between oppositely charged ions in the lattice require a large amount of energy to overcome." Be specific.</p>
+    <p data-lang="zh">遇到 "explain" 物理性质的题目，必须同时给出<strong>作用力类型</strong>和<strong>该作用力的强度</strong>。只写 "high melting point because of strong ionic bonds" 不够分，要写 "strong electrostatic attractions between oppositely charged ions in the lattice require a large amount of energy to overcome"，越具体越好。</p>
   </div>
 
   <div class="card">
-    <div class="card-header">Data Booklet</div>
-    <p>Key items: electronegativity values (for bond polarity), the bonding triangle, bond enthalpy data (for comparing bond strengths). For HL: IR spectroscopy data, NMR chemical shifts.</p>
+    <div class="card-header"><span data-lang="en">Data Booklet</span><span data-lang="zh">数据手册</span></div>
+    <p data-lang="en">Key items: electronegativity values (for bond polarity), the bonding triangle, bond enthalpy data (for comparing bond strengths). For HL: IR spectroscopy data, NMR chemical shifts.</p>
+    <p data-lang="zh">必查内容：电负性（<code>electronegativity</code>）数值（判断键的极性）、成键三角形、键能（<code>bond enthalpy</code>）数据（比较键强度）。HL 另需 IR 光谱数据、NMR 化学位移表。</p>
   </div>
 </section>
 
@@ -804,26 +915,42 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- COMMON MISTAKES -->
 <section class="section" id="common-mistakes">
   <div class="section-label">Watch Out</div>
-  <h2>Common Mistakes</h2>
+  <h2><span data-lang="en">Common Mistakes</span><span data-lang="zh">常见错误</span></h2>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Mistake 1 &mdash; Confusing Electron Domain Geometry with Molecular Geometry</strong>
     Electron domain geometry includes lone pairs. Molecular geometry describes only the atom positions. NH$_3$ has tetrahedral electron domain geometry but trigonal pyramidal molecular geometry. Always state both if asked.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">错误 1 &mdash; 把电子域几何与分子几何混为一谈</strong>
+    电子域几何（electron domain geometry）包含孤对；分子几何（<code>molecular geometry</code>）只描述原子的位置。NH$_3$ 的电子域几何是正四面体，分子几何却是三角锥（trigonal pyramidal）。题目问到时两者都要写。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Mistake 2 &mdash; Saying "Ionic Compounds Have Molecules"</strong>
     Ionic compounds exist as lattices, not discrete molecules. They are represented by empirical formulas. Never refer to "a molecule of NaCl."
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">错误 2 &mdash; 说 "离子化合物有分子"</strong>
+    离子化合物以晶格（<code>lattice</code>）形式存在，没有独立分子，用实验式表示。绝对不要写 "a molecule of NaCl"。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Mistake 3 &mdash; Confusing Intermolecular Forces with Intramolecular Bonds</strong>
     Boiling a covalent substance breaks intermolecular forces, NOT covalent bonds. Water boils at 100 degrees C because hydrogen bonds between molecules break. The O&ndash;H covalent bonds within each molecule remain intact.
   </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">错误 3 &mdash; 把分子间作用力当作分子内化学键</strong>
+    煮沸一种共价物质，打断的是分子间作用力（<code>intermolecular force</code>），不是共价键。水在 100°C 沸腾是因为分子之间的氢键（<code>hydrogen bond</code>）被打断；每个分子内的 O&ndash;H 共价键依旧完好。
+  </div>
 
-  <div class="concept-box red">
+  <div class="concept-box red" data-lang="en">
     <strong style="color: var(--red);">Mistake 4 &mdash; Forgetting London Forces Exist in ALL Molecules</strong>
     London forces are not exclusive to non-polar molecules. They are present in every substance. In small polar molecules, dipole&ndash;dipole or hydrogen bonding may dominate, but London forces still contribute.
+  </div>
+  <div class="concept-box red" data-lang="zh">
+    <strong style="color: var(--red);">错误 4 &mdash; 忘记色散力存在于所有分子</strong>
+    伦敦色散力（<code>London dispersion force</code>）不是非极性分子专有。所有物质中都有色散力。在小的极性分子里，偶极-偶极（<code>dipole-dipole</code>）或氢键可能占主导，但色散力仍有贡献。
   </div>
 </section>
 
@@ -832,56 +959,56 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- FLASHCARDS -->
 <section class="section" id="flashcards">
   <div class="section-label">Review</div>
-  <h2>Flashcards</h2>
-  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click a card to flip it.</p>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;"><span data-lang="en">Click a card to flip it.</span><span data-lang="zh">点击卡片翻面。</span></p>
 
   <div class="flashcard-grid">
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is an ionic bond?</div>
-        <div class="flashcard-back">The electrostatic attraction between oppositely charged ions in a lattice.</div>
+        <div class="flashcard-front"><span data-lang="en">What is an ionic bond?</span><span data-lang="zh">什么是 ionic bond？</span></div>
+        <div class="flashcard-back"><span data-lang="en">The electrostatic attraction between oppositely charged ions in a lattice.</span><span data-lang="zh">晶格中带相反电荷的离子之间的静电吸引。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Shape of a molecule with 4 electron domains, 2 lone pairs?</div>
-        <div class="flashcard-back">Bent (V-shaped), approximately 104.5 degrees. Example: H$_2$O.</div>
+        <div class="flashcard-front"><span data-lang="en">Shape of a molecule with 4 electron domains, 2 lone pairs?</span><span data-lang="zh">4 个电子域、2 个孤对的分子是什么形状？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Bent (V-shaped), approximately 104.5 degrees. Example: H$_2$O.</span><span data-lang="zh">V 形（bent），约 104.5&deg;。例子：H$_2$O。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">When does hydrogen bonding occur?</div>
-        <div class="flashcard-back">When H is covalently bonded to N, O, or F, and interacts with a lone pair on a neighbouring N, O, or F atom.</div>
+        <div class="flashcard-front"><span data-lang="en">When does hydrogen bonding occur?</span><span data-lang="zh">氢键（hydrogen bond）在什么条件下形成？</span></div>
+        <div class="flashcard-back"><span data-lang="en">When H is covalently bonded to N, O, or F, and interacts with a lone pair on a neighbouring N, O, or F atom.</span><span data-lang="zh">H 与 N、O 或 F 共价成键，并与相邻分子上 N、O、F 的孤对电子发生相互作用时。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Why does graphite conduct electricity?</div>
-        <div class="flashcard-back">Each carbon bonds to only 3 others (sp$^2$), leaving one delocalized electron per atom free to move between layers.</div>
+        <div class="flashcard-front"><span data-lang="en">Why does graphite conduct electricity?</span><span data-lang="zh">石墨为什么能导电？</span></div>
+        <div class="flashcard-back"><span data-lang="en">Each carbon bonds to only 3 others (sp$^2$), leaving one delocalized electron per atom free to move between layers.</span><span data-lang="zh">每个 C 只与 3 个 C 成键（sp$^2$ 杂化），剩下一个离域电子，可在层与层之间自由移动。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">What is a coordination bond?</div>
-        <div class="flashcard-back">A covalent bond where both electrons in the shared pair come from the same atom. Also called a dative bond.</div>
+        <div class="flashcard-front"><span data-lang="en">What is a coordination bond?</span><span data-lang="zh">什么是 coordinate bond？</span></div>
+        <div class="flashcard-back"><span data-lang="en">A covalent bond where both electrons in the shared pair come from the same atom. Also called a dative bond.</span><span data-lang="zh">配位键：共用电子对的两个电子全部来自同一个原子。亦称 dative bond。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">Why are metals malleable but ionic compounds brittle?</div>
-        <div class="flashcard-back">In metals, the electron sea adjusts when layers slide. In ionic compounds, shifting layers brings like charges together, causing repulsion and shattering.</div>
+        <div class="flashcard-front"><span data-lang="en">Why are metals malleable but ionic compounds brittle?</span><span data-lang="zh">为什么金属可锻而离子化合物脆？</span></div>
+        <div class="flashcard-back"><span data-lang="en">In metals, the electron sea adjusts when layers slide. In ionic compounds, shifting layers brings like charges together, causing repulsion and shattering.</span><span data-lang="zh">金属中电子海会随层的滑动而调整；离子化合物中层错位后，同号电荷相对、彼此排斥，晶体破碎。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">How do you determine if a molecule is polar?</div>
-        <div class="flashcard-back">1) Identify polar bonds (electronegativity difference). 2) Check if geometry allows dipoles to cancel. If they do not cancel, the molecule is polar.</div>
+        <div class="flashcard-front"><span data-lang="en">How do you determine if a molecule is polar?</span><span data-lang="zh">如何判断一个分子是否极性？</span></div>
+        <div class="flashcard-back"><span data-lang="en">1) Identify polar bonds (electronegativity difference). 2) Check if geometry allows dipoles to cancel. If they do not cancel, the molecule is polar.</span><span data-lang="zh">① 看是否存在极性键（依电负性差判断）；② 看几何能否让偶极相消。不能相消则分子为极性。</span></div>
       </div>
     </div>
     <div class="flashcard" onclick="this.classList.toggle('flipped')">
       <div class="flashcard-inner">
-        <div class="flashcard-front">HL: How many sigma and pi bonds in a triple bond?</div>
-        <div class="flashcard-back">1 sigma bond + 2 pi bonds. The sigma forms first by head-on overlap; the two pi bonds form by lateral overlap of p-orbitals.</div>
+        <div class="flashcard-front"><span data-lang="en">HL: How many sigma and pi bonds in a triple bond?</span><span data-lang="zh">HL：一个三键中有几个 σ 键、几个 π 键？</span></div>
+        <div class="flashcard-back"><span data-lang="en">1 sigma bond + 2 pi bonds. The sigma forms first by head-on overlap; the two pi bonds form by lateral overlap of p-orbitals.</span><span data-lang="zh">1 σ + 2 π。σ 键由轨道正面重叠先形成；两个 π 键由 p 轨道侧面重叠形成。</span></div>
       </div>
     </div>
   </div>
@@ -892,89 +1019,101 @@ button:focus-visible, .quiz-opt:focus-visible, .type-btn:focus-visible, summary:
 <!-- UNIT QUIZ -->
 <section class="section" id="unit-quiz">
   <div class="section-label">Assessment</div>
-  <h2>Unit Quiz</h2>
+  <h2><span data-lang="en">Unit Quiz</span><span data-lang="zh">单元测验</span></h2>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-q">1. Which substance conducts electricity in the solid state?</div>
+    <div class="quiz-q"><span data-lang="en">1. Which substance conducts electricity in the solid state?</span><span data-lang="zh">1. 下列哪种物质在固态下导电？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Graphite</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Graphite</span><span data-lang="zh">Graphite（石墨）</span></div>
       <div class="quiz-opt" data-idx="1">NaCl</div>
-      <div class="quiz-opt" data-idx="2">Diamond</div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Diamond</span><span data-lang="zh">Diamond（金刚石）</span></div>
       <div class="quiz-opt" data-idx="3">SiO$_2$</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Graphite has delocalized electrons between its carbon layers that are free to move and carry charge, even in the solid state. NaCl only conducts when molten or dissolved.</div>
-    <div class="quiz-explain wrong-exp">Graphite has delocalized electrons free to move between layers. Ionic solids like NaCl have ions locked in place. Diamond and SiO$_2$ have no mobile charge carriers. Answer: (A).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Graphite has delocalized electrons between its carbon layers that are free to move and carry charge, even in the solid state. NaCl only conducts when molten or dissolved.</span><span data-lang="zh">正确！石墨的碳层之间有离域电子，可以自由移动、携带电荷，即便固态也能导电。NaCl 只在熔融或溶解后才导电。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Graphite has delocalized electrons free to move between layers. Ionic solids like NaCl have ions locked in place. Diamond and SiO$_2$ have no mobile charge carriers. Answer: (A).</span><span data-lang="zh">石墨的离域电子可在层间自由移动。像 NaCl 这样的离子固体，离子被锁在晶格中。金刚石和 SiO$_2$ 没有可移动的载流子。答案：(A)。</span></div>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-q">2. What intermolecular force is primarily responsible for the high boiling point of water?</div>
+    <div class="quiz-q"><span data-lang="en">2. What intermolecular force is primarily responsible for the high boiling point of water?</span><span data-lang="zh">2. 水沸点偏高，主要是因为哪种分子间作用力？</span></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">London dispersion forces</div>
-      <div class="quiz-opt" data-idx="1">Covalent bonding</div>
-      <div class="quiz-opt" data-idx="2">Hydrogen bonding</div>
-      <div class="quiz-opt" data-idx="3">Ionic bonding</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">London dispersion forces</span><span data-lang="zh">London dispersion forces（伦敦色散力）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Covalent bonding</span><span data-lang="zh">Covalent bonding（共价键）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Hydrogen bonding</span><span data-lang="zh">Hydrogen bonding（氢键）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Ionic bonding</span><span data-lang="zh">Ionic bonding（离子键）</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Water molecules form extensive hydrogen bonds (H bonded to the highly electronegative O, interacting with lone pairs on neighbouring O atoms). This requires significant energy to overcome, giving water its anomalously high boiling point.</div>
-    <div class="quiz-explain wrong-exp">Water's high boiling point is due to strong hydrogen bonds between molecules (not covalent bonds, which hold atoms within molecules). Answer: (C).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Water molecules form extensive hydrogen bonds (H bonded to the highly electronegative O, interacting with lone pairs on neighbouring O atoms). This requires significant energy to overcome, giving water its anomalously high boiling point.</span><span data-lang="zh">正确！水分子之间形成大量氢键（H 直接连在电负性很大的 O 上，并与相邻 O 的孤对相互作用），破坏这些氢键需要大量能量，因此水的沸点异常偏高。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Water's high boiling point is due to strong hydrogen bonds between molecules (not covalent bonds, which hold atoms within molecules). Answer: (C).</span><span data-lang="zh">水的高沸点来自分子之间的氢键（共价键是把分子内部原子结合在一起的）。答案：(C)。</span></div>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-q">3. (HL) How many sigma and pi bonds are present in ethyne (C$_2$H$_2$)?</div>
+    <div class="quiz-q"><span data-lang="en">3. (HL) How many sigma and pi bonds are present in ethyne (C$_2$H$_2$)?</span><span data-lang="zh">3.（HL）乙炔 C$_2$H$_2$ 中含有多少 σ 键和 π 键？</span></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">3 sigma, 3 pi</div>
       <div class="quiz-opt" data-idx="1">3 sigma, 2 pi</div>
       <div class="quiz-opt" data-idx="2">5 sigma, 0 pi</div>
       <div class="quiz-opt" data-idx="3">2 sigma, 3 pi</div>
     </div>
-    <div class="quiz-explain correct-exp">Correct! Ethyne has a triple bond between the two carbons (1$\sigma$ + 2$\pi$) plus one C&ndash;H $\sigma$ bond on each side. Total: 3$\sigma$ + 2$\pi$.</div>
-    <div class="quiz-explain wrong-exp">H&ndash;C triple bond C&ndash;H: each C&ndash;H is 1$\sigma$, the triple bond is 1$\sigma$ + 2$\pi$. Total: 3$\sigma$ + 2$\pi$. Answer: (B).</div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Correct! Ethyne has a triple bond between the two carbons (1$\sigma$ + 2$\pi$) plus one C&ndash;H $\sigma$ bond on each side. Total: 3$\sigma$ + 2$\pi$.</span><span data-lang="zh">正确！乙炔中两个 C 之间是三键（1$\sigma$ + 2$\pi$），两侧各有一个 C&ndash;H $\sigma$ 键。合计：3$\sigma$ + 2$\pi$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">H&ndash;C triple bond C&ndash;H: each C&ndash;H is 1$\sigma$, the triple bond is 1$\sigma$ + 2$\pi$. Total: 3$\sigma$ + 2$\pi$. Answer: (B).</span><span data-lang="zh">H&ndash;C≡C&ndash;H：每个 C&ndash;H 为 1$\sigma$，三键为 1$\sigma$ + 2$\pi$。合计：3$\sigma$ + 2$\pi$。答案：(B)。</span></div>
   </div>
 </section>
 
 </main>
 
-<button class="backtotop" id="backToTop" aria-label="Back to top">&#x2191;</button>
+<button class="backtotop" id="backToTop" aria-label="Back to top / 返回顶部">&#x2191;</button>
 
 <footer class="site-footer">
   <div class="site-footer-card">
     <div class="site-footer-top">
       <div>
-        <div class="site-footer-title">Dingrui Scholars &mdash; IB Chemistry</div>
-        <div class="site-footer-copy">Structure 2: Models of Bonding and Structure. Content aligned with the IB Chemistry syllabus (first assessment 2025).</div>
+        <div class="site-footer-title"><span data-lang="en">Dingrui Scholars &mdash; IB Chemistry</span><span data-lang="zh">鼎睿学苑 &mdash; IB 化学</span></div>
+        <div class="site-footer-copy"><span data-lang="en">Structure 2: Models of Bonding and Structure. Content aligned with the IB Chemistry syllabus (first assessment 2025).</span><span data-lang="zh">Structure 2：化学键与结构模型。内容对齐 IB 化学考纲（first assessment 2025）。</span></div>
       </div>
     </div>
     <div class="utility-pills">
       <span class="utility-pill">Structure 2.1&ndash;2.4</span>
       <span class="utility-pill">SL + HL</span>
       <span class="utility-pill">KaTeX Math</span>
-      <span class="utility-pill">Dark Mode</span>
-      <span class="utility-pill">Print-Friendly</span>
+      <span class="utility-pill"><span data-lang="en">Dark Mode</span><span data-lang="zh">深色模式</span></span>
+      <span class="utility-pill"><span data-lang="en">Print-Friendly</span><span data-lang="zh">可打印</span></span>
     </div>
   </div>
 </footer>
 
 <script>
 // ═══ THEME ═══
+function setThemeBtnLabel(isDark) {
+  var btn = document.getElementById('themeToggle');
+  if (!btn) return;
+  if (isDark) {
+    btn.innerHTML = '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>';
+  } else {
+    btn.innerHTML = '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>';
+  }
+}
 function toggleTheme() {
   var html = document.documentElement;
-  var btn = document.getElementById('themeToggle');
   if (html.getAttribute('data-theme') === 'dark') {
     html.removeAttribute('data-theme');
-    btn.textContent = 'Dark';
+    setThemeBtnLabel(false);
     localStorage.setItem('theme', 'light');
   } else {
     html.setAttribute('data-theme', 'dark');
-    btn.textContent = 'Light';
+    setThemeBtnLabel(true);
     localStorage.setItem('theme', 'dark');
   }
 }
 (function() {
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
-    var btn = document.getElementById('themeToggle');
-    if (btn) btn.textContent = 'Light';
+    setThemeBtnLabel(true);
   }
 })();
+
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
 
 // ═══ SIDEBAR ═══
 function toggleSidebar() {
