@@ -50,43 +50,51 @@ Mandarin follow-up commit picks up the same file per
 - Unit C flashcard density boost (12 → ~16).
 - Unit A3.5 add labelled worked-solution block.
 
-### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+### Translation Sprint Wave 2 — Practice Questions & Solutions — CLOSED 2026-05-22
 
 Bilingual EN↔ZH pass over the IB Math AA HL Practice Questions and
 Solutions surfaces, extending Wave 1 (Study Guides A1/A3/A4/C) which
-closed 2026-05-21. Practice files currently exist for A1 + A3, plus an
-A3 Solutions companion — that 3-file set is the entire Wave 2 scope
-for this subject. (See `### Closed (Translation Sprint — closed 2026-05-21)`
-below — the "separate Translation Sprint Wave 2 entry to be opened
-when those files land" note is fulfilled by this section.)
+closed 2026-05-21. **First subject to close Wave 2** — the 3-file set
+shipped on branch `wave2_ib_math_hl` and is ready for fast-forward
+into `main` for customer deploy.
 
-Goal: ship every existing Practice / Solutions file in this subject
-with balanced `data-lang="en"` / `data-lang="zh"` markers and
-four-axis per-file audit (EN/ZH balance + glossary fit + pedagogical
-+ validates) before fast-forwarding `preview → main` for customer
-deploy.
+| ID | Item | Tier | Status | EN/ZH balance |
+|---|---|---|---|---|
+| ~~**W2-EN**~~ | ~~EN hygiene sweep across all 3 Practice/Solutions files~~ | P1 | ✅ **No-op** — zero CJK characters across all 3 files (no `\text{...}` collision risk), em dashes are paper-chrome convention (legitimate), no AI-voice drift. No changes needed. | — |
+| ~~**W2-1**~~ | ~~`Practice Questions/Unit_A1_Sequences_and_Series_Practice.html`~~ | P1 | ✅ closed — `89b8a12` | 67 / 67 ✅ |
+| ~~**W2-2**~~ | ~~`Practice Questions/Unit_A3_Combinatorics_Practice.html`~~ | P1 | ✅ closed — `bd62129` | 76 / 76 ✅ |
+| ~~**W2-3**~~ | ~~`Practice Questions/Solutions/Unit_A3_Combinatorics_Solutions.html`~~ | P1 | ✅ closed — `2dce66c` | 51 / 51 ✅ |
 
-**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
-— the IB Math AA HL glossary block locked at Wave 1 close (sequence /
-series / binomial theorem / De Moivre / Argand / modulus / argument /
-etc.) applies as-is.
+**Audience contract** — Mandarin-Chinese-language students preparing
+to write the IB Math AA HL exam in English. Chinese is a *teaching
+translation*; English exam-rubric terms remain in `<code>` glosses
+inside the Chinese prose. Math notation untouched.
 
-**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
-across all 3 files (KaTeX `\text{...}` CJK check, dashes, glossary
-collisions, AI-voice drift, mark-allocation pill consistency) lands
-first as a single review gate; then per-file ZH translation commits
-land sequentially, one review gate per file (mirrors Wave 1).
+**Form choice** — Practice files use inline `<span data-lang="en">…</span><span data-lang="zh">…</span>`
+pairs throughout. The Solutions file uses Form B (parallel
+`<div class="rationale" data-lang="en">…</div><div class="rationale" data-lang="zh">…</div>`)
+for the 12 worked-solution blocks because each has internal h4 / list /
+insight structure that's cleaner as a parallel block than as inline
+spans. Inline span pairs still used for prompts, answer lines,
+paper-header pills, and footer in the Solutions file.
 
-**Cross-subject companion sprints** — Wave 2 is open in parallel
-across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
-High School Math remains parked at `DP-4` (no EN content yet).
+**`scripts/validate.sh`** passes on all 3 files.
 
-| ID | Item | Tier | Status |
-|---|---|---|---|
-| **W2-EN** | EN hygiene sweep across A1 Practice + A3 Practice + A3 Solutions (KaTeX `\text{...}` CJK check, dashes, glossary collisions, AI-voice drift, paper/marks pill parity) | P1 | **Open** |
-| **W2-1** | `Practice Questions/Unit_A1_Sequences_and_Series_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
-| **W2-2** | `Practice Questions/Unit_A3_Combinatorics_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
-| **W2-3** | `Practice Questions/Solutions/Unit_A3_Combinatorics_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+**Glossary check** — IB Math AA HL Wave 1 terminology applied as-is
+(sequence / series / common difference / common ratio / sum to infinity
+/ partial sum / closed-form / GDC / exact form). Combinatorics-specific
+terms added inline via `<code>` glosses (binomial expansion / general
+term / binomial coefficient / binomial theorem / multiset / gap method
+/ block method / circular permutation / lattice paths / monotone paths
+/ multiplication principle / inclusion-exclusion / extended binomial
+theorem / radius of convergence / conditional probability / symmetry
+argument / triangular numbers).
+
+**Commits on `wave2_ib_math_hl`:**
+
+- `89b8a12` — W2-1 A1 Practice ZH translation (67/67, +81/−66)
+- `bd62129` — W2-2 A3 Practice ZH translation (76/76, +90/−75)
+- `2dce66c` — W2-3 A3 Solutions ZH translation (51/51, +353/−51)
 
 **Note — out of Wave 2 scope (build, not translate).** Practice +
 Solutions files for A2 / A4 / A5 / A6 / B / D / E (SQ-4 above) do not
