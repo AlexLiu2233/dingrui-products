@@ -14,9 +14,10 @@ Chemistry HL syllabus (first exams 2025).
 
 **Scope boundary** — this audit covers the *Study Guide* product only.
 
-Last reviewed: **2026-05-21** (Translation Sprint opened following the
-IB Math HL Translation Sprint close; coverage status refreshed —
-Reactivity 2 has shipped since the original 2026-05-11 stub).
+Last reviewed: **2026-05-21** (Translation Sprint closed same day as
+opened; all 4 shipped IB Chem HL study guides bilingualized EN↔ZH on
+branch `ib_chem_hl_translation`, 4 commits T-1..T-4 awaiting user
+review before fast-forward to main).
 
 **Syllabus coverage gap** — current shipped: Structure 1, Structure 2,
 Reactivity 1, Reactivity 2. Missing: Structure 3, Reactivity 3,
@@ -25,41 +26,43 @@ target).
 
 ---
 
-## Active Sprint — what we're working on now
+## Translation Sprint — CLOSED 2026-05-21
 
-**Translation Sprint — Bilingual EN↔ZH for shipped study guides
-(opened 2026-05-21).** All 4 currently-shipped IB Chemistry HL study
-guides (Structure 1, Structure 2, Reactivity 1, Reactivity 2)
-bilingualizing EN↔ZH against the locked playbook in
-[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
-Sequential, one file at a time, review-then-merge per file. Same
-methodology as the IB Math HL Translation Sprint (closed
-2026-05-21, commits `cdca220` / `ea3124d` / `12dc6ad` / `ebf8d11`).
+Bilingual EN↔ZH translation of all 4 shipped IB Chemistry HL study
+guides on branch `ib_chem_hl_translation` against the locked playbook
+in [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
+(IB Chem HL glossary block added to the playbook at sprint open;
+mirrors the AP Physics audit-locked terminology pattern). All 4 files
+pass the four-axis scorecard (EN/ZH balance + glossary fit +
+pedagogical + validates).
 
-| ID | Item | Tier | Status |
-|---|---|---|---|
-| **T-1** | Structure 1 Particulate Nature of Matter bilingual translation | P1 | **Open** — first up |
-| **T-2** | Structure 2 Bonding & Structure bilingual translation | P1 | **Open** |
-| **T-3** | Reactivity 1 What Drives Chemical Reactions bilingual translation | P1 | **Open** |
-| **T-4** | Reactivity 2 How Much How Fast How Far bilingual translation | P1 | **Open** |
+| ID | Item | Tier | Status | Parity | Lines (before → after) |
+|---|---|---|---|---|---|
+| **T-1** | Structure 1 Particulate Nature of Matter | P1 | **Shipped** | 175/175 | 1172 → 1304 |
+| **T-2** | Structure 2 Bonding & Structure | P1 | **Shipped** | 138/138 | 1069 → 1208 |
+| **T-3** | Reactivity 1 What Drives Chemical Reactions | P1 | **Shipped** | 167/167 | 1144 → 1216 |
+| **T-4** | Reactivity 2 How Much How Fast How Far | P1 | **Shipped** | 270/270 | 1320 → 1459 |
 
 **Audience contract** — Mandarin-Chinese-language students preparing
 to write the IB Chemistry HL exam in English. Chinese is a *teaching
-translation*; English exam-rubric terminology (atom / molecule /
-bonding / electronegativity / Lewis structure / molar / equilibrium /
-enthalpy / entropy / Gibbs / etc.) stays in `<code>` inline. Math /
-chemical notation untouched.
+translation*; English exam-rubric terminology stays in `<code>`
+inline; chemical formulas, state symbols, KaTeX math untouched.
 
-**Glossary extension required.** Playbook does not yet have an IB
-Chemistry HL block. Add one as Structure 1 ships, then extend through
-Structure 2 → Reactivity 1 → Reactivity 2 — same incremental approach
-that locked AP Physics terminology after U1–U7.
+**Locked terminology** — IB Chem HL glossary block in
+`prompts/create-bilingual-translation.md` covers Structure 1/2,
+Reactivity 1/2. Wave 2 (Structure 3, Reactivity 3, Tools 1–3) will
+extend the same tables as those files ship.
 
-Sprint closes when (a) all 4 files ship, (b) per-file scorecard passes
-four axes (EN/ZH balance + glossary fit + pedagogical + validates) for
-all 4, (c) no P0/P1 translation issues remain. Structure 3, Reactivity
-3, Tools 1–3 will be translated as they ship (separate Translation
-Sprint Wave 2 to be opened when those files land).
+**Commits on `ib_chem_hl_translation` branch (awaiting user review +
+fast-forward to main):**
+
+- `9630110` — T-1 Structure 1 Particulate Nature of Matter
+- `54ac31b` — T-2 Structure 2 Bonding & Structure
+- `1c7f483` — T-3 Reactivity 1 What Drives Chemical Reactions
+- `e855c1e` — T-4 Reactivity 2 How Much How Fast How Far
+
+**Next**: Structure 3, Reactivity 3, Tools 1–3 to be drafted in
+Sprint 1 (queued below) — those will be bilingual from the start.
 
 ### Sprint 1 (queued) — Syllabus coverage gap
 
