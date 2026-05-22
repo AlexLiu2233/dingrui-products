@@ -48,6 +48,53 @@ revision is confirmed per file):
 - D2 mistranslation: `Unit_7_Oscillations.html:504` `成反比例` should be
   `成正比但方向相反` (SHM defining relationship semantically inverted).
 
+### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+
+Bilingual EN↔ZH pass over the AP Physics Practice Questions and
+Solutions surfaces, extending Wave 1 (Study Guides U1–U7) which closed
+2026-05-19 at the four-axis audit. **Largest single block in the
+cross-subject Wave 2** — 7 Practice files + 7 Solutions files = 14
+file ZH commits.
+
+Goal: ship every Practice + Solutions file in this subject with
+balanced `data-lang="en"` / `data-lang="zh"` markers and four-axis
+per-file audit (EN/ZH balance + glossary fit + pedagogical + validates)
+before fast-forwarding `preview → main` for customer deploy.
+
+**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
+— the AP Physics C: Mechanics glossary block locked at Wave 1 close
+applies as-is; no glossary extension expected for the Practice/Solutions
+surface since they share the same terminology load as the Study Guides.
+
+**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
+across all 14 files (KaTeX `\text{...}` CJK collisions, dashes,
+glossary collisions, AI-voice drift, FRQ-marking-scheme phrasing
+consistency) lands first as a single review gate; then per-file ZH
+translation commits land sequentially, one review gate per file
+(mirrors Wave 1 U1–U4 cadence).
+
+**Cross-subject companion sprints** — Wave 2 is open in parallel
+across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
+High School Math remains parked at `DP-4` (no EN content yet).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **W2-EN** | EN hygiene sweep across all 14 Practice/Solutions files (KaTeX `\text{...}` CJK check, dashes, glossary collisions, AI-voice drift, FRQ-rubric phrasing parity) | P1 | **Open** |
+| **W2-1** | `Practice Questions/Unit_1_Kinematics_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-2** | `Practice Questions/Unit_2_Force_and_Dynamics_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-3** | `Practice Questions/Unit_3_Work_Energy_Power_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-4** | `Practice Questions/Unit_4_Linear_Momentum_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-5** | `Practice Questions/Unit_5_Torque_and_Rotational_Dynamics_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-6** | `Practice Questions/Unit_6_Energy_and_Momentum_of_Rotating_Systems_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-7** | `Practice Questions/Unit_7_Oscillations_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-8** | `Practice Questions/Solutions/Unit_1_Kinematics_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-9** | `Practice Questions/Solutions/Unit_2_Force_and_Dynamics_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-10** | `Practice Questions/Solutions/Unit_3_Work_Energy_Power_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-11** | `Practice Questions/Solutions/Unit_4_Linear_Momentum_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-12** | `Practice Questions/Solutions/Unit_5_Torque_and_Rotational_Dynamics_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-13** | `Practice Questions/Solutions/Unit_6_Energy_and_Momentum_of_Rotating_Systems_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-14** | `Practice Questions/Solutions/Unit_7_Oscillations_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+
 ### Closed sprints (collapsed)
 
 **Sprint 3 closed 2026-05-09** — all P1 polish items landed on

@@ -59,6 +59,46 @@ per `prompts/create-bilingual-translation.md`.
 - Section-label bilingualization in Structure 2.
 - Anchor naming `#s1-1` reuse between Structure 1 and Reactivity 1.
 
+### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+
+Bilingual EN↔ZH pass over the IB Chemistry HL Practice Questions and
+Solutions surfaces, extending Wave 1 (Study Guides) which closed
+2026-05-21. Only Reactivity 2 has shipped a Practice + Solutions pair
+so far; that pair is the entire Wave 2 scope for this subject.
+
+Goal: ship the existing Practice + Solutions pair in this subject with
+balanced `data-lang="en"` / `data-lang="zh"` markers and four-axis
+per-file audit (EN/ZH balance + glossary fit + pedagogical + validates)
+before fast-forwarding `preview → main` for customer deploy.
+
+**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
+— the IB Chem HL Structure 1/2 + Reactivity 1/2 glossary block locked at
+Wave 1 close applies as-is to the Reactivity 2 Practice/Solutions pair.
+
+**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
+across both files (KaTeX `\text{...}` CJK check, chemical-formula
+state-symbol rendering, dashes, glossary collisions, AI-voice drift)
+lands first as a single review gate; then per-file ZH translation
+commits land sequentially, one review gate per file (mirrors Wave 1).
+
+**Cross-subject companion sprints** — Wave 2 is open in parallel
+across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
+High School Math remains parked at `DP-4` (no EN content yet).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **W2-EN** | EN hygiene sweep across Reactivity_2 Practice + Solutions (KaTeX `\text{...}` CJK check, state-symbol parity, dashes, glossary collisions, AI-voice drift) | P1 | **Open** |
+| **W2-1** | `Practice Questions/Reactivity_2_How_Much_How_Fast_How_Far_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-2** | `Practice Questions/Solutions/Reactivity_2_How_Much_How_Fast_How_Far_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+
+**Note — out of Wave 2 scope (build, not translate).** Practice + Solutions
+companions for Structure 1, Structure 2, Reactivity 1 do not exist yet;
+they join a Wave 2 extension as they ship. Structure 3, Reactivity 3,
+Tools 1–3 are covered by Sprint 1 (Syllabus coverage gap) and will land
+bilingual end-to-end under the locked English-first → ZH cadence.
+
+---
+
 ### Sprint 1 (still queued) — Syllabus coverage gap
 
 Original P0 work; preserved here so it isn't lost.

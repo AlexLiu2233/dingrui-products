@@ -56,6 +56,48 @@ Mandarin follow-up commit picks up the same file per
 - Section-ID convention drift (A9 — `topic-4-N` vs `s4-N` etc.).
 - TOC anchor orphans (common-mistakes, mvt-explorer not linked from sidebars).
 
+### Translation Sprint Wave 2 — Practice Questions (opened 2026-05-22)
+
+Bilingual EN↔ZH pass over the AP Calculus Practice Questions surface,
+extending Wave 1 (Study Guides) which closed 2026-05-18 (`3ab03d5`).
+Promotes `DP-1` out of the Digital Product Backlog into an active
+sprint per user direction 2026-05-22 (Wave 2 cross-subject open).
+
+Goal: ship every existing Practice file in this subject with balanced
+`data-lang="en"` / `data-lang="zh"` markers and four-axis per-file audit
+(EN/ZH balance + glossary fit + pedagogical + validates) before
+fast-forwarding `preview → main` for customer deploy.
+
+**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
+across all 8 Practice files (KaTeX `\text{...}` CJK collisions same as
+the S2-1/S2-2 study-guide pattern, dashes, glossary collisions,
+AI-voice drift) lands first as a single review gate; then per-file ZH
+translation commits land sequentially, one review gate per file
+(mirrors Wave 1).
+
+**Cross-subject companion sprints** — Wave 2 is open in parallel
+across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
+High School Math remains parked at `DP-4` (no EN content yet).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **W2-EN** | EN hygiene sweep across `Unit_1`–`Unit_8` Practice Problems (KaTeX `\text{...}` CJK check, dashes, glossary collisions, AI-voice drift) | P1 | **Open** |
+| **W2-1** | `Unit_1_Limits_and_Continuity_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-2** | `Unit_2_Differentiation_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-3** | `Unit_3_Composite_Implicit_Inverse_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-4** | `Unit_4_Applications_of_Differentiation_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-5** | `Unit_5_Curve_Sketching_Optimization_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-6** | `Unit_6_Integration_and_Accumulation_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-7** | `Unit_7_Differential_Equations_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-8** | `Unit_8_Applications_of_Integration_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+
+**Note — out of Wave 2 scope (build, not translate).** `Unit_9` and
+`Unit_10` Practice Problems do not exist yet and are tracked as
+study-guide-only ships under Sprint 2. They join a future Wave 2
+extension as they ship. No Solutions companion product exists for
+AP Calculus — building one is a separate sprint (not in this Wave 2).
+
 ---
 
 ## Closed Sprints
@@ -158,4 +200,4 @@ found.
 
 | ID | Item | Why it's not in scope here |
 |---|---|---|
-| DP-1 | AP Calculus Practice Questions bilingual pass | The Practice files (`Unit_1_*_Practice_Problems.html`–`Unit_10`) are not yet bilingualized; lower leverage than the Study Guides for first-pass Mandarin audience. Reopen if a Chinese-language pilot user requests it. |
+| ~~DP-1~~ | ~~AP Calculus Practice Questions bilingual pass~~ | ✅ **Promoted into active sprint 2026-05-22** — now tracked as Translation Sprint Wave 2 above (W2-EN + W2-1..W2-8). Covers U1–U8; U9/U10 ship as Wave 2 extension once their Practice files exist. |

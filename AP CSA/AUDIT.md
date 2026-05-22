@@ -69,6 +69,45 @@ CED coverage gap (P0). Pulls into a future sprint, not this one.
 - Flashcard terseness rewrites.
 - Unit 3 CSS un-minify.
 
+### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+
+Bilingual EN↔ZH pass over the Practice Questions surface, extending
+Wave 1 (Study Guides) — the AP CSA Study Guides U1–U4 were already
+bilingualized as part of the original translation rollout, and the
+Solutions companions shipped bilingual at S7-1..S7-7. **The 4 Practice
+Problems files are the remaining English-only gap.**
+
+Goal: ship every Practice file in this subject with balanced
+`data-lang="en"` / `data-lang="zh"` markers and four-axis per-file audit
+(EN/ZH balance + glossary fit + pedagogical + validates) before
+fast-forwarding `preview → main` for customer deploy.
+
+**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
+**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
+across all 4 files (KaTeX-N/A here, code-comment policy, dashes,
+glossary collisions, AI-voice drift) lands first as a single review
+gate; then per-file ZH translation commits land sequentially, one
+review gate per file (mirrors Wave 1).
+
+**Cross-subject companion sprints** — Wave 2 is open in parallel
+across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
+High School Math remains parked at `DP-4` (no EN content yet).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **W2-EN** | EN hygiene sweep across `Unit_1`–`Unit_4` Practice Problems (code-comment policy per playbook §audience, glossary collisions, dashes, AI-voice drift) | P1 | **Open** |
+| **W2-1** | `Unit_1_Using_Objects_and_Methods_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-2** | `Unit_2_Selection_and_Iteration_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-3** | `Unit_3_Class_Creation_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-4** | `Unit_4_Data_Collection_Practice_Problems.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+
+**Note — Solutions already bilingual.** `Practice Questions/Solutions/Unit_1`..`Unit_4_*_Solutions.html`
+already carry `data-lang="zh"` markers (61 / 61 / 77 / 62) and are NOT
+in Wave 2 scope. AP CSA is the only subject where Solutions shipped
+bilingual as part of Wave 1.
+
+---
+
 ### Recently shipped (closed during Sprint 1)
 
 Captured here for traceability — none of these were tracked items at

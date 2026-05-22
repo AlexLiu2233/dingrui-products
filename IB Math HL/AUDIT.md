@@ -50,6 +50,49 @@ Mandarin follow-up commit picks up the same file per
 - Unit C flashcard density boost (12 → ~16).
 - Unit A3.5 add labelled worked-solution block.
 
+### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+
+Bilingual EN↔ZH pass over the IB Math AA HL Practice Questions and
+Solutions surfaces, extending Wave 1 (Study Guides A1/A3/A4/C) which
+closed 2026-05-21. Practice files currently exist for A1 + A3, plus an
+A3 Solutions companion — that 3-file set is the entire Wave 2 scope
+for this subject. (See `### Closed (Translation Sprint — closed 2026-05-21)`
+below — the "separate Translation Sprint Wave 2 entry to be opened
+when those files land" note is fulfilled by this section.)
+
+Goal: ship every existing Practice / Solutions file in this subject
+with balanced `data-lang="en"` / `data-lang="zh"` markers and
+four-axis per-file audit (EN/ZH balance + glossary fit + pedagogical
++ validates) before fast-forwarding `preview → main` for customer
+deploy.
+
+**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
+— the IB Math AA HL glossary block locked at Wave 1 close (sequence /
+series / binomial theorem / De Moivre / Argand / modulus / argument /
+etc.) applies as-is.
+
+**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
+across all 3 files (KaTeX `\text{...}` CJK check, dashes, glossary
+collisions, AI-voice drift, mark-allocation pill consistency) lands
+first as a single review gate; then per-file ZH translation commits
+land sequentially, one review gate per file (mirrors Wave 1).
+
+**Cross-subject companion sprints** — Wave 2 is open in parallel
+across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
+High School Math remains parked at `DP-4` (no EN content yet).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **W2-EN** | EN hygiene sweep across A1 Practice + A3 Practice + A3 Solutions (KaTeX `\text{...}` CJK check, dashes, glossary collisions, AI-voice drift, paper/marks pill parity) | P1 | **Open** |
+| **W2-1** | `Practice Questions/Unit_A1_Sequences_and_Series_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-2** | `Practice Questions/Unit_A3_Combinatorics_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+| **W2-3** | `Practice Questions/Solutions/Unit_A3_Combinatorics_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+
+**Note — out of Wave 2 scope (build, not translate).** Practice +
+Solutions files for A2 / A4 / A5 / A6 / B / D / E (SQ-4 above) do not
+exist yet; they ship bilingual end-to-end under the locked English-first
+→ ZH cadence as each one lands.
+
 ### Closed (Translation Sprint — closed 2026-05-21)
 
 All currently-shipped IB Math HL study guides (A1, A3, A4, C)
@@ -68,8 +111,9 @@ write the IB Math AA HL exam in English. Chinese is a *teaching
 translation*; English exam-rubric terminology (sequence / series /
 binomial theorem / De Moivre / Argand / modulus / argument / etc.) stays
 in `<code>` inline. Math notation untouched. A2 / A5 / A6 will be
-translated as they ship (separate Translation Sprint Wave 2 entry to be
-opened when those files land).
+translated as they ship (covered by the SQ-4 "as they ship" rule; the
+Practice Questions / Solutions surface for A1 + A3 is tracked in the
+**Translation Sprint Wave 2** entry above, opened 2026-05-22).
 
 **Backlog candidates beyond this sprint:** Sprint 1 (Unit A refactor —
 A2, A5, A6 study guides) and Sprint 2 (Units B / D / E).
