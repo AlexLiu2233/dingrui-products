@@ -124,7 +124,7 @@ Practice Questions / Solutions surface for A1 + A3 is tracked in the
 **Translation Sprint Wave 2** entry above, opened 2026-05-22).
 
 **Backlog candidates beyond this sprint:** Sprint 1 (Unit A refactor —
-A2, A5, A6 study guides) and Sprint 2 (Units B / D / E).
+A2, A5, A6 study guides) and Sprint 2 (Units B / **D shipped 2026-05-22** / E).
 
 ### Sprint 1 — Refactor Unit A into focused sub-units (paused for translation)
 
@@ -165,10 +165,24 @@ and mark allocation pills. Question-only — no embedded answers.
 | ~~**SQ-3**~~ | `Unit_A3_Combinatorics_Practice.html` (11 Qs, 61 marks total) | ✅ Shipped 2026-05-09 |
 | **SQ-4** | Practice files for A2 / A4 / A5 / A6 / B / D / E (one per study guide as those land) | **Open** — track per study-guide ship |
 
-### Sprint 2 (queued) — new topic units
-Once Sprint 1 closes, Sprint 2 picks up the missing units (B Functions,
-D Statistics &amp; Probability, E Calculus). Build order: **B → D → E**.
-Original P0 work; preserved here so it isn't lost.
+### Sprint 2 — New topic units (Topic D shipped 2026-05-22)
+
+Sprint 2 picks up the missing topic units (B Functions, D Statistics &amp;
+Probability, E Calculus). Original build order was **B → D → E**;
+**D jumped ahead of B on user request 2026-05-22** because of an
+upcoming client need.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S2-D1** | Draft `Unit_D1_Univariate_Data.html` covering IB AA HL sub-topics SL 4.1, 4.2, 4.3, 4.4 (univariate descriptive + bivariate correlation/regression, folded together to keep Topic D in 3 files) | P0 | ✅ **Shipped 2026-05-22** — 2092 lines, 7 sections each tagged with its official IB sub-topic via `.ib-ref` chip in h2; cram cheat-sheet + per-section quizzes + 10-MCQ final quiz + 14 flashcards (locked terse style) + 14-item readiness checklist. All SL content; no `hl-flag` chips. PMCC + regression line with through-mean-point property explicit. IB convention on SD (divide by `n`) stated. Commit `f8db91f`. |
+| **S2-D2** | Draft `Unit_D2_Probability.html` covering SL 4.5, 4.6, AHL 4.10 (probability concepts, combined events, Bayes' theorem) | P0 | ✅ **Shipped 2026-05-22** — 1810 lines, 7 sections. Section 2.7 Bayes is HL-only (carries `hl-flag` chip); cram cheat-sheet visually splits SL core from AHL Bayes; SVG Venn diagram, sample-space table, styled tree diagram included; Bayes statement with max-3-event cap stated. Commit `4a74130`. |
+| **S2-D3** | Draft `Unit_D3_Probability_Distributions.html` covering SL 4.7, 4.8, 4.9, AHL 4.11, 4.12, 4.13 (discrete RVs, binomial, normal, continuous RVs, linear transformations, sums of independent normals) | P0 | ✅ **Shipped 2026-05-22** — 1992 lines, 8 sections (densest of the 3). Sections 3.3, 3.7, 3.8 are HL-only (`hl-flag` chips). Cram cheat-sheet visually splits SL · CORE (green) from HL · AHL ONLY (purple). Two required going-deeper derivations: Var(X) = E(X²) − μ² and Var(aX+b) = a²Var(X). Inline SVG bell curve with ±1/2/3σ bands. N(μ, σ²) variance convention stated. Commit `8bb208a`. |
+| **S2-D-index** | Add D1/D2/D3 cards to `index.html` IB Math AA HL section (manual edit — `build-index.py` is currently bilingual-unaware and would have regressed `<span data-lang>` markup) | P1 | ✅ **Shipped 2026-05-22** — count chip updated to "7 units" / "7 个单元". Commit `c03cc67`. |
+| **S2-B** | Draft `Unit_B_Functions.html` (Topic 2 SL + AHL) | P0 | **Open** — covers function families, transformations, inverses, exponential/log, rational, polynomial division, partial fractions. |
+| **S2-E** | Draft `Unit_E_Calculus.html` (Topic 5 SL + AHL) | P0 | **Open** — covers limits, differentiation rules, applications, integration techniques, ODEs, MacLaurin series, related rates. Likely splits into E1/E2/E3 per the same pattern as Topic D. |
+| **S2-D-translate** | Bilingual ZH translation of `Unit_D1`, `Unit_D2`, `Unit_D3` per the locked English-first → ZH cadence | P1 | **Open** — picks up after user reviews EN content; mirrors Wave 1 translation flow. |
+| **S2-D-practice** | Practice Questions for D1 / D2 / D3 (paper-style, IB Paper 1A / 1B / 2 / 3HL split) per SQ-4 above | P1 | **Open** — follow the pattern used for A1 / A3 Practice. |
+| **S2-build-index** | Extend `scripts/build-index.py` to preserve `<span data-lang="zh">` alongside auto-generated English title in card markup | P1 | **Open** — punted 2026-05-22 when shipping D-units. Manual-edit was used as workaround for that ship. |
 
 ---
 
