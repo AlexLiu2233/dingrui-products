@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IB Math AA HL — Unit D1: Univariate Data | Dingrui Scholars. Sampling, presentation of data, central tendency and dispersion, linear correlation and regression. Sub-topics SL 4.1–4.4 of IB AA HL Topic 4. Cram-friendly cheat-sheets and 7-chaser derivations side by side. Interactive quizzes, flashcards, dark mode, print-friendly.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>IB Math AA HL — Unit D1: Univariate Data | Dingrui Scholars</title>
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --bg-code: #1E1418;
+  --text: #2C1B1F;
+  --text-secondary: #6B5058;
+  --accent: #7A2E2E;
+  --accent-light: #F2E4E4;
+  --accent-dark: #5A1E1E;
+  --green: #2E6B4F;
+  --green-light: #DFF0E8;
+  --orange: #A65E1A;
+  --orange-light: #FBF0E0;
+  --red: #B03030;
+  --red-light: #FCEAEA;
+  --purple: #5E3D7A;
+  --purple-light: #EDE4F5;
+  --gold: #C4956A;
+  --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px;
+  --toc-w: 260px;
+}
+
+[data-theme="dark"] {
+  --bg: #151010;
+  --bg-card: #1E1618;
+  --bg-code: #0D0A0B;
+  --text: #E8E0DC;
+  --text-secondary: #A89098;
+  --accent: #C87070;
+  --accent-light: #3A1818;
+  --accent-dark: #E08080;
+  --green: #5CB88A;
+  --green-light: #1A2E24;
+  --orange: #D4944A;
+  --orange-light: #2E2010;
+  --red: #E07070;
+  --red-light: #301515;
+  --purple: #A888C8;
+  --purple-light: #201828;
+  --gold: #D4A870;
+  --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg); color: var(--text);
+  line-height: 1.7; font-size: 17px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.score-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--green); background: var(--green-light);
+  border: 1px solid var(--green);
+  padding: 3px 10px; border-radius: 20px;
+  white-space: nowrap; transition: all 0.3s;
+}
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+
+.sidebar {
+  position: fixed; top: 59px; left: 0; bottom: 0;
+  width: var(--toc-w); background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; scrollbar-width: none; padding: 20px 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 90;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem; padding: 0 20px 12px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.sidebar a {
+  display: block; padding: 8px 20px;
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 0.88rem;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+}
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+
+.main-wrap {
+  max-width: var(--max-w);
+  margin: 80px auto 120px;
+  padding: 0 24px;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+}
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap {
+    max-width: none;
+    margin-left: calc(var(--toc-w) + 40px);
+    margin-right: 0;
+    padding: 0 48px;
+  }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+
+.hero {
+  text-align: center; padding: 56px 24px 48px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%);
+  border-radius: var(--radius);
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+  position: relative;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 16px;
+  position: relative;
+}
+.hero-sub {
+  color: var(--text-secondary); max-width: 650px; margin: 0 auto;
+  position: relative;
+}
+.hero-meta {
+  display: flex; gap: 16px; justify-content: center;
+  flex-wrap: wrap; margin-top: 24px; position: relative;
+}
+.hero-meta .chip {
+  font-size: 0.85rem; font-weight: 600;
+  padding: 6px 16px; border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+.ib-ref {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem; font-weight: 700;
+  color: var(--text-secondary); background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 6px;
+  letter-spacing: 0.6px; text-transform: uppercase;
+  vertical-align: middle; margin-left: 10px;
+}
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--accent); letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.section h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem; margin-bottom: 16px;
+  line-height: 1.25; border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px; display: inline-block;
+}
+.section h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem; margin: 32px 0 12px;
+  line-height: 1.3; color: var(--text);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; flex-shrink: 0;
+}
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+
+.concept-box {
+  border-left: 5px solid var(--accent);
+  background: var(--bg-card);
+  padding: 20px 24px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 20px 0;
+  box-shadow: var(--shadow);
+}
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child {
+  display: inline-block; margin-bottom: 8px;
+  font-family: var(--font-mono); text-transform: uppercase;
+  font-size: 0.8rem; letter-spacing: 0.5px;
+}
+
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  background: var(--accent-light); color: var(--accent);
+  padding: 3px 8px; border-radius: 6px;
+  flex-shrink: 0; margin-left: 12px;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 12px 18px; border: 2px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+  font-size: 0.95rem; transition: all 0.2s;
+  background: var(--bg); font-weight: 500;
+  position: relative;
+}
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry {
+  display: none; margin-top: 12px;
+  padding: 8px 18px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--text);
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary {
+  padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem;
+  user-select: none; list-style: none; display: flex; align-items: center; gap: 10px;
+  background: var(--bg); transition: background 0.2s;
+}
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+
+.flashcard-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin: 12px 0 4px;
+  font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.flashcard-toolbar button {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); padding: 5px 12px;
+  border-radius: 8px; font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+  margin-left: 6px;
+}
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner {
+  display: grid;
+  grid-template-areas: "card";
+  min-height: 200px; height: 100%;
+  position: relative;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back {
+  grid-area: card;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; box-shadow: var(--shadow);
+  overflow: hidden; word-break: break-word;
+  hyphens: auto;
+}
+.flashcard-front {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--accent); font-weight: 600;
+  font-size: clamp(0.92rem, 2.1vw, 1.05rem);
+  line-height: 1.45;
+  padding: 22px 20px 34px; gap: 8px;
+}
+.flashcard-front::after {
+  content: 'TAP TO FLIP';
+  position: absolute; bottom: 10px; left: 0; right: 0;
+  font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700;
+  color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px;
+}
+.flashcard-back {
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  color: var(--text);
+  transform: rotateY(180deg);
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  line-height: 1.6;
+  padding: 26px 22px; gap: 12px;
+  word-break: normal; hyphens: manual;
+  overflow-wrap: break-word; text-wrap: pretty;
+}
+.flashcard-back .katex-display {
+  margin: 6px 0 !important;
+  font-size: 1.25em;
+  max-width: 100%; overflow: hidden;
+}
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+.worked-solution {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+.worked-solution .katex-display { margin: 0.65rem 0; }
+
+.formula-box {
+  background: var(--bg-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin: 24px 0;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
+}
+.formula-box .formula-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--text-secondary); text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.formula-box .katex-display { margin: 10px 0 0 0; }
+
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 12px 16px; border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  cursor: pointer; font-size: 0.95rem;
+  background: var(--bg-card); transition: all 0.2s;
+  display: flex; align-items: center; gap: 12px;
+  user-select: none;
+}
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex;
+  align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+  font-size: 0.8rem; color: transparent;
+}
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+.checklist li .ib-ref { margin-left: 0; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+.footer-wrap {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-secondary); font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+}
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem; color: var(--text);
+  margin-bottom: 4px;
+}
+
+.formula-box .katex-display {
+  margin: 14px 0 !important;
+  overflow-x: auto; overflow-y: hidden;
+  padding: 2px 0;
+}
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+
+.section-label + h2 { margin-top: 0.2rem; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 2rem; }
+  .main-wrap { padding: 0 16px; margin-top: 60px; }
+  .formula-box { padding: 16px; }
+  .top-nav { padding: 0 16px; }
+}
+
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry,
+  .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(245, 240, 235, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 56px;
+  transition: background 0.3s, border 0.3s;
+}
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge {
+  background: var(--accent); color: #fff;
+  font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px;
+}
+.nav-btn {
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text); border-radius: 8px;
+  padding: 6px 14px; font-size: 0.82rem;
+  cursor: pointer; font-family: var(--font-body); font-weight: 600;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.cram-cheat {
+  background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%);
+  border: 2px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  margin: 20px 0;
+  position: relative;
+}
+.cram-cheat::before {
+  content: 'CRAM-MODE CHEAT';
+  position: absolute; top: -10px; left: 18px;
+  background: var(--gold); color: #fff;
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;
+}
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+.cram-cheat.unit-cram { padding: 24px 28px; }
+.cram-cheat.unit-cram::before { content: 'NIGHT-BEFORE SURVIVAL KIT'; }
+.cram-cheat.unit-cram h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin: 14px 0 4px;
+}
+.cram-cheat.unit-cram h4:first-of-type { margin-top: 4px; }
+.cram-cheat.unit-cram ul { margin: 4px 0 6px 22px; }
+.cram-cheat.unit-cram li { margin-bottom: 4px; font-size: 0.95rem; }
+.cram-cheat.unit-cram .mini-ref {
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--text-secondary); margin-left: 6px;
+}
+
+/* Bar histogram visual */
+.histo-mock {
+  display: flex; align-items: flex-end; justify-content: center;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 18px 16px;
+  margin: 18px 0;
+  height: 180px;
+}
+.histo-mock .bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-dark) 100%);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  min-width: 14px; max-width: 56px;
+}
+.histo-mock .bar::after {
+  content: attr(data-f);
+  position: absolute; top: -18px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+.histo-mock .bar::before {
+  content: attr(data-x);
+  position: absolute; bottom: -18px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-mono); font-size: 0.7rem;
+  color: var(--text);
+}
+
+/* Box plot visual */
+.boxplot-mock {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px 38px;
+  margin: 18px 0;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.boxplot-mock .axis {
+  position: relative;
+  height: 50px;
+  margin: 8px 0 14px;
+}
+.boxplot-mock .axis::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--text-secondary);
+}
+.boxplot-mock .whisker-l, .boxplot-mock .whisker-r {
+  position: absolute; top: 22px; height: 6px;
+  border-top: 1.5px solid var(--accent); border-bottom: none;
+}
+.boxplot-mock .whisker-l { left: 5%; width: 17%; border-left: 1.5px solid var(--accent); border-right: none; }
+.boxplot-mock .whisker-l::before {
+  content: ''; position: absolute; left: 0; top: -8px; bottom: -8px;
+  width: 1.5px; background: var(--accent);
+}
+.boxplot-mock .whisker-r { left: 78%; width: 17%; border-right: 1.5px solid var(--accent); border-left: none; }
+.boxplot-mock .whisker-r::after {
+  content: ''; position: absolute; right: 0; top: -8px; bottom: -8px;
+  width: 1.5px; background: var(--accent);
+}
+.boxplot-mock .box {
+  position: absolute; left: 22%; width: 56%; top: 8px; bottom: 8px;
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent);
+}
+.boxplot-mock .median {
+  position: absolute; left: 48%; top: 8px; bottom: 8px;
+  width: 2px; background: var(--accent-dark);
+}
+.boxplot-mock .lbl { position: absolute; bottom: -28px; transform: translateX(-50%); }
+.boxplot-mock .lbl.min  { left: 5%; }
+.boxplot-mock .lbl.q1   { left: 22%; }
+.boxplot-mock .lbl.med  { left: 49%; }
+.boxplot-mock .lbl.q3   { left: 78%; }
+.boxplot-mock .lbl.max  { left: 95%; }
+
+/* Scatter plot mock */
+.scatter-mock {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 18px 0;
+  position: relative;
+  height: 240px;
+}
+.scatter-mock svg { width: 100%; height: 100%; display: block; }
+
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">UNIT D1</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#how-to-use">How to use this guide</a>
+  <a href="#cram-sheet">Cram cheat-sheet</a>
+  <a href="#s-d1-1">1.1 Populations &amp; Samples</a>
+  <a href="#s-d1-2">1.2 Frequency &amp; Histograms</a>
+  <a href="#s-d1-3">1.3 Cumulative Frequency &amp; Box Plots</a>
+  <a href="#s-d1-4">1.4 Central Tendency</a>
+  <a href="#s-d1-5">1.5 Dispersion (Variance &amp; SD)</a>
+  <a href="#s-d1-6">1.6 Linear Transformations of Data</a>
+  <a href="#s-d1-7">1.7 Bivariate Data &amp; Regression</a>
+  <a href="#exam-strategy">Exam Strategy &amp; Pitfalls</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Practice Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
+</aside>
+
+<main class="main-wrap">
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-overline">IB AA HL &middot; Topic 4 &mdash; Statistics &amp; Probability</div>
+  <h1>Univariate Data</h1>
+  <p class="hero-sub">
+    Sub-topics 4.1 &ndash; 4.4 of IB AA HL Topic 4. Sampling, presentation of data, central tendency &amp; dispersion, linear correlation &amp; regression.
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">IB AA HL &middot; SL 4.1&ndash;4.4</span>
+    <span class="chip chip-green">Papers 1 &middot; 2</span>
+    <span class="chip chip-purple">7 Concepts</span>
+    <span class="chip chip-gold">GDC-friendly</span>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="section" id="how-to-use">
+  <div class="section-label">Read me first</div>
+  <h2>How to use this guide</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">!</div>
+        <div class="card-title">If you're cramming</div>
+      </div>
+      <p style="font-size: 0.95rem;">Read the <strong>Cram cheat-sheet</strong> next, then skim the dashed-gold <strong>"Cram-Mode Cheat"</strong> box at the top of each section, plus the formula boxes. One sentence to leave with: <em>mean and SD describe the centre and spread; median and IQR describe them robustly; PMCC $r$ measures linear strength on $[-1, 1]$ and the regression line $y = ax + b$ goes through $(\bar{x}, \bar{y})$.</em> Do one worked example per section. Then take the practice quiz.</p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">&#9733;</div>
+        <div class="card-title">If you're going for a 7</div>
+      </div>
+      <p style="font-size: 0.95rem;">Open every <code>&#9656; Going deeper</code>. Univariate data is the topic where IB rewards <em>interpretation</em> over arithmetic. Owning <em>why</em> mean shifts under $y = ax + b$ but SD only scales by $|a|$, and why $r$ is invariant under linear transformations of either variable, is what separates a 5 from a 7 on the data-handling paper.</p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">SL only &mdash; no HL extension</strong>
+    Every section in this unit is core SL content (sub-topics SL 4.1&ndash;4.4). The HL-only sub-topics on conditional probability, Bayes, and continuous random variables live in <em>Unit D2 &amp; D3</em>. No <code>HL</code> chips appear here.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">GDC convention</strong>
+    On Paper 2, your graphing calculator is the primary tool. Whenever you see "find the mean", "find $r$", or "find the regression line", the IB markscheme expects you to enter the data once and read off the answer. We don't model specific TI / Casio keystrokes &mdash; just know the menu names: <em>1-Var Stats</em>, <em>2-Var Stats</em>, <em>LinReg(a + bx)</em>. Paper 1 stats questions, by contrast, use clean numbers that work by hand.
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- CRAM CHEAT-SHEET -->
+<section class="section" id="cram-sheet">
+  <div class="section-label">Night-before survival kit</div>
+  <h2>Cram Cheat-Sheet</h2>
+
+  <div class="cram-cheat unit-cram">
+    <h4>Sampling &amp; data types <span class="mini-ref">SL 4.1</span></h4>
+    <ul>
+      <li><strong>Population</strong> = every individual of interest; <strong>sample</strong> = a subset actually measured.</li>
+      <li><strong>Random sample</strong> &Rightarrow; every individual has equal chance of selection. Other methods: systematic, stratified, quota, convenience (biased).</li>
+      <li><strong>Discrete</strong> data = counts (integers). <strong>Continuous</strong> = measurements on a continuum.</li>
+    </ul>
+
+    <h4>Presenting data <span class="mini-ref">SL 4.2</span></h4>
+    <ul>
+      <li><strong>Frequency table</strong> &rarr; <strong>histogram</strong> (bars touch; area $\propto$ frequency for continuous data).</li>
+      <li><strong>Cumulative frequency curve</strong> &rarr; read off median, $Q_1$, $Q_3$, percentiles.</li>
+      <li><strong>Box-and-whisker</strong>: five-number summary $\{\min, Q_1, \text{med}, Q_3, \max\}$.</li>
+      <li><strong>Outlier rule</strong>: $x < Q_1 - 1.5 \cdot \text{IQR}$ or $x > Q_3 + 1.5 \cdot \text{IQR}$.</li>
+    </ul>
+
+    <h4>Central tendency <span class="mini-ref">SL 4.3</span></h4>
+    <ul>
+      <li>Mean $\bar{x} = \dfrac{\sum x_i}{n}$ or $\dfrac{\sum f_i x_i}{\sum f_i}$ for grouped data (use the midpoint of each class).</li>
+      <li>Median = middle value when ordered. <strong>Modal class</strong> = class with greatest frequency density.</li>
+      <li>If a single big outlier exists, prefer median + IQR over mean + SD.</li>
+    </ul>
+
+    <h4>Dispersion <span class="mini-ref">SL 4.3</span></h4>
+    <ul>
+      <li>Range = $\max - \min$. IQR $= Q_3 - Q_1$.</li>
+      <li><strong>IB defaults to the population SD</strong> (divide by $n$, not $n-1$):
+        $$ \sigma = \sqrt{\frac{\sum (x_i - \mu)^2}{n}}, \qquad \sigma^2 = \frac{\sum (x_i - \mu)^2}{n}. $$
+      </li>
+      <li>For grouped data: $\sigma = \sqrt{\dfrac{\sum f_i (x_i - \bar{x})^2}{\sum f_i}}$.</li>
+    </ul>
+
+    <h4>Linear transformations <span class="mini-ref">SL 4.3</span></h4>
+    <ul>
+      <li>If $y_i = a x_i + b$, then $\bar{y} = a \bar{x} + b$ and $\sigma_y = |a|\, \sigma_x$, $\sigma_y^2 = a^2 \sigma_x^2$.</li>
+      <li>Adding a constant <em>shifts</em> the mean, leaves SD alone. Scaling by $a$ multiplies both mean and SD (SD by $|a|$).</li>
+    </ul>
+
+    <h4>Bivariate &amp; regression <span class="mini-ref">SL 4.4</span></h4>
+    <ul>
+      <li>PMCC: $r = \dfrac{S_{xy}}{\sqrt{S_{xx}\, S_{yy}}} \in [-1, 1]$. $|r|$ near $1$ &rArr; strong linear; near $0$ &rArr; weak.</li>
+      <li>Regression line of $y$ on $x$: $y - \bar{y} = b(x - \bar{x})$ with $b = S_{xy}/S_{xx}$. Equivalently $y = ax + b$. <em>Always passes through</em> $(\bar{x}, \bar{y})$.</li>
+      <li>Only predict <em>inside</em> the data range (interpolation). Extrapolation is unreliable.</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.1 POPULATIONS AND SAMPLES -->
+<section class="section" id="s-d1-1">
+  <div class="section-label">Topic 1.1 &middot; Foundations</div>
+  <h2>1.1 Populations and Samples <span class="ib-ref">SL 4.1</span></h2>
+
+  <div class="cram-cheat">
+    <strong>A population is the full set of individuals of interest; a sample is the subset you actually measure.</strong>
+    A random sample gives every individual an equal chance of being chosen and is the only kind whose statistics are unbiased estimators of population parameters. Real data is <em>discrete</em> (countable, integer-valued like number of siblings) or <em>continuous</em> (measurable on a continuum like height). Bias arises from how you sample, what people choose to report, and which observations get excluded.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Notation: parameter vs. statistic</div>
+    $$ \mu, \sigma \;\;\text{(population, fixed)} \qquad \bar{x}, s \;\;\text{(sample, computed)} $$
+    <p>The IB uses $\mu$ for the population mean and $\sigma$ for the population SD. The sample mean is $\bar{x}$. Because IB defaults to the population formula, the sample SD it reports also divides by $n$ &mdash; some textbooks call this $\sigma_n$ on the calculator.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Sampling methods you should be able to name</strong>
+    <strong>Simple random sample.</strong> Every individual has equal probability of being selected, e.g. picking names from a hat or using a random-number generator.<br>
+    <strong>Systematic sample.</strong> Choose every $k$-th individual from an ordered list. Cheap but biased if the list has periodicity.<br>
+    <strong>Stratified sample.</strong> Split the population into groups (strata: e.g. Year 1, Year 2, Year 3), then sample randomly within each in proportion to its size. Best when strata differ.<br>
+    <strong>Quota sample.</strong> Fill pre-set numbers from each group, but selection within each is non-random (e.g. street interviewer takes the first 10 women they see).<br>
+    <strong>Convenience sample.</strong> Whoever is easiest to reach. Almost always biased and the IB will call this out.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Sources of bias to flag in a 1- or 2-mark "comment on this sample" question</strong>
+    <strong>Selection bias.</strong> The sample isn't representative (e.g. a 6am gym survey skewed to early risers).<br>
+    <strong>Non-response bias.</strong> Those who do not respond differ systematically from those who do.<br>
+    <strong>Self-reported data.</strong> People misreport (income up, weight down).<br>
+    <strong>Volunteer bias.</strong> Volunteers tend to be more motivated &mdash; results don't generalize.<br>
+    <strong>Measurement bias.</strong> The instrument or wording skews answers (leading questions, faulty scale).
+  </div>
+
+  <h3>Worked Example &mdash; Identifying the right method</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A school has $400$ Year 12 students, $350$ Year 13 students. The principal wants a sample of $30$ for a survey on study habits. Suggest a sampling method and explain.</p>
+    <p><strong>Best choice:</strong> stratified random sampling. The two year groups likely differ in study habits, so we want the sample to reflect both in proportion.</p>
+    <p>Proportion: $\frac{400}{750} \approx 0.533$, $\frac{350}{750} \approx 0.467$. Take $\lceil 30 \times 0.533 \rceil = 16$ from Year 12 and $30 - 16 = 14$ from Year 13. Within each stratum, choose randomly (random-number generator).</p>
+    <p>Convenience sampling (just asking 30 friends) would be biased. A simple random sample across all $750$ would also work but might under-represent the smaller stratum by chance.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Discrete vs. continuous</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Classify the following as discrete or continuous:</p>
+    <p>(a) number of cars passing a sensor per hour, (b) time taken to run 100 m, (c) shoe size, (d) blood pressure.</p>
+    <p><strong>(a) Discrete</strong> &mdash; you can count $0, 1, 2, \ldots$ cars; no fractional cars.</p>
+    <p><strong>(b) Continuous</strong> &mdash; time can be any positive real number (resolution limited only by the clock).</p>
+    <p><strong>(c) Discrete</strong> &mdash; shoe sizes are quantized ($7, 7.5, 8, \ldots$). Half-sizes still make the sample space discrete, not continuous.</p>
+    <p><strong>(d) Continuous</strong> &mdash; blood pressure is measured on a continuum, though instruments report integers (mmHg). Treat as continuous unless the problem says otherwise.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why "random" matters mathematically</summary>
+    <div class="detail-body">
+      <p>The mean $\bar{X}$ of a simple random sample of size $n$ from a population with mean $\mu$ and SD $\sigma$ satisfies:</p>
+      $$ \mathbb{E}[\bar{X}] = \mu, \qquad \text{Var}(\bar{X}) = \frac{\sigma^2}{n}. $$
+      <p>The first equation is the <em>unbiasedness</em> property: the sample mean has no systematic error. The second is the <em>square-root law</em>: precision improves like $\sqrt{n}$. Both follow from linearity of expectation and independence of the draws.</p>
+      <p>If your sample is <em>not</em> random &mdash; say, a convenience sample &mdash; both properties can fail. $\mathbb{E}[\bar{X}]$ can differ from $\mu$ (bias), and the apparent precision $\sigma / \sqrt{n}$ over-states reality. The IB markscheme does not ask for this derivation in D1, but it explains why bias is fatal: more data does not fix it.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">A market researcher polls people leaving a gym at 6am about exercise habits. The sample is best described as:</div>
+      <span class="quiz-number">SL 4.1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Simple random &mdash; everyone in the gym had equal chance.</div>
+      <div class="quiz-opt" data-idx="1">Stratified &mdash; the gym splits people into age groups.</div>
+      <div class="quiz-opt" data-idx="2">Convenience &mdash; only morning gym-goers, who are systematically more active.</div>
+      <div class="quiz-opt" data-idx="3">Systematic &mdash; every $k$-th gym member.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The selection rule reaches only a particular sub-group (early-morning gym attendees), who are not representative of the general population. That's a convenience sample with selection bias.</div>
+    <div class="quiz-explain wrong-exp">It's a convenience sample. The researcher only reaches people who choose to be at the gym at 6am &mdash; almost certainly more active and earlier-rising than average.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">Which variable is <em>continuous</em>?</div>
+      <span class="quiz-number">SL 4.1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">The number of goals scored in a football match.</div>
+      <div class="quiz-opt" data-idx="1">The mass of a randomly chosen apple.</div>
+      <div class="quiz-opt" data-idx="2">The shoe size of a customer.</div>
+      <div class="quiz-opt" data-idx="3">The number of children in a household.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Mass can take any positive real value (within instrument resolution). The other three are countable / quantized &mdash; discrete.</div>
+    <div class="quiz-explain wrong-exp">Continuous data are measurements on a continuum &mdash; mass, length, time. Counts (goals, children) are discrete; quantized scales (shoe size) are discrete too.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.2 FREQUENCY DISTRIBUTIONS AND HISTOGRAMS -->
+<section class="section" id="s-d1-2">
+  <div class="section-label">Topic 1.2 &middot; Presenting data</div>
+  <h2>1.2 Frequency Distributions &amp; Histograms <span class="ib-ref">SL 4.2</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Group raw data into classes &mdash; report frequencies in a table, then draw a histogram.</strong>
+    For a <em>discrete</em> variable, bars sit on integer values and the height is the frequency. For a <em>continuous</em> variable, bars touch and the <strong>area</strong> of each bar is proportional to its frequency. <strong>Relative frequency</strong> $=$ frequency $/$ total &mdash; lets you compare two datasets of different sizes.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Frequency, relative frequency, frequency density</div>
+    $$ \text{relative freq.} = \frac{f_i}{\sum f_i} \qquad \text{freq. density} = \frac{f_i}{\text{class width}} $$
+    <p>When classes have unequal widths, plot frequency <em>density</em> on the $y$-axis so that bar <em>area</em> still represents frequency. IB rarely uses unequal classes &mdash; but when it does, this is the only safe way to read the histogram.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Frequency-table conventions</strong>
+    For continuous data, IB uses inclusive-lower / exclusive-upper class bounds, e.g. $10 \le x < 20$. The <strong>class midpoint</strong> $x_i = \tfrac{1}{2}(\text{lower} + \text{upper})$ is what you use to estimate the mean of grouped data &mdash; we'll see this in 1.4.<br>
+    A few classes (5&ndash;7) gives a smooth shape; too many gives a noisy one. The IB will tell you the classes.
+  </div>
+
+  <h3>Worked Example &mdash; Building a histogram</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> The masses (kg) of 40 students are grouped:</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mass (kg)</th><th>$40 \le m < 50$</th><th>$50 \le m < 60$</th><th>$60 \le m < 70$</th><th>$70 \le m < 80$</th><th>$80 \le m < 90$</th></tr></thead>
+      <tbody><tr><td>Frequency</td><td>4</td><td>11</td><td>14</td><td>8</td><td>3</td></tr></tbody>
+    </table>
+    </div>
+    <p>All classes have equal width (10 kg), so we plot frequency on the $y$-axis directly:</p>
+    <div class="histo-mock" aria-label="Histogram of student masses, 5 bars">
+      <div class="bar" style="height: 24%" data-f="4"  data-x="40&ndash;50"></div>
+      <div class="bar" style="height: 66%" data-f="11" data-x="50&ndash;60"></div>
+      <div class="bar" style="height: 84%" data-f="14" data-x="60&ndash;70"></div>
+      <div class="bar" style="height: 48%" data-f="8"  data-x="70&ndash;80"></div>
+      <div class="bar" style="height: 18%" data-f="3"  data-x="80&ndash;90"></div>
+    </div>
+    <p>The shape is roughly symmetric and unimodal, peaking in $60 \le m < 70$. The <strong>modal class</strong> is $60 \le m < 70$.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Relative frequency to compare</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Class A (25 students) and Class B (40 students) both have $8$ students scoring in $[70, 80)$. Which class has a <em>higher</em> proportion in that band?</p>
+    <p>Compare relative frequencies:</p>
+    $$ \text{A: } \frac{8}{25} = 0.32 = 32\%, \qquad \text{B: } \frac{8}{40} = 0.20 = 20\%. $$
+    <p>Class A has the higher proportion. Raw frequencies are identical but say nothing on their own when class sizes differ.</p>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Shape vocabulary IB rewards</strong>
+    Describe a histogram in two beats: <strong>(1)</strong> shape (symmetric / skewed left / skewed right / bimodal / uniform), and <strong>(2)</strong> centre &amp; spread (where it peaks, how wide).<br>
+    <strong>Right-skewed</strong> $\Leftrightarrow$ long tail to the right $\Leftrightarrow$ mean $>$ median.<br>
+    <strong>Left-skewed</strong> $\Leftrightarrow$ long tail to the left $\Leftrightarrow$ mean $<$ median.<br>
+    <strong>Symmetric</strong> $\Leftrightarrow$ mean $\approx$ median.
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why area, not height, encodes frequency</summary>
+    <div class="detail-body">
+      <p>For continuous data the histogram is a discrete approximation to an unknown probability density. The defining property of a density is that <em>area</em> under it on an interval equals the probability of landing in that interval. So a histogram bar's area should equal the frequency (or relative frequency) of its interval, not its height.</p>
+      <p>With equal-width classes, height and area are proportional, and IB lets you plot either &mdash; just say "frequency" on the $y$-axis. With unequal classes, plotting height alone visually exaggerates wide classes and hides narrow ones. Frequency density restores the proportionality:</p>
+      $$ \text{area of bar} = \text{freq. density} \times \text{width} = \frac{f_i}{\text{width}} \times \text{width} = f_i. $$
+      <p>This is also why the limiting curve of relative-frequency histograms (as bins shrink, $n$ grows) is the probability <em>density</em> function &mdash; the link to Topics D2&ndash;D3.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">A continuous-data histogram has unequal class widths. To make bar area equal to frequency, the $y$-axis should plot:</div>
+      <span class="quiz-number">SL 4.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Cumulative frequency.</div>
+      <div class="quiz-opt" data-idx="1">Frequency density $=$ frequency $/$ class width.</div>
+      <div class="quiz-opt" data-idx="2">Raw frequency.</div>
+      <div class="quiz-opt" data-idx="3">Percentage frequency.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Frequency density makes area $=$ width $\times$ density $=$ frequency, regardless of how wide each class is. Plotting raw frequency would visually exaggerate the wider classes.</div>
+    <div class="quiz-explain wrong-exp">Frequency density $=$ frequency $/$ class width. Then bar area $=$ width $\times$ density $=$ frequency, even with unequal widths.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.3 CUMULATIVE FREQUENCY AND BOX PLOTS -->
+<section class="section" id="s-d1-3">
+  <div class="section-label">Topic 1.3 &middot; Quartiles &amp; box plots</div>
+  <h2>1.3 Cumulative Frequency &amp; Box Plots <span class="ib-ref">SL 4.2</span></h2>
+
+  <div class="cram-cheat">
+    <strong>A cumulative-frequency graph lets you read percentiles by eye; a box plot is the five-number summary in one picture.</strong>
+    Plot cumulative frequency vs. upper class boundary, join the points smoothly. Read:
+    <ul style="margin: 6px 0 0 22px;">
+      <li><strong>median</strong> at $0.5 n$ on the $y$-axis;</li>
+      <li><strong>$Q_1$</strong> at $0.25 n$, <strong>$Q_3$</strong> at $0.75 n$;</li>
+      <li><strong>IQR</strong> $= Q_3 - Q_1$.</li>
+    </ul>
+    <strong>Outlier rule:</strong> $x < Q_1 - 1.5 \cdot \text{IQR}$ or $x > Q_3 + 1.5 \cdot \text{IQR}$.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Five-number summary &amp; box plot</div>
+    $$ \{\text{min}, \; Q_1, \; \text{median}, \; Q_3, \; \text{max}\} $$
+    <p>Box runs from $Q_1$ to $Q_3$, with the median marked inside. Whiskers extend from the box to the smallest non-outlier and the largest non-outlier. Outliers are drawn as individual points outside the whiskers.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Discrete quartiles &mdash; the position rule</strong>
+    For a sorted dataset of size $n$:
+    <ul style="margin: 6px 0 0 22px;">
+      <li><strong>Median</strong> $= $ value at position $\frac{n+1}{2}$ (interpolate if fractional).</li>
+      <li><strong>$Q_1$</strong> $= $ median of the lower half; <strong>$Q_3$</strong> $= $ median of the upper half.</li>
+    </ul>
+    Different textbooks define $Q_1, Q_3$ slightly differently &mdash; the IB sticks with the "split-then-median" definition above. Calculators may give slightly different values; trust the by-hand version on Paper 1 and the GDC's value on Paper 2.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Outlier rule &mdash; the $1.5 \cdot \text{IQR}$ fences</strong>
+    Compute:
+    $$ L = Q_1 - 1.5 \cdot \text{IQR}, \qquad U = Q_3 + 1.5 \cdot \text{IQR}. $$
+    Any observation strictly below $L$ or above $U$ is an outlier and must be drawn as a separate dot on the box plot. <em>Whiskers extend to the most extreme non-outlier, not to the outlier itself.</em>
+  </div>
+
+  <h3>Worked Example &mdash; Five-number summary by hand</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find the five-number summary of $\{3, 5, 7, 8, 9, 11, 12, 14, 16, 18, 25\}$, then identify any outliers.</p>
+    <p>$n = 11$, already sorted.</p>
+    <p><strong>Min</strong> $= 3$, <strong>max</strong> $= 25$. <strong>Median</strong> at position $\frac{11+1}{2} = 6$: the 6th value is $11$.</p>
+    <p>Lower half (excluding the median): $\{3, 5, 7, 8, 9\}$. <strong>$Q_1$</strong> $=$ median of this $=$ $7$.</p>
+    <p>Upper half (excluding the median): $\{12, 14, 16, 18, 25\}$. <strong>$Q_3$</strong> $=$ median of this $=$ $16$.</p>
+    <p><strong>IQR</strong> $= 16 - 7 = 9$. Fences: $L = 7 - 1.5(9) = -6.5$, $U = 16 + 1.5(9) = 29.5$.</p>
+    <p>No data falls outside $[-6.5, 29.5]$, so <strong>no outliers</strong>. (The value $25$ is large but lies inside $U$.)</p>
+    <p>Five-number summary: $\{3, 7, 11, 16, 25\}$.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Outlier check</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Test scores have $Q_1 = 52$, median $= 64$, $Q_3 = 73$, and one student scored $100$. Is $100$ an outlier?</p>
+    <p>$\text{IQR} = 73 - 52 = 21$. Upper fence $U = 73 + 1.5(21) = 73 + 31.5 = 104.5$.</p>
+    <p>Since $100 < 104.5$, the score is <strong>not</strong> an outlier under the IQR rule &mdash; though it is the maximum.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Reading the box plot</h3>
+  <div class="worked-solution">
+    <p>The five-number summary $\{3, 7, 11, 16, 25\}$ above becomes:</p>
+    <div class="boxplot-mock" aria-label="Box-and-whisker plot for the five-number summary 3, 7, 11, 16, 25">
+      <div class="axis">
+        <div class="whisker-l"></div>
+        <div class="box"></div>
+        <div class="median"></div>
+        <div class="whisker-r"></div>
+      </div>
+      <div class="lbl min">3</div>
+      <div class="lbl q1">7</div>
+      <div class="lbl med">11</div>
+      <div class="lbl q3">16</div>
+      <div class="lbl max">25</div>
+    </div>
+    <p>The right whisker is longer than the left &mdash; suggests a mild right skew (mean would be slightly above the median of $11$). The IQR-box itself is centred near the median, which is the typical look.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why $1.5 \cdot \text{IQR}$?</summary>
+    <div class="detail-body">
+      <p>The cutoff is conventional, not derived from a deep theorem &mdash; but it isn't arbitrary. John Tukey, who introduced the box plot, chose $1.5$ as a compromise: large enough that normal data rarely produces "outliers" (about $0.7\%$ on each tail), small enough that genuine outliers in skewed data still get flagged.</p>
+      <p>Some texts also use a $3 \cdot \text{IQR}$ "extreme outlier" fence. The IB does not require it &mdash; just the $1.5 \cdot \text{IQR}$ rule above. When you flag an outlier in a written answer, name the rule explicitly: <em>"$x = 25$ lies above $Q_3 + 1.5\, \text{IQR}$, so it is an outlier."</em></p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">A dataset has $Q_1 = 18$, $Q_3 = 30$. Which value is an outlier under the $1.5 \cdot \text{IQR}$ rule?</div>
+      <span class="quiz-number">SL 4.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$49$</div>
+      <div class="quiz-opt" data-idx="1">$45$</div>
+      <div class="quiz-opt" data-idx="2">$12$</div>
+      <div class="quiz-opt" data-idx="3">$5$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\text{IQR} = 12$, $U = 30 + 1.5 \cdot 12 = 48$. $49 > 48$, so $49$ is an outlier. $45$ sits inside the fence. $L = 18 - 18 = 0$, so $12$ and $5$ are both above $L$ and thus not outliers either.</div>
+    <div class="quiz-explain wrong-exp">$\text{IQR} = 30 - 18 = 12$. $U = 30 + 1.5 \cdot 12 = 48$; $L = 18 - 1.5 \cdot 12 = 0$. Only $49$ exceeds $U$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">From a cumulative-frequency graph with $n = 80$, the median is read at the $y$-value:</div>
+      <span class="quiz-number">SL 4.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$20$</div>
+      <div class="quiz-opt" data-idx="1">$80$</div>
+      <div class="quiz-opt" data-idx="2">$40$</div>
+      <div class="quiz-opt" data-idx="3">$60$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Median sits at $0.5 n = 40$. Then $Q_1$ at $0.25 n = 20$ and $Q_3$ at $0.75 n = 60$.</div>
+    <div class="quiz-explain wrong-exp">The median is at $0.5 n = 0.5 \cdot 80 = 40$ on the cumulative-frequency $y$-axis.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.4 CENTRAL TENDENCY -->
+<section class="section" id="s-d1-4">
+  <div class="section-label">Topic 1.4 &middot; Where the data sits</div>
+  <h2>1.4 Measures of Central Tendency <span class="ib-ref">SL 4.3</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Three summaries of "where the data is": mean, median, mode.</strong>
+    The <strong>mean</strong> $\bar{x} = \tfrac{1}{n}\sum x_i$ is the centre of mass &mdash; sensitive to outliers. The <strong>median</strong> is the middle value when ordered &mdash; robust to outliers, the right choice for skewed data. The <strong>mode</strong> is the most frequent value (the <strong>modal class</strong> for grouped data). On grouped data the mean is <em>estimated</em> using class midpoints.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Mean &mdash; raw vs. grouped data</div>
+    $$ \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}, \qquad \bar{x} \approx \frac{\sum_i f_i \, x_i}{\sum_i f_i} $$
+    <p>Left: the exact sample mean for raw data. Right: an <em>estimate</em> for grouped data, where $x_i$ is the midpoint of class $i$ and $f_i$ its frequency. The estimate is only as good as the assumption that within-class values cluster near the midpoint &mdash; on Paper 1 the IB expects you to write this approximation explicitly.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">When to use which</strong>
+    <strong>Mean.</strong> Default for symmetric distributions; numerically convenient (every later formula uses it).<br>
+    <strong>Median.</strong> Default for skewed distributions or any dataset with notable outliers (e.g. incomes, house prices).<br>
+    <strong>Mode (or modal class).</strong> Used when "most common" is the question (e.g. shoe-size stock to keep). For continuous data, report the modal class, not a single mode.
+  </div>
+
+  <h3>Worked Example &mdash; Raw data mean and median</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> $\{4, 6, 7, 7, 9, 12, 15\}$. Find the mean, median, and mode.</p>
+    <p>$n = 7$. Sum $= 4 + 6 + 7 + 7 + 9 + 12 + 15 = 60$.</p>
+    $$ \bar{x} = \frac{60}{7} \approx 8.57. $$
+    <p>Median (already sorted) at position $\tfrac{7+1}{2} = 4$: the 4th value is $7$.</p>
+    <p>Mode: $7$ appears twice; all others once. <strong>Mode $= 7$.</strong></p>
+  </div>
+
+  <h3>Worked Example &mdash; Estimating the mean from grouped data</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Using the masses table from 1.2:</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Class</th><th>$40 \le m < 50$</th><th>$50 \le m < 60$</th><th>$60 \le m < 70$</th><th>$70 \le m < 80$</th><th>$80 \le m < 90$</th></tr></thead>
+      <tbody>
+        <tr><td>Midpoint $x_i$</td><td>45</td><td>55</td><td>65</td><td>75</td><td>85</td></tr>
+        <tr><td>Frequency $f_i$</td><td>4</td><td>11</td><td>14</td><td>8</td><td>3</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>$\sum f_i = 40$. Compute $\sum f_i x_i$:</p>
+    $$ 4(45) + 11(55) + 14(65) + 8(75) + 3(85) = 180 + 605 + 910 + 600 + 255 = 2550. $$
+    $$ \bar{x} \approx \frac{2550}{40} = 63.75 \text{ kg}. $$
+    <p><strong>Modal class:</strong> $60 \le m < 70$ (highest frequency, $14$). Since the data is continuous, we report the class, not a single value.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Mean is fragile, median is not</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Salaries (in thousands): $\{32, 34, 35, 36, 38, 40, 250\}$. Find the mean and median, and comment.</p>
+    <p>$\bar{x} = \frac{32 + 34 + 35 + 36 + 38 + 40 + 250}{7} = \frac{465}{7} \approx 66.4$ thousand.</p>
+    <p>Median (sorted, $n = 7$, position 4): $36$ thousand.</p>
+    <p><strong>Comment.</strong> The mean ($\approx 66.4$k) is dragged upward by the single high earner ($250$k). The median ($36$k) represents the typical employee much better. With outliers present, IB usually rewards naming the median as the "more appropriate measure".</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; The mean as a minimizer</summary>
+    <div class="detail-body">
+      <p>The mean is the unique value $c$ that minimizes the sum of <em>squared</em> deviations:</p>
+      $$ \sum_{i=1}^{n} (x_i - c)^2 \;\;\text{is minimised at}\;\; c = \bar{x}. $$
+      <p>Quick proof: differentiate with respect to $c$, set to zero:</p>
+      $$ \frac{d}{dc}\sum (x_i - c)^2 = -2 \sum (x_i - c) = 0 \;\;\Longrightarrow\;\; c = \frac{\sum x_i}{n} = \bar{x}. $$
+      <p>The median, by contrast, minimises the sum of <em>absolute</em> deviations $\sum |x_i - c|$. Squaring penalises a single big deviation a lot more than absolute value does &mdash; that's exactly why the mean is sensitive to outliers and the median isn't. This is the deep reason behind variance / SD using squares: they pair naturally with the mean.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">The grouped-data table has midpoints $\{5, 15, 25\}$ with frequencies $\{2, 5, 3\}$. The estimated mean is:</div>
+      <span class="quiz-number">SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$15$</div>
+      <div class="quiz-opt" data-idx="1">$45$</div>
+      <div class="quiz-opt" data-idx="2">$16$</div>
+      <div class="quiz-opt" data-idx="3">$22.5$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\sum f_i x_i = 2(5) + 5(15) + 3(25) = 10 + 75 + 75 = 160$. $\sum f_i = 10$. Mean $\approx 160/10 = 16$.</div>
+    <div class="quiz-explain wrong-exp">Use $\bar{x} \approx \frac{\sum f_i x_i}{\sum f_i} = \frac{160}{10} = 16$. Don't average the midpoints alone &mdash; weight by frequency.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">A dataset is heavily right-skewed with one large outlier. Which summary is most appropriate?</div>
+      <span class="quiz-number">SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Mean &amp; SD.</div>
+      <div class="quiz-opt" data-idx="1">Median &amp; IQR.</div>
+      <div class="quiz-opt" data-idx="2">Mode only.</div>
+      <div class="quiz-opt" data-idx="3">Range only.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Both median and IQR are robust to outliers and to skew. Mean and SD are sensitive to the long tail; mode and range alone don't summarise enough.</div>
+    <div class="quiz-explain wrong-exp">With an outlier and skew, use median + IQR. Mean + SD are distorted; mode and range alone don't summarise spread well.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.5 DISPERSION -->
+<section class="section" id="s-d1-5">
+  <div class="section-label">Topic 1.5 &middot; How spread out</div>
+  <h2>1.5 Measures of Dispersion &mdash; Variance &amp; Standard Deviation <span class="ib-ref">SL 4.3</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Dispersion measures how spread the data is around its centre.</strong>
+    <strong>Range</strong> $= \max - \min$ (very fragile). <strong>IQR</strong> $= Q_3 - Q_1$ (robust). <strong>Variance</strong> $\sigma^2$ averages squared deviations from the mean; <strong>SD</strong> $\sigma$ is its square root and is in the same units as the data.<br>
+    <strong>IB defaults to dividing by $n$, not $n - 1$.</strong> Always use $\sigma$, $\sigma^2$ (calculator displays this as $\sigma_n$ or $\sigma_x$ &mdash; <em>not</em> $s_x$).
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Population standard deviation &amp; variance (IB convention)</div>
+    $$ \sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \mu)^2, \qquad \sigma = \sqrt{\sigma^2}. $$
+    <p>For grouped data with class midpoints $x_i$, frequencies $f_i$, and $n = \sum f_i$:</p>
+    $$ \sigma = \sqrt{\frac{\sum_i f_i\,(x_i - \bar{x})^2}{\sum_i f_i}}. $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Computational form (no need to compute deviations first)</div>
+    $$ \sigma^2 = \overline{x^2} - \bar{x}^2 = \frac{\sum x_i^2}{n} - \bar{x}^2. $$
+    <p>This is the by-hand-friendly version: compute $\sum x_i$ and $\sum x_i^2$ once, subtract. Avoids round-off from subtracting many small deviations.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Why squared?</strong>
+    Deviations $x_i - \bar{x}$ sum to zero by construction:
+    $$ \sum (x_i - \bar{x}) = \sum x_i - n\bar{x} = n\bar{x} - n\bar{x} = 0. $$
+    So you can't just average raw deviations. Squaring removes the sign; the SD then "un-squares" to get back to the original units. (Averaging $|x_i - \bar{x}|$ also works mathematically, but the squared version pairs with the mean &mdash; see the "Going deeper" in 1.4.)
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Two-statistic rule</strong>
+    Always report dispersion alongside centre. A dataset is best summarized by either <strong>(mean, SD)</strong> for symmetric data or <strong>(median, IQR)</strong> for skewed data. Reporting just the centre throws away half the picture; reporting just the spread leaves no anchor.
+  </div>
+
+  <h3>Worked Example &mdash; SD from raw data</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Find the standard deviation of $\{4, 6, 7, 9, 14\}$.</p>
+    <p>$n = 5$. $\sum x_i = 40$, so $\bar{x} = 8$.</p>
+    <p>Deviations and their squares:</p>
+    $$ \begin{aligned} (4 - 8)^2 &amp;= 16 \\ (6 - 8)^2 &amp;= 4 \\ (7 - 8)^2 &amp;= 1 \\ (9 - 8)^2 &amp;= 1 \\ (14 - 8)^2 &amp;= 36 \end{aligned} \qquad \sum = 58. $$
+    $$ \sigma^2 = \frac{58}{5} = 11.6, \qquad \sigma = \sqrt{11.6} \approx 3.41. $$
+  </div>
+
+  <h3>Worked Example &mdash; SD by the computational form</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Same data $\{4, 6, 7, 9, 14\}$, using $\sigma^2 = \overline{x^2} - \bar{x}^2$.</p>
+    <p>$\sum x_i^2 = 16 + 36 + 49 + 81 + 196 = 378$. $\overline{x^2} = 378/5 = 75.6$. $\bar{x}^2 = 64$.</p>
+    $$ \sigma^2 = 75.6 - 64 = 11.6, \qquad \sigma \approx 3.41. $$
+    <p>Same answer, faster &mdash; especially useful on Paper 1 when the data is small but the deviations would be messy.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Grouped-data SD</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> For the masses table (1.4), with $\bar{x} = 63.75$, find $\sigma$.</p>
+    <p>Deviations from $\bar{x}$, weighted:</p>
+    $$ \begin{aligned} 4(45 - 63.75)^2 &amp;= 4(351.5625) = 1406.25 \\ 11(55 - 63.75)^2 &amp;= 11(76.5625) = 842.1875 \\ 14(65 - 63.75)^2 &amp;= 14(1.5625) = 21.875 \\ 8(75 - 63.75)^2 &amp;= 8(126.5625) = 1012.5 \\ 3(85 - 63.75)^2 &amp;= 3(451.5625) = 1354.6875 \end{aligned} $$
+    $$ \sum f_i (x_i - \bar{x})^2 = 4637.5, \qquad \sigma = \sqrt{\frac{4637.5}{40}} = \sqrt{115.9375} \approx 10.77 \text{ kg}. $$
+    <p>(On Paper 2 you would put midpoints in L1, frequencies in L2, and read $\sigma_x$ directly from 1-Var Stats.)</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Equivalence of the two SD formulas</summary>
+    <div class="detail-body">
+      <p>Both forms compute the same quantity. Expand $(x_i - \bar{x})^2$:</p>
+      $$ \sum (x_i - \bar{x})^2 = \sum x_i^2 - 2\bar{x}\sum x_i + n \bar{x}^2 = \sum x_i^2 - 2\bar{x} (n\bar{x}) + n\bar{x}^2 = \sum x_i^2 - n\bar{x}^2. $$
+      <p>Divide by $n$:</p>
+      $$ \sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n} = \frac{\sum x_i^2}{n} - \bar{x}^2 = \overline{x^2} - \bar{x}^2. $$
+      <p>The computational form is preferred on Paper 1 because it avoids subtracting potentially close-in-value deviations &mdash; that's a source of catastrophic cancellation if you compute by calculator with limited precision.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why the IB uses $n$, not $n - 1$</summary>
+    <div class="detail-body">
+      <p>For a <em>sample</em> of size $n$ drawn from a larger population, the unbiased estimator of the population variance divides by $n - 1$ (the "Bessel correction"). The $-1$ accounts for using $\bar{x}$ in place of the unknown $\mu$ &mdash; one degree of freedom is "spent" estimating the mean.</p>
+      <p>However, the IB syllabus treats the data given in the question as the entire population of interest, so $\mu$ is known (it equals $\bar{x}$ when you have everyone). With $\mu$ known, dividing by $n$ gives an unbiased estimator of the true variance &mdash; no correction needed.</p>
+      <p>Practically: <strong>use $\sigma_x$ on your calculator, never $s_x$.</strong> If your final answer uses $s_x$ where the markscheme used $\sigma_x$, you'll lose accuracy marks. For $n$ large, the two differ negligibly &mdash; but on Paper 1 with tiny $n$, the gap is noticeable.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">For data $\{3, 5, 5, 7\}$ with $\bar{x} = 5$, the population SD is:</div>
+      <span class="quiz-number">SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\sqrt{2} \approx 1.41$</div>
+      <div class="quiz-opt" data-idx="1">$\sqrt{8/3} \approx 1.63$</div>
+      <div class="quiz-opt" data-idx="2">$2$</div>
+      <div class="quiz-opt" data-idx="3">$\sqrt{8} \approx 2.83$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! Squared deviations: $(3-5)^2 = 4$, $(5-5)^2 = 0$, $(5-5)^2 = 0$, $(7-5)^2 = 4$, sum $= 8$. $\sigma^2 = 8/4 = 2$, $\sigma = \sqrt{2}$. (Option B would use $n - 1 = 3$, the sample formula &mdash; not the IB convention.)</div>
+    <div class="quiz-explain wrong-exp">$\sum (x_i - \bar{x})^2 = 4 + 0 + 0 + 4 = 8$. $\sigma^2 = 8/n = 8/4 = 2$, so $\sigma = \sqrt{2}$. Use the population formula (divide by $n$, not $n - 1$).</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">Which of these is <em>most</em> sensitive to a single extreme outlier?</div>
+      <span class="quiz-number">SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Range.</div>
+      <div class="quiz-opt" data-idx="1">IQR.</div>
+      <div class="quiz-opt" data-idx="2">Median.</div>
+      <div class="quiz-opt" data-idx="3">Mode.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The range uses both extremes directly, so one large outlier inflates it immediately. SD is also sensitive (it's the runner-up). IQR, median, and mode are robust.</div>
+    <div class="quiz-explain wrong-exp">Range $= \max - \min$ &mdash; a single extreme can shift it dramatically. IQR, median, mode are robust because they ignore the tails.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.6 LINEAR TRANSFORMATIONS -->
+<section class="section" id="s-d1-6">
+  <div class="section-label">Topic 1.6 &middot; How summaries change</div>
+  <h2>1.6 Effect of Linear Transformations on Data <span class="ib-ref">SL 4.3</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Transform every observation by $y_i = a x_i + b$. Then:</strong>
+    $$ \bar{y} = a \bar{x} + b, \qquad \sigma_y = |a|\, \sigma_x, \qquad \sigma_y^2 = a^2 \sigma_x^2. $$
+    <ul style="margin: 6px 0 0 22px;">
+      <li><strong>Adding $b$</strong> shifts mean by $b$; SD unchanged.</li>
+      <li><strong>Multiplying by $a$</strong> multiplies mean by $a$; multiplies SD by $|a|$.</li>
+      <li>Median, $Q_1$, $Q_3$, IQR all transform the same way as the mean (subject to sign of $a$ for ordering).</li>
+    </ul>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Centre and spread under $y = ax + b$</div>
+    $$ \bar{y} = a\bar{x} + b \qquad \sigma_y = |a|\sigma_x \qquad \text{Var}(y) = a^2\,\text{Var}(x) $$
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Why these rules</strong>
+    <strong>Mean.</strong> $\bar{y} = \tfrac{1}{n}\sum (a x_i + b) = a \tfrac{1}{n}\sum x_i + b = a\bar{x} + b$.<br>
+    <strong>Variance.</strong> $y_i - \bar{y} = (a x_i + b) - (a\bar{x} + b) = a(x_i - \bar{x})$. Square, average:
+    $$ \sigma_y^2 = \frac{1}{n}\sum a^2 (x_i - \bar{x})^2 = a^2 \sigma_x^2 \quad\Longrightarrow\quad \sigma_y = |a|\sigma_x. $$
+    The shift $b$ vanishes from variance &mdash; spread is translation-invariant. The scale $a$ comes out squared in variance and as $|a|$ in SD.
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Use case &mdash; unit conversion</strong>
+    Temperatures in Celsius: mean $20{}^\circ$C, SD $3{}^\circ$C. Convert to Fahrenheit using $F = \tfrac{9}{5} C + 32$.<br>
+    $$ \bar{F} = \tfrac{9}{5}(20) + 32 = 68\,{}^\circ\text{F}, \qquad \sigma_F = \tfrac{9}{5}(3) = 5.4\,{}^\circ\text{F}. $$
+    The $+32$ doesn't affect SD &mdash; only the scale factor does. This is a classic IB hook.
+  </div>
+
+  <h3>Worked Example &mdash; Marks scaled and shifted</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A class's raw marks have $\bar{x} = 56$, $\sigma_x = 12$. The teacher scales each mark by $y = 1.2 x + 10$ to produce final marks. Find $\bar{y}$ and $\sigma_y$.</p>
+    $$ \bar{y} = 1.2(56) + 10 = 67.2 + 10 = 77.2. $$
+    $$ \sigma_y = |1.2|(12) = 14.4. $$
+    <p>The shift by $10$ moves the mean only. The scale by $1.2$ inflates both. The IB markscheme awards one mark for each of the two transformed values.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Reverse direction</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Three measurements have variance $25$. Each is then halved. What is the new variance and SD?</p>
+    <p>Transformation: $y = 0.5 x$ (no shift). Variance multiplies by $a^2 = 0.25$:</p>
+    $$ \sigma_y^2 = (0.5)^2 (25) = 6.25, \qquad \sigma_y = \sqrt{6.25} = 2.5. $$
+    <p>Equivalently $\sigma_y = 0.5 \cdot \sigma_x = 0.5 \cdot 5 = 2.5$.</p>
+  </div>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Standardization and the $z$-score</summary>
+    <div class="detail-body">
+      <p>The transformation $z = \dfrac{x - \mu}{\sigma}$ centres and scales the data so that $\bar{z} = 0$ and $\sigma_z = 1$.</p>
+      <p>Plug into the linear-transformation rules with $a = 1/\sigma$ and $b = -\mu/\sigma$:</p>
+      $$ \bar{z} = \frac{1}{\sigma}\,\mu - \frac{\mu}{\sigma} = 0, \qquad \sigma_z = \left|\frac{1}{\sigma}\right|\,\sigma = 1. $$
+      <p>The $z$-score answers "how many standard deviations is this observation from the mean?" &mdash; the foundation for the normal-distribution work in D3 and for outlier-flagging in real-world statistics. It's also the cleanest demonstration that linear transformations are <em>information-preserving</em>: shape, skewness, and PMCC are all invariant under them.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">A dataset has mean $10$ and SD $4$. After applying $y = -2x + 5$, the new mean and SD are:</div>
+      <span class="quiz-number">SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\bar{y} = -15$, $\sigma_y = -8$.</div>
+      <div class="quiz-opt" data-idx="1">$\bar{y} = -25$, $\sigma_y = -8$.</div>
+      <div class="quiz-opt" data-idx="2">$\bar{y} = -15$, $\sigma_y = 8$.</div>
+      <div class="quiz-opt" data-idx="3">$\bar{y} = -25$, $\sigma_y = 8$.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\bar{y} = -2(10) + 5 = -15$. $\sigma_y = |-2| \cdot 4 = 8$. SD is always non-negative &mdash; the absolute value is the safety net for the $a < 0$ case.</div>
+    <div class="quiz-explain wrong-exp">$\bar{y} = a\bar{x} + b = -2(10) + 5 = -15$. $\sigma_y = |a|\sigma_x = 2 \cdot 4 = 8$ (SD is non-negative).</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- 1.7 BIVARIATE: SCATTER, CORRELATION, REGRESSION -->
+<section class="section" id="s-d1-7">
+  <div class="section-label">Topic 1.7 &middot; Two variables at once</div>
+  <h2>1.7 Bivariate Data: Scatter, Correlation, Regression <span class="ib-ref">SL 4.4</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Bivariate data $(x_i, y_i)$ is shown on a scatter plot. Three questions follow.</strong>
+    <ol style="margin: 6px 0 0 22px;">
+      <li><strong>Direction &amp; form.</strong> Positive / negative / no association. Linear / curved.</li>
+      <li><strong>Strength.</strong> Pearson's PMCC $r = \dfrac{S_{xy}}{\sqrt{S_{xx}\, S_{yy}}} \in [-1, 1]$. Closer to $\pm 1$ &Rightarrow; stronger linear association.</li>
+      <li><strong>Best-fit line.</strong> The regression line of $y$ on $x$, $y = ax + b$, always passes through $(\bar{x}, \bar{y})$. Use it to predict $y$ from $x$ inside the data range.</li>
+    </ol>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Sample sums (define everything else)</div>
+    $$ S_{xx} = \sum (x_i - \bar{x})^2, \qquad S_{yy} = \sum (y_i - \bar{y})^2, \qquad S_{xy} = \sum (x_i - \bar{x})(y_i - \bar{y}). $$
+    <p>Computational form: $S_{xy} = \sum x_i y_i - n\bar{x}\bar{y}$, and similarly $S_{xx} = \sum x_i^2 - n\bar{x}^2$.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Pearson's product-moment correlation coefficient</div>
+    $$ r = \frac{S_{xy}}{\sqrt{S_{xx}\,S_{yy}}}, \qquad -1 \le r \le 1. $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Least-squares regression line of $y$ on $x$</div>
+    $$ y - \bar{y} = b(x - \bar{x}), \qquad b = \frac{S_{xy}}{S_{xx}}. $$
+    <p>Equivalently $y = a x + b$ in the IB's notation &mdash; just write down whichever the question uses. The line always passes through $(\bar{x}, \bar{y})$.</p>
+  </div>
+
+  <div class="concept-box">
+    <strong style="color: var(--accent);">Interpreting $r$</strong>
+    <strong>Sign.</strong> $r > 0$: $y$ tends to increase with $x$. $r < 0$: $y$ tends to decrease with $x$.<br>
+    <strong>Strength.</strong> Rough thresholds (vary by source &mdash; the IB accepts a sensible verbal description):
+    <ul style="margin: 6px 0 0 22px;">
+      <li>$|r| \ge 0.9$ very strong</li>
+      <li>$0.7 \le |r| < 0.9$ strong</li>
+      <li>$0.5 \le |r| < 0.7$ moderate</li>
+      <li>$0.3 \le |r| < 0.5$ weak</li>
+      <li>$|r| < 0.3$ very weak / no linear association</li>
+    </ul>
+  </div>
+
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Two non-negotiable cautions</strong>
+    <strong>Correlation is not causation.</strong> A strong $r$ says only that the variables move together, not that one causes the other. Lurking variables and reverse causation routinely explain strong $r$.<br>
+    <strong>$r$ measures <em>linear</em> association.</strong> Data that follows $y = x^2$ on $[-1, 1]$ has $r = 0$ but a perfect non-linear pattern. Always look at the scatter plot before quoting $r$.<br>
+    <strong>Don't extrapolate.</strong> The regression line is only reliable inside the $x$-range of the data. Predictions outside (extrapolation) assume the linear pattern continues &mdash; usually it doesn't.
+  </div>
+
+  <h3>Worked Example &mdash; PMCC and regression line by hand</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> Five $(x, y)$ pairs:</p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>$x$</th><th>2</th><th>3</th><th>5</th><th>7</th><th>8</th></tr></thead>
+      <tbody><tr><td>$y$</td><td>4</td><td>5</td><td>7</td><td>10</td><td>12</td></tr></tbody>
+    </table>
+    </div>
+    <p>$n = 5$. $\bar{x} = 25/5 = 5$, $\bar{y} = 38/5 = 7.6$.</p>
+    <p>Sums:</p>
+    $$ \sum x_i^2 = 4 + 9 + 25 + 49 + 64 = 151, \qquad \sum y_i^2 = 16 + 25 + 49 + 100 + 144 = 334, $$
+    $$ \sum x_i y_i = 2\cdot 4 + 3\cdot 5 + 5\cdot 7 + 7\cdot 10 + 8\cdot 12 = 8 + 15 + 35 + 70 + 96 = 224. $$
+    <p>$S_{xx} = 151 - 5(5)^2 = 151 - 125 = 26$. $S_{yy} = 334 - 5(7.6)^2 = 334 - 288.8 = 45.2$. $S_{xy} = 224 - 5(5)(7.6) = 224 - 190 = 34$.</p>
+    <p><strong>PMCC.</strong></p>
+    $$ r = \frac{34}{\sqrt{26 \cdot 45.2}} = \frac{34}{\sqrt{1175.2}} \approx \frac{34}{34.281} \approx 0.992. $$
+    <p>Very strong positive linear association.</p>
+    <p><strong>Regression line.</strong> $b = 34/26 \approx 1.308$. Passing through $(\bar{x}, \bar{y}) = (5, 7.6)$:</p>
+    $$ y - 7.6 = 1.308(x - 5) \;\Longrightarrow\; y \approx 1.31 x + 1.06. $$
+    <p>Read this off the GDC on Paper 2 (<em>LinReg(a + bx)</em>); the by-hand version above is what you'd write on Paper 1.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Using the line for prediction</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> For the data above, predict $y$ when $x = 6$. Comment on the reliability.</p>
+    $$ \hat{y} = 1.308(6) + 1.06 \approx 8.91. $$
+    <p>$x = 6$ lies inside the observed range $[2, 8]$, so the prediction is <strong>interpolation</strong> &mdash; reliable given the very strong $r \approx 0.99$.</p>
+    <p>By contrast, predicting at $x = 20$ would be extrapolation: the linear pattern is not guaranteed beyond the data.</p>
+  </div>
+
+  <h3>Worked Example &mdash; Interpreting parameters</h3>
+  <div class="worked-solution">
+    <p><strong>Problem:</strong> A regression of weekly sales $y$ ($\${,}000$) on advertising spend $x$ ($\${,}000$) gives $y = 4.2 x + 15$. Interpret the slope and intercept.</p>
+    <p><strong>Slope $a = 4.2$.</strong> For every $\$1{,}000$ extra spent on advertising, weekly sales increase by $\$4{,}200$ on average.</p>
+    <p><strong>Intercept $b = 15$.</strong> When advertising spend is $\$0$, the model predicts weekly sales of $\$15{,}000$. <em>Caveat:</em> $x = 0$ may lie outside the observed range, in which case the intercept's interpretation is shaky &mdash; flag this in a written answer.</p>
+  </div>
+
+  <h3>Visualizing the fit</h3>
+  <div class="scatter-mock" aria-label="Scatter plot with five points and a best-fit line through the mean point">
+    <svg viewBox="0 0 320 200" preserveAspectRatio="none">
+      <line x1="30" y1="180" x2="310" y2="180" stroke="var(--text-secondary)" stroke-width="1"/>
+      <line x1="30" y1="180" x2="30" y2="10"  stroke="var(--text-secondary)" stroke-width="1"/>
+      <line x1="30" y1="170" x2="310" y2="40" stroke="var(--accent)" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <circle cx="65"  cy="155" r="4.5" fill="var(--accent)"/>
+      <circle cx="100" cy="138" r="4.5" fill="var(--accent)"/>
+      <circle cx="170" cy="106" r="4.5" fill="var(--accent)"/>
+      <circle cx="240" cy="63"  r="4.5" fill="var(--accent)"/>
+      <circle cx="275" cy="48"  r="4.5" fill="var(--accent)"/>
+      <circle cx="170" cy="106" r="9" fill="none" stroke="var(--purple)" stroke-width="2"/>
+      <text x="180" y="120" font-family="JetBrains Mono" font-size="11" fill="var(--purple)">(&#x305;x, &#x305;y)</text>
+      <text x="160" y="195" font-family="JetBrains Mono" font-size="11" fill="var(--text-secondary)">x</text>
+      <text x="12"  y="100" font-family="JetBrains Mono" font-size="11" fill="var(--text-secondary)">y</text>
+    </svg>
+  </div>
+  <p style="font-size: 0.92rem; color: var(--text-secondary);">The dashed line is the best fit. It must pass through the highlighted mean point $(\bar{x}, \bar{y})$ &mdash; that's the easy way to sketch the line "by eye" if asked.</p>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why the regression line passes through $(\bar{x}, \bar{y})$</summary>
+    <div class="detail-body">
+      <p>Take the slope-form equation $y - \bar{y} = b(x - \bar{x})$ and substitute $x = \bar{x}$:</p>
+      $$ y - \bar{y} = b(\bar{x} - \bar{x}) = 0 \;\;\Longrightarrow\;\; y = \bar{y}. $$
+      <p>So the point $(\bar{x}, \bar{y})$ lies on the line by construction. The reason this happens is that the least-squares method minimises $\sum (y_i - (ax_i + b))^2$; differentiating with respect to $b$ and setting to zero gives $\sum (y_i - ax_i - b) = 0$, equivalently $\bar{y} = a\bar{x} + b$.</p>
+      <p>Practical use: in a Paper 1 question with no calculator, if you're given $\bar{x}, \bar{y}$ and the slope $b$, write the line in slope-form immediately &mdash; no extra arithmetic.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>&#9656; Going deeper &mdash; Why PMCC is invariant under linear transformations</summary>
+    <div class="detail-body">
+      <p>Apply $u = a x + b$, $v = c y + d$ with $a, c \ne 0$. Then $\bar{u} = a\bar{x} + b$, $\bar{v} = c\bar{y} + d$, and</p>
+      $$ S_{uv} = \sum (u_i - \bar{u})(v_i - \bar{v}) = \sum a(x_i - \bar{x}) \cdot c(y_i - \bar{y}) = a c \, S_{xy}. $$
+      <p>Similarly $S_{uu} = a^2 S_{xx}$, $S_{vv} = c^2 S_{yy}$. So:</p>
+      $$ r_{uv} = \frac{ac\, S_{xy}}{\sqrt{a^2 S_{xx} \cdot c^2 S_{yy}}} = \frac{ac}{|ac|} \cdot \frac{S_{xy}}{\sqrt{S_{xx} S_{yy}}} = \text{sign}(ac) \cdot r_{xy}. $$
+      <p>If $ac > 0$, $r$ is unchanged. If $ac < 0$ (i.e. exactly one of the variables is reflected), the sign flips but the magnitude stays the same. This makes $r$ a true measure of association: it doesn't depend on the units chosen.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">Bivariate data give $r = -0.95$. The correct interpretation:</div>
+      <span class="quiz-number">SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$x$ causes $y$ to decrease.</div>
+      <div class="quiz-opt" data-idx="1">There is a strong positive linear association.</div>
+      <div class="quiz-opt" data-idx="2">There is a strong negative linear association; $y$ tends to decrease as $x$ increases.</div>
+      <div class="quiz-opt" data-idx="3">The data lie exactly on a line of negative slope.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $|r| = 0.95$ is strong (close to $1$). Negative sign means $y$ falls as $x$ rises. "Causes" overstates &mdash; correlation alone never proves causation. "Exactly on a line" would require $r = -1$.</div>
+    <div class="quiz-explain wrong-exp">$r = -0.95$ &Rightarrow; strong <em>negative</em> linear association ($y$ falls as $x$ rises). Correlation is not causation, and "exactly on a line" requires $r = \pm 1$ exactly.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">A regression line $y = 2.4 x + 7$ comes from data with $\bar{x} = 5$. What must $\bar{y}$ be?</div>
+      <span class="quiz-number">SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$19$</div>
+      <div class="quiz-opt" data-idx="1">$7$</div>
+      <div class="quiz-opt" data-idx="2">$5$</div>
+      <div class="quiz-opt" data-idx="3">Cannot be determined.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The line passes through $(\bar{x}, \bar{y})$, so $\bar{y} = 2.4 (\bar{x}) + 7 = 2.4(5) + 7 = 19$.</div>
+    <div class="quiz-explain wrong-exp">The line always passes through $(\bar{x}, \bar{y})$. Plug $\bar{x} = 5$ into the line: $\bar{y} = 2.4(5) + 7 = 19$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- EXAM STRATEGY -->
+<section class="section" id="exam-strategy">
+  <div class="section-label">Review</div>
+  <h2>Exam Strategy &amp; Common Pitfalls</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-green">M</div>
+        <div class="card-title">Memorize</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>$\bar{x} = \dfrac{\sum f_i x_i}{\sum f_i}$ for grouped data <span class="ib-ref">SL 4.3</span></li>
+        <li>$\sigma = \sqrt{\dfrac{\sum(x_i - \mu)^2}{n}}$ (population) <span class="ib-ref">SL 4.3</span></li>
+        <li>$\sigma^2 = \overline{x^2} - \bar{x}^2$ computational form <span class="ib-ref">SL 4.3</span></li>
+        <li>Linear-transformation rule: $\bar{y} = a\bar{x} + b$, $\sigma_y = |a|\sigma_x$ <span class="ib-ref">SL 4.3</span></li>
+        <li>Outlier rule: $x < Q_1 - 1.5\,\text{IQR}$ or $x > Q_3 + 1.5\,\text{IQR}$ <span class="ib-ref">SL 4.2</span></li>
+        <li>PMCC: $r = S_{xy} / \sqrt{S_{xx} S_{yy}}$, $r \in [-1, 1]$ <span class="ib-ref">SL 4.4</span></li>
+        <li>Regression line passes through $(\bar{x}, \bar{y})$ <span class="ib-ref">SL 4.4</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-purple">U</div>
+        <div class="card-title">Understand</div>
+      </div>
+      <ul style="margin-left: 18px; line-height: 2;">
+        <li>Why a random sample matters &mdash; bias is fatal even with large $n$.</li>
+        <li>Why bar <em>area</em> (not height) encodes frequency on a continuous histogram.</li>
+        <li>Why mean is sensitive to outliers and median isn't (squared vs. absolute).</li>
+        <li>Why SD divides by $n$ in the IB, not $n - 1$ (population convention).</li>
+        <li>Why $\sigma_y = |a|\sigma_x$: shift vanishes, scale comes out squared then rooted.</li>
+        <li>Why $r$ is invariant under linear transformations of $x$ or $y$.</li>
+        <li>Why the regression line passes through $(\bar{x}, \bar{y})$ (least-squares condition).</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Common Pitfalls</h3>
+  <div class="concept-box red">
+    <strong style="color: var(--red);">Top student errors</strong>
+    <strong>1.</strong> Using $s_x$ (sample SD, divide by $n - 1$) instead of $\sigma_x$ (divide by $n$). The IB defaults to the latter.<br>
+    <strong>2.</strong> Saying "$r = 0.6$ means $x$ causes $y$." Correlation $\ne$ causation; always hedge in writing.<br>
+    <strong>3.</strong> Computing PMCC and quoting it without ever looking at the scatter plot &mdash; $r$ doesn't detect curvature.<br>
+    <strong>4.</strong> Extrapolating: using the regression line to predict $y$ for $x$ far outside the data range.<br>
+    <strong>5.</strong> Forgetting that the regression line passes through $(\bar{x}, \bar{y})$. This is the fastest way to recover the intercept on Paper 1.<br>
+    <strong>6.</strong> On grouped-data mean, averaging midpoints without weighting by frequency.<br>
+    <strong>7.</strong> Outlier rule: forgetting the factor $1.5$, or applying the rule to $\bar{x} \pm 1.5\sigma$ instead of $Q_1, Q_3 \pm 1.5\,\text{IQR}$.<br>
+    <strong>8.</strong> Linear transformations: adding $b$ to the SD (it doesn't change), or forgetting the absolute value on $|a|$ when $a < 0$.<br>
+    <strong>9.</strong> Reporting just one of (centre, spread) instead of both.<br>
+    <strong>10.</strong> Reading the median off a cumulative-frequency graph at $0.5$ on the $y$-axis instead of $0.5 n$.
+  </div>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Paper-specific notes</strong>
+    <strong>Paper 1 (no calc).</strong> Small datasets with clean numbers. Expect by-hand mean, median, quartiles, SD via the computational form $\overline{x^2} - \bar{x}^2$, and a regression line where they give you $\bar{x}, \bar{y}$, and one of $b$ or $r$. Outlier-rule applications. Interpreting a given $r$ in words.<br>
+    <strong>Paper 2 (calc).</strong> Larger datasets entered as L1 / L2 lists. Read 1-Var Stats for mean and SD; 2-Var Stats and LinReg for $r$, regression line, and predictions. Histograms and box plots already drawn &mdash; you describe shape and read off summary statistics. Often a final-mark question on whether a prediction is reliable (inside vs. outside data range).
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- FLASHCARDS -->
+<section class="section" id="flashcards">
+  <div class="section-label">Review</div>
+  <h2>Flashcards</h2>
+
+  <div class="flashcard-toolbar">
+    <span class="fc-count" id="fcCount">0 / 14 flipped</span>
+    <div>
+      <button onclick="shuffleFlashcards()">Shuffle</button>
+      <button onclick="resetFlashcards()">Reset</button>
+    </div>
+  </div>
+
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Population vs. sample?</div>
+        <div class="flashcard-back">Population = all individuals.<br>Sample = subset measured.</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Outlier rule (IQR)?</div>
+        <div class="flashcard-back">$$x < Q_1 - 1.5\,\text{IQR}\;\;\text{or}\;\;x > Q_3 + 1.5\,\text{IQR}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Mean of grouped data?</div>
+        <div class="flashcard-back">$$\bar{x} \approx \frac{\sum f_i x_i}{\sum f_i}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Population variance (IB convention)?</div>
+        <div class="flashcard-back">$$\sigma^2 = \frac{\sum (x_i - \mu)^2}{n}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Computational form of $\sigma^2$?</div>
+        <div class="flashcard-back">$$\sigma^2 = \overline{x^2} - \bar{x}^2$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Grouped-data SD?</div>
+        <div class="flashcard-back">$$\sigma = \sqrt{\frac{\sum f_i (x_i - \bar{x})^2}{\sum f_i}}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Under $y = ax + b$, new mean?</div>
+        <div class="flashcard-back">$$\bar{y} = a\bar{x} + b$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Under $y = ax + b$, new SD?</div>
+        <div class="flashcard-back">$$\sigma_y = |a|\,\sigma_x$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">PMCC formula?</div>
+        <div class="flashcard-back">$$r = \frac{S_{xy}}{\sqrt{S_{xx}\,S_{yy}}}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Range of $r$?</div>
+        <div class="flashcard-back">$$-1 \le r \le 1$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Regression line of $y$ on $x$?</div>
+        <div class="flashcard-back">$$y - \bar{y} = b(x - \bar{x}),\quad b = \frac{S_{xy}}{S_{xx}}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Regression line always passes through?</div>
+        <div class="flashcard-back">$$(\bar{x},\,\bar{y})$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">$z$-score?</div>
+        <div class="flashcard-back">$$z = \frac{x - \mu}{\sigma}$$</div>
+      </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">Five-number summary?</div>
+        <div class="flashcard-back">$$\{\min,\,Q_1,\,\text{med},\,Q_3,\,\max\}$$</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- UNIT QUIZ -->
+<section class="section" id="unit-quiz">
+  <div class="section-label">Assessment</div>
+  <h2>Unit D1 &mdash; Practice Quiz</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 20px;">Ten mixed-difficulty items. Your score updates in real time at the top of the page. Aim for 8/10 before exam day.</p>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">1. A school surveys students by emailing every 10th student on the alphabetical roll. This is best described as:</div>
+      <span class="quiz-number">Q1 &middot; SL 4.1</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Stratified random.</div>
+      <div class="quiz-opt" data-idx="1">Simple random.</div>
+      <div class="quiz-opt" data-idx="2">Systematic.</div>
+      <div class="quiz-opt" data-idx="3">Convenience.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! "Every $k$-th from an ordered list" is the systematic sampling definition. It is not simple random because once the first student is chosen, the rest are determined.</div>
+    <div class="quiz-explain wrong-exp">Every 10th student from an ordered list is the defining shape of a <em>systematic</em> sample.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">2. Find the median of $\{2, 5, 5, 8, 11, 11, 14, 19\}$.</div>
+      <span class="quiz-number">Q2 &middot; SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$8$</div>
+      <div class="quiz-opt" data-idx="1">$9.5$</div>
+      <div class="quiz-opt" data-idx="2">$11$</div>
+      <div class="quiz-opt" data-idx="3">$10$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $n = 8$, so the median is the mean of the 4th and 5th values: $(8 + 11)/2 = 9.5$.</div>
+    <div class="quiz-explain wrong-exp">$n = 8$ &mdash; even &mdash; median is the mean of positions 4 and 5: $(8 + 11)/2 = 9.5$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">3. A box plot shows $Q_1 = 24$, $Q_3 = 38$. Which value is an outlier?</div>
+      <span class="quiz-number">Q3 &middot; SL 4.2</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$2$</div>
+      <div class="quiz-opt" data-idx="1">$45$</div>
+      <div class="quiz-opt" data-idx="2">$10$</div>
+      <div class="quiz-opt" data-idx="3">$50$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! IQR $= 14$. $L = 24 - 21 = 3$; $U = 38 + 21 = 59$. Only $2 < 3$ is an outlier. $10$ is above $L$, and $45, 50$ are below $U$.</div>
+    <div class="quiz-explain wrong-exp">$\text{IQR} = 38 - 24 = 14$. Fences $L = 24 - 1.5(14) = 3$ and $U = 38 + 1.5(14) = 59$. Only the value $2$ is outside $[3, 59]$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">4. The (population) standard deviation of $\{4, 6, 8, 10\}$ is:</div>
+      <span class="quiz-number">Q4 &middot; SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\sqrt{6} \approx 2.45$</div>
+      <div class="quiz-opt" data-idx="1">$\sqrt{20/3} \approx 2.58$</div>
+      <div class="quiz-opt" data-idx="2">$\sqrt{5} \approx 2.24$</div>
+      <div class="quiz-opt" data-idx="3">$2$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\bar{x} = 7$. Squared deviations: $9, 1, 1, 9$, sum $= 20$. $\sigma^2 = 20/4 = 5$, $\sigma = \sqrt{5} \approx 2.24$. (Option B uses $n - 1 = 3$ &mdash; not IB convention.)</div>
+    <div class="quiz-explain wrong-exp">IB uses $\sigma^2 = \sum (x_i - \bar{x})^2 / n$. Here sum $= 20$, $n = 4$, so $\sigma^2 = 5$ and $\sigma = \sqrt{5}$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header">
+      <div class="quiz-q">5. A grouped table has midpoints $\{10, 20, 30, 40\}$ with frequencies $\{2, 8, 6, 4\}$. The estimated mean is:</div>
+      <span class="quiz-number">Q5 &middot; SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$26$</div>
+      <div class="quiz-opt" data-idx="1">$25$</div>
+      <div class="quiz-opt" data-idx="2">$22$</div>
+      <div class="quiz-opt" data-idx="3">$30$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\sum f_i x_i = 2(10) + 8(20) + 6(30) + 4(40) = 20 + 160 + 180 + 160 = 520$. $\sum f_i = 20$. Mean $= 520/20 = 26$.</div>
+    <div class="quiz-explain wrong-exp">Weighted sum: $20 + 160 + 180 + 160 = 520$. Total frequency $= 20$. Mean $= 26$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">6. Heights have mean $170$ cm and SD $8$ cm. After converting to metres ($y = 0.01 x$), the new mean and SD are:</div>
+      <span class="quiz-number">Q6 &middot; SL 4.3</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\bar{y} = 1.70$, $\sigma_y = 8$</div>
+      <div class="quiz-opt" data-idx="1">$\bar{y} = 170$, $\sigma_y = 0.08$</div>
+      <div class="quiz-opt" data-idx="2">$\bar{y} = 1.70$, $\sigma_y = 0.80$</div>
+      <div class="quiz-opt" data-idx="3">$\bar{y} = 1.70$, $\sigma_y = 0.08$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $\bar{y} = 0.01 \cdot 170 = 1.70$ m. $\sigma_y = |0.01| \cdot 8 = 0.08$ m. Scale factor applies to both.</div>
+    <div class="quiz-explain wrong-exp">Under $y = 0.01 x$: $\bar{y} = 0.01 \cdot 170 = 1.70$, $\sigma_y = 0.01 \cdot 8 = 0.08$ &mdash; same factor scales both.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">7. Bivariate data has PMCC $r = -0.12$. The correct one-line interpretation is:</div>
+      <span class="quiz-number">Q7 &middot; SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Strong negative linear association.</div>
+      <div class="quiz-opt" data-idx="1">Strong positive linear association.</div>
+      <div class="quiz-opt" data-idx="2">Very weak / no linear association.</div>
+      <div class="quiz-opt" data-idx="3">Perfect negative correlation.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $|r| = 0.12$ is well below $0.3$, so almost no linear association. The negative sign is too weak to read into.</div>
+    <div class="quiz-explain wrong-exp">$|r| = 0.12 < 0.3$ &Rightarrow; very weak / negligible linear association. A scatter plot might still show a non-linear pattern.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header">
+      <div class="quiz-q">8. The regression line of $y$ on $x$ for a dataset is $y = 1.5 x + 4$. If $\bar{x} = 6$, then $\bar{y}$ equals:</div>
+      <span class="quiz-number">Q8 &middot; SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$10$</div>
+      <div class="quiz-opt" data-idx="1">$13$</div>
+      <div class="quiz-opt" data-idx="2">$4$</div>
+      <div class="quiz-opt" data-idx="3">Cannot be determined.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! The line passes through $(\bar{x}, \bar{y})$, so $\bar{y} = 1.5(6) + 4 = 13$.</div>
+    <div class="quiz-explain wrong-exp">Use the fact that the line passes through $(\bar{x}, \bar{y})$: $\bar{y} = 1.5\bar{x} + 4 = 1.5(6) + 4 = 13$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header">
+      <div class="quiz-q">9. A scatter plot shows points lying on a curve $y = x^2$ for $x \in [-1, 1]$. The PMCC $r$ is:</div>
+      <span class="quiz-number">Q9 &middot; SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Close to $+1$.</div>
+      <div class="quiz-opt" data-idx="1">Close to $-1$.</div>
+      <div class="quiz-opt" data-idx="2">Exactly $+1$.</div>
+      <div class="quiz-opt" data-idx="3">Close to $0$.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $y = x^2$ is symmetric in $x$ on $[-1, 1]$: for every point $(x_0, x_0^2)$, the mirror point $(-x_0, x_0^2)$ has the same $y$. The covariance $S_{xy}$ averages to zero, so $r \approx 0$. The relationship is strong &mdash; just not <em>linear</em>.</div>
+    <div class="quiz-explain wrong-exp">PMCC measures <em>linear</em> association only. A symmetric $y = x^2$ has $r \approx 0$ &mdash; lesson: always look at the scatter plot, not just $r$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header">
+      <div class="quiz-q">10. A regression of ice-cream sales $y$ on temperature $x$ ($^\circ$C), based on data with $10 \le x \le 28$, gives $y = 4.2 x - 18$. Using the line to predict sales at $x = 5\,^\circ$C is:</div>
+      <span class="quiz-number">Q10 &middot; SL 4.4</span>
+    </div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Reliable &mdash; the line was computed from the data.</div>
+      <div class="quiz-opt" data-idx="1">Reliable &mdash; PMCC is presumably high.</div>
+      <div class="quiz-opt" data-idx="2">Unreliable &mdash; $x = 5$ is outside the observed data range (extrapolation).</div>
+      <div class="quiz-opt" data-idx="3">Unreliable &mdash; the slope is positive.</div>
+    </div>
+    <div class="quiz-explain correct-exp">Correct! $x = 5$ lies below the minimum observed $x = 10$. Any prediction outside the data range relies on extrapolation: we have no evidence the linear pattern continues there.</div>
+    <div class="quiz-explain wrong-exp">$x = 5$ is outside the observed range $[10, 28]$ &mdash; that's extrapolation. The regression line is only safe to use for interpolation.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">&#8635; Try Again</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-label">Self-Assessment</div>
+  <h2>Readiness Checklist</h2>
+  <p style="color: var(--text-secondary); margin-bottom: 16px;">Click each item you've mastered. Aim for 100% before exam day. The IB sub-topic reference is tagged on each item.</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 14 mastered</div>
+
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.1</span> I can distinguish population from sample, and name the major sampling methods (simple random, systematic, stratified, quota, convenience).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.1</span> I can identify likely sources of bias (selection, non-response, self-report, volunteer) in a sampling design.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.1</span> I can classify a variable as discrete or continuous and pick the right summary.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.2</span> I can build a frequency table and histogram, describe shape (skew / symmetry / modality), and read off the modal class.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.2</span> I can read median and quartiles from a cumulative-frequency graph and draw the corresponding box plot.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.2</span> I can apply the $1.5 \cdot \text{IQR}$ outlier rule and report outliers on a box plot.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.3</span> I can compute mean, median, and mode of raw data and estimate the mean from grouped data via $\sum f_i x_i / \sum f_i$.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.3</span> I can compute the population variance and SD by both the deviations form and $\overline{x^2} - \bar{x}^2$.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.3</span> I know the IB uses $n$ (not $n - 1$) in the SD and can read $\sigma_x$ on the GDC.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.3</span> I can apply the linear transformation rules $\bar{y} = a\bar{x} + b$ and $\sigma_y = |a|\sigma_x$, including the unit-conversion use case.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.4</span> I can interpret the sign and magnitude of $r$, and avoid the correlation-vs-causation trap in writing.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.4</span> I can fit a regression line by hand using $(\bar{x}, \bar{y})$ and $b = S_{xy}/S_{xx}$, or read it from the GDC.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.4</span> I can use the regression line to predict, and decide when a prediction is interpolation vs. extrapolation.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#10003;</span> <span class="ib-ref">SL 4.4</span> I can interpret the slope and intercept of a regression line in context, with appropriate caveats.</li>
+  </ul>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">Dingrui Scholars</div>
+  <p>IB Math Analysis &amp; Approaches HL &mdash; Unit D1: Univariate Data &middot; Topic SL 4.1&ndash;4.4</p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+
+function updateScoreBadge() {
+  const badge = document.getElementById('scoreBadge');
+  if (!badge) return;
+  if (quizScore.total === 0) {
+    badge.textContent = '0 / 0';
+    badge.classList.add('zero');
+  } else {
+    badge.textContent = quizScore.correct + ' / ' + quizScore.total;
+    badge.classList.remove('zero');
+  }
+}
+
+function setThemeBtnLabel(isDark) {
+  const tt = document.getElementById('themeToggle');
+  if (!tt) return;
+  tt.textContent = isDark ? 'Light' : 'Dark';
+}
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  setThemeBtnLabel(!isDark);
+}
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  setThemeBtnLabel(true);
+}
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+  const pf = document.getElementById('progressFill');
+  if (pf) pf.style.width = pct + '%';
+});
+
+const sections = document.querySelectorAll('.section');
+const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.querySelectorAll('.quiz').forEach(quiz => {
+  const answer = parseInt(quiz.dataset.answer);
+  const opts = quiz.querySelectorAll('.quiz-opt');
+  const expCorrect = quiz.querySelector('.quiz-explain.correct-exp');
+  const expWrong = quiz.querySelector('.quiz-explain.wrong-exp');
+  opts.forEach(opt => {
+    opt.addEventListener('click', () => {
+      if(opt.classList.contains('disabled')) return;
+      const idx = parseInt(opt.dataset.idx);
+      opts.forEach(o => o.classList.add('disabled'));
+      quizScore.total++;
+      if (idx === answer) {
+        opt.classList.add('correct');
+        quizScore.correct++;
+        if (expCorrect) expCorrect.classList.add('show');
+      } else {
+        opt.classList.add('wrong');
+        opts[answer].classList.add('correct');
+        if (expWrong) expWrong.classList.add('show');
+        const retry = quiz.querySelector('.quiz-retry');
+        if (retry) retry.classList.add('show');
+      }
+      updateScoreBadge();
+    });
+  });
+});
+
+function retryQuiz(btn) {
+  const quiz = btn.closest('.quiz');
+  quiz.querySelectorAll('.quiz-opt').forEach(o => {
+    o.classList.remove('disabled', 'correct', 'wrong');
+  });
+  quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show'));
+  btn.classList.remove('show');
+  quizScore.total--;
+  updateScoreBadge();
+}
+
+function flipCard(el) {
+  el.classList.toggle('flipped');
+  updateFlashcardCount();
+}
+function updateFlashcardCount() {
+  const total = document.querySelectorAll('#flashcardGrid .flashcard').length;
+  const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length;
+  const el = document.getElementById('fcCount');
+  if (el) el.textContent = flipped + ' / ' + total + ' flipped';
+}
+function resetFlashcards() {
+  document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped'));
+  updateFlashcardCount();
+}
+function shuffleFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  if (!grid) return;
+  const cards = [...grid.children];
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(cards[j]);
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+}
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const total = document.querySelectorAll('#checklistUl li').length;
+  const checked = document.querySelectorAll('#checklistUl li.checked').length;
+  const el = document.getElementById('checkProgress');
+  if (el) el.textContent = checked + ' / ' + total + ' mastered';
+}
+
+function toggleSidebar() {
+  if (window.innerWidth >= 1100) {
+    document.body.classList.toggle('sidebar-collapsed');
+  } else {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    const btn = document.getElementById('tocToggle');
+    if (btn) btn.classList.toggle('active', sidebar.classList.contains('open'));
+  }
+}
+document.addEventListener('click', function(e) {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('tocToggle');
+  if (!sidebar) return;
+  if (sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      e.target !== btn &&
+      !btn.contains(e.target)) {
+    sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const sidebar = document.getElementById('sidebar');
+    const btn = document.getElementById('tocToggle');
+    if (sidebar) sidebar.classList.remove('open');
+    if (btn) btn.classList.remove('active');
+  }
+});
+
+updateScoreBadge();
+</script>
+</body>
+</html>
