@@ -59,37 +59,46 @@ per `prompts/create-bilingual-translation.md`.
 - Section-label bilingualization in Structure 2.
 - Anchor naming `#s1-1` reuse between Structure 1 and Reactivity 1.
 
-### Translation Sprint Wave 2 — Practice Questions & Solutions (opened 2026-05-22)
+### Translation Sprint Wave 2 — Practice Questions & Solutions — CLOSED 2026-05-22
 
 Bilingual EN↔ZH pass over the IB Chemistry HL Practice Questions and
 Solutions surfaces, extending Wave 1 (Study Guides) which closed
-2026-05-21. Only Reactivity 2 has shipped a Practice + Solutions pair
-so far; that pair is the entire Wave 2 scope for this subject.
+2026-05-21. **Second subject to close Wave 2** (after IB Math HL).
+Reactivity 2 Practice + Solutions pair shipped on branch
+`wave2_ib_chem_hl`.
 
-Goal: ship the existing Practice + Solutions pair in this subject with
-balanced `data-lang="en"` / `data-lang="zh"` markers and four-axis
-per-file audit (EN/ZH balance + glossary fit + pedagogical + validates)
-before fast-forwarding `preview → main` for customer deploy.
+| ID | Item | Tier | Status | EN/ZH balance |
+|---|---|---|---|---|
+| ~~**W2-EN**~~ | ~~EN hygiene sweep across Reactivity_2 Practice + Solutions~~ | P1 | ✅ **No-op** — zero CJK characters across both files (no `\text{...}` collision risk); chemical formulas / state symbols / em dashes are paper-chrome convention. No changes needed. | — |
+| ~~**W2-1**~~ | ~~`Practice Questions/Reactivity_2_How_Much_How_Fast_How_Far_Practice.html`~~ | P1 | ✅ closed — `29dd0ae` | 96 / 96 ✅ |
+| ~~**W2-2**~~ | ~~`Practice Questions/Solutions/Reactivity_2_How_Much_How_Fast_How_Far_Solutions.html`~~ | P1 | ✅ closed — `a6329da` | 138 / 138 ✅ |
 
-**Locked playbook:** [`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md)
-— the IB Chem HL Structure 1/2 + Reactivity 1/2 glossary block locked at
-Wave 1 close applies as-is to the Reactivity 2 Practice/Solutions pair.
+**Audience contract** — Mandarin-Chinese-language students preparing
+to write the IB Chemistry HL exam in English. Chinese is a *teaching
+translation*; English exam-rubric terms remain in `<code>` glosses
+inside the Chinese prose. Chemical formulas, state symbols, KaTeX
+math untouched.
 
-**English-first gate (Wave 2 variant):** one EN hygiene sweep commit
-across both files (KaTeX `\text{...}` CJK check, chemical-formula
-state-symbol rendering, dashes, glossary collisions, AI-voice drift)
-lands first as a single review gate; then per-file ZH translation
-commits land sequentially, one review gate per file (mirrors Wave 1).
+**Form choice** — Both files use inline `<span data-lang="en">…</span><span data-lang="zh">…</span>`
+pairs throughout. The Solutions file's compact bullet-style rationales
+fit Form A cleanly (no need for Form B parallel rationale blocks).
 
-**Cross-subject companion sprints** — Wave 2 is open in parallel
-across AP CSA, AP Calculus, AP Physics, IB Chem HL, IB Math HL.
-High School Math remains parked at `DP-4` (no EN content yet).
+**`scripts/validate.sh`** passes on both files.
 
-| ID | Item | Tier | Status |
-|---|---|---|---|
-| **W2-EN** | EN hygiene sweep across Reactivity_2 Practice + Solutions (KaTeX `\text{...}` CJK check, state-symbol parity, dashes, glossary collisions, AI-voice drift) | P1 | **Open** |
-| **W2-1** | `Practice Questions/Reactivity_2_How_Much_How_Fast_How_Far_Practice.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
-| **W2-2** | `Practice Questions/Solutions/Reactivity_2_How_Much_How_Fast_How_Far_Solutions.html` bilingual translation | P1 | **Open** (blocked on W2-EN) |
+**Glossary check** — IB Chem HL Wave 1 terminology applied as-is.
+Reactivity-2-specific kinetics terms locked inline via `<code>`
+glosses: reaction rate / collision theory / collision frequency /
+activation energy / catalyst / Maxwell–Boltzmann distribution /
+energy profile / intermediate / transition state / order of reaction
+/ rate equation / rate constant / mechanism / rate-determining step
+/ molecularity / unimolecular / Arrhenius equation / enolisation /
+colorimetry / spectrophotometer / Beer–Lambert / systematic vs
+random error.
+
+**Commits on `wave2_ib_chem_hl`:**
+
+- `29dd0ae` — W2-1 Reactivity 2 Practice ZH translation (96/96, +109/−96)
+- `a6329da` — W2-2 Reactivity 2 Solutions ZH translation (138/138, +151/−138)
 
 **Note — out of Wave 2 scope (build, not translate).** Practice + Solutions
 companions for Structure 1, Structure 2, Reactivity 1 do not exist yet;
