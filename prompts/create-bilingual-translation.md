@@ -266,6 +266,110 @@ do not regress.
 | path length | 路程 | not `路径长度` (over-literal) |
 | crumple zone | 溃缩区 | not `缓冲溃缩区` |
 | impulse-momentum theorem | 动量定理 | not `冲量—动量定理` |
+
+#### IB Chemistry HL
+
+Locked 2026-05-21 as the IB Chem HL Translation Sprint opens. Generic
+high-frequency terms (`原子`, `分子`, `离子`, `元素`, `化合物`,
+`原子核`, `质子`, `中子`, `电子`, `摩尔`, `浓度`, `温度`, `压强`)
+are safe and don't need extra flagging. The English exam-rubric terms
+below are non-negotiable and must appear in `<code>` at first mention
+per section.
+
+**Structure 1 — Particulate nature of matter**
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| isotope | 同位素 | `isotope` |
+| atomic number / mass number | 原子序数 / 质量数 | `atomic number` / `mass number` |
+| relative atomic mass | 相对原子质量 | `relative atomic mass` |
+| mole / Avogadro's constant | 摩尔 / 阿伏伽德罗常数 | `mole` / `Avogadro's constant` |
+| molar mass | 摩尔质量 | `molar mass` |
+| empirical formula / molecular formula | 实验式 / 分子式 | `empirical formula` / `molecular formula` |
+| limiting reagent | 限量试剂 | `limiting reagent` |
+| theoretical yield / percent yield | 理论产量 / 产率 | `theoretical yield` / `percent yield` |
+| stoichiometry | 化学计量 | `stoichiometry` |
+| concentration | 浓度 | `concentration` (or `molarity` if used) |
+| ideal gas | 理想气体 | `ideal gas` |
+| molar volume | 摩尔体积 | `molar volume` |
+| STP | 标准温度和压力 | `STP` |
+| electron configuration | 电子构型 | `electron configuration` |
+| orbital / subshell | 轨道 / 亚层 | `orbital` / `subshell` |
+| Aufbau principle | 构造原理 | `Aufbau principle` |
+| Hund's rule | 洪德规则 | `Hund's rule` |
+| Pauli exclusion principle | 泡利不相容原理 | `Pauli exclusion principle` |
+| ionization energy | 电离能 | `ionization energy` |
+| emission / absorption spectrum | 发射光谱 / 吸收光谱 | `emission spectrum` / `absorption spectrum` |
+| quantum number | 量子数 | `quantum number` |
+
+**Structure 2 — Bonding & structure**
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| ionic bond | 离子键 | `ionic bond` |
+| covalent bond | 共价键 | `covalent bond` |
+| metallic bond | 金属键 | `metallic bond` |
+| electronegativity | 电负性 | `electronegativity` |
+| polar / non-polar | 极性 / 非极性 | `polar` / `non-polar` |
+| Lewis structure | 路易斯结构 | `Lewis structure` |
+| VSEPR theory | 价层电子对互斥理论 | `VSEPR` |
+| molecular geometry | 分子几何 | `molecular geometry` |
+| hybridization (sp / sp² / sp³) | 杂化 | `hybridization` |
+| sigma / pi bond | σ 键 / π 键 | `sigma bond` / `pi bond` |
+| resonance | 共振 | `resonance` |
+| formal charge | 形式电荷 | `formal charge` |
+| coordinate (dative) bond | 配位键 | `coordinate bond` / `dative bond` |
+| bond enthalpy / bond length | 键能 / 键长 | `bond enthalpy` / `bond length` |
+| intermolecular force | 分子间作用力 | `intermolecular force` |
+| London dispersion force | 伦敦色散力 | `London dispersion force` |
+| dipole-dipole interaction | 偶极-偶极相互作用 | `dipole-dipole` |
+| hydrogen bond | 氢键 | `hydrogen bond` |
+| van der Waals force | 范德华力 | `van der Waals force` |
+| lattice (giant ionic / covalent) | 晶格 (离子 / 共价) | `lattice` |
+
+**Reactivity 1 — What drives chemical reactions (energetics)**
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| enthalpy | 焓 | `enthalpy` |
+| entropy | 熵 | `entropy` |
+| Gibbs free energy | 吉布斯自由能 | `Gibbs free energy` |
+| exothermic / endothermic | 放热 / 吸热 | `exothermic` / `endothermic` |
+| standard enthalpy change | 标准焓变 | `standard enthalpy change` |
+| enthalpy of formation / combustion / neutralization | 生成焓 / 燃烧焓 / 中和焓 | `enthalpy of formation` / `combustion` / `neutralization` |
+| Hess's law | 盖斯定律 | `Hess's law` |
+| bond enthalpy | 键能 | `bond enthalpy` |
+| spontaneous reaction | 自发反应 | `spontaneous` |
+| system / surroundings | 体系 / 环境 | `system` / `surroundings` |
+| calorimetry | 量热法 | `calorimetry` |
+| specific heat capacity | 比热容 | `specific heat capacity` |
+
+**Reactivity 2 — How much, how fast, how far (kinetics + equilibrium)**
+
+| Concept | Chinese | Exam term in `<code>` |
+|---|---|---|
+| reaction rate | 反应速率 | `reaction rate` |
+| rate constant | 速率常数 | `rate constant` |
+| order of reaction | 反应级数 | `order of reaction` |
+| rate law / rate equation | 速率方程 | `rate law` / `rate equation` |
+| activation energy | 活化能 | `activation energy` |
+| catalyst | 催化剂 | `catalyst` |
+| Arrhenius equation | 阿伦尼乌斯方程 | `Arrhenius equation` |
+| collision theory | 碰撞理论 | `collision theory` |
+| Maxwell-Boltzmann distribution | 麦克斯韦-玻尔兹曼分布 | `Maxwell-Boltzmann distribution` |
+| transition state | 过渡态 | `transition state` |
+| rate-determining step | 决速步骤 | `rate-determining step` |
+| elementary step | 基元反应 | `elementary step` |
+| equilibrium | 平衡 | `equilibrium` |
+| dynamic equilibrium | 动态平衡 | `dynamic equilibrium` |
+| equilibrium constant (Kc / Kp) | 平衡常数 (Kc / Kp) | `equilibrium constant` |
+| Le Chatelier's principle | 勒夏特列原理 | `Le Chatelier's principle` |
+| reaction quotient | 反应商 | `reaction quotient` |
+
+**Translation note**: chemical formulas (H₂O, NaCl, CO₂), chemical
+equations, and SI units stay untouched. Subscript/superscript numbers
+in formulas are part of the symbol — don't replace them with HTML
+entities or Chinese punctuation.
 </glossary>
 
 <build_order>
