@@ -6,8 +6,11 @@ with [`review-changes.md`](review-changes.md) (inner loop, per-file
 edit review).
 
 **Core idea:** every subject has an `AUDIT.md` that lists open work
-tiered P0 / P1 / P2. The audit is the single source of truth. Each
-cycle has two phases:
+tiered P0 / P1 / P2. The audit is the single source of truth. New
+audit findings come from running
+[`rag/study-guide-audit-checklist.md`](../rag/study-guide-audit-checklist.md)
+against each shipped study guide; findings then land as sprint items
+in the subject's `AUDIT.md`. Each cycle has two phases:
 
 1. **Phase 0 — Improve `main`** (cross-cutting toolchain / infra).
    Lands on `main` before subject sprints open, because subject work
