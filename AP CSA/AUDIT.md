@@ -19,7 +19,9 @@ companion (`Practice Questions/Unit_N_*_Practice_Problems.html` + matched
 grading state, or other server / WASM work lives in the
 [Digital Product Backlog](#digital-product-backlog).
 
-Last reviewed: **2026-05-14** (post Sprint 1 close-out).
+Last reviewed: **2026-05-21** (`improve_study_guides` audit checkpoint —
+Sprint 2 opened with worked-examples / exam-tips / sliders focus per
+the user-locked 3-vector improvement direction).
 
 **CED coverage status** — Units 1–4 ship with both Study Guide *and*
 AP-style Practice Questions. AP CSA CED runs Units 1–10; Units 5–10
@@ -30,18 +32,42 @@ unbuilt on both surfaces. This is the headline gap.
 
 ## Active Sprint — what we're working on now
 
-**Sprint 1 closed 2026-05-14.** All practice-product items for the
-shipped units (U1–U4) landed on `ap_csa_unit_1_practice` and were
-fast-forwarded into `main`. The original S1-3 ("Practice Questions
-sub-product — none exist yet for this subject") is fully resolved for
-the in-scope unit range; **S1-1** (Units 5–10 CED coverage) remains the
-obvious next sprint.
+### Sprint 2 — Worked examples / exam tips / sliders (opened 2026-05-21)
+
+Audit-driven sprint per the user-locked 3-vector improvement focus
+(see `rag/study-guide-audit-checklist.md` Section E). **English-first**:
+each item lands as an English revision commit, user reviews, then the
+Mandarin follow-up commit picks up the same file per
+`prompts/create-bilingual-translation.md`.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S2-1** | All 4 units: per-section worked-example density audit (E1). U1 has 7 explicit "Worked Example" labels for 15 topics; U2/U3 have similar gaps. Many sections jump from concept-box to `<pre>` snippet without a labelled worked-example wrapper. Add labelled wrappers so the canonical exam application is discoverable per topic. | P1 | **Open** |
+| **S2-2** | All 4 units: per-topic exam-tip callouts (E2). Existing "AP Trap" callouts are the model — extend to all 15/12/9/17 topics in U1/U2/U3/U4. Targeted at AP Java FRQ trap patterns: `==` vs `.equals()`, autoboxing, `null` checks, off-by-one in array traversals, integer division, pass-by-value-of-reference. | P1 | **Open** |
+| **S2-3** | Slider widget candidate list (E3). AP CSA has zero slider widgets. Candidates (one slider, one concept each): traversal step-through (slider = array index), recursion depth tracer (slider = call count), iteration-vs-recursion comparison (slider = n), array growth visualizer. P2 because this is a new product surface, not a regression fix. | P2 | **Open** |
+
+**Sprint 1 still active for separate workstream**: **S1-1** Units 5–10
+CED coverage gap (P0). Pulls into a future sprint, not this one.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
 | **S1-1** | Ship Units 5–10 to close CED coverage gap (Writing Classes, Array, ArrayList, 2D Array, Inheritance, Recursion) on both surfaces | P0 | **Open** |
 | **S1-2** | Standing principle: pick whether AP CSA needs a Code Sandbox surface, or worked-snippets are enough | P1 | **Open** |
 | ~~**S1-3**~~ | ~~Practice Questions sub-product — none exist yet for this subject~~ | P1 | ✅ closed — U1 first cut `6b43af9`, refactored to exam-level `dd93b83`, U2/U3/U4 shipped `2239c20`, cross-linked from study guides `976ed5a` |
+
+**Deferred to bilingual follow-up** (per English-first gate locked
+2026-05-21):
+
+- `localStorage.setItem('drs.lang', …)` in `toggleLang()` across all 4
+  files — strip in translation follow-up.
+- Code-comment translation cleanup (~168 instances of
+  `<span class="cm" data-lang="zh">…</span>` siblings inside `<pre>`
+  blocks across U1–U4; code comments don't translate per playbook).
+- Title long-form normalization (`AP CSA` → `AP Computer Science A`).
+- Quiz markup parity (U1 inner-span vs U2/U3/U4 paired-div).
+- Unit 3 missing MCQ Patterns section.
+- Flashcard terseness rewrites.
+- Unit 3 CSS un-minify.
 
 ### Recently shipped (closed during Sprint 1)
 

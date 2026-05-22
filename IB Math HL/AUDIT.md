@@ -16,21 +16,45 @@ and the IB Math AA HL syllabus (first exams 2021).
 question files and any future digital products are out of scope until they
 exist.
 
-Last reviewed: **2026-05-15** (Sprint 1 active: Unit A refactor in flight;
-A1 + A3 + A4 study guides shipped; A1 + A3 practice question sets shipped).
+Last reviewed: **2026-05-21** (`improve_study_guides` audit checkpoint —
+Sprint 2 opened with worked-examples / exam-tips / sliders focus per
+the user-locked 3-vector improvement direction).
 
 ---
 
 ## Active Sprint — what we're working on now
 
-**Translation Sprint closed 2026-05-21.** All currently-shipped IB Math
-HL study guides (A1, A3, A4, C) bilingualized EN↔ZH against the locked
-playbook in
-[`prompts/create-bilingual-translation.md`](../prompts/create-bilingual-translation.md).
-Sequential, one file at a time, review-then-merge per file. Branch:
-`ib_math_hl_translation`. Per-file scorecard in the
-[Translation audit](#translation-audit-per-file-post-ship) section
-below — all 4 files pass four-axis audit.
+### Sprint 2 — Worked examples / exam tips / sliders (opened 2026-05-21)
+
+Audit-driven sprint per the user-locked 3-vector improvement focus
+(see `rag/study-guide-audit-checklist.md` Section E). **English-first**:
+each item lands as an English revision commit, user reviews, then the
+Mandarin follow-up commit picks up the same file per
+`prompts/create-bilingual-translation.md`.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S2-1** | **Unit C** `Unit_C_Geometry.html`: surface worked examples — unwrap `<details><summary>Worked Example — …</summary>` blocks so they're visible by default (sibling parity with A1/A3/A4). Reserve `<details>` for "Going deeper" proofs only. (E1 / B2) | P0 | **Open** |
+| **S2-2** | **Unit C**: add worked example + quiz to crammer-only topic sections — C1.3 Radian Measure, C2.1 SOHCAHTOA, C2.3 Bearings, C2.4 Unit Circle, C2.10 Symmetry. Add quiz to C2.6 Reciprocal/Inverse and C3.3 Vector Eqn of Line. (E1 / B2) | P1 | **Open** |
+| **S2-3** | All 4 units: per-major-topic exam-tip callout (E2). A1/A3/A4 have some "AP-style" strategy callouts — extend to every topic with concrete IB-paper guidance (Paper 1 calc vs Paper 2, HL-only flagging, command-term hints, "what graders look for"). Unit C has none. | P1 | **Open** |
+| **S2-4** | **Unit C**: page-fill / column-parity audit (A14). Unit C predates the A1/A3/A4 layout pattern; verify `.main-wrap` / `--max-w` / sidebar mode match siblings. | P2 | **Open** |
+| **S2-5** | Slider widget candidates (E3): IB Math HL currently has zero widgets. High-leverage one-slider-one-concept: GP convergence ratio slider (A1.6), Pascal-triangle row slider (A3.5), Argand diagram angle slider (A4 polar form), arc-length on unit circle (C2.4). Each = single slider, one observable. | P2 | **Open** |
+
+**Deferred to bilingual follow-up** (per English-first gate locked
+2026-05-21):
+
+- Theme persistence via `localStorage` (A5 — all 4 files).
+- HL-flagging migration to inline chips on Unit C (C2 — currently uses
+  text suffix; siblings use `<span class="hl-flag">HL</span>`).
+- `#how-to-use` section addition for Unit C.
+- Unit C flashcard density boost (12 → ~16).
+- Unit A3.5 add labelled worked-solution block.
+
+### Closed (Translation Sprint — closed 2026-05-21)
+
+All currently-shipped IB Math HL study guides (A1, A3, A4, C)
+bilingualized EN↔ZH. Branch `ib_math_hl_translation` fast-forwarded
+to `main`.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|

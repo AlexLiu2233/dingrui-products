@@ -155,7 +155,9 @@ Naming examples from history:
 For each audit item in the sprint, follow [`review-changes.md`](review-changes.md):
 
 1. **Capture before state** — `screenshot.sh <file> /tmp/before.png --both`
-2. **Edit** — minimal diff, address the audit item only
+2. **Edit — English only** — minimal diff, address the audit item only.
+   Even if the file is bilingual, the English revision lands first; do
+   not touch the Chinese side in this commit.
 3. **Validate** — `validate.sh <file>`
 4. **Capture after state** — `screenshot.sh <file> /tmp/after.png --both`
 5. **Compare** — diff before/after; check layout, math, dark mode
@@ -168,6 +170,14 @@ For each audit item in the sprint, follow [`review-changes.md`](review-changes.m
    Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
    ```
 7. **Wait for user review** — **never push or merge without explicit approval.**
+8. **Bilingual follow-up (gated, locked 2026-05-21).** Once the user
+   confirms the English revision for the file, add the Mandarin
+   teaching translation in a **separate follow-up commit** per the
+   locked playbook in
+   [`create-bilingual-translation.md`](create-bilingual-translation.md).
+   The follow-up commit also picks up any Section D findings (gloss
+   gaps, terminology drift) from the same audit. Do NOT bundle the
+   English revision and the bilingual update in one commit.
 
 ### 1.4 — Acceptance criteria per item
 Pulled from the audit item itself. Common shapes:

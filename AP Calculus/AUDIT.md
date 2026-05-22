@@ -15,21 +15,46 @@ and the official AP Calculus AB/BC Course and Exam Description (CED).
 **Scope boundary** — this audit covers the *Study Guide* product only. Practice
 question files and any future digital products are out of scope.
 
-Last reviewed: **2026-05-18** (translation audit added after AP Calc U1–U10
-bilingual ship at commit `3ab03d5`).
+Last reviewed: **2026-05-21** (`improve_study_guides` audit checkpoint —
+Sprint 2 opened with worked-examples / exam-tips / sliders focus per
+the user-locked 3-vector improvement direction).
 
 ---
 
 ## Active Sprint — what we're working on now
 
-**No active content sprint.** Translation Sprint closed; Study-Guide
-content inventory not yet done.
+### Sprint 2 — Worked examples / exam tips / sliders (opened 2026-05-21)
+
+Audit-driven sprint per the user-locked 3-vector improvement focus
+(see `rag/study-guide-audit-checklist.md` Section E). **English-first**:
+each item lands as an English revision commit, user reviews, then the
+Mandarin follow-up commit picks up the same file per
+`prompts/create-bilingual-translation.md`.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S1-1** | Inventory existing 10 units for content gaps vs current AP CED | P0 | **Open** |
-| **S1-2** | Normalize unit `<title>` tags — Units 7/8/10 had non-canonical titles before standardization (now fixed); verify card titles read well | P1 | **Open** |
-| **S1-3** | Standing principles section: pick the philosophy this subject uses (dual-goal? widget rules?) | P1 | **Open** |
+| **S2-1** | **U6** `Unit_6_Integration_Accumulation.html`: CJK characters inside `\text{...}` at lines 1850 (`\text{分子}`, `\text{分母}`) and 2056 (`\text{A 段}`, `\text{B 段}`) — math renders broken (A6 hygiene). Replace with `\mathrm{}` or move Chinese outside math. | P0 | **Open** |
+| **S2-2** | **U8** `Unit_8_Applications_of_Integration.html`: CJK in `\text{}` at lines 390 (`\text{净流入量}`) and 917 (`\text{其中 }`). Same fix (A6). | P0 | **Open** |
+| **S2-3** | **U5** `Unit_5_Analytical_Applications_of_Differentiation.html`: topics 5.3–5.10 and 5.12 have **no worked example** (only prose + concept boxes). Add ≥1 visible worked example per topic (E1 dual-goal). | P0 | **Open** |
+| **S2-4** | **U9** `Unit_9_Parametric_Polar_and_Vectors.html`: worked examples in topics 9.2, 9.3, 9.5, 9.8 are collapsed inside `<details>` — crammer can't lift in <1 min. Surface them (E1 / B2). | P0 | **Open** |
+| **S2-5** | **U10** `Unit_10_Sequences_and_Series.html`: all 14 worked examples are collapsed inside `<details>` — same structural inversion. Surface them (E1 / B2). | P0 | **Open** |
+| **S2-6** | **U8** stub topic 8.5 (formula box + 2 sentences, no example); topic 8.12 (washer about other axes) has no worked example. Fill in (E1). | P0 | **Open** |
+| **S2-7** | **U7** `Unit_7_Differential_Equations.html`: topics 7.2 (slope fields), 7.3 (exponential), 7.4 (logistic) — only 4 worked examples for 9 topics. Add 2–3 more (E1). | P1 | **Open** |
+| **S2-8** | Cross-corpus exam-tip callouts (E2): add `box--tip` / "AP Trap" / paper-strategy boxes for trap patterns (U-sub sign flip, FTC subtle conditions, BC parametric/polar conversions, infinite-series convergence-test choice). Currently scattered; missing on most topics. | P1 | **Open** |
+| **S2-9** | Slider widget candidates (E3): AP Calc has fewer interactive widgets than AP Physics. High-leverage one-slider-one-concept candidates: limit explorer (h → 0), Riemann sum (n rectangles), Taylor polynomial (n terms), logistic curve (carrying-capacity slider). Each = single slider, one observable. | P2 | **Open** |
+
+**Deferred to bilingual follow-up** (per English-first gate locked
+2026-05-21):
+
+- `localStorage.setItem('drs.lang', …)` in `toggleLang()` across 9 of 10
+  files (U8 already clean) — strip in translation follow-up.
+- Quiz markup convergence (A9 — U3 / U7 / U8 diverge from sibling pattern).
+- Per-section quiz coverage gaps (B4 — U5/U7/U8/U9/U10 push most quizzes
+  to end-of-unit).
+- Going-deeper proof block density (B3 — demoted to P1 per new checklist;
+  not in this sprint).
+- Section-ID convention drift (A9 — `topic-4-N` vs `s4-N` etc.).
+- TOC anchor orphans (common-mistakes, mvt-explorer not linked from sidebars).
 
 ---
 

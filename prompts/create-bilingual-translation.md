@@ -10,6 +10,21 @@ AP Calculus U1–U10 (`3ab03d5`), and hardened on AP Physics U1–U7
 (2026-05-19, including the terminology-audit pass that corrected
 `折返点 → 转折点`, `点积 → 标量积`, `路径长度 → 路程`,
 `缓冲溃缩区 → 溃缩区`, `冲量—动量定理 → 动量定理`).
+
+**English-first authoring order (locked 2026-05-21).** This playbook
+runs as a **follow-up to the English revision**, not in parallel.
+When auditing or improving an existing bilingual file:
+
+1. The English revision (worked examples / exam tips / slider widgets
+   / page-fill / hygiene) lands first as its own commit.
+2. User confirms the English on that file.
+3. *Then* this playbook executes against the confirmed English — the
+   Chinese side gets re-translated to track the English revision, and
+   any locked-glossary gaps (Section D in
+   `rag/study-guide-audit-checklist.md`) are picked up here.
+
+Never bundle the English revision and the bilingual update in one
+commit. Two commits, two review gates, same file path.
 </task>
 
 <inputs>

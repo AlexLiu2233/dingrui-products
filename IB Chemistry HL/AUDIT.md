@@ -14,15 +14,61 @@ Chemistry HL syllabus (first exams 2025).
 
 **Scope boundary** — this audit covers the *Study Guide* product only.
 
-Last reviewed: **2026-05-21** (Translation Sprint closed same day as
-opened; all 4 shipped IB Chem HL study guides bilingualized EN↔ZH on
-branch `ib_chem_hl_translation`, 4 commits T-1..T-4 awaiting user
-review before fast-forward to main).
+Last reviewed: **2026-05-21** (`improve_study_guides` audit checkpoint —
+Sprint 2 opened with worked-examples / exam-tips / sliders + page-fill
+focus per the user-locked 3-vector improvement direction).
 
 **Syllabus coverage gap** — current shipped: Structure 1, Structure 2,
 Reactivity 1, Reactivity 2. Missing: Structure 3, Reactivity 3,
 Tools 1–3 (plus all option topics if HL-specific extensions become a
 target).
+
+---
+
+## Active Sprint — what we're working on now
+
+### Sprint 2 — Worked examples / exam tips / sliders + page-fill (opened 2026-05-21)
+
+Audit-driven sprint per the user-locked 3-vector improvement focus
+(see `rag/study-guide-audit-checklist.md` Section E + A14).
+**English-first**: each item lands as an English revision commit, user
+reviews, then the Mandarin follow-up commit picks up the same file
+per `prompts/create-bilingual-translation.md`.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S2-1** | **Reactivity 1**: unicode superscripts `⁻¹` / `⁻³` inside `\text{...}` at lines 625, 644, 701, 720, 912, 1067 — math renders broken (A6 hygiene). Replace with `\mathrm{J\,mol^{-1}}` or `\text{J mol}^{-1}`. | P0 | **Open** |
+| **S2-2** | **Structure 2**: only 1 worked example across 4 topic sections. Add worked examples to 2.1 (ionic), 2.3 (metallic), 2.4 (materials) (E1 dual-goal). | P0 | **Open** |
+| **S2-3** | **Page-fill / column parity (A14, user-flagged).** All 4 IB Chem HL files render narrower than sibling subjects do. Diagnose: check `--max-w` value, `.main-wrap` width/margin rules, whether sidebar reserves a column vs. overlays. Side-by-side screenshot vs an AP Physics or IB Math HL sibling at the same viewport. Fix to match. | P1 | **Open** |
+| **S2-4** | **Structure 1** add worked example to 1.1 Particulate Nature. **Reactivity 1** add to 1.3 Energy from Fuels. (E1) | P1 | **Open** |
+| **S2-5** | **Reactivity 2**: add `#unit-quiz` section with 3 MCQs (sibling parity — other 3 files have one). | P1 | **Open** |
+| **S2-6** | All 4 files: per-major-topic exam-tip callout (E2). Currently every file has *one* Exam Strategy section at the bottom. Distribute the strategy guidance to each topic — Paper 1 (no calc) vs Paper 2 framing, mark-allocation cues, "data booklet" reminders, common rubric-loss traps. | P1 | **Open** |
+| **S2-7** | **Structure 1, Structure 2, Reactivity 1**: adopt Reactivity 2's "Guiding Question" `concept-box` opener at the top of every topic section (B1 cheat-sheet pattern parity). | P1 | **Open** |
+| **S2-8** | Slider widget candidates (E3): IB Chem has zero widgets. Candidates (one slider, one observable each): Maxwell-Boltzmann distribution (temperature slider → visualize tail above $E_a$), equilibrium shift (Le Chatelier — T or [reactant] slider → K change), rate-vs-concentration (order-of-reaction visualizer), Gibbs sign predictor (T slider with $\Delta H$, $\Delta S$ presets). | P2 | **Open** |
+
+**Deferred to bilingual follow-up** (per English-first gate locked
+2026-05-21):
+
+- Missing `<code>` glosses in Structure 1 (Avogadro's constant,
+  limiting reagent, theoretical yield, percent yield, stoichiometry,
+  Aufbau principle, Hund's rule, Pauli exclusion principle, quantum
+  number, emission spectrum, absorption spectrum).
+- Theme button implementation drift (P2 — Structure 1 uses CSS-only;
+  others use JS helper).
+- Worked-example markup form drift between files (P2).
+- Section-label bilingualization in Structure 2.
+- Anchor naming `#s1-1` reuse between Structure 1 and Reactivity 1.
+
+### Sprint 1 (still queued) — Syllabus coverage gap
+
+Original P0 work; preserved here so it isn't lost.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S1-1** | Draft `Structure_3_Classification_of_Matter.html` | P0 | **Open** |
+| **S1-2** | Draft `Reactivity_3_What_are_the_Mechanisms.html` (organic + electron transfer) | P0 | **Open** |
+| **S1-3** | Draft Tools 1–3 study guides (experimental, technology, math/data) | P0 | **Open** |
+| **S1-4** | Standing principle: dual-goal contract or domain-specific philosophy | P1 | **Open** |
 
 ---
 
@@ -53,29 +99,17 @@ inline; chemical formulas, state symbols, KaTeX math untouched.
 Reactivity 1/2. Wave 2 (Structure 3, Reactivity 3, Tools 1–3) will
 extend the same tables as those files ship.
 
-**Commits on `ib_chem_hl_translation` branch (awaiting user review +
-fast-forward to main):**
+**Commits on `main` (fast-forwarded 2026-05-21):**
 
 - `9630110` — T-1 Structure 1 Particulate Nature of Matter
 - `54ac31b` — T-2 Structure 2 Bonding & Structure
 - `1c7f483` — T-3 Reactivity 1 What Drives Chemical Reactions
 - `e855c1e` — T-4 Reactivity 2 How Much How Fast How Far
+- `03e6834` — AUDIT close-out
 
-**Next**: Structure 3, Reactivity 3, Tools 1–3 to be drafted in
-Sprint 1 (queued below) — those will be bilingual from the start.
-
-### Sprint 1 (queued) — Syllabus coverage gap
-
-Once the Translation Sprint closes, this Sprint picks up the
-unshipped syllabus topics. Original P0 work; preserved here so it
-isn't lost.
-
-| ID | Item | Tier | Status |
-|---|---|---|---|
-| **S1-1** | Draft `Structure_3_Classification_of_Matter.html` | P0 | **Open** |
-| **S1-2** | Draft `Reactivity_3_What_are_the_Mechanisms.html` (organic + electron transfer) | P0 | **Open** |
-| **S1-3** | Draft Tools 1–3 study guides (experimental, technology, math/data) | P0 | **Open** |
-| **S1-4** | Standing principle: dual-goal contract or domain-specific philosophy | P1 | **Open** |
+**Sprint 1 (Syllabus coverage gap — Structure 3, Reactivity 3,
+Tools 1–3) and Sprint 2 (Worked examples / exam tips / sliders + page-fill)
+both promoted to the Active Sprint section above.**
 
 ---
 

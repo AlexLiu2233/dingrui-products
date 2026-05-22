@@ -17,12 +17,38 @@ that belongs in a richer interactive surface lives in the
 [Digital Product Backlog](#digital-product-backlog) at the bottom of this file
 and is **out of scope** until that product spins up.
 
-Last reviewed: **2026-05-04** (post text/math + widget-philosophy directive).
-Last reorganized: **2026-05-04**.
+Last reviewed: **2026-05-21** (`improve_study_guides` audit checkpoint —
+Sprint 9 opened with worked-examples / exam-tips / sliders focus per
+the user-locked 3-vector improvement direction).
 
 ---
 
 ## Active Sprint — what we're working on now
+
+### Sprint 9 — Worked examples / exam tips / sliders (opened 2026-05-21)
+
+Audit-driven sprint per the user-locked 3-vector improvement focus
+(see `rag/study-guide-audit-checklist.md` Section E). **English-first**:
+each item lands as an English revision commit, user reviews, then the
+Mandarin follow-up commit picks up the same file per
+`prompts/create-bilingual-translation.md`.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S9-1** | `Unit_7_Oscillations.html` `shm-widget`: trim damping (`shmB`) + driving (`shmWd`) sliders + phase-space canvas — they violate the one-slider-one-concept rule (E3 / Interactive Component Philosophy Rule 2). Sprint 6 missed this. Log removed controls as **DP-11** (damped SHM widget) and **DP-12** (phase-space probe). | P0 | **Open** |
+| **S9-2** | Cross-corpus exam-tip callouts (E2). "AP Trap" callouts exist sparsely; extend to every major topic in all 7 units. Paper-style framing, trap patterns, mark-saver moves. | P1 | **Open** |
+| **S9-3** | Slider-widget audit (E3): confirm every existing widget is one-slider-one-concept. Catalogue any candidate topics where adding a widget would be high-leverage (e.g. orbital eccentricity, projectile launch angle vs range, damped pendulum amplitude decay). | P2 | **Open** |
+
+**Deferred to bilingual follow-up** (per English-first gate locked
+2026-05-21 — these land in the translation pass after the English
+revision is confirmed per file):
+
+- D3 terminology regression: `Unit_1_Kinematics.html` lines 695 + 1611
+  use `路径长度` instead of locked `路程`.
+- D2 mistranslation: `Unit_7_Oscillations.html:504` `成反比例` should be
+  `成正比但方向相反` (SHM defining relationship semantically inverted).
+
+### Closed sprints (collapsed)
 
 **Sprint 3 closed 2026-05-09** — all P1 polish items landed on
 `sprint3_p1_polish`. Sprints 1, 2, 3, 4 are all closed; resolved details

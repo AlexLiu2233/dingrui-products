@@ -16,6 +16,32 @@ product.
 - **Topics**: {{TOPICS_LIST}}                  *bullet list of sub-topics to cover*
 </inputs>
 
+<authoring_order>
+
+## English first, bilingual is a follow-up commit (locked 2026-05-21)
+
+**New units ship in English first.** Once the user confirms the
+English revision for the file, the Mandarin teaching translation
+lands as a separate follow-up commit per the locked playbook in
+[`create-bilingual-translation.md`](create-bilingual-translation.md).
+
+This applies to:
+
+- Brand-new units drafted with this prompt.
+- Improvements to existing English content (worked examples, exam
+  tips, slider widgets).
+- Coverage-gap drafts in subjects mid-translation (the new file ships
+  English; bilingual catches up in the next translation wave).
+
+**Why:** bilingual drafting in parallel doubled the surface area
+under review without doubling editorial value. English-first lets the
+user lock notes / examples / widgets once, then the translation pass
+becomes mechanical against the locked English. It also keeps the
+review cadence one-language-at-a-time per file, matching the locked
+review-then-merge pattern.
+
+</authoring_order>
+
 <contract>
 
 ## The dual-goal contract (read first, enforce at every section)
