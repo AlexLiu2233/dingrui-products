@@ -24,6 +24,180 @@ the user-locked 3-vector improvement direction).
 
 ## Active Sprint — what we're working on now
 
+### Sprint 3 — Complete the units (opened 2026-05-22)
+
+**Goal.** Every official IB Math AA HL sub-topic ships as a unit with
+4 deliverables: Study Guide, Practice Questions, Solutions,
+ZH translation. **79 sub-topics × 4 = ~316 deliverables** total scope.
+
+**Sub-topic numbering.** Matches the official IB AA HL guide
+(first exams 2021). Spec authority is `rag/subjects/ib_math_aa_hl.md`
+— see that file for sub-topic titles and SL/AHL classification.
+
+**Cadence.** Per the locked review-then-merge pattern, each Study Guide
+ships as its own commit. Practice + Solutions follow per unit.
+ZH translation pass per the locked English-first → ZH playbook.
+
+**Sprint 2 status.** Topic D part of Sprint 2 is closed (D1/D2/D3
+shipped 2026-05-22). S2-B (Unit B Functions) and S2-E (Unit E Calculus)
+rows are **absorbed into Sprint 3's deliverable grid below** —
+Topic 2 (16 sub-topics) and Topic 5 (18 sub-topics) cover the same
+ground at sub-topic granularity. Legacy Sprint 2 polish items
+(`S2-1` Unit C worked-examples surfacing, `S2-2` Unit C concept-box
+additions, etc.) are kept in the **Sprint 2 follow-up section** below
+since they apply to the existing Unit_C monolith and its retirement
+is deferred until C-split units ship.
+
+**Sub-topic-per-unit decision.** Spec adopts strict sub-topic-per-unit
+granularity per user direction "use the official IB sub-topics so the
+consumer can easily match it (like the APs do)". Legacy combined units
+(A1, A3, A4, C, D1, D2, D3) stay shipped with their existing filenames;
+retirement to `rag/archive/` happens once all their constituent
+sub-topic units ship.
+
+#### Sprint 3 deliverable grid
+
+Status legend per cell: `⬜` unbuilt · `🟡` drafting · `📁` covered by legacy combined unit · `✅` shipped · `🌐` ZH translation done
+
+##### Topic 1 — Number and Algebra (16 sub-topics)
+
+| Sub-topic | SL/AHL | Title | Study Guide | Practice | Solutions | ZH |
+|---|---|---|---|---|---|---|
+| 1.1 | SL | Scientific Notation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.2 | SL | Arithmetic Sequences & Series | 📁 (A1) | 📁 | 📁 | ⬜ |
+| 1.3 | SL | Geometric Sequences & Series | 📁 (A1) | 📁 | 📁 | ⬜ |
+| 1.4 | SL | Financial Applications of GP | 📁 (A1) | 📁 | 📁 | ⬜ |
+| 1.5 | SL | Exponents & Logarithms (Intro) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.6 | SL | Simple Deductive Proof | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.7 | SL | Logarithm Laws (Rational Exp + Change of Base) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.8 | SL | Infinite Geometric Series | 📁 (A1) | 📁 | 📁 | ⬜ |
+| 1.9 | SL | Binomial Theorem (Positive Integer) | 📁 (A3) | 📁 | 📁 | ⬜ |
+| 1.10 | AHL | Permutations, Combinations, Extended Binomial | 📁 (A3) | 📁 | 📁 | ⬜ |
+| 1.11 | AHL | Partial Fractions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.12 | AHL | Complex Numbers (Cartesian) | 📁 (A4) | ⬜ | ⬜ | ⬜ |
+| 1.13 | AHL | Polar / Euler Forms | 📁 (A4) | ⬜ | ⬜ | ⬜ |
+| 1.14 | AHL | Conjugate Roots, De Moivre, Complex Roots | 📁 (A4) | ⬜ | ⬜ | ⬜ |
+| 1.15 | AHL | Proof by Induction / Contradiction | ⬜ | ⬜ | ⬜ | ⬜ |
+| 1.16 | AHL | Systems of Linear Equations | ⬜ | ⬜ | ⬜ | ⬜ |
+
+##### Topic 2 — Functions (16 sub-topics — entirely greenfield)
+
+| Sub-topic | SL/AHL | Title | Study Guide | Practice | Solutions | ZH |
+|---|---|---|---|---|---|---|
+| 2.1 | SL | Straight Lines | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.2 | SL | Function Concepts (Domain, Range, Inverse) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.3 | SL | Graphs of Functions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.4 | SL | Key Features & Intersections | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.5 | SL | Composite Functions & Inverses | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.6 | SL | Quadratic Functions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.7 | SL | Quadratic Equations & Inequalities | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.8 | SL | Rational Functions (Linear Numerator) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.9 | SL | Exponential & Logarithmic Functions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.10 | SL | Solving Equations | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.11 | SL | Transformations of Graphs | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.12 | AHL | Polynomial Functions (Factor / Remainder) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.13 | AHL | Rational Functions HL | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.14 | AHL | Odd / Even / Self-Inverse Functions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.15 | AHL | Function Inequalities | ⬜ | ⬜ | ⬜ | ⬜ |
+| 2.16 | AHL | Graph Transformations HL (\|f(x)\|, 1/f(x), etc.) | ⬜ | ⬜ | ⬜ | ⬜ |
+
+##### Topic 3 — Geometry and Trigonometry (18 sub-topics)
+
+| Sub-topic | SL/AHL | Title | Study Guide | Practice | Solutions | ZH |
+|---|---|---|---|---|---|---|
+| 3.1 | SL | 3D Geometry, Volumes, Surface Areas | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.2 | SL | Angles Between Lines / Planes | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.3 | SL | Right-Angled & Non-Right Trigonometry | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.4 | SL | Radian Measure, Arc, Sector | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.5 | SL | Unit Circle Definitions, Exact Values | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.6 | SL | Pythagorean & Double-Angle Identities | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.7 | SL | Circular Functions (Amplitude, Period, Transformations) | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.8 | SL | Solving Trig Equations | 📁 (C) | ⬜ | ⬜ | ⬜ |
+| 3.9 | AHL | Reciprocal & Inverse Trig | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.10 | AHL | Compound Angle Identities | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.11 | AHL | Trig Symmetries & Relationships | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.12 | AHL | Vectors — Introduction | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.13 | AHL | Scalar Product | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.14 | AHL | Vector Equations of Lines | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.15 | AHL | Relationships Between Lines | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.16 | AHL | Vector Product (Cross Product) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.17 | AHL | Vector Equations of Planes | ⬜ | ⬜ | ⬜ | ⬜ |
+| 3.18 | AHL | Intersections of Lines & Planes | ⬜ | ⬜ | ⬜ | ⬜ |
+
+##### Topic 4 — Statistics and Probability (11 sub-topics — FULLY SHIPPED ✅)
+
+| Sub-topic | SL/AHL | Title | Study Guide | Practice | Solutions | ZH |
+|---|---|---|---|---|---|---|
+| 4.1 | SL | Sampling Concepts | ✅ (D1) | ⬜ | ⬜ | ✅ |
+| 4.2 | SL | Data Presentation | ✅ (D1) | ⬜ | ⬜ | ✅ |
+| 4.3 | SL | Central Tendency & Dispersion | ✅ (D1) | ⬜ | ⬜ | ✅ |
+| 4.4 | SL | Bivariate Linear (PMCC, Regression) | ✅ (D1) | ⬜ | ⬜ | ✅ |
+| 4.5 | SL | Probability Basics | ✅ (D2) | ⬜ | ⬜ | ✅ |
+| 4.6 | SL | Combined Events, Conditional, Independent | ✅ (D2) | ⬜ | ⬜ | ✅ |
+| 4.7 | SL | Discrete RVs, E(X) | ✅ (D3) | ⬜ | ⬜ | ✅ |
+| 4.8 | SL | Binomial Distribution | ✅ (D3) | ⬜ | ⬜ | ✅ |
+| 4.9 | SL | Normal Distribution | ✅ (D3) | ⬜ | ⬜ | ✅ |
+| 4.10 | AHL | Bayes' Theorem | ✅ (D2) | ⬜ | ⬜ | ✅ |
+| 4.11 | AHL | Variance, Continuous RVs, Linear Transforms | ✅ (D3) | ⬜ | ⬜ | ✅ |
+
+> **Topic 4 Practice + Solutions gap.** Study Guides are shipped and
+> translated, but per-sub-topic Practice / Solutions files haven't
+> been built (A1 / A3 currently have Practice but no per-sub-topic
+> Practice for Topic 4). Pre-existing A1 Practice, A3 Practice, A3
+> Solutions cover the Topic 1 portion of Sprint 3 partially. Topic 4
+> Practice + Solutions is a Sprint 3 deliverable. The bilingual ZH
+> mark above reflects Study Guide translation only.
+
+##### Topic 5 — Calculus (18 sub-topics — entirely greenfield)
+
+| Sub-topic | SL/AHL | Title | Study Guide | Practice | Solutions | ZH |
+|---|---|---|---|---|---|---|
+| 5.1 | SL | Introduction to Differentiation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.2 | SL | Increasing & Decreasing Functions | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.3 | SL | Power Rule & Linearity | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.4 | SL | Tangents & Normals | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.5 | SL | Anti-Differentiation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.6 | SL | Definite Integrals | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.7 | SL | Derivative Rules (Chain, Product, Quotient, Trig/Exp/Log) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.8 | SL | Maxima & Minima | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.9 | SL | Kinematics (Differentiation) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.10 | SL | Indefinite Integrals (Reverse Chain Rule) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.11 | SL | Volumes of Revolution (x-axis) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.12 | AHL | Continuity & Differentiability | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.13 | AHL | Related Rates & Implicit Differentiation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.14 | AHL | Concavity & Inflection | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.15 | AHL | Advanced Integration (Substitution, Parts) | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.16 | AHL | y-Axis Integration & Volumes | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.17 | AHL | Differential Equations | ⬜ | ⬜ | ⬜ | ⬜ |
+| 5.18 | AHL | Maclaurin Series | ⬜ | ⬜ | ⬜ | ⬜ |
+
+#### Sprint 3 roll-up
+
+- **Topic 1**: 7 sub-topics 📁 covered by legacy combined units (A1 + A3 + A4); 9 ⬜ unbuilt
+- **Topic 2**: 16 ⬜ unbuilt (greenfield)
+- **Topic 3**: 8 📁 covered by Unit_C monolith; 10 ⬜ unbuilt (AHL 3.9–3.18)
+- **Topic 4**: 11 ✅ Study Guides shipped + ZH (D1, D2, D3); Practice + Solutions ⬜ per sub-topic
+- **Topic 5**: 18 ⬜ unbuilt (greenfield)
+
+**Sprint 3 priority order** (suggested):
+
+1. **AHL 4.11 audit fix** — verify whether `Unit_D3` §3.8 (sums of independent RVs / linear combinations of normals) is in-syllabus or off-syllabus per the AA HL guide. If off-syllabus, either trim D3 or add an explicit "enrichment beyond syllabus" callout.
+2. **Topic 5 SL block** (5.1 – 5.11) — calculus is the most-tested AA HL topic on Paper 2; biggest student-impact greenfield work.
+3. **Topic 2 SL block** (2.1 – 2.11) — functions underpin calculus and trigonometry; second-priority greenfield.
+4. **Topic 3 AHL block** (3.9 – 3.18) — vectors is HL-distinctive content; Unit_C currently leaves it uncovered.
+5. **Topic 1 gaps** (1.1, 1.5, 1.6, 1.7, 1.11, 1.15, 1.16) — fills the legacy A-monolith retirement path.
+6. **Topic 5 AHL block** (5.12 – 5.18) — densest HL content; integration techniques + Maclaurin series.
+7. **Topic 2 AHL block** (2.12 – 2.16) — polynomial/rational HL extensions.
+8. **Topic 4 Practice + Solutions** — fills the per-sub-topic Practice gap for the already-shipped Topic 4.
+
+### Sprint 2 follow-up — Unit_C monolith polish (kept open)
+
+These rows apply to the existing `Unit_C_Geometry.html` monolith
+which remains in production until C-split sub-topic units 3.1–3.8
+all ship. The polish work below makes Unit_C consistent with A1/A3/A4
+during the transition window. Each row will be marked closed-by-split
+once the corresponding sub-topic units replace the monolith section.
+
 ### Sprint 2 — Worked examples / exam tips / sliders (opened 2026-05-21)
 
 Audit-driven sprint per the user-locked 3-vector improvement focus
