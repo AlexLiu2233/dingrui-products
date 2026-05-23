@@ -181,14 +181,20 @@ Status legend per cell: `⬜` unbuilt · `🟡` drafting · `📁` covered by le
 
 **Sprint 3 priority order** (suggested):
 
-1. **AHL 4.11 audit fix** — verify whether `Unit_D3` §3.8 (sums of independent RVs / linear combinations of normals) is in-syllabus or off-syllabus per the AA HL guide. If off-syllabus, either trim D3 or add an explicit "enrichment beyond syllabus" callout.
-2. **Topic 5 SL block** (5.1 – 5.11) — calculus is the most-tested AA HL topic on Paper 2; biggest student-impact greenfield work.
-3. **Topic 2 SL block** (2.1 – 2.11) — functions underpin calculus and trigonometry; second-priority greenfield.
-4. **Topic 3 AHL block** (3.9 – 3.18) — vectors is HL-distinctive content; Unit_C currently leaves it uncovered.
-5. **Topic 1 gaps** (1.1, 1.5, 1.6, 1.7, 1.11, 1.15, 1.16) — fills the legacy A-monolith retirement path.
-6. **Topic 5 AHL block** (5.12 – 5.18) — densest HL content; integration techniques + Maclaurin series.
-7. **Topic 2 AHL block** (2.12 – 2.16) — polynomial/rational HL extensions.
-8. **Topic 4 Practice + Solutions** — fills the per-sub-topic Practice gap for the already-shipped Topic 4.
+1. **Legacy unit retrofit — add `.ib-ref` chips to A1 / A3 / A4 / Unit_C.** D1 / D2 / D3 already carry per-section `.ib-ref` chips (78 chips across the three files); the four pre-D-units do not. Without this retrofit a student can't open the existing units and map sections to official IB sub-topic numbers — defeating the "consumer can match like APs do" rationale for Sprint 3. Scope per file:
+   - `Unit_A1_Sequences_and_Series.html` — chips for `SL 1.2`, `SL 1.3`, `SL 1.4`, `SL 1.8`
+   - `Unit_A3_Combinatorics.html` — chips for `SL 1.9`, `AHL 1.10`
+   - `Unit_A4_Complex_Numbers.html` — chips for `AHL 1.12`, `AHL 1.13`, `AHL 1.14`
+   - `Unit_C_Geometry.html` — chips for `SL 3.1` through `SL 3.8` across the 8 SL sub-topic sections
+   Also add the `.ib-ref` CSS rule to each file's `<style>` block. Translation pass on retrofitted files via the locked English-first → ZH cadence (the additional Chinese for `.ib-ref` labels is `SL 4.1` etc. — kept untranslated as exam-shorthand).
+2. **AHL 4.11 audit fix** — verify whether `Unit_D3` §3.8 (sums of independent RVs / linear combinations of normals) is in-syllabus or off-syllabus per the AA HL guide. If off-syllabus, either trim D3 or add an explicit "enrichment beyond syllabus" callout.
+3. **Topic 5 SL block** (5.1 – 5.11) — calculus is the most-tested AA HL topic on Paper 2; biggest student-impact greenfield work.
+4. **Topic 2 SL block** (2.1 – 2.11) — functions underpin calculus and trigonometry; second-priority greenfield.
+5. **Topic 3 AHL block** (3.9 – 3.18) — vectors is HL-distinctive content; Unit_C currently leaves it uncovered.
+6. **Topic 1 gaps** (1.1, 1.5, 1.6, 1.7, 1.11, 1.15, 1.16) — fills the legacy A-monolith retirement path.
+7. **Topic 5 AHL block** (5.12 – 5.18) — densest HL content; integration techniques + Maclaurin series.
+8. **Topic 2 AHL block** (2.12 – 2.16) — polynomial/rational HL extensions.
+9. **Topic 4 Practice + Solutions** — fills the per-sub-topic Practice gap for the already-shipped Topic 4.
 
 ### Sprint 2 follow-up — Unit_C monolith polish (kept open)
 
