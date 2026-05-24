@@ -19,24 +19,30 @@ and the IB Math AA HL syllabus (first assessment **2029** — switched from
 (to be created when AI HL drafting begins; spec lives at
 `rag/subjects/ib_math_ai_hl.md`).
 
-Last reviewed: **2026-05-22** (Sprint 3 retargeted from 79 sub-topic
-guides to 22 super-topic guides per the 2029 syllabus).
+Last reviewed: **2026-05-23** (massive Topic A push: A1 Solutions, A2
+SG+P+S, A4 P+S, A5 SG all shipped — Topic A is now 4/5 super-topics
+fully complete and 5/5 SG-complete; only A5 P+S remains).
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### 🎯 Immediate focus (locked 2026-05-22)
+### 🎯 Immediate focus (relocked 2026-05-23 after Topic A surge)
 
-1. **Topic D Practice + Solutions.** D1 / D2 / D3 Study Guides are
-   shipped and ZH-translated. The gap is **Practice + Solutions for
-   each of the 3 D-super-topics**. That's 3 × 2 surfaces × 2 languages =
-   **12 deliverables**. See the **Topic D sub-sprint** below.
-2. **Complete Combinatorics (A3).** A3 Study Guide + Practice +
-   Solutions all ship and are ZH-translated. "Complete" needs a
-   user-scoped definition before work starts — see the **A3 completion
-   row** in the Sprint 1 follow-up table below for the candidate
-   interpretations.
+1. ~~**Topic D Practice + Solutions.**~~ ✅ EN drafts all shipped
+   2026-05-22 (`f3c371e`, `50fd2ea`, `612071c`, `68ef8f3`, `49b2dcc`,
+   `22ff5f1`). ZH translation pass for the 6 Topic D P+S files still
+   open — handled in a combined D+A translation pass.
+2. ~~**Complete Combinatorics (A3).**~~ ✅ closed 2026-05-23 via
+   `832e7e7` (Paper 3 Q13 Vandermonde added, v1.2) + `7922014` (Paper 3
+   legend chip sync) + `52d1f55` (A1 Solutions drafted for parity).
+3. **Close Topic A 100%.** With A1/A2/A3/A4 all SG+P+S shipped, only
+   **A5 Practice + Solutions** remains. Drafting these closes Topic A
+   fully (5/5 super-topics × 4 deliverables) — the cleanest near-term
+   milestone.
+4. **Open Topic E or B greenfield.** E1 (calculus principles) is the
+   highest-leverage starting point; B1 (function representation) is
+   the foundational alternative.
 
 ### Sprint 3 — Complete the 2029 units (opened 2026-05-22)
 
@@ -70,18 +76,26 @@ Status legend per cell: `⬜` unbuilt · `🟡` partial (in legacy combined unit
 
 | ID | Super-topic | SL/AHL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **A1** | Sequences | SL + AHL | ✅ | ✅ | ⬜ ¹ | ✅ |
-| **A2** | Exponents and logarithms | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **A1** | Sequences | SL + AHL | ✅ | ✅ | ✅ ¹ | ✅ |
+| **A2** | Exponents and logarithms | SL + AHL | ✅ ² | ✅ ² | ✅ ² | ✅ ² |
 | **A3** | Combinatorics | SL + AHL | ✅ | ✅ | ✅ | ✅ |
-| **A4** | Complex numbers (HL only) | AHL | ✅ | ⬜ | ⬜ | ✅ ² |
-| **A5** | Proof and algebraic manipulation | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **A4** | Complex numbers (HL only) | AHL | ✅ | ✅ ³ | ✅ ³ | ✅ |
+| **A5** | Proof and algebraic manipulation | SL + AHL | ✅ ⁴ | ⬜ | ⬜ | ✅ ⁴ |
 
-¹ A1 Practice ZH shipped; A1 Solutions has never been drafted (only A3
-Solutions exists across the 6 shipped units). Drafting A1 Solutions is
-itself a deliverable, not just a translation pass.
+¹ A1 Solutions shipped 2026-05-23 (`52d1f55`) — 11 Qs / 87 marks,
+EN+ZH, mirroring the A3 Solutions template. Closed the
+Solutions-surface parity gap.
 
-² A4 Study Guide ZH shipped (T-3 `12dc6ad`); A4 Practice + Solutions
-have never been drafted. ZH column reflects Study Guide state only.
+² A2 SG shipped 2026-05-23 (`f9be199`, 1001 lines, 6 sections,
+covers 2021 1.5/1.7). A2 P+S shipped same day (`cd96f3f`) — 8 Qs /
+62 marks, EN+ZH built in. Topic A2 fully closed.
+
+³ A4 P+S shipped 2026-05-23 (`1bfaff4`) — 8 Qs / 67 marks, EN+ZH
+built in. A4 SG ZH was already in via T-3.
+
+⁴ A5 SG shipped 2026-05-23 (`cc943a4`, 1068 lines, 6 sections,
+covers 2021 1.6/1.11/1.15). A5 P+S still open — the **last gap** to
+close Topic A 100%.
 
 ##### Topic B — Functions (5 super-topics)
 
@@ -110,16 +124,17 @@ surface areas / radian / arc / sector for C1; right-angled trig /
 sine / cosine rules / bearings for C2). Standalone units not yet
 drafted.
 
-##### Topic D — Statistics and Probability (3 super-topics — 🎯 IMMEDIATE PRIORITY)
+##### Topic D — Statistics and Probability (3 super-topics)
 
 | ID | Super-topic | SL/AHL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **D1** | Univariate data (univariate + bivariate) | SL | ✅ | ⬜ | ⬜ | ✅ ⁵ |
-| **D2** | Probability | SL + AHL | ✅ | ⬜ | ⬜ | ✅ ⁵ |
-| **D3** | Probability distributions | SL + AHL | ✅ | ⬜ | ⬜ | ✅ ⁵ |
+| **D1** | Univariate data (univariate + bivariate) | SL | ✅ | ✅ | ✅ | ✅ ⁵ |
+| **D2** | Probability | SL + AHL | ✅ | ✅ | ✅ | ✅ ⁵ |
+| **D3** | Probability distributions | SL + AHL | ✅ | ✅ | ✅ | ✅ ⁵ |
 
-⁵ Study Guide ZH only. Practice + Solutions don't exist yet — they're
-the gap this sub-sprint closes (see below).
+⁵ Study Guide ZH complete (`148fa51`, `231f6e8`, `0f84a70`). Practice +
+Solutions EN drafts shipped 2026-05-22. ZH pass for the 6 P+S files
+still open — deferred to a combined D+A translation batch.
 
 ##### Topic E — Calculus (6 super-topics)
 
@@ -157,46 +172,43 @@ M1/A1/R1 callouts).
 
 | ID | Super-topic | SL/AHL | Practice | Solutions | ZH (P+S) |
 |---|---|---|---|---|---|
-| **S3-D1** | D1 Univariate data | SL | ⬜ | ⬜ | ⬜ |
-| **S3-D2** | D2 Probability | SL + AHL | ⬜ | ⬜ | ⬜ |
-| **S3-D3** | D3 Probability distributions | SL + AHL | ⬜ | ⬜ | ⬜ |
+| **S3-D1** | D1 Univariate data | SL | ✅ `f3c371e` | ✅ `50fd2ea` | ⬜ |
+| **S3-D2** | D2 Probability | SL + AHL | ✅ `612071c` (+ Paper 3 Q12 `fcf74e6`) | ✅ `68ef8f3` | ⬜ |
+| **S3-D3** | D3 Probability distributions | SL + AHL | ✅ `49b2dcc` (+ Paper 3 Q12 `f9dbea4`) | ✅ `22ff5f1` | ⬜ |
 
-**Sub-sprint roll-up.** 3 Practice + 3 Solutions + 6 ZH = **12
-deliverables**. Build order: D1 → D2 → D3, mirroring the Study Guide
-ship order so a customer can read straight through.
+**Sub-sprint roll-up.** EN drafts 6/6 ✅. ZH for the 6 P+S files
+remaining — bundled into the next combined D+A translation batch.
 
-#### Sprint 3 priority order (relocked 2026-05-22 — 2029 super-topic structure)
+#### Sprint 3 priority order (refreshed 2026-05-23 after Topic A surge)
 
-1. 🎯 **Topic D Practice + Solutions** (S3-D1 → S3-D3) — 12 deliverables.
-   Closing this lands the **first fully-complete 2029 super-topic
-   cluster** (Study Guide + Practice + Solutions, all surfaces × 3
-   super-topics, both languages).
-2. 🎯 **Complete A3 Combinatorics** — exact scope pending user
-   definition. Candidate interpretations: (a) retroactive verification
-   that A3's coverage matches the 2029 super-topic A3 sub-bullets once
-   the full IB AA HL 2029 guide is published; (b) add Paper 3 HL
-   exploration questions to A3 Practice (currently A3 Practice has
-   Paper 1A/1B/2 but no Paper 3); (c) draft A1 Solutions to match A3's
-   Solutions surface — only A3 has Solutions among shipped units.
-3. **Legacy unit retrofit — add `.ib-ref` chips to A1 / A3 / A4 / Unit_C.**
-   D1 / D2 / D3 already carry per-section `.ib-ref` chips (78 chips
-   across the three files); the four pre-D-units do not. Without this
-   retrofit a student can't open the existing units and map sections to
-   official IB sub-topic numbers. When the 2029 guide publishes
-   sub-bullets, the chips also pick up 2029 numbering.
-4. **A5 Proof and algebraic manipulation** — collapses Sprint 1 S1-5
-   (Proof) + S1-6 (Algebra & Systems) into one unit per the 2029
-   super-topic boundary. Covers 2021 sub-topics 1.6, 1.11, 1.15, 1.16.
-5. **A2 Exponents and logarithms** — finishes the Topic A super-topic
-   set (A1 ✅, A2 ⬜, A3 ✅, A4 ✅, A5 ⬜). Covers 2021 sub-topics 1.5, 1.7.
-6. **E1 Principles of differential calculus** — opens Topic E. Calculus
+1. ~~**Topic D Practice + Solutions** (S3-D1 → S3-D3)~~ ✅ EN drafts
+   shipped 2026-05-22. ZH pass remaining (6 files, bundled into next
+   D+A translation batch).
+2. ~~**Complete A3 Combinatorics**~~ ✅ closed 2026-05-23 via Paper 3
+   Q13 add (`832e7e7`), Solutions legend sync (`7922014`), and A1
+   Solutions parity draft (`52d1f55`).
+3. ~~**Legacy unit retrofit — `.ib-ref` chips on A1 / A3 / A4 / Unit_C.**~~
+   ✅ shipped 2026-05-23 in `e30142c` (40 chips total across the four
+   legacy units; Unit_C also gained the missing `.hl-flag` CSS as a
+   bonus).
+4. ~~**A5 Proof and Algebraic Manipulation** Study Guide~~ ✅ shipped
+   2026-05-23 (`cc943a4`, 1068 lines). A5 P+S still open.
+5. ~~**A2 Exponents and Logarithms** Study Guide + P+S~~ ✅ shipped
+   2026-05-23 (SG `f9be199`, P+S `cd96f3f`). Topic A2 fully closed.
+6. **A5 Practice + Solutions** — the last gap to close Topic A 100%.
+   8-question target mirroring A2/A4 pattern: direct/contradiction
+   proof, induction (HL), partial fractions (HL), 3×3 system, Paper 3
+   exploration.
+7. **E1 Principles of differential calculus** — opens Topic E. Calculus
    is the most-tested AA HL topic on Paper 2; biggest student-impact
    greenfield work.
-7. **B1 Representation of functions** — opens Topic B. Underpins
+8. **B1 Representation of functions** — opens Topic B. Underpins
    calculus.
-8. **E2 → E6** — rest of calculus in topic-order.
-9. **B2 → B5** — rest of functions.
-10. **C1 → C3** — geometry; also triggers `Unit_C_Geometry.html`
+9. **Topic D ZH translation batch** — 6 P+S files (deferred ZH from
+   Sprint 3 priority #1).
+10. **E2 → E6** — rest of calculus in topic-order.
+11. **B2 → B5** — rest of functions.
+12. **C1 → C3** — geometry; also triggers `Unit_C_Geometry.html`
     retirement once all three ship.
 
 ### Sprint 2 follow-up — Unit_C monolith polish (kept open)
@@ -301,19 +313,19 @@ merge into the single super-topic A5 "Proof and algebraic manipulation."
 | ID | Item | Tier | Status |
 |---|---|---|---|
 | ~~**S1-1**~~ | Draft `Unit_A1_Sequences_and_Series.html` | P0 | ✅ **Shipped 2026-05-08** — 8 sections, 18 quiz items, 12 flashcards, 14-item readiness checklist. Introduces the `cram-cheat` CSS pattern + `hl-flag` chip. |
-| **S1-2** | Draft `Unit_A2_Exponents_and_Logarithms.html` (2029 A2 — covers 2021 1.5, 1.7) | P0 | **Open** — laws of exponents (integer + rational), logarithms, exponential equations, change-of-base. |
+| ~~**S1-2**~~ | Draft `Unit_A2_Exponents_and_Logarithms.html` (2029 A2 — covers 2021 1.5, 1.7) | P0 | ✅ **Shipped 2026-05-23** — `f9be199`, 1001 lines, 6 content sections (Integer Exponents, Rational Exponents, Log Laws, Change of Base, Solving Eq, Growth/Decay). EN+ZH built in. |
 | ~~**S1-3**~~ | Draft `Unit_A3_Combinatorics.html` | P0 | ✅ **Shipped 2026-05-09** — 6 sections, 16 quizzes total, 12 flashcards, 14-item readiness checklist. Renamed from "Counting & Binomial" to user's preferred "Combinatorics." |
 | ~~**S1-4**~~ | Draft `Unit_A4_Complex_Numbers.html` | P0 | ✅ **Shipped 2026-05-15** — 6 sections, 16 quizzes total, 14 flashcards, 14-item readiness checklist. Includes Argand SVG components. |
-| **S1-5-and-6** | Draft `Unit_A5_Proof_and_Algebraic_Manipulation.html` (2029 A5 — covers 2021 1.6, 1.11, 1.15, 1.16) | P0 | **Open** — collapses former S1-5 (Proof: direct, induction, contradiction) and S1-6 (Algebraic manipulation: partial fractions, 3×3 linear systems, RREF) into one super-topic unit per the 2029 boundary. |
-| **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | 🟡 **Partial 2026-05-15** — file moved to `rag/archive/Unit_A_Number_and_Algebra.html` (stripped from deploy by `deploy.yml`); Unit A card dropped from `index.html`. Full deletion pending A2 + A5 ship. |
+| ~~**S1-5-and-6**~~ | Draft `Unit_A5_Proof_and_Algebraic_Manipulation.html` (2029 A5 — covers 2021 1.6, 1.11, 1.15, 1.16) | P0 | ✅ **Shipped 2026-05-23** — `cc943a4`, 1068 lines, 6 content sections (Direct Proof, Contradiction, Induction HL, Partial Fractions HL, 3×3 Systems HL, RREF HL). EN+ZH built in. Collapses 2021 S1-5 + S1-6 per the 2029 boundary. |
+| **S1-7** | Remove old `Unit_A_Number_and_Algebra.html` + update `index.html` cards | P1 | 🟡 **Partial 2026-05-15** — file moved to `rag/archive/Unit_A_Number_and_Algebra.html` (stripped from deploy by `deploy.yml`); Unit A card dropped from `index.html`. Full deletion now unblocked since A2 + A5 SGs shipped. |
 
-Build order under the 2029 collapse: **A1 (✓) → A3 (✓) → A4 (✓) → A2 → A5 → cleanup**.
+Build order under the 2029 collapse: **A1 (✓) → A3 (✓) → A4 (✓) → A2 (✓) → A5 (✓ SG; P+S pending) → S1-7 cleanup**.
 
-#### A3 completion row (immediate task #2)
+#### A3 completion row (immediate task #2) — ✅ closed 2026-05-23
 
-| ID | Item | Tier | Status | Candidate scopes |
+| ID | Item | Tier | Status | Resolution |
 |---|---|---|---|---|
-| **A3-complete** | Define and finish "complete Combinatorics (A3)" per immediate task #2 | P0 | **Open — scope pending** | (a) retroactive verification of A3 coverage against full 2029 A3 sub-bullets when IB publishes the AA HL 2029 guide; (b) add Paper 3 HL exploration question pack to `Unit_A3_Combinatorics_Practice.html` (currently has Paper 1A/1B/2 but no Paper 3); (c) draft `Unit_A1_Sequences_and_Series_Solutions.html` to match A3's Solutions surface (parity gap — only A3 has Solutions among the 6 shipped units); (d) other — clarify with user. |
+| ~~**A3-complete**~~ | Define and finish "complete Combinatorics (A3)" | P0 | ✅ closed | Path (b) + (c) executed. (b) Paper 3 Q13 (Vandermonde + sum-of-squares, 16 marks) added to A3 Practice in `832e7e7` (bumping A3 Practice to v1.2 / 13 Qs / 116 marks); legend chip and topics-line follow-on syncs in `7922014` and `6f5a257`. (c) A1 Solutions drafted in `52d1f55` (11 Qs / 87 marks, EN+ZH) — closes the Solutions-surface parity gap. Path (a) deferred until IB publishes the full AA HL 2029 sub-bullet enumeration. |
 
 ### Practice Questions sub-stream
 
@@ -326,9 +338,9 @@ and mark allocation pills. Question-only — no embedded answers.
 | ID | Item | Status |
 |---|---|---|
 | ~~**SQ-1**~~ | `Practice Questions/README.md` + locked conventions | ✅ Shipped 2026-05-09 |
-| ~~**SQ-2**~~ | `Unit_A1_Sequences_and_Series_Practice.html` (11 Qs, 67 marks total) | ✅ Shipped 2026-05-09 |
-| ~~**SQ-3**~~ | `Unit_A3_Combinatorics_Practice.html` (11 Qs, 61 marks total) | ✅ Shipped 2026-05-09 |
-| **SQ-4** | Practice files for A2 / A4 / A5 / B (all 5) / D1-D3 / E (all 6) — one per super-topic as study guides land | **Open** — track per super-topic ship; D1/D2/D3 are the immediate sub-sprint above |
+| ~~**SQ-2**~~ | `Unit_A1_Sequences_and_Series_Practice.html` (11 Qs, 87 marks) | ✅ Shipped 2026-05-09 (now also has Solutions companion `52d1f55`) |
+| ~~**SQ-3**~~ | `Unit_A3_Combinatorics_Practice.html` (13 Qs, 116 marks at v1.2) | ✅ Shipped 2026-05-09; Q13 Paper 3 added 2026-05-23 (`832e7e7`) |
+| **SQ-4** | Practice files for A2 / A4 / A5 / B (all 5) / D1-D3 / E (all 6) | 🟡 **Partially closed.** ✅ A2 (`cd96f3f`), A4 (`1bfaff4`), D1/D2/D3 (P+S EN drafts 2026-05-22). ⬜ Remaining: A5, B (all 5), E (all 6). |
 
 ### Sprint 2 — New super-topic units (Topic D shipped 2026-05-22)
 
@@ -346,7 +358,7 @@ Probability** stays as the already-shipped D1/D2/D3 (clean match).
 | **S2-B-greenfield** | Draft 5 B-super-topic units: B1 Representation of functions, B2 Polynomial functions, B3 Functions with asymptotes, B4 Trigonometric functions (partial via Unit_C), B5 Transformations of graphs and functions | P0 | **Open — 5 units total** |
 | **S2-E-greenfield** | Draft 6 E-super-topic units: E1 Principles, E2 Techniques (diff), E3 Techniques (int), E4 Problem-solving, E5 Differential equations (HL), E6 Maclaurin (HL) | P0 | **Open — 6 units total** |
 | ~~**S2-D-translate**~~ | Bilingual ZH translation of `Unit_D1`, `Unit_D2`, `Unit_D3` per the locked English-first → ZH cadence | P1 | ✅ **Shipped 2026-05-22** — D1 391/391 pairs (`148fa51`), D2 281/281 pairs (`231f6e8`), D3 312/312 pairs (`0f84a70`). |
-| **S2-D-practice** | Practice Questions for D1 / D2 / D3 per SQ-4 — **🎯 IMMEDIATE PRIORITY** (see Topic D sub-sprint above) | P1 | **Open** |
+| ~~**S2-D-practice**~~ | Practice + Solutions EN drafts for D1 / D2 / D3 | P1 | ✅ **Shipped 2026-05-22** — 6 files: `f3c371e` D1 Practice, `50fd2ea` D1 Solutions, `612071c` D2 Practice (+ `fcf74e6` Paper 3 Q12 add), `68ef8f3` D2 Solutions, `49b2dcc` D3 Practice (+ `f9dbea4` Paper 3 Q12 add), `22ff5f1` D3 Solutions. ZH translation pass for the 6 files remains open. |
 | **S2-build-index** | Extend `scripts/build-index.py` to preserve `<span data-lang="zh">` alongside auto-generated English title in card markup | P1 | **Open** — punted 2026-05-22 when shipping D-units. Manual-edit was used as workaround for that ship. |
 
 ---
@@ -364,17 +376,19 @@ student recognizes them on the exam paper. Playbook:
 
 | # | Unit (2029 ID) | EN/ZH balance | Glossary fit | Pedagogical | Validates | Notes |
 |---|---|---|---|---|---|---|
-| **A1** | Sequences | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped `cdca220`. |
-| **A3** | Combinatorics | 213 / 213 ✅ | ✅ | ✅ | ✅ | T-2 shipped `ea3124d`. |
-| **A4** | Complex Numbers | 241 / 241 ✅ | ✅ | ✅ | ✅ | T-3 shipped `12dc6ad`. Argand-gloss polish landed as follow-up. |
+| **A1** | Sequences | 260 / 260 ✅ | ✅ | ✅ | ✅ | T-1 shipped `cdca220`. Solutions companion shipped 2026-05-23 (`52d1f55`, bilingual built-in). |
+| **A2** | Exponents & Logarithms | bilingual built-in ✅ | ✅ | ✅ | ✅ | SG `f9be199` + P/S `cd96f3f` — all three shipped EN+ZH inline on 2026-05-23. |
+| **A3** | Combinatorics | 213 / 213 ✅ | ✅ | ✅ | ✅ | T-2 shipped `ea3124d`. Practice+Solutions Q13 (Paper 3) added bilingual `832e7e7`. |
+| **A4** | Complex Numbers | 241 / 241 SG ✅ | ✅ | ✅ | ✅ | SG T-3 `12dc6ad`. P+S `1bfaff4` shipped 2026-05-23 bilingual built-in. |
+| **A5** | Proof & Algebraic Manipulation | bilingual built-in ✅ | ✅ | ✅ | ✅ | SG `cc943a4` shipped 2026-05-23 EN+ZH inline. P+S still queued. |
 | **C** (legacy: B4+C1+C2 straddle) | Geometry & Trigonometry | 356 / 356 ✅ | ✅ | ✅ | ✅ | T-4 shipped `ebf8d11`. Largest file. |
-| **D1** | Univariate Data | 391 / 391 ✅ | ✅ | ✅ | ✅ | `148fa51`. |
-| **D2** | Probability | 281 / 281 ✅ | ✅ | ✅ | ✅ | `231f6e8`. |
-| **D3** | Probability Distributions | 312 / 312 ✅ | ✅ | ✅ | ✅ | `0f84a70`. |
+| **D1** | Univariate Data | 391 / 391 SG ✅ | ✅ | ✅ | ✅ | SG `148fa51`. P+S EN drafts shipped `f3c371e`/`50fd2ea`; P+S ZH pending. |
+| **D2** | Probability | 281 / 281 SG ✅ | ✅ | ✅ | ✅ | SG `231f6e8`. P+S EN drafts `612071c`/`68ef8f3` + Paper 3 Q12 `fcf74e6`; P+S ZH pending. |
+| **D3** | Probability Distributions | 312 / 312 SG ✅ | ✅ | ✅ | ✅ | SG `0f84a70`. P+S EN drafts `49b2dcc`/`22ff5f1` + Paper 3 Q12 `f9dbea4`; P+S ZH pending. |
 
-A2 / A5 / B (all 5) / C1-C3 standalone / E (all 6) not in this audit —
-they have not yet shipped. Translate as they ship under the locked
-English-first → ZH cadence.
+B (all 5) / C1-C3 standalone / E (all 6) not in this audit — they have
+not yet shipped. Translate as they ship under the locked English-first
+→ ZH cadence.
 
 ### Translation contract — standing principle
 
@@ -428,11 +442,11 @@ Paper 1 is no-calc (AA-distinctive); Paper 2 is calc.
 
 | 2029 ID | Super-topic | Status | Notes |
 |---|---|---|---|
-| A1 | Sequences | ✅ shipped 2026-05-08 | 8 sections, 18 quiz items, 12 flashcards |
-| A2 | Exponents and logarithms | **S1-2 open** | — |
-| A3 | Combinatorics | ✅ shipped 2026-05-09 | 6 sections, 16 quizzes, 12 flashcards |
-| A4 | Complex numbers (HL only) | ✅ shipped 2026-05-15 | 6 sections, 16 quizzes, 14 flashcards |
-| A5 | Proof and algebraic manipulation | **S1-5+6 collapsed; open** | — |
+| A1 | Sequences | ✅ shipped 2026-05-08 | 8 sections, 18 quiz items, 12 flashcards. **Full stack** (SG+P+S+ZH). |
+| A2 | Exponents and logarithms | ✅ shipped 2026-05-23 | 6 sections, ~8 quiz items, 12 flashcards. **Full stack** (SG+P+S+ZH bilingual). |
+| A3 | Combinatorics | ✅ shipped 2026-05-09 | 6 sections, 16 quizzes, 12 flashcards. **Full stack** (SG+P+S+ZH; P+S extended with Paper 3 Q13 on 2026-05-23). |
+| A4 | Complex numbers (HL only) | ✅ shipped 2026-05-15 | 6 sections, 16 quizzes, 14 flashcards. **Full stack** (SG+P+S+ZH bilingual). |
+| A5 | Proof and algebraic manipulation | 🟡 SG shipped 2026-05-23 | 6 sections, 5 quiz items, 12 flashcards. P+S still queued. |
 | B1 | Representation of functions | open (greenfield) | — |
 | B2 | Polynomial functions | open (greenfield) | — |
 | B3 | Functions with asymptotes | open (greenfield) | — |
@@ -451,11 +465,17 @@ Paper 1 is no-calc (AA-distinctive); Paper 2 is calc.
 | E5 | Differential equations (HL only) | open (greenfield) | — |
 | E6 | Maclaurin series (HL only) | open (greenfield) | — |
 
-**Roll-up: 6/22 super-topics shipped as standalone units. 3/22 partial
-(inside Unit_C). 13/22 entirely greenfield.**
+**Roll-up: 8/22 super-topics shipped as standalone Study Guides (A1,
+A2, A3, A4, A5, D1, D2, D3). 3/22 partial (B4, C1, C2 inside Unit_C).
+11/22 entirely greenfield (B1, B2, B3, B5, C3, E1-E6).**
+
+**Practice + Solutions cluster:** 5/8 shipped units have full P+S
+(A1, A2, A3, A4 — all bilingual built-in or post-translated; D1+D2+D3
+have EN P+S, ZH P+S pending). A5 is the only shipped SG missing P+S.
 
 *The legacy `Unit_A_Number_and_Algebra.html` is archived under
-`rag/archive/`. `Unit_C_Geometry.html` stays in production until
+`rag/archive/`. Now that A2 + A5 SGs have shipped, S1-7 cleanup is
+fully unblocked. `Unit_C_Geometry.html` stays in production until
 B4 / C1 / C2 ship, then archives the same way.*
 
 ---
