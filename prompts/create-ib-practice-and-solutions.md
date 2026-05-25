@@ -237,14 +237,22 @@ literally.
 </cross_references>
 
 <reminders>
-The four invariants most often violated when the file pair gets long —
-re-stated at the tail:
+The four invariants most often violated when the file pair gets long,
+restated at the tail:
 
 1. **No EASY questions.** MED + HARD only. The first cut sells.
 2. **`dingrui:version` and `dingrui:pair-key` match on both files.**
    `validate.sh` is the gate.
 3. **Per-question mark totals add up.** `(a)[3] + (b)[2] + (c)[5] = [10]`
    in both files.
-4. **Insight block on every solution.** It's the difference between
+4. **Insight block on every solution.** It is the difference between
    our Solutions and a vanilla mark scheme.
+5. **No em or en dashes in prompts, rationale, or insight blocks.**
+   See the `<tone>` section of [`create-unit.md`](create-unit.md) for
+   the full spec. Sweep for `—`, `–`, `&mdash;`, `&ndash;`,
+   `&#8212;`, `&#8211;` before shipping. Math notation is exempt
+   (the minus inside `$\sqrt{x} - 1$` is an operator, not a dash).
+6. **Pre-LLM textbook voice in rationale and insight blocks.** Read
+   like a Cambridge revision guide or Stewart, not a blog post. See
+   the `<tone>` block of `create-unit.md`.
 </reminders>
