@@ -19,20 +19,20 @@ and the IB Math AA HL syllabus (first assessment **2029** — switched from
 (to be created when AI HL drafting begins; spec lives at
 `rag/subjects/ib_math_ai_hl.md`).
 
-Last reviewed: **2026-05-24** (SG SPRINT COMPLETE: all 22/22 Study
-Guides shipped across A, B, C, D, E. Today's burst: A5 P+S (closes
-Topic A 100%), then E1/E2/E3/E4 sequential, then B1 sequential, then
-B2/B3/B4/B5/C1/C2/C3/E5/E6 in parallel via subagents. Every SG ships
-bilingual EN+ZH built in. Remaining work: Practice + Solutions for the
-16 super-topics still missing them; ZH translation of the existing
-D-cluster P+S; legacy Unit_C retirement (now unblocked since B4, C1,
-C2 standalone all shipped).
+Last reviewed: **2026-05-25** (P+S SPRINT COMPLETE: 13 super-topics
+shipped Practice + Solutions in 3 topical commits — B1-B5 (`492bc24`),
+C1-C3 (`1686332`), E1-E6 (`e01ed24`). Every P+S ships bilingual EN+ZH
+built in. **21/22 super-topics now full-stack (SG+P+S+ZH).**
+Sprint 4 opened today on `sprint4_ps_polish` for v1.1 polish against
+the audit checklist (P0 correctness + P1 consistency; 20 items).
+Remaining work: Sprint 4 polish; ZH translation of the D-cluster P+S;
+legacy Unit_C retirement (fully unblocked).
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### 🎯 Immediate focus (relocked 2026-05-24 after Topic A 100% closure)
+### 🎯 Immediate focus (relocked 2026-05-25 after P+S sprint closure)
 
 1. ~~**Topic D Practice + Solutions.**~~ ✅ EN drafts all shipped
    2026-05-22. ZH translation pass for the 6 Topic D P+S files still
@@ -41,11 +41,65 @@ C2 standalone all shipped).
 3. ~~**Close Topic A 100%.**~~ ✅ closed 2026-05-24 via A5 P+S
    (`d0839fa`, 8 Qs / 63 marks, EN+ZH built in). Topic A is now 5/5
    super-topics × 4 deliverables — fully shipped.
-4. **Open Topic E greenfield (E1 → E4).** Calculus is the most-tested
-   AA HL topic on Paper 2; greatest student impact. E1 (principles of
-   differential calculus) opens the topic.
-5. **Open Topic B greenfield (B1 → B5).** Functions; foundational for
-   calculus.
+4. ~~**Open Topic E greenfield (E1 → E4).**~~ ✅ closed 2026-05-24 (SG)
+   and 2026-05-25 (P+S, `e01ed24`).
+5. ~~**Open Topic B greenfield (B1 → B5).**~~ ✅ closed 2026-05-24 (SG)
+   and 2026-05-25 (P+S, `492bc24`).
+6. **Sprint 4 — P+S polish.** Audit-driven v1.1 pass over the 13 new
+   B/C/E P+S files plus a CJK-in-`\text{}` (A6) hygiene sweep across
+   all prior-shipped Solutions. 20 items (9 P0 + 11 P1).
+
+### Sprint 4 — Practice + Solutions polish (opened 2026-05-25, branch `sprint4_ps_polish`)
+
+**Goal.** Promote the 13 just-shipped Topic B/C/E Practice + Solutions
+files from initial draft to v1.1: fix correctness blockers (answer-line
+↔ rationale mismatches, two Practice prompt errors, one Maclaurin
+arithmetic slip, A6 KaTeX hygiene), then polish (typo, AG-attribution
+sweep, draft-state prose, Practice title-format sweep, missing part-meta).
+
+**Cadence.** Per the locked review-then-merge pattern, one commit per
+audit item (S4-N), English-first. The CJK-in-`\text{}` sweep is split
+into 2 commits by topic cluster. Sprint close ships the audit
+strikethrough.
+
+**P0 — correctness blockers (9 items)**
+
+| ID | File / Where | Gap | Status |
+|---|---|---|---|
+| **S4-1** | `Solutions/Unit_B1_..._Solutions.html` Q6(c) | answer-line `(-3, …)` contradicts rationale `[-3, …)` (bracket at $-3$) | **Open** |
+| **S4-2** | `Solutions/Unit_B4_..._Solutions.html` Q7(c) | answer-line `(0.661, 5.34)` vs rationale's `(0.649, 5.35)` (3 s.f. drift) | **Open** |
+| **S4-3** | `Solutions/Unit_B5_..._Solutions.html` Q3(c) | answer-line `x = 1, 4` but rationale concludes transformed function has no zeros — semantic mismatch | **Open** |
+| **S4-4** | `Unit_C1_Surface_Areas_Volumes_Circles_Practice.html` Q5(d) | Practice prompt says "show $V:S = r$" but the true identity is `V/S = r/3` — Solutions correct | **Open** |
+| **S4-5** | `Unit_E5_Differential_Equations_Practice.html` Q7(d) | prompt directs students to describe `y = x³/3 + 1` using {min, even, concave up} — all three wrong | **Open** |
+| **S4-6** | `Solutions/Unit_E6_Maclaurin_Series_Solutions.html` Q6(d) | error claim `≈ 5×10⁻⁹` should be `~9×10⁻⁸`; insight inherits the error | **Open** |
+| **S4-7** | `Solutions/Unit_E1_..._Solutions.html` Q3 + Q8(d) | A6: CJK inside `\text{}` — `m_{\text{切}}`, `m_{\text{法}}`, `\text{凹凸}`, `\text{拐点}` | **Open** |
+| **S4-8** | `Solutions/Unit_E2_..._Solutions.html` Q3 | A6: CJK inside `\text{}` (L225) | **Open** |
+| **S4-9** | CJK-in-`\text{}` sweep across prior-shipped Solutions | A1, A2, A3, A5, C1, C2, E4, E5 all show A6 regressions — sweep to enforce locked rubric | **Open** |
+
+**P1 — consistency / polish (11 items)**
+
+| ID | File / Where | Gap | Status |
+|---|---|---|---|
+| **S4-10** | `Solutions/Unit_B1_..._Solutions.html` L426 | typo `<span class="marls-call">` (workaround duplicate on L427) | **Open** |
+| **S4-11** | All 5 B-series Practice `<title>` tags | use `· IB-Style Practice`; A-series uses ` — IB-Style Practice`; none carry `\| Dingrui Scholars` suffix | **Open** |
+| **S4-12** | `Solutions/Unit_B3_..._Solutions.html` Q1-Q4 | answer-lines wrap multi-part labels in a single `.ans` span — style drift from B1/B2 template | **Open** |
+| **S4-13** | `Solutions/Unit_B5_..._Solutions.html` Q5(b) | draft-state prose ("Wait — more precisely") escaped editing | **Open** |
+| **S4-14** | B1/B2/B3/B5 + E4 Solutions | missing canonical `AG` attribution on "show that" terminal steps; A3/A5 gold standard | **Open** |
+| **S4-15** | C1/C2/C3 Practice `<title>` tags | format drift (em-dash vs middot, missing `\| Dingrui Scholars`) | **Open** |
+| **S4-16** | `Solutions/Unit_E1_..._Solutions.html` Q8(d) EN | draft-state self-correcting prose ("Wait — at $x=0$... No: …") | **Open** |
+| **S4-17** | `Solutions/Unit_E3_..._Solutions.html` Q5 EN insight | broken self-referential sentence — both sides of comparison identical | **Open** |
+| **S4-18** | `Solutions/Unit_E3_..._Solutions.html` Part IV `.part-meta` | missing "HL extended exploration" (Practice has it) | **Open** |
+| **S4-19** | `Solutions/Unit_E4_..._Solutions.html` Q5(d) + Q8(c) | "show that" proofs end with `\checkmark` rather than canonical `AG` | **Open** |
+| **S4-20** | `Solutions/Unit_E5_..._Solutions.html` Q7(d) | recovers via "distractor" framing without Practice signposting it (paired with S4-5) | **Open** |
+
+**P2 — cosmetic (4 items, deferred)**
+
+| ID | File / Where | Gap | Status |
+|---|---|---|---|
+| **S4-21** | `Unit_B2_..._Practice.html` `<title>` | uses raw `·` (U+00B7) vs sibling `&middot;` | Deferred |
+| **S4-22** | All 5 B-series Practice titles | lack `\| Dingrui Scholars` suffix (subset of S4-11) | Deferred |
+| **S4-23** | `Solutions/Unit_C1_..._Solutions.html` + C2 Solutions | dead `.pill.p3` / `--p3-*` / `.q.p3` CSS — no P3 question in either | Deferred |
+| **S4-24** | (cross-cluster) | inconsistent separator + suffix conventions in Practice `<title>` tags | Deferred |
 
 ### Sprint 3 — Complete the 2029 units (opened 2026-05-22)
 
