@@ -19,10 +19,14 @@ and the IB Math AA HL syllabus (first assessment **2029** — switched from
 (to be created when AI HL drafting begins; spec lives at
 `rag/subjects/ib_math_ai_hl.md`).
 
-Last reviewed: **2026-05-24** (Topic A 100% closed — A5 P+S shipped
-`d0839fa`, 8 Qs / 63 marks, EN+ZH built in. Topic A is now 5/5
-super-topics fully complete across all 4 deliverables). Greenfield
-focus shifts to Topic E (calculus — most-tested AA HL topic).
+Last reviewed: **2026-05-24** (SG SPRINT COMPLETE: all 22/22 Study
+Guides shipped across A, B, C, D, E. Today's burst: A5 P+S (closes
+Topic A 100%), then E1/E2/E3/E4 sequential, then B1 sequential, then
+B2/B3/B4/B5/C1/C2/C3/E5/E6 in parallel via subagents. Every SG ships
+bilingual EN+ZH built in. Remaining work: Practice + Solutions for the
+16 super-topics still missing them; ZH translation of the existing
+D-cluster P+S; legacy Unit_C retirement (now unblocked since B4, C1,
+C2 standalone all shipped).
 
 ---
 
@@ -107,28 +111,26 @@ Binet (Q8). **Topic A is now 5/5 super-topics fully closed across all
 
 | ID | Super-topic | SL/AHL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **B1** | Representation of functions | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **B2** | Polynomial functions | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **B3** | Functions with asymptotes | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **B4** | Trigonometric functions | SL + AHL | 🟡 ³ | ⬜ | ⬜ | 🟡 ³ |
-| **B5** | Transformations of graphs and functions | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **B1** | Representation of functions | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **B2** | Polynomial functions | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **B3** | Functions with asymptotes | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **B4** | Trigonometric functions | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **B5** | Transformations of graphs and functions | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
 
-³ B4 partial via `Unit_C_Geometry.html` §§C2.4–C2.10 (unit circle,
-identities, circular functions, solving trig equations). Standalone B4
-unit not yet drafted.
+³ ~~B4 partial via Unit_C~~ Closed by B4 standalone shipped 2026-05-24
+(see footnote 6). Unit_C retirement now unblocked.
 
 ##### Topic C — Geometry (3 super-topics)
 
 | ID | Super-topic | SL/AHL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **C1** | Surface areas, volumes and measurement in circles | SL | 🟡 ⁴ | ⬜ | ⬜ | 🟡 ⁴ |
-| **C2** | Trigonometry and its applications | SL | 🟡 ⁴ | ⬜ | ⬜ | 🟡 ⁴ |
-| **C3** | Vectors (HL only) | AHL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **C1** | Surface areas, volumes and measurement in circles | SL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **C2** | Trigonometry and its applications | SL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **C3** | Vectors (HL only) | AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
 
-⁴ C1 + C2 partial via `Unit_C_Geometry.html` (3D distance / volumes /
-surface areas / radian / arc / sector for C1; right-angled trig /
-sine / cosine rules / bearings for C2). Standalone units not yet
-drafted.
+⁴ ~~C1, C2 partial via Unit_C~~ Closed by C1, C2 standalone units
+shipped 2026-05-24 (see footnote 6). Unit_C retirement now unblocked
+since all three of B4, C1, C2 have shipped as standalone units.
 
 ##### Topic D — Statistics and Probability (3 super-topics)
 
@@ -146,12 +148,23 @@ still open — deferred to a combined D+A translation batch.
 
 | ID | Super-topic | SL/AHL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **E1** | Principles of differential calculus | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **E2** | Techniques of differential calculus | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **E3** | Techniques of integral calculus | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **E4** | Problem-solving using calculus | SL + AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **E5** | Differential equations (HL only) | AHL | ⬜ | ⬜ | ⬜ | ⬜ |
-| **E6** | Maclaurin series (HL only) | AHL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **E1** | Principles of differential calculus | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **E2** | Techniques of differential calculus | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **E3** | Techniques of integral calculus | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **E4** | Problem-solving using calculus | SL + AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **E5** | Differential equations (HL only) | AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+| **E6** | Maclaurin series (HL only) | AHL | ✅ ⁶ | ⬜ | ⬜ | ✅ ⁶ |
+
+⁶ **22/22 Study Guides shipped 2026-05-24.** SG sprint complete. The
+SG burst spanned three sessions: D1/D2/D3 (2026-05-22); A2/A5
+(2026-05-23); E1 + E2 + E3 + E4 sequential and B1 + B2 + B3 + B4 + B5
++ C1 + C2 + C3 + E5 + E6 in parallel via subagents (2026-05-24). All
+Study Guides ship bilingual (EN+ZH) built in; no separate ZH
+translation pass needed. Remaining work: Practice + Solutions for the
+16 super-topics that do not yet have them (A1-A4, A5, D1-D3 already
+do); ZH translation of the existing D-cluster P+S; Unit_C retirement
+cleanup (archive `Unit_C_Geometry.html` to `rag/archive/`, strip from
+deploy via `deploy.yml`).
 
 #### Topic D sub-sprint — Practice + Solutions (🎯 immediate, opened 2026-05-22)
 
@@ -469,14 +482,15 @@ Paper 1 is no-calc (AA-distinctive); Paper 2 is calc.
 | E5 | Differential equations (HL only) | open (greenfield) | — |
 | E6 | Maclaurin series (HL only) | open (greenfield) | — |
 
-**Roll-up: 8/22 super-topics shipped as standalone Study Guides (A1,
-A2, A3, A4, A5, D1, D2, D3). 3/22 partial (B4, C1, C2 inside Unit_C).
-11/22 entirely greenfield (B1, B2, B3, B5, C3, E1-E6).**
+**Roll-up: 22/22 super-topics shipped as standalone Study Guides
+(SG sprint COMPLETE 2026-05-24).** All Topic A, B, C, D, E units now
+exist as standalone bilingual (EN+ZH) Study Guides. Legacy
+`Unit_C_Geometry.html` is now redundant and slated for archive.
 
-**Practice + Solutions cluster:** 8/8 shipped units have full P+S
+**Practice + Solutions cluster:** 5/22 super-topics have full P+S
 (A1, A2, A3, A4, A5 — all bilingual built-in or post-translated;
-D1+D2+D3 have EN P+S, ZH P+S pending). **Topic A is 100% closed across
-all 4 deliverables (5/5 super-topics × 4).**
+D1+D2+D3 have EN P+S, ZH P+S pending). The 16 remaining super-topics
+(B1-B5, C1-C3, E1-E6, and the D-cluster ZH gap) are the next sprint.
 
 *The legacy `Unit_A_Number_and_Algebra.html` is archived under
 `rag/archive/`. With Topic A now fully shipped (A1-A5 SGs + P+S all
