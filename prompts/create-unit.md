@@ -341,8 +341,14 @@ companion, or a Cambridge revision guide. Concretely:
 
 **Sweep before declaring done.** Search the file for `—`, `–`,
 `&mdash;`, `&ndash;`, `&#8212;`, `&#8211;`. All six should return
-zero hits. Then re-read one section out loud; if it sounds like a
-blog post or a sales pitch, rewrite to textbook register.
+zero hits **except in one structural location**: the `<title>` tag,
+which `scripts/build-index.py` parses by splitting on `" — "` (see
+`parse_title` in that file). Until the title separator is migrated
+to a non-dash character across all shipped units, the em dash in
+`<title>` stays.
+
+Then re-read one section out loud. If it sounds like a blog post or
+a sales pitch, rewrite to textbook register.
 
 </tone>
 
