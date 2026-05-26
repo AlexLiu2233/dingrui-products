@@ -36,7 +36,19 @@ cross-link for depth.
 
 ## Active Sprint — what we're working on now
 
-### Sprint 1 — Unit 1 Linear Functions and Systems (full triplet) (opened 2026-05-25, branch `high_school_math_unit_1`)
+### Sprint 1 — Unit 1 Linear Functions and Systems (full triplet) — **CLOSED 2026-05-25** (branch `high_school_math_unit_1`)
+
+**Closed 2026-05-25**. 4 P0 items shipped in 4 commits + 1 audit-seed + 1 close-out = 6 commits total. **Unit 1 is live on `main`** with all three product formats (SG + Practice + Solutions) and the new subject card visible on the landing page.
+
+Locked Sprint 2+ template artifacts from this sprint:
+- CSS classes: `.syllabus-map`, `.syllabus-map-label`, `.syllabus-map-grid`, `.region-header`, `.region-chip`, `.syllabus-note`, `.honors-flag`, `.feeder-link`, `.pill.region`, `.pill.paper`, `.pill.honors`, `.syllabus-strip`, `.q-body ol.mcq` (Practice), `.distractor` (Solutions MCQ rationales)
+- Chip taxonomy: region flag + paper-style chips on every Practice question
+- Three-layer curriculum chrome: syllabus-map (top of unit) + region-chip (per section) + syllabus-note (inline, sparing)
+- Honors-flag pattern for advanced sections (BC PC12 / ON MCV4U / ON MCR3U+ honors-only content)
+- Feeder-link pattern for AP/IB cross-references
+- MCQ distractor pattern (Solutions explains why each wrong choice fails in 1 line)
+
+### Sprint 1 (active scope, now closed) — original deliverable list:
 
 **Goal.** Ship the first full HS Math product (Study Guide + Practice +
 Solutions) for **Unit 1: Linear Functions and Systems**. Proves all
@@ -86,12 +98,12 @@ three product templates in one sprint so Sprint 2 can bulk-draft Units
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| ~~**S0.5-4**~~ | Define `syllabus-map`, `syllabus-note`, `honors-flag` CSS classes | P1 | Folded into **S1-SG** — lands as part of Unit 1 SG drafting |
-| **S1-SG** | Draft `Unit_1_Linear_Functions_and_Systems.html` (Study Guide) | P0 | **Open** |
-| **S1-P** | Draft `Unit_1_Linear_Functions_and_Systems_Practice.html` (Practice) | P0 | **Open — blocked on S1-SG (inherits CSS + Syllabus Map design)** |
-| **S1-S** | Draft `Unit_1_Linear_Functions_and_Systems_Solutions.html` (Solutions) | P0 | **Open — blocked on S1-P (mirrors question set)** |
-| **S1-index** | Update `scripts/build-index.py` to discover the new subject; add `chip-green` subject chip; manually seed an `<h2>High School Math</h2>` block in `index.html` if needed | P1 | **Open — lands after S1-SG to enable index generation** |
-| **S1-bcfetch** | Fetch BC `pc11_elab.pdf` + `pc12_elab.pdf` into `rag/sources/bc/`; write topic-slice extracts for Quadratics + Polynomial + Exp/Log + Sequences (unblocks Sprint 2) | P1 | **Parallel — can run alongside S1-SG without blocking** |
+| ~~**S0.5-4**~~ | Define `syllabus-map`, `syllabus-note`, `honors-flag` CSS classes | P1 | ✅ closed — folded into `dc2548a` (Unit 1 SG) |
+| ~~**S1-SG**~~ | Draft `Unit_1_Linear_Functions_and_Systems.html` (Study Guide) | P0 | ✅ closed — `dc2548a` (1069 lines, 7 sections, 17 quizzes, 12 flashcards, 13 checklist items, all syllabus codes verified) |
+| ~~**S1-P**~~ | Draft `Unit_1_Linear_Functions_and_Systems_Practice.html` (Practice) | P0 | ✅ closed — `b6fac9c` (407 lines, 12 questions, 91 marks, region+paper-style chip taxonomy locked) |
+| ~~**S1-S**~~ | Draft `Unit_1_Linear_Functions_and_Systems_Solutions.html` (Solutions) | P0 | ✅ closed — `f61b9c3` (572 lines, 12 questions, all mark-callouts sum to declared marks, .distractor block for MCQ Solutions locked) |
+| ~~**S1-index**~~ | Update `scripts/build-index.py` to discover the new subject; add subject-group blocks to index.html | P1 | ✅ closed — this commit; build-index.py SUBJECTS now lists 7 subjects (added HS Math + IB Physics HL); ensure_sentinels extended to support tiered subject-group anchors; index.html tier 1 + tier 2 seeded with subject-group blocks; HS Math Unit 1 + IB Physics HL A.1 cards now visible on landing page |
+| **S1-bcfetch** | Fetch BC `pc11_elab.pdf` + `pc12_elab.pdf` into `rag/sources/bc/`; write topic-slice extracts for Quadratics + Polynomial + Exp/Log + Sequences (unblocks Sprint 2) | P1 | **Deferred to Sprint 2** — Unit 1 didn't need it; ship at start of Sprint 2 before bulk-drafting Units 2-6 |
 
 Build order: **S1-SG → S1-P → S1-S → S1-index** (per-item commits).
 S1-bcfetch can run in parallel.

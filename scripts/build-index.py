@@ -32,11 +32,13 @@ INDEX = ROOT / "index.html"
 
 # (directory, display name shown in <h2> and hero chip, chip CSS class)
 SUBJECTS = [
-    ("AP Calculus",     "AP Calculus AB/BC",          "chip-maroon"),
-    ("AP Physics",      "AP Physics C: Mechanics", "chip-green"),
-    ("IB Chemistry HL", "IB Chemistry HL",         "chip-purple"),
-    ("AP CSA",          "AP Computer Science A",   "chip-gold"),
-    ("IB Math HL",      "IB Math AA HL",           "chip-maroon"),
+    ("AP Calculus",      "AP Calculus AB/BC",       "chip-maroon"),
+    ("AP Physics",       "AP Physics C: Mechanics", "chip-green"),
+    ("IB Chemistry HL",  "IB Chemistry HL",         "chip-purple"),
+    ("AP CSA",           "AP Computer Science A",   "chip-gold"),
+    ("IB Math HL",       "IB Math AA HL",           "chip-maroon"),
+    ("IB Physics HL",    "IB Physics HL",           "chip-green"),
+    ("High School Math", "High School Math",        "chip-maroon"),
 ]
 
 # When a subject mixes prefix words (e.g. IB Chemistry's Structure/Reactivity),
@@ -122,32 +124,42 @@ def subject_marker(subject_dir: str) -> str:
 
 
 def ensure_sentinels(text: str) -> str:
-    """Idempotently inject BEGIN/END sentinel comments into the card grids and
-    the hero chip block, locating them via the <h2 class="section-title"> and
-    <div class="hero-meta"> structural anchors.
+    """Idempotently inject BEGIN/END sentinel comments into the card grids.
+    Supports two structural anchors:
+      1. Legacy `<h2 class="section-title">{display}</h2><div class="grid">`
+      2. Tiered `<span class="subject-group__title">{display}</span>` inside a
+         `<details class="subject-group">` block, with `<div class="grid">`
+         nested under `<div class="subject-group__body">`.
     """
     for subject_dir, display, _css in SUBJECTS:
         marker = subject_marker(subject_dir)
         if f"<!-- BEGIN {marker} -->" in text:
             continue
-        # Match the grid's closing </div> specifically — non-greedy on the body
-        # but anchor the close on `</a>\s*</div>` so we don't catch an inner
-        # `<div class="card__num">…</div>` by mistake.
-        pat = re.compile(
+        # Try legacy pattern first.
+        pat_legacy = re.compile(
             r'(<h2 class="section-title"[^>]*>'
             + re.escape(display)
             + r'</h2>\s*<div class="grid">)([\s\S]*?</a>\s*)(</div>)',
             re.DOTALL,
         )
-        m = pat.search(text)
+        m = pat_legacy.search(text)
+        if not m:
+            # Tiered pattern (subject-group with inner grid).
+            pat_tiered = re.compile(
+                r'(<span class="subject-group__title">'
+                + re.escape(display)
+                + r'</span>[\s\S]*?<div class="grid">)([\s\S]*?)(</div>)',
+                re.DOTALL,
+            )
+            m = pat_tiered.search(text)
         if not m:
             sys.exit(f"FAIL: cannot find grid section for '{display}' in index.html")
         body = m.group(2).rstrip("\n ")
         replacement = (
             m.group(1)
-            + f"\n    <!-- BEGIN {marker} -->"
+            + f"\n        <!-- BEGIN {marker} -->"
             + body
-            + f"\n    <!-- END {marker} -->\n  "
+            + f"\n        <!-- END {marker} -->\n      "
             + m.group(3)
         )
         text = text[: m.start()] + replacement + text[m.end():]
