@@ -25,16 +25,39 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-25** (Sprint 1 opened — branch
-`high_school_math_unit_1`. Scope re-locked from spec following user's
-2026-05-25 consultation: 3 regions (US + ON + BC), Alberta dropped;
-Sprint 1 ships full triplet for Unit 1; per-question region+paper-style
-chip taxonomy locked; Vectors Unit 14 stays thin with IB Math HL C3
-cross-link for depth.
+Last reviewed: **2026-05-25** (Sprint 2 closed — Unit 2 Quadratic
+Functions and Equations full triplet shipped on `high_school_math_unit_2`
+branch including how-to-use rework on Unit 1 + BC PC11 source fetch +
+PC11 quadratics extract. **2/15 units now shipped end-to-end.**
 
 ---
 
 ## Active Sprint — what we're working on now
+
+### Sprint 2 — Unit 2 Quadratic Functions and Equations (full triplet) — **CLOSED 2026-05-25** (branch `high_school_math_unit_2`)
+
+**Closed 2026-05-25**. User feedback after Unit 1 ship: "How to use guide doesn't seem right — should discuss topic-specific stuff and per-grade focus, with source citations." Sprint 2 closes that feedback by:
+
+1. **Unit 1 how-to-use rework** (`b37a192`) — replaced generic "If cramming / If going for top mark" framing with an 8-row grade-by-region nav table. Each row tells a student (e.g. "🇨🇦 ON Grade 9 — MPM1D") which sections to focus on, which to defer, and cites the specific source extract + strand. This pattern is now locked for Sprint 2+.
+2. **BC PC11 source fetch** (`94f0988`) — fetched `pc11_elab.pdf` from `curriculum.gov.bc.ca`; wrote `pc11_elab_extract.md` scoped to Quadratics + Polynomial Factoring + Linear/Quadratic Inequalities. Closes S1-bcfetch deferred item.
+3. **Unit 2 SG** (`8590923`) — 1171 lines, 7 content sections (§2.1-2.7 Parabola → Quadratic Inequalities), grade-by-region nav with 8 rows, Syllabus Map cites verbatim from all 4 extracts.
+4. **Unit 2 Practice** (`db9541d`) — 407 lines, 12 questions, 90 marks, region+paper-style chips throughout.
+5. **Unit 2 Solutions** (`2723050`) — 570 lines, mark-sum verified per Q, .distractor blocks for SAT MCQs, 12 quadratic-specific insights.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S1-bcfetch**~~ | Fetch BC PC11 + extract Quadratics slice | P1 | ✅ closed — `94f0988` |
+| ~~**U1-how-to-use**~~ | Rework Unit 1 how-to-use into grade-by-region nav with source citations | P0 | ✅ closed — `b37a192` (template locked for Units 2-15) |
+| ~~**S2-SG**~~ | Draft Unit_2_Quadratic_Functions_and_Equations.html | P0 | ✅ closed — `8590923` |
+| ~~**S2-P**~~ | Draft Unit_2_..._Practice.html | P0 | ✅ closed — `db9541d` |
+| ~~**S2-S**~~ | Draft Unit_2_..._Solutions.html | P0 | ✅ closed — `2723050` |
+| ~~**S2-index**~~ | Re-run scripts/build-index.py to surface Unit 2 card in landing page | P1 | ✅ closed — this commit |
+
+**Sprint 2 deliverable contract met:** 8-row grade-by-region nav (vs. Unit 1's 8 rows); BC PC11 column populated in Syllabus Map; 7 content sections each with cheat-sheet + worked example + going-deeper + quiz mix; 14 flashcards; 12 readiness items; 5 feeder-links.
+
+**Locked Sprint 3+ template:** how-to-use grade-by-region nav structure is now the standing pattern. Future Units 3-15 follow it.
+
+---
 
 ### Sprint 1 — Unit 1 Linear Functions and Systems (full triplet) — **CLOSED 2026-05-25** (branch `high_school_math_unit_1`)
 
