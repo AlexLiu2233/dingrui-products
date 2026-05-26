@@ -19,14 +19,15 @@ and the IB Math AA HL syllabus (first assessment **2029** — switched from
 (to be created when AI HL drafting begins; spec lives at
 `rag/subjects/ib_math_ai_hl.md`).
 
-Last reviewed: **2026-05-25** (P+S SPRINT COMPLETE: 13 super-topics
-shipped Practice + Solutions in 3 topical commits — B1-B5 (`492bc24`),
-C1-C3 (`1686332`), E1-E6 (`e01ed24`). Every P+S ships bilingual EN+ZH
-built in. **21/22 super-topics now full-stack (SG+P+S+ZH).**
-Sprint 4 opened today on `sprint4_ps_polish` for v1.1 polish against
-the audit checklist (P0 correctness + P1 consistency; 20 items).
-Remaining work: Sprint 4 polish; ZH translation of the D-cluster P+S;
-legacy Unit_C retirement (fully unblocked).
+Last reviewed: **2026-05-25** (P+S SPRINT + SPRINT 4 POLISH COMPLETE: 14
+B/C/E P+S files shipped initial draft and then promoted to v1.1 via
+Sprint 4 (20 audit items closed in 19 commits on `sprint4_ps_polish`,
+tip `dc41e78`). **21/22 super-topics now full-stack (SG+P+S+ZH)**, all
+files polished against checklist sections A (formatting hygiene), D
+(bilingual quality), and the custom P+S-N rubric (mark-callout sums,
+answer-line ↔ rationale consistency, math correctness, insight quality).
+Remaining work: branch fast-forward into `preview` + `main`; ZH
+translation of the D-cluster P+S; legacy Unit_C retirement.
 
 ---
 
@@ -45,52 +46,87 @@ legacy Unit_C retirement (fully unblocked).
    and 2026-05-25 (P+S, `e01ed24`).
 5. ~~**Open Topic B greenfield (B1 → B5).**~~ ✅ closed 2026-05-24 (SG)
    and 2026-05-25 (P+S, `492bc24`).
-6. **Sprint 4 — P+S polish.** Audit-driven v1.1 pass over the 13 new
-   B/C/E P+S files plus a CJK-in-`\text{}` (A6) hygiene sweep across
-   all prior-shipped Solutions. 20 items (9 P0 + 11 P1).
+6. ~~**Sprint 4 — P+S polish.**~~ ✅ closed 2026-05-25. 20 items
+   (9 P0 + 11 P1) landed in 19 commits on `sprint4_ps_polish` (tip
+   `dc41e78`).
+7. **Branch fast-forward** — review `sprint4_ps_polish` chain on top of
+   `sprint_3_unit_specs`, then `preview` → `main` per locked cadence.
+8. **Topic D Practice + Solutions ZH translation** — 6 EN-only files
+   (D1/D2/D3 P+S) bundled into the next ZH translation batch.
+9. **Unit_C retirement** — archive `Unit_C_Geometry.html` to `rag/archive/`,
+   strip from deploy via `deploy.yml`. Fully unblocked.
 
-### Sprint 4 — Practice + Solutions polish (opened 2026-05-25, branch `sprint4_ps_polish`)
+### Sprint 4 — Practice + Solutions polish — **CLOSED 2026-05-25** (branch `sprint4_ps_polish`)
 
-**Goal.** Promote the 13 just-shipped Topic B/C/E Practice + Solutions
-files from initial draft to v1.1: fix correctness blockers (answer-line
-↔ rationale mismatches, two Practice prompt errors, one Maclaurin
-arithmetic slip, A6 KaTeX hygiene), then polish (typo, AG-attribution
-sweep, draft-state prose, Practice title-format sweep, missing part-meta).
+**Closed 2026-05-25**: all 20 items (9 P0 + 11 P1) landed in 19 commits on
+`sprint4_ps_polish` (tip `dc41e78`). Branch ready for fast-forward into
+`preview` then `main` per the locked review-then-merge cadence.
 
-**Cadence.** Per the locked review-then-merge pattern, one commit per
-audit item (S4-N), English-first. The CJK-in-`\text{}` sweep is split
-into 2 commits by topic cluster. Sprint close ships the audit
-strikethrough.
+**Goal (achieved).** Promote the 14 just-shipped B/C/E Practice + Solutions
+files from initial draft to v1.1: fixed correctness blockers (5 answer-line
+↔ rationale mismatches, 2 Practice prompt errors, 1 Maclaurin arithmetic
+slip, A6 KaTeX hygiene sweep across 9 Solutions files), then polished
+(typo, AG-attribution sweep, draft-state prose cleanup, Practice
+title-format sweep, missing part-meta).
 
-**P0 — correctness blockers (9 items)**
+**Cadence.** Per-item commits with English-first edits. CJK-in-`\text{}`
+sweep split into 2 commits by topic cluster (Topic A + Topic B/C/E).
+Several P1 items paired naturally into shared commits (S4-14 + S4-19,
+S4-17 + S4-18, S4-11 + S4-15).
 
-| ID | File / Where | Gap | Status |
-|---|---|---|---|
-| **S4-1** | `Solutions/Unit_B1_..._Solutions.html` Q6(c) | answer-line `(-3, …)` contradicts rationale `[-3, …)` (bracket at $-3$) | **Open** |
-| **S4-2** | `Solutions/Unit_B4_..._Solutions.html` Q7(c) | answer-line `(0.661, 5.34)` vs rationale's `(0.649, 5.35)` (3 s.f. drift) | **Open** |
-| **S4-3** | `Solutions/Unit_B5_..._Solutions.html` Q3(c) | answer-line `x = 1, 4` but rationale concludes transformed function has no zeros — semantic mismatch | **Open** |
-| **S4-4** | `Unit_C1_Surface_Areas_Volumes_Circles_Practice.html` Q5(d) | Practice prompt says "show $V:S = r$" but the true identity is `V/S = r/3` — Solutions correct | **Open** |
-| **S4-5** | `Unit_E5_Differential_Equations_Practice.html` Q7(d) | prompt directs students to describe `y = x³/3 + 1` using {min, even, concave up} — all three wrong | **Open** |
-| **S4-6** | `Solutions/Unit_E6_Maclaurin_Series_Solutions.html` Q6(d) | error claim `≈ 5×10⁻⁹` should be `~9×10⁻⁸`; insight inherits the error | **Open** |
-| **S4-7** | `Solutions/Unit_E1_..._Solutions.html` Q3 + Q8(d) | A6: CJK inside `\text{}` — `m_{\text{切}}`, `m_{\text{法}}`, `\text{凹凸}`, `\text{拐点}` | **Open** |
-| **S4-8** | `Solutions/Unit_E2_..._Solutions.html` Q3 | A6: CJK inside `\text{}` (L225) | **Open** |
-| **S4-9** | CJK-in-`\text{}` sweep across prior-shipped Solutions | A1, A2, A3, A5, C1, C2, E4, E5 all show A6 regressions — sweep to enforce locked rubric | **Open** |
-
-**P1 — consistency / polish (11 items)**
+**P0 — correctness blockers (9 items) — all closed**
 
 | ID | File / Where | Gap | Status |
 |---|---|---|---|
-| **S4-10** | `Solutions/Unit_B1_..._Solutions.html` L426 | typo `<span class="marls-call">` (workaround duplicate on L427) | **Open** |
-| **S4-11** | All 5 B-series Practice `<title>` tags | use `· IB-Style Practice`; A-series uses ` — IB-Style Practice`; none carry `\| Dingrui Scholars` suffix | **Open** |
-| **S4-12** | `Solutions/Unit_B3_..._Solutions.html` Q1-Q4 | answer-lines wrap multi-part labels in a single `.ans` span — style drift from B1/B2 template | **Open** |
-| **S4-13** | `Solutions/Unit_B5_..._Solutions.html` Q5(b) | draft-state prose ("Wait — more precisely") escaped editing | **Open** |
-| **S4-14** | B1/B2/B3/B5 + E4 Solutions | missing canonical `AG` attribution on "show that" terminal steps; A3/A5 gold standard | **Open** |
-| **S4-15** | C1/C2/C3 Practice `<title>` tags | format drift (em-dash vs middot, missing `\| Dingrui Scholars`) | **Open** |
-| **S4-16** | `Solutions/Unit_E1_..._Solutions.html` Q8(d) EN | draft-state self-correcting prose ("Wait — at $x=0$... No: …") | **Open** |
-| **S4-17** | `Solutions/Unit_E3_..._Solutions.html` Q5 EN insight | broken self-referential sentence — both sides of comparison identical | **Open** |
-| **S4-18** | `Solutions/Unit_E3_..._Solutions.html` Part IV `.part-meta` | missing "HL extended exploration" (Practice has it) | **Open** |
-| **S4-19** | `Solutions/Unit_E4_..._Solutions.html` Q5(d) + Q8(c) | "show that" proofs end with `\checkmark` rather than canonical `AG` | **Open** |
-| **S4-20** | `Solutions/Unit_E5_..._Solutions.html` Q7(d) | recovers via "distractor" framing without Practice signposting it (paired with S4-5) | **Open** |
+| ~~**S4-1**~~ | `Solutions/Unit_B1_..._Solutions.html` Q6(c) | answer-line bracket fix `(-3` → `[-3` + rationale tighten | ✅ closed — `47038d5` |
+| ~~**S4-2**~~ | `Solutions/Unit_B4_..._Solutions.html` Q7(c) | 3-s.f. rounding $(0.661, 5.34)$ → $(0.649, 5.35)$ | ✅ closed — `656245c` |
+| ~~**S4-3**~~ | `Solutions/Unit_B5_..._Solutions.html` Q3(c) | answer-line semantic fix: "no zeros (range $[1,6]$); $x=1,4$ are images of old zeros" | ✅ closed — `a156ffc` |
+| ~~**S4-4**~~ | `Unit_C1_Surface_Areas_Volumes_Circles_Practice.html` Q5(d) | Practice prompt rewording to `V/S = r/3` (with verification at $r = 3$) | ✅ closed — `0889d45` |
+| ~~**S4-5**~~ | `Unit_E5_Differential_Equations_Practice.html` Q7(d) | prompt replaced wrong descriptors with `stationary inflection`, `odd symmetry about $(0,1)$`, `concavity changes sign at $x=0$` | ✅ closed — `bd90f9a` |
+| ~~**S4-6**~~ | `Solutions/Unit_E6_Maclaurin_Series_Solutions.html` Q6(d) | error magnitude fixed `5×10⁻⁹` → `~9.66×10⁻⁸`; insight cascaded | ✅ closed — `45f42ed` |
+| ~~**S4-7**~~ | `Solutions/Unit_E1_..._Solutions.html` Q3 + Q8(d) | CJK in `\text{}` → `\mathrm{tan}`, `\mathrm{n}`, `\text{shape}`, `\mathrm{IP}` | ✅ closed — `2db9266` |
+| ~~**S4-8**~~ | `Solutions/Unit_E2_..._Solutions.html` Q3 | `(\text{多项式})` → `p(x)` symbol defined in prose | ✅ closed — `9f108a4` |
+| ~~**S4-9**~~ | CJK-in-`\text{}` sweep across prior-shipped Solutions | 9 files swept clean: A1/A2/A3/A5 (1/2 `43528cc`), B2/C1/C2/E4/E5 (2/2 `3e6990d`) | ✅ closed — `43528cc` + `3e6990d` |
+
+**P1 — consistency / polish (11 items) — all closed**
+
+| ID | File / Where | Gap | Status |
+|---|---|---|---|
+| ~~**S4-10**~~ | `Solutions/Unit_B1_..._Solutions.html` L426 | `marls-call` → `marks-call`; dropped duplicate-span workaround | ✅ closed — `d8da8a7` |
+| ~~**S4-11**~~ | All 5 B-series Practice `<title>` tags | normalized to canonical `IB Math AA HL — Unit X: Topic — IB-Style Practice \| Dingrui Scholars` | ✅ closed — `dc41e78` |
+| ~~**S4-12**~~ | `Solutions/Unit_B3_..._Solutions.html` Q1-Q4 | split multi-part `.ans` spans per B1/B2 template (Q1-Q4, Q6, Q7, Q8) | ✅ closed — `c269e47` |
+| ~~**S4-13**~~ | `Solutions/Unit_B5_..._Solutions.html` Q5(b) | rewrote with correct $f(-x) = f(x + 2)$ relation (not $f(x - 2)$); dropped "Wait — more precisely" hedge | ✅ closed — `aed6a57` |
+| ~~**S4-14**~~ | B1/B2/B3/E4 Solutions | AG sweep on show-that endings (Q5(a) Möbius, Q8(b)(c)(d) Newton's identities, Q6(b) quotient-rule, Q8(b) Möbius inverse) | ✅ closed — `77085bd` |
+| ~~**S4-15**~~ | C1/C2/C3 Practice `<title>` tags | normalized via same sweep as S4-11 | ✅ closed — `dc41e78` |
+| ~~**S4-16**~~ | `Solutions/Unit_E1_..._Solutions.html` Q8(d) EN | rewrote draft-state "Wait — at $x = 0$... No:..." into clean tangent-at-origin explanation | ✅ closed — `2aa1e11` |
+| ~~**S4-17**~~ | `Solutions/Unit_E3_..._Solutions.html` Q5 EN insight | broken `\int_0^1 u^3 du` vs `\int_0^1 u^3 du` rewritten with non-coincidental (a) substitution example | ✅ closed — `b32b1d6` |
+| ~~**S4-18**~~ | `Solutions/Unit_E3_..._Solutions.html` Part IV `.part-meta` | added "HL extended exploration" to match Practice | ✅ closed — `b32b1d6` |
+| ~~**S4-19**~~ | `Solutions/Unit_E4_..._Solutions.html` Q5(d) + Q8(c) | `\checkmark` → `\text{AG}` (rolled into S4-14's AG sweep commit) | ✅ closed — `77085bd` |
+| ~~**S4-20**~~ | `Solutions/Unit_E5_..._Solutions.html` Q7(d) | dropped "Word watch" / "deliberate distractor" framing; clean three-feature rationale (paired with S4-5) | ✅ closed — `29c4f2d` |
+
+**Sprint 4 close-out roll-up.** 19 commits on `sprint4_ps_polish`:
+
+```
+97b2dc6  IB Math HL AUDIT: open Sprint 4 (seed)
+47038d5  S4-1   B1 Q6(c) bracket
+656245c  S4-2   B4 Q7(c) rounding
+a156ffc  S4-3   B5 Q3(c) semantic
+0889d45  S4-4   C1 Q5(d) prompt V/S = r/3
+bd90f9a  S4-5   E5 Q7(d) prompt descriptors
+45f42ed  S4-6   E6 Q6(d) Maclaurin error
+2db9266  S4-7   E1 CJK sweep
+9f108a4  S4-8   E2 CJK sweep
+43528cc  S4-9 (1/2)  Topic A CJK sweep
+3e6990d  S4-9 (2/2)  Topic B/C/E CJK sweep
+d8da8a7  S4-10  B1 marls-call typo
+c269e47  S4-12  B3 answer-line spans
+aed6a57  S4-13  B5 Q5(b) prose
+77085bd  S4-14 + S4-19  AG sweep across 4 files
+2aa1e11  S4-16  E1 Q8(d) prose
+b32b1d6  S4-17 + S4-18  E3 insight + part-meta
+29c4f2d  S4-20  E5 Q7(d) framing
+dc41e78  S4-11 + S4-15  Practice title sweep
+```
 
 **P2 — cosmetic (4 items, deferred)**
 
