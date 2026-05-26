@@ -31,7 +31,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -78,16 +78,23 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ─── BILINGUAL TOGGLE ─── */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}#langToggle{display:none !important;}}
 </style>
 </head>
 <body>
 
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+
 <div class="brand">I&nbsp;B&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H&nbsp;&nbsp;A&nbsp;A&nbsp;&nbsp;H&nbsp;L</div>
-<div class="chapter-tag">Unit D1 &middot; Solutions</div>
-<h1 class="chapter-title">Univariate Data &mdash; Solutions</h1>
-<p class="chapter-sub">Companion to the IB-Style Practice Set</p>
+<div class="chapter-tag"><span data-lang="en">Unit D1 &middot; Solutions</span><span data-lang="zh">Unit D1 &middot; 解析</span></div>
+<h1 class="chapter-title"><span data-lang="en">Univariate Data &mdash; Solutions</span><span data-lang="zh">单变量数据 —— 解析</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the IB-Style Practice Set</span><span data-lang="zh">IB 风格练习题的解析配套</span></p>
 <div class="legend">
   <span class="pill easy">EASY</span>
   <span class="pill med">MEDIUM</span>
@@ -96,21 +103,21 @@
   <span class="pill p1b">Paper 1B</span>
   <span class="pill p2">Paper 2</span>
 </div>
-<p class="topics-line">Syllabus <b>4.1 – 4.4</b><span class="scope">AA HL</span></p>
+<p class="topics-line"><span data-lang="en">Syllabus <b>4.1 – 4.4</b></span><span data-lang="zh">考纲 <b>4.1 – 4.4</b></span><span class="scope">AA HL</span></p>
 <hr class="thick"><hr class="thin">
 
-<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.0</code> &middot; companion to <code>Unit_D1_Univariate_Data_Practice.html</code> v1 &middot; 11 Qs &middot; 77 marks &middot; IB-style mark-by-mark with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> callouts</p>
+<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.0</code> &middot; <span data-lang="en">companion to <code>Unit_D1_Univariate_Data_Practice.html</code> v1 &middot; 11 Qs &middot; 77 marks &middot; IB-style mark-by-mark with</span><span data-lang="zh"><code>Unit_D1_Univariate_Data_Practice.html</code> v1 配套 &middot; 11 题 &middot; 77 分 &middot; 按 IB 风格逐分点给出，附</span> <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> <span data-lang="en">callouts</span><span data-lang="zh">分点标注</span></p>
 
 <!-- ════════════════════════════════ PART I ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART I &nbsp;·&nbsp; PAPER 1 SECTION A — SOLUTIONS</span><span class="part-meta">No calculator · 22 marks</span></div>
-<h2 class="section-head">Section A — Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;·&nbsp; PAPER 1 SECTION A — SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;·&nbsp; 第一卷 A 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator · 22 marks</span><span data-lang="zh">不可使用计算器 · 22 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A — Worked Solutions</span><span data-lang="zh">A 节 —— 详细解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.1 Sampling</span><span class="pill marks">[5 marks]</span></div>
-  <div class="q-body"><p class="prompt">National exam board sampling: 5 schools randomly, every 10th script. (a) Name techniques. (b) One bias source. (c) Discrete or continuous?</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">National exam board sampling: 5 schools randomly, every 10th script. (a) Name techniques. (b) One bias source. (c) Discrete or continuous?</span><span data-lang="zh">国家考试委员会抽样：随机抽 5 所学校，每第 10 份试卷。(a) 写出抽样方法名称。(b) 一种偏差来源。(c) 离散还是连续？</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> cluster (schools) + systematic (every 10th) &nbsp;·&nbsp; <span class="ans">(b)</span> within-cluster homogeneity (or roster-ordering bias) &nbsp;·&nbsp; <span class="ans">(c)</span> discrete</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> <span data-lang="en">cluster (schools) + systematic (every 10th)</span><span data-lang="zh">整群抽样（学校）+ 系统抽样（每第 10 份）</span> &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">within-cluster homogeneity (or roster-ordering bias)</span><span data-lang="zh">群内同质性（或名单顺序偏差）</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">discrete</span><span data-lang="zh">离散</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Two sampling techniques <span class="marks-call">A1·A1</span></h4>
       <ul>
         <li><strong>Cluster sampling</strong> &mdash; the 50 schools form natural clusters, and 5 are chosen at random. A whole-cluster-level selection rule.</li>
@@ -130,15 +137,35 @@
 
       <div class="insight"><strong>IB convention.</strong> "Discrete" requires the values to be countable; "continuous" requires the variable to be measurable on a real interval. Exam marks, counts, ratings $1$–$5$ &rarr; discrete. Time, length, mass &rarr; continuous (in principle; rounding to nearest minute / cm is still <em>treated</em> as continuous for grouped-data work).</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 两种抽样方法 <span class="marks-call">A1·A1</span></h4>
+      <ul>
+        <li><strong>整群抽样（<code>cluster sampling</code>）</strong> —— $50$ 所学校构成天然的"群"，从中随机抽取 $5$ 个。属于"整群级别"的选取规则。</li>
+        <li><strong>系统抽样（<code>systematic sampling</code>）</strong> —— 在每所被选学校的字母顺序名单中每隔 $10$ 份取 $1$ 份。是在有序列表上以固定步长进行选取的规则。</li>
+      </ul>
+
+      <h4>(b) 一种偏差来源 <span class="marks-call">R1</span></h4>
+      下列任一即可：
+      <ul>
+        <li><em>群内同质性。</em>同校学生在背景、师资、备考方式上往往相近，因此被抽到的 $5$ 所学校未必能代表全部 $50$ 所。</li>
+        <li><em>名单顺序偏差。</em>若字母顺序的名单与某种系统性因素（例如姓氏与族群或家庭背景相关）相关，则每第 $10$ 份的取法可能过度代表某些群体。</li>
+      </ul>
+      上述任一只要说明机制都可得分。<em>不</em>接受仅写"selection bias"（选择偏差）—— IB 要的是具体机制。</p>
+
+      <h4>(c) 离散还是连续 <span class="marks-call">A1·R1</span></h4>
+      变量"满分 80 的考试成绩"是<strong>离散型（<code>discrete</code>）</strong>。<em>理由：</em>分数取整数值 $0, 1, 2, \ldots, 80$ —— 这是一个可数集合，两个整数之间没有可能取值（例如不可能出现 $47.3$）。
+
+      <div class="insight"><strong>IB 惯例。</strong>"离散（<code>discrete</code>）"要求取值可数；"连续（<code>continuous</code>）"要求变量在某个实数区间上可测量。考试分数、计数、$1$–$5$ 评分 → 离散。时间、长度、质量 → 连续（原则上如此；即便四舍五入到最近的分钟或厘米，在分组数据处理中仍<em>视为</em>连续）。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.3 Central Tendency</span><span class="pill marks">[5 marks]</span></div>
-  <div class="q-body"><p class="prompt">Goals scored: $2, 1, 0, 3, 2, 1, 2, 4, 3$ ($n = 9$). (a) Mean. (b) Median. (c) Mode.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Goals scored: $2, 1, 0, 3, 2, 1, 2, 4, 3$ ($n = 9$). (a) Mean. (b) Median. (c) Mode.</span><span data-lang="zh">进球数：$2, 1, 0, 3, 2, 1, 2, 4, 3$（$n = 9$）。(a) 均值。(b) 中位数。(c) 众数。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\bar{x} = 2$ &nbsp;·&nbsp; <span class="ans">(b)</span> median $= 2$ &nbsp;·&nbsp; <span class="ans">(c)</span> mode $= 2$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\bar{x} = 2$ &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">median $= 2$</span><span data-lang="zh">中位数 $= 2$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">mode $= 2$</span><span data-lang="zh">众数 $= 2$</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Mean <span class="marks-call">M1·A1</span></h4>
       $$ \bar{x} \;=\; \frac{2 + 1 + 0 + 3 + 2 + 1 + 2 + 4 + 3}{9} \;=\; \frac{18}{9} \;=\; 2. $$
 
@@ -150,15 +177,27 @@
 
       <div class="insight"><strong>When all three coincide.</strong> A symmetric, single-peaked dataset often has mean $=$ median $=$ mode. Here all three equal $2$, which is consistent with a roughly symmetric distribution. Don't expect this in general — for skewed data the mean and median diverge.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 均值（<code>mean</code>） <span class="marks-call">M1·A1</span></h4>
+      $$ \bar{x} \;=\; \frac{2 + 1 + 0 + 3 + 2 + 1 + 2 + 4 + 3}{9} \;=\; \frac{18}{9} \;=\; 2. $$
+
+      <h4>(b) 中位数（<code>median</code>） <span class="marks-call">M1·A1</span></h4>
+      升序排列：$0, 1, 1, 2, \boxed{2}, 2, 3, 3, 4$。当 $n = 9$ 时，中位数取第 $\left(\dfrac{n+1}{2}\right) = 5$ 个值，即 $\boxed{2}$。
+
+      <h4>(c) 众数（<code>mode</code>） <span class="marks-call">A1</span></h4>
+      频数统计：$0\!\to\!1,\ 1\!\to\!2,\ 2\!\to\!3,\ 3\!\to\!2,\ 4\!\to\!1$。值 $2$ 出现 $3$ 次（多于其他任何值），故众数为 $\boxed{2}$。
+
+      <div class="insight"><strong>三者重合的情形。</strong>对称且单峰的数据集往往满足 均值 $=$ 中位数 $=$ 众数。本题三者均为 $2$，与近似对称的分布吻合。但不可一概而论 —— 偏态数据中均值与中位数会分开。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.2 IQR &amp; Outliers</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$Q_1 = 14$, median $= 22$, $Q_3 = 30$. Smallest value $= 4$, largest $= 54$. (a) IQR. (b) Fence values. (c) Outlier flags?</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$Q_1 = 14$, median $= 22$, $Q_3 = 30$. Smallest value $= 4$, largest $= 54$. (a) IQR. (b) Fence values. (c) Outlier flags?</span><span data-lang="zh">$Q_1 = 14$、中位数 $= 22$、$Q_3 = 30$。最小值 $= 4$，最大值 $= 54$。(a) IQR。(b) 围栏值。(c) 是否标记为异常值？</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\text{IQR} = 16$ &nbsp;·&nbsp; <span class="ans">(b)</span> lower fence $= -10$, upper fence $= 54$ &nbsp;·&nbsp; <span class="ans">(c)</span> neither flagged</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\text{IQR} = 16$ &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">lower fence $= -10$, upper fence $= 54$</span><span data-lang="zh">下围栏 $= -10$，上围栏 $= 54$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">neither flagged</span><span data-lang="zh">两者均未标记</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) IQR <span class="marks-call">A1</span></h4>
       $\text{IQR} \;=\; Q_3 - Q_1 \;=\; 30 - 14 \;=\; \boxed{16}.$
 
@@ -175,15 +214,32 @@
 
       <div class="insight"><strong>Boundary case.</strong> Some sources use $\ge$ instead of $>$ for the outlier cutoff, in which case $54$ <em>would</em> be flagged. For IB AA HL the convention is strict inequality on both sides ($x < Q_1 - 1.5\,\text{IQR}$ or $x > Q_3 + 1.5\,\text{IQR}$). Either answer can earn the marks <em>if</em> the convention is stated.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) IQR <span class="marks-call">A1</span></h4>
+      四分位距（<code>IQR</code>）$= Q_3 - Q_1 = 30 - 14 = \boxed{16}$。
+
+      <h4>(b) 围栏值 <span class="marks-call">M1·A1</span></h4>
+      在 $Q_1$ 之下和 $Q_3$ 之上各取 $1.5\cdot\text{IQR} = 24$：
+      $$ \text{下围栏（<code>lower fence</code>）} \;=\; Q_1 - 1.5\,\text{IQR} \;=\; 14 - 24 \;=\; -10, $$
+      $$ \text{上围栏（<code>upper fence</code>）} \;=\; Q_3 + 1.5\,\text{IQR} \;=\; 30 + 24 \;=\; 54. $$
+
+      <h4>(c) 异常值判定 <span class="marks-call">M1·A1·R1</span></h4>
+      <ul>
+        <li><strong>最小值 $4$：</strong>$-10 \le 4 \le 14$（处于 $[\text{下围栏},\, Q_1]$ 之中），因此 $4$ <em>没有</em>越过下围栏 —— <strong>不是异常值</strong>。</li>
+        <li><strong>最大值 $54$：</strong>恰好等于上围栏。$1.5\cdot\text{IQR}$ 规则只把<em>严格越出</em>围栏的值标记为异常（通常写作 $x > Q_3 + 1.5\,\text{IQR}$，严格不等式），所以<em>恰在</em>围栏上的值<strong>不被标记</strong>。要把"严格不等式"这一惯例写出来才能拿到推理分。</li>
+      </ul>
+
+      <div class="insight"><strong>边界情形。</strong>部分教材把异常值的临界用 $\ge$ 而非 $>$，那样 $54$ <em>就会</em>被标记。IB AA HL 的惯例是两边都用严格不等式（$x < Q_1 - 1.5\,\text{IQR}$ 或 $x > Q_3 + 1.5\,\text{IQR}$）。<em>只要</em>明写所用惯例，两种答案都能得分。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.3 Linear Transformations</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$\bar{x} = 58$, $\sigma_x = 12$. Apply $y_i = 1.25 x_i - 5$, then $z_i = -y_i + 90$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$\bar{x} = 58$, $\sigma_x = 12$. Apply $y_i = 1.25 x_i - 5$, then $z_i = -y_i + 90$.</span><span data-lang="zh">$\bar{x} = 58$、$\sigma_x = 12$。先施加 $y_i = 1.25 x_i - 5$，再施加 $z_i = -y_i + 90$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\bar{y} = 67.5$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\sigma_y = 15$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\bar{z} = 22.5$, $\sigma_z = 15$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\bar{y} = 67.5$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\sigma_y = 15$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\bar{z} = 22.5$, $\sigma_z = 15$</div>
+    <div class="rationale" data-lang="en">
       <h4>Lemma to use <span class="marks-call">R1</span></h4>
       For any linear transformation $y_i = a x_i + b$:
       $$ \bar{y} \;=\; a\bar{x} + b, \qquad \sigma_y \;=\; |a|\,\sigma_x. $$
@@ -202,21 +258,40 @@
 
       <div class="insight"><strong>Why $|a|$ and not $a$.</strong> Standard deviation is a measure of <em>spread</em>; spread can't be negative. Multiplying every value by $-1$ reflects the dataset about $0$ but doesn't change its dispersion. The mean does flip sign because mean is a <em>location</em> measure.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>需要用到的引理 <span class="marks-call">R1</span></h4>
+      对任意线性变换（<code>linear transformation</code>）$y_i = a x_i + b$：
+      $$ \bar{y} \;=\; a\bar{x} + b, \qquad \sigma_y \;=\; |a|\,\sigma_x. $$
+      均值同时受 $a$ 与 $b$ 影响；标准差只按 $|a|$ 缩放，因此对纯位移 $b$ <em>不变</em>。
+
+      <h4>(a) 变换后的均值 <span class="marks-call">M1·A1</span></h4>
+      $$ \bar{y} \;=\; 1.25 \cdot 58 - 5 \;=\; 72.5 - 5 \;=\; \boxed{67.5}. $$
+
+      <h4>(b) 变换后的标准差 <span class="marks-call">M1·A1</span></h4>
+      $$ \sigma_y \;=\; |1.25| \cdot 12 \;=\; \boxed{15}. $$
+
+      <h4>(c) 第二次变换 $z_i = -y_i + 90$ <span class="marks-call">M1·A1</span></h4>
+      对 $y_i$ 而言此时 $a = -1$、$b = 90$：
+      $$ \bar{z} \;=\; -\bar{y} + 90 \;=\; -67.5 + 90 \;=\; \boxed{22.5}, $$
+      $$ \sigma_z \;=\; |-1| \cdot \sigma_y \;=\; 1 \cdot 15 \;=\; \boxed{15}. $$
+
+      <div class="insight"><strong>为何取 $|a|$ 而非 $a$。</strong>标准差度量<em>离散程度</em>，不可能为负。把所有数值乘以 $-1$ 只是把数据关于 $0$ 翻转，并不改变其离散程度。但均值会变号 —— 因为均值是一个<em>位置（<code>location</code>）</em>度量。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART II ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART II &nbsp;·&nbsp; PAPER 1 SECTION B — SOLUTIONS</span><span class="part-meta">No calculator · 24 marks</span></div>
-<h2 class="section-head">Section B — Extended Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;·&nbsp; PAPER 1 SECTION B — SOLUTIONS</span><span data-lang="zh">第二部分 &nbsp;·&nbsp; 第一卷 B 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator · 24 marks</span><span data-lang="zh">不可使用计算器 · 24 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B — Extended Solutions</span><span data-lang="zh">B 节 —— 长答题解析</span></h2>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span><span class="pill p1b">Paper 1B</span><span class="pill topic">4.2 / 4.3 Grouped Data</span><span class="pill marks">[8 marks]</span></div>
-  <div class="q-body"><p class="prompt">App-usage times grouped in five $10$-min classes; $f_i = 8, 14, 16, 9, 3$ ($n=50$). (a) Estimated mean. (b) Modal class. (c) Why it's an estimate.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">App-usage times grouped in five $10$-min classes; $f_i = 8, 14, 16, 9, 3$ ($n=50$). (a) Estimated mean. (b) Modal class. (c) Why it's an estimate.</span><span data-lang="zh">App 使用时间按 $5$ 个 $10$ 分钟一组分组；$f_i = 8, 14, 16, 9, 3$（$n=50$）。(a) 估计均值。(b) 众数组。(c) 为何只是估计值。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\bar{t} = 22$ min &nbsp;·&nbsp; <span class="ans">(b)</span> modal class $[20, 30)$, midpoint $25$ &nbsp;·&nbsp; <span class="ans">(c)</span> midpoints approximate raw values</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> <span data-lang="en">$\bar{t} = 22$ min</span><span data-lang="zh">$\bar{t} = 22$ 分钟</span> &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">modal class $[20, 30)$, midpoint $25$</span><span data-lang="zh">众数组 $[20, 30)$，组中值 $25$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">midpoints approximate raw values</span><span data-lang="zh">组中值只是对原始数据的近似</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Estimated mean via class midpoints <span class="marks-call">M1·M1·A1·A1</span></h4>
       Construct the working table:
       <table>
@@ -236,15 +311,35 @@
       <h4>(c) Why it's an estimate <span class="marks-call">R1·R1</span></h4>
       Each value within a class has been replaced by its <em>class midpoint</em>, which is only an approximation of the actual times within that interval. If the raw within-class data were available, the true mean could differ from $22$ min (most often by less than half a class width).
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 用组中值估算均值 <span class="marks-call">M1·M1·A1·A1</span></h4>
+      列出计算用表：
+      <table>
+        <tr><th>组别</th><th>组中值 $x_i$</th><th>$f_i$</th><th>$f_i x_i$</th></tr>
+        <tr><td>$[0, 10)$</td><td>$5$</td><td>$8$</td><td>$40$</td></tr>
+        <tr><td>$[10, 20)$</td><td>$15$</td><td>$14$</td><td>$210$</td></tr>
+        <tr><td>$[20, 30)$</td><td>$25$</td><td>$16$</td><td>$400$</td></tr>
+        <tr><td>$[30, 40)$</td><td>$35$</td><td>$9$</td><td>$315$</td></tr>
+        <tr><td>$[40, 50)$</td><td>$45$</td><td>$3$</td><td>$135$</td></tr>
+        <tr><th colspan="2">合计</th><th>$50$</th><th>$1100$</th></tr>
+      </table>
+      $$ \bar{t} \;=\; \frac{\sum f_i x_i}{\sum f_i} \;=\; \frac{1100}{50} \;=\; \boxed{22\ \text{分钟}}. $$
+
+      <h4>(b) 众数组（<code>modal class</code>） <span class="marks-call">A1·A1</span></h4>
+      频数最大的组是 $[20, 30)$（$f = 16$）。组中值 $= 25$ 分钟。注意：分组数据只能报告众数<em>组</em>，而不是单一的众数值。
+
+      <h4>(c) 为何只是估计值 <span class="marks-call">R1·R1</span></h4>
+      每个数据点在计算时被其所在组的<em>组中值</em>替代，组中值只是对该区间内真实时间的近似。若拥有组内原始数据，真实均值可能与 $22$ 分钟存在偏差（通常偏差不超过半个组距）。
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">4.4 Bivariate / PMCC</span><span class="pill marks">[10 marks]</span></div>
-  <div class="q-body"><p class="prompt">Fertilizer $x$ vs yield $y$, $n=5$. (a) Show $\bar{x}=30$, $\bar{y}=4.8$. (b) Compute $\sum(x-\bar{x})(y-\bar{y})$ and $\sum(x-\bar{x})^2$. (c) Regression line $y = a + bx$. (d) One caution on causation.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Fertilizer $x$ vs yield $y$, $n=5$. (a) Show $\bar{x}=30$, $\bar{y}=4.8$. (b) Compute $\sum(x-\bar{x})(y-\bar{y})$ and $\sum(x-\bar{x})^2$. (c) Regression line $y = a + bx$. (d) One caution on causation.</span><span data-lang="zh">化肥用量 $x$ 与产量 $y$，$n=5$。(a) 证明 $\bar{x}=30$、$\bar{y}=4.8$。(b) 计算 $\sum(x-\bar{x})(y-\bar{y})$ 与 $\sum(x-\bar{x})^2$。(c) 回归直线 $y = a + bx$。(d) 关于因果的一条提醒。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> shown &nbsp;·&nbsp; <span class="ans">(b)</span> $S_{xy} = 95$, $S_{xx} = 1000$ &nbsp;·&nbsp; <span class="ans">(c)</span> $y = 1.95 + 0.095\,x$ &nbsp;·&nbsp; <span class="ans">(d)</span> correlation $\ne$ causation</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> <span data-lang="en">shown</span><span data-lang="zh">已证</span> &nbsp;·&nbsp; <span class="ans">(b)</span> $S_{xy} = 95$, $S_{xx} = 1000$ &nbsp;·&nbsp; <span class="ans">(c)</span> $y = 1.95 + 0.095\,x$ &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">correlation $\ne$ causation</span><span data-lang="zh">相关 $\ne$ 因果</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Means <span class="marks-call">M1·A1</span></h4>
       $$ \bar{x} \;=\; \frac{10 + 20 + 30 + 40 + 50}{5} \;=\; \frac{150}{5} \;=\; 30, \qquad \bar{y} \;=\; \frac{3.0 + 4.0 + 4.5 + 5.5 + 7.0}{5} \;=\; \frac{24.0}{5} \;=\; 4.8. \quad \blacksquare $$
 
@@ -269,15 +364,40 @@
 
       <div class="insight"><strong>IB formula convention.</strong> AA HL writes the regression line as $y = a + bx$ (intercept first), not the school-book $y = mx + c$. Memorise both forms; the IB formula booklet uses $a + bx$.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 均值 <span class="marks-call">M1·A1</span></h4>
+      $$ \bar{x} \;=\; \frac{10 + 20 + 30 + 40 + 50}{5} \;=\; \frac{150}{5} \;=\; 30, \qquad \bar{y} \;=\; \frac{3.0 + 4.0 + 4.5 + 5.5 + 7.0}{5} \;=\; \frac{24.0}{5} \;=\; 4.8. \quad \blacksquare $$
+
+      <h4>(b) 乘积之和表 <span class="marks-call">M1·M1·A1·A1</span></h4>
+      <table>
+        <tr><th>$x_i$</th><th>$y_i$</th><th>$x_i - \bar{x}$</th><th>$y_i - \bar{y}$</th><th>$(x_i-\bar{x})(y_i-\bar{y})$</th><th>$(x_i-\bar{x})^2$</th></tr>
+        <tr><td>$10$</td><td>$3.0$</td><td>$-20$</td><td>$-1.8$</td><td>$36$</td><td>$400$</td></tr>
+        <tr><td>$20$</td><td>$4.0$</td><td>$-10$</td><td>$-0.8$</td><td>$8$</td><td>$100$</td></tr>
+        <tr><td>$30$</td><td>$4.5$</td><td>$0$</td><td>$-0.3$</td><td>$0$</td><td>$0$</td></tr>
+        <tr><td>$40$</td><td>$5.5$</td><td>$10$</td><td>$0.7$</td><td>$7$</td><td>$100$</td></tr>
+        <tr><td>$50$</td><td>$7.0$</td><td>$20$</td><td>$2.2$</td><td>$44$</td><td>$400$</td></tr>
+        <tr><th colspan="4">合计</th><th>$S_{xy} = 95$</th><th>$S_{xx} = 1000$</th></tr>
+      </table>
+
+      <h4>(c) 回归直线（<code>regression line</code>） <span class="marks-call">M1·A1·A1</span></h4>
+      使用 AA HL 公式 $b = S_{xy}/S_{xx}$、$a = \bar{y} - b\bar{x}$：
+      $$ b \;=\; \frac{95}{1000} \;=\; 0.095, \qquad a \;=\; 4.8 - 0.095 \cdot 30 \;=\; 4.8 - 2.85 \;=\; 1.95. $$
+      直线：$\boxed{y \;=\; 1.95 + 0.095\,x}$（通过 $(\bar{x}, \bar{y}) = (30, 4.8)$ —— 校验：$1.95 + 0.095 \cdot 30 = 1.95 + 2.85 = 4.80$。✓）。
+
+      <h4>(d) 为什么仅凭 $r$ 不足以支持推荐 <span class="marks-call">R1</span></h4>
+      $r$ 很大只说明<em>相关</em>（<code>correlation</code>），不代表<em>因果</em>（<code>causation</code>）。其他因素（土壤质量、降雨、光照、农民经验、作物品种）也可能与化肥用量共变，能解释一部分甚至全部的产量增加。此外，该模型还假设此关系能延伸到本样本化肥范围以外的农场。
+
+      <div class="insight"><strong>IB 公式惯例。</strong>AA HL 把回归直线写作 $y = a + bx$（截距在前），而非课本里的 $y = mx + c$。两种形式都要记住；IB 公式手册（<code>formula booklet</code>）用 $a + bx$。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">4.2 / 4.3 Outliers &amp; Transformations</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$n=10$, $\bar{x}=64$, $\sigma_x=8$, $Q_1=60$, median $=65$, $Q_3=70$. One value $40$ corrected to $80$. Then $y_i = 1.1 x_i - 4$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$n=10$, $\bar{x}=64$, $\sigma_x=8$, $Q_1=60$, median $=65$, $Q_3=70$. One value $40$ corrected to $80$. Then $y_i = 1.1 x_i - 4$.</span><span data-lang="zh">$n=10$、$\bar{x}=64$、$\sigma_x=8$、$Q_1=60$、中位数 $=65$、$Q_3=70$。其中一个 $40$ 改为 $80$。随后 $y_i = 1.1 x_i - 4$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> yes ($40 < 45 = $ lower fence) &nbsp;·&nbsp; <span class="ans">(b)</span> $\bar{y} = 70.8$; $2.8$ above $\bar{x}_{\text{corr}} = 68$ &nbsp;·&nbsp; <span class="ans">(c)</span> SD measures spread, not extremeness</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> <span data-lang="en">yes ($40 < 45 = $ lower fence)</span><span data-lang="zh">是（$40 < 45 = $ 下围栏）</span> &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">$\bar{y} = 70.8$; $2.8$ above $\bar{x}_{\text{corr}} = 68$</span><span data-lang="zh">$\bar{y} = 70.8$；比 $\bar{x}_{\text{corr}} = 68$ 高 $2.8$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">SD measures spread, not extremeness</span><span data-lang="zh">标准差度量离散程度，而非极端程度</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Was $40$ an outlier in the original dataset? <span class="marks-call">M1·A1</span></h4>
       $\text{IQR} = 70 - 60 = 10$; $1.5\,\text{IQR} = 15$. Lower fence $= Q_1 - 1.5\,\text{IQR} = 60 - 15 = 45$. Since $40 < 45$, the value $40$ <strong>is</strong> below the lower fence — flagged as an outlier under the $1.5\cdot\text{IQR}$ rule. ✓
 
@@ -293,21 +413,37 @@
 
       <div class="insight"><strong>Two outlier philosophies.</strong> IB defaults to the <em>$1.5\cdot\text{IQR}$</em> rule (positional, robust to skew). Many real-world statisticians use the <em>$2\sigma$</em> or <em>$3\sigma$</em> rule (moment-based, valid under approximate normality). They give different answers on skewed data; the IB rule is preferred for AA HL.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 原始数据集中的 $40$ 是否为异常值？ <span class="marks-call">M1·A1</span></h4>
+      $\text{IQR} = 70 - 60 = 10$；$1.5\,\text{IQR} = 15$。下围栏 $= Q_1 - 1.5\,\text{IQR} = 60 - 15 = 45$。由于 $40 < 45$，$40$ <strong>确实</strong>在下围栏之外 —— 按 $1.5\cdot\text{IQR}$ 规则被标记为异常值。✓
+
+      <h4>(b) 改正后的均值与变换后的均值 <span class="marks-call">M1·A1</span></h4>
+      把一个 $40$ 改为 $80$，等于总和增加 $40$。原始总和 $= 64 \cdot 10 = 640$；改正后总和 $= 680$；改正后均值
+      $$ \bar{x}_{\text{corr}} \;=\; \frac{680}{10} \;=\; 68. $$
+      再施加 $y_i = 1.1 x_i - 4$：
+      $$ \bar{y} \;=\; 1.1 \cdot 68 - 4 \;=\; 74.8 - 4 \;=\; \boxed{70.8}. $$
+      变换后的均值比改正后的均值高 $70.8 - 68 = \boxed{2.8}$ 分。
+
+      <h4>(c) 标准差与异常值检测 <span class="marks-call">R1·R1</span></h4>
+      $\sigma_x = 8$ 度量数据围绕均值的<em>典型</em>波动幅度，但并不直接告诉你哪些个别值是极端的。$1.5\cdot\text{IQR}$ 规则建立在<em>四分位数</em>（<code>quartiles</code>）上，这是一种位置型指标（数据落在何处？），而非围绕中心的矩。一个点可以离均值多个标准差但并未越过围栏，反之亦然，具体取决于分布形状。因此仅凭 $\sigma_x$ 无法识别出哪个值（如果有）是异常值；为此你需要 $Q_1$ 与 $Q_3$。
+
+      <div class="insight"><strong>两种异常值判定哲学。</strong>IB 默认采用 <em>$1.5\cdot\text{IQR}$</em> 规则（位置型，对偏态稳健）。许多实际工作中的统计学家使用 <em>$2\sigma$</em> 或 <em>$3\sigma$</em> 规则（矩型，仅在近似正态时成立）。在偏态数据上两者给出的答案会不同；AA HL 偏好 IB 规则。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART III ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART III &nbsp;·&nbsp; PAPER 2 — SOLUTIONS</span><span class="part-meta">Calculator (GDC) · 31 marks</span></div>
-<h2 class="section-head">Section C — Paper 2 (Calculator) Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;·&nbsp; PAPER 2 — SOLUTIONS</span><span data-lang="zh">第三部分 &nbsp;·&nbsp; 第二卷 —— 解析</span></span><span class="part-meta"><span data-lang="en">Calculator (GDC) · 31 marks</span><span data-lang="zh">需要图形计算器（<code>GDC</code>）· 31 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C — Paper 2 (Calculator) Solutions</span><span data-lang="zh">C 节 —— 第二卷（可用计算器）解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q8</span><span class="pill easy">EASY</span><span class="pill p2">Paper 2</span><span class="pill topic">4.3 1-Var Stats</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$12$ heart rates: $58, 62, 64, 65, 67, 70, 72, 72, 75, 78, 82, 95$. (a) $\bar{x}, \sigma_x$. (b) $Q_1$, median, $Q_3$. (c) Is $95$ an outlier?</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$12$ heart rates: $58, 62, 64, 65, 67, 70, 72, 72, 75, 78, 82, 95$. (a) $\bar{x}, \sigma_x$. (b) $Q_1$, median, $Q_3$. (c) Is $95$ an outlier?</span><span data-lang="zh">$12$ 个心率值：$58, 62, 64, 65, 67, 70, 72, 72, 75, 78, 82, 95$。(a) $\bar{x}, \sigma_x$。(b) $Q_1$、中位数、$Q_3$。(c) $95$ 是否为异常值？</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\bar{x} \approx 71.7$, $\sigma_x \approx 9.62$ &nbsp;·&nbsp; <span class="ans">(b)</span> $Q_1 = 64.5$, median $= 71$, $Q_3 = 76.5$ &nbsp;·&nbsp; <span class="ans">(c)</span> yes (just beyond upper fence $94.5$)</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\bar{x} \approx 71.7$, $\sigma_x \approx 9.62$ &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">$Q_1 = 64.5$, median $= 71$, $Q_3 = 76.5$</span><span data-lang="zh">$Q_1 = 64.5$、中位数 $= 71$、$Q_3 = 76.5$</span> &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">yes (just beyond upper fence $94.5$)</span><span data-lang="zh">是（刚刚越过上围栏 $94.5$）</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) 1-Var Stats output <span class="marks-call">M1·A1</span></h4>
       Enter the 12 values into List 1 on the GDC and run 1-Var Stats:
       $$ \bar{x} \;=\; \frac{860}{12} \;\approx\; 71.7, \qquad \sigma_x \;\approx\; 9.62 \quad (3\ \text{s.f.}). $$
@@ -321,15 +457,29 @@
 
       <div class="insight"><strong>Read every GDC value.</strong> Don't write "GDC gives $\sigma_x \approx 9.62$" without showing you understand which row it came from. State $\sigma_x$ (population SD) by name and give $3$ s.f. by IB convention.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) <code>1-Var Stats</code> 输出 <span class="marks-call">M1·A1</span></h4>
+      在 GDC 的 List 1 中输入这 12 个值，运行 <code>1-Var Stats</code>：
+      $$ \bar{x} \;=\; \frac{860}{12} \;\approx\; 71.7, \qquad \sigma_x \;\approx\; 9.62 \quad (3\ \text{位有效数字}). $$
+      （和检验：$58+62+64+65+67+70+72+72+75+78+82+95 = 860$。）使用 GDC 的 $\sigma_x$ 行，<strong>不要</strong>用 $s_x$ —— IB 的分母为 $n$。
+
+      <h4>(b) 四分位数（<code>quartiles</code>） <span class="marks-call">A1·A1</span></h4>
+      $n = 12$ 个已排序的值，GDC 返回 $Q_1 = 64.5$、中位数 $= 71$、$Q_3 = 76.5$（手算：下半 $\{58,62,64,65,67,70\}$ 中位数 $\tfrac{64+65}{2} = 64.5$；整体中位数 $\tfrac{70+72}{2} = 71$；上半中位数 $\tfrac{75+78}{2} = 76.5$）。
+
+      <h4>(c) 对 $95$ 做异常值判定 <span class="marks-call">M1·A1</span></h4>
+      $\text{IQR} = 76.5 - 64.5 = 12$；$1.5\,\text{IQR} = 18$；上围栏 $= 76.5 + 18 = 94.5$。由于 $95 > 94.5$，值 $95$ <strong>越过上围栏 —— 被标记为异常值</strong>。
+
+      <div class="insight"><strong>每个 GDC 数值都要读懂。</strong>不要只写"GDC 给出 $\sigma_x \approx 9.62$"而不指明它来自哪一行。要明确说"$\sigma_x$（总体标准差，<code>population SD</code>）"，并按 IB 惯例保留 $3$ 位有效数字。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q9</span><span class="pill med">MEDIUM</span><span class="pill p2">Paper 2</span><span class="pill topic">4.2 Cumulative Frequency</span><span class="pill marks">[8 marks]</span></div>
-  <div class="q-body"><p class="prompt">$200$ delivery times in cumulative-frequency form. (a) Convert to frequency. (b) Median. (c) $Q_1$, $Q_3$, IQR. (d) Box plot.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$200$ delivery times in cumulative-frequency form. (a) Convert to frequency. (b) Median. (c) $Q_1$, $Q_3$, IQR. (d) Box plot.</span><span data-lang="zh">$200$ 个派送时间，以累积频数形式给出。(a) 转换为频数。(b) 中位数。(c) $Q_1$、$Q_3$、IQR。(d) 箱线图。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $14, 38, 58, 54, 28, 8$ &nbsp;·&nbsp; <span class="ans">(b)</span> median $\approx 28$ min &nbsp;·&nbsp; <span class="ans">(c)</span> $Q_1 \approx 19$, $Q_3 \approx 37$, $\text{IQR} \approx 18$ &nbsp;·&nbsp; <span class="ans">(d)</span> box plot drawn</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $14, 38, 58, 54, 28, 8$ &nbsp;·&nbsp; <span class="ans">(b)</span> <span data-lang="en">median $\approx 28$ min</span><span data-lang="zh">中位数 $\approx 28$ 分钟</span> &nbsp;·&nbsp; <span class="ans">(c)</span> $Q_1 \approx 19$, $Q_3 \approx 37$, $\text{IQR} \approx 18$ &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">box plot drawn</span><span data-lang="zh">画出箱线图</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Cumulative &rarr; frequency <span class="marks-call">M1·A1</span></h4>
       Subtract consecutive cumulative-frequency values:
       <table>
@@ -352,15 +502,38 @@
 
       <div class="insight"><strong>Linear interpolation lemma.</strong> If the cumulative frequency rises from $C_L$ to $C_R$ as $t$ moves from $a$ to $b$, the $t$-value where cumulative frequency hits a target $C$ is $t \approx a + \dfrac{C - C_L}{C_R - C_L} \cdot (b - a)$. This is the canonical AA HL method for finding quantiles from grouped data.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 累积频数（<code>cumulative frequency</code>） &rarr; 频数 <span class="marks-call">M1·A1</span></h4>
+      用相邻两项累积频数相减：
+      <table>
+        <tr><th>组别</th><th>$[0, 10)$</th><th>$[10, 20)$</th><th>$[20, 30)$</th><th>$[30, 40)$</th><th>$[40, 50)$</th><th>$[50, 60)$</th></tr>
+        <tr><th>$f$</th><td>$14$</td><td>$38$</td><td>$58$</td><td>$54$</td><td>$28$</td><td>$8$</td></tr>
+      </table>
+      校验：$14 + 38 + 58 + 54 + 28 + 8 = 200$。✓
+
+      <h4>(b) 中位数（累积频数 $= 100$） <span class="marks-call">M1·A1</span></h4>
+      中位数位于组 $[20, 30)$ 中（累积频数在 $t=20$ 处的 $52$ 与 $t=30$ 处的 $110$ 之间跨过 $100$）。线性插值（<code>linear interpolation</code>）：
+      $$ \text{中位数} \;\approx\; 20 + \frac{100 - 52}{110 - 52} \cdot 10 \;=\; 20 + \frac{48}{58} \cdot 10 \;\approx\; 20 + 8.3 \;\approx\; \boxed{28\ \text{分钟}}. $$
+
+      <h4>(c) $Q_1$（累积频数 $= 50$）与 $Q_3$（累积频数 $= 150$） <span class="marks-call">M1·M1·A1</span></h4>
+      $Q_1$ 在 $[10, 20)$ 中：$\ Q_1 \approx 10 + \dfrac{50 - 14}{52 - 14}\cdot 10 \;=\; 10 + \dfrac{36}{38}\cdot 10 \;\approx\; 19$。<br>
+      $Q_3$ 在 $[30, 40)$ 中：$\ Q_3 \approx 30 + \dfrac{150 - 110}{164 - 110}\cdot 10 \;=\; 30 + \dfrac{40}{54}\cdot 10 \;\approx\; 37$。<br>
+      $\text{IQR} \approx 37 - 19 = 18\ \text{分钟}$。
+
+      <h4>(d) 箱线图示意 <span class="marks-call">A1</span></h4>
+      数轴从 $0$ 到 $60$。箱体从 $19$ 到 $37$（中位线在 $28$）。须线（<code>whiskers</code>）从箱体延伸到最小值（左端约 $0$，因首组为 $[0,10)$，即有些派送刚刚超过 $0$ 分钟）和最大值（右端 $< 60$）。分组数据无法识别出单个的异常值。
+
+      <div class="insight"><strong>线性插值引理。</strong>当 $t$ 从 $a$ 移到 $b$ 时累积频数从 $C_L$ 上升到 $C_R$，则累积频数达到目标 $C$ 的 $t$ 值近似为 $t \approx a + \dfrac{C - C_L}{C_R - C_L} \cdot (b - a)$。这是 AA HL 在分组数据上求分位数的标准做法。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span><span class="pill p2">Paper 2</span><span class="pill topic">4.4 Regression / Prediction</span><span class="pill marks">[9 marks]</span></div>
-  <div class="q-body"><p class="prompt">Temperature $x$ vs iced-coffee sales $y$, $n=8$. (a) PMCC $r$. (b) Regression line. (c) Predict at $x=25$. (d) Predict at $x=38$ and explain unreliability.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Temperature $x$ vs iced-coffee sales $y$, $n=8$. (a) PMCC $r$. (b) Regression line. (c) Predict at $x=25$. (d) Predict at $x=38$ and explain unreliability.</span><span data-lang="zh">气温 $x$ 与冰咖啡销量 $y$，$n=8$。(a) PMCC $r$。(b) 回归直线。(c) 预测 $x=25$ 时的销量。(d) 预测 $x=38$ 时的销量并解释为何不可靠。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $r \approx 0.995$ &nbsp;·&nbsp; <span class="ans">(b)</span> $y \approx -16.7 + 4.66\,x$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\approx 100$ drinks &nbsp;·&nbsp; <span class="ans">(d)</span> extrapolation outside the sampled range</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $r \approx 0.995$ &nbsp;·&nbsp; <span class="ans">(b)</span> $y \approx -16.7 + 4.66\,x$ &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">$\approx 100$ drinks</span><span data-lang="zh">$\approx 100$ 杯</span> &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">extrapolation outside the sampled range</span><span data-lang="zh">在样本范围外做外推</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) PMCC <span class="marks-call">A1·A1</span></h4>
       GDC LinReg on the $(x, y)$ pairs returns $r \approx 0.995$ (3 s.f.). The near-$1$ value indicates very strong positive linear correlation in the data range.
 
@@ -379,15 +552,34 @@
 
       <div class="insight"><strong>Interpolation vs. extrapolation.</strong> The line is only fitted to data in $[x_{\min}, x_{\max}]$. Predictions <em>inside</em> that interval are interpolation (low-risk). Predictions <em>outside</em> are extrapolation — IB always wants you to flag this. Hot-day demand may flatten, saturate, or even reverse; the linear model is silent on this.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) PMCC（皮尔逊积矩相关系数） <span class="marks-call">A1·A1</span></h4>
+      用 GDC 的 <code>LinReg</code> 对 $(x, y)$ 配对进行计算，返回 $r \approx 0.995$（3 位有效数字）。$r$ 接近 $1$ 说明在数据范围内具有非常强的正向线性相关（<code>positive linear correlation</code>）。
+
+      <h4>(b) 回归直线 $y = a + bx$ <span class="marks-call">A1·A1</span></h4>
+      GDC 给出：$a \approx -16.7$、$b \approx 4.66$（3 位有效数字）。即
+      $$ y \;\approx\; -16.7 + 4.66\,x. $$
+      （校验：当 $\bar{x} = 167/8 = 20.875$ 时，预测 $y = -16.7 + 4.66 \cdot 20.875 \approx 80.6$，与 $\bar{y} = 641/8 \approx 80.1$ 接近 —— 这点偏差来自 $a, b$ 的四舍五入。✓）
+
+      <h4>(c) $x = 25^\circ\text{C}$ 时的预测 <span class="marks-call">M1·A1</span></h4>
+      $$ \hat{y}(25) \;=\; -16.7 + 4.66 \cdot 25 \;=\; -16.7 + 116.5 \;\approx\; \boxed{99.8 \approx 100\ \text{杯}}. $$
+      因 $25^\circ\text{C}$ 处于观测范围 $[12, 30]$ 之内，这是<em>内插</em>（<code>interpolation</code>） —— 在合理范围内可信。
+
+      <h4>(d) $x = 38^\circ\text{C}$ 时的预测 <span class="marks-call">M1·A1·R1</span></h4>
+      $$ \hat{y}(38) \;=\; -16.7 + 4.66 \cdot 38 \;\approx\; 160\ \text{杯}. $$
+      但 $38^\circ\text{C}$ 远超样本范围 $[12, 30]$。这是<em>外推</em>（<code>extrapolation</code>），春季观测到的线性关系在酷暑下未必继续成立 —— 顾客可能改买其他饮品、供给能力可能饱和，或消费行为发生本质变化。使用时务必谨慎。
+
+      <div class="insight"><strong>内插 vs. 外推。</strong>回归直线只根据 $[x_{\min}, x_{\max}]$ 中的数据拟合。该区间<em>内</em>的预测属于内插（风险低）；区间<em>外</em>的预测属于外推 —— IB 总要求你明确指出这一点。高温日的需求可能趋平、饱和，甚至反转；线性模型对此毫无信息。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill p2">Paper 2</span><span class="pill topic">4.2 – 4.4 Combined</span><span class="pill marks">[8 marks]</span></div>
-  <div class="q-body"><p class="prompt">Factory output, $n=30$, grouped in five $10$-unit classes with $f_i = 3, 7, 11, 6, 3$. (a) $\bar{x}, \sigma_x$. (b) $z$-score for $x = 90$. (c) Which group more dispersed (vs. $\bar{y}=80$, $\sigma_y=15$)? (d) Why standardising erases the difference.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Factory output, $n=30$, grouped in five $10$-unit classes with $f_i = 3, 7, 11, 6, 3$. (a) $\bar{x}, \sigma_x$. (b) $z$-score for $x = 90$. (c) Which group more dispersed (vs. $\bar{y}=80$, $\sigma_y=15$)? (d) Why standardising erases the difference.</span><span data-lang="zh">工厂产量，$n=30$，分成 $5$ 个 $10$ 单位的组，$f_i = 3, 7, 11, 6, 3$。(a) $\bar{x}, \sigma_x$。(b) $x = 90$ 的 $z$ 分数。(c) 与 $\bar{y}=80$、$\sigma_y=15$ 比较，哪组更分散？(d) 为何标准化会抹平差异。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\bar{x} \approx 74.7$, $\sigma_x \approx 11.1$ &nbsp;·&nbsp; <span class="ans">(b)</span> $z \approx 1.38$ &nbsp;·&nbsp; <span class="ans">(c)</span> the $y$-group ($\sigma_y = 15 > 11.1$) &nbsp;·&nbsp; <span class="ans">(d)</span> standardised SD is $1$ for both</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\bar{x} \approx 74.7$, $\sigma_x \approx 11.1$ &nbsp;·&nbsp; <span class="ans">(b)</span> $z \approx 1.38$ &nbsp;·&nbsp; <span class="ans">(c)</span> <span data-lang="en">the $y$-group ($\sigma_y = 15 > 11.1$)</span><span data-lang="zh">$y$ 组（$\sigma_y = 15 > 11.1$）</span> &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">standardised SD is $1$ for both</span><span data-lang="zh">两组标准化后标准差都是 $1$</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Frequency-weighted $\bar{x}$, $\sigma_x$ via GDC <span class="marks-call">M1·A1·A1</span></h4>
       Class midpoints: $55, 65, 75, 85, 95$ (List 1); frequencies $3, 7, 11, 6, 3$ (List 2). GDC 1-Var Stats with frequency = L2:
       $$ \bar{x} \;=\; \frac{\sum f_i x_i}{\sum f_i} \;=\; \frac{3 \cdot 55 + 7 \cdot 65 + 11 \cdot 75 + 6 \cdot 85 + 3 \cdot 95}{30} \;=\; \frac{2240}{30} \;\approx\; 74.7. $$
@@ -407,13 +599,39 @@
 
       <div class="insight"><strong>$z$-scores erase scale.</strong> That's the point: $z$-scores let you compare values across datasets with different units / scales (test scores vs heights, kg vs tons). The trade-off is exactly what the question highlights — you also erase information about <em>absolute</em> spread.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 用 GDC 做频数加权的 $\bar{x}$、$\sigma_x$ <span class="marks-call">M1·A1·A1</span></h4>
+      组中值：$55, 65, 75, 85, 95$（放入 List 1）；频数 $3, 7, 11, 6, 3$（放入 List 2）。在 GDC 的 <code>1-Var Stats</code> 中以 L2 作为频数：
+      $$ \bar{x} \;=\; \frac{\sum f_i x_i}{\sum f_i} \;=\; \frac{3 \cdot 55 + 7 \cdot 65 + 11 \cdot 75 + 6 \cdot 85 + 3 \cdot 95}{30} \;=\; \frac{2240}{30} \;\approx\; 74.7. $$
+      $\sigma_x \approx 11.1$（3 位有效数字）—— 直接从 GDC 的 $\sigma_x$ 行读取。
+
+      <h4>(b) $x = 90$ 的 $z$ 分数（<code>z-score</code>） <span class="marks-call">M1·A1</span></h4>
+      $$ z \;=\; \frac{x - \bar{x}}{\sigma_x} \;=\; \frac{90 - 74.7}{11.1} \;\approx\; \frac{15.3}{11.1} \;\approx\; \boxed{1.38}. $$
+      解读：生产 $90$ 台的机器距离均值约 $1.4$ 个标准差 —— 略高于平均水平，但不算极端。
+
+      <h4>(c) 哪一组更分散？ <span class="marks-call">A1·R1</span></h4>
+      直接比较两组的标准差（两组都以 $n$ 为分母，且 $n = 30$）：
+      $$ \sigma_x \approx 11.1 \;<\; \sigma_y = 15. $$
+      $y$ 组更分散（围绕均值的离散程度更大）。要用 $\sigma$ 而不是均值来比较 —— 离散程度（<code>dispersion</code>）讲的是分布幅度。
+
+      <h4>(d) 为何标准化（<code>standardising</code>）会抹平差异 <span class="marks-call">R1</span></h4>
+      标准化把每个 $x_i$ 替换为 $z_i = (x_i - \bar{x})/\sigma_x$。根据构造，标准化后的数据必满足 $\bar{z} = 0$、$\sigma_z = 1$，与原标准差无关。因此<em>标准化之后</em>，两组的离散程度都变成 $\sigma_z = 1$ —— 原本的离散程度差异恰恰就是我们除掉的那一项。
+
+      <div class="insight"><strong>$z$ 分数会抹掉量纲。</strong>这正是其用意：$z$ 分数让我们能跨单位、跨量纲比较数据（如考试分数 vs 身高、kg vs 吨）。代价正如本题指出 —— 关于<em>绝对</em>离散程度的信息也一并被抹掉。</div>
+    </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI SCHOLARS</span> · IB Math AA HL · Unit D1 Univariate Data &mdash; Solutions</span>
-  <span>Solutions · 11 Qs · 77 marks total</span>
+  <span><span class="mark">DINGRUI SCHOLARS</span> · <span data-lang="en">IB Math AA HL · Unit D1 Univariate Data &mdash; Solutions</span><span data-lang="zh">IB Math AA HL · Unit D1 单变量数据 —— 解析</span></span>
+  <span><span data-lang="en">Solutions · 11 Qs · 77 marks total</span><span data-lang="zh">解析 · 11 题 · 共 77 分</span></span>
 </footer>
+
+<script>
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+</script>
 
 </body>
 </html>
