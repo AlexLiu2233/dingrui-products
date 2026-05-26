@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High School Math Unit 6: Sequences and Series | Dingrui Scholars. Sequences as functions, recursive vs explicit definitions, arithmetic and geometric sequences and series, infinite geometric convergence, sigma notation, and the exp-function-to-geometric-sequence connection. Cram-friendly cheat-sheets and depth derivations side by side. Cites US Common Core (HSF-BF.A.2, HSF-IF.A.3, HSA-SSE.B.4), Ontario MPM2D/MCR3U Discrete Functions, BC FMP&amp;PC10 and BC Pre-Calc 12.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>High School Math — Unit 6: Sequences and Series | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-Math-6  dingrui:doc-type study-guide -->
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB; --bg-card: #FFFFFF; --bg-code: #1E1418;
+  --text: #2C1B1F; --text-secondary: #6B5058;
+  --accent: #7A2E2E; --accent-light: #F2E4E4; --accent-dark: #5A1E1E;
+  --green: #2E6B4F; --green-light: #DFF0E8;
+  --orange: #A65E1A; --orange-light: #FBF0E0;
+  --red: #B03030; --red-light: #FCEAEA;
+  --purple: #5E3D7A; --purple-light: #EDE4F5;
+  --gold: #C4956A; --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px; --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010; --bg-card: #1E1618; --bg-code: #0D0A0B;
+  --text: #E8E0DC; --text-secondary: #A89098;
+  --accent: #C87070; --accent-light: #3A1818; --accent-dark: #E08080;
+  --green: #5CB88A; --green-light: #1A2E24;
+  --orange: #D4944A; --orange-light: #2E2010;
+  --red: #E07070; --red-light: #301515;
+  --purple: #A888C8; --purple-light: #201828;
+  --gold: #D4A870; --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 17px; transition: background 0.3s, color 0.3s; }
+.score-badge { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--green); background: var(--green-light); border: 1px solid var(--green); padding: 3px 10px; border-radius: 20px; white-space: nowrap; transition: all 0.3s; }
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+.sidebar { position: fixed; top: 59px; left: 0; bottom: 0; width: var(--toc-w); background: var(--bg-card); border-right: 1px solid var(--border); overflow-y: auto; scrollbar-width: none; padding: 20px 0; transform: translateX(-100%); transition: transform 0.3s ease, background 0.3s; z-index: 90; }
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title { font-family: var(--font-display); font-size: 0.95rem; padding: 0 20px 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.sidebar a { display: block; padding: 8px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+.main-wrap { max-width: var(--max-w); margin: 80px auto 120px; padding: 0 24px; transition: width 0.3s ease, margin-left 0.3s ease; }
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap { max-width: none; margin-left: calc(var(--toc-w) + 40px); margin-right: 0; padding: 0 48px; }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+.hero { text-align: center; padding: 56px 24px 48px; background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%); border-radius: var(--radius); margin-bottom: 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%); pointer-events: none; }
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; position: relative; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; position: relative; }
+.hero-sub { color: var(--text-secondary); max-width: 650px; margin: 0 auto; position: relative; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; }
+.hero-meta .chip { font-size: 0.85rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HS Math multi-syllabus chrome (locked in Unit 1) */
+.syllabus-map { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg-card) 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px 26px 18px; margin: 28px 0 36px; box-shadow: var(--shadow); }
+.syllabus-map-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.syllabus-map-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+@media (max-width: 760px) { .syllabus-map-grid { grid-template-columns: 1fr; gap: 18px; } }
+.syllabus-map .region-header { font-family: var(--font-display); font-size: 1.02rem; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.syllabus-map ul { list-style: none; padding: 0; margin: 0; }
+.syllabus-map ul li { font-size: 0.86rem; line-height: 1.5; padding: 4px 0; color: var(--text-secondary); }
+.syllabus-map ul li code { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); background: var(--bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border); }
+
+.region-chip { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--text-secondary); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.4px; vertical-align: middle; margin-left: 8px; }
+
+.syllabus-note { border-left: 4px solid var(--purple); background: var(--purple-light); border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 18px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.syllabus-note strong { color: var(--purple); margin-right: 4px; }
+[data-theme="dark"] .syllabus-note { background: rgba(94, 61, 122, 0.18); }
+
+.honors-flag { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
+
+.feeder-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent); padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.2s; margin: 4px 6px 4px 0; }
+.feeder-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+.feeder-link::before { content: '→'; font-weight: 700; }
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.section h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px; line-height: 1.25; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; display: inline-block; }
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+.concept-box { border-left: 5px solid var(--accent); background: var(--bg-card); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 20px 0; box-shadow: var(--shadow); }
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child { display: inline-block; margin-bottom: 8px; font-family: var(--font-mono); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; margin-left: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; background: var(--bg); font-weight: 500; position: relative; }
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry { display: none; margin-top: 12px; padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary { padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem; user-select: none; list-style: none; display: flex; align-items: center; gap: 10px; background: var(--bg); transition: background 0.2s; }
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+.flashcard-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 4px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
+.flashcard-toolbar button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 8px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-left: 6px; }
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin: 24px 0; }
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner { display: grid; grid-template-areas: "card"; min-height: 200px; height: 100%; position: relative; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { grid-area: card; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: var(--shadow); overflow: hidden; word-break: break-word; hyphens: auto; }
+.flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-weight: 600; font-size: clamp(0.92rem, 2.1vw, 1.05rem); line-height: 1.45; padding: 22px 20px 34px; gap: 8px; }
+.flashcard-front::after { content: 'TAP TO FLIP'; position: absolute; bottom: 10px; left: 0; right: 0; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px; }
+.flashcard-back { background: var(--bg); border: 2px solid var(--accent); color: var(--text); transform: rotateY(180deg); font-size: clamp(0.88rem, 2vw, 1rem); line-height: 1.6; padding: 26px 22px; gap: 12px; word-break: normal; hyphens: manual; overflow-wrap: break-word; text-wrap: pretty; }
+.flashcard-back .katex-display { margin: 6px 0 !important; font-size: 1.25em; max-width: 100%; overflow: hidden; }
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) { .flashcard-grid { grid-template-columns: 1fr; } }
+.worked-solution { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+.worked-solution .katex-display { margin: 0.65rem 0; }
+.formula-box { background: var(--bg-card); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 24px 32px; margin: 24px 0; text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto; }
+.formula-box .formula-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.formula-box .katex-display { margin: 14px 0 !important; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; background: var(--bg-card); transition: all 0.2s; display: flex; align-items: center; gap: 12px; user-select: none; }
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.8rem; color: transparent; }
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+.footer-wrap { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 48px; }
+.footer-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+.section-label + h2 { margin-top: 0.2rem; }
+@media (max-width: 600px) { .hero h1 { font-size: 2rem; } .main-wrap { padding: 0 16px; margin-top: 60px; } .formula-box { padding: 16px; } .top-nav { padding: 0 16px; } }
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry, .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz, .syllabus-map, .syllabus-note { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245, 240, 235, 0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; transition: background 0.3s, border 0.3s; }
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge { background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px; }
+.nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; font-family: var(--font-body); font-weight: 600; transition: all 0.2s; }
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
+.cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">UNIT 6</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Table of Contents</div>
+  <a href="#hero">Overview</a>
+  <a href="#syllabus-map">Syllabus Map</a>
+  <a href="#how-to-use">How to use this guide</a>
+  <a href="#s-6-1">6.1 Sequences Vocabulary</a>
+  <a href="#s-6-2">6.2 Arithmetic Sequences</a>
+  <a href="#s-6-3">6.3 Arithmetic Series</a>
+  <a href="#s-6-4">6.4 Geometric Sequences</a>
+  <a href="#s-6-5">6.5 Geometric Series</a>
+  <a href="#s-6-6">6.6 Infinite Geometric Series</a>
+  <a href="#s-6-7">6.7 Sigma Notation</a>
+  <a href="#exam-strategy">Exam Strategy</a>
+  <a href="#flashcards">Flashcards</a>
+  <a href="#unit-quiz">Practice Quiz</a>
+  <a href="#checklist">Readiness Checklist</a>
+  <a href="#feeders">What This Feeds Into</a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">High School Math</div>
+  <h1>Unit 6: Sequences<br>and Series</h1>
+  <p class="hero-sub">
+    Sequences and series turn the function machine on the integers: each input is a position $n$, each output is a term $a_n$, and "summing the first $n$ terms" promotes the sequence to a series. This unit covers vocabulary (terms, recursive vs explicit definitions), arithmetic sequences and their finite sums, geometric sequences and their finite sums, the special infinite-geometric case that converges when $|r| &lt; 1$, and sigma notation as the compact summation language. We make the exp-function-to-geometric-sequence connection explicit (the BC PC12 curriculum names it). The unit feeds into Unit 5 (exponential growth seen as a geometric sequence), AP Calc BC Unit 10 (series), and IB Math HL A1 (sequences and series) and E6 (Maclaurin series).
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon">Unit 6 of 15</span>
+    <span class="chip chip-green">US Common Core &middot; ON &middot; BC</span>
+    <span class="chip chip-purple">7 sections &middot; sigma is honors at US Alg 1</span>
+  </div>
+</section>
+
+<aside class="syllabus-map" id="syllabus-map">
+  <div class="syllabus-map-label">Where this lives in your syllabus</div>
+  <div class="syllabus-map-grid">
+    <div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; US Common Core</div>
+      <ul>
+        <li><code>HSF-IF.A.3</code> recognize that <em>sequences are functions, sometimes defined recursively, whose domain is a subset of the integers</em> &mdash; the anchor for &sect;6.1</li>
+        <li><code>HSF-BF.A.2</code> write <em>arithmetic and geometric sequences both recursively and with an explicit formula&hellip; and translate between the two forms</em> &mdash; core for &sect;6.2 and &sect;6.4</li>
+        <li><code>HSA-SSE.B.4</code> derive the formula for the sum of a <em>finite geometric series</em> (when $r \ne 1$), and use it to solve problems &mdash; core for &sect;6.5</li>
+        <li><code>HSF-LE.A.2</code> construct linear and exponential functions, <em>including arithmetic and geometric sequences</em></li>
+        <li><code>HSF-LE.A.1a</code> linear grows by equal differences (arithmetic); exponential grows by equal factors (geometric)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; Ontario</div>
+      <ul>
+        <li><strong>MPM2D</strong> (Grade 10) &mdash; linear-as-arithmetic groundwork from the <em>Analytic Geometry</em> and <em>Linear Systems</em> strands; the explicit "arithmetic sequence" label arrives in Grade 11</li>
+        <li><strong>MCR3U</strong> strand <strong>C &mdash; Discrete Functions</strong>: the dedicated sequences-and-series home; <code>C1.1</code> connects arithmetic sequences to <em>discrete linear functions</em></li>
+        <li><strong>MCR3U</strong> <code>C2.2</code> <em>formula for the general term of an arithmetic sequence</em>, $t_n = a + (n - 1) d$</li>
+        <li><strong>MCR3U</strong> <code>C3.1</code> <em>simple interest, arithmetic sequences, and linear growth</em>; compound interest extends to geometric / exponential</li>
+        <li><strong>MHF4U</strong> revisits sequences as the discrete shadow of exponential functions</li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; British Columbia</div>
+      <ul>
+        <li><strong>BC FMP&amp;PC10</strong> Content &mdash; <em>arithmetic sequences</em>: <em>common difference, first term, general term</em>; connecting to linear relations; extension <em>arithmetic series</em></li>
+        <li><strong>BC PC12</strong> Content &mdash; <em>geometric sequences and series</em>: <em>common ratio, first term, general term</em>; <em>geometric sequences connecting to exponential functions</em>; <em>infinite geometric series</em>; <em>sigma notation</em></li>
+        <li><strong>BC PC12</strong> Curricular Competency <em>Connecting and reflecting</em>: "examine&hellip; connections between mathematical ideas (e.g., <em>exponential functions to geometric sequences</em>)" &mdash; the exp $\leftrightarrow$ geometric-sequence connection that anchors &sect;6.4</li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<section class="section" id="how-to-use">
+  <div class="section-label">Read me first</div>
+  <h2>How to use this guide</h2>
+  <p>Sequences and series land in two waves across every curriculum we map to: the <em>arithmetic</em> wave at Grade 10 (FMP&amp;PC10 in BC, the linear-relations groundwork in Ontario, intro Algebra 1 in the US), then the <em>geometric</em> wave one or two years later (PC12 in BC, MCR3U strand C in Ontario, US Algebra 2 / Pre-Calc). The table below tells you which sections are <em>on your syllabus right now</em>, citing the curriculum document we checked it against.</p>
+
+  <div style="overflow-x: auto; margin: 16px 0 18px;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
+    <thead>
+      <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
+        <th style="text-align: left; padding: 8px 10px;">If you are in&hellip;</th>
+        <th style="text-align: left; padding: 8px 10px;">Focus on these sections</th>
+        <th style="text-align: left; padding: 8px 10px;">Defer / skip</th>
+        <th style="text-align: left; padding: 8px 10px;">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 10 &mdash; MPM2D</strong></td>
+        <td style="padding: 8px 10px;">&sect;6.1 (vocabulary), &sect;6.2 (arithmetic sequences, framed as discrete linear functions)</td>
+        <td style="padding: 8px 10px;">&sect;6.4-6.7 (geometric, infinite, sigma) are MCR3U / MHF4U work; the dedicated discrete-functions strand is Grade 11</td>
+        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> &mdash; MPM2D <em>Analytic Geometry</em> and <em>Linear Systems</em> strands (arithmetic-as-linear groundwork)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 11 &mdash; MCR3U</strong></td>
+        <td style="padding: 8px 10px;">Full review &sect;6.1-6.7. MCR3U strand C <em>Discrete Functions</em> is the dedicated home for arithmetic <em>and</em> geometric sequences and series, plus the simple/compound-interest connection</td>
+        <td style="padding: 8px 10px;">Nothing &mdash; lean on &sect;6.2-6.5 since MCR3U expectation C2.2 names $t_n = a + (n-1) d$ and the geometric analogue verbatim</td>
+        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> &mdash; MCR3U strand C <em>Discrete Functions</em>; C1.1, C2.2, C3.1</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 10 &mdash; FMP&amp;PC10</strong></td>
+        <td style="padding: 8px 10px;">&sect;6.1, &sect;6.2, &sect;6.3 (BC PC10 names <em>extension: exploring arithmetic series</em> as a content elaboration)</td>
+        <td style="padding: 8px 10px;">&sect;6.4-6.7 (geometric, infinite, sigma) are PC12 territory in BC</td>
+        <td style="padding: 8px 10px;"><code>fmpc10_elab_extract.md</code> &mdash; Content <em>arithmetic sequences</em>: <em>common difference, first term, general term</em>; connecting to linear relations; extension <em>arithmetic series</em></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 12 &mdash; Pre-Calc 12</strong></td>
+        <td style="padding: 8px 10px;">&sect;6.4, &sect;6.5, &sect;6.6, &sect;6.7. PC12 is the dedicated geometric home: <em>common ratio, first term, general term</em>, <em>geometric sequences connecting to exponential functions</em>, <em>infinite geometric series</em>, <em>sigma notation</em></td>
+        <td style="padding: 8px 10px;">Light review of &sect;6.1-6.3 if arithmetic feels distant from PC10</td>
+        <td style="padding: 8px 10px;"><code>pc12_elab_extract.md</code> &mdash; Content <em>geometric sequences and series</em>; Curricular Competency <em>exponential functions to geometric sequences</em></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 1 (Grade 8-9)</strong></td>
+        <td style="padding: 8px 10px;">&sect;6.1 (sequences as functions), &sect;6.2 (arithmetic sequences both recursive and explicit, per <code>HSF-BF.A.2</code>)</td>
+        <td style="padding: 8px 10px;">&sect;6.5-6.7 are typically Algebra 2 / Pre-Calc; &sect;6.7 (sigma) carries an Honors flag at Alg 1</td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> &mdash; <code>HSF-IF.A.3</code>, <code>HSF-BF.A.2</code>, <code>HSF-LE.A.2</code></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 2 (Grade 10-11)</strong></td>
+        <td style="padding: 8px 10px;">&sect;6.4 (geometric sequences), &sect;6.5 (finite geometric series, the <code>HSA-SSE.B.4</code> derivation), &sect;6.7 (sigma notation); review &sect;6.1-6.3 quickly</td>
+        <td style="padding: 8px 10px;">&sect;6.6 (infinite convergence) is honors at Alg 2 in most US scope-and-sequences; mainstream Alg 2 stops at finite sums</td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> &mdash; <code>HSA-SSE.B.4</code> (finite geometric series derivation), <code>HSF-BF.A.2</code>, <code>HSF-LE.A.2</code></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Pre-Calc</strong></td>
+        <td style="padding: 8px 10px;">Full &sect;6.1-6.7 with depth on &sect;6.6 (infinite convergence, the $|r| &lt; 1$ test) and &sect;6.7 (sigma manipulation). Be fluent at translating between recursive and explicit forms</td>
+        <td style="padding: 8px 10px;">Nothing &mdash; this is the dedicated US home for the full unit</td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> &mdash; <code>HSA-SSE.B.4</code>, <code>HSF-BF.A.2</code>, <code>HSF-IF.A.3</code>; aligns with US Pre-Calc framework's <em>Sequences and Series</em> topic</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; AP-feeder (Calc BC bound)</strong></td>
+        <td style="padding: 8px 10px;">All sections, with extra weight on &sect;6.6 (the $|r| &lt; 1$ convergence test prefigures the geometric-series test in AP Calc BC Unit 10) and &sect;6.7 (sigma is the language of every series test you'll meet)</td>
+        <td style="padding: 8px 10px;">Nothing &mdash; complete this unit, then move into AP Calc BC Unit 10 (sequences and series) and IB Math HL E6 (Maclaurin series feeders)</td>
+        <td style="padding: 8px 10px;">See <em>What this feeds into</em> for the AP Calc BC and IB Math HL cross-references</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="margin-top: 12px;">Once located, use the two cards below for the working speed on the recommended sections.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title">If you are cramming the night before</div></div>
+      <p style="font-size: 0.95rem;">Memorise six formulas: arithmetic $n$-th term $a_n = a_1 + (n-1)d$; arithmetic sum $S_n = \tfrac{n}{2}(a_1 + a_n)$; geometric $n$-th term $a_n = a_1 r^{n-1}$; geometric finite sum $S_n = a_1 (1 - r^n)/(1 - r)$ for $r \ne 1$; infinite geometric $S_\infty = a_1/(1 - r)$ for $|r| &lt; 1$; sigma $\sum_{k=m}^{n} f(k)$. Read the cram-cheat at the top of every section in your row.</p>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title">If you are going for the top mark</div></div>
+      <p style="font-size: 0.95rem;">State the type (arithmetic vs geometric) and parameters $(a_1, d)$ or $(a_1, r)$ before writing any formula. Distinguish "the $n$-th term" from "the sum of the first $n$ terms." For infinite geometric, write $|r| &lt; 1$ <em>before</em> applying $S_\infty$. Practise sigma cold: pull constants out, split sums, re-index. Sigma fluency carries forward verbatim into AP Calc BC and IB Math HL E6.</p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">Honors flag.</strong>
+    Section 6.7 (sigma notation) carries an Honors chip for <strong>US Algebra 1 only</strong> &mdash; the explicit sigma symbol is typically introduced in Algebra 2 or Pre-Calc, and CCSSM keeps Alg 1 sequence work in plain prose. BC PC12 names <em>sigma notation</em> as a Content elaboration explicitly. Section 6.6 (infinite geometric convergence) also carries an honors-leaning chip at US Algebra 2; mainstream Alg 2 stops at finite series, and the $|r| &lt; 1$ test is folded into Pre-Calc.
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-1">
+  <div class="section-label">Section 6.1 &middot; Vocabulary</div>
+  <h2>Sequences Vocabulary</h2>
+
+  <div class="cram-cheat">
+    <strong>A sequence is a function on the integers.</strong> Inputs are positions $n = 1, 2, 3, \dots$; outputs are <em>terms</em> $a_n$. CCSSM <code>HSF-IF.A.3</code>: "sequences are functions, sometimes defined recursively, whose domain is a subset of the integers."
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>Term.</strong> A single output $a_n$; the subscript is the <em>position</em>, the value is the <em>term</em>.</li>
+      <li><strong>Explicit definition.</strong> A formula in $n$, e.g. $a_n = 2 n + 1$ gives $3, 5, 7, 9, \dots$ Plug in, read out.</li>
+      <li><strong>Recursive definition.</strong> A seed plus a rule, e.g. $a_1 = 3$, $a_{n+1} = a_n + 2$. Same sequence as above. Need both pieces or the sequence isn't pinned down.</li>
+      <li><strong>Finite vs infinite.</strong> Finite: domain $\{1, \dots, N\}$. Infinite: all of $\mathbb{N}$.</li>
+    </ul>
+    <strong>Translating.</strong> <code>HSF-BF.A.2</code> asks for translation between recursive and explicit. Arithmetic and geometric are the two families where the translation is mechanical.</div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.1 &middot; Recursive rule to explicit form</div>
+    <p>A sequence is defined by $a_1 = 7$ and $a_{n+1} = a_n + 4$. Write the first five terms and find an explicit formula.</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>Terms.</strong> $a_1 = 7, a_2 = 11, a_3 = 15, a_4 = 19, a_5 = 23$ (add $4$ each step).</p>
+    <p><strong>Spot the pattern.</strong> After $n - 1$ steps from $a_1$ we have added $4(n - 1)$, so $a_n = 7 + 4(n - 1) = 4 n + 3$.</p>
+    <p><strong>Sanity check.</strong> $a_1 = 7$, $a_5 = 23$ &mdash; match.</p>
+    <p><strong>Evaluate.</strong> The explicit form reads any term in one substitution ($a_{100} = 403$); the recursive form needs $99$ additions. For arithmetic sequences, always translate to explicit before computing far-out terms.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; Why "sequence" is just function-language on the integers</summary>
+    <div class="detail-body">
+      <p>A function $f : A \to B$ assigns to each input in $A$ a single output in $B$. A sequence $(a_n)_{n \ge 1}$ does exactly this with $A = \mathbb{N}$ and $B = \mathbb{R}$; the subscript $a_n$ is shorthand for $a(n)$. Everything you know about function notation carries over: domain, range, equality, composition. The recursive-vs-explicit dichotomy is the same as the difference between an iteration $x_{n+1} = g(x_n)$ and a closed-form $x_n = h(n)$ &mdash; iterations are easy to define from a rule, closed forms are easy to evaluate. CCSSM <code>HSF-BF.A.2</code> asks for fluency both directions on the two families where the closed form is mechanical.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">A sequence is defined by $a_1 = 2$ and $a_{n+1} = 3 a_n$. What is $a_4$?</div><div class="quiz-number">6.1 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$18$</div>
+      <div class="quiz-opt" data-idx="1">$54$</div>
+      <div class="quiz-opt" data-idx="2">$24$</div>
+      <div class="quiz-opt" data-idx="3">$162$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_1 = 2$, $a_2 = 6$, $a_3 = 18$, $a_4 = 54$. Each step multiplies the previous term by $3$.</div>
+    <div class="quiz-explain wrong-exp">Apply the recursion three times: $a_2 = 3 a_1$, $a_3 = 3 a_2$, $a_4 = 3 a_3$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">Which sequence is defined recursively but not explicitly by the choices given?</div><div class="quiz-number">6.1 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$a_n = 5 n - 2$</div>
+      <div class="quiz-opt" data-idx="1">$a_n = 3 \cdot 2^{n-1}$</div>
+      <div class="quiz-opt" data-idx="2">$a_1 = 1, a_2 = 1, a_{n+2} = a_{n+1} + a_n$ (the Fibonacci rule)</div>
+      <div class="quiz-opt" data-idx="3">$a_n = n^2$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Fibonacci is the canonical recursive sequence without an elementary explicit formula at the high-school level (the closed form uses the golden ratio). The other three are explicit formulas in $n$.</div>
+    <div class="quiz-explain wrong-exp">"Recursive but not explicit" means the rule references previous terms and no plug-and-evaluate formula in $n$ is given.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-2">
+  <div class="section-label">Section 6.2 &middot; Arithmetic sequences</div>
+  <h2>Arithmetic Sequences <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC10 &middot; &#x1F1E8;&#x1F1E6; ON MCR3U &middot; &#x1F1FA;&#x1F1F8; US Alg 1</span></h2>
+
+  <div class="cram-cheat">
+    <strong>Arithmetic sequence.</strong> Each term differs from the previous by a fixed amount $d$, the <em>common difference</em>. BC PC10 names exactly these three terms in its Content elaboration: <em>common difference, first term, general term</em>.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>Recursive:</strong> $a_1$ given, $a_{n+1} = a_n + d$.</li>
+      <li><strong>Explicit:</strong> $a_n = a_1 + (n - 1) d$. Ontario MCR3U C2.2 writes this as $t_n = a + (n - 1) d$.</li>
+      <li><strong>Direction:</strong> $d &gt; 0$ increasing, $d &lt; 0$ decreasing, $d = 0$ constant.</li>
+    </ul>
+    <strong>Arithmetic-as-linear.</strong> $a_n = d \cdot n + (a_1 - d)$ is linear in $n$ with slope $d$. Ontario MCR3U C1.1: "arithmetic sequences correspond to discrete linear functions."
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">$n$-th term of an arithmetic sequence</div>
+    $$ a_n \;=\; a_1 + (n - 1) d. $$
+    <p>$a_1$ is the first term; $d$ is the common difference; $n \ge 1$.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.2 &middot; Term given position; position given term</div>
+    <p>An arithmetic sequence has $a_1 = -3$ and $d = 5$. (a) Find $a_{20}$. (b) Which term equals $97$?</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>(a) Twentieth term:</strong> $a_{20} = -3 + 19 \cdot 5 = 92$.</p>
+    <p><strong>(b) Position from value.</strong> Solve $97 = -3 + (n - 1) \cdot 5$: $100 = 5(n - 1)$, so $n = 21$.</p>
+    <p><strong>Evaluate.</strong> Cross-check: $a_{21} = a_{20} + d = 92 + 5 = 97$. Confirmed.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; Arithmetic-as-linear, geometrically</summary>
+    <div class="detail-body">
+      <p>Plot $(n, a_n)$ for $n = 1, 2, 3, \dots$. Because $a_{n+1} - a_n = d$ is constant, the dots lie on a line of slope $d$; the continuous extension is $f(x) = d x + (a_1 - d)$. Ontario MCR3U C1.1 names this explicitly ("arithmetic sequences correspond to discrete linear functions"); BC FMP&amp;PC10 names the same picture as "connecting <em>arithmetic sequences</em> to linear relations." Whichever curriculum you sit inside, the two ideas are the same idea wearing different vocabulary.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">In an arithmetic sequence, $a_5 = 17$ and $a_{12} = 45$. Find the common difference $d$.</div><div class="quiz-number">6.2 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$d = 3$</div>
+      <div class="quiz-opt" data-idx="1">$d = 7$</div>
+      <div class="quiz-opt" data-idx="2">$d = 4$</div>
+      <div class="quiz-opt" data-idx="3">$d = 28$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Going from $a_5$ to $a_{12}$ takes $7$ steps. So $a_{12} - a_5 = 7 d$, i.e. $45 - 17 = 28 = 7 d$, giving $d = 4$.</div>
+    <div class="quiz-explain wrong-exp">$a_n - a_m = (n - m) d$ for any two positions $m, n$. So $d = (a_{12} - a_5) / (12 - 5)$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q">Which term of the arithmetic sequence $-8, -3, 2, 7, \dots$ is equal to $147$?</div><div class="quiz-number">6.2 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">The 32nd term</div>
+      <div class="quiz-opt" data-idx="1">The 30th term</div>
+      <div class="quiz-opt" data-idx="2">The 31st term</div>
+      <div class="quiz-opt" data-idx="3">The 29th term</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_1 = -8$, $d = 5$. Solve $147 = -8 + (n - 1) \cdot 5$: $155 = (n - 1) \cdot 5$, so $n - 1 = 31$ and $n = 32$.</div>
+    <div class="quiz-explain wrong-exp">Identify $a_1$ and $d$ from the listing, then solve $a_n = 147$ for $n$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-3">
+  <div class="section-label">Section 6.3 &middot; Arithmetic series</div>
+  <h2>Arithmetic Series</h2>
+
+  <div class="cram-cheat">
+    <strong>Series = sum of a sequence.</strong> The partial sum $S_n = a_1 + a_2 + \dots + a_n$ is the sum of the first $n$ terms; the sequence $(S_n)$ is itself a sequence.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>Average-times-count form:</strong> $S_n = \tfrac{n}{2}(a_1 + a_n)$. Read as "$n$ terms each averaging the midpoint of first and last."</li>
+      <li><strong>Parameter form:</strong> $S_n = \tfrac{n}{2}(2 a_1 + (n - 1) d)$. Same formula with $a_n$ expanded out.</li>
+    </ul>
+    <strong>Which to use.</strong> Know $a_n$? first form. Know $d$ but not $a_n$? second form. Same answer either way.
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Arithmetic partial sum &mdash; two forms</div>
+    $$ S_n \;=\; \frac{n}{2} (a_1 + a_n) \;=\; \frac{n}{2} \bigl( 2 a_1 + (n - 1) d \bigr). $$
+    <p>Both are exact for any arithmetic sequence with first term $a_1$, common difference $d$, and $n \ge 1$.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.3 &middot; Sum the first 50 terms</div>
+    <p>Find the sum of the first $50$ terms of the arithmetic sequence $4, 7, 10, 13, \dots$</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>Identify.</strong> $a_1 = 4$, $d = 3$, $n = 50$. Compute $a_{50} = 4 + 49 \cdot 3 = 151$.</p>
+    <p><strong>Average-times-count form:</strong> $S_{50} = \tfrac{50}{2}(4 + 151) = 25 \cdot 155 = 3875$.</p>
+    <p><strong>Cross-check (parameter form):</strong> $S_{50} = \tfrac{50}{2}(2 \cdot 4 + 49 \cdot 3) = 25 \cdot 155 = 3875$. Same answer either way.</p>
+    <p><strong>Evaluate.</strong> When you have $a_n$ in hand, use the first form; when you have $d$, use the second.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; Gauss's pairing argument for the arithmetic sum</summary>
+    <div class="detail-body">
+      <p>Write the sum forwards and backwards, then add columnwise:</p>
+      $$ S_n = a_1 + a_2 + \dots + a_n, \qquad S_n = a_n + a_{n-1} + \dots + a_1. $$
+      <p>For arithmetic sequences each "balanced" pair sums to the same value: $a_k + a_{n-k+1} = 2 a_1 + (n - 1) d = a_1 + a_n$. So adding the two lines gives $n$ copies of $a_1 + a_n$:</p>
+      $$ 2 S_n = n (a_1 + a_n) \;\Longrightarrow\; S_n = \tfrac{n}{2}(a_1 + a_n). $$
+      <p>The apocryphal story: young Gauss summed $1 + 2 + \dots + 100$ by spotting that $1 + 100 = 2 + 99 = \dots = 101$, with $50$ pairs, giving $5050$.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Find the sum of the first $20$ positive odd integers $1 + 3 + 5 + \dots + 39$.</div><div class="quiz-number">6.3 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$380$</div>
+      <div class="quiz-opt" data-idx="1">$400$</div>
+      <div class="quiz-opt" data-idx="2">$420$</div>
+      <div class="quiz-opt" data-idx="3">$200$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_1 = 1$, $a_{20} = 39$, $n = 20$. $S_{20} = \tfrac{20}{2}(1 + 39) = 10 \cdot 40 = 400$. (In general, the sum of the first $n$ odd integers is $n^2$.)</div>
+    <div class="quiz-explain wrong-exp">Use $S_n = \tfrac{n}{2}(a_1 + a_n)$ with $a_1 = 1$, $a_n = 39$, $n = 20$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q">An arithmetic series has $a_1 = 12$, $d = -3$, and $n = 15$. Find $S_{15}$.</div><div class="quiz-number">6.3 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-135$</div>
+      <div class="quiz-opt" data-idx="1">$135$</div>
+      <div class="quiz-opt" data-idx="2">$45$</div>
+      <div class="quiz-opt" data-idx="3">$-45$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$S_n = \tfrac{n}{2}(2 a_1 + (n - 1) d) = \tfrac{15}{2}(24 + 14 \cdot (-3)) = \tfrac{15}{2}(24 - 42) = \tfrac{15}{2} \cdot (-18) = -135$.</div>
+    <div class="quiz-explain wrong-exp">Use the parameter form $S_n = \tfrac{n}{2}(2 a_1 + (n - 1) d)$. With $d &lt; 0$ the partial sum is negative once the terms cross zero.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-4">
+  <div class="section-label">Section 6.4 &middot; Geometric sequences</div>
+  <h2>Geometric Sequences <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 &middot; &#x1F1E8;&#x1F1E6; ON MCR3U &middot; &#x1F1FA;&#x1F1F8; US Alg 2+</span></h2>
+
+  <div class="syllabus-note">
+    <strong>Syllabus note.</strong> Geometric lands later than arithmetic in every curriculum. BC PC12 names it as a dedicated Content topic (<em>geometric sequences and series</em>); Ontario sits it in MCR3U strand C; CCSSM covers it via <code>HSF-BF.A.2</code> and <code>HSF-LE.A.2</code>. The BC PC12 Curricular Competency names the connection ("exponential functions to geometric sequences") that we develop in the going-deeper below.
+  </div>
+
+  <div class="cram-cheat">
+    <strong>Geometric sequence.</strong> Each term is the previous multiplied by a fixed factor $r$, the <em>common ratio</em>. BC PC12 names exactly these three terms in its Content elaboration: <em>common ratio, first term, general term</em>.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>Recursive:</strong> $a_1$ given, $a_{n+1} = r \cdot a_n$.</li>
+      <li><strong>Explicit:</strong> $a_n = a_1 \cdot r^{n - 1}$.</li>
+      <li><strong>Find $r$:</strong> $r = a_{n+1}/a_n$ for any consecutive pair (constant iff geometric).</li>
+      <li><strong>Behaviour:</strong> $r &gt; 1$ growth, $0 &lt; r &lt; 1$ decay, $r = 1$ constant, $r &lt; 0$ alternates.</li>
+    </ul>
+    <strong>Geometric-as-exponential.</strong> $a_n = (a_1/r) \cdot r^{n}$ is exponential in $n$ with base $r$. BC PC12 names this twice: as a Content elaboration (<em>geometric sequences connecting to exponential functions</em>) and as a Curricular Competency (<em>examine connections between mathematical ideas (e.g., exponential functions to geometric sequences)</em>).
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">$n$-th term of a geometric sequence</div>
+    $$ a_n \;=\; a_1 \cdot r^{n - 1}. $$
+    <p>$a_1$ is the first term; $r$ is the common ratio; $n \ge 1$.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.4 &middot; Identify $r$, find a far-out term</div>
+    <p>A geometric sequence begins $3, 6, 12, 24, \dots$ (a) Find $r$. (b) Find $a_{10}$ and the explicit formula.</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>(a) Common ratio.</strong> $6/3 = 12/6 = 24/12 = 2$. Constant ratio confirmed, so $r = 2$.</p>
+    <p><strong>(b) Tenth term and formula.</strong> $a_{10} = 3 \cdot 2^{9} = 1536$, and $a_n = 3 \cdot 2^{n - 1}$ &mdash; an exponential with base $2$ restricted to integers.</p>
+    <p><strong>Evaluate.</strong> Geometric sequences double, triple, halve at every step &mdash; the per-step multiplier is the base of the corresponding continuous exponential.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; The geometric &harr; exponential connection (BC PC12 names this explicitly)</summary>
+    <div class="detail-body">
+      <p>BC PC12's <em>Connecting and reflecting</em> Curricular Competency reads: "examine the structure of and connections between mathematical ideas (e.g., <em>exponential functions to geometric sequences</em>)." Start from a continuous exponential $f(x) = A \cdot b^{x}$ and sample at integer inputs:</p>
+      $$ f(0) = A, \quad f(1) = A b, \quad f(2) = A b^{2}, \quad \dots, \quad f(n) = A b^{n}. $$
+      <p>That is a geometric sequence with first term $A$ and common ratio $b$; re-indexing to start at $n = 1$ gives $a_n = A \cdot b^{n - 1}$. Conversely, every geometric sequence $a_n = a_1 r^{n - 1}$ is a sample of the exponential $f(x) = (a_1 / r) \cdot r^{x}$. The per-step multiplier $r$ <em>is</em> the exponential base.</p>
+      <p>This is why compound interest (Ontario MCR3U C3.1) sits naturally in the discrete-functions strand: principal $P$ grows by factor $(1 + r)$ per compounding period, a geometric sequence in the period number and an exponential in continuous time. The same picture re-appears in Unit 5 and in IB Math HL B1.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">In a geometric sequence, $a_3 = 20$ and $a_6 = 540$. Find $r$.</div><div class="quiz-number">6.4 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$r = 27$</div>
+      <div class="quiz-opt" data-idx="1">$r = 9$</div>
+      <div class="quiz-opt" data-idx="2">$r = 3$</div>
+      <div class="quiz-opt" data-idx="3">$r = \sqrt[3]{20}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">From $a_3$ to $a_6$ is three steps, so $a_6 = a_3 \cdot r^{3}$, i.e. $540 = 20 \cdot r^{3}$, giving $r^{3} = 27$ and $r = 3$.</div>
+    <div class="quiz-explain wrong-exp">$a_n / a_m = r^{n - m}$ for any two positions $m, n$. So $r^{n-m} = a_n / a_m$ and you cube-root to recover $r$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q">A culture has $200$ bacteria that triples every hour. Treat the hourly population as a geometric sequence with $a_1 = 200$ (after $0$ hours). Which formula gives the population after $n - 1$ hours?</div><div class="quiz-number">6.4 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$a_n = 200 \cdot 3^{n - 1}$</div>
+      <div class="quiz-opt" data-idx="1">$a_n = 200 + 3 (n - 1)$</div>
+      <div class="quiz-opt" data-idx="2">$a_n = 200 \cdot 3^{n}$</div>
+      <div class="quiz-opt" data-idx="3">$a_n = 200 n^{3}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Geometric with $a_1 = 200$ (population at hour $0$, indexed as the 1st term) and $r = 3$. So $a_n = 200 \cdot 3^{n - 1}$. After $n - 1$ hours the population has tripled $n - 1$ times.</div>
+    <div class="quiz-explain wrong-exp">Tripling every hour is multiplication by a constant factor: that is geometric, not arithmetic. Use $a_n = a_1 r^{n - 1}$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-5">
+  <div class="section-label">Section 6.5 &middot; Geometric series</div>
+  <h2>Geometric Series (Finite)</h2>
+
+  <div class="cram-cheat">
+    <strong>The finite geometric sum.</strong> For a geometric sequence with first term $a_1$ and common ratio $r \ne 1$:
+    $$ S_n \;=\; a_1 \cdot \frac{1 - r^{n}}{1 - r}. $$
+    Multiplying num/denom by $-1$ gives $S_n = a_1 (r^{n} - 1)/(r - 1)$, often cleaner when $r &gt; 1$. Same number. <strong>Why $r \ne 1$:</strong> if $r = 1$ every term equals $a_1$ and $S_n = n \cdot a_1$ directly.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>$|r| &lt; 1$:</strong> $r^{n} \to 0$, so $S_n \to a_1/(1 - r)$ as $n$ grows. (See &sect;6.6.)</li>
+      <li><strong>$|r| &gt; 1$:</strong> $r^{n}$ blows up, so $S_n$ grows without bound.</li>
+      <li><strong>$r = -1$:</strong> partial sums oscillate between $a_1$ and $0$.</li>
+    </ul>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Finite geometric series sum</div>
+    $$ S_n \;=\; a_1 + a_1 r + a_1 r^{2} + \dots + a_1 r^{n - 1} \;=\; a_1 \cdot \frac{1 - r^{n}}{1 - r}, \qquad r \ne 1. $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.5 &middot; Sum 10 terms of a geometric series</div>
+    <p>Find $S_{10}$ for the geometric sequence $5, 10, 20, 40, \dots$</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>Identify.</strong> $a_1 = 5$, $r = 2$, $n = 10$. Since $r \ne 1$, the formula applies.</p>
+    $$ S_{10} \;=\; 5 \cdot \frac{1 - 2^{10}}{1 - 2} \;=\; 5 \cdot \frac{-1023}{-1} \;=\; 5115. $$
+    <p>Cross-check with the $r &gt; 1$ rearrangement: $5 \cdot (2^{10} - 1)/(2 - 1) = 5 \cdot 1023 = 5115$. Same.</p>
+    <p><strong>Evaluate.</strong> When $r &gt; 1$, $(r^{n} - 1)/(r - 1)$ saves a sign juggle.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; Deriving the finite-sum formula (the HSA-SSE.B.4 derivation)</summary>
+    <div class="detail-body">
+      <p>The "shift, subtract, factor" trick. Write</p>
+      $$ S_n = a_1 + a_1 r + \dots + a_1 r^{n - 1}, \qquad r S_n = a_1 r + a_1 r^{2} + \dots + a_1 r^{n}. $$
+      <p>Subtract: every term in $r S_n$ matches a term in $S_n$ shifted by one, so only the first term of $S_n$ and the last of $r S_n$ survive:</p>
+      $$ (1 - r) S_n = a_1 - a_1 r^{n} \;\Longrightarrow\; S_n = a_1 \cdot \frac{1 - r^{n}}{1 - r} \;(r \ne 1). $$
+      <p>This is the derivation <code>HSA-SSE.B.4</code> asks for. The argument works for any $r \ne 1$. The infinite series in &sect;6.6 is this formula's limit as $n \to \infty$ &mdash; well-defined only when $r^{n} \to 0$, i.e. $|r| &lt; 1$.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Find $S_{8}$ for the geometric series $2 + 6 + 18 + 54 + \dots$</div><div class="quiz-number">6.5 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$6560$</div>
+      <div class="quiz-opt" data-idx="1">$6560$ (i.e. $2 \cdot (3^{8} - 1) / 2 = 3^{8} - 1 = 6560$)</div>
+      <div class="quiz-opt" data-idx="2">$13122$</div>
+      <div class="quiz-opt" data-idx="3">$4374$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_1 = 2$, $r = 3$, $n = 8$. $S_8 = 2 \cdot (3^{8} - 1)/(3 - 1) = 2 \cdot 6560 / 2 = 6560$.</div>
+    <div class="quiz-explain wrong-exp">Apply $S_n = a_1 (r^{n} - 1)/(r - 1)$ with $a_1 = 2$, $r = 3$, $n = 8$. Compute $3^{8} = 6561$ first.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">A geometric series has first term $24$ and ratio $r = 1/2$. Find $S_6$.</div><div class="quiz-number">6.5 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$48$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{189}{4}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{189}{4}$ (i.e. $47.25$)</div>
+      <div class="quiz-opt" data-idx="3">$45$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$S_6 = 24 \cdot (1 - (1/2)^{6})/(1 - 1/2) = 24 \cdot (1 - 1/64) / (1/2) = 48 \cdot (63/64) = 3024 / 64 = 189/4 = 47.25$. As $n$ grows, $S_n$ approaches $S_\infty = 24 / (1 - 1/2) = 48$.</div>
+    <div class="quiz-explain wrong-exp">Apply $S_n = a_1 (1 - r^{n})/(1 - r)$ with $a_1 = 24$, $r = 1/2$, $n = 6$. The answer is just under $48$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-6">
+  <div class="section-label">Section 6.6 &middot; Infinite geometric series</div>
+  <h2>Infinite Geometric Series and Convergence <span class="honors-flag">Honors (US Alg 2)</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 core</span></h2>
+
+  <div class="syllabus-note">
+    <strong>Syllabus note.</strong> BC PC12 names <em>infinite geometric series</em> explicitly. CCSSM stops the geometric story at the finite case (<code>HSA-SSE.B.4</code>); the infinite case is honors at US Alg 2 and standard at US Pre-Calc. The convergence test below ($|r| &lt; 1$) is the prototype for every series test you will meet in AP Calc BC Unit 10 and IB Math HL E6.
+  </div>
+
+  <div class="cram-cheat">
+    <strong>The infinite geometric sum.</strong> Let $n \to \infty$ in $S_n = a_1 (1 - r^{n})/(1 - r)$. The behaviour of $r^n$ decides everything.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>$|r| &lt; 1$:</strong> $r^{n} \to 0$, so $S_n \to a_1/(1 - r)$. The series <em>converges</em>.</li>
+      <li><strong>$|r| \ge 1$ (and $a_1 \ne 0$):</strong> $r^{n}$ doesn't go to zero, so $S_n$ doesn't approach a finite limit. <em>Diverges</em>.</li>
+    </ul>
+    <strong>Convergence test.</strong> An infinite geometric series converges iff $|r| &lt; 1$. <em>Always state this before applying the formula.</em>
+    $$ S_\infty \;=\; \sum_{k = 0}^{\infty} a_1 r^{k} \;=\; \frac{a_1}{1 - r}, \qquad |r| &lt; 1. $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Infinite geometric series sum (the convergent case)</div>
+    $$ S_\infty \;=\; \frac{a_1}{1 - r}, \qquad |r| &lt; 1. $$
+    <p>Diverges (no finite sum) when $|r| \ge 1$.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.6 &middot; A repeating decimal as an infinite geometric series</div>
+    <p>Express $0.\overline{27} = 0.272727\dots$ as a fraction by writing it as an infinite geometric series.</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>Set up.</strong> $0.\overline{27} = 0.27 + 0.0027 + 0.000027 + \dots = \frac{27}{100} + \frac{27}{100^{2}} + \frac{27}{100^{3}} + \dots$ Geometric with $a_1 = 27/100$, $r = 1/100$; $|r| &lt; 1$ so it converges.</p>
+    $$ S_\infty \;=\; \frac{27/100}{1 - 1/100} \;=\; \frac{27/100}{99/100} \;=\; \frac{27}{99} \;=\; \frac{3}{11}. $$
+    <p><strong>Evaluate.</strong> So $0.\overline{27} = 3/11$ (check: $3/11 = 0.272727\dots$). Every repeating decimal converts to a fraction by exactly this argument &mdash; the standard "repeating decimals are rational" theorem.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; What "$|r| &lt; 1$" really buys you</summary>
+    <div class="detail-body">
+      <p>The finite-sum formula $S_n = a_1 (1 - r^n)/(1 - r)$ works for any $r \ne 1$. The infinite-sum $S_\infty = a_1/(1 - r)$ is a <em>limit</em>: the number $S_n$ approaches as $n \to \infty$. Whether it exists depends on $r^n$.</p>
+      <ul style="margin: 6px 0 0 22px;">
+        <li>$|r| &lt; 1$: $r^{n} \to 0$, so $S_n \to a_1 / (1 - r)$. Converges.</li>
+        <li>$r = 1$: partial sums $a_1, 2 a_1, 3 a_1, \dots$ unbounded. Diverges.</li>
+        <li>$r = -1$: partial sums oscillate $a_1, 0, a_1, 0, \dots$ Diverges.</li>
+        <li>$|r| &gt; 1$: $|r|^{n}$ grows without bound; $S_n$ grows in magnitude. Diverges.</li>
+      </ul>
+      <p>This is the simplest non-trivial convergence test. It re-appears as the first named test in AP Calc BC Unit 10 and as the prototype for the ratio test. The Maclaurin series of $1/(1 - x)$ in IB Math HL E6 is literally an infinite geometric series with $a_1 = 1$, $r = x$ &mdash; valid for $|x| &lt; 1$ by exactly this argument.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Does the infinite series $9 + 6 + 4 + \tfrac{8}{3} + \dots$ converge? If so, to what?</div><div class="quiz-number">6.6 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">Diverges</div>
+      <div class="quiz-opt" data-idx="1">Converges to $27$</div>
+      <div class="quiz-opt" data-idx="2">Converges to $18$</div>
+      <div class="quiz-opt" data-idx="3">Converges to $13.5$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Geometric with $a_1 = 9$, $r = 6/9 = 2/3$. Since $|r| = 2/3 &lt; 1$, it converges. $S_\infty = 9 / (1 - 2/3) = 9 / (1/3) = 27$.</div>
+    <div class="quiz-explain wrong-exp">Check $r = a_2/a_1$, confirm $|r| &lt; 1$, then apply $S_\infty = a_1 / (1 - r)$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q">Which of these geometric series diverges?</div><div class="quiz-number">6.6 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$3 + \tfrac{9}{2} + \tfrac{27}{4} + \tfrac{81}{8} + \dots$ ($r = 3/2$)</div>
+      <div class="quiz-opt" data-idx="1">$5 - 1 + \tfrac{1}{5} - \tfrac{1}{25} + \dots$ ($r = -1/5$)</div>
+      <div class="quiz-opt" data-idx="2">$8 + 2 + \tfrac{1}{2} + \tfrac{1}{8} + \dots$ ($r = 1/4$)</div>
+      <div class="quiz-opt" data-idx="3">$10 + 1 + 0.1 + 0.01 + \dots$ ($r = 1/10$)</div>
+    </div>
+    <div class="quiz-explain correct-exp">$r = 3/2 &gt; 1$, so the terms grow without bound and the partial sums diverge. The other three have $|r| &lt; 1$ and converge.</div>
+    <div class="quiz-explain wrong-exp">Convergence test: $|r| &lt; 1$ converges; $|r| \ge 1$ diverges.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-6-7">
+  <div class="section-label">Section 6.7 &middot; Sigma notation</div>
+  <h2>Sigma Notation <span class="honors-flag">Honors (US Alg 1)</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 core</span></h2>
+
+  <div class="syllabus-note">
+    <strong>Syllabus note.</strong> Sigma notation is a BC PC12 Content elaboration (under <em>geometric sequences and series</em>). It is honors at US Algebra 1 (CCSSM keeps Alg 1 sequences in plain prose) and standard at US Algebra 2 / Pre-Calc. Once you know it, you'll use it constantly &mdash; it's the canonical language for every series test downstream.
+  </div>
+
+  <div class="cram-cheat">
+    <strong>The sigma symbol.</strong>
+    $$ \sum_{k = m}^{n} f(k) \;=\; f(m) + f(m + 1) + \dots + f(n). $$
+    Index $k$, lower bound $m$, upper bound $n$, summand $f(k)$.
+    <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
+      <li><strong>Constant out:</strong> $\sum c f(k) = c \sum f(k)$.</li>
+      <li><strong>Sum splits:</strong> $\sum (f(k) + g(k)) = \sum f(k) + \sum g(k)$.</li>
+      <li><strong>Re-index:</strong> $\sum_{k=m}^{n} f(k) = \sum_{j=0}^{n-m} f(j+m)$.</li>
+    </ul>
+    <strong>Bounds.</strong> Number of terms is $n - m + 1$, not $n - m$. (Fence-post errors are the most common slip.)
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Sigma notation for the two series in this unit</div>
+    $$ S_n^{\text{arith}} \;=\; \sum_{k = 1}^{n} \bigl( a_1 + (k - 1) d \bigr) \;=\; \frac{n}{2} (a_1 + a_n), $$
+    $$ S_n^{\text{geom}} \;=\; \sum_{k = 1}^{n} a_1 r^{k - 1} \;=\; a_1 \cdot \frac{1 - r^{n}}{1 - r} \;\;(r \ne 1), \qquad S_\infty^{\text{geom}} \;=\; \sum_{k = 1}^{\infty} a_1 r^{k - 1} \;=\; \frac{a_1}{1 - r} \;\;(|r| &lt; 1). $$
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Worked Example 6.7 &middot; Translate between sigma and listed-terms forms</div>
+    <p>(a) Write $4 + 7 + 10 + 13 + 16 + 19$ in sigma notation. (b) Evaluate $\sum_{k = 1}^{5} 2 \cdot 3^{k - 1}$ and $\sum_{k = 1}^{\infty} 6 \cdot (1/4)^{k - 1}$.</p>
+  </div>
+  <div class="worked-solution">
+    <p><strong>(a) Listed to sigma.</strong> Arithmetic with $a_1 = 4$, $d = 3$, $6$ terms; $k$-th term $= 3 k + 1$:</p>
+    $$ 4 + 7 + 10 + 13 + 16 + 19 \;=\; \sum_{k = 1}^{6} (3 k + 1). $$
+    <p><strong>(b) Sigma to value &mdash; finite, then infinite.</strong> Finite geometric with $a_1 = 2$, $r = 3$, $n = 5$:</p>
+    $$ \sum_{k = 1}^{5} 2 \cdot 3^{k - 1} \;=\; 2 \cdot \frac{3^{5} - 1}{3 - 1} \;=\; 242. $$
+    <p>Infinite geometric with $a_1 = 6$, $r = 1/4$; since $|r| &lt; 1$ it converges:</p>
+    $$ \sum_{k = 1}^{\infty} 6 \cdot (1/4)^{k - 1} \;=\; \frac{6}{1 - 1/4} \;=\; 8. $$
+    <p><strong>Evaluate.</strong> Always read off $a_1$, $r$ or $d$, and the bounds first, then pick the matching formula.</p>
+  </div>
+
+  <details>
+    <summary>Going deeper &middot; Re-indexing without changing the value</summary>
+    <div class="detail-body">
+      <p>The summation index is a dummy variable &mdash; renamable and shiftable. Compare</p>
+      $$ \sum_{k = 1}^{n} a_1 r^{k - 1} \quad\text{vs}\quad \sum_{j = 0}^{n - 1} a_1 r^{j}. $$
+      <p>Substitute $j = k - 1$: $k = 1 \to j = 0$; $k = n \to j = n - 1$; $r^{k - 1} = r^{j}$. Different bounds, same value. This trick is essential when combining two sums whose indices don't quite line up &mdash; AP Calc BC's term-by-term differentiation of power series, IB Math HL E6's Maclaurin re-indexing, linear algebra's summation conventions. Get it clean here.</p>
+    </div>
+  </details>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">How many terms are there in $\sum_{k = 3}^{17} f(k)$?</div><div class="quiz-number">6.7 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$14$</div>
+      <div class="quiz-opt" data-idx="1">$17$</div>
+      <div class="quiz-opt" data-idx="2">$15$</div>
+      <div class="quiz-opt" data-idx="3">$20$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Number of terms is $\text{upper} - \text{lower} + 1 = 17 - 3 + 1 = 15$. The fence-post $+1$ is the part that trips people.</div>
+    <div class="quiz-explain wrong-exp">Inclusive count: $n - m + 1$, not $n - m$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Evaluate $\sum_{k = 1}^{4} (k^{2} + 1)$.</div><div class="quiz-number">6.7 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$30$</div>
+      <div class="quiz-opt" data-idx="1">$34$</div>
+      <div class="quiz-opt" data-idx="2">$24$</div>
+      <div class="quiz-opt" data-idx="3">$14$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Sum-splits: $\sum_{k = 1}^{4} k^{2} + \sum_{k = 1}^{4} 1 = (1 + 4 + 9 + 16) + 4 = 30 + 4 = 34$.</div>
+    <div class="quiz-explain wrong-exp">Compute the four summand values and add: $f(1) + f(2) + f(3) + f(4)$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="exam-strategy">
+  <div class="section-label">Exam Tactics</div>
+  <h2>Exam Strategy and Common Pitfalls</h2>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);">Vocabulary discipline</strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong>Identify the type first.</strong> Arithmetic (common <em>difference</em> $d$) vs geometric (common <em>ratio</em> $r$). Compute $a_2 - a_1$ and $a_2 / a_1$ before reaching for any formula.</li>
+      <li><strong>Sequence vs series.</strong> Sequence is a list; series is a sum. $a_n$ is the $n$-th term; $S_n$ is the partial sum.</li>
+      <li><strong>Read $a_1$ vs $a_0$.</strong> Some texts index from $1$, some from $0$. Use whichever your course uses and stay consistent.</li>
+    </ul>
+  </div>
+
+  <div class="concept-box" style="border-left-color: var(--accent);">
+    <strong style="color: var(--accent);">Formula selection</strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong>Arithmetic sum: match the form to your knowns.</strong> Know $a_1, a_n$? use $S_n = \tfrac{n}{2}(a_1 + a_n)$. Know $a_1, d$? use $S_n = \tfrac{n}{2}(2 a_1 + (n - 1) d)$.</li>
+      <li><strong>Geometric sum: orient the formula.</strong> $S_n = a_1 (1 - r^{n})/(1 - r)$ if $|r| &lt; 1$; $S_n = a_1 (r^{n} - 1)/(r - 1)$ if $r &gt; 1$. Same answer, fewer sign flips.</li>
+      <li><strong>Infinite geometric: always state $|r| &lt; 1$ first.</strong> Quoting $a_1/(1 - r)$ for a divergent series is the most common slip on this topic.</li>
+    </ul>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);">The arithmetic-linear / geometric-exponential connection</strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong>Arithmetic = discrete linear</strong>, sum changes by constant $d$ (CCSSM <code>HSF-LE.A.1a</code>: equal differences).</li>
+      <li><strong>Geometric = discrete exponential</strong>, multiplied by constant $r$ (CCSSM <code>HSF-LE.A.1a</code>: equal factors; BC PC12 names this both in Content and Curricular Competency).</li>
+      <li><strong>Compound interest:</strong> $a_n = P(1 + r)^{n}$ is geometric with ratio $(1 + r)$. Simple interest is arithmetic.</li>
+    </ul>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);">Sigma fluency &amp; convergence</strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong>Bounds first; count terms as $n - m + 1$.</strong> Pull constants out, split sums apart, re-index freely (the index is a dummy variable).</li>
+      <li><strong>$|r| &lt; 1$ is the <em>entire</em> condition</strong> for infinite-geometric convergence. "$r &lt; 1$" alone is wrong (it allows $r = -2$, which diverges).</li>
+      <li><strong>Don't confuse "converges" with "is finite."</strong> $1 + 1 + 1 + \dots$ has partial sums $1, 2, 3, \dots$ &mdash; unbounded, diverges. Convergence is about the <em>infinite</em> case.</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="flashcards">
+  <div class="section-label">Active Recall</div>
+  <h2>Flashcards</h2>
+  <div class="flashcard-toolbar">
+    <div id="fcCount">0 / 13 flipped</div>
+    <div>
+      <button onclick="shuffleFlashcards()">Shuffle</button>
+      <button onclick="resetFlashcards()">Reset</button>
+    </div>
+  </div>
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Arithmetic $n$-th term?</div><div class="flashcard-back">$$a_n = a_1 + (n - 1) d$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Arithmetic sum (avg-times-count form)?</div><div class="flashcard-back">$$S_n = \frac{n}{2}(a_1 + a_n)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Arithmetic sum (parameter form)?</div><div class="flashcard-back">$$S_n = \frac{n}{2}\bigl(2 a_1 + (n - 1) d\bigr)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Geometric $n$-th term?</div><div class="flashcard-back">$$a_n = a_1 \cdot r^{n - 1}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Geometric finite sum ($r \ne 1$)?</div><div class="flashcard-back">$$S_n = a_1 \cdot \frac{1 - r^{n}}{1 - r}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Infinite geometric sum?</div><div class="flashcard-back">$$S_\infty = \frac{a_1}{1 - r}, \;\; |r| &lt; 1$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Convergence test for infinite geometric?</div><div class="flashcard-back">$$|r| &lt; 1 \text{ converges}; \;\; |r| \ge 1 \text{ diverges}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Sigma definition?</div><div class="flashcard-back">$$\sum_{k = m}^{n} f(k) = f(m) + f(m+1) + \dots + f(n)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Number of terms in $\sum_{k = m}^{n}$?</div><div class="flashcard-back">$$n - m + 1$$ (fence-post $+1$)</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Constant-out rule for sigma?</div><div class="flashcard-back">$$\sum c \cdot f(k) = c \sum f(k)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Arithmetic-as-linear?</div><div class="flashcard-back">Arithmetic sequence = discrete linear function with slope $d$ (MCR3U C1.1)</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Geometric-as-exponential?</div><div class="flashcard-back">Geometric sequence = discrete exponential with base $r$ (BC PC12)</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Find $r$ from two terms?</div><div class="flashcard-back">$$r^{n - m} = \frac{a_n}{a_m}$$</div></div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="unit-quiz">
+  <div class="section-label">Mixed Practice</div>
+  <h2>Unit 6 Practice Quiz</h2>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">An arithmetic sequence has $a_1 = 9$ and $d = -2$. What is $a_{25}$?</div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$-41$</div>
+      <div class="quiz-opt" data-idx="1">$-39$</div>
+      <div class="quiz-opt" data-idx="2">$-39$ (i.e. $9 + 24 \cdot (-2)$)</div>
+      <div class="quiz-opt" data-idx="3">$57$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_{25} = 9 + (25 - 1)(-2) = 9 - 48 = -39$.</div>
+    <div class="quiz-explain wrong-exp">$a_n = a_1 + (n - 1) d$ with $n = 25$, $a_1 = 9$, $d = -2$. Watch the sign on $d$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Find $\sum_{k = 1}^{30} (2 k - 1)$ (the sum of the first 30 positive odd integers).</div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$870$</div>
+      <div class="quiz-opt" data-idx="1">$900$</div>
+      <div class="quiz-opt" data-idx="2">$930$</div>
+      <div class="quiz-opt" data-idx="3">$1860$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Arithmetic with $a_1 = 1$, $a_{30} = 59$, $n = 30$. $S_{30} = \tfrac{30}{2}(1 + 59) = 15 \cdot 60 = 900$. In general $\sum_{k=1}^{n}(2k-1) = n^{2}$, so $30^{2} = 900$.</div>
+    <div class="quiz-explain wrong-exp">First term $a_1 = 1$, last term $a_{30} = 2 \cdot 30 - 1 = 59$. Then $S_{30} = \tfrac{30}{2}(a_1 + a_{30})$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q">A geometric sequence has $a_1 = 4$ and $r = -3$. Find $a_5$.</div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$324$</div>
+      <div class="quiz-opt" data-idx="1">$-324$</div>
+      <div class="quiz-opt" data-idx="2">$108$</div>
+      <div class="quiz-opt" data-idx="3">$-108$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$a_5 = 4 \cdot (-3)^{4} = 4 \cdot 81 = 324$. Even power of a negative is positive.</div>
+    <div class="quiz-explain wrong-exp">$a_n = a_1 r^{n - 1}$ with $n = 5$, so $r^{n - 1} = (-3)^{4} = 81$, positive.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">Find the sum $\sum_{k = 1}^{6} 5 \cdot 2^{k - 1}$.</div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$155$</div>
+      <div class="quiz-opt" data-idx="1">$320$</div>
+      <div class="quiz-opt" data-idx="2">$315$</div>
+      <div class="quiz-opt" data-idx="3">$310$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Finite geometric with $a_1 = 5$, $r = 2$, $n = 6$. $S_6 = 5 \cdot (2^{6} - 1)/(2 - 1) = 5 \cdot 63 = 315$.</div>
+    <div class="quiz-explain wrong-exp">Apply $S_n = a_1 (r^{n} - 1)/(r - 1)$ with $a_1 = 5$, $r = 2$, $n = 6$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q">Convert the repeating decimal $0.\overline{4} = 0.4444\dots$ to a fraction using an infinite geometric series.</div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\tfrac{2}{5}$</div>
+      <div class="quiz-opt" data-idx="1">$\tfrac{4}{9}$</div>
+      <div class="quiz-opt" data-idx="2">$\tfrac{4}{10}$</div>
+      <div class="quiz-opt" data-idx="3">$\tfrac{1}{2}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">$0.\overline{4} = 4/10 + 4/100 + 4/1000 + \dots$ Geometric with $a_1 = 4/10$ and $r = 1/10$. $S_\infty = (4/10)/(1 - 1/10) = (4/10)/(9/10) = 4/9$.</div>
+    <div class="quiz-explain wrong-exp">Write the repeating decimal as a geometric series with $a_1 = 4/10$, $r = 1/10$, then apply $S_\infty = a_1/(1 - r)$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q">A ball is dropped from a height of $12$ m and on each bounce rebounds to $3/4$ of its previous height. What is the total <em>vertical</em> distance the ball travels before coming to rest?</div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$48$ m</div>
+      <div class="quiz-opt" data-idx="1">$72$ m</div>
+      <div class="quiz-opt" data-idx="2">$96$ m</div>
+      <div class="quiz-opt" data-idx="3">$84$ m</div>
+    </div>
+    <div class="quiz-explain correct-exp">Initial drop $12$ m. Each subsequent bounce goes up and down the same height. Total $= 12 + 2 \cdot \sum_{n=1}^{\infty} 12 (3/4)^{n} = 12 + 2 \cdot 12 (3/4)/(1 - 3/4) = 12 + 72 = 84$ m.</div>
+    <div class="quiz-explain wrong-exp">Initial drop separate; bounces contribute up + down. Bounce-up heights form infinite geometric with $a_1 = 9$, $r = 3/4$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q">Which sum diverges?</div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">$\sum_{k = 1}^{\infty} 5 \cdot (0.9)^{k - 1}$</div>
+      <div class="quiz-opt" data-idx="1">$\sum_{k = 1}^{\infty} 100 \cdot (-1/2)^{k - 1}$</div>
+      <div class="quiz-opt" data-idx="2">$\sum_{k = 1}^{\infty} 7 \cdot (5/4)^{k - 1}$</div>
+      <div class="quiz-opt" data-idx="3">$\sum_{k = 1}^{\infty} 3 \cdot (1/100)^{k - 1}$</div>
+    </div>
+    <div class="quiz-explain correct-exp">Convergence requires $|r| &lt; 1$. The third option has $r = 5/4 &gt; 1$, so the terms grow and the series diverges. The other three have $|r| &lt; 1$.</div>
+    <div class="quiz-explain wrong-exp">Check $|r|$ for each. Convergent iff strictly less than $1$.</div>
+    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="checklist">
+  <div class="section-label">Self-check</div>
+  <h2>Readiness Checklist</h2>
+  <p>Tick each item when you can do it cold, without notes, on a first attempt.</p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 12 mastered</div>
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> State the definition of a sequence as a function on the integers (CCSSM <code>HSF-IF.A.3</code>) and distinguish recursive from explicit definitions.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Translate between the recursive and explicit forms of an arithmetic sequence (CCSSM <code>HSF-BF.A.2</code>).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Apply $a_n = a_1 + (n - 1) d$ to find any term given the position (Ontario MCR3U C2.2).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Recover $d$ from any two terms by $d = (a_n - a_m)/(n - m)$, and recover the position $n$ from a known value $a_n$.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Apply both forms of the arithmetic partial-sum formula and pick the one matching the knowns.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Translate between the recursive and explicit forms of a geometric sequence (CCSSM <code>HSF-BF.A.2</code>).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Apply $a_n = a_1 r^{n - 1}$; recover $r$ from any two terms; and articulate the geometric-as-exponential connection (BC PC12 Content + Curricular Competency).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Derive (or reproduce) the finite-geometric sum formula $S_n = a_1 (1 - r^n)/(1 - r)$ via the shift-subtract-factor trick (CCSSM <code>HSA-SSE.B.4</code>).</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> State the convergence test $|r| &lt; 1$ for infinite geometric series and apply $S_\infty = a_1/(1 - r)$ correctly.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Convert a repeating decimal to a fraction by recognising it as an infinite geometric series.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Read, write, and evaluate sigma notation; count terms as $n - m + 1$; use constants-out and sum-splitting cleanly.</li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Solve a modelling problem (compound interest, bouncing ball, repeating decimal) by choosing arithmetic vs geometric and finite vs infinite, then quoting the right formula with units.</li>
+  </ul>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="feeders">
+  <div class="section-label">Next Steps</div>
+  <h2>What This Feeds Into</h2>
+  <p>Sequences and series are the discrete shadows of two function families you have already met (linear, exponential) and the prototype for every infinite-process technique you will meet downstream (limits, derivatives as limits, integrals as limits of Riemann sums, power series). The cross-references below point at units already shipped in this repo.</p>
+
+  <div style="margin: 20px 0;">
+    <p><strong>Within High School Math.</strong></p>
+    <p style="color: var(--text-secondary); font-size: 0.95rem;">Unit 1 (Linear Functions) is the continuous version of arithmetic sequences (&sect;6.2): slope $=$ common difference $d$. Unit 5 (Exponential and Logarithmic Functions) is the continuous version of geometric sequences (&sect;6.4): base $=$ common ratio $r$. Unit 15 (Intro to Limits and Calculus) builds on the infinite-geometric convergence in &sect;6.6 as the cleanest model for "a limit of partial sums."</p>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <p><strong>Across the AP and IB feeders in this repo.</strong></p>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;">
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_A1_Sequences_and_Series.html">IB Math HL A1 &middot; Sequences and Series (formal sigma manipulation)</a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_E6_Maclaurin_Series.html">IB Math HL E6 &middot; Maclaurin Series ($1/(1-x)$ is infinite geometric)</a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_B1_Representation_of_Functions.html">IB Math HL B1 &middot; Representation of Functions (exponential family)</a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_E1_Principles_of_Differential_Calculus.html">IB Math HL E1 &middot; Principles of Differential Calculus</a>
+      <a class="feeder-link" href="../../AP Calculus/Study Guides/Unit_10_Infinite_Sequences_and_Series.html">AP Calc BC Unit 10 &middot; Infinite Sequences and Series</a>
+    </div>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;">For AP Calc BC, the &sect;6.6 geometric-series test is the first named test in Unit 10 and the ratio test is its direct generalisation. For IB Math HL, A1 is the formal IB treatment of &sect;6.2-6.7; E6 extends $\sum r^{k}$ to the Maclaurin series of $1/(1 - x)$ &mdash; convergent for $|x| &lt; 1$ by exactly the &sect;6.6 argument.</p>
+  </div>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">DINGRUI SCHOLARS</div>
+  <p>High School Math &middot; Unit 6: Sequences and Series &middot; v1</p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+function updateScoreBadge() { const badge = document.getElementById('scoreBadge'); if (!badge) return; if (quizScore.total === 0) { badge.textContent = '0 / 0'; badge.classList.add('zero'); } else { badge.textContent = quizScore.correct + ' / ' + quizScore.total; badge.classList.remove('zero'); } }
+function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.textContent = isDark ? 'Light' : 'Dark'; }
+function toggleTheme() { const isDark = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark'); setThemeBtnLabel(!isDark); }
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); setThemeBtnLabel(true); }
+window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; const pct = h > 0 ? (window.scrollY / h) * 100 : 0; const pf = document.getElementById('progressFill'); if (pf) pf.style.width = pct + '%'; });
+const sections = document.querySelectorAll('.section'); const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(l => l.classList.remove('active')); const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`); if (link) link.classList.add('active'); } }); }, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz => { const answer = parseInt(quiz.dataset.answer); const opts = quiz.querySelectorAll('.quiz-opt'); const expCorrect = quiz.querySelector('.quiz-explain.correct-exp'); const expWrong = quiz.querySelector('.quiz-explain.wrong-exp'); opts.forEach(opt => { opt.addEventListener('click', () => { if(opt.classList.contains('disabled')) return; const idx = parseInt(opt.dataset.idx); opts.forEach(o => o.classList.add('disabled')); quizScore.total++; if (idx === answer) { opt.classList.add('correct'); quizScore.correct++; if (expCorrect) expCorrect.classList.add('show'); } else { opt.classList.add('wrong'); opts[answer].classList.add('correct'); if (expWrong) expWrong.classList.add('show'); const retry = quiz.querySelector('.quiz-retry'); if (retry) retry.classList.add('show'); } updateScoreBadge(); }); }); });
+function retryQuiz(btn) { const quiz = btn.closest('.quiz'); quiz.querySelectorAll('.quiz-opt').forEach(o => { o.classList.remove('disabled', 'correct', 'wrong'); }); quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show')); btn.classList.remove('show'); quizScore.total--; updateScoreBadge(); }
+function flipCard(el) { el.classList.toggle('flipped'); updateFlashcardCount(); }
+function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.textContent = flipped + ' / ' + total + ' flipped'; }
+function resetFlashcards() { document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped')); updateFlashcardCount(); }
+function shuffleFlashcards() { const grid = document.getElementById('flashcardGrid'); if (!grid) return; const cards = [...grid.children]; for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); grid.appendChild(cards[j]); [cards[i], cards[j]] = [cards[j], cards[i]]; } }
+function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.textContent = checked + ' / ' + total + ' mastered'; }
+function toggleSidebar() { if (window.innerWidth >= 1100) { document.body.classList.toggle('sidebar-collapsed'); } else { const sidebar = document.getElementById('sidebar'); sidebar.classList.toggle('open'); const btn = document.getElementById('tocToggle'); if (btn) btn.classList.toggle('active', sidebar.classList.contains('open')); } }
+document.addEventListener('click', function(e) { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (!sidebar) return; if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (sidebar) sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+updateScoreBadge();
+</script>
+</body>
+</html>
