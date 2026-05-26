@@ -25,14 +25,61 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-25** (Sprint 2 closed — Unit 2 Quadratic
-Functions and Equations full triplet shipped on `high_school_math_unit_2`
-branch including how-to-use rework on Unit 1 + BC PC11 source fetch +
-PC11 quadratics extract. **2/15 units now shipped end-to-end.**
+Last reviewed: **2026-05-26** (Sprint 3 closed — Units 3-6 full triplets
+shipped on `high_school_math_sprint3` branch alongside BC PC12 source
+fetch + extract. **6/15 units now shipped end-to-end.**
 
 ---
 
 ## Active Sprint — what we're working on now
+
+### Sprint 3 — Units 3-6 bulk-draft from locked Unit 2 template — **CLOSED 2026-05-26** (branch `high_school_math_sprint3`)
+
+**Closed 2026-05-26**. Sprint 3 doubled the size of the shipped corpus
+in one branch by bulk-drafting Units 3-6 (Polynomial, Rational/Radical,
+Exp/Log, Sequences/Series) in parallel from the Unit 2 template locked
+at end of Sprint 2. All twelve files (4 SG + 4 P + 4 S) share identical
+chrome: 8-row grade-by-region nav, region+paper-style chip taxonomy,
+syllabus-map with verbatim source citations, .insight callouts on every
+Solutions question.
+
+1. **BC PC12 source fetch** (`f052fba`) — fetched `pc12_elab.pdf` from
+   `curriculum.gov.bc.ca`; wrote `pc12_elab_extract.md` covering ALL
+   non-PC11 content for HS Math Units 3-10 (polynomial, rational, exp/log,
+   sequences/series, trig, transformations). Closes the BC column for
+   the next 8 units in one fetch.
+2. **Units 3-6 SG batch** (`17042c2`) — 4590 SG lines drafted in
+   parallel via foreground subagents from Unit 2 template. Each unit
+   has 7 content sections, 8-row grade-nav, syllabus-map verified
+   verbatim per extract, 21-24 quizzes, 13-14 flashcards, 12 checklist
+   items.
+3. **Units 3-6 Practice batch** (`0a517e6`) — 1630 Practice lines,
+   each Unit 12 Qs / 90 marks, EASY/MED/HARD per Unit 1/2 split,
+   region+paper-style chrome verbatim from Unit 2.
+4. **Units 3-6 Solutions batch** (`7b15e37`) — 2322 Solutions lines,
+   each Unit 12 Qs / 90 marks with mark-callouts summing to declared
+   marks, .distractor blocks on MCQs, 12 .insight blocks per Unit,
+   index.html regen surfacing Units 3-6 cards.
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S3-bcfetch**~~ | Fetch BC PC12 + extract Units 3-10 slice | P1 | ✅ closed — `f052fba` (unblocks BC column for Units 3-10) |
+| ~~**S3-SG**~~ | Draft 4 SGs (Units 3-6) | P0 | ✅ closed — `17042c2` (4590 lines, 4 files parallel via subagents) |
+| ~~**S3-P**~~ | Draft 4 Practice files (Units 3-6) | P0 | ✅ closed — `0a517e6` (1630 lines, 12 Qs / 90 marks per unit) |
+| ~~**S3-S**~~ | Draft 4 Solutions files (Units 3-6) | P0 | ✅ closed — `7b15e37` (2322 lines, mark-sums verified per Q, Unit 4 `\$` → `&#36;` migration) |
+| ~~**S3-index**~~ | Re-run scripts/build-index.py to surface Units 3-6 cards in landing page | P1 | ✅ closed — folded into `7b15e37` (SG batch commit forgot it) |
+
+**Sprint 3 deliverable contract met:** 4 units shipped end-to-end with
+parity to Unit 2; chip taxonomy and curriculum-callout structure
+unchanged from Unit 2; 360 marks total across 48 Practice questions;
+48 .insight callouts; 12 .distractor blocks (3 MCQs × 4 units).
+
+**Locked Sprint 4+ template:** Sprint 3 confirmed the Unit 2 template
+scales via foreground subagents. Future Units 7-15 follow the same
+parallel-bulk-draft pattern with a 4-unit batch as the natural sprint
+unit.
+
+---
 
 ### Sprint 2 — Unit 2 Quadratic Functions and Equations (full triplet) — **CLOSED 2026-05-25** (branch `high_school_math_unit_2`)
 
@@ -222,13 +269,13 @@ Map (US/ON/BC) and add the AB row in a follow-up commit.
 
 | Unit | Topic | Sections | Worked Ex. | Quiz | Status |
 |---|---|---|---|---|---|
-| 1   | Linear Functions and Systems            | &mdash; | &mdash; | &mdash; | **Sprint 1 queued** |
-| 2   | Quadratic Functions and Equations       | &mdash; | &mdash; | &mdash; | unbuilt |
-| 3   | Polynomial Functions                    | &mdash; | &mdash; | &mdash; | unbuilt |
-| 4   | Rational and Radical Expressions        | &mdash; | &mdash; | &mdash; | unbuilt |
-| 5   | Exponential and Logarithmic Functions   | &mdash; | &mdash; | &mdash; | unbuilt |
-| 6   | Sequences and Series                    | &mdash; | &mdash; | &mdash; | unbuilt |
-| 7   | Right-Triangle Trigonometry             | &mdash; | &mdash; | &mdash; | unbuilt |
+| 1   | Linear Functions and Systems            | 7 | &mdash; | 17 | shipped (Sprint 1) |
+| 2   | Quadratic Functions and Equations       | 7 | &mdash; | &mdash; | shipped (Sprint 2) |
+| 3   | Polynomial Functions                    | 7 | &mdash; | 21 | shipped (Sprint 3) |
+| 4   | Rational and Radical Expressions        | 7 | &mdash; | 22 | shipped (Sprint 3) |
+| 5   | Exponential and Logarithmic Functions   | 7 | &mdash; | 24 | shipped (Sprint 3) |
+| 6   | Sequences and Series                    | 7 | &mdash; | 21 | shipped (Sprint 3) |
+| 7   | Right-Triangle Trigonometry             | &mdash; | &mdash; | &mdash; | **Sprint 4 queued** |
 | 8   | Unit-Circle Trig and Trigonometric Functions | &mdash; | &mdash; | &mdash; | unbuilt |
 | 9   | Trigonometric Identities and Equations  | &mdash; | &mdash; | &mdash; | unbuilt |
 | 10  | Function Transformations and Composition| &mdash; | &mdash; | &mdash; | unbuilt |
