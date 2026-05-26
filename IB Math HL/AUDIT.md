@@ -19,15 +19,13 @@ and the IB Math AA HL syllabus (first assessment **2029** — switched from
 (to be created when AI HL drafting begins; spec lives at
 `rag/subjects/ib_math_ai_hl.md`).
 
-Last reviewed: **2026-05-25** (P+S SPRINT + SPRINT 4 POLISH COMPLETE: 14
-B/C/E P+S files shipped initial draft and then promoted to v1.1 via
-Sprint 4 (20 audit items closed in 19 commits on `sprint4_ps_polish`,
-tip `dc41e78`). **21/22 super-topics now full-stack (SG+P+S+ZH)**, all
-files polished against checklist sections A (formatting hygiene), D
-(bilingual quality), and the custom P+S-N rubric (mark-callout sums,
-answer-line ↔ rationale consistency, math correctness, insight quality).
-Remaining work: branch fast-forward into `preview` + `main`; ZH
-translation of the D-cluster P+S; legacy Unit_C retirement.
+Last reviewed: **2026-05-25** (SUBJECT 100% CLOSED: IB Math AA HL is
+now **22/22 super-topics fully-shipped** (SG + P + S + ZH). Sprint 3
+delivered 14 B/C/E P+S initial drafts; Sprint 4 polished to v1.1
+(20 audit items in 19 commits, `0aa4b39`); Sprint 5 closed Topic D
+P+S ZH translation (3 unit-paired commits, `b74784d`). 67 total commits
+shipped to `main` this session. Remaining IB Math AA HL work: Unit_C
+retirement; Sprint 2 SG polish (5 items, deferred).
 
 ---
 
@@ -51,41 +49,49 @@ translation of the D-cluster P+S; legacy Unit_C retirement.
    `dc41e78`).
 7. ~~**Branch fast-forward**~~ ✅ closed 2026-05-25 — `sprint4_ps_polish`
    merged into `preview` + `main` (tip `0aa4b39`).
-8. **Sprint 5 — Topic D P+S ZH translation** (active, branch
-   `sprint5_d_translation`) — 6 EN-only files (D1/D2/D3 Practice +
-   Solutions) bilingualized to close the 22/22 cell. Closes IB Math AA HL
-   to 22/22 fully-shipped.
+8. ~~**Sprint 5 — Topic D P+S ZH translation**~~ ✅ closed 2026-05-25 —
+   3 unit-paired commits on `sprint5_d_translation` (tip `b74784d`).
+   **IB Math AA HL now 22/22 fully-shipped (SG+P+S+ZH).**
 9. **Unit_C retirement** — archive `Unit_C_Geometry.html` to `rag/archive/`,
    strip from deploy via `deploy.yml`. Fully unblocked.
+10. **Sprint 2 follow-up** (Worked examples / exam tips / sliders) — 5
+    items still open (S2-1 through S2-5). Audit-driven SG polish.
 
-### Sprint 5 — Topic D Practice + Solutions ZH translation (opened 2026-05-25, branch `sprint5_d_translation`)
+### Sprint 5 — Topic D Practice + Solutions ZH translation — **CLOSED 2026-05-25** (branch `sprint5_d_translation`)
 
-**Goal.** Bilingualize the 6 Topic D Practice + Solutions files (D1/D2/D3
-× P+S) that have been EN-only since their initial draft on 2026-05-22.
-Closes the last remaining gap in the IB Math AA HL 22-cell grid:
-**22/22 super-topics fully-shipped (SG + P + S + ZH)**.
+**Closed 2026-05-25**: all 3 items shipped in 3 unit-paired commits.
+**IB Math AA HL now closes to 22/22 super-topics fully-shipped (SG + P + S + ZH).**
 
-**Contract** — per locked `prompts/create-bilingual-translation.md`:
-Chinese is a *teaching translation*, not literal. Math notation, code
-identifiers, and exam-rubric terminology stay in English (the student
-must recognize them on the exam paper). Pedagogical prose translates
-to natural Chinese. Inline `<span data-lang="en">…</span><span data-lang="zh">…</span>`
-pairs throughout; parallel `<div class="rationale" data-lang>` blocks
-for Solutions worked steps (Form B from `prompts/create-bilingual-translation.md`,
-matching the Wave 2 A3 Solutions template `2dce66c`).
-
-**Cadence.** Per-unit commits — one commit per super-topic (D1, D2, D3),
-each commit touching both the Practice and Solutions file for that unit.
-Per-file would also work but per-unit groups the pair naturally.
+**Contract (achieved)** — per locked `prompts/create-bilingual-translation.md`:
+Chinese is teaching translation, not literal. Math + exam-rubric terms in
+English; pedagogical prose in natural Chinese. Form A inline span pairs
+throughout Practice; Form B parallel `<div class="rationale" data-lang>`
+blocks for Solutions worked steps. Locked toggle infra (`#langToggle`,
+CSS `display:none` rules, no `localStorage`); CJK font fallback added to
+`--font-body` on all 6 files.
 
 | ID | Item | Files | Status |
 |---|---|---|---|
-| **S5-D1** | D1 Univariate Data P+S — translate to EN+ZH | `Unit_D1_..._Practice.html`, `Unit_D1_..._Solutions.html` | **Open** |
-| **S5-D2** | D2 Probability P+S — translate to EN+ZH | `Unit_D2_..._Practice.html`, `Unit_D2_..._Solutions.html` | **Open** |
-| **S5-D3** | D3 Probability Distributions P+S — translate to EN+ZH | `Unit_D3_..._Practice.html`, `Unit_D3_..._Solutions.html` | **Open** |
+| ~~**S5-D1**~~ | D1 Univariate Data P+S | Practice 73/73 ✓; Solutions 48/48 ✓ | ✅ closed — `dc828de` |
+| ~~**S5-D2**~~ | D2 Probability P+S (incl. Paper 3 Q12 Bayesian) | Practice 93/93 ✓; Solutions 53/53 ✓ | ✅ closed — `725f47d` |
+| ~~**S5-D3**~~ | D3 Probability Distributions P+S (incl. Paper 3 Q12 CLT) | Practice 74/74 ✓; Solutions 53/53 ✓ | ✅ closed — `b74784d` |
 
-**Validation.** After each commit: `bash scripts/validate.sh <file>` exit 0;
-`grep -c 'data-lang="en"' <file>` equals `grep -c 'data-lang="zh"' <file>`.
+**Sprint 5 roll-up.** 4 commits on `sprint5_d_translation` (1 seed + 3 unit-pairs):
+
+```
+dea37a3  IB Math HL AUDIT: open Sprint 5 (seed)
+dc828de  S5-D1   D1 Univariate Data ZH (+217 + +14 lines)
+725f47d  S5-D2   D2 Probability ZH (+251 + +16 lines)
+b74784d  S5-D3   D3 Probability Distributions ZH (+221 + +15 lines)
+```
+
+**Terminology decisions** (logged for future references):
+- `complement` (probability context) → 余事件 (not 补集, which is set-theoretic)
+- `Venn diagram` → 维恩图 (canonical mainland 教材)
+- `sensitivity/specificity` → 灵敏度/特异度 (mainland diagnostic-test convention)
+- `standard normal` → 标准正态分布 (extends 正态分布)
+
+---
 
 ---
 
