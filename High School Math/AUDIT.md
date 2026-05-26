@@ -25,28 +25,94 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-17** (Sprint 0.5 ✅ closed — all 4 PDFs
-extracted via `pdftotext` after the tool was located at `/mingw64/bin`).
-Sprint 1 ready to open.
+Last reviewed: **2026-05-25** (Sprint 1 opened — branch
+`high_school_math_unit_1`. Scope re-locked from spec following user's
+2026-05-25 consultation: 3 regions (US + ON + BC), Alberta dropped;
+Sprint 1 ships full triplet for Unit 1; per-question region+paper-style
+chip taxonomy locked; Vectors Unit 14 stays thin with IB Math HL C3
+cross-link for depth.
 
 ---
 
 ## Active Sprint — what we're working on now
 
-**Sprint 0.5 — Source-grounding and first unit choice.** Before any
-unit drafting, we ground the multi-syllabus posture in actual source
-documents so syllabus claims inside guides cite real codes, not
-training-data recall.
+### Sprint 1 — Unit 1 Linear Functions and Systems (full triplet) (opened 2026-05-25, branch `high_school_math_unit_1`)
+
+**Goal.** Ship the first full HS Math product (Study Guide + Practice +
+Solutions) for **Unit 1: Linear Functions and Systems**. Proves all
+three product templates in one sprint so Sprint 2 can bulk-draft Units
+2-6 from validated designs.
+
+**Locked decisions** (user 2026-05-25 consultation):
+
+- **Regions:** 3 columns — 🇺🇸 US Common Core, 🇨🇦 Ontario, 🇨🇦 British
+  Columbia. Alberta dropped from current scope.
+- **Chip taxonomy on Practice questions:** **Region flag + paper style**.
+  Each question carries (a) a region chip (`🇺🇸 US` / `🇨🇦 ON` /
+  `🇨🇦 BC`) and (b) a paper-style chip (`SAT-style MCQ`, `AP-feeder FRQ`,
+  `ON Provincial-style`, `BC Provincial-style`). Students drilling for
+  a specific exam filter by chip. Mirrors IB Math HL's Paper 1A/1B/2/3
+  chip system.
+- **Three-layer curriculum-callout structure inside each SG:**
+  1. *Top of unit:* `syllabus-map` callout box (3 columns: US/ON/BC,
+     country flag + course code + standard reference).
+  2. *Per-section:* small region-/grade chip where the section diverges
+     from "core for everyone" (e.g. `🇨🇦 BC PC12 honors`,
+     `🇨🇦 ON MHF4U`, `🇺🇸 not in CCSSM — AP/IB feeder`).
+  3. *Inline:* `syllabus-note` callout only where a single curriculum
+     requires a different proof / different terminology / different
+     exam expectation. Sparingly.
+- **Vectors Unit 14:** keep as thin ON-MCV4U-focused unit; deep-content
+  students hyperlinked to existing
+  `IB Math HL/Study Guides/Unit_C3_Vectors.html`.
+
+**Sprint 1 deliverable contract:**
+
+- ≥6 content sections following the dual-goal contract (cheat-sheet →
+  worked example → going-deeper → quiz mix).
+- `syllabus-map` callout near hero (3-column US/ON/BC, code-cited from
+  the verbatim `*_extract.md` slices in `rag/sources/`).
+- `syllabus-note` callouts where genuine divergence (US Common Core's
+  HSF-LE.A.4 modeling vs. ON MPM1D's analytic-geometry framing, etc.).
+- `honors-flag` chips on the few sections that are honors / advanced
+  (linear systems via matrix row-reduction reads as honors in ON;
+  parametric form of a line reads as honors in BC PC12).
+- 8+ flashcards in the locked terse style.
+- 10+ item readiness checklist.
+- AP/IB feeder pointers — hyperlinks to existing AP Calc / IB Math HL
+  units where a topic feeds in.
+- English-only (per spec — no ZH track until subject stabilises).
+- `scripts/validate.sh` exit 0.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| ~~**S0.5-1**~~ | Add **CCSSM High School** (US Common Core) as a row in `sources.txt` | P0 | ✅ shipped 2026-05-16 (commit `ecbc87a`, row 13) |
-| ~~**S0.5-2a**~~ | Fetch 4 priority PDFs into `rag/sources/` | P0 | ✅ shipped 2026-05-16 — files committed |
-| ~~**S0.5-2b**~~ | Extract Linear-Functions text from those PDFs into `*_extract.md` companions | P0 | ✅ shipped 2026-05-17 — `pdftotext` (Poppler) located at `/mingw64/bin/pdftotext`; 4 extracts written. See [Extracts produced](#extracts-produced) below. |
-| ~~**S0.5-3**~~ | Pick the topic for Unit 1 | P0 | ✅ 2026-05-16 — **Linear Functions and Systems** |
-| **S0.5-4** | Define the `syllabus-map` and `syllabus-note` CSS callout classes | P1 | Open &mdash; lands with Unit 1 |
+| ~~**S0.5-4**~~ | Define `syllabus-map`, `syllabus-note`, `honors-flag` CSS classes | P1 | Folded into **S1-SG** — lands as part of Unit 1 SG drafting |
+| **S1-SG** | Draft `Unit_1_Linear_Functions_and_Systems.html` (Study Guide) | P0 | **Open** |
+| **S1-P** | Draft `Unit_1_Linear_Functions_and_Systems_Practice.html` (Practice) | P0 | **Open — blocked on S1-SG (inherits CSS + Syllabus Map design)** |
+| **S1-S** | Draft `Unit_1_Linear_Functions_and_Systems_Solutions.html` (Solutions) | P0 | **Open — blocked on S1-P (mirrors question set)** |
+| **S1-index** | Update `scripts/build-index.py` to discover the new subject; add `chip-green` subject chip; manually seed an `<h2>High School Math</h2>` block in `index.html` if needed | P1 | **Open — lands after S1-SG to enable index generation** |
+| **S1-bcfetch** | Fetch BC `pc11_elab.pdf` + `pc12_elab.pdf` into `rag/sources/bc/`; write topic-slice extracts for Quadratics + Polynomial + Exp/Log + Sequences (unblocks Sprint 2) | P1 | **Parallel — can run alongside S1-SG without blocking** |
 
-Build order: open Sprint 1 (Unit 1 drafting) → S0.5-4 lands as part of Unit 1.
+Build order: **S1-SG → S1-P → S1-S → S1-index** (per-item commits).
+S1-bcfetch can run in parallel.
+
+---
+
+### Closed Sprints
+
+#### Sprint 0.5 — closed 2026-05-17
+
+Source-grounding + first unit choice. All 4 priority PDFs (US, BC PC10,
+ON 9-10, ON 11-12) fetched and Linear-Functions extracts written via
+`pdftotext -layout` from Poppler (located at `/mingw64/bin/pdftotext`
+inside the sandbox).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| ~~**S0.5-1**~~ | Add CCSSM HS row to `sources.txt` | P0 | ✅ shipped 2026-05-16 (`ecbc87a`, row 13) |
+| ~~**S0.5-2a**~~ | Fetch 4 priority PDFs into `rag/sources/` | P0 | ✅ shipped 2026-05-16 |
+| ~~**S0.5-2b**~~ | Extract Linear-Functions text into `*_extract.md` | P0 | ✅ shipped 2026-05-17 (`31c0fb5`) |
+| ~~**S0.5-3**~~ | Pick Unit 1 topic | P0 | ✅ 2026-05-16 — **Linear Functions and Systems** |
 
 ### Extracts produced
 
