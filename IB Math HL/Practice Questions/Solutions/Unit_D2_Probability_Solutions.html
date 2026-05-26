@@ -12,7 +12,7 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
   onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
-<style>
+<style data-theme="light">
   :root{
     --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
     --maroon:#7A2E2E; --maroon-ink:#ffffff;
@@ -33,7 +33,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -83,36 +83,45 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+
+  /* ─── BILINGUAL TOGGLE ─── */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
+
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}#langToggle{display:none !important;}}
 </style>
 </head>
-<body>
+<body data-theme="light">
+
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
 
 <div class="brand">I&nbsp;B&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H&nbsp;&nbsp;A&nbsp;A&nbsp;&nbsp;H&nbsp;L</div>
-<div class="chapter-tag">Unit D2 &middot; Solutions</div>
-<h1 class="chapter-title">Probability &mdash; Solutions</h1>
-<p class="chapter-sub">Companion to the IB-Style Practice Set</p>
+<div class="chapter-tag"><span data-lang="en">Unit D2 &middot; Solutions</span><span data-lang="zh">Unit D2 &middot; 解析</span></div>
+<h1 class="chapter-title"><span data-lang="en">Probability &mdash; Solutions</span><span data-lang="zh">概率 —— 解析</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the IB-Style Practice Set</span><span data-lang="zh">IB 风格练习题的解析配套</span></p>
 <div class="legend">
   <span class="pill easy">EASY</span><span class="pill med">MEDIUM</span><span class="pill hard">HARD</span>
   <span class="pill p1a">Paper 1A</span><span class="pill p1b">Paper 1B</span><span class="pill p2">Paper 2</span><span class="pill p3">Paper 3</span>
   <span class="pill hl">HL ONLY</span>
 </div>
-<p class="topics-line">Syllabus <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> Bayes <span class="scope">AA HL</span></p>
+<p class="topics-line"><span data-lang="en">Syllabus <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> Bayes</span><span data-lang="zh">考纲 <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> 贝叶斯（<code>Bayes' theorem</code>）</span> <span class="scope">AA HL</span></p>
 <hr class="thick"><hr class="thin">
 
-<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.1</code> &middot; companion to <code>Unit_D2_Probability_Practice.html</code> v1.1 &middot; 12 Qs &middot; 91 marks &middot; mark-by-mark with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> callouts</p>
+<p style="font-family:'Source Sans 3',sans-serif;font-size:9.75pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;"><code>v1.1</code> &middot; <span data-lang="en">companion to <code>Unit_D2_Probability_Practice.html</code> v1.1 &middot; 12 Qs &middot; 91 marks &middot; mark-by-mark with</span><span data-lang="zh"><code>Unit_D2_Probability_Practice.html</code> v1.1 配套 &middot; 12 题 &middot; 91 分 &middot; 逐分点附</span> <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> <span data-lang="en">callouts</span><span data-lang="zh">分点标注</span></p>
 
 <!-- ════════════════════════════════ PART I ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART I &nbsp;·&nbsp; PAPER 1 SECTION A — SOLUTIONS</span><span class="part-meta">No calculator · 22 marks</span></div>
-<h2 class="section-head">Section A — Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;·&nbsp; PAPER 1 SECTION A — SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;·&nbsp; 第一卷 A 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator · 22 marks</span><span data-lang="zh">不可使用计算器 · 22 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A — Worked Solutions</span><span data-lang="zh">A 节 —— 详细解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.5 Sample Spaces</span><span class="pill marks">[5 marks]</span></div>
-  <div class="q-body"><p class="prompt">Two fair dice. (a) $P(\text{sum}=7)$. (b) $P(\text{sum even})$. (c) $P(\text{at least one }6)$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Two fair dice. (a) $P(\text{sum}=7)$. (b) $P(\text{sum even})$. (c) $P(\text{at least one }6)$.</span><span data-lang="zh">两枚均匀骰子。(a) $P(\text{sum}=7)$。(b) $P(\text{sum even})$。(c) $P(\text{at least one }6)$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{1}{2}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{11}{36}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\dfrac{1}{6}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\dfrac{1}{2}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\dfrac{11}{36}$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Sum equals $7$ <span class="marks-call">M1·A1</span></h4>
       Pairs giving sum $7$: $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ — exactly $6$ outcomes out of $36$. $P = 6/36 = \boxed{\tfrac{1}{6}}.$
 
@@ -125,15 +134,28 @@
 
       <div class="insight"><strong>Complement first.</strong> "At least one" almost always opens with the complement rule. Counting the at-least-one outcomes directly is error-prone (double-counting); $1 - P(\text{none})$ is bulletproof.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 点数和等于 $7$ <span class="marks-call">M1·A1</span></h4>
+      点数和为 $7$ 的样本空间（<code>sample space</code>）中的结果（<code>outcome</code>）：$(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ —— $36$ 个结果中恰有 $6$ 个。$P = 6/36 = \boxed{\tfrac{1}{6}}.$
+
+      <h4>(b) 点数和为偶数 <span class="marks-call">A1</span></h4>
+      点数和为偶数当且仅当两枚骰子奇偶性相同。两枚都为奇：$3 \times 3 = 9$ 对；两枚都为偶：$3 \times 3 = 9$ 对。共 $18/36 = \boxed{\tfrac{1}{2}}$。
+
+      <h4>(c) 至少一枚为 $6$ —— 余事件技巧 <span class="marks-call">M1·A1</span></h4>
+      $P(\text{no }6 \text{ on either die}) = (5/6)^2 = 25/36$。因此用余事件（<code>complement</code>）：
+      $$ P(\text{at least one }6) \;=\; 1 - \tfrac{25}{36} \;=\; \boxed{\tfrac{11}{36}}. $$
+
+      <div class="insight"><strong>先用余事件。</strong> 题目里出现 "at least one" 几乎都从余事件入手。直接枚举 "至少一次" 容易重复计数；用 $1 - P(\text{none})$ 几乎不出错。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.5 Complementary / Expected</span><span class="pill marks">[5 marks]</span></div>
-  <div class="q-body"><p class="prompt">$P(\text{rain}) = 0.4$, days independent. (a) $P(\text{no rain})$. (b) Expected rainy days in $30$. (c) $P(\ge 1\text{ rainy day in }3)$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$P(\text{rain}) = 0.4$, days independent. (a) $P(\text{no rain})$. (b) Expected rainy days in $30$. (c) $P(\ge 1\text{ rainy day in }3)$.</span><span data-lang="zh">$P(\text{rain}) = 0.4$，各天独立。(a) $P(\text{no rain})$。(b) $30$ 天内下雨天数的期望。(c) $P(\ge 1\text{ rainy day in }3)$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $0.6$ &nbsp;·&nbsp; <span class="ans">(b)</span> $12$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.784$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $0.6$ &nbsp;·&nbsp; <span class="ans">(b)</span> $12$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.784$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) <span class="marks-call">A1</span></h4>
       $P(R^{\,\prime}) = 1 - 0.4 = 0.6.$
 
@@ -146,15 +168,28 @@
 
       <div class="insight"><strong>Expected frequency vs probability.</strong> $E[X] = np$ is a count (units: "days"); $P$ is a probability (unitless, $[0,1]$). Keep them straight in answer writing.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) <span class="marks-call">A1</span></h4>
+      $P(R^{\,\prime}) = 1 - 0.4 = 0.6.$（余事件 <code>complement</code>）
+
+      <h4>(b) 期望频数 <span class="marks-call">M1·A1</span></h4>
+      $E[\text{rainy days in }30] = n \cdot p = 30 \cdot 0.4 = \boxed{12}$ 天。
+
+      <h4>(c) 三天中至少有一天下雨 <span class="marks-call">M1·A1</span></h4>
+      $P(\text{no rain on any of 3 days}) = 0.6^3 = 0.216$。
+      $P(\ge 1 \text{ rainy}) = 1 - 0.216 = \boxed{0.784}.$
+
+      <div class="insight"><strong>期望频数与概率的区别。</strong> $E[X] = np$ 是一个计数（单位是 "天"）；$P$ 是概率（<code>probability</code>，无量纲，取值 $[0,1]$）。答题时务必区分清楚。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.6 ME vs Independent</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$P(A) = 0.3$, $P(B) = 0.5$. (a) ME: $P(A \cup B)$. (b) Ind: $P(A \cap B)$. (c) Ind: $P(A \cup B)$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$P(A) = 0.3$, $P(B) = 0.5$. (a) ME: $P(A \cup B)$. (b) Ind: $P(A \cap B)$. (c) Ind: $P(A \cup B)$.</span><span data-lang="zh">$P(A) = 0.3$，$P(B) = 0.5$。(a) 互斥时 $P(A \cup B)$。(b) 独立时 $P(A \cap B)$。(c) 独立时 $P(A \cup B)$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $0.8$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.15$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.65$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $0.8$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.15$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.65$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Mutually exclusive case <span class="marks-call">M1·A1</span></h4>
       ME means $A \cap B = \varnothing$, so $P(A \cap B) = 0$. Addition rule:
       $$ P(A \cup B) \;=\; P(A) + P(B) - P(A \cap B) \;=\; 0.3 + 0.5 - 0 \;=\; \boxed{0.8}. $$
@@ -168,15 +203,29 @@
 
       <div class="insight"><strong>ME $\ne$ Independent.</strong> Mutually exclusive events with non-zero probability are <em>never</em> independent ($P(A \cap B) = 0 \ne P(A)P(B) > 0$). The two concepts are often confused. Use them as opposites of each other.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 互斥（<code>mutually exclusive</code>）情形 <span class="marks-call">M1·A1</span></h4>
+      互斥意味着 $A \cap B = \varnothing$，故 $P(A \cap B) = 0$。由加法公式（并 <code>union</code>）：
+      $$ P(A \cup B) \;=\; P(A) + P(B) - P(A \cap B) \;=\; 0.3 + 0.5 - 0 \;=\; \boxed{0.8}. $$
+
+      <h4>(b) 独立（<code>independent</code>）时的交（<code>intersection</code>） <span class="marks-call">M1·A1</span></h4>
+      独立意味着 $P(A \cap B) = P(A)\,P(B) = 0.3 \cdot 0.5 = \boxed{0.15}.$
+
+      <h4>(c) 独立时的并 <span class="marks-call">M1·A1</span></h4>
+      用 (b) 的交代入加法公式：
+      $$ P(A \cup B) \;=\; 0.3 + 0.5 - 0.15 \;=\; \boxed{0.65}. $$
+
+      <div class="insight"><strong>互斥 $\ne$ 独立。</strong> 概率非零的互斥事件<em>永远</em>不可能独立（$P(A \cap B) = 0 \ne P(A)P(B) > 0$）。这两个概念常被混淆，应把它们视为对立的两种关系。</div>
+    </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span><span class="pill p1a">Paper 1A</span><span class="pill topic">4.6 Conditional</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">Two-way table: $50$ M + $50$ F; $65$ pass total; $30$ M pass. (a) $P(\text{Pass})$. (b) $P(\text{Pass}\mid\text{Male})$. (c) $P(\text{Female}\mid\text{Pass})$. (d) Independence?</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Two-way table: $50$ M + $50$ F; $65$ pass total; $30$ M pass. (a) $P(\text{Pass})$. (b) $P(\text{Pass}\mid\text{Male})$. (c) $P(\text{Female}\mid\text{Pass})$. (d) Independence?</span><span data-lang="zh">列联表：$50$ 男 + $50$ 女；共 $65$ 人通过；男生通过 $30$ 人。(a) $P(\text{Pass})$。(b) $P(\text{Pass}\mid\text{Male})$。(c) $P(\text{Female}\mid\text{Pass})$。(d) 是否独立？</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\tfrac{13}{20} = 0.65$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\tfrac{3}{5} = 0.6$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{7}{13}$ &nbsp;·&nbsp; <span class="ans">(d)</span> not independent</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\tfrac{13}{20} = 0.65$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\tfrac{3}{5} = 0.6$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{7}{13}$ &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">not independent</span><span data-lang="zh">不独立</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) <span class="marks-call">A1</span></h4>
       $P(\text{Pass}) = 65/100 = \boxed{0.65}.$
 
@@ -191,21 +240,36 @@
 
       <div class="insight"><strong>Conditional restricts the universe.</strong> $P(B \mid A)$ reads "given $A$"; the denominator switches from $n(U) = 100$ to $n(A)$. Both numerator and denominator change.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) <span class="marks-call">A1</span></h4>
+      $P(\text{Pass}) = 65/100 = \boxed{0.65}.$
+
+      <h4>(b) <span class="marks-call">M1·A1</span></h4>
+      以 Male 为条件（条件概率 <code>conditional probability</code>，<code>P(A|B)</code>）：仅看男生这一行，$P(\text{Pass}\mid\text{Male}) = 30/50 = \boxed{0.6}.$
+
+      <h4>(c) <span class="marks-call">M1·A1</span></h4>
+      以 Pass 为条件：仅看通过这一列，$P(\text{Female}\mid\text{Pass}) = 35/65 = \boxed{7/13} \approx 0.538.$
+
+      <h4>(d) 独立性检验 <span class="marks-call">R1</span></h4>
+      $P(\text{Pass} \cap \text{Male}) = 30/100 = 0.3$，$P(\text{Pass})\,P(\text{Male}) = 0.65 \cdot 0.5 = 0.325$。由 $0.3 \ne 0.325$ 可知两事件<strong>不独立</strong>。
+
+      <div class="insight"><strong>条件概率改变样本范围。</strong> $P(B \mid A)$ 读作 "在 $A$ 发生的条件下"，分母从 $n(U) = 100$ 变为 $n(A)$。分子与分母都同时改变。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART II ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART II &nbsp;·&nbsp; PAPER 1 SECTION B — SOLUTIONS</span><span class="part-meta">No calculator · 23 marks</span></div>
-<h2 class="section-head">Section B — Extended Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;·&nbsp; PAPER 1 SECTION B — SOLUTIONS</span><span data-lang="zh">第二部分 &nbsp;·&nbsp; 第一卷 B 节 —— 解析</span></span><span class="part-meta"><span data-lang="en">No calculator · 23 marks</span><span data-lang="zh">不可使用计算器 · 23 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B — Extended Solutions</span><span data-lang="zh">B 节 —— 长答题解析</span></h2>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span><span class="pill p1b">Paper 1B</span><span class="pill topic">4.6 Tree</span><span class="pill marks">[7 marks]</span></div>
-  <div class="q-body"><p class="prompt">$4$ red, $6$ blue. Two draws without replacement.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$4$ red, $6$ blue. Two draws without replacement.</span><span data-lang="zh">$4$ 红、$6$ 蓝。不放回抽取两次。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(b)</span> $\tfrac{2}{15}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{8}{15}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{2}{3}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(b)</span> $\tfrac{2}{15}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{8}{15}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{2}{3}$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Tree diagram <span class="marks-call">M1·A1</span></h4>
       <pre style="font-family:'JetBrains Mono',monospace;font-size:10pt;background:#fff;border:1px solid #d4e4cb;border-radius:3px;padding:8px;margin:6px 0;">
                   3/9  R   →  RR : 4/10 · 3/9 = 12/90 = 2/15
@@ -232,15 +296,42 @@
 
       <div class="insight"><strong>Symmetry check.</strong> The two "one-of-each" paths $RB$ and $BR$ give identical probabilities here ($24/90$). This is always true when independence (or in this case, just symmetric-sample-space) is involved — useful as an arithmetic check.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 树状图（<code>tree diagram</code>） <span class="marks-call">M1·A1</span></h4>
+      <pre style="font-family:'JetBrains Mono',monospace;font-size:10pt;background:#fff;border:1px solid #d4e4cb;border-radius:3px;padding:8px;margin:6px 0;">
+                  3/9  R   →  RR : 4/10 · 3/9 = 12/90 = 2/15
+              ___/
+       4/10  R
+       _____/    \___ 6/9  B   →  RB : 4/10 · 6/9 = 24/90 = 4/15
+      |
+      |
+      |_____ 6/10  B
+              ___       4/9  R   →  BR : 6/10 · 4/9 = 24/90 = 4/15
+                 \___/
+                      5/9  B   →  BB : 6/10 · 5/9 = 30/90 = 1/3
+      </pre>
+      给 M1 的依据是树的结构（两阶段；由于不放回，第二次抽取的分母减 $1$）；A1 给的是正确写出的条件概率。
+
+      <h4>(b) $P(RR)$ <span class="marks-call">M1·A1</span></h4>
+      $P(RR) = \dfrac{4}{10} \cdot \dfrac{3}{9} = \dfrac{12}{90} = \boxed{\dfrac{2}{15}}.$
+
+      <h4>(c) 一红一蓝 <span class="marks-call">M1·A1</span></h4>
+      $P(RB) + P(BR) = \dfrac{4}{10}\cdot\dfrac{6}{9} + \dfrac{6}{10}\cdot\dfrac{4}{9} = \dfrac{24}{90} + \dfrac{24}{90} = \dfrac{48}{90} = \boxed{\dfrac{8}{15}}.$
+
+      <h4>(d) $P(\text{second blue} \mid \text{first red})$ <span class="marks-call">A1</span></h4>
+      已知第一球为红，袋中剩 $3$ 红 $6$ 蓝（共 $9$ 个）。$P(B_2 \mid R_1) = \boxed{\dfrac{6}{9} = \dfrac{2}{3}}.$
+
+      <div class="insight"><strong>对称性检查。</strong> 此处两条 "一红一蓝" 路径 $RB$ 与 $BR$ 给出相同的概率（均为 $24/90$）。只要涉及独立性（或本题这样的对称样本空间）这都成立，可作为计算的快速检查。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q6</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">4.6 Venn / Independence</span><span class="pill marks">[8 marks]</span></div>
-  <div class="q-body"><p class="prompt">$n=100$; $|M|=65$, $|P|=50$, $|M \cap P|=25$. (a) Venn. (b) Neither. (c) Exactly one. (d) $P(P\mid M)$. (e) Independence.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$n=100$; $|M|=65$, $|P|=50$, $|M \cap P|=25$. (a) Venn. (b) Neither. (c) Exactly one. (d) $P(P\mid M)$. (e) Independence.</span><span data-lang="zh">$n=100$；$|M|=65$、$|P|=50$、$|M \cap P|=25$。(a) 维恩图。(b) 两门都不选。(c) 恰选一门。(d) $P(P\mid M)$。(e) 是否独立。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(b)</span> $10$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.65$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{5}{13}$ &nbsp;·&nbsp; <span class="ans">(e)</span> not independent</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(b)</span> $10$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.65$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{5}{13}$ &nbsp;·&nbsp; <span class="ans">(e)</span> <span data-lang="en">not independent</span><span data-lang="zh">不独立</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Venn diagram regions <span class="marks-call">M1·A1</span></h4>
       Centre (both): $25$. Math-only: $65 - 25 = 40$. Physics-only: $50 - 25 = 25$. Outside (neither): $100 - 40 - 25 - 25 = 10$.
 
@@ -258,15 +349,33 @@
 
       <div class="insight"><strong>Two routes to independence-check.</strong> Either compare $P(A \cap B)$ to $P(A)P(B)$, or compare $P(A \mid B)$ to $P(A)$. They are equivalent — pick whichever uses numbers already on the page.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 维恩图（<code>Venn diagram</code>）的各区域 <span class="marks-call">M1·A1</span></h4>
+      中间（两门都选）：$25$。仅数学：$65 - 25 = 40$。仅物理：$50 - 25 = 25$。外部（两门都不选）：$100 - 40 - 25 - 25 = 10$。
+
+      <h4>(b) 两门都不选 <span class="marks-call">A1</span></h4>
+      $|(M \cup P)^{\,\prime}| = 100 - |M \cup P| = 100 - (65 + 50 - 25) = 100 - 90 = \boxed{10}.$
+
+      <h4>(c) 恰好选一门 <span class="marks-call">M1·A1</span></h4>
+      $|M\text{-only}| + |P\text{-only}| = 40 + 25 = 65 \Rightarrow P = \boxed{65/100 = 0.65}.$
+
+      <h4>(d) $P(P \mid M)$ <span class="marks-call">M1·A1</span></h4>
+      $$ P(P \mid M) \;=\; \frac{P(P \cap M)}{P(M)} \;=\; \frac{25/100}{65/100} \;=\; \frac{25}{65} \;=\; \boxed{\frac{5}{13}}. $$
+
+      <h4>(e) 独立性检验 <span class="marks-call">R1</span></h4>
+      $P(M \cap P) = 25/100 = 0.25$，对照 $P(M)\,P(P) = 0.65 \cdot 0.5 = 0.325$。由 $0.25 \ne 0.325$ 知 $M$ 与 $P$ <strong>不独立</strong>。（选了其中一门会让另一门变得更不可能 —— 两事件在此呈负相关。）
+
+      <div class="insight"><strong>独立性检验的两种路径。</strong> 可以比较 $P(A \cap B)$ 与 $P(A)P(B)$，也可以比较 $P(A \mid B)$ 与 $P(A)$。二者等价 —— 哪种用到已经写在纸上的数字就用哪种。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q7</span><span class="pill hard">HARD</span><span class="pill p1b">Paper 1B</span><span class="pill topic">AHL 4.10 Bayes</span><span class="pill marks">[8 marks]</span><span class="pill hl">HL</span></div>
-  <div class="q-body"><p class="prompt">Two machines $A$ (60%), $B$ (40%); defect rates $2\%, 5\%$. (a) Tree. (b) $P(D)$. (c) $P(A \mid D)$. (d) Why $P(A\mid D) < P(A)$?</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Two machines $A$ (60%), $B$ (40%); defect rates $2\%, 5\%$. (a) Tree. (b) $P(D)$. (c) $P(A \mid D)$. (d) Why $P(A\mid D) < P(A)$?</span><span data-lang="zh">两台机器 $A$（60%）、$B$（40%）；不合格率分别为 $2\%, 5\%$。(a) 树状图。(b) $P(D)$。(c) $P(A \mid D)$。(d) 为何 $P(A\mid D) < P(A)$？</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(b)</span> $0.032$ &nbsp;·&nbsp; <span class="ans">(c)</span> $P(A\mid D) = \tfrac{3}{8} = 0.375$ &nbsp;·&nbsp; <span class="ans">(d)</span> $B$ has higher defect rate</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(b)</span> $0.032$ &nbsp;·&nbsp; <span class="ans">(c)</span> $P(A\mid D) = \tfrac{3}{8} = 0.375$ &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">$B$ has higher defect rate</span><span data-lang="zh">$B$ 的不合格率更高</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Tree diagram <span class="marks-call">M1·A1</span></h4>
       <pre style="font-family:'JetBrains Mono',monospace;font-size:10pt;background:#fff;border:1px solid #d4e4cb;border-radius:3px;padding:8px;margin:6px 0;">
                   0.02  D    →  P(A∩D) = 0.6 · 0.02 = 0.012
@@ -291,21 +400,46 @@
 
       <div class="insight"><strong>Bayes in one symbolic line.</strong> Memorise the equation $P(H \mid E) = \dfrac{P(E \mid H)\,P(H)}{P(E)}$ where $H$ is the hypothesis and $E$ is the evidence. Then $P(E)$ is always built from the law of total probability. The whole AA HL Bayes machinery sits in those two formulas.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 树状图 <span class="marks-call">M1·A1</span></h4>
+      <pre style="font-family:'JetBrains Mono',monospace;font-size:10pt;background:#fff;border:1px solid #d4e4cb;border-radius:3px;padding:8px;margin:6px 0;">
+                  0.02  D    →  P(A∩D) = 0.6 · 0.02 = 0.012
+              ___/
+       0.6  A
+       ____/    \___ 0.98  D′   →  P(A∩D′) = 0.588
+      |
+      |____ 0.4  B
+              ___       0.05  D    →  P(B∩D) = 0.4 · 0.05 = 0.020
+                 \___/
+                      0.95  D′   →  P(B∩D′) = 0.380
+      </pre>
+
+      <h4>(b) 全概率公式（<code>law of total probability</code>） <span class="marks-call">M1·A1</span></h4>
+      $$ P(D) \;=\; P(A)P(D\mid A) + P(B)P(D\mid B) \;=\; 0.6 \cdot 0.02 + 0.4 \cdot 0.05 \;=\; 0.012 + 0.020 \;=\; \boxed{0.032}. $$
+
+      <h4>(c) 贝叶斯定理（<code>Bayes' theorem</code>） <span class="marks-call">M1·M1·A1</span></h4>
+      $$ P(A \mid D) \;=\; \frac{P(D \mid A)\,P(A)}{P(D)} \;=\; \frac{0.02 \cdot 0.6}{0.032} \;=\; \frac{0.012}{0.032} \;=\; \boxed{\frac{3}{8} = 0.375}. $$
+
+      <h4>(d) 为何后验（<code>posterior</code>）$<$ 先验（<code>prior</code>） <span class="marks-call">R1</span></h4>
+      机器 $B$ 的不合格率（$5\%$）是 $A$（$2\%$）的两倍多。所以在不合格品中，$B$ 的占比远大于其 $40\%$ 的产量份额，这把 $P(A \mid D)$ 拉到了<em>低于</em> $P(A) = 0.6$ 的水平。
+
+      <div class="insight"><strong>一行公式即贝叶斯。</strong> 记住 $P(H \mid E) = \dfrac{P(E \mid H)\,P(H)}{P(E)}$，其中 $H$ 是假设，$E$ 是证据。$P(E)$ 始终通过全概率公式构造。AA HL 全部贝叶斯题型都靠这两条公式。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART III ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART III &nbsp;·&nbsp; PAPER 2 — SOLUTIONS</span><span class="part-meta">Calculator · 18 marks</span></div>
-<h2 class="section-head">Section C — Paper 2 (Calculator) Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;·&nbsp; PAPER 2 — SOLUTIONS</span><span data-lang="zh">第三部分 &nbsp;·&nbsp; 第二卷 —— 解析</span></span><span class="part-meta"><span data-lang="en">Calculator · 18 marks</span><span data-lang="zh">允许计算器 · 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C — Paper 2 (Calculator) Solutions</span><span data-lang="zh">C 节 —— 第二卷（允许计算器）解析</span></h2>
 
 <div class="q">
   <div class="q-head"><span class="pill qnum">Q8</span><span class="pill easy">EASY</span><span class="pill p2">Paper 2</span><span class="pill topic">4.6 Two-Way Table</span><span class="pill marks">[5 marks]</span></div>
-  <div class="q-body"><p class="prompt">$200$ students; Y11 = 100 (60 AA, 40 AI); Y12 = 100 (70 AA, 30 AI).</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$200$ students; Y11 = 100 (60 AA, 40 AI); Y12 = 100 (70 AA, 30 AI).</span><span data-lang="zh">$200$ 名学生；11 年级 100 人（60 AA、40 AI）；12 年级 100 人（70 AA、30 AI）。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $0.5$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.7$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.3$ &nbsp;·&nbsp; <span class="ans">(d)</span> not independent</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $0.5$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.7$ &nbsp;·&nbsp; <span class="ans">(c)</span> $0.3$ &nbsp;·&nbsp; <span class="ans">(d)</span> <span data-lang="en">not independent</span><span data-lang="zh">不独立</span></div>
+    <div class="rationale" data-lang="en">
       <h4>(a)–(c) <span class="marks-call">A1·A1·A1</span></h4>
       $P(\text{Y11}) = 100/200 = 0.5$; $\ P(\text{AA}\mid\text{Y12}) = 70/100 = 0.7$; $\ P(\text{Y11}\cap\text{AA}) = 60/200 = 0.3$.
 
@@ -315,15 +449,25 @@
 
       <div class="insight"><strong>Marginal probabilities first.</strong> Always read marginal $P(\text{AA}) = 130/200$ from the column total before comparing with conditionals. The full marginal/joint/conditional set is what tells you whether independence holds.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a)–(c) <span class="marks-call">A1·A1·A1</span></h4>
+      $P(\text{Y11}) = 100/200 = 0.5$；$\ P(\text{AA}\mid\text{Y12}) = 70/100 = 0.7$；$\ P(\text{Y11}\cap\text{AA}) = 60/200 = 0.3$。
+
+      <h4>(d) 独立性检验 <span class="marks-call">M1·R1</span></h4>
+      $P(\text{Y11})\,P(\text{AA}) = 0.5 \cdot (130/200) = 0.5 \cdot 0.65 = 0.325$。
+      与 $P(\text{Y11}\cap\text{AA}) = 0.3$ 比较，$0.3 \ne 0.325$，因此<strong>不独立</strong>。
+
+      <div class="insight"><strong>先读边际概率。</strong> 在与条件概率比较之前，务必先从列总计读出边际概率 $P(\text{AA}) = 130/200$。要回答 "是否独立"，需要把边际、联合、条件三套概率都列齐。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q9</span><span class="pill med">MEDIUM</span><span class="pill p2">Paper 2</span><span class="pill topic">4.6 Sequential Draws</span><span class="pill marks">[7 marks]</span></div>
-  <div class="q-body"><p class="prompt">$5$ white, $3$ black, no replacement.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$5$ white, $3$ black, no replacement.</span><span data-lang="zh">$5$ 白、$3$ 黑，不放回。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $\tfrac{5}{14}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\tfrac{9}{14}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{5}{7}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{1}{2}$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\tfrac{5}{14}$ &nbsp;·&nbsp; <span class="ans">(b)</span> $\tfrac{9}{14}$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{5}{7}$ &nbsp;·&nbsp; <span class="ans">(d)</span> $\tfrac{1}{2}$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) <span class="marks-call">M1·A1</span></h4>
       $P(WW) = \dfrac{5}{8} \cdot \dfrac{4}{7} = \dfrac{20}{56} = \boxed{\dfrac{5}{14}}.$
 
@@ -338,15 +482,30 @@
 
       <div class="insight"><strong>Without replacement = condition on history.</strong> Each new draw updates the bag composition. Track the conditional bag state, not the original counts.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) <span class="marks-call">M1·A1</span></h4>
+      $P(WW) = \dfrac{5}{8} \cdot \dfrac{4}{7} = \dfrac{20}{56} = \boxed{\dfrac{5}{14}}.$
+
+      <h4>(b) 余事件 <span class="marks-call">M1·A1</span></h4>
+      $P(\ge 1 \text{ black in 2 draws}) = 1 - P(WW) = 1 - \dfrac{5}{14} = \boxed{\dfrac{9}{14}}.$
+
+      <h4>(c) 条件概率 <span class="marks-call">M1·A1</span></h4>
+      抽出一个黑球后，袋中剩 $5$ 白 $2$ 黑（共 $7$ 个）。$P(W_2 \mid B_1) = \boxed{\dfrac{5}{7}}.$
+
+      <h4>(d) 第三次抽取 <span class="marks-call">A1</span></h4>
+      已抽出两个白球，袋中剩 $3$ 白 $3$ 黑。$P(B_3 \mid W_1 \cap W_2) = \dfrac{3}{6} = \boxed{\dfrac{1}{2}}.$
+
+      <div class="insight"><strong>不放回（<code>without replacement</code>）= 以历史为条件。</strong> 每抽一次袋中组成就更新。要追踪条件下的袋内状态，而不是原始数量。</div>
+    </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head"><span class="pill qnum">Q10</span><span class="pill hard">HARD</span><span class="pill p2">Paper 2</span><span class="pill topic">4.6 Tree + Conditional</span><span class="pill marks">[6 marks]</span></div>
-  <div class="q-body"><p class="prompt">$P(B) = 0.7$ bus, $P(W) = 0.3$ walks; $P(OT\mid B) = 0.85$, $P(OT\mid W) = 0.6$.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">$P(B) = 0.7$ bus, $P(W) = 0.3$ walks; $P(OT\mid B) = 0.85$, $P(OT\mid W) = 0.6$.</span><span data-lang="zh">$P(B) = 0.7$ 乘公交，$P(W) = 0.3$ 步行；$P(OT\mid B) = 0.85$、$P(OT\mid W) = 0.6$。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $0.775$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.595$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{119}{155} \approx 0.768$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $0.775$ &nbsp;·&nbsp; <span class="ans">(b)</span> $0.595$ &nbsp;·&nbsp; <span class="ans">(c)</span> $\tfrac{119}{155} \approx 0.768$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Law of total probability <span class="marks-call">M1·M1·A1</span></h4>
       $$ P(OT) \;=\; P(B)P(OT \mid B) + P(W)P(OT \mid W) \;=\; 0.7 \cdot 0.85 + 0.3 \cdot 0.6 \;=\; 0.595 + 0.18 \;=\; \boxed{0.775}. $$
 
@@ -359,21 +518,34 @@
 
       <div class="insight"><strong>Reverse-conditional = mini-Bayes.</strong> $P(B \mid OT) = \dfrac{P(OT \mid B)P(B)}{P(OT)}$. At SL this is framed as "two-way reading of the tree"; at HL it's exactly Bayes' Theorem. Same formula either way.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 全概率公式 <span class="marks-call">M1·M1·A1</span></h4>
+      $$ P(OT) \;=\; P(B)P(OT \mid B) + P(W)P(OT \mid W) \;=\; 0.7 \cdot 0.85 + 0.3 \cdot 0.6 \;=\; 0.595 + 0.18 \;=\; \boxed{0.775}. $$
+
+      <h4>(b) 联合概率 <span class="marks-call">A1</span></h4>
+      $P(B \cap OT) = P(B) \cdot P(OT \mid B) = 0.7 \cdot 0.85 = \boxed{0.595}.$
+
+      <h4>(c) 反向条件概率 <span class="marks-call">M1·A1</span></h4>
+      $$ P(B \mid OT) \;=\; \frac{P(B \cap OT)}{P(OT)} \;=\; \frac{0.595}{0.775} \;=\; \frac{119}{155} \;\approx\; \boxed{0.768}. $$
+      （直觉检查：$P(B \mid OT) > P(B) = 0.7$ —— 没错，因为公交的准时率更高，所以已知 "准时" 会拉高 "乘公交" 的后验概率。）
+
+      <div class="insight"><strong>反向条件概率 = 小型贝叶斯。</strong> $P(B \mid OT) = \dfrac{P(OT \mid B)P(B)}{P(OT)}$。在 SL 阶段它叫做 "树状图反向读"；在 HL 阶段它就是贝叶斯定理。两边其实是同一公式。</div>
+    </div>
   </div>
 </div>
 
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART IV ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART IV &nbsp;·&nbsp; PAPER 3 (HL) — SOLUTIONS</span><span class="part-meta">Calculator · 28 marks</span></div>
-<h2 class="section-head">Section D — Paper 3 (HL Extended) Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART IV &nbsp;·&nbsp; PAPER 3 (HL) — SOLUTIONS</span><span data-lang="zh">第四部分 &nbsp;·&nbsp; 第三卷（HL） —— 解析</span></span><span class="part-meta"><span data-lang="en">Calculator · 28 marks</span><span data-lang="zh">允许计算器 · 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section D — Paper 3 (HL Extended) Solutions</span><span data-lang="zh">D 节 —— 第三卷（HL 长题探究）解析</span></h2>
 
 <div class="q p3">
   <div class="q-head"><span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill p3">Paper 3</span><span class="pill topic">AHL 4.10 Multi-Source Bayes</span><span class="pill marks">[12 marks]</span><span class="pill hl">HL</span></div>
-  <div class="q-body"><p class="prompt">Three regions; prevalence/sensitivity/specificity differ; find regional posteriors then a population-weighted posterior.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Three regions; prevalence/sensitivity/specificity differ; find regional posteriors then a population-weighted posterior.</span><span data-lang="zh">三个地区；患病率／灵敏度／特异度各不相同；先求各地区后验概率，再求按人口加权的后验概率。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(a)</span> $P(D \mid +)_A = \tfrac{1}{3} \approx 0.333$ &nbsp;·&nbsp; <span class="ans">(b)</span> B: $0.400$; C: $0.286$ &nbsp;·&nbsp; <span class="ans">(d)</span> $P(B \mid +) \approx 0.515$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $P(D \mid +)_A = \tfrac{1}{3} \approx 0.333$ &nbsp;·&nbsp; <span class="ans">(b)</span> B: $0.400$; C: $0.286$ &nbsp;·&nbsp; <span class="ans">(d)</span> $P(B \mid +) \approx 0.515$</div>
+    <div class="rationale" data-lang="en">
       <h4>Statement of Bayes (used throughout) <span class="marks-call">R1</span></h4>
       $$ P(D \mid +) \;=\; \frac{P(+ \mid D)\,P(D)}{P(+)}, \qquad P(+) \;=\; P(+\mid D)P(D) + P(+\mid D^{\,\prime})P(D^{\,\prime}). $$
       Note $P(+ \mid D^{\,\prime}) = 1 - \text{specificity}$ (the false-positive rate).
@@ -405,15 +577,47 @@
 
       <div class="insight"><strong>Three layers of conditioning.</strong> Part (d) compounds two Bayes layers: <em>within</em> a region you mix disease vs no-disease; <em>across</em> regions you mix the regional populations. The general rule: when posterior depends on a hierarchy of mixtures, build the joint distribution first (the table above), then condition on the observed evidence.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>贝叶斯公式陈述（贯穿全题使用） <span class="marks-call">R1</span></h4>
+      $$ P(D \mid +) \;=\; \frac{P(+ \mid D)\,P(D)}{P(+)}, \qquad P(+) \;=\; P(+\mid D)P(D) + P(+\mid D^{\,\prime})P(D^{\,\prime}). $$
+      注意 $P(+ \mid D^{\,\prime}) = 1 - \text{specificity}$，即假阳性率（<code>false positive</code> rate）。
+
+      <h4>(a) 地区 A <span class="marks-call">M1·A1·A1</span></h4>
+      $P(D) = 0.05$、$P(+\mid D) = 0.95$、$P(+\mid D^{\,\prime}) = 1 - 0.90 = 0.10$。
+      $$ P(+) \;=\; 0.05 \cdot 0.95 + 0.95 \cdot 0.10 \;=\; 0.0475 + 0.095 \;=\; 0.1425. $$
+      $$ P(D \mid +)_A \;=\; \frac{0.0475}{0.1425} \;=\; \boxed{\frac{1}{3} \approx 0.333}. $$
+
+      <h4>(b) 地区 B 与 C <span class="marks-call">M1·A1·A1</span></h4>
+      <em>地区 B：</em>$P(+) = 0.10 \cdot 0.90 + 0.90 \cdot 0.15 = 0.09 + 0.135 = 0.225$。
+      $$ P(D \mid +)_B \;=\; \frac{0.09}{0.225} \;=\; \boxed{0.400}. $$
+      <em>地区 C：</em>$P(+) = 0.02 \cdot 0.98 + 0.98 \cdot 0.05 = 0.0196 + 0.049 = 0.0686$。
+      $$ P(D \mid +)_C \;=\; \frac{0.0196}{0.0686} \;\approx\; \boxed{0.286}. $$
+
+      <h4>(c) 低患病率悖论 <span class="marks-call">R1·R1</span></h4>
+      地区 C 患病率仅 $2\%$，所以即便检测准确度很高，<em>从绝对数量上看</em>仍会产生大量假阳性：$98\%$ 健康人群中 $5\%$ 检测为假阳性 $\approx 4.9\%$，远超 $2\% \cdot 98\% = 1.96\%$ 的真阳性。结果是地区 C 的阳性结果大多为假阳性。<em>后验概率取决于患病率，而不仅仅取决于检测准确度。</em>
+
+      <h4>(d) 按人口加权的后验 —— 阳性者来自地区 B 的概率？ <span class="marks-call">M1·M1·A1·A1</span></h4>
+      使用上面算出的 $P(+ \mid \text{region})$ 值：
+      <table>
+        <tr><th>地区</th><th>$P(\text{Region})$</th><th>$P(+\mid \text{Region})$</th><th>联合 $P(\text{Region}\cap +)$</th></tr>
+        <tr><td>A</td><td>$0.40$</td><td>$0.1425$</td><td>$0.0570$</td></tr>
+        <tr><td>B</td><td>$0.35$</td><td>$0.225$</td><td>$0.07875$</td></tr>
+        <tr><td>C</td><td>$0.25$</td><td>$0.0686$</td><td>$0.01715$</td></tr>
+        <tr><th colspan="3">$P(+)$</th><th>$0.1529$</th></tr>
+      </table>
+      $$ P(B \mid +) \;=\; \frac{P(B \cap +)}{P(+)} \;=\; \frac{0.07875}{0.1529} \;\approx\; \boxed{0.515}. $$
+
+      <div class="insight"><strong>三层条件化。</strong> (d) 把两层贝叶斯叠加：<em>在</em>同一地区内混合患病与未患病；<em>跨</em>地区混合各地区人口分布。一般法则：当后验依赖于层层混合时，先把联合分布列出来（见上表），再以观测到的证据为条件。</div>
+    </div>
   </div>
 </div>
 
 <div class="q p3">
   <div class="q-head"><span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill p3">Paper 3</span><span class="pill topic">AHL 4.10 Sequential Bayes</span><span class="pill marks">[16 marks]</span><span class="pill hl">HL</span></div>
-  <div class="q-body"><p class="prompt">Rare-marker screening, $P(D) = 0.01$, sens $0.99$, spec $0.95$, conditionally independent retests. Updates the posterior across one then two positives, then explores false-alarm rate and a weak-spec scenario.</p></div>
+  <div class="q-body"><p class="prompt"><span data-lang="en">Rare-marker screening, $P(D) = 0.01$, sens $0.99$, spec $0.95$, conditionally independent retests. Updates the posterior across one then two positives, then explores false-alarm rate and a weak-spec scenario.</span><span data-lang="zh">罕见标志物筛查，$P(D) = 0.01$、灵敏度 $0.99$、特异度 $0.95$，复检条件独立。先后用一次、两次阳性更新后验，并探究假阳性率与较低特异度的情景。</span></p></div>
   <div class="solution">
-    <div class="answer-line">Answers: &nbsp;<span class="ans">(b)</span> $P(D \mid +) = \tfrac{1}{6} \approx 0.167$ &nbsp;·&nbsp; <span class="ans">(c)</span> $P(D \mid +,+) \approx 0.798$ &nbsp;·&nbsp; <span class="ans">(e)</span> $P(+,+ \mid D^{\,\prime}) = 0.0025$ &nbsp;·&nbsp; <span class="ans">(f)</span> $n = 4$, posterior $\approx 0.990$</div>
-    <div class="rationale">
+    <div class="answer-line"><span data-lang="en">Answers:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(b)</span> $P(D \mid +) = \tfrac{1}{6} \approx 0.167$ &nbsp;·&nbsp; <span class="ans">(c)</span> $P(D \mid +,+) \approx 0.798$ &nbsp;·&nbsp; <span class="ans">(e)</span> $P(+,+ \mid D^{\,\prime}) = 0.0025$ &nbsp;·&nbsp; <span class="ans">(f)</span> $n = 4$, <span data-lang="en">posterior</span><span data-lang="zh">后验</span> $\approx 0.990$</div>
+    <div class="rationale" data-lang="en">
       <h4>(a) Statement of Bayes + identification <span class="marks-call">R1·A1</span></h4>
       $$ P(D \mid +) \;=\; \frac{P(+ \mid D)\,P(D)}{P(+)}, \qquad P(+) \;=\; P(+\mid D)P(D) + P(+\mid D^{\,\prime})P(D^{\,\prime}). $$
       For this scenario: $P(D) = 0.01$, $P(+\mid D) = 0.99$ (sensitivity), $P(+\mid D^{\,\prime}) = 1 - 0.95 = 0.05$ (false-positive rate). So $P(D^{\,\prime}) = 0.99$.
@@ -453,13 +657,60 @@
 
       <div class="insight"><strong>The screening-test design heuristic.</strong> Doubling the specificity (lowering false positives) buys you posterior power <em>much faster</em> than improving sensitivity, because in low-prevalence settings the denominator $P(+)$ is dominated by false positives from the healthy majority. That's why two-stage screens (a cheap sensitive test, then an expensive specific confirmatory test) outperform any single test at fixed cost — they engineer the multiplication in (d) on purpose.</div>
     </div>
+    <div class="rationale" data-lang="zh">
+      <h4>(a) 贝叶斯公式陈述 + 量的识别 <span class="marks-call">R1·A1</span></h4>
+      $$ P(D \mid +) \;=\; \frac{P(+ \mid D)\,P(D)}{P(+)}, \qquad P(+) \;=\; P(+\mid D)P(D) + P(+\mid D^{\,\prime})P(D^{\,\prime}). $$
+      本情境下：$P(D) = 0.01$、$P(+\mid D) = 0.99$（灵敏度 <code>sensitivity</code>）、$P(+\mid D^{\,\prime}) = 1 - 0.95 = 0.05$（假阳性率 <code>false positive</code> rate）。因此 $P(D^{\,\prime}) = 0.99$。
+
+      <h4>(b) 一次阳性后的后验 <span class="marks-call">M1·M1·A1</span></h4>
+      $$ P(+) \;=\; (0.99)(0.01) + (0.05)(0.99) \;=\; 0.0099 + 0.0495 \;=\; 0.0594. $$
+      $$ P(D \mid +) \;=\; \frac{0.0099}{0.0594} \;=\; \boxed{\frac{1}{6} \approx 0.167}. $$
+      即便灵敏度高达 $99\%$，一次阳性后后验也只到约 $17\%$ —— $1\%$ 的基率（<code>base rate</code>）依然占主导。
+
+      <h4>(c) 连续两次阳性后的后验 <span class="marks-call">M1·M1·A1</span></h4>
+      新先验 $P(D) = 1/6$，因此 $P(D^{\,\prime}) = 5/6$。用同样的检测参数再做一次贝叶斯：
+      $$ P(+) \;=\; (0.99)\!\cdot\!\tfrac{1}{6} + (0.05)\!\cdot\!\tfrac{5}{6} \;=\; \tfrac{0.99 + 0.25}{6} \;=\; \tfrac{1.24}{6} \;\approx\; 0.2067. $$
+      $$ P(D \mid +,+) \;=\; \frac{0.99 \cdot \tfrac{1}{6}}{1.24/6} \;=\; \frac{0.99}{1.24} \;\approx\; \boxed{0.798}. $$
+      <em>从原始先验直接核对：</em>
+      $$ P(D \mid +,+) \;=\; \frac{P(D)\,[P(+\mid D)]^{2}}{P(D)[P(+\mid D)]^{2} + P(D^{\,\prime})[P(+\mid D^{\,\prime})]^{2}} \;=\; \frac{0.01 \cdot 0.9801}{0.01 \cdot 0.9801 + 0.99 \cdot 0.0025} \;\approx\; 0.798. \;\checkmark $$
+
+      <h4>(d) 为何 "一次阳性 $\to$ 两次阳性" 跃升如此剧烈 <span class="marks-call">R1·R1</span></h4>
+      贝叶斯定理在<em>赔率</em>（<code>odds</code>）上是乘性的：每多一次独立阳性，先验赔率就乘以似然比（<code>likelihood ratio</code>）$\text{LR}^{+} = \dfrac{P(+\mid D)}{P(+\mid D^{\,\prime})} = \dfrac{0.99}{0.05} = 19.8$。先验赔率为 $0.01/0.99 \approx 1/99$。一次阳性：赔率 $\to 19.8/99 \approx 0.2$（对应概率 $\approx 1/6$）。两次阳性：赔率 $\to 19.8^{2}/99 \approx 3.96$（概率 $\approx 0.798$）。第二次阳性不是 "加"，而是 "乘" —— $\approx 20\times$ 的放大器连用两次，对赔率的总放大约为 $\approx 400\times$。
+
+      <h4>(e) 连续两次阳性的假阳性率 <span class="marks-call">M1·A1·R1</span></h4>
+      在未患病的条件下两次检测条件独立：
+      $$ P(+,+ \mid D^{\,\prime}) \;=\; [P(+\mid D^{\,\prime})]^{2} \;=\; (0.05)^{2} \;=\; \boxed{0.0025}. $$
+      <em>筛查解读：</em>在 $100{,}000$ 名两次受检的健康人中，预计约 $250$ 人会纯属偶然地连续两次阳性 —— 对个人而言仍属罕见（$0.25\%$），但筛查规模一大绝对数量就显著，因此两次阳性的方案需要再做第三次确证或随访。
+
+      <h4>(f) 较弱特异度 $0.90$ —— 使后验 $&gt; 0.95$ 的最小 $n$ <span class="marks-call">M1·M1·A1</span></h4>
+      此时 $P(+\mid D^{\,\prime}) = 0.10$，因此 $\text{LR}^{+} = 0.99/0.10 = 9.9$。$n$ 次独立阳性后的后验赔率：
+      $$ \text{odds}_n \;=\; \text{prior odds} \times (\text{LR}^{+})^{n} \;=\; \frac{0.01}{0.99} \cdot (9.9)^{n} \;=\; \frac{(9.9)^{n}}{99}. $$
+      要后验概率 $&gt; 0.95$ 等价于赔率 $&gt; 19$：
+      $$ \frac{(9.9)^{n}}{99} &gt; 19 \;\Longleftrightarrow\; (9.9)^{n} &gt; 1881 \;\Longleftrightarrow\; n &gt; \frac{\log 1881}{\log 9.9} \approx \frac{3.274}{0.9956} \approx 3.29. $$
+      <em>用 GDC 迭代验证：</em>
+      <table>
+        <tr><th>$n$</th><th>赔率</th><th>后验</th></tr>
+        <tr><td>$3$</td><td>$9.9^{3}/99 \approx 9.80$</td><td>$\approx 0.907$（未达标）</td></tr>
+        <tr><td>$4$</td><td>$9.9^{4}/99 \approx 97.03$</td><td>$\approx \boxed{0.990}$（达标）</td></tr>
+      </table>
+      最小 $n = \boxed{4}$，对应后验 $\approx 0.990$。
+
+      <div class="insight"><strong>筛查检测的设计经验。</strong> 在低患病率场景下，提高特异度（降低假阳性）对后验能力的提升<em>远快于</em>提升灵敏度，因为分母 $P(+)$ 由健康多数中的假阳性主导。这就是为什么两阶段筛查（先做廉价的高灵敏度初筛，再做昂贵的高特异度确证）在同等成本下总能优于任何单一检测 —— 它们正是有意制造 (d) 中的乘性放大。</div>
+    </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI SCHOLARS</span> · IB Math AA HL · Unit D2 Probability &mdash; Solutions</span>
-  <span>Solutions · 12 Qs · 91 marks total &middot; <code style="color:#555;">v1.1</code></span>
+  <span><span class="mark">DINGRUI SCHOLARS</span> · <span data-lang="en">IB Math AA HL · Unit D2 Probability &mdash; Solutions</span><span data-lang="zh">IB Math AA HL · Unit D2 概率 —— 解析</span></span>
+  <span><span data-lang="en">Solutions · 12 Qs · 91 marks total</span><span data-lang="zh">解析 · 12 题 · 共 91 分</span> &middot; <code style="color:#555;">v1.1</code></span>
 </footer>
+
+<script>
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+</script>
 
 </body>
 </html>

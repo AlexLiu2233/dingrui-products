@@ -30,7 +30,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -82,16 +82,25 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+
+  /* ─── BILINGUAL TOGGLE ─── */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
+
   @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}#langToggle{display:none !important;}}
 </style>
 </head>
 <body>
 
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+
 <div class="brand">I&nbsp;B&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H&nbsp;&nbsp;A&nbsp;A&nbsp;&nbsp;H&nbsp;L</div>
-<div class="chapter-tag">Unit D2 · Statistics &amp; Probability</div>
-<h1 class="chapter-title">Probability</h1>
-<p class="chapter-sub">IB-Style Practice Questions</p>
+<div class="chapter-tag"><span data-lang="en">Unit D2 · Statistics &amp; Probability</span><span data-lang="zh">Unit D2 · 统计与概率</span></div>
+<h1 class="chapter-title"><span data-lang="en">Probability</span><span data-lang="zh">概率</span></h1>
+<p class="chapter-sub"><span data-lang="en">IB-Style Practice Questions</span><span data-lang="zh">IB 风格练习题</span></p>
 <div class="legend">
   <span class="pill easy">EASY</span>
   <span class="pill med">MEDIUM</span>
@@ -102,15 +111,15 @@
   <span class="pill p3">Paper 3</span>
   <span class="pill hl">HL ONLY</span>
 </div>
-<p class="topics-line">Syllabus <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> Bayes <span class="scope">AA HL</span></p>
+<p class="topics-line"><span data-lang="en">Syllabus <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> Bayes</span><span data-lang="zh">考纲 <b>4.5 – 4.6</b> SL + <b>AHL 4.10</b> 贝叶斯（<code>Bayes' theorem</code>）</span> <span class="scope">AA HL</span></p>
 <hr class="thick"><hr class="thin">
-<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner"><code>v1.1</code> — 12 questions · 91 marks across IB Paper 1A / 1B / 2 / 3 HL. Bayes' Theorem questions marked HL only. Question-only practice set; companion Solutions file in <code>Solutions/</code>.</p>
+<div class="nameline"><span><span data-lang="en">Name:</span><span data-lang="zh">姓名：</span><span class="blank"></span></span><span><span data-lang="en">Date:</span><span data-lang="zh">日期：</span><span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1.1</code> — <span data-lang="en">12 questions · 91 marks across IB Paper 1A / 1B / 2 / 3 HL. Bayes' Theorem questions marked HL only. Question-only practice set; companion Solutions file in <code>Solutions/</code>.</span><span data-lang="zh">12 道题 · 91 分，覆盖 IB Paper 1A / 1B / 2 / 3 HL。贝叶斯定理（<code>Bayes' theorem</code>）题目仅限 HL。仅含题目；配套解析文件位于 <code>Solutions/</code> 目录。</span></p>
 
 <!-- ════════════════════════════════ PART I ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART I &nbsp;·&nbsp; PAPER 1 SECTION A</span><span class="part-meta">No calculator · short response · 22 marks</span></div>
-<h2 class="section-head">Section A — Short Response</h2>
-<p class="instructions">Show all working. Probabilities should be left as exact fractions where natural, or as decimals to 3 s.f. otherwise. No calculator permitted.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;·&nbsp; PAPER 1 SECTION A</span><span data-lang="zh">第一部分 &nbsp;·&nbsp; 第一卷 A 节</span></span><span class="part-meta"><span data-lang="en">No calculator · short response · 22 marks</span><span data-lang="zh">不可使用计算器 · 简答题 · 22 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A — Short Response</span><span data-lang="zh">A 节 —— 简答题</span></h2>
+<p class="instructions"><span data-lang="en">Show all working. Probabilities should be left as exact fractions where natural, or as decimals to 3 s.f. otherwise. No calculator permitted.</span><span data-lang="zh">写出完整解题过程。概率（<code>probability</code>）若自然可写为分数则保留精确分数，否则保留 3 位有效数字的小数。不可使用计算器。</span></p>
 
 <div class="q">
   <div class="q-head">
@@ -120,11 +129,11 @@
     <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Two fair six-sided dice are rolled.</p>
+    <p class="prompt"><span data-lang="en">Two fair six-sided dice are rolled.</span><span data-lang="zh">投掷两枚均匀的六面骰子。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find $P(\text{sum} = 7)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{sum is even})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find $P(\text{at least one die shows a }6)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find $P(\text{sum} = 7)$.</span><span data-lang="zh">求点数之和等于 $7$ 的概率 $P(\text{sum} = 7)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{sum is even})$.</span><span data-lang="zh">求点数之和为偶数的概率 $P(\text{sum is even})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find $P(\text{at least one die shows a }6)$.</span><span data-lang="zh">求至少有一枚骰子显示 $6$ 的概率 $P(\text{at least one die shows a }6)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -137,11 +146,11 @@
     <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A weather model gives $P(\text{rain on a given spring day}) = 0.4$. Different days are treated as independent.</p>
+    <p class="prompt"><span data-lang="en">A weather model gives $P(\text{rain on a given spring day}) = 0.4$. Different days are treated as independent.</span><span data-lang="zh">某天气模型给出 $P(\text{rain on a given spring day}) = 0.4$。不同的日子视为独立（<code>independent</code>）。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find the probability that a given day is not rainy. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find the expected number of rainy days in a $30$-day month. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find the probability that there is at least one rainy day in a $3$-day weekend. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the probability that a given day is not rainy.</span><span data-lang="zh">求某一天不下雨的概率（即余事件 <code>complement</code>）。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the expected number of rainy days in a $30$-day month.</span><span data-lang="zh">求 $30$ 天的一个月中下雨天数的期望（<code>expected</code>）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the probability that there is at least one rainy day in a $3$-day weekend.</span><span data-lang="zh">求一个 $3$ 天的周末至少有一天下雨的概率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -154,11 +163,11 @@
     <span class="pill marks">[6 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Events $A$ and $B$ satisfy $P(A) = 0.3$ and $P(B) = 0.5$.</p>
+    <p class="prompt"><span data-lang="en">Events $A$ and $B$ satisfy $P(A) = 0.3$ and $P(B) = 0.5$.</span><span data-lang="zh">事件（<code>event</code>） $A$ 与 $B$ 满足 $P(A) = 0.3$ 与 $P(B) = 0.5$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find $P(A \cup B)$ if $A$ and $B$ are mutually exclusive. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(A \cap B)$ if $A$ and $B$ are independent. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Hence find $P(A \cup B)$ if $A$ and $B$ are independent. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find $P(A \cup B)$ if $A$ and $B$ are mutually exclusive.</span><span data-lang="zh">若 $A$ 与 $B$ 互斥（<code>mutually exclusive</code>），求 $P(A \cup B)$（并 <code>union</code>）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(A \cap B)$ if $A$ and $B$ are independent.</span><span data-lang="zh">若 $A$ 与 $B$ 独立，求 $P(A \cap B)$（交 <code>intersection</code>）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Hence find $P(A \cup B)$ if $A$ and $B$ are independent.</span><span data-lang="zh">由此在 $A$ 与 $B$ 独立的情形下求 $P(A \cup B)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -171,18 +180,18 @@
     <span class="pill marks">[6 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$100$ students took a unit test:</p>
+    <p class="prompt"><span data-lang="en">$100$ students took a unit test:</span><span data-lang="zh">$100$ 名学生参加了一次单元测验：</span></p>
     <table class="data">
-      <tr><th></th><th>Pass</th><th>Fail</th><th>Total</th></tr>
-      <tr><th>Male</th><td>30</td><td>20</td><td>50</td></tr>
-      <tr><th>Female</th><td>35</td><td>15</td><td>50</td></tr>
-      <tr><th>Total</th><td>65</td><td>35</td><td>100</td></tr>
+      <tr><th></th><th><span data-lang="en">Pass</span><span data-lang="zh">通过</span></th><th><span data-lang="en">Fail</span><span data-lang="zh">未通过</span></th><th><span data-lang="en">Total</span><span data-lang="zh">合计</span></th></tr>
+      <tr><th><span data-lang="en">Male</span><span data-lang="zh">男</span></th><td>30</td><td>20</td><td>50</td></tr>
+      <tr><th><span data-lang="en">Female</span><span data-lang="zh">女</span></th><td>35</td><td>15</td><td>50</td></tr>
+      <tr><th><span data-lang="en">Total</span><span data-lang="zh">合计</span></th><td>65</td><td>35</td><td>100</td></tr>
     </table>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find $P(\text{Pass})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{Pass}\mid\text{Male})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find $P(\text{Female}\mid\text{Pass})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> State, with brief justification, whether "Pass" and "Male" are independent. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find $P(\text{Pass})$.</span><span data-lang="zh">求 $P(\text{Pass})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{Pass}\mid\text{Male})$.</span><span data-lang="zh">求 $P(\text{Pass}\mid\text{Male})$（条件概率 <code>conditional probability</code>，<code>P(A|B)</code>）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find $P(\text{Female}\mid\text{Pass})$.</span><span data-lang="zh">求 $P(\text{Female}\mid\text{Pass})$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">State, with brief justification, whether "Pass" and "Male" are independent.</span><span data-lang="zh">简要说明并判断 "Pass" 与 "Male" 是否独立。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -190,9 +199,9 @@
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART II ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART II &nbsp;·&nbsp; PAPER 1 SECTION B</span><span class="part-meta">No calculator · extended response · 23 marks</span></div>
-<h2 class="section-head">Section B — Extended Response</h2>
-<p class="instructions">Set out clean diagrams (tree, Venn, or table) before computing. Marks are awarded for method, accuracy, and clear reasoning. No calculator permitted.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;·&nbsp; PAPER 1 SECTION B</span><span data-lang="zh">第二部分 &nbsp;·&nbsp; 第一卷 B 节</span></span><span class="part-meta"><span data-lang="en">No calculator · extended response · 23 marks</span><span data-lang="zh">不可使用计算器 · 长答题 · 23 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B — Extended Response</span><span data-lang="zh">B 节 —— 长答题</span></h2>
+<p class="instructions"><span data-lang="en">Set out clean diagrams (tree, Venn, or table) before computing. Marks are awarded for method, accuracy, and clear reasoning. No calculator permitted.</span><span data-lang="zh">动笔计算前先画清晰的图表（树状图 <code>tree diagram</code>、维恩图 <code>Venn diagram</code> 或表格）。得分项包括方法、准确性与清晰的推理。不可使用计算器。</span></p>
 
 <div class="q frq">
   <div class="q-head">
@@ -202,12 +211,12 @@
     <span class="pill marks">[7 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A bag contains $4$ red and $6$ blue balls. Two balls are drawn one after the other <strong>without replacement</strong>.</p>
+    <p class="prompt"><span data-lang="en">A bag contains $4$ red and $6$ blue balls. Two balls are drawn one after the other <strong>without replacement</strong>.</span><span data-lang="zh">一个袋中装有 $4$ 个红球与 $6$ 个蓝球。先后<strong>不放回</strong>（<code>without replacement</code>）地抽取两球。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Draw and label a clear tree diagram for the two draws. <span class="marks-inline">[2]</span><div class="work l"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{both red})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find $P(\text{one red and one blue, in either order})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Find $P(\text{second is blue} \mid \text{first is red})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Draw and label a clear tree diagram for the two draws.</span><span data-lang="zh">为两次抽取画出清晰且带标签的树状图。</span> <span class="marks-inline">[2]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{both red})$.</span><span data-lang="zh">求 $P(\text{both red})$（两次都是红球）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find $P(\text{one red and one blue, in either order})$.</span><span data-lang="zh">求 $P(\text{one red and one blue, in either order})$（一红一蓝，顺序任意）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find $P(\text{second is blue} \mid \text{first is red})$.</span><span data-lang="zh">求 $P(\text{second is blue} \mid \text{first is red})$（在第一球是红的条件下，第二球是蓝）。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -220,18 +229,18 @@
     <span class="pill marks">[8 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">In a survey of $100$ students about their IB subjects:</p>
+    <p class="prompt"><span data-lang="en">In a survey of $100$ students about their IB subjects:</span><span data-lang="zh">在一项对 $100$ 名学生 IB 科目选择的调查中：</span></p>
     <ul style="margin:6px 0 6px 24px;">
-      <li>$65$ take Mathematics ($M$)</li>
-      <li>$50$ take Physics ($P$)</li>
-      <li>$25$ take both</li>
+      <li><span data-lang="en">$65$ take Mathematics ($M$)</span><span data-lang="zh">$65$ 人选了数学（$M$）</span></li>
+      <li><span data-lang="en">$50$ take Physics ($P$)</span><span data-lang="zh">$50$ 人选了物理（$P$）</span></li>
+      <li><span data-lang="en">$25$ take both</span><span data-lang="zh">$25$ 人两门都选</span></li>
     </ul>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Sketch a Venn diagram showing the numbers in each region. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find the number of students who take neither Mathematics nor Physics. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> A student is chosen at random. Find the probability that the student takes exactly one of the two subjects. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Find $P(P \mid M)$, the probability of taking Physics given that the student takes Mathematics. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> State, with a numerical comparison, whether $M$ and $P$ are independent. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Sketch a Venn diagram showing the numbers in each region.</span><span data-lang="zh">画出维恩图，标出各区域内的人数。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the number of students who take neither Mathematics nor Physics.</span><span data-lang="zh">求既未选数学又未选物理的学生人数。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">A student is chosen at random. Find the probability that the student takes exactly one of the two subjects.</span><span data-lang="zh">随机选一名学生，求该学生恰好选了两门科目中的一门的概率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find $P(P \mid M)$, the probability of taking Physics given that the student takes Mathematics.</span><span data-lang="zh">求 $P(P \mid M)$，即在学生选了数学的条件下，选物理的概率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">State, with a numerical comparison, whether $M$ and $P$ are independent.</span><span data-lang="zh">通过数值比较，判断 $M$ 与 $P$ 是否独立。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -245,12 +254,12 @@
     <span class="pill hl">HL</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A factory uses two machines, $A$ and $B$. Machine $A$ produces $60\%$ of the daily output; Machine $B$ produces the remaining $40\%$. Of items produced by $A$, $2\%$ are defective. Of items produced by $B$, $5\%$ are defective.</p>
+    <p class="prompt"><span data-lang="en">A factory uses two machines, $A$ and $B$. Machine $A$ produces $60\%$ of the daily output; Machine $B$ produces the remaining $40\%$. Of items produced by $A$, $2\%$ are defective. Of items produced by $B$, $5\%$ are defective.</span><span data-lang="zh">某工厂使用两台机器 $A$ 与 $B$。机器 $A$ 生产每日产量的 $60\%$，机器 $B$ 生产其余的 $40\%$。$A$ 生产的产品中 $2\%$ 不合格，$B$ 生产的产品中 $5\%$ 不合格。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Draw a tree diagram showing source (A or B) and quality (defective $D$ or non-defective $D^{\,\prime}$). <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find the overall probability $P(D)$ that a randomly selected item is defective. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> A defective item is found in the warehouse. Apply Bayes' Theorem to find the probability that it came from Machine $A$. Show the formula and substitution. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> In one sentence, explain why $P(A \mid D) < P(A)$ in this scenario. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Draw a tree diagram showing source (A or B) and quality (defective $D$ or non-defective $D^{\,\prime}$).</span><span data-lang="zh">画出树状图，标明来源（$A$ 或 $B$）与质量（不合格 $D$ 或合格 $D^{\,\prime}$）。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the overall probability $P(D)$ that a randomly selected item is defective.</span><span data-lang="zh">求随机抽取一件产品为不合格的总概率 $P(D)$（全概率公式 <code>law of total probability</code>）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">A defective item is found in the warehouse. Apply Bayes' Theorem to find the probability that it came from Machine $A$. Show the formula and substitution.</span><span data-lang="zh">仓库中发现一件不合格品。利用贝叶斯定理（<code>Bayes' theorem</code>）求该产品来自机器 $A$ 的概率，写出公式与代入过程。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">In one sentence, explain why $P(A \mid D) < P(A)$ in this scenario.</span><span data-lang="zh">用一句话说明：在本情境下为何 $P(A \mid D) < P(A)$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -258,9 +267,9 @@
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART III ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART III &nbsp;·&nbsp; PAPER 2</span><span class="part-meta">Calculator (GDC) permitted · 18 marks</span></div>
-<h2 class="section-head">Section C — Paper 2 (Calculator)</h2>
-<p class="instructions">Use exact fractions where natural, decimals (3 s.f.) where called for. State key intermediate probabilities, not just GDC outputs.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;·&nbsp; PAPER 2</span><span data-lang="zh">第三部分 &nbsp;·&nbsp; 第二卷</span></span><span class="part-meta"><span data-lang="en">Calculator (GDC) permitted · 18 marks</span><span data-lang="zh">允许使用图形计算器（<code>GDC</code>） · 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C — Paper 2 (Calculator)</span><span data-lang="zh">C 节 —— 第二卷（允许计算器）</span></h2>
+<p class="instructions"><span data-lang="en">Use exact fractions where natural, decimals (3 s.f.) where called for. State key intermediate probabilities, not just GDC outputs.</span><span data-lang="zh">自然时使用精确分数，需要小数时保留 3 位有效数字。要写出关键的中间概率，不要只给计算器结果。</span></p>
 
 <div class="q">
   <div class="q-head">
@@ -270,18 +279,18 @@
     <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$200$ students from two year groups indicated their IB Math choice:</p>
+    <p class="prompt"><span data-lang="en">$200$ students from two year groups indicated their IB Math choice:</span><span data-lang="zh">两个年级共 $200$ 名学生填写了所选的 IB 数学课程：</span></p>
     <table class="data">
-      <tr><th></th><th>AA</th><th>AI</th><th>Total</th></tr>
-      <tr><th>Year 11</th><td>60</td><td>40</td><td>100</td></tr>
-      <tr><th>Year 12</th><td>70</td><td>30</td><td>100</td></tr>
-      <tr><th>Total</th><td>130</td><td>70</td><td>200</td></tr>
+      <tr><th></th><th>AA</th><th>AI</th><th><span data-lang="en">Total</span><span data-lang="zh">合计</span></th></tr>
+      <tr><th><span data-lang="en">Year 11</span><span data-lang="zh">11 年级</span></th><td>60</td><td>40</td><td>100</td></tr>
+      <tr><th><span data-lang="en">Year 12</span><span data-lang="zh">12 年级</span></th><td>70</td><td>30</td><td>100</td></tr>
+      <tr><th><span data-lang="en">Total</span><span data-lang="zh">合计</span></th><td>130</td><td>70</td><td>200</td></tr>
     </table>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find $P(\text{Year 11})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{AA} \mid \text{Year 12})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find $P(\text{Year 11} \cap \text{AA})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> State, with a numerical justification, whether "Year 11" and "AA" are independent. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find $P(\text{Year 11})$.</span><span data-lang="zh">求 $P(\text{Year 11})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{AA} \mid \text{Year 12})$.</span><span data-lang="zh">求 $P(\text{AA} \mid \text{Year 12})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find $P(\text{Year 11} \cap \text{AA})$.</span><span data-lang="zh">求 $P(\text{Year 11} \cap \text{AA})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">State, with a numerical justification, whether "Year 11" and "AA" are independent.</span><span data-lang="zh">通过数值依据说明 "Year 11" 与 "AA" 是否独立。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -294,12 +303,12 @@
     <span class="pill marks">[7 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A bag contains $5$ white and $3$ black balls. Two balls are drawn one after the other without replacement.</p>
+    <p class="prompt"><span data-lang="en">A bag contains $5$ white and $3$ black balls. Two balls are drawn one after the other without replacement.</span><span data-lang="zh">一个袋中装有 $5$ 个白球与 $3$ 个黑球。先后不放回地抽取两球。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find $P(\text{both white})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{at least one is black})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find $P(\text{second is white} \mid \text{first is black})$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> A third ball is then drawn (still without replacement) given that the first two were both white. Find the probability this third ball is black. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find $P(\text{both white})$.</span><span data-lang="zh">求 $P(\text{both white})$（两次都是白球）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{at least one is black})$.</span><span data-lang="zh">求 $P(\text{at least one is black})$（至少一次抽到黑球）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find $P(\text{second is white} \mid \text{first is black})$.</span><span data-lang="zh">求 $P(\text{second is white} \mid \text{first is black})$（在第一球是黑的条件下，第二球为白）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">A third ball is then drawn (still without replacement) given that the first two were both white. Find the probability this third ball is black.</span><span data-lang="zh">再抽取第三球（仍不放回），已知前两球都是白球。求第三球为黑球的概率。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -312,11 +321,11 @@
     <span class="pill marks">[6 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A student takes the bus to school with probability $0.7$, and walks otherwise. If she takes the bus, the probability she arrives on time is $0.85$; if she walks, the probability she arrives on time is $0.6$.</p>
+    <p class="prompt"><span data-lang="en">A student takes the bus to school with probability $0.7$, and walks otherwise. If she takes the bus, the probability she arrives on time is $0.85$; if she walks, the probability she arrives on time is $0.6$.</span><span data-lang="zh">某学生以 $0.7$ 的概率乘公交去上学，否则步行。乘公交时按时到校的概率为 $0.85$；步行时按时到校的概率为 $0.6$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find the probability that on a randomly chosen day she arrives on time. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find $P(\text{took the bus} \cap \text{on time})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Given that she arrived on time, find the probability she took the bus. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the probability that on a randomly chosen day she arrives on time.</span><span data-lang="zh">求随机一天她按时到校的概率。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find $P(\text{took the bus} \cap \text{on time})$.</span><span data-lang="zh">求 $P(\text{took the bus} \cap \text{on time})$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Given that she arrived on time, find the probability she took the bus.</span><span data-lang="zh">已知她按时到校，求她乘公交的概率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -324,9 +333,9 @@
 <div class="page-break"></div>
 
 <!-- ════════════════════════════════ PART IV ════════════════════════════════ -->
-<div class="part"><span class="part-label">PART IV &nbsp;·&nbsp; PAPER 3 (HL ONLY)</span><span class="part-meta">Calculator · extended modelling · 28 marks</span></div>
-<h2 class="section-head">Section D — Paper 3 (HL Extended Exploration)</h2>
-<p class="instructions">Read the full scenario before starting. Each part builds on the previous. State Bayes' theorem in symbols once, then apply it consistently. AHL only.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART IV &nbsp;·&nbsp; PAPER 3 (HL ONLY)</span><span data-lang="zh">第四部分 &nbsp;·&nbsp; 第三卷（仅 HL）</span></span><span class="part-meta"><span data-lang="en">Calculator · extended modelling · 28 marks</span><span data-lang="zh">允许计算器 · 长题建模 · 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section D — Paper 3 (HL Extended Exploration)</span><span data-lang="zh">D 节 —— 第三卷（HL 长题探究）</span></h2>
+<p class="instructions"><span data-lang="en">Read the full scenario before starting. Each part builds on the previous. State Bayes' theorem in symbols once, then apply it consistently. AHL only.</span><span data-lang="zh">开始作答前先通读全部情境。各小问层层递进。先用符号写出一次贝叶斯定理（<code>Bayes' theorem</code>），随后保持一致地应用。仅限 AHL。</span></p>
 
 <div class="q p3">
   <div class="q-head">
@@ -337,18 +346,18 @@
     <span class="pill hl">HL</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A diagnostic test for a rare disease is used in three regions whose disease prevalence and test characteristics differ:</p>
+    <p class="prompt"><span data-lang="en">A diagnostic test for a rare disease is used in three regions whose disease prevalence and test characteristics differ:</span><span data-lang="zh">某罕见疾病的诊断检测在三个地区使用，各地区的疾病患病率（<code>prevalence</code>）与检测特性不同：</span></p>
     <table class="data">
-      <tr><th>Region</th><th>Prevalence $P(D)$</th><th>Sensitivity $P(+\mid D)$</th><th>Specificity $P(-\mid D^\prime)$</th></tr>
+      <tr><th><span data-lang="en">Region</span><span data-lang="zh">地区</span></th><th><span data-lang="en">Prevalence $P(D)$</span><span data-lang="zh">患病率 $P(D)$</span></th><th><span data-lang="en">Sensitivity $P(+\mid D)$</span><span data-lang="zh">灵敏度 $P(+\mid D)$（<code>sensitivity</code>）</span></th><th><span data-lang="en">Specificity $P(-\mid D^\prime)$</span><span data-lang="zh">特异度 $P(-\mid D^\prime)$（<code>specificity</code>）</span></th></tr>
       <tr><th>A</th><td>$0.05$</td><td>$0.95$</td><td>$0.90$</td></tr>
       <tr><th>B</th><td>$0.10$</td><td>$0.90$</td><td>$0.85$</td></tr>
       <tr><th>C</th><td>$0.02$</td><td>$0.98$</td><td>$0.95$</td></tr>
     </table>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> In Region A, a randomly chosen person tests positive. Use Bayes' Theorem to find the probability that they actually have the disease. State $P(+)$ as an intermediate. <span class="marks-inline">[3]</span><div class="work l"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Repeat (a) for Region B and Region C, giving each posterior probability to 3 s.f. <span class="marks-inline">[3]</span><div class="work l"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Despite Region C having both the highest sensitivity and the highest specificity, its posterior $P(D \mid +)$ is the lowest of the three. Explain in one or two sentences <em>why</em> high test accuracy can still produce a low posterior probability. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> A national programme samples patients from a population that is $40\%$ from Region A, $35\%$ from Region B, and $25\%$ from Region C. A randomly chosen patient tests positive. Find the probability that they came from Region B. <span class="marks-inline">[4]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">In Region A, a randomly chosen person tests positive. Use Bayes' Theorem to find the probability that they actually have the disease. State $P(+)$ as an intermediate.</span><span data-lang="zh">在地区 A，随机抽取一人检测呈阳性。利用贝叶斯定理求其确实患病的概率，并将 $P(+)$ 作为中间量给出。</span> <span class="marks-inline">[3]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Repeat (a) for Region B and Region C, giving each posterior probability to 3 s.f.</span><span data-lang="zh">对地区 B 与地区 C 重复 (a) 的过程，给出每个后验（<code>posterior</code>）概率到 3 位有效数字。</span> <span class="marks-inline">[3]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Despite Region C having both the highest sensitivity and the highest specificity, its posterior $P(D \mid +)$ is the lowest of the three. Explain in one or two sentences <em>why</em> high test accuracy can still produce a low posterior probability.</span><span data-lang="zh">尽管地区 C 同时具有最高的灵敏度与最高的特异度，其后验 $P(D \mid +)$ 却是三地中最低的。用一两句话解释<em>为何</em>检测准确度高仍可能导致较低的后验概率。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">A national programme samples patients from a population that is $40\%$ from Region A, $35\%$ from Region B, and $25\%$ from Region C. A randomly chosen patient tests positive. Find the probability that they came from Region B.</span><span data-lang="zh">某全国项目抽取的人群中 $40\%$ 来自地区 A、$35\%$ 来自地区 B、$25\%$ 来自地区 C。随机抽取一名患者检测呈阳性，求其来自地区 B 的概率。</span> <span class="marks-inline">[4]</span><div class="work l"></div></div>
     </div>
   </div>
 </div>
@@ -362,22 +371,29 @@
     <span class="pill hl">HL</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A screening test for a rare genetic marker has sensitivity $P(+ \mid D) = 0.99$ and specificity $P(- \mid D^{\,\prime}) = 0.95$. In the target population $P(D) = 0.01$. Successive tests on the same patient are conditionally independent given true status.</p>
+    <p class="prompt"><span data-lang="en">A screening test for a rare genetic marker has sensitivity $P(+ \mid D) = 0.99$ and specificity $P(- \mid D^{\,\prime}) = 0.95$. In the target population $P(D) = 0.01$. Successive tests on the same patient are conditionally independent given true status.</span><span data-lang="zh">一项针对罕见基因标志的筛查（<code>screening test</code>）的灵敏度为 $P(+ \mid D) = 0.99$，特异度为 $P(- \mid D^{\,\prime}) = 0.95$。目标人群中 $P(D) = 0.01$。对同一患者的多次检测在真实状态条件下相互独立（<code>conditionally independent</code>）。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> State Bayes' theorem in symbols for $P(D \mid +)$, and identify $P(D)$, $P(+\mid D)$, $P(+\mid D^{\,\prime})$ for this scenario. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> A randomly chosen patient tests positive. Find $P(D \mid +)$, to 3 s.f. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> The same patient is retested and again tests positive. Treating the posterior from (b) as the new prior, find $P(D \mid +,+)$ after two consecutive positives, to 3 s.f. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Compare your answer in (c) to (b). In one sentence, explain in Bayesian terms why a second independent positive shifts the posterior so dramatically. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> Find $P(+,+ \mid D^{\,\prime})$ for a non-diseased patient, and explain in one sentence what this number means for false alarms in a large screening programme. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(f)</span> Suppose specificity drops to $0.90$ (false-positive rate $0.10$), sensitivity unchanged. Find the smallest number of consecutive independent positive tests $n$ such that the posterior $P(D \mid n \text{ positives}) &gt; 0.95$. State $n$ and the resulting posterior, both from a GDC iteration. <span class="marks-inline">[3]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">State Bayes' theorem in symbols for $P(D \mid +)$, and identify $P(D)$, $P(+\mid D)$, $P(+\mid D^{\,\prime})$ for this scenario.</span><span data-lang="zh">用符号写出关于 $P(D \mid +)$ 的贝叶斯定理，并在本情境中识别 $P(D)$、$P(+\mid D)$、$P(+\mid D^{\,\prime})$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">A randomly chosen patient tests positive. Find $P(D \mid +)$, to 3 s.f.</span><span data-lang="zh">随机抽取的患者检测呈阳性，求 $P(D \mid +)$，保留 3 位有效数字。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">The same patient is retested and again tests positive. Treating the posterior from (b) as the new prior, find $P(D \mid +,+)$ after two consecutive positives, to 3 s.f.</span><span data-lang="zh">对同一患者再次检测仍为阳性。将 (b) 的后验作为新的先验（<code>prior</code>），求连续两次阳性后的 $P(D \mid +,+)$，保留 3 位有效数字。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Compare your answer in (c) to (b). In one sentence, explain in Bayesian terms why a second independent positive shifts the posterior so dramatically.</span><span data-lang="zh">将 (c) 与 (b) 比较。用一句话以贝叶斯语言说明：为何第二次独立的阳性结果会使后验概率大幅跃升。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Find $P(+,+ \mid D^{\,\prime})$ for a non-diseased patient, and explain in one sentence what this number means for false alarms in a large screening programme.</span><span data-lang="zh">对未患病者求 $P(+,+ \mid D^{\,\prime})$，并用一句话说明该数值在大规模筛查中对假阳性（<code>false positive</code>）警报的意义。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(f)</span> <span data-lang="en">Suppose specificity drops to $0.90$ (false-positive rate $0.10$), sensitivity unchanged. Find the smallest number of consecutive independent positive tests $n$ such that the posterior $P(D \mid n \text{ positives}) &gt; 0.95$. State $n$ and the resulting posterior, both from a GDC iteration.</span><span data-lang="zh">假设特异度降至 $0.90$（假阳性率为 $0.10$），灵敏度不变。求使后验 $P(D \mid n \text{ positives}) &gt; 0.95$ 的最小独立连续阳性次数 $n$。用 GDC 迭代给出 $n$ 与对应的后验概率。</span> <span class="marks-inline">[3]</span><div class="work l"></div></div>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI SCHOLARS</span> · IB Math AA HL · Unit D2 Probability <code style="color:#555;">v1.1</code></span>
-  <span>Practice · 12 Qs · 91 marks total</span>
+  <span><span class="mark">DINGRUI SCHOLARS</span> · <span data-lang="en">IB Math AA HL · Unit D2 Probability</span><span data-lang="zh">IB Math AA HL · Unit D2 概率</span> <code style="color:#555;">v1.1</code></span>
+  <span><span data-lang="en">Practice · 12 Qs · 91 marks total</span><span data-lang="zh">练习 · 12 题 · 共 91 分</span></span>
 </footer>
+
+<script>
+// ─── LANGUAGE (default English; toggle persists only within the page) ───
+function toggleLang() {
+  document.body.classList.toggle('lang-zh');
+}
+</script>
 
 </body>
 </html>
