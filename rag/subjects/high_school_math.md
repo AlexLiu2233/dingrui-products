@@ -29,14 +29,15 @@ four implicitly.
 ## Source documents
 
 Catalogued in [`sources.txt`](../../sources.txt) at the repo root.
-Status `[ ]` means URL queued but not yet pulled into `rag/sources/`.
+Status `[x]` = PDF pulled to `rag/sources/`; `[ ]` = queued; `[!]` =
+URL is a publications landing page, not a direct PDF link.
 
-| Region | Course / doc | Status |
+| Region | Course / doc | Status (2026-05-26) |
 |---|---|---|
-| 🇺🇸 US | CCSSM High School (single PDF, ~93 pp) | **Not yet in `sources.txt`** — add as the next sprint step |
-| 🇨🇦 BC | Foundations & Pre-Calc 10, Pre-Calc 11, Pre-Calc 12, Calculus 12 | Listed (rows 1–4), not pulled |
-| 🇨🇦 ON | Gr 9–10 (MPM2D), Gr 11–12 (MCR3U / MHF4U / MCV4U / MDM4U) | Listed (rows 5–6), not pulled |
-| 🇨🇦 AB | Math 10C / 20-1 / 30-1, Math 31, assessment standards & exemplars | Listed (rows 7–12), not pulled |
+| 🇺🇸 US | CCSSM High School (~93 pp) | `[x]` row 13 — extract written (Linear Functions slice) |
+| 🇨🇦 BC | FMP&PC 10, Pre-Calc 11, Pre-Calc 12, Calculus 12 | rows 01-04 all `[x]`; extracts for FMP&PC 10, PC11, PC12 done; Calc 12 extract pending |
+| 🇨🇦 ON | Gr 9-10 (MPM2D), Gr 11-12 (MCR3U / MHF4U / MCV4U / MDM4U) | rows 05-06 `[x]`; Linear-Functions extract written |
+| 🇨🇦 AB | Math 10C / 20-1 / 30-1 Indicators, Math 31, 10C/30-1 Standards, 30-1 Bulletin | rows 07-09, 11-12 `[x]` (fetched 2026-05-26); row 10 (Math 20-1 Standards) `[!]` — landing page, not direct PDF; extracts pending |
 
 **Verification rule:** any syllabus-specific claim in a guide (course
 code, topic placement, exam-expected emphasis) must be checked against
