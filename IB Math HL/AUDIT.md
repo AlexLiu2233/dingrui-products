@@ -49,12 +49,45 @@ translation of the D-cluster P+S; legacy Unit_C retirement.
 6. ~~**Sprint 4 — P+S polish.**~~ ✅ closed 2026-05-25. 20 items
    (9 P0 + 11 P1) landed in 19 commits on `sprint4_ps_polish` (tip
    `dc41e78`).
-7. **Branch fast-forward** — review `sprint4_ps_polish` chain on top of
-   `sprint_3_unit_specs`, then `preview` → `main` per locked cadence.
-8. **Topic D Practice + Solutions ZH translation** — 6 EN-only files
-   (D1/D2/D3 P+S) bundled into the next ZH translation batch.
+7. ~~**Branch fast-forward**~~ ✅ closed 2026-05-25 — `sprint4_ps_polish`
+   merged into `preview` + `main` (tip `0aa4b39`).
+8. **Sprint 5 — Topic D P+S ZH translation** (active, branch
+   `sprint5_d_translation`) — 6 EN-only files (D1/D2/D3 Practice +
+   Solutions) bilingualized to close the 22/22 cell. Closes IB Math AA HL
+   to 22/22 fully-shipped.
 9. **Unit_C retirement** — archive `Unit_C_Geometry.html` to `rag/archive/`,
    strip from deploy via `deploy.yml`. Fully unblocked.
+
+### Sprint 5 — Topic D Practice + Solutions ZH translation (opened 2026-05-25, branch `sprint5_d_translation`)
+
+**Goal.** Bilingualize the 6 Topic D Practice + Solutions files (D1/D2/D3
+× P+S) that have been EN-only since their initial draft on 2026-05-22.
+Closes the last remaining gap in the IB Math AA HL 22-cell grid:
+**22/22 super-topics fully-shipped (SG + P + S + ZH)**.
+
+**Contract** — per locked `prompts/create-bilingual-translation.md`:
+Chinese is a *teaching translation*, not literal. Math notation, code
+identifiers, and exam-rubric terminology stay in English (the student
+must recognize them on the exam paper). Pedagogical prose translates
+to natural Chinese. Inline `<span data-lang="en">…</span><span data-lang="zh">…</span>`
+pairs throughout; parallel `<div class="rationale" data-lang>` blocks
+for Solutions worked steps (Form B from `prompts/create-bilingual-translation.md`,
+matching the Wave 2 A3 Solutions template `2dce66c`).
+
+**Cadence.** Per-unit commits — one commit per super-topic (D1, D2, D3),
+each commit touching both the Practice and Solutions file for that unit.
+Per-file would also work but per-unit groups the pair naturally.
+
+| ID | Item | Files | Status |
+|---|---|---|---|
+| **S5-D1** | D1 Univariate Data P+S — translate to EN+ZH | `Unit_D1_..._Practice.html`, `Unit_D1_..._Solutions.html` | **Open** |
+| **S5-D2** | D2 Probability P+S — translate to EN+ZH | `Unit_D2_..._Practice.html`, `Unit_D2_..._Solutions.html` | **Open** |
+| **S5-D3** | D3 Probability Distributions P+S — translate to EN+ZH | `Unit_D3_..._Practice.html`, `Unit_D3_..._Solutions.html` | **Open** |
+
+**Validation.** After each commit: `bash scripts/validate.sh <file>` exit 0;
+`grep -c 'data-lang="en"' <file>` equals `grep -c 'data-lang="zh"' <file>`.
+
+---
 
 ### Sprint 4 — Practice + Solutions polish — **CLOSED 2026-05-25** (branch `sprint4_ps_polish`)
 
