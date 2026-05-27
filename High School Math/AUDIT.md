@@ -25,13 +25,67 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-26** (Sprint 3 closed — Units 3-6 full triplets
-shipped on `high_school_math_sprint3` branch alongside BC PC12 source
-fetch + extract. **6/15 units now shipped end-to-end.**
+Last reviewed: **2026-05-26** (Sprint 4 opened — Units 7-15 bilingual
+Study-Guide bulk-draft on `high_school_math_sprint4` branch.
+PQ/Solutions deferred to a later sprint per user 2026-05-26
+token-optimization decision. **6/15 units shipped end-to-end + 9
+SG-only drafts in flight.**
 
 ---
 
 ## Active Sprint — what we're working on now
+
+### Sprint 4 — Units 7-15 bilingual Study-Guide bulk-draft (SG-only, EN + ZH from start) — **OPEN 2026-05-26** (branch `high_school_math_sprint4`)
+
+**Posture shift locked 2026-05-26:**
+
+1. **SG-only sprint.** PQ + Solutions deferred to a follow-on sprint
+   for token-budget reasons. Goal: ship maximum Study Guide coverage
+   first, then catch the practice corpus up in a later sprint.
+2. **Bilingual-from-start.** Every Unit 7-15 SG ships with paired
+   `<span data-lang="en">` + `<span data-lang="zh">` markup in the
+   same commit. This is a **departure** from the prior English-first
+   pattern in `high_school_math.md`. Reason: each new SG should land
+   visible in the landing-page ZH mode immediately, not wait for a
+   translation wave.
+3. **Retroactive ZH for Units 1-6.** The existing six units are
+   English-only and hide in ZH mode via `data-zh-ready="false"`. A
+   retroactive ZH translation pass is the second half of this sprint
+   so the full HS Math corpus surfaces in ZH mode at sprint close.
+4. **Order: curriculum-natural but flexible on numbering.** The
+   topic list in `high_school_math.md` is a working sequence;
+   curricula vary on when each topic lands per grade, so the unit
+   N filename is the canonical handle but the "natural order" is a
+   guideline, not a contract.
+
+**Sprint 4 deliverable contract:**
+
+- 9 new bilingual SGs: Units 7-15. Each follows the locked Unit 2
+  template (8-row grade-by-region nav, syllabus-map cited verbatim
+  from the source extracts, region+paper-style chips, honors-flag
+  pattern, feeder-link to AP Calc / IB Math HL where applicable, 7
+  content sections satisfying dual-goal contract, 12+ flashcards,
+  10+ readiness checklist items).
+- 6 retroactive ZH translations: Units 1-6.
+- AB column added to the Syllabus Map on all 15 units (now that the
+  AB source PDFs are in `rag/sources/ab/`).
+- `data-zh-ready="false"` lifted from HS Math cards on landing page
+  at sprint close (build-index.py will pick it up automatically once
+  every unit file has `data-lang="zh"` markers).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S4-template** | Draft Unit 7 (Right-Triangle Trigonometry) bilingual SG to lock the bilingual-from-start template | P0 | open |
+| **S4-SG-bulk** | Bulk-draft Units 8, 9, 10, 11, 12, 13, 14, 15 bilingual SGs in parallel via subagents (8 files, ~10000 lines) | P0 | blocked on S4-template user review |
+| **S4-retro-zh** | Retroactive ZH translation pass on Units 1-6 (6 files, ~6500 lines) | P0 | open |
+| **S4-ab-column** | Add AB column to Syllabus Map across all 15 unit files using `rag/sources/ab/` PDFs | P1 | open |
+| **S4-index** | Re-run `scripts/build-index.py` so HS Math cards surface in ZH mode | P1 | open at sprint close |
+
+Build order: **S4-template → S4-retro-zh + S4-SG-bulk in parallel →
+S4-ab-column → S4-index**. Sprint 5+ (PQ + Solutions catch-up) opens
+once this sprint closes.
+
+---
 
 ### Sprint 3 — Units 3-6 bulk-draft from locked Unit 2 template — **CLOSED 2026-05-26** (branch `high_school_math_sprint3`)
 
