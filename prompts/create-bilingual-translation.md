@@ -494,8 +494,8 @@ explicitly authorizes a sweep.
 </cross_references>
 
 <reminders>
-The five rules most often violated when the file gets long —
-re-stated at the tail because they're the highest-leverage:
+The six rules most often violated when the file gets long, restated
+at the tail because they're the highest-leverage:
 
 1. **Teaching translation, not literal.** Chinese explains; English in
    `<code>` carries the exam vocabulary. Fix the prose, not the term.
@@ -506,4 +506,7 @@ re-stated at the tail because they're the highest-leverage:
    build order. Skip it and you ship `点积` where `标量积` belongs.
 5. **Cross-unit consistency beats new-best-translation.** If a term
    already shipped on the branch, don't churn it without user approval.
+6. **Tone rules in [`_tone.md`](_tone.md).** The no-em-dash sweep and
+   pre-LLM textbook voice apply on the English side as much as the
+   Chinese. Sweep both columns before declaring done.
 </reminders>

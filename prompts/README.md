@@ -49,11 +49,45 @@ the model can navigate by section. Sections used (in order):
   `rag/*` files. Never absolute paths.
 - **Locked example commits** are cited by short SHA next to the
   decision they justify. If a convention changes, the cited commit is
-  superseded — never silently rewritten.
+  superseded, never silently rewritten.
 - **Negative-space rules are scoped.** Each "do not" trails a reason
   (the past incident, the actual cost). Generic prohibitions are
   banned because they create the behavior they warn against.
 </conventions>
+
+<global_invariants>
+
+Five rules that bind every authoring playbook in this directory.
+Stated here so playbooks don't restate them. If a playbook contradicts
+one of these, treat the playbook as out of date and route a fix.
+
+1. **Tone.** Load [`_tone.md`](_tone.md) before writing prose. No em
+   or en dashes (`—`, `–`, `&mdash;`, `&ndash;`, `&#8212;`,
+   `&#8211;`) anywhere in student-facing product prose. Pre-LLM
+   textbook voice (Stewart / Spivak / Cambridge revision register),
+   not coaching prose. Math notation is exempt. Sweep the file for
+   all six dash characters before declaring done. The only
+   exemption is the `<title>` tag separator (`build-index.py` splits
+   on `" — "`).
+2. **`dingrui:version` + `dingrui:pair-key` lock paired files.**
+   Practice + Solutions sets must carry identical version + pair-key
+   tags. `scripts/validate.sh` is the gate.
+3. **`data-lang` parity is the bilingual gate.** Every
+   `<span data-lang="en">` has a sibling `<span data-lang="zh">` in
+   bilingual files. `grep -c` counts must match. `index.html`'s ZH
+   toggle relies on this contract; non-paired strings disappear in
+   one language.
+4. **`scripts/validate.sh` exits 0 before shipping.** Catches odd-`$`
+   parity, mismatched marks, missing dingrui pair tags, broken TOC
+   anchors. Run it.
+5. **`scripts/build-index.py` runs after any change that adds, removes,
+   or renames a Study Guide.** It writes the landing-page cards from
+   the unit `<title>` tags + hero `<h1>` ZH spans.
+
+Each playbook's `<reminders>` tail repeats only the playbook-specific
+items. The five above are global; cite [`_tone.md`](_tone.md) or this
+section instead of inlining the rule.
+</global_invariants>
 
 <cross_references>
 
