@@ -247,12 +247,9 @@ restated at the tail:
    in both files.
 4. **Insight block on every solution.** It is the difference between
    our Solutions and a vanilla mark scheme.
-5. **No em or en dashes in prompts, rationale, or insight blocks.**
-   See the `<tone>` section of [`create-unit.md`](create-unit.md) for
-   the full spec. Sweep for `—`, `–`, `&mdash;`, `&ndash;`,
-   `&#8212;`, `&#8211;` before shipping. Math notation is exempt
-   (the minus inside `$\sqrt{x} - 1$` is an operator, not a dash).
-6. **Pre-LLM textbook voice in rationale and insight blocks.** Read
-   like a Cambridge revision guide or Stewart, not a blog post. See
-   the `<tone>` block of `create-unit.md`.
+5. **Tone rules in [`_tone.md`](_tone.md).** Sweep for the six dash
+   characters (`—`, `–`, `&mdash;`, `&ndash;`, `&#8212;`, `&#8211;`)
+   before shipping; rewrite to two sentences or a colon. Pre-LLM
+   textbook voice in rationale and insight blocks. Math notation
+   is exempt (the minus inside `$\sqrt{x} - 1$` is an operator).
 </reminders>
