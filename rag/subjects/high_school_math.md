@@ -65,14 +65,58 @@ Examples:
 ## Required `<title>` format
 
 ```
-High School Math — Unit N: <Topic> | Dingrui Scholars
+High School Math — <Topic> | Dingrui Scholars
 ```
 
 Examples:
-- `High School Math — Unit 1: Linear Functions and Systems | Dingrui Scholars`
-- `High School Math — Unit 7: Right-Triangle Trigonometry | Dingrui Scholars`
+- `High School Math — Linear Functions and Systems | Dingrui Scholars`
+- `High School Math — Right-Triangle Trigonometry | Dingrui Scholars`
 
 `build-index.py` reads this verbatim to generate the home-page card.
+
+### Why no "Unit N:" in the visible title (locked 2026-05-27)
+
+HS Math is **topic-organised** across four curricula (US/ON/BC/AB), so a
+sequential unit number reads as noise — students locate content by topic,
+not by sprint order. The filename keeps `Unit_N_` for directory sort
+stability and cross-link permanence; everything visible (title tag,
+hero h1, nav badge, hero meta chips, section labels, worked-example
+labels, quiz numbers, cross-section refs, footer) strips it.
+
+**Visible chrome rules:**
+
+- **Hero h1:** topic name only, no `Unit N:` prefix.
+- **Nav badge (second chip):** topic code, not unit number — table below.
+- **Hero meta chip "Unit N of 15":** removed entirely. Replace with a
+  content-count chip like `7 sections` or a curriculum chip.
+- **Section labels:** `Section 1 · …` instead of `Section 7.1 · …`
+  (sequential within the unit). Same for Worked Example labels and
+  quiz numbers (`§1 · Q1` not `7.1 · Q1`).
+- **Cross-section references inside the same guide:** `§1`, `§2`, …
+  Cross-unit references use topic names ("see the Polynomial Functions
+  guide"), not unit numbers.
+- **HTML `id` attributes:** keep `s-7-1`, `s-7-2`, etc. for URL anchor
+  stability. Visible labels change; the IDs are implementation detail.
+
+**Topic-code mapping for nav badges:**
+
+| Filename | Nav badge |
+|---|---|
+| `Unit_1_Linear_Functions_and_Systems.html` | `LINEAR` |
+| `Unit_2_Quadratic_Functions_and_Equations.html` | `QUADRATIC` |
+| `Unit_3_Polynomial_Functions.html` | `POLY` |
+| `Unit_4_Rational_and_Radical_Expressions.html` | `RATIONAL` |
+| `Unit_5_Exponential_and_Logarithmic_Functions.html` | `EXP / LOG` |
+| `Unit_6_Sequences_and_Series.html` | `SEQUENCES` |
+| `Unit_7_Right-Triangle_Trigonometry.html` | `RT TRIG` |
+| `Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions.html` | `UC TRIG` |
+| `Unit_9_Trigonometric_Identities_and_Equations.html` | `TRIG ID` |
+| `Unit_10_Function_Transformations_and_Composition.html` | `TRANSFORM` |
+| `Unit_11_Combinatorics_and_the_Binomial_Theorem.html` | `BINOMIAL` |
+| `Unit_12_Conic_Sections.html` | `CONICS` |
+| `Unit_13_Probability_and_Statistics_Foundations.html` | `STATS` |
+| `Unit_14_Vectors.html` | `VECTORS` |
+| `Unit_15_Introduction_to_Limits_and_Calculus.html` | `LIMITS` |
 
 ## Topic list (initial proposal, ~15 units to span the full scope)
 

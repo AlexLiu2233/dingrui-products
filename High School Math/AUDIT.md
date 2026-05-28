@@ -25,11 +25,14 @@ Practice Questions, SAT-prep cross-references, and bilingual translation
 all live in the [Digital Product Backlog](#digital-product-backlog) until
 those product surfaces spin up.
 
-Last reviewed: **2026-05-26** (Sprint 4 opened — Units 7-15 bilingual
-Study-Guide bulk-draft on `high_school_math_sprint4` branch.
-PQ/Solutions deferred to a later sprint per user 2026-05-26
-token-optimization decision. **6/15 units shipped end-to-end + 9
-SG-only drafts in flight.**
+Last reviewed: **2026-05-27** (Sprint 4 in flight on
+`high_school_math_sprint4`. Sprint 3 FF-merged to main 2026-05-27
+(`4091eb2`). Unit 7 bilingual SG drafted and refactored to the new
+**no-unit-numbers** convention locked this turn — Units 1-6 retro
+strip queued as S4-convention-retro. PQ/Solutions deferred to a
+follow-on sprint per user 2026-05-26 token-optimization decision.
+**6/15 units shipped end-to-end + Unit 7 SG bilingual draft ready
+for review.**
 
 ---
 
@@ -75,15 +78,28 @@ SG-only drafts in flight.**
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S4-template** | Draft Unit 7 (Right-Triangle Trigonometry) bilingual SG to lock the bilingual-from-start template | P0 | open |
-| **S4-SG-bulk** | Bulk-draft Units 8, 9, 10, 11, 12, 13, 14, 15 bilingual SGs in parallel via subagents (8 files, ~10000 lines) | P0 | blocked on S4-template user review |
-| **S4-retro-zh** | Retroactive ZH translation pass on Units 1-6 (6 files, ~6500 lines) | P0 | open |
+| ~~**S4-template**~~ | Draft Unit 7 (Right-Triangle Trigonometry) bilingual SG to lock the bilingual-from-start template | P0 | ✅ drafted 2026-05-27 (1119 lines, 373/373 EN/ZH spans, validate.sh PASS); awaiting user review |
+| **S4-convention-retro** | Drop "Unit N" visible chrome from Units 1-6 (18 files: 6 SG + 6 P + 6 S) to match the new topic-only convention locked 2026-05-27 (see [`high_school_math.md`](../rag/subjects/high_school_math.md) §Required title format) | P0 | open |
+| **S4-SG-bulk** | Bulk-draft Units 8, 9, 10, 11, 12, 13, 14, 15 bilingual SGs in parallel via subagents (8 files, ~10000 lines) | P0 | unblocked — awaiting user OK after Unit 7 review |
+| **S4-retro-zh** | Retroactive ZH translation pass on Units 1-6 (6 files, ~6500 lines) | P0 | blocked on S4-convention-retro (avoid touching same files twice) |
 | **S4-ab-column** | Add AB column to Syllabus Map across all 15 unit files using `rag/sources/ab/` PDFs | P1 | open |
 | **S4-index** | Re-run `scripts/build-index.py` so HS Math cards surface in ZH mode | P1 | open at sprint close |
 
-Build order: **S4-template → S4-retro-zh + S4-SG-bulk in parallel →
-S4-ab-column → S4-index**. Sprint 5+ (PQ + Solutions catch-up) opens
-once this sprint closes.
+Build order: **S4-template → S4-convention-retro + S4-SG-bulk in
+parallel → S4-retro-zh → S4-ab-column → S4-index**. Sprint 5+ (PQ +
+Solutions catch-up) opens once this sprint closes.
+
+### Convention shift locked 2026-05-27 — no "Unit N" in visible chrome
+
+User feedback after reviewing Unit 7 SG bilingual template ("no need
+for unit numbers since these are mainly by topic anyways"). HS Math
+is topic-organised across four curricula; sequential unit numbering
+reads as noise. **Filenames stay `Unit_N_Topic.html`** (sort order,
+cross-link stability, build-index ordering); **everything visible
+loses the prefix**. Full rule book lives in the subject spec at
+[`rag/subjects/high_school_math.md`](../rag/subjects/high_school_math.md).
+Topic-code nav-badge mapping locked there. Applies to HS Math only —
+IB / AP subjects keep their curriculum-defined unit framing.
 
 ---
 
