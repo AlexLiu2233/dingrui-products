@@ -38,7 +38,7 @@ for review.**
 
 ## Active Sprint — what we're working on now
 
-### Sprint 4 — Units 7-15 bilingual Study-Guide bulk-draft (SG-only, EN + ZH from start) — **OPEN 2026-05-26** (branch `high_school_math_sprint4`)
+### Sprint 4 — Units 7-15 bilingual Study-Guide bulk-draft (SG-only, EN + ZH from start) — **CLOSED 2026-05-28** (branch `high_school_math_sprint4`, awaiting FF to main)
 
 **Posture shift locked 2026-05-26:**
 
@@ -78,16 +78,19 @@ for review.**
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| ~~**S4-template**~~ | Draft Unit 7 (Right-Triangle Trigonometry) bilingual SG to lock the bilingual-from-start template | P0 | ✅ drafted 2026-05-27 (1119 lines, 373/373 EN/ZH spans, validate.sh PASS); awaiting user review |
-| **S4-convention-retro** | Drop "Unit N" visible chrome from Units 1-6 (18 files: 6 SG + 6 P + 6 S) to match the new topic-only convention locked 2026-05-27 (see [`high_school_math.md`](../rag/subjects/high_school_math.md) §Required title format) | P0 | open |
-| **S4-SG-bulk** | Bulk-draft Units 8, 9, 10, 11, 12, 13, 14, 15 bilingual SGs in parallel via subagents (8 files, ~10000 lines) | P0 | unblocked — awaiting user OK after Unit 7 review |
-| **S4-retro-zh** | Retroactive ZH translation pass on Units 1-6 (6 files, ~6500 lines) | P0 | blocked on S4-convention-retro (avoid touching same files twice) |
-| **S4-ab-column** | Add AB column to Syllabus Map across all 15 unit files using `rag/sources/ab/` PDFs | P1 | open |
-| **S4-index** | Re-run `scripts/build-index.py` so HS Math cards surface in ZH mode | P1 | open at sprint close |
+| ~~**S4-template**~~ | Draft Unit 7 (Right-Triangle Trigonometry) bilingual SG to lock the bilingual-from-start template | P0 | ✅ closed 2026-05-27 — `de36c3a` (1119 lines, 373/373 EN/ZH spans, validate.sh PASS) |
+| ~~**S4-convention-retro**~~ | Drop "Unit N" visible chrome from Units 1-6 (18 files: 6 SG + 6 P + 6 S) | P0 | ✅ closed 2026-05-28 — Python regex driver (`scripts/strip_unit_labels_hs_math.py`) on 18 files: 11 transformations × 18 files, 1768 bytes removed, all validate clean |
+| ~~**S4-SG-bulk**~~ | Bulk-draft Units 8, 9, 10, 11, 12, 13, 14, 15 bilingual SGs via parallel subagents | P0 | ✅ closed 2026-05-28 — 8 SGs, 9024 lines total, EN/ZH span counts balanced per file, all validate clean. Topic codes: UC TRIG, TRIG ID, TRANSFORM, BINOMIAL, CONICS, STATS, VECTORS, LIMITS |
+| ~~**S4-ab-column**~~ | Add AB column to Syllabus Map across Units 1-6 (Units 7-15 already shipped 4-column) | P1 | ✅ closed 2026-05-28 — 6 files modified, grid `repeat(3, 1fr)` → `repeat(4, 1fr)`, AB content cited verbatim from `rag/sources/ab/pos_10-12_indicators.txt` (Math 10C / 20-1 / 30-1 indicators per unit) |
+| ~~**S4-index**~~ | Re-run `scripts/build-index.py` so HS Math cards surface | P1 | ✅ closed 2026-05-28 — also patched `parse_title()` to handle the new HS Math no-colon title format (synthesises prefix from filename); 15 HS Math cards now sort + render correctly |
+| **S4-retro-zh** | Retroactive ZH translation pass on Units 1-6 SGs (6 files, ~6500 lines) | P0 | **deferred to Sprint 5** — isolating for separate review per [[review-then-merge-cadence]]; the 8 newly drafted SGs + AB column refresh are the natural batch to FF-merge to main first |
 
-Build order: **S4-template → S4-convention-retro + S4-SG-bulk in
-parallel → S4-retro-zh → S4-ab-column → S4-index**. Sprint 5+ (PQ +
-Solutions catch-up) opens once this sprint closes.
+Build order followed: **S4-template → S4-convention-retro + S4-SG-bulk
++ S4-ab-column in parallel → S4-index**. S4-retro-zh deferred to
+Sprint 5 to keep this batch reviewable. Sprint 5 candidates: ZH retro
+on Units 1-6 SGs (P0), Practice + Solutions catch-up on Units 7-15
+(SG-only sprint left them empty), AB topic-slice extracts written
+(currently citing raw `pos_10-12_indicators.txt`).
 
 ### Convention shift locked 2026-05-27 — no "Unit N" in visible chrome
 

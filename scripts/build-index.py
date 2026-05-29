@@ -78,10 +78,20 @@ ZH_SPAN_RE = re.compile(r'<span[^>]*data-lang="zh"[^>]*>(.*?)</span>',
                         re.IGNORECASE | re.DOTALL)
 
 
-def parse_title(html_text: str):
+def parse_title(html_text: str, file_path=None):
     """Return (prefix, topic) or None.
 
-    Expected: '{Subject} — {Prefix}: {Topic} | Dingrui Scholars'
+    Two title formats are supported:
+
+    1. '{Subject} — {Prefix}: {Topic} | Dingrui Scholars' (canonical;
+       used by AP / IB subjects where the prefix maps to a curriculum-
+       defined unit identifier).
+    2. '{Subject} — {Topic} | Dingrui Scholars' (HS Math convention
+       locked 2026-05-27 — topic-organised subject, no "Unit N:" in the
+       visible title). When no colon is present, the prefix is
+       synthesised from the filename's `Unit_N_…` prefix so sort order
+       and ZH chrome still work.
+
     'Subject' itself may contain a colon (e.g. 'AP Physics C: Mechanics'),
     so we split on the em dash first.
     """
@@ -94,10 +104,16 @@ def parse_title(html_text: str):
     if " — " not in t:
         return None
     _, after = t.split(" — ", 1)
-    if ":" not in after:
-        return None
-    prefix, topic = after.split(":", 1)
-    return prefix.strip(), topic.strip()
+    if ":" in after:
+        prefix, topic = after.split(":", 1)
+        return prefix.strip(), topic.strip()
+    # No-colon fallback for the topic-organised convention: derive prefix
+    # from filename if it follows the `Unit_N_…` shape.
+    if file_path is not None:
+        m_unit = re.match(r"Unit_(\d+)_", file_path.name)
+        if m_unit:
+            return f"Unit {m_unit.group(1)}", after.strip()
+    return None
 
 
 def parse_zh_topic(html_text: str):
@@ -228,7 +244,7 @@ def gather_items(subject_dir: str):
     items = []
     for f in study_guides(subject_dir):
         text = f.read_text(encoding="utf-8", errors="ignore")
-        pt = parse_title(text)
+        pt = parse_title(text, f)
         if not pt:
             print(f"WARN: cannot parse <title> in {f.relative_to(ROOT)}", file=sys.stderr)
             continue
