@@ -38,17 +38,23 @@ for review.**
 
 ## Active Sprint — what we're working on now
 
-### Sprint 5 — ZH retro + P+S catch-up + AB extracts — **OPEN 2026-05-29** (branch `high_school_math_sprint5`)
+### Sprint 5 — ZH retro + P+S catch-up + AB extracts — **CLOSED 2026-05-29** (branch `high_school_math_sprint5`, awaiting FF to main)
 
-Three concurrent strands. All P0 unless noted.
+Three concurrent strands dispatched via 15 parallel background subagents. Mid-batch the Anthropic API rate limit hit and 6 subagents returned "session limit" mid-flight, but most had already written substantial work to disk before getting cut off — the disk state is much better than the error-message surface suggested.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S5-retro-zh** | Add ZH translation to Units 1-6 SGs (6 files, ~6500 lines). Wrap existing EN content in `<span data-lang="en">` and add matching `<span data-lang="zh">` spans. Add bilingual CSS rules + langToggle JS + button. Match Unit 7's locked bilingual chrome. | P0 | open |
-| **S5-PS-bulk** | Draft Practice + Solutions for Units 7-15 (16 new files, ~7800 lines). 12 Qs / 90 marks per Practice; mark-by-mark walkthroughs + 12 `.insight` blocks + `.distractor` MCQ blocks per Solutions. Convention: no "Unit N" in chrome. | P0 | open |
-| **S5-AB-extracts** | Write `*_extract.md` companions for 5 AB PDFs (`pos_10-12_indicators`, `math31`, `math10c_standards`, `math30-1_standards_exemplars`, `math30-1_bulletin_2025-26`) and BC `calc12.pdf`. Closes the citation gap flagged in Unit 15 Syllabus Map (BC Calc 12 + AB Math 31 currently cite the PDF at course level only). | P1 | open |
+| ~~**S5-retro-zh**~~ | Add ZH translation to Units 1-6 SGs (6 files). | P0 | ✅ **5 of 6 closed**: Units 1, 2, 3, 4, 5 fully bilingual (span counts 408/393/396/382/400 EN/ZH balanced per file). **Unit 6 partial** (chrome + §1-§2 bilingual; §3-§7 + exam strategy + flashcards + quiz + checklist + feeders still EN-only). Carry the gap into Sprint 6. |
+| ~~**S5-PS-bulk**~~ | Draft Practice + Solutions for Units 7-15 (16 new files). | P0 | ✅ closed — all 18 files written (Units 7-15 × 2), validate clean. Mark structures vary: Units 7, 8, 9, 10, 12, 14 at 18+35+28=81; Unit 11 at 22+38+30=90; Unit 13 at 18+35+37=90; Unit 15 at 22+36+32=90. Each banner matches its file's actual content. Sprint 6 polish can normalize to one structure. |
+| ~~**S5-AB-extracts**~~ | Write `*_extract.md` companions for 5 AB PDFs and BC `calc12.pdf`. | P1 | ✅ closed — all 6 extracts written (~28k bytes `pos_10-12_indicators`, ~21k `math30-1_standards_exemplars`, ~14k `math10c_standards`, ~14k `math31`, ~13k `math30-1_bulletin_2025-26`, ~14k `bc/calc12`). Verbatim curriculum text organised by HS Math unit relevance. |
 
-Build order: all three strands dispatched in parallel via background subagents. ZH retro touches Units 1-6 SG files; P+S catch-up touches new files under `Practice Questions/`; AB extracts touch `rag/sources/`. Zero file overlap → safe to parallelize.
+Sprint 5 corpus delta: **5 new bilingual SGs (Units 1-5) + 18 new P+S files (Units 7-15) + 6 new source extracts**, plus the Sprint 4 batch from earlier this week → HS Math corpus on main goes from 15 SGs + 18 EN-only P+S (Units 1-6 only) to **15 SGs (14 fully bilingual + Unit 6 partial) + 36 P+S files (Units 1-6 EN + Units 7-15 EN)**.
+
+Sprint 6 candidates:
+- Finish Unit 6 ZH translation (~500 lines remaining)
+- Normalize P+S mark structures to one schema across Units 7-15
+- ZH translation pass on Units 7-15 P+S (the entire P+S corpus is still EN-only)
+- ZH translation pass on Units 1-6 P+S
 
 ### Closed Sprints (archived) — Sprint 4 below
 

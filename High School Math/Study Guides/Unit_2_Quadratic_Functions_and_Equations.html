@@ -30,7 +30,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px; --toc-w: 260px;
 }
@@ -227,6 +227,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
 .cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
 [data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -238,737 +242,741 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#syllabus-map">Syllabus Map</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-2-1">The Parabola and Its Key Features</a>
-  <a href="#s-2-2">Three Forms of a Quadratic</a>
-  <a href="#s-2-3">Solving by Factoring</a>
-  <a href="#s-2-4">Quadratic Formula and Discriminant</a>
-  <a href="#s-2-5">Completing the Square</a>
-  <a href="#s-2-6">Quadratic Modeling</a>
-  <a href="#s-2-7">Quadratic Inequalities</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
-  <a href="#feeders">What This Feeds Into</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-2-1"><span data-lang="en">The Parabola and Its Key Features</span><span data-lang="zh">抛物线及其关键特征</span></a>
+  <a href="#s-2-2"><span data-lang="en">Three Forms of a Quadratic</span><span data-lang="zh">二次函数的三种形式</span></a>
+  <a href="#s-2-3"><span data-lang="en">Solving by Factoring</span><span data-lang="zh">因式分解法求解</span></a>
+  <a href="#s-2-4"><span data-lang="en">Quadratic Formula and Discriminant</span><span data-lang="zh">求根公式与判别式</span></a>
+  <a href="#s-2-5"><span data-lang="en">Completing the Square</span><span data-lang="zh">配方法</span></a>
+  <a href="#s-2-6"><span data-lang="en">Quadratic Modeling</span><span data-lang="zh">二次函数建模</span></a>
+  <a href="#s-2-7"><span data-lang="en">Quadratic Inequalities</span><span data-lang="zh">二次不等式</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">High School Math</div>
-  <h1>Quadratic Functions<br>and Equations</h1>
+  <h1><span data-lang="en">Quadratic Functions<br>and Equations</span><span data-lang="zh">二次函数与方程</span></h1>
   <p class="hero-sub">
-    Quadratics show up in Grade 10-12 across all three curricula we map to. This unit covers the graph ,  parabola, vertex, axis of symmetry, intercepts ,  the three useful forms (standard, vertex, factored), four ways to solve $a x^{2} + b x + c = 0$ (factoring, the quadratic formula, completing the square, graphing), the discriminant, quadratic inequalities via sign analysis, and the canonical quadratic-modeling problems (projectile motion, revenue and profit, area constraints). The unit feeds into Polynomial Functions, Exponential and Logarithmic Functions read against quadratic growth, AP Calc Unit 4 (max and min), and IB Math AA HL A5 (algebraic manipulation and proof) and B2 (polynomial functions).
+    <span data-lang="en">Quadratics show up in Grade 10-12 across all three curricula we map to. This unit covers the graph ,  parabola, vertex, axis of symmetry, intercepts ,  the three useful forms (standard, vertex, factored), four ways to solve $a x^{2} + b x + c = 0$ (factoring, the quadratic formula, completing the square, graphing), the discriminant, quadratic inequalities via sign analysis, and the canonical quadratic-modeling problems (projectile motion, revenue and profit, area constraints). The unit feeds into Polynomial Functions, Exponential and Logarithmic Functions read against quadratic growth, AP Calc Unit 4 (max and min), and IB Math AA HL A5 (algebraic manipulation and proof) and B2 (polynomial functions).</span><span data-lang="zh">二次函数（<code>quadratic function</code>）在我们对照的三套课程中均覆盖 10-12 年级。本单元涵盖图像（抛物线、顶点、对称轴、截距）、三种常用形式（一般式、顶点式、因式分解式）、求解 $a x^{2} + b x + c = 0$ 的四种方法（因式分解、求根公式、配方法、图像法）、判别式、利用符号分析的二次不等式，以及经典二次建模问题（投射运动、营收与利润、面积约束）。本单元为多项式函数、与二次增长对照的指数与对数函数、AP Calc 第 4 单元（极值）、以及 IB Math AA HL A5（代数操作与证明）和 B2（多项式函数）打基础。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-green">US Common Core &middot; ON &middot; BC &middot; AB</span>
-    <span class="chip chip-purple">7 sections &middot; honors block on inequalities</span>
+    <span class="chip chip-green"><span data-lang="en">US Common Core &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US 共同核心 &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">7 sections &middot; honors block on inequalities</span><span data-lang="zh">7 节 &middot; 不等式为荣誉级</span></span>
   </div>
 </section>
 
 <aside class="syllabus-map" id="syllabus-map">
-  <div class="syllabus-map-label">Where this lives in your syllabus</div>
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
   <div class="syllabus-map-grid">
     <div>
-      <div class="region-header">&#x1F1FA;&#x1F1F8; US Common Core</div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core</span><span data-lang="zh">美国共同核心</span></div>
       <ul>
-        <li><code>HSA-SSE.A.1</code> interpret parts of an expression (terms, factors, coefficients) ,  the lever for reading $a$, $b$, $c$ in $a x^{2} + b x + c$</li>
-        <li><code>HSA-CED.A.1</code> create equations and inequalities in one variable, <em>including equations arising from quadratic functions</em></li>
-        <li><code>HSA-REI.B.4</code> solve quadratic equations in one variable (the core CCSSM citation for this unit)</li>
-        <li><code>HSA-REI.C.7</code> solve a simple system consisting of a linear equation and a quadratic equation</li>
-        <li><code>HSA-REI.D.11</code> graphical solving of $f(x) = g(x)$ <em>including cases where $f(x)$ and/or $g(x)$ are polynomial</em></li>
-        <li><code>HSF-IF.B.4</code> interpret key features of graphs: intercepts, intervals of increase/decrease, relative max/min, symmetries</li>
-        <li><code>HSF-IF.C.7a</code> graph quadratic functions and show intercepts, maxima, and minima</li>
-        <li><code>HSF-IF.C.8</code> factor and complete the square (out-of-scope in linear unit; in scope here)</li>
-        <li><code>HSF-IF.C.9</code> compare properties of two functions given in different representations</li>
-        <li><code>HSF-BF.A.1</code> write a function describing a relationship between two quantities (modeling)</li>
-        <li><code>HSF-BF.B.3</code> identify the effect on the graph of $f(x) + k$, $k f(x)$, $f(k x)$, $f(x + k)$ ,  supports vertex-form transformations</li>
+        <li><code>HSA-SSE.A.1</code> <span data-lang="en">interpret parts of an expression (terms, factors, coefficients) ,  the lever for reading $a$, $b$, $c$ in $a x^{2} + b x + c$</span><span data-lang="zh">解读表达式的各组成（项、因式、系数） ,  用于读取 $a x^{2} + b x + c$ 中的 $a$、$b$、$c$</span></li>
+        <li><code>HSA-CED.A.1</code> <span data-lang="en">create equations and inequalities in one variable, <em>including equations arising from quadratic functions</em></span><span data-lang="zh">建立单变量方程与不等式，<em>包括二次函数产生的方程</em></span></li>
+        <li><code>HSA-REI.B.4</code> <span data-lang="en">solve quadratic equations in one variable (the core CCSSM citation for this unit)</span><span data-lang="zh">求解一元二次方程（本单元在 CCSSM 中的核心依据）</span></li>
+        <li><code>HSA-REI.C.7</code> <span data-lang="en">solve a simple system consisting of a linear equation and a quadratic equation</span><span data-lang="zh">求解由一次方程与二次方程构成的简单方程组</span></li>
+        <li><code>HSA-REI.D.11</code> <span data-lang="en">graphical solving of $f(x) = g(x)$ <em>including cases where $f(x)$ and/or $g(x)$ are polynomial</em></span><span data-lang="zh">通过图像求解 $f(x) = g(x)$，<em>含 $f$、$g$ 为多项式的情形</em></span></li>
+        <li><code>HSF-IF.B.4</code> <span data-lang="en">interpret key features of graphs: intercepts, intervals of increase/decrease, relative max/min, symmetries</span><span data-lang="zh">解读图像关键特征：截距、增减区间、相对极值、对称性</span></li>
+        <li><code>HSF-IF.C.7a</code> <span data-lang="en">graph quadratic functions and show intercepts, maxima, and minima</span><span data-lang="zh">绘制二次函数图像并标出截距与极值</span></li>
+        <li><code>HSF-IF.C.8</code> <span data-lang="en">factor and complete the square (out-of-scope in linear unit; in scope here)</span><span data-lang="zh">因式分解与配方法（在线性单元外，于本单元覆盖）</span></li>
+        <li><code>HSF-IF.C.9</code> <span data-lang="en">compare properties of two functions given in different representations</span><span data-lang="zh">比较以不同表示方式给出的两个函数的性质</span></li>
+        <li><code>HSF-BF.A.1</code> <span data-lang="en">write a function describing a relationship between two quantities (modeling)</span><span data-lang="zh">写出描述两个量之间关系的函数（建模）</span></li>
+        <li><code>HSF-BF.B.3</code> <span data-lang="en">identify the effect on the graph of $f(x) + k$, $k f(x)$, $f(k x)$, $f(x + k)$ ,  supports vertex-form transformations</span><span data-lang="zh">辨识 $f(x) + k$、$k f(x)$、$f(k x)$、$f(x + k)$ 对图像的影响 ,  支持顶点式的变换分析</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Ontario</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario</span><span data-lang="zh">安大略</span></div>
       <ul>
-        <li><strong>MPM2D</strong> (Grade 10 Academic) ,  the course where students "explore <em>quadratic relations</em> and their applications" (course description); the Quadratic Relations and Solving Quadratic Equations strands sit here</li>
-        <li><strong>MCR3U</strong> <code>A1.1</code> distinguish a function from a relation using <em>linear and quadratic</em> relations</li>
-        <li><strong>MCR3U</strong> <code>A1.2</code> represent linear and quadratic functions in function notation</li>
-        <li><strong>MCR3U</strong> <code>A1.5</code>, <code>A1.7</code> inverse of a linear or quadratic function</li>
-        <li><strong>MCR3U</strong> sub-cluster <strong>A2 ,  Solving Problems Involving Quadratic Functions</strong> (the dedicated MCR3U quadratics block; A2.5 covers the linear/quadratic-system case from a quadratic perspective)</li>
-        <li><strong>MCR3U</strong> <code>A1.8</code>, <code>A1.9</code> transformations of $f(x) = x^{2}$ via $y = a f(k (x - d)) + c$ ,  the vertex-form parametrisation</li>
+        <li><strong>MPM2D</strong> <span data-lang="en">(Grade 10 Academic) ,  the course where students "explore <em>quadratic relations</em> and their applications" (course description); the Quadratic Relations and Solving Quadratic Equations strands sit here</span><span data-lang="zh">（10 年级学术课） ,  课程描述中要求学生"探究<em>二次关系</em>及其应用"；"二次关系"与"求解二次方程"两个单元在此</span></li>
+        <li><strong>MCR3U</strong> <code>A1.1</code> <span data-lang="en">distinguish a function from a relation using <em>linear and quadratic</em> relations</span><span data-lang="zh">借助<em>一次与二次</em>关系区分函数与关系</span></li>
+        <li><strong>MCR3U</strong> <code>A1.2</code> <span data-lang="en">represent linear and quadratic functions in function notation</span><span data-lang="zh">用函数记号表示一次与二次函数</span></li>
+        <li><strong>MCR3U</strong> <code>A1.5</code>, <code>A1.7</code> <span data-lang="en">inverse of a linear or quadratic function</span><span data-lang="zh">一次或二次函数的反函数</span></li>
+        <li><strong>MCR3U</strong> <span data-lang="en">sub-cluster <strong>A2 ,  Solving Problems Involving Quadratic Functions</strong> (the dedicated MCR3U quadratics block; A2.5 covers the linear/quadratic-system case from a quadratic perspective)</span><span data-lang="zh">子簇 <strong>A2 ,  求解涉及二次函数的问题</strong>（MCR3U 的专属二次模块；A2.5 从二次角度处理"一次—二次"方程组）</span></li>
+        <li><strong>MCR3U</strong> <code>A1.8</code>, <code>A1.9</code> <span data-lang="en">transformations of $f(x) = x^{2}$ via $y = a f(k (x - d)) + c$ ,  the vertex-form parametrisation</span><span data-lang="zh">通过 $y = a f(k (x - d)) + c$ 对 $f(x) = x^{2}$ 作变换 ,  即顶点式的参数化</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; British Columbia</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></div>
       <ul>
-        <li><strong>BC PC11</strong> Big Idea: <em>Quadratic relationships are prevalent in the world around us.</em></li>
-        <li><strong>BC PC11</strong> Content ,  <em>quadratic functions and equations</em>: identifying characteristics of graphs (domain, range, intercepts, vertex, symmetry), multiple forms, function notation, extrema, exploring transformations</li>
-        <li><strong>BC PC11</strong> Content ,  <em>quadratic functions and equations</em>: solving equations (factoring, quadratic formula, completing the square, graphing, square root method) ,  the four-methods-plus-square-root list, verbatim</li>
-        <li><strong>BC PC11</strong> Content ,  <em>polynomial factoring</em>: GCF, trinomials with $a = 1$, difference of squares, may extend to perfect-square trinomials and $a x^{2} + b x + c$ with $a \ne 1$</li>
-        <li><strong>BC PC11</strong> Content ,  <em>linear and quadratic inequalities</em>: single variable (e.g. $a x^{2} + b x + c \le 0$), <em>sign analysis</em>, interval notation</li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Big Idea: <em>Quadratic relationships are prevalent in the world around us.</em></span><span data-lang="zh">大概念：<em>二次关系在我们身边的世界中普遍存在。</em></span></li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Content ,  <em>quadratic functions and equations</em>: identifying characteristics of graphs (domain, range, intercepts, vertex, symmetry), multiple forms, function notation, extrema, exploring transformations</span><span data-lang="zh">内容 ,  <em>二次函数与方程</em>：辨识图像特征（定义域、值域、截距、顶点、对称性）、多种形式、函数记号、极值、变换探索</span></li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Content ,  <em>quadratic functions and equations</em>: solving equations (factoring, quadratic formula, completing the square, graphing, square root method) ,  the four-methods-plus-square-root list, verbatim</span><span data-lang="zh">内容 ,  <em>二次函数与方程</em>：求解方程（因式分解、求根公式、配方法、图像法、开平方法） ,  四种方法加开平方法，原文列表</span></li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Content ,  <em>polynomial factoring</em>: GCF, trinomials with $a = 1$, difference of squares, may extend to perfect-square trinomials and $a x^{2} + b x + c$ with $a \ne 1$</span><span data-lang="zh">内容 ,  <em>多项式因式分解</em>：最大公因式、$a = 1$ 的三项式、平方差，可拓展至完全平方三项式与 $a \ne 1$ 的 $a x^{2} + b x + c$</span></li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Content ,  <em>linear and quadratic inequalities</em>: single variable (e.g. $a x^{2} + b x + c \le 0$), <em>sign analysis</em>, interval notation</span><span data-lang="zh">内容 ,  <em>一次与二次不等式</em>：单变量（如 $a x^{2} + b x + c \le 0$）、<em>符号分析</em>、区间记法</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Alberta</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta</span><span data-lang="zh">阿尔伯塔</span></div>
       <ul>
-        <li><strong>Math 20-1</strong> Relations &amp; Functions GO 3: <em>"analyze quadratic functions of the form $y = a(x - p)^2 + q$ and determine the vertex, domain and range, direction of opening, axis of symmetry, and $x$- and $y$-intercepts"</em>; <code>RF3.1</code>-<code>RF3.9</code> develop transformations from $y = x^2$ and writing equations from a graph</li>
-        <li><strong>Math 20-1</strong> RF GO 4: <em>"analyze quadratic functions of the form $y = ax^2 + bx + c$"</em>; <code>RF4.1</code>-<code>RF4.2</code> explicitly cover <em>completing the square</em> to convert to vertex form; <code>RF4.7</code>-<code>RF4.8</code> cover modelling situations</li>
-        <li><strong>Math 20-1</strong> RF GO 5: <em>"solve problems that involve quadratic equations"</em>; indicator <code>RF5.2</code> <em>"derive the quadratic formula, using deductive reasoning"</em>; <code>RF5.3</code> lists the five strategies (square roots, factoring, completing the square, quadratic formula, graphing); <code>RF5.5</code> covers the discriminant</li>
-        <li><strong>Math 20-1</strong> RF GO 6: <em>"solve, algebraically and graphically, problems that involve systems of linear-quadratic and quadratic-quadratic equations in two variables"</em>; <code>RF6.1</code>-<code>RF6.7</code></li>
-        <li><strong>Math 20-1</strong> RF GO 7, 8: linear and quadratic inequalities in one and two variables; <code>RF8.1</code> names "case analysis, graphing, roots and test points, or sign analysis"</li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">Relations &amp; Functions GO 3: <em>"analyze quadratic functions of the form $y = a(x - p)^2 + q$ and determine the vertex, domain and range, direction of opening, axis of symmetry, and $x$- and $y$-intercepts"</em>; <code>RF3.1</code>-<code>RF3.9</code> develop transformations from $y = x^2$ and writing equations from a graph</span><span data-lang="zh">关系与函数 GO 3：<em>"分析 $y = a(x - p)^2 + q$ 形式的二次函数，并确定顶点、定义域与值域、开口方向、对称轴及 $x$、$y$ 截距"</em>；<code>RF3.1</code>-<code>RF3.9</code> 由 $y = x^2$ 发展变换并根据图像写方程</span></li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">RF GO 4: <em>"analyze quadratic functions of the form $y = ax^2 + bx + c$"</em>; <code>RF4.1</code>-<code>RF4.2</code> explicitly cover <em>completing the square</em> to convert to vertex form; <code>RF4.7</code>-<code>RF4.8</code> cover modelling situations</span><span data-lang="zh">RF GO 4：<em>"分析 $y = ax^2 + bx + c$ 形式的二次函数"</em>；<code>RF4.1</code>-<code>RF4.2</code> 明确覆盖<em>配方法</em>转化为顶点式；<code>RF4.7</code>-<code>RF4.8</code> 覆盖建模情境</span></li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">RF GO 5: <em>"solve problems that involve quadratic equations"</em>; indicator <code>RF5.2</code> <em>"derive the quadratic formula, using deductive reasoning"</em>; <code>RF5.3</code> lists the five strategies (square roots, factoring, completing the square, quadratic formula, graphing); <code>RF5.5</code> covers the discriminant</span><span data-lang="zh">RF GO 5：<em>"求解涉及二次方程的问题"</em>；指标 <code>RF5.2</code><em>"用演绎推理推导求根公式"</em>；<code>RF5.3</code> 列出五种策略（开平方、因式分解、配方法、求根公式、图像法）；<code>RF5.5</code> 覆盖判别式</span></li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">RF GO 6: <em>"solve, algebraically and graphically, problems that involve systems of linear-quadratic and quadratic-quadratic equations in two variables"</em>; <code>RF6.1</code>-<code>RF6.7</code></span><span data-lang="zh">RF GO 6：<em>"代数与图像方法求解涉及二元一次—二次方程组及二次—二次方程组的问题"</em>；<code>RF6.1</code>-<code>RF6.7</code></span></li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">RF GO 7, 8: linear and quadratic inequalities in one and two variables; <code>RF8.1</code> names "case analysis, graphing, roots and test points, or sign analysis"</span><span data-lang="zh">RF GO 7、8：一元与二元的一次与二次不等式；<code>RF8.1</code> 点名"分类讨论、图像法、根与试点法、或符号分析"</span></li>
       </ul>
     </div>
   </div>
 </aside>
 
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
-  <p>Quadratics are the second great function family of high-school math and they live in different grades depending on which curriculum you follow. US Algebra 1 sees the factoring and graphing core; US Algebra 2 finishes the formula, completing the square, the discriminant, and complex roots; Ontario MPM2D anchors quadratics in Grade 10 with MCR3U revisiting them in Grade 11; BC Pre-Calculus 11 is the single biggest dedicated quadratics course we map to and explicitly covers sign-analysis inequalities. The table below tells you which sections of this guide are <em>on your syllabus right now</em>. Each row cites the curriculum document we checked it against, so the recommendation is grounded, not guessed.</p>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Quadratics are the second great function family of high-school math and they live in different grades depending on which curriculum you follow. US Algebra 1 sees the factoring and graphing core; US Algebra 2 finishes the formula, completing the square, the discriminant, and complex roots; Ontario MPM2D anchors quadratics in Grade 10 with MCR3U revisiting them in Grade 11; BC Pre-Calculus 11 is the single biggest dedicated quadratics course we map to and explicitly covers sign-analysis inequalities. The table below tells you which sections of this guide are <em>on your syllabus right now</em>. Each row cites the curriculum document we checked it against, so the recommendation is grounded, not guessed.</span><span data-lang="zh">二次函数是高中数学的第二大函数家族，不同课程把它安排在不同年级。美国 Algebra 1 覆盖因式分解与图像核心；Algebra 2 完成求根公式、配方法、判别式与复根；安大略 MPM2D 在 10 年级集中讲二次函数，MCR3U 在 11 年级再覆盖一次；BC Pre-Calculus 11 是我们对照的最大专属二次课程，并明确覆盖符号分析不等式。下表告诉你本指南中哪些节<em>现在在你的大纲内</em>。每一行都注明了所对照的课纲文件，建议有据可依，并非凭空。</span></p>
 
   <div style="overflow-x: auto; margin: 16px 0 18px;">
   <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
     <thead>
       <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
-        <th style="text-align: left; padding: 8px 10px;">If you are in&hellip;</th>
-        <th style="text-align: left; padding: 8px 10px;">Focus on these sections</th>
-        <th style="text-align: left; padding: 8px 10px;">Defer / skip</th>
-        <th style="text-align: left; padding: 8px 10px;">Source</th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / skip</span><span data-lang="zh">可推迟</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 10 ,  MPM2D</strong></td>
-        <td style="padding: 8px 10px;">&sect;1, &sect;2, &sect;3, &sect;4 (formula), &sect;5 (completing the square)</td>
-        <td style="padding: 8px 10px;">&sect;7 (quadratic inequalities are MCR3U / MHF4U work, light in MPM2D); &sect;6 modeling depth is optional</td>
-        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> ,  MPM2D course description ("explore <em>quadratic relations</em> and their applications") + MPM2D <em>Analytic Geometry</em> strand</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 10 ,  MPM2D</span><span data-lang="zh">安大略 10 年级 ,  MPM2D</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1, &sect;2, &sect;3, &sect;4 (formula), &sect;5 (completing the square)</span><span data-lang="zh">&sect;1、&sect;2、&sect;3、&sect;4（公式）、&sect;5（配方法）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;7 (quadratic inequalities are MCR3U / MHF4U work, light in MPM2D); &sect;6 modeling depth is optional</span><span data-lang="zh">&sect;7（二次不等式属 MCR3U / MHF4U，在 MPM2D 中较轻）；&sect;6 建模深度可选</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> <span data-lang="en">,  MPM2D course description ("explore <em>quadratic relations</em> and their applications") + MPM2D <em>Analytic Geometry</em> strand</span><span data-lang="zh">,  MPM2D 课程描述（"探究<em>二次关系</em>及其应用"）+ MPM2D <em>解析几何</em>单元</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 11 ,  MCR3U</strong></td>
-        <td style="padding: 8px 10px;">Full review &sect;1-7; lean on &sect;2 (function notation) and &sect;5-7 since MCR3U's A2 sub-cluster is "<em>Solving Problems Involving Quadratic Functions</em>"</td>
-        <td style="padding: 8px 10px;">Nothing ,  treat this unit as a complete refresher before moving into MCR3U's transformation work in A1.8-A1.9</td>
-        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> ,  MCR3U sub-cluster A2 <em>Solving Problems Involving Quadratic Functions</em>; A1.1, A1.2, A1.5, A1.7, A1.8</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 ,  MCR3U</span><span data-lang="zh">安大略 11 年级 ,  MCR3U</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full review &sect;1-7; lean on &sect;2 (function notation) and &sect;5-7 since MCR3U's A2 sub-cluster is "<em>Solving Problems Involving Quadratic Functions</em>"</span><span data-lang="zh">全面复习 &sect;1-7；加重 &sect;2（函数记号）与 &sect;5-7，因为 MCR3U 的 A2 子簇正是"<em>求解涉及二次函数的问题</em>"</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  treat this unit as a complete refresher before moving into MCR3U's transformation work in A1.8-A1.9</span><span data-lang="zh">无 ,  视本单元为 MCR3U A1.8-A1.9 变换内容前的完整回顾</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> <span data-lang="en">,  MCR3U sub-cluster A2 <em>Solving Problems Involving Quadratic Functions</em>; A1.1, A1.2, A1.5, A1.7, A1.8</span><span data-lang="zh">,  MCR3U 子簇 A2 <em>求解涉及二次函数的问题</em>；A1.1、A1.2、A1.5、A1.7、A1.8</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 11 ,  Pre-Calc 11</strong></td>
-        <td style="padding: 8px 10px;">Full &sect;1-7. BC PC11 is the dedicated quadratics home; the curriculum explicitly lists factoring + quadratic formula + completing the square + graphing + square root method as solving paths, and <em>sign analysis</em> as the inequality technique</td>
-        <td style="padding: 8px 10px;">Nothing ,  every section maps to a PC11 Content elaboration verbatim</td>
-        <td style="padding: 8px 10px;"><code>pc11_elab_extract.md</code> ,  Big Idea <em>"Quadratic relationships are prevalent in the world around us"</em> + Content <em>quadratic functions and equations</em>, <em>polynomial factoring</em>, <em>linear and quadratic inequalities</em></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC Grade 11 ,  Pre-Calc 11</span><span data-lang="zh">BC 11 年级 ,  Pre-Calc 11</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-7. BC PC11 is the dedicated quadratics home; the curriculum explicitly lists factoring + quadratic formula + completing the square + graphing + square root method as solving paths, and <em>sign analysis</em> as the inequality technique</span><span data-lang="zh">&sect;1-7 完整学习。BC PC11 是二次的专属课程；课纲明确列出因式分解 + 求根公式 + 配方法 + 图像法 + 开平方法五种求解路径，并把<em>符号分析</em>列为不等式技法</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  every section maps to a PC11 Content elaboration verbatim</span><span data-lang="zh">无 ,  每一节都对应一条 PC11 内容细则的原文</span></td>
+        <td style="padding: 8px 10px;"><code>pc11_elab_extract.md</code> <span data-lang="en">,  Big Idea <em>"Quadratic relationships are prevalent in the world around us"</em> + Content <em>quadratic functions and equations</em>, <em>polynomial factoring</em>, <em>linear and quadratic inequalities</em></span><span data-lang="zh">,  大概念<em>"二次关系在我们身边的世界中普遍存在"</em> + 内容<em>二次函数与方程</em>、<em>多项式因式分解</em>、<em>一次与二次不等式</em></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 1 (Grade 8-9)</strong></td>
-        <td style="padding: 8px 10px;">&sect;1, &sect;2 (forms), &sect;3 (factoring), &sect;4 (formula)</td>
-        <td style="padding: 8px 10px;">&sect;5 (completing the square is Algebra 2 in most US scope-and-sequences); &sect;7 (inequalities sit in Algebra 2 / Pre-Calc)</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  <code>HSA-REI.B.4</code>, <code>HSF-IF.C.7a</code>, <code>HSA-SSE.A.1</code>, <code>HSF-BF.A.1</code></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Algebra 1 (Grade 8-9)</span><span data-lang="zh">美国 Algebra 1（8-9 年级）</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1, &sect;2 (forms), &sect;3 (factoring), &sect;4 (formula)</span><span data-lang="zh">&sect;1、&sect;2（形式）、&sect;3（因式分解）、&sect;4（求根公式）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5 (completing the square is Algebra 2 in most US scope-and-sequences); &sect;7 (inequalities sit in Algebra 2 / Pre-Calc)</span><span data-lang="zh">&sect;5（多数美国课程把配方法放在 Algebra 2）；&sect;7（不等式在 Algebra 2 / Pre-Calc）</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  <code>HSA-REI.B.4</code>, <code>HSF-IF.C.7a</code>, <code>HSA-SSE.A.1</code>, <code>HSF-BF.A.1</code></span><span data-lang="zh">,  <code>HSA-REI.B.4</code>、<code>HSF-IF.C.7a</code>、<code>HSA-SSE.A.1</code>、<code>HSF-BF.A.1</code></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 2 (Grade 10-11)</strong></td>
-        <td style="padding: 8px 10px;">&sect;4 (discriminant + complex roots when $\Delta &lt; 0$), &sect;5 (completing the square), &sect;6 modeling, &sect;7 inequalities; review &sect;1-3 lightly</td>
-        <td style="padding: 8px 10px;">Nothing ,  Algebra 2 typically finishes the unit</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  <code>HSA-REI.B.4</code>, <code>HSF-IF.C.8</code>, <code>HSA-REI.C.7</code>, <code>HSA-REI.D.11</code>, <code>HSF-BF.B.3</code></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Algebra 2 (Grade 10-11)</span><span data-lang="zh">美国 Algebra 2（10-11 年级）</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;4 (discriminant + complex roots when $\Delta &lt; 0$), &sect;5 (completing the square), &sect;6 modeling, &sect;7 inequalities; review &sect;1-3 lightly</span><span data-lang="zh">&sect;4（判别式 + $\Delta &lt; 0$ 时的复根）、&sect;5（配方法）、&sect;6 建模、&sect;7 不等式；&sect;1-3 轻量复习</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  Algebra 2 typically finishes the unit</span><span data-lang="zh">无 ,  Algebra 2 一般完成本单元全部内容</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  <code>HSA-REI.B.4</code>, <code>HSF-IF.C.8</code>, <code>HSA-REI.C.7</code>, <code>HSA-REI.D.11</code>, <code>HSF-BF.B.3</code></span><span data-lang="zh">,  <code>HSA-REI.B.4</code>、<code>HSF-IF.C.8</code>、<code>HSA-REI.C.7</code>、<code>HSA-REI.D.11</code>、<code>HSF-BF.B.3</code></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Pre-Calc / Honors / AP-feeder</strong></td>
-        <td style="padding: 8px 10px;">Full &sect;1-7 with modeling depth (&sect;6 worked examples + going-deeper). Be fluent on the discriminant trichotomy and on rewriting between standard, vertex, and factored forms</td>
-        <td style="padding: 8px 10px;">Nothing ,  cross-reference to AP Calc Unit 4 (max/min) and IB Math HL B2 (polynomial functions)</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  <code>HSF-IF.C.9</code>, <code>HSA-REI.C.7</code>, <code>HSA-REI.D.11</code> (graphical), <code>HSF-BF.B.3</code> (transformations of $f(x) = x^{2}$)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Pre-Calc / Honors / AP-feeder</span><span data-lang="zh">美国 Pre-Calc / 荣誉 / AP 衔接</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-7 with modeling depth (&sect;6 worked examples + going-deeper). Be fluent on the discriminant trichotomy and on rewriting between standard, vertex, and factored forms</span><span data-lang="zh">&sect;1-7 全部，并完成 &sect;6 例题与"深入"框。熟练判别式三分情形与一般式、顶点式、因式分解式之间的互转</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  cross-reference to AP Calc Unit 4 (max/min) and IB Math HL B2 (polynomial functions)</span><span data-lang="zh">无 ,  交叉引用 AP Calc 第 4 单元（极值）与 IB Math HL B2（多项式函数）</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  <code>HSF-IF.C.9</code>, <code>HSA-REI.C.7</code>, <code>HSA-REI.D.11</code> (graphical), <code>HSF-BF.B.3</code> (transformations of $f(x) = x^{2}$)</span><span data-lang="zh">,  <code>HSF-IF.C.9</code>、<code>HSA-REI.C.7</code>、<code>HSA-REI.D.11</code>（图像法）、<code>HSF-BF.B.3</code>（$f(x) = x^{2}$ 的变换）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; SAT bound</strong></td>
-        <td style="padding: 8px 10px;">All sections. Quadratics are roughly $10\%$ of SAT Math: factoring, the formula, the vertex of a parabola, and the linear-quadratic system are all SAT-frequent</td>
-        <td style="padding: 8px 10px;">Nothing ,  SAT favours fluency on solving by inspection (factoring or special-product spotting) over completing the square from scratch</td>
-        <td style="padding: 8px 10px;">See <em>What this feeds into</em> at the end of this unit for the SAT and AP cross-references</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">SAT bound</span><span data-lang="zh">SAT 考生</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">All sections. Quadratics are roughly $10\%$ of SAT Math: factoring, the formula, the vertex of a parabola, and the linear-quadratic system are all SAT-frequent</span><span data-lang="zh">全部章节。二次内容约占 SAT 数学 $10\%$：因式分解、公式、抛物线顶点、一次—二次方程组都是高频考点</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  SAT favours fluency on solving by inspection (factoring or special-product spotting) over completing the square from scratch</span><span data-lang="zh">无 ,  SAT 更看重观察法（因式分解或特殊乘积识别）的熟练度，而非从零开始的配方法</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See <em>What this feeds into</em> at the end of this unit for the SAT and AP cross-references</span><span data-lang="zh">详见本单元末"后续单元"中关于 SAT 与 AP 的交叉引用</span></td>
       </tr>
       <tr>
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; AP Calc bound</strong></td>
-        <td style="padding: 8px 10px;">All sections. The derivative-zero technique for locating maxima and minima in AP Calc is the calculus analogue of the vertex of a parabola you find here</td>
-        <td style="padding: 8px 10px;">Nothing ,  complete this unit, then move to AP Calc Unit 1 (limits) and Unit 4 (analytical applications of differentiation)</td>
-        <td style="padding: 8px 10px;">See <em>What this feeds into</em>; cross-link to <code>AP Calculus/Study Guides/Unit_1_*</code></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">AP Calc bound</span><span data-lang="zh">AP Calc 考生</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">All sections. The derivative-zero technique for locating maxima and minima in AP Calc is the calculus analogue of the vertex of a parabola you find here</span><span data-lang="zh">全部章节。AP Calc 中"导数为零"求极值的方法，正是本单元抛物线顶点的微积分类比</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  complete this unit, then move to AP Calc Unit 1 (limits) and Unit 4 (analytical applications of differentiation)</span><span data-lang="zh">无 ,  完成本单元后进入 AP Calc 第 1 单元（极限）与第 4 单元（微分的解析应用）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See <em>What this feeds into</em>; cross-link to <code>AP Calculus/Study Guides/Unit_1_*</code></span><span data-lang="zh">详见"后续单元"；交叉链接至 <code>AP Calculus/Study Guides/Unit_1_*</code></span></td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <p style="margin-top: 12px;">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</p>
+  <p style="margin-top: 12px;"><span data-lang="en">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</span><span data-lang="zh">找到所在行后，用下面两张卡片决定推进速度。</span></p>
 
   <div class="two-col">
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title">If you are cramming the night before</div></div>
-      <p style="font-size: 0.95rem;">Memorise four formulas: vertex of $a x^{2} + b x + c$ at $x = -b/(2a)$; quadratic formula $x = (-b \pm \sqrt{b^{2} - 4 a c}) / (2 a)$; discriminant $\Delta = b^{2} - 4 a c$ classifies roots (two real / one repeated / two complex); vertex form $y = a (x - h)^{2} + k$. Be able to factor any trinomial with small integer coefficients in $\le 90$ seconds. Read every cram-cheat box at the top of each section in your row.</p>
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise four formulas: vertex of $a x^{2} + b x + c$ at $x = -b/(2a)$; quadratic formula $x = (-b \pm \sqrt{b^{2} - 4 a c}) / (2 a)$; discriminant $\Delta = b^{2} - 4 a c$ classifies roots (two real / one repeated / two complex); vertex form $y = a (x - h)^{2} + k$. Be able to factor any trinomial with small integer coefficients in $\le 90$ seconds. Read every cram-cheat box at the top of each section in your row.</span><span data-lang="zh">背熟四个公式：$a x^{2} + b x + c$ 的顶点位于 $x = -b/(2a)$；求根公式 $x = (-b \pm \sqrt{b^{2} - 4 a c}) / (2 a)$；判别式 $\Delta = b^{2} - 4 a c$ 分类根的情形（两实根 / 一重根 / 两复根）；顶点式 $y = a (x - h)^{2} + k$。小整数系数三项式应能在 $\le 90$ 秒内因式分解。所在行的每节顶部速记框都要读。</span></p>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title">If you are going for the top mark</div></div>
-      <p style="font-size: 0.95rem;">Always state whether you used factoring, the formula, or completing the square and why. Always sketch the parabola before answering an inequality question. Always check the sign of $\Delta$ before quoting any roots. Practise rewriting between all three forms cold, both directions. Sign analysis (&sect;7) is one of the few high-school techniques that carries forward unchanged into limits, derivatives, and rational-function asymptote work.</p>
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Always state whether you used factoring, the formula, or completing the square and why. Always sketch the parabola before answering an inequality question. Always check the sign of $\Delta$ before quoting any roots. Practise rewriting between all three forms cold, both directions. Sign analysis (&sect;7) is one of the few high-school techniques that carries forward unchanged into limits, derivatives, and rational-function asymptote work.</span><span data-lang="zh">每题都要写明使用了因式分解、公式还是配方法，以及为何选用。回答不等式题前先画抛物线草图。引用根之前先核 $\Delta$ 的正负号。反复练三种形式之间的双向互转。符号分析（&sect;7）是少数能原样延续到极限、导数与有理函数渐近线的高中技法之一。</span></p>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Honors flag.</strong>
-    Section 7 (quadratic inequalities via sign analysis) carries the <span class="honors-flag">Honors</span> chip for US Algebra 1 only ,  CCSSM treats inequalities elsewhere and lightly at the Algebra 1 level. BC Pre-Calc 11 includes sign analysis explicitly as a Content elaboration; Ontario MCR3U revisits inequalities once functions are introduced. If your row above sends you to &sect;7, work through it carefully; the technique transfers verbatim to rational and polynomial inequalities in later units.
+    <strong style="color: var(--purple);"><span data-lang="en">Honors flag.</span><span data-lang="zh">荣誉级标记。</span></strong>
+    <span data-lang="en">Section 7 (quadratic inequalities via sign analysis) carries the <span class="honors-flag">Honors</span> chip for US Algebra 1 only ,  CCSSM treats inequalities elsewhere and lightly at the Algebra 1 level. BC Pre-Calc 11 includes sign analysis explicitly as a Content elaboration; Ontario MCR3U revisits inequalities once functions are introduced. If your row above sends you to &sect;7, work through it carefully; the technique transfers verbatim to rational and polynomial inequalities in later units.</span><span data-lang="zh">&sect;7（用符号分析处理二次不等式）仅对美国 Algebra 1 标 <span class="honors-flag">Honors</span> ,  CCSSM 把不等式放在别处，在 Algebra 1 层级轻量处理。BC Pre-Calc 11 把符号分析明确列为内容细则；安大略 MCR3U 在引入函数后再回到不等式。如果上表把你导向 &sect;7，请认真完成；该技法在后续单元的有理与多项式不等式中原样复用。</span>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-1">
-  <div class="section-label">Section 1 &middot; The parabola</div>
-  <h2>The Parabola and Its Key Features</h2>
+  <div class="section-label"><span data-lang="en">Section 1 &middot; The parabola</span><span data-lang="zh">第 1 节 &middot; 抛物线</span></div>
+  <h2><span data-lang="en">The Parabola and Its Key Features</span><span data-lang="zh">抛物线及其关键特征</span></h2>
 
   <div class="cram-cheat">
-    <strong>Anatomy of $y = a x^{2} + b x + c$.</strong>
+    <strong><span data-lang="en">Anatomy of $y = a x^{2} + b x + c$.</span><span data-lang="zh">$y = a x^{2} + b x + c$ 的结构。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Opens up</strong> if $a &gt; 0$; <strong>opens down</strong> if $a &lt; 0$. The sign of $a$ controls whether the vertex is a minimum or maximum.</li>
-      <li><strong>Axis of symmetry:</strong> the vertical line $x = -b/(2 a)$. The parabola is symmetric about this line.</li>
-      <li><strong>Vertex:</strong> the point on the parabola where the axis of symmetry meets it. Its $x$-coordinate is $-b/(2 a)$; its $y$-coordinate is found by substituting back into the equation.</li>
-      <li><strong>$y$-intercept:</strong> always $(0, c)$ ,  just plug in $x = 0$.</li>
-      <li><strong>$x$-intercepts (roots):</strong> where $y = 0$. There are $0$, $1$, or $2$ of them depending on the discriminant.</li>
+      <li><strong><span data-lang="en">Opens up</span><span data-lang="zh">开口向上</span></strong> <span data-lang="en">if $a &gt; 0$; <strong>opens down</strong> if $a &lt; 0$. The sign of $a$ controls whether the vertex is a minimum or maximum.</span><span data-lang="zh">当 $a &gt; 0$；<strong>开口向下</strong>当 $a &lt; 0$。$a$ 的符号决定顶点是最小值还是最大值。</span></li>
+      <li><strong><span data-lang="en">Axis of symmetry:</span><span data-lang="zh">对称轴：</span></strong> <span data-lang="en">the vertical line $x = -b/(2 a)$. The parabola is symmetric about this line.</span><span data-lang="zh">竖直线 $x = -b/(2 a)$。抛物线关于此线对称。</span></li>
+      <li><strong><span data-lang="en">Vertex:</span><span data-lang="zh">顶点：</span></strong> <span data-lang="en">the point on the parabola where the axis of symmetry meets it. Its $x$-coordinate is $-b/(2 a)$; its $y$-coordinate is found by substituting back into the equation.</span><span data-lang="zh">对称轴与抛物线的交点。$x$ 坐标为 $-b/(2 a)$；$y$ 坐标由代回方程求得。</span></li>
+      <li><strong><span data-lang="en">$y$-intercept:</span><span data-lang="zh">$y$ 截距：</span></strong> <span data-lang="en">always $(0, c)$ ,  just plug in $x = 0$.</span><span data-lang="zh">恒为 $(0, c)$ ,  代入 $x = 0$ 即得。</span></li>
+      <li><strong><span data-lang="en">$x$-intercepts (roots):</span><span data-lang="zh">$x$ 截距（实根）：</span></strong> <span data-lang="en">where $y = 0$. There are $0$, $1$, or $2$ of them depending on the discriminant.</span><span data-lang="zh">$y = 0$ 处。根据判别式不同，可能有 $0$、$1$ 或 $2$ 个。</span></li>
     </ul>
-    <strong>Maximum vs. minimum.</strong> If $a &gt; 0$, the vertex is the minimum point of the function (the parabola opens up). If $a &lt; 0$, the vertex is the maximum point. There is no other extremum: a parabola has exactly one turning point.
+    <strong><span data-lang="en">Maximum vs. minimum.</span><span data-lang="zh">最大值与最小值。</span></strong> <span data-lang="en">If $a &gt; 0$, the vertex is the minimum point of the function (the parabola opens up). If $a &lt; 0$, the vertex is the maximum point. There is no other extremum: a parabola has exactly one turning point.</span><span data-lang="zh">$a &gt; 0$ 时，顶点是函数的最小值点（开口向上）；$a &lt; 0$ 时，顶点是最大值点。再无其他极值：抛物线恰有一个转折点。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 1 &middot; Key features from standard form</div>
-    <p>For the quadratic $f(x) = -2 x^{2} + 8 x - 3$, find (a) the axis of symmetry, (b) the vertex, (c) the $y$-intercept, and (d) the direction of opening.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 1 &middot; Key features from standard form</span><span data-lang="zh">例题 1 &middot; 由一般式读取关键特征</span></div>
+    <p><span data-lang="en">For the quadratic $f(x) = -2 x^{2} + 8 x - 3$, find (a) the axis of symmetry, (b) the vertex, (c) the $y$-intercept, and (d) the direction of opening.</span><span data-lang="zh">对二次函数 $f(x) = -2 x^{2} + 8 x - 3$，求（a）对称轴，（b）顶点，（c）$y$ 截距，（d）开口方向。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> Standard form $a = -2$, $b = 8$, $c = -3$.</p>
-    <p><strong>(a) Axis of symmetry.</strong></p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">Standard form $a = -2$, $b = 8$, $c = -3$.</span><span data-lang="zh">一般式中 $a = -2$，$b = 8$，$c = -3$。</span></p>
+    <p><strong><span data-lang="en">(a) Axis of symmetry.</span><span data-lang="zh">（a）对称轴。</span></strong></p>
     $$ x \;=\; -\frac{b}{2 a} \;=\; -\frac{8}{2 \cdot (-2)} \;=\; 2. $$
-    <p><strong>(b) Vertex.</strong> Substitute $x = 2$ into $f$:</p>
+    <p><strong><span data-lang="en">(b) Vertex.</span><span data-lang="zh">（b）顶点。</span></strong> <span data-lang="en">Substitute $x = 2$ into $f$:</span><span data-lang="zh">代入 $x = 2$：</span></p>
     $$ f(2) \;=\; -2 \cdot 4 + 8 \cdot 2 - 3 \;=\; -8 + 16 - 3 \;=\; 5. $$
-    <p>So the vertex is $(2, 5)$.</p>
-    <p><strong>(c) $y$-intercept.</strong> Set $x = 0$: $f(0) = -3$, so the $y$-intercept is $(0, -3)$.</p>
-    <p><strong>(d) Direction.</strong> Because $a = -2 &lt; 0$, the parabola opens <em>downward</em> and the vertex $(2, 5)$ is the maximum point.</p>
-    <p><strong>Evaluate.</strong> The maximum value of $f$ is $5$, achieved at $x = 2$. The parabola crosses the $y$-axis at $(0, -3)$ on its way up to the vertex.</p>
+    <p><span data-lang="en">So the vertex is $(2, 5)$.</span><span data-lang="zh">所以顶点为 $(2, 5)$。</span></p>
+    <p><strong><span data-lang="en">(c) $y$-intercept.</span><span data-lang="zh">（c）$y$ 截距。</span></strong> <span data-lang="en">Set $x = 0$: $f(0) = -3$, so the $y$-intercept is $(0, -3)$.</span><span data-lang="zh">令 $x = 0$：$f(0) = -3$，$y$ 截距为 $(0, -3)$。</span></p>
+    <p><strong><span data-lang="en">(d) Direction.</span><span data-lang="zh">（d）开口方向。</span></strong> <span data-lang="en">Because $a = -2 &lt; 0$, the parabola opens <em>downward</em> and the vertex $(2, 5)$ is the maximum point.</span><span data-lang="zh">由 $a = -2 &lt; 0$，抛物线<em>向下</em>开口，顶点 $(2, 5)$ 为最大值点。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">小结。</span></strong> <span data-lang="en">The maximum value of $f$ is $5$, achieved at $x = 2$. The parabola crosses the $y$-axis at $(0, -3)$ on its way up to the vertex.</span><span data-lang="zh">$f$ 的最大值为 $5$，在 $x = 2$ 处取得。抛物线在 $(0, -3)$ 处交 $y$ 轴，沿途上升至顶点。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the axis of symmetry is $x = -b / (2 a)$</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the axis of symmetry is $x = -b / (2 a)$</span><span data-lang="zh">深入 &middot; 为何对称轴为 $x = -b / (2 a)$</span></summary>
     <div class="detail-body">
-      <p>Start from $f(x) = a x^{2} + b x + c$ and apply the algebraic identity for completing the square:</p>
+      <p><span data-lang="en">Start from $f(x) = a x^{2} + b x + c$ and apply the algebraic identity for completing the square:</span><span data-lang="zh">从 $f(x) = a x^{2} + b x + c$ 出发，套用配方法的代数恒等式：</span></p>
       $$ f(x) \;=\; a \left( x^{2} + \tfrac{b}{a} x \right) + c \;=\; a \left( x + \tfrac{b}{2 a} \right)^{2} - a \cdot \tfrac{b^{2}}{4 a^{2}} + c. $$
-      <p>The first term $a (x + b/(2 a))^{2}$ is non-negative when $a &gt; 0$ and equals zero only at $x = -b/(2 a)$. The remaining constant $c - b^{2}/(4 a)$ is the value of $f$ at that point. Symmetry of the squared term about $x = -b/(2 a)$ is what makes that vertical line the axis of symmetry of the whole parabola: $f(-b/(2 a) + h) = f(-b/(2 a) - h)$ for every $h$. The argument runs in reverse for $a &lt; 0$ with "non-negative" replaced by "non-positive," and the same line is the axis of symmetry.</p>
+      <p><span data-lang="en">The first term $a (x + b/(2 a))^{2}$ is non-negative when $a &gt; 0$ and equals zero only at $x = -b/(2 a)$. The remaining constant $c - b^{2}/(4 a)$ is the value of $f$ at that point. Symmetry of the squared term about $x = -b/(2 a)$ is what makes that vertical line the axis of symmetry of the whole parabola: $f(-b/(2 a) + h) = f(-b/(2 a) - h)$ for every $h$. The argument runs in reverse for $a &lt; 0$ with "non-negative" replaced by "non-positive," and the same line is the axis of symmetry.</span><span data-lang="zh">第一项 $a (x + b/(2 a))^{2}$ 当 $a &gt; 0$ 时非负，仅在 $x = -b/(2 a)$ 处为零；其余常数 $c - b^{2}/(4 a)$ 为该点的 $f$ 值。平方项关于 $x = -b/(2 a)$ 对称，使该竖直线成为整条抛物线的对称轴：对任意 $h$，$f(-b/(2 a) + h) = f(-b/(2 a) - h)$。$a &lt; 0$ 时把"非负"换成"非正"，结论一致。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">For $f(x) = 3 x^{2} - 12 x + 7$, find the axis of symmetry.</div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For $f(x) = 3 x^{2} - 12 x + 7$, find the axis of symmetry.</span><span data-lang="zh">对 $f(x) = 3 x^{2} - 12 x + 7$，求对称轴。</span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = -2$</div>
       <div class="quiz-opt" data-idx="1">$x = -4$</div>
       <div class="quiz-opt" data-idx="2">$x = 2$</div>
       <div class="quiz-opt" data-idx="3">$x = 4$</div>
     </div>
-    <div class="quiz-explain correct-exp">$x = -b/(2 a) = -(-12)/(2 \cdot 3) = 12/6 = 2$.</div>
-    <div class="quiz-explain wrong-exp">The formula is $x = -b/(2 a)$ with both signs honoured. Here $b = -12$, so $-b = 12$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$x = -b/(2 a) = -(-12)/(2 \cdot 3) = 12/6 = 2$.</span><span data-lang="zh">$x = -b/(2 a) = -(-12)/(2 \cdot 3) = 12/6 = 2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The formula is $x = -b/(2 a)$ with both signs honoured. Here $b = -12$, so $-b = 12$.</span><span data-lang="zh">公式为 $x = -b/(2 a)$，两个负号都要保留。此处 $b = -12$，故 $-b = 12$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">Which statement about $g(x) = -\tfrac{1}{2} x^{2} + 3 x + 4$ is correct?</div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which statement about $g(x) = -\tfrac{1}{2} x^{2} + 3 x + 4$ is correct?</span><span data-lang="zh">关于 $g(x) = -\tfrac{1}{2} x^{2} + 3 x + 4$，下列哪项正确？</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">The parabola opens downward and the vertex is a maximum.</div>
-      <div class="quiz-opt" data-idx="1">The parabola opens upward and the vertex is a minimum.</div>
-      <div class="quiz-opt" data-idx="2">The parabola opens downward and the vertex is a minimum.</div>
-      <div class="quiz-opt" data-idx="3">The function has no vertex.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The parabola opens downward and the vertex is a maximum.</span><span data-lang="zh">抛物线向下开口，顶点为最大值。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The parabola opens upward and the vertex is a minimum.</span><span data-lang="zh">抛物线向上开口，顶点为最小值。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The parabola opens downward and the vertex is a minimum.</span><span data-lang="zh">抛物线向下开口，顶点为最小值。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The function has no vertex.</span><span data-lang="zh">函数没有顶点。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">The leading coefficient $a = -1/2 &lt; 0$, so the parabola opens downward. The vertex of a downward parabola is its maximum point.</div>
-    <div class="quiz-explain wrong-exp">Read the sign of the leading coefficient $a$. Negative $a$ means the parabola opens downward and the vertex is a maximum.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The leading coefficient $a = -1/2 &lt; 0$, so the parabola opens downward. The vertex of a downward parabola is its maximum point.</span><span data-lang="zh">首项系数 $a = -1/2 &lt; 0$，抛物线向下开口；向下抛物线的顶点是最大值。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Read the sign of the leading coefficient $a$. Negative $a$ means the parabola opens downward and the vertex is a maximum.</span><span data-lang="zh">先读首项系数 $a$ 的符号。$a$ 为负 → 抛物线向下开口 → 顶点为最大值。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-2">
-  <div class="section-label">Section 2 &middot; Three Forms</div>
-  <h2>Three Forms of a Quadratic Function</h2>
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Three Forms</span><span data-lang="zh">第 2 节 &middot; 三种形式</span></div>
+  <h2><span data-lang="en">Three Forms of a Quadratic Function</span><span data-lang="zh">二次函数的三种形式</span></h2>
 
   <div class="cram-cheat">
-    <strong>The three forms.</strong>
+    <strong><span data-lang="en">The three forms.</span><span data-lang="zh">三种形式。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Standard form:</strong> $y = a x^{2} + b x + c$. Best for reading the $y$-intercept ($c$) and computing the axis ($x = -b/(2 a)$).</li>
-      <li><strong>Vertex form:</strong> $y = a (x - h)^{2} + k$. The vertex is $(h, k)$ ,  read directly. Best for transformations and for stating the max/min value.</li>
-      <li><strong>Factored form:</strong> $y = a (x - r_{1}) (x - r_{2})$. The roots are $r_{1}$ and $r_{2}$ ,  read directly. Best for graphing from roots and for solving the equation.</li>
+      <li><strong><span data-lang="en">Standard form:</span><span data-lang="zh">一般式：</span></strong> <span data-lang="en">$y = a x^{2} + b x + c$. Best for reading the $y$-intercept ($c$) and computing the axis ($x = -b/(2 a)$).</span><span data-lang="zh">$y = a x^{2} + b x + c$。最适合读取 $y$ 截距（$c$）与计算对称轴（$x = -b/(2 a)$）。</span></li>
+      <li><strong><span data-lang="en">Vertex form:</span><span data-lang="zh">顶点式：</span></strong> <span data-lang="en">$y = a (x - h)^{2} + k$. The vertex is $(h, k)$ ,  read directly. Best for transformations and for stating the max/min value.</span><span data-lang="zh">$y = a (x - h)^{2} + k$。顶点为 $(h, k)$ ,  可直接读出。最适合处理变换与给出极值。</span></li>
+      <li><strong><span data-lang="en">Factored form:</span><span data-lang="zh">因式分解式：</span></strong> <span data-lang="en">$y = a (x - r_{1}) (x - r_{2})$. The roots are $r_{1}$ and $r_{2}$ ,  read directly. Best for graphing from roots and for solving the equation.</span><span data-lang="zh">$y = a (x - r_{1}) (x - r_{2})$。实根为 $r_{1}$ 与 $r_{2}$ ,  可直接读出。最适合由根作图与求解方程。</span></li>
     </ul>
-    <strong>Conversions.</strong> All three describe the same parabola; learn the moves between them cold.
+    <strong><span data-lang="en">Conversions.</span><span data-lang="zh">互转。</span></strong> <span data-lang="en">All three describe the same parabola; learn the moves between them cold.</span><span data-lang="zh">三种形式描述同一条抛物线；要把彼此之间的转换练到熟极。</span>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Standard to vertex:</strong> complete the square (see &sect;5) or use $h = -b/(2 a)$, $k = f(h)$.</li>
-      <li><strong>Standard to factored:</strong> factor the quadratic (&sect;3) or use the roots from the formula (&sect;4).</li>
-      <li><strong>Vertex to standard:</strong> expand $a (x - h)^{2} + k$.</li>
-      <li><strong>Factored to standard:</strong> expand $a (x - r_{1})(x - r_{2})$. The constant term is $a r_{1} r_{2}$; the middle coefficient is $-a (r_{1} + r_{2})$.</li>
+      <li><strong><span data-lang="en">Standard to vertex:</span><span data-lang="zh">一般式 → 顶点式：</span></strong> <span data-lang="en">complete the square (see &sect;5) or use $h = -b/(2 a)$, $k = f(h)$.</span><span data-lang="zh">配方法（见 &sect;5），或用 $h = -b/(2 a)$、$k = f(h)$。</span></li>
+      <li><strong><span data-lang="en">Standard to factored:</span><span data-lang="zh">一般式 → 因式分解式：</span></strong> <span data-lang="en">factor the quadratic (&sect;3) or use the roots from the formula (&sect;4).</span><span data-lang="zh">对二次因式分解（&sect;3），或用求根公式得到的根（&sect;4）。</span></li>
+      <li><strong><span data-lang="en">Vertex to standard:</span><span data-lang="zh">顶点式 → 一般式：</span></strong> <span data-lang="en">expand $a (x - h)^{2} + k$.</span><span data-lang="zh">展开 $a (x - h)^{2} + k$。</span></li>
+      <li><strong><span data-lang="en">Factored to standard:</span><span data-lang="zh">因式分解式 → 一般式：</span></strong> <span data-lang="en">expand $a (x - r_{1})(x - r_{2})$. The constant term is $a r_{1} r_{2}$; the middle coefficient is $-a (r_{1} + r_{2})$.</span><span data-lang="zh">展开 $a (x - r_{1})(x - r_{2})$。常数项为 $a r_{1} r_{2}$；一次项系数为 $-a (r_{1} + r_{2})$。</span></li>
     </ul>
-    <strong>When is the factored form unavailable?</strong> When the parabola has no real roots ($\Delta &lt; 0$) you cannot factor over the real numbers. Vertex and standard forms always exist.
+    <strong><span data-lang="en">When is the factored form unavailable?</span><span data-lang="zh">何时无法用因式分解式？</span></strong> <span data-lang="en">When the parabola has no real roots ($\Delta &lt; 0$) you cannot factor over the real numbers. Vertex and standard forms always exist.</span><span data-lang="zh">当抛物线无实根（$\Delta &lt; 0$）时，无法在实数范围内因式分解。一般式与顶点式始终存在。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 2 &middot; Move between all three forms</div>
-    <p>Take $f(x) = 2 x^{2} - 12 x + 10$ and write it in (a) vertex form and (b) factored form.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 2 &middot; Move between all three forms</span><span data-lang="zh">例题 2 &middot; 三种形式之间互转</span></div>
+    <p><span data-lang="en">Take $f(x) = 2 x^{2} - 12 x + 10$ and write it in (a) vertex form and (b) factored form.</span><span data-lang="zh">取 $f(x) = 2 x^{2} - 12 x + 10$，写出（a）顶点式与（b）因式分解式。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>(a) Vertex form.</strong> First find the vertex via $h = -b/(2 a) = 12/4 = 3$. Then</p>
+    <p><strong><span data-lang="en">(a) Vertex form.</span><span data-lang="zh">（a）顶点式。</span></strong> <span data-lang="en">First find the vertex via $h = -b/(2 a) = 12/4 = 3$. Then</span><span data-lang="zh">先用 $h = -b/(2 a) = 12/4 = 3$ 求顶点：</span></p>
     $$ k \;=\; f(3) \;=\; 2 \cdot 9 - 12 \cdot 3 + 10 \;=\; 18 - 36 + 10 \;=\; -8. $$
-    <p>So $f(x) = 2 (x - 3)^{2} - 8$.</p>
-    <p><strong>Sanity check.</strong> Expand: $2 (x - 3)^{2} - 8 = 2 (x^{2} - 6 x + 9) - 8 = 2 x^{2} - 12 x + 10$. Matches.</p>
-    <p><strong>(b) Factored form.</strong> Factor a $2$ out: $f(x) = 2 (x^{2} - 6 x + 5)$. Then $x^{2} - 6 x + 5 = (x - 1)(x - 5)$, so</p>
+    <p><span data-lang="en">So $f(x) = 2 (x - 3)^{2} - 8$.</span><span data-lang="zh">故 $f(x) = 2 (x - 3)^{2} - 8$。</span></p>
+    <p><strong><span data-lang="en">Sanity check.</span><span data-lang="zh">核验。</span></strong> <span data-lang="en">Expand: $2 (x - 3)^{2} - 8 = 2 (x^{2} - 6 x + 9) - 8 = 2 x^{2} - 12 x + 10$. Matches.</span><span data-lang="zh">展开：$2 (x - 3)^{2} - 8 = 2 (x^{2} - 6 x + 9) - 8 = 2 x^{2} - 12 x + 10$，吻合。</span></p>
+    <p><strong><span data-lang="en">(b) Factored form.</span><span data-lang="zh">（b）因式分解式。</span></strong> <span data-lang="en">Factor a $2$ out: $f(x) = 2 (x^{2} - 6 x + 5)$. Then $x^{2} - 6 x + 5 = (x - 1)(x - 5)$, so</span><span data-lang="zh">提出 $2$：$f(x) = 2 (x^{2} - 6 x + 5)$。再因式分解 $x^{2} - 6 x + 5 = (x - 1)(x - 5)$，得</span></p>
     $$ f(x) \;=\; 2 (x - 1)(x - 5). $$
-    <p><strong>Evaluate.</strong> The roots are $x = 1$ and $x = 5$; the vertex is $(3, -8)$; the $y$-intercept is $(0, 10)$. The three forms encode the same parabola, each surfacing a different feature.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">小结。</span></strong> <span data-lang="en">The roots are $x = 1$ and $x = 5$; the vertex is $(3, -8)$; the $y$-intercept is $(0, 10)$. The three forms encode the same parabola, each surfacing a different feature.</span><span data-lang="zh">实根为 $x = 1$、$x = 5$；顶点 $(3, -8)$；$y$ 截距 $(0, 10)$。三种形式描述同一条抛物线，各自突出不同特征。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why expanding factored form gives the right coefficients</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why expanding factored form gives the right coefficients</span><span data-lang="zh">深入 &middot; 为何展开因式分解式能给出正确系数</span></summary>
     <div class="detail-body">
-      <p>Expand $a (x - r_{1})(x - r_{2})$ step by step:</p>
+      <p><span data-lang="en">Expand $a (x - r_{1})(x - r_{2})$ step by step:</span><span data-lang="zh">逐步展开 $a (x - r_{1})(x - r_{2})$：</span></p>
       $$ a (x - r_{1})(x - r_{2}) \;=\; a \left( x^{2} - (r_{1} + r_{2}) x + r_{1} r_{2} \right) \;=\; a x^{2} - a (r_{1} + r_{2}) x + a r_{1} r_{2}. $$
-      <p>Compare with standard form $a x^{2} + b x + c$. Matching coefficients gives</p>
+      <p><span data-lang="en">Compare with standard form $a x^{2} + b x + c$. Matching coefficients gives</span><span data-lang="zh">与一般式 $a x^{2} + b x + c$ 对照，比较系数得</span></p>
       $$ b \;=\; -a (r_{1} + r_{2}), \qquad c \;=\; a r_{1} r_{2}. $$
-      <p>These are <strong>Vieta's formulas</strong> for a quadratic. They are a fast sanity check when factoring: if you propose roots $r_{1}, r_{2}$, the sum should equal $-b/a$ and the product should equal $c/a$. If either fails, the proposed factoring is wrong.</p>
+      <p><span data-lang="en">These are <strong>Vieta's formulas</strong> for a quadratic. They are a fast sanity check when factoring: if you propose roots $r_{1}, r_{2}$, the sum should equal $-b/a$ and the product should equal $c/a$. If either fails, the proposed factoring is wrong.</span><span data-lang="zh">这就是二次的 <strong>Vieta 公式</strong>（韦达定理）。因式分解时是速效核验：若提出根 $r_{1}, r_{2}$，则根之和应等于 $-b/a$，根之积应等于 $c/a$。任一条不满足，因式分解就错。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Convert $y = x^{2} + 4 x - 5$ to vertex form.</div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Convert $y = x^{2} + 4 x - 5$ to vertex form.</span><span data-lang="zh">将 $y = x^{2} + 4 x - 5$ 化为顶点式。</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = (x - 2)^{2} - 9$</div>
       <div class="quiz-opt" data-idx="1">$y = (x + 2)^{2} - 9$</div>
       <div class="quiz-opt" data-idx="2">$y = (x + 2)^{2} + 1$</div>
       <div class="quiz-opt" data-idx="3">$y = (x - 2)^{2} + 1$</div>
     </div>
-    <div class="quiz-explain correct-exp">$h = -b/(2 a) = -4/2 = -2$, $k = (-2)^{2} + 4(-2) - 5 = 4 - 8 - 5 = -9$. So $y = (x + 2)^{2} - 9$.</div>
-    <div class="quiz-explain wrong-exp">Use $h = -b/(2 a) = -2$. The vertex form is $y = a (x - h)^{2} + k$; since $h = -2$, the form contains $(x - (-2)) = (x + 2)$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$h = -b/(2 a) = -4/2 = -2$, $k = (-2)^{2} + 4(-2) - 5 = 4 - 8 - 5 = -9$. So $y = (x + 2)^{2} - 9$.</span><span data-lang="zh">$h = -b/(2 a) = -4/2 = -2$，$k = (-2)^{2} + 4(-2) - 5 = -9$。所以 $y = (x + 2)^{2} - 9$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use $h = -b/(2 a) = -2$. The vertex form is $y = a (x - h)^{2} + k$; since $h = -2$, the form contains $(x - (-2)) = (x + 2)$.</span><span data-lang="zh">由 $h = -b/(2 a) = -2$。顶点式 $y = a (x - h)^{2} + k$ 中代入 $h = -2$ 得 $(x - (-2)) = (x + 2)$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Which quadratic has roots $x = -3$ and $x = 4$ and passes through $(0, -24)$?</div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which quadratic has roots $x = -3$ and $x = 4$ and passes through $(0, -24)$?</span><span data-lang="zh">哪个二次函数的实根为 $x = -3$、$x = 4$ 且过 $(0, -24)$？</span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = (x + 3)(x - 4)$</div>
       <div class="quiz-opt" data-idx="1">$y = -2 (x + 3)(x - 4)$</div>
       <div class="quiz-opt" data-idx="2">$y = 2 (x + 3)(x - 4)$</div>
       <div class="quiz-opt" data-idx="3">$y = (x - 3)(x + 4)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Roots fix the factored form up to a leading coefficient: $y = a (x + 3)(x - 4)$. Plug in $(0, -24)$: $-24 = a \cdot 3 \cdot (-4) = -12 a$, so $a = 2$.</div>
-    <div class="quiz-explain wrong-exp">Factored form with roots $-3, 4$ is $a (x + 3)(x - 4)$. Use the point $(0, -24)$ to solve for $a$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Roots fix the factored form up to a leading coefficient: $y = a (x + 3)(x - 4)$. Plug in $(0, -24)$: $-24 = a \cdot 3 \cdot (-4) = -12 a$, so $a = 2$.</span><span data-lang="zh">已知实根确定因式分解式至首项系数：$y = a (x + 3)(x - 4)$。代入 $(0, -24)$：$-24 = a \cdot 3 \cdot (-4) = -12 a$，故 $a = 2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factored form with roots $-3, 4$ is $a (x + 3)(x - 4)$. Use the point $(0, -24)$ to solve for $a$.</span><span data-lang="zh">实根为 $-3$、$4$ 的因式分解式为 $a (x + 3)(x - 4)$。用 $(0, -24)$ 求 $a$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-3">
-  <div class="section-label">Section 3 &middot; Factoring</div>
-  <h2>Solving by Factoring</h2>
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Factoring</span><span data-lang="zh">第 3 节 &middot; 因式分解</span></div>
+  <h2><span data-lang="en">Solving by Factoring</span><span data-lang="zh">因式分解法求解</span></h2>
 
   <div class="cram-cheat">
-    <strong>The zero-product property.</strong> If $A \cdot B = 0$, then $A = 0$ or $B = 0$ (or both). This is the only reason factoring solves equations.
+    <strong><span data-lang="en">The zero-product property.</span><span data-lang="zh">零积性质。</span></strong> <span data-lang="en">If $A \cdot B = 0$, then $A = 0$ or $B = 0$ (or both). This is the only reason factoring solves equations.</span><span data-lang="zh">若 $A \cdot B = 0$，则 $A = 0$ 或 $B = 0$（或同时为零）。这是因式分解能解方程的唯一原因。</span>
     <br><br>
-    <strong>Factoring playbook for $a x^{2} + b x + c = 0$.</strong>
+    <strong><span data-lang="en">Factoring playbook for $a x^{2} + b x + c = 0$.</span><span data-lang="zh">$a x^{2} + b x + c = 0$ 的因式分解策略。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Factor out the GCF first</strong> if any coefficient shares a factor with all others.</li>
-      <li><strong>Trinomial with $a = 1$:</strong> find two numbers whose product is $c$ and whose sum is $b$. They become the roots' negatives: $x^{2} + b x + c = (x + p)(x + q)$ where $p + q = b$ and $p q = c$.</li>
-      <li><strong>Trinomial with $a \ne 1$:</strong> the <em>AC method / decomposition</em>. Multiply $a \cdot c$. Find two numbers that multiply to $a c$ and add to $b$. Split $b x$ into those two terms, then factor by grouping.</li>
-      <li><strong>Difference of squares:</strong> $a^{2} - b^{2} = (a - b)(a + b)$.</li>
-      <li><strong>Perfect-square trinomial:</strong> $a^{2} \pm 2 a b + b^{2} = (a \pm b)^{2}$.</li>
+      <li><strong><span data-lang="en">Factor out the GCF first</span><span data-lang="zh">先提取最大公因式</span></strong> <span data-lang="en">if any coefficient shares a factor with all others.</span><span data-lang="zh">若各系数有公因子。</span></li>
+      <li><strong><span data-lang="en">Trinomial with $a = 1$:</span><span data-lang="zh">$a = 1$ 的三项式：</span></strong> <span data-lang="en">find two numbers whose product is $c$ and whose sum is $b$. They become the roots' negatives: $x^{2} + b x + c = (x + p)(x + q)$ where $p + q = b$ and $p q = c$.</span><span data-lang="zh">找两个数，乘积为 $c$、和为 $b$。它们是实根的相反数：$x^{2} + b x + c = (x + p)(x + q)$，其中 $p + q = b$、$p q = c$。</span></li>
+      <li><strong><span data-lang="en">Trinomial with $a \ne 1$:</span><span data-lang="zh">$a \ne 1$ 的三项式：</span></strong> <span data-lang="en">the <em>AC method / decomposition</em>. Multiply $a \cdot c$. Find two numbers that multiply to $a c$ and add to $b$. Split $b x$ into those two terms, then factor by grouping.</span><span data-lang="zh"><em>AC 法 / 拆项法</em>。算 $a \cdot c$。找两数，乘积为 $a c$、和为 $b$。把 $b x$ 拆成这两项，然后分组分解。</span></li>
+      <li><strong><span data-lang="en">Difference of squares:</span><span data-lang="zh">平方差：</span></strong> $a^{2} - b^{2} = (a - b)(a + b)$.</li>
+      <li><strong><span data-lang="en">Perfect-square trinomial:</span><span data-lang="zh">完全平方三项式：</span></strong> $a^{2} \pm 2 a b + b^{2} = (a \pm b)^{2}$.</li>
     </ol>
-    <strong>Solve.</strong> Set each factor to zero and read the roots. If the quadratic does not factor over the integers, switch to the quadratic formula (&sect;4) or completing the square (&sect;5).
+    <strong><span data-lang="en">Solve.</span><span data-lang="zh">求解。</span></strong> <span data-lang="en">Set each factor to zero and read the roots. If the quadratic does not factor over the integers, switch to the quadratic formula (&sect;4) or completing the square (&sect;5).</span><span data-lang="zh">让每个因式等于零，读出实根。若在整数范围内分解不出，改用求根公式（&sect;4）或配方法（&sect;5）。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 3 &middot; Trinomial with $a \ne 1$ via the AC method</div>
-    <p>Solve $6 x^{2} - 7 x - 3 = 0$ by factoring.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 3 &middot; Trinomial with $a \ne 1$ via the AC method</span><span data-lang="zh">例题 3 &middot; 用 AC 法处理 $a \ne 1$ 的三项式</span></div>
+    <p><span data-lang="en">Solve $6 x^{2} - 7 x - 3 = 0$ by factoring.</span><span data-lang="zh">用因式分解法求解 $6 x^{2} - 7 x - 3 = 0$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> $a = 6$, $b = -7$, $c = -3$. Compute $a c = 6 \cdot (-3) = -18$.</p>
-    <p><strong>Set up.</strong> Look for two integers whose product is $-18$ and whose sum is $-7$: the pair $(-9, 2)$ works because $-9 \cdot 2 = -18$ and $-9 + 2 = -7$.</p>
-    <p><strong>Execute.</strong> Split the middle term:</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">$a = 6$, $b = -7$, $c = -3$. Compute $a c = 6 \cdot (-3) = -18$.</span><span data-lang="zh">$a = 6$，$b = -7$，$c = -3$。计算 $a c = 6 \cdot (-3) = -18$。</span></p>
+    <p><strong><span data-lang="en">Set up.</span><span data-lang="zh">设置。</span></strong> <span data-lang="en">Look for two integers whose product is $-18$ and whose sum is $-7$: the pair $(-9, 2)$ works because $-9 \cdot 2 = -18$ and $-9 + 2 = -7$.</span><span data-lang="zh">找两个整数，乘积 $-18$、和 $-7$：$(-9, 2)$ 满足 $-9 \cdot 2 = -18$、$-9 + 2 = -7$。</span></p>
+    <p><strong><span data-lang="en">Execute.</span><span data-lang="zh">执行。</span></strong> <span data-lang="en">Split the middle term:</span><span data-lang="zh">拆分中间项：</span></p>
     $$ 6 x^{2} - 7 x - 3 \;=\; 6 x^{2} - 9 x + 2 x - 3. $$
-    <p>Factor by grouping:</p>
+    <p><span data-lang="en">Factor by grouping:</span><span data-lang="zh">分组分解：</span></p>
     $$ 6 x^{2} - 9 x + 2 x - 3 \;=\; 3 x (2 x - 3) + 1 \cdot (2 x - 3) \;=\; (3 x + 1)(2 x - 3). $$
-    <p>Apply the zero-product property:</p>
+    <p><span data-lang="en">Apply the zero-product property:</span><span data-lang="zh">套用零积性质：</span></p>
     $$ 3 x + 1 = 0 \;\Rightarrow\; x = -\tfrac{1}{3}, \qquad 2 x - 3 = 0 \;\Rightarrow\; x = \tfrac{3}{2}. $$
-    <p><strong>Evaluate.</strong> Check by Vieta's: sum should be $-b/a = 7/6$; sum of $-1/3 + 3/2 = -2/6 + 9/6 = 7/6$. Confirmed.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">核验。</span></strong> <span data-lang="en">Check by Vieta's: sum should be $-b/a = 7/6$; sum of $-1/3 + 3/2 = -2/6 + 9/6 = 7/6$. Confirmed.</span><span data-lang="zh">用韦达定理核验：根之和应为 $-b/a = 7/6$；$-1/3 + 3/2 = 7/6$，吻合。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the AC method works</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the AC method works</span><span data-lang="zh">深入 &middot; 为何 AC 法成立</span></summary>
     <div class="detail-body">
-      <p>Assume $a x^{2} + b x + c$ factors over the integers as $(p x + r)(q x + s)$ with $p q = a$, $r s = c$, and $p s + q r = b$. Multiply out:</p>
+      <p><span data-lang="en">Assume $a x^{2} + b x + c$ factors over the integers as $(p x + r)(q x + s)$ with $p q = a$, $r s = c$, and $p s + q r = b$. Multiply out:</span><span data-lang="zh">设 $a x^{2} + b x + c$ 在整数范围内可分解为 $(p x + r)(q x + s)$，满足 $p q = a$、$r s = c$、$p s + q r = b$。展开：</span></p>
       $$ (p x + r)(q x + s) \;=\; p q x^{2} + (p s + q r) x + r s. $$
-      <p>Set $u = p s$ and $v = q r$. Then $u + v = b$ and</p>
+      <p><span data-lang="en">Set $u = p s$ and $v = q r$. Then $u + v = b$ and</span><span data-lang="zh">令 $u = p s$、$v = q r$。则 $u + v = b$ 且</span></p>
       $$ u v \;=\; (p s)(q r) \;=\; (p q)(r s) \;=\; a c. $$
-      <p>So we just need to find two integers $u, v$ whose product is $a c$ and whose sum is $b$ ,  that is the AC method's search step. Once you have $u, v$, splitting $b x = u x + v x$ and grouping recovers the factorisation. If no such integer pair exists, the quadratic does not factor over the integers and you should switch to the quadratic formula or completing the square.</p>
+      <p><span data-lang="en">So we just need to find two integers $u, v$ whose product is $a c$ and whose sum is $b$ ,  that is the AC method's search step. Once you have $u, v$, splitting $b x = u x + v x$ and grouping recovers the factorisation. If no such integer pair exists, the quadratic does not factor over the integers and you should switch to the quadratic formula or completing the square.</span><span data-lang="zh">所以只需找乘积为 $a c$、和为 $b$ 的两个整数 $u, v$ ,  这正是 AC 法的搜索步骤。得到 $u, v$ 后，把 $b x = u x + v x$ 拆开再分组，即恢复因式分解。若无此整数对，则二次在整数范围内不可分解，应改用求根公式或配方法。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Solve $x^{2} - 5 x - 14 = 0$ by factoring.</div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $x^{2} - 5 x - 14 = 0$ by factoring.</span><span data-lang="zh">用因式分解法求解 $x^{2} - 5 x - 14 = 0$。</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = 2, 7$</div>
       <div class="quiz-opt" data-idx="1">$x = -2, 7$</div>
       <div class="quiz-opt" data-idx="2">$x = 2, -7$</div>
       <div class="quiz-opt" data-idx="3">$x = -2, -7$</div>
     </div>
-    <div class="quiz-explain correct-exp">Two numbers with product $-14$ and sum $-5$: $-7$ and $2$. So $x^{2} - 5 x - 14 = (x - 7)(x + 2)$. Roots $x = 7$ and $x = -2$.</div>
-    <div class="quiz-explain wrong-exp">Need $p \cdot q = c = -14$ and $p + q = b = -5$. The pair $(-7, 2)$ satisfies both. Then $(x - 7)(x + 2) = 0$ gives $x = 7$ or $x = -2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Two numbers with product $-14$ and sum $-5$: $-7$ and $2$. So $x^{2} - 5 x - 14 = (x - 7)(x + 2)$. Roots $x = 7$ and $x = -2$.</span><span data-lang="zh">乘积 $-14$、和 $-5$ 的两数为 $-7$ 与 $2$。故 $x^{2} - 5 x - 14 = (x - 7)(x + 2)$。实根 $x = 7$、$x = -2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Need $p \cdot q = c = -14$ and $p + q = b = -5$. The pair $(-7, 2)$ satisfies both. Then $(x - 7)(x + 2) = 0$ gives $x = 7$ or $x = -2$.</span><span data-lang="zh">需 $p \cdot q = c = -14$、$p + q = b = -5$。$(-7, 2)$ 满足。$(x - 7)(x + 2) = 0$ 给出 $x = 7$ 或 $x = -2$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-header"><div class="quiz-q">Solve $9 x^{2} - 25 = 0$.</div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $9 x^{2} - 25 = 0$.</span><span data-lang="zh">求解 $9 x^{2} - 25 = 0$。</span></div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = \pm \tfrac{25}{9}$</div>
       <div class="quiz-opt" data-idx="1">$x = \pm \tfrac{9}{25}$</div>
       <div class="quiz-opt" data-idx="2">$x = \pm \tfrac{3}{5}$</div>
       <div class="quiz-opt" data-idx="3">$x = \pm \tfrac{5}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Difference of squares: $9 x^{2} - 25 = (3 x - 5)(3 x + 5)$. Setting each factor to zero gives $x = \pm 5/3$.</div>
-    <div class="quiz-explain wrong-exp">Rewrite as $(3 x)^{2} - 5^{2}$ and apply $A^{2} - B^{2} = (A - B)(A + B)$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Difference of squares: $9 x^{2} - 25 = (3 x - 5)(3 x + 5)$. Setting each factor to zero gives $x = \pm 5/3$.</span><span data-lang="zh">平方差：$9 x^{2} - 25 = (3 x - 5)(3 x + 5)$。每个因式为零得 $x = \pm 5/3$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Rewrite as $(3 x)^{2} - 5^{2}$ and apply $A^{2} - B^{2} = (A - B)(A + B)$.</span><span data-lang="zh">写为 $(3 x)^{2} - 5^{2}$，套用 $A^{2} - B^{2} = (A - B)(A + B)$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-4">
-  <div class="section-label">Section 4 &middot; Formula and discriminant</div>
-  <h2>The Quadratic Formula and the Discriminant <span class="region-chip">&#x1F1E8;&#x1F1E6; ON &middot; &#x1F1E8;&#x1F1E6; BC PC11 &middot; &#x1F1FA;&#x1F1F8; US Alg 2+</span></h2>
+  <div class="section-label"><span data-lang="en">Section 4 &middot; Formula and discriminant</span><span data-lang="zh">第 4 节 &middot; 求根公式与判别式</span></div>
+  <h2><span data-lang="en">The Quadratic Formula and the Discriminant</span><span data-lang="zh">求根公式与判别式</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; ON &middot; &#x1F1E8;&#x1F1E6; BC PC11 &middot; &#x1F1FA;&#x1F1F8; US Alg 2+</span></h2>
 
   <div class="cram-cheat">
-    <strong>The quadratic formula.</strong> For $a x^{2} + b x + c = 0$ with $a \ne 0$,
+    <strong><span data-lang="en">The quadratic formula.</span><span data-lang="zh">求根公式。</span></strong> <span data-lang="en">For $a x^{2} + b x + c = 0$ with $a \ne 0$,</span><span data-lang="zh">对 $a \ne 0$ 的 $a x^{2} + b x + c = 0$，</span>
     $$ x \;=\; \frac{-b \pm \sqrt{b^{2} - 4 a c}}{2 a}. $$
-    Works on every quadratic equation, factorable or not.
+    <span data-lang="en">Works on every quadratic equation, factorable or not.</span><span data-lang="zh">对任何二次方程都成立，无论可否因式分解。</span>
     <br><br>
-    <strong>The discriminant.</strong> Define
+    <strong><span data-lang="en">The discriminant.</span><span data-lang="zh">判别式。</span></strong> <span data-lang="en">Define</span><span data-lang="zh">定义</span>
     $$ \Delta \;=\; b^{2} - 4 a c. $$
-    The sign of $\Delta$ classifies the roots:
+    <span data-lang="en">The sign of $\Delta$ classifies the roots:</span><span data-lang="zh">$\Delta$ 的符号分类根的情形：</span>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>$\Delta &gt; 0$:</strong> two distinct real roots; the parabola crosses the $x$-axis twice.</li>
-      <li><strong>$\Delta = 0$:</strong> one repeated real root ($x = -b/(2 a)$); the parabola is tangent to the $x$-axis at the vertex.</li>
-      <li><strong>$\Delta &lt; 0$:</strong> no real roots; two complex conjugate roots; the parabola does not cross the $x$-axis.</li>
+      <li><strong>$\Delta &gt; 0$:</strong> <span data-lang="en">two distinct real roots; the parabola crosses the $x$-axis twice.</span><span data-lang="zh">两个不同实根；抛物线两次穿过 $x$ 轴。</span></li>
+      <li><strong>$\Delta = 0$:</strong> <span data-lang="en">one repeated real root ($x = -b/(2 a)$); the parabola is tangent to the $x$-axis at the vertex.</span><span data-lang="zh">一个重实根（$x = -b/(2 a)$）；抛物线在顶点处与 $x$ 轴相切。</span></li>
+      <li><strong>$\Delta &lt; 0$:</strong> <span data-lang="en">no real roots; two complex conjugate roots; the parabola does not cross the $x$-axis.</span><span data-lang="zh">无实根；两个共轭复根；抛物线不与 $x$ 轴相交。</span></li>
     </ul>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> The $\Delta &lt; 0$ case requires complex-number arithmetic. US Common Core treats this through HSN-CN (Number and Quantity ,  Complex Numbers) in Algebra 2; in Ontario MCR3U it shows up as "no real solutions" without complex follow-up; in BC Pre-Calc 11 the quadratic-equation Content elaboration covers all four solution paths (factoring, quadratic formula, completing the square, graphing, square root method) but stops at the real-solution count. Treat $\Delta &lt; 0$ as a "no real roots, sketch shows no $x$-intercepts" outcome unless your course explicitly covers complex roots.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">The $\Delta &lt; 0$ case requires complex-number arithmetic. US Common Core treats this through HSN-CN (Number and Quantity ,  Complex Numbers) in Algebra 2; in Ontario MCR3U it shows up as "no real solutions" without complex follow-up; in BC Pre-Calc 11 the quadratic-equation Content elaboration covers all four solution paths (factoring, quadratic formula, completing the square, graphing, square root method) but stops at the real-solution count. Treat $\Delta &lt; 0$ as a "no real roots, sketch shows no $x$-intercepts" outcome unless your course explicitly covers complex roots.</span><span data-lang="zh">$\Delta &lt; 0$ 时需要复数运算。美国共同核心通过 HSN-CN（数与量 ,  复数）在 Algebra 2 处理；安大略 MCR3U 仅作"无实数解"处理，不深入复数；BC PC11 在二次方程内容细则中覆盖四种求解路径（因式分解、求根公式、配方法、图像法、开平方法），但只数实根。除非课程明确覆盖复根，否则把 $\Delta &lt; 0$ 视为"无实根，图像无 $x$ 截距"。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 4 &middot; The formula and the discriminant in one pass</div>
-    <p>Solve $2 x^{2} + 3 x - 5 = 0$ using the quadratic formula, and classify the roots by computing $\Delta$ first.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 4 &middot; The formula and the discriminant in one pass</span><span data-lang="zh">例题 4 &middot; 求根公式与判别式一遍走完</span></div>
+    <p><span data-lang="en">Solve $2 x^{2} + 3 x - 5 = 0$ using the quadratic formula, and classify the roots by computing $\Delta$ first.</span><span data-lang="zh">用求根公式求解 $2 x^{2} + 3 x - 5 = 0$，先算 $\Delta$ 分类根的情形。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> $a = 2$, $b = 3$, $c = -5$.</p>
-    <p><strong>Discriminant first.</strong></p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">$a = 2$, $b = 3$, $c = -5$.</span><span data-lang="zh">$a = 2$，$b = 3$，$c = -5$。</span></p>
+    <p><strong><span data-lang="en">Discriminant first.</span><span data-lang="zh">先算判别式。</span></strong></p>
     $$ \Delta \;=\; b^{2} - 4 a c \;=\; 9 - 4 \cdot 2 \cdot (-5) \;=\; 9 + 40 \;=\; 49. $$
-    <p>$\Delta = 49 &gt; 0$ and is a perfect square, so we expect two distinct rational roots.</p>
-    <p><strong>Apply the formula.</strong></p>
+    <p><span data-lang="en">$\Delta = 49 &gt; 0$ and is a perfect square, so we expect two distinct rational roots.</span><span data-lang="zh">$\Delta = 49 &gt; 0$ 且为完全平方，预期两个不同有理根。</span></p>
+    <p><strong><span data-lang="en">Apply the formula.</span><span data-lang="zh">套用公式。</span></strong></p>
     $$ x \;=\; \frac{-3 \pm \sqrt{49}}{2 \cdot 2} \;=\; \frac{-3 \pm 7}{4}. $$
-    <p>So $x = 4/4 = 1$ or $x = -10/4 = -5/2$.</p>
-    <p><strong>Evaluate.</strong> Check by Vieta's: sum $= -b/a = -3/2$; sum of $1 + (-5/2) = -3/2$. Product $= c/a = -5/2$; product of $1 \cdot (-5/2) = -5/2$. Both confirmed.</p>
+    <p><span data-lang="en">So $x = 4/4 = 1$ or $x = -10/4 = -5/2$.</span><span data-lang="zh">故 $x = 4/4 = 1$ 或 $x = -10/4 = -5/2$。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">核验。</span></strong> <span data-lang="en">Check by Vieta's: sum $= -b/a = -3/2$; sum of $1 + (-5/2) = -3/2$. Product $= c/a = -5/2$; product of $1 \cdot (-5/2) = -5/2$. Both confirmed.</span><span data-lang="zh">用韦达定理核验：根之和 $= -b/a = -3/2$；$1 + (-5/2) = -3/2$。根之积 $= c/a = -5/2$；$1 \cdot (-5/2) = -5/2$。两者吻合。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Deriving the quadratic formula from completing the square</summary>
+    <summary><span data-lang="en">Going deeper &middot; Deriving the quadratic formula from completing the square</span><span data-lang="zh">深入 &middot; 由配方法推导求根公式</span></summary>
     <div class="detail-body">
-      <p>Start from $a x^{2} + b x + c = 0$ with $a \ne 0$. Divide by $a$:</p>
+      <p><span data-lang="en">Start from $a x^{2} + b x + c = 0$ with $a \ne 0$. Divide by $a$:</span><span data-lang="zh">从 $a x^{2} + b x + c = 0$（$a \ne 0$）出发，两边除以 $a$：</span></p>
       $$ x^{2} + \tfrac{b}{a} x + \tfrac{c}{a} \;=\; 0. $$
-      <p>Move the constant and complete the square (see &sect;5):</p>
+      <p><span data-lang="en">Move the constant and complete the square (see &sect;5):</span><span data-lang="zh">移项并配方（见 &sect;5）：</span></p>
       $$ x^{2} + \tfrac{b}{a} x \;=\; -\tfrac{c}{a} \quad\Longrightarrow\quad \left( x + \tfrac{b}{2 a} \right)^{2} \;=\; -\tfrac{c}{a} + \tfrac{b^{2}}{4 a^{2}} \;=\; \frac{b^{2} - 4 a c}{4 a^{2}}. $$
-      <p>Take square roots and isolate $x$:</p>
+      <p><span data-lang="en">Take square roots and isolate $x$:</span><span data-lang="zh">开平方并解出 $x$：</span></p>
       $$ x + \tfrac{b}{2 a} \;=\; \pm \frac{\sqrt{b^{2} - 4 a c}}{2 a} \quad\Longrightarrow\quad x \;=\; \frac{-b \pm \sqrt{b^{2} - 4 a c}}{2 a}. $$
-      <p>The radicand $b^{2} - 4 a c$ is the discriminant. If it is positive, $\sqrt{\Delta}$ is a positive real number and the $\pm$ gives two distinct roots. If it is zero, the $\pm$ collapses and we get one repeated root. If it is negative, $\sqrt{\Delta}$ is not real and the roots are complex conjugates.</p>
+      <p><span data-lang="en">The radicand $b^{2} - 4 a c$ is the discriminant. If it is positive, $\sqrt{\Delta}$ is a positive real number and the $\pm$ gives two distinct roots. If it is zero, the $\pm$ collapses and we get one repeated root. If it is negative, $\sqrt{\Delta}$ is not real and the roots are complex conjugates.</span><span data-lang="zh">根号内 $b^{2} - 4 a c$ 即判别式。正时 $\sqrt{\Delta}$ 为正实数，$\pm$ 给出两个不同实根；为零时 $\pm$ 合并，得一重根；为负时 $\sqrt{\Delta}$ 非实，根为共轭复根。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">How many real solutions does $x^{2} + x + 2 = 0$ have?</div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">How many real solutions does $x^{2} + x + 2 = 0$ have?</span><span data-lang="zh">$x^{2} + x + 2 = 0$ 有几个实数解？</span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Two distinct real roots.</div>
-      <div class="quiz-opt" data-idx="1">One repeated real root.</div>
-      <div class="quiz-opt" data-idx="2">No real roots; two complex conjugate roots.</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined without solving.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Two distinct real roots.</span><span data-lang="zh">两个不同实根。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">One repeated real root.</span><span data-lang="zh">一个重实根。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">No real roots; two complex conjugate roots.</span><span data-lang="zh">无实根；两个共轭复根。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined without solving.</span><span data-lang="zh">不解方程无法判断。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">$\Delta = 1 - 4 \cdot 1 \cdot 2 = 1 - 8 = -7 &lt; 0$, so the equation has no real solutions.</div>
-    <div class="quiz-explain wrong-exp">Compute the discriminant first: $\Delta = b^{2} - 4 a c$. Negative discriminant means no real roots.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$\Delta = 1 - 4 \cdot 1 \cdot 2 = 1 - 8 = -7 &lt; 0$, so the equation has no real solutions.</span><span data-lang="zh">$\Delta = 1 - 8 = -7 &lt; 0$，方程无实数解。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Compute the discriminant first: $\Delta = b^{2} - 4 a c$. Negative discriminant means no real roots.</span><span data-lang="zh">先算判别式 $\Delta = b^{2} - 4 a c$。负判别式 → 无实根。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Use the quadratic formula on $x^{2} - 6 x + 7 = 0$.</div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Use the quadratic formula on $x^{2} - 6 x + 7 = 0$.</span><span data-lang="zh">对 $x^{2} - 6 x + 7 = 0$ 使用求根公式。</span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = 3 \pm \sqrt{7}$</div>
       <div class="quiz-opt" data-idx="1">$x = 3 \pm \sqrt{2}$</div>
       <div class="quiz-opt" data-idx="2">$x = -3 \pm \sqrt{2}$</div>
       <div class="quiz-opt" data-idx="3">$x = 6 \pm \sqrt{8}$</div>
     </div>
-    <div class="quiz-explain correct-exp">$\Delta = 36 - 28 = 8$, so $x = (6 \pm \sqrt{8})/2 = 3 \pm \sqrt{2}$ after simplifying $\sqrt{8} = 2 \sqrt{2}$.</div>
-    <div class="quiz-explain wrong-exp">Compute $\Delta = b^{2} - 4 a c = 8$. Then $x = (-b \pm \sqrt{\Delta})/(2 a) = (6 \pm 2 \sqrt{2})/2 = 3 \pm \sqrt{2}$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$\Delta = 36 - 28 = 8$, so $x = (6 \pm \sqrt{8})/2 = 3 \pm \sqrt{2}$ after simplifying $\sqrt{8} = 2 \sqrt{2}$.</span><span data-lang="zh">$\Delta = 36 - 28 = 8$，故 $x = (6 \pm \sqrt{8})/2 = 3 \pm \sqrt{2}$（化简 $\sqrt{8} = 2\sqrt{2}$）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Compute $\Delta = b^{2} - 4 a c = 8$. Then $x = (-b \pm \sqrt{\Delta})/(2 a) = (6 \pm 2 \sqrt{2})/2 = 3 \pm \sqrt{2}$.</span><span data-lang="zh">算 $\Delta = b^{2} - 4 a c = 8$。再 $x = (-b \pm \sqrt{\Delta})/(2 a) = (6 \pm 2\sqrt{2})/2 = 3 \pm \sqrt{2}$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-5">
-  <div class="section-label">Section 5 &middot; Completing the square</div>
-  <h2>Completing the Square</h2>
+  <div class="section-label"><span data-lang="en">Section 5 &middot; Completing the square</span><span data-lang="zh">第 5 节 &middot; 配方法</span></div>
+  <h2><span data-lang="en">Completing the Square</span><span data-lang="zh">配方法</span></h2>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> Completing the square is typically introduced in Algebra 2 (US), Grade 10 MPM2D (Ontario), and Pre-Calc 11 (BC). US Algebra 1 students often skip it on a first pass and learn the quadratic formula by recipe instead. If you're in US Algebra 1 and your row above defers &sect;5, you can still memorise the formula in &sect;4 ,  but completing the square is what the formula <em>is</em>, and you will need it for parabola transformations and (later) for circles, ellipses, and the rotation-to-standard-form trick in conic sections (Conic Sections).
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">Completing the square is typically introduced in Algebra 2 (US), Grade 10 MPM2D (Ontario), and Pre-Calc 11 (BC). US Algebra 1 students often skip it on a first pass and learn the quadratic formula by recipe instead. If you're in US Algebra 1 and your row above defers &sect;5, you can still memorise the formula in &sect;4 ,  but completing the square is what the formula <em>is</em>, and you will need it for parabola transformations and (later) for circles, ellipses, and the rotation-to-standard-form trick in conic sections (Conic Sections).</span><span data-lang="zh">配方法一般在美国 Algebra 2、安大略 10 年级 MPM2D、BC Pre-Calc 11 引入。美国 Algebra 1 学生常先跳过，按公式背诵法记住求根公式。若你在 US Algebra 1 且上表把 &sect;5 列为可推迟，仍可背 &sect;4 的公式 ,  但配方法<em>正是</em>公式的来源，后续抛物线变换以及圆、椭圆与圆锥曲线的标准形化简都要用到它。</span>
   </div>
 
   <div class="cram-cheat">
-    <strong>The procedure for $x^{2} + b x + c = 0$ (with $a = 1$).</strong>
+    <strong><span data-lang="en">The procedure for $x^{2} + b x + c = 0$ (with $a = 1$).</span><span data-lang="zh">$x^{2} + b x + c = 0$（$a = 1$）的步骤。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>Move the constant to the right: $x^{2} + b x = -c$.</li>
-      <li>Halve $b$ and square it: $(b/2)^{2}$.</li>
-      <li>Add $(b/2)^{2}$ to both sides: $x^{2} + b x + (b/2)^{2} = -c + (b/2)^{2}$.</li>
-      <li>Factor the left side as a perfect square: $(x + b/2)^{2} = (b/2)^{2} - c$.</li>
-      <li>Take square roots: $x + b/2 = \pm \sqrt{(b/2)^{2} - c}$.</li>
-      <li>Isolate $x$.</li>
+      <li><span data-lang="en">Move the constant to the right: $x^{2} + b x = -c$.</span><span data-lang="zh">常数移到右边：$x^{2} + b x = -c$。</span></li>
+      <li><span data-lang="en">Halve $b$ and square it: $(b/2)^{2}$.</span><span data-lang="zh">$b$ 折半再平方：$(b/2)^{2}$。</span></li>
+      <li><span data-lang="en">Add $(b/2)^{2}$ to both sides: $x^{2} + b x + (b/2)^{2} = -c + (b/2)^{2}$.</span><span data-lang="zh">两边同加 $(b/2)^{2}$：$x^{2} + b x + (b/2)^{2} = -c + (b/2)^{2}$。</span></li>
+      <li><span data-lang="en">Factor the left side as a perfect square: $(x + b/2)^{2} = (b/2)^{2} - c$.</span><span data-lang="zh">左边化为完全平方：$(x + b/2)^{2} = (b/2)^{2} - c$。</span></li>
+      <li><span data-lang="en">Take square roots: $x + b/2 = \pm \sqrt{(b/2)^{2} - c}$.</span><span data-lang="zh">开平方：$x + b/2 = \pm \sqrt{(b/2)^{2} - c}$。</span></li>
+      <li><span data-lang="en">Isolate $x$.</span><span data-lang="zh">解出 $x$。</span></li>
     </ol>
-    <strong>When $a \ne 1$.</strong> Factor $a$ out of the $x^{2}$ and $x$ terms first: $a (x^{2} + (b/a) x) + c = 0$. Complete the square inside the bracket using $b/a$ as the new linear coefficient, then expand.
+    <strong><span data-lang="en">When $a \ne 1$.</span><span data-lang="zh">当 $a \ne 1$。</span></strong> <span data-lang="en">Factor $a$ out of the $x^{2}$ and $x$ terms first: $a (x^{2} + (b/a) x) + c = 0$. Complete the square inside the bracket using $b/a$ as the new linear coefficient, then expand.</span><span data-lang="zh">先把 $a$ 从 $x^{2}$ 与 $x$ 项中提出：$a (x^{2} + (b/a) x) + c = 0$。在括号内用 $b/a$ 作新的一次系数完成配方，然后展开。</span>
     <br><br>
-    <strong>The geometric picture.</strong> Adding $(b/2)^{2}$ to $x^{2} + b x$ literally completes a square of side $x + b/2$. The visualisation is where the name comes from.
+    <strong><span data-lang="en">The geometric picture.</span><span data-lang="zh">几何图像。</span></strong> <span data-lang="en">Adding $(b/2)^{2}$ to $x^{2} + b x$ literally completes a square of side $x + b/2$. The visualisation is where the name comes from.</span><span data-lang="zh">给 $x^{2} + b x$ 加上 $(b/2)^{2}$ 就字面上把它"补成"一个边长为 $x + b/2$ 的正方形 ,  这就是"配方法"名字的来源。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 5 &middot; Complete the square to find the vertex</div>
-    <p>Rewrite $f(x) = 2 x^{2} + 8 x + 5$ in vertex form by completing the square.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 5 &middot; Complete the square to find the vertex</span><span data-lang="zh">例题 5 &middot; 通过配方法求顶点</span></div>
+    <p><span data-lang="en">Rewrite $f(x) = 2 x^{2} + 8 x + 5$ in vertex form by completing the square.</span><span data-lang="zh">用配方法把 $f(x) = 2 x^{2} + 8 x + 5$ 化为顶点式。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Factor $2$ out of the $x^{2}$ and $x$ terms.</strong></p>
+    <p><strong><span data-lang="en">Factor $2$ out of the $x^{2}$ and $x$ terms.</span><span data-lang="zh">从 $x^{2}$ 与 $x$ 项中提出 $2$。</span></strong></p>
     $$ f(x) \;=\; 2 \left( x^{2} + 4 x \right) + 5. $$
-    <p><strong>Halve the linear coefficient inside the bracket.</strong> $b = 4$, so $(b/2)^{2} = 4$. Add and subtract $4$ <em>inside</em> the bracket (so the net change is zero):</p>
+    <p><strong><span data-lang="en">Halve the linear coefficient inside the bracket.</span><span data-lang="zh">把括号内一次项系数折半。</span></strong> <span data-lang="en">$b = 4$, so $(b/2)^{2} = 4$. Add and subtract $4$ <em>inside</em> the bracket (so the net change is zero):</span><span data-lang="zh">$b = 4$，$(b/2)^{2} = 4$。在括号<em>内</em>加并减 $4$（净变化为零）：</span></p>
     $$ f(x) \;=\; 2 \left( x^{2} + 4 x + 4 - 4 \right) + 5 \;=\; 2 \left( (x + 2)^{2} - 4 \right) + 5. $$
-    <p><strong>Distribute and combine constants.</strong></p>
+    <p><strong><span data-lang="en">Distribute and combine constants.</span><span data-lang="zh">展开并合并常数。</span></strong></p>
     $$ f(x) \;=\; 2 (x + 2)^{2} - 8 + 5 \;=\; 2 (x + 2)^{2} - 3. $$
-    <p><strong>Evaluate.</strong> Read off the vertex from the form $a (x - h)^{2} + k$: $h = -2$, $k = -3$, so the vertex is $(-2, -3)$. Since $a = 2 &gt; 0$, the parabola opens up and the vertex is the minimum.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">小结。</span></strong> <span data-lang="en">Read off the vertex from the form $a (x - h)^{2} + k$: $h = -2$, $k = -3$, so the vertex is $(-2, -3)$. Since $a = 2 &gt; 0$, the parabola opens up and the vertex is the minimum.</span><span data-lang="zh">由 $a (x - h)^{2} + k$ 读出顶点：$h = -2$，$k = -3$，顶点 $(-2, -3)$。$a = 2 &gt; 0$，开口向上，顶点为最小值。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; The completing-the-square move, geometrically</summary>
+    <summary><span data-lang="en">Going deeper &middot; The completing-the-square move, geometrically</span><span data-lang="zh">深入 &middot; 配方法的几何图像</span></summary>
     <div class="detail-body">
-      <p>Picture $x^{2} + b x$ as a literal square of side $x$ plus a rectangle of dimensions $b \times x$. Split the rectangle into two strips of dimensions $(b/2) \times x$ and attach one strip to each of two adjacent sides of the square. You now have an L-shape with a missing corner. The missing corner is a $(b/2) \times (b/2) = (b/2)^{2}$ square. Adding it fills out the L into a perfect $(x + b/2) \times (x + b/2)$ square ,  hence "completing the square."</p>
-      <p>Algebraically, the same move says: $x^{2} + b x + (b/2)^{2} = (x + b/2)^{2}$. Subtracting $(b/2)^{2}$ to undo the addition gives $x^{2} + b x = (x + b/2)^{2} - (b/2)^{2}$, which is the substitution that turns standard form into vertex form.</p>
+      <p><span data-lang="en">Picture $x^{2} + b x$ as a literal square of side $x$ plus a rectangle of dimensions $b \times x$. Split the rectangle into two strips of dimensions $(b/2) \times x$ and attach one strip to each of two adjacent sides of the square. You now have an L-shape with a missing corner. The missing corner is a $(b/2) \times (b/2) = (b/2)^{2}$ square. Adding it fills out the L into a perfect $(x + b/2) \times (x + b/2)$ square ,  hence "completing the square."</span><span data-lang="zh">把 $x^{2} + b x$ 看成边长为 $x$ 的正方形加上 $b \times x$ 的长方形。将长方形分成两条 $(b/2) \times x$ 的条，分别贴在正方形相邻两边上，得到一个缺角的 L 形。缺的角是 $(b/2) \times (b/2) = (b/2)^{2}$ 的方块。补上它就把 L 形补成边长 $(x + b/2)$ 的完整正方形 ,  这就是"配方法"得名的由来。</span></p>
+      <p><span data-lang="en">Algebraically, the same move says: $x^{2} + b x + (b/2)^{2} = (x + b/2)^{2}$. Subtracting $(b/2)^{2}$ to undo the addition gives $x^{2} + b x = (x + b/2)^{2} - (b/2)^{2}$, which is the substitution that turns standard form into vertex form.</span><span data-lang="zh">代数上同等于：$x^{2} + b x + (b/2)^{2} = (x + b/2)^{2}$。再减去 $(b/2)^{2}$ 抵消所加，得 $x^{2} + b x = (x + b/2)^{2} - (b/2)^{2}$ ,  这就是把一般式变成顶点式的代换。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Complete the square to rewrite $y = x^{2} - 10 x + 18$ in vertex form.</div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Complete the square to rewrite $y = x^{2} - 10 x + 18$ in vertex form.</span><span data-lang="zh">用配方法把 $y = x^{2} - 10 x + 18$ 化为顶点式。</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = (x - 5)^{2} + 7$</div>
       <div class="quiz-opt" data-idx="1">$y = (x - 5)^{2} - 7$</div>
       <div class="quiz-opt" data-idx="2">$y = (x + 5)^{2} - 7$</div>
       <div class="quiz-opt" data-idx="3">$y = (x - 10)^{2} + 18$</div>
     </div>
-    <div class="quiz-explain correct-exp">Half of $-10$ is $-5$; $(-5)^{2} = 25$. So $x^{2} - 10 x + 18 = (x^{2} - 10 x + 25) - 25 + 18 = (x - 5)^{2} - 7$.</div>
-    <div class="quiz-explain wrong-exp">Halve the linear coefficient and square: $(b/2)^{2} = (-5)^{2} = 25$. Add and subtract $25$ to form a perfect square.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Half of $-10$ is $-5$; $(-5)^{2} = 25$. So $x^{2} - 10 x + 18 = (x^{2} - 10 x + 25) - 25 + 18 = (x - 5)^{2} - 7$.</span><span data-lang="zh">$-10$ 的一半为 $-5$，$(-5)^{2} = 25$。故 $x^{2} - 10 x + 18 = (x - 5)^{2} - 7$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Halve the linear coefficient and square: $(b/2)^{2} = (-5)^{2} = 25$. Add and subtract $25$ to form a perfect square.</span><span data-lang="zh">一次系数折半并平方：$(b/2)^{2} = 25$。加并减 $25$ 凑完全平方。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-6">
-  <div class="section-label">Section 6 &middot; Modeling</div>
-  <h2>Quadratic Modeling</h2>
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Modeling</span><span data-lang="zh">第 6 节 &middot; 建模</span></div>
+  <h2><span data-lang="en">Quadratic Modeling</span><span data-lang="zh">二次函数建模</span></h2>
 
   <div class="cram-cheat">
-    <strong>Three canonical model types.</strong>
+    <strong><span data-lang="en">Three canonical model types.</span><span data-lang="zh">三类经典模型。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Projectile motion.</strong> In US customary units (feet, seconds): $h(t) = -16 t^{2} + v_{0} t + h_{0}$. In metric (metres, seconds): $h(t) = -4.9 t^{2} + v_{0} t + h_{0}$. The $-16$ and $-4.9$ are $\tfrac{1}{2} g$ for gravitational acceleration $g$. The vertex gives the maximum height; the positive root gives the landing time.</li>
-      <li><strong>Revenue and profit.</strong> Demand is often modelled linearly: price $p = a - b x$ for quantity sold $x$. Revenue $R(x) = x p = x (a - b x) = a x - b x^{2}$ is quadratic with a maximum. Profit $P(x) = R(x) - C(x)$ (subtract a linear cost) is still quadratic.</li>
-      <li><strong>Area-perimeter optimisation.</strong> A fixed perimeter gives a constraint $2 L + 2 W = P$; substitute into area $A = L W$ to get a quadratic in one variable. The vertex gives the maximum area (or area-constrained minimum perimeter, depending on the question).</li>
+      <li><strong><span data-lang="en">Projectile motion.</span><span data-lang="zh">投射运动。</span></strong> <span data-lang="en">In US customary units (feet, seconds): $h(t) = -16 t^{2} + v_{0} t + h_{0}$. In metric (metres, seconds): $h(t) = -4.9 t^{2} + v_{0} t + h_{0}$. The $-16$ and $-4.9$ are $\tfrac{1}{2} g$ for gravitational acceleration $g$. The vertex gives the maximum height; the positive root gives the landing time.</span><span data-lang="zh">美制单位（英尺、秒）：$h(t) = -16 t^{2} + v_{0} t + h_{0}$。公制（米、秒）：$h(t) = -4.9 t^{2} + v_{0} t + h_{0}$。其中 $-16$ 与 $-4.9$ 均为 $\tfrac{1}{2} g$（$g$ 为重力加速度）。顶点给出最大高度；正根给出落地时刻。</span></li>
+      <li><strong><span data-lang="en">Revenue and profit.</span><span data-lang="zh">营收与利润。</span></strong> <span data-lang="en">Demand is often modelled linearly: price $p = a - b x$ for quantity sold $x$. Revenue $R(x) = x p = x (a - b x) = a x - b x^{2}$ is quadratic with a maximum. Profit $P(x) = R(x) - C(x)$ (subtract a linear cost) is still quadratic.</span><span data-lang="zh">需求常以线性建模：销量 $x$ 时价格 $p = a - b x$。营收 $R(x) = x p = a x - b x^{2}$ 是二次函数，有最大值。利润 $P(x) = R(x) - C(x)$（减去线性成本）仍为二次。</span></li>
+      <li><strong><span data-lang="en">Area-perimeter optimisation.</span><span data-lang="zh">面积—周长最优化。</span></strong> <span data-lang="en">A fixed perimeter gives a constraint $2 L + 2 W = P$; substitute into area $A = L W$ to get a quadratic in one variable. The vertex gives the maximum area (or area-constrained minimum perimeter, depending on the question).</span><span data-lang="zh">周长固定给出约束 $2 L + 2 W = P$；代入面积 $A = L W$ 得到单变量二次函数。顶点给出最大面积（或面积约束下的最小周长，视题目而定）。</span></li>
     </ul>
-    <strong>Workflow.</strong> (1) Name your variables with units. (2) Write the quadratic. (3) Find the vertex (max or min). (4) Find the roots if the question asks "when does it hit zero?" (5) Answer in a sentence with units.
+    <strong><span data-lang="en">Workflow.</span><span data-lang="zh">流程。</span></strong> <span data-lang="en">(1) Name your variables with units. (2) Write the quadratic. (3) Find the vertex (max or min). (4) Find the roots if the question asks "when does it hit zero?" (5) Answer in a sentence with units.</span><span data-lang="zh">（1）带单位命名变量；（2）写出二次函数；（3）求顶点（极值）；（4）若题问"何时归零"再求根；（5）用一句带单位的话作答。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 6 &middot; Projectile motion</div>
-    <p>A ball is thrown upward from a $5$-metre platform at $20$ m/s. Its height is $h(t) = -4.9 t^{2} + 20 t + 5$, with $h$ in metres and $t$ in seconds. (a) When does the ball reach its maximum height? (b) What is the maximum height? (c) When does the ball hit the ground?</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 6 &middot; Projectile motion</span><span data-lang="zh">例题 6 &middot; 投射运动</span></div>
+    <p><span data-lang="en">A ball is thrown upward from a $5$-metre platform at $20$ m/s. Its height is $h(t) = -4.9 t^{2} + 20 t + 5$, with $h$ in metres and $t$ in seconds. (a) When does the ball reach its maximum height? (b) What is the maximum height? (c) When does the ball hit the ground?</span><span data-lang="zh">一球从 $5$ 米高台以 $20$ m/s 向上抛出，高度 $h(t) = -4.9 t^{2} + 20 t + 5$，$h$ 单位米、$t$ 单位秒。（a）球何时达到最大高度？（b）最大高度多少？（c）何时落地？</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> $a = -4.9$, $b = 20$, $c = 5$. Parabola opens downward (since $a &lt; 0$), so the vertex is a maximum.</p>
-    <p><strong>(a) Time of maximum height.</strong></p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">$a = -4.9$, $b = 20$, $c = 5$. Parabola opens downward (since $a &lt; 0$), so the vertex is a maximum.</span><span data-lang="zh">$a = -4.9$，$b = 20$，$c = 5$。$a &lt; 0$，抛物线开口向下，顶点为最大值。</span></p>
+    <p><strong><span data-lang="en">(a) Time of maximum height.</span><span data-lang="zh">（a）最大高度时刻。</span></strong></p>
     $$ t \;=\; -\frac{b}{2 a} \;=\; -\frac{20}{2 \cdot (-4.9)} \;=\; \frac{20}{9.8} \;\approx\; 2.04 \text{ seconds}. $$
-    <p><strong>(b) Maximum height.</strong> Substitute $t = 20/9.8$ back:</p>
+    <p><strong><span data-lang="en">(b) Maximum height.</span><span data-lang="zh">（b）最大高度。</span></strong> <span data-lang="en">Substitute $t = 20/9.8$ back:</span><span data-lang="zh">代回 $t = 20/9.8$：</span></p>
     $$ h_{\max} \;=\; -4.9 \cdot (20/9.8)^{2} + 20 \cdot (20/9.8) + 5 \;=\; -\tfrac{(20)^{2}}{2 \cdot 9.8} + \tfrac{(20)^{2}}{9.8} + 5 \;=\; \tfrac{200}{9.8} + 5 \;\approx\; 25.41 \text{ metres}. $$
-    <p><strong>(c) Landing time.</strong> Set $h(t) = 0$ and use the quadratic formula:</p>
+    <p><strong><span data-lang="en">(c) Landing time.</span><span data-lang="zh">（c）落地时刻。</span></strong> <span data-lang="en">Set $h(t) = 0$ and use the quadratic formula:</span><span data-lang="zh">令 $h(t) = 0$，用求根公式：</span></p>
     $$ t \;=\; \frac{-20 \pm \sqrt{400 + 4 \cdot 4.9 \cdot 5}}{2 \cdot (-4.9)} \;=\; \frac{-20 \pm \sqrt{498}}{-9.8}. $$
-    <p>Take the positive root (negative time is unphysical): $\sqrt{498} \approx 22.32$, so</p>
+    <p><span data-lang="en">Take the positive root (negative time is unphysical): $\sqrt{498} \approx 22.32$, so</span><span data-lang="zh">取正根（负时间无物理意义）：$\sqrt{498} \approx 22.32$，故</span></p>
     $$ t \;=\; \frac{-20 - 22.32}{-9.8} \;\approx\; \frac{-42.32}{-9.8} \;\approx\; 4.32 \text{ seconds}. $$
-    <p><strong>Evaluate.</strong> The ball rises for $\approx 2.04$ seconds to a peak of $\approx 25.4$ metres, then falls back, landing at $\approx 4.32$ seconds. The total flight time is slightly more than twice the rise time because it falls farther (from $25.4$ m to $0$ m) than it rose (from $5$ m to $25.4$ m).</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">小结。</span></strong> <span data-lang="en">The ball rises for $\approx 2.04$ seconds to a peak of $\approx 25.4$ metres, then falls back, landing at $\approx 4.32$ seconds. The total flight time is slightly more than twice the rise time because it falls farther (from $25.4$ m to $0$ m) than it rose (from $5$ m to $25.4$ m).</span><span data-lang="zh">球上升约 $2.04$ 秒，达到约 $25.4$ 米的峰值，再下落，约 $4.32$ 秒落地。总飞行时间略多于上升时间的两倍，因为下落距离（$25.4 \to 0$ 米）大于上升距离（$5 \to 25.4$ 米）。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; A revenue-optimisation worked example</summary>
+    <summary><span data-lang="en">Going deeper &middot; A revenue-optimisation worked example</span><span data-lang="zh">深入 &middot; 营收最大化例题</span></summary>
     <div class="detail-body">
-      <p>A streaming service models monthly demand as $x = 1000 - 50 p$ subscribers when the price is $p$ dollars per month. Find the price that maximises revenue, and the resulting revenue.</p>
-      <p>Revenue is $R(p) = p \cdot x = p (1000 - 50 p) = 1000 p - 50 p^{2}$, which is a downward-opening parabola in $p$. The maximum is at the vertex:</p>
+      <p><span data-lang="en">A streaming service models monthly demand as $x = 1000 - 50 p$ subscribers when the price is $p$ dollars per month. Find the price that maximises revenue, and the resulting revenue.</span><span data-lang="zh">某流媒体把月需求建模为 $x = 1000 - 50 p$（订阅人数），月费 $p$ 美元。求最大化营收的价格与对应营收。</span></p>
+      <p><span data-lang="en">Revenue is $R(p) = p \cdot x = p (1000 - 50 p) = 1000 p - 50 p^{2}$, which is a downward-opening parabola in $p$. The maximum is at the vertex:</span><span data-lang="zh">营收 $R(p) = p \cdot x = 1000 p - 50 p^{2}$，是关于 $p$ 的向下开口抛物线。最大值在顶点：</span></p>
       $$ p^{*} \;=\; -\frac{1000}{2 \cdot (-50)} \;=\; \frac{1000}{100} \;=\; 10 \text{ dollars}. $$
-      <p>At $p^{*} = 10$, demand is $x^{*} = 1000 - 50 \cdot 10 = 500$ subscribers, and revenue is</p>
+      <p><span data-lang="en">At $p^{*} = 10$, demand is $x^{*} = 1000 - 50 \cdot 10 = 500$ subscribers, and revenue is</span><span data-lang="zh">$p^{*} = 10$ 时需求 $x^{*} = 500$ 人，营收</span></p>
       $$ R(10) \;=\; 10 \cdot 500 \;=\; 5000 \text{ dollars per month}. $$
-      <p>The same calculation appears in AP Macroeconomics (monopoly revenue maximisation) and in IB Math HL E4 (problem-solving using calculus), where the calculus version uses $\frac{dR}{dp} = 0$ instead of the vertex formula. Both methods give the same answer; the calculus approach generalises beyond quadratics.</p>
+      <p><span data-lang="en">The same calculation appears in AP Macroeconomics (monopoly revenue maximisation) and in IB Math HL E4 (problem-solving using calculus), where the calculus version uses $\frac{dR}{dp} = 0$ instead of the vertex formula. Both methods give the same answer; the calculus approach generalises beyond quadratics.</span><span data-lang="zh">同一计算在 AP 宏观经济（垄断营收最大化）与 IB Math HL E4（用微积分求解问题）中再现，那里用 $\frac{dR}{dp} = 0$ 取代顶点公式。结果一致；微积分方法可推广到非二次情形。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">A ball is thrown from ground level upward with an initial velocity of $48$ ft/s. Its height is $h(t) = -16 t^{2} + 48 t$. What is the maximum height, in feet?</div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A ball is thrown from ground level upward with an initial velocity of $48$ ft/s. Its height is $h(t) = -16 t^{2} + 48 t$. What is the maximum height, in feet?</span><span data-lang="zh">球从地面以 $48$ ft/s 向上抛出，高度 $h(t) = -16 t^{2} + 48 t$。最大高度（英尺）为？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$24$</div>
       <div class="quiz-opt" data-idx="1">$32$</div>
       <div class="quiz-opt" data-idx="2">$36$</div>
       <div class="quiz-opt" data-idx="3">$48$</div>
     </div>
-    <div class="quiz-explain correct-exp">Vertex at $t = -48/(2 \cdot (-16)) = 48/32 = 1.5$ s. Then $h(1.5) = -16 \cdot 2.25 + 48 \cdot 1.5 = -36 + 72 = 36$ ft.</div>
-    <div class="quiz-explain wrong-exp">Find the time at the vertex with $t = -b/(2 a)$, then substitute into $h$. Maximum height is $h(t^{*})$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Vertex at $t = -48/(2 \cdot (-16)) = 48/32 = 1.5$ s. Then $h(1.5) = -16 \cdot 2.25 + 48 \cdot 1.5 = -36 + 72 = 36$ ft.</span><span data-lang="zh">顶点 $t = 48/32 = 1.5$ s。$h(1.5) = -36 + 72 = 36$ 英尺。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Find the time at the vertex with $t = -b/(2 a)$, then substitute into $h$. Maximum height is $h(t^{*})$.</span><span data-lang="zh">用 $t = -b/(2 a)$ 求顶点时刻，再代入 $h$。最大高度即 $h(t^{*})$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">A farmer has $40$ metres of fencing to enclose a rectangular field along a straight river (fencing on three sides only). What dimensions maximise the area?</div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A farmer has $40$ metres of fencing to enclose a rectangular field along a straight river (fencing on three sides only). What dimensions maximise the area?</span><span data-lang="zh">农夫有 $40$ 米栅栏，沿直河圈出矩形田地（仅围三边）。何种尺寸面积最大？</span></div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$10 \text{ m} \times 20 \text{ m}$</div>
       <div class="quiz-opt" data-idx="1">$8 \text{ m} \times 24 \text{ m}$</div>
       <div class="quiz-opt" data-idx="2">$13 \text{ m} \times 14 \text{ m}$</div>
       <div class="quiz-opt" data-idx="3">$20 \text{ m} \times 20 \text{ m}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Let $W$ be the side perpendicular to the river and $L$ along the river. Three-sided fence: $2 W + L = 40$, so $L = 40 - 2 W$. Area $A(W) = W (40 - 2 W) = 40 W - 2 W^{2}$. Vertex at $W = -40/(2 \cdot (-2)) = 10$. Then $L = 20$.</div>
-    <div class="quiz-explain wrong-exp">Set up area as a function of one variable using the perimeter constraint. The vertex of the resulting downward parabola gives the optimum.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Let $W$ be the side perpendicular to the river and $L$ along the river. Three-sided fence: $2 W + L = 40$, so $L = 40 - 2 W$. Area $A(W) = W (40 - 2 W) = 40 W - 2 W^{2}$. Vertex at $W = -40/(2 \cdot (-2)) = 10$. Then $L = 20$.</span><span data-lang="zh">设 $W$ 为垂直于河岸的边，$L$ 沿河。三边围栏：$2 W + L = 40$，故 $L = 40 - 2 W$。面积 $A(W) = 40 W - 2 W^{2}$，顶点 $W = 10$，$L = 20$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Set up area as a function of one variable using the perimeter constraint. The vertex of the resulting downward parabola gives the optimum.</span><span data-lang="zh">用周长约束把面积写成单变量函数。所得向下开口抛物线的顶点即为最优。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-2-7">
-  <div class="section-label">Section 7 &middot; Inequalities</div>
-  <h2>Quadratic Inequalities <span class="honors-flag">Honors (US Alg 1)</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 core</span></h2>
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Inequalities</span><span data-lang="zh">第 7 节 &middot; 不等式</span></div>
+  <h2><span data-lang="en">Quadratic Inequalities</span><span data-lang="zh">二次不等式</span> <span class="honors-flag"><span data-lang="en">Honors (US Alg 1)</span><span data-lang="zh">荣誉（US Alg 1）</span></span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 core</span></h2>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> BC Pre-Calc 11 lists <em>linear and quadratic inequalities</em> as a dedicated Content topic with <em>sign analysis</em> as the named technique ,  that is the curriculum's own wording. US Common Core covers linear inequalities under <code>HSA-REI.B.3</code> and graphical inequality solving under <code>HSA-REI.D.12</code>, but quadratic inequalities are usually deferred to Algebra 2 or Pre-Calc. In Ontario MCR3U the technique surfaces alongside the function-domain work in A1. The sign-analysis method below works across all three curricula.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">BC Pre-Calc 11 lists <em>linear and quadratic inequalities</em> as a dedicated Content topic with <em>sign analysis</em> as the named technique ,  that is the curriculum's own wording. US Common Core covers linear inequalities under <code>HSA-REI.B.3</code> and graphical inequality solving under <code>HSA-REI.D.12</code>, but quadratic inequalities are usually deferred to Algebra 2 or Pre-Calc. In Ontario MCR3U the technique surfaces alongside the function-domain work in A1. The sign-analysis method below works across all three curricula.</span><span data-lang="zh">BC Pre-Calc 11 把<em>一次与二次不等式</em>列为专属内容，并把<em>符号分析</em>作为指定技法 ,  这是课纲原文。US 共同核心在 <code>HSA-REI.B.3</code> 覆盖一次不等式，在 <code>HSA-REI.D.12</code> 覆盖图像法不等式，但二次不等式一般推迟到 Algebra 2 或 Pre-Calc。安大略 MCR3U 在 A1 单元结合函数定义域时一并处理。下文的符号分析法在三套课程中均通用。</span>
   </div>
 
   <div class="cram-cheat">
-    <strong>Sign analysis for $a x^{2} + b x + c \;\square\; 0$ (where $\square \in \{ &lt;, \le, &gt;, \ge \}$).</strong>
+    <strong><span data-lang="en">Sign analysis for $a x^{2} + b x + c \;\square\; 0$ (where $\square \in \{ &lt;, \le, &gt;, \ge \}$).</span><span data-lang="zh">$a x^{2} + b x + c \;\square\; 0$（$\square \in \{ &lt;, \le, &gt;, \ge \}$）的符号分析。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Find the roots.</strong> Solve $a x^{2} + b x + c = 0$ by factoring, the formula, or completing the square. Call them $r_{1} \le r_{2}$ if they exist.</li>
-      <li><strong>Draw the parabola.</strong> Use the sign of $a$ to decide whether it opens up or down. Mark the roots on the $x$-axis.</li>
-      <li><strong>Read intervals.</strong> Between two roots, the parabola is on the opposite side of the $x$-axis from its tails. Use the sketch to read which intervals make the inequality true.</li>
-      <li><strong>Express in interval notation.</strong> $(-\infty, r_{1}) \cup (r_{2}, \infty)$ for "outside the roots"; $(r_{1}, r_{2})$ for "between the roots." Include the endpoints with square brackets when the inequality is $\le$ or $\ge$.</li>
+      <li><strong><span data-lang="en">Find the roots.</span><span data-lang="zh">求根。</span></strong> <span data-lang="en">Solve $a x^{2} + b x + c = 0$ by factoring, the formula, or completing the square. Call them $r_{1} \le r_{2}$ if they exist.</span><span data-lang="zh">用因式分解、求根公式或配方法解 $a x^{2} + b x + c = 0$；若存在记为 $r_{1} \le r_{2}$。</span></li>
+      <li><strong><span data-lang="en">Draw the parabola.</span><span data-lang="zh">画抛物线。</span></strong> <span data-lang="en">Use the sign of $a$ to decide whether it opens up or down. Mark the roots on the $x$-axis.</span><span data-lang="zh">由 $a$ 的符号判断开口方向，并在 $x$ 轴上标出实根。</span></li>
+      <li><strong><span data-lang="en">Read intervals.</span><span data-lang="zh">读区间。</span></strong> <span data-lang="en">Between two roots, the parabola is on the opposite side of the $x$-axis from its tails. Use the sketch to read which intervals make the inequality true.</span><span data-lang="zh">两根之间，抛物线与两端在 $x$ 轴的相反一侧。用草图读出使不等式成立的区间。</span></li>
+      <li><strong><span data-lang="en">Express in interval notation.</span><span data-lang="zh">用区间记法表示。</span></strong> <span data-lang="en">$(-\infty, r_{1}) \cup (r_{2}, \infty)$ for "outside the roots"; $(r_{1}, r_{2})$ for "between the roots." Include the endpoints with square brackets when the inequality is $\le$ or $\ge$.</span><span data-lang="zh">"两根外"用 $(-\infty, r_{1}) \cup (r_{2}, \infty)$；"两根之间"用 $(r_{1}, r_{2})$。不等式为 $\le$ 或 $\ge$ 时端点用方括号。</span></li>
     </ol>
-    <strong>Edge cases.</strong> If $\Delta &lt; 0$, the parabola has no real roots: it is either everywhere positive ($a &gt; 0$) or everywhere negative ($a &lt; 0$). Then the inequality is true on all of $\mathbb{R}$ or on no real numbers depending on direction.
+    <strong><span data-lang="en">Edge cases.</span><span data-lang="zh">边缘情形。</span></strong> <span data-lang="en">If $\Delta &lt; 0$, the parabola has no real roots: it is either everywhere positive ($a &gt; 0$) or everywhere negative ($a &lt; 0$). Then the inequality is true on all of $\mathbb{R}$ or on no real numbers depending on direction.</span><span data-lang="zh">若 $\Delta &lt; 0$，抛物线无实根：要么处处为正（$a &gt; 0$），要么处处为负（$a &lt; 0$）。视不等式方向，解集要么是 $\mathbb{R}$，要么为空。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 7 &middot; Sign analysis for a strict inequality</div>
-    <p>Solve $x^{2} - x - 6 &gt; 0$ by sign analysis.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 7 &middot; Sign analysis for a strict inequality</span><span data-lang="zh">例题 7 &middot; 严格不等式的符号分析</span></div>
+    <p><span data-lang="en">Solve $x^{2} - x - 6 &gt; 0$ by sign analysis.</span><span data-lang="zh">用符号分析法求解 $x^{2} - x - 6 &gt; 0$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Find the roots.</strong> Factor: $x^{2} - x - 6 = (x - 3)(x + 2)$. Roots are $x = -2$ and $x = 3$.</p>
-    <p><strong>Read the parabola.</strong> $a = 1 &gt; 0$, so the parabola opens upward. It crosses the $x$-axis at $-2$ and $3$. Between the roots the parabola is <em>below</em> the $x$-axis (negative); outside the roots it is <em>above</em> (positive).</p>
-    <p><strong>Pick intervals.</strong> The inequality asks where $x^{2} - x - 6 &gt; 0$, that is, where the parabola is positive. That is outside the roots:</p>
+    <p><strong><span data-lang="en">Find the roots.</span><span data-lang="zh">求根。</span></strong> <span data-lang="en">Factor: $x^{2} - x - 6 = (x - 3)(x + 2)$. Roots are $x = -2$ and $x = 3$.</span><span data-lang="zh">因式分解：$x^{2} - x - 6 = (x - 3)(x + 2)$。实根 $x = -2$、$x = 3$。</span></p>
+    <p><strong><span data-lang="en">Read the parabola.</span><span data-lang="zh">读抛物线。</span></strong> <span data-lang="en">$a = 1 &gt; 0$, so the parabola opens upward. It crosses the $x$-axis at $-2$ and $3$. Between the roots the parabola is <em>below</em> the $x$-axis (negative); outside the roots it is <em>above</em> (positive).</span><span data-lang="zh">$a = 1 &gt; 0$，开口向上，在 $-2$ 与 $3$ 处穿过 $x$ 轴。两根之间抛物线在 $x$ 轴<em>下方</em>（为负）；两根之外则在<em>上方</em>（为正）。</span></p>
+    <p><strong><span data-lang="en">Pick intervals.</span><span data-lang="zh">选区间。</span></strong> <span data-lang="en">The inequality asks where $x^{2} - x - 6 &gt; 0$, that is, where the parabola is positive. That is outside the roots:</span><span data-lang="zh">不等式问 $x^{2} - x - 6 &gt; 0$ 在何处成立，即抛物线为正的区域，即两根之外：</span></p>
     $$ x \in (-\infty, -2) \cup (3, \infty). $$
-    <p><strong>Evaluate.</strong> Strict inequality means we exclude the roots (round brackets). Spot-check with $x = 0$ (between the roots): $0 - 0 - 6 = -6 &lt; 0$, correctly outside the solution set. Spot-check with $x = 5$: $25 - 5 - 6 = 14 &gt; 0$, correctly inside.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">核验。</span></strong> <span data-lang="en">Strict inequality means we exclude the roots (round brackets). Spot-check with $x = 0$ (between the roots): $0 - 0 - 6 = -6 &lt; 0$, correctly outside the solution set. Spot-check with $x = 5$: $25 - 5 - 6 = 14 &gt; 0$, correctly inside.</span><span data-lang="zh">严格不等式排除端点（圆括号）。$x = 0$（两根之间）：$-6 &lt; 0$，正确不在解集；$x = 5$：$14 &gt; 0$，正确在解集。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; A quadratic inequality with $\Delta &lt; 0$</summary>
+    <summary><span data-lang="en">Going deeper &middot; A quadratic inequality with $\Delta &lt; 0$</span><span data-lang="zh">深入 &middot; $\Delta &lt; 0$ 的二次不等式</span></summary>
     <div class="detail-body">
-      <p>Solve $x^{2} + 2 x + 5 \le 0$.</p>
-      <p>Compute the discriminant: $\Delta = 4 - 20 = -16 &lt; 0$. The parabola has no real roots and never crosses the $x$-axis. Since $a = 1 &gt; 0$, the parabola opens upward and lies entirely <em>above</em> the $x$-axis ,  the expression $x^{2} + 2 x + 5$ is always strictly positive.</p>
-      <p>The inequality $\le 0$ asks where the expression is non-positive. It never is. So the solution set is empty: no real $x$ satisfies it.</p>
-      <p>Compare with the opposite direction: $x^{2} + 2 x + 5 &gt; 0$ is true for <em>all</em> real $x$. The contrast is a useful sanity check whenever $\Delta &lt; 0$: depending on the direction of the inequality and the sign of $a$, the solution set is either everything or nothing.</p>
+      <p><span data-lang="en">Solve $x^{2} + 2 x + 5 \le 0$.</span><span data-lang="zh">求解 $x^{2} + 2 x + 5 \le 0$。</span></p>
+      <p><span data-lang="en">Compute the discriminant: $\Delta = 4 - 20 = -16 &lt; 0$. The parabola has no real roots and never crosses the $x$-axis. Since $a = 1 &gt; 0$, the parabola opens upward and lies entirely <em>above</em> the $x$-axis ,  the expression $x^{2} + 2 x + 5$ is always strictly positive.</span><span data-lang="zh">算判别式：$\Delta = 4 - 20 = -16 &lt; 0$。抛物线无实根，不与 $x$ 轴相交。$a = 1 &gt; 0$，开口向上，整条曲线在 $x$ 轴<em>上方</em> ,  表达式 $x^{2} + 2 x + 5$ 恒为正。</span></p>
+      <p><span data-lang="en">The inequality $\le 0$ asks where the expression is non-positive. It never is. So the solution set is empty: no real $x$ satisfies it.</span><span data-lang="zh">不等式 $\le 0$ 问表达式何时非正，但它从不非正，故解集为空。</span></p>
+      <p><span data-lang="en">Compare with the opposite direction: $x^{2} + 2 x + 5 &gt; 0$ is true for <em>all</em> real $x$. The contrast is a useful sanity check whenever $\Delta &lt; 0$: depending on the direction of the inequality and the sign of $a$, the solution set is either everything or nothing.</span><span data-lang="zh">反向对照：$x^{2} + 2 x + 5 &gt; 0$ 对<em>所有</em>实 $x$ 成立。每当 $\Delta &lt; 0$，根据不等式方向与 $a$ 的符号，解集要么"全部实数"，要么"空集"。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Solve $x^{2} - 4 x + 3 \le 0$.</div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $x^{2} - 4 x + 3 \le 0$.</span><span data-lang="zh">求解 $x^{2} - 4 x + 3 \le 0$。</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-\infty, 1) \cup (3, \infty)$</div>
       <div class="quiz-opt" data-idx="1">$(-\infty, 1] \cup [3, \infty)$</div>
       <div class="quiz-opt" data-idx="2">$[1, 3]$</div>
       <div class="quiz-opt" data-idx="3">$(1, 3)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Factor: $(x - 1)(x - 3) \le 0$. Roots at $1, 3$; parabola opens upward. The expression is $\le 0$ <em>between</em> the roots (inclusive because $\le$).</div>
-    <div class="quiz-explain wrong-exp">Find roots, sketch the upward parabola, and pick the interval where the parabola is at or below the $x$-axis. Use square brackets for $\le$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Factor: $(x - 1)(x - 3) \le 0$. Roots at $1, 3$; parabola opens upward. The expression is $\le 0$ <em>between</em> the roots (inclusive because $\le$).</span><span data-lang="zh">分解：$(x - 1)(x - 3) \le 0$。实根 $1$、$3$；开口向上。表达式在两根<em>之间</em>非正（$\le$，含端点）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Find roots, sketch the upward parabola, and pick the interval where the parabola is at or below the $x$-axis. Use square brackets for $\le$.</span><span data-lang="zh">求根，画开口向上的抛物线，选抛物线在 $x$ 轴上或之下的区间。$\le$ 用方括号。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">For which $x$ is $-x^{2} + 4 x - 3 &gt; 0$?</div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For which $x$ is $-x^{2} + 4 x - 3 &gt; 0$?</span><span data-lang="zh">何时 $-x^{2} + 4 x - 3 &gt; 0$？</span></div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(1, 3)$</div>
       <div class="quiz-opt" data-idx="1">$[1, 3]$</div>
       <div class="quiz-opt" data-idx="2">$(-\infty, 1) \cup (3, \infty)$</div>
-      <div class="quiz-opt" data-idx="3">All real $x$</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">All real $x$</span><span data-lang="zh">所有实数 $x$</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Multiply by $-1$ (flip the inequality): $x^{2} - 4 x + 3 &lt; 0$, that is $(x - 1)(x - 3) &lt; 0$. Roots $1, 3$; upward parabola is below the axis <em>between</em> the roots. Strict, so use round brackets.</div>
-    <div class="quiz-explain wrong-exp">Either factor the expression directly or multiply by $-1$ (flipping the inequality). Either way the solution is the open interval between the roots.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Multiply by $-1$ (flip the inequality): $x^{2} - 4 x + 3 &lt; 0$, that is $(x - 1)(x - 3) &lt; 0$. Roots $1, 3$; upward parabola is below the axis <em>between</em> the roots. Strict, so use round brackets.</span><span data-lang="zh">两边乘 $-1$（不等号翻转）：$x^{2} - 4 x + 3 &lt; 0$，即 $(x - 1)(x - 3) &lt; 0$。实根 $1$、$3$；开口向上抛物线在两根<em>之间</em>低于 $x$ 轴。严格，故圆括号。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Either factor the expression directly or multiply by $-1$ (flipping the inequality). Either way the solution is the open interval between the roots.</span><span data-lang="zh">直接因式分解或乘以 $-1$ 翻转不等号皆可。解为两根之间的开区间。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Tactics</div>
-  <h2>Exam Strategy and Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Parabola anatomy</strong>
+    <strong style="color: var(--orange);"><span data-lang="en">Parabola anatomy</span><span data-lang="zh">抛物线结构</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Always read the sign of $a$ first.</strong> It tells you opening direction and whether the vertex is a max or a min. Forgetting this is the most common single-mark slip on parabola questions.</li>
-      <li><strong>Vertex from standard form:</strong> $x = -b/(2 a)$, then substitute back. Don't try to read the vertex off standard form by inspection.</li>
-      <li><strong>The $y$-intercept is always $c$.</strong> Plug $x = 0$ in to confirm if you're rushing.</li>
+      <li><strong><span data-lang="en">Always read the sign of $a$ first.</span><span data-lang="zh">先读 $a$ 的符号。</span></strong> <span data-lang="en">It tells you opening direction and whether the vertex is a max or a min. Forgetting this is the most common single-mark slip on parabola questions.</span><span data-lang="zh">它决定开口方向与顶点是最大还是最小。漏掉这一步是抛物线题最常见的一分丢失。</span></li>
+      <li><strong><span data-lang="en">Vertex from standard form:</span><span data-lang="zh">由一般式求顶点：</span></strong> <span data-lang="en">$x = -b/(2 a)$, then substitute back. Don't try to read the vertex off standard form by inspection.</span><span data-lang="zh">$x = -b/(2 a)$ 再代回。不要凭眼力直接从一般式"看"顶点。</span></li>
+      <li><strong><span data-lang="en">The $y$-intercept is always $c$.</span><span data-lang="zh">$y$ 截距恒为 $c$。</span></strong> <span data-lang="en">Plug $x = 0$ in to confirm if you're rushing.</span><span data-lang="zh">赶时间时可代入 $x = 0$ 核对。</span></li>
     </ul>
   </div>
 
   <div class="concept-box" style="border-left-color: var(--accent);">
-    <strong style="color: var(--accent);">Solving methods</strong>
+    <strong style="color: var(--accent);"><span data-lang="en">Solving methods</span><span data-lang="zh">求解方法</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Try factoring first.</strong> If integer coefficients factor cleanly, you save time over the formula.</li>
-      <li><strong>Fall back to the formula</strong> for messy coefficients or when factoring fails. Always state $\Delta$ on the page before you solve ,  it earns marks even when the arithmetic slips.</li>
-      <li><strong>Use completing the square for vertex form</strong> or when the question wants exact form (e.g. SAT, IB-style). The formula gives numeric roots; completing the square gives structure.</li>
-      <li><strong>Graph for "how many solutions" questions.</strong> The vertex's relation to the $x$-axis answers it in one move.</li>
+      <li><strong><span data-lang="en">Try factoring first.</span><span data-lang="zh">先尝试因式分解。</span></strong> <span data-lang="en">If integer coefficients factor cleanly, you save time over the formula.</span><span data-lang="zh">整数系数能干净分解时，比公式法省时。</span></li>
+      <li><strong><span data-lang="en">Fall back to the formula</span><span data-lang="zh">退而使用求根公式</span></strong> <span data-lang="en">for messy coefficients or when factoring fails. Always state $\Delta$ on the page before you solve ,  it earns marks even when the arithmetic slips.</span><span data-lang="zh">用于系数复杂或分解失败。求解前在纸上先写出 $\Delta$ ,  即便后续算错也能拿分。</span></li>
+      <li><strong><span data-lang="en">Use completing the square for vertex form</span><span data-lang="zh">用配方法取顶点式</span></strong> <span data-lang="en">or when the question wants exact form (e.g. SAT, IB-style). The formula gives numeric roots; completing the square gives structure.</span><span data-lang="zh">或题目要求精确形式时（如 SAT、IB 风格）。求根公式给数值根；配方法给结构。</span></li>
+      <li><strong><span data-lang="en">Graph for "how many solutions" questions.</span><span data-lang="zh">"几解"问题用图像。</span></strong> <span data-lang="en">The vertex's relation to the $x$-axis answers it in one move.</span><span data-lang="zh">顶点与 $x$ 轴的相对位置一步给出答案。</span></li>
     </ul>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Discriminant</strong>
+    <strong style="color: var(--purple);"><span data-lang="en">Discriminant</span><span data-lang="zh">判别式</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>$\Delta = b^{2} - 4 a c$ is a single number you compute first.</strong> Many exam questions only ask for the classification, not the roots themselves ,  in which case computing $\Delta$ is the whole answer.</li>
-      <li><strong>When $\Delta = 0$, the repeated root is $x = -b/(2 a)$.</strong> It is also the $x$-coordinate of the vertex. The parabola is tangent to the $x$-axis at that point.</li>
-      <li><strong>When $\Delta &lt; 0$, the parabola does not cross the $x$-axis.</strong> Phrase your answer in those terms unless your course covers complex roots, in which case the roots are $(-b \pm i \sqrt{-\Delta})/(2 a)$.</li>
+      <li><strong><span data-lang="en">$\Delta = b^{2} - 4 a c$ is a single number you compute first.</span><span data-lang="zh">$\Delta = b^{2} - 4 a c$ 是先算的单一数值。</span></strong> <span data-lang="en">Many exam questions only ask for the classification, not the roots themselves ,  in which case computing $\Delta$ is the whole answer.</span><span data-lang="zh">许多考题只问"几个实根"，并不问根本身 ,  此时 $\Delta$ 就是全部答案。</span></li>
+      <li><strong><span data-lang="en">When $\Delta = 0$, the repeated root is $x = -b/(2 a)$.</span><span data-lang="zh">$\Delta = 0$ 时，重根为 $x = -b/(2 a)$。</span></strong> <span data-lang="en">It is also the $x$-coordinate of the vertex. The parabola is tangent to the $x$-axis at that point.</span><span data-lang="zh">它也是顶点的 $x$ 坐标。抛物线在此点与 $x$ 轴相切。</span></li>
+      <li><strong><span data-lang="en">When $\Delta &lt; 0$, the parabola does not cross the $x$-axis.</span><span data-lang="zh">$\Delta &lt; 0$ 时，抛物线不与 $x$ 轴相交。</span></strong> <span data-lang="en">Phrase your answer in those terms unless your course covers complex roots, in which case the roots are $(-b \pm i \sqrt{-\Delta})/(2 a)$.</span><span data-lang="zh">除非课程覆盖复根，否则就以此措辞作答；若覆盖，根为 $(-b \pm i \sqrt{-\Delta})/(2 a)$。</span></li>
     </ul>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Modeling</strong>
+    <strong style="color: var(--green);"><span data-lang="en">Modeling</span><span data-lang="zh">建模</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Always name the variable and its units.</strong> "Let $W$ be the side perpendicular to the river, in metres" beats "let $W$ be a number."</li>
-      <li><strong>Vertex = optimum.</strong> Maximum height, maximum revenue, maximum area for a fixed perimeter ,  all are read off the vertex of a quadratic, not by trial.</li>
-      <li><strong>Check that the answer is physical.</strong> Negative time, negative length, negative revenue: discard.</li>
+      <li><strong><span data-lang="en">Always name the variable and its units.</span><span data-lang="zh">永远带单位命名变量。</span></strong> <span data-lang="en">"Let $W$ be the side perpendicular to the river, in metres" beats "let $W$ be a number."</span><span data-lang="zh">"设 $W$ 为垂直于河的边，单位米"远胜"设 $W$ 为某数"。</span></li>
+      <li><strong><span data-lang="en">Vertex = optimum.</span><span data-lang="zh">顶点 = 最优。</span></strong> <span data-lang="en">Maximum height, maximum revenue, maximum area for a fixed perimeter ,  all are read off the vertex of a quadratic, not by trial.</span><span data-lang="zh">最大高度、最大营收、固定周长下的最大面积 ,  都从二次顶点读出，不靠试值。</span></li>
+      <li><strong><span data-lang="en">Check that the answer is physical.</span><span data-lang="zh">核查答案是否符合物理意义。</span></strong> <span data-lang="en">Negative time, negative length, negative revenue: discard.</span><span data-lang="zh">负时间、负长度、负营收：舍去。</span></li>
     </ul>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Inequalities (BC PC11 / honors track)</strong>
+    <strong style="color: var(--red);"><span data-lang="en">Inequalities (BC PC11 / honors track)</span><span data-lang="zh">不等式（BC PC11 / 荣誉级）</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Sketch the parabola first.</strong> Sign analysis is faster on a sketch than on a symbol table.</li>
-      <li><strong>Strict vs. inclusive.</strong> $&lt;$ and $&gt;$ exclude the roots (round brackets); $\le$ and $\ge$ include them (square brackets). Mark this on the page before writing the final answer.</li>
-      <li><strong>Multiplying by a negative flips the inequality.</strong> If you flip the sign of $a$ to make the parabola open up, flip the inequality direction too.</li>
+      <li><strong><span data-lang="en">Sketch the parabola first.</span><span data-lang="zh">先画抛物线草图。</span></strong> <span data-lang="en">Sign analysis is faster on a sketch than on a symbol table.</span><span data-lang="zh">符号分析在草图上比在符号表上快。</span></li>
+      <li><strong><span data-lang="en">Strict vs. inclusive.</span><span data-lang="zh">严格与含端点。</span></strong> <span data-lang="en">$&lt;$ and $&gt;$ exclude the roots (round brackets); $\le$ and $\ge$ include them (square brackets). Mark this on the page before writing the final answer.</span><span data-lang="zh">$&lt;$、$&gt;$ 排除端点（圆括号）；$\le$、$\ge$ 含端点（方括号）。写最终答案前先在纸上标出。</span></li>
+      <li><strong><span data-lang="en">Multiplying by a negative flips the inequality.</span><span data-lang="zh">乘以负数翻转不等号。</span></strong> <span data-lang="en">If you flip the sign of $a$ to make the parabola open up, flip the inequality direction too.</span><span data-lang="zh">若把 $a$ 变号使开口向上，不等号方向也要随之翻转。</span></li>
     </ul>
   </div>
 </section>
@@ -976,128 +984,128 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <hr class="sep">
 
 <section class="section" id="flashcards">
-  <div class="section-label">Active Recall</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动回忆</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <div class="flashcard-toolbar">
-    <div id="fcCount">0 / 14 flipped</div>
+    <div id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">0 / 14 已翻</span></div>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
   <div class="flashcard-grid" id="flashcardGrid">
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Quadratic formula?</div><div class="flashcard-back">$$x = \frac{-b \pm \sqrt{b^{2} - 4 a c}}{2 a}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Discriminant?</div><div class="flashcard-back">$$\Delta = b^{2} - 4 a c$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Axis of symmetry of $a x^{2} + b x + c$?</div><div class="flashcard-back">$$x = -\frac{b}{2 a}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Vertex form?</div><div class="flashcard-back">$$y = a (x - h)^{2} + k$$ vertex $(h, k)$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Factored form?</div><div class="flashcard-back">$$y = a (x - r_{1})(x - r_{2})$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Vieta: sum of roots?</div><div class="flashcard-back">$$r_{1} + r_{2} = -\frac{b}{a}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Vieta: product of roots?</div><div class="flashcard-back">$$r_{1} r_{2} = \frac{c}{a}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Difference of squares?</div><div class="flashcard-back">$$a^{2} - b^{2} = (a - b)(a + b)$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Perfect-square trinomial?</div><div class="flashcard-back">$$a^{2} \pm 2 a b + b^{2} = (a \pm b)^{2}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Zero-product property?</div><div class="flashcard-back">$$A B = 0 \;\Rightarrow\; A = 0 \text{ or } B = 0$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">$\Delta &gt; 0$: how many real roots?</div><div class="flashcard-back">Two distinct real roots.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">$\Delta = 0$: how many real roots?</div><div class="flashcard-back">One repeated real root at $x = -b/(2 a)$.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Projectile height (metric)?</div><div class="flashcard-back">$$h(t) = -4.9 t^{2} + v_{0} t + h_{0}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">$(x + b/2)^{2}$ expanded?</div><div class="flashcard-back">$$x^{2} + b x + (b/2)^{2}$$ (completing the square)</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Quadratic formula?</span><span data-lang="zh">求根公式？</span></div><div class="flashcard-back">$$x = \frac{-b \pm \sqrt{b^{2} - 4 a c}}{2 a}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Discriminant?</span><span data-lang="zh">判别式？</span></div><div class="flashcard-back">$$\Delta = b^{2} - 4 a c$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Axis of symmetry of $a x^{2} + b x + c$?</span><span data-lang="zh">$a x^{2} + b x + c$ 的对称轴？</span></div><div class="flashcard-back">$$x = -\frac{b}{2 a}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Vertex form?</span><span data-lang="zh">顶点式？</span></div><div class="flashcard-back">$$y = a (x - h)^{2} + k$$ <span data-lang="en">vertex $(h, k)$</span><span data-lang="zh">顶点 $(h, k)$</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Factored form?</span><span data-lang="zh">因式分解式？</span></div><div class="flashcard-back">$$y = a (x - r_{1})(x - r_{2})$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Vieta: sum of roots?</span><span data-lang="zh">韦达：根之和？</span></div><div class="flashcard-back">$$r_{1} + r_{2} = -\frac{b}{a}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Vieta: product of roots?</span><span data-lang="zh">韦达：根之积？</span></div><div class="flashcard-back">$$r_{1} r_{2} = \frac{c}{a}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Difference of squares?</span><span data-lang="zh">平方差？</span></div><div class="flashcard-back">$$a^{2} - b^{2} = (a - b)(a + b)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Perfect-square trinomial?</span><span data-lang="zh">完全平方三项式？</span></div><div class="flashcard-back">$$a^{2} \pm 2 a b + b^{2} = (a \pm b)^{2}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Zero-product property?</span><span data-lang="zh">零积性质？</span></div><div class="flashcard-back">$$A B = 0 \;\Rightarrow\; A = 0 \text{ or } B = 0$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">$\Delta &gt; 0$: how many real roots?</span><span data-lang="zh">$\Delta &gt; 0$：几个实根？</span></div><div class="flashcard-back"><span data-lang="en">Two distinct real roots.</span><span data-lang="zh">两个不同实根。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">$\Delta = 0$: how many real roots?</span><span data-lang="zh">$\Delta = 0$：几个实根？</span></div><div class="flashcard-back"><span data-lang="en">One repeated real root at $x = -b/(2 a)$.</span><span data-lang="zh">一个重实根，位于 $x = -b/(2 a)$。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Projectile height (metric)?</span><span data-lang="zh">投射高度（公制）？</span></div><div class="flashcard-back">$$h(t) = -4.9 t^{2} + v_{0} t + h_{0}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">$(x + b/2)^{2}$ expanded?</span><span data-lang="zh">$(x + b/2)^{2}$ 展开？</span></div><div class="flashcard-back">$$x^{2} + b x + (b/2)^{2}$$ <span data-lang="en">(completing the square)</span><span data-lang="zh">（配方法）</span></div></div></div>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="unit-quiz">
-  <div class="section-label">Mixed Practice</div>
-  <h2>Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></h2>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">The graph of $y = -x^{2} + 6 x - 5$ has its vertex at which point?</div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">The graph of $y = -x^{2} + 6 x - 5$ has its vertex at which point?</span><span data-lang="zh">$y = -x^{2} + 6 x - 5$ 的顶点在哪一点？</span></div><div class="quiz-number">Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-3, -32)$</div>
       <div class="quiz-opt" data-idx="1">$(3, -14)$</div>
       <div class="quiz-opt" data-idx="2">$(3, 4)$</div>
       <div class="quiz-opt" data-idx="3">$(6, -5)$</div>
     </div>
-    <div class="quiz-explain correct-exp">$h = -b/(2 a) = -6/(-2) = 3$; $k = -9 + 18 - 5 = 4$. Vertex $(3, 4)$.</div>
-    <div class="quiz-explain wrong-exp">Compute the vertex's $x$-coordinate with $x = -b/(2 a)$, then substitute back into the function for the $y$-coordinate.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$h = -b/(2 a) = -6/(-2) = 3$; $k = -9 + 18 - 5 = 4$. Vertex $(3, 4)$.</span><span data-lang="zh">$h = -b/(2 a) = -6/(-2) = 3$；$k = -9 + 18 - 5 = 4$。顶点 $(3, 4)$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Compute the vertex's $x$-coordinate with $x = -b/(2 a)$, then substitute back into the function for the $y$-coordinate.</span><span data-lang="zh">用 $x = -b/(2 a)$ 算顶点 $x$ 坐标，再代回函数求 $y$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Solve $3 x^{2} + 4 x - 4 = 0$ by factoring.</div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $3 x^{2} + 4 x - 4 = 0$ by factoring.</span><span data-lang="zh">用因式分解法求解 $3 x^{2} + 4 x - 4 = 0$。</span></div><div class="quiz-number">Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = -2, \tfrac{1}{3}$</div>
       <div class="quiz-opt" data-idx="1">$x = -2, \tfrac{2}{3}$</div>
       <div class="quiz-opt" data-idx="2">$x = 2, -\tfrac{2}{3}$</div>
       <div class="quiz-opt" data-idx="3">$x = 1, -\tfrac{4}{3}$</div>
     </div>
-    <div class="quiz-explain correct-exp">$a c = 3 \cdot (-4) = -12$. Pair $(6, -2)$ sums to $4$. Split: $3 x^{2} + 6 x - 2 x - 4 = 3 x (x + 2) - 2 (x + 2) = (3 x - 2)(x + 2)$. Roots: $x = 2/3$ or $x = -2$.</div>
-    <div class="quiz-explain wrong-exp">AC method: $a c = -12$, find $u + v = 4$ and $u v = -12$, then split the middle term and factor by grouping.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$a c = 3 \cdot (-4) = -12$. Pair $(6, -2)$ sums to $4$. Split: $3 x^{2} + 6 x - 2 x - 4 = 3 x (x + 2) - 2 (x + 2) = (3 x - 2)(x + 2)$. Roots: $x = 2/3$ or $x = -2$.</span><span data-lang="zh">$a c = -12$。$(6, -2)$ 和为 $4$。拆项：$3 x^{2} + 6 x - 2 x - 4 = (3 x - 2)(x + 2)$。实根 $x = 2/3$ 或 $x = -2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">AC method: $a c = -12$, find $u + v = 4$ and $u v = -12$, then split the middle term and factor by grouping.</span><span data-lang="zh">AC 法：$a c = -12$，找 $u + v = 4$、$u v = -12$，拆中间项并分组分解。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">For what value of $k$ does $x^{2} + k x + 9 = 0$ have exactly one repeated real root?</div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For what value of $k$ does $x^{2} + k x + 9 = 0$ have exactly one repeated real root?</span><span data-lang="zh">$k$ 取何值时 $x^{2} + k x + 9 = 0$ 恰有一个重实根？</span></div><div class="quiz-number">Q3</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$k = \pm 6$</div>
       <div class="quiz-opt" data-idx="1">$k = \pm 3$</div>
       <div class="quiz-opt" data-idx="2">$k = 0$</div>
       <div class="quiz-opt" data-idx="3">$k = 9$</div>
     </div>
-    <div class="quiz-explain correct-exp">$\Delta = k^{2} - 36 = 0 \;\Rightarrow\; k^{2} = 36 \;\Rightarrow\; k = \pm 6$.</div>
-    <div class="quiz-explain wrong-exp">Set $\Delta = b^{2} - 4 a c = 0$ and solve for $k$. Here $a = 1$ and $c = 9$, so $k^{2} = 36$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$\Delta = k^{2} - 36 = 0 \;\Rightarrow\; k^{2} = 36 \;\Rightarrow\; k = \pm 6$.</span><span data-lang="zh">$\Delta = k^{2} - 36 = 0 \Rightarrow k = \pm 6$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Set $\Delta = b^{2} - 4 a c = 0$ and solve for $k$. Here $a = 1$ and $c = 9$, so $k^{2} = 36$.</span><span data-lang="zh">令 $\Delta = b^{2} - 4 a c = 0$ 解 $k$。此处 $a = 1$、$c = 9$，故 $k^{2} = 36$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-header"><div class="quiz-q">Rewrite $y = -2 x^{2} + 4 x + 7$ in vertex form.</div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Rewrite $y = -2 x^{2} + 4 x + 7$ in vertex form.</span><span data-lang="zh">将 $y = -2 x^{2} + 4 x + 7$ 化为顶点式。</span></div><div class="quiz-number">Q4</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = -2 (x + 1)^{2} + 5$</div>
       <div class="quiz-opt" data-idx="1">$y = -2 (x - 1)^{2} + 7$</div>
       <div class="quiz-opt" data-idx="2">$y = -2 (x + 1)^{2} + 9$</div>
       <div class="quiz-opt" data-idx="3">$y = -2 (x - 1)^{2} + 9$</div>
     </div>
-    <div class="quiz-explain correct-exp">$y = -2 (x^{2} - 2 x) + 7 = -2 (x^{2} - 2 x + 1 - 1) + 7 = -2 (x - 1)^{2} + 2 + 7 = -2 (x - 1)^{2} + 9$.</div>
-    <div class="quiz-explain wrong-exp">Factor $-2$ out of the $x^{2}$ and $x$ terms first, then complete the square inside the brackets. Don't forget the sign change when distributing $-2$ back through the $-1$ correction term.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$y = -2 (x^{2} - 2 x) + 7 = -2 (x^{2} - 2 x + 1 - 1) + 7 = -2 (x - 1)^{2} + 2 + 7 = -2 (x - 1)^{2} + 9$.</span><span data-lang="zh">$y = -2 (x^{2} - 2 x) + 7 = -2 (x - 1)^{2} + 2 + 7 = -2 (x - 1)^{2} + 9$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factor $-2$ out of the $x^{2}$ and $x$ terms first, then complete the square inside the brackets. Don't forget the sign change when distributing $-2$ back through the $-1$ correction term.</span><span data-lang="zh">先从 $x^{2}$、$x$ 项中提出 $-2$，再在括号内配方。把 $-2$ 重分配过 $-1$ 修正项时勿忘符号变化。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">A diver jumps from a $10$-metre platform with initial upward velocity $2$ m/s. Her height above the water is $h(t) = -4.9 t^{2} + 2 t + 10$. When does she hit the water? (Use the positive root, to two decimals.)</div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A diver jumps from a $10$-metre platform with initial upward velocity $2$ m/s. Her height above the water is $h(t) = -4.9 t^{2} + 2 t + 10$. When does she hit the water? (Use the positive root, to two decimals.)</span><span data-lang="zh">跳水员从 $10$ 米跳台以 $2$ m/s 向上起跳，离水面高度 $h(t) = -4.9 t^{2} + 2 t + 10$。何时入水？（取正根，两位小数。）</span></div><div class="quiz-number">Q5</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$t \approx 1.21$ s</div>
       <div class="quiz-opt" data-idx="1">$t \approx 1.65$ s</div>
-      <div class="quiz-opt" data-idx="2">$t \approx 1.65$ s (after applying the formula and discarding the negative root)</div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$t \approx 1.65$ s (after applying the formula and discarding the negative root)</span><span data-lang="zh">$t \approx 1.65$ s（用求根公式后舍去负根）</span></div>
       <div class="quiz-opt" data-idx="3">$t \approx 2.04$ s</div>
     </div>
-    <div class="quiz-explain correct-exp">Set $h(t) = 0$: $-4.9 t^{2} + 2 t + 10 = 0$. Quadratic formula: $t = (-2 \pm \sqrt{4 + 196}) / (-9.8) = (-2 \pm \sqrt{200}) / (-9.8) \approx (-2 \pm 14.14)/(-9.8)$. Positive root: $t \approx 1.65$ s.</div>
-    <div class="quiz-explain wrong-exp">Apply the quadratic formula with $a = -4.9$, $b = 2$, $c = 10$. Keep only the positive root since negative time is unphysical.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Set $h(t) = 0$: $-4.9 t^{2} + 2 t + 10 = 0$. Quadratic formula: $t = (-2 \pm \sqrt{4 + 196}) / (-9.8) = (-2 \pm \sqrt{200}) / (-9.8) \approx (-2 \pm 14.14)/(-9.8)$. Positive root: $t \approx 1.65$ s.</span><span data-lang="zh">令 $h(t) = 0$：$-4.9 t^{2} + 2 t + 10 = 0$。求根公式：$t = (-2 \pm \sqrt{200})/(-9.8)$。正根 $t \approx 1.65$ s。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Apply the quadratic formula with $a = -4.9$, $b = 2$, $c = 10$. Keep only the positive root since negative time is unphysical.</span><span data-lang="zh">用 $a = -4.9$、$b = 2$、$c = 10$ 套求根公式。负时间无物理意义，只留正根。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Solve the inequality $x^{2} + 2 x - 8 &lt; 0$. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 / US Alg 2+</span></div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve the inequality $x^{2} + 2 x - 8 &lt; 0$.</span><span data-lang="zh">求解不等式 $x^{2} + 2 x - 8 &lt; 0$。</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 / US Alg 2+</span></div><div class="quiz-number">Q6</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-\infty, -4) \cup (2, \infty)$</div>
       <div class="quiz-opt" data-idx="1">$(-4, 2)$</div>
       <div class="quiz-opt" data-idx="2">$[-4, 2]$</div>
       <div class="quiz-opt" data-idx="3">$(-2, 4)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Factor: $(x + 4)(x - 2) &lt; 0$. Roots at $-4, 2$; upward parabola is below the $x$-axis between the roots. Strict $&lt;$ means open brackets.</div>
-    <div class="quiz-explain wrong-exp">Factor first; find roots $-4, 2$; sign analysis on an upward-opening parabola gives the interval between the roots, open because the inequality is strict.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Factor: $(x + 4)(x - 2) &lt; 0$. Roots at $-4, 2$; upward parabola is below the $x$-axis between the roots. Strict $&lt;$ means open brackets.</span><span data-lang="zh">分解：$(x + 4)(x - 2) &lt; 0$。实根 $-4$、$2$；开口向上抛物线在两根之间低于 $x$ 轴。严格 $&lt;$ → 圆括号。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Factor first; find roots $-4, 2$; sign analysis on an upward-opening parabola gives the interval between the roots, open because the inequality is strict.</span><span data-lang="zh">先因式分解；求根 $-4$、$2$；对开口向上抛物线作符号分析得两根之间的开区间（严格不等式）。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">A linear-quadratic system: $\begin{cases} y = x + 1 \\ y = x^{2} - 5 \end{cases}$. How many intersection points are there?</div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A linear-quadratic system: $\begin{cases} y = x + 1 \\ y = x^{2} - 5 \end{cases}$. How many intersection points are there?</span><span data-lang="zh">一次—二次方程组：$\begin{cases} y = x + 1 \\ y = x^{2} - 5 \end{cases}$。交点几个？</span></div><div class="quiz-number">Q7</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">None.</div>
-      <div class="quiz-opt" data-idx="1">One.</div>
-      <div class="quiz-opt" data-idx="2">Two.</div>
-      <div class="quiz-opt" data-idx="3">Infinitely many.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">None.</span><span data-lang="zh">无。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">One.</span><span data-lang="zh">一个。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Two.</span><span data-lang="zh">两个。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Infinitely many.</span><span data-lang="zh">无穷多。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Set $x + 1 = x^{2} - 5$, that is $x^{2} - x - 6 = 0$. $\Delta = 1 + 24 = 25 &gt; 0$, two distinct real roots ($x = 3$ and $x = -2$). Two intersection points.</div>
-    <div class="quiz-explain wrong-exp">Substitute the linear equation into the quadratic and check the discriminant of the resulting one-variable equation. Two intersection points correspond to $\Delta &gt; 0$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Set $x + 1 = x^{2} - 5$, that is $x^{2} - x - 6 = 0$. $\Delta = 1 + 24 = 25 &gt; 0$, two distinct real roots ($x = 3$ and $x = -2$). Two intersection points.</span><span data-lang="zh">令 $x + 1 = x^{2} - 5$，即 $x^{2} - x - 6 = 0$。$\Delta = 25 &gt; 0$，两个不同实根（$x = 3$、$x = -2$）。即两个交点。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Substitute the linear equation into the quadratic and check the discriminant of the resulting one-variable equation. Two intersection points correspond to $\Delta &gt; 0$.</span><span data-lang="zh">把一次方程代入二次，检查所得一元方程的判别式。两交点对应 $\Delta &gt; 0$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 

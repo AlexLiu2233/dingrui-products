@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High School Math — Combinatorics and the Binomial Theorem — Practice | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-Math-11  dingrui:doc-type practice -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style data-theme="light">
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --easy-bg:#E7F2E3; --easy-ink:#2F6B2F; --easy-rule:#79A977;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+    --region-bg:#F5F2EE; --region-ink:#3A322B; --region-rule:#B5A68F;
+    --paper-bg:#FBE9E9;  --paper-ink:#7A2E2E;  --paper-rule:#C97A7A;
+    --honors-bg:#FDF5EC; --honors-ink:#7A5618; --honors-rule:#C4956A;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  .pill.region{background:var(--region-bg);color:var(--region-ink);border-color:var(--region-rule);letter-spacing:.08em;}
+  .pill.paper {background:var(--paper-bg); color:var(--paper-ink); border-color:var(--paper-rule);}
+  .pill.honors{background:var(--honors-bg);color:var(--honors-ink);border-color:var(--honors-rule);text-transform:uppercase;}
+  .syllabus-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0 6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;}
+  .syllabus-strip .col{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:5px;padding:8px 10px;background:#fdfbf8;}
+  .syllabus-strip .col b{display:block;font-size:9.5pt;margin-bottom:3px;color:var(--maroon);letter-spacing:.05em;}
+  .syllabus-strip .col code{font-family:'JetBrains Mono',monospace;font-size:8.5pt;color:#4A3A2A;background:#EFE9E4;padding:1px 4px;border-radius:3px;}
+  .syllabus-strip-note{font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#555;font-style:italic;text-align:center;margin:4px 0 12px;}
+  @media (max-width: 800px){.syllabus-strip{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width: 500px){.syllabus-strip{grid-template-columns:1fr;}}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:'Source Sans 3',sans-serif;font-size:10.5pt;margin:4px 0 22px;color:#222;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .draft-banner{font-family:'Source Sans 3',sans-serif;font-size:9.5pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:12px 18px 14px;margin-bottom:16px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q.frq{border-left-color:#1E3F75;}
+  .q.app{border-left-color:#C4956A;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px;font-family:'Source Sans 3',sans-serif;}
+  .q-head .title{margin-left:auto;font-size:9.5pt;color:#666;font-style:italic;}
+  .q-body{font-size:11.5pt;line-height:1.5;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 10px;}
+  .q-body ol.mcq{list-style:none;padding:0;margin:8px 0 4px;font-size:11pt;}
+  .q-body ol.mcq li{margin:3px 0 3px 6px;}
+  .q-body ol.mcq li .lab{font-family:'Source Sans 3',sans-serif;font-weight:700;color:var(--maroon);margin-right:8px;}
+  .work{min-height:90px;border-top:1px dashed #c9c4bd;margin-top:8px;}
+  .work.s{min-height:50px;} .work.m{min-height:120px;} .work.l{min-height:170px;} .work.xl{min-height:240px;}
+  .frq-parts{margin-top:6px;}
+  .frq-parts .part-item{margin:6px 0 4px;}
+  .frq-parts .part-item > .tag{font-family:'Source Sans 3',sans-serif;font-weight:700;margin-right:6px;}
+  .frq-parts .part-item .marks-inline{font-family:'JetBrains Mono',monospace;font-size:9pt;color:#666;font-weight:700;float:right;letter-spacing:.05em;}
+  .frq-parts .part-item .sub-part{margin:4px 0 4px 18px;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
+<div class="chapter-tag">Practice</div>
+<h1 class="chapter-title">Combinatorics and the Binomial Theorem</h1>
+<p class="chapter-sub">Practice Questions &middot; SAT-style MCQ &middot; AP-Feeder FRQ &middot; ON / BC / AB Provincial Styles</p>
+
+<div class="legend">
+  <span class="pill easy">EASY</span>
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+  <span class="pill paper">SAT-style MCQ</span>
+  <span class="pill paper">AP-feeder FRQ</span>
+  <span class="pill paper">ON Provincial-style</span>
+  <span class="pill paper">BC Provincial-style</span>
+  <span class="pill paper">AB Provincial-style</span>
+  <span class="pill honors">Honors</span>
+</div>
+
+<!-- Condensed Syllabus Map (full 4-column callout lives in the Study Guide). -->
+<div class="syllabus-strip">
+  <div class="col"><b>&#x1F1FA;&#x1F1F8; US Common Core</b><code>HSS-CP.B.9</code> (+) &middot; <code>HSA-APR.C.5</code> (+) &middot; <em>both plus-cluster (honors / Pre-Calc / AP-feeder); CCSSM does not host combinatorics in standard Algebra II</em></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; Ontario</b>MDM4U <em>Counting and Probability</em> (fundamental counting principle, $_{n}P_{r}$, $_{n}C_{r}$, identical-elements) &middot; MHF4U <em>Polynomial Functions</em> (Pascal's triangle, Binomial Theorem)</div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; British Columbia</b>PC 12 content topic <em>"Permutations, Combinations, and Binomial Theorem"</em> &middot; counting principle, $_{n}P_{r}$, $_{n}C_{r}$, Pascal's triangle, $(a+b)^n$ for natural $n$</div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; Alberta</b>Math 30-1 General Outcome <em>"Permutations, Combinations and Binomial Theorem"</em> &middot; SO 1 (counting) &middot; SO 2 ($_{n}P_{r}$) &middot; SO 3 ($_{n}C_{r}$) &middot; SO 4 (Binomial Theorem, specific term)</div>
+</div>
+<p class="syllabus-strip-note">Full 4-column Syllabus Map lives in <code>../Study Guides/Unit_11_Combinatorics_and_the_Binomial_Theorem.html</code>. US students: treat the whole unit as Honors / AP-feeder; every question carries an Honors chip when stamped US.</p>
+
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1</code> &middot; 12 Qs &middot; 90 marks &middot; region + paper-style chips on every question &middot; companion: <code>Solutions/Unit_11_Combinatorics_and_the_Binomial_Theorem_Solutions.html</code></p>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART I, Short Response (SAT-style + Provincial short answer)
+     5 questions, 22 marks total.
+     Touches §1 (multiplication rule), §2 ($_{n}P_{r}$), §3 ($_{n}C_{r}$),
+     §4 (Pascal symmetry).
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span class="part-meta">SAT-style MCQ + Provincial short answer &middot; 22 marks</span></div>
+<h2 class="section-head">Section A &middot; Short Response</h2>
+<p class="instructions">Mix of multiple-choice and short-answer items. For MCQs, circle the letter; show enough work in the margin that a marker could verify. Before any count, state whether <em>order matters</em> (permutation) or <em>order does not</em> (combination). No calculator on Q1–Q4; calculator permitted on Q5.</p>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;1 Counting Principle &middot; HSS-CP.B.9 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A cafeteria offers $4$ sandwiches, $3$ sides, and $5$ drinks. A meal consists of one sandwich, one side, and one drink. How many distinct meals are possible?</p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $12$</li>
+      <li><span class="lab">(B)</span> $60$</li>
+      <li><span class="lab">(C)</span> $120$</li>
+      <li><span class="lab">(D)</span> $720$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;2 Permutations &middot; HSS-CP.B.9 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Evaluate $_{7}P_{3}$.</p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $21$</li>
+      <li><span class="lab">(B)</span> $35$</li>
+      <li><span class="lab">(C)</span> $210$</li>
+      <li><span class="lab">(D)</span> $5040$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;4 Pascal Symmetry &middot; HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Which of the following is equal to $\binom{15}{4}$?</p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $\binom{15}{3}$</li>
+      <li><span class="lab">(B)</span> $\binom{15}{11}$</li>
+      <li><span class="lab">(C)</span> $\binom{4}{15}$</li>
+      <li><span class="lab">(D)</span> $\binom{11}{4}$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;3 Combinations &middot; MDM4U Counting and Probability</span>
+    <span class="pill marks">[6 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A school's debate club has $12$ members. Three of them must be chosen to attend a tournament.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> If the three attendees are sent as an undifferentiated team (no roles), how many ways are there to choose them? State whether you used $_{n}P_{r}$ or $\binom{n}{r}$ and justify in one sentence. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> If, instead, the three attendees are to be assigned the distinct roles of <em>captain</em>, <em>first speaker</em>, and <em>second speaker</em>, how many ways are there? <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Verify numerically that your answer to (b) equals $3!$ times your answer to (a), and explain the factor of $3!$ combinatorially. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AB Provincial-style</span>
+    <span class="pill topic">&sect;2 Identical-Elements Permutations &middot; AB Math 30-1 SO 2 (indicator 2.6)</span>
+    <span class="pill marks">[7 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the word <em>STATISTICS</em> ($10$ letters: $3$ S, $3$ T, $1$ A, $2$ I, $1$ C).</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> State the identical-elements formula for the number of distinguishable letter arrangements of a word with repeated letters, in terms of the total letter count $n$ and the multiplicities $k_{1}, k_{2}, \ldots, k_{m}$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> Compute the number of distinguishable letter arrangements of <em>STATISTICS</em>. Give the exact integer. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> If the word were instead <em>STATS</em> ($5$ letters: $2$ S, $2$ T, $1$ A), how many distinguishable arrangements would there be? <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART II, Extended Response (AP-feeder FRQ + Honors)
+     4 questions, 38 marks total.
+     §3 (multi-step combinations), §4 (Pascal's rule), §5 (Binomial Theorem),
+     §6 (specific-term extraction). Q9 is the cross-region honors capstone
+     on the negative-power case (x + b/x)^n.
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span class="part-meta">AP-feeder FRQ + honors &middot; 38 marks</span></div>
+<h2 class="section-head">Section B &middot; Extended Response</h2>
+<p class="instructions">Show every algebraic step. State the general term $T_{r+1} = \binom{n}{r} a^{n-r} b^{r}$ before substituting in any binomial-expansion problem. No calculator on Q6–Q9 unless noted.</p>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">BC Provincial-style</span>
+    <span class="pill topic">&sect;3 Committee Counts &middot; BC PC 12 Permutations/Combinations</span>
+    <span class="pill marks">[8 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A committee of $5$ is to be chosen from a group of $8$ women and $6$ men.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> How many committees are possible with no restriction on composition? <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> How many committees contain exactly $3$ women and $2$ men? <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> How many committees contain at least $4$ women? <span class="marks-inline">[3]</span><div class="work m"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AB Provincial-style</span>
+    <span class="pill topic">&sect;5 Binomial Theorem &middot; AB Math 30-1 SO 4 (indicators 4.1, 4.5)</span>
+    <span class="pill marks">[9 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the expansion of $(2x + 3)^{5}$ via the Binomial Theorem.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Write row $5$ of Pascal's triangle. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> Write out the general term $T_{r+1} = \binom{n}{r} a^{n-r} b^{r}$ for $(2x + 3)^{5}$, with $a = 2x$, $b = 3$, $n = 5$, $r = 0, 1, \ldots, 5$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Compute the full expansion of $(2x + 3)^{5}$ in expanded standard form, simplifying each coefficient. <span class="marks-inline">[5]</span><div class="work l"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> State the sum of all coefficients in the expansion, and check it equals $(2(1) + 3)^{5} = 5^{5} = 3125$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;6 Term Extraction (positive powers) &middot; MHF4U Polynomial Functions</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the expansion of $(2x - 3)^{12}$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> State the general term $T_{r+1}$ of $(2x - 3)^{12}$ as a function of $r$, where $r \in \{0, 1, 2, \ldots, 12\}$. Simplify so that the dependence on $x$ is in a single power $x^{12-r}$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> Find the value of $r$ that produces the term containing $x^{7}$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Compute the coefficient of $x^{7}$ in the expansion of $(2x - 3)^{12}$. Give the exact signed integer. <span class="marks-inline">[4]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> State the sign of your coefficient and explain in one sentence why this sign is consistent with the pattern $T_{r+1}$ alternates sign as $r$ increases by one. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;6 Term Extraction (negative powers) &middot; BC PC 12 / HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[11 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Consider the expansion of $\left(x + \dfrac{2}{x}\right)^{10}$, valid for $x \ne 0$.</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> State the general term $T_{r+1}$ as a function of $r$, where $r \in \{0, 1, 2, \ldots, 10\}$. Simplify so that the dependence on $x$ is in a single power $x^{10-2r}$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> Find the value of $r$ that produces the <em>constant term</em> (the term with $x^{0}$). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Compute the constant term. Give the exact integer. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> Find the value of $r$ that produces the term containing $x^{4}$, and compute the coefficient of $x^{4}$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> Explain in one sentence why only <em>even</em> powers of $x$ can appear in this expansion (cite the form of the exponent of $x$ in $T_{r+1}$). <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART III, Modeling / Identities (Universal + Honors capstone)
+     3 questions, 30 marks total.
+     §1+§3 word-problem modeling (Q10), §7 subset identities (Q11),
+     §3+§5 hybrid (Q12) AP-feeder capstone.
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / IDENTITIES</span><span class="part-meta">Universal + honors capstone &middot; 30 marks</span></div>
+<h2 class="section-head">Section C &middot; Modeling and Identities</h2>
+<p class="instructions">Name your sample space and the choice rule (with or without replacement; ordered or unordered) before writing any count. State each combinatorial identity in symbols before applying it. Calculator permitted throughout Part III.</p>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;1 + &sect;3 Modeling &middot; MDM4U Counting and Probability</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A province issues licence plates with $3$ uppercase letters from $\{A, B, \ldots, Z\}$ followed by $3$ digits from $\{0, 1, \ldots, 9\}$. The letters $I, O$ and the digit $0$ are excluded as confusing (so there are effectively $24$ usable letters and $9$ usable digits).</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> How many distinct plates are possible if repetition is allowed throughout? <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> How many plates are possible if no letter and no digit may be repeated? <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> A driver applies for a plate at random from the with-repetition pool in (a). What is the probability that the plate has no repeated letter and no repeated digit? Give an exact ratio and a decimal to three decimal places. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> If the province later allows plates of the form <em>two letters, two digits, in any one of the two interleaved orders</em> (i.e. LL-DD or LD-LD), how many plates are possible with the same $24$-letter, $9$-digit alphabets and repetition allowed? Justify your "multiply, not add" reasoning. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;7 Subset-Count Identities &middot; HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Let $n$ be a positive integer. Consider the identity
+    $$ \sum_{r=0}^{n} \binom{n}{r} \;=\; 2^{n}. $$</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> Derive this identity as a corollary of the Binomial Theorem by choosing a specific substitution into $(a + b)^{n} = \sum_{r=0}^{n} \binom{n}{r} a^{n-r} b^{r}$. State the substitution and show the resulting line of algebra. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> Give a combinatorial (double-counting) proof of the same identity. The left side counts what? The right side counts what? Explain in two sentences why both expressions count the same thing. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Verify the identity numerically for $n = 6$ by adding row $6$ of Pascal's triangle ($1, 6, 15, 20, 15, 6, 1$) and confirming that the sum equals $2^{6} = 64$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> Use the analogous substitution $a = 1$, $b = -1$ into the Binomial Theorem to derive the alternating-sum identity $\sum_{r=0}^{n} (-1)^{r} \binom{n}{r} = 0$ (for $n \ge 1$). State the substitution; show the resulting line. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;3 + &sect;5 Capstone &middot; HSS-CP.B.9 (+) / AB Math 30-1 SO 3, 4</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">A standard $52$-card deck is shuffled and a $5$-card poker hand is dealt at random (order does not matter).</p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> State the size of the sample space, $\binom{52}{5}$, as a simplified integer. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> A "flush" is a $5$-card hand whose cards all share the same suit (there are $4$ suits, each of $13$ cards). Count the number of flushes. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> Compute the probability of being dealt a flush, $P(\text{flush})$, as an exact ratio of binomial coefficients and as a decimal to four decimal places. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> Independently, consider the expansion of $(x + 1)^{52}$. State the coefficient of $x^{5}$ in this expansion, and explain in one sentence why this number is equal to your answer in (a). Reference the combinatorial interpretation $\binom{n}{r}$ counts $r$-subsets of an $n$-set. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Practice &middot; <code style="color:#555;">v1</code></span>
+  <span>12 Qs &middot; 90 marks &middot; US / ON / BC / AB &middot; SAT / AP-feeder / Provincial</span>
+</footer>
+
+</body>
+</html>

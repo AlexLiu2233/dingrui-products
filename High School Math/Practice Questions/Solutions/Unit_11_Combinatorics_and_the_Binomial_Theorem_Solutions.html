@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High School Math — Combinatorics and the Binomial Theorem — Solutions | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-Math-11  dingrui:doc-type solutions -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style>
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --easy-bg:#E7F2E3; --easy-ink:#2F6B2F; --easy-rule:#79A977;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+    --region-bg:#F5F2EE; --region-ink:#3A322B; --region-rule:#B5A68F;
+    --paper-bg:#FBE9E9;  --paper-ink:#7A2E2E;  --paper-rule:#C97A7A;
+    --honors-bg:#FDF5EC; --honors-ink:#7A5618; --honors-rule:#C4956A;
+    --sol-bg:#F1F7EE;  --sol-rule:#5E8E47;  --sol-ink:#2F4E1E;
+    --sol-accent:#3E7228;
+    --insight-bg:#FBF6EC; --insight-rule:#C49350; --insight-ink:#5E4014;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:'Source Sans 3',sans-serif;font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  .pill.region{background:var(--region-bg);color:var(--region-ink);border-color:var(--region-rule);letter-spacing:.08em;}
+  .pill.paper {background:var(--paper-bg); color:var(--paper-ink); border-color:var(--paper-rule);}
+  .pill.honors{background:var(--honors-bg);color:var(--honors-ink);border-color:var(--honors-rule);text-transform:uppercase;}
+  .topics-line{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .draft-banner{font-family:'Source Sans 3',sans-serif;font-size:9.5pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:'Source Sans 3',sans-serif;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:14px 20px 6px;margin-bottom:22px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q.frq{border-left-color:#1E3F75;}
+  .q.app{border-left-color:#C4956A;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:12px;font-family:'Source Sans 3',sans-serif;}
+  .q-body{font-size:11pt;line-height:1.55;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 10px;font-style:italic;color:#444;border-left:2px solid #d8cdb8;padding-left:10px;}
+  .solution{margin:14px 0 8px;background:var(--sol-bg);border-left:3px solid var(--sol-rule);border-radius:0 4px 4px 0;padding:12px 18px 14px;font-size:11pt;line-height:1.6;}
+  .solution .answer-line{font-family:'Source Sans 3',sans-serif;font-weight:700;color:var(--sol-ink);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #d4e4cb;letter-spacing:.04em;font-size:11pt;}
+  .solution .answer-line .ans{color:var(--sol-accent);font-size:1.08em;letter-spacing:.08em;}
+  .solution .rationale{color:#2a2a2a;}
+  .solution .rationale p{margin:5px 0;}
+  .solution h4{font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10.5pt;color:var(--sol-ink);margin:10px 0 4px;letter-spacing:.05em;text-transform:uppercase;}
+  .solution ul, .solution ol{margin:6px 0 6px 22px;line-height:1.7;}
+  .solution .marks-call{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;letter-spacing:.04em;margin-left:6px;vertical-align:1px;}
+  .solution .insight{margin-top:10px;background:var(--insight-bg);border-left:2px solid var(--insight-rule);padding:8px 12px;font-size:10.5pt;color:var(--insight-ink);border-radius:0 3px 3px 0;}
+  .solution .insight strong{color:#7A4810;}
+  .solution .distractor{font-family:'Source Sans 3',sans-serif;font-size:10pt;color:#3a3a3a;background:#fff;border:1px solid #d4e4cb;border-radius:4px;padding:8px 12px;margin-top:8px;}
+  .solution .distractor .lab{color:var(--maroon);font-weight:700;margin-right:6px;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  @media (max-width: 600px){body{font-size:10.5pt;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
+<div class="chapter-tag">Solutions</div>
+<h1 class="chapter-title">Combinatorics and the Binomial Theorem &middot; Solutions</h1>
+<p class="chapter-sub">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; SAT / AP-feeder / ON / BC / AB styles</p>
+
+<div class="legend">
+  <span class="pill easy">EASY</span>
+  <span class="pill med">MEDIUM</span>
+  <span class="pill hard">HARD</span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+  <span class="pill paper">SAT-style MCQ</span>
+  <span class="pill paper">AP-feeder FRQ</span>
+  <span class="pill paper">ON Provincial-style</span>
+  <span class="pill paper">BC Provincial-style</span>
+  <span class="pill paper">AB Provincial-style</span>
+  <span class="pill honors">Honors</span>
+</div>
+
+<hr class="thick"><hr class="thin">
+
+<p class="draft-banner"><code>v1</code> &middot; companion to <code>Unit_11_Combinatorics_and_the_Binomial_Theorem_Practice.html</code> &middot; 12 Qs &middot; 90 marks &middot; mark-by-mark walkthroughs with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> callouts</p>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART I, Short Response Solutions (Q1–Q5, 22 marks)
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span class="part-meta">SAT MCQ + Provincial short answer &middot; 22 marks</span></div>
+<h2 class="section-head">Section A &middot; Worked Solutions</h2>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;1 Counting Principle &middot; HSS-CP.B.9 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Cafeteria: $4$ sandwiches $\times$ $3$ sides $\times$ $5$ drinks. Distinct meals?</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$60$ meals</span></div>
+    <div class="rationale">
+      <h4>(a) Apply the fundamental counting principle <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      A meal is built by three independent successive choices (sandwich, then side, then drink). The fundamental counting principle (multiplication rule) gives
+      $$ N \;=\; 4 \times 3 \times 5 \;=\; 60. $$
+      So there are <strong>$60$</strong> distinct meals, matching option <strong>(B)</strong>.
+
+      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+        <ul>
+          <li><strong>(A) $12$</strong>, multiplies only $4 \times 3$ (forgets the drinks slot entirely).</li>
+          <li><strong>(C) $120$</strong>, adds an extra factor of $2$ (perhaps mis-counting one slot, or treating a single choice as two).</li>
+          <li><strong>(D) $720$</strong>, computes $4! \cdot 3! \cdot 5! / \text{something}$, or applies $_{n}P_{r}$ where no ordering is needed; classic over-count from reaching for permutations when only the multiplication rule is needed.</li>
+        </ul>
+      </div>
+
+      <div class="insight"><strong>If the choices are independent and "with replacement" (each slot draws from its own pool), just multiply pool sizes.</strong> No factorials, no $_{n}P_{r}$, no $\binom{n}{r}$ are needed here, because the three pools (sandwich, side, drink) are <em>different sets</em>, not subsets of one set. Reach for factorials only when you are arranging or sub-selecting from the <em>same</em> pool. This is the single most common combinatorics misstep at the entry level: students who have just learnt permutations try to apply $_{n}P_{r}$ to multi-pool problems.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;2 Permutations &middot; HSS-CP.B.9 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Evaluate $_{7}P_{3}$.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(C) &nbsp;$210$</span></div>
+    <div class="rationale">
+      <h4>(a) Apply the permutation formula <span class="marks-call">M1&middot;A1</span></h4>
+      $$ {}_{7}P_{3} \;=\; \frac{7!}{(7-3)!} \;=\; \frac{7!}{4!} \;=\; 7 \cdot 6 \cdot 5 \;=\; 210. $$
+
+      <h4>(b) Cross-check by the "slots" intuition <span class="marks-call">A1</span></h4>
+      $_{7}P_{3}$ counts ordered arrangements of $3$ items drawn from $7$. Slot $1$: $7$ choices; slot $2$: $6$ remaining; slot $3$: $5$ remaining. Product $= 7 \cdot 6 \cdot 5 = 210$. $\checkmark$ Matches option <strong>(C)</strong>.
+
+      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+        <ul>
+          <li><strong>(A) $21$</strong>, $\binom{7}{2} = 21$, or $\binom{7}{5} = 21$; the student computed a <em>combination</em> instead of a permutation, possibly with the wrong $r$.</li>
+          <li><strong>(B) $35$</strong>, this is $\binom{7}{3} = 35$, the combination value, which is $_{7}P_{3} / 3!$ &mdash; off by a factor of $3! = 6$ because order was discounted.</li>
+          <li><strong>(D) $5040$</strong>, this is $7! = 5040$, the count of <em>full</em> arrangements of all $7$ items; the student forgot to stop after $3$ slots.</li>
+        </ul>
+      </div>
+
+      <div class="insight"><strong>$_{n}P_{r} = n \cdot (n-1) \cdots (n-r+1)$, a product of exactly $r$ descending factors.</strong> The factorial-quotient definition $n!/(n-r)!$ is conceptually clean but slow; the slot-product version is faster. The key check: count the factors. For $_{7}P_{3}$ you write three factors $7 \cdot 6 \cdot 5$, not four ($7 \cdot 6 \cdot 5 \cdot 4 = 840$, a common slip) and not two ($7 \cdot 6 = 42$, the other common slip). The number of factors equals the number of slots, not the size of the pool.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill paper">SAT-style MCQ</span>
+    <span class="pill topic">&sect;4 Pascal Symmetry &middot; HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[3 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Which is equal to $\binom{15}{4}$?</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$\binom{15}{11}$</span></div>
+    <div class="rationale">
+      <h4>(a) Apply Pascal symmetry $\binom{n}{r} = \binom{n}{n-r}$ <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      With $n = 15$, $r = 4$: the complementary index is $n - r = 15 - 4 = 11$. So
+      $$ \binom{15}{4} \;=\; \binom{15}{15-4} \;=\; \binom{15}{11}. $$
+      This matches option <strong>(B)</strong>. (Numerical check: $\binom{15}{4} = \frac{15 \cdot 14 \cdot 13 \cdot 12}{24} = \frac{32760}{24} = 1365$, and $\binom{15}{11} = \binom{15}{4} = 1365$ by the same symmetry. $\checkmark$)
+
+      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+        <ul>
+          <li><strong>(A) $\binom{15}{3}$</strong>, the student "decreased $r$ by $1$" instead of replacing $r$ by $n - r$; $\binom{15}{3} = 455 \ne 1365$.</li>
+          <li><strong>(C) $\binom{4}{15}$</strong>, the indices are illegally swapped, $\binom{n}{r}$ requires $0 \le r \le n$, so $\binom{4}{15}$ is conventionally zero (no way to choose $15$ from $4$).</li>
+          <li><strong>(D) $\binom{11}{4}$</strong>, the student replaced $n$ by $n - r$ but left $r$ alone; $\binom{11}{4} = 330 \ne 1365$.</li>
+        </ul>
+      </div>
+
+      <div class="insight"><strong>Pascal symmetry is a swap of $r$ with $n - r$, the $n$ stays.</strong> The combinatorial reason: choosing an $r$-subset of an $n$-set is the same as choosing the $(n - r)$-element complement to <em>leave behind</em>. Every $r$-subset $S$ pairs bijectively with its complement $S^{c}$, so the count is the same. AP-feeder problems love this swap because it converts an awkward $\binom{20}{17}$ into a fast $\binom{20}{3}$, three factors instead of seventeen. The diagnostic: whichever of $r$ and $n - r$ is smaller is the side you should compute on.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;3 Combinations &middot; MDM4U Counting and Probability</span>
+    <span class="pill marks">[6 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$12$ debate-club members; choose $3$. (a) Undifferentiated team count + justify $\binom{n}{r}$ vs $_{n}P_{r}$. (b) Distinct roles count. (c) Verify (b) $= 3! \times$ (a).</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\binom{12}{3} = 220$ teams (order does not matter) &nbsp;&middot;&nbsp; <span class="ans">(b)</span> ${}_{12}P_{3} = 1320$ role-assignments &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $1320 = 3! \cdot 220$, factor of $3! = 6$ counts the role-permutations of any fixed $3$-team</div>
+    <div class="rationale">
+      <h4>(a) Undifferentiated team: order does not matter <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Sending three people with no roles means the order of selection is irrelevant. Use combinations, $\binom{n}{r}$:
+      $$ \binom{12}{3} \;=\; \frac{12!}{3! \cdot 9!} \;=\; \frac{12 \cdot 11 \cdot 10}{3 \cdot 2 \cdot 1} \;=\; \frac{1320}{6} \;=\; 220. $$
+      Justification: "the three attendees are sent as an undifferentiated team", so swapping who-was-listed-first does not produce a new outcome.
+
+      <h4>(b) Distinct roles: order matters <span class="marks-call">M1&middot;A1</span></h4>
+      Assigning the three roles <em>captain</em>, <em>first speaker</em>, <em>second speaker</em> distinguishes the three attendees, so order matters. Use permutations:
+      $$ {}_{12}P_{3} \;=\; 12 \cdot 11 \cdot 10 \;=\; 1320. $$
+
+      <h4>(c) Verify and explain the factor of $3!$ <span class="marks-call">R1</span></h4>
+      Numerical: $3! \cdot 220 = 6 \cdot 220 = 1320$. $\checkmark$<br>
+      Combinatorial: every <em>unordered</em> $3$-team in (a) can be assigned the three distinct roles in $3! = 6$ ways (pick a captain in $3$ ways, then a first speaker in $2$, then second is forced). So $_{12}P_{3} = \binom{12}{3} \cdot 3!$, i.e. permutations count combinations <em>multiplied by</em> the role-permutations of each fixed team.
+
+      <div class="insight"><strong>Permutations $= $ combinations $\times $ (orderings of each subset): $_{n}P_{r} = \binom{n}{r} \cdot r!$.</strong> This single identity is the structural backbone of the unit. Read in either direction: divide $_{n}P_{r}$ by $r!$ to "forget order" and land in combinations; multiply $\binom{n}{r}$ by $r!$ to "decorate" each subset with a role-assignment and land in permutations. The MDM4U marker rewards students who explicitly cite the order-matters/order-does-not test <em>before</em> writing any number, the M1 is given for naming the right tool, not for the arithmetic.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AB Provincial-style</span>
+    <span class="pill topic">&sect;2 Identical-Elements Permutations &middot; AB Math 30-1 SO 2 (indicator 2.6)</span>
+    <span class="pill marks">[7 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Word <em>STATISTICS</em> ($10$ letters: $3$ S, $3$ T, $1$ A, $2$ I, $1$ C). (a) State formula. (b) Count arrangements. (c) Repeat for <em>STATS</em>.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\dfrac{n!}{k_{1}!\, k_{2}!\, \cdots k_{m}!}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $50{,}400$ arrangements &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $30$ arrangements</div>
+    <div class="rationale">
+      <h4>(a) Identical-elements formula <span class="marks-call">A1&middot;A1</span></h4>
+      For a word of length $n$ with letter multiplicities $k_{1}, k_{2}, \ldots, k_{m}$ (summing to $n$), the number of distinguishable arrangements is
+      $$ N \;=\; \frac{n!}{k_{1}!\, k_{2}!\, \cdots k_{m}!}. $$
+      The $n!$ in the numerator counts all arrangements as if the letters were distinct; each $k_{i}!$ in the denominator divides out the permutations among identical copies of letter $i$, which produce the same word.
+
+      <h4>(b) Apply to <em>STATISTICS</em> <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Multiplicities: S$=3$, T$=3$, A$=1$, I$=2$, C$=1$. Total $n = 3 + 3 + 1 + 2 + 1 = 10$. $\checkmark$
+      $$ N \;=\; \frac{10!}{3!\, 3!\, 1!\, 2!\, 1!} \;=\; \frac{3{,}628{,}800}{6 \cdot 6 \cdot 1 \cdot 2 \cdot 1} \;=\; \frac{3{,}628{,}800}{72} \;=\; 50{,}400. $$
+
+      <h4>(c) Apply to <em>STATS</em> <span class="marks-call">A1&middot;A1</span></h4>
+      Multiplicities: S$=2$, T$=2$, A$=1$. Total $n = 5$. $\checkmark$
+      $$ N \;=\; \frac{5!}{2!\, 2!\, 1!} \;=\; \frac{120}{4} \;=\; 30. $$
+
+      <div class="insight"><strong>The denominator is one factorial per <em>letter type</em>, not per repeated letter.</strong> Common slip: students see "three S's and three T's" and write $\tfrac{10!}{(3 \cdot 3)!} = \tfrac{10!}{9!} = 10$, treating "the six repeated letters" as a single block. The denominator is a <em>product</em> of factorials, one per distinct letter, $3! \cdot 3! \cdot 1! \cdot 2! \cdot 1!$, never $(3 \cdot 3 \cdot 1 \cdot 2 \cdot 1)!$ nor $(3 + 3 + 1 + 2 + 1)!$. AB Math 30-1 markers explicitly check that you have listed one factorial per letter type; missing the $1!$s costs no marks (since $1! = 1$) but writing them shows the audit was done.</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART II, Extended Response Solutions (Q6–Q9, 38 marks)
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE &middot; SOLUTIONS</span><span class="part-meta">AP-feeder FRQ + honors &middot; 38 marks</span></div>
+<h2 class="section-head">Section B &middot; Worked Solutions</h2>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">BC Provincial-style</span>
+    <span class="pill topic">&sect;3 Committee Counts &middot; BC PC 12 Permutations/Combinations</span>
+    <span class="pill marks">[8 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Choose $5$ from $8$ women + $6$ men. (a) No restriction. (b) Exactly $3$W $+ 2$M. (c) At least $4$W.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\binom{14}{5} = 2{,}002$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $\binom{8}{3}\binom{6}{2} = 840$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\binom{8}{4}\binom{6}{1} + \binom{8}{5}\binom{6}{0} = 476$</div>
+    <div class="rationale">
+      <h4>(a) Unrestricted committee <span class="marks-call">M1&middot;A1</span></h4>
+      The pool is $8 + 6 = 14$ people and we choose $5$ unordered (a committee has no roles in this part):
+      $$ \binom{14}{5} \;=\; \frac{14 \cdot 13 \cdot 12 \cdot 11 \cdot 10}{5!} \;=\; \frac{240{,}240}{120} \;=\; 2{,}002. $$
+
+      <h4>(b) Exactly $3$ women and $2$ men <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Split the selection: choose $3$ women from $8$, <em>and</em> independently choose $2$ men from $6$. By the multiplication rule:
+      $$ \binom{8}{3} \cdot \binom{6}{2} \;=\; 56 \cdot 15 \;=\; 840. $$
+
+      <h4>(c) At least $4$ women <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      "At least $4$ women" out of $5$ committee members partitions into two disjoint cases: exactly $4$W$+1$M, or exactly $5$W$+0$M. Add the case counts:
+      $$ \binom{8}{4} \cdot \binom{6}{1} \;+\; \binom{8}{5} \cdot \binom{6}{0} \;=\; 70 \cdot 6 \;+\; 56 \cdot 1 \;=\; 420 + 56 \;=\; 476. $$
+
+      <div class="insight"><strong>"And" $\Rightarrow $ multiply within a case; "or" $\Rightarrow $ add across disjoint cases.</strong> The two-rule split is the spine of every committee/lineup problem. "Exactly $3$W and $2$M" is one case, so multiply $\binom{8}{3} \cdot \binom{6}{2}$. "At least $4$W" is the union of two disjoint cases ($4$W+$1$M, $5$W+$0$M), so add their counts; the two cases are <em>disjoint</em> (no committee has both exactly $4$ and exactly $5$ women), so no inclusion-exclusion adjustment is needed. BC PC 12 markers explicitly look for the case split written out before any binomial coefficients are computed.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AB Provincial-style</span>
+    <span class="pill topic">&sect;5 Binomial Theorem &middot; AB Math 30-1 SO 4 (indicators 4.1, 4.5)</span>
+    <span class="pill marks">[9 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$(2x + 3)^{5}$. (a) Row $5$. (b) General term $T_{r+1}$. (c) Full expansion. (d) Sum of coefficients.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $1, 5, 10, 10, 5, 1$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $32x^{5} + 240x^{4} + 720x^{3} + 1080x^{2} + 810x + 243$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> $3125 = 5^{5}$ $\checkmark$</div>
+    <div class="rationale">
+      <h4>(a) Row $5$ of Pascal's triangle <span class="marks-call">A1</span></h4>
+      Row $5$ is $\binom{5}{0}, \binom{5}{1}, \binom{5}{2}, \binom{5}{3}, \binom{5}{4}, \binom{5}{5}$, which gives
+      $$ 1, \;5, \;10, \;10, \;5, \;1. $$
+      Symmetric, as Pascal's rule and the $\binom{n}{r} = \binom{n}{n-r}$ identity predict.
+
+      <h4>(b) General term <span class="marks-call">M1&middot;A1</span></h4>
+      With $a = 2x$, $b = 3$, $n = 5$:
+      $$ T_{r+1} \;=\; \binom{5}{r} (2x)^{5-r} (3)^{r} \;=\; \binom{5}{r} \cdot 2^{5-r} \cdot 3^{r} \cdot x^{5-r}, \qquad r \in \{0, 1, 2, 3, 4, 5\}. $$
+
+      <h4>(c) Full expansion <span class="marks-call">M1&middot;A1&middot;A1&middot;A1&middot;A1</span></h4>
+      Tabulate $T_{r+1}$ for each $r$:
+      <ul>
+        <li>$r = 0$: $\binom{5}{0} \cdot 2^{5} \cdot 3^{0} \cdot x^{5} = 1 \cdot 32 \cdot 1 \cdot x^{5} = 32 x^{5}$.</li>
+        <li>$r = 1$: $\binom{5}{1} \cdot 2^{4} \cdot 3^{1} \cdot x^{4} = 5 \cdot 16 \cdot 3 \cdot x^{4} = 240 x^{4}$.</li>
+        <li>$r = 2$: $\binom{5}{2} \cdot 2^{3} \cdot 3^{2} \cdot x^{3} = 10 \cdot 8 \cdot 9 \cdot x^{3} = 720 x^{3}$.</li>
+        <li>$r = 3$: $\binom{5}{3} \cdot 2^{2} \cdot 3^{3} \cdot x^{2} = 10 \cdot 4 \cdot 27 \cdot x^{2} = 1080 x^{2}$.</li>
+        <li>$r = 4$: $\binom{5}{4} \cdot 2^{1} \cdot 3^{4} \cdot x^{1} = 5 \cdot 2 \cdot 81 \cdot x = 810 x$.</li>
+        <li>$r = 5$: $\binom{5}{5} \cdot 2^{0} \cdot 3^{5} \cdot x^{0} = 1 \cdot 1 \cdot 243 = 243$.</li>
+      </ul>
+      Sum:
+      $$ (2x + 3)^{5} \;=\; 32 x^{5} + 240 x^{4} + 720 x^{3} + 1080 x^{2} + 810 x + 243. $$
+
+      <h4>(d) Sum-of-coefficients check <span class="marks-call">A1</span></h4>
+      Sum of coefficients $= 32 + 240 + 720 + 1080 + 810 + 243 = 3125$. Plugging $x = 1$ into the original: $(2(1) + 3)^{5} = 5^{5} = 3125$. $\checkmark$ Agreement confirms the expansion.
+
+      <div class="insight"><strong>The $x = 1$ trick instantly audits any binomial expansion.</strong> For any polynomial $p(x)$, $p(1)$ equals the sum of its coefficients. So plugging $x = 1$ into both the original $(2x+3)^{5}$ and your expanded sum gives a one-line consistency check: $5^{5} = 3125$ must equal $\sum c_{i}$. Likewise $p(-1) = $ alternating sum of coefficients, useful for verifying signs in $(a - b)^{n}$ problems. AB Math 30-1 markers explicitly reward students who include the $x = 1$ check, it costs one line and catches every arithmetic slip.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;6 Term Extraction (positive powers) &middot; MHF4U Polynomial Functions</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$(2x - 3)^{12}$. (a) $T_{r+1}$. (b) $r$ for $x^{7}$. (c) Coefficient of $x^{7}$. (d) Sign + reasoning.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{12}{r} 2^{12-r} (-3)^{r} x^{12-r}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $r = 5$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $-24{,}634{,}368$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> negative because $(-3)^{r}$ alternates and $r = 5$ is odd</div>
+    <div class="rationale">
+      <h4>(a) General term <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      With $a = 2x$, $b = -3$, $n = 12$:
+      $$ T_{r+1} \;=\; \binom{12}{r} (2x)^{12-r} (-3)^{r} \;=\; \binom{12}{r} \cdot 2^{12-r} \cdot (-3)^{r} \cdot x^{12-r}, \qquad r \in \{0, 1, \ldots, 12\}. $$
+      The dependence on $x$ is the single power $x^{12-r}$.
+
+      <h4>(b) Solve for the $x^{7}$ index <span class="marks-call">M1&middot;A1</span></h4>
+      Match the exponent: $12 - r = 7 \Longrightarrow r = 5$.
+
+      <h4>(c) Coefficient at $r = 5$ <span class="marks-call">M1&middot;A1&middot;A1&middot;A1</span></h4>
+      Substitute $r = 5$ into the coefficient (the part of $T_{r+1}$ not involving $x$):
+      $$ c_{7} \;=\; \binom{12}{5} \cdot 2^{12-5} \cdot (-3)^{5} \;=\; 792 \cdot 2^{7} \cdot (-243) \;=\; 792 \cdot 128 \cdot (-243). $$
+      Compute step by step: $792 \cdot 128 = 101{,}376$; then $101{,}376 \cdot (-243) = -24{,}634{,}368$. So
+      $$ c_{7} \;=\; -24{,}634{,}368. $$
+
+      <h4>(d) Sign and alternation <span class="marks-call">A1</span></h4>
+      The coefficient is <strong>negative</strong>. Reason: every increment of $r$ by $1$ multiplies the coefficient by $-3/2 \cdot (12-r)/(r+1)$, picking up one extra factor of $-3$ each step. Since $r = 5$ is <em>odd</em>, $(-3)^{5} < 0$, so the entire coefficient inherits a negative sign. (Even $r$ produces a positive coefficient; odd $r$, negative.)
+
+      <div class="insight"><strong>"Find the term containing $x^{k}$" $\Rightarrow $ solve $n - r = k$, then substitute.</strong> The general term in $(a x + b)^{n}$ has $x$-power $n - r$ (when $a$ is the linear part). So extracting the $x^{k}$ coefficient is two lines: solve the linear equation for $r$, then compute $\binom{n}{r} a^{n-r} b^{r}$. The MHF4U marker awards two distinct A1 marks: one for finding the right $r$ (the algebra step), one for the correct numerical coefficient including sign. Drop the sign and lose an A1 even if the magnitude is correct.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;6 Term Extraction (negative powers) &middot; BC PC 12 / HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[11 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\left(x + \tfrac{2}{x}\right)^{10}$, $x \ne 0$. (a) $T_{r+1}$. (b) $r$ for constant. (c) Constant term. (d) $r$ for $x^{4}$ + coefficient. (e) Why only even powers.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $T_{r+1} = \binom{10}{r} 2^{r} x^{10-2r}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $r = 5$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $8{,}064$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> $r = 3$, coefficient $960$ &nbsp;&middot;&nbsp; <span class="ans">(e)</span> exponent $10 - 2r$ is always even</div>
+    <div class="rationale">
+      <h4>(a) General term <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      With $a = x$, $b = \tfrac{2}{x} = 2 x^{-1}$, $n = 10$:
+      $$ T_{r+1} \;=\; \binom{10}{r} x^{10-r} \cdot \left(\tfrac{2}{x}\right)^{r} \;=\; \binom{10}{r} x^{10-r} \cdot 2^{r} x^{-r} \;=\; \binom{10}{r} \cdot 2^{r} \cdot x^{10-2r}. $$
+      The $x$-exponent simplifies to $10 - 2r$ because the two contributions $x^{10-r}$ and $x^{-r}$ combine additively in the exponent.
+
+      <h4>(b) Constant-term index <span class="marks-call">M1&middot;A1</span></h4>
+      Constant $\Leftrightarrow x^{0}$ $\Leftrightarrow 10 - 2r = 0 \Leftrightarrow r = 5$.
+
+      <h4>(c) Constant term <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Substitute $r = 5$ (and the $x$-part vanishes, since $x^{0} = 1$):
+      $$ T_{6} \;=\; \binom{10}{5} \cdot 2^{5} \;=\; 252 \cdot 32 \;=\; 8{,}064. $$
+
+      <h4>(d) $x^{4}$ index and coefficient <span class="marks-call">M1&middot;A1</span></h4>
+      Solve $10 - 2r = 4 \Rightarrow r = 3$. Coefficient:
+      $$ c_{4} \;=\; \binom{10}{3} \cdot 2^{3} \;=\; 120 \cdot 8 \;=\; 960. $$
+
+      <h4>(e) Why only even powers appear <span class="marks-call">R1</span></h4>
+      The $x$-exponent in $T_{r+1}$ is $10 - 2r$, which is even for every integer $r \in \{0, 1, \ldots, 10\}$ (subtracting an even number from $10$ stays even). So the expansion has only even-power terms: $x^{10}, x^{8}, x^{6}, x^{4}, x^{2}, x^{0}, x^{-2}, x^{-4}, x^{-6}, x^{-8}, x^{-10}$. No odd-power terms can appear.
+
+      <div class="insight"><strong>Negative-power expansions live entirely in the exponent algebra.</strong> The whole trick of $(x + b x^{-1})^{n}$ is that combining $x^{n-r}$ with $(x^{-1})^{r} = x^{-r}$ gives $x^{(n-r) + (-r)} = x^{n - 2r}$, exponent changes by $2$ for each unit step in $r$. So the family of exponents is an arithmetic progression of step $-2$. The "constant term exists $\Leftrightarrow n$ is even" diagnostic falls out immediately: $n - 2r = 0$ requires $r = n/2$, which is an integer only when $n$ is even. AP-feeder problems love this because it stress-tests both the Binomial Theorem and the algebra of exponents in one prompt.</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART III, Modeling / Identities Solutions (Q10–Q12, 30 marks)
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / IDENTITIES &middot; SOLUTIONS</span><span class="part-meta">Universal + honors capstone &middot; 30 marks</span></div>
+<h2 class="section-head">Section C &middot; Worked Solutions</h2>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
+    <span class="pill paper">ON Provincial-style</span>
+    <span class="pill topic">&sect;1 + &sect;3 Modeling &middot; MDM4U Counting and Probability</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">Plates LLL-DDD; $24$ usable letters, $9$ usable digits. (a) With repetition. (b) No repeated letter or digit. (c) Probability of (b) within (a). (d) Two interleaved orders LLDD, LDLD.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $10{,}077{,}696$ plates &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $6{,}120{,}576$ plates &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\tfrac{6{,}120{,}576}{10{,}077{,}696} \approx 0.607$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> $2 \cdot 24^{2} \cdot 9^{2} = 93{,}312$</div>
+    <div class="rationale">
+      <h4>(a) Plates with repetition <span class="marks-call">M1&middot;A1</span></h4>
+      Six independent slots, three from a $24$-letter pool and three from a $9$-digit pool, all with replacement:
+      $$ N_{a} \;=\; 24^{3} \cdot 9^{3} \;=\; 13{,}824 \cdot 729 \;=\; 10{,}077{,}696. $$
+
+      <h4>(b) Plates with no repeat within letters or digits <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Letters: $24 \cdot 23 \cdot 22 = 12{,}144$ ordered triples (a permutation). Digits: $9 \cdot 8 \cdot 7 = 504$. Multiply:
+      $$ N_{b} \;=\; 12{,}144 \cdot 504 \;=\; 6{,}120{,}576. $$
+
+      <h4>(c) Probability <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Under the uniform-random-plate model of (a):
+      $$ P \;=\; \frac{N_{b}}{N_{a}} \;=\; \frac{6{,}120{,}576}{10{,}077{,}696} \;=\; \frac{23 \cdot 22}{24 \cdot 24} \cdot \frac{8 \cdot 7}{9 \cdot 9} \;=\; \frac{506}{576} \cdot \frac{56}{81} \;=\; \frac{28{,}336}{46{,}656}. $$
+      Decimal: $P \approx 0.6073\ldots \approx 0.607$.
+
+      <h4>(d) Two interleaved orders, repetition allowed <span class="marks-call">A1&middot;A1</span></h4>
+      For each fixed ordering pattern (e.g. LLDD), the count is $24^{2} \cdot 9^{2} = 576 \cdot 81 = 46{,}656$. There are $2$ ordering patterns (LLDD and LDLD), and they are <em>disjoint</em> (no plate fits both patterns), so add:
+      $$ N_{d} \;=\; 2 \cdot 46{,}656 \;=\; 93{,}312. $$
+      "Multiply, not add" inside each pattern (the four slots are independent choices, so we multiply); "add across patterns" because the patterns themselves are mutually exclusive (an LLDD-plate cannot also be an LDLD-plate). So the full formula is $\text{(slots multiplied)} \times \text{(patterns added)} = 2 \cdot 24^{2} \cdot 9^{2}$.
+
+      <div class="insight"><strong>"With/without replacement" toggles between $n^{r}$ and $_{n}P_{r}$.</strong> The two facts to internalise: (i) ordered draws <em>with</em> replacement from a pool of size $n$, $r$ times, gives $n^{r}$, because each slot independently has $n$ choices; (ii) ordered draws <em>without</em> replacement give $_{n}P_{r} = n(n-1)\cdots(n-r+1)$. The license-plate framing is the textbook prompt to test this distinction: part (a) is $n^{r}$ per pool, part (b) is $_{n}P_{r}$ per pool. The ratio in (c) then becomes $\tfrac{_{n}P_{r}}{n^{r}}$, the "no-collision" probability that famously powers the birthday paradox at $r = 23$, $n = 365$. MDM4U markers explicitly reward students who recognise this structural connection.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q11</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;7 Subset-Count Identities &middot; HSA-APR.C.5 (+)</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$\sum_{r=0}^{n} \binom{n}{r} = 2^{n}$. (a) Derive via $(a+b)^{n}$. (b) Combinatorial proof. (c) Numerical $n=6$. (d) Alternating-sum identity via $a=1, b=-1$.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> Substitute $a = b = 1$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> both sides count subsets of $\{1, \ldots, n\}$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $1 + 6 + 15 + 20 + 15 + 6 + 1 = 64 = 2^{6}$ $\checkmark$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> $0^{n} = 0$ for $n \ge 1$</div>
+    <div class="rationale">
+      <h4>(a) Binomial-Theorem derivation <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Substitute $a = 1$, $b = 1$ into the Binomial Theorem:
+      $$ (1 + 1)^{n} \;=\; \sum_{r=0}^{n} \binom{n}{r} \cdot 1^{n-r} \cdot 1^{r} \;=\; \sum_{r=0}^{n} \binom{n}{r}. $$
+      But $(1 + 1)^{n} = 2^{n}$ directly, so $\sum_{r=0}^{n} \binom{n}{r} = 2^{n}$. $\;\blacksquare$ <span class="marks-call">AG</span>
+
+      <h4>(b) Combinatorial (double-counting) proof <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      Let $S = \{1, 2, \ldots, n\}$. Count the number of subsets of $S$ in two ways:
+      <ul>
+        <li><strong>Left side.</strong> Partition the subsets by size: there are $\binom{n}{r}$ subsets of size $r$. Summing across all sizes $r = 0, 1, \ldots, n$ gives the total count $\sum_{r=0}^{n} \binom{n}{r}$.</li>
+        <li><strong>Right side.</strong> Build a subset by making $n$ independent yes/no decisions (one per element of $S$): "is element $i$ in the subset?" Each decision has $2$ outcomes, so there are $2^{n}$ subsets total.</li>
+      </ul>
+      Since both sides count the same set of objects (all subsets of $S$), the identity follows.
+
+      <h4>(c) Numerical check at $n = 6$ <span class="marks-call">A1&middot;A1</span></h4>
+      Row $6$: $1, 6, 15, 20, 15, 6, 1$. Sum:
+      $$ 1 + 6 + 15 + 20 + 15 + 6 + 1 \;=\; 64 \;=\; 2^{6}. \; \checkmark $$
+
+      <h4>(d) Alternating-sum identity via $a = 1, b = -1$ <span class="marks-call">M1&middot;A1</span></h4>
+      Substitute $a = 1$, $b = -1$ into the Binomial Theorem:
+      $$ (1 + (-1))^{n} \;=\; \sum_{r=0}^{n} \binom{n}{r} \cdot 1^{n-r} \cdot (-1)^{r} \;=\; \sum_{r=0}^{n} (-1)^{r} \binom{n}{r}. $$
+      The left side is $0^{n} = 0$ for every $n \ge 1$ (the case $n = 0$ gives $0^{0}$, which is conventionally $1$, and is excluded by the $n \ge 1$ hypothesis). So $\sum_{r=0}^{n} (-1)^{r} \binom{n}{r} = 0$ for $n \ge 1$. $\;\blacksquare$
+
+      <div class="insight"><strong>The Binomial Theorem is an identity machine, choose values of $a, b$ and read off corollaries.</strong> Substituting $(a, b) = (1, 1)$ extracts the sum of every row of Pascal's triangle ($2^{n}$); $(1, -1)$ extracts the alternating sum ($0$ for $n \ge 1$); $(1, x)$ for arbitrary $x$ gives a polynomial identity, $(1, 2)$ gives a $3^{n}$ identity; etc. The double-counting proof in (b) is the deeper view: every binomial identity has a combinatorial interpretation, the algebraic derivation is one route, the bijective/double-count argument is the other. AP-feeder problems explicitly ask for "two proofs", testing both literacies. The $2^{n}$ identity is also the simplest example of a generating-function evaluation, which is the bridge into discrete math and combinatorics at the university level.</div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
+    <span class="pill paper">AP-feeder FRQ</span>
+    <span class="pill topic">&sect;3 + &sect;5 Capstone &middot; HSS-CP.B.9 (+) / AB Math 30-1 SO 3, 4</span>
+    <span class="pill marks">[10 marks]</span>
+  </div>
+  <div class="q-body">
+    <p class="prompt">$5$-card poker hand from $52$-card deck. (a) $\binom{52}{5}$ as integer. (b) Number of flushes. (c) $P(\text{flush})$ exact + decimal. (d) Coefficient of $x^{5}$ in $(x+1)^{52}$ + interpretation.</p>
+  </div>
+  <div class="solution">
+    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\binom{52}{5} = 2{,}598{,}960$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $4 \cdot \binom{13}{5} = 5{,}148$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\tfrac{5148}{2598960} \approx 0.0020$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> coefficient $= \binom{52}{5} = 2{,}598{,}960$</div>
+    <div class="rationale">
+      <h4>(a) Sample-space size <span class="marks-call">M1&middot;A1</span></h4>
+      A $5$-card hand drawn without order from a $52$-card deck:
+      $$ \binom{52}{5} \;=\; \frac{52 \cdot 51 \cdot 50 \cdot 49 \cdot 48}{5!} \;=\; \frac{311{,}875{,}200}{120} \;=\; 2{,}598{,}960. $$
+
+      <h4>(b) Count of flushes <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      A flush is built in two stages: (1) choose the common suit ($4$ choices), and (2) choose $5$ cards from the $13$ cards of that suit ($\binom{13}{5} = 1{,}287$ choices). By the multiplication rule:
+      $$ N_{\text{flush}} \;=\; 4 \cdot \binom{13}{5} \;=\; 4 \cdot 1{,}287 \;=\; 5{,}148. $$
+      (Note: this count <em>includes</em> straight flushes and royal flushes, which are usually treated as separate categories in poker rankings; the problem just asks for "flush" in the broad sense.)
+
+      <h4>(c) Probability <span class="marks-call">A1&middot;A1</span></h4>
+      $$ P(\text{flush}) \;=\; \frac{N_{\text{flush}}}{\binom{52}{5}} \;=\; \frac{4 \cdot \binom{13}{5}}{\binom{52}{5}} \;=\; \frac{5{,}148}{2{,}598{,}960}. $$
+      Decimal: $P \approx 0.001981\ldots \approx 0.0020$ to four decimal places (about $1$ flush every $505$ hands).
+
+      <h4>(d) Coefficient in $(x + 1)^{52}$ + combinatorial meaning <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      By the Binomial Theorem,
+      $$ (x + 1)^{52} \;=\; \sum_{r = 0}^{52} \binom{52}{r} x^{52 - r} \;=\; \sum_{k = 0}^{52} \binom{52}{52 - k} x^{k} \;=\; \sum_{k = 0}^{52} \binom{52}{k} x^{k}, $$
+      using Pascal symmetry $\binom{52}{52 - k} = \binom{52}{k}$. So the coefficient of $x^{5}$ is $\binom{52}{5} = 2{,}598{,}960$. This <em>equals</em> the sample-space size in (a): both count $5$-element subsets of a $52$-element set. Algebraically, $\binom{52}{5}$ counts the number of ways to choose $5$ "$x$"-factors out of $52$ when expanding $(x + 1)^{52}$ as a product; combinatorially, those $5$ chosen factors index a $5$-subset of the $52$ binomial factors, which is exactly the same counting structure as drawing $5$ cards from a $52$-card deck.
+
+      <div class="insight"><strong>$\binom{n}{r}$ has three faces: algebraic, combinatorial, and generating-functional.</strong> The same number $\binom{52}{5} = 2{,}598{,}960$ shows up as: (i) the number of $5$-card poker hands (combinatorial), (ii) the coefficient of $x^{5}$ in $(x + 1)^{52}$ (algebraic / generating function), and (iii) the value of $\tfrac{52!}{5!\,47!}$ (factorial formula). The unification is the substance of the Binomial Theorem: $\binom{n}{r}$ is <em>defined</em> combinatorially, <em>computed</em> via the factorial formula, and <em>read off</em> the generating function. AP-feeder problems use this trifecta to bridge into Unit 13 (probability) and into the introductory combinatorics of first-year university discrete math. The deeper reason flushes are rare (~$0.2\%$): only one in $\binom{52}{5}/(4\binom{13}{5}) \approx 505$ hands has all five cards from the same suit, because most $5$-card subsets span multiple suits.</div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Solutions &middot; <code style="color:#555;">v1</code> &middot; Companion to Practice &middot; 90 marks total</span>
+  <span>12 Qs &middot; 90 marks &middot; US / ON / BC / AB &middot; SAT / AP-feeder / Provincial</span>
+</footer>
+
+</body>
+</html>

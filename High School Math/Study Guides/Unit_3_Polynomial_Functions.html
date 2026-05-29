@@ -30,7 +30,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px; --toc-w: 260px;
 }
@@ -227,6 +227,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
 .cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
 [data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -238,713 +242,719 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#syllabus-map">Syllabus Map</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-3-1">Polynomial Vocabulary</a>
-  <a href="#s-3-2">Polynomial Arithmetic and Division</a>
-  <a href="#s-3-3">Remainder and Factor Theorems</a>
-  <a href="#s-3-4">Finding Roots</a>
-  <a href="#s-3-5">Graphing Polynomials</a>
-  <a href="#s-3-6">Complex Roots and Conjugate Pairs</a>
-  <a href="#s-3-7">Polynomial Inequalities</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
-  <a href="#feeders">What This Feeds Into</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-3-1"><span data-lang="en">Polynomial Vocabulary</span><span data-lang="zh">多项式术语</span></a>
+  <a href="#s-3-2"><span data-lang="en">Polynomial Arithmetic and Division</span><span data-lang="zh">多项式运算与除法</span></a>
+  <a href="#s-3-3"><span data-lang="en">Remainder and Factor Theorems</span><span data-lang="zh">余数定理与因式定理</span></a>
+  <a href="#s-3-4"><span data-lang="en">Finding Roots</span><span data-lang="zh">求根</span></a>
+  <a href="#s-3-5"><span data-lang="en">Graphing Polynomials</span><span data-lang="zh">多项式作图</span></a>
+  <a href="#s-3-6"><span data-lang="en">Complex Roots and Conjugate Pairs</span><span data-lang="zh">复根与共轭对</span></a>
+  <a href="#s-3-7"><span data-lang="en">Polynomial Inequalities</span><span data-lang="zh">多项式不等式</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">High School Math</div>
-  <h1>Polynomial<br>Functions</h1>
+  <h1><span data-lang="en">Polynomial<br>Functions</span><span data-lang="zh">多项式函数</span></h1>
   <p class="hero-sub">
-    Polynomials are the natural generalisation of the parabola you mastered in the Quadratic Functions guide. This unit names the parts (degree, leading coefficient, constant term), does the arithmetic (addition, multiplication, long and synthetic division), and then unlocks roots through the remainder theorem, the factor theorem, and the rational root theorem. From there we graph by zeros, multiplicity, and end behaviour, count turning points against the degree, and finish with complex conjugate roots and polynomial inequalities via sign analysis. The unit feeds into Rational and Radical Expressions, where polynomial factoring rebuilds the numerator and denominator, AP Calc Unit 2 (derivative of a polynomial), and IB Math AA HL B2 (polynomial functions with the full factor / remainder / sum-and-product machinery).
+    <span data-lang="en">Polynomials are the natural generalisation of the parabola you mastered in the Quadratic Functions guide. This unit names the parts (degree, leading coefficient, constant term), does the arithmetic (addition, multiplication, long and synthetic division), and then unlocks roots through the remainder theorem, the factor theorem, and the rational root theorem. From there we graph by zeros, multiplicity, and end behaviour, count turning points against the degree, and finish with complex conjugate roots and polynomial inequalities via sign analysis. The unit feeds into Rational and Radical Expressions, where polynomial factoring rebuilds the numerator and denominator, AP Calc Unit 2 (derivative of a polynomial), and IB Math AA HL B2 (polynomial functions with the full factor / remainder / sum-and-product machinery).</span><span data-lang="zh">多项式（<code>polynomial</code>）是你在二次函数单元掌握的抛物线的自然推广。本单元先命名各部分：次数（<code>degree</code>）、首项系数（<code>leading coefficient</code>）、常数项（<code>constant term</code>），再做运算（加、乘、长除法与综合除法），然后用余数定理（<code>remainder theorem</code>）、因式定理（<code>factor theorem</code>）和有理根定理（<code>rational root theorem</code>）打开求根。接下来按零点、重根（<code>multiplicity</code>）与末端行为（<code>end behaviour</code>）作图，按次数估拐点（<code>turning point</code>）数量，最后以复共轭根（<code>complex conjugate root</code>）和符号分析下的多项式不等式（<code>polynomial inequality</code>）收尾。本单元承接的下游课程包括：有理与根式表达式（多项式因式分解重建分子与分母）、AP Calculus Unit 2（多项式求导）和 IB Math AA HL B2（多项式函数，完整的因式 / 余数 / 根与系数机制）。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-green">US Common Core &middot; ON &middot; BC &middot; AB</span>
-    <span class="chip chip-purple">7 sections &middot; honors block on inequalities + complex roots</span>
+    <span class="chip chip-green"><span data-lang="en">US Common Core &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US 共同核心 &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">7 sections &middot; honors block on inequalities + complex roots</span><span data-lang="zh">7 节内容 &middot; 不等式与复根为荣誉级</span></span>
   </div>
 </section>
 
 <aside class="syllabus-map" id="syllabus-map">
-  <div class="syllabus-map-label">Where this lives in your syllabus</div>
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
   <div class="syllabus-map-grid">
     <div>
-      <div class="region-header">&#x1F1FA;&#x1F1F8; US Common Core</div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core</span><span data-lang="zh">美国共同核心</span></div>
       <ul>
-        <li><code>HSA-SSE.A.1</code> interpret parts of an expression (terms, factors, coefficients) ,  the lever for reading degree, leading coefficient, and constant term in $a_{n} x^{n} + \cdots + a_{0}$</li>
-        <li><code>HSA-SSE.A.2</code> (named in the CCSSM extract under the polynomial / quadratic note) interpret structure to enable factoring ,  e.g. spotting $x^{4} - y^{4}$ as a difference of two squares</li>
-        <li><code>HSA-CED.A.1</code> create equations and inequalities in one variable arising from polynomial functions</li>
-        <li><code>HSA-REI.B.4</code> (named in the extract as covering quadratic equations; the degree-2 base case of polynomial equation solving) ,  this unit extends the technique to higher degrees</li>
-        <li><code>HSA-REI.D.11</code> graphical solving of $f(x) = g(x)$ <em>including cases where $f(x)$ and/or $g(x)$ are polynomial</em> (verbatim in the extract)</li>
-        <li><code>HSF-IF.B.4</code> interpret key features of graphs: intercepts, intervals of increase/decrease, relative max/min, end behavior</li>
-        <li><code>HSF-IF.C.7</code> graph functions and show key features (the parent cluster; polynomial-of-degree-$\ge 3$ subclauses sit beyond the linear-scoped extract)</li>
-        <li><code>HSF-IF.C.8</code> (named in the extract) factor and complete the square to reveal zeros ,  extended here to higher-degree factoring</li>
-        <li><code>HSF-LE.A.3</code> exponential growth <em>eventually exceeds polynomial growth</em> (verbatim, end-behaviour cross-reference)</li>
-        <li><code>HSF-BF.B.3</code> identify the effect on the graph of $f(x) + k$, $k f(x)$, $f(k x)$, $f(x + k)$ ,  the parent-function transformations that take $y = x^{n}$ to general polynomials</li>
+        <li><code>HSA-SSE.A.1</code> <span data-lang="en">interpret parts of an expression (terms, factors, coefficients) ,  the lever for reading degree, leading coefficient, and constant term in $a_{n} x^{n} + \cdots + a_{0}$</span><span data-lang="zh">解读表达式各部分（项、因式、系数）,  是读出 $a_{n} x^{n} + \cdots + a_{0}$ 的次数、首项系数与常数项的依据</span></li>
+        <li><code>HSA-SSE.A.2</code> <span data-lang="en">(named in the CCSSM extract under the polynomial / quadratic note) interpret structure to enable factoring ,  e.g. spotting $x^{4} - y^{4}$ as a difference of two squares</span><span data-lang="zh">（CCSSM 在多项式 / 二次注记中点名）通过解读结构进行因式分解 ,  例如把 $x^{4} - y^{4}$ 看作平方差</span></li>
+        <li><code>HSA-CED.A.1</code> <span data-lang="en">create equations and inequalities in one variable arising from polynomial functions</span><span data-lang="zh">由多项式函数建立一元方程与不等式</span></li>
+        <li><code>HSA-REI.B.4</code> <span data-lang="en">(named in the extract as covering quadratic equations; the degree-2 base case of polynomial equation solving) ,  this unit extends the technique to higher degrees</span><span data-lang="zh">（CCSSM 摘录中作为二次方程,  多项式求解的次数 2 基线案例）,  本单元将技术推广到更高次</span></li>
+        <li><code>HSA-REI.D.11</code> <span data-lang="en">graphical solving of $f(x) = g(x)$ <em>including cases where $f(x)$ and/or $g(x)$ are polynomial</em> (verbatim in the extract)</span><span data-lang="zh">图象法求解 $f(x) = g(x)$，<em>包括 $f(x)$ 与/或 $g(x)$ 为多项式的情形</em>（摘录原文）</span></li>
+        <li><code>HSF-IF.B.4</code> <span data-lang="en">interpret key features of graphs: intercepts, intervals of increase/decrease, relative max/min, end behavior</span><span data-lang="zh">解读图象的关键特征：截距、单调区间、相对极值、末端行为</span></li>
+        <li><code>HSF-IF.C.7</code> <span data-lang="en">graph functions and show key features (the parent cluster; polynomial-of-degree-$\ge 3$ subclauses sit beyond the linear-scoped extract)</span><span data-lang="zh">作函数图象并标出关键特征（母簇；次数 $\ge 3$ 的子条款不在线性范围摘录内）</span></li>
+        <li><code>HSF-IF.C.8</code> <span data-lang="en">(named in the extract) factor and complete the square to reveal zeros ,  extended here to higher-degree factoring</span><span data-lang="zh">（摘录中点名）通过因式分解与配方暴露零点 ,  本单元推广至高次因式分解</span></li>
+        <li><code>HSF-LE.A.3</code> <span data-lang="en">exponential growth <em>eventually exceeds polynomial growth</em> (verbatim, end-behaviour cross-reference)</span><span data-lang="zh">指数增长<em>终将超过多项式增长</em>（原文，末端行为的交叉引用）</span></li>
+        <li><code>HSF-BF.B.3</code> <span data-lang="en">identify the effect on the graph of $f(x) + k$, $k f(x)$, $f(k x)$, $f(x + k)$ ,  the parent-function transformations that take $y = x^{n}$ to general polynomials</span><span data-lang="zh">辨识 $f(x) + k$、$k f(x)$、$f(k x)$、$f(x + k)$ 对图象的影响 ,  将 $y = x^{n}$ 变换为一般多项式的母函数变换</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Ontario</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario</span><span data-lang="zh">安大略</span></div>
       <ul>
-        <li><strong>MHF4U ,  Advanced Functions, Grade 12 University</strong> (verbatim course name in the extract). Strand <strong>"Polynomial and Rational Functions"</strong> ,  the dedicated MHF4U home for this unit</li>
-        <li><strong>MHF4U</strong> strand <em>Characteristics of Functions</em> (composition, combining functions) ,  supports polynomial arithmetic (adding, multiplying, composing polynomials)</li>
-        <li><strong>MCR3U</strong> <code>A1.1</code>, <code>A1.2</code> establish the function-notation and representation foundation that MHF4U's polynomial strand depends on; quadratics here serve as the degree-2 case before generalising</li>
-        <li><strong>MCR3U</strong> sub-cluster <strong>A2 ,  Solving Problems Involving Quadratic Functions</strong> is the prerequisite scaffold: factoring trinomials, solving by formula or completing the square, sketching parabolas all transfer to higher-degree polynomials</li>
+        <li><strong>MHF4U <span data-lang="en">,  Advanced Functions, Grade 12 University</span><span data-lang="zh">,  高级函数，12 年级大学预备</span></strong> <span data-lang="en">(verbatim course name in the extract). Strand <strong>"Polynomial and Rational Functions"</strong> ,  the dedicated MHF4U home for this unit</span><span data-lang="zh">（摘录原文课程名）。单元 <strong>"多项式与有理函数"</strong> ,  本单元在 MHF4U 的专属归属</span></li>
+        <li><strong>MHF4U</strong> <span data-lang="en">strand <em>Characteristics of Functions</em> (composition, combining functions) ,  supports polynomial arithmetic (adding, multiplying, composing polynomials)</span><span data-lang="zh">单元 <em>函数特征</em>（复合、函数组合）,  支撑多项式运算（相加、相乘、复合）</span></li>
+        <li><strong>MCR3U</strong> <code>A1.1</code>, <code>A1.2</code> <span data-lang="en">establish the function-notation and representation foundation that MHF4U's polynomial strand depends on; quadratics here serve as the degree-2 case before generalising</span><span data-lang="zh">建立 MHF4U 多项式单元所依赖的函数记号与表示基础；二次函数是推广前的次数 2 基线</span></li>
+        <li><strong>MCR3U</strong> <span data-lang="en">sub-cluster <strong>A2 ,  Solving Problems Involving Quadratic Functions</strong> is the prerequisite scaffold: factoring trinomials, solving by formula or completing the square, sketching parabolas all transfer to higher-degree polynomials</span><span data-lang="zh">子簇 <strong>A2 ,  涉及二次函数的问题求解</strong>是先修脚手架：三项式因式分解、用公式或配方求解、抛物线作图，均迁移到高次多项式</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; British Columbia</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></div>
       <ul>
-        <li><strong>BC PC12</strong> Content ,  <em>polynomial functions and equations</em>: <strong>factoring, including the factor theorem and the remainder theorem</strong> (verbatim in the extract)</li>
-        <li><strong>BC PC12</strong> Content ,  <em>polynomial functions and equations</em>: <strong>graphing and the characteristics of a graph (e.g., degree, extrema, zeros, end-behaviour)</strong> (verbatim list of the four named characteristics)</li>
-        <li><strong>BC PC12</strong> Content ,  <em>polynomial functions and equations</em>: <strong>solving equations algebraically and graphically</strong> (verbatim)</li>
-        <li><strong>BC PC12</strong> Curricular Competency ,  "defend the reasonableness of an estimated value or a solution&hellip; (e.g., <em>the zeros of a graphed polynomial function</em>)" ,  polynomial-zeros explicitly named</li>
-        <li><strong>BC PC11</strong> Content ,  <em>polynomial factoring</em>: greatest common factor of a polynomial, trinomials $a x^{2} + b x + c$ with $a = 1$, difference of squares $a^{2} - b^{2}$, may extend to perfect-square trinomials and $a x^{2} + b x + c$ with $a \ne 1$ (verbatim PC11 elaboration ,  the factoring foundation)</li>
+        <li><strong>BC PC12</strong> <span data-lang="en">Content ,  <em>polynomial functions and equations</em>: <strong>factoring, including the factor theorem and the remainder theorem</strong> (verbatim in the extract)</span><span data-lang="zh">内容 ,  <em>多项式函数与方程</em>：<strong>因式分解，含因式定理与余数定理</strong>（摘录原文）</span></li>
+        <li><strong>BC PC12</strong> <span data-lang="en">Content ,  <em>polynomial functions and equations</em>: <strong>graphing and the characteristics of a graph (e.g., degree, extrema, zeros, end-behaviour)</strong> (verbatim list of the four named characteristics)</span><span data-lang="zh">内容 ,  <em>多项式函数与方程</em>：<strong>作图与图象特征（如次数、极值、零点、末端行为）</strong>（四项原文列出）</span></li>
+        <li><strong>BC PC12</strong> <span data-lang="en">Content ,  <em>polynomial functions and equations</em>: <strong>solving equations algebraically and graphically</strong> (verbatim)</span><span data-lang="zh">内容 ,  <em>多项式函数与方程</em>：<strong>代数法与图象法求解方程</strong>（原文）</span></li>
+        <li><strong>BC PC12</strong> <span data-lang="en">Curricular Competency ,  "defend the reasonableness of an estimated value or a solution&hellip; (e.g., <em>the zeros of a graphed polynomial function</em>)" ,  polynomial-zeros explicitly named</span><span data-lang="zh">课程能力 ,  "为估值或解的合理性辩护&hellip;（例如，<em>所作多项式函数图象的零点</em>）",  原文明确点名多项式零点</span></li>
+        <li><strong>BC PC11</strong> <span data-lang="en">Content ,  <em>polynomial factoring</em>: greatest common factor of a polynomial, trinomials $a x^{2} + b x + c$ with $a = 1$, difference of squares $a^{2} - b^{2}$, may extend to perfect-square trinomials and $a x^{2} + b x + c$ with $a \ne 1$ (verbatim PC11 elaboration ,  the factoring foundation)</span><span data-lang="zh">内容 ,  <em>多项式因式分解</em>：最大公因式、$a = 1$ 的三项式 $a x^{2} + b x + c$、平方差 $a^{2} - b^{2}$，可扩展到完全平方三项式与 $a \ne 1$ 的 $a x^{2} + b x + c$（PC11 阐释原文 ,  因式分解的根基）</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Alberta</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta</span><span data-lang="zh">阿尔伯塔</span></div>
       <ul>
-        <li><strong>Math 30-1</strong> Relations &amp; Functions GO 11: <em>"demonstrate an understanding of factoring polynomials of degree greater than 2 (limited to polynomials of degree $\le 5$ with integral coefficients)"</em>; indicator <code>RF11.1</code> explicitly connects long division and synthetic division</li>
-        <li><strong>Math 30-1</strong> <code>RF11.2</code> <em>"divide a polynomial expression by a binomial expression of the form $x - a$, $a \in \mathbb{Z}$, using long division or synthetic division"</em></li>
-        <li><strong>Math 30-1</strong> <code>RF11.4</code> <em>"explain the relationship between the remainder when a polynomial expression is divided by $x - a$, and the value of the polynomial expression at $x = a$ (remainder theorem)"</em></li>
-        <li><strong>Math 30-1</strong> <code>RF11.5</code> <em>"explain and apply the factor theorem to express a polynomial expression as a product of factors"</em></li>
-        <li><strong>Math 30-1</strong> RF GO 12: <em>"graph and analyze polynomial functions (limited to polynomial functions of degree $\le 5$)"</em>; <code>RF12.2</code> covers leading coefficient and constant term; <code>RF12.3</code> covers odd vs even degree; <code>RF12.4</code> ties zeros / roots / $x$-intercepts together; <code>RF12.5</code> covers <em>multiplicity</em> of a zero</li>
-        <li><strong>Math 20-1</strong> Algebra &amp; Number GO 1 supplies the prerequisite factoring including <code>AN1.4</code> "factor a polynomial expression that has a quadratic pattern"</li>
+        <li><strong>Math 30-1</strong> <span data-lang="en">Relations &amp; Functions GO 11: <em>"demonstrate an understanding of factoring polynomials of degree greater than 2 (limited to polynomials of degree $\le 5$ with integral coefficients)"</em>; indicator <code>RF11.1</code> explicitly connects long division and synthetic division</span><span data-lang="zh">关系与函数总目标 11：<em>"展示对次数大于 2 的多项式因式分解的理解（限于整系数次数 $\le 5$ 的多项式）"</em>；指标 <code>RF11.1</code> 明确把长除法与综合除法关联</span></li>
+        <li><strong>Math 30-1</strong> <code>RF11.2</code> <span data-lang="en"><em>"divide a polynomial expression by a binomial expression of the form $x - a$, $a \in \mathbb{Z}$, using long division or synthetic division"</em></span><span data-lang="zh"><em>"使用长除法或综合除法，将多项式表达式除以形如 $x - a$（$a \in \mathbb{Z}$）的二项式"</em></span></li>
+        <li><strong>Math 30-1</strong> <code>RF11.4</code> <span data-lang="en"><em>"explain the relationship between the remainder when a polynomial expression is divided by $x - a$, and the value of the polynomial expression at $x = a$ (remainder theorem)"</em></span><span data-lang="zh"><em>"解释多项式表达式除以 $x - a$ 的余数与多项式在 $x = a$ 处的值之间的关系（余数定理）"</em></span></li>
+        <li><strong>Math 30-1</strong> <code>RF11.5</code> <span data-lang="en"><em>"explain and apply the factor theorem to express a polynomial expression as a product of factors"</em></span><span data-lang="zh"><em>"解释并应用因式定理，将多项式表达式表示为因式乘积"</em></span></li>
+        <li><strong>Math 30-1</strong> <span data-lang="en">RF GO 12: <em>"graph and analyze polynomial functions (limited to polynomial functions of degree $\le 5$)"</em>; <code>RF12.2</code> covers leading coefficient and constant term; <code>RF12.3</code> covers odd vs even degree; <code>RF12.4</code> ties zeros / roots / $x$-intercepts together; <code>RF12.5</code> covers <em>multiplicity</em> of a zero</span><span data-lang="zh">RF 总目标 12：<em>"作图并分析多项式函数（限于次数 $\le 5$）"</em>；<code>RF12.2</code> 覆盖首项系数与常数项；<code>RF12.3</code> 覆盖奇 / 偶次；<code>RF12.4</code> 串联零点 / 根 / $x$ 截距；<code>RF12.5</code> 覆盖零点的<em>重数</em></span></li>
+        <li><strong>Math 20-1</strong> <span data-lang="en">Algebra &amp; Number GO 1 supplies the prerequisite factoring including <code>AN1.4</code> "factor a polynomial expression that has a quadratic pattern"</span><span data-lang="zh">代数与数论总目标 1 提供先修因式分解，含 <code>AN1.4</code>"分解具有二次模式的多项式表达式"</span></li>
       </ul>
     </div>
   </div>
 </aside>
 
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
-  <p>Polynomial functions span Grades 11 and 12 in the curricula we map to: the factoring infrastructure sits in BC PC11 and US Algebra 2, but the named theorems (factor theorem, remainder theorem) live in BC PC12 and Ontario MHF4U, with the rational root theorem usually appearing in US Pre-Calc / honors. The table below tells you which sections of this guide are <em>on your syllabus right now</em>. Each row cites the curriculum document we checked it against, so the recommendation is grounded, not guessed.</p>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Polynomial functions span Grades 11 and 12 in the curricula we map to: the factoring infrastructure sits in BC PC11 and US Algebra 2, but the named theorems (factor theorem, remainder theorem) live in BC PC12 and Ontario MHF4U, with the rational root theorem usually appearing in US Pre-Calc / honors. The table below tells you which sections of this guide are <em>on your syllabus right now</em>. Each row cites the curriculum document we checked it against, so the recommendation is grounded, not guessed.</span><span data-lang="zh">多项式函数横跨我们对照的大纲的 11、12 年级：因式分解基础放在 BC PC11 与美国 Algebra 2；而具名定理（因式定理、余数定理）位于 BC PC12 与安大略 MHF4U；有理根定理通常出现在美国 Pre-Calc / 荣誉课程中。下表告诉你本指南<em>当前大纲下应学的章节</em>。每行都列出我们对照的课纲文件，使建议有据可依。</span></p>
 
   <div style="overflow-x: auto; margin: 16px 0 18px;">
   <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
     <thead>
       <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
-        <th style="text-align: left; padding: 8px 10px;">If you are in&hellip;</th>
-        <th style="text-align: left; padding: 8px 10px;">Focus on these sections</th>
-        <th style="text-align: left; padding: 8px 10px;">Defer / skip</th>
-        <th style="text-align: left; padding: 8px 10px;">Source</th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / skip</span><span data-lang="zh">可推迟</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 11 ,  MCR3U</strong> (light polynomial exposure)</td>
-        <td style="padding: 8px 10px;">&sect;1 (vocabulary), &sect;2 (arithmetic). Treat as a vocabulary primer so MHF4U's polynomial strand lands cleanly next year.</td>
-        <td style="padding: 8px 10px;">&sect;3-&sect;7 are MHF4U work. Come back after MCR3U closes.</td>
-        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> ,  MCR3U A1.1, A1.2 (function-notation foundation); polynomial work flagged for MHF4U</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 ,  MCR3U</span><span data-lang="zh">安大略 11 年级 ,  MCR3U</span></strong> <span data-lang="en">(light polynomial exposure)</span><span data-lang="zh">（轻量多项式接触）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 (vocabulary), &sect;2 (arithmetic). Treat as a vocabulary primer so MHF4U's polynomial strand lands cleanly next year.</span><span data-lang="zh">&sect;1（术语）、&sect;2（运算）。作为术语预习，下一年 MHF4U 的多项式单元就能顺接。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;3-&sect;7 are MHF4U work. Come back after MCR3U closes.</span><span data-lang="zh">&sect;3-&sect;7 属 MHF4U 内容。MCR3U 收尾后再回来。</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> <span data-lang="en">,  MCR3U A1.1, A1.2 (function-notation foundation); polynomial work flagged for MHF4U</span><span data-lang="zh">,  MCR3U A1.1、A1.2（函数记号基础）；多项式工作归 MHF4U</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 12 ,  MHF4U</strong> (deep)</td>
-        <td style="padding: 8px 10px;">Full &sect;1-&sect;7. MHF4U's dedicated strand is "Polynomial and Rational Functions" and includes the factor theorem, the remainder theorem, characteristics of polynomial graphs, and polynomial inequalities.</td>
-        <td style="padding: 8px 10px;">Nothing ,  every section maps to an MHF4U expectation in the polynomial strand.</td>
-        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> ,  MHF4U strand <em>Polynomial and Rational Functions</em> (verbatim strand name in the extract)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 12 ,  MHF4U</span><span data-lang="zh">安大略 12 年级 ,  MHF4U</span></strong> <span data-lang="en">(deep)</span><span data-lang="zh">（深入）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-&sect;7. MHF4U's dedicated strand is "Polynomial and Rational Functions" and includes the factor theorem, the remainder theorem, characteristics of polynomial graphs, and polynomial inequalities.</span><span data-lang="zh">完整 &sect;1-&sect;7。MHF4U 的专属单元 "多项式与有理函数" 包括因式定理、余数定理、多项式图象特征以及多项式不等式。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  every section maps to an MHF4U expectation in the polynomial strand.</span><span data-lang="zh">无 ,  每节都对应 MHF4U 多项式单元中的期望。</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> <span data-lang="en">,  MHF4U strand <em>Polynomial and Rational Functions</em> (verbatim strand name in the extract)</span><span data-lang="zh">,  MHF4U 单元 <em>多项式与有理函数</em>（摘录原文单元名）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 12 ,  Pre-Calc 12</strong> (deep)</td>
-        <td style="padding: 8px 10px;">Full &sect;1-&sect;7. BC PC12 is the dedicated polynomial home; the curriculum lists the factor theorem and remainder theorem by name, and explicitly enumerates degree / extrema / zeros / end-behaviour as the graph characteristics.</td>
-        <td style="padding: 8px 10px;">Nothing ,  every section maps to a PC12 Content elaboration verbatim.</td>
-        <td style="padding: 8px 10px;"><code>pc12_elab_extract.md</code> ,  Content <em>polynomial functions and equations</em> (factor theorem, remainder theorem, degree, extrema, zeros, end-behaviour, algebraic and graphical solving)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC Grade 12 ,  Pre-Calc 12</span><span data-lang="zh">BC 12 年级 ,  Pre-Calc 12</span></strong> <span data-lang="en">(deep)</span><span data-lang="zh">（深入）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-&sect;7. BC PC12 is the dedicated polynomial home; the curriculum lists the factor theorem and remainder theorem by name, and explicitly enumerates degree / extrema / zeros / end-behaviour as the graph characteristics.</span><span data-lang="zh">完整 &sect;1-&sect;7。BC PC12 是多项式的专属归属；课纲点名因式定理与余数定理，并将次数 / 极值 / 零点 / 末端行为列为图象特征。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  every section maps to a PC12 Content elaboration verbatim.</span><span data-lang="zh">无 ,  每节都原文对应 PC12 内容阐释。</span></td>
+        <td style="padding: 8px 10px;"><code>pc12_elab_extract.md</code> <span data-lang="en">,  Content <em>polynomial functions and equations</em> (factor theorem, remainder theorem, degree, extrema, zeros, end-behaviour, algebraic and graphical solving)</span><span data-lang="zh">,  内容 <em>多项式函数与方程</em>（因式定理、余数定理、次数、极值、零点、末端行为、代数与图象求解）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 2 (Grade 10-11)</strong> (basic polynomial arithmetic)</td>
-        <td style="padding: 8px 10px;">&sect;1 (vocabulary), &sect;2 (arithmetic and long division), &sect;3 (remainder + factor theorems are typical Alg 2 content), light &sect;5 (graphing by zeros). &sect;4 rational root theorem is Alg 2 in some scope-and-sequences, Pre-Calc in others.</td>
-        <td style="padding: 8px 10px;">&sect;6 complex conjugate roots is honors / Alg 2+; &sect;7 polynomial inequalities are Pre-Calc in most US tracks.</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  <code>HSA-SSE.A.1</code>, <code>HSF-IF.B.4</code>, <code>HSF-IF.C.8</code>, <code>HSA-REI.D.11</code> (polynomial graphical solving named verbatim)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Algebra 2 (Grade 10-11)</span><span data-lang="zh">美国 Algebra 2（10-11 年级）</span></strong> <span data-lang="en">(basic polynomial arithmetic)</span><span data-lang="zh">（基础多项式运算）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 (vocabulary), &sect;2 (arithmetic and long division), &sect;3 (remainder + factor theorems are typical Alg 2 content), light &sect;5 (graphing by zeros). &sect;4 rational root theorem is Alg 2 in some scope-and-sequences, Pre-Calc in others.</span><span data-lang="zh">&sect;1（术语）、&sect;2（运算与长除法）、&sect;3（余数与因式定理是典型 Alg 2 内容）、轻量 &sect;5（按零点作图）。&sect;4 有理根定理在部分大纲是 Alg 2 内容，其他归 Pre-Calc。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;6 complex conjugate roots is honors / Alg 2+; &sect;7 polynomial inequalities are Pre-Calc in most US tracks.</span><span data-lang="zh">&sect;6 复共轭根属 honors / Alg 2+；&sect;7 多项式不等式在多数美国课程里归 Pre-Calc。</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  <code>HSA-SSE.A.1</code>, <code>HSF-IF.B.4</code>, <code>HSF-IF.C.8</code>, <code>HSA-REI.D.11</code> (polynomial graphical solving named verbatim)</span><span data-lang="zh">,  <code>HSA-SSE.A.1</code>、<code>HSF-IF.B.4</code>、<code>HSF-IF.C.8</code>、<code>HSA-REI.D.11</code>（多项式图象求解原文点名）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Pre-Calc / Honors</strong> (factor + remainder + complex roots)</td>
-        <td style="padding: 8px 10px;">Full &sect;1-&sect;7. Pre-Calc / Honors is the US course where the factor theorem, remainder theorem, rational root theorem, complex conjugate roots, and polynomial inequalities all land.</td>
-        <td style="padding: 8px 10px;">Nothing ,  treat this as the canonical US polynomial-functions unit.</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  <code>HSF-IF.C.7</code>, <code>HSF-IF.C.8</code>, <code>HSA-SSE.A.2</code>, <code>HSF-LE.A.3</code>, <code>HSF-BF.B.3</code></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Pre-Calc / Honors</span><span data-lang="zh">美国 Pre-Calc / 荣誉</span></strong> <span data-lang="en">(factor + remainder + complex roots)</span><span data-lang="zh">（因式 + 余数 + 复根）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-&sect;7. Pre-Calc / Honors is the US course where the factor theorem, remainder theorem, rational root theorem, complex conjugate roots, and polynomial inequalities all land.</span><span data-lang="zh">完整 &sect;1-&sect;7。Pre-Calc / 荣誉是美国课程中安置因式定理、余数定理、有理根定理、复共轭根与多项式不等式的归属。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  treat this as the canonical US polynomial-functions unit.</span><span data-lang="zh">无 ,  视为美国课程中标准的多项式函数单元。</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  <code>HSF-IF.C.7</code>, <code>HSF-IF.C.8</code>, <code>HSA-SSE.A.2</code>, <code>HSF-LE.A.3</code>, <code>HSF-BF.B.3</code></span><span data-lang="zh">,  <code>HSF-IF.C.7</code>、<code>HSF-IF.C.8</code>、<code>HSA-SSE.A.2</code>、<code>HSF-LE.A.3</code>、<code>HSF-BF.B.3</code></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US AP-feeder</strong></td>
-        <td style="padding: 8px 10px;">Full &sect;1-&sect;7. The end-behaviour / zeros / multiplicity vocabulary from &sect;5 is exactly the AP Pre-Calculus framework; the polynomial-as-product-of-linear-and-quadratic-factors statement from &sect;6 is what AP Calc Unit 2 takes for granted when differentiating polynomials.</td>
-        <td style="padding: 8px 10px;">Nothing ,  cross-reference to AP Calc Unit 2 (derivative of a polynomial) and AP Pre-Calc Unit 1.</td>
-        <td style="padding: 8px 10px;">See <em>What this feeds into</em>; cross-link to <code>AP Calculus/Study Guides/Unit_2_*</code></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US AP-feeder</span><span data-lang="zh">美国 AP 衔接</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-&sect;7. The end-behaviour / zeros / multiplicity vocabulary from &sect;5 is exactly the AP Pre-Calculus framework; the polynomial-as-product-of-linear-and-quadratic-factors statement from &sect;6 is what AP Calc Unit 2 takes for granted when differentiating polynomials.</span><span data-lang="zh">完整 &sect;1-&sect;7。&sect;5 的末端行为 / 零点 / 重根术语正是 AP Pre-Calculus 的框架；&sect;6 中"多项式为线性与二次因式之积"的论断，是 AP Calc Unit 2 在求多项式导数时默认成立的前提。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  cross-reference to AP Calc Unit 2 (derivative of a polynomial) and AP Pre-Calc Unit 1.</span><span data-lang="zh">无 ,  交叉参考 AP Calc Unit 2（多项式求导）与 AP Pre-Calc Unit 1。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See <em>What this feeds into</em>; cross-link to <code>AP Calculus/Study Guides/Unit_2_*</code></span><span data-lang="zh">见 <em>后续单元</em>；交叉链接到 <code>AP Calculus/Study Guides/Unit_2_*</code></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; SAT bound</strong></td>
-        <td style="padding: 8px 10px;">&sect;1-&sect;3 are the SAT-frequent slice: polynomial vocabulary, polynomial arithmetic, and the factor-theorem-as-"if-$p(a)-equals-zero-then-$x-minus-$a$-is-a-factor" question style. &sect;5 graphing-by-zeros is SAT-common too.</td>
-        <td style="padding: 8px 10px;">&sect;6 (complex roots) and &sect;7 (inequalities) are not on the SAT in this form.</td>
-        <td style="padding: 8px 10px;">See <em>What this feeds into</em> at the end of this unit for the SAT and AP cross-references</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">SAT bound</span><span data-lang="zh">备考 SAT</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1-&sect;3 are the SAT-frequent slice: polynomial vocabulary, polynomial arithmetic, and the factor-theorem-as-"if-$p(a)-equals-zero-then-$x-minus-$a$-is-a-factor" question style. &sect;5 graphing-by-zeros is SAT-common too.</span><span data-lang="zh">&sect;1-&sect;3 是 SAT 高频片段：多项式术语、多项式运算，以及"若 $p(a) = 0$ 则 $(x - a)$ 是因式"形式的因式定理题。&sect;5 按零点作图在 SAT 也常见。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;6 (complex roots) and &sect;7 (inequalities) are not on the SAT in this form.</span><span data-lang="zh">&sect;6（复根）与 &sect;7（不等式）以此形式不出现在 SAT。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See <em>What this feeds into</em> at the end of this unit for the SAT and AP cross-references</span><span data-lang="zh">SAT 与 AP 交叉参考见本单元末尾的 <em>后续单元</em></span></td>
       </tr>
       <tr>
-        <td style="padding: 8px 10px;"><strong>IB / AP feeder</strong></td>
-        <td style="padding: 8px 10px;">Full &sect;1-&sect;7 with depth. The factor theorem / remainder theorem / sum-and-product-of-roots block in &sect;3 and &sect;6 is exactly what IB Math HL B2 takes for granted; the binomial expansion connection to combinatorics is the IB HL A3 cross-reference.</td>
-        <td style="padding: 8px 10px;">Nothing ,  this is the prerequisite block for IB HL B2 (Polynomial Functions) and AP Calc Unit 2.</td>
-        <td style="padding: 8px 10px;">See feeders; targets include IB HL B2, IB HL A3, AP Calc U2.</td>
+        <td style="padding: 8px 10px;"><strong><span data-lang="en">IB / AP feeder</span><span data-lang="zh">IB / AP 衔接</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full &sect;1-&sect;7 with depth. The factor theorem / remainder theorem / sum-and-product-of-roots block in &sect;3 and &sect;6 is exactly what IB Math HL B2 takes for granted; the binomial expansion connection to combinatorics is the IB HL A3 cross-reference.</span><span data-lang="zh">完整 &sect;1-&sect;7 并加深。&sect;3 与 &sect;6 的因式定理 / 余数定理 / 根与系数模块，正是 IB Math HL B2 所默认掌握的；二项式展开与组合学的连接是 IB HL A3 的交叉参考。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  this is the prerequisite block for IB HL B2 (Polynomial Functions) and AP Calc Unit 2.</span><span data-lang="zh">无 ,  本单元是 IB HL B2（多项式函数）与 AP Calc Unit 2 的先修模块。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See feeders; targets include IB HL B2, IB HL A3, AP Calc U2.</span><span data-lang="zh">见后续单元；目标含 IB HL B2、IB HL A3、AP Calc U2。</span></td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <p style="margin-top: 12px;">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</p>
+  <p style="margin-top: 12px;"><span data-lang="en">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</span><span data-lang="zh">找到所在行后，用下面两张卡片决定推进速度。</span></p>
 
   <div class="two-col">
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title">If you are cramming the night before</div></div>
-      <p style="font-size: 0.95rem;">Memorise four facts. (1) The factor theorem: $p(a) = 0$ if and only if $(x - a)$ is a factor of $p(x)$. (2) The remainder theorem: the remainder when $p(x)$ is divided by $(x - a)$ is $p(a)$. (3) End behaviour is set by the leading term: $a_{n} x^{n}$ alone decides what happens as $x \to \pm \infty$. (4) A polynomial of degree $n$ has at most $n - 1$ turning points and exactly $n$ roots counted with multiplicity (in $\mathbb{C}$). Skim the cram-cheat boxes at the top of each section in your row.</p>
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise four facts. (1) The factor theorem: $p(a) = 0$ if and only if $(x - a)$ is a factor of $p(x)$. (2) The remainder theorem: the remainder when $p(x)$ is divided by $(x - a)$ is $p(a)$. (3) End behaviour is set by the leading term: $a_{n} x^{n}$ alone decides what happens as $x \to \pm \infty$. (4) A polynomial of degree $n$ has at most $n - 1$ turning points and exactly $n$ roots counted with multiplicity (in $\mathbb{C}$). Skim the cram-cheat boxes at the top of each section in your row.</span><span data-lang="zh">背熟四件事。（1）因式定理：$p(a) = 0$ 当且仅当 $(x - a)$ 是 $p(x)$ 的因式。（2）余数定理：$p(x)$ 除以 $(x - a)$ 的余数即 $p(a)$。（3）末端行为由首项决定：当 $x \to \pm \infty$ 时仅 $a_{n} x^{n}$ 起作用。（4）次数为 $n$ 的多项式至多有 $n - 1$ 个拐点，并在 $\mathbb{C}$ 中按重数恰有 $n$ 个根。逐节速读你所在行各节顶部的速记框。</span></p>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title">If you are going for the top mark</div></div>
-      <p style="font-size: 0.95rem;">Always state the theorem you are invoking by name: "by the factor theorem&hellip;", "by the rational root theorem the candidates are&hellip;". Always check multiplicity when sketching: an even-multiplicity zero <em>touches</em> the axis without crossing; an odd-multiplicity zero <em>crosses</em>. Always state the leading-term end-behaviour signs as a one-line conclusion. Sign analysis (&sect;7) transfers verbatim to rational-function and derivative-of-polynomial work.</p>
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Always state the theorem you are invoking by name: "by the factor theorem&hellip;", "by the rational root theorem the candidates are&hellip;". Always check multiplicity when sketching: an even-multiplicity zero <em>touches</em> the axis without crossing; an odd-multiplicity zero <em>crosses</em>. Always state the leading-term end-behaviour signs as a one-line conclusion. Sign analysis (&sect;7) transfers verbatim to rational-function and derivative-of-polynomial work.</span><span data-lang="zh">引用定理务必点名：&ldquo;由因式定理&hellip;&rdquo;、&ldquo;由有理根定理，候选为&hellip;&rdquo;。作图时务必检查重数：偶重数零点<em>触轴</em>不穿越；奇重数零点<em>穿越</em>。务必把首项末端行为的符号写成一行结论。&sect;7 的符号分析可原样迁移到有理函数与多项式求导工作。</span></p>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Honors flag.</strong>
-    Section 6 (complex roots and the complex conjugate root theorem) carries the <span class="honors-flag">Honors</span> chip for US Algebra 2 / Pre-Calc / BC PC12 tracks. US Common Core treats complex numbers under HSN-CN; the polynomial-specific consequence ("non-real roots of a real polynomial come in conjugate pairs") sits above the linear-scoped CCSSM extract but is standard in US Pre-Calc and is named directly in BC PC12 via the polynomial-equations elaboration. Section 7 (polynomial inequalities) is an <span class="honors-flag">Honors</span> extension for US Algebra 2 (BC PC11's sign-analysis elaboration generalises naturally; the PC12 extract names polynomial equation solving algebraically and graphically without an explicit inequality bullet, so this is the PC11 sign-analysis technique applied at higher degree).
+    <strong style="color: var(--purple);"><span data-lang="en">Honors flag.</span><span data-lang="zh">荣誉级标记。</span></strong>
+    <span data-lang="en">Section 6 (complex roots and the complex conjugate root theorem) carries the <span class="honors-flag">Honors</span> chip for US Algebra 2 / Pre-Calc / BC PC12 tracks. US Common Core treats complex numbers under HSN-CN; the polynomial-specific consequence ("non-real roots of a real polynomial come in conjugate pairs") sits above the linear-scoped CCSSM extract but is standard in US Pre-Calc and is named directly in BC PC12 via the polynomial-equations elaboration. Section 7 (polynomial inequalities) is an <span class="honors-flag">Honors</span> extension for US Algebra 2 (BC PC11's sign-analysis elaboration generalises naturally; the PC12 extract names polynomial equation solving algebraically and graphically without an explicit inequality bullet, so this is the PC11 sign-analysis technique applied at higher degree).</span><span data-lang="zh">第 6 节（复根与复共轭根定理）在美国 Algebra 2 / Pre-Calc / BC PC12 课程中标为 <span class="honors-flag">Honors</span>。美国共同核心把复数放在 HSN-CN；针对多项式的推论（"实多项式的非实根成共轭对")在线性范围的 CCSSM 摘录之上，但在美国 Pre-Calc 中是标准内容，且在 BC PC12 多项式方程阐释中直接点名。第 7 节（多项式不等式）对美国 Algebra 2 属 <span class="honors-flag">Honors</span> 拓展（BC PC11 的符号分析阐释自然推广；PC12 摘录只点名代数与图象求解，未单列不等式条款，因此本节是把 PC11 符号分析技术应用到更高次）。</span>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-1">
-  <div class="section-label">Section 1 &middot; Vocabulary</div>
-  <h2>Polynomial Vocabulary <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM &middot; &#x1F1E8;&#x1F1E6; ON MHF4U &middot; &#x1F1E8;&#x1F1E6; BC PC12</span></h2>
+  <div class="section-label"><span data-lang="en">Section 1 &middot; Vocabulary</span><span data-lang="zh">第 1 节 &middot; 术语</span></div>
+  <h2><span data-lang="en">Polynomial Vocabulary</span><span data-lang="zh">多项式术语</span> <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM &middot; &#x1F1E8;&#x1F1E6; ON MHF4U &middot; &#x1F1E8;&#x1F1E6; BC PC12</span></h2>
 
   <div class="cram-cheat">
-    <strong>A polynomial in $x$.</strong> Finite sum of $a_{k} x^{k}$ with $k$ a non-negative integer:
+    <strong><span data-lang="en">A polynomial in $x$.</span><span data-lang="zh">$x$ 的多项式。</span></strong> <span data-lang="en">Finite sum of $a_{k} x^{k}$ with $k$ a non-negative integer:</span><span data-lang="zh">$a_{k} x^{k}$（$k$ 为非负整数）的有限和：</span>
     $$ p(x) \;=\; a_{n} x^{n} + a_{n-1} x^{n-1} + \cdots + a_{1} x + a_{0}, \qquad a_{n} \ne 0. $$
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Degree</strong> $n$ ,  largest exponent with non-zero coefficient (linear $1$, quadratic $2$, cubic $3$, quartic $4$, quintic $5$).</li>
-      <li><strong>Leading coefficient</strong> $a_{n}$ ,  controls end behaviour.</li>
-      <li><strong>Constant term</strong> $a_{0} = p(0)$ ,  the $y$-intercept.</li>
-      <li><strong>Monic</strong> ,  leading coefficient $1$. <strong>Terms vs. factors:</strong> terms are added, factors are multiplied.</li>
+      <li><strong><span data-lang="en">Degree</span><span data-lang="zh">次数</span></strong> $n$ <span data-lang="en">,  largest exponent with non-zero coefficient (linear $1$, quadratic $2$, cubic $3$, quartic $4$, quintic $5$).</span><span data-lang="zh">,  非零系数对应的最高次（一次 $1$、二次 $2$、三次 $3$、四次 $4$、五次 $5$）。</span></li>
+      <li><strong><span data-lang="en">Leading coefficient</span><span data-lang="zh">首项系数</span></strong> $a_{n}$ <span data-lang="en">,  controls end behaviour.</span><span data-lang="zh">,  决定末端行为。</span></li>
+      <li><strong><span data-lang="en">Constant term</span><span data-lang="zh">常数项</span></strong> $a_{0} = p(0)$ <span data-lang="en">,  the $y$-intercept.</span><span data-lang="zh">,  即 $y$ 截距。</span></li>
+      <li><strong><span data-lang="en">Monic</span><span data-lang="zh">首一</span></strong> <span data-lang="en">,  leading coefficient $1$. <strong>Terms vs. factors:</strong> terms are added, factors are multiplied.</span><span data-lang="zh">,  首项系数为 $1$。<strong>项与因式：</strong>项是相加的，因式是相乘的。</span></li>
     </ul>
-    <strong>End behaviour.</strong> Only $a_{n} x^{n}$ matters as $x \to \pm \infty$. Four cases by parity of $n$ and sign of $a_{n}$: <em>even-positive</em> both ends to $+\infty$ (like $x^{2}$); <em>even-negative</em> both to $-\infty$; <em>odd-positive</em> left $\to -\infty$, right $\to +\infty$ (like $x^{3}$); <em>odd-negative</em> the reverse.
+    <strong><span data-lang="en">End behaviour.</span><span data-lang="zh">末端行为。</span></strong> <span data-lang="en">Only $a_{n} x^{n}$ matters as $x \to \pm \infty$. Four cases by parity of $n$ and sign of $a_{n}$: <em>even-positive</em> both ends to $+\infty$ (like $x^{2}$); <em>even-negative</em> both to $-\infty$; <em>odd-positive</em> left $\to -\infty$, right $\to +\infty$ (like $x^{3}$); <em>odd-negative</em> the reverse.</span><span data-lang="zh">当 $x \to \pm \infty$ 时只看 $a_{n} x^{n}$。按 $n$ 的奇偶和 $a_{n}$ 的符号分四种：<em>偶 + 正</em>两端均趋 $+\infty$（似 $x^{2}$）；<em>偶 + 负</em>两端均趋 $-\infty$；<em>奇 + 正</em>左 $\to -\infty$、右 $\to +\infty$（似 $x^{3}$）；<em>奇 + 负</em>相反。</span>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> BC Pre-Calc 12 enumerates the named graph characteristics ,  <em>degree, extrema, zeros, end-behaviour</em> ,  verbatim in its polynomial-functions Content elaboration. That four-word list is the right vocabulary checklist for any BC PC12 polynomial question; the same vocabulary surfaces in MHF4U (Ontario) and in US Pre-Calc / AP Pre-Calc, often word-for-word.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">BC Pre-Calc 12 enumerates the named graph characteristics ,  <em>degree, extrema, zeros, end-behaviour</em> ,  verbatim in its polynomial-functions Content elaboration. That four-word list is the right vocabulary checklist for any BC PC12 polynomial question; the same vocabulary surfaces in MHF4U (Ontario) and in US Pre-Calc / AP Pre-Calc, often word-for-word.</span><span data-lang="zh">BC PC12 在多项式函数内容阐释中原文列出四项图象特征 ,  <em>次数、极值、零点、末端行为</em>。这四个词是 BC PC12 任何多项式题的术语清单；同一组术语也常原文出现在 MHF4U（安大略）以及美国 Pre-Calc / AP Pre-Calc 中。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 1 &middot; Identify the parts</div>
-    <p>For $p(x) = -3 x^{4} + 5 x^{2} - 2 x + 7$, state the degree, leading coefficient, constant term, and end behaviour.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 1 &middot; Identify the parts</span><span data-lang="zh">例题 1 &middot; 辨识各部分</span></div>
+    <p><span data-lang="en">For $p(x) = -3 x^{4} + 5 x^{2} - 2 x + 7$, state the degree, leading coefficient, constant term, and end behaviour.</span><span data-lang="zh">对 $p(x) = -3 x^{4} + 5 x^{2} - 2 x + 7$，写出次数、首项系数、常数项及末端行为。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> $p(x) = -3 x^{4} + 0 \cdot x^{3} + 5 x^{2} - 2 x + 7$ (note the missing $x^{3}$ term).</p>
-    <p><strong>Degree</strong> $= 4$. <strong>Leading coefficient</strong> $a_{4} = -3$. <strong>Constant term</strong> $a_{0} = 7 = p(0)$.</p>
-    <p><strong>End behaviour.</strong> $n = 4$ even and $a_{n} = -3 &lt; 0$: both ends fall, $p(x) \to -\infty$ as $x \to \pm \infty$.</p>
-    <p><strong>Evaluate.</strong> Quartic, opens "down on both ends," $y$-intercept $(0, 7)$, at most $3$ turning points (general: degree $n \Rightarrow$ at most $n - 1$ turning points). The next sections find where it crosses zero.</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">$p(x) = -3 x^{4} + 0 \cdot x^{3} + 5 x^{2} - 2 x + 7$ (note the missing $x^{3}$ term).</span><span data-lang="zh">$p(x) = -3 x^{4} + 0 \cdot x^{3} + 5 x^{2} - 2 x + 7$（注意 $x^{3}$ 项缺失）。</span></p>
+    <p><strong><span data-lang="en">Degree</span><span data-lang="zh">次数</span></strong> $= 4$. <strong><span data-lang="en">Leading coefficient</span><span data-lang="zh">首项系数</span></strong> $a_{4} = -3$. <strong><span data-lang="en">Constant term</span><span data-lang="zh">常数项</span></strong> $a_{0} = 7 = p(0)$.</p>
+    <p><strong><span data-lang="en">End behaviour.</span><span data-lang="zh">末端行为。</span></strong> <span data-lang="en">$n = 4$ even and $a_{n} = -3 &lt; 0$: both ends fall, $p(x) \to -\infty$ as $x \to \pm \infty$.</span><span data-lang="zh">$n = 4$ 为偶，$a_{n} = -3 &lt; 0$：两端均下降，$x \to \pm \infty$ 时 $p(x) \to -\infty$。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">小结。</span></strong> <span data-lang="en">Quartic, opens "down on both ends," $y$-intercept $(0, 7)$, at most $3$ turning points (general: degree $n \Rightarrow$ at most $n - 1$ turning points). The next sections find where it crosses zero.</span><span data-lang="zh">四次多项式，"两端向下"，$y$ 截距 $(0, 7)$，至多 $3$ 个拐点（一般规律：次数 $n \Rightarrow$ 至多 $n - 1$ 个拐点）。后续章节将求其零点。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why only the leading term decides end behaviour</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why only the leading term decides end behaviour</span><span data-lang="zh">深入 &middot; 为何只有首项决定末端行为</span></summary>
     <div class="detail-body">
-      <p>Factor $a_{n} x^{n}$ out: $p(x) = a_{n} x^{n} \left( 1 + \frac{a_{n-1}}{a_{n} x} + \cdots + \frac{a_{0}}{a_{n} x^{n}} \right)$. As $|x| \to \infty$, every term in the bracket except the constant $1$ heads to $0$, so the bracket approaches $1$ and $p(x)$ behaves like $a_{n} x^{n}$ for large $|x|$. That is the whole "only the leading term matters" rule: lower-order terms are eventually negligible. The same argument explains why polynomials of different degree must diverge from each other ,  the algebraic content behind <code>HSF-LE.A.3</code>'s "exponential eventually beats polynomial" claim, applied within the polynomial family itself.</p>
+      <p><span data-lang="en">Factor $a_{n} x^{n}$ out: $p(x) = a_{n} x^{n} \left( 1 + \frac{a_{n-1}}{a_{n} x} + \cdots + \frac{a_{0}}{a_{n} x^{n}} \right)$. As $|x| \to \infty$, every term in the bracket except the constant $1$ heads to $0$, so the bracket approaches $1$ and $p(x)$ behaves like $a_{n} x^{n}$ for large $|x|$. That is the whole "only the leading term matters" rule: lower-order terms are eventually negligible. The same argument explains why polynomials of different degree must diverge from each other ,  the algebraic content behind <code>HSF-LE.A.3</code>'s "exponential eventually beats polynomial" claim, applied within the polynomial family itself.</span><span data-lang="zh">把 $a_{n} x^{n}$ 提出：$p(x) = a_{n} x^{n} \left( 1 + \frac{a_{n-1}}{a_{n} x} + \cdots + \frac{a_{0}}{a_{n} x^{n}} \right)$。当 $|x| \to \infty$ 时，括号内除常数 $1$ 外每一项均趋 $0$，故括号趋 $1$，$|x|$ 大时 $p(x)$ 表现如 $a_{n} x^{n}$。这就是"只看首项"的全部含义：低次项最终可忽略。同样的论证解释了不同次数的多项式必然彼此发散 ,  这就是 <code>HSF-LE.A.3</code>"指数终将超越多项式"在多项式族内部的代数版本。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">What is the end behaviour of $p(x) = 2 x^{5} - 7 x^{3} + x - 4$?</div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the end behaviour of $p(x) = 2 x^{5} - 7 x^{3} + x - 4$?</span><span data-lang="zh">$p(x) = 2 x^{5} - 7 x^{3} + x - 4$ 的末端行为是？</span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">As $x \to \pm \infty$, $p(x) \to +\infty$.</div>
-      <div class="quiz-opt" data-idx="1">As $x \to -\infty$, $p(x) \to +\infty$; as $x \to +\infty$, $p(x) \to -\infty$.</div>
-      <div class="quiz-opt" data-idx="2">As $x \to -\infty$, $p(x) \to -\infty$; as $x \to +\infty$, $p(x) \to +\infty$.</div>
-      <div class="quiz-opt" data-idx="3">As $x \to \pm \infty$, $p(x) \to -\infty$.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">As $x \to \pm \infty$, $p(x) \to +\infty$.</span><span data-lang="zh">$x \to \pm \infty$ 时 $p(x) \to +\infty$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">As $x \to -\infty$, $p(x) \to +\infty$; as $x \to +\infty$, $p(x) \to -\infty$.</span><span data-lang="zh">$x \to -\infty$ 时 $p(x) \to +\infty$；$x \to +\infty$ 时 $p(x) \to -\infty$。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">As $x \to -\infty$, $p(x) \to -\infty$; as $x \to +\infty$, $p(x) \to +\infty$.</span><span data-lang="zh">$x \to -\infty$ 时 $p(x) \to -\infty$；$x \to +\infty$ 时 $p(x) \to +\infty$。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">As $x \to \pm \infty$, $p(x) \to -\infty$.</span><span data-lang="zh">$x \to \pm \infty$ 时 $p(x) \to -\infty$。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Degree $n = 5$ is odd, leading coefficient $a_{n} = 2 &gt; 0$. Odd-positive: left tail down, right tail up.</div>
-    <div class="quiz-explain wrong-exp">Look only at the leading term $2 x^{5}$. Odd degree means the two tails go opposite directions; positive leading coefficient means the right tail rises.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Degree $n = 5$ is odd, leading coefficient $a_{n} = 2 &gt; 0$. Odd-positive: left tail down, right tail up.</span><span data-lang="zh">次数 $n = 5$ 为奇，首项系数 $a_{n} = 2 &gt; 0$。奇 + 正：左尾下降，右尾上升。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Look only at the leading term $2 x^{5}$. Odd degree means the two tails go opposite directions; positive leading coefficient means the right tail rises.</span><span data-lang="zh">只看首项 $2 x^{5}$。奇次意味着两端方向相反；正首项系数意味着右端上升。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">A polynomial $p(x)$ has degree $6$. The maximum possible number of turning points is:</div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A polynomial $p(x)$ has degree $6$. The maximum possible number of turning points is:</span><span data-lang="zh">多项式 $p(x)$ 次数为 $6$。拐点数的最大可能值是：</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$6$</div>
       <div class="quiz-opt" data-idx="1">$5$</div>
       <div class="quiz-opt" data-idx="2">$7$</div>
       <div class="quiz-opt" data-idx="3">$3$</div>
     </div>
-    <div class="quiz-explain correct-exp">A polynomial of degree $n$ has at most $n - 1$ turning points (one for each zero of the degree-$(n-1)$ derivative). For $n = 6$, that bound is $5$.</div>
-    <div class="quiz-explain wrong-exp">The bound is $n - 1$, set by the degree of the derivative. For $n = 6$, that is $5$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A polynomial of degree $n$ has at most $n - 1$ turning points (one for each zero of the degree-$(n-1)$ derivative). For $n = 6$, that bound is $5$.</span><span data-lang="zh">次数 $n$ 的多项式至多有 $n - 1$ 个拐点（对应 $n-1$ 次导数的零点）。$n = 6$ 时上界为 $5$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The bound is $n - 1$, set by the degree of the derivative. For $n = 6$, that is $5$.</span><span data-lang="zh">上界为 $n - 1$，由导数次数决定。$n = 6$ 时为 $5$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-2">
-  <div class="section-label">Section 2 &middot; Arithmetic and division</div>
-  <h2>Polynomial Arithmetic and Division</h2>
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Arithmetic and division</span><span data-lang="zh">第 2 节 &middot; 运算与除法</span></div>
+  <h2><span data-lang="en">Polynomial Arithmetic and Division</span><span data-lang="zh">多项式运算与除法</span></h2>
 
   <div class="cram-cheat">
-    <strong>Addition and multiplication.</strong> Add by combining like terms (same exponent). Multiply by the distributive law term-by-term; the degree of a product is the sum of the degrees.
+    <strong><span data-lang="en">Addition and multiplication.</span><span data-lang="zh">加法与乘法。</span></strong> <span data-lang="en">Add by combining like terms (same exponent). Multiply by the distributive law term-by-term; the degree of a product is the sum of the degrees.</span><span data-lang="zh">相加合并同类项（同指数）；按分配律逐项相乘；乘积的次数等于各因式次数之和。</span>
     <br><br>
-    <strong>Long division.</strong> To divide $p(x)$ by $d(x)$:
+    <strong><span data-lang="en">Long division.</span><span data-lang="zh">长除法。</span></strong> <span data-lang="en">To divide $p(x)$ by $d(x)$:</span><span data-lang="zh">用 $d(x)$ 除 $p(x)$：</span>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>Arrange both in descending order, including a $0$ coefficient for any missing power.</li>
-      <li>Divide the leading term of $p$ by the leading term of $d$ to get the next term of the quotient.</li>
-      <li>Multiply $d$ by that term and subtract from $p$.</li>
-      <li>Repeat with the new "remainder so far" until its degree is less than $\deg d$.</li>
+      <li><span data-lang="en">Arrange both in descending order, including a $0$ coefficient for any missing power.</span><span data-lang="zh">两者均按降幂排列，缺项用 $0$ 系数补齐。</span></li>
+      <li><span data-lang="en">Divide the leading term of $p$ by the leading term of $d$ to get the next term of the quotient.</span><span data-lang="zh">$p$ 的首项除以 $d$ 的首项，得到商的下一项。</span></li>
+      <li><span data-lang="en">Multiply $d$ by that term and subtract from $p$.</span><span data-lang="zh">用该项乘 $d$，从 $p$ 中减去。</span></li>
+      <li><span data-lang="en">Repeat with the new "remainder so far" until its degree is less than $\deg d$.</span><span data-lang="zh">对新的"当前余数"重复以上步骤，直到其次数小于 $\deg d$。</span></li>
     </ol>
-    The result is $p(x) = d(x) \cdot q(x) + r(x)$ with $\deg r &lt; \deg d$.
+    <span data-lang="en">The result is $p(x) = d(x) \cdot q(x) + r(x)$ with $\deg r &lt; \deg d$.</span><span data-lang="zh">最终 $p(x) = d(x) \cdot q(x) + r(x)$，且 $\deg r &lt; \deg d$。</span>
     <br><br>
-    <strong>Synthetic division.</strong> A streamlined shortcut for dividing by a linear factor $(x - a)$:
+    <strong><span data-lang="en">Synthetic division.</span><span data-lang="zh">综合除法。</span></strong> <span data-lang="en">A streamlined shortcut for dividing by a linear factor $(x - a)$:</span><span data-lang="zh">除以线性因式 $(x - a)$ 的速记法：</span>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>Write the coefficients of $p$ in descending order (use $0$ for missing powers).</li>
-      <li>Put $a$ on the left.</li>
-      <li>Bring down the first coefficient. Multiply by $a$ and add to the next coefficient. Repeat.</li>
-      <li>The final number is $p(a)$ ,  the remainder. The other numbers, in order, are the coefficients of the quotient (degree one less than $p$).</li>
+      <li><span data-lang="en">Write the coefficients of $p$ in descending order (use $0$ for missing powers).</span><span data-lang="zh">按降幂写出 $p$ 的系数（缺项补 $0$）。</span></li>
+      <li><span data-lang="en">Put $a$ on the left.</span><span data-lang="zh">把 $a$ 放在左侧。</span></li>
+      <li><span data-lang="en">Bring down the first coefficient. Multiply by $a$ and add to the next coefficient. Repeat.</span><span data-lang="zh">把首系数下移；乘 $a$ 加到下一系数；如此循环。</span></li>
+      <li><span data-lang="en">The final number is $p(a)$ ,  the remainder. The other numbers, in order, are the coefficients of the quotient (degree one less than $p$).</span><span data-lang="zh">最后一个数即 $p(a)$ ,  余数；其余数字按序为商的系数（次数比 $p$ 低 $1$）。</span></li>
     </ol>
-    Synthetic division is exactly long division by $(x - a)$, rewritten as a number-crunching procedure.
+    <span data-lang="en">Synthetic division is exactly long division by $(x - a)$, rewritten as a number-crunching procedure.</span><span data-lang="zh">综合除法本质上就是除以 $(x - a)$ 的长除法，写成纯数字流程而已。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 2 &middot; Long division of $p(x) = 2 x^{3} - 5 x^{2} + 3 x - 7$ by $d(x) = x - 2$</div>
-    <p>Find the quotient $q(x)$ and the remainder $r$.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 2 &middot; Long division of $p(x) = 2 x^{3} - 5 x^{2} + 3 x - 7$ by $d(x) = x - 2$</span><span data-lang="zh">例题 2 &middot; 用 $d(x) = x - 2$ 长除 $p(x) = 2 x^{3} - 5 x^{2} + 3 x - 7$</span></div>
+    <p><span data-lang="en">Find the quotient $q(x)$ and the remainder $r$.</span><span data-lang="zh">求商 $q(x)$ 与余数 $r$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Set up.</strong> Coefficients of $p$: $2, -5, 3, -7$.</p>
-    <p><strong>Step 1.</strong> $2 x^{3} \div x = 2 x^{2}$; multiply by $d$: $2 x^{3} - 4 x^{2}$; subtract: $-x^{2}$. Bring down: dividend $-x^{2} + 3 x - 7$.</p>
-    <p><strong>Step 2.</strong> $-x^{2} \div x = -x$; multiply: $-x^{2} + 2 x$; subtract: $x$. Bring down: dividend $x - 7$.</p>
-    <p><strong>Step 3.</strong> $x \div x = 1$; multiply: $x - 2$; subtract: $-5$. Degree $0 &lt; \deg d$, stop.</p>
-    <p><strong>Read off.</strong> $q(x) = 2 x^{2} - x + 1$, $r = -5$, so $2 x^{3} - 5 x^{2} + 3 x - 7 = (x - 2)(2 x^{2} - x + 1) - 5$. Sanity check at $x = 2$: left $= 16 - 20 + 6 - 7 = -5$, matching $r$ ,  previewing the remainder theorem in &sect;3.</p>
+    <p><strong><span data-lang="en">Set up.</span><span data-lang="zh">列式。</span></strong> <span data-lang="en">Coefficients of $p$: $2, -5, 3, -7$.</span><span data-lang="zh">$p$ 的系数：$2, -5, 3, -7$。</span></p>
+    <p><strong><span data-lang="en">Step 1.</span><span data-lang="zh">第 1 步。</span></strong> <span data-lang="en">$2 x^{3} \div x = 2 x^{2}$; multiply by $d$: $2 x^{3} - 4 x^{2}$; subtract: $-x^{2}$. Bring down: dividend $-x^{2} + 3 x - 7$.</span><span data-lang="zh">$2 x^{3} \div x = 2 x^{2}$；乘 $d$ 得 $2 x^{3} - 4 x^{2}$；相减得 $-x^{2}$。下移：被除式变为 $-x^{2} + 3 x - 7$。</span></p>
+    <p><strong><span data-lang="en">Step 2.</span><span data-lang="zh">第 2 步。</span></strong> <span data-lang="en">$-x^{2} \div x = -x$; multiply: $-x^{2} + 2 x$; subtract: $x$. Bring down: dividend $x - 7$.</span><span data-lang="zh">$-x^{2} \div x = -x$；乘得 $-x^{2} + 2 x$；相减得 $x$。下移：被除式变为 $x - 7$。</span></p>
+    <p><strong><span data-lang="en">Step 3.</span><span data-lang="zh">第 3 步。</span></strong> <span data-lang="en">$x \div x = 1$; multiply: $x - 2$; subtract: $-5$. Degree $0 &lt; \deg d$, stop.</span><span data-lang="zh">$x \div x = 1$；乘得 $x - 2$；相减得 $-5$。次数 $0 &lt; \deg d$，停止。</span></p>
+    <p><strong><span data-lang="en">Read off.</span><span data-lang="zh">读出结果。</span></strong> <span data-lang="en">$q(x) = 2 x^{2} - x + 1$, $r = -5$, so $2 x^{3} - 5 x^{2} + 3 x - 7 = (x - 2)(2 x^{2} - x + 1) - 5$. Sanity check at $x = 2$: left $= 16 - 20 + 6 - 7 = -5$, matching $r$ ,  previewing the remainder theorem in &sect;3.</span><span data-lang="zh">$q(x) = 2 x^{2} - x + 1$、$r = -5$，故 $2 x^{3} - 5 x^{2} + 3 x - 7 = (x - 2)(2 x^{2} - x + 1) - 5$。$x = 2$ 处核验：左 $= 16 - 20 + 6 - 7 = -5$，与 $r$ 一致 ,  这就是 &sect;3 余数定理的预演。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Synthetic division on the same problem</summary>
+    <summary><span data-lang="en">Going deeper &middot; Synthetic division on the same problem</span><span data-lang="zh">深入 &middot; 同一题的综合除法</span></summary>
     <div class="detail-body">
-      <p>Coefficients $2, -5, 3, -7$. Divisor $(x - 2)$, so $a = 2$. Bring down $2$; multiply by $a = 2$ and add: $-5 + 4 = -1$. Continue: $3 + (-2) = 1$; $-7 + 2 = -5$. Read off the quotient coefficients $2, -1, 1$ (one degree lower than $p$) and the remainder $-5$, matching long division exactly. Synthetic division is faster but only works for divisors of the form $(x - a)$; for higher-degree divisors, fall back to long division.</p>
+      <p><span data-lang="en">Coefficients $2, -5, 3, -7$. Divisor $(x - 2)$, so $a = 2$. Bring down $2$; multiply by $a = 2$ and add: $-5 + 4 = -1$. Continue: $3 + (-2) = 1$; $-7 + 2 = -5$. Read off the quotient coefficients $2, -1, 1$ (one degree lower than $p$) and the remainder $-5$, matching long division exactly. Synthetic division is faster but only works for divisors of the form $(x - a)$; for higher-degree divisors, fall back to long division.</span><span data-lang="zh">系数 $2, -5, 3, -7$。除式 $(x - 2)$，故 $a = 2$。下移 $2$；乘 $a = 2$ 后相加：$-5 + 4 = -1$。继续：$3 + (-2) = 1$；$-7 + 2 = -5$。读出商的系数 $2, -1, 1$（次数比 $p$ 低 $1$）与余数 $-5$，与长除法完全一致。综合除法更快，但只适用于 $(x - a)$ 形式的除式；对高次除式需退回长除法。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">What is the remainder when $p(x) = x^{3} + 2 x^{2} - x + 5$ is divided by $(x + 1)$?</div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the remainder when $p(x) = x^{3} + 2 x^{2} - x + 5$ is divided by $(x + 1)$?</span><span data-lang="zh">$p(x) = x^{3} + 2 x^{2} - x + 5$ 除以 $(x + 1)$ 的余数是？</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$5$</div>
       <div class="quiz-opt" data-idx="1">$7$</div>
       <div class="quiz-opt" data-idx="2">$-7$</div>
       <div class="quiz-opt" data-idx="3">$3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Divisor $(x + 1) = (x - (-1))$, so $a = -1$. Synthetic division on coefficients $1, 2, -1, 5$ with $a = -1$ gives a final value (remainder) of $7$. (Cross-check via the remainder theorem in &sect;3: $p(-1) = -1 + 2 + 1 + 5 = 7$.)</div>
-    <div class="quiz-explain wrong-exp">When dividing by $(x + 1)$, use synthetic division with $a = -1$. The last number you produce is the remainder.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Divisor $(x + 1) = (x - (-1))$, so $a = -1$. Synthetic division on coefficients $1, 2, -1, 5$ with $a = -1$ gives a final value (remainder) of $7$. (Cross-check via the remainder theorem in &sect;3: $p(-1) = -1 + 2 + 1 + 5 = 7$.)</span><span data-lang="zh">除式 $(x + 1) = (x - (-1))$，故 $a = -1$。对系数 $1, 2, -1, 5$ 用 $a = -1$ 做综合除法，最后一个数（余数）为 $7$。（用 &sect;3 余数定理核验：$p(-1) = -1 + 2 + 1 + 5 = 7$。）</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">When dividing by $(x + 1)$, use synthetic division with $a = -1$. The last number you produce is the remainder.</span><span data-lang="zh">除以 $(x + 1)$ 时综合除法取 $a = -1$。最后产生的数即余数。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">If $p(x) = x^{4} - 16$ is divided by $(x - 2)$, the quotient is:</div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">If $p(x) = x^{4} - 16$ is divided by $(x - 2)$, the quotient is:</span><span data-lang="zh">$p(x) = x^{4} - 16$ 除以 $(x - 2)$ 的商是：</span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$x^{3} + 2 x^{2} + 4 x + 8$ with remainder $16$.</div>
-      <div class="quiz-opt" data-idx="1">$x^{3} - 2 x^{2} + 4 x - 8$ with remainder $0$.</div>
-      <div class="quiz-opt" data-idx="2">$x^{3} + 2 x^{2} + 4 x + 8$ with remainder $0$.</div>
-      <div class="quiz-opt" data-idx="3">$x^{3} - 8$ with remainder $0$.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$x^{3} + 2 x^{2} + 4 x + 8$ with remainder $16$.</span><span data-lang="zh">$x^{3} + 2 x^{2} + 4 x + 8$，余数 $16$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$x^{3} - 2 x^{2} + 4 x - 8$ with remainder $0$.</span><span data-lang="zh">$x^{3} - 2 x^{2} + 4 x - 8$，余数 $0$。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$x^{3} + 2 x^{2} + 4 x + 8$ with remainder $0$.</span><span data-lang="zh">$x^{3} + 2 x^{2} + 4 x + 8$，余数 $0$。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">$x^{3} - 8$ with remainder $0$.</span><span data-lang="zh">$x^{3} - 8$，余数 $0$。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Synthetic division on $1, 0, 0, 0, -16$ with $a = 2$: $1$, then $0 + 2 = 2$, then $0 + 4 = 4$, then $0 + 8 = 8$, then $-16 + 16 = 0$. Quotient $x^{3} + 2 x^{2} + 4 x + 8$, remainder $0$.</div>
-    <div class="quiz-explain wrong-exp">Use synthetic division with $a = 2$. Remember to insert $0$ coefficients for the missing $x^{3}, x^{2}, x^{1}$ powers.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Synthetic division on $1, 0, 0, 0, -16$ with $a = 2$: $1$, then $0 + 2 = 2$, then $0 + 4 = 4$, then $0 + 8 = 8$, then $-16 + 16 = 0$. Quotient $x^{3} + 2 x^{2} + 4 x + 8$, remainder $0$.</span><span data-lang="zh">对 $1, 0, 0, 0, -16$ 用 $a = 2$ 做综合除法：$1$、$0 + 2 = 2$、$0 + 4 = 4$、$0 + 8 = 8$、$-16 + 16 = 0$。商 $x^{3} + 2 x^{2} + 4 x + 8$，余数 $0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use synthetic division with $a = 2$. Remember to insert $0$ coefficients for the missing $x^{3}, x^{2}, x^{1}$ powers.</span><span data-lang="zh">综合除法用 $a = 2$。注意为缺失的 $x^{3}, x^{2}, x^{1}$ 项补 $0$ 系数。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-3">
-  <div class="section-label">Section 3 &middot; Remainder and Factor Theorems</div>
-  <h2>The Remainder and Factor Theorems <span class="region-chip">&#x1F1E8;&#x1F1E6; ON MHF4U &middot; &#x1F1E8;&#x1F1E6; BC PC12 core</span></h2>
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Remainder and Factor Theorems</span><span data-lang="zh">第 3 节 &middot; 余数定理与因式定理</span></div>
+  <h2><span data-lang="en">The Remainder and Factor Theorems</span><span data-lang="zh">余数定理与因式定理</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; ON MHF4U &middot; &#x1F1E8;&#x1F1E6; BC PC12 core</span></h2>
 
   <div class="cram-cheat">
-    <strong>Remainder theorem.</strong> When $p(x)$ is divided by $(x - a)$, the remainder equals $p(a)$.
+    <strong><span data-lang="en">Remainder theorem.</span><span data-lang="zh">余数定理。</span></strong> <span data-lang="en">When $p(x)$ is divided by $(x - a)$, the remainder equals $p(a)$.</span><span data-lang="zh">$p(x)$ 除以 $(x - a)$ 的余数等于 $p(a)$。</span>
     $$ p(x) \;=\; (x - a) \cdot q(x) + p(a). $$
-    <strong>Factor theorem.</strong> $(x - a)$ is a factor of $p(x)$ if and only if $p(a) = 0$. (Special case of the remainder theorem with $p(a) = 0$.)
+    <strong><span data-lang="en">Factor theorem.</span><span data-lang="zh">因式定理。</span></strong> <span data-lang="en">$(x - a)$ is a factor of $p(x)$ if and only if $p(a) = 0$. (Special case of the remainder theorem with $p(a) = 0$.)</span><span data-lang="zh">$(x - a)$ 是 $p(x)$ 的因式当且仅当 $p(a) = 0$。（余数定理在 $p(a) = 0$ 时的特例。）</span>
     <br><br>
-    <strong>How to use them.</strong>
+    <strong><span data-lang="en">How to use them.</span><span data-lang="zh">使用方法。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Check whether $a$ is a root</strong> without doing long division: compute $p(a)$ and see if it is zero.</li>
-      <li><strong>Factor a polynomial</strong> once you have spotted a root $a$: divide by $(x - a)$ (synthetic division is fastest) to get the quotient $q(x)$, then continue factoring $q(x)$.</li>
-      <li><strong>Find an unknown coefficient</strong> when you know a root: substitute and solve.</li>
+      <li><strong><span data-lang="en">Check whether $a$ is a root</span><span data-lang="zh">检验 $a$ 是否为根</span></strong> <span data-lang="en">without doing long division: compute $p(a)$ and see if it is zero.</span><span data-lang="zh">无需长除：算 $p(a)$ 看是否为零。</span></li>
+      <li><strong><span data-lang="en">Factor a polynomial</span><span data-lang="zh">分解多项式</span></strong> <span data-lang="en">once you have spotted a root $a$: divide by $(x - a)$ (synthetic division is fastest) to get the quotient $q(x)$, then continue factoring $q(x)$.</span><span data-lang="zh">：一旦找到一个根 $a$，除以 $(x - a)$（综合除法最快）得商 $q(x)$，再继续分解 $q(x)$。</span></li>
+      <li><strong><span data-lang="en">Find an unknown coefficient</span><span data-lang="zh">求未知系数</span></strong> <span data-lang="en">when you know a root: substitute and solve.</span><span data-lang="zh">：已知一根时，代入求解。</span></li>
     </ul>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> BC Pre-Calc 12 names the <em>factor theorem and the remainder theorem</em> verbatim in its polynomial-functions Content elaboration ,  they are not a derivation here but a named curriculum learning standard. Ontario MHF4U's "Polynomial and Rational Functions" strand carries the same two theorems. In US Common Core they sit one click above the linear-scoped extract under <code>HSA-APR</code> (Arithmetic with Polynomials and Rational Expressions); the cluster name and category exist, but the granular bullets are not in <code>ccssm_hs_math_extract.md</code>. The mathematical content below is identical across all three curricula.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">BC Pre-Calc 12 names the <em>factor theorem and the remainder theorem</em> verbatim in its polynomial-functions Content elaboration ,  they are not a derivation here but a named curriculum learning standard. Ontario MHF4U's "Polynomial and Rational Functions" strand carries the same two theorems. In US Common Core they sit one click above the linear-scoped extract under <code>HSA-APR</code> (Arithmetic with Polynomials and Rational Expressions); the cluster name and category exist, but the granular bullets are not in <code>ccssm_hs_math_extract.md</code>. The mathematical content below is identical across all three curricula.</span><span data-lang="zh">BC PC12 在多项式函数内容阐释中原文点名 <em>因式定理与余数定理</em> ,  此处不是推导而是具名课纲标准。安大略 MHF4U 的"多项式与有理函数"单元也同样收录这两个定理。在美国共同核心中，它们位于线性范围摘录之上、归入 <code>HSA-APR</code>（多项式与有理表达式的运算）；簇名与类别存在，但细分条目不在 <code>ccssm_hs_math_extract.md</code> 内。下面的数学内容在三套大纲中完全一致。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 3 &middot; Factor a cubic by spotting a root</div>
-    <p>Fully factor $p(x) = x^{3} - 6 x^{2} + 11 x - 6$ over the reals.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 3 &middot; Factor a cubic by spotting a root</span><span data-lang="zh">例题 3 &middot; 通过试根分解三次多项式</span></div>
+    <p><span data-lang="en">Fully factor $p(x) = x^{3} - 6 x^{2} + 11 x - 6$ over the reals.</span><span data-lang="zh">在实数范围内完全分解 $p(x) = x^{3} - 6 x^{2} + 11 x - 6$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Hunt for a root.</strong> Try $x = 1$: $p(1) = 1 - 6 + 11 - 6 = 0$. By the factor theorem, $(x - 1)$ is a factor.</p>
-    <p><strong>Divide.</strong> Synthetic division with $a = 1$ on $1, -6, 11, -6$ gives quotient $x^{2} - 5 x + 6$ and remainder $0$. Factor the quotient: $(x - 2)(x - 3)$ (sum $5$, product $6$).</p>
-    <p><strong>Assemble.</strong> $p(x) = (x - 1)(x - 2)(x - 3)$. Roots $1, 2, 3$, all simple. Vieta check on the cubic: sum $1 + 2 + 3 = 6 = -a_{n-1}/a_{n}$; product $1 \cdot 2 \cdot 3 = 6 = (-1)^{n} a_{0}/a_{n} = -(-6)$. Confirmed.</p>
+    <p><strong><span data-lang="en">Hunt for a root.</span><span data-lang="zh">试根。</span></strong> <span data-lang="en">Try $x = 1$: $p(1) = 1 - 6 + 11 - 6 = 0$. By the factor theorem, $(x - 1)$ is a factor.</span><span data-lang="zh">试 $x = 1$：$p(1) = 1 - 6 + 11 - 6 = 0$。由因式定理，$(x - 1)$ 是因式。</span></p>
+    <p><strong><span data-lang="en">Divide.</span><span data-lang="zh">作除。</span></strong> <span data-lang="en">Synthetic division with $a = 1$ on $1, -6, 11, -6$ gives quotient $x^{2} - 5 x + 6$ and remainder $0$. Factor the quotient: $(x - 2)(x - 3)$ (sum $5$, product $6$).</span><span data-lang="zh">对 $1, -6, 11, -6$ 用 $a = 1$ 做综合除法，商为 $x^{2} - 5 x + 6$，余数 $0$。分解商：$(x - 2)(x - 3)$（和 $5$，积 $6$）。</span></p>
+    <p><strong><span data-lang="en">Assemble.</span><span data-lang="zh">合并结论。</span></strong> <span data-lang="en">$p(x) = (x - 1)(x - 2)(x - 3)$. Roots $1, 2, 3$, all simple. Vieta check on the cubic: sum $1 + 2 + 3 = 6 = -a_{n-1}/a_{n}$; product $1 \cdot 2 \cdot 3 = 6 = (-1)^{n} a_{0}/a_{n} = -(-6)$. Confirmed.</span><span data-lang="zh">$p(x) = (x - 1)(x - 2)(x - 3)$。三个根 $1, 2, 3$ 均为单根。三次 Vieta 核验：根之和 $1 + 2 + 3 = 6 = -a_{n-1}/a_{n}$；根之积 $1 \cdot 2 \cdot 3 = 6 = (-1)^{n} a_{0}/a_{n} = -(-6)$。确认。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the remainder theorem is true</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the remainder theorem is true</span><span data-lang="zh">深入 &middot; 余数定理为何成立</span></summary>
     <div class="detail-body">
-      <p>Long division of $p(x)$ by $(x - a)$ leaves a remainder $r(x)$ with $\deg r &lt; \deg(x - a) = 1$, so $r$ is a constant: $p(x) = (x - a) q(x) + r$. Substitute $x = a$: $p(a) = 0 \cdot q(a) + r = r$. So the remainder equals $p(a)$ ,  the remainder theorem in one substitution. The factor theorem is the special case $p(a) = 0$: then $p(x) = (x - a) q(x)$, exhibiting $(x - a)$ as a factor; the converse is immediate.</p>
+      <p><span data-lang="en">Long division of $p(x)$ by $(x - a)$ leaves a remainder $r(x)$ with $\deg r &lt; \deg(x - a) = 1$, so $r$ is a constant: $p(x) = (x - a) q(x) + r$. Substitute $x = a$: $p(a) = 0 \cdot q(a) + r = r$. So the remainder equals $p(a)$ ,  the remainder theorem in one substitution. The factor theorem is the special case $p(a) = 0$: then $p(x) = (x - a) q(x)$, exhibiting $(x - a)$ as a factor; the converse is immediate.</span><span data-lang="zh">$p(x)$ 长除 $(x - a)$ 得到余式 $r(x)$，且 $\deg r &lt; \deg(x - a) = 1$，故 $r$ 是常数：$p(x) = (x - a) q(x) + r$。代入 $x = a$：$p(a) = 0 \cdot q(a) + r = r$。故余数等于 $p(a)$ ,  一次代入即得余数定理。因式定理是 $p(a) = 0$ 的特例：此时 $p(x) = (x - a) q(x)$，$(x - a)$ 显式为因式；反向亦显然。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">If $p(x) = 2 x^{3} - 3 x^{2} + k x + 1$ has $(x - 1)$ as a factor, what is $k$?</div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">If $p(x) = 2 x^{3} - 3 x^{2} + k x + 1$ has $(x - 1)$ as a factor, what is $k$?</span><span data-lang="zh">若 $p(x) = 2 x^{3} - 3 x^{2} + k x + 1$ 以 $(x - 1)$ 为因式，则 $k$ 为？</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$k = 0$</div>
       <div class="quiz-opt" data-idx="1">$k = 1$</div>
       <div class="quiz-opt" data-idx="2">$k = -1$</div>
       <div class="quiz-opt" data-idx="3">$k = 2$</div>
     </div>
-    <div class="quiz-explain correct-exp">By the factor theorem, $(x - 1)$ a factor means $p(1) = 0$. Compute: $p(1) = 2 - 3 + k + 1 = k$. Set $k = 0$.</div>
-    <div class="quiz-explain wrong-exp">Use the factor theorem: $(x - 1)$ a factor of $p(x)$ iff $p(1) = 0$. Substitute and solve for $k$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">By the factor theorem, $(x - 1)$ a factor means $p(1) = 0$. Compute: $p(1) = 2 - 3 + k + 1 = k$. Set $k = 0$.</span><span data-lang="zh">由因式定理，$(x - 1)$ 为因式即 $p(1) = 0$。算得：$p(1) = 2 - 3 + k + 1 = k$。令 $k = 0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use the factor theorem: $(x - 1)$ a factor of $p(x)$ iff $p(1) = 0$. Substitute and solve for $k$.</span><span data-lang="zh">用因式定理：$(x - 1) \mid p(x) \iff p(1) = 0$。代入解 $k$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-header"><div class="quiz-q">The remainder when $p(x) = x^{4} - 3 x^{2} + 2 x - 5$ is divided by $(x - 2)$ is:</div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">The remainder when $p(x) = x^{4} - 3 x^{2} + 2 x - 5$ is divided by $(x - 2)$ is:</span><span data-lang="zh">$p(x) = x^{4} - 3 x^{2} + 2 x - 5$ 除以 $(x - 2)$ 的余数是：</span></div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$0$</div>
       <div class="quiz-opt" data-idx="1">$5$</div>
       <div class="quiz-opt" data-idx="2">$-3$</div>
       <div class="quiz-opt" data-idx="3">$3$</div>
     </div>
-    <div class="quiz-explain correct-exp">By the remainder theorem, the remainder is $p(2) = 16 - 12 + 4 - 5 = 3$.</div>
-    <div class="quiz-explain wrong-exp">The remainder theorem says the remainder is $p(a)$; here $a = 2$. Substitute directly ,  no long division required.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">By the remainder theorem, the remainder is $p(2) = 16 - 12 + 4 - 5 = 3$.</span><span data-lang="zh">由余数定理，余数为 $p(2) = 16 - 12 + 4 - 5 = 3$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The remainder theorem says the remainder is $p(a)$; here $a = 2$. Substitute directly ,  no long division required.</span><span data-lang="zh">余数定理告诉我们余数即 $p(a)$；此处 $a = 2$。直接代入 ,  无需长除。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-4">
-  <div class="section-label">Section 4 &middot; Finding roots</div>
-  <h2>Finding Roots: Rational Root Theorem and Factoring Strategies</h2>
+  <div class="section-label"><span data-lang="en">Section 4 &middot; Finding roots</span><span data-lang="zh">第 4 节 &middot; 求根</span></div>
+  <h2><span data-lang="en">Finding Roots: Rational Root Theorem and Factoring Strategies</span><span data-lang="zh">求根：有理根定理与因式分解策略</span></h2>
 
   <div class="cram-cheat">
-    <strong>Rational root theorem.</strong> Let $p(x) = a_{n} x^{n} + \cdots + a_{1} x + a_{0}$ have <em>integer</em> coefficients with $a_{n} \ne 0$ and $a_{0} \ne 0$. If $p$ has a rational root $\frac{p}{q}$ in lowest terms (so $\gcd(p, q) = 1$), then
+    <strong><span data-lang="en">Rational root theorem.</span><span data-lang="zh">有理根定理。</span></strong> <span data-lang="en">Let $p(x) = a_{n} x^{n} + \cdots + a_{1} x + a_{0}$ have <em>integer</em> coefficients with $a_{n} \ne 0$ and $a_{0} \ne 0$. If $p$ has a rational root $\frac{p}{q}$ in lowest terms (so $\gcd(p, q) = 1$), then</span><span data-lang="zh">设 $p(x) = a_{n} x^{n} + \cdots + a_{1} x + a_{0}$ 系数<em>均为整数</em>，且 $a_{n} \ne 0$、$a_{0} \ne 0$。若 $p$ 有最简形式的有理根 $\frac{p}{q}$（即 $\gcd(p, q) = 1$），则</span>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>$p$ divides $a_{0}$ (the constant term), and</li>
-      <li>$q$ divides $a_{n}$ (the leading coefficient).</li>
+      <li><span data-lang="en">$p$ divides $a_{0}$ (the constant term), and</span><span data-lang="zh">$p \mid a_{0}$（常数项），且</span></li>
+      <li><span data-lang="en">$q$ divides $a_{n}$ (the leading coefficient).</span><span data-lang="zh">$q \mid a_{n}$（首项系数）。</span></li>
     </ul>
-    The candidate list is finite: every $\pm (\text{factor of } a_{0}) / (\text{factor of } a_{n})$ in lowest terms.
+    <span data-lang="en">The candidate list is finite: every $\pm (\text{factor of } a_{0}) / (\text{factor of } a_{n})$ in lowest terms.</span><span data-lang="zh">候选有限：所有最简形式的 $\pm (a_{0} \text{的因数}) / (a_{n} \text{的因数})$。</span>
     <br><br>
-    <strong>Strategy for solving $p(x) = 0$.</strong>
+    <strong><span data-lang="en">Strategy for solving $p(x) = 0$.</span><span data-lang="zh">求解 $p(x) = 0$ 的策略。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Pull a GCF first</strong> if one is staring at you (factors out a power of $x$ to expose any $x = 0$ roots).</li>
-      <li><strong>Try special factorings</strong>: difference of squares $a^{2} - b^{2} = (a - b)(a + b)$; sum/difference of cubes $a^{3} \pm b^{3} = (a \pm b)(a^{2} \mp a b + b^{2})$; grouping for four-term expressions.</li>
-      <li><strong>List rational candidates</strong> with the rational root theorem. Test each with synthetic division (which delivers $p(a)$ and the quotient simultaneously).</li>
-      <li><strong>Recurse.</strong> Each rational root drops the degree by $1$; eventually you reach a quadratic, which you solve by &sect;2.3-&sect;2.5 techniques.</li>
-      <li><strong>Irrational roots</strong> come from the residual quadratic via the quadratic formula. <strong>Complex roots</strong> come in conjugate pairs (&sect;6).</li>
+      <li><strong><span data-lang="en">Pull a GCF first</span><span data-lang="zh">先提公因式</span></strong> <span data-lang="en">if one is staring at you (factors out a power of $x$ to expose any $x = 0$ roots).</span><span data-lang="zh">（若一眼可见）。提出 $x$ 的幂可显式暴露 $x = 0$ 的根。</span></li>
+      <li><strong><span data-lang="en">Try special factorings</span><span data-lang="zh">尝试特殊因式</span></strong><span data-lang="en">: difference of squares $a^{2} - b^{2} = (a - b)(a + b)$; sum/difference of cubes $a^{3} \pm b^{3} = (a \pm b)(a^{2} \mp a b + b^{2})$; grouping for four-term expressions.</span><span data-lang="zh">：平方差 $a^{2} - b^{2} = (a - b)(a + b)$；立方和 / 差 $a^{3} \pm b^{3} = (a \pm b)(a^{2} \mp a b + b^{2})$；四项分组。</span></li>
+      <li><strong><span data-lang="en">List rational candidates</span><span data-lang="zh">列出有理候选</span></strong> <span data-lang="en">with the rational root theorem. Test each with synthetic division (which delivers $p(a)$ and the quotient simultaneously).</span><span data-lang="zh">：用有理根定理。每个候选用综合除法测试（同时给出 $p(a)$ 与商）。</span></li>
+      <li><strong><span data-lang="en">Recurse.</span><span data-lang="zh">递归。</span></strong> <span data-lang="en">Each rational root drops the degree by $1$; eventually you reach a quadratic, which you solve by &sect;2.3-&sect;2.5 techniques.</span><span data-lang="zh">每找到一个有理根次数降 $1$；最终降到二次，用 &sect;2.3-&sect;2.5 的方法求解。</span></li>
+      <li><strong><span data-lang="en">Irrational roots</span><span data-lang="zh">无理根</span></strong> <span data-lang="en">come from the residual quadratic via the quadratic formula. <strong>Complex roots</strong> come in conjugate pairs (&sect;6).</span><span data-lang="zh">从残余二次中用求根公式获得。<strong>复根</strong>成共轭对（&sect;6）。</span></li>
     </ol>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> The rational root theorem is standard in US Pre-Calc / Algebra 2 Honors; it is the canonical tool for hand-factoring a cubic or quartic with integer coefficients. BC Pre-Calc 12 lists "solving equations algebraically and graphically" in the polynomial Content elaboration without naming the theorem ,  the theorem is the standard solving technique that any PC12 candidate-list question expects. Ontario MHF4U's polynomial strand uses the same hunt-then-divide workflow.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">The rational root theorem is standard in US Pre-Calc / Algebra 2 Honors; it is the canonical tool for hand-factoring a cubic or quartic with integer coefficients. BC Pre-Calc 12 lists "solving equations algebraically and graphically" in the polynomial Content elaboration without naming the theorem ,  the theorem is the standard solving technique that any PC12 candidate-list question expects. Ontario MHF4U's polynomial strand uses the same hunt-then-divide workflow.</span><span data-lang="zh">有理根定理在美国 Pre-Calc / Algebra 2 Honors 中是标准内容；它是手工分解整系数三次 / 四次多项式的常规工具。BC PC12 在多项式内容阐释中列出"代数与图象求解方程"但未点名该定理 ,  它是任何 PC12 候选列表题默认采用的标准技术。安大略 MHF4U 多项式单元采用同样的"试根再除"流程。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 4 &middot; Solve a cubic with the rational root theorem</div>
-    <p>Solve $2 x^{3} - 3 x^{2} - 11 x + 6 = 0$ completely over the reals.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 4 &middot; Solve a cubic with the rational root theorem</span><span data-lang="zh">例题 4 &middot; 用有理根定理解三次方程</span></div>
+    <p><span data-lang="en">Solve $2 x^{3} - 3 x^{2} - 11 x + 6 = 0$ completely over the reals.</span><span data-lang="zh">在实数范围内完全求解 $2 x^{3} - 3 x^{2} - 11 x + 6 = 0$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Candidate list.</strong> $a_{n} = 2$, $a_{0} = 6$. Lowest-terms $p/q$ with $p \mid 6$ and $q \mid 2$: $\pm 1, \pm 2, \pm 3, \pm 6, \pm \tfrac{1}{2}, \pm \tfrac{3}{2}$.</p>
-    <p><strong>Test.</strong> Try $x = 3$: $p(3) = 54 - 27 - 33 + 6 = 0$. Root found.</p>
-    <p><strong>Divide.</strong> Synthetic division with $a = 3$ on $2, -3, -11, 6$ gives quotient coefficients $2, 3, -2$ with remainder $0$, so the quotient is $2 x^{2} + 3 x - 2$.</p>
-    <p><strong>Solve the quotient.</strong> Factor $2 x^{2} + 3 x - 2$ by AC method: $a c = -4$, pair $(4, -1)$ sums to $3$, so $2 x^{2} + 3 x - 2 = (2 x - 1)(x + 2)$ giving $x = 1/2$ or $x = -2$.</p>
-    <p><strong>Assemble.</strong> All roots: $x = 3, \tfrac{1}{2}, -2$. Fully factored: $2 x^{3} - 3 x^{2} - 11 x + 6 = (x - 3)(2 x - 1)(x + 2)$.</p>
+    <p><strong><span data-lang="en">Candidate list.</span><span data-lang="zh">候选列表。</span></strong> <span data-lang="en">$a_{n} = 2$, $a_{0} = 6$. Lowest-terms $p/q$ with $p \mid 6$ and $q \mid 2$: $\pm 1, \pm 2, \pm 3, \pm 6, \pm \tfrac{1}{2}, \pm \tfrac{3}{2}$.</span><span data-lang="zh">$a_{n} = 2$、$a_{0} = 6$。最简 $p/q$，$p \mid 6$，$q \mid 2$：$\pm 1, \pm 2, \pm 3, \pm 6, \pm \tfrac{1}{2}, \pm \tfrac{3}{2}$。</span></p>
+    <p><strong><span data-lang="en">Test.</span><span data-lang="zh">测试。</span></strong> <span data-lang="en">Try $x = 3$: $p(3) = 54 - 27 - 33 + 6 = 0$. Root found.</span><span data-lang="zh">试 $x = 3$：$p(3) = 54 - 27 - 33 + 6 = 0$。找到根。</span></p>
+    <p><strong><span data-lang="en">Divide.</span><span data-lang="zh">作除。</span></strong> <span data-lang="en">Synthetic division with $a = 3$ on $2, -3, -11, 6$ gives quotient coefficients $2, 3, -2$ with remainder $0$, so the quotient is $2 x^{2} + 3 x - 2$.</span><span data-lang="zh">对 $2, -3, -11, 6$ 用 $a = 3$ 做综合除法，得商系数 $2, 3, -2$，余数 $0$，故商为 $2 x^{2} + 3 x - 2$。</span></p>
+    <p><strong><span data-lang="en">Solve the quotient.</span><span data-lang="zh">解商。</span></strong> <span data-lang="en">Factor $2 x^{2} + 3 x - 2$ by AC method: $a c = -4$, pair $(4, -1)$ sums to $3$, so $2 x^{2} + 3 x - 2 = (2 x - 1)(x + 2)$ giving $x = 1/2$ or $x = -2$.</span><span data-lang="zh">用 AC 法分解 $2 x^{2} + 3 x - 2$：$a c = -4$，配对 $(4, -1)$ 和为 $3$，故 $2 x^{2} + 3 x - 2 = (2 x - 1)(x + 2)$，得 $x = 1/2$ 或 $x = -2$。</span></p>
+    <p><strong><span data-lang="en">Assemble.</span><span data-lang="zh">合并结论。</span></strong> <span data-lang="en">All roots: $x = 3, \tfrac{1}{2}, -2$. Fully factored: $2 x^{3} - 3 x^{2} - 11 x + 6 = (x - 3)(2 x - 1)(x + 2)$.</span><span data-lang="zh">全部根：$x = 3, \tfrac{1}{2}, -2$。完全分解：$2 x^{3} - 3 x^{2} - 11 x + 6 = (x - 3)(2 x - 1)(x + 2)$。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the rational root theorem is true</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the rational root theorem is true</span><span data-lang="zh">深入 &middot; 有理根定理为何成立</span></summary>
     <div class="detail-body">
-      <p>If $p(x) = a_{n} x^{n} + \cdots + a_{0}$ has integer coefficients and rational root $p/q$ in lowest terms, then $p(p/q) = 0$. Multiply through by $q^{n}$ to clear denominators:</p>
+      <p><span data-lang="en">If $p(x) = a_{n} x^{n} + \cdots + a_{0}$ has integer coefficients and rational root $p/q$ in lowest terms, then $p(p/q) = 0$. Multiply through by $q^{n}$ to clear denominators:</span><span data-lang="zh">若 $p(x) = a_{n} x^{n} + \cdots + a_{0}$ 系数为整且最简有理根 $p/q$，则 $p(p/q) = 0$。两边乘 $q^{n}$ 清分母：</span></p>
       $$ a_{n} p^{n} + a_{n-1} p^{n-1} q + \cdots + a_{1} p q^{n-1} + a_{0} q^{n} \;=\; 0. $$
-      <p>Every term except the last is divisible by $p$, so $p \mid a_{0} q^{n}$; since $\gcd(p, q) = 1$, this forces $p \mid a_{0}$. Symmetrically, every term except the first is divisible by $q$, so $q \mid a_{n} p^{n}$ and $q \mid a_{n}$. That is the theorem. Without integer coefficients the result fails; if the polynomial has rational coefficients, clear denominators first.</p>
+      <p><span data-lang="en">Every term except the last is divisible by $p$, so $p \mid a_{0} q^{n}$; since $\gcd(p, q) = 1$, this forces $p \mid a_{0}$. Symmetrically, every term except the first is divisible by $q$, so $q \mid a_{n} p^{n}$ and $q \mid a_{n}$. That is the theorem. Without integer coefficients the result fails; if the polynomial has rational coefficients, clear denominators first.</span><span data-lang="zh">除最后一项外每项均含 $p$，故 $p \mid a_{0} q^{n}$；又 $\gcd(p, q) = 1$，故 $p \mid a_{0}$。对称地，除第一项外每项均含 $q$，故 $q \mid a_{n} p^{n}$，即 $q \mid a_{n}$。定理得证。若系数非整数则结论失败；若为有理数，先清分母即可。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Which of these is <em>not</em> a candidate rational root of $p(x) = 3 x^{3} - 5 x^{2} + 2 x - 4$?</div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which of these is <em>not</em> a candidate rational root of $p(x) = 3 x^{3} - 5 x^{2} + 2 x - 4$?</span><span data-lang="zh">下列哪个<em>不是</em> $p(x) = 3 x^{3} - 5 x^{2} + 2 x - 4$ 的有理候选根？</span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$\tfrac{2}{3}$</div>
       <div class="quiz-opt" data-idx="1">$-\tfrac{4}{3}$</div>
       <div class="quiz-opt" data-idx="2">$\tfrac{2}{5}$</div>
       <div class="quiz-opt" data-idx="3">$-1$</div>
     </div>
-    <div class="quiz-explain correct-exp">Numerator must divide $a_{0} = -4$: $\pm 1, \pm 2, \pm 4$. Denominator must divide $a_{n} = 3$: $1, 3$. So candidates are $\pm 1, \pm 2, \pm 4, \pm \tfrac{1}{3}, \pm \tfrac{2}{3}, \pm \tfrac{4}{3}$. The fraction $\tfrac{2}{5}$ has denominator $5$, which does not divide $3$.</div>
-    <div class="quiz-explain wrong-exp">Candidate rational roots have numerator dividing $a_{0}$ and denominator dividing $a_{n}$. Here $a_{n} = 3$ does not have $5$ as a factor.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Numerator must divide $a_{0} = -4$: $\pm 1, \pm 2, \pm 4$. Denominator must divide $a_{n} = 3$: $1, 3$. So candidates are $\pm 1, \pm 2, \pm 4, \pm \tfrac{1}{3}, \pm \tfrac{2}{3}, \pm \tfrac{4}{3}$. The fraction $\tfrac{2}{5}$ has denominator $5$, which does not divide $3$.</span><span data-lang="zh">分子须整除 $a_{0} = -4$：$\pm 1, \pm 2, \pm 4$。分母须整除 $a_{n} = 3$：$1, 3$。故候选为 $\pm 1, \pm 2, \pm 4, \pm \tfrac{1}{3}, \pm \tfrac{2}{3}, \pm \tfrac{4}{3}$。分数 $\tfrac{2}{5}$ 的分母 $5$ 不整除 $3$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Candidate rational roots have numerator dividing $a_{0}$ and denominator dividing $a_{n}$. Here $a_{n} = 3$ does not have $5$ as a factor.</span><span data-lang="zh">候选有理根的分子整除 $a_{0}$、分母整除 $a_{n}$。此处 $a_{n} = 3$ 无 $5$ 这一因数。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Find all real roots of $p(x) = x^{3} - 7 x + 6$.</div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Find all real roots of $p(x) = x^{3} - 7 x + 6$.</span><span data-lang="zh">求 $p(x) = x^{3} - 7 x + 6$ 的所有实根。</span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$x = 1, 2, 3$</div>
       <div class="quiz-opt" data-idx="1">$x = 1, 2, -3$</div>
       <div class="quiz-opt" data-idx="2">$x = -1, -2, 3$</div>
       <div class="quiz-opt" data-idx="3">$x = 1, -2, -3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Try $x = 1$: $1 - 7 + 6 = 0$. Divide by $(x - 1)$: quotient $x^{2} + x - 6 = (x + 3)(x - 2)$. Roots $x = 1, 2, -3$. Vieta: sum $= 1 + 2 - 3 = 0 = -a_{n-1}/a_{n} = 0$. Confirmed.</div>
-    <div class="quiz-explain wrong-exp">Spot $x = 1$ as a root, divide by $(x - 1)$, then factor the resulting quadratic. The product of roots is $(-1)^{3} \cdot a_{0}/a_{n} = -6$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Try $x = 1$: $1 - 7 + 6 = 0$. Divide by $(x - 1)$: quotient $x^{2} + x - 6 = (x + 3)(x - 2)$. Roots $x = 1, 2, -3$. Vieta: sum $= 1 + 2 - 3 = 0 = -a_{n-1}/a_{n} = 0$. Confirmed.</span><span data-lang="zh">试 $x = 1$：$1 - 7 + 6 = 0$。除以 $(x - 1)$：商 $x^{2} + x - 6 = (x + 3)(x - 2)$。根 $x = 1, 2, -3$。Vieta：和 $= 1 + 2 - 3 = 0 = -a_{n-1}/a_{n} = 0$。确认。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Spot $x = 1$ as a root, divide by $(x - 1)$, then factor the resulting quadratic. The product of roots is $(-1)^{3} \cdot a_{0}/a_{n} = -6$.</span><span data-lang="zh">发现 $x = 1$ 是根，除以 $(x - 1)$，再分解所得二次式。根之积 $= (-1)^{3} \cdot a_{0}/a_{n} = -6$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-5">
-  <div class="section-label">Section 5 &middot; Graphing</div>
-  <h2>Graphing Polynomial Functions</h2>
+  <div class="section-label"><span data-lang="en">Section 5 &middot; Graphing</span><span data-lang="zh">第 5 节 &middot; 作图</span></div>
+  <h2><span data-lang="en">Graphing Polynomial Functions</span><span data-lang="zh">多项式函数作图</span></h2>
 
   <div class="cram-cheat">
-    <strong>Five-step polynomial sketch.</strong>
+    <strong><span data-lang="en">Five-step polynomial sketch.</span><span data-lang="zh">多项式作图五步法。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Degree and leading coefficient</strong> set end behaviour (four cases of &sect;1).</li>
-      <li><strong>$y$-intercept</strong> is $p(0) = a_{0}$.</li>
-      <li><strong>Zeros and multiplicity.</strong> Factor $p(x)$; each factor $(x - r)^{m}$ contributes a zero at $r$ with multiplicity $m$. <em>Odd $m$</em>: graph <em>crosses</em>. <em>Even $m$</em>: graph <em>touches</em> without crossing. <em>$m \ge 2$</em>: graph is <em>flatter</em> near $r$.</li>
-      <li><strong>Turning points:</strong> at most $n - 1$; exact locations need calculus.</li>
-      <li><strong>Sketch:</strong> plot intercepts, apply end behaviour, use multiplicities at each zero.</li>
+      <li><strong><span data-lang="en">Degree and leading coefficient</span><span data-lang="zh">次数与首项系数</span></strong> <span data-lang="en">set end behaviour (four cases of &sect;1).</span><span data-lang="zh">决定末端行为（&sect;1 的四种情形）。</span></li>
+      <li><strong><span data-lang="en">$y$-intercept</span><span data-lang="zh">$y$ 截距</span></strong> <span data-lang="en">is $p(0) = a_{0}$.</span><span data-lang="zh">即 $p(0) = a_{0}$。</span></li>
+      <li><strong><span data-lang="en">Zeros and multiplicity.</span><span data-lang="zh">零点与重数。</span></strong> <span data-lang="en">Factor $p(x)$; each factor $(x - r)^{m}$ contributes a zero at $r$ with multiplicity $m$. <em>Odd $m$</em>: graph <em>crosses</em>. <em>Even $m$</em>: graph <em>touches</em> without crossing. <em>$m \ge 2$</em>: graph is <em>flatter</em> near $r$.</span><span data-lang="zh">分解 $p(x)$；每个因式 $(x - r)^{m}$ 贡献一个重数为 $m$ 的零点 $r$。<em>奇 $m$</em>：图象<em>穿越</em>；<em>偶 $m$</em>：图象<em>触轴</em>不穿越；<em>$m \ge 2$</em>：图象在 $r$ 附近更<em>平</em>。</span></li>
+      <li><strong><span data-lang="en">Turning points:</span><span data-lang="zh">拐点：</span></strong> <span data-lang="en">at most $n - 1$; exact locations need calculus.</span><span data-lang="zh">至多 $n - 1$ 个；具体位置需微积分。</span></li>
+      <li><strong><span data-lang="en">Sketch:</span><span data-lang="zh">作图：</span></strong> <span data-lang="en">plot intercepts, apply end behaviour, use multiplicities at each zero.</span><span data-lang="zh">标截距、套末端行为、在每个零点按重数处理。</span></li>
     </ol>
-    <strong>Sign sketch shortcut.</strong> Mark zeros. Set the rightmost interval's sign from end behaviour. Walk leftward; sign flips at odd-multiplicity zeros, stays the same at even-multiplicity zeros.
+    <strong><span data-lang="en">Sign sketch shortcut.</span><span data-lang="zh">符号速画法。</span></strong> <span data-lang="en">Mark zeros. Set the rightmost interval's sign from end behaviour. Walk leftward; sign flips at odd-multiplicity zeros, stays the same at even-multiplicity zeros.</span><span data-lang="zh">标出零点；最右区间符号由末端行为给出；向左走 ,  奇重数零点翻号，偶重数零点不变。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 5 &middot; Sketch $p(x) = -(x + 2)(x - 1)^{2}(x - 3)$</div>
-    <p>Identify all features and produce a qualitatively accurate sketch.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 5 &middot; Sketch $p(x) = -(x + 2)(x - 1)^{2}(x - 3)$</span><span data-lang="zh">例题 5 &middot; 作 $p(x) = -(x + 2)(x - 1)^{2}(x - 3)$ 的图</span></div>
+    <p><span data-lang="en">Identify all features and produce a qualitatively accurate sketch.</span><span data-lang="zh">辨识全部特征并画出定性正确的草图。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Degree / leading coefficient.</strong> Product of leading terms $-1 \cdot x \cdot x^{2} \cdot x = -x^{4}$. Degree $4$ (even), leading coefficient $-1$, so both tails fall to $-\infty$.</p>
-    <p><strong>$y$-intercept.</strong> $p(0) = -(2)(1)(-3) = 6$, point $(0, 6)$.</p>
-    <p><strong>Zeros and multiplicity.</strong> $x = -2$ mult $1$ (odd, cross); $x = 1$ mult $2$ (even, touch ,  flat at axis); $x = 3$ mult $1$ (odd, cross). Sum of multiplicities $1 + 2 + 1 = 4$ matches the degree.</p>
-    <p><strong>Sign analysis.</strong> End behaviour gives $p &lt; 0$ on $(3, \infty)$; crossing at $3$ flips to $p &gt; 0$ on $(1, 3)$; touch at $1$ keeps $p &gt; 0$ on $(-2, 1)$; crossing at $-2$ flips back to $p &lt; 0$ on $(-\infty, -2)$.</p>
-    <p><strong>Sketch (qualitative).</strong> Both tails fall to $-\infty$. Graph rises from $-\infty$, crosses at $x = -2$, climbs to a local max, descends to touch the axis at $x = 1$ (bounce), rises to another local max, then falls to cross at $x = 3$ and return to $-\infty$. The $y$-intercept $6$ sits between the touch and the left crossing.</p>
+    <p><strong><span data-lang="en">Degree / leading coefficient.</span><span data-lang="zh">次数 / 首项系数。</span></strong> <span data-lang="en">Product of leading terms $-1 \cdot x \cdot x^{2} \cdot x = -x^{4}$. Degree $4$ (even), leading coefficient $-1$, so both tails fall to $-\infty$.</span><span data-lang="zh">首项乘积 $-1 \cdot x \cdot x^{2} \cdot x = -x^{4}$。次数 $4$（偶），首项系数 $-1$，故两端均下降到 $-\infty$。</span></p>
+    <p><strong><span data-lang="en">$y$-intercept.</span><span data-lang="zh">$y$ 截距。</span></strong> <span data-lang="en">$p(0) = -(2)(1)(-3) = 6$, point $(0, 6)$.</span><span data-lang="zh">$p(0) = -(2)(1)(-3) = 6$，点 $(0, 6)$。</span></p>
+    <p><strong><span data-lang="en">Zeros and multiplicity.</span><span data-lang="zh">零点与重数。</span></strong> <span data-lang="en">$x = -2$ mult $1$ (odd, cross); $x = 1$ mult $2$ (even, touch ,  flat at axis); $x = 3$ mult $1$ (odd, cross). Sum of multiplicities $1 + 2 + 1 = 4$ matches the degree.</span><span data-lang="zh">$x = -2$ 重 $1$（奇，穿越）；$x = 1$ 重 $2$（偶，触轴 ,  贴轴扁平）；$x = 3$ 重 $1$（奇，穿越）。重数之和 $1 + 2 + 1 = 4$，与次数一致。</span></p>
+    <p><strong><span data-lang="en">Sign analysis.</span><span data-lang="zh">符号分析。</span></strong> <span data-lang="en">End behaviour gives $p &lt; 0$ on $(3, \infty)$; crossing at $3$ flips to $p &gt; 0$ on $(1, 3)$; touch at $1$ keeps $p &gt; 0$ on $(-2, 1)$; crossing at $-2$ flips back to $p &lt; 0$ on $(-\infty, -2)$.</span><span data-lang="zh">末端行为给出 $(3, \infty)$ 上 $p &lt; 0$；$x = 3$ 穿越翻号到 $(1, 3)$ 上 $p &gt; 0$；$x = 1$ 触轴不变，$(-2, 1)$ 上仍 $p &gt; 0$；$x = -2$ 穿越翻号回 $(-\infty, -2)$ 上 $p &lt; 0$。</span></p>
+    <p><strong><span data-lang="en">Sketch (qualitative).</span><span data-lang="zh">定性草图。</span></strong> <span data-lang="en">Both tails fall to $-\infty$. Graph rises from $-\infty$, crosses at $x = -2$, climbs to a local max, descends to touch the axis at $x = 1$ (bounce), rises to another local max, then falls to cross at $x = 3$ and return to $-\infty$. The $y$-intercept $6$ sits between the touch and the left crossing.</span><span data-lang="zh">两端下降至 $-\infty$。图象从 $-\infty$ 上升、在 $x = -2$ 穿越、爬到局部极大、下降触轴于 $x = 1$（反弹）、再升至另一局部极大、然后在 $x = 3$ 穿越下降回 $-\infty$。$y$ 截距 $6$ 位于触点与左侧穿越之间。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why even multiplicity gives a "touch" and odd a "cross"</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why even multiplicity gives a "touch" and odd a "cross"</span><span data-lang="zh">深入 &middot; 为何偶重数给出"触"、奇重数给出"穿"</span></summary>
     <div class="detail-body">
-      <p>Factor the local behaviour at a zero $r$: $p(x) = (x - r)^{m} \cdot g(x)$ with $g(r) \ne 0$. Near $x = r$, $g(x) \approx g(r)$ is a non-zero constant, so $p(x) \approx g(r) \cdot (x - r)^{m}$ locally; the sign of $p$ near $r$ is the sign of $g(r)$ times the sign of $(x - r)^{m}$. <strong>Odd $m$:</strong> $(x - r)^{m}$ flips sign as $x$ crosses $r$, so $p$ flips ,  graph crosses. <strong>Even $m$:</strong> $(x - r)^{m} \ge 0$ everywhere with equality only at $r$, so $p$ keeps its sign ,  graph touches and returns. Larger $m$ also makes the graph <em>flatter</em> near $r$ because $(x - r)^{m}$ is closer to $0$ ,  the "flat-zero" appearance.</p>
+      <p><span data-lang="en">Factor the local behaviour at a zero $r$: $p(x) = (x - r)^{m} \cdot g(x)$ with $g(r) \ne 0$. Near $x = r$, $g(x) \approx g(r)$ is a non-zero constant, so $p(x) \approx g(r) \cdot (x - r)^{m}$ locally; the sign of $p$ near $r$ is the sign of $g(r)$ times the sign of $(x - r)^{m}$. <strong>Odd $m$:</strong> $(x - r)^{m}$ flips sign as $x$ crosses $r$, so $p$ flips ,  graph crosses. <strong>Even $m$:</strong> $(x - r)^{m} \ge 0$ everywhere with equality only at $r$, so $p$ keeps its sign ,  graph touches and returns. Larger $m$ also makes the graph <em>flatter</em> near $r$ because $(x - r)^{m}$ is closer to $0$ ,  the "flat-zero" appearance.</span><span data-lang="zh">把零点 $r$ 附近局部分解为 $p(x) = (x - r)^{m} \cdot g(x)$，其中 $g(r) \ne 0$。$x$ 接近 $r$ 时 $g(x) \approx g(r)$ 为非零常数，故 $p(x) \approx g(r) \cdot (x - r)^{m}$；$p$ 在 $r$ 附近的符号即 $g(r)$ 符号乘以 $(x - r)^{m}$ 符号。<strong>奇 $m$：</strong>$(x - r)^{m}$ 在 $r$ 两侧翻号，故 $p$ 翻号 ,  图象穿越。<strong>偶 $m$：</strong>$(x - r)^{m} \ge 0$，等号仅在 $r$，故 $p$ 保号 ,  图象触轴返回。$m$ 越大，$(x - r)^{m}$ 越接近 $0$，图象在 $r$ 附近越<em>平</em> ,  即"平零点"外观。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">The graph of $p(x) = (x + 1)^{2}(x - 4)$ behaves at $x = -1$ as:</div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">The graph of $p(x) = (x + 1)^{2}(x - 4)$ behaves at $x = -1$ as:</span><span data-lang="zh">$p(x) = (x + 1)^{2}(x - 4)$ 的图象在 $x = -1$ 处表现为：</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Crosses the $x$-axis transversally.</div>
-      <div class="quiz-opt" data-idx="1">Touches the $x$-axis without crossing.</div>
-      <div class="quiz-opt" data-idx="2">Has a vertical asymptote.</div>
-      <div class="quiz-opt" data-idx="3">Is undefined.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Crosses the $x$-axis transversally.</span><span data-lang="zh">横穿 $x$ 轴。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Touches the $x$-axis without crossing.</span><span data-lang="zh">触 $x$ 轴但不穿过。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Has a vertical asymptote.</span><span data-lang="zh">有竖直渐近线。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Is undefined.</span><span data-lang="zh">无定义。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Multiplicity at $x = -1$ is $2$ (even), so the graph touches the axis and returns to the same side ,  it does not cross.</div>
-    <div class="quiz-explain wrong-exp">Even multiplicity = touch, odd multiplicity = cross. The factor $(x + 1)^{2}$ has multiplicity $2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Multiplicity at $x = -1$ is $2$ (even), so the graph touches the axis and returns to the same side ,  it does not cross.</span><span data-lang="zh">$x = -1$ 处重数为 $2$（偶），故图象触轴并返回同侧 ,  不穿越。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Even multiplicity = touch, odd multiplicity = cross. The factor $(x + 1)^{2}$ has multiplicity $2$.</span><span data-lang="zh">偶重数 = 触，奇重数 = 穿。因式 $(x + 1)^{2}$ 重数为 $2$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">For $p(x) = (x - 1)(x - 2)(x + 3)$, on which interval is $p(x) &lt; 0$?</div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For $p(x) = (x - 1)(x - 2)(x + 3)$, on which interval is $p(x) &lt; 0$?</span><span data-lang="zh">对 $p(x) = (x - 1)(x - 2)(x + 3)$，$p(x) &lt; 0$ 在哪个区间成立？</span></div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(2, \infty)$</div>
-      <div class="quiz-opt" data-idx="1">$(-3, 1)$ only</div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$(-3, 1)$ only</span><span data-lang="zh">仅 $(-3, 1)$</span></div>
       <div class="quiz-opt" data-idx="2">$(-\infty, -3) \cup (1, 2)$</div>
       <div class="quiz-opt" data-idx="3">$(1, 2) \cup (2, \infty)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Cubic with positive leading coefficient: $p \to +\infty$ as $x \to +\infty$. All zeros are simple, so the sign flips at each. Sign pattern from $+\infty$ leftward across $2, 1, -3$: $+, -, +, -$. So $p &lt; 0$ on $(1, 2)$ and on $(-\infty, -3)$.</div>
-    <div class="quiz-explain wrong-exp">Mark the three simple zeros $-3, 1, 2$. On the rightmost interval, end behaviour is positive. Walk leftward; the sign flips at every (simple) zero.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Cubic with positive leading coefficient: $p \to +\infty$ as $x \to +\infty$. All zeros are simple, so the sign flips at each. Sign pattern from $+\infty$ leftward across $2, 1, -3$: $+, -, +, -$. So $p &lt; 0$ on $(1, 2)$ and on $(-\infty, -3)$.</span><span data-lang="zh">三次、首项系数为正：$x \to +\infty$ 时 $p \to +\infty$。所有零点为单根，故每个均翻号。自 $+\infty$ 向左经过 $2, 1, -3$ 的符号模式：$+, -, +, -$。故 $p &lt; 0$ 在 $(1, 2)$ 与 $(-\infty, -3)$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Mark the three simple zeros $-3, 1, 2$. On the rightmost interval, end behaviour is positive. Walk leftward; the sign flips at every (simple) zero.</span><span data-lang="zh">标出三个单根 $-3, 1, 2$。最右区间末端行为为正。向左走，每个（单）零点翻号。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-6">
-  <div class="section-label">Section 6 &middot; Complex roots</div>
-  <h2>Complex Roots and Conjugate Pairs <span class="honors-flag">Honors (US Alg 2+ / BC PC12)</span></h2>
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Complex roots</span><span data-lang="zh">第 6 节 &middot; 复根</span></div>
+  <h2><span data-lang="en">Complex Roots and Conjugate Pairs</span><span data-lang="zh">复根与共轭对</span> <span class="honors-flag">Honors (US Alg 2+ / BC PC12)</span></h2>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> Complex numbers sit in US Common Core under HSN-CN (Number and Quantity ,  Complex Numbers), which is one cluster above the linear-scoped CCSSM extract. The polynomial consequence ,  that non-real roots of a real polynomial come in conjugate pairs ,  is standard US Algebra 2 / Pre-Calc content. BC Pre-Calc 12 names "solving equations algebraically and graphically" in the polynomial Content elaboration; the PC12 extract does not single out complex roots, but the framework supports them. Ontario MHF4U's polynomial strand uses the same conjugate-pair principle when factoring quartics.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">Complex numbers sit in US Common Core under HSN-CN (Number and Quantity ,  Complex Numbers), which is one cluster above the linear-scoped CCSSM extract. The polynomial consequence ,  that non-real roots of a real polynomial come in conjugate pairs ,  is standard US Algebra 2 / Pre-Calc content. BC Pre-Calc 12 names "solving equations algebraically and graphically" in the polynomial Content elaboration; the PC12 extract does not single out complex roots, but the framework supports them. Ontario MHF4U's polynomial strand uses the same conjugate-pair principle when factoring quartics.</span><span data-lang="zh">复数在美国共同核心中位于 HSN-CN（数与量 ,  复数），位于线性范围 CCSSM 摘录之上。其多项式推论 ,  实系数多项式的非实根成共轭对 ,  是美国 Algebra 2 / Pre-Calc 的标准内容。BC PC12 在多项式内容阐释中点名"代数与图象求解方程"；PC12 摘录未单独点名复根，但框架支持。安大略 MHF4U 多项式单元在分解四次式时也使用同一共轭对原理。</span>
   </div>
 
   <div class="cram-cheat">
-    <strong>The complex conjugate root theorem.</strong> If $p(x)$ has <em>real</em> coefficients and $z = a + b i$ (with $b \ne 0$) is a root, then $\bar{z} = a - b i$ is also a root. Non-real roots of a real polynomial come in conjugate pairs.
+    <strong><span data-lang="en">The complex conjugate root theorem.</span><span data-lang="zh">复共轭根定理。</span></strong> <span data-lang="en">If $p(x)$ has <em>real</em> coefficients and $z = a + b i$ (with $b \ne 0$) is a root, then $\bar{z} = a - b i$ is also a root. Non-real roots of a real polynomial come in conjugate pairs.</span><span data-lang="zh">若 $p(x)$ 系数为<em>实</em>且 $z = a + b i$（$b \ne 0$）为根，则 $\bar{z} = a - b i$ 也是根。实多项式的非实根成共轭对。</span>
     <br><br>
-    <strong>Consequences.</strong>
+    <strong><span data-lang="en">Consequences.</span><span data-lang="zh">推论。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Real factorisation always exists into linear and irreducible quadratic factors.</strong> Pair each non-real root with its conjugate; the product $(x - z)(x - \bar{z}) = x^{2} - 2 a x + (a^{2} + b^{2})$ is an irreducible real quadratic.</li>
-      <li><strong>An odd-degree real polynomial has at least one real root.</strong> Complex roots come in pairs (even count), so degree $n$ odd forces an odd number of real roots, which is at least $1$.</li>
-      <li><strong>The fundamental theorem of algebra</strong>: every polynomial of degree $n \ge 1$ with complex coefficients has exactly $n$ roots in $\mathbb{C}$, counted with multiplicity.</li>
+      <li><strong><span data-lang="en">Real factorisation always exists into linear and irreducible quadratic factors.</span><span data-lang="zh">实数范围内总能分解为一次与不可约二次因式。</span></strong> <span data-lang="en">Pair each non-real root with its conjugate; the product $(x - z)(x - \bar{z}) = x^{2} - 2 a x + (a^{2} + b^{2})$ is an irreducible real quadratic.</span><span data-lang="zh">将每个非实根与其共轭配对；乘积 $(x - z)(x - \bar{z}) = x^{2} - 2 a x + (a^{2} + b^{2})$ 是不可约实二次式。</span></li>
+      <li><strong><span data-lang="en">An odd-degree real polynomial has at least one real root.</span><span data-lang="zh">奇次实多项式至少有一实根。</span></strong> <span data-lang="en">Complex roots come in pairs (even count), so degree $n$ odd forces an odd number of real roots, which is at least $1$.</span><span data-lang="zh">复根成对（偶数个），故奇次 $n$ 强迫实根为奇数个，至少为 $1$。</span></li>
+      <li><strong><span data-lang="en">The fundamental theorem of algebra</span><span data-lang="zh">代数基本定理</span></strong><span data-lang="en">: every polynomial of degree $n \ge 1$ with complex coefficients has exactly $n$ roots in $\mathbb{C}$, counted with multiplicity.</span><span data-lang="zh">：任何复系数 $n \ge 1$ 次多项式在 $\mathbb{C}$ 中按重数恰有 $n$ 个根。</span></li>
     </ul>
-    <strong>How to use.</strong> If a problem hands you one complex root, the conjugate is the second root for free.
+    <strong><span data-lang="en">How to use.</span><span data-lang="zh">使用方法。</span></strong> <span data-lang="en">If a problem hands you one complex root, the conjugate is the second root for free.</span><span data-lang="zh">题目给你一个复根，其共轭即免费的第二根。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 6 &middot; Build a polynomial from a complex root</div>
-    <p>Find a polynomial with real coefficients of degree $3$ that has roots $x = 2$ and $x = 1 + i$.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 6 &middot; Build a polynomial from a complex root</span><span data-lang="zh">例题 6 &middot; 由复根构造多项式</span></div>
+    <p><span data-lang="en">Find a polynomial with real coefficients of degree $3$ that has roots $x = 2$ and $x = 1 + i$.</span><span data-lang="zh">求一个实系数 $3$ 次多项式，使其以 $x = 2$ 与 $x = 1 + i$ 为根。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> Given real root $x = 2$ and complex root $z = 1 + i$. Real coefficients force $\bar{z} = 1 - i$ as the third root. Three roots in hand, matching degree $3$.</p>
-    <p><strong>Multiply the conjugate pair.</strong> $(x - (1 + i))(x - (1 - i)) = ((x - 1) - i)((x - 1) + i) = (x - 1)^{2} + 1 = x^{2} - 2 x + 2$ (irreducible: $\Delta = 4 - 8 &lt; 0$).</p>
-    <p><strong>Assemble.</strong> $p(x) = (x - 2)(x^{2} - 2 x + 2) = x^{3} - 4 x^{2} + 6 x - 4$.</p>
-    <p><strong>Evaluate.</strong> Check $p(2) = 8 - 16 + 12 - 4 = 0$. For $p(1 + i)$, use $(1 + i)^{2} = 2 i$ and $(1 + i)^{3} = -2 + 2 i$; substituting gives $p(1 + i) = (-2 + 2 i) - 4 (2 i) + 6 (1 + i) - 4 = 0$. Both roots confirmed.</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">Given real root $x = 2$ and complex root $z = 1 + i$. Real coefficients force $\bar{z} = 1 - i$ as the third root. Three roots in hand, matching degree $3$.</span><span data-lang="zh">已知实根 $x = 2$ 与复根 $z = 1 + i$。实系数强迫 $\bar{z} = 1 - i$ 为第三个根。三根齐备，匹配次数 $3$。</span></p>
+    <p><strong><span data-lang="en">Multiply the conjugate pair.</span><span data-lang="zh">乘出共轭对。</span></strong> <span data-lang="en">$(x - (1 + i))(x - (1 - i)) = ((x - 1) - i)((x - 1) + i) = (x - 1)^{2} + 1 = x^{2} - 2 x + 2$ (irreducible: $\Delta = 4 - 8 &lt; 0$).</span><span data-lang="zh">$(x - (1 + i))(x - (1 - i)) = ((x - 1) - i)((x - 1) + i) = (x - 1)^{2} + 1 = x^{2} - 2 x + 2$（不可约：$\Delta = 4 - 8 &lt; 0$）。</span></p>
+    <p><strong><span data-lang="en">Assemble.</span><span data-lang="zh">合并。</span></strong> <span data-lang="en">$p(x) = (x - 2)(x^{2} - 2 x + 2) = x^{3} - 4 x^{2} + 6 x - 4$.</span><span data-lang="zh">$p(x) = (x - 2)(x^{2} - 2 x + 2) = x^{3} - 4 x^{2} + 6 x - 4$。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">核验。</span></strong> <span data-lang="en">Check $p(2) = 8 - 16 + 12 - 4 = 0$. For $p(1 + i)$, use $(1 + i)^{2} = 2 i$ and $(1 + i)^{3} = -2 + 2 i$; substituting gives $p(1 + i) = (-2 + 2 i) - 4 (2 i) + 6 (1 + i) - 4 = 0$. Both roots confirmed.</span><span data-lang="zh">$p(2) = 8 - 16 + 12 - 4 = 0$。对 $p(1 + i)$ 用 $(1 + i)^{2} = 2 i$ 与 $(1 + i)^{3} = -2 + 2 i$；代入得 $p(1 + i) = (-2 + 2 i) - 4 (2 i) + 6 (1 + i) - 4 = 0$。两根均确认。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the conjugate root theorem is true</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the conjugate root theorem is true</span><span data-lang="zh">深入 &middot; 共轭根定理为何成立</span></summary>
     <div class="detail-body">
-      <p>Complex conjugation satisfies $\overline{z + w} = \bar{z} + \bar{w}$ and $\overline{z w} = \bar{z} \cdot \bar{w}$. If $p(x) = a_{n} x^{n} + \cdots + a_{0}$ has <em>real</em> coefficients (so $\bar{a}_{k} = a_{k}$) and $p(z) = 0$, apply conjugation to both sides: $\overline{p(z)} = a_{n} \bar{z}^{n} + \cdots + a_{0} = p(\bar{z})$, while the left side is $\overline{0} = 0$. So $p(\bar{z}) = 0$, i.e. $\bar{z}$ is also a root. The proof fails for non-real coefficients (then $\bar{a}_{k} \ne a_{k}$) ,  the conjugate-pair statement is specifically about real polynomials.</p>
+      <p><span data-lang="en">Complex conjugation satisfies $\overline{z + w} = \bar{z} + \bar{w}$ and $\overline{z w} = \bar{z} \cdot \bar{w}$. If $p(x) = a_{n} x^{n} + \cdots + a_{0}$ has <em>real</em> coefficients (so $\bar{a}_{k} = a_{k}$) and $p(z) = 0$, apply conjugation to both sides: $\overline{p(z)} = a_{n} \bar{z}^{n} + \cdots + a_{0} = p(\bar{z})$, while the left side is $\overline{0} = 0$. So $p(\bar{z}) = 0$, i.e. $\bar{z}$ is also a root. The proof fails for non-real coefficients (then $\bar{a}_{k} \ne a_{k}$) ,  the conjugate-pair statement is specifically about real polynomials.</span><span data-lang="zh">复共轭满足 $\overline{z + w} = \bar{z} + \bar{w}$ 与 $\overline{z w} = \bar{z} \cdot \bar{w}$。若 $p(x) = a_{n} x^{n} + \cdots + a_{0}$ 系数为<em>实</em>（故 $\bar{a}_{k} = a_{k}$）且 $p(z) = 0$，两边取共轭：$\overline{p(z)} = a_{n} \bar{z}^{n} + \cdots + a_{0} = p(\bar{z})$，而左边 $= \overline{0} = 0$。故 $p(\bar{z}) = 0$，即 $\bar{z}$ 也是根。系数非实时（$\bar{a}_{k} \ne a_{k}$）证明失败 ,  共轭对结论专属实多项式。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">If $p(x)$ has real coefficients and $2 - 3 i$ is a root, which of the following must also be a root?</div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">If $p(x)$ has real coefficients and $2 - 3 i$ is a root, which of the following must also be a root?</span><span data-lang="zh">若 $p(x)$ 系数为实且 $2 - 3 i$ 为根，则下列哪个也必为根？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$-2 + 3 i$</div>
       <div class="quiz-opt" data-idx="1">$-2 - 3 i$</div>
       <div class="quiz-opt" data-idx="2">$2 + 3 i$</div>
       <div class="quiz-opt" data-idx="3">$3 - 2 i$</div>
     </div>
-    <div class="quiz-explain correct-exp">By the complex conjugate root theorem, the conjugate $\overline{2 - 3 i} = 2 + 3 i$ is also a root.</div>
-    <div class="quiz-explain wrong-exp">Real polynomial + complex root $\Rightarrow$ its complex <em>conjugate</em> is also a root. Conjugate of $a + b i$ is $a - b i$; conjugate of $2 - 3 i$ is $2 + 3 i$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">By the complex conjugate root theorem, the conjugate $\overline{2 - 3 i} = 2 + 3 i$ is also a root.</span><span data-lang="zh">由复共轭根定理，共轭 $\overline{2 - 3 i} = 2 + 3 i$ 也是根。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Real polynomial + complex root $\Rightarrow$ its complex <em>conjugate</em> is also a root. Conjugate of $a + b i$ is $a - b i$; conjugate of $2 - 3 i$ is $2 + 3 i$.</span><span data-lang="zh">实多项式 + 复根 $\Rightarrow$ 其复<em>共轭</em>也是根。$a + b i$ 的共轭是 $a - b i$；$2 - 3 i$ 的共轭是 $2 + 3 i$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">An odd-degree polynomial with real coefficients is guaranteed to have:</div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">An odd-degree polynomial with real coefficients is guaranteed to have:</span><span data-lang="zh">奇次实系数多项式必有：</span></div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">At least one real root.</div>
-      <div class="quiz-opt" data-idx="1">All real roots.</div>
-      <div class="quiz-opt" data-idx="2">No real roots.</div>
-      <div class="quiz-opt" data-idx="3">Exactly two complex roots.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">At least one real root.</span><span data-lang="zh">至少一个实根。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">All real roots.</span><span data-lang="zh">全部实根。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">No real roots.</span><span data-lang="zh">无实根。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Exactly two complex roots.</span><span data-lang="zh">恰有两个复根。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Non-real roots of a real polynomial come in conjugate pairs (an even count). An odd total degree minus an even count of non-real roots is an odd (so positive) count of real roots. Hence at least one real root.</div>
-    <div class="quiz-explain wrong-exp">Complex roots come in pairs, so the count of non-real roots is even. Odd degree minus even is odd, hence positive ,  at least one real root.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Non-real roots of a real polynomial come in conjugate pairs (an even count). An odd total degree minus an even count of non-real roots is an odd (so positive) count of real roots. Hence at least one real root.</span><span data-lang="zh">实多项式的非实根成共轭对（偶数个）。奇次数减去偶数个非实根仍为奇数（即正数），故实根至少 $1$ 个。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Complex roots come in pairs, so the count of non-real roots is even. Odd degree minus even is odd, hence positive ,  at least one real root.</span><span data-lang="zh">复根成对，非实根计数为偶。奇次减偶为奇，故为正 ,  至少一实根。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-3-7">
-  <div class="section-label">Section 7 &middot; Inequalities</div>
-  <h2>Polynomial Inequalities <span class="honors-flag">Honors (US Alg 2)</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 sign-analysis</span></h2>
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Inequalities</span><span data-lang="zh">第 7 节 &middot; 不等式</span></div>
+  <h2><span data-lang="en">Polynomial Inequalities</span><span data-lang="zh">多项式不等式</span> <span class="honors-flag">Honors (US Alg 2)</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC11 sign-analysis</span></h2>
 
   <div class="cram-cheat">
-    <strong>Sign analysis for $p(x) \;\square\; 0$ (where $\square \in \{ &lt;, \le, &gt;, \ge \}$).</strong>
+    <strong><span data-lang="en">Sign analysis for $p(x) \;\square\; 0$ (where $\square \in \{ &lt;, \le, &gt;, \ge \}$).</span><span data-lang="zh">对 $p(x) \;\square\; 0$（$\square \in \{ &lt;, \le, &gt;, \ge \}$）的符号分析。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Factor</strong> $p(x)$ completely over the reals into linear factors $(x - r)^{m}$ and irreducible quadratics ($\Delta &lt; 0$, fixed sign throughout).</li>
-      <li><strong>List zeros</strong> in increasing order.</li>
-      <li><strong>Rightmost-interval sign</strong> from end behaviour (sign of $a_{n}$ as $x \to +\infty$).</li>
-      <li><strong>Walk leftward.</strong> Flip at odd-multiplicity zeros; keep at even-multiplicity zeros.</li>
-      <li><strong>Read off intervals</strong> and write in interval notation. Square brackets at zeros for $\le, \ge$; round for strict.</li>
+      <li><strong><span data-lang="en">Factor</span><span data-lang="zh">分解</span></strong> <span data-lang="en">$p(x)$ completely over the reals into linear factors $(x - r)^{m}$ and irreducible quadratics ($\Delta &lt; 0$, fixed sign throughout).</span><span data-lang="zh">$p(x)$ 在实数范围内完全分解为线性因式 $(x - r)^{m}$ 与不可约二次式（$\Delta &lt; 0$，全程定号）。</span></li>
+      <li><strong><span data-lang="en">List zeros</span><span data-lang="zh">列出零点</span></strong> <span data-lang="en">in increasing order.</span><span data-lang="zh">按升序排列。</span></li>
+      <li><strong><span data-lang="en">Rightmost-interval sign</span><span data-lang="zh">最右区间符号</span></strong> <span data-lang="en">from end behaviour (sign of $a_{n}$ as $x \to +\infty$).</span><span data-lang="zh">由末端行为决定（$x \to +\infty$ 时 $a_{n}$ 的符号）。</span></li>
+      <li><strong><span data-lang="en">Walk leftward.</span><span data-lang="zh">向左行走。</span></strong> <span data-lang="en">Flip at odd-multiplicity zeros; keep at even-multiplicity zeros.</span><span data-lang="zh">奇重数零点翻号；偶重数零点保号。</span></li>
+      <li><strong><span data-lang="en">Read off intervals</span><span data-lang="zh">读出区间</span></strong> <span data-lang="en">and write in interval notation. Square brackets at zeros for $\le, \ge$; round for strict.</span><span data-lang="zh">并用区间记号表示。$\le, \ge$ 在零点处用方括号；严格不等式用圆括号。</span></li>
     </ol>
-    <strong>Strict vs. non-strict.</strong> Zeros satisfy $p = 0$, so they belong to $\le, \ge$ solutions but not to $&lt;, &gt;$.
+    <strong><span data-lang="en">Strict vs. non-strict.</span><span data-lang="zh">严格与非严格。</span></strong> <span data-lang="en">Zeros satisfy $p = 0$, so they belong to $\le, \ge$ solutions but not to $&lt;, &gt;$.</span><span data-lang="zh">零点满足 $p = 0$，故归入 $\le, \ge$ 的解集，但不入 $&lt;, &gt;$ 的解集。</span>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> BC Pre-Calc 11 explicitly lists <em>sign analysis</em> as the named inequality technique under <em>linear and quadratic inequalities</em>; the PC11 Content elaboration uses the exact phrase "<em>sign analysis: identifying intervals where a function is positive, negative, or zero</em>." Generalising from quadratic to higher-degree polynomial is a direct extension: the same workflow, more factors. BC PC12's polynomial extract does not separately enumerate inequalities, so this section runs the PC11 method at higher degree.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">BC Pre-Calc 11 explicitly lists <em>sign analysis</em> as the named inequality technique under <em>linear and quadratic inequalities</em>; the PC11 Content elaboration uses the exact phrase "<em>sign analysis: identifying intervals where a function is positive, negative, or zero</em>." Generalising from quadratic to higher-degree polynomial is a direct extension: the same workflow, more factors. BC PC12's polynomial extract does not separately enumerate inequalities, so this section runs the PC11 method at higher degree.</span><span data-lang="zh">BC PC11 在<em>线性与二次不等式</em>下明确把<em>符号分析</em>列为不等式技术；PC11 内容阐释原文："<em>符号分析：辨识函数为正、负、零的区间</em>"。从二次推广到高次是直接拓展：流程相同、因式更多。BC PC12 多项式摘录未单列不等式条款，故本节即把 PC11 方法应用到更高次。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 7 &middot; Solve $(x + 2)(x - 1)^{2}(x - 4) &gt; 0$</div>
-    <p>State the solution in interval notation.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 7 &middot; Solve $(x + 2)(x - 1)^{2}(x - 4) &gt; 0$</span><span data-lang="zh">例题 7 &middot; 求解 $(x + 2)(x - 1)^{2}(x - 4) &gt; 0$</span></div>
+    <p><span data-lang="en">State the solution in interval notation.</span><span data-lang="zh">用区间记号写出解集。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Factor.</strong> Already factored. Zeros: $x = -2$ (mult $1$, odd), $x = 1$ (mult $2$, even), $x = 4$ (mult $1$, odd). Total multiplicity $1 + 2 + 1 = 4$; expanded leading term is $+x^{4}$ (degree $4$, leading coefficient $+1$).</p>
-    <p><strong>End behaviour and walk.</strong> Even degree, positive leading coefficient $\Rightarrow (4, \infty): +$. Cross at $4$: flip to $-$ on $(1, 4)$. Touch at $1$: no flip, $-$ on $(-2, 1)$. Cross at $-2$: flip to $+$ on $(-\infty, -2)$.</p>
-    <p><strong>Read off.</strong> Solution (strict $&gt; 0$, excluding zeros): $x \in (-\infty, -2) \cup (4, \infty)$. Sanity check: $x = 0$ gives $(2)(1)(-4) = -8 &lt; 0$ (correctly outside); $x = 5$ gives $(7)(16)(1) = 112 &gt; 0$ (correctly inside). Note $x = 1$ is excluded even though $p(1) = 0$, since the inequality is strict.</p>
+    <p><strong><span data-lang="en">Factor.</span><span data-lang="zh">分解。</span></strong> <span data-lang="en">Already factored. Zeros: $x = -2$ (mult $1$, odd), $x = 1$ (mult $2$, even), $x = 4$ (mult $1$, odd). Total multiplicity $1 + 2 + 1 = 4$; expanded leading term is $+x^{4}$ (degree $4$, leading coefficient $+1$).</span><span data-lang="zh">已分解。零点：$x = -2$（重 $1$，奇）、$x = 1$（重 $2$，偶）、$x = 4$（重 $1$，奇）。重数之和 $1 + 2 + 1 = 4$；展开后首项为 $+x^{4}$（次数 $4$、首项系数 $+1$）。</span></p>
+    <p><strong><span data-lang="en">End behaviour and walk.</span><span data-lang="zh">末端行为与走号。</span></strong> <span data-lang="en">Even degree, positive leading coefficient $\Rightarrow (4, \infty): +$. Cross at $4$: flip to $-$ on $(1, 4)$. Touch at $1$: no flip, $-$ on $(-2, 1)$. Cross at $-2$: flip to $+$ on $(-\infty, -2)$.</span><span data-lang="zh">偶次、首项系数为正 $\Rightarrow (4, \infty): +$。在 $4$ 穿越翻号 $\Rightarrow (1, 4)$ 上 $-$。在 $1$ 触轴不翻 $\Rightarrow (-2, 1)$ 上 $-$。在 $-2$ 穿越翻号 $\Rightarrow (-\infty, -2)$ 上 $+$。</span></p>
+    <p><strong><span data-lang="en">Read off.</span><span data-lang="zh">读出。</span></strong> <span data-lang="en">Solution (strict $&gt; 0$, excluding zeros): $x \in (-\infty, -2) \cup (4, \infty)$. Sanity check: $x = 0$ gives $(2)(1)(-4) = -8 &lt; 0$ (correctly outside); $x = 5$ gives $(7)(16)(1) = 112 &gt; 0$ (correctly inside). Note $x = 1$ is excluded even though $p(1) = 0$, since the inequality is strict.</span><span data-lang="zh">解集（严格 $&gt; 0$，不含零点）：$x \in (-\infty, -2) \cup (4, \infty)$。核验：$x = 0$ 给 $(2)(1)(-4) = -8 &lt; 0$（正确不在解集）；$x = 5$ 给 $(7)(16)(1) = 112 &gt; 0$（正确在解集）。注意虽然 $p(1) = 0$，但严格不等式不含 $x = 1$。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; A polynomial inequality with an irreducible quadratic factor</summary>
+    <summary><span data-lang="en">Going deeper &middot; A polynomial inequality with an irreducible quadratic factor</span><span data-lang="zh">深入 &middot; 含不可约二次因式的多项式不等式</span></summary>
     <div class="detail-body">
-      <p>Solve $(x - 3)(x^{2} + 4) \le 0$. The factor $(x^{2} + 4)$ has $\Delta = -16 &lt; 0$ and positive leading coefficient, so $x^{2} + 4 &gt; 0$ for every real $x$. The product therefore has the same sign as $(x - 3)$, which is $\le 0$ iff $x \le 3$. Answer: $x \in (-\infty, 3]$ (square bracket because $\le$ is non-strict). Irreducible-quadratic factors of a real polynomial contribute a fixed sign and never cause sign changes ,  pull them out and ignore them once their sign is known.</p>
+      <p><span data-lang="en">Solve $(x - 3)(x^{2} + 4) \le 0$. The factor $(x^{2} + 4)$ has $\Delta = -16 &lt; 0$ and positive leading coefficient, so $x^{2} + 4 &gt; 0$ for every real $x$. The product therefore has the same sign as $(x - 3)$, which is $\le 0$ iff $x \le 3$. Answer: $x \in (-\infty, 3]$ (square bracket because $\le$ is non-strict). Irreducible-quadratic factors of a real polynomial contribute a fixed sign and never cause sign changes ,  pull them out and ignore them once their sign is known.</span><span data-lang="zh">求解 $(x - 3)(x^{2} + 4) \le 0$。因式 $(x^{2} + 4)$ 的 $\Delta = -16 &lt; 0$ 且首项系数为正，故对任意实 $x$ 有 $x^{2} + 4 &gt; 0$。乘积与 $(x - 3)$ 同号，而 $(x - 3) \le 0 \iff x \le 3$。答案：$x \in (-\infty, 3]$（$\le$ 非严格故用方括号）。实多项式的不可约二次因式提供定号，不引起符号变化 ,  确定其符号后提出即可忽略。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">Solve $x(x - 2)(x + 3) \ge 0$.</div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $x(x - 2)(x + 3) \ge 0$.</span><span data-lang="zh">求解 $x(x - 2)(x + 3) \ge 0$。</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-\infty, -3] \cup [0, 2]$</div>
       <div class="quiz-opt" data-idx="1">$[-3, 0] \cup [2, \infty)$</div>
       <div class="quiz-opt" data-idx="2">$[-3, 2]$</div>
       <div class="quiz-opt" data-idx="3">$(-\infty, 0] \cup [2, \infty)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Three simple zeros at $-3, 0, 2$. Cubic, positive leading coefficient $\Rightarrow p \to +\infty$ as $x \to +\infty$. Sign on rightmost interval $(2, \infty)$ is $+$. Flipping at each simple zero leftward: sign pattern $+, -, +, -$ across $(2, \infty), (0, 2), (-3, 0), (-\infty, -3)$. Non-strict $\ge$ includes the zeros (square brackets).</div>
-    <div class="quiz-explain wrong-exp">Mark zeros, set the rightmost interval sign by end behaviour ($+$ for positive-leading-coefficient cubic), then flip at every simple zero leftward. Include zeros because the inequality is non-strict.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Three simple zeros at $-3, 0, 2$. Cubic, positive leading coefficient $\Rightarrow p \to +\infty$ as $x \to +\infty$. Sign on rightmost interval $(2, \infty)$ is $+$. Flipping at each simple zero leftward: sign pattern $+, -, +, -$ across $(2, \infty), (0, 2), (-3, 0), (-\infty, -3)$. Non-strict $\ge$ includes the zeros (square brackets).</span><span data-lang="zh">三个单根 $-3, 0, 2$。三次、首项系数为正 $\Rightarrow x \to +\infty$ 时 $p \to +\infty$。最右区间 $(2, \infty)$ 符号 $+$。向左每个单根翻号：$(2, \infty), (0, 2), (-3, 0), (-\infty, -3)$ 的模式为 $+, -, +, -$。$\ge$ 非严格，含零点（方括号）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Mark zeros, set the rightmost interval sign by end behaviour ($+$ for positive-leading-coefficient cubic), then flip at every simple zero leftward. Include zeros because the inequality is non-strict.</span><span data-lang="zh">标零点；最右区间符号由末端行为决定（正首项系数的三次为 $+$）；向左每个单根翻号。非严格不等式含零点。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">For which $x$ is $(x - 1)^{2}(x + 4) &lt; 0$?</div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For which $x$ is $(x - 1)^{2}(x + 4) &lt; 0$?</span><span data-lang="zh">$(x - 1)^{2}(x + 4) &lt; 0$ 在哪些 $x$ 处成立？</span></div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(-\infty, -4)$</div>
       <div class="quiz-opt" data-idx="1">$(-\infty, -4) \cup (1, \infty)$</div>
       <div class="quiz-opt" data-idx="2">$(-4, 1)$</div>
-      <div class="quiz-opt" data-idx="3">All real $x$ except $x = 1$</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">All real $x$ except $x = 1$</span><span data-lang="zh">除 $x = 1$ 外的所有实 $x$</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Zeros: $x = 1$ (mult $2$, even ,  touch) and $x = -4$ (mult $1$, odd ,  cross). Cubic, positive leading coefficient, so $p \to +\infty$ as $x \to +\infty$. On $(1, \infty)$: $+$. Touch at $1$: no flip, so $(-4, 1)$: $+$. Cross at $-4$: flip, so $(-\infty, -4)$: $-$. Strict $&lt;$ excludes the zeros.</div>
-    <div class="quiz-explain wrong-exp">Even-multiplicity zero at $x = 1$ does <em>not</em> flip the sign ,  the product stays positive across $x = 1$. Only $(-\infty, -4)$ is negative.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Zeros: $x = 1$ (mult $2$, even ,  touch) and $x = -4$ (mult $1$, odd ,  cross). Cubic, positive leading coefficient, so $p \to +\infty$ as $x \to +\infty$. On $(1, \infty)$: $+$. Touch at $1$: no flip, so $(-4, 1)$: $+$. Cross at $-4$: flip, so $(-\infty, -4)$: $-$. Strict $&lt;$ excludes the zeros.</span><span data-lang="zh">零点：$x = 1$（重 $2$，偶 ,  触轴）与 $x = -4$（重 $1$，奇 ,  穿越）。三次、首项系数为正，故 $x \to +\infty$ 时 $p \to +\infty$。$(1, \infty)$ 上 $+$；$1$ 处触轴不翻 $\Rightarrow (-4, 1)$ 上仍 $+$；$-4$ 处穿越翻号 $\Rightarrow (-\infty, -4)$ 上 $-$。严格 $&lt;$ 不含零点。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Even-multiplicity zero at $x = 1$ does <em>not</em> flip the sign ,  the product stays positive across $x = 1$. Only $(-\infty, -4)$ is negative.</span><span data-lang="zh">$x = 1$ 处偶重数零点<em>不</em>翻号 ,  乘积在 $x = 1$ 两侧仍为正。仅 $(-\infty, -4)$ 为负。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Tactics</div>
-  <h2>Exam Strategy and Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试技巧</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见误区</span></h2>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Vocabulary and end behaviour</strong>
+    <strong style="color: var(--orange);"><span data-lang="en">Vocabulary and end behaviour</span><span data-lang="zh">术语与末端行为</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Always state degree and leading coefficient first.</strong> End behaviour follows immediately from those two and is worth marks even when the rest of the question goes sideways.</li>
-      <li><strong>Insert $0$ coefficients for missing powers</strong> before any long or synthetic division. Skipping this step is the single most common arithmetic slip.</li>
-      <li><strong>$y$-intercept is always $a_{0}$.</strong> The constant term is $p(0)$; no calculation needed.</li>
+      <li><strong><span data-lang="en">Always state degree and leading coefficient first.</span><span data-lang="zh">务必先写出次数与首项系数。</span></strong> <span data-lang="en">End behaviour follows immediately from those two and is worth marks even when the rest of the question goes sideways.</span><span data-lang="zh">两者立即给出末端行为；即便后续做错，这一步也能得分。</span></li>
+      <li><strong><span data-lang="en">Insert $0$ coefficients for missing powers</span><span data-lang="zh">为缺失次幂补 $0$ 系数</span></strong> <span data-lang="en">before any long or synthetic division. Skipping this step is the single most common arithmetic slip.</span><span data-lang="zh">再做长除或综合除法。跳过此步是最常见的算术失误。</span></li>
+      <li><strong><span data-lang="en">$y$-intercept is always $a_{0}$.</span><span data-lang="zh">$y$ 截距永远是 $a_{0}$。</span></strong> <span data-lang="en">The constant term is $p(0)$; no calculation needed.</span><span data-lang="zh">常数项即 $p(0)$；无需运算。</span></li>
     </ul>
   </div>
 
   <div class="concept-box" style="border-left-color: var(--accent);">
-    <strong style="color: var(--accent);">Theorems by name</strong>
+    <strong style="color: var(--accent);"><span data-lang="en">Theorems by name</span><span data-lang="zh">点名引用定理</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Quote the factor theorem and remainder theorem by name.</strong> "By the factor theorem, $(x - a)$ is a factor iff $p(a) = 0$." Examiners look for this phrasing in MHF4U and PC12.</li>
-      <li><strong>The remainder theorem is the fastest way to compute a remainder.</strong> Don't do long division if the divisor is $(x - a)$ ,  just compute $p(a)$.</li>
-      <li><strong>The rational root theorem narrows but does not guarantee.</strong> Every rational root is on the candidate list, but most candidates are not roots. Test by substitution or synthetic division.</li>
+      <li><strong><span data-lang="en">Quote the factor theorem and remainder theorem by name.</span><span data-lang="zh">引用因式定理与余数定理时务必点名。</span></strong> <span data-lang="en">"By the factor theorem, $(x - a)$ is a factor iff $p(a) = 0$." Examiners look for this phrasing in MHF4U and PC12.</span><span data-lang="zh">"由因式定理，$(x - a)$ 是因式当且仅当 $p(a) = 0$"。MHF4U 与 PC12 阅卷都期待此表述。</span></li>
+      <li><strong><span data-lang="en">The remainder theorem is the fastest way to compute a remainder.</span><span data-lang="zh">余数定理是计算余数的最快方法。</span></strong> <span data-lang="en">Don't do long division if the divisor is $(x - a)$ ,  just compute $p(a)$.</span><span data-lang="zh">除式为 $(x - a)$ 时不必长除 ,  直接算 $p(a)$。</span></li>
+      <li><strong><span data-lang="en">The rational root theorem narrows but does not guarantee.</span><span data-lang="zh">有理根定理只缩小范围，不保证。</span></strong> <span data-lang="en">Every rational root is on the candidate list, but most candidates are not roots. Test by substitution or synthetic division.</span><span data-lang="zh">每个有理根都在候选列表里，但多数候选并非根。须用代入或综合除法测试。</span></li>
     </ul>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Graphing</strong>
+    <strong style="color: var(--purple);"><span data-lang="en">Graphing</span><span data-lang="zh">作图</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Read multiplicity off each factor.</strong> Write "$(x - r)^{m}$, mult $m$" beside each zero so you don't forget when sketching.</li>
-      <li><strong>Even multiplicity = touch; odd multiplicity = cross.</strong> The bounce vs. cross distinction is a common single-mark question on its own.</li>
-      <li><strong>Sum of multiplicities equals the degree</strong>, counting complex roots. A consistency check: if your multiplicities don't sum to $n$, you missed a factor.</li>
+      <li><strong><span data-lang="en">Read multiplicity off each factor.</span><span data-lang="zh">从每个因式读出重数。</span></strong> <span data-lang="en">Write "$(x - r)^{m}$, mult $m$" beside each zero so you don't forget when sketching.</span><span data-lang="zh">在每个零点旁标注"$(x - r)^{m}$，重 $m$"，作图时不会忘。</span></li>
+      <li><strong><span data-lang="en">Even multiplicity = touch; odd multiplicity = cross.</span><span data-lang="zh">偶重数 = 触；奇重数 = 穿。</span></strong> <span data-lang="en">The bounce vs. cross distinction is a common single-mark question on its own.</span><span data-lang="zh">触轴 / 穿越的区分常作为独立单分题。</span></li>
+      <li><strong><span data-lang="en">Sum of multiplicities equals the degree</span><span data-lang="zh">重数之和等于次数</span></strong><span data-lang="en">, counting complex roots. A consistency check: if your multiplicities don't sum to $n$, you missed a factor.</span><span data-lang="zh">（含复根）。一致性核验：重数之和不等于 $n$ 即说明漏了因式。</span></li>
     </ul>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Complex roots (honors)</strong>
+    <strong style="color: var(--green);"><span data-lang="en">Complex roots (honors)</span><span data-lang="zh">复根（荣誉）</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Real polynomial $+$ one complex root means the conjugate is free.</strong> Always state this explicitly when building a polynomial from roots.</li>
-      <li><strong>Pair complex conjugates into a real irreducible quadratic</strong>: $(x - z)(x - \bar{z}) = x^{2} - 2 \operatorname{Re}(z) x + |z|^{2}$. This is a clean way to keep arithmetic real.</li>
-      <li><strong>Odd-degree real polynomials always have at least one real root.</strong> Useful as a sanity check on any cubic-roots question.</li>
+      <li><strong><span data-lang="en">Real polynomial $+$ one complex root means the conjugate is free.</span><span data-lang="zh">实多项式 + 一个复根 $\Rightarrow$ 共轭免费奉送。</span></strong> <span data-lang="en">Always state this explicitly when building a polynomial from roots.</span><span data-lang="zh">由根构造多项式时务必显式声明。</span></li>
+      <li><strong><span data-lang="en">Pair complex conjugates into a real irreducible quadratic</span><span data-lang="zh">把复共轭配对为实不可约二次式</span></strong><span data-lang="en">: $(x - z)(x - \bar{z}) = x^{2} - 2 \operatorname{Re}(z) x + |z|^{2}$. This is a clean way to keep arithmetic real.</span><span data-lang="zh">：$(x - z)(x - \bar{z}) = x^{2} - 2 \operatorname{Re}(z) x + |z|^{2}$。这是把运算保留在实数内的干净办法。</span></li>
+      <li><strong><span data-lang="en">Odd-degree real polynomials always have at least one real root.</span><span data-lang="zh">奇次实多项式至少有一个实根。</span></strong> <span data-lang="en">Useful as a sanity check on any cubic-roots question.</span><span data-lang="zh">是任何三次方程根问题的合理性核验。</span></li>
     </ul>
   </div>
 
   <div class="concept-box red">
-    <strong style="color: var(--red);">Inequalities</strong>
+    <strong style="color: var(--red);"><span data-lang="en">Inequalities</span><span data-lang="zh">不等式</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Always factor first, then sign-analyse.</strong> Trying to sign-analyse an unfactored polynomial wastes time.</li>
-      <li><strong>Flip sign only at odd-multiplicity zeros.</strong> Forgetting that even multiplicity is a "touch" is the second-most-common slip.</li>
-      <li><strong>Strict $&lt;, &gt;$ exclude zeros (round brackets); $\le, \ge$ include (square brackets).</strong> Decide this before writing the final answer.</li>
+      <li><strong><span data-lang="en">Always factor first, then sign-analyse.</span><span data-lang="zh">务必先分解，再做符号分析。</span></strong> <span data-lang="en">Trying to sign-analyse an unfactored polynomial wastes time.</span><span data-lang="zh">对未分解多项式做符号分析浪费时间。</span></li>
+      <li><strong><span data-lang="en">Flip sign only at odd-multiplicity zeros.</span><span data-lang="zh">只在奇重数零点翻号。</span></strong> <span data-lang="en">Forgetting that even multiplicity is a "touch" is the second-most-common slip.</span><span data-lang="zh">忘记偶重数为"触轴"是第二常见的失误。</span></li>
+      <li><strong><span data-lang="en">Strict $&lt;, &gt;$ exclude zeros (round brackets); $\le, \ge$ include (square brackets).</span><span data-lang="zh">严格 $&lt;, &gt;$ 不含零点（圆括号）；$\le, \ge$ 含零点（方括号）。</span></strong> <span data-lang="en">Decide this before writing the final answer.</span><span data-lang="zh">写最终答案前先定好。</span></li>
     </ul>
   </div>
 </section>
@@ -952,128 +962,128 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <hr class="sep">
 
 <section class="section" id="flashcards">
-  <div class="section-label">Active Recall</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动回忆</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <div class="flashcard-toolbar">
-    <div id="fcCount">0 / 14 flipped</div>
+    <div id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">0 / 14 已翻</span></div>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
   <div class="flashcard-grid" id="flashcardGrid">
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Factor theorem?</div><div class="flashcard-back">$$(x - a) \mid p(x) \iff p(a) = 0$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Remainder theorem?</div><div class="flashcard-back">$$p(x) = (x - a) q(x) + p(a)$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Rational root candidates of $a_{n} x^{n} + \cdots + a_{0}$?</div><div class="flashcard-back">$$\pm \frac{p}{q} \text{ with } p \mid a_{0}, \; q \mid a_{n}, \; \gcd(p, q) = 1$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">End behaviour of $p$ depends on?</div><div class="flashcard-back">Leading term $a_{n} x^{n}$ only.<br>Parity of $n$ and sign of $a_{n}$ give 4 cases.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Max turning points of degree-$n$ polynomial?</div><div class="flashcard-back">$$n - 1$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Sum of multiplicities equals?</div><div class="flashcard-back">Degree $n$ (counting complex roots).</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Odd multiplicity at $r$ means?</div><div class="flashcard-back">Graph <em>crosses</em> $x$-axis at $r$.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Even multiplicity at $r$ means?</div><div class="flashcard-back">Graph <em>touches</em> $x$-axis at $r$ without crossing.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Complex conjugate root theorem?</div><div class="flashcard-back">Real polynomial: $p(z) = 0 \Rightarrow p(\bar{z}) = 0$.<br>Non-real roots come in pairs.</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">$(x - z)(x - \bar{z})$ for $z = a + b i$?</div><div class="flashcard-back">$$x^{2} - 2 a x + (a^{2} + b^{2})$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Difference of cubes?</div><div class="flashcard-back">$$a^{3} - b^{3} = (a - b)(a^{2} + a b + b^{2})$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Sum of cubes?</div><div class="flashcard-back">$$a^{3} + b^{3} = (a + b)(a^{2} - a b + b^{2})$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Odd-degree real polynomial has at least how many real roots?</div><div class="flashcard-back">At least $1$ (complex roots come in pairs).</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Sign at rightmost interval of factored $p$?</div><div class="flashcard-back">Sign of $a_{n}$ (end behaviour as $x \to +\infty$).</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Factor theorem?</span><span data-lang="zh">因式定理？</span></div><div class="flashcard-back">$$(x - a) \mid p(x) \iff p(a) = 0$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Remainder theorem?</span><span data-lang="zh">余数定理？</span></div><div class="flashcard-back">$$p(x) = (x - a) q(x) + p(a)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Rational root candidates of $a_{n} x^{n} + \cdots + a_{0}$?</span><span data-lang="zh">$a_{n} x^{n} + \cdots + a_{0}$ 的有理候选根？</span></div><div class="flashcard-back">$$\pm \frac{p}{q} \text{ with } p \mid a_{0}, \; q \mid a_{n}, \; \gcd(p, q) = 1$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">End behaviour of $p$ depends on?</span><span data-lang="zh">$p$ 的末端行为取决于？</span></div><div class="flashcard-back"><span data-lang="en">Leading term $a_{n} x^{n}$ only.<br>Parity of $n$ and sign of $a_{n}$ give 4 cases.</span><span data-lang="zh">仅首项 $a_{n} x^{n}$。<br>$n$ 的奇偶与 $a_{n}$ 的符号给出 4 种情形。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Max turning points of degree-$n$ polynomial?</span><span data-lang="zh">$n$ 次多项式拐点最大数？</span></div><div class="flashcard-back">$$n - 1$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Sum of multiplicities equals?</span><span data-lang="zh">重数之和等于？</span></div><div class="flashcard-back"><span data-lang="en">Degree $n$ (counting complex roots).</span><span data-lang="zh">次数 $n$（含复根）。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Odd multiplicity at $r$ means?</span><span data-lang="zh">$r$ 处奇重数意味着？</span></div><div class="flashcard-back"><span data-lang="en">Graph <em>crosses</em> $x$-axis at $r$.</span><span data-lang="zh">图象在 $r$ 处<em>穿越</em> $x$ 轴。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Even multiplicity at $r$ means?</span><span data-lang="zh">$r$ 处偶重数意味着？</span></div><div class="flashcard-back"><span data-lang="en">Graph <em>touches</em> $x$-axis at $r$ without crossing.</span><span data-lang="zh">图象在 $r$ 处<em>触</em> $x$ 轴但不穿越。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Complex conjugate root theorem?</span><span data-lang="zh">复共轭根定理？</span></div><div class="flashcard-back"><span data-lang="en">Real polynomial: $p(z) = 0 \Rightarrow p(\bar{z}) = 0$.<br>Non-real roots come in pairs.</span><span data-lang="zh">实多项式：$p(z) = 0 \Rightarrow p(\bar{z}) = 0$。<br>非实根成对。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">$(x - z)(x - \bar{z})$ for $z = a + b i$?</span><span data-lang="zh">$z = a + b i$ 时 $(x - z)(x - \bar{z})$？</span></div><div class="flashcard-back">$$x^{2} - 2 a x + (a^{2} + b^{2})$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Difference of cubes?</span><span data-lang="zh">立方差？</span></div><div class="flashcard-back">$$a^{3} - b^{3} = (a - b)(a^{2} + a b + b^{2})$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Sum of cubes?</span><span data-lang="zh">立方和？</span></div><div class="flashcard-back">$$a^{3} + b^{3} = (a + b)(a^{2} - a b + b^{2})$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Odd-degree real polynomial has at least how many real roots?</span><span data-lang="zh">奇次实多项式至少有几个实根？</span></div><div class="flashcard-back"><span data-lang="en">At least $1$ (complex roots come in pairs).</span><span data-lang="zh">至少 $1$ 个（复根成对）。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Sign at rightmost interval of factored $p$?</span><span data-lang="zh">已分解 $p$ 最右区间的符号？</span></div><div class="flashcard-back"><span data-lang="en">Sign of $a_{n}$ (end behaviour as $x \to +\infty$).</span><span data-lang="zh">$a_{n}$ 的符号（$x \to +\infty$ 末端行为）。</span></div></div></div>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="unit-quiz">
-  <div class="section-label">Mixed Practice</div>
-  <h2>Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></h2>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">The polynomial $p(x) = -4 x^{6} + 2 x^{3} - 5$ has which end behaviour?</div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">The polynomial $p(x) = -4 x^{6} + 2 x^{3} - 5$ has which end behaviour?</span><span data-lang="zh">多项式 $p(x) = -4 x^{6} + 2 x^{3} - 5$ 的末端行为是？</span></div><div class="quiz-number">Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Both ends $\to +\infty$.</div>
-      <div class="quiz-opt" data-idx="1">Left $\to -\infty$, right $\to +\infty$.</div>
-      <div class="quiz-opt" data-idx="2">Both ends $\to -\infty$.</div>
-      <div class="quiz-opt" data-idx="3">Left $\to +\infty$, right $\to -\infty$.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Both ends $\to +\infty$.</span><span data-lang="zh">两端 $\to +\infty$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Left $\to -\infty$, right $\to +\infty$.</span><span data-lang="zh">左 $\to -\infty$，右 $\to +\infty$。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Both ends $\to -\infty$.</span><span data-lang="zh">两端 $\to -\infty$。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Left $\to +\infty$, right $\to -\infty$.</span><span data-lang="zh">左 $\to +\infty$，右 $\to -\infty$。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Degree $6$ (even), leading coefficient $-4 &lt; 0$. Even-negative: both tails fall.</div>
-    <div class="quiz-explain wrong-exp">Look only at the leading term. Even degree + negative leading coefficient: both ends head to $-\infty$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Degree $6$ (even), leading coefficient $-4 &lt; 0$. Even-negative: both tails fall.</span><span data-lang="zh">次数 $6$（偶），首项系数 $-4 &lt; 0$。偶 + 负：两端均下降。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Look only at the leading term. Even degree + negative leading coefficient: both ends head to $-\infty$.</span><span data-lang="zh">只看首项。偶次 + 负首项系数：两端均趋 $-\infty$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">When $p(x) = 2 x^{3} - x^{2} + 3 x - 4$ is divided by $(x + 1)$, the remainder is:</div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">When $p(x) = 2 x^{3} - x^{2} + 3 x - 4$ is divided by $(x + 1)$, the remainder is:</span><span data-lang="zh">$p(x) = 2 x^{3} - x^{2} + 3 x - 4$ 除以 $(x + 1)$ 的余数是：</span></div><div class="quiz-number">Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$-10$</div>
       <div class="quiz-opt" data-idx="1">$-4$</div>
       <div class="quiz-opt" data-idx="2">$4$</div>
       <div class="quiz-opt" data-idx="3">$10$</div>
     </div>
-    <div class="quiz-explain correct-exp">By the remainder theorem, the remainder is $p(-1) = -2 - 1 - 3 - 4 = -10$.</div>
-    <div class="quiz-explain wrong-exp">Use the remainder theorem with $a = -1$. Substitute $x = -1$ directly; no division needed.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">By the remainder theorem, the remainder is $p(-1) = -2 - 1 - 3 - 4 = -10$.</span><span data-lang="zh">由余数定理，余数为 $p(-1) = -2 - 1 - 3 - 4 = -10$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use the remainder theorem with $a = -1$. Substitute $x = -1$ directly; no division needed.</span><span data-lang="zh">用余数定理 $a = -1$。直接代入 $x = -1$；无需作除。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">If $(x - 2)$ is a factor of $p(x) = x^{3} + k x^{2} + 3 x - 14$, find $k$.</div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">If $(x - 2)$ is a factor of $p(x) = x^{3} + k x^{2} + 3 x - 14$, find $k$.</span><span data-lang="zh">若 $(x - 2)$ 是 $p(x) = x^{3} + k x^{2} + 3 x - 14$ 的因式，求 $k$。</span></div><div class="quiz-number">Q3</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$k = 0$</div>
-      <div class="quiz-opt" data-idx="1">$k = 0$ (recompute: $8 + 4 k + 6 - 14 = 4 k$, so $k = 0$)</div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$k = 0$ (recompute: $8 + 4 k + 6 - 14 = 4 k$, so $k = 0$)</span><span data-lang="zh">$k = 0$（核算：$8 + 4 k + 6 - 14 = 4 k$，故 $k = 0$）</span></div>
       <div class="quiz-opt" data-idx="2">$k = 1$</div>
       <div class="quiz-opt" data-idx="3">$k = -3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Factor theorem: $p(2) = 0$. Compute $p(2) = 8 + 4 k + 6 - 14 = 4 k$. Set $4 k = 0 \Rightarrow k = 0$.</div>
-    <div class="quiz-explain wrong-exp">Set $p(2) = 0$ and solve for $k$: $8 + 4 k + 6 - 14 = 4 k = 0$, so $k = 0$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Factor theorem: $p(2) = 0$. Compute $p(2) = 8 + 4 k + 6 - 14 = 4 k$. Set $4 k = 0 \Rightarrow k = 0$.</span><span data-lang="zh">因式定理：$p(2) = 0$。算 $p(2) = 8 + 4 k + 6 - 14 = 4 k$。令 $4 k = 0 \Rightarrow k = 0$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Set $p(2) = 0$ and solve for $k$: $8 + 4 k + 6 - 14 = 4 k = 0$, so $k = 0$.</span><span data-lang="zh">令 $p(2) = 0$ 解 $k$：$8 + 4 k + 6 - 14 = 4 k = 0$，故 $k = 0$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">List the candidate rational roots of $p(x) = 4 x^{3} - 3 x^{2} + 2 x - 6$.</div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">List the candidate rational roots of $p(x) = 4 x^{3} - 3 x^{2} + 2 x - 6$.</span><span data-lang="zh">列出 $p(x) = 4 x^{3} - 3 x^{2} + 2 x - 6$ 的有理候选根。</span></div><div class="quiz-number">Q4</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$\pm 1, \pm 2, \pm 3, \pm 6$ only.</div>
-      <div class="quiz-opt" data-idx="1">$\pm \tfrac{1}{2}, \pm \tfrac{1}{4}$ only.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$\pm 1, \pm 2, \pm 3, \pm 6$ only.</span><span data-lang="zh">仅 $\pm 1, \pm 2, \pm 3, \pm 6$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$\pm \tfrac{1}{2}, \pm \tfrac{1}{4}$ only.</span><span data-lang="zh">仅 $\pm \tfrac{1}{2}, \pm \tfrac{1}{4}$。</span></div>
       <div class="quiz-opt" data-idx="2">$\pm 1, \pm 2, \pm 3, \pm 6, \pm \tfrac{1}{2}, \pm \tfrac{3}{2}, \pm \tfrac{1}{4}, \pm \tfrac{3}{4}$.</div>
-      <div class="quiz-opt" data-idx="3">Any rational number.</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Any rational number.</span><span data-lang="zh">任意有理数。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Numerator divides $a_{0} = -6$: $\pm 1, \pm 2, \pm 3, \pm 6$. Denominator divides $a_{n} = 4$: $1, 2, 4$. Lowest-terms candidates listed in option 2.</div>
-    <div class="quiz-explain wrong-exp">$p/q$ with $p \mid a_{0} = -6$ and $q \mid a_{n} = 4$, in lowest terms. The integer candidates (denominator $1$) are $\pm 1, \pm 2, \pm 3, \pm 6$; half-candidates are $\pm 1/2, \pm 3/2$; quarter-candidates are $\pm 1/4, \pm 3/4$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Numerator divides $a_{0} = -6$: $\pm 1, \pm 2, \pm 3, \pm 6$. Denominator divides $a_{n} = 4$: $1, 2, 4$. Lowest-terms candidates listed in option 2.</span><span data-lang="zh">分子整除 $a_{0} = -6$：$\pm 1, \pm 2, \pm 3, \pm 6$。分母整除 $a_{n} = 4$：$1, 2, 4$。选项 2 列出全部最简候选。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">$p/q$ with $p \mid a_{0} = -6$ and $q \mid a_{n} = 4$, in lowest terms. The integer candidates (denominator $1$) are $\pm 1, \pm 2, \pm 3, \pm 6$; half-candidates are $\pm 1/2, \pm 3/2$; quarter-candidates are $\pm 1/4, \pm 3/4$.</span><span data-lang="zh">最简 $p/q$，$p \mid a_{0} = -6$、$q \mid a_{n} = 4$。整数候选（分母 $1$）：$\pm 1, \pm 2, \pm 3, \pm 6$；半分候选：$\pm 1/2, \pm 3/2$；四分候选：$\pm 1/4, \pm 3/4$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-header"><div class="quiz-q">For $p(x) = (x + 1)(x - 2)^{3}(x - 5)$, at how many points does the graph <em>cross</em> the $x$-axis?</div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For $p(x) = (x + 1)(x - 2)^{3}(x - 5)$, at how many points does the graph <em>cross</em> the $x$-axis?</span><span data-lang="zh">对 $p(x) = (x + 1)(x - 2)^{3}(x - 5)$，图象在多少点处<em>穿越</em> $x$ 轴？</span></div><div class="quiz-number">Q5</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$0$</div>
       <div class="quiz-opt" data-idx="1">$1$</div>
       <div class="quiz-opt" data-idx="2">$2$</div>
       <div class="quiz-opt" data-idx="3">$3$</div>
     </div>
-    <div class="quiz-explain correct-exp">Zeros at $x = -1$ (mult $1$, odd, cross), $x = 2$ (mult $3$, odd, cross), $x = 5$ (mult $1$, odd, cross). Three crossings. (Even-multiplicity zeros would have given touches without crossings.)</div>
-    <div class="quiz-explain wrong-exp">All three zeros have odd multiplicity here, so the graph crosses at all three.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Zeros at $x = -1$ (mult $1$, odd, cross), $x = 2$ (mult $3$, odd, cross), $x = 5$ (mult $1$, odd, cross). Three crossings. (Even-multiplicity zeros would have given touches without crossings.)</span><span data-lang="zh">零点 $x = -1$（重 $1$，奇，穿）、$x = 2$（重 $3$，奇，穿）、$x = 5$（重 $1$，奇，穿）。三次穿越。（偶重数零点只会触轴不穿。）</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">All three zeros have odd multiplicity here, so the graph crosses at all three.</span><span data-lang="zh">此处三个零点重数均为奇，故图象在三处均穿越。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">A real polynomial of degree $4$ has roots $3$ and $1 + 2 i$. The other two roots are: <span class="region-chip">Honors</span></div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A real polynomial of degree $4$ has roots $3$ and $1 + 2 i$. The other two roots are:</span><span data-lang="zh">$4$ 次实系数多项式有根 $3$ 与 $1 + 2 i$。另两根为：</span> <span class="region-chip">Honors</span></div><div class="quiz-number">Q6</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$3$ (again, as a repeated root) and $1 - 2 i$.</div>
-      <div class="quiz-opt" data-idx="1">$1 - 2 i$ only; the other root is undetermined.</div>
-      <div class="quiz-opt" data-idx="2">Two real roots that must be irrational.</div>
-      <div class="quiz-opt" data-idx="3">Cannot be determined without more information.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$3$ (again, as a repeated root) and $1 - 2 i$.</span><span data-lang="zh">$3$（作为重根再次出现）与 $1 - 2 i$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$1 - 2 i$ only; the other root is undetermined.</span><span data-lang="zh">仅 $1 - 2 i$；另一根不能确定。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Two real roots that must be irrational.</span><span data-lang="zh">两个必为无理数的实根。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Cannot be determined without more information.</span><span data-lang="zh">信息不足无法确定。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">The conjugate $1 - 2 i$ is forced (real polynomial). That uses three roots; the fourth must also be real (else it would force a fifth conjugate). With only two known roots ($3$ and the pair $1 \pm 2 i$ counts as one pair plus one real), the fourth real root is undetermined <em>unless</em> we assume the given roots account for the full root list. Reading the question that way, the fourth root must be a repeat of $3$ (to fill the four-degree count with the given root set). Of the listed options, only (a) is consistent.</div>
-    <div class="quiz-explain wrong-exp">The conjugate $1 - 2 i$ is automatic. Degree $4$ means four roots counted with multiplicity; the question implies the listed roots cover the count, so the remaining root must repeat the real root $3$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The conjugate $1 - 2 i$ is forced (real polynomial). That uses three roots; the fourth must also be real (else it would force a fifth conjugate). With only two known roots ($3$ and the pair $1 \pm 2 i$ counts as one pair plus one real), the fourth real root is undetermined <em>unless</em> we assume the given roots account for the full root list. Reading the question that way, the fourth root must be a repeat of $3$ (to fill the four-degree count with the given root set). Of the listed options, only (a) is consistent.</span><span data-lang="zh">共轭 $1 - 2 i$ 是强制的（实多项式）。已占三个根；第四根也必须为实（否则会强迫第五个共轭出现）。已知两根（$3$ 与共轭对 $1 \pm 2 i$ 算一对加一实），<em>若</em>题意默认所给根覆盖全部，则第四根必为 $3$ 的重根（以填满 $4$ 次）。所列选项中只有 (a) 一致。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The conjugate $1 - 2 i$ is automatic. Degree $4$ means four roots counted with multiplicity; the question implies the listed roots cover the count, so the remaining root must repeat the real root $3$.</span><span data-lang="zh">共轭 $1 - 2 i$ 自动出现。$4$ 次按重数有四根；题意默认所列根覆盖计数，故剩余根必为实根 $3$ 的重复。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Solve $(x - 1)(x + 2)(x - 3) \le 0$.</div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $(x - 1)(x + 2)(x - 3) \le 0$.</span><span data-lang="zh">求解 $(x - 1)(x + 2)(x - 3) \le 0$。</span></div><div class="quiz-number">Q7</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$[-2, 1]$ only.</div>
-      <div class="quiz-opt" data-idx="1">$[1, 3]$ only.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$[-2, 1]$ only.</span><span data-lang="zh">仅 $[-2, 1]$。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$[1, 3]$ only.</span><span data-lang="zh">仅 $[1, 3]$。</span></div>
       <div class="quiz-opt" data-idx="2">$(-\infty, -2] \cup [1, 3]$.</div>
       <div class="quiz-opt" data-idx="3">$(-\infty, -2) \cup (1, 3)$.</div>
     </div>
-    <div class="quiz-explain correct-exp">Simple zeros at $-2, 1, 3$. Cubic with positive leading coefficient: rightmost sign $+$. Flipping at each simple zero leftward: $(3, \infty)$ $+$; $(1, 3)$ $-$; $(-2, 1)$ $+$; $(-\infty, -2)$ $-$. Non-strict $\le$ includes the zeros.</div>
-    <div class="quiz-explain wrong-exp">Three simple zeros; sign flips at each. End behaviour to the right is positive, so the leftmost interval is negative. Include zeros because $\le$ is non-strict.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Simple zeros at $-2, 1, 3$. Cubic with positive leading coefficient: rightmost sign $+$. Flipping at each simple zero leftward: $(3, \infty)$ $+$; $(1, 3)$ $-$; $(-2, 1)$ $+$; $(-\infty, -2)$ $-$. Non-strict $\le$ includes the zeros.</span><span data-lang="zh">单根 $-2, 1, 3$。三次、正首项系数：最右符号 $+$。向左每个单根翻号：$(3, \infty)$ $+$；$(1, 3)$ $-$；$(-2, 1)$ $+$；$(-\infty, -2)$ $-$。$\le$ 非严格故含零点。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Three simple zeros; sign flips at each. End behaviour to the right is positive, so the leftmost interval is negative. Include zeros because $\le$ is non-strict.</span><span data-lang="zh">三个单根；每个翻号。右端末端行为为正，故最左区间为负。$\le$ 非严格，含零点。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 

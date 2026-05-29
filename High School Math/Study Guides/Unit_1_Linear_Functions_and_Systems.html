@@ -30,7 +30,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
   --radius: 12px;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Source Sans 3', -apple-system, sans-serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --max-w: 860px; --toc-w: 260px;
 }
@@ -250,6 +250,10 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
 .cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
 [data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
 </style>
 </head>
 <body>
@@ -261,694 +265,697 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
   </div>
   <div class="nav-right">
     <span class="score-badge zero" id="scoreBadge">0 / 0</span>
-    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()">Contents</button>
-    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()">Dark</button>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
   </div>
 </nav>
 
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-title">Table of Contents</div>
-  <a href="#hero">Overview</a>
-  <a href="#syllabus-map">Syllabus Map</a>
-  <a href="#how-to-use">How to use this guide</a>
-  <a href="#s-1-1">Slope and Rate of Change</a>
-  <a href="#s-1-2">Forms of a Linear Equation</a>
-  <a href="#s-1-3">Graphing Linear Functions</a>
-  <a href="#s-1-4">Writing Equations from Descriptions</a>
-  <a href="#s-1-5">Linear Systems of Two Equations</a>
-  <a href="#s-1-6">Systems: Applications and Modeling</a>
-  <a href="#s-1-7">Matrix Row-Reduction (Honors)</a>
-  <a href="#exam-strategy">Exam Strategy</a>
-  <a href="#flashcards">Flashcards</a>
-  <a href="#unit-quiz">Practice Quiz</a>
-  <a href="#checklist">Readiness Checklist</a>
-  <a href="#feeders">What This Feeds Into</a>
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-1-1"><span data-lang="en">Slope and Rate of Change</span><span data-lang="zh">斜率与变化率</span></a>
+  <a href="#s-1-2"><span data-lang="en">Forms of a Linear Equation</span><span data-lang="zh">一元一次方程的三种形式</span></a>
+  <a href="#s-1-3"><span data-lang="en">Graphing Linear Functions</span><span data-lang="zh">作一次函数图像</span></a>
+  <a href="#s-1-4"><span data-lang="en">Writing Equations from Descriptions</span><span data-lang="zh">由描述写出方程</span></a>
+  <a href="#s-1-5"><span data-lang="en">Linear Systems of Two Equations</span><span data-lang="zh">二元一次方程组</span></a>
+  <a href="#s-1-6"><span data-lang="en">Systems: Applications and Modeling</span><span data-lang="zh">方程组：应用与建模</span></a>
+  <a href="#s-1-7"><span data-lang="en">Matrix Row-Reduction (Honors)</span><span data-lang="zh">矩阵行简化（荣誉级）</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
 </aside>
 
 <main class="main-wrap">
 
 <section class="hero" id="hero">
   <div class="hero-overline">High School Math</div>
-  <h1>Linear Functions<br>and Systems</h1>
+  <h1><span data-lang="en">Linear Functions<br>and Systems</span><span data-lang="zh">一次函数与方程组</span></h1>
   <p class="hero-sub">
-    Linear functions are the gateway to every higher math course. This unit covers the universal core: slope and rate of change, the three forms of a line (point-slope, slope-intercept, standard), graphical and algebraic technique, and systems of two linear equations by substitution, elimination, and graphing. An honors section adds matrix row-reduction. The modeling lens runs through every section: rate problems, mixture problems, break-even analysis. From here, you walk straight into Quadratic Functions and Equations, Exponential and Logarithmic Functions, and ultimately AP Calculus and IB Math AA HL.
+    <span data-lang="en">Linear functions are the gateway to every higher math course. This unit covers the universal core: slope and rate of change, the three forms of a line (point-slope, slope-intercept, standard), graphical and algebraic technique, and systems of two linear equations by substitution, elimination, and graphing. An honors section adds matrix row-reduction. The modeling lens runs through every section: rate problems, mixture problems, break-even analysis. From here, you walk straight into Quadratic Functions and Equations, Exponential and Logarithmic Functions, and ultimately AP Calculus and IB Math AA HL.</span><span data-lang="zh">一次函数（<code>linear function</code>）是通往所有更高阶数学课程的门户。本单元覆盖全球共同核心：斜率（<code>slope</code>）与变化率、直线的三种形式（点斜式、斜截式、标准式），图形与代数两套技法，以及用代入、消元和图解法求解二元一次方程组（<code>system of linear equations</code>）。荣誉级章节加入矩阵行简化（<code>row reduction</code>）。建模视角贯穿每一节：速率题、混合题、盈亏平衡分析。学完本单元，你将直接进入二次函数与方程、指数与对数函数，最终衔接 AP Calculus 与 IB Math AA HL。</span>
   </p>
   <div class="hero-meta">
-    <span class="chip chip-green">US Common Core &middot; ON &middot; BC &middot; AB</span>
-    <span class="chip chip-purple">7 sections &middot; honors block included</span>
+    <span class="chip chip-green"><span data-lang="en">US Common Core &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US 共同核心 &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">7 sections &middot; honors block included</span><span data-lang="zh">7 节内容 &middot; 含荣誉级</span></span>
   </div>
 </section>
 
 <aside class="syllabus-map" id="syllabus-map">
-  <div class="syllabus-map-label">Where this lives in your syllabus</div>
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
   <div class="syllabus-map-grid">
     <div>
-      <div class="region-header">&#x1F1FA;&#x1F1F8; US Common Core</div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core</span><span data-lang="zh">美国共同核心</span></div>
       <ul>
-        <li><code>HSF-LE.A.1</code> linear vs. exponential growth (equal differences)</li>
-        <li><code>HSF-LE.A.2</code> construct linear functions from a graph, description, or two input-output pairs</li>
-        <li><code>HSF-LE.B.5</code> interpret parameters of a linear function in context</li>
-        <li><code>HSF-IF.B.6</code> average rate of change over an interval</li>
-        <li><code>HSF-IF.C.7a</code> graph linear functions, show intercepts</li>
-        <li><code>HSA-CED.A.2</code> create two-variable equations and graph them</li>
-        <li><code>HSA-REI.B.3</code> solve linear equations and inequalities in one variable</li>
-        <li><code>HSA-REI.C.5</code> prove that elimination preserves the solution set</li>
-        <li><code>HSA-REI.C.6</code> solve systems of linear equations in two variables</li>
-        <li><code>HSA-REI.D.10</code>, <code>HSA-REI.D.11</code> graphical solving</li>
-        <li><code>HSA-REI.C.8 (+)</code>, <code>HSA-REI.C.9 (+)</code> matrix representation of systems (honors)</li>
+        <li><code>HSF-LE.A.1</code> <span data-lang="en">linear vs. exponential growth (equal differences)</span><span data-lang="zh">线性增长与指数增长的比较（等差变化）</span></li>
+        <li><code>HSF-LE.A.2</code> <span data-lang="en">construct linear functions from a graph, description, or two input-output pairs</span><span data-lang="zh">由图象、文字描述或两组输入输出对建立一次函数</span></li>
+        <li><code>HSF-LE.B.5</code> <span data-lang="en">interpret parameters of a linear function in context</span><span data-lang="zh">在情境中解释一次函数的各参数</span></li>
+        <li><code>HSF-IF.B.6</code> <span data-lang="en">average rate of change over an interval</span><span data-lang="zh">区间上的平均变化率</span></li>
+        <li><code>HSF-IF.C.7a</code> <span data-lang="en">graph linear functions, show intercepts</span><span data-lang="zh">作一次函数图象并标出截距</span></li>
+        <li><code>HSA-CED.A.2</code> <span data-lang="en">create two-variable equations and graph them</span><span data-lang="zh">建立二元方程并作图</span></li>
+        <li><code>HSA-REI.B.3</code> <span data-lang="en">solve linear equations and inequalities in one variable</span><span data-lang="zh">求解一元一次方程与不等式</span></li>
+        <li><code>HSA-REI.C.5</code> <span data-lang="en">prove that elimination preserves the solution set</span><span data-lang="zh">证明消元法保持解集不变</span></li>
+        <li><code>HSA-REI.C.6</code> <span data-lang="en">solve systems of linear equations in two variables</span><span data-lang="zh">求解二元一次方程组</span></li>
+        <li><code>HSA-REI.D.10</code>, <code>HSA-REI.D.11</code> <span data-lang="en">graphical solving</span><span data-lang="zh">图解法</span></li>
+        <li><code>HSA-REI.C.8 (+)</code>, <code>HSA-REI.C.9 (+)</code> <span data-lang="en">matrix representation of systems (honors)</span><span data-lang="zh">方程组的矩阵表示（荣誉级）</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Ontario</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario</span><span data-lang="zh">安大略</span></div>
       <ul>
-        <li><strong>MPM1D</strong> strand <em>Linear Relations</em> (direct and partial variation, first differences, equation from description)</li>
-        <li><strong>MPM1D</strong> strand <em>Analytic Geometry</em> (forms $y = mx + b$, $Ax + By + C = 0$; slope formulas; parallelism and perpendicularity; point of intersection)</li>
-        <li><strong>MPM2D</strong> strand <em>Analytic Geometry</em> &middot; <em>Using Linear Systems to Solve Problems</em> (substitution, elimination, and graphical methods)</li>
-        <li><strong>MCR3U</strong> A1.1, A1.2 (function notation for linear and quadratic)</li>
-        <li><strong>MCR3U</strong> A1.5, A1.7 (inverse of a linear function)</li>
-        <li><strong>MCR3U</strong> C3.1 (simple interest and arithmetic sequences as linear growth)</li>
+        <li><strong>MPM1D</strong> <span data-lang="en">strand <em>Linear Relations</em> (direct and partial variation, first differences, equation from description)</span><span data-lang="zh"><em>线性关系</em>单元（正比与部分比、一阶差分、由描述建立方程）</span></li>
+        <li><strong>MPM1D</strong> <span data-lang="en">strand <em>Analytic Geometry</em> (forms $y = mx + b$, $Ax + By + C = 0$; slope formulas; parallelism and perpendicularity; point of intersection)</span><span data-lang="zh"><em>解析几何</em>单元（$y = mx + b$、$Ax + By + C = 0$ 两种形式；斜率公式；平行与垂直；交点）</span></li>
+        <li><strong>MPM2D</strong> <span data-lang="en">strand <em>Analytic Geometry</em> &middot; <em>Using Linear Systems to Solve Problems</em> (substitution, elimination, and graphical methods)</span><span data-lang="zh"><em>解析几何</em> &middot; <em>用线性方程组解题</em>（代入、消元、图解三法）</span></li>
+        <li><strong>MCR3U</strong> <code>A1.1</code>, <code>A1.2</code> <span data-lang="en">(function notation for linear and quadratic)</span><span data-lang="zh">（一次函数与二次函数的函数记号）</span></li>
+        <li><strong>MCR3U</strong> <code>A1.5</code>, <code>A1.7</code> <span data-lang="en">(inverse of a linear function)</span><span data-lang="zh">（一次函数的反函数）</span></li>
+        <li><strong>MCR3U</strong> <code>C3.1</code> <span data-lang="en">(simple interest and arithmetic sequences as linear growth)</span><span data-lang="zh">（简单利息与等差数列作为线性增长）</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; British Columbia</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></div>
       <ul>
-        <li><strong>FMPC 10</strong> Big Idea #3: <em>Constant rate of change is an essential attribute of linear relations.</em></li>
-        <li><strong>FMPC 10</strong> Content: <em>functions and relations</em> (domain, range, function notation)</li>
-        <li><strong>FMPC 10</strong> Content: <em>linear functions</em> (slope sign cases, three forms, parallel and perpendicular, horizontal and vertical lines)</li>
-        <li><strong>FMPC 10</strong> Content: <em>arithmetic sequences</em> (common difference, general term, connection to linear relations)</li>
-        <li><strong>FMPC 10</strong> Content: <em>systems of linear equations</em> (graphical, inspection, substitution, elimination)</li>
+        <li><strong>FMPC 10</strong> <span data-lang="en">Big Idea #3: <em>Constant rate of change is an essential attribute of linear relations.</em></span><span data-lang="zh">大概念 #3：<em>恒定的变化率是线性关系的本质属性</em>。</span></li>
+        <li><strong>FMPC 10</strong> <span data-lang="en">Content: <em>functions and relations</em> (domain, range, function notation)</span><span data-lang="zh">内容：<em>函数与关系</em>（定义域、值域、函数记号）</span></li>
+        <li><strong>FMPC 10</strong> <span data-lang="en">Content: <em>linear functions</em> (slope sign cases, three forms, parallel and perpendicular, horizontal and vertical lines)</span><span data-lang="zh">内容：<em>一次函数</em>（斜率的正负零无穷四种情形、三种形式、平行与垂直、水平线与竖直线）</span></li>
+        <li><strong>FMPC 10</strong> <span data-lang="en">Content: <em>arithmetic sequences</em> (common difference, general term, connection to linear relations)</span><span data-lang="zh">内容：<em>等差数列</em>（公差、通项、与线性关系的联系）</span></li>
+        <li><strong>FMPC 10</strong> <span data-lang="en">Content: <em>systems of linear equations</em> (graphical, inspection, substitution, elimination)</span><span data-lang="zh">内容：<em>线性方程组</em>（图解、观察、代入、消元）</span></li>
       </ul>
     </div>
     <div>
-      <div class="region-header">&#x1F1E8;&#x1F1E6; Alberta</div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta</span><span data-lang="zh">阿尔伯塔</span></div>
       <ul>
-        <li><strong>Math 10C</strong> Relations &amp; Functions GO 4: <em>"describe and represent linear relations using words, ordered pairs, tables of values, graphs, and equations"</em>; indicators <code>RF4.1</code>-<code>RF4.7</code> cover dependent/independent variables and recognizing linearity in each representation</li>
-        <li><strong>Math 10C</strong> RF GO 5: <em>"determine the characteristics of the graphs of linear relations, including intercepts, slope, domain and range"</em>; <code>RF5.1</code>-<code>RF5.7</code> cover slope, intercepts, and contextual problems</li>
-        <li><strong>Math 10C</strong> RF GO 6: <em>"relate linear relations expressed in slope-intercept form ($y = mx + b$), general form ($Ax + By + C = 0$), and slope-point form ($y - y_1 = m(x - x_1)$) to their graphs"</em></li>
-        <li><strong>Math 10C</strong> RF GO 7: <em>"determine the equation of a linear relation, given a graph, a point and the slope, two points, or a point and the equation of a parallel or perpendicular line, to solve problems"</em></li>
-        <li><strong>Math 10C</strong> <code>RF8.1</code>-<code>RF8.5</code> represent a linear function using function notation, including domain/range evaluation</li>
-        <li><strong>Math 10C</strong> RF GO 9: <em>"solve problems that involve systems of linear equations in two variables, graphically and algebraically"</em>; <code>RF9.1</code>-<code>RF9.8</code> cover modelling, graphical/algebraic solutions, no/one/infinite solution cases</li>
+        <li><strong>Math 10C</strong> <span data-lang="en">Relations &amp; Functions GO 4: <em>"describe and represent linear relations using words, ordered pairs, tables of values, graphs, and equations"</em>; indicators <code>RF4.1</code>-<code>RF4.7</code> cover dependent/independent variables and recognizing linearity in each representation</span><span data-lang="zh">关系与函数总目标 4：<em>"用文字、有序对、值表、图象、方程描述并表示线性关系"</em>；指标 <code>RF4.1</code>-<code>RF4.7</code> 覆盖自变量/因变量及在各种表示中识别线性</span></li>
+        <li><strong>Math 10C</strong> <span data-lang="en">RF GO 5: <em>"determine the characteristics of the graphs of linear relations, including intercepts, slope, domain and range"</em>; <code>RF5.1</code>-<code>RF5.7</code> cover slope, intercepts, and contextual problems</span><span data-lang="zh">RF 总目标 5：<em>"确定线性关系图象的特征，包括截距、斜率、定义域与值域"</em>；<code>RF5.1</code>-<code>RF5.7</code> 覆盖斜率、截距与情境题</span></li>
+        <li><strong>Math 10C</strong> <span data-lang="en">RF GO 6: <em>"relate linear relations expressed in slope-intercept form ($y = mx + b$), general form ($Ax + By + C = 0$), and slope-point form ($y - y_1 = m(x - x_1)$) to their graphs"</em></span><span data-lang="zh">RF 总目标 6：<em>"把以斜截式（$y = mx + b$）、一般式（$Ax + By + C = 0$）、点斜式（$y - y_1 = m(x - x_1)$）表示的线性关系与其图象相关联"</em></span></li>
+        <li><strong>Math 10C</strong> <span data-lang="en">RF GO 7: <em>"determine the equation of a linear relation, given a graph, a point and the slope, two points, or a point and the equation of a parallel or perpendicular line, to solve problems"</em></span><span data-lang="zh">RF 总目标 7：<em>"由图象、点与斜率、两点、或点与平行/垂直直线的方程，求出该线性关系的方程并解决问题"</em></span></li>
+        <li><strong>Math 10C</strong> <code>RF8.1</code>-<code>RF8.5</code> <span data-lang="en">represent a linear function using function notation, including domain/range evaluation</span><span data-lang="zh">用函数记号表示一次函数，含定义域/值域的求值</span></li>
+        <li><strong>Math 10C</strong> <span data-lang="en">RF GO 9: <em>"solve problems that involve systems of linear equations in two variables, graphically and algebraically"</em>; <code>RF9.1</code>-<code>RF9.8</code> cover modelling, graphical/algebraic solutions, no/one/infinite solution cases</span><span data-lang="zh">RF 总目标 9：<em>"用图解与代数方法解决涉及二元线性方程组的问题"</em>；<code>RF9.1</code>-<code>RF9.8</code> 覆盖建模、图解/代数解法以及无解/唯一解/无穷多解三种情形</span></li>
       </ul>
     </div>
   </div>
 </aside>
 
 <section class="section" id="how-to-use">
-  <div class="section-label">Read me first</div>
-  <h2>How to use this guide</h2>
-  <p>Linear functions and systems show up somewhere in every Grade 9-12 curriculum, but each course covers a different slice of this unit. The table below tells you which sections are on your syllabus right now ,  and which you can skip until next year or never. Each row cites the curriculum document it was checked against, so the recommendation is grounded, not guessed.</p>
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Linear functions and systems show up somewhere in every Grade 9-12 curriculum, but each course covers a different slice of this unit. The table below tells you which sections are on your syllabus right now ,  and which you can skip until next year or never. Each row cites the curriculum document it was checked against, so the recommendation is grounded, not guessed.</span><span data-lang="zh">一次函数与方程组在 9-12 年级的每一份大纲里都会出现，但各门课程覆盖的范围不同。下表告诉你当前哪些节属于你的大纲、哪些可以推迟到下一年、哪些可以完全跳过。每一行都注明所依据的课纲文件，建议有据可查。</span></p>
 
   <div style="overflow-x: auto; margin: 16px 0 18px;">
   <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
     <thead>
       <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
-        <th style="text-align: left; padding: 8px 10px;">If you are in&hellip;</th>
-        <th style="text-align: left; padding: 8px 10px;">Focus on these sections</th>
-        <th style="text-align: left; padding: 8px 10px;">Defer / skip</th>
-        <th style="text-align: left; padding: 8px 10px;">Source</th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / skip</span><span data-lang="zh">可推迟</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
       </tr>
     </thead>
     <tbody>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 9 ,  MPM1D</strong></td>
-        <td style="padding: 8px 10px;">&sect;1, &sect;2, &sect;3, &sect;4</td>
-        <td style="padding: 8px 10px;">&sect;5-7 (systems land in Grade 10)</td>
-        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> ,  MPM1D <em>Linear Relations</em> + <em>Analytic Geometry</em> strands</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 9 ,  MPM1D</span><span data-lang="zh">安大略 9 年级 ,  MPM1D</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1, &sect;2, &sect;3, &sect;4</span><span data-lang="zh">&sect;1、&sect;2、&sect;3、&sect;4</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5-7 (systems land in Grade 10)</span><span data-lang="zh">&sect;5-7（方程组在 10 年级才出现）</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> <span data-lang="en">,  MPM1D <em>Linear Relations</em> + <em>Analytic Geometry</em> strands</span><span data-lang="zh">,  MPM1D <em>线性关系</em>与<em>解析几何</em>单元</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 10 ,  MPM2D</strong></td>
-        <td style="padding: 8px 10px;">&sect;5 (systems), &sect;6 (modeling); review &sect;2-&sect;4</td>
-        <td style="padding: 8px 10px;">&sect;7 (honors)</td>
-        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> ,  MPM2D <em>Analytic Geometry</em> strand, <em>Using Linear Systems</em></td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 10 ,  MPM2D</span><span data-lang="zh">安大略 10 年级 ,  MPM2D</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5 (systems), &sect;6 (modeling); review &sect;2-&sect;4</span><span data-lang="zh">&sect;5（方程组）、&sect;6（建模）；复习 &sect;2-&sect;4</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;7 (honors)</span><span data-lang="zh">&sect;7（荣誉级）</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_9-10_extract.md</code> <span data-lang="en">,  MPM2D <em>Analytic Geometry</em> strand, <em>Using Linear Systems</em></span><span data-lang="zh">,  MPM2D <em>解析几何</em>单元 ,  <em>用线性方程组解题</em></span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; ON Grade 11 ,  MCR3U</strong></td>
-        <td style="padding: 8px 10px;">Full review &sect;1-6; &sect;7 if you are honors-track or MCV4U-bound</td>
-        <td style="padding: 8px 10px;">Nothing ,  treat this unit as the linear-functions foundation for everything after</td>
-        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> ,  MCR3U A1.1, A1.2, A1.5, A1.7, C3.1</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 ,  MCR3U</span><span data-lang="zh">安大略 11 年级 ,  MCR3U</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Full review &sect;1-6; &sect;7 if you are honors-track or MCV4U-bound</span><span data-lang="zh">&sect;1-6 完整复习；若走荣誉路径或备考 MCV4U，再做 &sect;7</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  treat this unit as the linear-functions foundation for everything after</span><span data-lang="zh">无 ,  把本单元当作后续所有一次函数内容的基础</span></td>
+        <td style="padding: 8px 10px;"><code>math_grades_11-12_extract.md</code> <span data-lang="en">,  MCR3U A1.1, A1.2, A1.5, A1.7, C3.1</span><span data-lang="zh">,  MCR3U A1.1、A1.2、A1.5、A1.7、C3.1</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 10 ,  Foundations &amp; Pre-Calc 10</strong></td>
-        <td style="padding: 8px 10px;">&sect;1-6 (the BC curriculum covers slope, all three forms, and systems in one Grade 10 course)</td>
-        <td style="padding: 8px 10px;">&sect;7 (matrix row-reduction is in PC12, not PC10)</td>
-        <td style="padding: 8px 10px;"><code>fmpc10_elab.pdf</code> ,  Big Idea #3 + Content (functions and relations, linear functions, arithmetic sequences, systems of linear equations)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC Grade 10 ,  Foundations &amp; Pre-Calc 10</span><span data-lang="zh">BC 10 年级 ,  FMP&amp;PC 10</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1-6 (the BC curriculum covers slope, all three forms, and systems in one Grade 10 course)</span><span data-lang="zh">&sect;1-6（BC 课程把斜率、三种形式与方程组合并在 10 年级一门课内）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;7 (matrix row-reduction is in PC12, not PC10)</span><span data-lang="zh">&sect;7（矩阵行简化在 PC12，不在 PC10）</span></td>
+        <td style="padding: 8px 10px;"><code>fmpc10_elab.pdf</code> <span data-lang="en">,  Big Idea #3 + Content (functions and relations, linear functions, arithmetic sequences, systems of linear equations)</span><span data-lang="zh">,  大概念 #3 + 内容（函数与关系、一次函数、等差数列、线性方程组）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; BC Grade 12 ,  Pre-Calc 12</strong></td>
-        <td style="padding: 8px 10px;">&sect;7 matrix row-reduction (Pre-Calc 12 covers 2&times;2 and 3&times;3 systems)</td>
-        <td style="padding: 8px 10px;">Review &sect;1-6 only if you are rusty ,  the PC10 content above should be solid by Grade 12</td>
-        <td style="padding: 8px 10px;">BC PC12 elaborations (cross-referenced in audit; full extract pending Sprint 2 source-fetch)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC Grade 12 ,  Pre-Calc 12</span><span data-lang="zh">BC 12 年级 ,  PC 12</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;7 matrix row-reduction (Pre-Calc 12 covers 2&times;2 and 3&times;3 systems)</span><span data-lang="zh">&sect;7 矩阵行简化（PC 12 覆盖 2&times;2 与 3&times;3 方程组）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Review &sect;1-6 only if you are rusty ,  the PC10 content above should be solid by Grade 12</span><span data-lang="zh">只在生疏时复习 &sect;1-6 ,  上述 PC10 内容到 12 年级应已牢固</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">BC PC12 elaborations (cross-referenced in audit; full extract pending Sprint 2 source-fetch)</span><span data-lang="zh">BC PC12 课程详释（已在审计中交叉引用；完整提取待 Sprint 2 抓源）</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 1 (Grade 8-9)</strong></td>
-        <td style="padding: 8px 10px;">&sect;1, &sect;2, &sect;3, &sect;4, &sect;5 substitution; &sect;6 modeling</td>
-        <td style="padding: 8px 10px;">&sect;5 elimination justification; &sect;7 (sits at the STEM-track <em>+</em> level)</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  HSF-LE.A.1/A.2/B.5, HSF-IF.B.6, HSA-REI.B.3, HSA-REI.C.5/C.6, HSA-REI.D.10/D.11</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Algebra 1 (Grade 8-9)</span><span data-lang="zh">美国 Algebra 1（8-9 年级）</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1, &sect;2, &sect;3, &sect;4, &sect;5 substitution; &sect;6 modeling</span><span data-lang="zh">&sect;1、&sect;2、&sect;3、&sect;4、&sect;5（代入法）、&sect;6（建模）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5 elimination justification; &sect;7 (sits at the STEM-track <em>+</em> level)</span><span data-lang="zh">&sect;5 中的消元法证明；&sect;7（属 STEM 路径 <em>+</em> 级）</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  HSF-LE.A.1/A.2/B.5, HSF-IF.B.6, HSA-REI.B.3, HSA-REI.C.5/C.6, HSA-REI.D.10/D.11</span><span data-lang="zh">,  HSF-LE.A.1/A.2/B.5、HSF-IF.B.6、HSA-REI.B.3、HSA-REI.C.5/C.6、HSA-REI.D.10/D.11</span></td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; US Algebra 2 / Honors / Pre-Calc</strong></td>
-        <td style="padding: 8px 10px;">&sect;4-6 (deeper modeling + system justification); &sect;7 matrix row-reduction (STEM-track <em>+</em>)</td>
-        <td style="padding: 8px 10px;">Review &sect;1-3 only if you are rusty on slope mechanics</td>
-        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> ,  HSA-REI.C.5 (justification), HSA-REI.C.8 (+), HSA-REI.C.9 (+)</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Algebra 2 / Honors / Pre-Calc</span><span data-lang="zh">美国 Algebra 2 / 荣誉 / Pre-Calc</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;4-6 (deeper modeling + system justification); &sect;7 matrix row-reduction (STEM-track <em>+</em>)</span><span data-lang="zh">&sect;4-6（更深建模 + 方程组证明）；&sect;7 矩阵行简化（STEM 路径 <em>+</em>）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Review &sect;1-3 only if you are rusty on slope mechanics</span><span data-lang="zh">仅当斜率技法生疏时再复习 &sect;1-3</span></td>
+        <td style="padding: 8px 10px;"><code>ccssm_hs_math_extract.md</code> <span data-lang="en">,  HSA-REI.C.5 (justification), HSA-REI.C.8 (+), HSA-REI.C.9 (+)</span><span data-lang="zh">,  HSA-REI.C.5（证明）、HSA-REI.C.8 (+)、HSA-REI.C.9 (+)</span></td>
       </tr>
       <tr>
-        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; SAT / AP Calc bound</strong></td>
-        <td style="padding: 8px 10px;">All sections, then move to AP Calc Unit 1 (limits) and IB Math HL B1 (linear-to-linear functions)</td>
-        <td style="padding: 8px 10px;">Nothing ,  you want fluent recall on slope, all three forms, and the geometric meaning of "no solution" / "infinitely many"</td>
-        <td style="padding: 8px 10px;">See <em>What this feeds into</em> at the end of this unit for the cross-references</td>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">SAT / AP Calc bound</span><span data-lang="zh">备考 SAT / AP Calc</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">All sections, then move to AP Calc Unit 1 (limits) and IB Math HL B1 (linear-to-linear functions)</span><span data-lang="zh">全部章节学完，再进入 AP Calc Unit 1（极限）与 IB Math HL B1（线性到线性的函数）</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing ,  you want fluent recall on slope, all three forms, and the geometric meaning of "no solution" / "infinitely many"</span><span data-lang="zh">无 ,  斜率、三种形式以及"无解 / 无穷多解"的几何意义都需熟练记忆</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">See <em>What this feeds into</em> at the end of this unit for the cross-references</span><span data-lang="zh">交叉引用见本单元末尾的<em>后续单元</em>章节</span></td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <p style="margin-top: 12px;">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</p>
+  <p style="margin-top: 12px;"><span data-lang="en">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</span><span data-lang="zh">找到所在行后，用下面两张卡片决定推进速度。</span></p>
 
   <div class="two-col">
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title">If you are cramming the night before</div></div>
-      <p style="font-size: 0.95rem;">Memorise four formulas: slope $m = (y_{2} - y_{1})/(x_{2} - x_{1})$; point-slope $y - y_{1} = m(x - x_{1})$; slope-intercept $y = mx + b$; perpendicular slopes multiply to $-1$. Be able to solve a 2-by-2 system by substitution and by elimination, and know what "no solution" and "infinitely many solutions" mean geometrically. Read every cram-cheat box at the top of each section in your row.</p>
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise four formulas: slope $m = (y_{2} - y_{1})/(x_{2} - x_{1})$; point-slope $y - y_{1} = m(x - x_{1})$; slope-intercept $y = mx + b$; perpendicular slopes multiply to $-1$. Be able to solve a 2-by-2 system by substitution and by elimination, and know what "no solution" and "infinitely many solutions" mean geometrically. Read every cram-cheat box at the top of each section in your row.</span><span data-lang="zh">背熟四条公式：斜率 $m = (y_{2} - y_{1})/(x_{2} - x_{1})$；点斜式 $y - y_{1} = m(x - x_{1})$；斜截式 $y = mx + b$；垂直直线斜率乘积为 $-1$。能用代入法与消元法解二元一次方程组，并清楚"无解"与"无穷多解"的几何含义。每节顶端的速记框都要读。</span></p>
     </div>
     <div class="card">
-      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title">If you are going for the top mark</div></div>
-      <p style="font-size: 0.95rem;">Always state the units of slope in a modeling context (dollars per hour, metres per second). Always justify whether a system has one, none, or infinitely many solutions <em>before</em> computing. Practise the honors row-reduction technique in &sect;7 if your row above includes it: it carries forward to IB Math HL A5 and any first-year linear-algebra course.</p>
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Always state the units of slope in a modeling context (dollars per hour, metres per second). Always justify whether a system has one, none, or infinitely many solutions <em>before</em> computing. Practise the honors row-reduction technique in &sect;7 if your row above includes it: it carries forward to IB Math HL A5 and any first-year linear-algebra course.</span><span data-lang="zh">建模题中务必写出斜率的单位（美元/小时、米/秒）。计算<em>之前</em>先判断方程组是一解、无解还是无穷多解。若你的行包含 &sect;7，反复练习矩阵行简化 ,  它直接对接 IB Math HL A5 与任何大一线性代数课。</span></p>
     </div>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Honors flag.</strong>
-    Section 7 (matrix row-reduction) carries the <span class="honors-flag">Honors</span> chip. It is the focus for BC PC12 and the matrix-fluent path through ON MCV4U; in US Common Core it sits at the STEM-track <em>+</em> level (<code>HSA-REI.C.8</code>, <code>HSA-REI.C.9</code>). If your row above sends you to &sect;7, work through it carefully. If not, skip it cleanly.
+    <strong style="color: var(--purple);"><span data-lang="en">Honors flag.</span><span data-lang="zh">荣誉级标记。</span></strong>
+    <span data-lang="en">Section 7 (matrix row-reduction) carries the <span class="honors-flag">Honors</span> chip. It is the focus for BC PC12 and the matrix-fluent path through ON MCV4U; in US Common Core it sits at the STEM-track <em>+</em> level (<code>HSA-REI.C.8</code>, <code>HSA-REI.C.9</code>). If your row above sends you to &sect;7, work through it carefully. If not, skip it cleanly.</span><span data-lang="zh">第 7 节（矩阵行简化）标有 <span class="honors-flag">Honors</span>。它是 BC PC12 的重点，也是安大略 MCV4U 矩阵路径的核心；在美国共同核心里属于 STEM 路径 <em>+</em> 级（<code>HSA-REI.C.8</code>、<code>HSA-REI.C.9</code>）。若你的行指向 &sect;7，请扎实学完；若不在你的行内，可干净跳过。</span>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-1">
-  <div class="section-label">Section 1 &middot; Slope</div>
-  <h2>Slope and Rate of Change</h2>
+  <div class="section-label"><span data-lang="en">Section 1 &middot; Slope</span><span data-lang="zh">第 1 节 &middot; 斜率</span></div>
+  <h2><span data-lang="en">Slope and Rate of Change</span><span data-lang="zh">斜率与变化率</span></h2>
 
   <div class="cram-cheat">
-    <strong>Slope formula.</strong> For two points $(x_{1}, y_{1})$ and $(x_{2}, y_{2})$ on a line,
+    <strong><span data-lang="en">Slope formula.</span><span data-lang="zh">斜率公式。</span></strong> <span data-lang="en">For two points $(x_{1}, y_{1})$ and $(x_{2}, y_{2})$ on a line,</span><span data-lang="zh">对直线上的两点 $(x_{1}, y_{1})$ 与 $(x_{2}, y_{2})$，</span>
     $$ m \;=\; \frac{y_{2} - y_{1}}{x_{2} - x_{1}} \qquad (x_{1} \ne x_{2}). $$
-    <strong>The four cases.</strong>
+    <strong><span data-lang="en">The four cases.</span><span data-lang="zh">四种情形。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Positive slope.</strong> Line rises from left to right.</li>
-      <li><strong>Negative slope.</strong> Line falls from left to right.</li>
-      <li><strong>Zero slope.</strong> Horizontal line $y = b$.</li>
-      <li><strong>Undefined slope.</strong> Vertical line $x = a$; the formula divides by zero.</li>
+      <li><strong><span data-lang="en">Positive slope.</span><span data-lang="zh">正斜率。</span></strong> <span data-lang="en">Line rises from left to right.</span><span data-lang="zh">直线自左向右上升。</span></li>
+      <li><strong><span data-lang="en">Negative slope.</span><span data-lang="zh">负斜率。</span></strong> <span data-lang="en">Line falls from left to right.</span><span data-lang="zh">直线自左向右下降。</span></li>
+      <li><strong><span data-lang="en">Zero slope.</span><span data-lang="zh">零斜率。</span></strong> <span data-lang="en">Horizontal line $y = b$.</span><span data-lang="zh">水平线 $y = b$。</span></li>
+      <li><strong><span data-lang="en">Undefined slope.</span><span data-lang="zh">斜率不存在。</span></strong> <span data-lang="en">Vertical line $x = a$; the formula divides by zero.</span><span data-lang="zh">竖直线 $x = a$；公式中分母为零。</span></li>
     </ul>
-    <strong>Parallel and perpendicular.</strong> Lines with slopes $m_{1}$ and $m_{2}$ are
+    <strong><span data-lang="en">Parallel and perpendicular.</span><span data-lang="zh">平行与垂直。</span></strong> <span data-lang="en">Lines with slopes $m_{1}$ and $m_{2}$ are</span><span data-lang="zh">斜率为 $m_{1}$ 与 $m_{2}$ 的两直线：</span>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>parallel if and only if $m_{1} = m_{2}$ (and they are not the same line),</li>
-      <li>perpendicular if and only if $m_{1} m_{2} = -1$ (and both slopes are defined).</li>
+      <li><span data-lang="en">parallel if and only if $m_{1} = m_{2}$ (and they are not the same line),</span><span data-lang="zh">平行当且仅当 $m_{1} = m_{2}$（且非同一直线），</span></li>
+      <li><span data-lang="en">perpendicular if and only if $m_{1} m_{2} = -1$ (and both slopes are defined).</span><span data-lang="zh">垂直当且仅当 $m_{1} m_{2} = -1$（两斜率均存在）。</span></li>
     </ul>
-    <strong>Slope as rate of change.</strong> In a modeling context, slope carries units: dollars per hour, metres per second, degrees per minute. Always state the units when interpreting a slope.
+    <strong><span data-lang="en">Slope as rate of change.</span><span data-lang="zh">斜率即变化率。</span></strong> <span data-lang="en">In a modeling context, slope carries units: dollars per hour, metres per second, degrees per minute. Always state the units when interpreting a slope.</span><span data-lang="zh">在建模情境中，斜率带有单位：美元/小时、米/秒、度/分钟。解释斜率时必须写出单位。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 1 &middot; Slope from two points and a unit interpretation</div>
-    <p>A rental scooter charges according to the linear model $C = 2.50 + 0.15 t$, where $C$ is the cost in dollars and $t$ is time in minutes. (a) Identify the slope and interpret it with units. (b) Find the slope of the segment between $(t, C) = (10, 4.00)$ and $(30, 7.00)$ and confirm it matches.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 1 &middot; Slope from two points and a unit interpretation</span><span data-lang="zh">例题 1 &middot; 由两点求斜率并作单位解释</span></div>
+    <p><span data-lang="en">A rental scooter charges according to the linear model $C = 2.50 + 0.15 t$, where $C$ is the cost in dollars and $t$ is time in minutes. (a) Identify the slope and interpret it with units. (b) Find the slope of the segment between $(t, C) = (10, 4.00)$ and $(30, 7.00)$ and confirm it matches.</span><span data-lang="zh">某共享滑板车按线性模型 $C = 2.50 + 0.15 t$ 计费，其中 $C$ 为费用（美元），$t$ 为时长（分钟）。(a) 写出斜率并解释其单位含义。(b) 求 $(t, C) = (10, 4.00)$ 与 $(30, 7.00)$ 两点连线的斜率并验证一致。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> The model is in slope-intercept form: $C = mt + b$ with $m = 0.15$ and $b = 2.50$.</p>
-    <p><strong>Interpret.</strong> The slope $m = 0.15$ has units of dollars per minute. Each additional minute of rental adds $\$0.15$ to the cost. The intercept $b = 2.50$ is the unlock fee (cost at $t = 0$).</p>
-    <p><strong>Confirm from two points.</strong></p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">The model is in slope-intercept form: $C = mt + b$ with $m = 0.15$ and $b = 2.50$.</span><span data-lang="zh">模型为斜截式 $C = mt + b$，其中 $m = 0.15$、$b = 2.50$。</span></p>
+    <p><strong><span data-lang="en">Interpret.</span><span data-lang="zh">解释。</span></strong> <span data-lang="en">The slope $m = 0.15$ has units of dollars per minute. Each additional minute of rental adds $\$0.15$ to the cost. The intercept $b = 2.50$ is the unlock fee (cost at $t = 0$).</span><span data-lang="zh">斜率 $m = 0.15$ 的单位为美元/分钟：每多骑 $1$ 分钟，费用增加 $\$0.15$。截距 $b = 2.50$ 是开锁费（$t = 0$ 时的费用）。</span></p>
+    <p><strong><span data-lang="en">Confirm from two points.</span><span data-lang="zh">由两点验证。</span></strong></p>
     $$ m \;=\; \frac{7.00 - 4.00}{30 - 10} \;=\; \frac{3.00}{20} \;=\; 0.15 \text{ dollars per minute}. $$
-    <p><strong>Evaluate.</strong> The numerical slope matches the model coefficient, confirming the linear fit.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">The numerical slope matches the model coefficient, confirming the linear fit.</span><span data-lang="zh">数值斜率与模型系数一致，验证了该线性拟合。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why slope is the same between any two points on a line</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why slope is the same between any two points on a line</span><span data-lang="zh">深入 &middot; 为何同一条直线上任意两点的斜率相同</span></summary>
     <div class="detail-body">
-      <p>Suppose $L$ is a non-vertical line in the plane, and pick any four points $P_{1} = (x_{1}, y_{1})$, $P_{2} = (x_{2}, y_{2})$, $P_{3} = (x_{3}, y_{3})$, $P_{4} = (x_{4}, y_{4})$ on $L$ with $x_{1} \ne x_{2}$ and $x_{3} \ne x_{4}$. Drop perpendiculars to the $x$-axis from $P_{1}, P_{2}$ and from $P_{3}, P_{4}$. The two resulting right triangles share the angle that $L$ makes with the horizontal, so they are similar by AA. Hence corresponding sides are proportional:</p>
+      <p><span data-lang="en">Suppose $L$ is a non-vertical line in the plane, and pick any four points $P_{1} = (x_{1}, y_{1})$, $P_{2} = (x_{2}, y_{2})$, $P_{3} = (x_{3}, y_{3})$, $P_{4} = (x_{4}, y_{4})$ on $L$ with $x_{1} \ne x_{2}$ and $x_{3} \ne x_{4}$. Drop perpendiculars to the $x$-axis from $P_{1}, P_{2}$ and from $P_{3}, P_{4}$. The two resulting right triangles share the angle that $L$ makes with the horizontal, so they are similar by AA. Hence corresponding sides are proportional:</span><span data-lang="zh">设 $L$ 是平面内一条非竖直直线，在 $L$ 上任取四点 $P_{1} = (x_{1}, y_{1})$、$P_{2} = (x_{2}, y_{2})$、$P_{3} = (x_{3}, y_{3})$、$P_{4} = (x_{4}, y_{4})$，且 $x_{1} \ne x_{2}$、$x_{3} \ne x_{4}$。分别从 $P_{1}, P_{2}$ 与 $P_{3}, P_{4}$ 向 $x$ 轴作垂线，得到两个直角三角形，它们共享 $L$ 与水平方向的夹角，因此由 AA 相似。故对应边成比例：</span></p>
       $$ \frac{y_{2} - y_{1}}{x_{2} - x_{1}} \;=\; \frac{y_{4} - y_{3}}{x_{4} - x_{3}}. $$
-      <p>That is, the slope formula returns the same value whichever pair of points we pick. This is why $m$ is well-defined as a property of the line, not of the chosen points. The argument also extends to negative differences and to the four sign cases; vertical lines fail because the limiting triangle has zero base and the ratio is undefined.</p>
+      <p><span data-lang="en">That is, the slope formula returns the same value whichever pair of points we pick. This is why $m$ is well-defined as a property of the line, not of the chosen points. The argument also extends to negative differences and to the four sign cases; vertical lines fail because the limiting triangle has zero base and the ratio is undefined.</span><span data-lang="zh">即斜率公式对任意两点取相同的值。这正是 $m$ 作为直线属性（而非所选点的属性）良定义的原因。该论证同样适用于差为负的情形与四种符号情形；竖直线则因极限三角形底为零、比值不存在而失效。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">A line passes through $(-2, 5)$ and $(3, -5)$. Find its slope.</div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A line passes through $(-2, 5)$ and $(3, -5)$. Find its slope.</span><span data-lang="zh">一条直线过点 $(-2, 5)$ 与 $(3, -5)$。求其斜率。</span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$2$</div>
       <div class="quiz-opt" data-idx="1">$-\tfrac{1}{2}$</div>
       <div class="quiz-opt" data-idx="2">$-2$</div>
       <div class="quiz-opt" data-idx="3">$\tfrac{1}{2}$</div>
     </div>
-    <div class="quiz-explain correct-exp">$m = (-5 - 5) / (3 - (-2)) = -10 / 5 = -2$.</div>
-    <div class="quiz-explain wrong-exp">Apply the slope formula carefully: $m = (y_{2} - y_{1})/(x_{2} - x_{1}) = (-5 - 5)/(3 - (-2)) = -10/5 = -2$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$m = (-5 - 5) / (3 - (-2)) = -10 / 5 = -2$.</span><span data-lang="zh">$m = (-5 - 5) / (3 - (-2)) = -10 / 5 = -2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Apply the slope formula carefully: $m = (y_{2} - y_{1})/(x_{2} - x_{1}) = (-5 - 5)/(3 - (-2)) = -10/5 = -2$.</span><span data-lang="zh">小心套用斜率公式：$m = (y_{2} - y_{1})/(x_{2} - x_{1}) = (-5 - 5)/(3 - (-2)) = -10/5 = -2$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">A storage tank loses water at a constant rate. After $2$ hours it holds $86$ litres; after $5$ hours it holds $50$ litres. State the slope with units.</div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A storage tank loses water at a constant rate. After $2$ hours it holds $86$ litres; after $5$ hours it holds $50$ litres. State the slope with units.</span><span data-lang="zh">一个储水罐以恒定速率漏水。$2$ 小时后罐中有 $86$ 升，$5$ 小时后有 $50$ 升。写出斜率及其单位。</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">$12$ litres per hour</div>
-      <div class="quiz-opt" data-idx="1">$-12$ litres per hour</div>
-      <div class="quiz-opt" data-idx="2">$-\tfrac{1}{12}$ hours per litre</div>
-      <div class="quiz-opt" data-idx="3">$12$ hours per litre</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">$12$ litres per hour</span><span data-lang="zh">$12$ 升/小时</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$-12$ litres per hour</span><span data-lang="zh">$-12$ 升/小时</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">$-\tfrac{1}{12}$ hours per litre</span><span data-lang="zh">$-\tfrac{1}{12}$ 小时/升</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">$12$ hours per litre</span><span data-lang="zh">$12$ 小时/升</span></div>
     </div>
-    <div class="quiz-explain correct-exp">$m = (50 - 86)/(5 - 2) = -36/3 = -12$ litres per hour. The negative sign records the loss.</div>
-    <div class="quiz-explain wrong-exp">The variable $V$ (litres) is on the vertical axis and $t$ (hours) on the horizontal, so the slope has units of litres per hour. Because $V$ is decreasing, the slope is negative.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$m = (50 - 86)/(5 - 2) = -36/3 = -12$ litres per hour. The negative sign records the loss.</span><span data-lang="zh">$m = (50 - 86)/(5 - 2) = -36/3 = -12$ 升/小时。负号表示漏失。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The variable $V$ (litres) is on the vertical axis and $t$ (hours) on the horizontal, so the slope has units of litres per hour. Because $V$ is decreasing, the slope is negative.</span><span data-lang="zh">$V$（升）为纵轴变量、$t$（小时）为横轴变量，故斜率单位为升/小时。因 $V$ 递减，斜率为负。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-2">
-  <div class="section-label">Section 2 &middot; Three Forms</div>
-  <h2>Forms of a Linear Equation</h2>
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Three Forms</span><span data-lang="zh">第 2 节 &middot; 三种形式</span></div>
+  <h2><span data-lang="en">Forms of a Linear Equation</span><span data-lang="zh">一元一次方程的三种形式</span></h2>
 
   <div class="cram-cheat">
-    <strong>The three forms.</strong>
+    <strong><span data-lang="en">The three forms.</span><span data-lang="zh">三种形式。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Slope-intercept:</strong> $y = m x + b$. Use when you can read or want to report the $y$-intercept.</li>
-      <li><strong>Point-slope:</strong> $y - y_{1} = m (x - x_{1})$. Use when you have a point and a slope.</li>
-      <li><strong>Standard (general):</strong> $A x + B y = C$ (or $A x + B y + C = 0$). Use when you want integer coefficients, or when the line is vertical ($B = 0$).</li>
+      <li><strong><span data-lang="en">Slope-intercept:</span><span data-lang="zh">斜截式：</span></strong> <span data-lang="en">$y = m x + b$. Use when you can read or want to report the $y$-intercept.</span><span data-lang="zh">$y = m x + b$。当能直接读出或想要写出 $y$ 截距时使用。</span></li>
+      <li><strong><span data-lang="en">Point-slope:</span><span data-lang="zh">点斜式：</span></strong> <span data-lang="en">$y - y_{1} = m (x - x_{1})$. Use when you have a point and a slope.</span><span data-lang="zh">$y - y_{1} = m (x - x_{1})$。已知一点和斜率时使用。</span></li>
+      <li><strong><span data-lang="en">Standard (general):</span><span data-lang="zh">标准式（一般式）：</span></strong> <span data-lang="en">$A x + B y = C$ (or $A x + B y + C = 0$). Use when you want integer coefficients, or when the line is vertical ($B = 0$).</span><span data-lang="zh">$A x + B y = C$（或 $A x + B y + C = 0$）。当需要整数系数、或直线竖直（$B = 0$）时使用。</span></li>
     </ul>
-    <strong>Conversions.</strong> All three describe the same line; you should be able to move between them in two algebra steps.
+    <strong><span data-lang="en">Conversions.</span><span data-lang="zh">互化。</span></strong> <span data-lang="en">All three describe the same line; you should be able to move between them in two algebra steps.</span><span data-lang="zh">三种形式描述同一条直线；应能在两步代数内互相转换。</span>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>Slope-intercept to standard: clear the $b$ to the right; collect $x$ and $y$ on the left.</li>
-      <li>Standard to slope-intercept: solve for $y$.</li>
-      <li>Point-slope to slope-intercept: distribute the $m$ and add $y_{1}$.</li>
+      <li><span data-lang="en">Slope-intercept to standard: clear the $b$ to the right; collect $x$ and $y$ on the left.</span><span data-lang="zh">斜截式 → 标准式：把 $b$ 移到右边，$x$、$y$ 项归并到左边。</span></li>
+      <li><span data-lang="en">Standard to slope-intercept: solve for $y$.</span><span data-lang="zh">标准式 → 斜截式：解出 $y$。</span></li>
+      <li><span data-lang="en">Point-slope to slope-intercept: distribute the $m$ and add $y_{1}$.</span><span data-lang="zh">点斜式 → 斜截式：展开 $m$ 项并加上 $y_{1}$。</span></li>
     </ul>
-    <strong>Vertical and horizontal lines.</strong> $x = a$ is vertical (slope undefined). $y = b$ is horizontal (slope zero).
+    <strong><span data-lang="en">Vertical and horizontal lines.</span><span data-lang="zh">竖直线与水平线。</span></strong> <span data-lang="en">$x = a$ is vertical (slope undefined). $y = b$ is horizontal (slope zero).</span><span data-lang="zh">$x = a$ 为竖直线（斜率不存在）；$y = b$ 为水平线（斜率为零）。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 2 &middot; Move between all three forms</div>
-    <p>The line $L$ passes through $(2, -1)$ with slope $-\tfrac{3}{4}$. Write its equation in (a) point-slope form, (b) slope-intercept form, (c) standard form with integer coefficients.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 2 &middot; Move between all three forms</span><span data-lang="zh">例题 2 &middot; 三种形式间互化</span></div>
+    <p><span data-lang="en">The line $L$ passes through $(2, -1)$ with slope $-\tfrac{3}{4}$. Write its equation in (a) point-slope form, (b) slope-intercept form, (c) standard form with integer coefficients.</span><span data-lang="zh">直线 $L$ 过 $(2, -1)$，斜率 $-\tfrac{3}{4}$。分别用 (a) 点斜式、(b) 斜截式、(c) 整系数标准式写出其方程。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>(a) Point-slope.</strong> Substitute directly:</p>
+    <p><strong><span data-lang="en">(a) Point-slope.</span><span data-lang="zh">(a) 点斜式。</span></strong> <span data-lang="en">Substitute directly:</span><span data-lang="zh">直接代入：</span></p>
     $$ y - (-1) \;=\; -\tfrac{3}{4} (x - 2), \qquad \text{i.e.} \qquad y + 1 \;=\; -\tfrac{3}{4}(x - 2). $$
-    <p><strong>(b) Slope-intercept.</strong> Distribute and isolate $y$:</p>
+    <p><strong><span data-lang="en">(b) Slope-intercept.</span><span data-lang="zh">(b) 斜截式。</span></strong> <span data-lang="en">Distribute and isolate $y$:</span><span data-lang="zh">展开并解出 $y$：</span></p>
     $$ y \;=\; -\tfrac{3}{4} x + \tfrac{3}{2} - 1 \;=\; -\tfrac{3}{4} x + \tfrac{1}{2}. $$
-    <p><strong>(c) Standard form.</strong> Multiply by $4$ to clear fractions, then move $x$ to the left:</p>
+    <p><strong><span data-lang="en">(c) Standard form.</span><span data-lang="zh">(c) 标准式。</span></strong> <span data-lang="en">Multiply by $4$ to clear fractions, then move $x$ to the left:</span><span data-lang="zh">两边乘 $4$ 去分母，再把 $x$ 移到左边：</span></p>
     $$ 4y \;=\; -3x + 2 \quad\Longrightarrow\quad 3x + 4y \;=\; 2. $$
-    <p><strong>Evaluate.</strong> Check that the point $(2, -1)$ satisfies the standard form: $3(2) + 4(-1) = 6 - 4 = 2$. Confirmed.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">Check that the point $(2, -1)$ satisfies the standard form: $3(2) + 4(-1) = 6 - 4 = 2$. Confirmed.</span><span data-lang="zh">验证点 $(2, -1)$ 满足标准式：$3(2) + 4(-1) = 6 - 4 = 2$。通过。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why standard form $A x + B y = C$ handles vertical lines</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why standard form $A x + B y = C$ handles vertical lines</span><span data-lang="zh">深入 &middot; 为何标准式 $A x + B y = C$ 能处理竖直线</span></summary>
     <div class="detail-body">
-      <p>Slope-intercept form $y = mx + b$ cannot represent a vertical line because a vertical line has undefined slope. Standard form $A x + B y = C$ avoids the problem by parametrising the line through its direction vector $(B, -A)$ rather than through a slope: any non-zero choice of $(A, B)$ picks out a unique line direction. When $B = 0$ and $A \ne 0$, we recover the vertical line $x = C/A$; when $A = 0$ and $B \ne 0$, the horizontal line $y = C/B$. This unified treatment is why textbooks introduce standard form even though slope-intercept is computationally lighter.</p>
+      <p><span data-lang="en">Slope-intercept form $y = mx + b$ cannot represent a vertical line because a vertical line has undefined slope. Standard form $A x + B y = C$ avoids the problem by parametrising the line through its direction vector $(B, -A)$ rather than through a slope: any non-zero choice of $(A, B)$ picks out a unique line direction. When $B = 0$ and $A \ne 0$, we recover the vertical line $x = C/A$; when $A = 0$ and $B \ne 0$, the horizontal line $y = C/B$. This unified treatment is why textbooks introduce standard form even though slope-intercept is computationally lighter.</span><span data-lang="zh">斜截式 $y = mx + b$ 无法表示竖直线，因为竖直线的斜率不存在。标准式 $A x + B y = C$ 改用方向向量 $(B, -A)$ 参数化直线而非用斜率：只要 $(A, B)$ 不全为零，就唯一确定一条直线方向。当 $B = 0$、$A \ne 0$ 时即得竖直线 $x = C/A$；当 $A = 0$、$B \ne 0$ 时得水平线 $y = C/B$。这种统一处理正是教科书引入标准式的原因，尽管斜截式在计算上更轻巧。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">Write $5x - 2y = 8$ in slope-intercept form.</div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Write $5x - 2y = 8$ in slope-intercept form.</span><span data-lang="zh">将 $5x - 2y = 8$ 改写为斜截式。</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = \tfrac{5}{2} x - 4$</div>
       <div class="quiz-opt" data-idx="1">$y = 5x - 4$</div>
       <div class="quiz-opt" data-idx="2">$y = -\tfrac{5}{2} x + 4$</div>
       <div class="quiz-opt" data-idx="3">$y = \tfrac{2}{5} x - \tfrac{8}{5}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Solve for $y$: $-2y = -5x + 8$, so $y = \tfrac{5}{2} x - 4$.</div>
-    <div class="quiz-explain wrong-exp">Subtract $5x$ from both sides, then divide by $-2$. The signs flip twice and the slope is $5/2$, not $5$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Solve for $y$: $-2y = -5x + 8$, so $y = \tfrac{5}{2} x - 4$.</span><span data-lang="zh">解出 $y$：$-2y = -5x + 8$，故 $y = \tfrac{5}{2} x - 4$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Subtract $5x$ from both sides, then divide by $-2$. The signs flip twice and the slope is $5/2$, not $5$.</span><span data-lang="zh">两边减 $5x$ 再除以 $-2$。符号翻转两次，斜率为 $5/2$ 而非 $5$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Which equation describes a vertical line through $(4, -7)$?</div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which equation describes a vertical line through $(4, -7)$?</span><span data-lang="zh">下列哪个方程表示过 $(4, -7)$ 的竖直线？</span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = -7$</div>
       <div class="quiz-opt" data-idx="1">$y = 4$</div>
       <div class="quiz-opt" data-idx="2">$x = 4$</div>
       <div class="quiz-opt" data-idx="3">$x = -7$</div>
     </div>
-    <div class="quiz-explain correct-exp">A vertical line has the form $x = a$; the constant is the $x$-coordinate of any point on the line, $4$.</div>
-    <div class="quiz-explain wrong-exp">Vertical lines fix $x$. Horizontal lines fix $y$. Read the $x$-coordinate of the given point.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A vertical line has the form $x = a$; the constant is the $x$-coordinate of any point on the line, $4$.</span><span data-lang="zh">竖直线形如 $x = a$；常数即直线上任一点的 $x$ 坐标 $4$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Vertical lines fix $x$. Horizontal lines fix $y$. Read the $x$-coordinate of the given point.</span><span data-lang="zh">竖直线固定 $x$，水平线固定 $y$。读出给定点的 $x$ 坐标即可。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-3">
-  <div class="section-label">Section 3 &middot; Graphing</div>
-  <h2>Graphing Linear Functions</h2>
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Graphing</span><span data-lang="zh">第 3 节 &middot; 作图</span></div>
+  <h2><span data-lang="en">Graphing Linear Functions</span><span data-lang="zh">作一次函数图像</span></h2>
 
   <div class="cram-cheat">
-    <strong>Two reliable techniques.</strong>
+    <strong><span data-lang="en">Two reliable techniques.</span><span data-lang="zh">两种可靠技法。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Intercepts method.</strong> Find the $y$-intercept by setting $x = 0$ and the $x$-intercept by setting $y = 0$. Plot both and draw the line. Fails on lines through the origin and on lines parallel to an axis.</li>
-      <li><strong>Slope-intercept method.</strong> Plot the $y$-intercept $(0, b)$. From there, use the slope as a "rise over run" to step to a second point. For $m = 3/4$, go $4$ right and $3$ up. For $m = -2 = -2/1$, go $1$ right and $2$ down.</li>
+      <li><strong><span data-lang="en">Intercepts method.</span><span data-lang="zh">截距法。</span></strong> <span data-lang="en">Find the $y$-intercept by setting $x = 0$ and the $x$-intercept by setting $y = 0$. Plot both and draw the line. Fails on lines through the origin and on lines parallel to an axis.</span><span data-lang="zh">令 $x = 0$ 求 $y$ 截距，令 $y = 0$ 求 $x$ 截距。画出两点连线。对过原点或与坐标轴平行的直线失效。</span></li>
+      <li><strong><span data-lang="en">Slope-intercept method.</span><span data-lang="zh">斜截法。</span></strong> <span data-lang="en">Plot the $y$-intercept $(0, b)$. From there, use the slope as a "rise over run" to step to a second point. For $m = 3/4$, go $4$ right and $3$ up. For $m = -2 = -2/1$, go $1$ right and $2$ down.</span><span data-lang="zh">先画 $y$ 截距 $(0, b)$；再以斜率作"上升 / 平移"步进到下一点。$m = 3/4$：右 $4$ 上 $3$；$m = -2 = -2/1$：右 $1$ 下 $2$。</span></li>
     </ul>
-    <strong>Reading $m$ and $b$ from a graph.</strong> The $y$-intercept is the $y$-coordinate where the line crosses the vertical axis. The slope is rise-over-run between any two clearly-marked lattice points.
+    <strong><span data-lang="en">Reading $m$ and $b$ from a graph.</span><span data-lang="zh">从图象读出 $m$ 与 $b$。</span></strong> <span data-lang="en">The $y$-intercept is the $y$-coordinate where the line crosses the vertical axis. The slope is rise-over-run between any two clearly-marked lattice points.</span><span data-lang="zh">$y$ 截距是直线与纵轴交点的 $y$ 坐标；斜率为任意两个清晰格点间的上升/平移之比。</span>
     <br><br>
-    <strong>Gradient triangle.</strong> Drawing a right-triangle "$\Delta$" beneath any segment of the line, with horizontal leg $\Delta x$ and vertical leg $\Delta y$, makes the slope visible: $m = \Delta y / \Delta x$.
+    <strong><span data-lang="en">Gradient triangle.</span><span data-lang="zh">坡度三角形。</span></strong> <span data-lang="en">Drawing a right-triangle "$\Delta$" beneath any segment of the line, with horizontal leg $\Delta x$ and vertical leg $\Delta y$, makes the slope visible: $m = \Delta y / \Delta x$.</span><span data-lang="zh">在直线段下方画一个直角三角形"$\Delta$"，水平直角边 $\Delta x$、竖直直角边 $\Delta y$，斜率即可视化为 $m = \Delta y / \Delta x$。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 3 &middot; Graph from an equation, then read it back</div>
-    <p>Graph $y = -\tfrac{2}{3} x + 4$, then state two lattice points on the line that confirm the slope.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 3 &middot; Graph from an equation, then read it back</span><span data-lang="zh">例题 3 &middot; 由方程作图并反向读取</span></div>
+    <p><span data-lang="en">Graph $y = -\tfrac{2}{3} x + 4$, then state two lattice points on the line that confirm the slope.</span><span data-lang="zh">作 $y = -\tfrac{2}{3} x + 4$ 的图象，并指出直线上能验证斜率的两个格点。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> Slope $m = -\tfrac{2}{3}$, $y$-intercept $b = 4$.</p>
-    <p><strong>Set up.</strong> Plot $(0, 4)$. From there, slope $-2/3$ means "down $2$ for every $3$ right." Step to $(3, 2)$, then to $(6, 0)$ (the $x$-intercept), then to $(9, -2)$.</p>
-    <p><strong>Execute.</strong> Connect the points with a straight line. Two clean lattice points on the line are $(0, 4)$ and $(6, 0)$.</p>
-    <p><strong>Evaluate.</strong> Confirm the slope from the two lattice points:</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">Slope $m = -\tfrac{2}{3}$, $y$-intercept $b = 4$.</span><span data-lang="zh">斜率 $m = -\tfrac{2}{3}$，$y$ 截距 $b = 4$。</span></p>
+    <p><strong><span data-lang="en">Set up.</span><span data-lang="zh">作图。</span></strong> <span data-lang="en">Plot $(0, 4)$. From there, slope $-2/3$ means "down $2$ for every $3$ right." Step to $(3, 2)$, then to $(6, 0)$ (the $x$-intercept), then to $(9, -2)$.</span><span data-lang="zh">先画 $(0, 4)$。斜率 $-2/3$ 表示"每右 $3$ 单位下降 $2$ 单位"。依次走到 $(3, 2)$、$(6, 0)$（$x$ 截距）、$(9, -2)$。</span></p>
+    <p><strong><span data-lang="en">Execute.</span><span data-lang="zh">执行。</span></strong> <span data-lang="en">Connect the points with a straight line. Two clean lattice points on the line are $(0, 4)$ and $(6, 0)$.</span><span data-lang="zh">用直线连接各点。两个清晰格点为 $(0, 4)$ 与 $(6, 0)$。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">Confirm the slope from the two lattice points:</span><span data-lang="zh">由两格点验证斜率：</span></p>
     $$ m \;=\; \frac{0 - 4}{6 - 0} \;=\; -\tfrac{2}{3}. \quad \checkmark $$
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why the slope-intercept and intercepts methods agree</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why the slope-intercept and intercepts methods agree</span><span data-lang="zh">深入 &middot; 为何斜截法与截距法画出同一条直线</span></summary>
     <div class="detail-body">
-      <p>Suppose a line has slope $m \ne 0$ and $y$-intercept $b \ne 0$. The $y$-intercept is $(0, b)$ by definition. To find the $x$-intercept, set $y = 0$ in $y = mx + b$: $0 = mx + b$, so $x = -b/m$. The slope between $(0, b)$ and $(-b/m, 0)$ is</p>
+      <p><span data-lang="en">Suppose a line has slope $m \ne 0$ and $y$-intercept $b \ne 0$. The $y$-intercept is $(0, b)$ by definition. To find the $x$-intercept, set $y = 0$ in $y = mx + b$: $0 = mx + b$, so $x = -b/m$. The slope between $(0, b)$ and $(-b/m, 0)$ is</span><span data-lang="zh">设直线斜率 $m \ne 0$、$y$ 截距 $b \ne 0$。按定义 $y$ 截距为 $(0, b)$。令 $y = mx + b$ 中 $y = 0$，得 $x = -b/m$，即 $x$ 截距。$(0, b)$ 与 $(-b/m, 0)$ 间的斜率为</span></p>
       $$ \frac{0 - b}{-b/m - 0} \;=\; \frac{-b}{-b/m} \;=\; m, $$
-      <p>which is the same $m$ the slope-intercept form encodes. The two graphing methods produce the same line because the intercepts are derivable from $(m, b)$ and vice versa.</p>
+      <p><span data-lang="en">which is the same $m$ the slope-intercept form encodes. The two graphing methods produce the same line because the intercepts are derivable from $(m, b)$ and vice versa.</span><span data-lang="zh">即与斜截式中的 $m$ 相同。因为截距可由 $(m, b)$ 推出，反之亦然，所以两种作图法画出同一条直线。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">A line crosses the $x$-axis at $(-3, 0)$ and the $y$-axis at $(0, 6)$. Find its slope-intercept equation.</div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A line crosses the $x$-axis at $(-3, 0)$ and the $y$-axis at $(0, 6)$. Find its slope-intercept equation.</span><span data-lang="zh">直线交 $x$ 轴于 $(-3, 0)$，交 $y$ 轴于 $(0, 6)$。求其斜截式方程。</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = -2x + 6$</div>
       <div class="quiz-opt" data-idx="1">$y = 2x + 6$</div>
       <div class="quiz-opt" data-idx="2">$y = \tfrac{1}{2} x + 6$</div>
       <div class="quiz-opt" data-idx="3">$y = 6x - 3$</div>
     </div>
-    <div class="quiz-explain correct-exp">$m = (6 - 0)/(0 - (-3)) = 6/3 = 2$ and $b = 6$, so $y = 2x + 6$.</div>
-    <div class="quiz-explain wrong-exp">Slope is rise over run between the two intercept points: $(6 - 0)/(0 - (-3)) = 2$. Then read the $y$-intercept directly.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">$m = (6 - 0)/(0 - (-3)) = 6/3 = 2$ and $b = 6$, so $y = 2x + 6$.</span><span data-lang="zh">$m = (6 - 0)/(0 - (-3)) = 6/3 = 2$，$b = 6$，故 $y = 2x + 6$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Slope is rise over run between the two intercept points: $(6 - 0)/(0 - (-3)) = 2$. Then read the $y$-intercept directly.</span><span data-lang="zh">斜率即两截距点间的上升/平移：$(6 - 0)/(0 - (-3)) = 2$。$y$ 截距直接读取。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-4">
-  <div class="section-label">Section 4 &middot; Writing equations</div>
-  <h2>Writing Equations from Descriptions</h2>
+  <div class="section-label"><span data-lang="en">Section 4 &middot; Writing equations</span><span data-lang="zh">第 4 节 &middot; 写出方程</span></div>
+  <h2><span data-lang="en">Writing Equations from Descriptions</span><span data-lang="zh">由描述写出方程</span></h2>
 
   <div class="cram-cheat">
-    <strong>Decision tree.</strong>
+    <strong><span data-lang="en">Decision tree.</span><span data-lang="zh">决策树。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Two points given.</strong> Compute slope, then use point-slope with either point.</li>
-      <li><strong>Point and slope given.</strong> Use point-slope directly.</li>
-      <li><strong>Parallel to a given line through a point.</strong> Read the slope of the given line; use the same slope in point-slope.</li>
-      <li><strong>Perpendicular to a given line through a point.</strong> Read the slope; take its negative reciprocal; use point-slope.</li>
-      <li><strong>From a table.</strong> Use two rows to compute slope; substitute one row into point-slope.</li>
-      <li><strong>From a word problem.</strong> Identify the rate (slope) and a starting value or anchor point (intercept or point). Write in the form that matches what you found.</li>
+      <li><strong><span data-lang="en">Two points given.</span><span data-lang="zh">已知两点。</span></strong> <span data-lang="en">Compute slope, then use point-slope with either point.</span><span data-lang="zh">先算斜率，再用任一点代入点斜式。</span></li>
+      <li><strong><span data-lang="en">Point and slope given.</span><span data-lang="zh">已知一点与斜率。</span></strong> <span data-lang="en">Use point-slope directly.</span><span data-lang="zh">直接套点斜式。</span></li>
+      <li><strong><span data-lang="en">Parallel to a given line through a point.</span><span data-lang="zh">过一点且与已知直线平行。</span></strong> <span data-lang="en">Read the slope of the given line; use the same slope in point-slope.</span><span data-lang="zh">读出已知直线斜率，用相同斜率代入点斜式。</span></li>
+      <li><strong><span data-lang="en">Perpendicular to a given line through a point.</span><span data-lang="zh">过一点且与已知直线垂直。</span></strong> <span data-lang="en">Read the slope; take its negative reciprocal; use point-slope.</span><span data-lang="zh">读出斜率；取其负倒数；代入点斜式。</span></li>
+      <li><strong><span data-lang="en">From a table.</span><span data-lang="zh">由数值表。</span></strong> <span data-lang="en">Use two rows to compute slope; substitute one row into point-slope.</span><span data-lang="zh">用两行算斜率，再用其中一行代入点斜式。</span></li>
+      <li><strong><span data-lang="en">From a word problem.</span><span data-lang="zh">由文字题。</span></strong> <span data-lang="en">Identify the rate (slope) and a starting value or anchor point (intercept or point). Write in the form that matches what you found.</span><span data-lang="zh">先辨识速率（斜率）与起始值或锚点（截距或点），再选合适的形式写出。</span></li>
     </ol>
-    <strong>Convert to standard form</strong> only if the question asks for it; the work is the same line either way.
+    <strong><span data-lang="en">Convert to standard form</span><span data-lang="zh">仅在题目要求时</span></strong> <span data-lang="en">only if the question asks for it; the work is the same line either way.</span><span data-lang="zh">才转为标准式；同一条直线两种形式都正确。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 4 &middot; Line perpendicular to a given line through a point</div>
-    <p>Find the equation of the line through $(4, 1)$ perpendicular to $2x + 3y = 12$.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 4 &middot; Line perpendicular to a given line through a point</span><span data-lang="zh">例题 4 &middot; 过一点作已知直线的垂线</span></div>
+    <p><span data-lang="en">Find the equation of the line through $(4, 1)$ perpendicular to $2x + 3y = 12$.</span><span data-lang="zh">求过 $(4, 1)$ 且与 $2x + 3y = 12$ 垂直的直线方程。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> Solve the given line for $y$: $3y = -2x + 12$, so $y = -\tfrac{2}{3} x + 4$. The given slope is $m_{1} = -\tfrac{2}{3}$.</p>
-    <p><strong>Set up.</strong> The perpendicular slope is the negative reciprocal: $m_{2} = -1/m_{1} = \tfrac{3}{2}$.</p>
-    <p><strong>Execute.</strong> Apply point-slope through $(4, 1)$:</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">Solve the given line for $y$: $3y = -2x + 12$, so $y = -\tfrac{2}{3} x + 4$. The given slope is $m_{1} = -\tfrac{2}{3}$.</span><span data-lang="zh">把已知直线解出 $y$：$3y = -2x + 12$，故 $y = -\tfrac{2}{3} x + 4$。已知斜率 $m_{1} = -\tfrac{2}{3}$。</span></p>
+    <p><strong><span data-lang="en">Set up.</span><span data-lang="zh">列式。</span></strong> <span data-lang="en">The perpendicular slope is the negative reciprocal: $m_{2} = -1/m_{1} = \tfrac{3}{2}$.</span><span data-lang="zh">垂直方向斜率为负倒数：$m_{2} = -1/m_{1} = \tfrac{3}{2}$。</span></p>
+    <p><strong><span data-lang="en">Execute.</span><span data-lang="zh">求解。</span></strong> <span data-lang="en">Apply point-slope through $(4, 1)$:</span><span data-lang="zh">以 $(4, 1)$ 套点斜式：</span></p>
     $$ y - 1 \;=\; \tfrac{3}{2}(x - 4) \quad\Longrightarrow\quad y \;=\; \tfrac{3}{2} x - 6 + 1 \;=\; \tfrac{3}{2} x - 5. $$
-    <p><strong>Evaluate.</strong> Verify the perpendicularity: $m_{1} m_{2} = (-\tfrac{2}{3})(\tfrac{3}{2}) = -1$. Confirmed.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">Verify the perpendicularity: $m_{1} m_{2} = (-\tfrac{2}{3})(\tfrac{3}{2}) = -1$. Confirmed.</span><span data-lang="zh">验证垂直关系：$m_{1} m_{2} = (-\tfrac{2}{3})(\tfrac{3}{2}) = -1$。通过。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why perpendicular slopes multiply to $-1$</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why perpendicular slopes multiply to $-1$</span><span data-lang="zh">深入 &middot; 为何垂直直线斜率乘积为 $-1$</span></summary>
     <div class="detail-body">
-      <p>Let $L_{1}$ and $L_{2}$ be two non-vertical lines making angles $\theta_{1}$ and $\theta_{2}$ with the positive $x$-axis, so $m_{i} = \tan \theta_{i}$. The lines are perpendicular if and only if $\theta_{2} = \theta_{1} + \pi/2$. Then</p>
+      <p><span data-lang="en">Let $L_{1}$ and $L_{2}$ be two non-vertical lines making angles $\theta_{1}$ and $\theta_{2}$ with the positive $x$-axis, so $m_{i} = \tan \theta_{i}$. The lines are perpendicular if and only if $\theta_{2} = \theta_{1} + \pi/2$. Then</span><span data-lang="zh">设两条非竖直直线 $L_{1}$、$L_{2}$ 与 $x$ 轴正方向的夹角分别为 $\theta_{1}$、$\theta_{2}$，故 $m_{i} = \tan \theta_{i}$。两直线垂直当且仅当 $\theta_{2} = \theta_{1} + \pi/2$。于是</span></p>
       $$ m_{2} \;=\; \tan\!\left(\theta_{1} + \tfrac{\pi}{2}\right) \;=\; -\cot \theta_{1} \;=\; -\frac{1}{\tan \theta_{1}} \;=\; -\frac{1}{m_{1}}, $$
-      <p>so $m_{1} m_{2} = -1$. The argument breaks if either line is vertical (one slope is undefined), in which case the perpendicular partner is horizontal and the rule is replaced with "horizontal and vertical lines are always perpendicular."</p>
+      <p><span data-lang="en">so $m_{1} m_{2} = -1$. The argument breaks if either line is vertical (one slope is undefined), in which case the perpendicular partner is horizontal and the rule is replaced with "horizontal and vertical lines are always perpendicular."</span><span data-lang="zh">故 $m_{1} m_{2} = -1$。若任一直线竖直（斜率不存在），论证失效；此时其垂线为水平线，规则改述为"水平线与竖直线恒垂直"。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Find the equation of the line through $(1, -2)$ parallel to $y = -3x + 7$.</div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Find the equation of the line through $(1, -2)$ parallel to $y = -3x + 7$.</span><span data-lang="zh">求过 $(1, -2)$ 且平行于 $y = -3x + 7$ 的直线方程。</span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = -3x - 2$</div>
       <div class="quiz-opt" data-idx="1">$y = \tfrac{1}{3} x - \tfrac{7}{3}$</div>
       <div class="quiz-opt" data-idx="2">$y = -3x + 1$</div>
       <div class="quiz-opt" data-idx="3">$y = -3x + 7$</div>
     </div>
-    <div class="quiz-explain correct-exp">Parallel means same slope $m = -3$. Point-slope: $y + 2 = -3(x - 1)$, so $y = -3x + 1$.</div>
-    <div class="quiz-explain wrong-exp">Parallel lines share the slope of the given line, $m = -3$. Apply point-slope through $(1, -2)$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Parallel means same slope $m = -3$. Point-slope: $y + 2 = -3(x - 1)$, so $y = -3x + 1$.</span><span data-lang="zh">平行即同斜率 $m = -3$。点斜式：$y + 2 = -3(x - 1)$，故 $y = -3x + 1$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Parallel lines share the slope of the given line, $m = -3$. Apply point-slope through $(1, -2)$.</span><span data-lang="zh">平行线与已知直线斜率相同 $m = -3$；以 $(1, -2)$ 代入点斜式。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">A taxi charges a $\$3.00$ flag drop and $\$1.75$ per kilometre. Write the cost $C$ as a linear function of distance $d$ (in km).</div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A taxi charges a $\$3.00$ flag drop and $\$1.75$ per kilometre. Write the cost $C$ as a linear function of distance $d$ (in km).</span><span data-lang="zh">出租车起步费 $\$3.00$，每公里 $\$1.75$。将费用 $C$ 写成距离 $d$（公里）的一次函数。</span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$C = 3.00 + 1.75 d$</div>
       <div class="quiz-opt" data-idx="1">$C = 1.75 + 3.00 d$</div>
       <div class="quiz-opt" data-idx="2">$C = 4.75 d$</div>
       <div class="quiz-opt" data-idx="3">$C = 3.00 d + 1.75$</div>
     </div>
-    <div class="quiz-explain correct-exp">Flag drop is the fixed cost at $d = 0$, so it is the $y$-intercept. Rate is the slope.</div>
-    <div class="quiz-explain wrong-exp">In a linear model $y = b + m x$, the constant $b$ is the value at $x = 0$ (here, the flag drop) and $m$ is the per-unit rate (the per-km charge).</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Flag drop is the fixed cost at $d = 0$, so it is the $y$-intercept. Rate is the slope.</span><span data-lang="zh">起步费是 $d = 0$ 时的固定费用，即 $y$ 截距；每公里费率是斜率。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">In a linear model $y = b + m x$, the constant $b$ is the value at $x = 0$ (here, the flag drop) and $m$ is the per-unit rate (the per-km charge).</span><span data-lang="zh">线性模型 $y = b + m x$ 中，$b$ 是 $x = 0$ 时的值（此处为起步费），$m$ 是单位变化率（每公里费率）。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-5">
-  <div class="section-label">Section 5 &middot; Systems</div>
-  <h2>Linear Systems of Two Equations</h2>
+  <div class="section-label"><span data-lang="en">Section 5 &middot; Systems</span><span data-lang="zh">第 5 节 &middot; 方程组</span></div>
+  <h2><span data-lang="en">Linear Systems of Two Equations</span><span data-lang="zh">二元一次方程组</span></h2>
 
   <div class="cram-cheat">
-    <strong>Three methods, one goal: find every $(x, y)$ that solves both equations.</strong>
+    <strong><span data-lang="en">Three methods, one goal: find every $(x, y)$ that solves both equations.</span><span data-lang="zh">三种方法、一个目标：找出同时满足两个方程的所有 $(x, y)$。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Substitution.</strong> Solve one equation for one variable, substitute into the other, solve the resulting one-variable equation, back-substitute. Best when one equation is already solved for a variable.</li>
-      <li><strong>Elimination (addition).</strong> Scale one or both equations so that a chosen variable has opposite coefficients, add the equations to eliminate that variable, solve, back-substitute. Best when both equations are in standard form.</li>
-      <li><strong>Graphical.</strong> Graph both lines; the solution is the intersection point. Useful for intuition and for the "how many solutions" question.</li>
+      <li><strong><span data-lang="en">Substitution.</span><span data-lang="zh">代入法。</span></strong> <span data-lang="en">Solve one equation for one variable, substitute into the other, solve the resulting one-variable equation, back-substitute. Best when one equation is already solved for a variable.</span><span data-lang="zh">在一个方程中解出一个变量，代入另一个方程，解出新的一元方程，再回代。当其中一个方程已经解出某变量时最优。</span></li>
+      <li><strong><span data-lang="en">Elimination (addition).</span><span data-lang="zh">消元法（加减法）。</span></strong> <span data-lang="en">Scale one or both equations so that a chosen variable has opposite coefficients, add the equations to eliminate that variable, solve, back-substitute. Best when both equations are in standard form.</span><span data-lang="zh">将一个或两个方程乘以适当系数，使某变量的系数相反，相加消去该变量，再解、再回代。当两方程都是标准式时最优。</span></li>
+      <li><strong><span data-lang="en">Graphical.</span><span data-lang="zh">图解法。</span></strong> <span data-lang="en">Graph both lines; the solution is the intersection point. Useful for intuition and for the "how many solutions" question.</span><span data-lang="zh">作出两直线图象，解即交点。便于直观理解与判断"解的个数"。</span></li>
     </ul>
-    <strong>The three outcomes.</strong>
+    <strong><span data-lang="en">The three outcomes.</span><span data-lang="zh">三种结果。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>One solution.</strong> Lines cross once. Slopes differ.</li>
-      <li><strong>No solution.</strong> Lines are parallel (same slope, different intercept). Algebra produces a contradiction like $0 = 5$.</li>
-      <li><strong>Infinitely many solutions.</strong> Lines are identical. Algebra produces an identity like $0 = 0$.</li>
+      <li><strong><span data-lang="en">One solution.</span><span data-lang="zh">唯一解。</span></strong> <span data-lang="en">Lines cross once. Slopes differ.</span><span data-lang="zh">两直线相交一次；斜率不同。</span></li>
+      <li><strong><span data-lang="en">No solution.</span><span data-lang="zh">无解。</span></strong> <span data-lang="en">Lines are parallel (same slope, different intercept). Algebra produces a contradiction like $0 = 5$.</span><span data-lang="zh">两直线平行（同斜率、不同截距）；代数会出现矛盾，如 $0 = 5$。</span></li>
+      <li><strong><span data-lang="en">Infinitely many solutions.</span><span data-lang="zh">无穷多解。</span></strong> <span data-lang="en">Lines are identical. Algebra produces an identity like $0 = 0$.</span><span data-lang="zh">两方程为同一直线；代数化为恒等式 $0 = 0$。</span></li>
     </ul>
   </div>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> In US Common Core, <code>HSA-REI.C.5</code> requires that you can <em>prove</em> elimination preserves the solution set, not just apply it; <code>HSA-REI.C.6</code> covers the full method. In Ontario MPM2D the focus is "choosing an appropriate algebraic or graphical method"; the proof is not required. In BC FMPC 10 the elaboration lists <em>graphical, inspection, substitution, elimination</em> as four methods of equal weight, so a BC provincial-style question may ask which method you would choose and why.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">In US Common Core, <code>HSA-REI.C.5</code> requires that you can <em>prove</em> elimination preserves the solution set, not just apply it; <code>HSA-REI.C.6</code> covers the full method. In Ontario MPM2D the focus is "choosing an appropriate algebraic or graphical method"; the proof is not required. In BC FMPC 10 the elaboration lists <em>graphical, inspection, substitution, elimination</em> as four methods of equal weight, so a BC provincial-style question may ask which method you would choose and why.</span><span data-lang="zh">美国共同核心 <code>HSA-REI.C.5</code> 要求你能<em>证明</em>消元法保持解集不变，而不仅是应用；<code>HSA-REI.C.6</code> 覆盖完整方法。安大略 MPM2D 重点是"选择恰当的代数或图解方法"，不要求证明。BC FMPC 10 在课程详释中并列<em>图解、观察、代入、消元</em>四种方法等权重，所以 BC 省考风格的题目可能要你说明选用哪种方法及理由。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 5 &middot; Solve a 2-by-2 system three ways</div>
-    <p>Solve the system $\begin{cases} 2x + 3y = 13 \\ x - y = 1 \end{cases}$ by (a) substitution, (b) elimination, and (c) state the geometric meaning.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 5 &middot; Solve a 2-by-2 system three ways</span><span data-lang="zh">例题 5 &middot; 三法求解二元方程组</span></div>
+    <p><span data-lang="en">Solve the system $\begin{cases} 2x + 3y = 13 \\ x - y = 1 \end{cases}$ by (a) substitution, (b) elimination, and (c) state the geometric meaning.</span><span data-lang="zh">分别用 (a) 代入法、(b) 消元法求解方程组 $\begin{cases} 2x + 3y = 13 \\ x - y = 1 \end{cases}$，并 (c) 说明几何意义。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>(a) Substitution.</strong> Solve the second equation for $x$: $x = y + 1$. Substitute into the first:</p>
+    <p><strong><span data-lang="en">(a) Substitution.</span><span data-lang="zh">(a) 代入法。</span></strong> <span data-lang="en">Solve the second equation for $x$: $x = y + 1$. Substitute into the first:</span><span data-lang="zh">由第二式解出 $x = y + 1$，代入第一式：</span></p>
     $$ 2(y + 1) + 3y \;=\; 13 \quad\Longrightarrow\quad 5y + 2 \;=\; 13 \quad\Longrightarrow\quad y \;=\; \tfrac{11}{5}. $$
-    <p>Back-substitute into $x = y + 1$ to obtain $x = 11/5 + 1 = 16/5$.</p>
-    <p><strong>(b) Elimination.</strong> Multiply the second equation by $2$: $2x - 2y = 2$. Subtract from the first:</p>
+    <p><span data-lang="en">Back-substitute into $x = y + 1$ to obtain $x = 11/5 + 1 = 16/5$.</span><span data-lang="zh">回代 $x = y + 1$ 得 $x = 11/5 + 1 = 16/5$。</span></p>
+    <p><strong><span data-lang="en">(b) Elimination.</span><span data-lang="zh">(b) 消元法。</span></strong> <span data-lang="en">Multiply the second equation by $2$: $2x - 2y = 2$. Subtract from the first:</span><span data-lang="zh">第二式乘 $2$：$2x - 2y = 2$。从第一式减去：</span></p>
     $$ (2x + 3y) - (2x - 2y) \;=\; 13 - 2 \quad\Longrightarrow\quad 5y \;=\; 11 \quad\Longrightarrow\quad y \;=\; \tfrac{11}{5}. $$
-    <p>Back-substitute into $x - y = 1$ to obtain $x = 1 + 11/5 = 16/5$. The two methods agree.</p>
-    <p><strong>(c) Geometric meaning.</strong> The two lines have slopes $-2/3$ and $1$, which differ, so the lines intersect at exactly one point. That point is $(16/5, 11/5)$.</p>
+    <p><span data-lang="en">Back-substitute into $x - y = 1$ to obtain $x = 1 + 11/5 = 16/5$. The two methods agree.</span><span data-lang="zh">回代 $x - y = 1$ 得 $x = 1 + 11/5 = 16/5$。两法结果一致。</span></p>
+    <p><strong><span data-lang="en">(c) Geometric meaning.</span><span data-lang="zh">(c) 几何意义。</span></strong> <span data-lang="en">The two lines have slopes $-2/3$ and $1$, which differ, so the lines intersect at exactly one point. That point is $(16/5, 11/5)$.</span><span data-lang="zh">两直线斜率分别为 $-2/3$ 与 $1$，互异，故恰交于一点，即 $(16/5, 11/5)$。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; Why elimination preserves the solution set</summary>
+    <summary><span data-lang="en">Going deeper &middot; Why elimination preserves the solution set</span><span data-lang="zh">深入 &middot; 为何消元法保持解集不变</span></summary>
     <div class="detail-body">
-      <p>Let the system be $E_{1}: a_{1} x + b_{1} y = c_{1}$ and $E_{2}: a_{2} x + b_{2} y = c_{2}$. Replace $E_{2}$ by $E_{2}' = E_{2} + k E_{1}$ for any constant $k$. We claim $\{E_{1}, E_{2}\}$ and $\{E_{1}, E_{2}'\}$ have identical solution sets.</p>
-      <p>Forward direction: if $(x, y)$ satisfies $E_{1}$ and $E_{2}$, then it satisfies $k E_{1}$ (since both sides are scaled by $k$) and so it satisfies $E_{2}' = E_{2} + k E_{1}$.</p>
-      <p>Reverse direction: if $(x, y)$ satisfies $E_{1}$ and $E_{2}'$, then it satisfies $E_{2}' - k E_{1} = E_{2}$.</p>
-      <p>The replacement is reversible (the same $k$ undoes it with the opposite sign), so the two systems have exactly the same solutions. This justifies <code>HSA-REI.C.5</code>: every elimination step is just a controlled replacement that preserves the solution set.</p>
+      <p><span data-lang="en">Let the system be $E_{1}: a_{1} x + b_{1} y = c_{1}$ and $E_{2}: a_{2} x + b_{2} y = c_{2}$. Replace $E_{2}$ by $E_{2}' = E_{2} + k E_{1}$ for any constant $k$. We claim $\{E_{1}, E_{2}\}$ and $\{E_{1}, E_{2}'\}$ have identical solution sets.</span><span data-lang="zh">设方程组 $E_{1}: a_{1} x + b_{1} y = c_{1}$、$E_{2}: a_{2} x + b_{2} y = c_{2}$。对任意常数 $k$，把 $E_{2}$ 替换为 $E_{2}' = E_{2} + k E_{1}$。我们证明 $\{E_{1}, E_{2}\}$ 与 $\{E_{1}, E_{2}'\}$ 解集相同。</span></p>
+      <p><span data-lang="en">Forward direction: if $(x, y)$ satisfies $E_{1}$ and $E_{2}$, then it satisfies $k E_{1}$ (since both sides are scaled by $k$) and so it satisfies $E_{2}' = E_{2} + k E_{1}$.</span><span data-lang="zh">正向：若 $(x, y)$ 同时满足 $E_{1}$ 与 $E_{2}$，则它满足 $k E_{1}$（两边同乘 $k$），从而满足 $E_{2}' = E_{2} + k E_{1}$。</span></p>
+      <p><span data-lang="en">Reverse direction: if $(x, y)$ satisfies $E_{1}$ and $E_{2}'$, then it satisfies $E_{2}' - k E_{1} = E_{2}$.</span><span data-lang="zh">反向：若 $(x, y)$ 同时满足 $E_{1}$ 与 $E_{2}'$，则它满足 $E_{2}' - k E_{1} = E_{2}$。</span></p>
+      <p><span data-lang="en">The replacement is reversible (the same $k$ undoes it with the opposite sign), so the two systems have exactly the same solutions. This justifies <code>HSA-REI.C.5</code>: every elimination step is just a controlled replacement that preserves the solution set.</span><span data-lang="zh">该替换可逆（用相反符号的同一 $k$ 即可还原），故两方程组解集完全相同。这便证明了 <code>HSA-REI.C.5</code>：消元的每一步都是保持解集不变的可控替换。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">How many solutions does the system $\begin{cases} 3x - y = 4 \\ 6x - 2y = 8 \end{cases}$ have?</div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">How many solutions does the system $\begin{cases} 3x - y = 4 \\ 6x - 2y = 8 \end{cases}$ have?</span><span data-lang="zh">方程组 $\begin{cases} 3x - y = 4 \\ 6x - 2y = 8 \end{cases}$ 有多少解？</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Exactly one.</div>
-      <div class="quiz-opt" data-idx="1">Infinitely many.</div>
-      <div class="quiz-opt" data-idx="2">None.</div>
-      <div class="quiz-opt" data-idx="3">Two.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Exactly one.</span><span data-lang="zh">恰有一个解。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Infinitely many.</span><span data-lang="zh">无穷多解。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">None.</span><span data-lang="zh">无解。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Two.</span><span data-lang="zh">两个解。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Multiply the first equation by $2$: $6x - 2y = 8$, which is identical to the second. The two equations describe the same line, so every point on that line is a solution.</div>
-    <div class="quiz-explain wrong-exp">Scale the first equation by $2$ and compare to the second. If the result is identical, the lines coincide and there are infinitely many solutions.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Multiply the first equation by $2$: $6x - 2y = 8$, which is identical to the second. The two equations describe the same line, so every point on that line is a solution.</span><span data-lang="zh">第一式乘 $2$ 得 $6x - 2y = 8$，与第二式完全相同。两方程表示同一条直线，故直线上每一点都是解。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Scale the first equation by $2$ and compare to the second. If the result is identical, the lines coincide and there are infinitely many solutions.</span><span data-lang="zh">把第一式乘 $2$ 与第二式比较。若完全相同，则两直线重合，有无穷多解。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">Solve $\begin{cases} x + 2y = 7 \\ 3x - y = 7 \end{cases}$.</div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $\begin{cases} x + 2y = 7 \\ 3x - y = 7 \end{cases}$.</span><span data-lang="zh">求解 $\begin{cases} x + 2y = 7 \\ 3x - y = 7 \end{cases}$。</span></div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(x, y) = (1, 3)$</div>
       <div class="quiz-opt" data-idx="1">$(x, y) = (5, 1)$</div>
       <div class="quiz-opt" data-idx="2">$(x, y) = (3, 2)$</div>
       <div class="quiz-opt" data-idx="3">$(x, y) = (7, 0)$</div>
     </div>
-    <div class="quiz-explain correct-exp">From the second equation, $y = 3x - 7$. Substitute: $x + 2(3x - 7) = 7$, so $7x = 21$, $x = 3$. Then $y = 9 - 7 = 2$.</div>
-    <div class="quiz-explain wrong-exp">Solve the second equation for $y$, substitute into the first, then solve the resulting one-variable equation.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">From the second equation, $y = 3x - 7$. Substitute: $x + 2(3x - 7) = 7$, so $7x = 21$, $x = 3$. Then $y = 9 - 7 = 2$.</span><span data-lang="zh">由第二式 $y = 3x - 7$；代入第一式：$x + 2(3x - 7) = 7$，故 $7x = 21$、$x = 3$。再得 $y = 9 - 7 = 2$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Solve the second equation for $y$, substitute into the first, then solve the resulting one-variable equation.</span><span data-lang="zh">由第二式解出 $y$，代入第一式，解出新的一元方程即可。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-6">
-  <div class="section-label">Section 6 &middot; Modeling</div>
-  <h2>Linear Systems: Applications and Modeling</h2>
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Modeling</span><span data-lang="zh">第 6 节 &middot; 建模</span></div>
+  <h2><span data-lang="en">Linear Systems: Applications and Modeling</span><span data-lang="zh">线性方程组：应用与建模</span></h2>
 
   <div class="cram-cheat">
-    <strong>Word-problem playbook.</strong>
+    <strong><span data-lang="en">Word-problem playbook.</span><span data-lang="zh">文字题套路。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Name two variables.</strong> Write down what each one means, with units.</li>
-      <li><strong>Translate two sentences into two equations.</strong> One usually controls a total ($x + y = $ something); the other controls a rate, a value, or a comparison.</li>
-      <li><strong>Solve the system.</strong> Substitution if one equation is already isolated; elimination otherwise.</li>
-      <li><strong>Answer in a sentence with units.</strong> Numeric answers without context lose marks in modeling rubrics.</li>
+      <li><strong><span data-lang="en">Name two variables.</span><span data-lang="zh">定义两个变量。</span></strong> <span data-lang="en">Write down what each one means, with units.</span><span data-lang="zh">写出含义并标明单位。</span></li>
+      <li><strong><span data-lang="en">Translate two sentences into two equations.</span><span data-lang="zh">把两句话译成两个方程。</span></strong> <span data-lang="en">One usually controls a total ($x + y = $ something); the other controls a rate, a value, or a comparison.</span><span data-lang="zh">一个通常约束总量（$x + y = $ 某值），另一个约束速率、价值或对比。</span></li>
+      <li><strong><span data-lang="en">Solve the system.</span><span data-lang="zh">求解方程组。</span></strong> <span data-lang="en">Substitution if one equation is already isolated; elimination otherwise.</span><span data-lang="zh">若一方程已解出某变量则用代入法；否则用消元法。</span></li>
+      <li><strong><span data-lang="en">Answer in a sentence with units.</span><span data-lang="zh">用整句加单位作答。</span></strong> <span data-lang="en">Numeric answers without context lose marks in modeling rubrics.</span><span data-lang="zh">在建模评分标准中，仅写数字没有上下文会丢分。</span></li>
     </ol>
-    <strong>Three canonical problem types.</strong>
+    <strong><span data-lang="en">Three canonical problem types.</span><span data-lang="zh">三类典型问题。</span></strong>
     <ul style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li><strong>Mixture.</strong> Combine two amounts at different concentrations to hit a target.</li>
-      <li><strong>Rate.</strong> Distance / cost / work accumulates linearly over time at a fixed rate.</li>
-      <li><strong>Break-even.</strong> Cost and revenue are both linear; find the production quantity where they meet.</li>
+      <li><strong><span data-lang="en">Mixture.</span><span data-lang="zh">混合题。</span></strong> <span data-lang="en">Combine two amounts at different concentrations to hit a target.</span><span data-lang="zh">把两种不同浓度按一定量混合达到目标浓度。</span></li>
+      <li><strong><span data-lang="en">Rate.</strong> Distance / cost / work accumulates linearly over time at a fixed rate.</span><span data-lang="zh"><strong>速率题。</strong>距离/费用/工作量按固定速率随时间线性累积。</span></li>
+      <li><strong><span data-lang="en">Break-even.</span><span data-lang="zh">盈亏平衡。</span></strong> <span data-lang="en">Cost and revenue are both linear; find the production quantity where they meet.</span><span data-lang="zh">成本与收入皆为一次函数；求两者相等时的产量。</span></li>
     </ul>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 6 &middot; Break-even analysis</div>
-    <p>A small printing business has fixed monthly costs of $\$1{,}200$ and a variable cost of $\$3$ per booklet. It sells booklets at $\$8$ each. How many booklets must it sell per month to break even?</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 6 &middot; Break-even analysis</span><span data-lang="zh">例题 6 &middot; 盈亏平衡分析</span></div>
+    <p><span data-lang="en">A small printing business has fixed monthly costs of $\$1{,}200$ and a variable cost of $\$3$ per booklet. It sells booklets at $\$8$ each. How many booklets must it sell per month to break even?</span><span data-lang="zh">某小型印刷企业每月固定成本 $\$1{,}200$，每本小册子可变成本 $\$3$，售价 $\$8$。每月需售出多少本才能达到盈亏平衡？</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Identify.</strong> Let $n$ be the number of booklets sold per month. Define</p>
+    <p><strong><span data-lang="en">Identify.</span><span data-lang="zh">辨识。</span></strong> <span data-lang="en">Let $n$ be the number of booklets sold per month. Define</span><span data-lang="zh">设每月售出 $n$ 本，定义</span></p>
     <ul style="margin: 0 0 12px 22px;">
-      <li>Total cost: $C(n) = 1200 + 3n$ (fixed plus variable).</li>
-      <li>Total revenue: $R(n) = 8n$.</li>
+      <li><span data-lang="en">Total cost: $C(n) = 1200 + 3n$ (fixed plus variable).</span><span data-lang="zh">总成本：$C(n) = 1200 + 3n$（固定 + 可变）。</span></li>
+      <li><span data-lang="en">Total revenue: $R(n) = 8n$.</span><span data-lang="zh">总收入：$R(n) = 8n$。</span></li>
     </ul>
-    <p><strong>Set up.</strong> Break-even occurs where $C(n) = R(n)$:</p>
+    <p><strong><span data-lang="en">Set up.</span><span data-lang="zh">列式。</span></strong> <span data-lang="en">Break-even occurs where $C(n) = R(n)$:</span><span data-lang="zh">盈亏平衡发生在 $C(n) = R(n)$：</span></p>
     $$ 1200 + 3n \;=\; 8n. $$
-    <p><strong>Execute.</strong> Subtract $3n$ from both sides:</p>
+    <p><strong><span data-lang="en">Execute.</span><span data-lang="zh">求解。</span></strong> <span data-lang="en">Subtract $3n$ from both sides:</span><span data-lang="zh">两边减 $3n$：</span></p>
     $$ 1200 \;=\; 5n \quad\Longrightarrow\quad n \;=\; 240. $$
-    <p><strong>Evaluate.</strong> The business breaks even at $240$ booklets per month. Below that the loss is $5n - 1200$ short of cost; above that the profit grows at $\$5$ per booklet.</p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">The business breaks even at $240$ booklets per month. Below that the loss is $5n - 1200$ short of cost; above that the profit grows at $\$5$ per booklet.</span><span data-lang="zh">企业每月售出 $240$ 本即达到盈亏平衡。低于此值亏损 $1200 - 5n$；高于此值每多售一本利润增加 $\$5$。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; A mixture problem solved as a system</summary>
+    <summary><span data-lang="en">Going deeper &middot; A mixture problem solved as a system</span><span data-lang="zh">深入 &middot; 用方程组解一道混合题</span></summary>
     <div class="detail-body">
-      <p>A chemist needs $10$ litres of a $40\%$ acid solution. She has $20\%$ acid and $70\%$ acid stocks on hand. How many litres of each should she combine?</p>
-      <p>Let $x$ be litres of the $20\%$ stock and $y$ litres of the $70\%$ stock. The two equations:</p>
+      <p><span data-lang="en">A chemist needs $10$ litres of a $40\%$ acid solution. She has $20\%$ acid and $70\%$ acid stocks on hand. How many litres of each should she combine?</span><span data-lang="zh">一名化学家需要 $10$ 升 $40\%$ 浓度的酸溶液。手头有 $20\%$ 与 $70\%$ 两种原液。各需取多少升？</span></p>
+      <p><span data-lang="en">Let $x$ be litres of the $20\%$ stock and $y$ litres of the $70\%$ stock. The two equations:</span><span data-lang="zh">设取 $20\%$ 原液 $x$ 升、$70\%$ 原液 $y$ 升，得两方程：</span></p>
       $$ x + y \;=\; 10 \quad\text{(total volume)}, \qquad 0.20 x + 0.70 y \;=\; 0.40 \cdot 10 \;=\; 4 \quad\text{(total acid)}. $$
-      <p>From the first equation, $x = 10 - y$. Substitute:</p>
+      <p><span data-lang="en">From the first equation, $x = 10 - y$. Substitute:</span><span data-lang="zh">由第一式 $x = 10 - y$，代入：</span></p>
       $$ 0.20 (10 - y) + 0.70 y \;=\; 4 \quad\Longrightarrow\quad 2 + 0.50 y \;=\; 4 \quad\Longrightarrow\quad y \;=\; 4. $$
-      <p>Then $x = 6$. The chemist mixes $6$ litres of $20\%$ stock with $4$ litres of $70\%$ stock. A quick sanity check: $0.20 \cdot 6 + 0.70 \cdot 4 = 1.2 + 2.8 = 4.0$ litres of pure acid, which is $40\%$ of $10$ litres.</p>
+      <p><span data-lang="en">Then $x = 6$. The chemist mixes $6$ litres of $20\%$ stock with $4$ litres of $70\%$ stock. A quick sanity check: $0.20 \cdot 6 + 0.70 \cdot 4 = 1.2 + 2.8 = 4.0$ litres of pure acid, which is $40\%$ of $10$ litres.</span><span data-lang="zh">再得 $x = 6$。即取 $6$ 升 $20\%$ 原液与 $4$ 升 $70\%$ 原液。快速验证：$0.20 \cdot 6 + 0.70 \cdot 4 = 1.2 + 2.8 = 4.0$ 升纯酸，恰为 $10$ 升的 $40\%$。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">An adult ticket costs $\$12$ and a student ticket costs $\$8$. A school sold $150$ tickets for a total of $\$1{,}480$. How many adult tickets were sold?</div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">An adult ticket costs $\$12$ and a student ticket costs $\$8$. A school sold $150$ tickets for a total of $\$1{,}480$. How many adult tickets were sold?</span><span data-lang="zh">成人票 $\$12$、学生票 $\$8$。某校共售出 $150$ 张，总收入 $\$1{,}480$。售出多少张成人票？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$60$</div>
       <div class="quiz-opt" data-idx="1">$70$</div>
       <div class="quiz-opt" data-idx="2">$80$</div>
       <div class="quiz-opt" data-idx="3">$90$</div>
     </div>
-    <div class="quiz-explain correct-exp">Let $a$ be adult tickets, $s$ student. Then $a + s = 150$ and $12 a + 8 s = 1480$. Substitute $s = 150 - a$: $12 a + 8(150 - a) = 1480$, so $4 a + 1200 = 1480$, $a = 70$.</div>
-    <div class="quiz-explain wrong-exp">Set up two equations: one for total tickets, one for total revenue. Solve by substitution. The adult-ticket count is $a = 70$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Let $a$ be adult tickets, $s$ student. Then $a + s = 150$ and $12 a + 8 s = 1480$. Substitute $s = 150 - a$: $12 a + 8(150 - a) = 1480$, so $4 a + 1200 = 1480$, $a = 70$.</span><span data-lang="zh">设成人票 $a$ 张、学生票 $s$ 张。$a + s = 150$、$12 a + 8 s = 1480$。代入 $s = 150 - a$：$12 a + 8(150 - a) = 1480$，故 $4 a + 1200 = 1480$、$a = 70$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Set up two equations: one for total tickets, one for total revenue. Solve by substitution. The adult-ticket count is $a = 70$.</span><span data-lang="zh">列两方程：总票数与总收入。用代入法求解，成人票数 $a = 70$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="s-1-7">
-  <div class="section-label">Section 7 &middot; Honors</div>
-  <h2>Matrix Row-Reduction <span class="honors-flag">Honors</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 / ON MCV4U</span> <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM (+)</span></h2>
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Honors</span><span data-lang="zh">第 7 节 &middot; 荣誉级</span></div>
+  <h2><span data-lang="en">Matrix Row-Reduction</span><span data-lang="zh">矩阵行简化</span> <span class="honors-flag">Honors</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 / ON MCV4U</span> <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM (+)</span></h2>
 
   <div class="syllabus-note">
-    <strong>Syllabus note.</strong> US Common Core lists matrix methods as the STEM-track extension <code>HSA-REI.C.8 (+)</code> and <code>HSA-REI.C.9 (+)</code>, so they appear in honors and AP-feeder classrooms but not in the regular CCSSM Algebra 2 syllabus. In BC, matrix row-reduction is standard in Pre-Calculus 12. In Ontario, it sits in MCV4U (Calculus and Vectors). Skip this section if you are a regular-track student aiming for a state test or a provincial exam at the standard level.
+    <strong><span data-lang="en">Syllabus note.</span><span data-lang="zh">大纲提示。</span></strong>
+    <span data-lang="en">US Common Core lists matrix methods as the STEM-track extension <code>HSA-REI.C.8 (+)</code> and <code>HSA-REI.C.9 (+)</code>, so they appear in honors and AP-feeder classrooms but not in the regular CCSSM Algebra 2 syllabus. In BC, matrix row-reduction is standard in Pre-Calculus 12. In Ontario, it sits in MCV4U (Calculus and Vectors). Skip this section if you are a regular-track student aiming for a state test or a provincial exam at the standard level.</span><span data-lang="zh">美国共同核心把矩阵方法列为 STEM 路径扩展 <code>HSA-REI.C.8 (+)</code> 与 <code>HSA-REI.C.9 (+)</code>，仅出现在荣誉与 AP 衔接课堂，不在常规 CCSSM Algebra 2 大纲内。BC 的 Pre-Calculus 12 标准覆盖矩阵行简化；安大略则在 MCV4U（微积分与向量）课程中。如果你走常规路径、目标是州考或省考标准卷，可跳过本节。</span>
   </div>
 
   <div class="cram-cheat">
-    <strong>The augmented matrix.</strong> Write the system $\begin{cases} a_{1} x + b_{1} y = c_{1} \\ a_{2} x + b_{2} y = c_{2} \end{cases}$ as
+    <strong><span data-lang="en">The augmented matrix.</span><span data-lang="zh">增广矩阵。</span></strong> <span data-lang="en">Write the system $\begin{cases} a_{1} x + b_{1} y = c_{1} \\ a_{2} x + b_{2} y = c_{2} \end{cases}$ as</span><span data-lang="zh">把方程组 $\begin{cases} a_{1} x + b_{1} y = c_{1} \\ a_{2} x + b_{2} y = c_{2} \end{cases}$ 写为</span>
     $$ \left[\begin{array}{cc|c} a_{1} & b_{1} & c_{1} \\ a_{2} & b_{2} & c_{2} \end{array}\right]. $$
-    <strong>Three elementary row operations.</strong>
+    <strong><span data-lang="en">Three elementary row operations.</span><span data-lang="zh">三种初等行变换。</span></strong>
     <ol style="margin: 6px 0 0 22px; font-size: 0.94rem;">
-      <li>Swap two rows.</li>
-      <li>Multiply a row by a non-zero constant.</li>
-      <li>Add a multiple of one row to another.</li>
+      <li><span data-lang="en">Swap two rows.</span><span data-lang="zh">交换两行。</span></li>
+      <li><span data-lang="en">Multiply a row by a non-zero constant.</span><span data-lang="zh">将一行乘以非零常数。</span></li>
+      <li><span data-lang="en">Add a multiple of one row to another.</span><span data-lang="zh">将一行的若干倍加到另一行。</span></li>
     </ol>
-    Each operation preserves the solution set (it is the matrix version of the elimination argument in 1.5).
+    <span data-lang="en">Each operation preserves the solution set (it is the matrix version of the elimination argument in 1.5).</span><span data-lang="zh">每种变换都保持解集不变（即 &sect;1.5 消元法论证的矩阵版本）。</span>
     <br><br>
-    <strong>Goal: row-echelon form.</strong> Use the operations until the matrix has $1$s on the main diagonal (where possible) and $0$s below them. Back-substitute to read off $(x, y)$.
+    <strong><span data-lang="en">Goal: row-echelon form.</span><span data-lang="zh">目标：行阶梯形。</span></strong> <span data-lang="en">Use the operations until the matrix has $1$s on the main diagonal (where possible) and $0$s below them. Back-substitute to read off $(x, y)$.</span><span data-lang="zh">不断变换，直到主对角线尽可能为 $1$、其下方全为 $0$。再用回代读出 $(x, y)$。</span>
   </div>
 
   <div class="formula-box">
-    <div class="formula-label">Worked Example 7 &middot; Solve a 3-by-3 system by row-reduction</div>
-    <p>Solve the system $\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$ by row-reducing the augmented matrix.</p>
+    <div class="formula-label"><span data-lang="en">Worked Example 7 &middot; Solve a 3-by-3 system by row-reduction</span><span data-lang="zh">例题 7 &middot; 用行简化求解三元方程组</span></div>
+    <p><span data-lang="en">Solve the system $\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$ by row-reducing the augmented matrix.</span><span data-lang="zh">用增广矩阵行简化求解 $\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$。</span></p>
   </div>
   <div class="worked-solution">
-    <p><strong>Set up the augmented matrix.</strong></p>
+    <p><strong><span data-lang="en">Set up the augmented matrix.</span><span data-lang="zh">列出增广矩阵。</span></strong></p>
     $$ \left[\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\ 2 & -1 & 1 & 3 \\ 1 & 2 & -1 & 2 \end{array}\right]. $$
-    <p><strong>Clear column 1 below the pivot.</strong> Apply $R_{2} \to R_{2} - 2 R_{1}$ and $R_{3} \to R_{3} - R_{1}$:</p>
+    <p><strong><span data-lang="en">Clear column 1 below the pivot.</span><span data-lang="zh">消去第 1 列主元下方。</span></strong> <span data-lang="en">Apply $R_{2} \to R_{2} - 2 R_{1}$ and $R_{3} \to R_{3} - R_{1}$:</span><span data-lang="zh">执行 $R_{2} \to R_{2} - 2 R_{1}$ 与 $R_{3} \to R_{3} - R_{1}$：</span></p>
     $$ \left[\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\ 0 & -3 & -1 & -9 \\ 0 & 1 & -2 & -4 \end{array}\right]. $$
-    <p><strong>Swap $R_{2}$ and $R_{3}$</strong> for a friendlier pivot:</p>
+    <p><strong><span data-lang="en">Swap $R_{2}$ and $R_{3}$</span><span data-lang="zh">交换 $R_{2}$ 与 $R_{3}$</span></strong> <span data-lang="en">for a friendlier pivot:</span><span data-lang="zh">以获得更友好的主元：</span></p>
     $$ \left[\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\ 0 & 1 & -2 & -4 \\ 0 & -3 & -1 & -9 \end{array}\right]. $$
-    <p><strong>Clear column 2 below the new pivot.</strong> $R_{3} \to R_{3} + 3 R_{2}$:</p>
+    <p><strong><span data-lang="en">Clear column 2 below the new pivot.</span><span data-lang="zh">消去第 2 列主元下方。</span></strong> <span data-lang="en">$R_{3} \to R_{3} + 3 R_{2}$:</span><span data-lang="zh">$R_{3} \to R_{3} + 3 R_{2}$：</span></p>
     $$ \left[\begin{array}{ccc|c} 1 & 1 & 1 & 6 \\ 0 & 1 & -2 & -4 \\ 0 & 0 & -7 & -21 \end{array}\right]. $$
-    <p><strong>Solve by back-substitution.</strong> From row 3: $-7 z = -21$, so $z = 3$. From row 2: $y - 2(3) = -4$, so $y = 2$. From row 1: $x + 2 + 3 = 6$, so $x = 1$.</p>
-    <p><strong>Evaluate.</strong> The unique solution is $(x, y, z) = (1, 2, 3)$. Check: $1 + 2 + 3 = 6$, $2 - 2 + 3 = 3$, $1 + 4 - 3 = 2$. Confirmed.</p>
+    <p><strong><span data-lang="en">Solve by back-substitution.</span><span data-lang="zh">回代求解。</span></strong> <span data-lang="en">From row 3: $-7 z = -21$, so $z = 3$. From row 2: $y - 2(3) = -4$, so $y = 2$. From row 1: $x + 2 + 3 = 6$, so $x = 1$.</span><span data-lang="zh">由第 3 行 $-7 z = -21$，得 $z = 3$。由第 2 行 $y - 2(3) = -4$，得 $y = 2$。由第 1 行 $x + 2 + 3 = 6$，得 $x = 1$。</span></p>
+    <p><strong><span data-lang="en">Evaluate.</span><span data-lang="zh">复核。</span></strong> <span data-lang="en">The unique solution is $(x, y, z) = (1, 2, 3)$. Check: $1 + 2 + 3 = 6$, $2 - 2 + 3 = 3$, $1 + 4 - 3 = 2$. Confirmed.</span><span data-lang="zh">唯一解 $(x, y, z) = (1, 2, 3)$。验证：$1 + 2 + 3 = 6$、$2 - 2 + 3 = 3$、$1 + 4 - 3 = 2$。通过。</span></p>
   </div>
 
   <details>
-    <summary>Going deeper &middot; What row-echelon form tells you about solution count</summary>
+    <summary><span data-lang="en">Going deeper &middot; What row-echelon form tells you about solution count</span><span data-lang="zh">深入 &middot; 行阶梯形对应的解数判断</span></summary>
     <div class="detail-body">
-      <p>After row-reduction, an augmented matrix falls into one of three shapes that mirror the three outcomes of 1.5:</p>
+      <p><span data-lang="en">After row-reduction, an augmented matrix falls into one of three shapes that mirror the three outcomes of 1.5:</span><span data-lang="zh">行简化后，增广矩阵呈现三种形态，对应 &sect;1.5 的三种结果：</span></p>
       <ul style="margin: 6px 0 0 22px;">
-        <li><strong>A pivot in every variable column.</strong> The system has exactly one solution.</li>
-        <li><strong>A row of the form $[0, 0, \ldots, 0 \,|\, c]$ with $c \ne 0$.</strong> The system has no solution; this row reads $0 = c$.</li>
-        <li><strong>A free variable (no pivot in some variable column) and no contradiction row.</strong> The system has infinitely many solutions parametrised by the free variable.</li>
+        <li><strong><span data-lang="en">A pivot in every variable column.</span><span data-lang="zh">每个变量列都有主元。</span></strong> <span data-lang="en">The system has exactly one solution.</span><span data-lang="zh">方程组有唯一解。</span></li>
+        <li><strong><span data-lang="en">A row of the form $[0, 0, \ldots, 0 \,|\, c]$ with $c \ne 0$.</span><span data-lang="zh">存在形如 $[0, 0, \ldots, 0 \,|\, c]$（$c \ne 0$）的行。</span></strong> <span data-lang="en">The system has no solution; this row reads $0 = c$.</span><span data-lang="zh">方程组无解，因为该行读作 $0 = c$。</span></li>
+        <li><strong><span data-lang="en">A free variable (no pivot in some variable column) and no contradiction row.</span><span data-lang="zh">某变量列无主元（自由变量）且无矛盾行。</span></strong> <span data-lang="en">The system has infinitely many solutions parametrised by the free variable.</span><span data-lang="zh">方程组有无穷多解，由自由变量参数化。</span></li>
       </ul>
-      <p>For $2 \times 2$ systems this matches "one intersection / parallel lines / coincident lines"; for $3 \times 3$ systems it matches "single point / parallel planes / line or plane of solutions." The same trichotomy generalises to every dimension.</p>
+      <p><span data-lang="en">For $2 \times 2$ systems this matches "one intersection / parallel lines / coincident lines"; for $3 \times 3$ systems it matches "single point / parallel planes / line or plane of solutions." The same trichotomy generalises to every dimension.</span><span data-lang="zh">对 $2 \times 2$ 方程组对应"一个交点 / 平行 / 重合"；对 $3 \times 3$ 对应"一点 / 平行平面 / 解为直线或平面"。该三分法可推广到任意维。</span></p>
     </div>
   </details>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">After row-reducing the augmented matrix of a system in three variables, the bottom row reads $[0, 0, 0 \,|\, -5]$. What can you conclude?</div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">After row-reducing the augmented matrix of a system in three variables, the bottom row reads $[0, 0, 0 \,|\, -5]$. What can you conclude?</span><span data-lang="zh">三元方程组的增广矩阵行简化后，最后一行为 $[0, 0, 0 \,|\, -5]$。你能得出什么结论？</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">The system has a unique solution.</div>
-      <div class="quiz-opt" data-idx="1">The system has infinitely many solutions.</div>
-      <div class="quiz-opt" data-idx="2">The system has no solution.</div>
-      <div class="quiz-opt" data-idx="3">The matrix has been row-reduced incorrectly.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The system has a unique solution.</span><span data-lang="zh">方程组有唯一解。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The system has infinitely many solutions.</span><span data-lang="zh">方程组有无穷多解。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The system has no solution.</span><span data-lang="zh">方程组无解。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The matrix has been row-reduced incorrectly.</span><span data-lang="zh">矩阵行简化有误。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">The row reads $0 x + 0 y + 0 z = -5$, that is $0 = -5$, a contradiction. No assignment of $(x, y, z)$ can satisfy the system.</div>
-    <div class="quiz-explain wrong-exp">A zero-coefficient row with a non-zero right-hand side is the matrix signature of an inconsistent system. The solution set is empty.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The row reads $0 x + 0 y + 0 z = -5$, that is $0 = -5$, a contradiction. No assignment of $(x, y, z)$ can satisfy the system.</span><span data-lang="zh">该行读作 $0 x + 0 y + 0 z = -5$，即 $0 = -5$，为矛盾。任何 $(x, y, z)$ 都无法同时满足。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">A zero-coefficient row with a non-zero right-hand side is the matrix signature of an inconsistent system. The solution set is empty.</span><span data-lang="zh">系数全零而右端非零的行，是矛盾方程组的矩阵特征。解集为空。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="exam-strategy">
-  <div class="section-label">Exam Tactics</div>
-  <h2>Exam Strategy and Common Pitfalls</h2>
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
 
   <div class="concept-box orange">
-    <strong style="color: var(--orange);">Slope and units</strong>
+    <strong style="color: var(--orange);"><span data-lang="en">Slope and units</span><span data-lang="zh">斜率与单位</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Always state units in a modeling problem.</strong> "The slope is $-12$" loses a mark in a rubric that expects "$-12$ litres per hour."</li>
-      <li><strong>Check sign before computing.</strong> If the dependent quantity is decreasing, the slope is negative. A positive answer to a "loss" question is almost always wrong.</li>
+      <li><strong><span data-lang="en">Always state units in a modeling problem.</span><span data-lang="zh">建模题必须写单位。</span></strong> <span data-lang="en">"The slope is $-12$" loses a mark in a rubric that expects "$-12$ litres per hour."</span><span data-lang="zh">若评分标准要求"$-12$ 升/小时"，仅写"斜率为 $-12$"会丢分。</span></li>
+      <li><strong><span data-lang="en">Check sign before computing.</span><span data-lang="zh">计算前先核符号。</span></strong> <span data-lang="en">If the dependent quantity is decreasing, the slope is negative. A positive answer to a "loss" question is almost always wrong.</span><span data-lang="zh">若因变量递减，斜率必为负。"损失"类问题给出正数答案几乎必错。</span></li>
     </ul>
   </div>
 
   <div class="concept-box" style="border-left-color: var(--accent);">
-    <strong style="color: var(--accent);">Forms of a line</strong>
+    <strong style="color: var(--accent);"><span data-lang="en">Forms of a line</span><span data-lang="zh">直线的形式</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Convert to slope-intercept before reading the slope.</strong> $5x - 2y = 8$ does not have slope $5$.</li>
-      <li><strong>Standard form is for vertical lines and integer-coefficient answers.</strong> Use it deliberately, not as a default.</li>
-      <li><strong>Perpendicular slope flips sign and reciprocal both.</strong> The negative-reciprocal rule is one of the two most-tested facts in this unit (the other is the slope formula).</li>
+      <li><strong><span data-lang="en">Convert to slope-intercept before reading the slope.</span><span data-lang="zh">读斜率前先化为斜截式。</span></strong> <span data-lang="en">$5x - 2y = 8$ does not have slope $5$.</span><span data-lang="zh">$5x - 2y = 8$ 的斜率不是 $5$。</span></li>
+      <li><strong><span data-lang="en">Standard form is for vertical lines and integer-coefficient answers.</span><span data-lang="zh">标准式适用于竖直线与整系数答案。</span></strong> <span data-lang="en">Use it deliberately, not as a default.</span><span data-lang="zh">需有意识地使用，而非默认。</span></li>
+      <li><strong><span data-lang="en">Perpendicular slope flips sign and reciprocal both.</span><span data-lang="zh">垂直方向斜率同时变号且取倒数。</span></strong> <span data-lang="en">The negative-reciprocal rule is one of the two most-tested facts in this unit (the other is the slope formula).</span><span data-lang="zh">"负倒数"规则与斜率公式是本单元最常考的两件事。</span></li>
     </ul>
   </div>
 
   <div class="concept-box purple">
-    <strong style="color: var(--purple);">Systems</strong>
+    <strong style="color: var(--purple);"><span data-lang="en">Systems</span><span data-lang="zh">方程组</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Pick the method that minimises arithmetic.</strong> Substitution is usually faster when one equation is already in slope-intercept form. Elimination is usually faster when both equations are in standard form.</li>
-      <li><strong>Read "no solution" and "infinitely many" off the algebra.</strong> $0 = 5$ means no solution; $0 = 0$ means infinitely many. Do not invent answers to "consistent" or "dependent" systems.</li>
-      <li><strong>Write down units in modeling answers.</strong> "Sells $240$ booklets" beats "$240$" alone.</li>
+      <li><strong><span data-lang="en">Pick the method that minimises arithmetic.</span><span data-lang="zh">选择运算量最小的方法。</span></strong> <span data-lang="en">Substitution is usually faster when one equation is already in slope-intercept form. Elimination is usually faster when both equations are in standard form.</span><span data-lang="zh">一方程已是斜截式时代入法更快；两方程都是标准式时消元法更快。</span></li>
+      <li><strong><span data-lang="en">Read "no solution" and "infinitely many" off the algebra.</span><span data-lang="zh">从代数直接判断"无解"与"无穷多解"。</span></strong> <span data-lang="en">$0 = 5$ means no solution; $0 = 0$ means infinitely many. Do not invent answers to "consistent" or "dependent" systems.</span><span data-lang="zh">$0 = 5$ 意味无解；$0 = 0$ 意味无穷多解。不要为"相容"或"相关"方程组编造答案。</span></li>
+      <li><strong><span data-lang="en">Write down units in modeling answers.</span><span data-lang="zh">建模题答案带单位。</span></strong> <span data-lang="en">"Sells $240$ booklets" beats "$240$" alone.</span><span data-lang="zh">"售出 $240$ 本"优于仅写"$240$"。</span></li>
     </ul>
   </div>
 
   <div class="concept-box green">
-    <strong style="color: var(--green);">Honors row-reduction</strong>
+    <strong style="color: var(--green);"><span data-lang="en">Honors row-reduction</span><span data-lang="zh">荣誉级行简化</span></strong>
     <ul style="margin-top: 8px; padding-left: 22px;">
-      <li><strong>Record each elementary row operation.</strong> Examiners give partial credit for the work even when arithmetic slips. Write "$R_{2} \to R_{2} - 2 R_{1}$" beside the step.</li>
-      <li><strong>Back-substitute carefully.</strong> Once you reach row-echelon form, work from the bottom row up. Errors in the back-substitution stage are the most common loss of marks in this technique.</li>
+      <li><strong><span data-lang="en">Record each elementary row operation.</span><span data-lang="zh">逐步记录初等行变换。</span></strong> <span data-lang="en">Examiners give partial credit for the work even when arithmetic slips. Write "$R_{2} \to R_{2} - 2 R_{1}$" beside the step.</span><span data-lang="zh">即便算错，过程仍可得部分分。在每一步旁注明 "$R_{2} \to R_{2} - 2 R_{1}$"。</span></li>
+      <li><strong><span data-lang="en">Back-substitute carefully.</span><span data-lang="zh">小心回代。</span></strong> <span data-lang="en">Once you reach row-echelon form, work from the bottom row up. Errors in the back-substitution stage are the most common loss of marks in this technique.</span><span data-lang="zh">化到行阶梯形后由下往上回代。回代阶段的错误是该技巧失分最常见的原因。</span></li>
     </ul>
   </div>
 </section>
@@ -956,177 +963,179 @@ details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-c
 <hr class="sep">
 
 <section class="section" id="flashcards">
-  <div class="section-label">Active Recall</div>
-  <h2>Flashcards</h2>
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动回忆</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
   <div class="flashcard-toolbar">
-    <div id="fcCount">0 / 12 flipped</div>
+    <div id="fcCount"><span data-lang="en">0 / 12 flipped</span><span data-lang="zh">0 / 12 已翻</span></div>
     <div>
-      <button onclick="shuffleFlashcards()">Shuffle</button>
-      <button onclick="resetFlashcards()">Reset</button>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">乱序</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
     </div>
   </div>
   <div class="flashcard-grid" id="flashcardGrid">
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Slope from two points?</div><div class="flashcard-back">$$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Point-slope form?</div><div class="flashcard-back">$$y - y_{1} = m(x - x_{1})$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Slope-intercept form?</div><div class="flashcard-back">$$y = m x + b$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Standard form?</div><div class="flashcard-back">$$A x + B y = C$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Parallel-slope condition?</div><div class="flashcard-back">$$m_{1} = m_{2}$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Perpendicular-slope condition?</div><div class="flashcard-back">$$m_{1} m_{2} = -1$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Vertical line through $(a, c)$?</div><div class="flashcard-back">$$x = a$$ slope undefined</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Horizontal line through $(a, c)$?</div><div class="flashcard-back">$$y = c$$ slope $0$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">System with no solution: algebra signature?</div><div class="flashcard-back">$$0 = k, \quad k \ne 0$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">System with infinitely many solutions: algebra signature?</div><div class="flashcard-back">$$0 = 0$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Break-even condition?</div><div class="flashcard-back">$$C(n) = R(n)$$</div></div></div>
-    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front">Three elementary row operations?</div><div class="flashcard-back">Swap rows; scale a row by $k \ne 0$; add a multiple of one row to another.</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Slope from two points?</span><span data-lang="zh">两点求斜率？</span></div><div class="flashcard-back">$$m = \frac{y_{2} - y_{1}}{x_{2} - x_{1}}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Point-slope form?</span><span data-lang="zh">点斜式？</span></div><div class="flashcard-back">$$y - y_{1} = m(x - x_{1})$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Slope-intercept form?</span><span data-lang="zh">斜截式？</span></div><div class="flashcard-back">$$y = m x + b$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Standard form?</span><span data-lang="zh">标准式？</span></div><div class="flashcard-back">$$A x + B y = C$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Parallel-slope condition?</span><span data-lang="zh">平行条件？</span></div><div class="flashcard-back">$$m_{1} = m_{2}$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Perpendicular-slope condition?</span><span data-lang="zh">垂直条件？</span></div><div class="flashcard-back">$$m_{1} m_{2} = -1$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Vertical line through $(a, c)$?</span><span data-lang="zh">过 $(a, c)$ 的竖直线？</span></div><div class="flashcard-back">$$x = a$$ <span data-lang="en">slope undefined</span><span data-lang="zh">斜率不存在</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Horizontal line through $(a, c)$?</span><span data-lang="zh">过 $(a, c)$ 的水平线？</span></div><div class="flashcard-back">$$y = c$$ <span data-lang="en">slope $0$</span><span data-lang="zh">斜率为 $0$</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">System with no solution: algebra signature?</span><span data-lang="zh">无解方程组的代数特征？</span></div><div class="flashcard-back">$$0 = k, \quad k \ne 0$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">System with infinitely many solutions: algebra signature?</span><span data-lang="zh">无穷多解方程组的代数特征？</span></div><div class="flashcard-back">$$0 = 0$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Break-even condition?</span><span data-lang="zh">盈亏平衡条件？</span></div><div class="flashcard-back">$$C(n) = R(n)$$</div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Three elementary row operations?</span><span data-lang="zh">三种初等行变换？</span></div><div class="flashcard-back"><span data-lang="en">Swap rows; scale a row by $k \ne 0$; add a multiple of one row to another.</span><span data-lang="zh">交换两行；将一行乘以 $k \ne 0$；将一行的若干倍加到另一行。</span></div></div></div>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="unit-quiz">
-  <div class="section-label">Mixed Practice</div>
-  <h2>Practice Quiz</h2>
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></h2>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">A line has slope $-\tfrac{1}{2}$ and passes through $(4, -3)$. Find its $y$-intercept.</div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A line has slope $-\tfrac{1}{2}$ and passes through $(4, -3)$. Find its $y$-intercept.</span><span data-lang="zh">直线斜率为 $-\tfrac{1}{2}$ 且过 $(4, -3)$。求其 $y$ 截距。</span></div><div class="quiz-number">Q1</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$-5$</div>
       <div class="quiz-opt" data-idx="1">$-1$</div>
       <div class="quiz-opt" data-idx="2">$1$</div>
       <div class="quiz-opt" data-idx="3">$5$</div>
     </div>
-    <div class="quiz-explain correct-exp">Point-slope: $y + 3 = -\tfrac{1}{2}(x - 4) = -\tfrac{1}{2} x + 2$, so $y = -\tfrac{1}{2} x - 1$. The $y$-intercept is $-1$.</div>
-    <div class="quiz-explain wrong-exp">Apply point-slope through $(4, -3)$ with $m = -1/2$, then read $b$ from the slope-intercept form.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Point-slope: $y + 3 = -\tfrac{1}{2}(x - 4) = -\tfrac{1}{2} x + 2$, so $y = -\tfrac{1}{2} x - 1$. The $y$-intercept is $-1$.</span><span data-lang="zh">点斜式：$y + 3 = -\tfrac{1}{2}(x - 4) = -\tfrac{1}{2} x + 2$，故 $y = -\tfrac{1}{2} x - 1$。$y$ 截距为 $-1$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Apply point-slope through $(4, -3)$ with $m = -1/2$, then read $b$ from the slope-intercept form.</span><span data-lang="zh">以 $(4, -3)$ 与 $m = -1/2$ 套点斜式，再化为斜截式读 $b$。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="0">
-    <div class="quiz-header"><div class="quiz-q">Find the equation of the line through $(-1, 4)$ perpendicular to $y = \tfrac{2}{5} x - 3$.</div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Find the equation of the line through $(-1, 4)$ perpendicular to $y = \tfrac{2}{5} x - 3$.</span><span data-lang="zh">求过 $(-1, 4)$ 且与 $y = \tfrac{2}{5} x - 3$ 垂直的直线方程。</span></div><div class="quiz-number">Q2</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$y = -\tfrac{5}{2} x + \tfrac{3}{2}$</div>
       <div class="quiz-opt" data-idx="1">$y = \tfrac{5}{2} x + \tfrac{13}{2}$</div>
       <div class="quiz-opt" data-idx="2">$y = -\tfrac{2}{5} x + \tfrac{18}{5}$</div>
       <div class="quiz-opt" data-idx="3">$y = \tfrac{2}{5} x + \tfrac{22}{5}$</div>
     </div>
-    <div class="quiz-explain correct-exp">Perpendicular slope to $2/5$ is $-5/2$. Point-slope: $y - 4 = -\tfrac{5}{2}(x + 1) = -\tfrac{5}{2} x - \tfrac{5}{2}$, so $y = -\tfrac{5}{2} x + \tfrac{3}{2}$.</div>
-    <div class="quiz-explain wrong-exp">Take the negative reciprocal of $2/5$ to get $-5/2$, then apply point-slope through $(-1, 4)$.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Perpendicular slope to $2/5$ is $-5/2$. Point-slope: $y - 4 = -\tfrac{5}{2}(x + 1) = -\tfrac{5}{2} x - \tfrac{5}{2}$, so $y = -\tfrac{5}{2} x + \tfrac{3}{2}$.</span><span data-lang="zh">$2/5$ 的垂直方向斜率为 $-5/2$。点斜式：$y - 4 = -\tfrac{5}{2}(x + 1) = -\tfrac{5}{2} x - \tfrac{5}{2}$，故 $y = -\tfrac{5}{2} x + \tfrac{3}{2}$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Take the negative reciprocal of $2/5$ to get $-5/2$, then apply point-slope through $(-1, 4)$.</span><span data-lang="zh">取 $2/5$ 的负倒数 $-5/2$，再以 $(-1, 4)$ 代入点斜式。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="3">
-    <div class="quiz-header"><div class="quiz-q">Solve $\begin{cases} 4x + y = 9 \\ 2x - 3y = 1 \end{cases}$.</div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Solve $\begin{cases} 4x + y = 9 \\ 2x - 3y = 1 \end{cases}$.</span><span data-lang="zh">求解 $\begin{cases} 4x + y = 9 \\ 2x - 3y = 1 \end{cases}$。</span></div><div class="quiz-number">Q3</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$(x, y) = (1, 5)$</div>
       <div class="quiz-opt" data-idx="1">$(x, y) = (3, -3)$</div>
       <div class="quiz-opt" data-idx="2">$(x, y) = (-1, 13)$</div>
       <div class="quiz-opt" data-idx="3">$(x, y) = (2, 1)$</div>
     </div>
-    <div class="quiz-explain correct-exp">Multiply the first equation by $3$: $12 x + 3 y = 27$. Add to the second: $14 x = 28$, so $x = 2$. Back-substitute: $4(2) + y = 9$, $y = 1$.</div>
-    <div class="quiz-explain wrong-exp">Use elimination by scaling the first equation so the $y$-coefficients are opposite, then add and solve.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Multiply the first equation by $3$: $12 x + 3 y = 27$. Add to the second: $14 x = 28$, so $x = 2$. Back-substitute: $4(2) + y = 9$, $y = 1$.</span><span data-lang="zh">第一式乘 $3$ 得 $12 x + 3 y = 27$。加上第二式：$14 x = 28$，故 $x = 2$。回代 $4(2) + y = 9$，得 $y = 1$。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Use elimination by scaling the first equation so the $y$-coefficients are opposite, then add and solve.</span><span data-lang="zh">用消元法：把第一式乘倍使 $y$ 的系数互为相反数，相加后求解。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q">The system $\begin{cases} y = 2x + 3 \\ y = 2x - 5 \end{cases}$ has how many solutions?</div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">The system $\begin{cases} y = 2x + 3 \\ y = 2x - 5 \end{cases}$ has how many solutions?</span><span data-lang="zh">方程组 $\begin{cases} y = 2x + 3 \\ y = 2x - 5 \end{cases}$ 有多少解？</span></div><div class="quiz-number">Q4</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Exactly one.</div>
-      <div class="quiz-opt" data-idx="1">Infinitely many.</div>
-      <div class="quiz-opt" data-idx="2">None.</div>
-      <div class="quiz-opt" data-idx="3">Two.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Exactly one.</span><span data-lang="zh">恰有一个解。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Infinitely many.</span><span data-lang="zh">无穷多解。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">None.</span><span data-lang="zh">无解。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Two.</span><span data-lang="zh">两个解。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">Both lines have slope $2$ but different intercepts ($3$ and $-5$), so the lines are parallel and never meet.</div>
-    <div class="quiz-explain wrong-exp">When two lines share a slope but differ in intercept, they are parallel and the system has no solution.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Both lines have slope $2$ but different intercepts ($3$ and $-5$), so the lines are parallel and never meet.</span><span data-lang="zh">两直线斜率均为 $2$，但截距不同（$3$ 与 $-5$），两线平行不相交。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">When two lines share a slope but differ in intercept, they are parallel and the system has no solution.</span><span data-lang="zh">两直线同斜率而异截距即平行，方程组无解。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="1">
-    <div class="quiz-header"><div class="quiz-q">A bakery sells loaves at $\$5$ each. Fixed daily costs are $\$80$ and variable cost per loaf is $\$2$. How many loaves does the bakery need to sell each day to break even?</div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A bakery sells loaves at $\$5$ each. Fixed daily costs are $\$80$ and variable cost per loaf is $\$2$. How many loaves does the bakery need to sell each day to break even?</span><span data-lang="zh">一家面包店每条售 $\$5$，每日固定成本 $\$80$，每条可变成本 $\$2$。每日需售出多少条才能盈亏平衡？</span></div><div class="quiz-number">Q5</div></div>
     <div class="quiz-options">
       <div class="quiz-opt" data-idx="0">$16$</div>
-      <div class="quiz-opt" data-idx="1">$27$ (round up, since $26.\overline{6}$ is not a whole loaf)</div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">$27$ (round up, since $26.\overline{6}$ is not a whole loaf)</span><span data-lang="zh">$27$（向上取整，$26.\overline{6}$ 非整条）</span></div>
       <div class="quiz-opt" data-idx="2">$40$</div>
       <div class="quiz-opt" data-idx="3">$80$</div>
     </div>
-    <div class="quiz-explain correct-exp">Set $5 n = 80 + 2 n$, so $3 n = 80$ and $n = 80/3 \approx 26.67$. Whole loaves only, so the bakery must sell at least $27$ loaves.</div>
-    <div class="quiz-explain wrong-exp">Equate revenue $5 n$ with total cost $80 + 2 n$, solve for $n$, then round up to the next whole loaf.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Set $5 n = 80 + 2 n$, so $3 n = 80$ and $n = 80/3 \approx 26.67$. Whole loaves only, so the bakery must sell at least $27$ loaves.</span><span data-lang="zh">令 $5 n = 80 + 2 n$，得 $3 n = 80$、$n = 80/3 \approx 26.67$。只能为整条，故至少售出 $27$ 条。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Equate revenue $5 n$ with total cost $80 + 2 n$, solve for $n$, then round up to the next whole loaf.</span><span data-lang="zh">令收入 $5 n$ 等于总成本 $80 + 2 n$ 解 $n$，再向上取整到下一条整数。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 
   <div class="quiz" data-answer="2">
-    <div class="quiz-header"><div class="quiz-q"><span class="honors-flag">Honors</span> A 3-by-3 system row-reduces to the matrix $\left[\begin{array}{ccc|c} 1 & 2 & -1 & 4 \\ 0 & 1 & 3 & 5 \\ 0 & 0 & 0 & 0 \end{array}\right]$. Which is true?</div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-header"><div class="quiz-q"><span class="honors-flag">Honors</span> <span data-lang="en">A 3-by-3 system row-reduces to the matrix $\left[\begin{array}{ccc|c} 1 & 2 & -1 & 4 \\ 0 & 1 & 3 & 5 \\ 0 & 0 & 0 & 0 \end{array}\right]$. Which is true?</span><span data-lang="zh">一个三元方程组的增广矩阵行简化为 $\left[\begin{array}{ccc|c} 1 & 2 & -1 & 4 \\ 0 & 1 & 3 & 5 \\ 0 & 0 & 0 & 0 \end{array}\right]$。下列哪项正确？</span></div><div class="quiz-number">Q6</div></div>
     <div class="quiz-options">
-      <div class="quiz-opt" data-idx="0">Unique solution.</div>
-      <div class="quiz-opt" data-idx="1">No solution.</div>
-      <div class="quiz-opt" data-idx="2">Infinitely many solutions; $z$ is a free parameter.</div>
-      <div class="quiz-opt" data-idx="3">The matrix has been row-reduced incorrectly.</div>
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Unique solution.</span><span data-lang="zh">唯一解。</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">No solution.</span><span data-lang="zh">无解。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Infinitely many solutions; $z$ is a free parameter.</span><span data-lang="zh">无穷多解；$z$ 为自由参数。</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The matrix has been row-reduced incorrectly.</span><span data-lang="zh">矩阵行简化有误。</span></div>
     </div>
-    <div class="quiz-explain correct-exp">The bottom row is $0 = 0$, an identity (no contradiction). There is no pivot in the $z$-column, so $z$ is free. The system has a one-parameter family of solutions.</div>
-    <div class="quiz-explain wrong-exp">A trivial bottom row $[0, 0, 0 \,|\, 0]$ contributes no constraint. Count the variable columns without pivots to identify the free parameters.</div>
-    <button class="quiz-retry" onclick="retryQuiz(this)">Retry</button>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The bottom row is $0 = 0$, an identity (no contradiction). There is no pivot in the $z$-column, so $z$ is free. The system has a one-parameter family of solutions.</span><span data-lang="zh">末行 $0 = 0$ 为恒等式（无矛盾）。$z$ 列无主元，故 $z$ 自由。方程组有一参数族解。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">A trivial bottom row $[0, 0, 0 \,|\, 0]$ contributes no constraint. Count the variable columns without pivots to identify the free parameters.</span><span data-lang="zh">末行 $[0, 0, 0 \,|\, 0]$ 不构成约束。统计无主元的变量列以确定自由参数。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
   </div>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="checklist">
-  <div class="section-label">Self-check</div>
-  <h2>Readiness Checklist</h2>
-  <p>Tick each item when you can do it cold, without notes, on a first attempt.</p>
-  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;">0 / 13 mastered</div>
+  <div class="section-label"><span data-lang="en">Self-check</span><span data-lang="zh">自查</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></h2>
+  <p><span data-lang="en">Tick each item when you can do it cold, without notes, on a first attempt.</span><span data-lang="zh">能在无笔记、首次尝试下完成时，再勾选每一项。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 13 mastered</span><span data-lang="zh">已掌握 0 / 13</span></div>
   <ul class="checklist" id="checklistUl">
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Compute the slope from two points and state its units in a modeling context.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Identify positive, negative, zero, and undefined slope cases by inspection. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC FMPC10 elaboration</span></li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Move between point-slope, slope-intercept, and standard form in two algebra steps.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Write the equation of a vertical line and a horizontal line through a given point.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Graph a line from its equation using the slope-intercept method and the intercepts method.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Find the line through a point parallel or perpendicular to a given line.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Write a linear equation from two points, from a point and slope, from a table, and from a word problem.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Solve a 2-by-2 system by substitution and by elimination, and pick the method that minimises arithmetic.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Recognise no-solution and infinite-solution systems both algebraically and graphically. <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM HSA-REI.C.5/6</span></li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Set up and solve a mixture, rate, or break-even word problem with named variables and units in the answer.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> Interpret slope and intercept of a fitted line in real-world units (Common Core <code>HSF-LE.B.5</code>; Ontario MPM1D Linear Relations).</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> <span class="honors-flag">Honors</span> Set up an augmented matrix and apply three elementary row operations to reach row-echelon form.</li>
-    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span> <span class="honors-flag">Honors</span> Diagnose unique / no / infinite solutions from the row-echelon shape and identify free parameters. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 / ON MCV4U</span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Compute the slope from two points and state its units in a modeling context.</span><span data-lang="zh">由两点求斜率，并在建模情境中写出其单位。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Identify positive, negative, zero, and undefined slope cases by inspection.</span><span data-lang="zh">凭直观识别正、负、零、不存在四种斜率情形。</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC FMPC10 elaboration</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Move between point-slope, slope-intercept, and standard form in two algebra steps.</span><span data-lang="zh">在两步代数内完成点斜式、斜截式、标准式互化。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write the equation of a vertical line and a horizontal line through a given point.</span><span data-lang="zh">写出过给定点的竖直线与水平线方程。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Graph a line from its equation using the slope-intercept method and the intercepts method.</span><span data-lang="zh">能用斜截法与截距法两种方式由方程作直线图象。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Find the line through a point parallel or perpendicular to a given line.</span><span data-lang="zh">求过定点平行或垂直于已知直线的直线方程。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a linear equation from two points, from a point and slope, from a table, and from a word problem.</span><span data-lang="zh">从两点、点与斜率、数值表、文字题四种情形分别写出一次方程。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Solve a 2-by-2 system by substitution and by elimination, and pick the method that minimises arithmetic.</span><span data-lang="zh">用代入法和消元法求解二元方程组，并选择运算量最小的方法。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Recognise no-solution and infinite-solution systems both algebraically and graphically.</span><span data-lang="zh">从代数与图象两个角度识别无解与无穷多解的方程组。</span> <span class="region-chip">&#x1F1FA;&#x1F1F8; CCSSM HSA-REI.C.5/6</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Set up and solve a mixture, rate, or break-even word problem with named variables and units in the answer.</span><span data-lang="zh">设立并求解混合、速率或盈亏平衡类文字题，明确变量名称，答案带单位。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Interpret slope and intercept of a fitted line in real-world units (Common Core <code>HSF-LE.B.5</code>; Ontario MPM1D Linear Relations).</span><span data-lang="zh">用现实单位解释拟合直线的斜率与截距（共同核心 <code>HSF-LE.B.5</code>；安大略 MPM1D 线性关系单元）。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span class="honors-flag">Honors</span> <span data-lang="en">Set up an augmented matrix and apply three elementary row operations to reach row-echelon form.</span><span data-lang="zh">列出增广矩阵并应用三种初等行变换化为行阶梯形。</span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span class="honors-flag">Honors</span> <span data-lang="en">Diagnose unique / no / infinite solutions from the row-echelon shape and identify free parameters.</span><span data-lang="zh">由行阶梯形判断唯一解 / 无解 / 无穷多解，并识别自由参数。</span> <span class="region-chip">&#x1F1E8;&#x1F1E6; BC PC12 / ON MCV4U</span></span></li>
   </ul>
 </section>
 
 <hr class="sep">
 
 <section class="section" id="feeders">
-  <div class="section-label">Next Steps</div>
-  <h2>What This Feeds Into</h2>
-  <p>Linear functions are the base case for every later function family and the geometric backbone of differential calculus. The cross-references below point at units already shipped in this repo.</p>
+  <div class="section-label"><span data-lang="en">Next Steps</span><span data-lang="zh">后续单元</span></div>
+  <h2><span data-lang="en">What This Feeds Into</span><span data-lang="zh">本单元的去向</span></h2>
+  <p><span data-lang="en">Linear functions are the base case for every later function family and the geometric backbone of differential calculus. The cross-references below point at units already shipped in this repo.</span><span data-lang="zh">一次函数是后续所有函数族的基底，也是微分学的几何骨架。下方链接指向本仓库已有的相关单元。</span></p>
 
   <div style="margin: 20px 0;">
-    <p><strong>Within High School Math.</strong></p>
-    <p style="color: var(--text-secondary); font-size: 0.95rem;">Quadratic Functions and Equations extends the slope idea to changing rates of change. Exponential and Logarithmic Functions contrasts equal-difference (linear) and equal-ratio (exponential) growth, picking up directly from <code>HSF-LE.A.1</code> in this unit. Sequences and Series treats arithmetic sequences as the discrete version of linear functions (Ontario MCR3U C3.1, BC FMPC10 <em>arithmetic sequences</em>). Function Transformations and Composition generalises shifts and stretches starting from the linear base case $f(x) = x$.</p>
+    <p><strong><span data-lang="en">Within High School Math.</span><span data-lang="zh">在 HS Math 内部。</span></strong></p>
+    <p style="color: var(--text-secondary); font-size: 0.95rem;"><span data-lang="en">Quadratic Functions and Equations extends the slope idea to changing rates of change. Exponential and Logarithmic Functions contrasts equal-difference (linear) and equal-ratio (exponential) growth, picking up directly from <code>HSF-LE.A.1</code> in this unit. Sequences and Series treats arithmetic sequences as the discrete version of linear functions (Ontario MCR3U C3.1, BC FMPC10 <em>arithmetic sequences</em>). Function Transformations and Composition generalises shifts and stretches starting from the linear base case $f(x) = x$.</span><span data-lang="zh">二次函数与方程把"斜率"扩展到"变化率本身在变化"。指数与对数函数对比"等差（一次）"与"等比（指数）"增长，直接延续本单元 <code>HSF-LE.A.1</code>。数列与级数把等差数列视为一次函数的离散版本（安大略 MCR3U C3.1、BC FMPC10 <em>等差数列</em>）。函数变换与复合从线性基底 $f(x) = x$ 出发推广平移与伸缩。</span></p>
   </div>
 
   <div style="margin: 20px 0;">
-    <p><strong>Across the AP and IB feeders in this repo.</strong></p>
+    <p><strong><span data-lang="en">Across the AP and IB feeders in this repo.</span><span data-lang="zh">本仓库中的 AP 与 IB 衔接单元。</span></strong></p>
     <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;">
-      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_B1_Representation_of_Functions.html">IB Math HL B1 &middot; Representation of Functions</a>
-      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_E1_Principles_of_Differential_Calculus.html">IB Math HL E1 &middot; Principles of Differential Calculus</a>
-      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_A5_Proof_and_Algebraic_Manipulation.html">IB Math HL A5 &middot; Proof and Algebraic Manipulation</a>
-      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_C3_Vectors.html">IB Math HL C3 &middot; Vectors (matrix and vector linear-algebra deep dive)</a>
-      <a class="feeder-link" href="../../AP Physics/Study Guides/Unit_1_Kinematics.html">AP Physics &middot; Unit 1 Kinematics (position-time graphs as linear functions)</a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_B1_Representation_of_Functions.html"><span data-lang="en">IB Math HL B1 &middot; Representation of Functions</span><span data-lang="zh">IB Math HL B1 &middot; 函数的表示</span></a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_E1_Principles_of_Differential_Calculus.html"><span data-lang="en">IB Math HL E1 &middot; Principles of Differential Calculus</span><span data-lang="zh">IB Math HL E1 &middot; 微分学原理</span></a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_A5_Proof_and_Algebraic_Manipulation.html"><span data-lang="en">IB Math HL A5 &middot; Proof and Algebraic Manipulation</span><span data-lang="zh">IB Math HL A5 &middot; 证明与代数运算</span></a>
+      <a class="feeder-link" href="../../IB Math HL/Study Guides/Unit_C3_Vectors.html"><span data-lang="en">IB Math HL C3 &middot; Vectors (matrix and vector linear-algebra deep dive)</span><span data-lang="zh">IB Math HL C3 &middot; 向量（矩阵与向量线性代数深入）</span></a>
+      <a class="feeder-link" href="../../AP Physics/Study Guides/Unit_1_Kinematics.html"><span data-lang="en">AP Physics &middot; Unit 1 Kinematics (position-time graphs as linear functions)</span><span data-lang="zh">AP Physics &middot; Unit 1 运动学（位置-时间图象即一次函数）</span></a>
     </div>
-    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;">If you are aiming for an AP Calculus AB or BC exam, the derivative-as-slope-of-the-tangent-line idea (introduced in IB Math HL E1) sits one course away. The slope formula in this unit is its discrete prototype: $m$ is the limit of $\Delta y / \Delta x$ as the two points coalesce.</p>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;"><span data-lang="en">If you are aiming for an AP Calculus AB or BC exam, the derivative-as-slope-of-the-tangent-line idea (introduced in IB Math HL E1) sits one course away. The slope formula in this unit is its discrete prototype: $m$ is the limit of $\Delta y / \Delta x$ as the two points coalesce.</span><span data-lang="zh">若你备考 AP Calculus AB / BC，"导数即切线斜率"的思想（IB Math HL E1 引入）距此只一门课之遥。本单元的斜率公式即其离散原型：当两点合并时，$m$ 为 $\Delta y / \Delta x$ 的极限。</span></p>
   </div>
 </section>
 
 <div class="footer-wrap">
   <div class="footer-brand">DINGRUI SCHOLARS</div>
-  <p>High School Math &middot; Linear Functions and Systems &middot; v1</p>
+  <p><span data-lang="en">High School Math &middot; Linear Functions and Systems &middot; v1</span><span data-lang="zh">高中数学 &middot; 一次函数与方程组 &middot; v1</span></p>
 </div>
 
 </main>
 <script>
 let quizScore = { correct: 0, attempted: 0, total: 0 };
 function updateScoreBadge() { const badge = document.getElementById('scoreBadge'); if (!badge) return; if (quizScore.total === 0) { badge.textContent = '0 / 0'; badge.classList.add('zero'); } else { badge.textContent = quizScore.correct + ' / ' + quizScore.total; badge.classList.remove('zero'); } }
-function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.textContent = isDark ? 'Light' : 'Dark'; }
+function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.innerHTML = isDark ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>' : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>'; }
 function toggleTheme() { const isDark = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark'); setThemeBtnLabel(!isDark); }
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); setThemeBtnLabel(true); }
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
 window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; const pct = h > 0 ? (window.scrollY / h) * 100 : 0; const pf = document.getElementById('progressFill'); if (pf) pf.style.width = pct + '%'; });
 const sections = document.querySelectorAll('.section'); const tocLinks = document.querySelectorAll('.sidebar a');
 const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(l => l.classList.remove('active')); const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`); if (link) link.classList.add('active'); } }); }, { rootMargin: '-80px 0px -60% 0px' });
@@ -1134,10 +1143,10 @@ sections.forEach(s => observer.observe(s));
 document.querySelectorAll('.quiz').forEach(quiz => { const answer = parseInt(quiz.dataset.answer); const opts = quiz.querySelectorAll('.quiz-opt'); const expCorrect = quiz.querySelector('.quiz-explain.correct-exp'); const expWrong = quiz.querySelector('.quiz-explain.wrong-exp'); opts.forEach(opt => { opt.addEventListener('click', () => { if(opt.classList.contains('disabled')) return; const idx = parseInt(opt.dataset.idx); opts.forEach(o => o.classList.add('disabled')); quizScore.total++; if (idx === answer) { opt.classList.add('correct'); quizScore.correct++; if (expCorrect) expCorrect.classList.add('show'); } else { opt.classList.add('wrong'); opts[answer].classList.add('correct'); if (expWrong) expWrong.classList.add('show'); const retry = quiz.querySelector('.quiz-retry'); if (retry) retry.classList.add('show'); } updateScoreBadge(); }); }); });
 function retryQuiz(btn) { const quiz = btn.closest('.quiz'); quiz.querySelectorAll('.quiz-opt').forEach(o => { o.classList.remove('disabled', 'correct', 'wrong'); }); quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show')); btn.classList.remove('show'); quizScore.total--; updateScoreBadge(); }
 function flipCard(el) { el.classList.toggle('flipped'); updateFlashcardCount(); }
-function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.textContent = flipped + ' / ' + total + ' flipped'; }
+function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.innerHTML = '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span><span data-lang="zh">' + flipped + ' / ' + total + ' 已翻</span>'; }
 function resetFlashcards() { document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped')); updateFlashcardCount(); }
 function shuffleFlashcards() { const grid = document.getElementById('flashcardGrid'); if (!grid) return; const cards = [...grid.children]; for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); grid.appendChild(cards[j]); [cards[i], cards[j]] = [cards[j], cards[i]]; } }
-function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.textContent = checked + ' / ' + total + ' mastered'; }
+function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>'; }
 function toggleSidebar() { if (window.innerWidth >= 1100) { document.body.classList.toggle('sidebar-collapsed'); } else { const sidebar = document.getElementById('sidebar'); sidebar.classList.toggle('open'); const btn = document.getElementById('tocToggle'); if (btn) btn.classList.toggle('active', sidebar.classList.contains('open')); } }
 document.addEventListener('click', function(e) { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (!sidebar) return; if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
 document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (sidebar) sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
