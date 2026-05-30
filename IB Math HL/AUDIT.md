@@ -56,6 +56,24 @@ retirement; Sprint 2 SG polish (5 items, deferred).
    strip from deploy via `deploy.yml`. Fully unblocked.
 10. **Sprint 2 follow-up** (Worked examples / exam tips / sliders) — 5
     items still open (S2-1 through S2-5). Audit-driven SG polish.
+11. ~~**Sprint 6 — D1 Premium P+S rebuild**~~ ✅ closed 2026-05-30 — D1
+    Univariate Data Practice + Solutions rebuilt as a v2.0 "Premium /
+    7-Chaser" set on branch `ib_math_hl_stats_premium`, deployed to `main`.
+
+### Sprint 6 — D1 Univariate Data "Premium" P+S rebuild — **CLOSED 2026-05-30** (branch `ib_math_hl_stats_premium`)
+
+Rebuilt the D1 Univariate Data Practice + Solutions as a depth-over-recall
+set for the 6→7 student. EASY tier dropped; new `OUT-OF-THE-BOX` (stretch)
+tier added with its own theme. Content reweighted to combined/pooled
+statistics, the two regression lines, Simpson's paradox, reverse
+transformations, and "same summary stats, different data."
+
+| ID | Item | Files | Status |
+|---|---|---|---|
+| ~~**S6-D1**~~ | D1 Univariate Data Premium P+S | 10 Qs / 85 marks; 2 Medium warm-ups, rest Hard/stretch; Practice ↔ Solutions aligned 1:1; validator OK | ✅ closed |
+
+Both files bumped to `v2.0`. Per-question marks (6+7+7+12+8+7+10+9+10+9)
+sum to 85 and match across Practice/Solutions.
 
 ### Sprint 5 — Topic D Practice + Solutions ZH translation — **CLOSED 2026-05-25** (branch `sprint5_d_translation`)
 
