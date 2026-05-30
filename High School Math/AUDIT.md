@@ -38,7 +38,20 @@ for review.**
 
 ## Active Sprint — what we're working on now
 
-### Sprint 5 — ZH retro + P+S catch-up + AB extracts — **CLOSED 2026-05-29** (branch `high_school_math_sprint5`, awaiting FF to main)
+### Sprint 6 — Unit 6 ZH finish + P+S mark normalization + P+S ZH translation + P2 polish — **OPEN 2026-05-29** (branch `high_school_math_sprint6`)
+
+Four concurrent strands, dispatched in waves to avoid Anthropic rate-limit cliff (Sprint 5 hit it mid-batch).
+
+| ID | Item | Tier | Status |
+|---|---|---|---|
+| **S6-unit6-zh-finish** | Finish Unit 6 SG ZH translation. Sprint 5 subagent stopped after chrome + §1-§2 (137/137 spans); need to translate §3-§7 + exam-strategy + flashcards + unit-quiz + checklist + feeders. | P0 | open |
+| **S6-PS-mark-normalize** | Normalize P+S mark structures across Units 7-15. Currently mixed: Units 7-10, 12, 14 at 18+35+28=81; Units 11, 13, 15 at 90 (different splits). Pick one schema (recommend 18+35+28=81 to match Units 1-6) and rebalance Units 11, 13, 15. | P1 | open |
+| **S6-PS-zh-bulk** | Add ZH translation to all 36 HS Math Practice + Solutions files (Units 1-15). ~24k lines of paired-span content. Dispatched as 15 per-Unit subagents, each handling both P and S for one unit. | P0 | open |
+| **S6-P2-polish** | Address P2 backlog from the 2026-05-28 audit: worked-example variety on Units 3, 4, 12, 13, 15; Unit 13 §5 quiz repetition; Unit 1 SG flashcard mix; ZH polish on a few terms; honors-flag wording standardization. | P2 | open |
+
+Build order: Wave 1 (low-risk, mostly mechanical) → Wave 2/3 (P+S ZH bulk). Reused driver scripts available: `scripts/strip_unit_labels_hs_math.py`, `scripts/fix_hs_math_audit.py`.
+
+### Sprint 5 — ZH retro + P+S catch-up + AB extracts — **CLOSED 2026-05-29** (branch `high_school_math_sprint5`, FF-merged to main at `3a7ad99`)
 
 Three concurrent strands dispatched via 15 parallel background subagents. Mid-batch the Anthropic API rate limit hit and 6 subagents returned "session limit" mid-flight, but most had already written substantial work to disk before getting cut off — the disk state is much better than the error-message surface suggested.
 
