@@ -46,12 +46,22 @@ The bulk of the ZH work was drafted by per-unit subagents in a prior session and
 |---|---|---|---|
 | ~~**S6-unit6-zh-finish**~~ | Finish Unit 6 SG ZH translation (Sprint 5 left §3-§7 + exam-strategy + flashcards + quiz + checklist + feeders EN-only). | P0 | ✅ closed — Unit 6 SG now 439/439 EN/ZH balanced. All 15 SGs fully bilingual. |
 | ~~**S6-PS-zh-bulk**~~ | Add ZH translation to all 36 HS Math Practice + Solutions files (Units 1-15). | P0 | ✅ closed — 36/36 files bilingual with balanced spans (Unit 4 Solutions 309/310 by design: word-order split around inline `<code>HSN-RN.A.1</code>`). **Two gaps found + fixed this session:** (1) Unit 13 Solutions was entirely untranslated (0 spans) → full bilingual pass, now 282/282; (2) 7 Solutions files (Units 8-12, 14, 15) had spans + toggle button but no `toggleLang()` `<script>`, leaving ZH unreachable → script added via `scripts/fix_hs_solutions_toggle.py` (idempotent, line-ending preserving). |
-| **S6-PS-mark-normalize** | Normalize P+S mark structures across Units 7-15 (Units 11, 13, 15 at 90; rest at 18+35+28=81). | P1 | **deferred to Sprint 7** — each file's totals are internally correct; this is a cross-unit consistency fix, not a correctness one. Delicate (re-allocate per-Q marks + re-sum callouts), so isolated for its own batch. |
-| **S6-P2-polish** | Worked-example variety (Units 3, 4, 12, 13, 15); Unit 13 §5 quiz repetition; Unit 1 SG flashcard mix; ZH term polish; honors-flag wording standardization. | P2 | **deferred to Sprint 7**. |
+| ~~**S6-PS-mark-normalize**~~ | Normalize P+S mark structures across Units 7-15. | P1 | ✅ **closed by verification 2026-05-31 — NO WORK NEEDED.** The Sprint 5 note ("Units 11, 13, 15 at 90") was stale. A direct audit of all 18 Units 7-15 P+S files shows every one is **already uniformly 18+35+28=81** (Part I Q1-5 = 18, Part II Q6-9 = 35, Part III Q10-12 = 28), banners + footers consistent, Practice/Solutions paired. Nothing to rebalance. |
+| **S6-P2-polish** | Worked-example variety (Units 3, 4, 12, 13, 15); Unit 13 §5 quiz repetition; Unit 1 SG flashcard mix; ZH term polish; honors-flag wording standardization. | P2 | **optional backlog** — subjective polish, deprioritized below the HS STEM build-out (see below). |
 
-Sprint 6 corpus delta: **15/15 SGs now fully bilingual** (Unit 6 finished) and **36/36 P+S files now bilingual** with working language toggles. HS Math is fully ZH-ready end-to-end.
+Sprint 6 corpus delta: **15/15 SGs now fully bilingual** (Unit 6 finished) and **36/36 P+S files now bilingual** with working language toggles. HS Math is fully ZH-ready end-to-end, and all P+S mark structures are uniform at 81.
 
-Sprint 7 candidates: S6-PS-mark-normalize (P1), S6-P2-polish (P2).
+### Sprint 7 — verification + strategic pivot — **2026-05-31**
+
+P1 mark-normalization resolved by verification (above). The remaining HS Math
+item (S6-P2-polish) is subjective P2 polish and is **deprioritized**: the user
+has reprioritized to **build out the entire High School STEM tier** (Physics,
+Chemistry, Biology, Computer Science) alongside the existing High School Math,
+Study-Guides-first and bilingual, across US / BC / ON / AB curricula. That
+program is scaffolded on branch `hs_stem_buildout`; see
+[`rag/subjects/high_school_stem_program.md`](../rag/subjects/high_school_stem_program.md)
+for the roadmap. HS Math is **content-complete** (15/15 units, full triplet,
+fully bilingual, uniform marks); P2 polish can be picked up opportunistically.
 
 ### Sprint 5 — ZH retro + P+S catch-up + AB extracts — **CLOSED 2026-05-29** (branch `high_school_math_sprint5`, FF-merged to main at `3a7ad99`)
 
