@@ -27,11 +27,13 @@
     --sol-bg:#F1F7EE;  --sol-rule:#5E8E47;  --sol-ink:#2F4E1E;
     --sol-accent:#3E7228;
     --insight-bg:#FBF6EC; --insight-rule:#C49350; --insight-ink:#5E4014;
+    --font-body:'Times New Roman', Times, Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+    --font-sans:'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:var(--font-body);font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -78,140 +80,151 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ── Lang toggle (locked Sprint 4; same tokens as the Study Guide) ── */
+  .lang-bar{display:flex;justify-content:center;margin:6px 0 10px;}
+  .lang-btn{font-family:var(--font-sans);font-weight:700;font-size:9pt;letter-spacing:.1em;padding:4px 14px;border:1px solid var(--maroon);background:#fff;color:var(--maroon);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn:hover{background:var(--maroon);color:#fff;}
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  body.lang-zh{font-family:var(--font-sans);}
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}.lang-bar{display:none;}}
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <button class="lang-btn" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+</div>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Solutions</div>
-<h1 class="chapter-title">Introduction to Limits and Calculus &middot; Solutions</h1>
-<p class="chapter-sub">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; AP Calc AB-feeder / MCV4U / BC Calc 12 / AB Math 31 styles</p>
+<div class="chapter-tag"><span data-lang="en">Solutions</span><span data-lang="zh">详解</span></div>
+<h1 class="chapter-title"><span data-lang="en">Introduction to Limits and Calculus &middot; Solutions</span><span data-lang="zh">极限与微积分入门 &middot; 详解</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; AP Calc AB-feeder / MCV4U / BC Calc 12 / AB Math 31 styles</span><span data-lang="zh">练习题配套答案 &middot; 逐分讲解 &middot; AP Calc AB 衔接 / MCV4U / BC Calc 12 / AB Math 31 风格</span></p>
 
 <div class="legend">
-  <span class="pill easy">EASY</span>
-  <span class="pill med">MEDIUM</span>
-  <span class="pill hard">HARD</span>
-  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-  <span class="pill paper">AP-feeder FRQ</span>
-  <span class="pill paper">ON Provincial-style</span>
-  <span class="pill paper">BC Provincial-style</span>
-  <span class="pill paper">AB Math 31-style</span>
-  <span class="pill honors">Honors</span>
+  <span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+  <span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+  <span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+  <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+  <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">AB Math 31-style</span><span data-lang="zh">阿尔伯塔 Math 31 风格</span></span>
+  <span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
 </div>
 
 <hr class="thick"><hr class="thin">
 
-<p class="draft-banner"><code>v1</code> &middot; companion to <code>Unit_15_Introduction_to_Limits_and_Calculus_Practice.html</code> &middot; 12 Qs &middot; 90 marks &middot; mark-by-mark walkthroughs with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> callouts</p>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">companion to <code>Unit_15_Introduction_to_Limits_and_Calculus_Practice.html</code> &middot; 12 Qs &middot; 81 marks &middot; mark-by-mark walkthroughs with</span><span data-lang="zh">配套练习：<code>Unit_15_Introduction_to_Limits_and_Calculus_Practice.html</code> &middot; 共 12 题 &middot; 81 分 &middot; 逐分讲解，含</span> <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> <span data-lang="en">callouts</span><span data-lang="zh">分项标记</span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
-     PART I, Short Response Solutions (Q1–Q5, 22 marks)
+     PART I, Short Response Solutions (Q1–Q5, 18 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span class="part-meta">AP-feeder MCQ + ON/BC short answer &middot; 22 marks</span></div>
-<h2 class="section-head">Section A &middot; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 短答题 &middot; 详解</span></span><span class="part-meta"><span data-lang="en">AP-feeder MCQ + ON/BC short answer &middot; 18 marks</span><span data-lang="zh">AP 衔接选择题 + 安/卑省考短答 &middot; 共 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Worked Solutions</span><span data-lang="zh">A 部分 &middot; 详细解答</span></h2>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;1 Intuitive Limits &middot; AP Calc AB Unit 1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q1</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Intuitive Limits</span><span data-lang="zh">直观的极限</span> &middot; AP Calc AB Unit 1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Estimate $\lim_{x \to 2} f(x)$ from the symmetric table around $x = 2$.</p>
+    <p class="prompt"><span data-lang="en">Estimate $\lim_{x \to 2} f(x)$ from the symmetric table around $x = 2$.</span><span data-lang="zh">根据 $x = 2$ 附近的对称数表估计 $\lim_{x \to 2} f(x)$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$5$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(B) &nbsp;$5$</span></div>
     <div class="rationale">
-      <h4>(a) Read both sides of the table <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
-      As $x$ creeps up on $2$ from the left ($1.9 \to 1.99 \to 1.999$), the $f$-values run $4.41 \to 4.9401 \to 4.994001$, climbing toward $5$. As $x$ creeps down on $2$ from the right ($2.001 \to 2.01 \to 2.1$), the $f$-values run $5.006001 \to 5.0601 \to 5.61$, falling toward $5$. Both one-sided trends converge on the same value, so the two-sided limit exists and equals $\mathbf{5}$. (The table is consistent with $f(x) = x^{2} + 1$, where $f(2) = 5$, but the limit argument does not need to know the formula.)
+      <h4>(a) <span data-lang="en">Read both sides of the table</span><span data-lang="zh">同时读表的两侧</span> <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <span data-lang="en">As $x$ creeps up on $2$ from the left ($1.9 \to 1.99 \to 1.999$), the $f$-values run $4.41 \to 4.9401 \to 4.994001$, climbing toward $5$. As $x$ creeps down on $2$ from the right ($2.001 \to 2.01 \to 2.1$), the $f$-values run $5.006001 \to 5.0601 \to 5.61$, falling toward $5$. Both one-sided trends converge on the same value, so the two-sided limit exists and equals $\mathbf{5}$. (The table is consistent with $f(x) = x^{2} + 1$, where $f(2) = 5$, but the limit argument does not need to know the formula.)</span><span data-lang="zh">当 $x$ 从左侧逼近 $2$（$1.9 \to 1.99 \to 1.999$）时，$f$ 的取值为 $4.41 \to 4.9401 \to 4.994001$，向 $5$ 攀升。当 $x$ 从右侧逼近 $2$（$2.001 \to 2.01 \to 2.1$）时，$f$ 的取值为 $5.006001 \to 5.0601 \to 5.61$，向 $5$ 下降。两侧趋势收敛于同一值，故双侧极限存在且等于 $\mathbf{5}$。（数表与 $f(x) = x^{2} + 1$ 一致，此时 $f(2) = 5$，但求极限的论证不需要知道具体公式。）</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">干扰项分析。</span></strong>
         <ul>
-          <li><strong>(A) $4$</strong>, reads only the far-left value $f(1.9) = 4.41$ and rounds aggressively; ignores that the entries get closer to $5$, not $4$, as $x$ gets closer to $2$.</li>
-          <li><strong>(C) $5.006$</strong>, copies the right-most-of-the-close-in entries verbatim instead of recognizing the trend toward a clean value of $5$. A limit is the value the function <em>approaches</em>, not the closest tabulated entry.</li>
-          <li><strong>(D) The limit does not exist</strong>, would require the two one-sided trends to disagree (or to oscillate). Here both sides agree on $5$, so the limit exists.</li>
+          <li><strong>(A) $4$</strong><span data-lang="en">, reads only the far-left value $f(1.9) = 4.41$ and rounds aggressively; ignores that the entries get closer to $5$, not $4$, as $x$ gets closer to $2$.</span><span data-lang="zh">：只读了最左端的 $f(1.9) = 4.41$ 并粗暴取整；忽略了随着 $x$ 趋近 $2$，数据是在向 $5$（而非 $4$）靠拢。</span></li>
+          <li><strong>(C) $5.006$</strong><span data-lang="en">, copies the right-most-of-the-close-in entries verbatim instead of recognizing the trend toward a clean value of $5$. A limit is the value the function <em>approaches</em>, not the closest tabulated entry.</span><span data-lang="zh">：直接照抄最接近 $2$ 的右侧数据，没有看出数据是在向干净的 $5$ 靠拢。极限是函数所<em>趋近</em>的值，不是最接近的表中条目。</span></li>
+          <li><strong>(D) <span data-lang="en">The limit does not exist</span><span data-lang="zh">极限不存在</span></strong><span data-lang="en">, would require the two one-sided trends to disagree (or to oscillate). Here both sides agree on $5$, so the limit exists.</span><span data-lang="zh">：这要求两侧趋势不一致（或振荡）。此处两侧都收敛到 $5$，故极限存在。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>A symmetric table around $c$ is a yes/no test for the two-sided limit.</strong> If the left-side column and the right-side column close in on the same value, the limit exists and equals that value. If they close in on different values, the limit does not exist (jump discontinuity). If the values blow up or oscillate without settling, the limit does not exist either. The Study Guide $\S 1$ frames this as "$x$ gets arbitrarily close to $c$ from either side; the limit does not care what $f(c)$ is." For AP Calc AB Unit 1, every tabular-limit MCQ rewards the student who reads <em>both</em> columns before answering.</div>
+      <div class="insight"><strong><span data-lang="en">A symmetric table around $c$ is a yes/no test for the two-sided limit.</span><span data-lang="zh">围绕 $c$ 的对称数表，就是判断双侧极限的是 / 否检验。</span></strong> <span data-lang="en">If the left-side column and the right-side column close in on the same value, the limit exists and equals that value. If they close in on different values, the limit does not exist (jump discontinuity). If the values blow up or oscillate without settling, the limit does not exist either. The Study Guide $\S 1$ frames this as "$x$ gets arbitrarily close to $c$ from either side; the limit does not care what $f(c)$ is." For AP Calc AB Unit 1, every tabular-limit MCQ rewards the student who reads <em>both</em> columns before answering.</span><span data-lang="zh">若左右两列收敛于同一值，则极限存在且等于该值。若收敛于不同值，则极限不存在（跳跃间断）。若数值发散或振荡不定，极限同样不存在。学习指南 $\S 1$ 概括为"$x$ 从两侧任意逼近 $c$；极限不关心 $f(c)$ 是什么"。在 AP Calc AB Unit 1 中，每一道数表型极限选择题都奖励先看<em>两侧</em>再作答的学生。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;2 Algebraic Limits &middot; AP Calc AB Unit 1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q2</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Algebraic Limits</span><span data-lang="zh">代数法求极限</span> &middot; AP Calc AB Unit 1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Evaluate $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3}$.</p>
+    <p class="prompt"><span data-lang="en">Evaluate $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3}$.</span><span data-lang="zh">求 $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3}$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(C) &nbsp;$6$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(C) &nbsp;$6$</span></div>
     <div class="rationale">
-      <h4>(a) Direct substitution gives $0/0$, an indeterminate form <span class="marks-call">M1</span></h4>
-      Plugging $x = 3$ into $\dfrac{x^{2} - 9}{x - 3}$ gives $\dfrac{9 - 9}{3 - 3} = \dfrac{0}{0}$, which is <em>indeterminate</em>, not "undefined-so-the-limit-does-not-exist". The $0/0$ form is the trigger to factor and cancel.
+      <h4>(a) <span data-lang="en">Direct substitution gives $0/0$, an indeterminate form</span><span data-lang="zh">直接代入得 $0/0$，为不定式</span> <span class="marks-call">M1</span></h4>
+      <span data-lang="en">Plugging $x = 3$ into $\dfrac{x^{2} - 9}{x - 3}$ gives $\dfrac{9 - 9}{3 - 3} = \dfrac{0}{0}$, which is <em>indeterminate</em>, not "undefined-so-the-limit-does-not-exist". The $0/0$ form is the trigger to factor and cancel.</span><span data-lang="zh">将 $x = 3$ 代入 $\dfrac{x^{2} - 9}{x - 3}$ 得 $\dfrac{9 - 9}{3 - 3} = \dfrac{0}{0}$，这是<em>不定式</em>，并非"无定义 = 极限不存在"。$0/0$ 就是因式分解与约分的信号。</span>
 
-      <h4>(b) Factor and cancel, then substitute <span class="marks-call">A1&middot;A1</span></h4>
-      The numerator is a difference of squares: $x^{2} - 9 = (x - 3)(x + 3)$. So for $x \ne 3$,
+      <h4>(b) <span data-lang="en">Factor and cancel, then substitute</span><span data-lang="zh">因式分解、约分，再代入</span> <span class="marks-call">A1&middot;A1</span></h4>
+      <span data-lang="en">The numerator is a difference of squares: $x^{2} - 9 = (x - 3)(x + 3)$. So for $x \ne 3$,</span><span data-lang="zh">分子是平方差：$x^{2} - 9 = (x - 3)(x + 3)$。故对 $x \ne 3$：</span>
       $$ \frac{x^{2} - 9}{x - 3} \;=\; \frac{(x - 3)(x + 3)}{x - 3} \;=\; x + 3. $$
-      Therefore $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3} = \lim_{x \to 3} (x + 3) = 6$. Matches option <strong>(C)</strong>.
+      <span data-lang="en">Therefore $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3} = \lim_{x \to 3} (x + 3) = 6$. Matches option <strong>(C)</strong>.</span><span data-lang="zh">因此 $\lim_{x \to 3} \dfrac{x^{2} - 9}{x - 3} = \lim_{x \to 3} (x + 3) = 6$。对应选项 <strong>(C)</strong>。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">干扰项分析。</span></strong>
         <ul>
-          <li><strong>(A) $0$</strong>, mistakes the indeterminate $0/0$ for "$0$ divided by anything is $0$". The numerator <em>and</em> denominator are both heading to zero; that requires factoring, not arithmetic.</li>
-          <li><strong>(B) $3$</strong>, sloppy substitution into the simplified $x + 3$ at $x = 0$ instead of $x = 3$; or, alternatively, drops the $+ 3$ after cancellation.</li>
-          <li><strong>(D) The limit does not exist</strong>, confuses "$f(3)$ undefined" with "$\lim_{x \to 3} f(x)$ undefined". The Study Guide $\S 1$ "hole example" is exactly this point: the limit can exist even when $f(c)$ does not.</li>
+          <li><strong>(A) $0$</strong><span data-lang="en">, mistakes the indeterminate $0/0$ for "$0$ divided by anything is $0$". The numerator <em>and</em> denominator are both heading to zero; that requires factoring, not arithmetic.</span><span data-lang="zh">：把不定式 $0/0$ 错当成"$0$ 除以任何数都是 $0$"。分子与分母都在趋于 $0$，需要的是因式分解，不是算术。</span></li>
+          <li><strong>(B) $3$</strong><span data-lang="en">, sloppy substitution into the simplified $x + 3$ at $x = 0$ instead of $x = 3$; or, alternatively, drops the $+ 3$ after cancellation.</span><span data-lang="zh">：把化简后的 $x + 3$ 误代入 $x = 0$ 而非 $x = 3$；或在约分后丢掉了 $+ 3$。</span></li>
+          <li><strong>(D) <span data-lang="en">The limit does not exist</span><span data-lang="zh">极限不存在</span></strong><span data-lang="en">, confuses "$f(3)$ undefined" with "$\lim_{x \to 3} f(x)$ undefined". The Study Guide $\S 1$ "hole example" is exactly this point: the limit can exist even when $f(c)$ does not.</span><span data-lang="zh">：把 "$f(3)$ 无定义"与 "$\lim_{x \to 3} f(x)$ 不存在"混为一谈。学习指南 $\S 1$ 的"洞"例子正是为了厘清这点：即便 $f(c)$ 无定义，极限仍可以存在。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>$0/0$ is the algebra-do-something signal, not a final answer.</strong> Every algebraic-limits problem starts with direct substitution. If you get a real number, you are done (limit laws plus continuity of polynomials guarantee it). If you get $0/0$, that's the prompt to reach for the next tool: factor and cancel, conjugate, combine fractions, then take the limit. The Study Guide $\S 2$ ranks these three moves in order: factor-cancel is by far the most common on AP Calc AB Unit 1. Other indeterminate forms ($\infty/\infty$, $\infty - \infty$, $0 \cdot \infty$) all have their own algebraic moves; the AB exam reuses these patterns relentlessly.</div>
+      <div class="insight"><strong><span data-lang="en">$0/0$ is the algebra-do-something signal, not a final answer.</span><span data-lang="zh">$0/0$ 是"动手做代数"的信号，不是终答。</span></strong> <span data-lang="en">Every algebraic-limits problem starts with direct substitution. If you get a real number, you are done (limit laws plus continuity of polynomials guarantee it). If you get $0/0$, that's the prompt to reach for the next tool: factor and cancel, conjugate, combine fractions, then take the limit. The Study Guide $\S 2$ ranks these three moves in order: factor-cancel is by far the most common on AP Calc AB Unit 1. Other indeterminate forms ($\infty/\infty$, $\infty - \infty$, $0 \cdot \infty$) all have their own algebraic moves; the AB exam reuses these patterns relentlessly.</span><span data-lang="zh">每道代数极限题都先从直接代入开始。若得到实数，工作完成（极限运算法则与多项式连续性保证）。若得 $0/0$，则提示动用下一个工具：因式约分、共轭法、合并分式，再取极限。学习指南 $\S 2$ 给出三项顺序：因式约分在 AP Calc AB Unit 1 中出现频率最高。其余不定式（$\infty/\infty$、$\infty - \infty$、$0 \cdot \infty$）各有专属代数手法；AB 考试会反复使用这些套路。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;5 Power Rule &middot; AP Calc AB Unit 2</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q3</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;5 <span data-lang="en">Power Rule</span><span data-lang="zh">幂法则</span> &middot; AP Calc AB Unit 2</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">$f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$; find $f'(x)$.</p>
+    <p class="prompt"><span data-lang="en">$f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$; find $f'(x)$.</span><span data-lang="zh">设 $f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$，求 $f'(x)$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(A) &nbsp;$20 x^{4} - 6 x + 7$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(A) &nbsp;$20 x^{4} - 6 x + 7$</span></div>
     <div class="rationale">
-      <h4>(a) Apply power, constant-multiple, sum / difference rules term-by-term <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
-      Use $(x^{n})' = n x^{n - 1}$ on each term, with $(c f)' = c f'$ and $(f + g)' = f' + g'$:
+      <h4>(a) <span data-lang="en">Apply power, constant-multiple, sum / difference rules term-by-term</span><span data-lang="zh">逐项使用幂法则、常数倍法则、求和 / 差法则</span> <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <span data-lang="en">Use $(x^{n})' = n x^{n - 1}$ on each term, with $(c f)' = c f'$ and $(f + g)' = f' + g'$:</span><span data-lang="zh">对每项使用 $(x^{n})' = n x^{n - 1}$，配合 $(c f)' = c f'$ 与 $(f + g)' = f' + g'$：</span>
       <ul>
         <li>$(4 x^{5})' = 4 \cdot 5 x^{4} = 20 x^{4}$.</li>
         <li>$(-3 x^{2})' = -3 \cdot 2 x = -6 x$.</li>
         <li>$(7 x)' = 7 \cdot 1 \cdot x^{0} = 7$.</li>
-        <li>$(-11)' = 0$ (derivative of a constant is zero).</li>
+        <li>$(-11)' = 0$ <span data-lang="en">(derivative of a constant is zero).</span><span data-lang="zh">（常数的导数为零）。</span></li>
       </ul>
-      Sum: $f'(x) = 20 x^{4} - 6 x + 7$, matching option <strong>(A)</strong>.
+      <span data-lang="en">Sum: $f'(x) = 20 x^{4} - 6 x + 7$, matching option <strong>(A)</strong>.</span><span data-lang="zh">求和：$f'(x) = 20 x^{4} - 6 x + 7$，对应选项 <strong>(A)</strong>。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">干扰项分析。</span></strong>
         <ul>
-          <li><strong>(B) $20 x^{5} - 6 x^{2} + 7$</strong>, multiplies the coefficient by the exponent but forgets to subtract $1$ from each exponent. The power rule $n x^{n - 1}$ has two pieces; both must apply.</li>
-          <li><strong>(C) $4 x^{4} - 3 x + 7$</strong>, subtracts $1$ from each exponent but forgets the coefficient-times-exponent step. A common slip when sketching the rule from memory.</li>
-          <li><strong>(D) $20 x^{4} - 6 x + 7 - 11$</strong>, leaves the constant $-11$ in the answer. The derivative of any constant is $0$, so $-11$ vanishes; keeping it is the single most common power-rule slip on the AP Calc AB MCQ section.</li>
+          <li><strong>(B) $20 x^{5} - 6 x^{2} + 7$</strong><span data-lang="en">, multiplies the coefficient by the exponent but forgets to subtract $1$ from each exponent. The power rule $n x^{n - 1}$ has two pieces; both must apply.</span><span data-lang="zh">：把系数乘了指数，却忘了把每个指数减 $1$。幂法则 $n x^{n - 1}$ 有两部分，两步都要做。</span></li>
+          <li><strong>(C) $4 x^{4} - 3 x + 7$</strong><span data-lang="en">, subtracts $1$ from each exponent but forgets the coefficient-times-exponent step. A common slip when sketching the rule from memory.</span><span data-lang="zh">：每个指数减 $1$，却漏了"系数乘指数"那一步。凭记忆默写法则时常见的疏漏。</span></li>
+          <li><strong>(D) $20 x^{4} - 6 x + 7 - 11$</strong><span data-lang="en">, leaves the constant $-11$ in the answer. The derivative of any constant is $0$, so $-11$ vanishes; keeping it is the single most common power-rule slip on the AP Calc AB MCQ section.</span><span data-lang="zh">：把常数 $-11$ 留在答案里。任意常数的导数都为 $0$，故 $-11$ 消失；保留它是 AP Calc AB 选择题部分最常见的幂法则失误。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>Constants vanish; linear terms become their slope; everything else loses one degree.</strong> The mental scan for any polynomial: each $a x^{n}$ becomes $a n x^{n - 1}$, the linear term $b x$ becomes $b$, and every additive constant disappears. So the derivative of any degree-$5$ polynomial is a degree-$4$ polynomial with no constant inherited from the original constant. The Study Guide $\S 5$ frames this as "linearity of differentiation": $(c f + d g)' = c f' + d g'$. AP Calc AB Unit 2 builds product, quotient, and chain rules on top of this, but the linearity over sums and constant multiples never goes away.</div>
+      <div class="insight"><strong><span data-lang="en">Constants vanish; linear terms become their slope; everything else loses one degree.</span><span data-lang="zh">常数消失；线性项变为斜率；其余各项次数降 $1$。</span></strong> <span data-lang="en">The mental scan for any polynomial: each $a x^{n}$ becomes $a n x^{n - 1}$, the linear term $b x$ becomes $b$, and every additive constant disappears. So the derivative of any degree-$5$ polynomial is a degree-$4$ polynomial with no constant inherited from the original constant. The Study Guide $\S 5$ frames this as "linearity of differentiation": $(c f + d g)' = c f' + d g'$. AP Calc AB Unit 2 builds product, quotient, and chain rules on top of this, but the linearity over sums and constant multiples never goes away.</span><span data-lang="zh">对任意多项式做心算：每个 $a x^{n}$ 变为 $a n x^{n - 1}$，线性项 $b x$ 变为 $b$，所有加法常数消失。故任意五次多项式的导数为四次多项式，且不会继承原常数项。学习指南 $\S 5$ 概括为"求导的线性性"：$(c f + d g)' = c f' + d g'$。AP Calc AB Unit 2 在此之上构建积、商、链式法则，但求和与常数倍的线性性始终不变。</span></div>
     </div>
   </div>
 </div>
@@ -222,7 +235,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
     <span class="pill paper">ON Provincial-style</span>
     <span class="pill topic">&sect;3 One-Sided Limits &amp; Continuity &middot; MCV4U Strand A</span>
-    <span class="pill marks">[6 marks]</span>
+    <span class="pill marks">[4 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">$f(x) = 2x + 1$ for $x &lt; 1$; $f(1) = 5$; $f(x) = x^{2} + 2$ for $x &gt; 1$. (a) One-sided limits. (b) Two-sided limit. (c) Continuity at $x = 1$.</p>
@@ -230,7 +243,7 @@
   <div class="solution">
     <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\lim_{x \to 1^{-}} f = 3$, $\lim_{x \to 1^{+}} f = 3$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $\lim_{x \to 1} f = 3$ (both sides agree) &nbsp;&middot;&nbsp; <span class="ans">(c)</span> Discontinuous at $x = 1$: condition 3 fails ($\lim \ne f(1)$).</div>
     <div class="rationale">
-      <h4>(a) Plug each branch into its own side <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(a) Plug each branch into its own side <span class="marks-call">M1</span></h4>
       Left side ($x &lt; 1$ branch): $\lim_{x \to 1^{-}} (2 x + 1) = 2(1) + 1 = 3$.<br>
       Right side ($x &gt; 1$ branch): $\lim_{x \to 1^{+}} (x^{2} + 2) = (1)^{2} + 2 = 3$.<br>
       Both one-sided limits equal $3$. The $f(1) = 5$ assignment plays no role here; the limit is about how $f$ behaves <em>near</em> $1$, not at $1$.
@@ -239,7 +252,7 @@
       Since $\lim_{x \to 1^{-}} f(x) = 3 = \lim_{x \to 1^{+}} f(x)$, the two-sided limit exists and equals $3$:
       $$ \lim_{x \to 1} f(x) \;=\; 3. $$
 
-      <h4>(c) Continuity at $x = 1$: three conditions <span class="marks-call">A1&middot;A1</span></h4>
+      <h4>(c) Continuity at $x = 1$: three conditions <span class="marks-call">A1</span></h4>
       A function is continuous at $c$ iff <em>all three</em> of the following hold:
       <ol>
         <li>$f(c)$ is defined &mdash; here $f(1) = 5$. $\checkmark$</li>
@@ -259,7 +272,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
     <span class="pill paper">BC Provincial-style</span>
     <span class="pill topic">&sect;3 Limits at Infinity &middot; BC Calc 12</span>
-    <span class="pill marks">[7 marks]</span>
+    <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">$g(x) = \dfrac{3 x^{2} - 5 x + 1}{2 x^{2} + 4}$. (a) $\lim_{x \to \infty}$. (b) $\lim_{x \to -\infty}$. (c) Horizontal asymptote.</p>
@@ -267,7 +280,7 @@
   <div class="solution">
     <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\dfrac{3}{2}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $\dfrac{3}{2}$ (same; even-degree dominant terms) &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $y = \dfrac{3}{2}$</div>
     <div class="rationale">
-      <h4>(a) Divide top and bottom by $x^{2}$ <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <h4>(a) Divide top and bottom by $x^{2}$ <span class="marks-call">M1&middot;A1</span></h4>
       The highest power of $x$ in the denominator is $x^{2}$. Divide every term in numerator and denominator by $x^{2}$:
       $$ g(x) \;=\; \frac{3 x^{2} - 5 x + 1}{2 x^{2} + 4} \;=\; \frac{3 - \dfrac{5}{x} + \dfrac{1}{x^{2}}}{2 + \dfrac{4}{x^{2}}}. $$
       As $x \to \infty$, the terms $\dfrac{5}{x}, \dfrac{1}{x^{2}}, \dfrac{4}{x^{2}}$ all tend to $0$, leaving the dominant ratio:
@@ -288,9 +301,9 @@
 <div class="page-break"></div>
 
 <!-- ─────────────────────────────────────────────────────────────────────
-     PART II, Extended Response Solutions (Q6–Q9, 36 marks)
+     PART II, Extended Response Solutions (Q6–Q9, 35 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE &middot; SOLUTIONS</span><span class="part-meta">AP-feeder FRQ + honors &middot; 36 marks</span></div>
+<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE &middot; SOLUTIONS</span><span class="part-meta">AP-feeder FRQ + honors &middot; 35 marks</span></div>
 <h2 class="section-head">Section B &middot; Worked Solutions</h2>
 
 <div class="q frq">
@@ -300,7 +313,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
     <span class="pill paper">AP-feeder FRQ</span>
     <span class="pill topic">&sect;4 Derivative from Definition &middot; AP Calc AB Unit 2 / MCV4U Strand B</span>
-    <span class="pill marks">[9 marks]</span>
+    <span class="pill marks">[8 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">$f(x) = x^{2} - 4 x + 5$. (a) Definition. (b) Difference quotient. (c) Take the limit. (d) Verify via power rule + interpret $f'(3)$.</p>
@@ -312,7 +325,7 @@
       $$ f'(x) \;=\; \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}. $$
       (MCV4U Strand B markers will deduct an A1 if this definition is not written before the algebra begins.)
 
-      <h4>(b) Compute $f(x + h)$, form the difference quotient, simplify <span class="marks-call">M1&middot;A1&middot;A1&middot;A1</span></h4>
+      <h4>(b) Compute $f(x + h)$, form the difference quotient, simplify <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
       $$ f(x + h) \;=\; (x + h)^{2} - 4 (x + h) + 5 \;=\; x^{2} + 2 x h + h^{2} - 4 x - 4 h + 5. $$
       Subtract $f(x) = x^{2} - 4 x + 5$:
       $$ f(x + h) - f(x) \;=\; (2 x h + h^{2}) + (-4 h) \;=\; h(2 x + h - 4). $$
@@ -442,9 +455,9 @@
 <div class="page-break"></div>
 
 <!-- ─────────────────────────────────────────────────────────────────────
-     PART III, Modeling / Applied Solutions (Q10–Q12, 32 marks)
+     PART III, Modeling / Applied Solutions (Q10–Q12, 28 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED &middot; SOLUTIONS</span><span class="part-meta">Universal &middot; 32 marks</span></div>
+<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED &middot; SOLUTIONS</span><span class="part-meta">Universal &middot; 28 marks</span></div>
 <h2 class="section-head">Section C &middot; Modeling and Applications</h2>
 
 <div class="q app">
@@ -453,7 +466,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
     <span class="pill paper">ON Provincial-style</span>
     <span class="pill topic">&sect;4 Tangent Line &amp; Instantaneous Rate &middot; MCV4U Strand A &amp; B</span>
-    <span class="pill marks">[10 marks]</span>
+    <span class="pill marks">[9 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">Drone: $s(t) = -5 t^{2} + 40 t$ (m, s), $0 \le t \le 8$. (a) Average rate on $[1, 3]$. (b) $s'(t)$ + $s'(2)$ in context. (c) Time $s' = 0$ + peak meaning. (d) Tangent at $t = 1$.</p>
@@ -465,7 +478,7 @@
       Average rate is the secant slope:
       $$ \bar v_{[1,3]} \;=\; \frac{s(3) - s(1)}{3 - 1} \;=\; \frac{(-45 + 120) - (-5 + 40)}{2} \;=\; \frac{75 - 35}{2} \;=\; \frac{40}{2} \;=\; 20 \;\text{m/s}. $$
 
-      <h4>(b) Instantaneous rate via power rule <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <h4>(b) Instantaneous rate via power rule <span class="marks-call">M1&middot;A1</span></h4>
       $s'(t) = -5 \cdot 2 t + 40 \cdot 1 = -10 t + 40$. At $t = 2$: $\;s'(2) = -20 + 40 = 20$ m/s. <strong>Interpretation</strong>: at $t = 2$ seconds, the drone is rising at an instantaneous vertical velocity of $20$ metres per second (positive means upward).<br>
       Sanity check: the average rate on $[1, 3]$ also came out to $20$ m/s; by symmetry of the secant about $t = 2$, this match is expected for a quadratic, MCV4U Strand A actually uses this as a discovery exercise.
 
@@ -489,7 +502,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
     <span class="pill paper">AP-feeder FRQ</span>
     <span class="pill topic">&sect;6 Antiderivative &amp; Indefinite Integral &middot; AP Calc AB Unit 6</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill marks">[10 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">$v(t) = 3 t^{2} - 4 t + 2$ m/s, $s(0) = 5$ m. (a) General antiderivative. (b) Particular antiderivative via $s(0)$. (c) Verify $s' = v$. (d) $\int (4 x^{3} - 6/x^{2} + 5) dx$.</p>
@@ -511,7 +524,7 @@
       $$ s'(t) \;=\; 3 t^{2} - 4 t + 2 + 0 \;=\; v(t). \;\checkmark $$
       The "$+ 5$" disappears (derivative of a constant is zero), confirming the rule that any particular antiderivative differentiates back to the original integrand.
 
-      <h4>(d) Indefinite integral with negative-exponent term <span class="marks-call">M1&middot;A1&middot;A1&middot;A1</span></h4>
+      <h4>(d) Indefinite integral with negative-exponent term <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
       Rewrite $\dfrac{1}{x^{2}} = x^{-2}$. Apply reverse power rule:
       $$ \int 4 x^{3} \, dx \;=\; \frac{4 x^{4}}{4} \;=\; x^{4}, \quad \int -6 x^{-2} \, dx \;=\; -6 \cdot \frac{x^{-1}}{-1} \;=\; 6 x^{-1} \;=\; \frac{6}{x}, \quad \int 5 \, dx \;=\; 5 x. $$
       Combine and add $+ C$:
@@ -530,7 +543,7 @@
     <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
     <span class="pill paper">AP-feeder FRQ</span>
     <span class="pill topic">&sect;7 Definite Integral as Signed Area &middot; AP Calc AB Unit 6 / FTC</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill marks">[9 marks]</span>
   </div>
   <div class="q-body">
     <p class="prompt">$f(x) = 4 - x^{2}$ on $[-2, 3]$. (a) Sketch + intercepts + shading. (b) Sign of area on $[-2, 2]$ vs $[2, 3]$. (c) $\int_{-2}^{2}$ via FTC. (d) $\int_{2}^{3}$ via FTC. (e) Combine; net vs total geometric area.</p>
@@ -538,7 +551,7 @@
   <div class="solution">
     <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> downward parabola, intercepts $x = \pm 2$, vertex $(0, 4)$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $[-2, 2]$ above axis, $+$; $[2, 3]$ below, $-$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\dfrac{32}{3}$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> $-\dfrac{7}{3}$ &nbsp;&middot;&nbsp; <span class="ans">(e)</span> $\dfrac{25}{3}$, this is <em>net</em> signed area, not total geometric area.</div>
     <div class="rationale">
-      <h4>(a) Sketch <span class="marks-call">A1&middot;A1</span></h4>
+      <h4>(a) Sketch <span class="marks-call">A1</span></h4>
       $f(x) = 4 - x^{2}$ is a downward-opening parabola (leading coefficient $-1$) with vertex at $(0, 4)$ and $x$-intercepts where $4 - x^{2} = 0$, i.e. $x = \pm 2$. On the interval $[-2, 3]$ the graph rises from $(-2, 0)$ up to the vertex $(0, 4)$, then descends through $(2, 0)$ and continues to $(3, -5)$. Shade the region bounded above by the curve and bounded below by the $x$-axis for $x \in [-2, 2]$, and the region bounded above by the $x$-axis and below by the curve for $x \in [2, 3]$ (the curve dips below the axis on this sub-interval).
 
       <h4>(b) Sign on each sub-interval <span class="marks-call">A1&middot;A1</span></h4>
@@ -550,7 +563,7 @@
       $$ \int_{-2}^{2} (4 - x^{2}) \, dx \;=\; F(2) - F(-2) \;=\; \left( 8 - \tfrac{8}{3} \right) - \left( -8 + \tfrac{8}{3} \right) \;=\; 16 - \tfrac{16}{3} \;=\; \tfrac{48 - 16}{3} \;=\; \tfrac{32}{3}. $$
       Positive, consistent with the curve being above the axis on $[-2, 2]$.
 
-      <h4>(d) FTC on $[2, 3]$ <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(d) FTC on $[2, 3]$ <span class="marks-call">A1</span></h4>
       Using the same $F$:
       $$ \int_{2}^{3} (4 - x^{2}) \, dx \;=\; F(3) - F(2) \;=\; \left( 12 - 9 \right) - \left( 8 - \tfrac{8}{3} \right) \;=\; 3 - 8 + \tfrac{8}{3} \;=\; -5 + \tfrac{8}{3} \;=\; \tfrac{-15 + 8}{3} \;=\; -\tfrac{7}{3}. $$
       Negative, consistent with the curve being below the axis on $[2, 3]$, confirming part (b).
@@ -566,9 +579,14 @@
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Solutions &middot; <code style="color:#555;">v1</code> &middot; Companion to Practice &middot; 90 marks total</span>
-  <span>12 Qs &middot; 90 marks &middot; US (Honors) / ON / BC / AB &middot; AP-feeder / Provincial</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Solutions &middot; <code style="color:#555;">v1</code> &middot; Companion to Practice &middot; 81 marks total</span>
+  <span>12 Qs &middot; 81 marks &middot; US (Honors) / ON / BC / AB &middot; AP-feeder / Provincial</span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>

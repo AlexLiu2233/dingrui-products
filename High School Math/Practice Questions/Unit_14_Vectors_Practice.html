@@ -32,7 +32,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -91,16 +91,23 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* BILINGUAL TOGGLE (locked Sprint 4) */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
   @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}#langToggle{display:none !important;}}
 </style>
 </head>
 <body>
 
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Practice</div>
-<h1 class="chapter-title">Vectors</h1>
-<p class="chapter-sub">Practice Questions &middot; ON MCV4U &middot; US HSN-VM (+) Honors &middot; BC / AB out-of-core</p>
+<div class="chapter-tag"><span data-lang="en">Practice</span><span data-lang="zh">练习题</span></div>
+<h1 class="chapter-title"><span data-lang="en">Vectors</span><span data-lang="zh">向量</span></h1>
+<p class="chapter-sub"><span data-lang="en">Practice Questions &middot; ON MCV4U &middot; US HSN-VM (+) Honors &middot; BC / AB out-of-core</span><span data-lang="zh">练习题 &middot; ON MCV4U &middot; US HSN-VM (+) 荣誉 &middot; BC / AB 不在核心</span></p>
 
 <div class="legend">
   <span class="pill easy">EASY</span>
@@ -122,15 +129,15 @@
      flag §4-§7 as Honors for the US column (matches the Study Guide's
      section-by-section honors-flag pattern). -->
 <div class="syllabus-strip">
-  <div class="col"><b>&#x1F1FA;&#x1F1F8; US Common Core <span style="font-size:8pt;color:#7A5618;">(Honors / + cluster)</span></b><code>HSN-VM.A.1 (+)</code> &middot; <code>HSN-VM.A.2 (+)</code> &middot; <code>HSN-VM.A.3 (+)</code> &middot; <code>HSN-VM.B.4 (+)</code> &middot; <code>HSN-VM.B.5 (+)</code>. Entire HSN-VM cluster carries the (+) marker (STEM-track Pre-Calc).</div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; Ontario MCV4U <em>(core)</em></b>Strand C <em>Geometry and Algebra of Vectors</em>: C1 representing vectors, C2 vector operations, C3 dot/cross product, C4 lines/planes (lines/planes covered in IB HL feeder, not this unit).</div>
-  <div class="col oc"><b>&#x1F1E8;&#x1F1E6; BC PC11/PC12 + AB Math 30-1 <em>(out-of-core)</em></b>No vectors content in BC or AB published outcomes. Application home is IB Math AA HL Topic C3 (vectors) + AP Physics Unit 1 (kinematics &amp; force vectors).</div>
+  <div class="col"><b>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core <span style="font-size:8pt;color:#7A5618;">(Honors / + cluster)</span></span><span data-lang="zh">美国共同核心 <span style="font-size:8pt;color:#7A5618;">（荣誉 / + 簇）</span></span></b><code>HSN-VM.A.1 (+)</code> &middot; <code>HSN-VM.A.2 (+)</code> &middot; <code>HSN-VM.A.3 (+)</code> &middot; <code>HSN-VM.B.4 (+)</code> &middot; <code>HSN-VM.B.5 (+)</code>. <span data-lang="en">Entire HSN-VM cluster carries the (+) marker (STEM-track Pre-Calc).</span><span data-lang="zh">整个 HSN-VM 簇带 (+) 标记（STEM 方向 Pre-Calc）。</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario MCV4U <em>(core)</em></span><span data-lang="zh">安大略 MCV4U <em>（核心）</em></span></b><span data-lang="en">Strand C <em>Geometry and Algebra of Vectors</em>: C1 representing vectors, C2 vector operations, C3 dot/cross product, C4 lines/planes (lines/planes covered in IB HL feeder, not this unit).</span><span data-lang="zh">C 单元 <em>向量的几何与代数</em>：C1 向量的表示，C2 向量运算，C3 点积/叉积，C4 直线/平面（直线/平面在 IB HL 衔接单元中讲，不在本单元）。</span></div>
+  <div class="col oc"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC PC11/PC12 + AB Math 30-1 <em>(out-of-core)</em></span><span data-lang="zh">BC PC11/PC12 + AB Math 30-1 <em>（不在核心）</em></span></b><span data-lang="en">No vectors content in BC or AB published outcomes. Application home is IB Math AA HL Topic C3 (vectors) + AP Physics Unit 1 (kinematics &amp; force vectors).</span><span data-lang="zh">BC 与 AB 已发布大纲中均无向量内容。应用归宿是 IB Math AA HL 主题 C3（向量）与 AP Physics 第 1 单元（运动学与力向量）。</span></div>
 </div>
-<p class="syllabus-strip-note">Full 4-region Syllabus Map lives in <code>../Study Guides/Unit_14_Vectors.html</code>.</p>
+<p class="syllabus-strip-note"><span data-lang="en">Full 4-region Syllabus Map lives in <code>../Study Guides/Unit_14_Vectors.html</code>.</span><span data-lang="zh">完整 4 区域大纲对照见 <code>../Study Guides/Unit_14_Vectors.html</code>。</span></p>
 
 <hr class="thick"><hr class="thin">
-<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner"><code>v1</code> &middot; 12 Qs &middot; ~81 marks &middot; region + paper-style chips on every question &middot; companion: <code>Solutions/Unit_14_Vectors_Solutions.html</code></p>
+<div class="nameline"><span><span data-lang="en">Name:</span><span data-lang="zh">姓名：</span><span class="blank"></span></span><span><span data-lang="en">Date:</span><span data-lang="zh">日期：</span><span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">12 Qs &middot; ~81 marks &middot; region + paper-style chips on every question &middot; companion: <code>Solutions/Unit_14_Vectors_Solutions.html</code></span><span data-lang="zh">12 题 &middot; 约 81 分 &middot; 每题均标注区域与卷型 &middot; 配套解析：<code>Solutions/Unit_14_Vectors_Solutions.html</code></span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART I, Short Response (ON MCV4U + US HSN-VM (+))
@@ -140,9 +147,9 @@
      §3 addition + scalar multiplication componentwise.
      §4 (dot product) appears at the end with US-Honors flag.
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span class="part-meta">ON MCV4U + US HSN-VM (+) &middot; 18 marks</span></div>
-<h2 class="section-head">Section A &middot; Short Response</h2>
-<p class="instructions">Mix of multiple-choice and short-answer items. For MCQs, circle the letter; show enough work in the margin that a marker could verify. Write vectors in angle-bracket component form $\langle a, b\rangle$ unless the question states otherwise. State magnitudes to two decimals or exact-radical form as the question requires. No calculator on Q1–Q3; calculator permitted on Q4–Q5.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 简答题</span></span><span class="part-meta"><span data-lang="en">ON MCV4U + US HSN-VM (+) &middot; 18 marks</span><span data-lang="zh">ON MCV4U + US HSN-VM (+) &middot; 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Short Response</span><span data-lang="zh">A 节 &middot; 简答题</span></h2>
+<p class="instructions"><span data-lang="en">Mix of multiple-choice and short-answer items. For MCQs, circle the letter; show enough work in the margin that a marker could verify. Write vectors in angle-bracket component form $\langle a, b\rangle$ unless the question states otherwise. State magnitudes to two decimals or exact-radical form as the question requires. No calculator on Q1–Q3; calculator permitted on Q4–Q5.</span><span data-lang="zh">题型混合：选择题与简答题。选择题请圈出字母，并在空白处保留可验证的过程。除非题目另有说明，向量请用尖括号分量形式 $\langle a, b\rangle$ 表示。模长按题目要求保留两位小数或精确根式。Q1–Q3 不可用计算器；Q4–Q5 可用计算器。</span></p>
 
 <div class="q">
   <div class="q-head">
@@ -154,7 +161,7 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">The vector $\vec{AB}$ has initial point $A(-1, 4)$ and terminal point $B(5, -4)$. Which of the following is the component form of $\vec{AB}$, and what is its magnitude $|\vec{AB}|$?</p>
+    <p class="prompt"><span data-lang="en">The vector $\vec{AB}$ has initial point $A(-1, 4)$ and terminal point $B(5, -4)$. Which of the following is the component form of $\vec{AB}$, and what is its magnitude $|\vec{AB}|$?</span><span data-lang="zh">向量 $\vec{AB}$ 的起点为 $A(-1, 4)$，终点为 $B(5, -4)$。下列哪一项是 $\vec{AB}$ 的分量形式与其模长 $|\vec{AB}|$？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $\vec{AB} = \langle 6, -8\rangle$, $|\vec{AB}| = 10$</li>
       <li><span class="lab">(B)</span> $\vec{AB} = \langle -6, 8\rangle$, $|\vec{AB}| = 10$</li>
@@ -175,7 +182,7 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Let $\vec{v} = \langle -3, 4\rangle$. Which of the following gives $|\vec{v}|$ and the unit vector $\hat{v}$ in the same direction as $\vec{v}$?</p>
+    <p class="prompt"><span data-lang="en">Let $\vec{v} = \langle -3, 4\rangle$. Which of the following gives $|\vec{v}|$ and the unit vector $\hat{v}$ in the same direction as $\vec{v}$?</span><span data-lang="zh">设 $\vec{v} = \langle -3, 4\rangle$。下列哪一项给出 $|\vec{v}|$ 及与 $\vec{v}$ 同向的单位向量 $\hat{v}$？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $|\vec{v}| = 1$, $\hat{v} = \langle -3, 4\rangle$</li>
       <li><span class="lab">(B)</span> $|\vec{v}| = 5$, $\hat{v} = \left\langle -\tfrac{3}{5}, \tfrac{4}{5}\right\rangle$</li>
@@ -196,7 +203,7 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Let $\vec{u} = \langle 2, -1\rangle$ and $\vec{w} = \langle -4, 3\rangle$. Compute $2\vec{u} - \vec{w}$ in component form.</p>
+    <p class="prompt"><span data-lang="en">Let $\vec{u} = \langle 2, -1\rangle$ and $\vec{w} = \langle -4, 3\rangle$. Compute $2\vec{u} - \vec{w}$ in component form.</span><span data-lang="zh">设 $\vec{u} = \langle 2, -1\rangle$，$\vec{w} = \langle -4, 3\rangle$。求 $2\vec{u} - \vec{w}$ 的分量形式。</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $\langle 8, -5\rangle$</li>
       <li><span class="lab">(B)</span> $\langle 0, -5\rangle$</li>
@@ -216,10 +223,10 @@
     <span class="pill marks">[4 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A wind vector $\vec{w}$ has magnitude $|\vec{w}| = 20$ km/h and points in a direction $35^{\circ}$ north of east. Take east as the positive $x$-axis and north as the positive $y$-axis.</p>
+    <p class="prompt"><span data-lang="en">A wind vector $\vec{w}$ has magnitude $|\vec{w}| = 20$ km/h and points in a direction $35^{\circ}$ north of east. Take east as the positive $x$-axis and north as the positive $y$-axis.</span><span data-lang="zh">风向向量 $\vec{w}$ 的模长 $|\vec{w}| = 20$ km/h，方向为北偏东 $35^{\circ}$（即在东方向上方 $35^{\circ}$）。取东向为正 $x$ 轴，北向为正 $y$ 轴。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Write $\vec{w}$ in component form $\langle a, b\rangle$, with each component rounded to two decimals (km/h). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Verify your answer by computing $|\vec{w}|$ from your components; confirm it rounds to $20$ km/h. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Write $\vec{w}$ in component form $\langle a, b\rangle$, with each component rounded to two decimals (km/h).</span><span data-lang="zh">将 $\vec{w}$ 写成分量形式 $\langle a, b\rangle$，每个分量保留两位小数（km/h）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Verify your answer by computing $|\vec{w}|$ from your components; confirm it rounds to $20$ km/h.</span><span data-lang="zh">用所得分量计算 $|\vec{w}|$ 进行验算，确认其四舍五入后为 $20$ km/h。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -234,10 +241,10 @@
     <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Let $\vec{a} = \langle 3, -2\rangle$ and $\vec{b} = \langle 4, k\rangle$ where $k$ is a real parameter.</p>
+    <p class="prompt"><span data-lang="en">Let $\vec{a} = \langle 3, -2\rangle$ and $\vec{b} = \langle 4, k\rangle$ where $k$ is a real parameter.</span><span data-lang="zh">设 $\vec{a} = \langle 3, -2\rangle$，$\vec{b} = \langle 4, k\rangle$，其中 $k$ 为实参数。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\vec{a} \cdot \vec{b}$ in terms of $k$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find the value of $k$ for which $\vec{a}$ and $\vec{b}$ are perpendicular. State the perpendicularity test you used. <span class="marks-inline">[3]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\vec{a} \cdot \vec{b}$ in terms of $k$.</span><span data-lang="zh">求 $\vec{a} \cdot \vec{b}$ 关于 $k$ 的表达式。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the value of $k$ for which $\vec{a}$ and $\vec{b}$ are perpendicular. State the perpendicularity test you used.</span><span data-lang="zh">求使 $\vec{a}$ 与 $\vec{b}$ 垂直的 $k$ 值。写出所用的垂直判别式。</span> <span class="marks-inline">[3]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -251,9 +258,9 @@
      middle-component sign trap explicitly seeded), mixed §4-§6 algebra.
      Every Part II item is US-Honors because §4+ is the (+) cluster.
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span class="part-meta">AP-feeder FRQ + ON MCV4U C3 &middot; 35 marks</span></div>
-<h2 class="section-head">Section B &middot; Extended Response</h2>
-<p class="instructions">Show every step of each dot- and cross-product computation. For cross products, write the $3 \times 3$ determinant expansion explicitly and watch the sign of the middle component (Sarrus / cofactor expansion both work). State angles in degrees rounded to one decimal unless the question asks for radians. No calculator on Q6–Q8; calculator permitted on Q9.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span data-lang="zh">第二部分 &nbsp;&middot;&nbsp; 长答题</span></span><span class="part-meta"><span data-lang="en">AP-feeder FRQ + ON MCV4U C3 &middot; 35 marks</span><span data-lang="zh">AP 衔接 FRQ + ON MCV4U C3 &middot; 35 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &middot; Extended Response</span><span data-lang="zh">B 节 &middot; 长答题</span></h2>
+<p class="instructions"><span data-lang="en">Show every step of each dot- and cross-product computation. For cross products, write the $3 \times 3$ determinant expansion explicitly and watch the sign of the middle component (Sarrus / cofactor expansion both work). State angles in degrees rounded to one decimal unless the question asks for radians. No calculator on Q6–Q8; calculator permitted on Q9.</span><span data-lang="zh">点积与叉积的每一步都要写出来。叉积要明确写出 $3 \times 3$ 行列式展开，并注意中间分量的符号（Sarrus 与代数余子式展开均可）。角度若无特别说明保留到 0.1 度。Q6–Q8 不可用计算器；Q9 可用计算器。</span></p>
 
 <div class="q frq">
   <div class="q-head">
@@ -265,12 +272,12 @@
     <span class="pill marks">[8 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Let $\vec{u} = \langle 2, 3\rangle$ and $\vec{v} = \langle -1, 5\rangle$.</p>
+    <p class="prompt"><span data-lang="en">Let $\vec{u} = \langle 2, 3\rangle$ and $\vec{v} = \langle -1, 5\rangle$.</span><span data-lang="zh">设 $\vec{u} = \langle 2, 3\rangle$，$\vec{v} = \langle -1, 5\rangle$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\vec{u} \cdot \vec{v}$ algebraically (componentwise). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute $|\vec{u}|$ and $|\vec{v}|$ in exact-radical form. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Use the geometric form $\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}| \cos\theta$ to find the angle $\theta$ between $\vec{u}$ and $\vec{v}$, in degrees, rounded to one decimal. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> State whether $\theta$ is acute, right, or obtuse, and link that classification back to the sign of $\vec{u} \cdot \vec{v}$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\vec{u} \cdot \vec{v}$ algebraically (componentwise).</span><span data-lang="zh">用代数方法（按分量）计算 $\vec{u} \cdot \vec{v}$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute $|\vec{u}|$ and $|\vec{v}|$ in exact-radical form.</span><span data-lang="zh">以精确根式计算 $|\vec{u}|$ 与 $|\vec{v}|$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Use the geometric form $\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}| \cos\theta$ to find the angle $\theta$ between $\vec{u}$ and $\vec{v}$, in degrees, rounded to one decimal.</span><span data-lang="zh">利用几何形式 $\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}| \cos\theta$ 求 $\vec{u}$ 与 $\vec{v}$ 的夹角 $\theta$，以度为单位，保留 0.1。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">State whether $\theta$ is acute, right, or obtuse, and link that classification back to the sign of $\vec{u} \cdot \vec{v}$.</span><span data-lang="zh">指出 $\theta$ 是锐角、直角还是钝角，并把该分类与 $\vec{u} \cdot \vec{v}$ 的符号关联起来。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -284,12 +291,12 @@
     <span class="pill marks">[9 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">In $\mathbb{R}^{3}$, let $\vec{p} = \langle 1, -2, 2\rangle$ and $\vec{q} = \langle 3, 0, -4\rangle$.</p>
+    <p class="prompt"><span data-lang="en">In $\mathbb{R}^{3}$, let $\vec{p} = \langle 1, -2, 2\rangle$ and $\vec{q} = \langle 3, 0, -4\rangle$.</span><span data-lang="zh">在 $\mathbb{R}^{3}$ 中，设 $\vec{p} = \langle 1, -2, 2\rangle$，$\vec{q} = \langle 3, 0, -4\rangle$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $|\vec{p}|$ and $|\vec{q}|$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Find the unit vector $\hat{p}$ in the direction of $\vec{p}$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Compute $\vec{p} \cdot \vec{q}$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Find the angle between $\vec{p}$ and $\vec{q}$, in degrees, rounded to one decimal. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $|\vec{p}|$ and $|\vec{q}|$.</span><span data-lang="zh">计算 $|\vec{p}|$ 与 $|\vec{q}|$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the unit vector $\hat{p}$ in the direction of $\vec{p}$.</span><span data-lang="zh">求 $\vec{p}$ 方向上的单位向量 $\hat{p}$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Compute $\vec{p} \cdot \vec{q}$.</span><span data-lang="zh">计算 $\vec{p} \cdot \vec{q}$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the angle between $\vec{p}$ and $\vec{q}$, in degrees, rounded to one decimal.</span><span data-lang="zh">求 $\vec{p}$ 与 $\vec{q}$ 的夹角，以度为单位，保留 0.1。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
@@ -304,11 +311,11 @@
     <span class="pill marks">[8 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">In $\mathbb{R}^{3}$, let $\vec{a} = \langle 2, -1, 3\rangle$ and $\vec{b} = \langle 1, 4, -2\rangle$.</p>
+    <p class="prompt"><span data-lang="en">In $\mathbb{R}^{3}$, let $\vec{a} = \langle 2, -1, 3\rangle$ and $\vec{b} = \langle 1, 4, -2\rangle$.</span><span data-lang="zh">在 $\mathbb{R}^{3}$ 中，设 $\vec{a} = \langle 2, -1, 3\rangle$，$\vec{b} = \langle 1, 4, -2\rangle$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\vec{a} \times \vec{b}$ by writing out the $3 \times 3$ determinant expansion explicitly. <em>Be careful with the sign of the $\hat{j}$-component, the cofactor expansion picks up an extra minus sign.</em> <span class="marks-inline">[4]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Verify your answer is perpendicular to both $\vec{a}$ and $\vec{b}$ by checking $(\vec{a} \times \vec{b}) \cdot \vec{a} = 0$ and $(\vec{a} \times \vec{b}) \cdot \vec{b} = 0$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Compute $|\vec{a} \times \vec{b}|$, and state its geometric meaning (area of which figure?). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\vec{a} \times \vec{b}$ by writing out the $3 \times 3$ determinant expansion explicitly. <em>Be careful with the sign of the $\hat{j}$-component, the cofactor expansion picks up an extra minus sign.</em></span><span data-lang="zh">通过明确写出 $3 \times 3$ 行列式展开来计算 $\vec{a} \times \vec{b}$。<em>注意 $\hat{j}$ 分量的符号，代数余子式展开会多出一个负号。</em></span> <span class="marks-inline">[4]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Verify your answer is perpendicular to both $\vec{a}$ and $\vec{b}$ by checking $(\vec{a} \times \vec{b}) \cdot \vec{a} = 0$ and $(\vec{a} \times \vec{b}) \cdot \vec{b} = 0$.</span><span data-lang="zh">通过验证 $(\vec{a} \times \vec{b}) \cdot \vec{a} = 0$ 与 $(\vec{a} \times \vec{b}) \cdot \vec{b} = 0$，确认所得向量与 $\vec{a}$、$\vec{b}$ 均垂直。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Compute $|\vec{a} \times \vec{b}|$, and state its geometric meaning (area of which figure?).</span><span data-lang="zh">计算 $|\vec{a} \times \vec{b}|$，并说明其几何含义（是哪一个图形的面积？）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -323,12 +330,12 @@
     <span class="pill marks">[10 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">In $\mathbb{R}^{3}$, let $\vec{u} = \langle 1, 2, -1\rangle$ and $\vec{v} = \langle 2, 0, 1\rangle$.</p>
+    <p class="prompt"><span data-lang="en">In $\mathbb{R}^{3}$, let $\vec{u} = \langle 1, 2, -1\rangle$ and $\vec{v} = \langle 2, 0, 1\rangle$.</span><span data-lang="zh">在 $\mathbb{R}^{3}$ 中，设 $\vec{u} = \langle 1, 2, -1\rangle$，$\vec{v} = \langle 2, 0, 1\rangle$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\vec{u} \cdot \vec{v}$ and the angle $\theta$ between $\vec{u}$ and $\vec{v}$ (in degrees, to one decimal). <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute $\vec{u} \times \vec{v}$ via the determinant expansion. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Verify the identity $|\vec{u}|^{2} |\vec{v}|^{2} = (\vec{u} \cdot \vec{v})^{2} + |\vec{u} \times \vec{v}|^{2}$ (Lagrange's identity). Show both sides numerically. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Without recomputing, state $\vec{v} \times \vec{u}$, citing the antisymmetry property $\vec{v} \times \vec{u} = -(\vec{u} \times \vec{v})$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\vec{u} \cdot \vec{v}$ and the angle $\theta$ between $\vec{u}$ and $\vec{v}$ (in degrees, to one decimal).</span><span data-lang="zh">计算 $\vec{u} \cdot \vec{v}$ 与 $\vec{u}$、$\vec{v}$ 的夹角 $\theta$（度，保留 0.1）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute $\vec{u} \times \vec{v}$ via the determinant expansion.</span><span data-lang="zh">用行列式展开计算 $\vec{u} \times \vec{v}$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Verify the identity $|\vec{u}|^{2} |\vec{v}|^{2} = (\vec{u} \cdot \vec{v})^{2} + |\vec{u} \times \vec{v}|^{2}$ (Lagrange's identity). Show both sides numerically.</span><span data-lang="zh">验证恒等式 $|\vec{u}|^{2} |\vec{v}|^{2} = (\vec{u} \cdot \vec{v})^{2} + |\vec{u} \times \vec{v}|^{2}$（拉格朗日恒等式）。给出两侧的数值。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Without recomputing, state $\vec{v} \times \vec{u}$, citing the antisymmetry property $\vec{v} \times \vec{u} = -(\vec{u} \times \vec{v})$.</span><span data-lang="zh">不重新计算，依据反对称性 $\vec{v} \times \vec{u} = -(\vec{u} \times \vec{v})$ 写出 $\vec{v} \times \vec{u}$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -341,9 +348,9 @@
      §7 force resolution on an inclined plane, work as F·d (1-D and 3-D),
      torque/moment as r x F (cross-product application, HSN-VM.A.3).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span class="part-meta">AP Physics-feeder + ON MCV4U C2-C3 &middot; 28 marks</span></div>
-<h2 class="section-head">Section C &middot; Modeling and Applications</h2>
-<p class="instructions">Name your axes and units before writing equations. Set up the vector model, solve, and conclude with a one-sentence answer in context (with units). Calculator permitted throughout Part III. These three problems are exactly the kinds of force / work / moment computations students will see in AP Physics Unit 1 (kinematics &amp; force vectors) and IB Math HL Topic C3.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span data-lang="zh">第三部分 &nbsp;&middot;&nbsp; 建模 / 应用</span></span><span class="part-meta"><span data-lang="en">AP Physics-feeder + ON MCV4U C2-C3 &middot; 28 marks</span><span data-lang="zh">AP Physics 衔接 + ON MCV4U C2-C3 &middot; 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C &middot; Modeling and Applications</span><span data-lang="zh">C 节 &middot; 建模与应用</span></h2>
+<p class="instructions"><span data-lang="en">Name your axes and units before writing equations. Set up the vector model, solve, and conclude with a one-sentence answer in context (with units). Calculator permitted throughout Part III. These three problems are exactly the kinds of force / work / moment computations students will see in AP Physics Unit 1 (kinematics &amp; force vectors) and IB Math HL Topic C3.</span><span data-lang="zh">列方程前先命名坐标轴和单位。建立向量模型、求解，并用一句话给出结合情境的结论（带单位）。第三部分全程可用计算器。这三道题正是 AP Physics 第 1 单元（运动学与力向量）与 IB Math HL 主题 C3 中常见的力 / 功 / 力矩计算。</span></p>
 
 <div class="q app">
   <div class="q-head">
@@ -355,12 +362,12 @@
     <span class="pill marks">[9 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A $10$ kg crate sits on a frictionless ramp inclined at $25^{\circ}$ above the horizontal. Take gravity $g = 9.8$ m/s$^{2}$ acting straight down with magnitude $W = mg$.</p>
+    <p class="prompt"><span data-lang="en">A $10$ kg crate sits on a frictionless ramp inclined at $25^{\circ}$ above the horizontal. Take gravity $g = 9.8$ m/s$^{2}$ acting straight down with magnitude $W = mg$.</span><span data-lang="zh">一个 $10$ kg 的箱子放在与水平面成 $25^{\circ}$ 的无摩擦斜面上。取重力加速度 $g = 9.8$ m/s$^{2}$ 竖直向下作用，大小为 $W = mg$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute the magnitude of the gravitational force $W = mg$ in newtons. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Resolve $W$ into a component parallel to the ramp surface (call it $W_{\parallel}$, pointing down the slope) and a component perpendicular to the ramp (call it $W_{\perp}$, pressing into the surface). Express both as multiples of $W$ with trig factors, then evaluate to the nearest tenth of a newton. <span class="marks-inline">[4]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> State the minimum force, parallel to the ramp and directed up the slope, needed to hold the crate stationary. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Sanity-check: compute $W_{\parallel}^{2} + W_{\perp}^{2}$ and confirm it equals $W^{2}$ (Pythagoras on perpendicular components). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute the magnitude of the gravitational force $W = mg$ in newtons.</span><span data-lang="zh">计算重力大小 $W = mg$（牛顿）。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Resolve $W$ into a component parallel to the ramp surface (call it $W_{\parallel}$, pointing down the slope) and a component perpendicular to the ramp (call it $W_{\perp}$, pressing into the surface). Express both as multiples of $W$ with trig factors, then evaluate to the nearest tenth of a newton.</span><span data-lang="zh">将 $W$ 分解为沿斜面方向的分量（记作 $W_{\parallel}$，沿斜面向下）与垂直于斜面方向的分量（记作 $W_{\perp}$，压向斜面）。先用 $W$ 与三角函数因子表示，再求值，结果保留到 0.1 N。</span> <span class="marks-inline">[4]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the minimum force, parallel to the ramp and directed up the slope, needed to hold the crate stationary.</span><span data-lang="zh">写出使箱子保持静止所需的沿斜面向上的最小作用力。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Sanity-check: compute $W_{\parallel}^{2} + W_{\perp}^{2}$ and confirm it equals $W^{2}$ (Pythagoras on perpendicular components).</span><span data-lang="zh">合理性检验：计算 $W_{\parallel}^{2} + W_{\perp}^{2}$，确认其等于 $W^{2}$（垂直分量上的勾股定理）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -375,12 +382,12 @@
     <span class="pill marks">[9 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A worker pulls a sled by a rope angled $30^{\circ}$ above the horizontal. The rope tension has magnitude $|\vec{F}| = 80$ N. The sled is displaced by $\vec{d} = \langle 12, 0\rangle$ (m) along level ground (east).</p>
+    <p class="prompt"><span data-lang="en">A worker pulls a sled by a rope angled $30^{\circ}$ above the horizontal. The rope tension has magnitude $|\vec{F}| = 80$ N. The sled is displaced by $\vec{d} = \langle 12, 0\rangle$ (m) along level ground (east).</span><span data-lang="zh">一工人用绳子拉雪橇，绳与水平方向成 $30^{\circ}$ 向上。绳的张力大小 $|\vec{F}| = 80$ N。雪橇沿水平地面（向东）移动 $\vec{d} = \langle 12, 0\rangle$（m）。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Write the force vector $\vec{F}$ in component form $\langle F_{x}, F_{y}\rangle$, taking east as $+x$ and up as $+y$. Round each to one decimal place. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute the work $W = \vec{F} \cdot \vec{d}$ using the algebraic (componentwise) form. State the units. <span class="marks-inline">[3]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Verify your answer using the geometric form $W = |\vec{F}|\,|\vec{d}|\cos\theta$, with $\theta = 30^{\circ}$. The two forms should agree to within rounding. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Explain in one sentence why the vertical component of $\vec{F}$ does <em>no</em> work on the sled in this scenario. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Write the force vector $\vec{F}$ in component form $\langle F_{x}, F_{y}\rangle$, taking east as $+x$ and up as $+y$. Round each to one decimal place.</span><span data-lang="zh">取东向为正 $x$、向上为正 $y$，将力向量 $\vec{F}$ 写成分量形式 $\langle F_{x}, F_{y}\rangle$。每个分量保留 1 位小数。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute the work $W = \vec{F} \cdot \vec{d}$ using the algebraic (componentwise) form. State the units.</span><span data-lang="zh">用代数（按分量）形式计算功 $W = \vec{F} \cdot \vec{d}$，并写出单位。</span> <span class="marks-inline">[3]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Verify your answer using the geometric form $W = |\vec{F}|\,|\vec{d}|\cos\theta$, with $\theta = 30^{\circ}$. The two forms should agree to within rounding.</span><span data-lang="zh">取 $\theta = 30^{\circ}$，用几何形式 $W = |\vec{F}|\,|\vec{d}|\cos\theta$ 验证答案。两种形式在舍入误差内应一致。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Explain in one sentence why the vertical component of $\vec{F}$ does <em>no</em> work on the sled in this scenario.</span><span data-lang="zh">用一句话说明：在此情境中，为何 $\vec{F}$ 的竖直分量对雪橇<em>不</em>做功。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -395,20 +402,25 @@
     <span class="pill marks">[10 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">A wrench is used to tighten a bolt at the origin. The applied force is $\vec{F} = \langle 0, 10, 0\rangle$ N. The point of application (the end of the wrench handle) is at $\vec{r} = \langle 0.30, 0, 0\rangle$ m. Torque about the origin is defined by $\vec{\tau} = \vec{r} \times \vec{F}$.</p>
+    <p class="prompt"><span data-lang="en">A wrench is used to tighten a bolt at the origin. The applied force is $\vec{F} = \langle 0, 10, 0\rangle$ N. The point of application (the end of the wrench handle) is at $\vec{r} = \langle 0.30, 0, 0\rangle$ m. Torque about the origin is defined by $\vec{\tau} = \vec{r} \times \vec{F}$.</span><span data-lang="zh">用扳手紧固位于原点处的螺栓。施加力为 $\vec{F} = \langle 0, 10, 0\rangle$ N。作用点（扳手手柄末端）位于 $\vec{r} = \langle 0.30, 0, 0\rangle$ m。关于原点的力矩定义为 $\vec{\tau} = \vec{r} \times \vec{F}$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\vec{\tau} = \vec{r} \times \vec{F}$ in component form (N&middot;m). Write out the determinant expansion explicitly. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> State $|\vec{\tau}|$ (the magnitude of the torque), and the direction of $\vec{\tau}$ relative to the standard right-hand coordinate axes. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> The mechanic now repositions the wrench so that the force is applied at $\vec{r}' = \langle 0.30, 0.10, 0\rangle$ m with the same $\vec{F} = \langle 0, 10, 0\rangle$ N. Re-compute $\vec{\tau}' = \vec{r}' \times \vec{F}$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Compare $|\vec{\tau}|$ to $|\vec{\tau}'|$. Explain in one sentence why the $y$-component of $\vec{r}'$ does <em>not</em> increase the torque, and connect this to the geometric formula $|\vec{\tau}| = |\vec{r}|\,|\vec{F}|\sin\theta$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\vec{\tau} = \vec{r} \times \vec{F}$ in component form (N&middot;m). Write out the determinant expansion explicitly.</span><span data-lang="zh">以分量形式计算 $\vec{\tau} = \vec{r} \times \vec{F}$（N&middot;m）。明确写出行列式展开。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">State $|\vec{\tau}|$ (the magnitude of the torque), and the direction of $\vec{\tau}$ relative to the standard right-hand coordinate axes.</span><span data-lang="zh">写出 $|\vec{\tau}|$（力矩大小）以及 $\vec{\tau}$ 相对于标准右手坐标轴的方向。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">The mechanic now repositions the wrench so that the force is applied at $\vec{r}' = \langle 0.30, 0.10, 0\rangle$ m with the same $\vec{F} = \langle 0, 10, 0\rangle$ N. Re-compute $\vec{\tau}' = \vec{r}' \times \vec{F}$.</span><span data-lang="zh">技师调整扳手位置，使作用点变为 $\vec{r}' = \langle 0.30, 0.10, 0\rangle$ m，力仍为 $\vec{F} = \langle 0, 10, 0\rangle$ N。重新计算 $\vec{\tau}' = \vec{r}' \times \vec{F}$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Compare $|\vec{\tau}|$ to $|\vec{\tau}'|$. Explain in one sentence why the $y$-component of $\vec{r}'$ does <em>not</em> increase the torque, and connect this to the geometric formula $|\vec{\tau}| = |\vec{r}|\,|\vec{F}|\sin\theta$.</span><span data-lang="zh">比较 $|\vec{\tau}|$ 与 $|\vec{\tau}'|$。用一句话说明为何 $\vec{r}'$ 的 $y$ 分量<em>不</em>会增大力矩，并将其与几何公式 $|\vec{\tau}| = |\vec{r}|\,|\vec{F}|\sin\theta$ 联系起来。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Practice &middot; <code style="color:#555;">v1</code></span>
-  <span>12 Qs &middot; ~81 marks &middot; ON MCV4U + US HSN-VM (+) &middot; BC/AB out-of-core</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; <span data-lang="en">High School Math &middot; Practice &middot;</span><span data-lang="zh">高中数学 &middot; 练习 &middot;</span> <code style="color:#555;">v1</code></span>
+  <span><span data-lang="en">12 Qs &middot; ~81 marks &middot; ON MCV4U + US HSN-VM (+) &middot; BC/AB out-of-core</span><span data-lang="zh">12 题 &middot; 约 81 分 &middot; ON MCV4U + US HSN-VM (+) &middot; BC/AB 不在核心</span></span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>

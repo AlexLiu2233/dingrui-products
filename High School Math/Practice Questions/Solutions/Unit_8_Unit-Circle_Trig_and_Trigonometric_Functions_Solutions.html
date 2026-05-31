@@ -27,11 +27,13 @@
     --sol-bg:#F1F7EE;  --sol-rule:#5E8E47;  --sol-ink:#2F4E1E;
     --sol-accent:#3E7228;
     --insight-bg:#FBF6EC; --insight-rule:#C49350; --insight-ink:#5E4014;
+    --font-body:'Times New Roman', Times, Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+    --font-sans:'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:var(--font-body);font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -78,202 +80,213 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ── Lang toggle (locked Sprint 4; same tokens as the Study Guide) ── */
+  .lang-bar{display:flex;justify-content:center;margin:6px 0 10px;}
+  .lang-btn{font-family:var(--font-sans);font-weight:700;font-size:9pt;letter-spacing:.1em;padding:4px 14px;border:1px solid var(--maroon);background:#fff;color:var(--maroon);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn:hover{background:var(--maroon);color:#fff;}
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  body.lang-zh{font-family:var(--font-sans);}
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}.lang-bar{display:none;}}
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <button class="lang-btn" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+</div>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Solutions</div>
-<h1 class="chapter-title">Unit-Circle Trigonometry and Trigonometric Functions &middot; Solutions</h1>
-<p class="chapter-sub">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; SAT / AP-Feeder / Provincial styles</p>
+<div class="chapter-tag"><span data-lang="en">Solutions</span><span data-lang="zh">答案</span></div>
+<h1 class="chapter-title"><span data-lang="en">Unit-Circle Trigonometry and Trigonometric Functions &middot; Solutions</span><span data-lang="zh">单位圆三角学与三角函数 &middot; 答案</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; SAT / AP-Feeder / Provincial styles</span><span data-lang="zh">配套练习题集答案 &middot; 按分点逐步讲解 &middot; SAT / AP 衔接 / 省考风格</span></p>
 
 <div class="legend">
-  <span class="pill easy">EASY</span>
-  <span class="pill med">MEDIUM</span>
-  <span class="pill hard">HARD</span>
-  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-  <span class="pill paper">SAT-style MCQ</span>
-  <span class="pill paper">AP-feeder FRQ</span>
-  <span class="pill paper">ON Provincial-style</span>
-  <span class="pill paper">BC Provincial-style</span>
-  <span class="pill paper">AB Math 30-1 style</span>
-  <span class="pill honors">Honors / Pre-Calc</span>
+  <span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+  <span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+  <span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+  <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+  <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+  <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">AB Math 30-1 style</span><span data-lang="zh">阿省 Math 30-1 风格</span></span>
+  <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
 </div>
 
 <hr class="thick"><hr class="thin">
 
-<p class="draft-banner"><code>v1</code> &middot; companion to <code>Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Practice.html</code> &middot; 12 Qs &middot; 81 marks &middot; mark-by-mark walkthroughs with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> callouts</p>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">companion to <code>Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Practice.html</code> &middot; 12 Qs &middot; 81 marks &middot; mark-by-mark walkthroughs with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> callouts</span><span data-lang="zh">配套 <code>Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Practice.html</code> &middot; 共 12 题 &middot; 81 分 &middot; 按 <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> 标注逐步讲解</span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART I, Short Response Solutions (Q1–Q5, 18 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span class="part-meta">SAT MCQ + ON/BC/AB short answer &middot; 18 marks</span></div>
-<h2 class="section-head">Section A &middot; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 短答题 &middot; 答案</span></span><span class="part-meta"><span data-lang="en">SAT MCQ + ON/BC/AB short answer &middot; 18 marks</span><span data-lang="zh">SAT 选择题 + 安/卑/阿省考短答 &middot; 共 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Worked Solutions</span><span data-lang="zh">A 部分 &middot; 解题过程</span></h2>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Radians &middot; HSF-TF.A.1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q1</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Radians</span><span data-lang="zh">弧度制</span> &middot; HSF-TF.A.1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">$150^{\circ}$ in radians.</p>
+    <p class="prompt"><span data-lang="en">$150^{\circ}$ in radians.</span><span data-lang="zh">$150^{\circ}$ 化为弧度。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(C) &nbsp;$\dfrac{5\pi}{6}$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(C) &nbsp;$\dfrac{5\pi}{6}$</span></div>
     <div class="rationale">
-      <h4>(a) Apply the conversion factor $180^{\circ} = \pi$ rad <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
-      The conversion factor from degrees to radians is $\dfrac{\pi \text{ rad}}{180^{\circ}}$:
+      <h4>(a) <span data-lang="en">Apply the conversion factor $180^{\circ} = \pi$ rad</span><span data-lang="zh">运用换算关系 $180^{\circ} = \pi$ 弧度</span> <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <span data-lang="en">The conversion factor from degrees to radians is $\dfrac{\pi \text{ rad}}{180^{\circ}}$:</span><span data-lang="zh">从角度制到弧度制的换算因子为 $\dfrac{\pi \text{ rad}}{180^{\circ}}$：</span>
       $$ 150^{\circ} \cdot \dfrac{\pi}{180^{\circ}} \;=\; \dfrac{150\pi}{180} \;=\; \dfrac{5\pi}{6}. $$
-      The reduction $\tfrac{150}{180} = \tfrac{5}{6}$ comes from dividing top and bottom by $30$. Matches <strong>(C)</strong>.
+      <span data-lang="en">The reduction $\tfrac{150}{180} = \tfrac{5}{6}$ comes from dividing top and bottom by $30$. Matches <strong>(C)</strong>.</span><span data-lang="zh">约分 $\tfrac{150}{180} = \tfrac{5}{6}$ 来自分子分母同除以 $30$。与 <strong>(C)</strong> 一致。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(A) $\tfrac{2\pi}{3} = 120^{\circ}$</strong>, off by $30^{\circ}$ (the student likely divided $180^{\circ}$ into thirds instead of sixths).</li>
-          <li><strong>(B) $\tfrac{3\pi}{4} = 135^{\circ}$</strong>, off by $15^{\circ}$; this is the radian for $135^{\circ}$, a common SAT misread.</li>
-          <li><strong>(D) $\tfrac{7\pi}{6} = 210^{\circ}$</strong>, the supplementary-angle trap: $150^{\circ}$ and $210^{\circ}$ are reflections across the horizontal axis, and the test sets them adjacent in the answer set.</li>
+          <li><span data-lang="en"><strong>(A) $\tfrac{2\pi}{3} = 120^{\circ}$</strong>, off by $30^{\circ}$ (the student likely divided $180^{\circ}$ into thirds instead of sixths).</span><span data-lang="zh"><strong>(A) $\tfrac{2\pi}{3} = 120^{\circ}$</strong>，相差 $30^{\circ}$（学生可能误将 $180^{\circ}$ 三等分而非六等分）。</span></li>
+          <li><span data-lang="en"><strong>(B) $\tfrac{3\pi}{4} = 135^{\circ}$</strong>, off by $15^{\circ}$; this is the radian for $135^{\circ}$, a common SAT misread.</span><span data-lang="zh"><strong>(B) $\tfrac{3\pi}{4} = 135^{\circ}$</strong>，相差 $15^{\circ}$；这是 $135^{\circ}$ 对应的弧度，SAT 常见的误读陷阱。</span></li>
+          <li><span data-lang="en"><strong>(D) $\tfrac{7\pi}{6} = 210^{\circ}$</strong>, the supplementary-angle trap: $150^{\circ}$ and $210^{\circ}$ are reflections across the horizontal axis, and the test sets them adjacent in the answer set.</span><span data-lang="zh"><strong>(D) $\tfrac{7\pi}{6} = 210^{\circ}$</strong>，补角陷阱：$150^{\circ}$ 与 $210^{\circ}$ 关于水平轴对称，命题人将两者并列以诱导误选。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>Memorise the five "anchor" radians and read everything off them.</strong> The minute-zero anchors on the unit circle are $0$, $\tfrac{\pi}{6}$ ($30^{\circ}$), $\tfrac{\pi}{4}$ ($45^{\circ}$), $\tfrac{\pi}{3}$ ($60^{\circ}$), and $\tfrac{\pi}{2}$ ($90^{\circ}$). Any multiple of $30^{\circ}$ lands on one of the $\pi/6$ tick marks, so $150^{\circ} = 5 \cdot 30^{\circ}$ sits at the fifth tick: $\tfrac{5\pi}{6}$. SAT students who memorise the unit circle in radians lose almost no time on this question; students who convert by formula every time lose 20 seconds and an A1 to arithmetic.</div>
+      <div class="insight"><strong><span data-lang="en">Memorise the five "anchor" radians and read everything off them.</span><span data-lang="zh">熟记五个"锚点"弧度，其余靠它们直接读出。</span></strong> <span data-lang="en">The minute-zero anchors on the unit circle are $0$, $\tfrac{\pi}{6}$ ($30^{\circ}$), $\tfrac{\pi}{4}$ ($45^{\circ}$), $\tfrac{\pi}{3}$ ($60^{\circ}$), and $\tfrac{\pi}{2}$ ($90^{\circ}$). Any multiple of $30^{\circ}$ lands on one of the $\pi/6$ tick marks, so $150^{\circ} = 5 \cdot 30^{\circ}$ sits at the fifth tick: $\tfrac{5\pi}{6}$. SAT students who memorise the unit circle in radians lose almost no time on this question; students who convert by formula every time lose 20 seconds and an A1 to arithmetic.</span><span data-lang="zh">单位圆上的关键锚点为 $0$、$\tfrac{\pi}{6}$（$30^{\circ}$）、$\tfrac{\pi}{4}$（$45^{\circ}$）、$\tfrac{\pi}{3}$（$60^{\circ}$）与 $\tfrac{\pi}{2}$（$90^{\circ}$）。任何 $30^{\circ}$ 的倍数都落在 $\pi/6$ 的刻度上，所以 $150^{\circ} = 5 \cdot 30^{\circ}$ 位于第五个刻度：$\tfrac{5\pi}{6}$。背熟弧度制单位圆的考生在本题上几乎不耗时；每次都套公式换算的考生会浪费 20 秒，并因算术失误丢掉 A1。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;2 Unit Circle &middot; HSF-TF.A.3 (+)</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q2</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Unit Circle</span><span data-lang="zh">单位圆</span> &middot; HSF-TF.A.3 (+)</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\sin\!\left(\tfrac{5\pi}{6}\right)$.</p>
+    <p class="prompt">$\sin\!\left(\tfrac{5\pi}{6}\right)$<span data-lang="en">.</span><span data-lang="zh">。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$\dfrac{1}{2}$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(B) &nbsp;$\dfrac{1}{2}$</span></div>
     <div class="rationale">
-      <h4>(a) Locate quadrant and reference angle <span class="marks-call">M1</span></h4>
-      $\tfrac{5\pi}{6}$ is between $\tfrac{\pi}{2}$ and $\pi$, so the terminal arm is in <strong>Quadrant II</strong>. The reference angle is the acute angle to the $x$-axis:
+      <h4>(a) <span data-lang="en">Locate quadrant and reference angle</span><span data-lang="zh">确定象限与参考角</span> <span class="marks-call">M1</span></h4>
+      <span data-lang="en">$\tfrac{5\pi}{6}$ is between $\tfrac{\pi}{2}$ and $\pi$, so the terminal arm is in <strong>Quadrant II</strong>. The reference angle is the acute angle to the $x$-axis:</span><span data-lang="zh">$\tfrac{5\pi}{6}$ 位于 $\tfrac{\pi}{2}$ 与 $\pi$ 之间，故终边位于<strong>第二象限</strong>。参考角是终边到 $x$ 轴的锐角：</span>
       $$ \theta_{\text{ref}} \;=\; \pi - \tfrac{5\pi}{6} \;=\; \tfrac{\pi}{6}. $$
 
-      <h4>(b) Read the sign and magnitude <span class="marks-call">A1&middot;A1</span></h4>
-      In Quadrant II, $\sin$ is <em>positive</em> (the $y$-coordinate of the unit-circle point is above the $x$-axis). The magnitude equals $\sin(\theta_{\text{ref}}) = \sin\!\tfrac{\pi}{6} = \tfrac{1}{2}$. Therefore $\sin\!\tfrac{5\pi}{6} = +\tfrac{1}{2}$, which matches <strong>(B)</strong>.
+      <h4>(b) <span data-lang="en">Read the sign and magnitude</span><span data-lang="zh">读取符号与大小</span> <span class="marks-call">A1&middot;A1</span></h4>
+      <span data-lang="en">In Quadrant II, $\sin$ is <em>positive</em> (the $y$-coordinate of the unit-circle point is above the $x$-axis). The magnitude equals $\sin(\theta_{\text{ref}}) = \sin\!\tfrac{\pi}{6} = \tfrac{1}{2}$. Therefore $\sin\!\tfrac{5\pi}{6} = +\tfrac{1}{2}$, which matches <strong>(B)</strong>.</span><span data-lang="zh">在第二象限，$\sin$ 为<em>正</em>（单位圆上点的 $y$ 坐标位于 $x$ 轴上方）。大小等于 $\sin(\theta_{\text{ref}}) = \sin\!\tfrac{\pi}{6} = \tfrac{1}{2}$。故 $\sin\!\tfrac{5\pi}{6} = +\tfrac{1}{2}$，与 <strong>(B)</strong> 一致。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(A) $-\tfrac{1}{2}$</strong>, sign error: confuses Quadrant II (sin $&gt; 0$) with Quadrant III or IV.</li>
-          <li><strong>(C) $-\tfrac{\sqrt{3}}{2}$</strong> and <strong>(D) $\tfrac{\sqrt{3}}{2}$</strong>, magnitude error: the student reads $\cos\!\tfrac{5\pi}{6}$ instead of $\sin$, swapping the $x$- and $y$-coordinates of the unit-circle point.</li>
+          <li><span data-lang="en"><strong>(A) $-\tfrac{1}{2}$</strong>, sign error: confuses Quadrant II (sin $&gt; 0$) with Quadrant III or IV.</span><span data-lang="zh"><strong>(A) $-\tfrac{1}{2}$</strong>，符号错误：把第二象限（$\sin &gt; 0$）误认为第三或第四象限。</span></li>
+          <li><span data-lang="en"><strong>(C) $-\tfrac{\sqrt{3}}{2}$</strong> and <strong>(D) $\tfrac{\sqrt{3}}{2}$</strong>, magnitude error: the student reads $\cos\!\tfrac{5\pi}{6}$ instead of $\sin$, swapping the $x$- and $y$-coordinates of the unit-circle point.</span><span data-lang="zh"><strong>(C) $-\tfrac{\sqrt{3}}{2}$</strong> 与 <strong>(D) $\tfrac{\sqrt{3}}{2}$</strong>，大小错误：考生误读为 $\cos\!\tfrac{5\pi}{6}$，混淆了单位圆点的 $x$ 与 $y$ 坐标。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>ASTC ("All Students Take Calculus") for the sign, reference angle for the magnitude.</strong> The two-step move for any unit-circle evaluation: (1) find which quadrant, then apply the sign rule, in Q-I all six functions are positive, in Q-II only $\sin / \csc$, in Q-III only $\tan / \cot$, in Q-IV only $\cos / \sec$. (2) Compute the value at the reference angle ($30^{\circ}, 45^{\circ}, 60^{\circ}$ are the only three magnitudes you ever need to know). This decouples a hard question into two cheap moves. The unit circle on the Pre-Calc / Math 30-1 exam reduces to this drill.</div>
+      <div class="insight"><strong><span data-lang="en">ASTC ("All Students Take Calculus") for the sign, reference angle for the magnitude.</span><span data-lang="zh">用 ASTC（"All Students Take Calculus"）记忆符号，用参考角确定大小。</span></strong> <span data-lang="en">The two-step move for any unit-circle evaluation: (1) find which quadrant, then apply the sign rule, in Q-I all six functions are positive, in Q-II only $\sin / \csc$, in Q-III only $\tan / \cot$, in Q-IV only $\cos / \sec$. (2) Compute the value at the reference angle ($30^{\circ}, 45^{\circ}, 60^{\circ}$ are the only three magnitudes you ever need to know). This decouples a hard question into two cheap moves. The unit circle on the Pre-Calc / Math 30-1 exam reduces to this drill.</span><span data-lang="zh">单位圆求值的两步法：(1) 确定象限并套符号规则——第一象限六个函数全正，第二象限仅 $\sin / \csc$ 为正，第三象限仅 $\tan / \cot$ 为正，第四象限仅 $\cos / \sec$ 为正。(2) 计算参考角处的值（$30^{\circ}, 45^{\circ}, 60^{\circ}$ 三个大小是你唯一需要熟记的）。这样把难题拆成两步轻松动作。Pre-Calc / Math 30-1 考试上的单位圆题目，本质上就是这套训练。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Reference Angles &middot; HSF-TF.A.3 (+)</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q3</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Reference Angles</span><span data-lang="zh">参考角</span> &middot; HSF-TF.A.3 (+)</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Quadrant III, reference angle $\tfrac{\pi}{4}$. Find $\cos\theta$.</p>
+    <p class="prompt"><span data-lang="en">Quadrant III, reference angle $\tfrac{\pi}{4}$. Find $\cos\theta$.</span><span data-lang="zh">第三象限，参考角为 $\tfrac{\pi}{4}$。求 $\cos\theta$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$-\dfrac{\sqrt{2}}{2}$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(B) &nbsp;$-\dfrac{\sqrt{2}}{2}$</span></div>
     <div class="rationale">
-      <h4>(a) Sign rule for Quadrant III <span class="marks-call">M1</span></h4>
-      In Quadrant III, both $x$ and $y$ are negative, so both $\cos\theta$ (the $x$-coordinate of the unit-circle point) and $\sin\theta$ (the $y$-coordinate) are negative. Only $\tan$ and $\cot$ come out positive in Q-III.
+      <h4>(a) <span data-lang="en">Sign rule for Quadrant III</span><span data-lang="zh">第三象限符号规则</span> <span class="marks-call">M1</span></h4>
+      <span data-lang="en">In Quadrant III, both $x$ and $y$ are negative, so both $\cos\theta$ (the $x$-coordinate of the unit-circle point) and $\sin\theta$ (the $y$-coordinate) are negative. Only $\tan$ and $\cot$ come out positive in Q-III.</span><span data-lang="zh">在第三象限，$x$ 与 $y$ 均为负，故 $\cos\theta$（单位圆点的 $x$ 坐标）与 $\sin\theta$（$y$ 坐标）皆为负。第三象限只有 $\tan$ 与 $\cot$ 为正。</span>
 
-      <h4>(b) Magnitude from the reference angle <span class="marks-call">A1&middot;A1</span></h4>
-      Magnitude of $\cos$ at reference angle $\tfrac{\pi}{4}$: $\cos\!\tfrac{\pi}{4} = \tfrac{\sqrt{2}}{2}$. Combine with the Q-III sign:
+      <h4>(b) <span data-lang="en">Magnitude from the reference angle</span><span data-lang="zh">由参考角确定大小</span> <span class="marks-call">A1&middot;A1</span></h4>
+      <span data-lang="en">Magnitude of $\cos$ at reference angle $\tfrac{\pi}{4}$: $\cos\!\tfrac{\pi}{4} = \tfrac{\sqrt{2}}{2}$. Combine with the Q-III sign:</span><span data-lang="zh">$\cos$ 在参考角 $\tfrac{\pi}{4}$ 处的大小：$\cos\!\tfrac{\pi}{4} = \tfrac{\sqrt{2}}{2}$。结合第三象限符号：</span>
       $$ \cos\theta \;=\; -\dfrac{\sqrt{2}}{2}. $$
-      Matches <strong>(B)</strong>.
+      <span data-lang="en">Matches <strong>(B)</strong>.</span><span data-lang="zh">与 <strong>(B)</strong> 一致。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(A) $\tfrac{\sqrt{2}}{2}$</strong>, correct magnitude but ignores the Q-III sign rule (this would be the Q-I value).</li>
-          <li><strong>(C) $\tfrac{1}{2}$</strong> and <strong>(D) $-\tfrac{1}{2}$</strong>, wrong reference angle: $\tfrac{1}{2}$ is the magnitude at $\tfrac{\pi}{3}$ ($\cos\tfrac{\pi}{3}$) or $\tfrac{\pi}{6}$ ($\sin\tfrac{\pi}{6}$), not $\tfrac{\pi}{4}$.</li>
+          <li><span data-lang="en"><strong>(A) $\tfrac{\sqrt{2}}{2}$</strong>, correct magnitude but ignores the Q-III sign rule (this would be the Q-I value).</span><span data-lang="zh"><strong>(A) $\tfrac{\sqrt{2}}{2}$</strong>，大小正确但忽略了第三象限符号规则（这是第一象限的值）。</span></li>
+          <li><span data-lang="en"><strong>(C) $\tfrac{1}{2}$</strong> and <strong>(D) $-\tfrac{1}{2}$</strong>, wrong reference angle: $\tfrac{1}{2}$ is the magnitude at $\tfrac{\pi}{3}$ ($\cos\tfrac{\pi}{3}$) or $\tfrac{\pi}{6}$ ($\sin\tfrac{\pi}{6}$), not $\tfrac{\pi}{4}$.</span><span data-lang="zh"><strong>(C) $\tfrac{1}{2}$</strong> 与 <strong>(D) $-\tfrac{1}{2}$</strong>，参考角错误：$\tfrac{1}{2}$ 是 $\tfrac{\pi}{3}$（$\cos\tfrac{\pi}{3}$）或 $\tfrac{\pi}{6}$（$\sin\tfrac{\pi}{6}$）处的大小，并非 $\tfrac{\pi}{4}$。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>Reference angle gives the magnitude; the quadrant gives the sign, never the other way around.</strong> The most common reference-angle slip on the SAT and AP-feeder is to compute the right sign in the right quadrant but pull the magnitude from the wrong reference angle (the $\tfrac{\sqrt{2}}{2}$ vs. $\tfrac{1}{2}$ vs. $\tfrac{\sqrt{3}}{2}$ confusion). Drill: $\sin / \cos$ at the three reference angles map to $\bigl(\tfrac{1}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{3}}{2}\bigr)$ for $\tfrac{\pi}{6}, \tfrac{\pi}{4}, \tfrac{\pi}{3}$ in $\sin$, and the reverse $\bigl(\tfrac{\sqrt{3}}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{1}{2}\bigr)$ in $\cos$. The pattern is "$\sin$ rises, $\cos$ falls" as the reference angle climbs from $\tfrac{\pi}{6}$ to $\tfrac{\pi}{3}$.</div>
+      <div class="insight"><strong><span data-lang="en">Reference angle gives the magnitude; the quadrant gives the sign, never the other way around.</span><span data-lang="zh">参考角决定大小，象限决定符号，绝不可颠倒。</span></strong> <span data-lang="en">The most common reference-angle slip on the SAT and AP-feeder is to compute the right sign in the right quadrant but pull the magnitude from the wrong reference angle (the $\tfrac{\sqrt{2}}{2}$ vs. $\tfrac{1}{2}$ vs. $\tfrac{\sqrt{3}}{2}$ confusion). Drill: $\sin / \cos$ at the three reference angles map to $\bigl(\tfrac{1}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{3}}{2}\bigr)$ for $\tfrac{\pi}{6}, \tfrac{\pi}{4}, \tfrac{\pi}{3}$ in $\sin$, and the reverse $\bigl(\tfrac{\sqrt{3}}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{1}{2}\bigr)$ in $\cos$. The pattern is "$\sin$ rises, $\cos$ falls" as the reference angle climbs from $\tfrac{\pi}{6}$ to $\tfrac{\pi}{3}$.</span><span data-lang="zh">SAT 与 AP 衔接题最常见的参考角失误，是在正确象限取对了符号，却从错误的参考角抓取大小（$\tfrac{\sqrt{2}}{2}$ vs. $\tfrac{1}{2}$ vs. $\tfrac{\sqrt{3}}{2}$ 的混淆）。背诵法：三个参考角的 $\sin / \cos$ 对照表是——$\sin$ 在 $\tfrac{\pi}{6}, \tfrac{\pi}{4}, \tfrac{\pi}{3}$ 处依次为 $\bigl(\tfrac{1}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{\sqrt{3}}{2}\bigr)$，$\cos$ 则反过来 $\bigl(\tfrac{\sqrt{3}}{2}, \tfrac{\sqrt{2}}{2}, \tfrac{1}{2}\bigr)$。规律：随着参考角从 $\tfrac{\pi}{6}$ 升到 $\tfrac{\pi}{3}$，"$\sin$ 上升，$\cos$ 下降"。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;3 Reciprocal Functions &middot; MHF4U Strand B</span>
-    <span class="pill marks">[4 marks]</span>
+    <span class="pill qnum">Q4</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">Reciprocal Functions</span><span data-lang="zh">倒数三角函数</span> &middot; MHF4U <span data-lang="en">Strand B</span><span data-lang="zh">单元 B</span></span>
+    <span class="pill marks"><span data-lang="en">[4 marks]</span><span data-lang="zh">[4 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\sin\theta = -\tfrac{3}{5}$, $\theta$ in Q-IV. (a) $\cos\theta$. (b) $\csc\theta$, $\sec\theta$.</p>
+    <p class="prompt"><span data-lang="en">$\sin\theta = -\tfrac{3}{5}$, $\theta$ in Q-IV. (a) $\cos\theta$. (b) $\csc\theta$, $\sec\theta$.</span><span data-lang="zh">$\sin\theta = -\tfrac{3}{5}$，$\theta$ 位于第四象限。(a) 求 $\cos\theta$。(b) 求 $\csc\theta$ 与 $\sec\theta$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\cos\theta = \dfrac{4}{5}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $\csc\theta = -\dfrac{5}{3}$, $\sec\theta = \dfrac{5}{4}$</div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\cos\theta = \dfrac{4}{5}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $\csc\theta = -\dfrac{5}{3}$, $\sec\theta = \dfrac{5}{4}$</div>
     <div class="rationale">
-      <h4>(a) Pythagorean identity + quadrant sign <span class="marks-call">M1&middot;A1</span></h4>
-      Use $\sin^{2}\theta + \cos^{2}\theta = 1$:
+      <h4>(a) <span data-lang="en">Pythagorean identity + quadrant sign</span><span data-lang="zh">毕达哥拉斯恒等式 + 象限符号</span> <span class="marks-call">M1&middot;A1</span></h4>
+      <span data-lang="en">Use $\sin^{2}\theta + \cos^{2}\theta = 1$:</span><span data-lang="zh">使用 $\sin^{2}\theta + \cos^{2}\theta = 1$：</span>
       $$ \cos^{2}\theta \;=\; 1 - \sin^{2}\theta \;=\; 1 - \tfrac{9}{25} \;=\; \tfrac{16}{25} \;\Longrightarrow\; \cos\theta \;=\; \pm \tfrac{4}{5}. $$
-      In Quadrant IV the $x$-coordinate is positive, so $\cos\theta &gt; 0$. Hence $\cos\theta = +\tfrac{4}{5}$.
+      <span data-lang="en">In Quadrant IV the $x$-coordinate is positive, so $\cos\theta &gt; 0$. Hence $\cos\theta = +\tfrac{4}{5}$.</span><span data-lang="zh">在第四象限 $x$ 坐标为正，故 $\cos\theta &gt; 0$。因此 $\cos\theta = +\tfrac{4}{5}$。</span>
 
-      <h4>(b) Reciprocals <span class="marks-call">A1&middot;A1</span></h4>
-      By definition, $\csc\theta = \dfrac{1}{\sin\theta}$ and $\sec\theta = \dfrac{1}{\cos\theta}$:
+      <h4>(b) <span data-lang="en">Reciprocals</span><span data-lang="zh">取倒数</span> <span class="marks-call">A1&middot;A1</span></h4>
+      <span data-lang="en">By definition, $\csc\theta = \dfrac{1}{\sin\theta}$ and $\sec\theta = \dfrac{1}{\cos\theta}$:</span><span data-lang="zh">由定义 $\csc\theta = \dfrac{1}{\sin\theta}$、$\sec\theta = \dfrac{1}{\cos\theta}$：</span>
       $$ \csc\theta \;=\; \dfrac{1}{-3/5} \;=\; -\dfrac{5}{3}, \qquad \sec\theta \;=\; \dfrac{1}{4/5} \;=\; \dfrac{5}{4}. $$
 
-      <div class="insight"><strong>The reciprocal inherits the sign; do not re-derive it.</strong> Two reflexes worth locking in: (i) $\csc\theta$ shares the sign of $\sin\theta$, $\sec\theta$ shares the sign of $\cos\theta$, $\cot\theta$ shares the sign of $\tan\theta$, because reciprocating a negative number gives a negative number. (ii) When extracting $\cos$ from $\sin$ via the Pythagorean identity, write both signs first ($\pm \tfrac{4}{5}$), then pick the right one based on the quadrant. Skipping the $\pm$ step is where ON markers deduct A1s, even when the final number is right.</div>
+      <div class="insight"><strong><span data-lang="en">The reciprocal inherits the sign; do not re-derive it.</span><span data-lang="zh">倒数继承原函数的符号，无需重新判定。</span></strong> <span data-lang="en">Two reflexes worth locking in: (i) $\csc\theta$ shares the sign of $\sin\theta$, $\sec\theta$ shares the sign of $\cos\theta$, $\cot\theta$ shares the sign of $\tan\theta$, because reciprocating a negative number gives a negative number. (ii) When extracting $\cos$ from $\sin$ via the Pythagorean identity, write both signs first ($\pm \tfrac{4}{5}$), then pick the right one based on the quadrant. Skipping the $\pm$ step is where ON markers deduct A1s, even when the final number is right.</span><span data-lang="zh">两个需牢记的反射：(i) $\csc\theta$ 与 $\sin\theta$ 同号，$\sec\theta$ 与 $\cos\theta$ 同号，$\cot\theta$ 与 $\tan\theta$ 同号，因为负数的倒数仍为负。(ii) 由 $\sin$ 通过毕达哥拉斯恒等式求 $\cos$ 时，先写出两个符号（$\pm \tfrac{4}{5}$），再根据象限选取正确符号。省略 $\pm$ 这一步正是安大略阅卷扣 A1 的地方，即使最终数字正确也照扣不误。</span></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-    <span class="pill paper">AB Math 30-1 style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Coterminal + Arc Length &middot; AB Math 30-1 Trig GO 1</span>
-    <span class="pill marks">[5 marks]</span>
+    <span class="pill qnum">Q5</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">AB Math 30-1 style</span><span data-lang="zh">阿省 Math 30-1 风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Coterminal + Arc Length</span><span data-lang="zh">共终边角 + 弧长</span> &middot; <span data-lang="en">AB Math 30-1 Trig GO 1</span><span data-lang="zh">阿省 Math 30-1 三角 GO 1</span></span>
+    <span class="pill marks"><span data-lang="en">[5 marks]</span><span data-lang="zh">[5 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\theta = \tfrac{11\pi}{3}$. (a) Coterminal in $[0, 2\pi)$. (b) Quadrant + reference angle. (c) Arc length $s = r\theta'$ with $r = 6$.</p>
+    <p class="prompt"><span data-lang="en">$\theta = \tfrac{11\pi}{3}$. (a) Coterminal in $[0, 2\pi)$. (b) Quadrant + reference angle. (c) Arc length $s = r\theta'$ with $r = 6$.</span><span data-lang="zh">$\theta = \tfrac{11\pi}{3}$。(a) 求 $[0, 2\pi)$ 内的共终边角。(b) 象限 + 参考角。(c) 取 $r = 6$，求弧长 $s = r\theta'$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\theta' = \dfrac{5\pi}{3}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> Quadrant IV, $\theta_{\text{ref}} = \dfrac{\pi}{3}$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $s = 10\pi$ cm</div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\theta' = \dfrac{5\pi}{3}$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> <span data-lang="en">Quadrant IV, $\theta_{\text{ref}} = \dfrac{\pi}{3}$</span><span data-lang="zh">第四象限，$\theta_{\text{ref}} = \dfrac{\pi}{3}$</span> &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $s = 10\pi$ cm</div>
     <div class="rationale">
-      <h4>(a) Subtract $2\pi$ until you land in $[0, 2\pi)$ <span class="marks-call">M1&middot;A1</span></h4>
-      $\tfrac{11\pi}{3} - 2\pi = \tfrac{11\pi}{3} - \tfrac{6\pi}{3} = \tfrac{5\pi}{3}$. Since $0 \le \tfrac{5\pi}{3} &lt; 2\pi$, we stop here: $\theta' = \tfrac{5\pi}{3}$. (Equivalently, $\tfrac{11\pi}{3} = \tfrac{5\pi}{3} + 2\pi$, one full revolution past the principal angle.)
+      <h4>(a) <span data-lang="en">Subtract $2\pi$ until you land in $[0, 2\pi)$</span><span data-lang="zh">连续减 $2\pi$ 直至落入 $[0, 2\pi)$</span> <span class="marks-call">M1&middot;A1</span></h4>
+      <span data-lang="en">$\tfrac{11\pi}{3} - 2\pi = \tfrac{11\pi}{3} - \tfrac{6\pi}{3} = \tfrac{5\pi}{3}$. Since $0 \le \tfrac{5\pi}{3} &lt; 2\pi$, we stop here: $\theta' = \tfrac{5\pi}{3}$. (Equivalently, $\tfrac{11\pi}{3} = \tfrac{5\pi}{3} + 2\pi$, one full revolution past the principal angle.)</span><span data-lang="zh">$\tfrac{11\pi}{3} - 2\pi = \tfrac{11\pi}{3} - \tfrac{6\pi}{3} = \tfrac{5\pi}{3}$。由于 $0 \le \tfrac{5\pi}{3} &lt; 2\pi$，到此为止：$\theta' = \tfrac{5\pi}{3}$。（等价地，$\tfrac{11\pi}{3} = \tfrac{5\pi}{3} + 2\pi$，比主角多转一整圈。）</span>
 
-      <h4>(b) Quadrant and reference angle <span class="marks-call">A1&middot;A1</span></h4>
-      $\tfrac{5\pi}{3}$ lies between $\tfrac{3\pi}{2}$ and $2\pi$, so the terminal arm is in <strong>Quadrant IV</strong>. The reference angle is the acute angle to the positive $x$-axis:
+      <h4>(b) <span data-lang="en">Quadrant and reference angle</span><span data-lang="zh">象限与参考角</span> <span class="marks-call">A1&middot;A1</span></h4>
+      <span data-lang="en">$\tfrac{5\pi}{3}$ lies between $\tfrac{3\pi}{2}$ and $2\pi$, so the terminal arm is in <strong>Quadrant IV</strong>. The reference angle is the acute angle to the positive $x$-axis:</span><span data-lang="zh">$\tfrac{5\pi}{3}$ 介于 $\tfrac{3\pi}{2}$ 与 $2\pi$ 之间，故终边位于<strong>第四象限</strong>。参考角为终边到 $x$ 正半轴的锐角：</span>
       $$ \theta_{\text{ref}} \;=\; 2\pi - \tfrac{5\pi}{3} \;=\; \tfrac{\pi}{3}. $$
 
-      <h4>(c) Arc length <span class="marks-call">A1</span></h4>
-      Using $s = r \theta'$ with $r = 6$ cm and $\theta' = \tfrac{5\pi}{3}$ rad:
+      <h4>(c) <span data-lang="en">Arc length</span><span data-lang="zh">弧长</span> <span class="marks-call">A1</span></h4>
+      <span data-lang="en">Using $s = r \theta'$ with $r = 6$ cm and $\theta' = \tfrac{5\pi}{3}$ rad:</span><span data-lang="zh">用 $s = r \theta'$，代入 $r = 6$ cm 与 $\theta' = \tfrac{5\pi}{3}$ rad：</span>
       $$ s \;=\; 6 \cdot \tfrac{5\pi}{3} \;=\; \tfrac{30\pi}{3} \;=\; 10\pi \;\text{cm} \;\approx\; 31.4 \;\text{cm}. $$
 
-      <div class="insight"><strong>The arc-length formula $s = r\theta$ only works in radians.</strong> This is the AB Math 30-1 indicator 1.6 / 1.7 trap: if a student converts $\theta'$ to $300^{\circ}$ first, then substitutes "$300$" into $s = r\theta$, they get $1800$ cm of arc on a $6$ cm circle, which is geometrically impossible (the whole circumference is only $12\pi \approx 37.7$ cm). The radian definition $1 \text{ rad} = \text{the angle that subtends an arc equal to the radius}$ is exactly what makes $s = r\theta$ collapse to multiplication; the degree form needs a $\tfrac{\pi}{180}$ correction. State the unit on $\theta$ explicitly before substituting.</div>
+      <div class="insight"><strong><span data-lang="en">The arc-length formula $s = r\theta$ only works in radians.</span><span data-lang="zh">弧长公式 $s = r\theta$ 仅在弧度制下成立。</span></strong> <span data-lang="en">This is the AB Math 30-1 indicator 1.6 / 1.7 trap: if a student converts $\theta'$ to $300^{\circ}$ first, then substitutes "$300$" into $s = r\theta$, they get $1800$ cm of arc on a $6$ cm circle, which is geometrically impossible (the whole circumference is only $12\pi \approx 37.7$ cm). The radian definition $1 \text{ rad} = \text{the angle that subtends an arc equal to the radius}$ is exactly what makes $s = r\theta$ collapse to multiplication; the degree form needs a $\tfrac{\pi}{180}$ correction. State the unit on $\theta$ explicitly before substituting.</span><span data-lang="zh">这是阿省 Math 30-1 指标 1.6 / 1.7 的常见陷阱：若学生先将 $\theta'$ 换算为 $300^{\circ}$，再把 "$300$" 代入 $s = r\theta$，会得到 $6$ cm 圆上 $1800$ cm 弧长，几何上不可能（整个圆周仅为 $12\pi \approx 37.7$ cm）。弧度定义"$1$ 弧度 = 所截弧长等于半径时的角"，正是该定义使得 $s = r\theta$ 退化为简单乘法；度数形式则需 $\tfrac{\pi}{180}$ 的修正因子。代入前请显式注明 $\theta$ 的单位。</span></div>
     </div>
   </div>
 </div>
@@ -570,6 +583,11 @@
   <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Solutions &middot; <code style="color:#555;">v1</code> &middot; Companion to Practice &middot; 81 marks total</span>
   <span>12 Qs &middot; 81 marks &middot; US / ON / BC / AB &middot; SAT / AP-feeder / Provincial</span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>

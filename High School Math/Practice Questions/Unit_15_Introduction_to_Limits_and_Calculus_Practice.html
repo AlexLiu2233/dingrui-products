@@ -25,11 +25,13 @@
     --region-bg:#F5F2EE; --region-ink:#3A322B; --region-rule:#B5A68F;
     --paper-bg:#FBE9E9;  --paper-ink:#7A2E2E;  --paper-rule:#C97A7A;
     --honors-bg:#FDF5EC; --honors-ink:#7A5618; --honors-rule:#C4956A;
+    --font-body:'Times New Roman', Times, Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+    --font-sans:'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:var(--font-body);font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -86,73 +88,84 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ── Lang toggle (locked Sprint 4; same tokens as the Study Guide) ── */
+  .lang-bar{display:flex;justify-content:center;margin:6px 0 10px;}
+  .lang-btn{font-family:var(--font-sans);font-weight:700;font-size:9pt;letter-spacing:.1em;padding:4px 14px;border:1px solid var(--maroon);background:#fff;color:var(--maroon);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn:hover{background:var(--maroon);color:#fff;}
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  body.lang-zh{font-family:var(--font-sans);}
   @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}.lang-bar{display:none;}}
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <button class="lang-btn" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+</div>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Practice</div>
-<h1 class="chapter-title">Introduction to Limits and Calculus</h1>
-<p class="chapter-sub">Practice Questions &middot; AP Calc AB-Feeder &middot; ON MCV4U &middot; BC Calculus 12 &middot; AB Math 31</p>
+<div class="chapter-tag"><span data-lang="en">Practice</span><span data-lang="zh">练习题</span></div>
+<h1 class="chapter-title"><span data-lang="en">Introduction to Limits and Calculus</span><span data-lang="zh">极限与微积分入门</span></h1>
+<p class="chapter-sub"><span data-lang="en">Practice Questions &middot; AP Calc AB-Feeder &middot; ON MCV4U &middot; BC Calculus 12 &middot; AB Math 31</span><span data-lang="zh">练习题集 &middot; AP Calc AB 衔接 &middot; 安大略 MCV4U &middot; 卑诗 Calculus 12 &middot; 阿尔伯塔 Math 31</span></p>
 
 <div class="legend">
-  <span class="pill easy">EASY</span>
-  <span class="pill med">MEDIUM</span>
-  <span class="pill hard">HARD</span>
-  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-  <span class="pill paper">AP-feeder FRQ</span>
-  <span class="pill paper">ON Provincial-style</span>
-  <span class="pill paper">BC Provincial-style</span>
-  <span class="pill paper">AB Math 31-style</span>
-  <span class="pill honors">Honors</span>
+  <span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+  <span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+  <span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+  <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+  <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">AB Math 31-style</span><span data-lang="zh">阿尔伯塔 Math 31 风格</span></span>
+  <span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
 </div>
 
 <!-- Condensed Syllabus Map (full 6-region callout lives in the Study Guide). -->
 <div class="syllabus-strip">
-  <div class="col"><b>&#x1F1FA;&#x1F1F8; US Common Core</b><span style="font-style:italic;">Not in CCSSM.</span> Closest CCSSM standard: <code>HSF-IF.B.6</code> (average rate of change). Whole unit flagged <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> as AP Calc AB feeder; AP Calc AB CED Units 1 (Limits &amp; Continuity), 2 (Differentiation), 6 (Integration) are the proper home.</div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; Ontario &middot; MCV4U</b>Strand A <em>Rate of Change</em> (limits, average vs instantaneous rate, secants &amp; tangents). Strand B <em>Derivatives</em> (definition, power rule, sum &amp; constant-multiple rules, derivative graphs). Antiderivatives / integrals not in MCV4U.</div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; BC Calc 12 &middot; &#x1F1E8;&#x1F1E6; AB Math 31</b>BC Calculus 12 (optional Grade 12): limits, derivatives, integrals (citation at course level &ndash; <code>calc12_extract.md</code> pending). AB Math 31 (optional Grade 12): same scope as BC Calc 12 (citation at course level &ndash; <code>math31_extract.md</code> pending).</div>
+  <div class="col"><b>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core</span><span data-lang="zh">美国共同核心</span></b><span data-lang="en"><span style="font-style:italic;">Not in CCSSM.</span> Closest CCSSM standard: <code>HSF-IF.B.6</code> (average rate of change). Whole unit flagged <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> as AP Calc AB feeder; AP Calc AB CED Units 1 (Limits &amp; Continuity), 2 (Differentiation), 6 (Integration) are the proper home.</span><span data-lang="zh"><span style="font-style:italic;">不在 CCSSM 内。</span>最接近的标准：<code>HSF-IF.B.6</code>（平均变化率）。整个单元标 <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">荣誉级</span>，作为 AP Calc AB 衔接；其正式归属为 AP Calc AB CED 的 Unit 1（极限与连续）、Unit 2（求导）、Unit 6（积分）。</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario &middot; MCV4U</span><span data-lang="zh">安大略 &middot; MCV4U</span></b><span data-lang="en">Strand A <em>Rate of Change</em> (limits, average vs instantaneous rate, secants &amp; tangents). Strand B <em>Derivatives</em> (definition, power rule, sum &amp; constant-multiple rules, derivative graphs). Antiderivatives / integrals not in MCV4U.</span><span data-lang="zh">单元 A <em>变化率</em>（极限、平均与瞬时变化率、割线与切线）。单元 B <em>导数</em>（定义、幂法则、求和与常数倍法则、导数图像）。反导数 / 积分不在 MCV4U 内。</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC Calc 12 &middot; &#x1F1E8;&#x1F1E6; AB Math 31</span><span data-lang="zh">卑诗 Calc 12 &middot; 阿尔伯塔 Math 31</span></b><span data-lang="en">BC Calculus 12 (optional Grade 12): limits, derivatives, integrals (citation at course level &ndash; <code>calc12_extract.md</code> pending). AB Math 31 (optional Grade 12): same scope as BC Calc 12 (citation at course level &ndash; <code>math31_extract.md</code> pending).</span><span data-lang="zh">BC Calculus 12（12 年级选修）：极限、导数、积分（按课程级引用 &ndash; <code>calc12_extract.md</code> 待补）。AB Math 31（12 年级选修）：范围与 BC Calc 12 一致（按课程级引用 &ndash; <code>math31_extract.md</code> 待补）。</span></div>
 </div>
-<p class="syllabus-strip-note">Full 6-region Syllabus Map (with row-by-row scope, defer / skip, and source extracts) lives in <code>../Study Guides/Unit_15_Introduction_to_Limits_and_Calculus.html</code>.</p>
+<p class="syllabus-strip-note"><span data-lang="en">Full 6-region Syllabus Map (with row-by-row scope, defer / skip, and source extracts) lives in <code>../Study Guides/Unit_15_Introduction_to_Limits_and_Calculus.html</code>.</span><span data-lang="zh">完整的六地区大纲对照表（逐行范围、缓 / 跳与原文摘录）见 <code>../Study Guides/Unit_15_Introduction_to_Limits_and_Calculus.html</code>。</span></p>
 
 <hr class="thick"><hr class="thin">
-<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner"><code>v1</code> &middot; 12 Qs &middot; ~90 marks &middot; region + paper-style chips on every question &middot; heavy <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> flagging for US column (calculus not in CCSSM) &middot; companion: <code>Solutions/Unit_15_Introduction_to_Limits_and_Calculus_Solutions.html</code></p>
+<div class="nameline"><span><span data-lang="en">Name:</span><span data-lang="zh">姓名：</span><span class="blank"></span></span><span><span data-lang="en">Date:</span><span data-lang="zh">日期：</span><span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">12 Qs &middot; ~81 marks &middot; region + paper-style chips on every question &middot; heavy <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> flagging for US column (calculus not in CCSSM) &middot; companion: <code>Solutions/Unit_15_Introduction_to_Limits_and_Calculus_Solutions.html</code></span><span data-lang="zh">共 12 题 &middot; 约 81 分 &middot; 每题标注地区与试卷风格标签 &middot; 美国一栏大量加注 <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">荣誉级</span>（微积分不在 CCSSM 内）&middot; 配套答案：<code>Solutions/Unit_15_Introduction_to_Limits_and_Calculus_Solutions.html</code></span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART I, Short Response (AP-feeder MCQ + ON/BC short answer)
-     5 questions, 3-7 marks each, ~22 marks total.
+     5 questions, 3-5 marks each, 18 marks total.
      Covers §1 (intuitive limits), §2 (algebraic limits, factor-cancel and
      conjugate), §3 (one-sided + continuity + limits at infinity), §5
      (power rule). Heavy Honors flag on US items because calculus is not
      in CCSSM. IB Math HL E-cluster chip ride-along on AP-feeder MCQs.
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span class="part-meta">AP-feeder MCQ + ON/BC short answer &middot; 22 marks</span></div>
-<h2 class="section-head">Section A &middot; Short Response</h2>
-<p class="instructions">Mix of multiple-choice and short-answer items. For MCQs, circle the letter and show enough work in the margin that a marker could verify. For limits, justify with a one-line reason (table, factor-and-cancel, direct substitution, or asymptote dominance). No calculator on Q1&ndash;Q4; calculator permitted on Q5.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 短答题</span></span><span class="part-meta"><span data-lang="en">AP-feeder MCQ + ON/BC short answer &middot; 18 marks</span><span data-lang="zh">AP 衔接选择题 + 安/卑省考短答 &middot; 共 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Short Response</span><span data-lang="zh">A 部分 &middot; 短答题</span></h2>
+<p class="instructions"><span data-lang="en">Mix of multiple-choice and short-answer items. For MCQs, circle the letter and show enough work in the margin that a marker could verify. For limits, justify with a one-line reason (table, factor-and-cancel, direct substitution, or asymptote dominance). No calculator on Q1&ndash;Q4; calculator permitted on Q5.</span><span data-lang="zh">本节包含选择题与短答题。选择题请圈出字母答案，并在空白处写出足以让阅卷人核对的过程。求极限时用一行说明所采用的依据（数表、因式约分、直接代入或渐近线主导）。Q1&ndash;Q4 不可使用计算器；Q5 可用计算器。</span></p>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;1 Intuitive Limits &middot; AP Calc AB Unit 1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q1</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Intuitive Limits</span><span data-lang="zh">直观的极限</span> &middot; AP Calc AB Unit 1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">The table below gives selected values of a function $f$ near $x = 2$:</p>
+    <p class="prompt"><span data-lang="en">The table below gives selected values of a function $f$ near $x = 2$:</span><span data-lang="zh">下表给出函数 $f$ 在 $x = 2$ 附近的若干取值：</span></p>
     <p style="font-family:'JetBrains Mono',monospace;font-size:10pt;margin-left:8px;">$x$: &nbsp; $1.9$ &nbsp; $1.99$ &nbsp; $1.999$ &nbsp;&nbsp; $2.001$ &nbsp; $2.01$ &nbsp; $2.1$<br>$f(x)$: $4.41$ &nbsp; $4.9401$ &nbsp; $4.994001$ &nbsp;&nbsp; $5.006001$ &nbsp; $5.0601$ &nbsp; $5.61$</p>
-    <p>Which value best estimates $\displaystyle\lim_{x\to 2} f(x)$?</p>
+    <p><span data-lang="en">Which value best estimates $\displaystyle\lim_{x\to 2} f(x)$?</span><span data-lang="zh">下列哪一项最佳地估计了 $\displaystyle\lim_{x\to 2} f(x)$？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $4$</li>
       <li><span class="lab">(B)</span> $5$</li>
       <li><span class="lab">(C)</span> $5.006$</li>
-      <li><span class="lab">(D)</span> The limit does not exist.</li>
+      <li><span class="lab">(D)</span> <span data-lang="en">The limit does not exist.</span><span data-lang="zh">极限不存在。</span></li>
     </ol>
     <div class="work s"></div>
   </div>
@@ -160,19 +173,19 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;2 Algebraic Limits &middot; AP Calc AB Unit 1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q2</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Algebraic Limits</span><span data-lang="zh">代数法求极限</span> &middot; AP Calc AB Unit 1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Evaluate $\displaystyle\lim_{x \to 3} \frac{x^{2} - 9}{x - 3}$.</p>
+    <p class="prompt"><span data-lang="en">Evaluate $\displaystyle\lim_{x \to 3} \frac{x^{2} - 9}{x - 3}$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to 3} \frac{x^{2} - 9}{x - 3}$ 的值。</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $0$</li>
       <li><span class="lab">(B)</span> $3$</li>
       <li><span class="lab">(C)</span> $6$</li>
-      <li><span class="lab">(D)</span> The limit does not exist (the function is undefined at $x = 3$).</li>
+      <li><span class="lab">(D)</span> <span data-lang="en">The limit does not exist (the function is undefined at $x = 3$).</span><span data-lang="zh">极限不存在（因为函数在 $x = 3$ 处无定义）。</span></li>
     </ol>
     <div class="work s"></div>
   </div>
@@ -180,14 +193,14 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;5 Power Rule &middot; AP Calc AB Unit 2</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q3</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;5 <span data-lang="en">Power Rule</span><span data-lang="zh">幂法则</span> &middot; AP Calc AB Unit 2</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">If $f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$, then $f'(x) = $</p>
+    <p class="prompt"><span data-lang="en">If $f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$, then $f'(x) = $</span><span data-lang="zh">设 $f(x) = 4 x^{5} - 3 x^{2} + 7 x - 11$，则 $f'(x) = $</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $20 x^{4} - 6 x + 7$</li>
       <li><span class="lab">(B)</span> $20 x^{5} - 6 x^{2} + 7$</li>
@@ -200,36 +213,36 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill topic">&sect;3 One-Sided Limits &amp; Continuity &middot; MCV4U Strand A</span>
-    <span class="pill marks">[6 marks]</span>
+    <span class="pill qnum">Q4</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">One-Sided Limits &amp; Continuity</span><span data-lang="zh">单侧极限与连续性</span> &middot; MCV4U Strand A</span>
+    <span class="pill marks"><span data-lang="en">[4 marks]</span><span data-lang="zh">[4 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the piecewise function $$f(x) \;=\; \begin{cases} 2x + 1, & x &lt; 1 \\ 5, & x = 1 \\ x^{2} + 2, & x &gt; 1 \end{cases}$$</p>
+    <p class="prompt"><span data-lang="en">Consider the piecewise function</span><span data-lang="zh">考虑分段函数</span> $$f(x) \;=\; \begin{cases} 2x + 1, & x &lt; 1 \\ 5, & x = 1 \\ x^{2} + 2, & x &gt; 1 \end{cases}$$</p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute the left-hand limit $\displaystyle\lim_{x \to 1^{-}} f(x)$ and the right-hand limit $\displaystyle\lim_{x \to 1^{+}} f(x)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> State whether $\displaystyle\lim_{x \to 1} f(x)$ exists, and justify in one line. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> State whether $f$ is continuous at $x = 1$, and identify which of the three continuity conditions fails (if any). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute the left-hand limit $\displaystyle\lim_{x \to 1^{-}} f(x)$ and the right-hand limit $\displaystyle\lim_{x \to 1^{+}} f(x)$.</span><span data-lang="zh">求左极限 $\displaystyle\lim_{x \to 1^{-}} f(x)$ 与右极限 $\displaystyle\lim_{x \to 1^{+}} f(x)$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">State whether $\displaystyle\lim_{x \to 1} f(x)$ exists, and justify in one line.</span><span data-lang="zh">判断 $\displaystyle\lim_{x \to 1} f(x)$ 是否存在，并用一行说明理由。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State whether $f$ is continuous at $x = 1$, and identify which of the three continuity conditions fails (if any).</span><span data-lang="zh">判断 $f$ 在 $x = 1$ 处是否连续，并指出三条连续性条件中哪一条不满足（若有）。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">BC Provincial-style</span>
-    <span class="pill topic">&sect;3 Limits at Infinity &middot; BC Calc 12</span>
-    <span class="pill marks">[7 marks]</span>
+    <span class="pill qnum">Q5</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">Limits at Infinity</span><span data-lang="zh">无穷大极限</span> &middot; BC Calc 12</span>
+    <span class="pill marks"><span data-lang="en">[5 marks]</span><span data-lang="zh">[5 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the rational function $g(x) = \dfrac{3 x^{2} - 5 x + 1}{2 x^{2} + 4}$.</p>
+    <p class="prompt"><span data-lang="en">Consider the rational function $g(x) = \dfrac{3 x^{2} - 5 x + 1}{2 x^{2} + 4}$.</span><span data-lang="zh">考虑有理函数 $g(x) = \dfrac{3 x^{2} - 5 x + 1}{2 x^{2} + 4}$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute $\displaystyle\lim_{x \to \infty} g(x)$ by dividing numerator and denominator by the highest power of $x$ in the denominator. Show the dominant-term step. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute $\displaystyle\lim_{x \to -\infty} g(x)$. State whether the answer differs from part (a) and why. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> State the equation of the horizontal asymptote of $y = g(x)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute $\displaystyle\lim_{x \to \infty} g(x)$ by dividing numerator and denominator by the highest power of $x$ in the denominator. Show the dominant-term step.</span><span data-lang="zh">将分子分母同除以分母中 $x$ 的最高次幂，求 $\displaystyle\lim_{x \to \infty} g(x)$。写出主导项步骤。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute $\displaystyle\lim_{x \to -\infty} g(x)$. State whether the answer differs from part (a) and why.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to -\infty} g(x)$。说明结果是否与 (a) 不同，并解释原因。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the equation of the horizontal asymptote of $y = g(x)$.</span><span data-lang="zh">写出 $y = g(x)$ 的水平渐近线方程。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -238,91 +251,91 @@
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART II, Extended Response (AP-feeder FRQ + Honors)
-     4 questions, 8-11 marks each, ~36 marks total.
+     4 questions, 8-11 marks each, 35 marks total.
      §4 (derivative from definition, AP Calc AB Unit 2 + MCV4U Strand B),
      §2 (conjugate technique, BC Calc 12), §3 (piecewise continuity at a
      parameter value, AP-feeder honors), §5 (negative / fractional
      exponents, AB Math 31-style). Q9 is the honors block (continuity
      parameter under AP Calc AB framework).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span class="part-meta">AP-feeder FRQ + honors &middot; 36 marks</span></div>
-<h2 class="section-head">Section B &middot; Extended Response</h2>
-<p class="instructions">Show every algebraic step. State the limit law or technique invoked (direct substitution, factor and cancel, conjugate, dominant-term, definition of derivative, power rule) before substituting. For "from first principles" items, you must write the definition $f'(x) = \lim_{h \to 0} (f(x+h) - f(x))/h$ before reaching for the power rule. No calculator on Q6&ndash;Q9.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span data-lang="zh">第二部分 &nbsp;&middot;&nbsp; 简答题</span></span><span class="part-meta"><span data-lang="en">AP-feeder FRQ + honors &middot; 35 marks</span><span data-lang="zh">AP 衔接简答题 + 荣誉级 &middot; 共 35 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &middot; Extended Response</span><span data-lang="zh">B 部分 &middot; 简答题</span></h2>
+<p class="instructions"><span data-lang="en">Show every algebraic step. State the limit law or technique invoked (direct substitution, factor and cancel, conjugate, dominant-term, definition of derivative, power rule) before substituting. For "from first principles" items, you must write the definition $f'(x) = \lim_{h \to 0} (f(x+h) - f(x))/h$ before reaching for the power rule. No calculator on Q6&ndash;Q9.</span><span data-lang="zh">每一步代数运算都要写出。在代入之前先注明所用极限法则或技巧（直接代入、因式约分、共轭、主导项、导数定义、幂法则）。对于"用定义求导"的题，必须先写出 $f'(x) = \lim_{h \to 0} (f(x+h) - f(x))/h$，再用幂法则。Q6&ndash;Q9 不可使用计算器。</span></p>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;4 Derivative from Definition &middot; AP Calc AB Unit 2 / MCV4U Strand B</span>
-    <span class="pill marks">[9 marks]</span>
+    <span class="pill qnum">Q6</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">Derivative from Definition</span><span data-lang="zh">用定义求导数</span> &middot; AP Calc AB Unit 2 / MCV4U Strand B</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Let $f(x) = x^{2} - 4 x + 5$.</p>
+    <p class="prompt"><span data-lang="en">Let $f(x) = x^{2} - 4 x + 5$.</span><span data-lang="zh">设 $f(x) = x^{2} - 4 x + 5$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Write the limit definition of the derivative $f'(x)$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute $f(x + h)$ in expanded form, then form the difference quotient $\dfrac{f(x + h) - f(x)}{h}$ and simplify so that the factor of $h$ in the numerator cancels cleanly. <span class="marks-inline">[4]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Take the limit as $h \to 0$ to obtain $f'(x)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Verify your answer by applying the power rule directly to $f(x)$. Then evaluate $f'(3)$ and interpret it as the slope of the tangent line to $y = f(x)$ at the point $(3, f(3))$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Write the limit definition of the derivative $f'(x)$.</span><span data-lang="zh">写出导数 $f'(x)$ 的极限定义。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute $f(x + h)$ in expanded form, then form the difference quotient $\dfrac{f(x + h) - f(x)}{h}$ and simplify so that the factor of $h$ in the numerator cancels cleanly.</span><span data-lang="zh">展开 $f(x + h)$，然后写出差商 $\dfrac{f(x + h) - f(x)}{h}$ 并化简，使分子中的 $h$ 因子能与分母干净地约去。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Take the limit as $h \to 0$ to obtain $f'(x)$.</span><span data-lang="zh">令 $h \to 0$ 取极限，得到 $f'(x)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Verify your answer by applying the power rule directly to $f(x)$. Then evaluate $f'(3)$ and interpret it as the slope of the tangent line to $y = f(x)$ at the point $(3, f(3))$.</span><span data-lang="zh">用幂法则直接对 $f(x)$ 求导以验证答案。然后求 $f'(3)$，并将其解释为曲线 $y = f(x)$ 在点 $(3, f(3))$ 处的切线斜率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill topic">&sect;5 Power Rule &amp; Linearity &middot; MCV4U Strand B</span>
-    <span class="pill marks">[8 marks]</span>
+    <span class="pill qnum">Q7</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill topic">&sect;5 <span data-lang="en">Power Rule &amp; Linearity</span><span data-lang="zh">幂法则与线性性</span> &middot; MCV4U Strand B</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Differentiate each function with respect to $x$. State the power rule, sum / difference rule, and constant-multiple rule as you use them. No need to simplify beyond combining like terms.</p>
+    <p class="prompt"><span data-lang="en">Differentiate each function with respect to $x$. State the power rule, sum / difference rule, and constant-multiple rule as you use them. No need to simplify beyond combining like terms.</span><span data-lang="zh">对每个函数关于 $x$ 求导。在使用幂法则、求和 / 差法则与常数倍法则时，请逐条注明。只需合并同类项即可，无需进一步化简。</span></p>
     <div class="frq-parts">
       <div class="part-item"><span class="tag">(a)</span> $p(x) = 6 x^{4} - 2 x^{3} + 9 x - 14$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> $q(x) = \dfrac{5}{x^{2}} + 8 \sqrt{x}$. (Rewrite with rational exponents first.) <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> For $p(x)$ in part (a), find the equation of the tangent line at $x = 1$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> $q(x) = \dfrac{5}{x^{2}} + 8 \sqrt{x}$. <span data-lang="en">(Rewrite with rational exponents first.)</span><span data-lang="zh">（请先改写为有理数指数形式。）</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">For $p(x)$ in part (a), find the equation of the tangent line at $x = 1$.</span><span data-lang="zh">对 (a) 中的 $p(x)$，求其在 $x = 1$ 处的切线方程。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-    <span class="pill paper">BC Provincial-style</span>
-    <span class="pill topic">&sect;2 Algebraic Limits &middot; BC Calc 12 / AB Math 31</span>
-    <span class="pill marks">[8 marks]</span>
+    <span class="pill qnum">Q8</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Algebraic Limits</span><span data-lang="zh">代数法求极限</span> &middot; BC Calc 12 / AB Math 31</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Evaluate each limit. State the technique (direct substitution, factor and cancel, or conjugate) before computing.</p>
+    <p class="prompt"><span data-lang="en">Evaluate each limit. State the technique (direct substitution, factor and cancel, or conjugate) before computing.</span><span data-lang="zh">求下列各极限。在计算之前先注明所用技巧（直接代入、因式约分或共轭法）。</span></p>
     <div class="frq-parts">
       <div class="part-item"><span class="tag">(a)</span> $\displaystyle\lim_{x \to 4} \frac{x^{2} - 16}{x^{2} - x - 12}$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 9} - 3}{x}$ (use the conjugate). <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> $\displaystyle\lim_{x \to 2} \frac{x^{3} - 8}{x - 2}$ (recognize the difference-of-cubes pattern). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> $\displaystyle\lim_{x \to 0} \frac{\sqrt{x + 9} - 3}{x}$ <span data-lang="en">(use the conjugate).</span><span data-lang="zh">（使用共轭法）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> $\displaystyle\lim_{x \to 2} \frac{x^{3} - 8}{x - 2}$ <span data-lang="en">(recognize the difference-of-cubes pattern).</span><span data-lang="zh">（识别立方差的因式分解模式）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;3 Continuity at a Parameter &middot; AP Calc AB Unit 1 / BC Calc 12</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill qnum">Q9</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">Continuity at a Parameter</span><span data-lang="zh">参数取值下的连续性</span> &middot; AP Calc AB Unit 1 / BC Calc 12</span>
+    <span class="pill marks"><span data-lang="en">[11 marks]</span><span data-lang="zh">[11 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the piecewise function $$h(x) \;=\; \begin{cases} \dfrac{x^{2} - a^{2}}{x - a}, & x \ne a \\ b, & x = a \end{cases}$$ where $a$ and $b$ are real parameters.</p>
+    <p class="prompt"><span data-lang="en">Consider the piecewise function</span><span data-lang="zh">考虑分段函数</span> $$h(x) \;=\; \begin{cases} \dfrac{x^{2} - a^{2}}{x - a}, & x \ne a \\ b, & x = a \end{cases}$$ <span data-lang="en">where $a$ and $b$ are real parameters.</span><span data-lang="zh">其中 $a$、$b$ 为实参数。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> For $x \ne a$, simplify $\dfrac{x^{2} - a^{2}}{x - a}$ by factoring the numerator and cancelling. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute $\displaystyle\lim_{x \to a} h(x)$ in terms of $a$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> State the three conditions for continuity of $h$ at $x = a$. Use them to determine the value of $b$ (in terms of $a$) that makes $h$ continuous at $x = a$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Take $a = 5$. With the value of $b$ from part (c), classify the original "hole" at $x = 5$ as either a removable discontinuity (now removed) or an essential discontinuity, and justify in one line. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> Sketch (in your work area) the graph of $h$ for $a = 5, b = 10$, showing the line $y = x + 5$ with the point $(5, 10)$ filled in. State the slope of the line. <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">For $x \ne a$, simplify $\dfrac{x^{2} - a^{2}}{x - a}$ by factoring the numerator and cancelling.</span><span data-lang="zh">当 $x \ne a$ 时，对分子作因式分解并约分，化简 $\dfrac{x^{2} - a^{2}}{x - a}$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute $\displaystyle\lim_{x \to a} h(x)$ in terms of $a$.</span><span data-lang="zh">求 $\displaystyle\lim_{x \to a} h(x)$ （用 $a$ 表示）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the three conditions for continuity of $h$ at $x = a$. Use them to determine the value of $b$ (in terms of $a$) that makes $h$ continuous at $x = a$.</span><span data-lang="zh">写出 $h$ 在 $x = a$ 处连续的三条条件。借此确定使 $h$ 在 $x = a$ 处连续的 $b$ 值（用 $a$ 表示）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Take $a = 5$. With the value of $b$ from part (c), classify the original "hole" at $x = 5$ as either a removable discontinuity (now removed) or an essential discontinuity, and justify in one line.</span><span data-lang="zh">取 $a = 5$。用 (c) 中得到的 $b$ 值，将原本在 $x = 5$ 处的"洞"分类为可去间断点（现已修补）或本性间断点，并用一行说明理由。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Sketch (in your work area) the graph of $h$ for $a = 5, b = 10$, showing the line $y = x + 5$ with the point $(5, 10)$ filled in. State the slope of the line.</span><span data-lang="zh">在答题区内画出 $a = 5, b = 10$ 时 $h$ 的图像，画出直线 $y = x + 5$，并将点 $(5, 10)$ 标为实心点。写出直线的斜率。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
@@ -331,80 +344,85 @@
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART III, Modeling / Applied (Universal)
-     3 questions, 10-11 marks each, ~32 marks total.
+     3 questions, 9-10 marks each, 28 marks total.
      §4 (tangent line, instantaneous rate of change, MCV4U Strand B-style
      applied), §6 (antiderivatives + indefinite integral, AP Calc AB
      Unit 6 honors), §7 (definite integral as signed area, FTC connection,
      AP Calc AB Unit 6 honors).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span class="part-meta">Universal &middot; 32 marks</span></div>
-<h2 class="section-head">Section C &middot; Modeling and Applications</h2>
-<p class="instructions">Name your variables (with units) before writing equations. Set up your model, solve, and conclude with a one-sentence answer in context. Always include $+ C$ on indefinite integrals; the constant of integration is worth its own A1 on every AP Calc AB free-response item. Calculator permitted throughout Part III.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span data-lang="zh">第三部分 &nbsp;&middot;&nbsp; 建模 / 应用题</span></span><span class="part-meta"><span data-lang="en">Universal &middot; 28 marks</span><span data-lang="zh">通用 &middot; 共 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C &middot; Modeling and Applications</span><span data-lang="zh">C 部分 &middot; 建模与应用</span></h2>
+<p class="instructions"><span data-lang="en">Name your variables (with units) before writing equations. Set up your model, solve, and conclude with a one-sentence answer in context. Always include $+ C$ on indefinite integrals; the constant of integration is worth its own A1 on every AP Calc AB free-response item. Calculator permitted throughout Part III.</span><span data-lang="zh">在列方程前先为变量命名并标注单位。建立模型、求解，并用一句话给出情境中的结论。不定积分必须加上 $+ C$；积分常数在 AP Calc AB 简答题中独占一分（A1）。第三部分全程可使用计算器。</span></p>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill topic">&sect;4 Tangent Line &amp; Instantaneous Rate &middot; MCV4U Strand A &amp; B</span>
-    <span class="pill marks">[10 marks]</span>
+    <span class="pill qnum">Q10</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">Tangent Line &amp; Instantaneous Rate</span><span data-lang="zh">切线与瞬时变化率</span> &middot; MCV4U Strand A &amp; B</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">A drone's height above the ground, in metres, after $t$ seconds is modeled by $s(t) = -5 t^{2} + 40 t$ for $0 \le t \le 8$.</p>
+    <p class="prompt"><span data-lang="en">A drone's height above the ground, in metres, after $t$ seconds is modeled by $s(t) = -5 t^{2} + 40 t$ for $0 \le t \le 8$.</span><span data-lang="zh">一架无人机在 $t$ 秒后的离地高度（米）由模型 $s(t) = -5 t^{2} + 40 t$ 给出，其中 $0 \le t \le 8$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute the average rate of change of $s$ on the interval $[1, 3]$, with units. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Compute the instantaneous rate of change $s'(t)$ using the power rule, and evaluate $s'(2)$. Interpret $s'(2)$ in context, with units. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find the time at which the drone's instantaneous vertical velocity is zero. Interpret the result in context (peak height). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Find the equation of the tangent line to $y = s(t)$ at $t = 1$, in slope-intercept form. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute the average rate of change of $s$ on the interval $[1, 3]$, with units.</span><span data-lang="zh">求 $s$ 在区间 $[1, 3]$ 上的平均变化率，并写出单位。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Compute the instantaneous rate of change $s'(t)$ using the power rule, and evaluate $s'(2)$. Interpret $s'(2)$ in context, with units.</span><span data-lang="zh">用幂法则求瞬时变化率 $s'(t)$，并求出 $s'(2)$。结合情境解释 $s'(2)$ 的含义，并标出单位。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the time at which the drone's instantaneous vertical velocity is zero. Interpret the result in context (peak height).</span><span data-lang="zh">求无人机瞬时垂直速度为零的时刻。结合情境解释结果（即达到最大高度的时刻）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the equation of the tangent line to $y = s(t)$ at $t = 1$, in slope-intercept form.</span><span data-lang="zh">求曲线 $y = s(t)$ 在 $t = 1$ 处的切线方程（斜截式）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q11</span><span class="pill med">MEDIUM</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;6 Antiderivative &amp; Indefinite Integral &middot; AP Calc AB Unit 6</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill qnum">Q11</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;6 <span data-lang="en">Antiderivative &amp; Indefinite Integral</span><span data-lang="zh">反导数与不定积分</span> &middot; AP Calc AB Unit 6</span>
+    <span class="pill marks"><span data-lang="en">[10 marks]</span><span data-lang="zh">[10 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">A particle moves along a straight line with velocity $v(t) = 3 t^{2} - 4 t + 2$ (in metres per second) at time $t$ (in seconds). The particle's position at time $t = 0$ is $s(0) = 5$ metres.</p>
+    <p class="prompt"><span data-lang="en">A particle moves along a straight line with velocity $v(t) = 3 t^{2} - 4 t + 2$ (in metres per second) at time $t$ (in seconds). The particle's position at time $t = 0$ is $s(0) = 5$ metres.</span><span data-lang="zh">一个质点沿直线运动，时刻 $t$（秒）时的速度为 $v(t) = 3 t^{2} - 4 t + 2$（米/秒）。初始位置 $s(0) = 5$ 米。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find the general antiderivative $s(t)$ of $v(t)$, including the constant of integration $C$. State the power rule applied in reverse: $\displaystyle\int x^{n} \, dx = \frac{x^{n+1}}{n+1} + C$ for $n \ne -1$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Use the initial condition $s(0) = 5$ to determine $C$, and write the particular antiderivative $s(t)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Verify by differentiation that $s'(t) = v(t)$ for your particular antiderivative from part (b). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Compute the indefinite integral $\displaystyle\int \left( 4 x^{3} - \frac{6}{x^{2}} + 5 \right) dx$. (Rewrite $1/x^{2}$ as $x^{-2}$ before applying the reverse power rule. Do not forget $+ C$.) <span class="marks-inline">[4]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the general antiderivative $s(t)$ of $v(t)$, including the constant of integration $C$. State the power rule applied in reverse: $\displaystyle\int x^{n} \, dx = \frac{x^{n+1}}{n+1} + C$ for $n \ne -1$.</span><span data-lang="zh">求 $v(t)$ 的一般反导数 $s(t)$，含积分常数 $C$。注明所用的逆向幂法则：$\displaystyle\int x^{n} \, dx = \frac{x^{n+1}}{n+1} + C$（$n \ne -1$）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Use the initial condition $s(0) = 5$ to determine $C$, and write the particular antiderivative $s(t)$.</span><span data-lang="zh">利用初值条件 $s(0) = 5$ 确定 $C$，写出特解 $s(t)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Verify by differentiation that $s'(t) = v(t)$ for your particular antiderivative from part (b).</span><span data-lang="zh">通过求导验证 (b) 中的特解满足 $s'(t) = v(t)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Compute the indefinite integral $\displaystyle\int \left( 4 x^{3} - \frac{6}{x^{2}} + 5 \right) dx$. (Rewrite $1/x^{2}$ as $x^{-2}$ before applying the reverse power rule. Do not forget $+ C$.)</span><span data-lang="zh">计算不定积分 $\displaystyle\int \left( 4 x^{3} - \frac{6}{x^{2}} + 5 \right) dx$。（在使用逆向幂法则前先将 $1/x^{2}$ 改写为 $x^{-2}$。别忘了 $+ C$。）</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;7 Definite Integral as Signed Area &middot; AP Calc AB Unit 6 / FTC</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill qnum">Q12</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Definite Integral as Signed Area</span><span data-lang="zh">定积分即带符号面积</span> &middot; AP Calc AB Unit 6 / FTC</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the function $f(x) = 4 - x^{2}$ on the interval $[-2, 3]$.</p>
+    <p class="prompt"><span data-lang="en">Consider the function $f(x) = 4 - x^{2}$ on the interval $[-2, 3]$.</span><span data-lang="zh">考虑函数 $f(x) = 4 - x^{2}$ 在区间 $[-2, 3]$ 上的性质。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Sketch the graph of $y = f(x)$ over $[-2, 3]$ in your work area. Mark the $x$-intercepts and shade the region between the graph and the $x$-axis on this interval. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> The definite integral $\displaystyle\int_{a}^{b} f(x) \, dx$ represents the <em>signed</em> area between the graph and the $x$-axis on $[a, b]$ (area above the axis counts positively; area below counts negatively). Split the interval $[-2, 3]$ at the $x$-intercept $x = 2$ and describe in words the sign of the area on $[-2, 2]$ and on $[2, 3]$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Using the Fundamental Theorem of Calculus, compute $\displaystyle\int_{-2}^{2} (4 - x^{2}) \, dx$ via an antiderivative $F$ of $f$ and the rule $\int_{a}^{b} f \, dx = F(b) - F(a)$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Compute $\displaystyle\int_{2}^{3} (4 - x^{2}) \, dx$ the same way. The result should be negative, confirming the signed-area picture from part (b). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> Combine parts (c) and (d) to compute $\displaystyle\int_{-2}^{3} (4 - x^{2}) \, dx$. State whether the result represents "net signed area" or "total geometric area between the curve and the $x$-axis", and explain in one line. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Sketch the graph of $y = f(x)$ over $[-2, 3]$ in your work area. Mark the $x$-intercepts and shade the region between the graph and the $x$-axis on this interval.</span><span data-lang="zh">在答题区内画出 $y = f(x)$ 在 $[-2, 3]$ 上的图像。标出 $x$ 轴交点，并对图像与 $x$ 轴之间的区域阴影。</span> <span class="marks-inline">[1]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">The definite integral $\displaystyle\int_{a}^{b} f(x) \, dx$ represents the <em>signed</em> area between the graph and the $x$-axis on $[a, b]$ (area above the axis counts positively; area below counts negatively). Split the interval $[-2, 3]$ at the $x$-intercept $x = 2$ and describe in words the sign of the area on $[-2, 2]$ and on $[2, 3]$.</span><span data-lang="zh">定积分 $\displaystyle\int_{a}^{b} f(x) \, dx$ 表示图像与 $x$ 轴在 $[a, b]$ 之间的<em>带符号</em>面积（轴上方为正、下方为负）。在 $x$ 轴交点 $x = 2$ 处将区间 $[-2, 3]$ 拆分，并用文字说明 $[-2, 2]$ 与 $[2, 3]$ 上面积的符号。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Using the Fundamental Theorem of Calculus, compute $\displaystyle\int_{-2}^{2} (4 - x^{2}) \, dx$ via an antiderivative $F$ of $f$ and the rule $\int_{a}^{b} f \, dx = F(b) - F(a)$.</span><span data-lang="zh">利用微积分基本定理，借助 $f$ 的反导数 $F$ 与公式 $\int_{a}^{b} f \, dx = F(b) - F(a)$，计算 $\displaystyle\int_{-2}^{2} (4 - x^{2}) \, dx$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Compute $\displaystyle\int_{2}^{3} (4 - x^{2}) \, dx$ the same way. The result should be negative, confirming the signed-area picture from part (b).</span><span data-lang="zh">用同样方法计算 $\displaystyle\int_{2}^{3} (4 - x^{2}) \, dx$。结果应为负，与 (b) 中带符号面积的描述相符。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Combine parts (c) and (d) to compute $\displaystyle\int_{-2}^{3} (4 - x^{2}) \, dx$. State whether the result represents "net signed area" or "total geometric area between the curve and the $x$-axis", and explain in one line.</span><span data-lang="zh">合并 (c)、(d) 的结果，计算 $\displaystyle\int_{-2}^{3} (4 - x^{2}) \, dx$。说明该结果代表"净带符号面积"还是"曲线与 $x$ 轴之间的总几何面积"，并用一行解释。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Practice &middot; <code style="color:#555;">v1</code></span>
-  <span>12 Qs &middot; ~90 marks &middot; US (Honors) / ON / BC / AB &middot; AP-feeder / Provincial</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; <span data-lang="en">High School Math &middot; Practice</span><span data-lang="zh">高中数学 &middot; 练习题</span> &middot; <code style="color:#555;">v1</code></span>
+  <span><span data-lang="en">12 Qs &middot; 81 marks &middot; US (Honors) / ON / BC / AB &middot; AP-feeder / Provincial</span><span data-lang="zh">共 12 题 &middot; 81 分 &middot; 美（荣誉）/ 安 / 卑 / 阿 &middot; AP 衔接 / 省考</span></span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>

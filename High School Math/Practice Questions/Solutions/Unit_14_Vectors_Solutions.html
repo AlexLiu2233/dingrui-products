@@ -31,7 +31,7 @@
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:'Times New Roman','PingFang SC','Hiragino Sans GB','Microsoft YaHei',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -78,16 +78,23 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* BILINGUAL TOGGLE (locked Sprint 4) */
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  #langToggle{position:fixed;top:10px;right:10px;z-index:200;background:var(--maroon);color:var(--maroon-ink);border:none;padding:6px 14px;border-radius:999px;font-family:'Source Sans 3','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-weight:700;font-size:9pt;letter-spacing:.1em;cursor:pointer;box-shadow:0 2px 6px rgba(122,46,46,0.25);}
+  #langToggle:hover{background:#5C1E1E;}
   @media (max-width: 600px){body{font-size:10.5pt;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.solution{background:#f0f6ec;}.draft-banner{display:none;}#langToggle{display:none !important;}}
 </style>
 </head>
 <body>
 
+<button id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Solutions</div>
-<h1 class="chapter-title">Vectors &middot; Solutions</h1>
-<p class="chapter-sub">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; ON MCV4U + US HSN-VM (+) Honors</p>
+<div class="chapter-tag"><span data-lang="en">Solutions</span><span data-lang="zh">解析</span></div>
+<h1 class="chapter-title"><span data-lang="en">Vectors &middot; Solutions</span><span data-lang="zh">向量 &middot; 解析</span></h1>
+<p class="chapter-sub"><span data-lang="en">Companion to the Practice Set &middot; Mark-by-mark walkthroughs &middot; ON MCV4U + US HSN-VM (+) Honors</span><span data-lang="zh">配套练习解析 &middot; 逐分讲解 &middot; ON MCV4U + US HSN-VM (+) 荣誉</span></p>
 
 <div class="legend">
   <span class="pill easy">EASY</span>
@@ -102,13 +109,13 @@
 
 <hr class="thick"><hr class="thin">
 
-<p class="draft-banner"><code>v1</code> &middot; companion to <code>Unit_14_Vectors_Practice.html</code> &middot; 12 Qs &middot; 81 marks &middot; mark-by-mark walkthroughs with <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> callouts</p>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">companion to <code>Unit_14_Vectors_Practice.html</code> &middot; 12 Qs &middot; 81 marks &middot; mark-by-mark walkthroughs with</span><span data-lang="zh">配套 <code>Unit_14_Vectors_Practice.html</code> &middot; 12 题 &middot; 81 分 &middot; 逐分讲解，标注</span> <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">M1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">A1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">R1</span> / <span style="font-family:'JetBrains Mono',monospace;font-size:8.5pt;background:#E5EFD9;color:#41652C;border:1px solid #9BBD7A;padding:0 6px;border-radius:3px;">AG</span> <span data-lang="en">callouts</span><span data-lang="zh">标记</span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART I, Short Response Solutions (Q1–Q5, 18 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span class="part-meta">ON MCV4U + US HSN-VM (+) &middot; 18 marks</span></div>
-<h2 class="section-head">Section A &middot; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE &middot; SOLUTIONS</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 简答题 &middot; 解析</span></span><span class="part-meta"><span data-lang="en">ON MCV4U + US HSN-VM (+) &middot; 18 marks</span><span data-lang="zh">ON MCV4U + US HSN-VM (+) &middot; 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Worked Solutions</span><span data-lang="zh">A 节 &middot; 详细解答</span></h2>
 
 <div class="q">
   <div class="q-head">
@@ -120,27 +127,27 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$A(-1,4)$, $B(5,-4)$. Component form and magnitude of $\vec{AB}$.</p>
+    <p class="prompt"><span data-lang="en">$A(-1,4)$, $B(5,-4)$. Component form and magnitude of $\vec{AB}$.</span><span data-lang="zh">$A(-1,4)$，$B(5,-4)$。求 $\vec{AB}$ 的分量形式与模长。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(A) &nbsp;$\vec{AB} = \langle 6, -8\rangle$, $|\vec{AB}| = 10$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(A) &nbsp;$\vec{AB} = \langle 6, -8\rangle$, $|\vec{AB}| = 10$</span></div>
     <div class="rationale">
-      <h4>(a) Component form via terminal minus initial <span class="marks-call">M1&middot;A1</span></h4>
-      The HSN-VM.A.2 rule: $\vec{AB} = B - A$ (terminal coordinates minus initial coordinates):
+      <h4>(a) <span data-lang="en">Component form via terminal minus initial</span><span data-lang="zh">用"终点减起点"求分量形式</span> <span class="marks-call">M1&middot;A1</span></h4>
+      <span data-lang="en">The HSN-VM.A.2 rule: $\vec{AB} = B - A$ (terminal coordinates minus initial coordinates):</span><span data-lang="zh">HSN-VM.A.2 规则：$\vec{AB} = B - A$（终点坐标减起点坐标）：</span>
       $$ \vec{AB} \;=\; \langle 5 - (-1),\; -4 - 4\rangle \;=\; \langle 6,\; -8\rangle. $$
 
-      <h4>(b) Magnitude via Pythagoras <span class="marks-call">A1</span></h4>
+      <h4>(b) <span data-lang="en">Magnitude via Pythagoras</span><span data-lang="zh">用勾股定理求模长</span> <span class="marks-call">A1</span></h4>
       $$ |\vec{AB}| \;=\; \sqrt{6^{2} + (-8)^{2}} \;=\; \sqrt{36 + 64} \;=\; \sqrt{100} \;=\; 10. $$
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(B) $\langle -6, 8\rangle$, $10$</strong>, signs flipped: this is $\vec{BA} = A - B$, the reverse vector. Order matters in vector notation.</li>
-          <li><strong>(C) $\langle 6, -8\rangle$, $14$</strong>, correct components but $|6| + |-8| = 14$ is the "taxicab" (Manhattan) length, not the Euclidean magnitude.</li>
-          <li><strong>(D) $\langle 4, 0\rangle$, $4$</strong>, midpoint thinking: $(-1+5)/2 = 2$ is the midpoint $x$-coordinate, not the displacement. Vectors are not midpoints.</li>
+          <li><strong>(B) $\langle -6, 8\rangle$, $10$</strong><span data-lang="en">, signs flipped: this is $\vec{BA} = A - B$, the reverse vector. Order matters in vector notation.</span><span data-lang="zh">，符号颠倒：这是 $\vec{BA} = A - B$，是反向向量。向量记号中顺序很重要。</span></li>
+          <li><strong>(C) $\langle 6, -8\rangle$, $14$</strong><span data-lang="en">, correct components but $|6| + |-8| = 14$ is the "taxicab" (Manhattan) length, not the Euclidean magnitude.</span><span data-lang="zh">，分量正确，但 $|6| + |-8| = 14$ 是"出租车"（曼哈顿）距离，不是欧几里得模长。</span></li>
+          <li><strong>(D) $\langle 4, 0\rangle$, $4$</strong><span data-lang="en">, midpoint thinking: $(-1+5)/2 = 2$ is the midpoint $x$-coordinate, not the displacement. Vectors are not midpoints.</span><span data-lang="zh">，中点思路：$(-1+5)/2 = 2$ 是中点的 $x$ 坐标，不是位移。向量不是中点。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>"Terminal minus initial" is the only rule you need for $\vec{AB}$.</strong> The mnemonic is the arrow direction: write the head ($B$) coordinates first, then subtract the tail ($A$) coordinates. The reverse, $\vec{BA} = A - B$, gives the same arrow length but the opposite direction (a sign flip in every component). Markers split a 2-mark "component form" item into M1 (set up the subtraction in the correct order) and A1 (arithmetic). Reverse the order and you forfeit both.</div>
+      <div class="insight"><strong><span data-lang="en">"Terminal minus initial" is the only rule you need for $\vec{AB}$.</span><span data-lang="zh">求 $\vec{AB}$ 只要"终点减起点"一条规则。</span></strong> <span data-lang="en">The mnemonic is the arrow direction: write the head ($B$) coordinates first, then subtract the tail ($A$) coordinates. The reverse, $\vec{BA} = A - B$, gives the same arrow length but the opposite direction (a sign flip in every component). Markers split a 2-mark "component form" item into M1 (set up the subtraction in the correct order) and A1 (arithmetic). Reverse the order and you forfeit both.</span><span data-lang="zh">记法跟随箭头方向：先写箭头头部 ($B$) 的坐标，再减去箭头尾部 ($A$) 的坐标。反向的 $\vec{BA} = A - B$ 长度相同但方向相反（每个分量翻号）。阅卷把 2 分的"分量形式"题拆成 M1（顺序设置正确）与 A1（算术正确），顺序写反两分都丢。</span></div>
     </div>
   </div>
 </div>
@@ -155,28 +162,28 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\vec{v} = \langle -3, 4\rangle$. Magnitude and unit vector.</p>
+    <p class="prompt"><span data-lang="en">$\vec{v} = \langle -3, 4\rangle$. Magnitude and unit vector.</span><span data-lang="zh">$\vec{v} = \langle -3, 4\rangle$。求模长与单位向量。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(B) &nbsp;$|\vec{v}| = 5$, $\hat{v} = \left\langle -\tfrac{3}{5}, \tfrac{4}{5}\right\rangle$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(B) &nbsp;$|\vec{v}| = 5$, $\hat{v} = \left\langle -\tfrac{3}{5}, \tfrac{4}{5}\right\rangle$</span></div>
     <div class="rationale">
-      <h4>(a) Magnitude <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(a) <span data-lang="en">Magnitude</span><span data-lang="zh">模长</span> <span class="marks-call">M1&middot;A1</span></h4>
       $$ |\vec{v}| \;=\; \sqrt{(-3)^{2} + 4^{2}} \;=\; \sqrt{9 + 16} \;=\; \sqrt{25} \;=\; 5. $$
 
-      <h4>(b) Unit vector by scalar division <span class="marks-call">A1</span></h4>
-      The unit vector in the direction of $\vec{v}$ is $\hat{v} = \vec{v}/|\vec{v}|$:
+      <h4>(b) <span data-lang="en">Unit vector by scalar division</span><span data-lang="zh">通过数除得到单位向量</span> <span class="marks-call">A1</span></h4>
+      <span data-lang="en">The unit vector in the direction of $\vec{v}$ is $\hat{v} = \vec{v}/|\vec{v}|$:</span><span data-lang="zh">$\vec{v}$ 方向上的单位向量为 $\hat{v} = \vec{v}/|\vec{v}|$：</span>
       $$ \hat{v} \;=\; \frac{1}{5}\langle -3, 4\rangle \;=\; \left\langle -\tfrac{3}{5},\; \tfrac{4}{5}\right\rangle. $$
-      Sanity check: $|\hat{v}|^{2} = \tfrac{9}{25} + \tfrac{16}{25} = 1$. $\checkmark$
+      <span data-lang="en">Sanity check: $|\hat{v}|^{2} = \tfrac{9}{25} + \tfrac{16}{25} = 1$. $\checkmark$</span><span data-lang="zh">合理性检验：$|\hat{v}|^{2} = \tfrac{9}{25} + \tfrac{16}{25} = 1$。$\checkmark$</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(A) $|\vec{v}| = 1$, $\hat{v} = \langle -3, 4\rangle$</strong>, confuses "unit vector" with the input vector; only a vector that already has magnitude $1$ is its own unit vector.</li>
-          <li><strong>(C) $|\vec{v}| = 5$, $\hat{v} = \langle 3/5, -4/5\rangle$</strong>, correct magnitude but signs flipped; the student divided $-\vec{v}$ by $|\vec{v}|$, producing the unit vector in the <em>opposite</em> direction.</li>
-          <li><strong>(D) $|\vec{v}| = 7$, $\hat{v} = \langle -3/7, 4/7\rangle$</strong>, computed $|\vec{v}| = |-3| + |4| = 7$ (taxicab length again); the unit vector is consistent with the wrong magnitude.</li>
+          <li><strong>(A) $|\vec{v}| = 1$, $\hat{v} = \langle -3, 4\rangle$</strong><span data-lang="en">, confuses "unit vector" with the input vector; only a vector that already has magnitude $1$ is its own unit vector.</span><span data-lang="zh">，把"单位向量"与原向量混为一谈；只有本身模长已等于 $1$ 的向量才是自己的单位向量。</span></li>
+          <li><strong>(C) $|\vec{v}| = 5$, $\hat{v} = \langle 3/5, -4/5\rangle$</strong><span data-lang="en">, correct magnitude but signs flipped; the student divided $-\vec{v}$ by $|\vec{v}|$, producing the unit vector in the <em>opposite</em> direction.</span><span data-lang="zh">，模长正确但符号颠倒；学生将 $-\vec{v}$ 除以 $|\vec{v}|$，得到<em>反方向</em>的单位向量。</span></li>
+          <li><strong>(D) $|\vec{v}| = 7$, $\hat{v} = \langle -3/7, 4/7\rangle$</strong><span data-lang="en">, computed $|\vec{v}| = |-3| + |4| = 7$ (taxicab length again); the unit vector is consistent with the wrong magnitude.</span><span data-lang="zh">，把 $|\vec{v}| = |-3| + |4| = 7$（又是出租车距离）；单位向量与错误的模长一致。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>$\hat{v}$ keeps the direction of $\vec{v}$, scaled down to length $1$.</strong> Two ways to verify: (i) the components of $\hat{v}$ should have the <em>same signs</em> as $\vec{v}$'s components (a sign flip is direction reversal, not normalization); (ii) the sum of squares of $\hat{v}$'s components must equal $1$ exactly. AP-feeder markers reward students who write the verification step "$|\hat{v}|^{2} = 1$" explicitly, it earns the A1 even when the arithmetic of the magnitude itself was sloppy.</div>
+      <div class="insight"><strong><span data-lang="en">$\hat{v}$ keeps the direction of $\vec{v}$, scaled down to length $1$.</span><span data-lang="zh">$\hat{v}$ 保持 $\vec{v}$ 的方向，长度缩为 $1$。</span></strong> <span data-lang="en">Two ways to verify: (i) the components of $\hat{v}$ should have the <em>same signs</em> as $\vec{v}$'s components (a sign flip is direction reversal, not normalization); (ii) the sum of squares of $\hat{v}$'s components must equal $1$ exactly. AP-feeder markers reward students who write the verification step "$|\hat{v}|^{2} = 1$" explicitly, it earns the A1 even when the arithmetic of the magnitude itself was sloppy.</span><span data-lang="zh">两种验证方式：(i) $\hat{v}$ 的分量应与 $\vec{v}$ 的分量<em>同号</em>（翻号是方向反转，不是单位化）；(ii) $\hat{v}$ 各分量平方和必须恰好等于 $1$。AP 衔接阅卷会奖励显式写出"$|\hat{v}|^{2} = 1$"验证步骤的学生，即便模长本身的算术粗糙也能拿到 A1。</span></div>
     </div>
   </div>
 </div>
@@ -191,27 +198,27 @@
     <span class="pill marks">[3 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\vec{u} = \langle 2, -1\rangle$, $\vec{w} = \langle -4, 3\rangle$. Compute $2\vec{u} - \vec{w}$.</p>
+    <p class="prompt"><span data-lang="en">$\vec{u} = \langle 2, -1\rangle$, $\vec{w} = \langle -4, 3\rangle$. Compute $2\vec{u} - \vec{w}$.</span><span data-lang="zh">$\vec{u} = \langle 2, -1\rangle$，$\vec{w} = \langle -4, 3\rangle$。求 $2\vec{u} - \vec{w}$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(A) &nbsp;$\langle 8, -5\rangle$</span></div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(A) &nbsp;$\langle 8, -5\rangle$</span></div>
     <div class="rationale">
-      <h4>(a) Scalar multiplication of $\vec{u}$ <span class="marks-call">M1</span></h4>
-      $2\vec{u} = 2 \langle 2, -1\rangle = \langle 4, -2\rangle$ (HSN-VM.B.5: scalar multiplies <em>every</em> component).
+      <h4>(a) <span data-lang="en">Scalar multiplication of $\vec{u}$</span><span data-lang="zh">$\vec{u}$ 的数乘</span> <span class="marks-call">M1</span></h4>
+      <span data-lang="en">$2\vec{u} = 2 \langle 2, -1\rangle = \langle 4, -2\rangle$ (HSN-VM.B.5: scalar multiplies <em>every</em> component).</span><span data-lang="zh">$2\vec{u} = 2 \langle 2, -1\rangle = \langle 4, -2\rangle$（HSN-VM.B.5：标量乘以<em>每一个</em>分量）。</span>
 
-      <h4>(b) Component subtraction <span class="marks-call">A1&middot;A1</span></h4>
+      <h4>(b) <span data-lang="en">Component subtraction</span><span data-lang="zh">按分量相减</span> <span class="marks-call">A1&middot;A1</span></h4>
       $$ 2\vec{u} - \vec{w} \;=\; \langle 4, -2\rangle - \langle -4, 3\rangle \;=\; \langle 4 - (-4),\; -2 - 3\rangle \;=\; \langle 8, -5\rangle. $$
-      Component-by-component (HSN-VM.B.4); the second-component subtraction $-2 - 3 = -5$ is the trap point.
+      <span data-lang="en">Component-by-component (HSN-VM.B.4); the second-component subtraction $-2 - 3 = -5$ is the trap point.</span><span data-lang="zh">按分量逐一处理（HSN-VM.B.4）；第二分量的减法 $-2 - 3 = -5$ 是陷阱。</span>
 
-      <div class="distractor"><strong>Why the wrong choices fail.</strong>
+      <div class="distractor"><strong><span data-lang="en">Why the wrong choices fail.</span><span data-lang="zh">错误选项分析。</span></strong>
         <ul>
-          <li><strong>(B) $\langle 0, -5\rangle$</strong>, scaled $\vec{u}$ by $2$ but then <em>added</em> $\vec{w}$ instead of subtracting in the first component: $4 + (-4) = 0$. Half the sign-error.</li>
-          <li><strong>(C) $\langle 8, 1\rangle$</strong>, correct first component, but second-component sign slip: $-2 - 3 = 1$ is wrong, the student computed $-2 - (-3) = 1$ as if subtracting the negative of $\vec{w}$'s second component.</li>
-          <li><strong>(D) $\langle -8, 5\rangle$</strong>, this is $\vec{w} - 2\vec{u}$ instead of $2\vec{u} - \vec{w}$; the entire result is negated.</li>
+          <li><strong>(B) $\langle 0, -5\rangle$</strong><span data-lang="en">, scaled $\vec{u}$ by $2$ but then <em>added</em> $\vec{w}$ instead of subtracting in the first component: $4 + (-4) = 0$. Half the sign-error.</span><span data-lang="zh">，把 $\vec{u}$ 乘以 $2$ 后在第一分量上<em>加上</em>了 $\vec{w}$ 而非相减：$4 + (-4) = 0$。半个符号错误。</span></li>
+          <li><strong>(C) $\langle 8, 1\rangle$</strong><span data-lang="en">, correct first component, but second-component sign slip: $-2 - 3 = 1$ is wrong, the student computed $-2 - (-3) = 1$ as if subtracting the negative of $\vec{w}$'s second component.</span><span data-lang="zh">，第一分量正确，但第二分量符号弄反：$-2 - 3 = 1$ 是错的，学生算成了 $-2 - (-3) = 1$，仿佛减去的是 $\vec{w}$ 第二分量的相反数。</span></li>
+          <li><strong>(D) $\langle -8, 5\rangle$</strong><span data-lang="en">, this is $\vec{w} - 2\vec{u}$ instead of $2\vec{u} - \vec{w}$; the entire result is negated.</span><span data-lang="zh">，这是 $\vec{w} - 2\vec{u}$ 而非 $2\vec{u} - \vec{w}$；整个结果取了负号。</span></li>
         </ul>
       </div>
 
-      <div class="insight"><strong>Scale before subtracting, and write the substitution before doing arithmetic.</strong> The single most reliable scaffold for $a\vec{u} + b\vec{w}$ items is to (1) write $a\vec{u}$ in full, (2) write $b\vec{w}$ in full, (3) <em>then</em> stack and subtract componentwise on paper. Trying to combine the scaling and subtraction in one step is where the sign flips creep in. The double-negative trap in the second component ($-2 - 3$ vs $-2 - (-3)$) appears on essentially every SAT-style vector item with mixed signs.</div>
+      <div class="insight"><strong><span data-lang="en">Scale before subtracting, and write the substitution before doing arithmetic.</span><span data-lang="zh">先数乘再相减，先写代入再算术。</span></strong> <span data-lang="en">The single most reliable scaffold for $a\vec{u} + b\vec{w}$ items is to (1) write $a\vec{u}$ in full, (2) write $b\vec{w}$ in full, (3) <em>then</em> stack and subtract componentwise on paper. Trying to combine the scaling and subtraction in one step is where the sign flips creep in. The double-negative trap in the second component ($-2 - 3$ vs $-2 - (-3)$) appears on essentially every SAT-style vector item with mixed signs.</span><span data-lang="zh">解 $a\vec{u} + b\vec{w}$ 类题目最可靠的脚手架是：(1) 完整写出 $a\vec{u}$；(2) 完整写出 $b\vec{w}$；(3) <em>再</em>在纸上按分量上下对齐并相减。把数乘与减法挤在一步里，正是符号翻号悄悄发生的地方。第二分量的双负号陷阱（$-2 - 3$ 与 $-2 - (-3)$）几乎出现在每一道含混合符号的 SAT 风格向量题里。</span></div>
     </div>
   </div>
 </div>
@@ -225,22 +232,22 @@
     <span class="pill marks">[4 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">Wind $|\vec{w}| = 20$ km/h, $35^{\circ}$ N of E. (a) Component form. (b) Verify $|\vec{w}|$.</p>
+    <p class="prompt"><span data-lang="en">Wind $|\vec{w}| = 20$ km/h, $35^{\circ}$ N of E. (a) Component form. (b) Verify $|\vec{w}|$.</span><span data-lang="zh">风 $|\vec{w}| = 20$ km/h，方向北偏东 $35^{\circ}$（东向上方 $35^{\circ}$）。(a) 分量形式。(b) 验算 $|\vec{w}|$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\vec{w} \approx \langle 16.38, 11.47\rangle$ km/h &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $|\vec{w}| \approx \sqrt{399.87} \approx 20.00$ km/h $\checkmark$</div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\vec{w} \approx \langle 16.38, 11.47\rangle$ km/h &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $|\vec{w}| \approx \sqrt{399.87} \approx 20.00$ km/h $\checkmark$</div>
     <div class="rationale">
-      <h4>(a) Decompose into east and north components <span class="marks-call">M1&middot;A1</span></h4>
-      With $|\vec{w}| = 20$ and the angle $\theta = 35^{\circ}$ measured from the positive $x$-axis (east), the components are
+      <h4>(a) <span data-lang="en">Decompose into east and north components</span><span data-lang="zh">分解为东向与北向分量</span> <span class="marks-call">M1&middot;A1</span></h4>
+      <span data-lang="en">With $|\vec{w}| = 20$ and the angle $\theta = 35^{\circ}$ measured from the positive $x$-axis (east), the components are</span><span data-lang="zh">已知 $|\vec{w}| = 20$，自正 $x$ 轴（东）逆时针测得 $\theta = 35^{\circ}$，分量为</span>
       $$ w_{x} \;=\; |\vec{w}| \cos\theta \;=\; 20 \cos 35^{\circ} \;\approx\; 20 (0.81915) \;\approx\; 16.38, $$
       $$ w_{y} \;=\; |\vec{w}| \sin\theta \;=\; 20 \sin 35^{\circ} \;\approx\; 20 (0.57358) \;\approx\; 11.47. $$
-      So $\vec{w} \approx \langle 16.38,\; 11.47\rangle$ km/h.
+      <span data-lang="en">So $\vec{w} \approx \langle 16.38,\; 11.47\rangle$ km/h.</span><span data-lang="zh">因此 $\vec{w} \approx \langle 16.38,\; 11.47\rangle$ km/h。</span>
 
-      <h4>(b) Pythagorean check on the components <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(b) <span data-lang="en">Pythagorean check on the components</span><span data-lang="zh">用分量做勾股验算</span> <span class="marks-call">M1&middot;A1</span></h4>
       $$ |\vec{w}| \;=\; \sqrt{16.38^{2} + 11.47^{2}} \;=\; \sqrt{268.30 + 131.56} \;=\; \sqrt{399.86} \;\approx\; 19.997 \;\approx\; 20.00. $$
-      Matches the given magnitude to two decimals. $\checkmark$ (Any small drift is rounding in the trig.)
+      <span data-lang="en">Matches the given magnitude to two decimals. $\checkmark$ (Any small drift is rounding in the trig.)</span><span data-lang="zh">与给定模长在两位小数内一致。$\checkmark$（微小偏差来自三角函数的舍入。）</span>
 
-      <div class="insight"><strong>"North of east" places the angle in the standard position, $35^{\circ}$ from $+x$ toward $+y$.</strong> Compass conventions (N of E, E of N, bearings) are the most common source of dropped marks on Ontario MCV4U C1 short-answer items. Always restate the convention you are using in one short sentence ("take east as $+x$, measure $\theta$ counterclockwise from $+x$"); markers will give the M1 for the correct setup even if the arithmetic is off. Watch for "N$35^{\circ}$E", which is a bearing notation and means $35^{\circ}$ measured east of north, i.e. an angle of $90 - 35 = 55^{\circ}$ from the $+x$-axis, not $35^{\circ}$.</div>
+      <div class="insight"><strong><span data-lang="en">"North of east" places the angle in the standard position, $35^{\circ}$ from $+x$ toward $+y$.</span><span data-lang="zh">"北偏东"把角放在标准位置：自 $+x$ 朝 $+y$ 方向 $35^{\circ}$。</span></strong> <span data-lang="en">Compass conventions (N of E, E of N, bearings) are the most common source of dropped marks on Ontario MCV4U C1 short-answer items. Always restate the convention you are using in one short sentence ("take east as $+x$, measure $\theta$ counterclockwise from $+x$"); markers will give the M1 for the correct setup even if the arithmetic is off. Watch for "N$35^{\circ}$E", which is a bearing notation and means $35^{\circ}$ measured east of north, i.e. an angle of $90 - 35 = 55^{\circ}$ from the $+x$-axis, not $35^{\circ}$.</span><span data-lang="zh">罗盘约定（北偏东、东偏北、方位角）是 Ontario MCV4U C1 简答题中最常见的失分原因。务必用一句短话重申所用约定（"取东为 $+x$，自 $+x$ 逆时针测 $\theta$"）；只要前置设置正确，即便算术出错也能拿到 M1。注意"N$35^{\circ}$E"是方位角记法，表示自正北顺时针测 $35^{\circ}$，相当于自 $+x$ 轴量 $90 - 35 = 55^{\circ}$，而非 $35^{\circ}$。</span></div>
     </div>
   </div>
 </div>
@@ -255,20 +262,20 @@
     <span class="pill marks">[5 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\vec{a} = \langle 3, -2\rangle$, $\vec{b} = \langle 4, k\rangle$. (a) $\vec{a} \cdot \vec{b}$ in terms of $k$. (b) $k$ for perpendicularity.</p>
+    <p class="prompt"><span data-lang="en">$\vec{a} = \langle 3, -2\rangle$, $\vec{b} = \langle 4, k\rangle$. (a) $\vec{a} \cdot \vec{b}$ in terms of $k$. (b) $k$ for perpendicularity.</span><span data-lang="zh">$\vec{a} = \langle 3, -2\rangle$，$\vec{b} = \langle 4, k\rangle$。(a) 用 $k$ 表示 $\vec{a} \cdot \vec{b}$。(b) 求使二者垂直的 $k$。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\vec{a} \cdot \vec{b} = 12 - 2k$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $k = 6$ (perpendicularity test: $\vec{a} \cdot \vec{b} = 0$)</div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\vec{a} \cdot \vec{b} = 12 - 2k$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $k = 6$ <span data-lang="en">(perpendicularity test: $\vec{a} \cdot \vec{b} = 0$)</span><span data-lang="zh">（垂直判别式：$\vec{a} \cdot \vec{b} = 0$）</span></div>
     <div class="rationale">
-      <h4>(a) Componentwise dot product <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(a) <span data-lang="en">Componentwise dot product</span><span data-lang="zh">按分量计算点积</span> <span class="marks-call">M1&middot;A1</span></h4>
       $$ \vec{a} \cdot \vec{b} \;=\; (3)(4) + (-2)(k) \;=\; 12 - 2k. $$
 
-      <h4>(b) Apply the perpendicularity test <span class="marks-call">R1&middot;M1&middot;A1</span></h4>
-      Two non-zero vectors are perpendicular iff their dot product is zero (this is the algebraic form of the perpendicularity test, equivalent to $\cos\theta = 0 \Leftrightarrow \theta = 90^{\circ}$). Setting $\vec{a} \cdot \vec{b} = 0$:
+      <h4>(b) <span data-lang="en">Apply the perpendicularity test</span><span data-lang="zh">应用垂直判别式</span> <span class="marks-call">R1&middot;M1&middot;A1</span></h4>
+      <span data-lang="en">Two non-zero vectors are perpendicular iff their dot product is zero (this is the algebraic form of the perpendicularity test, equivalent to $\cos\theta = 0 \Leftrightarrow \theta = 90^{\circ}$). Setting $\vec{a} \cdot \vec{b} = 0$:</span><span data-lang="zh">两个非零向量垂直当且仅当其点积为零（这是垂直判别式的代数形式，等价于 $\cos\theta = 0 \Leftrightarrow \theta = 90^{\circ}$）。令 $\vec{a} \cdot \vec{b} = 0$：</span>
       $$ 12 - 2k \;=\; 0 \;\Longrightarrow\; k \;=\; 6. $$
-      Verify: with $k = 6$, $\vec{b} = \langle 4, 6\rangle$ and $\vec{a} \cdot \vec{b} = 12 - 12 = 0$. $\checkmark$
+      <span data-lang="en">Verify: with $k = 6$, $\vec{b} = \langle 4, 6\rangle$ and $\vec{a} \cdot \vec{b} = 12 - 12 = 0$. $\checkmark$</span><span data-lang="zh">验算：当 $k = 6$ 时，$\vec{b} = \langle 4, 6\rangle$，$\vec{a} \cdot \vec{b} = 12 - 12 = 0$。$\checkmark$</span>
 
-      <div class="insight"><strong>The dot-product perpendicularity test is the fastest way to find a missing component.</strong> Setting up the equation $\vec{a} \cdot \vec{b} = 0$ converts a geometric question ("perpendicular?") into a one-line linear equation in the unknown. Compare with the alternative, using slopes: you would compute $m_{a} = -2/3$, then require $m_{b} \cdot m_{a} = -1$, then solve for $k/4$. Both work, but the dot-product route is dimension-agnostic (works in 3-D where slopes do not) and never requires dividing by zero (vertical-vector edge case). MCV4U C3 markers split this item: R1 for stating the test, M1 for setting up the equation, A1 for solving.</div>
+      <div class="insight"><strong><span data-lang="en">The dot-product perpendicularity test is the fastest way to find a missing component.</span><span data-lang="zh">点积垂直判别式是求未知分量最快的途径。</span></strong> <span data-lang="en">Setting up the equation $\vec{a} \cdot \vec{b} = 0$ converts a geometric question ("perpendicular?") into a one-line linear equation in the unknown. Compare with the alternative, using slopes: you would compute $m_{a} = -2/3$, then require $m_{b} \cdot m_{a} = -1$, then solve for $k/4$. Both work, but the dot-product route is dimension-agnostic (works in 3-D where slopes do not) and never requires dividing by zero (vertical-vector edge case). MCV4U C3 markers split this item: R1 for stating the test, M1 for setting up the equation, A1 for solving.</span><span data-lang="zh">列出 $\vec{a} \cdot \vec{b} = 0$ 即可把"是否垂直？"这一几何问题转成关于未知数的一行线性方程。对比另一思路——用斜率：先算 $m_{a} = -2/3$，再要求 $m_{b} \cdot m_{a} = -1$，最后解 $k/4$。两种方法都可行，但点积路径与维度无关（三维下斜率失效），且从不除以零（避免竖直向量的边界情形）。MCV4U C3 阅卷拆分本题：R1 写判别式，M1 列方程，A1 解出。</span></div>
     </div>
   </div>
 </div>
@@ -278,8 +285,8 @@
 <!-- ─────────────────────────────────────────────────────────────────────
      PART II, Extended Response Solutions (Q6–Q9, 35 marks)
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE &middot; SOLUTIONS</span><span class="part-meta">AP-feeder FRQ + ON MCV4U C3 &middot; 35 marks</span></div>
-<h2 class="section-head">Section B &middot; Worked Solutions</h2>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE &middot; SOLUTIONS</span><span data-lang="zh">第二部分 &nbsp;&middot;&nbsp; 长答题 &middot; 解析</span></span><span class="part-meta"><span data-lang="en">AP-feeder FRQ + ON MCV4U C3 &middot; 35 marks</span><span data-lang="zh">AP 衔接 FRQ + ON MCV4U C3 &middot; 35 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &middot; Worked Solutions</span><span data-lang="zh">B 节 &middot; 详细解答</span></h2>
 
 <div class="q frq">
   <div class="q-head">
@@ -291,28 +298,28 @@
     <span class="pill marks">[8 marks]</span>
   </div>
   <div class="q-body">
-    <p class="prompt">$\vec{u} = \langle 2, 3\rangle$, $\vec{v} = \langle -1, 5\rangle$. (a) $\vec{u} \cdot \vec{v}$. (b) $|\vec{u}|, |\vec{v}|$ exact. (c) Angle $\theta$. (d) Classify $\theta$.</p>
+    <p class="prompt"><span data-lang="en">$\vec{u} = \langle 2, 3\rangle$, $\vec{v} = \langle -1, 5\rangle$. (a) $\vec{u} \cdot \vec{v}$. (b) $|\vec{u}|, |\vec{v}|$ exact. (c) Angle $\theta$. (d) Classify $\theta$.</span><span data-lang="zh">$\vec{u} = \langle 2, 3\rangle$，$\vec{v} = \langle -1, 5\rangle$。(a) 求 $\vec{u} \cdot \vec{v}$。(b) 精确求 $|\vec{u}|, |\vec{v}|$。(c) 夹角 $\theta$。(d) 将 $\theta$ 分类。</span></p>
   </div>
   <div class="solution">
-    <div class="answer-line">Answer: &nbsp;<span class="ans">(a)</span> $\vec{u} \cdot \vec{v} = 13$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $|\vec{u}| = \sqrt{13}$, $|\vec{v}| = \sqrt{26}$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\theta = 45.0^{\circ}$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> acute ($\vec{u} \cdot \vec{v} &gt; 0$)</div>
+    <div class="answer-line"><span data-lang="en">Answer:</span><span data-lang="zh">答案：</span> &nbsp;<span class="ans">(a)</span> $\vec{u} \cdot \vec{v} = 13$ &nbsp;&middot;&nbsp; <span class="ans">(b)</span> $|\vec{u}| = \sqrt{13}$, $|\vec{v}| = \sqrt{26}$ &nbsp;&middot;&nbsp; <span class="ans">(c)</span> $\theta = 45.0^{\circ}$ &nbsp;&middot;&nbsp; <span class="ans">(d)</span> <span data-lang="en">acute</span><span data-lang="zh">锐角</span> ($\vec{u} \cdot \vec{v} &gt; 0$)</div>
     <div class="rationale">
-      <h4>(a) Algebraic dot product <span class="marks-call">M1&middot;A1</span></h4>
+      <h4>(a) <span data-lang="en">Algebraic dot product</span><span data-lang="zh">代数法求点积</span> <span class="marks-call">M1&middot;A1</span></h4>
       $$ \vec{u} \cdot \vec{v} \;=\; (2)(-1) + (3)(5) \;=\; -2 + 15 \;=\; 13. $$
 
-      <h4>(b) Magnitudes in exact-radical form <span class="marks-call">A1&middot;A1</span></h4>
+      <h4>(b) <span data-lang="en">Magnitudes in exact-radical form</span><span data-lang="zh">精确根式求模长</span> <span class="marks-call">A1&middot;A1</span></h4>
       $|\vec{u}| = \sqrt{2^{2} + 3^{2}} = \sqrt{4 + 9} = \sqrt{13}$.<br>
       $|\vec{v}| = \sqrt{(-1)^{2} + 5^{2}} = \sqrt{1 + 25} = \sqrt{26}$.
 
-      <h4>(c) Angle from the geometric form <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
+      <h4>(c) <span data-lang="en">Angle from the geometric form</span><span data-lang="zh">用几何形式求夹角</span> <span class="marks-call">M1&middot;A1&middot;A1</span></h4>
       $$ \cos\theta \;=\; \frac{\vec{u} \cdot \vec{v}}{|\vec{u}|\,|\vec{v}|} \;=\; \frac{13}{\sqrt{13}\,\sqrt{26}} \;=\; \frac{13}{\sqrt{338}}. $$
-      Simplify the denominator: $\sqrt{338} = \sqrt{169 \cdot 2} = 13\sqrt{2}$. Hence
+      <span data-lang="en">Simplify the denominator: $\sqrt{338} = \sqrt{169 \cdot 2} = 13\sqrt{2}$. Hence</span><span data-lang="zh">化简分母：$\sqrt{338} = \sqrt{169 \cdot 2} = 13\sqrt{2}$。因此</span>
       $$ \cos\theta \;=\; \frac{13}{13\sqrt{2}} \;=\; \frac{1}{\sqrt{2}} \;=\; \frac{\sqrt{2}}{2}. $$
-      So $\theta = \arccos\left(\tfrac{\sqrt{2}}{2}\right) = 45.0^{\circ}$ (exact).
+      <span data-lang="en">So $\theta = \arccos\left(\tfrac{\sqrt{2}}{2}\right) = 45.0^{\circ}$ (exact).</span><span data-lang="zh">所以 $\theta = \arccos\left(\tfrac{\sqrt{2}}{2}\right) = 45.0^{\circ}$（精确值）。</span>
 
-      <h4>(d) Classification <span class="marks-call">A1</span></h4>
-      $\theta = 45.0^{\circ}$ is between $0^{\circ}$ and $90^{\circ}$, so $\theta$ is <strong>acute</strong>. This matches the sign of the dot product: $\vec{u} \cdot \vec{v} = 13 &gt; 0 \Leftrightarrow \cos\theta &gt; 0 \Leftrightarrow \theta$ acute.
+      <h4>(d) <span data-lang="en">Classification</span><span data-lang="zh">分类</span> <span class="marks-call">A1</span></h4>
+      <span data-lang="en">$\theta = 45.0^{\circ}$ is between $0^{\circ}$ and $90^{\circ}$, so $\theta$ is <strong>acute</strong>. This matches the sign of the dot product: $\vec{u} \cdot \vec{v} = 13 &gt; 0 \Leftrightarrow \cos\theta &gt; 0 \Leftrightarrow \theta$ acute.</span><span data-lang="zh">$\theta = 45.0^{\circ}$ 介于 $0^{\circ}$ 与 $90^{\circ}$ 之间，所以 $\theta$ 是<strong>锐角</strong>。这与点积符号一致：$\vec{u} \cdot \vec{v} = 13 &gt; 0 \Leftrightarrow \cos\theta &gt; 0 \Leftrightarrow \theta$ 为锐角。</span>
 
-      <div class="insight"><strong>The sign of $\vec{u} \cdot \vec{v}$ classifies the angle, no inverse-cosine needed.</strong> A four-way diagnostic: $\vec{u} \cdot \vec{v} &gt; 0 \Leftrightarrow$ acute; $= 0 \Leftrightarrow$ right; $&lt; 0 \Leftrightarrow$ obtuse; $\pm |\vec{u}||\vec{v}| \Leftrightarrow$ parallel ($0^{\circ}$ or $180^{\circ}$). Part (d)'s mark is free if you state this rule explicitly. Cross-check on the algebra: simplify $\sqrt{13 \cdot 26}$ <em>before</em> reaching for the calculator, $\sqrt{a^{2} \cdot b} = a\sqrt{b}$ takes a messy decimal and turns it into the exact $13\sqrt{2}$, which gives an exact $\theta = 45^{\circ}$. Markers reward the exact-form route over decimal approximation.</div>
+      <div class="insight"><strong><span data-lang="en">The sign of $\vec{u} \cdot \vec{v}$ classifies the angle, no inverse-cosine needed.</span><span data-lang="zh">$\vec{u} \cdot \vec{v}$ 的符号即可给夹角分类，无需反余弦。</span></strong> <span data-lang="en">A four-way diagnostic: $\vec{u} \cdot \vec{v} &gt; 0 \Leftrightarrow$ acute; $= 0 \Leftrightarrow$ right; $&lt; 0 \Leftrightarrow$ obtuse; $\pm |\vec{u}||\vec{v}| \Leftrightarrow$ parallel ($0^{\circ}$ or $180^{\circ}$). Part (d)'s mark is free if you state this rule explicitly. Cross-check on the algebra: simplify $\sqrt{13 \cdot 26}$ <em>before</em> reaching for the calculator, $\sqrt{a^{2} \cdot b} = a\sqrt{b}$ takes a messy decimal and turns it into the exact $13\sqrt{2}$, which gives an exact $\theta = 45^{\circ}$. Markers reward the exact-form route over decimal approximation.</span><span data-lang="zh">四档判别：$\vec{u} \cdot \vec{v} &gt; 0 \Leftrightarrow$ 锐角；$= 0 \Leftrightarrow$ 直角；$&lt; 0 \Leftrightarrow$ 钝角；$\pm |\vec{u}||\vec{v}| \Leftrightarrow$ 平行（$0^{\circ}$ 或 $180^{\circ}$）。明示此规则即可白拿 (d) 那一分。代数自查：动计算器前先化简 $\sqrt{13 \cdot 26}$，$\sqrt{a^{2} \cdot b} = a\sqrt{b}$ 把一串杂乱小数变成精确的 $13\sqrt{2}$，从而得到精确的 $\theta = 45^{\circ}$。阅卷会偏爱精确根式而非小数近似。</span></div>
     </div>
   </div>
 </div>
@@ -567,6 +574,11 @@
   <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Solutions &middot; <code style="color:#555;">v1</code> &middot; Companion to Practice &middot; 81 marks total</span>
   <span>12 Qs &middot; 81 marks &middot; ON MCV4U + US HSN-VM (+) &middot; BC/AB out-of-core</span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>

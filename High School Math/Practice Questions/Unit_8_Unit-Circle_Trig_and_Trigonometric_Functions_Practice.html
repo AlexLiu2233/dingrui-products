@@ -25,11 +25,13 @@
     --region-bg:#F5F2EE; --region-ink:#3A322B; --region-rule:#B5A68F;
     --paper-bg:#FBE9E9;  --paper-ink:#7A2E2E;  --paper-rule:#C97A7A;
     --honors-bg:#FDF5EC; --honors-ink:#7A5618; --honors-rule:#C4956A;
+    --font-body:'Times New Roman', Times, Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+    --font-sans:'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
   }
   @page { size: letter; margin: 0.6in 0.65in; }
   *{margin:0;padding:0;box-sizing:border-box;}
   html,body{background:var(--paper);color:var(--ink);}
-  body{font-family:'Times New Roman',Times,Georgia,serif;font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  body{font-family:var(--font-body);font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
   .brand{letter-spacing:.55em;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
   .chapter-tag{font-family:'Source Sans 3',sans-serif;text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
   .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
@@ -87,45 +89,56 @@
   footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:'Source Sans 3',sans-serif;font-size:9pt;color:#666;display:flex;justify-content:space-between;}
   footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
   .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ── Lang toggle (locked Sprint 4; same tokens as the Study Guide) ── */
+  .lang-bar{display:flex;justify-content:center;margin:6px 0 10px;}
+  .lang-btn{font-family:var(--font-sans);font-weight:700;font-size:9pt;letter-spacing:.1em;padding:4px 14px;border:1px solid var(--maroon);background:#fff;color:var(--maroon);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn:hover{background:var(--maroon);color:#fff;}
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  body.lang-zh{font-family:var(--font-sans);}
   @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
-  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}.lang-bar{display:none;}}
 </style>
 </head>
 <body>
 
+<div class="lang-bar">
+  <button class="lang-btn" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+</div>
+
 <div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;M&nbsp;A&nbsp;T&nbsp;H</div>
-<div class="chapter-tag">Practice</div>
-<h1 class="chapter-title">Unit-Circle Trigonometry and Trigonometric Functions</h1>
-<p class="chapter-sub">Practice Questions &middot; SAT &middot; AP-Feeder &middot; ON / BC / AB Provincial Styles</p>
+<div class="chapter-tag"><span data-lang="en">Practice</span><span data-lang="zh">练习题</span></div>
+<h1 class="chapter-title"><span data-lang="en">Unit-Circle Trigonometry and Trigonometric Functions</span><span data-lang="zh">单位圆三角学与三角函数</span></h1>
+<p class="chapter-sub"><span data-lang="en">Practice Questions &middot; SAT &middot; AP-Feeder &middot; ON / BC / AB Provincial Styles</span><span data-lang="zh">练习题集 &middot; SAT 风格 &middot; AP 衔接 &middot; 安大略 / 不列颠哥伦比亚 / 阿尔伯塔省考风格</span></p>
 
 <div class="legend">
-  <span class="pill easy">EASY</span>
-  <span class="pill med">MEDIUM</span>
-  <span class="pill hard">HARD</span>
-  <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-  <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-  <span class="pill paper">SAT-style MCQ</span>
-  <span class="pill paper">AP-feeder FRQ</span>
-  <span class="pill paper">ON Provincial-style</span>
-  <span class="pill paper">BC Provincial-style</span>
-  <span class="pill paper">AB Math 30-1 style</span>
-  <span class="pill honors">Honors / Pre-Calc</span>
+  <span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+  <span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+  <span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+  <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+  <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+  <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">AB Math 30-1 style</span><span data-lang="zh">阿省 Math 30-1 风格</span></span>
+  <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
 </div>
 
 <!-- Condensed Syllabus Map (full 4-column callout lives in the Study Guide). -->
 <div class="syllabus-strip">
-  <div class="col"><b>&#x1F1FA;&#x1F1F8; US Common Core</b><code>HSF-TF.A.1</code> &middot; <code>HSF-TF.A.2</code> &middot; <code>HSF-TF.A.3 (+)</code> &middot; <code>HSF-TF.A.4 (+)</code> &middot; <code>HSF-TF.B.5</code> (above Algebra 2; Pre-Calc territory)</div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; Ontario</b>MCR3U <em>Strand D &middot; Trigonometric Functions</em> (degree-mode sinusoidal models) &middot; MHF4U <em>Strand B &middot; Trigonometric Functions</em> (radians, unit circle, $\sin/\cos/\tan$ graphs and transformations)</div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; British Columbia</b>PC 11 <em>angles in standard position</em> (degree mode) &middot; PC 12 <em>radians + unit circle + reference / coterminal / special angles</em> &middot; PC 12 <em>graphing primary trig functions, incl. transformations</em></div>
-  <div class="col"><b>&#x1F1E8;&#x1F1E6; Alberta</b>Math 30-1 Trig GO 1 (radians 1.1&ndash;1.9) &middot; GO 2 (unit-circle equation 2.1&ndash;2.2) &middot; GO 3 (exact values at $30^{\circ}/45^{\circ}/60^{\circ}$ multiples, 3.2) &middot; GO 4 (graphs + write $y = a\sin b(x - c) + d$, 4.1&ndash;4.9)</div>
+  <div class="col"><b>&#x1F1FA;&#x1F1F8; <span data-lang="en">US Common Core</span><span data-lang="zh">美国共同核心</span></b><code>HSF-TF.A.1</code> &middot; <code>HSF-TF.A.2</code> &middot; <code>HSF-TF.A.3 (+)</code> &middot; <code>HSF-TF.A.4 (+)</code> &middot; <code>HSF-TF.B.5</code> <span data-lang="en">(above Algebra 2; Pre-Calc territory)</span><span data-lang="zh">（高于 Algebra 2，属于 Pre-Calc 范畴）</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario</span><span data-lang="zh">安大略</span></b><span data-lang="en">MCR3U <em>Strand D &middot; Trigonometric Functions</em> (degree-mode sinusoidal models) &middot; MHF4U <em>Strand B &middot; Trigonometric Functions</em> (radians, unit circle, $\sin/\cos/\tan$ graphs and transformations)</span><span data-lang="zh">MCR3U <em>单元 D &middot; 三角函数</em>（角度制正弦型模型）&middot; MHF4U <em>单元 B &middot; 三角函数</em>（弧度制、单位圆、$\sin/\cos/\tan$ 图像及变换）</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></b><span data-lang="en">PC 11 <em>angles in standard position</em> (degree mode) &middot; PC 12 <em>radians + unit circle + reference / coterminal / special angles</em> &middot; PC 12 <em>graphing primary trig functions, incl. transformations</em></span><span data-lang="zh">PC 11 <em>标准位置上的角</em>（角度制）&middot; PC 12 <em>弧度制 + 单位圆 + 参考角 / 共终边角 / 特殊角</em> &middot; PC 12 <em>基本三角函数作图，含变换</em></span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta</span><span data-lang="zh">阿尔伯塔</span></b><span data-lang="en">Math 30-1 Trig GO 1 (radians 1.1&ndash;1.9) &middot; GO 2 (unit-circle equation 2.1&ndash;2.2) &middot; GO 3 (exact values at $30^{\circ}/45^{\circ}/60^{\circ}$ multiples, 3.2) &middot; GO 4 (graphs + write $y = a\sin b(x - c) + d$, 4.1&ndash;4.9)</span><span data-lang="zh">Math 30-1 三角 GO 1（弧度 1.1–1.9）&middot; GO 2（单位圆方程 2.1–2.2）&middot; GO 3（$30^{\circ}/45^{\circ}/60^{\circ}$ 倍数处的精确值，3.2）&middot; GO 4（图像 + 写出 $y = a\sin b(x - c) + d$，4.1–4.9）</span></div>
 </div>
-<p class="syllabus-strip-note">Full 4-column Syllabus Map lives in <code>../Study Guides/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions.html</code>.</p>
+<p class="syllabus-strip-note"><span data-lang="en">Full 4-column Syllabus Map lives in <code>../Study Guides/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions.html</code>.</span><span data-lang="zh">完整的四列大纲对照表见 <code>../Study Guides/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions.html</code>。</span></p>
 
 <hr class="thick"><hr class="thin">
-<div class="nameline"><span>Name:<span class="blank"></span></span><span>Date:<span class="blank period"></span></span></div>
-<p class="draft-banner"><code>v1</code> &middot; 12 Qs &middot; 81 marks &middot; region + paper-style chips on every question &middot; <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> flag marks Pre-Calc / Math 30-1 content that sits above US Algebra 2 &middot; companion: <code>Solutions/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Solutions.html</code></p>
+<div class="nameline"><span><span data-lang="en">Name:</span><span data-lang="zh">姓名：</span><span class="blank"></span></span><span><span data-lang="en">Date:</span><span data-lang="zh">日期：</span><span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">12 Qs &middot; 81 marks &middot; region + paper-style chips on every question &middot; <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">Honors</span> flag marks Pre-Calc / Math 30-1 content that sits above US Algebra 2 &middot; companion: <code>Solutions/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Solutions.html</code></span><span data-lang="zh">共 12 题 &middot; 81 分 &middot; 每题均标注地区与试卷风格标签 &middot; <span class="pill honors" style="font-size:7.5pt;padding:1px 6px;">荣誉级</span> 标志表示高于美国 Algebra 2 的 Pre-Calc / Math 30-1 内容 &middot; 配套答案：<code>Solutions/Unit_8_Unit-Circle_Trig_and_Trigonometric_Functions_Solutions.html</code></span></p>
 
 <!-- ─────────────────────────────────────────────────────────────────────
      PART I, Short Response (SAT-style + ON/BC short answer)
@@ -133,21 +146,21 @@
      Section coverage: §1 (radians/coterminal/reference), §2 (unit circle),
      §3 (reciprocals).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span class="part-meta">SAT-style MCQ + ON/BC/AB short answer &middot; 18 marks</span></div>
-<h2 class="section-head">Section A &middot; Short Response</h2>
-<p class="instructions">Mix of multiple-choice and short-answer items focused on the unit-circle foundations. For MCQs, circle the letter and leave enough margin work that a marker could verify. State exact values in simplified radical form (e.g. $\tfrac{\sqrt{3}}{2}$, not the decimal $0.866\ldots$). No calculator on Q1&ndash;Q5.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 短答题</span></span><span class="part-meta"><span data-lang="en">SAT-style MCQ + ON/BC/AB short answer &middot; 18 marks</span><span data-lang="zh">SAT 风格选择题 + 安/卑/阿省考短答 &middot; 共 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Short Response</span><span data-lang="zh">A 部分 &middot; 短答题</span></h2>
+<p class="instructions"><span data-lang="en">Mix of multiple-choice and short-answer items focused on the unit-circle foundations. For MCQs, circle the letter and leave enough margin work that a marker could verify. State exact values in simplified radical form (e.g. $\tfrac{\sqrt{3}}{2}$, not the decimal $0.866\ldots$). No calculator on Q1&ndash;Q5.</span><span data-lang="zh">本节为选择题与短答题混合，聚焦单位圆基础。选择题请圈出字母答案，并在空白处写下足以让阅卷人核对的过程。精确值请以最简根式形式作答（例如 $\tfrac{\sqrt{3}}{2}$，而非小数 $0.866\ldots$）。Q1–Q5 不可使用计算器。</span></p>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q1</span><span class="pill easy">EASY</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Radians &middot; HSF-TF.A.1</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q1</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Radians</span><span data-lang="zh">弧度制</span> &middot; HSF-TF.A.1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">An angle measures $150^{\circ}$. Which of the following is the equivalent radian measure?</p>
+    <p class="prompt"><span data-lang="en">An angle measures $150^{\circ}$. Which of the following is the equivalent radian measure?</span><span data-lang="zh">某角的度数为 $150^{\circ}$。下列哪一项是其等价的弧度度量？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $\dfrac{2\pi}{3}$</li>
       <li><span class="lab">(B)</span> $\dfrac{3\pi}{4}$</li>
@@ -160,15 +173,15 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q2</span><span class="pill easy">EASY</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;2 Unit Circle &middot; HSF-TF.A.3 (+)</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q2</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Unit Circle</span><span data-lang="zh">单位圆</span> &middot; HSF-TF.A.3 (+)</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">What is the exact value of $\sin\!\left(\dfrac{5\pi}{6}\right)$?</p>
+    <p class="prompt"><span data-lang="en">What is the exact value of $\sin\!\left(\dfrac{5\pi}{6}\right)$?</span><span data-lang="zh">$\sin\!\left(\dfrac{5\pi}{6}\right)$ 的精确值是多少？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $-\dfrac{1}{2}$</li>
       <li><span class="lab">(B)</span> $\dfrac{1}{2}$</li>
@@ -181,15 +194,15 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q3</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">SAT-style MCQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Reference Angles &middot; HSF-TF.A.3 (+)</span>
-    <span class="pill marks">[3 marks]</span>
+    <span class="pill qnum">Q3</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">SAT-style MCQ</span><span data-lang="zh">SAT 风格选择题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Reference Angles</span><span data-lang="zh">参考角</span> &middot; HSF-TF.A.3 (+)</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">The terminal arm of an angle $\theta$ in standard position lies in Quadrant III, and the reference angle is $\dfrac{\pi}{4}$. What is the value of $\cos\theta$?</p>
+    <p class="prompt"><span data-lang="en">The terminal arm of an angle $\theta$ in standard position lies in Quadrant III, and the reference angle is $\dfrac{\pi}{4}$. What is the value of $\cos\theta$?</span><span data-lang="zh">标准位置上的角 $\theta$ 终边位于第三象限，参考角为 $\dfrac{\pi}{4}$。$\cos\theta$ 的值是多少？</span></p>
     <ol class="mcq">
       <li><span class="lab">(A)</span> $\dfrac{\sqrt{2}}{2}$</li>
       <li><span class="lab">(B)</span> $-\dfrac{\sqrt{2}}{2}$</li>
@@ -202,38 +215,38 @@
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q4</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;3 Reciprocal Functions &middot; MHF4U Strand B</span>
-    <span class="pill marks">[4 marks]</span>
+    <span class="pill qnum">Q4</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">Reciprocal Functions</span><span data-lang="zh">倒数三角函数</span> &middot; MHF4U <span data-lang="en">Strand B</span><span data-lang="zh">单元 B</span></span>
+    <span class="pill marks"><span data-lang="en">[4 marks]</span><span data-lang="zh">[4 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Given that $\sin\theta = -\dfrac{3}{5}$ and $\theta$ lies in Quadrant IV, determine the exact values of:</p>
+    <p class="prompt"><span data-lang="en">Given that $\sin\theta = -\dfrac{3}{5}$ and $\theta$ lies in Quadrant IV, determine the exact values of:</span><span data-lang="zh">已知 $\sin\theta = -\dfrac{3}{5}$ 且 $\theta$ 位于第四象限，求下列各量的精确值：</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> $\cos\theta$ (use the Pythagorean identity and the quadrant sign). <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> $\csc\theta$ and $\sec\theta$ in lowest terms. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">$\cos\theta$ (use the Pythagorean identity and the quadrant sign).</span><span data-lang="zh">$\cos\theta$（使用毕达哥拉斯恒等式与象限符号判定）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">$\csc\theta$ and $\sec\theta$ in lowest terms.</span><span data-lang="zh">$\csc\theta$ 与 $\sec\theta$，以最简形式作答。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q">
   <div class="q-head">
-    <span class="pill qnum">Q5</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-    <span class="pill paper">AB Math 30-1 style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;1 Coterminal + Arc Length &middot; AB Math 30-1 Trig GO 1</span>
-    <span class="pill marks">[5 marks]</span>
+    <span class="pill qnum">Q5</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">AB Math 30-1 style</span><span data-lang="zh">阿省 Math 30-1 风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Coterminal + Arc Length</span><span data-lang="zh">共终边角 + 弧长</span> &middot; <span data-lang="en">AB Math 30-1 Trig GO 1</span><span data-lang="zh">阿省 Math 30-1 三角 GO 1</span></span>
+    <span class="pill marks"><span data-lang="en">[5 marks]</span><span data-lang="zh">[5 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">An angle in standard position measures $\theta = \dfrac{11\pi}{3}$ radians.</p>
+    <p class="prompt"><span data-lang="en">An angle in standard position measures $\theta = \dfrac{11\pi}{3}$ radians.</span><span data-lang="zh">标准位置上的角度数为 $\theta = \dfrac{11\pi}{3}$ 弧度。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Find the coterminal angle $\theta'$ that satisfies $0 \le \theta' &lt; 2\pi$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> State the quadrant in which the terminal arm lies, and give the reference angle. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> A circle has radius $r = 6$ cm. State the arc length subtended by the coterminal angle $\theta'$ from part (a), using the formula $s = r\theta'$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the coterminal angle $\theta'$ that satisfies $0 \le \theta' &lt; 2\pi$.</span><span data-lang="zh">求满足 $0 \le \theta' &lt; 2\pi$ 的共终边角 $\theta'$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">State the quadrant in which the terminal arm lies, and give the reference angle.</span><span data-lang="zh">写出终边所在的象限，并给出参考角。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">A circle has radius $r = 6$ cm. State the arc length subtended by the coterminal angle $\theta'$ from part (a), using the formula $s = r\theta'$.</span><span data-lang="zh">某圆半径为 $r = 6$ cm。利用公式 $s = r\theta'$，写出 (a) 中所得共终边角 $\theta'$ 所截弧长。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
@@ -247,87 +260,87 @@
      §4-§6 (sin/cos/tan graphs), §7 (transformations of sinusoids).
      Q9 is the honors block (write equation from graph + interpret B and C).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span class="part-meta">AP-feeder FRQ + honors &middot; 35 marks</span></div>
-<h2 class="section-head">Section B &middot; Extended Response</h2>
-<p class="instructions">Show every step. State each exact value in simplified radical form. For graph questions, label amplitude $A$, period $T$, phase shift $C$, and vertical shift $D$ explicitly before sketching or solving. No calculator on Q6&ndash;Q9.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span data-lang="zh">第二部分 &nbsp;&middot;&nbsp; 简答题</span></span><span class="part-meta"><span data-lang="en">AP-feeder FRQ + honors &middot; 35 marks</span><span data-lang="zh">AP 衔接简答题 + 荣誉级 &middot; 共 35 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &middot; Extended Response</span><span data-lang="zh">B 部分 &middot; 简答题</span></h2>
+<p class="instructions"><span data-lang="en">Show every step. State each exact value in simplified radical form. For graph questions, label amplitude $A$, period $T$, phase shift $C$, and vertical shift $D$ explicitly before sketching or solving. No calculator on Q6&ndash;Q9.</span><span data-lang="zh">每一步都要写出。所有精确值请以最简根式形式作答。图像题在作图或求解前，请先显式标注振幅 $A$、周期 $T$、相位（<code>phase shift</code>）$C$ 与垂直位移 $D$。Q6–Q9 不可使用计算器。</span></p>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q6</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;2 Four Quadrants + &sect;3 Reciprocals &middot; HSF-TF.A.2 / A.3 (+)</span>
-    <span class="pill marks">[8 marks]</span>
+    <span class="pill qnum">Q6</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Four Quadrants + &sect;3 Reciprocals</span><span data-lang="zh">四象限 + &sect;3 倒数三角比</span> &middot; HSF-TF.A.2 / A.3 (+)</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Evaluate each expression using unit-circle exact values. State the reference angle and the quadrant in every case, then read the sign and magnitude from the unit circle. Give exact values in simplified form.</p>
+    <p class="prompt"><span data-lang="en">Evaluate each expression using unit-circle exact values. State the reference angle and the quadrant in every case, then read the sign and magnitude from the unit circle. Give exact values in simplified form.</span><span data-lang="zh">使用单位圆精确值求下列各表达式的值。每题都先写出参考角与象限，再从单位圆读取符号与大小。结果以最简形式给出精确值。</span></p>
     <div class="frq-parts">
       <div class="part-item"><span class="tag">(a)</span> $\cos\!\left(\dfrac{7\pi}{6}\right)$ <span class="marks-inline">[2]</span><div class="work s"></div></div>
       <div class="part-item"><span class="tag">(b)</span> $\tan\!\left(\dfrac{5\pi}{4}\right)$ <span class="marks-inline">[2]</span><div class="work s"></div></div>
       <div class="part-item"><span class="tag">(c)</span> $\sec\!\left(\dfrac{4\pi}{3}\right)$ <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> $\csc\!\left(-\dfrac{\pi}{3}\right)$ (use the coterminal angle $2\pi - \tfrac{\pi}{3} = \tfrac{5\pi}{3}$, or read $\sin$ as an odd function). <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">$\csc\!\left(-\dfrac{\pi}{3}\right)$ (use the coterminal angle $2\pi - \tfrac{\pi}{3} = \tfrac{5\pi}{3}$, or read $\sin$ as an odd function).</span><span data-lang="zh">$\csc\!\left(-\dfrac{\pi}{3}\right)$（可使用共终边角 $2\pi - \tfrac{\pi}{3} = \tfrac{5\pi}{3}$，或利用 $\sin$ 为奇函数这一性质）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q7</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;4 Sine Graph Features &middot; MHF4U Strand B</span>
-    <span class="pill marks">[8 marks]</span>
+    <span class="pill qnum">Q7</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">Sine Graph Features</span><span data-lang="zh">正弦曲线特征</span> &middot; MHF4U <span data-lang="en">Strand B</span><span data-lang="zh">单元 B</span></span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider the function $f(x) = \sin x$ on the closed interval $[0, 2\pi]$.</p>
+    <p class="prompt"><span data-lang="en">Consider the function $f(x) = \sin x$ on the closed interval $[0, 2\pi]$.</span><span data-lang="zh">考虑闭区间 $[0, 2\pi]$ 上的函数 $f(x) = \sin x$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> List the five "key points" of one full period at $x = 0, \tfrac{\pi}{2}, \pi, \tfrac{3\pi}{2}, 2\pi$ with their function values $\bigl(x, \sin x\bigr)$. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> State the amplitude, period, and range of $f$. <span class="marks-inline">[3]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Solve $\sin x = \dfrac{1}{2}$ on $[0, 2\pi]$ by reading off the unit circle, and state all solutions exactly. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> State the value of $\sin(-x)$ in terms of $\sin x$, and name the symmetry property this expresses (odd or even). <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">List the five "key points" of one full period at $x = 0, \tfrac{\pi}{2}, \pi, \tfrac{3\pi}{2}, 2\pi$ with their function values $\bigl(x, \sin x\bigr)$.</span><span data-lang="zh">列出一个完整周期内 $x = 0, \tfrac{\pi}{2}, \pi, \tfrac{3\pi}{2}, 2\pi$ 处的五个"关键点"及其函数值 $\bigl(x, \sin x\bigr)$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">State the amplitude, period, and range of $f$.</span><span data-lang="zh">写出 $f$ 的振幅、周期与值域。</span> <span class="marks-inline">[3]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Solve $\sin x = \dfrac{1}{2}$ on $[0, 2\pi]$ by reading off the unit circle, and state all solutions exactly.</span><span data-lang="zh">通过读取单位圆，在 $[0, 2\pi]$ 上求解 $\sin x = \dfrac{1}{2}$，写出所有精确解。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">State the value of $\sin(-x)$ in terms of $\sin x$, and name the symmetry property this expresses (odd or even).</span><span data-lang="zh">用 $\sin x$ 表示 $\sin(-x)$，并指出这体现了哪种对称性（奇函数或偶函数）。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q8</span><span class="pill hard">HARD</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">BC Provincial-style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;7 Transformations &middot; BC PC 12</span>
-    <span class="pill marks">[8 marks]</span>
+    <span class="pill qnum">Q8</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Transformations</span><span data-lang="zh">函数变换</span> &middot; BC PC 12</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">Consider $g(x) = 3\sin\!\left(2\!\left(x - \dfrac{\pi}{4}\right)\right) - 1$.</p>
+    <p class="prompt"><span data-lang="en">Consider $g(x) = 3\sin\!\left(2\!\left(x - \dfrac{\pi}{4}\right)\right) - 1$.</span><span data-lang="zh">考虑函数 $g(x) = 3\sin\!\left(2\!\left(x - \dfrac{\pi}{4}\right)\right) - 1$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Identify $A$, $B$, $C$, and $D$ in the transformation form $y = A\sin\bigl(B(x - C)\bigr) + D$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> State the amplitude, period, phase shift, and vertical shift, with appropriate signs and direction (e.g. "phase shift $\tfrac{\pi}{4}$ to the right"). <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> State the maximum value, minimum value, and the equation of the midline (sinusoidal axis). <span class="marks-inline">[3]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> State the range of $g$ in interval notation. <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Identify $A$, $B$, $C$, and $D$ in the transformation form $y = A\sin\bigl(B(x - C)\bigr) + D$.</span><span data-lang="zh">在变换形式 $y = A\sin\bigl(B(x - C)\bigr) + D$ 中辨识 $A$、$B$、$C$、$D$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">State the amplitude, period, phase shift, and vertical shift, with appropriate signs and direction (e.g. "phase shift $\tfrac{\pi}{4}$ to the right").</span><span data-lang="zh">写出振幅、周期、相位（<code>phase shift</code>）与垂直位移，标明符号与方向（例如"相位向右平移 $\tfrac{\pi}{4}$"）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the maximum value, minimum value, and the equation of the midline (sinusoidal axis).</span><span data-lang="zh">写出最大值、最小值与中线（正弦曲线轴）的方程。</span> <span class="marks-inline">[3]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">State the range of $g$ in interval notation.</span><span data-lang="zh">用区间记号写出 $g$ 的值域。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q frq">
   <div class="q-head">
-    <span class="pill qnum">Q9</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill topic">&sect;7 Inverse Modeling &middot; HSF-TF.B.5 / BC PC 12 &amp; AB Math 30-1 GO 4.9</span>
-    <span class="pill marks">[11 marks]</span>
+    <span class="pill qnum">Q9</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Inverse Modeling</span><span data-lang="zh">反向建模</span> &middot; HSF-TF.B.5 / BC PC 12 &amp; AB Math 30-1 GO 4.9</span>
+    <span class="pill marks"><span data-lang="en">[11 marks]</span><span data-lang="zh">[11 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">A sinusoidal curve passes through the maximum point $\left(\dfrac{\pi}{6}, 7\right)$ and the next minimum point $\left(\dfrac{7\pi}{6}, -3\right)$. The curve is to be written in the form $y = A\sin\!\bigl(B(x - C)\bigr) + D$ with $A &gt; 0$ and $B &gt; 0$.</p>
+    <p class="prompt"><span data-lang="en">A sinusoidal curve passes through the maximum point $\left(\dfrac{\pi}{6}, 7\right)$ and the next minimum point $\left(\dfrac{7\pi}{6}, -3\right)$. The curve is to be written in the form $y = A\sin\!\bigl(B(x - C)\bigr) + D$ with $A &gt; 0$ and $B &gt; 0$.</span><span data-lang="zh">某正弦曲线（<code>sinusoid</code>）经过最大值点 $\left(\dfrac{\pi}{6}, 7\right)$ 与紧邻的最小值点 $\left(\dfrac{7\pi}{6}, -3\right)$。需将该曲线写成形式 $y = A\sin\!\bigl(B(x - C)\bigr) + D$，其中 $A &gt; 0$ 且 $B &gt; 0$。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Determine the midline equation $y = D$ from the average of the max and min heights, and state $D$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Determine the amplitude $A$ from the half-distance between max and min. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> The distance from a max to the next min is half a period. Use this to determine the period $T$, then the angular frequency $B = \tfrac{2\pi}{T}$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> The parent function $\sin$ reaches its max at $x = \tfrac{\pi}{2}$. For the transformed curve, the max occurs where $B(x - C) = \tfrac{\pi}{2}$. Use the given max coordinate to solve for $C$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> Write the final equation $y = A\sin\!\bigl(B(x - C)\bigr) + D$ with your values from (a)&ndash;(d). Verify by substituting $x = \tfrac{\pi}{6}$ and confirming $y = 7$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Determine the midline equation $y = D$ from the average of the max and min heights, and state $D$.</span><span data-lang="zh">由最大值与最小值高度的平均数确定中线方程 $y = D$，并写出 $D$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Determine the amplitude $A$ from the half-distance between max and min.</span><span data-lang="zh">由最大值与最小值之间距离的一半确定振幅 $A$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">The distance from a max to the next min is half a period. Use this to determine the period $T$, then the angular frequency $B = \tfrac{2\pi}{T}$.</span><span data-lang="zh">从最大值到下一个最小值的距离为半个周期。据此确定周期 $T$，再求角频率 $B = \tfrac{2\pi}{T}$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">The parent function $\sin$ reaches its max at $x = \tfrac{\pi}{2}$. For the transformed curve, the max occurs where $B(x - C) = \tfrac{\pi}{2}$. Use the given max coordinate to solve for $C$.</span><span data-lang="zh">母函数 $\sin$ 在 $x = \tfrac{\pi}{2}$ 处取最大值。对变换后的曲线，最大值出现在 $B(x - C) = \tfrac{\pi}{2}$ 处。利用给定的最大值横坐标求 $C$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Write the final equation $y = A\sin\!\bigl(B(x - C)\bigr) + D$ with your values from (a)&ndash;(d). Verify by substituting $x = \tfrac{\pi}{6}$ and confirming $y = 7$.</span><span data-lang="zh">代入 (a)–(d) 所得值写出最终方程 $y = A\sin\!\bigl(B(x - C)\bigr) + D$。代入 $x = \tfrac{\pi}{6}$ 验证 $y = 7$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
@@ -339,75 +352,80 @@
      3 questions, 9-10 marks each, 28 marks total.
      §7 sinusoidal modeling: Ferris wheel (US), tide (ON), temperature (BC honors).
      ───────────────────────────────────────────────────────────────────── -->
-<div class="part"><span class="part-label">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span class="part-meta">Universal sinusoidal modelling &middot; 28 marks</span></div>
-<h2 class="section-head">Section C &middot; Modeling and Applications</h2>
-<p class="instructions">Name your variables (with units) before writing equations. For each model, identify $A$, $B$, $C$, $D$ from the situation, then write the function and answer the contextual question. Calculator permitted throughout Part III, but exact-value answers in radical form are preferred where reasonable.</p>
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span data-lang="zh">第三部分 &nbsp;&middot;&nbsp; 建模与应用</span></span><span class="part-meta"><span data-lang="en">Universal sinusoidal modelling &middot; 28 marks</span><span data-lang="zh">通用正弦型建模 &middot; 共 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C &middot; Modeling and Applications</span><span data-lang="zh">C 部分 &middot; 建模与应用</span></h2>
+<p class="instructions"><span data-lang="en">Name your variables (with units) before writing equations. For each model, identify $A$, $B$, $C$, $D$ from the situation, then write the function and answer the contextual question. Calculator permitted throughout Part III, but exact-value answers in radical form are preferred where reasonable.</span><span data-lang="zh">在写方程前，先定义变量名（含单位）。每个模型都需先从情境中辨识 $A$、$B$、$C$、$D$，再写出函数并回答情境问题。第三部分全程可用计算器，但在合理情况下优先以根式形式给出精确值。</span></p>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q10</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1FA;&#x1F1F8; US</span>
-    <span class="pill paper">AP-feeder FRQ</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;7 Ferris-Wheel Model &middot; HSF-TF.B.5</span>
-    <span class="pill marks">[9 marks]</span>
+    <span class="pill qnum">Q10</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Ferris-Wheel Model</span><span data-lang="zh">摩天轮模型</span> &middot; HSF-TF.B.5</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">A Ferris wheel has a diameter of $40$ m. Its lowest point is $2$ m above the ground (the boarding platform), and it completes one full rotation every $80$ seconds. Riders board at the lowest point at time $t = 0$ and the wheel rotates at a constant rate. Let $h(t)$ be the height of a rider above the ground, in metres, $t$ seconds after boarding.</p>
+    <p class="prompt"><span data-lang="en">A Ferris wheel has a diameter of $40$ m. Its lowest point is $2$ m above the ground (the boarding platform), and it completes one full rotation every $80$ seconds. Riders board at the lowest point at time $t = 0$ and the wheel rotates at a constant rate. Let $h(t)$ be the height of a rider above the ground, in metres, $t$ seconds after boarding.</span><span data-lang="zh">某摩天轮直径为 $40$ 米。最低点距地面 $2$ 米（即登舱平台），每 $80$ 秒转一圈。乘客在 $t = 0$ 时于最低点登舱，转轮以恒定速率旋转。设 $h(t)$ 为登舱 $t$ 秒后乘客距地面的高度（米）。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> State the centre height (midline $D$), the amplitude $A$, and the period $T$ of $h(t)$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Write $h(t)$ in the form $h(t) = -A\cos\!\bigl(B t\bigr) + D$ (the negative cosine form starts at the minimum at $t = 0$, matching the boarding condition). State $B$ exactly. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Find the height of the rider $30$ seconds after boarding. Round to the nearest tenth of a metre. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> At what time during the first rotation does the rider first reach a height of $30$ m on the way up? Round to the nearest second. <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">State the centre height (midline $D$), the amplitude $A$, and the period $T$ of $h(t)$.</span><span data-lang="zh">写出 $h(t)$ 的中心高度（中线 $D$）、振幅 $A$ 与周期 $T$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Write $h(t)$ in the form $h(t) = -A\cos\!\bigl(B t\bigr) + D$ (the negative cosine form starts at the minimum at $t = 0$, matching the boarding condition). State $B$ exactly.</span><span data-lang="zh">将 $h(t)$ 写成 $h(t) = -A\cos\!\bigl(B t\bigr) + D$ 形式（负余弦形式在 $t = 0$ 时从最低点出发，与登舱条件吻合）。精确给出 $B$。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the height of the rider $30$ seconds after boarding. Round to the nearest tenth of a metre.</span><span data-lang="zh">求登舱 $30$ 秒后乘客的高度，四舍五入到 $0.1$ 米。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">At what time during the first rotation does the rider first reach a height of $30$ m on the way up? Round to the nearest second.</span><span data-lang="zh">在首圈中，乘客上升过程中首次达到 $30$ 米高度是何时？四舍五入到秒。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q11</span><span class="pill med">MEDIUM</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; ON</span>
-    <span class="pill paper">ON Provincial-style</span>
-    <span class="pill honors">Honors / Pre-Calc</span>
-    <span class="pill topic">&sect;7 Tidal Model &middot; MHF4U Strand B</span>
-    <span class="pill marks">[9 marks]</span>
+    <span class="pill qnum">Q11</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill honors"><span data-lang="en">Honors / Pre-Calc</span><span data-lang="zh">荣誉级 / 微积分预备</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Tidal Model</span><span data-lang="zh">潮汐模型</span> &middot; MHF4U <span data-lang="en">Strand B</span><span data-lang="zh">单元 B</span></span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">A coastal harbour records a high tide of $4.8$ m and a low tide of $0.6$ m. Successive high tides occur $12$ hours apart. The first high tide of the day occurs at $t = 3$ hours (where $t$ is hours after midnight). Let $H(t)$ be the water depth at the harbour at time $t$, in metres.</p>
+    <p class="prompt"><span data-lang="en">A coastal harbour records a high tide of $4.8$ m and a low tide of $0.6$ m. Successive high tides occur $12$ hours apart. The first high tide of the day occurs at $t = 3$ hours (where $t$ is hours after midnight). Let $H(t)$ be the water depth at the harbour at time $t$, in metres.</span><span data-lang="zh">某沿海港口记录到高潮位为 $4.8$ 米、低潮位为 $0.6$ 米。两次相邻高潮相隔 $12$ 小时。当日第一次高潮出现在 $t = 3$ 小时（$t$ 为零时之后的小时数）。设 $H(t)$ 为时刻 $t$ 港口水深（米）。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> Compute the midline $D$, the amplitude $A$, and the period $T$ of $H(t)$. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> The cosine function naturally peaks at its argument $= 0$. Write $H(t)$ in the form $H(t) = A\cos\!\bigl(B(t - C)\bigr) + D$ using the high-tide time as the phase shift $C$. State $B$ and $C$ explicitly. <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Compute the water depth at $t = 7$ hours (i.e. 7 a.m.). Round to two decimal places. <span class="marks-inline">[2]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> A small ferry requires a minimum water depth of $2.0$ m to dock safely. Without solving, explain whether the ferry can dock at the time computed in part (c). <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute the midline $D$, the amplitude $A$, and the period $T$ of $H(t)$.</span><span data-lang="zh">计算 $H(t)$ 的中线 $D$、振幅 $A$ 与周期 $T$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">The cosine function naturally peaks at its argument $= 0$. Write $H(t)$ in the form $H(t) = A\cos\!\bigl(B(t - C)\bigr) + D$ using the high-tide time as the phase shift $C$. State $B$ and $C$ explicitly.</span><span data-lang="zh">余弦函数自然在自变量 $= 0$ 时取最大值。将 $H(t)$ 写成 $H(t) = A\cos\!\bigl(B(t - C)\bigr) + D$，以高潮时刻作为相位 $C$，并显式给出 $B$ 与 $C$。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Compute the water depth at $t = 7$ hours (i.e. 7 a.m.). Round to two decimal places.</span><span data-lang="zh">计算 $t = 7$ 小时（即上午 7 时）的水深，保留两位小数。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">A small ferry requires a minimum water depth of $2.0$ m to dock safely. Without solving, explain whether the ferry can dock at the time computed in part (c).</span><span data-lang="zh">某小型渡轮需至少 $2.0$ 米水深方可安全停靠。不另行求解，说明在 (c) 中所得时刻该渡轮能否停靠。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <div class="q app">
   <div class="q-head">
-    <span class="pill qnum">Q12</span><span class="pill hard">HARD</span><span class="pill honors">Honors</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; BC</span>
-    <span class="pill region">&#x1F1E8;&#x1F1E6; AB</span>
-    <span class="pill paper">BC Provincial-style</span>
-    <span class="pill topic">&sect;7 Temperature Model &middot; BC PC 12 / AB Math 30-1 GO 4.9</span>
-    <span class="pill marks">[10 marks]</span>
+    <span class="pill qnum">Q12</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Temperature Model</span><span data-lang="zh">气温模型</span> &middot; BC PC 12 / AB Math 30-1 GO 4.9</span>
+    <span class="pill marks"><span data-lang="en">[10 marks]</span><span data-lang="zh">[10 分]</span></span>
   </div>
   <div class="q-body">
-    <p class="prompt">The mean daily temperature in a Northern Alberta town, in degrees Celsius, is modelled by a sinusoidal function of the day of the year $d$ (where $d = 1$ on January 1 and $d = 365$ on December 31). Records show the warmest mean daily temperature of $24^{\circ}\text{C}$ occurs on day $d = 200$, and the coldest of $-22^{\circ}\text{C}$ occurs roughly half a year later. Let $T(d)$ denote the modelled temperature.</p>
+    <p class="prompt"><span data-lang="en">The mean daily temperature in a Northern Alberta town, in degrees Celsius, is modelled by a sinusoidal function of the day of the year $d$ (where $d = 1$ on January 1 and $d = 365$ on December 31). Records show the warmest mean daily temperature of $24^{\circ}\text{C}$ occurs on day $d = 200$, and the coldest of $-22^{\circ}\text{C}$ occurs roughly half a year later. Let $T(d)$ denote the modelled temperature.</span><span data-lang="zh">阿尔伯塔北部某城镇的日均气温（摄氏度）由一年中第 $d$ 天的正弦型函数建模（$d = 1$ 为 1 月 1 日，$d = 365$ 为 12 月 31 日）。记录显示最高日均气温 $24^{\circ}\text{C}$ 出现在 $d = 200$，最低气温 $-22^{\circ}\text{C}$ 出现在大约半年之后。设 $T(d)$ 表示建模温度。</span></p>
     <div class="frq-parts">
-      <div class="part-item"><span class="tag">(a)</span> State the midline $D$, the amplitude $A$, and the period (in days). <span class="marks-inline">[3]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(b)</span> Determine $B$ exactly using $B = \dfrac{2\pi}{T_{\text{period}}}$. <span class="marks-inline">[1]</span><div class="work s"></div></div>
-      <div class="part-item"><span class="tag">(c)</span> Write $T(d) = A\cos\!\bigl(B(d - C)\bigr) + D$ using the maximum-day as the phase shift $C$. State the explicit equation. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(d)</span> Compute the modelled temperature on April 30 ($d = 120$). Round to the nearest degree. <span class="marks-inline">[2]</span><div class="work m"></div></div>
-      <div class="part-item"><span class="tag">(e)</span> Without solving algebraically, identify two days of the year (one in spring, one in fall) on which the modelled temperature equals the midline $D$. Justify briefly using the geometry of the cosine curve. <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">State the midline $D$, the amplitude $A$, and the period (in days).</span><span data-lang="zh">写出中线 $D$、振幅 $A$ 与周期（以天为单位）。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Determine $B$ exactly using $B = \dfrac{2\pi}{T_{\text{period}}}$.</span><span data-lang="zh">利用 $B = \dfrac{2\pi}{T_{\text{period}}}$ 精确求出 $B$。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Write $T(d) = A\cos\!\bigl(B(d - C)\bigr) + D$ using the maximum-day as the phase shift $C$. State the explicit equation.</span><span data-lang="zh">以最高气温所在天数作为相位 $C$，写出 $T(d) = A\cos\!\bigl(B(d - C)\bigr) + D$，并给出显式方程。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Compute the modelled temperature on April 30 ($d = 120$). Round to the nearest degree.</span><span data-lang="zh">计算 4 月 30 日（$d = 120$）的建模气温，四舍五入到整数度。</span> <span class="marks-inline">[2]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Without solving algebraically, identify two days of the year (one in spring, one in fall) on which the modelled temperature equals the midline $D$. Justify briefly using the geometry of the cosine curve.</span><span data-lang="zh">不进行代数求解，指出一年中分别位于春、秋的两个日期，使建模气温等于中线 $D$。利用余弦曲线的几何性质简要说明理由。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
     </div>
   </div>
 </div>
 
 <footer class="page-foot">
-  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; High School Math &middot; Practice &middot; <code style="color:#555;">v1</code></span>
-  <span>12 Qs &middot; 81 marks &middot; US / ON / BC / AB &middot; SAT / AP-feeder / Provincial</span>
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; <span data-lang="en">High School Math &middot; Practice</span><span data-lang="zh">高中数学 &middot; 练习题</span> &middot; <code style="color:#555;">v1</code></span>
+  <span><span data-lang="en">12 Qs &middot; 81 marks &middot; US / ON / BC / AB &middot; SAT / AP-feeder / Provincial</span><span data-lang="zh">共 12 题 &middot; 81 分 &middot; 美 / 安 / 卑 / 阿 &middot; SAT / AP 衔接 / 省考</span></span>
 </footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
 
 </body>
 </html>
