@@ -28,15 +28,51 @@ Practice Questions and Solutions follow once the Study Guide template is
 locked. All other surfaces live in the
 [Digital Product Backlog](#digital-product-backlog).
 
-Last reviewed: **2026-05-31** (subject scaffolded; spec + audit + empty
-folder structure created. Sprint 1 OPEN: source-grounding + Unit 1 SG
-template lock. No content drafted yet — source PDFs not yet fetched.)
+Last reviewed: **2026-06-02** (**all 14 Study Guides shipped** —
+bilingual from start, source-grounded, validate PASS, balanced EN/ZH
+spans — on branch `hs_chemistry_sg`, awaiting review/FF to main.
+Practice + Solutions and the static-visual upgrade are later waves.)
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### Sprint 1 — source-grounding + Unit 1 SG template lock — **OPEN** (2026-05-31)
+### Sprint 1 — source-grounding + 14 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_chemistry_sg`, awaiting FF to main)
+
+**Shipped:** all 4 curricula source-grounded (NGSS HS-PS1, ON SCH3U/4U,
+BC Chem 11/12, AB Chem 20/30 — extracts + cached PDFs in `rag/sources/`),
+Unit 1 Atomic Structure drafted as the bilingual template lock, then
+Units 2-14 bulk-drafted via Sonnet **copy-then-edit** (cp Unit 1, transform
+per-section). All 14 SGs: ~1010-1160 lines, balanced EN/ZH spans, validate
+PASS, syllabus-maps cite real codes per curriculum; feeder-links → IB
+Chemistry HL (Structure 1/2, Reactivity 1/2) where topics align. Divergence
+syllabus-notes baked in: NGSS qualitative (no PE for Nomenclature/Gas
+Laws/Acids/Redox/Organic; honors-flag quantitative Thermo/Kinetics/
+Equilibrium); BC organic in Gr11 + light thermo; AB no standalone kinetics.
+
+| Unit | Topic | Spans (EN=ZH) |
+|---|---|---|
+| 1 | Atomic Structure (template) | 475 |
+| 2 | Periodic Table and Trends | 494 |
+| 3 | Chemical Bonding | 487 |
+| 4 | Nomenclature and Formulae | 503 |
+| 5 | The Mole and Stoichiometry | 407 |
+| 6 | Chemical Reactions and Equations | 473 |
+| 7 | States of Matter and Gas Laws | 390 |
+| 8 | Solutions and Solubility | 485 |
+| 9 | Acids, Bases and pH | 449 |
+| 10 | Thermochemistry and Energy | 408 |
+| 11 | Reaction Rates and Kinetics | 503 |
+| 12 | Chemical Equilibrium | 479 |
+| 13 | Redox and Electrochemistry | 469 |
+| 14 | Introduction to Organic Chemistry | 493 |
+
+**Next:** build-index + landing-page integration (surface 14 Chemistry cards),
+then static-visual upgrade (deferred until all HS STEM SGs ship), then P+S.
+
+#### Original Sprint 1 plan (historical)
+
+### Sprint 1 — source-grounding + Unit 1 SG template lock — (historical plan)
 
 Stand up the subject: fetch and extract the four-curriculum source
 documents, then draft the **Unit 1 (Atomic Structure and the Quantum
