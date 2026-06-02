@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High School Computer Science · Computational Thinking and Algorithms | Dingrui Scholars. Decomposition, pattern recognition, abstraction and algorithmic thinking; writing pseudocode; flowcharts and logic representation; sequencing and step-by-step execution; introduction to algorithm efficiency; problem decomposition worked example; tracing and debugging algorithms. Cites US CSTA 3A-AP-13, 3A-AP-17, AP CSP Big Idea 3 (AAP); Ontario ICS3U strands B1/B3; BC Computer Programming 11 computational thinking content; Alberta CSE1010/CSE1110.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>High School Computer Science — Computational Thinking and Algorithms | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-CS-1  dingrui:doc-type study-guide -->
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB; --bg-card: #FFFFFF; --bg-code: #1E1418;
+  --text: #2C1B1F; --text-secondary: #6B5058;
+  --accent: #7A2E2E; --accent-light: #F2E4E4; --accent-dark: #5A1E1E;
+  --green: #2E6B4F; --green-light: #DFF0E8;
+  --orange: #A65E1A; --orange-light: #FBF0E0;
+  --red: #B03030; --red-light: #FCEAEA;
+  --purple: #5E3D7A; --purple-light: #EDE4F5;
+  --gold: #C4956A; --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px; --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010; --bg-card: #1E1618; --bg-code: #0D0A0B;
+  --text: #E8E0DC; --text-secondary: #A89098;
+  --accent: #C87070; --accent-light: #3A1818; --accent-dark: #E08080;
+  --green: #5CB88A; --green-light: #1A2E24;
+  --orange: #D4944A; --orange-light: #2E2010;
+  --red: #E07070; --red-light: #301515;
+  --purple: #A888C8; --purple-light: #201828;
+  --gold: #D4A870; --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 17px; transition: background 0.3s, color 0.3s; }
+.score-badge { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--green); background: var(--green-light); border: 1px solid var(--green); padding: 3px 10px; border-radius: 20px; white-space: nowrap; transition: all 0.3s; }
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+.sidebar { position: fixed; top: 59px; left: 0; bottom: 0; width: var(--toc-w); background: var(--bg-card); border-right: 1px solid var(--border); overflow-y: auto; scrollbar-width: none; padding: 20px 0; transform: translateX(-100%); transition: transform 0.3s ease, background 0.3s; z-index: 90; }
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title { font-family: var(--font-display); font-size: 0.95rem; padding: 0 20px 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.sidebar a { display: block; padding: 8px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+.main-wrap { max-width: var(--max-w); margin: 80px auto 120px; padding: 0 24px; transition: width 0.3s ease, margin-left 0.3s ease; }
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap { max-width: none; margin-left: calc(var(--toc-w) + 40px); margin-right: 0; padding: 0 48px; }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+.hero { text-align: center; padding: 56px 24px 48px; background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%); border-radius: var(--radius); margin-bottom: 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%); pointer-events: none; }
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; position: relative; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; position: relative; }
+.hero-sub { color: var(--text-secondary); max-width: 650px; margin: 0 auto; position: relative; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; }
+.hero-meta .chip { font-size: 0.85rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HS Math multi-syllabus chrome (locked in Unit 1) */
+.syllabus-map { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg-card) 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px 26px 18px; margin: 28px 0 36px; box-shadow: var(--shadow); }
+.syllabus-map-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.syllabus-map-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1000px) { .syllabus-map-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+@media (max-width: 600px) { .syllabus-map-grid { grid-template-columns: 1fr; gap: 18px; } }
+.syllabus-map .region-header { font-family: var(--font-display); font-size: 1.02rem; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.syllabus-map ul { list-style: none; padding: 0; margin: 0; }
+.syllabus-map ul li { font-size: 0.84rem; line-height: 1.5; padding: 4px 0; color: var(--text-secondary); }
+.syllabus-map ul li code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); background: var(--bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border); }
+
+.region-chip { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--text-secondary); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.4px; vertical-align: middle; margin-left: 8px; }
+
+.syllabus-note { border-left: 4px solid var(--purple); background: var(--purple-light); border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 18px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.syllabus-note strong { color: var(--purple); margin-right: 4px; }
+[data-theme="dark"] .syllabus-note { background: rgba(94, 61, 122, 0.18); }
+
+.honors-flag { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
+
+.feeder-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent); padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.2s; margin: 4px 6px 4px 0; }
+.feeder-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+.feeder-link::before { content: '\2192'; font-weight: 700; }
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.section h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px; line-height: 1.25; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; display: inline-block; }
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+.concept-box { border-left: 5px solid var(--accent); background: var(--bg-card); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 20px 0; box-shadow: var(--shadow); }
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child { display: inline-block; margin-bottom: 8px; font-family: var(--font-mono); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; margin-left: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; background: var(--bg); font-weight: 500; position: relative; }
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry { display: none; margin-top: 12px; padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary { padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem; user-select: none; list-style: none; display: flex; align-items: center; gap: 10px; background: var(--bg); transition: background 0.2s; }
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+.flashcard-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 4px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
+.flashcard-toolbar button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 8px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-left: 6px; }
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin: 24px 0; }
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner { display: grid; grid-template-areas: "card"; min-height: 200px; height: 100%; position: relative; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { grid-area: card; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: var(--shadow); overflow: hidden; word-break: break-word; hyphens: auto; }
+.flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-weight: 600; font-size: clamp(0.92rem, 2.1vw, 1.05rem); line-height: 1.45; padding: 22px 20px 34px; gap: 8px; }
+.flashcard-front::after { content: 'TAP TO FLIP'; position: absolute; bottom: 10px; left: 0; right: 0; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px; }
+.flashcard-back { background: var(--bg); border: 2px solid var(--accent); color: var(--text); transform: rotateY(180deg); font-size: clamp(0.88rem, 2vw, 1rem); line-height: 1.6; padding: 26px 22px; gap: 12px; word-break: normal; hyphens: manual; overflow-wrap: break-word; text-wrap: pretty; }
+.flashcard-back .katex-display { margin: 6px 0 !important; font-size: 1.25em; max-width: 100%; overflow: hidden; }
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) { .flashcard-grid { grid-template-columns: 1fr; } }
+.worked-solution { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+.worked-solution .katex-display { margin: 0.65rem 0; }
+.formula-box { background: var(--bg-card); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 24px 32px; margin: 24px 0; text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto; }
+.formula-box .formula-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.formula-box .katex-display { margin: 14px 0 !important; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; background: var(--bg-card); transition: all 0.2s; display: flex; align-items: center; gap: 12px; user-select: none; }
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.8rem; color: transparent; }
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+.footer-wrap { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 48px; }
+.footer-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+.section-label + h2 { margin-top: 0.2rem; }
+@media (max-width: 600px) { .hero h1 { font-size: 2rem; } .main-wrap { padding: 0 16px; margin-top: 60px; } .formula-box { padding: 16px; } .top-nav { padding: 0 16px; } }
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry, .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz, .syllabus-map, .syllabus-note { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245, 240, 235, 0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; transition: background 0.3s, border 0.3s; }
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge { background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px; }
+.nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; font-family: var(--font-body); font-weight: 600; transition: all 0.2s; }
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
+.cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">COMP THINK</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-7-1"><span data-lang="en">What is Computational Thinking?</span><span data-lang="zh">什么是计算思维？</span></a>
+  <a href="#s-7-2"><span data-lang="en">Algorithms and Pseudocode</span><span data-lang="zh">算法与伪代码</span></a>
+  <a href="#s-7-3"><span data-lang="en">Flowcharts and Logic Representation</span><span data-lang="zh">流程图与逻辑表示</span></a>
+  <a href="#s-7-4"><span data-lang="en">Sequencing and Step-by-Step Execution</span><span data-lang="zh">顺序结构与逐步执行</span></a>
+  <a href="#s-7-5"><span data-lang="en">Introduction to Algorithm Efficiency</span><span data-lang="zh">算法效率初步</span></a>
+  <a href="#s-7-6"><span data-lang="en">Problem Decomposition</span><span data-lang="zh">问题分解</span></a>
+  <a href="#s-7-7"><span data-lang="en">Tracing and Debugging</span><span data-lang="zh">追踪与调试</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">High School Computer Science</div>
+  <h1><span data-lang="en">Computational Thinking and Algorithms</span><span data-lang="zh">计算思维与算法</span></h1>
+  <p class="hero-sub">
+    <span data-lang="en">Computational thinking is the problem-solving mindset that computer scientists bring to every challenge: break a big problem apart (decomposition), spot repeated patterns, strip away irrelevant detail (abstraction), and express the solution as a precise sequence of steps (algorithmic thinking). This guide builds all four pillars from the ground up, then shows you how to write that step sequence as pseudocode and draw it as a flowchart, how to trace through an algorithm by hand so you can verify correctness before writing a single line of code, and how to start reasoning about whether one algorithm is faster than another. Worked examples use real pseudocode and Python throughout.</span><span data-lang="zh">计算思维（<code>computational thinking</code>，计算思维）是计算机科学家解决每一个挑战的思维方式：把大问题拆开（<code>decomposition</code>，分解）、找出重复的模式（<code>pattern recognition</code>，模式识别）、剥去无关细节（<code>abstraction</code>，抽象），再将解决方案表达为一系列精确的步骤（<code>algorithmic thinking</code>，算法思维）。本指南从零开始建立这四个支柱，再展示如何把步骤序列写成伪代码（<code>pseudocode</code>，伪代码）、画成流程图（<code>flowchart</code>，流程图），如何手工追踪一个算法（<code>algorithm</code>，算法）来验证正确性，以及如何初步判断算法效率（<code>efficiency</code>，效率）。全部例题均使用伪代码和 Python 演算。</span>
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon"><span data-lang="en">7 sections</span><span data-lang="zh">7 节内容</span></span>
+    <span class="chip chip-green"><span data-lang="en">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">Pseudocode + Python worked examples</span><span data-lang="zh">伪代码 + Python 例题</span></span>
+  </div>
+</section>
+
+<aside class="syllabus-map" id="syllabus-map">
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
+  <div class="syllabus-map-grid">
+    <div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></div>
+      <ul>
+        <li><code>3A-AP-13</code> <span data-lang="en">"Create prototypes that use algorithms to solve computational problems by leveraging prior student knowledge and personal interests." (CSTA K-12 CS Standards, Level 3A)</span><span data-lang="zh">"创建使用算法解决计算问题的原型，借助学生已有知识和个人兴趣。"（CSTA K-12 计算机科学标准，3A 级）</span></li>
+        <li><code>3A-AP-17</code> <span data-lang="en">"Decompose problems into smaller components through systematic analysis, using constructs such as procedures, modules, and/or objects." (CSTA Level 3A)</span><span data-lang="zh">"通过系统分析将问题分解为更小的组件，使用过程、模块和/或对象等构造。"（CSTA 3A 级）</span></li>
+        <li><span data-lang="en">AP CSP Big Idea 3 (AAP — Algorithms &amp; Programming): "Programmers integrate algorithms and abstraction to create programs… Incorporating elements of abstraction — by breaking problems down into interacting pieces, each with their own purpose — makes writing complex programs easier." Topics 3.9 Developing Algorithms, 3.17 Algorithmic Efficiency.</span><span data-lang="zh">AP CSP 大概念 3（AAP — 算法与编程）："程序员整合算法和抽象来创建程序……通过将问题分解为相互交互的部分（每个部分有其自身目的）来融入抽象元素，使编写复杂程序更容易。"主题 3.9 开发算法，3.17 算法效率。</span></li>
+        <li><span data-lang="en">AP CSP Big Idea 1 (CRD — Creative Development): Topics 1.3 Program Design and Development, 1.4 Identifying and Correcting Errors — the design-and-debug loop that &sect;7 of this guide addresses.</span><span data-lang="zh">AP CSP 大概念 1（CRD — 创意开发）：主题 1.3 程序设计与开发，1.4 识别和纠正错误——本指南 &sect;7 所涉及的设计与调试循环。</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario — ICS3U</span><span data-lang="zh">安大略 — ICS3U</span></div>
+      <ul>
+        <li><strong>ICS3U</strong> <span data-lang="en">Strand B (Software Development), Overall Expectation <code>B1</code>: "use a variety of problem-solving strategies to solve different types of problems independently and as part of a team." Specific Expectation <code>B1.1</code>: "use various problem-solving strategies (e.g., stepwise refinement, divide and conquer, working backwards, examples, extreme cases, tables and charts, trial and error) when solving different types of problems."</span><span data-lang="zh">ICS3U B 单元（软件开发），总体期望 <code>B1</code>："独立及团队协作，运用多种解题策略解决不同类型的问题。"具体期望 <code>B1.1</code>："解决不同类型问题时运用各种解题策略（如逐步精化、分而治之、逆向推导、举例、极端情况、表格与图表、试错）。"</span></li>
+        <li><strong>ICS3U</strong> <code>B3</code> <span data-lang="en">"design algorithms according to specifications." <code>B3.1</code>: "design simple algorithms (e.g., add data to a sorted array, delete a datum from the middle of an array) according to specifications." <code>B3.3</code>: "design algorithms to detect, intercept, and handle exceptions."</span><span data-lang="zh"><code>B3</code>："根据规格设计算法。" <code>B3.1</code>："根据规格设计简单算法（如向有序数组添加数据、从数组中间删除数据）。" <code>B3.3</code>："设计算法以检测、拦截和处理异常。"</span></li>
+        <li><strong>ICS3U</strong> <code>B1.3</code> <span data-lang="en">"use the input-process-output model to solve problems" — the IPO framework in &sect;4.</span><span data-lang="zh"><code>B1.3</code>："使用输入-处理-输出模型解决问题"——即 &sect;4 的 IPO 框架。</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></div>
+      <ul>
+        <li><strong>Computer Studies 10</strong> <span data-lang="en">Content (verbatim): "principles of computational thinking (decomposition, patterns and generalizations, abstraction, algorithmic thinking)" — the four pillars covered in &sect;1.</span><span data-lang="zh">Computer Studies 10 内容（原文）："计算思维原则（分解、模式与泛化、抽象、算法思维）"——即 &sect;1 所涵盖的四个支柱。</span></li>
+        <li><strong>Computer Programming 11</strong> <span data-lang="en">Content (verbatim): "problem decomposition"; "computational thinking processes"; "requirements of a problem statement"; "ways to transform requirements into algorithms" — the full scope of this guide.</span><span data-lang="zh">Computer Programming 11 内容（原文）："问题分解"；"计算思维过程"；"问题陈述的要求"；"将需求转化为算法的方法"——本指南的完整范围。</span></li>
+        <li><strong>Computer Programming 11</strong> <span data-lang="en">Curricular Competency (Applied Design — Prototyping): "Develop an appropriate test of the prototype" — underpins tracing and debugging in &sect;7.</span><span data-lang="zh">Computer Programming 11 课程能力（应用设计——原型制作）："开发原型的适当测试"——支撑 &sect;7 的追踪与调试。</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta — CSE</span><span data-lang="zh">阿尔伯塔 — CSE</span></div>
+      <ul>
+        <li><strong>CSE1010</strong> <span data-lang="en">"introduction to the algorithm as a problem-solving tool … the use of algorithms … algorithms and data structures." (Outcomes 1.1.2, 1.2.2)</span><span data-lang="zh">CSE1010："将算法作为解决问题的工具……算法的使用……算法与数据结构。"（结果 1.1.2、1.2.2）</span></li>
+        <li><strong>CSE1110</strong> <span data-lang="en">Outcome 1: "demonstrate introductory structured programming skills by writing sequential algorithms to solve problems involving input, processing and output." Sub-outcomes: "1.1 describe the purpose and nature of an algorithm; 1.2 analyse a variety of simple algorithms … 1.4 decompose the problem into its input, processing and output components … 1.6 write the algorithm in an acceptable format; e.g., pseudocode, structured chart; 1.7 test the algorithm for failure as well as success with appropriate data."</span><span data-lang="zh">CSE1110 结果 1："通过编写顺序算法来解决涉及输入、处理和输出的问题，展示初步结构化编程技能。"子结果："1.1 描述算法的目的和性质；1.2 分析各种简单算法……1.4 将问题分解为输入、处理和输出组件……1.6 以可接受的格式编写算法，如伪代码、结构图；1.7 用适当数据测试算法的成功与失败情况。"</span></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<section class="section" id="how-to-use">
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Computational thinking is covered in every curriculum we map to, and all four agree on the core four pillars: decomposition, pattern recognition, abstraction, and algorithmic thinking. Pseudocode and flowcharts are universal. Where they diverge is on <em>algorithm efficiency analysis</em>: Alberta CSE1110 names explicit algorithm testing; Ontario ICS4U strand C adds formal analysis of efficiency (a Grade-12 topic). The tracing and debugging section (&sect;7) maps to Ontario ICS3U strand B, BC Computer Programming 11 "use of test cases," and CSE1110 outcome 1.7. The table tells you which sections are core for you right now; each row cites the curriculum document it was checked against.</span><span data-lang="zh">在我们对照的所有大纲中，计算思维都是核心内容，四套大纲对四个支柱（分解、模式识别、抽象、算法思维）高度一致，伪代码与流程图也是共同要求。它们的分歧在于<em>算法效率分析</em>：阿尔伯塔 CSE1110 明确要求测试算法；安大略 ICS4U C 单元增加了正式的效率分析（属 12 年级内容）。追踪与调试（&sect;7）对应安大略 ICS3U B 单元、BC Computer Programming 11"测试用例的使用"与 CSE1110 结果 1.7。下表告诉你当前哪些节属于你的核心；每行都注明所依据的课纲文件。</span></p>
+
+  <div style="overflow-x: auto; margin: 16px 0 18px;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
+    <thead>
+      <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / lighter</span><span data-lang="zh">可推迟 / 减负</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7 in full. CSTA 3A-AP-13 (prototypes using algorithms), 3A-AP-17 (decomposition), AP CSP Big Idea 3 topics 3.9 and 3.17 all map to this guide.</span><span data-lang="zh">&sect;1 至 &sect;7 完整学习。CSTA 3A-AP-13（使用算法的原型）、3A-AP-17（分解）、AP CSP 大概念 3 主题 3.9 和 3.17 均对应本指南。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5 efficiency analysis is labelled &ldquo;going deeper&rdquo; for AP CSP floor students; Big Idea 3 topic 3.17 covers it at the exam level.</span><span data-lang="zh">&sect;5 效率分析对 AP CSP 基础学生标注为"深入"；大概念 3 主题 3.17 在考试层面覆盖此内容。</span></td>
+        <td style="padding: 8px 10px;"><code>csta_apcsp_extract.md</code> <span data-lang="en">&mdash; CSTA 3A-AP-13, 3A-AP-17; AP CSP Big Idea 3 (AAP) topics 3.9, 3.17; Big Idea 1 (CRD) topics 1.3, 1.4</span><span data-lang="zh">&mdash; CSTA 3A-AP-13、3A-AP-17；AP CSP 大概念 3（AAP）主题 3.9、3.17；大概念 1（CRD）主题 1.3、1.4</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 &mdash; ICS3U</span><span data-lang="zh">安大略 11 年级 &mdash; ICS3U</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7 in full. ICS3U Strand B (B1, B3) explicitly names problem-solving strategies including &ldquo;stepwise refinement, divide and conquer&rdquo; and algorithm design. &sect;7 tracing maps to B3.3 (algorithm testing) and B4 (software development cycle).</span><span data-lang="zh">&sect;1 至 &sect;7 完整学习。ICS3U B 单元（B1、B3）明确点名"逐步精化、分而治之"等解题策略和算法设计。&sect;7 追踪对应 B3.3（算法测试）和 B4（软件开发周期）。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Formal efficiency analysis in &sect;5 going-deeper is ICS4U strand C (Grade 12) &mdash; skip for ICS3U floor.</span><span data-lang="zh">&sect;5 深入中的正式效率分析属 ICS4U C 单元（12 年级）&mdash;&mdash;ICS3U 基础学生可跳过。</span></td>
+        <td style="padding: 8px 10px;"><code>computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; ICS3U Strand B B1, B1.1, B1.3, B3, B3.1, B3.3; ICS4U Strand C C2, C2.1</span><span data-lang="zh">&mdash; ICS3U B 单元 B1、B1.1、B1.3、B3、B3.1、B3.3；ICS4U C 单元 C2、C2.1</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC &mdash; CS10 / CP11</span><span data-lang="zh">BC &mdash; CS10 / CP11</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7. Computer Studies 10 Content names all four computational-thinking pillars verbatim. Computer Programming 11 Content names &ldquo;problem decomposition,&rdquo; &ldquo;computational thinking processes,&rdquo; &ldquo;ways to transform requirements into algorithms.&rdquo;</span><span data-lang="zh">&sect;1 至 &sect;7。BC Computer Studies 10 内容原文命名全部四个计算思维支柱。Computer Programming 11 内容点名"问题分解"、"计算思维过程"、"将需求转化为算法的方法"。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">BC has no explicit algorithm-efficiency standard at grade 11; &sect;5 going-deeper is enrichment for BC students.</span><span data-lang="zh">BC 11 年级无明确算法效率标准；&sect;5 深入对 BC 学生为拓展内容。</span></td>
+        <td style="padding: 8px 10px;"><code>computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; BC CS10 computational-thinking Content bullet; CP11 problem decomposition / computational thinking Content; CP11 Applied Design Curricular Competency (Prototyping)</span><span data-lang="zh">&mdash; BC CS10 计算思维内容条目；CP11 问题分解/计算思维内容；CP11 应用设计课程能力（原型制作）</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">AB &mdash; CSE1010 / CSE1110</span><span data-lang="zh">阿尔伯塔 &mdash; CSE1010 / CSE1110</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7. CSE1010 introduces the algorithm as a problem-solving tool. CSE1110 outcomes 1.1&ndash;1.7 cover algorithm description, analysis, decomposition, pseudocode/structured-chart writing, and algorithm testing &mdash; a near-perfect match for this guide.</span><span data-lang="zh">&sect;1 至 &sect;7。CSE1010 将算法作为解决问题的工具引入。CSE1110 结果 1.1&ndash;1.7 涵盖算法描述、分析、分解、伪代码/结构图编写和算法测试&mdash;&mdash;与本指南高度契合。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Formal efficiency comparison (&sect;5 going-deeper) is CSE3110 Advanced &mdash; skip for CSE1110 floor students.</span><span data-lang="zh">正式效率比较（&sect;5 深入）属 CSE3110 高级模块&mdash;&mdash;CSE1110 基础学生可跳过。</span></td>
+        <td style="padding: 8px 10px;"><code>computing_science_cse_extract.md</code> <span data-lang="en">&mdash; CSE1010 outcomes 1.1.2, 1.2.2; CSE1110 outcomes 1.1&ndash;1.7</span><span data-lang="zh">&mdash; CSE1010 结果 1.1.2、1.2.2；CSE1110 结果 1.1&ndash;1.7</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">AP CSP / AP CSA feeder track</span><span data-lang="zh">AP CSP / AP CSA 衔接轨道</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">All seven sections including going-deeper boxes. AP CSP Big Idea 3 (30&ndash;35% of the exam) assumes you can read and write pseudocode fluently. AP CSA (Java OOP) assumes algorithmic thinking and decomposition from day one.</span><span data-lang="zh">全部 7 节，包含深入框。AP CSP 大概念 3（占考试 30&ndash;35%）假定你能流畅读写伪代码。AP CSA（Java 面向对象）从第一天起就假定你具备算法思维和分解能力。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing &mdash; this unit is the conceptual bedrock that both AP CS courses build on. See the feeder links in "What This Feeds Into."</span><span data-lang="zh">无 &mdash; 本单元是两门 AP CS 课程的概念基石。见"本单元的去向"中的衔接链接。</span></td>
+        <td style="padding: 8px 10px;"><code>csta_apcsp_extract.md</code> <span data-lang="en">&mdash; AP CSP Big Idea 3 (AAP) exam weighting 30&ndash;35%; AP CSP Big Idea 1 (CRD) 10&ndash;13%</span><span data-lang="zh">&mdash; AP CSP 大概念 3（AAP）考试占比 30&ndash;35%；大概念 1（CRD）10&ndash;13%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="margin-top: 12px;"><span data-lang="en">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</span><span data-lang="zh">找到所在行后，用下面两张卡片决定推进速度。</span></p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise four things: the four pillars of computational thinking (decomposition, pattern recognition, abstraction, algorithmic thinking); what an algorithm is and how to write simple pseudocode; how to read a flowchart and follow its logic; and how to trace an algorithm by hand using a variable table. Read every cram-cheat box. Skip the going-deeper efficiency analysis.</span><span data-lang="zh">背熟四件事：计算思维的四个支柱（分解、模式识别、抽象、算法思维）；算法是什么以及如何写简单伪代码；如何读懂流程图并遵循其逻辑；如何用变量追踪表手工追踪一个算法。读每个速记框，跳过深入的效率分析。</span></p>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Always decompose before you code: write the algorithm in plain pseudocode first, trace through it with a worked example to check correctness, then translate to a programming language. AP CSP Big Idea 3 (30&ndash;35% of the exam) expects you to read and write the College Board pseudocode fluently. AB CSE1110 and ON ICS3U both require you to test your algorithm with both success and failure cases &mdash; &sect;7 shows you how.</span><span data-lang="zh">永远先分解再编码：先用普通伪代码写算法，用例题追踪验证正确性，再翻译为编程语言。AP CSP 大概念 3（占考试 30&ndash;35%）要求你能流畅读写 College Board 伪代码。AB CSE1110 和 ON ICS3U 都要求你分别用成功与失败用例测试算法&mdash;&mdash;&sect;7 展示了如何做到这一点。</span></p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);"><span data-lang="en">Algorithm efficiency note.</span><span data-lang="zh">算法效率说明。</span></strong>
+    <span data-lang="en">Section 5 (Introduction to Algorithm Efficiency) introduces the idea that some algorithms are faster than others, and shows how to compare step counts informally. The <span class="honors-flag">Honors</span> chip marks the going-deeper box where formal Big-O notation is introduced. That box maps to Ontario ICS4U strand C2 (Grade 12) and Alberta CSE3110 (Advanced level). For ICS3U / CSE1110 / AP CSP floor students, the intuitive &ldquo;count the steps&rdquo; approach in the cram box is the assessed level.</span><span data-lang="zh">&sect;5（算法效率初步）介绍了某些算法比其他算法更快的思想，并展示如何非正式地比较步骤数量。<span class="honors-flag">Honors</span> 标记深入框，其中正式引入大 O 表示法。该框对应安大略 ICS4U C 单元第 2 条（12 年级）和阿尔伯塔 CSE3110（高级模块）。对于 ICS3U / CSE1110 / AP CSP 基础学生，速记框中的直观"计步"方法是被评估的层次。</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-1">
+  <div class="section-label"><span data-lang="en">Section 1 &middot; Computational thinking</span><span data-lang="zh">第 1 节 &middot; 计算思维</span></div>
+  <h2><span data-lang="en">What is Computational Thinking?</span><span data-lang="zh">什么是计算思维？</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">The four pillars &mdash; memorise these before anything else.</span><span data-lang="zh">四个支柱 &mdash; 在学其他内容之前先背会这些。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Decomposition</span><span data-lang="zh">分解</span></strong> <span data-lang="en">&mdash; break a complex problem into smaller, manageable sub-problems. BC Computer Studies 10 names this verbatim; AB CSE1110 outcome 1.4 says "decompose the problem into its input, processing and output components."</span><span data-lang="zh">&mdash; 将复杂问题拆分为更小、可处理的子问题。BC Computer Studies 10 原文命名此项；AB CSE1110 结果 1.4 要求"将问题分解为输入、处理和输出组件"。</span></li>
+      <li><strong><span data-lang="en">Pattern recognition</span><span data-lang="zh">模式识别</span></strong> <span data-lang="en">&mdash; spot similarities or repeated structures across problems or within data. Recognising patterns means you can reuse solutions instead of starting from scratch every time.</span><span data-lang="zh">&mdash; 发现问题之间或数据内部的相似性或重复结构。识别模式意味着你可以重复使用解决方案，而不必每次从头开始。</span></li>
+      <li><strong><span data-lang="en">Abstraction</span><span data-lang="zh">抽象</span></strong> <span data-lang="en">&mdash; strip away irrelevant detail and keep only what matters for solving the problem. A map is an abstraction of a city; a function is an abstraction of repeated code.</span><span data-lang="zh">&mdash; 去除无关细节，只保留解决问题所需的内容。地图是城市的抽象；函数是重复代码的抽象。</span></li>
+      <li><strong><span data-lang="en">Algorithmic thinking</span><span data-lang="zh">算法思维</span></strong> <span data-lang="en">&mdash; express the solution as a precise, unambiguous, step-by-step sequence that anyone (or any computer) can follow. This step sequence is called an <em>algorithm</em>.</span><span data-lang="zh">&mdash; 将解决方案表达为任何人（或任何计算机）都能遵循的精确、无歧义的逐步序列。这个步骤序列称为<em>算法</em>。</span></li>
+    </ul>
+    <span data-lang="en"><strong>The one fact that catches people:</strong> computational thinking is a <em>mindset</em>, not a programming language. You can apply decomposition and algorithmic thinking entirely in plain English (or pseudocode) before writing a single line of code. CSTA 3A-AP-13 says "Create prototypes that use algorithms to solve computational problems" &mdash; the prototype can be pseudocode.</span><span data-lang="zh"><strong>最易踩坑的一点：</strong>计算思维是一种<em>思维方式</em>，而非编程语言。在写一行代码之前，你完全可以用普通英语（或伪代码）运用分解和算法思维。CSTA 3A-AP-13 要求"创建使用算法解决计算问题的原型"——原型可以是伪代码。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-blue">CT</div><div class="card-title"><span data-lang="en">Worked Example 1 &middot; Planning a school schedule</span><span data-lang="zh">例题 1 &middot; 规划学校课表</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: build an app that helps a student organise their homework across five subjects. Apply all four pillars.</span><span data-lang="zh">问题：创建一个帮助学生在五门学科之间安排作业的应用程序。应用全部四个支柱。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Decomposition.</span><span data-lang="zh">分解。</span></strong> <span data-lang="en">Break into sub-problems: (1) store the list of subjects and due dates; (2) sort tasks by urgency; (3) display the prioritised list; (4) mark tasks complete. Each is now small enough to code independently.</span><span data-lang="zh">拆分为子问题：(1) 存储学科列表和截止日期；(2) 按紧迫性排序任务；(3) 显示优先列表；(4) 标记任务为已完成。每个子问题现在都足够小，可以独立编码。</span></p>
+    <p><strong><span data-lang="en">Pattern recognition.</span><span data-lang="zh">模式识别。</span></strong> <span data-lang="en">Sorting tasks by date is the same pattern as sorting any list of items by a key &mdash; you can reuse a general sorting approach (covered in the Searching and Sorting guide).</span><span data-lang="zh">按日期排序任务与按键排序任何项目列表的模式相同——你可以重复使用通用排序方法（在搜索与排序指南中介绍）。</span></p>
+    <p><strong><span data-lang="en">Abstraction.</span><span data-lang="zh">抽象。</span></strong> <span data-lang="en">Represent each task as a record with just three fields: <code>subject</code>, <code>due_date</code>, <code>done</code>. Ignore everything else (teacher name, room number, textbook page) &mdash; it is irrelevant to the scheduling problem.</span><span data-lang="zh">将每个任务表示为只有三个字段的记录：<code>subject</code>（学科）、<code>due_date</code>（截止日期）、<code>done</code>（完成状态）。忽略其他一切（教师姓名、教室编号、课本页码）——它们与调度问题无关。</span></p>
+    <p><strong><span data-lang="en">Algorithmic thinking.</span><span data-lang="zh">算法思维。</span></strong> <span data-lang="en">Write the steps in pseudocode: INPUT tasks with due dates → SORT tasks by due date → FOR EACH task: DISPLAY subject and date → END. Each step is unambiguous and executable.</span><span data-lang="zh">用伪代码写出步骤：输入带截止日期的任务 → 按截止日期排序任务 → 对每个任务：显示学科和日期 → 结束。每个步骤都是无歧义且可执行的。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A student wants to build a program to calculate the average of a list of test scores. Which computational thinking pillar involves deciding that the program only needs to store the scores (not student names or dates) to calculate the average?</span><span data-lang="zh">一名学生想编写一个程序来计算一组考试成绩的平均值。哪个计算思维支柱涉及决定程序只需存储成绩（而非学生姓名或日期）来计算平均值？</span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Decomposition</span><span data-lang="zh">分解</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Abstraction</span><span data-lang="zh">抽象</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Algorithmic thinking</span><span data-lang="zh">算法思维</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Pattern recognition</span><span data-lang="zh">模式识别</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Abstraction means keeping only what is relevant and stripping away unneeded detail. Deciding to store only scores (not names or dates) is a classic abstraction decision &mdash; it simplifies the data model to what the calculation actually requires.</span><span data-lang="zh">抽象意味着只保留相关内容，去除不需要的细节。决定只存储成绩（而非姓名或日期）是经典的抽象决策——它将数据模型简化为计算实际所需的内容。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">This is about filtering out irrelevant detail &mdash; that is abstraction. Decomposition breaks a problem into sub-parts; algorithmic thinking writes step sequences; pattern recognition spots repetition across problems.</span><span data-lang="zh">这是关于过滤无关细节——那是抽象。分解将问题拆分为子部分；算法思维编写步骤序列；模式识别发现问题间的重复。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which pillar of computational thinking means breaking a large problem into smaller, manageable sub-problems?</span><span data-lang="zh">计算思维的哪个支柱意味着将一个大问题拆分为更小、可管理的子问题？</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Decomposition</span><span data-lang="zh">分解</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Abstraction</span><span data-lang="zh">抽象</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Pattern recognition</span><span data-lang="zh">模式识别</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Algorithmic thinking</span><span data-lang="zh">算法思维</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Decomposition is the pillar that breaks a complex problem into smaller, more manageable sub-problems. CSTA 3A-AP-17 states: "Decompose problems into smaller components through systematic analysis."</span><span data-lang="zh">分解是将复杂问题拆分为更小、更易管理的子问题的支柱。CSTA 3A-AP-17 指出："通过系统分析将问题分解为更小的组件。"</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Decomposition = break into pieces. Abstraction = hide irrelevant detail. Pattern recognition = spot repetition. Algorithmic thinking = write a step sequence.</span><span data-lang="zh">分解 = 拆分为部分。抽象 = 隐藏无关细节。模式识别 = 发现重复。算法思维 = 编写步骤序列。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; computational thinking across disciplines</span><span data-lang="zh">深入 &mdash; 跨学科的计算思维</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">CSTA 3A-IC-26 states: "Demonstrate ways a given algorithm applies to problems across disciplines." Computational thinking is not exclusive to programming: a biologist who sequences genomes uses decomposition (break the genome into segments) and pattern recognition (find repeating base sequences). A historian who analyses census data uses abstraction (which fields matter?) and algorithmic thinking (which decades should be compared first?). This cross-disciplinary reach is why every major curriculum includes computational thinking as a core skill, not merely a programming prerequisite.</span><span data-lang="zh">CSTA 3A-IC-26 指出："展示给定算法在跨学科问题中的应用方式。"计算思维不仅限于编程：对基因组测序的生物学家运用分解（将基因组分成片段）和模式识别（找出重复的碱基序列）。分析人口普查数据的历史学家运用抽象（哪些字段重要？）和算法思维（应该首先比较哪几十年？）。这种跨学科的广泛应用是每个主要课程将计算思维作为核心技能而非仅仅是编程先决条件的原因。</span></p>
+      <p><span data-lang="en">The BC Computer Programming 11 Big Idea "The design cycle includes updating content, tools, and delivery" reinforces this: the four pillars are the <em>design phase</em> of the software development cycle (covered in depth in the Software Development Process guide). Mastering them here pays dividends in every subsequent unit.</span><span data-lang="zh">BC Computer Programming 11 的大概念"设计周期包括更新内容、工具和交付"强化了这一点：四个支柱是软件开发周期的<em>设计阶段</em>（在软件开发过程指南中深入介绍）。在这里掌握它们，在后续每个单元都会带来回报。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-2">
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Algorithms and pseudocode</span><span data-lang="zh">第 2 节 &middot; 算法与伪代码</span></div>
+  <h2><span data-lang="en">Algorithms and Pseudocode</span><span data-lang="zh">算法与伪代码</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Three properties every algorithm must have.</span><span data-lang="zh">每个算法必须具备的三个属性。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Finiteness</span><span data-lang="zh">有限性</span></strong> <span data-lang="en">&mdash; terminates after a finite number of steps (no infinite loops).</span><span data-lang="zh">&mdash; 经过有限步骤后终止（无无限循环）。</span></li>
+      <li><strong><span data-lang="en">Definiteness</span><span data-lang="zh">确定性</span></strong> <span data-lang="en">&mdash; every step is precisely and unambiguously defined; no guessing.</span><span data-lang="zh">&mdash; 每个步骤都是精确且无歧义地定义的；不需要猜测。</span></li>
+      <li><strong><span data-lang="en">Effectiveness</span><span data-lang="zh">有效性</span></strong> <span data-lang="en">&mdash; every step can actually be carried out (no "wave a magic wand").</span><span data-lang="zh">&mdash; 每个步骤都可以实际执行（不存在"挥动魔杖"）。</span></li>
+    </ul>
+    <span data-lang="en"><strong>Pseudocode</strong> is a human-readable way to write an algorithm — structured enough to be clear, but not tied to any particular programming language. Use keywords like <code>INPUT</code>, <code>OUTPUT</code>, <code>IF/ELSE</code>, <code>WHILE</code>, <code>FOR</code>, <code>SET x TO</code>. AB CSE1110 outcome 1.6 says: "write the algorithm in an acceptable format; e.g., pseudocode, structured chart."</span><span data-lang="zh"><strong>伪代码</strong>是一种人类可读的算法编写方式——结构足够清晰，但不依赖任何特定的编程语言。使用关键字如 <code>INPUT</code>（输入）、<code>OUTPUT</code>（输出）、<code>IF/ELSE</code>（如果/否则）、<code>WHILE</code>（当…时）、<code>FOR</code>（对于）、<code>SET x TO</code>（将 x 设为）。AB CSE1110 结果 1.6 要求："以可接受的格式编写算法，如伪代码、结构图。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 2 &middot; Finding the minimum number of coins</span><span data-lang="zh">例题 2 &middot; 找最少硬币数</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: given an amount in cents (e.g. 87 cents) and coin denominations [25, 10, 5, 1], write an algorithm that returns the fewest coins needed.</span><span data-lang="zh">问题：给定以分为单位的金额（如 87 分）和硬币面值 [25, 10, 5, 1]，编写一个返回所需最少硬币数的算法。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Algorithm in pseudocode.</span><span data-lang="zh">算法（伪代码）。</span></strong></p>
+    <pre><code>INPUT amount
+SET count TO 0
+FOR EACH coin IN [25, 10, 5, 1]:
+    WHILE amount >= coin:
+        SET amount TO amount - coin
+        SET count TO count + 1
+OUTPUT count</code></pre>
+    <p><span data-lang="en">ZH: 以上伪代码中：<code>INPUT</code> 输入，<code>SET ... TO</code> 赋值，<code>FOR EACH</code> 对每个，<code>WHILE</code> 当…时，<code>OUTPUT</code> 输出。</span><span data-lang="zh">以上伪代码中：<code>INPUT</code> 输入，<code>SET ... TO</code> 赋值，<code>FOR EACH</code> 对每个，<code>WHILE</code> 当…时，<code>OUTPUT</code> 输出。</span></p>
+    <p><strong><span data-lang="en">Python rendering.</span><span data-lang="zh">Python 实现。</span></strong></p>
+    <pre><code>def min_coins(amount):
+    count = 0
+    for coin in [25, 10, 5, 1]:
+        while amount >= coin:
+            amount -= coin
+            count += 1
+    return count
+
+print(min_coins(87))  # Output: 6</code></pre>
+    <p><span data-lang="en">The pseudocode maps directly to Python: each keyword has a near-identical Python counterpart. Writing pseudocode first means the Python almost writes itself. Output: 87 = 3×25 + 1×10 + 2×1 = 6 coins.</span><span data-lang="zh">伪代码直接映射到 Python：每个关键字都有近乎相同的 Python 对应物。先写伪代码意味着 Python 几乎会自动写出。输出：87 = 3×25 + 1×10 + 2×1 = 6 枚硬币。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which of the following is the best description of an algorithm?</span><span data-lang="zh">以下哪项最能描述算法？</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">A program written in Python or Java</span><span data-lang="zh">用 Python 或 Java 编写的程序</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">A flowchart drawn on paper</span><span data-lang="zh">画在纸上的流程图</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">A precise, finite, step-by-step procedure for solving a problem</span><span data-lang="zh">解决问题的精确、有限、逐步程序</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">A list of test cases for debugging</span><span data-lang="zh">用于调试的测试用例列表</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">An algorithm is a precise, finite, step-by-step procedure. It can be expressed in pseudocode, a flowchart, plain English, or a programming language &mdash; the format is secondary; the precision and finiteness are essential.</span><span data-lang="zh">算法是精确、有限的逐步程序。它可以用伪代码、流程图、普通英语或编程语言表达——格式是次要的；精确性和有限性是本质要求。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">An algorithm is a general concept, not tied to any language or representation. A Python program and a pseudocode sketch are both implementations of an algorithm.</span><span data-lang="zh">算法是一个通用概念，不依附于任何语言或表示形式。Python 程序和伪代码草图都是算法的实现。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In pseudocode, <code>SET total TO total + score</code> means what in Python?</span><span data-lang="zh">在伪代码中，<code>SET total TO total + score</code> 对应 Python 中的哪行代码？</span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>total == total + score</code></div>
+      <div class="quiz-opt" data-idx="1"><code>total = total + score</code></div>
+      <div class="quiz-opt" data-idx="2"><code>print(total + score)</code></div>
+      <div class="quiz-opt" data-idx="3"><code>total + score = total</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>SET x TO value</code> in pseudocode is an assignment statement. In Python, assignment is written with a single equals sign: <code>total = total + score</code> (or equivalently <code>total += score</code>).</span><span data-lang="zh">伪代码中的 <code>SET x TO value</code> 是赋值语句。在 Python 中，赋值用单等号写：<code>total = total + score</code>（等价地 <code>total += score</code>）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en"><code>==</code> is a comparison (checks equality); <code>=</code> is assignment (sets a value). Pseudocode <code>SET x TO y</code> always maps to assignment, not comparison.</span><span data-lang="zh"><code>==</code> 是比较（检查是否相等）；<code>=</code> 是赋值（设置值）。伪代码 <code>SET x TO y</code> 总是映射到赋值，而不是比较。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; College Board AP CSP pseudocode vs Python</span><span data-lang="zh">深入 &mdash; College Board AP CSP 伪代码与 Python 对比</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">AP CSP uses its own reference-sheet pseudocode (not Python). Key differences: assignment is written <code>x &larr; value</code>; lists are 1-indexed (first element is index 1, not 0); Boolean values are <code>TRUE</code>/<code>FALSE</code>; display uses <code>DISPLAY(value)</code>; procedures are <code>PROCEDURE name(params)</code>. You will see this notation on the AP CSP exam. Learning pseudocode in this guide gives you the underlying concepts; mapping those to the AP CSP notation is a surface-level translation exercise.</span><span data-lang="zh">AP CSP 使用自己的参考手册伪代码（不是 Python）。主要区别：赋值写作 <code>x &larr; value</code>；列表从 1 开始索引（第一个元素索引为 1，不是 0）；布尔值为 <code>TRUE</code>/<code>FALSE</code>；显示使用 <code>DISPLAY(value)</code>；过程为 <code>PROCEDURE name(params)</code>。你会在 AP CSP 考试中看到这种表示法。学习本指南中的伪代码让你掌握底层概念；将这些概念映射到 AP CSP 表示法只是一个表层翻译练习。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-3">
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Flowcharts and logic representation</span><span data-lang="zh">第 3 节 &middot; 流程图与逻辑表示</span></div>
+  <h2><span data-lang="en">Flowcharts and Representing Logic</span><span data-lang="zh">流程图与逻辑表示</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Four flowchart shapes &mdash; memorise these.</span><span data-lang="zh">四种流程图形状 &mdash; 背熟这些。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Oval / Rounded rectangle</span><span data-lang="zh">椭圆 / 圆角矩形</span></strong> <span data-lang="en">&mdash; Start or End (terminal). Every flowchart must have exactly one Start and at least one End.</span><span data-lang="zh">&mdash; 开始或结束（终端）。每个流程图必须恰好有一个开始和至少一个结束。</span></li>
+      <li><strong><span data-lang="en">Rectangle</span><span data-lang="zh">矩形</span></strong> <span data-lang="en">&mdash; Process / Action (assignment, calculation, I/O operation).</span><span data-lang="zh">&mdash; 处理 / 操作（赋值、计算、I/O 操作）。</span></li>
+      <li><strong><span data-lang="en">Diamond</span><span data-lang="zh">菱形</span></strong> <span data-lang="en">&mdash; Decision (yes/no question). Two arrows leave: one for YES, one for NO.</span><span data-lang="zh">&mdash; 判断（是/否问题）。两条箭头离开：一条表示"是"，一条表示"否"。</span></li>
+      <li><strong><span data-lang="en">Parallelogram</span><span data-lang="zh">平行四边形</span></strong> <span data-lang="en">&mdash; Input or Output (read data in, write data out).</span><span data-lang="zh">&mdash; 输入或输出（读取数据、写出数据）。</span></li>
+    </ul>
+    <span data-lang="en">BC Computer Programming 11 names <strong>"computational thinking processes"</strong> and <strong>"ways to transform requirements into algorithms"</strong> as core content; flowcharts are the standard visual tool for this transformation. AB CSE1110 outcome 1.6 accepts "pseudocode, structured chart" — a structured chart is essentially a flowchart or Nassi-Schneiderman diagram.</span><span data-lang="zh">BC Computer Programming 11 将<strong>"计算思维过程"</strong>和<strong>"将需求转化为算法的方法"</strong>列为核心内容；流程图是这种转换的标准可视化工具。AB CSE1110 结果 1.6 接受"伪代码、结构图"——结构图本质上就是流程图或 Nassi-Schneiderman 图。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-orange">WE</div><div class="card-title"><span data-lang="en">Worked Example 3 &middot; Flowchart for grade classification</span><span data-lang="zh">例题 3 &middot; 成绩分类的流程图</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Draw the flowchart for: read a score; if score &ge; 90 output "A"; else if score &ge; 80 output "B"; else output "C or below."</span><span data-lang="zh">画出以下流程图：读入分数；如果分数 &ge; 90 输出"A"；否则如果分数 &ge; 80 输出"B"；否则输出"C 或以下"。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Pseudocode first (always write this before the flowchart).</span><span data-lang="zh">先写伪代码（总是在画流程图之前写这个）。</span></strong></p>
+    <pre><code>START
+INPUT score
+IF score >= 90 THEN
+    OUTPUT "A"
+ELSE IF score >= 80 THEN
+    OUTPUT "B"
+ELSE
+    OUTPUT "C or below"
+END IF
+END</code></pre>
+    <p><strong><span data-lang="en">Flowchart structure (described textually).</span><span data-lang="zh">流程图结构（文字描述）。</span></strong></p>
+    <p><span data-lang="en">Oval "START" → Parallelogram "Read score" → Diamond "score &ge; 90?" → YES branch: Parallelogram "Output A" → Oval "END". NO branch → Diamond "score &ge; 80?" → YES branch: Parallelogram "Output B" → Oval "END". NO branch → Parallelogram "Output C or below" → Oval "END". Notice: three possible END ovals (or alternatively one shared END after merging the branches).</span><span data-lang="zh">椭圆"开始"→ 平行四边形"读取分数"→ 菱形"分数 &ge; 90？"→ 是分支：平行四边形"输出 A"→ 椭圆"结束"。否分支 → 菱形"分数 &ge; 80？"→ 是分支：平行四边形"输出 B"→ 椭圆"结束"。否分支 → 平行四边形"输出 C 或以下"→ 椭圆"结束"。注意：三个可能的结束椭圆（或者在合并分支后共享一个结束）。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In a flowchart, what shape represents a decision (a yes/no question)?</span><span data-lang="zh">在流程图中，哪种形状代表判断（是/否问题）？</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Rectangle</span><span data-lang="zh">矩形</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Parallelogram</span><span data-lang="zh">平行四边形</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Oval</span><span data-lang="zh">椭圆</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Diamond</span><span data-lang="zh">菱形</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A diamond (rhombus) represents a decision in a flowchart. It has two exit arrows labelled YES and NO (or TRUE and FALSE). A rectangle is a process; a parallelogram is input/output; an oval is start/end.</span><span data-lang="zh">菱形（菱形）代表流程图中的判断。它有两条出口箭头，标记为"是"和"否"（或 TRUE 和 FALSE）。矩形是处理；平行四边形是输入/输出；椭圆是开始/结束。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Remember: Diamond = Decision (two exits). Rectangle = Process. Parallelogram = Input/Output. Oval = Start/End.</span><span data-lang="zh">记住：菱形 = 判断（两个出口）。矩形 = 处理。平行四边形 = 输入/输出。椭圆 = 开始/结束。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">How many arrows exit a decision diamond?</span><span data-lang="zh">判断菱形有几条出口箭头？</span></div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Two (one for YES, one for NO)</span><span data-lang="zh">两条（一条表示"是"，一条表示"否"）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">One</span><span data-lang="zh">一条</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Three or more</span><span data-lang="zh">三条或更多</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">It depends on the number of conditions</span><span data-lang="zh">取决于条件的数量</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A decision diamond always has exactly two exit arrows: one for YES (condition true) and one for NO (condition false). If you need more than two branches, use nested or sequential diamonds.</span><span data-lang="zh">判断菱形总是恰好有两条出口箭头：一条表示"是"（条件为真），一条表示"否"（条件为假）。如果需要两个以上的分支，请使用嵌套或顺序菱形。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">A diamond always has exactly two exits: YES and NO. Multi-way decisions require chaining multiple diamonds.</span><span data-lang="zh">菱形总是恰好有两个出口：是和否。多路判断需要串联多个菱形。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-4">
+  <div class="section-label"><span data-lang="en">Section 4 &middot; Sequencing and step-by-step execution</span><span data-lang="zh">第 4 节 &middot; 顺序结构与逐步执行</span></div>
+  <h2><span data-lang="en">Sequencing and Step-by-Step Execution</span><span data-lang="zh">顺序结构与逐步执行</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Sequence = order matters. Every step executes exactly once, in the order written.</span><span data-lang="zh">顺序 = 顺序很重要。每个步骤按照书写的顺序恰好执行一次。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">IPO model</span><span data-lang="zh">IPO 模型</span></strong> <span data-lang="en">&mdash; Input, Process, Output. Every sequential algorithm follows this structure. AB CSE1110 B1.3 and Ontario ICS3U B1.3 both mandate the IPO model as the core problem-solving framework.</span><span data-lang="zh">&mdash; 输入（Input）、处理（Process）、输出（Output）。每个顺序算法都遵循这种结构。AB CSE1110 B1.3 和安大略 ICS3U B1.3 都将 IPO 模型规定为核心解题框架。</span></li>
+      <li><strong><span data-lang="en">Assignment is not comparison</span><span data-lang="zh">赋值不是比较</span></strong> <span data-lang="en">&mdash; <code>x = 5</code> sets x to 5. <code>x == 5</code> checks if x equals 5. Mixing these up causes logic bugs that are hard to spot.</span><span data-lang="zh">&mdash; <code>x = 5</code> 将 x 设为 5。<code>x == 5</code> 检查 x 是否等于 5。混淆这两者会导致难以发现的逻辑错误。</span></li>
+      <li><strong><span data-lang="en">Left-to-right / top-to-bottom</span><span data-lang="zh">从左到右 / 从上到下</span></strong> <span data-lang="en">&mdash; the computer executes statements in the order they appear (unless control flow changes this — see &sect;3 and the Control Flow guide).</span><span data-lang="zh">&mdash; 计算机按照语句出现的顺序执行（除非控制流改变了这一点——见 &sect;3 和控制流指南）。</span></li>
+    </ul>
+    <span data-lang="en">AB CSE1110 outcome 1.3 says "analyze problems and determine if they can be solved using algorithms that employ an input/processing/output (IPO) approach." The IPO model is the sequential algorithm in its simplest form.</span><span data-lang="zh">AB CSE1110 结果 1.3 要求"分析问题并确定是否可以使用采用输入/处理/输出（IPO）方法的算法来解决。" IPO 模型是顺序算法的最简形式。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 4 &middot; Temperature converter</span><span data-lang="zh">例题 4 &middot; 温度转换器</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Write a sequential algorithm to convert Celsius to Fahrenheit. Formula: F = (C × 9/5) + 32.</span><span data-lang="zh">编写一个顺序算法将摄氏度转换为华氏度。公式：F = (C × 9/5) + 32。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">IPO analysis first.</span><span data-lang="zh">首先进行 IPO 分析。</span></strong></p>
+    <ul style="margin: 4px 0 10px 20px; font-size: 0.94rem;">
+      <li><span data-lang="en"><strong>Input:</strong> Celsius temperature (a number).</span><span data-lang="zh"><strong>输入：</strong>摄氏温度（一个数字）。</span></li>
+      <li><span data-lang="en"><strong>Process:</strong> multiply by 9, divide by 5, add 32.</span><span data-lang="zh"><strong>处理：</strong>乘以 9，除以 5，加 32。</span></li>
+      <li><span data-lang="en"><strong>Output:</strong> Fahrenheit temperature.</span><span data-lang="zh"><strong>输出：</strong>华氏温度。</span></li>
+    </ul>
+    <p><strong><span data-lang="en">Pseudocode.</span><span data-lang="zh">伪代码。</span></strong></p>
+    <pre><code>INPUT celsius
+SET fahrenheit TO (celsius * 9 / 5) + 32
+OUTPUT fahrenheit</code></pre>
+    <p><strong><span data-lang="en">Python.</span><span data-lang="zh">Python。</span></strong></p>
+    <pre><code>celsius = float(input("Enter Celsius: "))
+fahrenheit = (celsius * 9 / 5) + 32
+print(f"{celsius}°C = {fahrenheit}°F")</code></pre>
+    <p><span data-lang="en">Notice: three lines, three phases. The order is critical — you must have the Celsius value before you can compute Fahrenheit; you must have Fahrenheit before you can output it. Swapping lines 1 and 2 causes an error.</span><span data-lang="zh">注意：三行，三个阶段。顺序至关重要——在计算华氏度之前必须有摄氏度值；在输出之前必须有华氏度。交换第 1 行和第 2 行会导致错误。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In the IPO model, which phase converts raw input into a result?</span><span data-lang="zh">在 IPO 模型中，哪个阶段将原始输入转换为结果？</span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Process</span><span data-lang="zh">处理</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Input</span><span data-lang="zh">输入</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Output</span><span data-lang="zh">输出</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Algorithm</span><span data-lang="zh">算法</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The Process phase contains the calculations or transformations that convert input data into the result. Input reads data in; Output displays or returns the result; Process is where the actual computation happens.</span><span data-lang="zh">处理阶段包含将输入数据转换为结果的计算或转换。输入读取数据；输出显示或返回结果；处理是实际计算发生的地方。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">IPO: Input (read data), Process (transform data), Output (display/return result). The computation lives in the Process phase.</span><span data-lang="zh">IPO：输入（读取数据）、处理（转换数据）、输出（显示/返回结果）。计算在处理阶段进行。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the value of <code>result</code> after these three lines execute in order?<br><code>SET x TO 4</code><br><code>SET x TO x + 3</code><br><code>SET result TO x * 2</code></span><span data-lang="zh">这三行按顺序执行后，<code>result</code> 的值是多少？<br><code>SET x TO 4</code><br><code>SET x TO x + 3</code><br><code>SET result TO x * 2</code></span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">8</div>
+      <div class="quiz-opt" data-idx="1">11</div>
+      <div class="quiz-opt" data-idx="2">6</div>
+      <div class="quiz-opt" data-idx="3">14</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Step 1: x = 4. Step 2: x = 4 + 3 = 7. Step 3: result = 7 × 2 = 14. Order matters — if step 2 were skipped, result would be 4 × 2 = 8.</span><span data-lang="zh">步骤 1：x = 4。步骤 2：x = 4 + 3 = 7。步骤 3：result = 7 × 2 = 14。顺序很重要——如果跳过步骤 2，result 将是 4 × 2 = 8。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Trace line by line: x starts as 4, then becomes 7 (line 2 updates x), then result = 7 * 2 = 14.</span><span data-lang="zh">逐行追踪：x 开始为 4，然后变为 7（第 2 行更新 x），然后 result = 7 * 2 = 14。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; why order of operations in code differs from algebra</span><span data-lang="zh">深入 &mdash; 代码中的运算顺序为何与代数不同</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">In algebra, <code>x = x + 1</code> is a contradiction (no number equals itself plus one). In programming, it is a valid sequential statement: "take the current value of x, add 1, and store the result back in x." The variable on the left of <code>=</code> names the storage location to write to; the expression on the right is evaluated first using the old value, then the result is stored. This execution model — evaluate right side, assign to left side — is why <code>SET total TO total + score</code> accumulates a running sum correctly. AB CSE1110 outcome 2.4.6 covers "assignment, arithmetical and concatenation and interpolation operators" in this sequential context.</span><span data-lang="zh">在代数中，<code>x = x + 1</code> 是矛盾的（没有数字等于自身加一）。在编程中，这是一个有效的顺序语句："取 x 的当前值，加 1，将结果存回 x。"<code>=</code> 左边的变量命名要写入的存储位置；右边的表达式首先使用旧值求值，然后将结果存储。这种执行模型——求右边的值，赋值给左边——是 <code>SET total TO total + score</code> 正确累积运行总和的原因。AB CSE1110 结果 2.4.6 在此顺序上下文中涵盖"赋值、算术和拼接与插值运算符"。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-5">
+  <div class="section-label"><span data-lang="en">Section 5 &middot; Algorithm efficiency</span><span data-lang="zh">第 5 节 &middot; 算法效率</span></div>
+  <h2><span data-lang="en">Introduction to Algorithm Efficiency</span><span data-lang="zh">算法效率初步</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Count steps to compare algorithms &mdash; the one with fewer steps is (usually) faster.</span><span data-lang="zh">计步比较算法——步骤少的（通常）更快。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Linear search</span><span data-lang="zh">线性搜索</span></strong> <span data-lang="en">&mdash; check each item in turn until you find the target. For a list of <em>n</em> items, worst case is <em>n</em> steps.</span><span data-lang="zh">&mdash; 依次检查每项，直到找到目标。对于 <em>n</em> 项的列表，最坏情况是 <em>n</em> 步。</span></li>
+      <li><strong><span data-lang="en">Binary search (sorted list required)</span><span data-lang="zh">二分搜索（需要已排序列表）</span></strong> <span data-lang="en">&mdash; check the middle item; eliminate half the list; repeat. For <em>n</em> items, worst case is about log<sub>2</sub>(<em>n</em>) steps.</span><span data-lang="zh">&mdash; 检查中间项；排除一半列表；重复。对于 <em>n</em> 项，最坏情况约为 log<sub>2</sub>(<em>n</em>) 步。</span></li>
+      <li><strong><span data-lang="en">Why it matters</span><span data-lang="zh">为什么重要</span></strong> <span data-lang="en">&mdash; for a list of 1,000 items: linear search takes up to 1,000 steps; binary search takes at most 10 steps. For 1,000,000 items: 1,000,000 vs 20 steps.</span><span data-lang="zh">&mdash; 对于 1000 项的列表：线性搜索最多需要 1000 步；二分搜索最多需要 10 步。对于 100 万项：1,000,000 步 vs 20 步。</span></li>
+    </ul>
+    <span data-lang="en">AP CSP Big Idea 3 topic 3.17 ("Algorithmic Efficiency") and Learning Objective AAP-4.A cover exactly this comparison. ICS3U B3.1 says to "design simple algorithms" — efficiency is one criterion for choosing among alternatives.</span><span data-lang="zh">AP CSP 大概念 3 主题 3.17（"算法效率"）和学习目标 AAP-4.A 正是涵盖这种比较。ICS3U B3.1 要求"设计简单算法"——效率是在备选方案中选择的标准之一。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-purple">WE</div><div class="card-title"><span data-lang="en">Worked Example 5 &middot; Linear vs binary search on a 16-item list</span><span data-lang="zh">例题 5 &middot; 16 项列表上的线性搜索与二分搜索</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">List: [2, 5, 8, 12, 16, 23, 38, 42, 55, 60, 71, 80, 88, 91, 99, 105]. Target: 91. Count steps for each search.</span><span data-lang="zh">列表：[2, 5, 8, 12, 16, 23, 38, 42, 55, 60, 71, 80, 88, 91, 99, 105]。目标：91。计算每种搜索的步骤数。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Linear search (check index 0, 1, 2, … until found).</span><span data-lang="zh">线性搜索（检查索引 0、1、2……直到找到）。</span></strong></p>
+    <pre><code>91 at index 13 → checked indices 0-13 → 14 steps</code></pre>
+    <p><strong><span data-lang="en">Binary search (list has 16 items; indices 0–15).</span><span data-lang="zh">二分搜索（列表有 16 项；索引 0–15）。</span></strong></p>
+    <pre><code>Step 1: mid = 7 → list[7] = 42. 91 > 42 → search upper half [8..15]
+Step 2: mid = 11 → list[11] = 80. 91 > 80 → search upper half [12..15]
+Step 3: mid = 13 → list[13] = 91. FOUND! → 3 steps</code></pre>
+    <p><span data-lang="en">Linear: 14 steps. Binary: 3 steps. For 16 items, log<sub>2</sub>(16) = 4 (upper bound), and we did it in 3. Binary search is dramatically more efficient on sorted data, but requires the list to be sorted first.</span><span data-lang="zh">线性：14 步。二分：3 步。对于 16 项，log<sub>2</sub>(16) = 4（上界），我们在 3 步内完成。二分搜索在已排序数据上效率显著更高，但需要先对列表排序。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which of the following is a requirement for binary search to work correctly?</span><span data-lang="zh">以下哪项是二分搜索正确工作的要求？</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The list must contain only numbers</span><span data-lang="zh">列表必须只包含数字</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The list must have an even number of items</span><span data-lang="zh">列表必须有偶数个项目</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The list must be sorted</span><span data-lang="zh">列表必须已排序</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The target must be in the list</span><span data-lang="zh">目标必须在列表中</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Binary search works by comparing the target to the middle element and eliminating half the list. This only works if the list is sorted — otherwise "eliminating the lower half" has no meaning.</span><span data-lang="zh">二分搜索通过将目标与中间元素比较并排除一半列表来工作。这只在列表已排序时才有效——否则"排除下半部分"毫无意义。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Binary search requires a sorted list. It works on any type of comparable data (not just numbers), any list length, and correctly returns "not found" if the target is absent.</span><span data-lang="zh">二分搜索需要已排序的列表。它适用于任何可比较的数据类型（不仅仅是数字），任何列表长度，如果目标不存在，则正确返回"未找到"。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A sorted list has 1,024 items. Approximately how many steps does binary search need in the worst case?</span><span data-lang="zh">一个已排序的列表有 1024 项。二分搜索在最坏情况下大约需要多少步？</span></div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">512</div>
+      <div class="quiz-opt" data-idx="1">10</div>
+      <div class="quiz-opt" data-idx="2">1024</div>
+      <div class="quiz-opt" data-idx="3">100</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Binary search halves the search space each step. Starting from 1,024: 1024 → 512 → 256 → 128 → 64 → 32 → 16 → 8 → 4 → 2 → 1. That is 10 halvings. log<sub>2</sub>(1024) = 10.</span><span data-lang="zh">二分搜索每步将搜索空间减半。从 1024 开始：1024 → 512 → 256 → 128 → 64 → 32 → 16 → 8 → 4 → 2 → 1。那是 10 次减半。log<sub>2</sub>(1024) = 10。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Binary search takes log<sub>2</sub>(n) steps in the worst case. log<sub>2</sub>(1024) = 10, since 2<sup>10</sup> = 1024.</span><span data-lang="zh">二分搜索在最坏情况下需要 log<sub>2</sub>(n) 步。log<sub>2</sub>(1024) = 10，因为 2<sup>10</sup> = 1024。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; Big-O notation <span class="honors-flag">Honors &mdash; ICS4U C2 / CSE3110</span></span><span data-lang="zh">深入 &mdash; 大 O 表示法 <span class="honors-flag">荣誉 &mdash; ICS4U C2 / CSE3110</span></span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">Computer scientists use <strong>Big-O notation</strong> to describe how an algorithm's step count grows as the input size <em>n</em> grows, ignoring constant factors. Common classes: O(1) = constant (same steps regardless of n); O(log n) = logarithmic (binary search); O(n) = linear (linear search); O(n&sup2;) = quadratic (simple sorting like bubble sort on an unsorted list). Ontario ICS4U strand C2 ("analyse algorithms for their effectiveness") and Alberta CSE3110 ("compare and contrast the computational efficiencies") are the curricula that assess Big-O reasoning formally. For floor students, "more steps = slower" is sufficient.</span><span data-lang="zh">计算机科学家使用<strong>大 O 表示法</strong>来描述算法的步骤数随输入大小 <em>n</em> 增长而增长的方式，忽略常数因子。常见类别：O(1) = 常数（无论 n 如何，步骤数相同）；O(log n) = 对数（二分搜索）；O(n) = 线性（线性搜索）；O(n²) = 二次（对未排序列表的简单排序，如冒泡排序）。安大略 ICS4U C 单元第 2 条（"分析算法的有效性"）和阿尔伯塔 CSE3110（"比较计算效率"）是正式评估大 O 推理的课程。对于基础学生，"更多步骤 = 更慢"就足够了。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-6">
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Problem decomposition</span><span data-lang="zh">第 6 节 &middot; 问题分解</span></div>
+  <h2><span data-lang="en">Problem Decomposition: Worked Example</span><span data-lang="zh">问题分解：综合例题</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Top-down design &mdash; start big, subdivide until each piece is small enough to code.</span><span data-lang="zh">自顶向下设计 &mdash; 从大开始，细分直到每个部分小到可以编码。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Level 1</span><span data-lang="zh">第 1 级</span></strong> <span data-lang="en">&mdash; the overall problem statement (one sentence).</span><span data-lang="zh">&mdash; 整体问题陈述（一句话）。</span></li>
+      <li><strong><span data-lang="en">Level 2</span><span data-lang="zh">第 2 级</span></strong> <span data-lang="en">&mdash; the major sub-problems (3–6 items, each a clear responsibility).</span><span data-lang="zh">&mdash; 主要子问题（3-6 项，每项职责明确）。</span></li>
+      <li><strong><span data-lang="en">Level 3</span><span data-lang="zh">第 3 级</span></strong> <span data-lang="en">&mdash; each sub-problem broken into steps small enough to write a pseudocode loop or decision for.</span><span data-lang="zh">&mdash; 每个子问题拆分为足够小的步骤，可以为其编写伪代码循环或判断。</span></li>
+    </ul>
+    <span data-lang="en">CSTA 3A-AP-17: "Decompose problems into smaller components through systematic analysis." Ontario ICS3U B1.1: "stepwise refinement, divide and conquer … when solving different types of problems." AB CSE1110 outcome 1.4: "decompose the problem into its input, processing and output components."</span><span data-lang="zh">CSTA 3A-AP-17："通过系统分析将问题分解为更小的组件。"安大略 ICS3U B1.1："解决不同类型问题时逐步精化、分而治之……"AB CSE1110 结果 1.4："将问题分解为输入、处理和输出组件。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-orange">WE</div><div class="card-title"><span data-lang="en">Worked Example 6 &middot; A student grade book program</span><span data-lang="zh">例题 6 &middot; 学生成绩册程序</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: write a program that reads a student's scores on five assignments, computes their average, and prints a letter grade (A &ge; 90, B &ge; 80, C &ge; 70, D &ge; 60, F otherwise). Apply decomposition.</span><span data-lang="zh">问题：编写一个程序，读取学生在五项作业上的成绩，计算平均分，并打印字母等级（A &ge; 90，B &ge; 80，C &ge; 70，D &ge; 60，F 否则）。应用分解。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Level 1 — overall problem.</span><span data-lang="zh">第 1 级——整体问题。</span></strong> <span data-lang="en">Read 5 scores → compute average → determine letter grade → output.</span><span data-lang="zh">读取 5 个成绩 → 计算平均分 → 确定字母等级 → 输出。</span></p>
+    <p><strong><span data-lang="en">Level 2 — four sub-problems.</span><span data-lang="zh">第 2 级——四个子问题。</span></strong></p>
+    <ul style="margin: 4px 0 10px 20px; font-size: 0.94rem;">
+      <li><span data-lang="en">Sub-problem A: Read 5 scores from the user.</span><span data-lang="zh">子问题 A：从用户读取 5 个成绩。</span></li>
+      <li><span data-lang="en">Sub-problem B: Compute the average of the 5 scores.</span><span data-lang="zh">子问题 B：计算 5 个成绩的平均值。</span></li>
+      <li><span data-lang="en">Sub-problem C: Map the average to a letter grade.</span><span data-lang="zh">子问题 C：将平均值映射到字母等级。</span></li>
+      <li><span data-lang="en">Sub-problem D: Output the average and the grade.</span><span data-lang="zh">子问题 D：输出平均分和等级。</span></li>
+    </ul>
+    <p><strong><span data-lang="en">Pseudocode (one sub-problem at a time).</span><span data-lang="zh">伪代码（每次一个子问题）。</span></strong></p>
+    <pre><code>-- Sub-problem A: Read scores
+SET total TO 0
+FOR i FROM 1 TO 5:
+    INPUT score
+    SET total TO total + score
+
+-- Sub-problem B: Compute average
+SET average TO total / 5
+
+-- Sub-problem C: Determine grade
+IF average >= 90 THEN SET grade TO "A"
+ELSE IF average >= 80 THEN SET grade TO "B"
+ELSE IF average >= 70 THEN SET grade TO "C"
+ELSE IF average >= 60 THEN SET grade TO "D"
+ELSE SET grade TO "F"
+
+-- Sub-problem D: Output
+OUTPUT average, grade</code></pre>
+    <p><span data-lang="en">Each sub-problem is now a small, independent piece of pseudocode. You can test each part separately before combining them. This is the core benefit of decomposition: <strong>independently testable units</strong>.</span><span data-lang="zh">每个子问题现在是一小段独立的伪代码。你可以在合并之前分别测试每个部分。这是分解的核心好处：<strong>可独立测试的单元</strong>。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the main benefit of decomposing a problem into sub-problems before writing code?</span><span data-lang="zh">在编写代码之前将问题分解为子问题的主要好处是什么？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">It makes programs run faster</span><span data-lang="zh">它使程序运行更快</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">It eliminates all bugs</span><span data-lang="zh">它消除所有错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">It allows the program to use less memory</span><span data-lang="zh">它允许程序使用更少的内存</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">It makes large problems manageable by creating smaller, independently testable pieces</span><span data-lang="zh">它通过创建更小、可独立测试的部分使大问题变得可管理</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Decomposition makes large problems manageable by breaking them into smaller sub-problems, each of which can be designed, written, and tested independently. It does not automatically make code faster or eliminate bugs, but it makes the development process much more tractable.</span><span data-lang="zh">分解通过将大问题拆分为更小的子问题使其变得可管理，每个子问题都可以独立设计、编写和测试。它不会自动使代码更快或消除错误，但使开发过程更加可控。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Decomposition is a design strategy, not a runtime optimization. Its benefit is manageability and testability, not speed or memory efficiency.</span><span data-lang="zh">分解是一种设计策略，而不是运行时优化。其好处是可管理性和可测试性，而不是速度或内存效率。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A student is building a calculator app. Which is the best first step using decomposition?</span><span data-lang="zh">一名学生正在构建一个计算器应用程序。使用分解的最佳第一步是什么？</span></div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Identify the major sub-problems: get input, perform operation, display result</span><span data-lang="zh">识别主要子问题：获取输入、执行操作、显示结果</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Write all the code immediately</span><span data-lang="zh">立即编写所有代码</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Choose a programming language first</span><span data-lang="zh">先选择编程语言</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Design the visual layout of the app</span><span data-lang="zh">设计应用程序的视觉布局</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Decomposition starts with identifying the major sub-problems. For a calculator: get the user's numbers and operation (input), apply the operation (process), show the answer (output). The language choice and visual design come later.</span><span data-lang="zh">分解从识别主要子问题开始。对于计算器：获取用户的数字和操作（输入），应用操作（处理），显示答案（输出）。语言选择和视觉设计稍后进行。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Decomposition means breaking the problem down first. Writing code immediately, choosing a language, or designing UI before understanding the problem structure is working in the wrong order.</span><span data-lang="zh">分解意味着首先分解问题。在理解问题结构之前立即编写代码、选择语言或设计 UI 是错误的工作顺序。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-7">
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Tracing and debugging</span><span data-lang="zh">第 7 节 &middot; 追踪与调试</span></div>
+  <h2><span data-lang="en">Tracing and Debugging Algorithms</span><span data-lang="zh">追踪与调试算法</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Tracing = running the algorithm by hand with concrete values.</span><span data-lang="zh">追踪 = 用具体值手工运行算法。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Variable trace table</span><span data-lang="zh">变量追踪表</span></strong> <span data-lang="en">&mdash; one column per variable, one row per step. Fill in the new value every time a variable changes.</span><span data-lang="zh">&mdash; 每个变量一列，每步一行。每次变量更改时填入新值。</span></li>
+      <li><strong><span data-lang="en">Three types of bugs</span><span data-lang="zh">三种错误类型</span></strong> <span data-lang="en">&mdash; (1) Syntax: code does not parse (typo in a keyword). (2) Logic: code runs but produces the wrong answer. (3) Runtime: code crashes during execution (division by zero, accessing out-of-bounds index).</span><span data-lang="zh">&mdash; (1) 语法：代码无法解析（关键字中有错别字）。(2) 逻辑：代码运行但产生错误答案。(3) 运行时：代码在执行过程中崩溃（除以零、访问越界索引）。</span></li>
+      <li><strong><span data-lang="en">AB CSE1110</span><span data-lang="zh">AB CSE1110</span></strong> <span data-lang="en">outcome 1.7: "test the algorithm for failure as well as success with appropriate data"; outcome 3.1: "use appropriate test data and debugging techniques to track and correct errors including: run-time errors; logic errors."</span><span data-lang="zh">结果 1.7："用适当数据测试算法的成功与失败情况"；结果 3.1："使用适当的测试数据和调试技术来跟踪和纠正错误，包括：运行时错误；逻辑错误。"</span></li>
+    </ul>
+    <span data-lang="en">Ontario ICS3U B3.3 says "design algorithms to detect, intercept, and handle exceptions" — a direct link to debugging. BC Computer Programming 11 Content lists "use of test cases to detect logical or semantic errors." AB CSE1110 outcome 3.1.2: "logic errors."</span><span data-lang="zh">安大略 ICS3U B3.3 要求"设计算法以检测、拦截和处理异常"——与调试直接相关。BC Computer Programming 11 内容列出"使用测试用例检测逻辑或语义错误"。AB CSE1110 结果 3.1.2："逻辑错误。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-red">WE</div><div class="card-title"><span data-lang="en">Worked Example 7 &middot; Trace a buggy sum algorithm</span><span data-lang="zh">例题 7 &middot; 追踪一个有错误的求和算法</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">The following pseudocode is supposed to sum the numbers 1 to 5 and output 15. Trace it and find the bug.</span><span data-lang="zh">以下伪代码本应求 1 到 5 的数字之和并输出 15。追踪它并找出错误。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Buggy pseudocode.</span><span data-lang="zh">有错误的伪代码。</span></strong></p>
+    <pre><code>SET total TO 0
+SET i TO 1
+WHILE i < 5:
+    SET total TO total + i
+    SET i TO i + 1
+OUTPUT total</code></pre>
+    <p><strong><span data-lang="en">Trace table (variable: i, total).</span><span data-lang="zh">追踪表（变量：i，total）。</span></strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th><span data-lang="en">Step</span><span data-lang="zh">步骤</span></th><th>i</th><th>total</th><th><span data-lang="en">Condition i &lt; 5?</span><span data-lang="zh">条件 i &lt; 5？</span></th></tr></thead>
+        <tbody>
+          <tr><td><span data-lang="en">Init</span><span data-lang="zh">初始</span></td><td>1</td><td>0</td><td>—</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>TRUE</td></tr>
+          <tr><td>2</td><td>2</td><td>3</td><td>TRUE</td></tr>
+          <tr><td>3</td><td>3</td><td>6</td><td>TRUE</td></tr>
+          <tr><td>4</td><td>4</td><td>10</td><td>TRUE</td></tr>
+          <tr><td>5</td><td>5</td><td>10</td><td>FALSE → exits</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong><span data-lang="en">Bug found.</span><span data-lang="zh">找到错误。</span></strong> <span data-lang="en">Output is 10, not 15. The condition <code>i &lt; 5</code> stops the loop before adding 5. Fix: change to <code>i &lt;= 5</code> (or equivalently <code>i &lt; 6</code>). This is a classic off-by-one logic error.</span><span data-lang="zh">输出是 10，不是 15。条件 <code>i &lt; 5</code> 在添加 5 之前停止了循环。修复：改为 <code>i &lt;= 5</code>（或等价地 <code>i &lt; 6</code>）。这是经典的"差一"逻辑错误。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A program compiles and runs without crashing, but always prints the wrong answer. What type of error is this?</span><span data-lang="zh">一个程序能编译并运行而不崩溃，但总是打印错误答案。这是什么类型的错误？</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Syntax error</span><span data-lang="zh">语法错误</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Runtime error</span><span data-lang="zh">运行时错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Logic error</span><span data-lang="zh">逻辑错误</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Compilation error</span><span data-lang="zh">编译错误</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A logic error is when the code runs correctly (no crash, no syntax problem) but produces the wrong output. The program's logic does not match what was intended. Tracing through the algorithm with a variable trace table is the standard technique for finding logic errors.</span><span data-lang="zh">逻辑错误是指代码正确运行（不崩溃，无语法问题）但产生错误输出。程序的逻辑与预期不符。通过变量追踪表追踪算法是查找逻辑错误的标准技术。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Syntax errors prevent compilation/parsing. Runtime errors crash the program during execution. Logic errors let the program run but produce wrong results.</span><span data-lang="zh">语法错误阻止编译/解析。运行时错误在执行过程中使程序崩溃。逻辑错误让程序运行但产生错误结果。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the purpose of a variable trace table when checking an algorithm?</span><span data-lang="zh">在检查算法时，变量追踪表的目的是什么？</span></div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">To display the program's output on screen</span><span data-lang="zh">在屏幕上显示程序的输出</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">To track the value of each variable at each step so you can spot where the logic goes wrong</span><span data-lang="zh">跟踪每步每个变量的值，以便找出逻辑出错的地方</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">To measure how many seconds the algorithm takes to run</span><span data-lang="zh">测量算法运行需要多少秒</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">To count the total number of lines of code</span><span data-lang="zh">计算代码的总行数</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A variable trace table records the value of each variable after each step, letting you follow the algorithm's execution by hand. When the trace table shows a value that differs from what you expected, you have found the location of the logic error.</span><span data-lang="zh">变量追踪表记录每步之后每个变量的值，让你手工跟踪算法的执行。当追踪表显示与预期不同的值时，你就找到了逻辑错误的位置。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">A trace table is a hand-execution tool for correctness checking, not a timing tool or output display. It shows variable states step by step.</span><span data-lang="zh">追踪表是用于正确性检查的手工执行工具，而不是计时工具或输出显示。它逐步显示变量状态。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; testing strategies: normal, boundary, and error cases</span><span data-lang="zh">深入 &mdash; 测试策略：正常情况、边界情况和错误情况</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">AB CSE1110 outcome 1.7 says to "test the algorithm for failure <strong>as well as</strong> success." A thorough test plan covers three categories: (1) <strong>Normal cases</strong> — typical valid inputs (e.g., score = 75 for a grade calculator). (2) <strong>Boundary cases</strong> — values at the exact edge of a condition (e.g., score = 90, score = 89, score = 0, score = 100 — each triggers a different branch). (3) <strong>Error/exception cases</strong> — invalid inputs that the algorithm might encounter (e.g., score = -5, score = 200, score = "hello"). Ontario ICS3U B3.3 says to "design algorithms to detect, intercept, and handle exceptions" — the error cases are what test this. BC Computer Programming 11 says "use of test cases to detect logical or semantic errors." Always test all three categories before calling an algorithm finished.</span><span data-lang="zh">AB CSE1110 结果 1.7 要求"用适当数据测试算法的成功<strong>与</strong>失败情况"。完整的测试计划涵盖三个类别：(1) <strong>正常情况</strong>——典型的有效输入（例如，成绩计算器中的分数 = 75）。(2) <strong>边界情况</strong>——恰好在条件边缘的值（例如，分数 = 90、分数 = 89、分数 = 0、分数 = 100——每个触发不同的分支）。(3) <strong>错误/异常情况</strong>——算法可能遇到的无效输入（例如，分数 = -5、分数 = 200、分数 = "hello"）。安大略 ICS3U B3.3 要求"设计算法以检测、拦截和处理异常"——错误情况正是测试这一点的。BC Computer Programming 11 要求"使用测试用例检测逻辑或语义错误"。在宣布算法完成之前，始终测试所有三个类别。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="exam-strategy">
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);"><span data-lang="en">Discipline before you code</span><span data-lang="zh">编码前的纪律</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Decompose first, pseudocode second, code third.</span><span data-lang="zh">先分解，再写伪代码，最后写代码。</span></strong> <span data-lang="en">Never open a code editor before you have a clear pseudocode plan. Students who skip straight to code produce untraceable bugs. The mark-winning habit is: problem &rarr; sub-problems &rarr; pseudocode &rarr; trace &rarr; code.</span><span data-lang="zh">在有清晰伪代码计划之前，永远不要打开代码编辑器。跳过直接写代码的学生会产生难以追踪的错误。获得高分的习惯是：问题 → 子问题 → 伪代码 → 追踪 → 代码。</span></li>
+      <li><strong><span data-lang="en">Label each pillar explicitly.</span><span data-lang="zh">明确标注每个支柱。</span></strong> <span data-lang="en">On a written exam, when you are asked to apply computational thinking, write the four pillar names (Decomposition, Pattern Recognition, Abstraction, Algorithmic Thinking) and state what each one contributed to your solution. Examiners are checking that you can name and apply all four.</span><span data-lang="zh">在笔试中，当被要求应用计算思维时，写出四个支柱名称（分解、模式识别、抽象、算法思维）并说明每个支柱对你的解决方案的贡献。考官在检查你是否能命名并应用全部四个支柱。</span></li>
+      <li><strong><span data-lang="en">Trace before you submit.</span><span data-lang="zh">提交前先追踪。</span></strong> <span data-lang="en">On any pseudocode or algorithm question, always trace through your answer with a concrete example before moving on. A trace table takes 60 seconds and catches most off-by-one and sign errors.</span><span data-lang="zh">在任何伪代码或算法问题上，在继续之前始终用具体示例追踪你的答案。追踪表只需 60 秒，能发现大多数"差一"和符号错误。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box" style="border-left-color: var(--accent);">
+    <strong style="color: var(--accent);"><span data-lang="en">Pseudocode and algorithm questions (&sect;1-&sect;4)</span><span data-lang="zh">伪代码和算法问题（&sect;1-&sect;4）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Assignment is not equality.</span><span data-lang="zh">赋值不是等式。</span></strong> <span data-lang="en"><code>x = 5</code> sets; <code>x == 5</code> tests. In AP CSP pseudocode, assignment uses the arrow (<code>&larr;</code>). Mixing these up is the single most common exam error in this unit.</span><span data-lang="zh"><code>x = 5</code> 设置值；<code>x == 5</code> 测试相等。在 AP CSP 伪代码中，赋值使用箭头（<code>&larr;</code>）。混淆这两者是本单元最常见的考试错误。</span></li>
+      <li><strong><span data-lang="en">State the IPO explicitly.</span><span data-lang="zh">明确陈述 IPO。</span></strong> <span data-lang="en">For any algorithm question: identify the inputs, the processing steps, and the output before writing a single line of pseudocode. Ontario ICS3U B1.3 and AB CSE1110 1.3 both assess this.</span><span data-lang="zh">对于任何算法问题：在写一行伪代码之前，确定输入、处理步骤和输出。安大略 ICS3U B1.3 和 AB CSE1110 1.3 都评估这一点。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);"><span data-lang="en">Efficiency and tracing (&sect;5-&sect;7)</span><span data-lang="zh">效率和追踪（&sect;5-&sect;7）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Name the error type.</span><span data-lang="zh">命名错误类型。</span></strong> <span data-lang="en">When asked about a bug, state whether it is a syntax, logic, or runtime error and justify your answer. Examiners expect the correct term.</span><span data-lang="zh">当被问及错误时，说明它是语法错误、逻辑错误还是运行时错误，并证明你的答案。考官期望正确的术语。</span></li>
+      <li><strong><span data-lang="en">Binary vs linear search argument.</span><span data-lang="zh">二分搜索与线性搜索的论据。</span></strong> <span data-lang="en">On efficiency questions: state the pre-condition (list must be sorted for binary), the step count (n vs log n), and a concrete example with numbers. Two sentences scores more than a vague claim.</span><span data-lang="zh">在效率问题上：说明前提条件（二分搜索需要列表已排序）、步骤数（n 对比 log n），以及带数字的具体例子。两句话比模糊的说法得分更高。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);"><span data-lang="en">Answer hygiene</span><span data-lang="zh">作答规范</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Use pseudocode keywords, not real-language syntax.</span><span data-lang="zh">使用伪代码关键字，而非真实语言语法。</span></strong> <span data-lang="en">AP CSP uses its own keyword set (DISPLAY, &larr;, REPEAT, etc.). Write the keywords from the reference sheet, not Python or Java syntax.</span><span data-lang="zh">AP CSP 使用其自己的关键字集（DISPLAY、&larr;、REPEAT 等）。写参考手册中的关键字，而不是 Python 或 Java 语法。</span></li>
+      <li><strong><span data-lang="en">Show your trace table work.</span><span data-lang="zh">展示你的追踪表工作。</span></strong> <span data-lang="en">When tracing, draw the table explicitly — column headers are the variable names, rows are the steps. A partial trace that reaches the error is worth more than "I ran it in my head."</span><span data-lang="zh">在追踪时，明确画出表格——列标题是变量名称，行是步骤。到达错误的部分追踪比"我在脑子里运行了它"更有价值。</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="flashcards">
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
+  <div class="flashcard-toolbar">
+    <div id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">0 / 14 已翻</span></div>
+    <div>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">洗牌</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
+    </div>
+  </div>
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Decomposition</span><span data-lang="zh">分解</span></div><div class="flashcard-back"><span data-lang="en">Breaking a complex problem into smaller, manageable sub-problems. CSTA 3A-AP-17.</span><span data-lang="zh">将复杂问题分解为更小、可管理的子问题。CSTA 3A-AP-17。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Abstraction</span><span data-lang="zh">抽象</span></div><div class="flashcard-back"><span data-lang="en">Stripping away irrelevant detail; keeping only what matters for solving the problem. E.g., a map abstracts a city.</span><span data-lang="zh">去除无关细节；只保留解决问题所需的内容。例如，地图是城市的抽象。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Pattern recognition</span><span data-lang="zh">模式识别</span></div><div class="flashcard-back"><span data-lang="en">Spotting similarities or repeated structures across problems or within data, allowing solution reuse.</span><span data-lang="zh">发现问题间或数据内的相似性或重复结构，从而实现解决方案复用。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Algorithmic thinking</span><span data-lang="zh">算法思维</span></div><div class="flashcard-back"><span data-lang="en">Expressing a solution as a precise, unambiguous, step-by-step sequence that anyone (or any computer) can follow.</span><span data-lang="zh">将解决方案表达为任何人（或计算机）都能遵循的精确、无歧义的逐步序列。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What is an algorithm?</span><span data-lang="zh">什么是算法？</span></div><div class="flashcard-back"><span data-lang="en">A precise, finite, step-by-step procedure for solving a problem. Must be finite, definite, and effective.</span><span data-lang="zh">解决问题的精确、有限的逐步程序。必须是有限的、确定的和有效的。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What is pseudocode?</span><span data-lang="zh">什么是伪代码？</span></div><div class="flashcard-back"><span data-lang="en">Human-readable algorithm notation, structured but not tied to any language. Uses keywords like INPUT, OUTPUT, IF, WHILE, FOR, SET.</span><span data-lang="zh">人类可读的算法表示法，结构化但不依附于任何语言。使用关键字如 INPUT、OUTPUT、IF、WHILE、FOR、SET。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Flowchart diamond shape?</span><span data-lang="zh">流程图菱形形状？</span></div><div class="flashcard-back"><span data-lang="en">Decision (yes/no question). Has exactly two exit arrows: YES and NO.</span><span data-lang="zh">判断（是/否问题）。恰好有两条出口箭头：是和否。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Flowchart four shapes?</span><span data-lang="zh">流程图四种形状？</span></div><div class="flashcard-back"><span data-lang="en">Oval = Start/End. Rectangle = Process. Parallelogram = Input/Output. Diamond = Decision.</span><span data-lang="zh">椭圆 = 开始/结束。矩形 = 处理。平行四边形 = 输入/输出。菱形 = 判断。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">IPO model</span><span data-lang="zh">IPO 模型</span></div><div class="flashcard-back"><span data-lang="en">Input → Process → Output. Every sequential algorithm follows this structure. AB CSE1110 outcome 1.3; ON ICS3U B1.3.</span><span data-lang="zh">输入 → 处理 → 输出。每个顺序算法都遵循这种结构。AB CSE1110 结果 1.3；ON ICS3U B1.3。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Linear search step count?</span><span data-lang="zh">线性搜索步骤数？</span></div><div class="flashcard-back"><span data-lang="en">Worst case: n steps (check every item). No pre-condition needed. Simple but slow for large lists.</span><span data-lang="zh">最坏情况：n 步（检查每项）。不需要前提条件。简单但对大列表较慢。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Binary search step count?</span><span data-lang="zh">二分搜索步骤数？</span></div><div class="flashcard-back"><span data-lang="en">Worst case: log₂(n) steps. Requires sorted list. 1024 items → at most 10 steps.</span><span data-lang="zh">最坏情况：log₂(n) 步。需要已排序列表。1024 项 → 最多 10 步。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Three types of program errors?</span><span data-lang="zh">三种程序错误类型？</span></div><div class="flashcard-back"><span data-lang="en">Syntax: code doesn't parse. Logic: runs but wrong answer. Runtime: crashes during execution.</span><span data-lang="zh">语法：代码无法解析。逻辑：运行但答案错误。运行时：执行过程中崩溃。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Variable trace table</span><span data-lang="zh">变量追踪表</span></div><div class="flashcard-back"><span data-lang="en">A hand-execution table: one column per variable, one row per step. Records the value of each variable after each step. Used to find logic errors.</span><span data-lang="zh">手工执行表：每个变量一列，每步一行。记录每步后每个变量的值。用于查找逻辑错误。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Off-by-one error</span><span data-lang="zh">差一错误</span></div><div class="flashcard-back"><span data-lang="en">A logic error where a loop runs one too many or one too few times. E.g., WHILE i &lt; 5 stops at i=4, missing the 5. Fix: WHILE i &lt;= 5.</span><span data-lang="zh">循环运行次数多一次或少一次的逻辑错误。例如，WHILE i &lt; 5 在 i=4 时停止，遗漏了 5。修复：WHILE i &lt;= 5。</span></div></div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="unit-quiz">
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">综合测验</span></h2>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">You are building a program to find the largest number in a list of exam scores. Applying computational thinking, which step comes first?</span><span data-lang="zh">你正在构建一个程序来找出一列考试成绩中的最大值。应用计算思维，哪个步骤最先？</span></div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Write the Python code</span><span data-lang="zh">编写 Python 代码</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Decompose: identify the sub-problems (read scores, compare, track maximum, output)</span><span data-lang="zh">分解：识别子问题（读取成绩、比较、跟踪最大值、输出）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Draw a flowchart</span><span data-lang="zh">画流程图</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Choose a programming language</span><span data-lang="zh">选择编程语言</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Decomposition is always the first step. Identify sub-problems first, then write pseudocode, then code.</span><span data-lang="zh">分解始终是第一步。先识别子问题，再写伪代码，再写代码。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Computational thinking workflow: problem &rarr; decompose &rarr; pseudocode &rarr; trace &rarr; code.</span><span data-lang="zh">计算思维工作流程：问题 &rarr; 分解 &rarr; 伪代码 &rarr; 追踪 &rarr; 代码。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does the pseudocode line <code>SET max TO scores[0]</code> do?</span><span data-lang="zh">伪代码行 <code>SET max TO scores[0]</code> 做什么？</span></div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Tests if max equals scores[0]</span><span data-lang="zh">测试 max 是否等于 scores[0]</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Adds scores[0] to the variable max</span><span data-lang="zh">将 scores[0] 添加到变量 max</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Assigns the value of scores[0] to the variable max</span><span data-lang="zh">将 scores[0] 的值赋给变量 max</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Prints the value of max</span><span data-lang="zh">打印 max 的值</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>SET x TO value</code> is assignment &mdash; it stores the value in the variable. This sets max to the first item in the scores list.</span><span data-lang="zh"><code>SET x TO value</code> 是赋值&mdash;&mdash;它将值存储在变量中。这将 max 设置为成绩列表中的第一项。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">SET...TO is assignment. To test equality you would write IF max = scores[0] THEN.</span><span data-lang="zh">SET...TO 是赋值。测试相等需写 IF max = scores[0] THEN。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In a flowchart for "if temperature &gt; 30 then output WARN else output OK," how many decision diamonds are needed?</span><span data-lang="zh">在"如果温度 &gt; 30 则输出 WARN 否则输出 OK"的流程图中，需要多少个判断菱形？</span></div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">One</span><span data-lang="zh">一个</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Two</span><span data-lang="zh">两个</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Three</span><span data-lang="zh">三个</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">None</span><span data-lang="zh">没有</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">One condition = one diamond. The diamond's YES path goes to WARN; the NO path goes to OK.</span><span data-lang="zh">一个条件 = 一个菱形。菱形的是路径通向 WARN；否路径通向 OK。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">One condition, one diamond. Two outputs but only one decision point.</span><span data-lang="zh">一个条件，一个菱形。两个输出但只有一个决策点。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Trace this pseudocode with input 6. What is the output?<br><code>INPUT n | SET result TO 1</code><br><code>FOR i FROM 1 TO n: SET result TO result * i</code><br><code>OUTPUT result</code></span><span data-lang="zh">用输入 6 追踪以下伪代码。输出是什么？<br><code>INPUT n | SET result TO 1</code><br><code>FOR i FROM 1 TO n: SET result TO result * i</code><br><code>OUTPUT result</code></span></div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">6</div>
+      <div class="quiz-opt" data-idx="1">21</div>
+      <div class="quiz-opt" data-idx="2">36</div>
+      <div class="quiz-opt" data-idx="3">720</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">This computes 6! (factorial). Trace: 1&rarr;1&rarr;2&rarr;6&rarr;24&rarr;120&rarr;720. Output: 720.</span><span data-lang="zh">这计算 6!（阶乘）。追踪：1&rarr;1&rarr;2&rarr;6&rarr;24&rarr;120&rarr;720。输出：720。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Trace: i=1:1, i=2:2, i=3:6, i=4:24, i=5:120, i=6:720.</span><span data-lang="zh">追踪：i=1:1, i=2:2, i=3:6, i=4:24, i=5:120, i=6:720。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A sorted list has 1,024 items. Using binary search, what is the maximum number of comparisons needed?</span><span data-lang="zh">一个已排序的列表有 1024 项。使用二分搜索，最多需要多少次比较？</span></div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">256</div>
+      <div class="quiz-opt" data-idx="1">10</div>
+      <div class="quiz-opt" data-idx="2">1024</div>
+      <div class="quiz-opt" data-idx="3">100</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">log&#x2082;(1024) = 10 (since 2&#xB9;&#x2070; = 1024). Binary search halves the list each step, taking at most log&#x2082;(n) steps.</span><span data-lang="zh">log&#x2082;(1024) = 10（因为 2&#xB9;&#x2070; = 1024）。二分搜索每步将列表减半，最多需要 log&#x2082;(n) 步。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Binary search: log&#x2082;(n) steps max. 2&#xB9;&#x2070; = 1024 &rArr; log&#x2082;(1024) = 10.</span><span data-lang="zh">二分搜索：最多 log&#x2082;(n) 步。2&#xB9;&#x2070; = 1024 &rArr; log&#x2082;(1024) = 10。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">An algorithm outputs 10 instead of 15 (should sum 1+2+3+4+5). It runs without crashing. What type of bug is this?</span><span data-lang="zh">一个算法输出 10 而不是 15（应求 1+2+3+4+5 的和）。它运行不崩溃。这是什么类型的错误？</span></div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Syntax error</span><span data-lang="zh">语法错误</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Runtime error</span><span data-lang="zh">运行时错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Logic error (off-by-one: condition should be &lt;= 5)</span><span data-lang="zh">逻辑错误（差一：条件应为 &lt;= 5）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">No error &mdash; 10 is correct</span><span data-lang="zh">没有错误 &mdash; 10 是正确的</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Runs without crash (not syntax/runtime). Wrong answer (logic error). Classic off-by-one: WHILE i &lt; 5 stops before adding 5. Fix: i &lt;= 5.</span><span data-lang="zh">运行不崩溃（不是语法/运行时错误）。答案错误（逻辑错误）。经典差一错误：WHILE i &lt; 5 在添加 5 之前停止。修复：i &lt;= 5。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Runs without crash = not syntax/runtime. Wrong answer = logic error.</span><span data-lang="zh">运行不崩溃 = 不是语法/运行时。答案错误 = 逻辑错误。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which CSTA standard says "Decompose problems into smaller components through systematic analysis"? <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span><span data-lang="zh">哪个 CSTA 标准说"通过系统分析将问题分解为更小的组件"？<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span></div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>3A-AP-17</code></div>
+      <div class="quiz-opt" data-idx="1"><code>3A-AP-13</code></div>
+      <div class="quiz-opt" data-idx="2"><code>3B-AP-15</code></div>
+      <div class="quiz-opt" data-idx="3"><code>3A-IC-26</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">CSTA 3A-AP-17 (verbatim): "Decompose problems into smaller components through systematic analysis, using constructs such as procedures, modules, and/or objects."</span><span data-lang="zh">CSTA 3A-AP-17（原文）："通过系统分析将问题分解为更小的组件，使用过程、模块和/或对象等构造。"</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">3A-AP-17 = decomposition. 3A-AP-13 = prototypes using algorithms. 3B-AP-15 = generalizable patterns. 3A-IC-26 = algorithms across disciplines.</span><span data-lang="zh">3A-AP-17 = 分解。3A-AP-13 = 使用算法的原型。3B-AP-15 = 可概括模式。3A-IC-26 = 跨学科算法。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+</section>
+
+<hr class="sep">
+
+<section class="section" id="checklist">
+  <div class="section-label"><span data-lang="en">Self-check</span><span data-lang="zh">自查</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></h2>
+  <p><span data-lang="en">Tick each item when you can do it cold, without notes, on a first attempt.</span><span data-lang="zh">能在无笔记、首次尝试下完成，再勾选每一项。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 11 mastered</span><span data-lang="zh">已掌握 0 / 11</span></div>
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Name and define all four pillars of computational thinking (decomposition, pattern recognition, abstraction, algorithmic thinking) and give an example of each applied to a single problem. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-17 / &#x1F1E8;&#x1F1E6; BC CS10</span></span><span data-lang="zh">命名并定义计算思维的全部四个支柱（分解、模式识别、抽象、算法思维），并举例说明每个支柱在一个问题中的应用。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-17 / &#x1F1E8;&#x1F1E6; BC CS10</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a pseudocode algorithm for a simple problem (e.g., find the maximum of a list) using correct keywords (INPUT, OUTPUT, IF/ELSE, WHILE, FOR, SET...TO). <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 outcome 1.6</span></span><span data-lang="zh">为简单问题（如找列表最大值）用正确关键字（INPUT、OUTPUT、IF/ELSE、WHILE、FOR、SET...TO）写出伪代码算法。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 结果 1.6</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Identify the four flowchart shapes (oval, rectangle, parallelogram, diamond) and state what each represents. Draw a simple flowchart for an if/else decision. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / ON ICS3U B2.4</span></span><span data-lang="zh">识别流程图四种形状（椭圆、矩形、平行四边形、菱形）并说明各自代表什么。为一个 if/else 判断画出简单流程图。<span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / ON ICS3U B2.4</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Explain the IPO model (Input, Process, Output) and apply it to identify the three phases of any simple algorithm before writing code. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 outcome 1.3 / ON ICS3U B1.3</span></span><span data-lang="zh">解释 IPO 模型（输入、处理、输出），并在编写代码之前将其应用于识别任意简单算法的三个阶段。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 结果 1.3 / ON ICS3U B1.3</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Build a variable trace table for a given pseudocode fragment with at least 5 steps, recording the value of every variable after each step. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 outcome 1.7</span></span><span data-lang="zh">为给定的至少 5 步伪代码片段建立变量追踪表，记录每步后每个变量的值。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 结果 1.7</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Distinguish between syntax, logic, and runtime errors; identify the type of bug in a given buggy pseudocode fragment and state the fix. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 outcome 3.1 / BC CP11</span></span><span data-lang="zh">区分语法错误、逻辑错误和运行时错误；识别给定有错误的伪代码片段中的错误类型并说明修复方法。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 结果 3.1 / BC CP11</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Compare linear search and binary search: state the step count (n vs log&#x2082; n), the pre-condition for binary search (sorted list), and give a concrete example with a 16-item list. <span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP 3.17 (AAP-4.A)</span></span><span data-lang="zh">比较线性搜索和二分搜索：陈述步骤数（n 对比 log&#x2082; n）、二分搜索的前提条件（已排序列表），并用 16 项列表举出具体例子。<span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP 3.17 (AAP-4.A)</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Apply the three-pillar testing strategy to a given algorithm: design normal-case, boundary-case, and error-case test inputs and state what the expected output is for each. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U B3.3 / BC CP11</span></span><span data-lang="zh">将三支柱测试策略应用于给定算法：设计正常情况、边界情况和错误情况的测试输入，并说明每种情况的预期输出。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U B3.3 / BC CP11</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Decompose a medium-complexity problem (e.g., a grade book, a scheduling app) into at least three sub-problems using top-down design, and write pseudocode for one sub-problem. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-17 / &#x1F1E8;&#x1F1E6; ON ICS3U B1.1</span></span><span data-lang="zh">使用自顶向下设计将中等复杂度的问题（如成绩册、调度应用程序）分解为至少三个子问题，并为其中一个子问题编写伪代码。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-17 / &#x1F1E8;&#x1F1E6; ON ICS3U B1.1</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">State verbatim (or near-verbatim) the CSTA standards 3A-AP-13 and 3A-AP-17, and explain which pillar of computational thinking each one maps to. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA Level 3A</span></span><span data-lang="zh">逐字（或近逐字）陈述 CSTA 标准 3A-AP-13 和 3A-AP-17，并解释每个标准映射到计算思维的哪个支柱。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA Level 3A</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en"><span class="honors-flag">Honors &mdash; ICS4U / CSE3110</span> Explain Big-O notation and classify linear search as O(n) and binary search as O(log n). Argue why O(log n) is dramatically better for large n. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS4U C2 / AB CSE3110</span></span><span data-lang="zh"><span class="honors-flag">荣誉 &mdash; ICS4U / CSE3110</span> 解释大 O 表示法，将线性搜索归类为 O(n)，将二分搜索归类为 O(log n)。论证为何 O(log n) 对于大 n 明显更好。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS4U C2 / AB CSE3110</span></span></span></li>
+  </ul>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="feeders">
+  <div class="section-label"><span data-lang="en">Next Steps</span><span data-lang="zh">后续单元</span></div>
+  <h2><span data-lang="en">What This Feeds Into</span><span data-lang="zh">本单元的去向</span></h2>
+  <p><span data-lang="en">Computational thinking is the conceptual bedrock of every topic in this HS Computer Science series. Every subsequent guide (control flow, functions, data structures, OOP) assumes you can decompose a problem before you code, write clear pseudocode, trace an algorithm, and reason informally about efficiency. The two downstream AP courses both assume this unit has already been covered. The links below point at the existing AP CSA guide (which uses Java OOP but depends on exactly the algorithmic thinking taught here) and are provided only for files confirmed to exist in this repo.</span><span data-lang="zh">计算思维是本 HS 计算机科学系列中每个主题的概念基础。后续每本指南（控制流、函数、数据结构、OOP）都假定你能在编码前分解问题、编写清晰的伪代码、追踪算法，并非正式地推理效率。两门下游 AP 课程都假定本单元已经学过。以下链接指向现有 AP CSA 指南（使用 Java OOP，但依赖于这里所教授的算法思维），仅提供已确认存在于本仓库的文件链接。</span></p>
+
+  <div style="margin: 20px 0;">
+    <p><strong><span data-lang="en">Within High School Computer Science.</span><span data-lang="zh">在 HS Computer Science 内部。</span></strong></p>
+    <p style="color: var(--text-secondary); font-size: 0.95rem;"><span data-lang="en">The next unit (Programming Fundamentals) translates the pseudocode and IPO patterns you learned here into actual variables, data types, and I/O in a real language. Control Flow adds selection and iteration to the sequential step-by-step execution of &sect;4. Functions and Modular Design formalises the decomposition you practiced in &sect;6 into callable sub-programs with parameters. Every later unit reuses the algorithmic thinking and tracing discipline from this guide.</span><span data-lang="zh">下一单元（编程基础）将你在这里学到的伪代码和 IPO 模式转化为真实语言中的实际变量、数据类型和 I/O。控制流在 &sect;4 的顺序逐步执行基础上添加选择和迭代。函数与模块化设计将 &sect;6 中练习的分解正式化为带参数的可调用子程序。每个后续单元都重用本指南中的算法思维和追踪纪律。</span></p>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <p><strong><span data-lang="en">AP feeder links (existing in this repo).</span><span data-lang="zh">AP 衔接链接（本仓库中已有）。</span></strong></p>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;">
+      <a class="feeder-link" href="../../AP CSA/Study Guides/Unit_1_Using_Objects_and_Methods.html"><span data-lang="en">AP CSA Unit 1 &middot; Using Objects and Methods (Java OOP: the algorithmic thinking and pseudocode-to-code translation practiced here is the foundation AP CSA builds on from day one)</span><span data-lang="zh">AP CSA Unit 1 &middot; 使用对象和方法（Java 面向对象：这里练习的算法思维和伪代码转代码是 AP CSA 从第一天起就依赖的基础）</span></a>
+    </div>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;"><span data-lang="en">The AP CSP feeder (Big Idea 3, Algorithms &amp; Programming, 30&ndash;35% of the exam) directly tests pseudocode fluency, decomposition, and algorithm efficiency reasoning covered in this guide. AP CSA (Java-specific, the downstream programming course) assumes you can decompose problems, write clean step-by-step algorithms, and trace code by hand before the first class. Both courses benefit from mastering this unit thoroughly before attempting either AP.</span><span data-lang="zh">AP CSP 衔接（大概念 3，算法与编程，占考试 30&ndash;35%）直接测试本指南所涵盖的伪代码流利度、分解和算法效率推理。AP CSA（Java 专项，下游编程课程）假定你在第一堂课之前就能分解问题、编写清晰的逐步算法并手工追踪代码。在尝试任一 AP 课程之前，彻底掌握本单元对两门课程都有益。</span></p>
+  </div>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">DINGRUI SCHOLARS</div>
+  <p><span data-lang="en">High School Computer Science &middot; Computational Thinking and Algorithms &middot; v1</span><span data-lang="zh">高中计算机科学 &middot; 计算思维与算法 &middot; v1</span></p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+function updateScoreBadge() { const badge = document.getElementById('scoreBadge'); if (!badge) return; if (quizScore.total === 0) { badge.textContent = '0 / 0'; badge.classList.add('zero'); } else { badge.textContent = quizScore.correct + ' / ' + quizScore.total; badge.classList.remove('zero'); } }
+function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.innerHTML = isDark ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>' : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>'; }
+function toggleTheme() { const isDark = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark'); setThemeBtnLabel(!isDark); }
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); setThemeBtnLabel(true); }
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; const pct = h > 0 ? (window.scrollY / h) * 100 : 0; const pf = document.getElementById('progressFill'); if (pf) pf.style.width = pct + '%'; });
+const sections = document.querySelectorAll('.section'); const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(l => l.classList.remove('active')); const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`); if (link) link.classList.add('active'); } }); }, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz => { const answer = parseInt(quiz.dataset.answer); const opts = quiz.querySelectorAll('.quiz-opt'); const expCorrect = quiz.querySelector('.quiz-explain.correct-exp'); const expWrong = quiz.querySelector('.quiz-explain.wrong-exp'); opts.forEach(opt => { opt.addEventListener('click', () => { if(opt.classList.contains('disabled')) return; const idx = parseInt(opt.dataset.idx); opts.forEach(o => o.classList.add('disabled')); quizScore.total++; if (idx === answer) { opt.classList.add('correct'); quizScore.correct++; if (expCorrect) expCorrect.classList.add('show'); } else { opt.classList.add('wrong'); opts[answer].classList.add('correct'); if (expWrong) expWrong.classList.add('show'); const retry = quiz.querySelector('.quiz-retry'); if (retry) retry.classList.add('show'); } updateScoreBadge(); }); }); });
+function retryQuiz(btn) { const quiz = btn.closest('.quiz'); quiz.querySelectorAll('.quiz-opt').forEach(o => { o.classList.remove('disabled', 'correct', 'wrong'); }); quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show')); btn.classList.remove('show'); quizScore.total--; updateScoreBadge(); }
+function flipCard(el) { el.classList.toggle('flipped'); updateFlashcardCount(); }
+function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.innerHTML = '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span><span data-lang="zh">' + flipped + ' / ' + total + ' 已翻</span>'; }
+function resetFlashcards() { document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped')); updateFlashcardCount(); }
+function shuffleFlashcards() { const grid = document.getElementById('flashcardGrid'); if (!grid) return; const cards = [...grid.children]; for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); grid.appendChild(cards[j]); [cards[i], cards[j]] = [cards[j], cards[i]]; } }
+function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>'; }
+function toggleSidebar() { if (window.innerWidth >= 1100) { document.body.classList.toggle('sidebar-collapsed'); } else { const sidebar = document.getElementById('sidebar'); sidebar.classList.toggle('open'); const btn = document.getElementById('tocToggle'); if (btn) btn.classList.toggle('active', sidebar.classList.contains('open')); } }
+document.addEventListener('click', function(e) { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (!sidebar) return; if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (sidebar) sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+updateScoreBadge();
+</script>
+</body>
+</html>
