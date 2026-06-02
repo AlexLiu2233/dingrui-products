@@ -32,14 +32,47 @@ Practice Questions and Solutions land per the spec's bilingual-from-start
 contract. Items that don't fit those surfaces live in the
 [Digital Product Backlog](#digital-product-backlog).
 
-Last reviewed: **2026-05-31** (subject scaffolded — spec + audit +
-folder structure created; no SG content drafted yet. Sprint 1 open.)
+Last reviewed: **2026-06-01** (**all 12 Study Guides shipped** —
+bilingual from start, source-grounded, validate PASS — on branch
+`hs_physics_studyguides`, awaiting review/FF to main. Practice +
+Solutions are the next wave.)
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### Sprint 1 — source-grounding + Unit 1 SG template lock — **OPEN** (branch TBD)
+### Sprint 1 — source-grounding + 12 bilingual Study Guides — **CLOSED 2026-06-01** (branch `hs_physics_studyguides`, awaiting FF to main)
+
+**Shipped:** all 4 curricula source-grounded (NGSS HS-PS, ON SPH3U/4U,
+BC Physics 11/12, AB Physics 20/30 — extracts + cached PDFs in
+`rag/sources/`), Unit 1 Kinematics drafted as the bilingual template
+lock, then Units 2-12 bulk-drafted via Sonnet **copy-then-edit**
+subagents (cp the locked template, transform per-section — avoids the
+32k single-write cap that broke earlier from-scratch attempts). All 12
+SGs: ~1070-1150 lines, balanced EN/ZH spans, validate PASS, syllabus-maps
+cite real codes per curriculum. Divergence syllabus-notes added where a
+curriculum lacks a topic: Optics (U7) + DC Circuits (U9) absent from
+NGSS/AB; Thermodynamics (U11) absent from AB Physics 20/30.
+
+| Unit | Topic | Spans (EN=ZH) |
+|---|---|---|
+| 1 | Kinematics (template) | 433 |
+| 2 | Forces and Newton's Laws | 457 |
+| 3 | Work, Energy and Power | 415 |
+| 4 | Momentum and Collisions | 455 |
+| 5 | Circular Motion and Gravitation | 416 |
+| 6 | Waves and Sound | 440 |
+| 7 | Light and Geometric Optics | 432 |
+| 8 | Electrostatics and Electric Fields | 430 |
+| 9 | Current Electricity and Circuits | 405 |
+| 10 | Magnetism and Electromagnetic Induction | 459 |
+| 11 | Thermodynamics and Heat | 461 |
+| 12 | Modern and Nuclear Physics | 448 |
+
+**Next:** build-index + landing-page tier integration (surface the 12
+cards), then the Practice + Solutions wave.
+
+#### Original Sprint 1 plan (historical)
 
 **Goal.** Stand up the source-grounding layer for all four curricula,
 then draft the **Unit 1 (Kinematics)** Study Guide **bilingual from
