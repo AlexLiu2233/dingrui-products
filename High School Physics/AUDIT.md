@@ -70,7 +70,37 @@ NGSS/AB; Thermodynamics (U11) absent from AB Physics 20/30.
 | 12 | Modern and Nuclear Physics | 448 |
 
 **Next:** build-index + landing-page tier integration (surface the 12
-cards), then the Practice + Solutions wave.
+cards) ✅ done 2026-06-01 (`d52bf1a`, live on main). Then the visual-
+improvement sprint below, then the Practice + Solutions wave.
+
+### Sprint 2 — static visual upgrade — **PLANNED (deferred until all HS STEM SGs ship)**
+
+Per the [Visuals policy](../prompts/create-unit.md) locked 2026-06-01:
+add a **clear static visual** (inline SVG / pure CSS — **no interactive /
+JS-driven widgets**) wherever a topic is graph- or diagram-based. The
+12 SGs currently lean on prose + KaTeX; these visuals materially aid
+comprehension. Per-unit punch list (tier P1):
+
+| Unit | Visual to add |
+|---|---|
+| 1 Kinematics | position-time & velocity-time graphs; projectile parabola |
+| 2 Dynamics | free-body diagrams; inclined-plane force decomposition |
+| 3 Energy | energy bar charts / KE↔PE exchange along a track |
+| 4 Momentum | before/after collision vector diagrams |
+| 5 Circular/Gravitation | centripetal-force diagram; orbit + field arrows |
+| 6 Waves | transverse/longitudinal waveform; standing-wave harmonics |
+| 7 Optics | ray diagrams (mirrors, lenses); refraction at an interface |
+| 8 Electrostatics | field-line diagrams (point charge, dipole, parallel plates) |
+| 9 Circuits | series/parallel circuit schematics |
+| 10 Magnetism | field-around-wire; right-hand-rule; induction loop |
+| 11 Thermodynamics | heating/phase-change curve; PV diagram |
+| 12 Modern | photoelectric threshold graph; decay curve; energy levels |
+
+**Constraints (apply to ALL subjects' visual work):** static SVG/CSS only;
+dark-mode-safe (`currentColor`/CSS vars, no hardcoded fills); bilingual
+labels paired like surrounding prose; must not break print or validate.
+Also during this sprint: spot-check each SG for content accuracy + the
+known cosmetic odd-`$` validate WARN (benign).
 
 #### Original Sprint 1 plan (historical)
 
