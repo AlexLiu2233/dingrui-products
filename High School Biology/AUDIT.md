@@ -35,15 +35,43 @@ Study Guide corpus anchors their scope. **Bilingual (EN/ZH) is NOT a
 backlog item** — it is locked into every Study Guide from the first
 commit (see Standing principles).
 
-Last reviewed: **2026-05-31** (subject opened. Sprint 1 active:
-source-grounding + Unit 1 SG template lock. Nothing shipped yet — all
-source-grounding PENDING, all units unbuilt.)
+Last reviewed: **2026-06-02** (**all 12 Study Guides shipped** —
+bilingual from start, source-grounded, validate PASS, balanced EN/ZH
+spans — on branch `hs_biology_sg`, awaiting review/FF to main. Practice +
+Solutions and the static-visual upgrade are later waves.)
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### Sprint 1 — source-grounding + Unit 1 SG template lock — **OPEN** (branch TBD)
+### Sprint 1 — source-grounding + 12 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_biology_sg`, awaiting FF to main)
+
+**Shipped:** all 4 curricula source-grounded (NGSS HS-LS, ON SBI3U/4U, BC
+Life Sci 11 + A&P 12, AB Bio 20/30 — extracts + cached PDFs in `rag/sources/`),
+Unit 1 Cell Structure drafted as the bilingual template lock (cloned from the
+Physics SG chrome), then Units 2-12 bulk-drafted via Sonnet copy-then-edit.
+All 12 SGs ~929-1022 lines, balanced EN/ZH spans, validate PASS. **No feeder
+links** (no IB/AP Biology product exists in the repo — "what this feeds into"
+is prose). Divergence syllabus-notes baked in: Hardy-Weinberg quantitative is
+AB-only (Bio 30; NGSS excludes); taxonomy absent from NGSS; biochemical-pathway
+depth deepest in SBI4U; human A&P/homeostasis concentrated in Gr-12 streams
+(honors-flagged).
+
+| Unit | Topic | Spans (EN=ZH) | Unit | Topic | Spans |
+|---|---|---|---|---|---|
+| 1 | Cell Structure (template) | 418 | 7 | Evolution | 407 |
+| 2 | Biochemistry | 399 | 8 | Biodiversity/Taxonomy | 501 |
+| 3 | Cellular Energetics | 425 | 9 | Ecology | 435 |
+| 4 | Cell Division | 470 | 10 | Anatomy & Physiology | 416 |
+| 5 | Mendelian Genetics | 451 | 11 | Homeostasis | 435 |
+| 6 | Molecular Genetics | 404 | 12 | Population Biology | 434 |
+
+**Next:** build-index + landing integration (12 Bio cards), then CS SGs (last
+subject), then static-visual upgrade + P+S across all four.
+
+#### Original Sprint 1 plan (historical)
+
+### Sprint 1 — source-grounding + Unit 1 SG template lock — (historical)
 
 First real sprint. Two goals, in order: (1) fetch the priority source
 documents and write verbatim `*_extract.md` slices so the Syllabus Map
