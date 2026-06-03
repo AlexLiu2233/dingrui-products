@@ -73,7 +73,17 @@ NGSS/AB; Thermodynamics (U11) absent from AB Physics 20/30.
 cards) ✅ done 2026-06-01 (`d52bf1a`, live on main). Then the visual-
 improvement sprint below, then the Practice + Solutions wave.
 
-### Sprint 2 — static visual upgrade — **PLANNED (deferred until all HS STEM SGs ship)**
+### Sprint 2 — static visual upgrade — **SCRAPPED 2026-06-03**
+
+**Scrapped.** A static inline-SVG trial on Unit 1 Kinematics produced figures
+that were not accurate / high-quality enough; Manim/video conflicts with the
+static self-contained constraints (and ffmpeg/LaTeX aren't available). In-guide
+figures are dropped — guides stay prose + KaTeX. Superseded by the
+**HS STEM Deployment-Readiness Audit** sprint (see
+[`rag/hs-stem-deploy-audit.md`](../rag/hs-stem-deploy-audit.md)). The original
+visual punch list is retained below only as historical reference.
+
+#### (historical) original visual punch list
 
 Per the [Visuals policy](../prompts/create-unit.md) locked 2026-06-01:
 add a **clear static visual** (inline SVG / pure CSS — **no interactive /

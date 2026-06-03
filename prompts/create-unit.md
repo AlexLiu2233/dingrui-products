@@ -184,27 +184,26 @@ seconds; the top-score chaser gets no derivation. **Add a tip box,
 worked example, and proof block before considering the section done.**
 </examples>
 
-## Visuals policy (locked 2026-06-01)
+## Visuals policy (updated 2026-06-03 — in-guide figures SCRAPPED for now)
 
-Where a topic is inherently visual or graph-based (motion graphs, waveforms,
-ray diagrams, field lines, circuit diagrams, free-body diagrams, vectors,
-reaction-energy profiles, geometric figures), **include a clear static visual**
-— it materially helps comprehension.
+**Decision (2026-06-03):** do NOT embed diagrams/graphs in the study guides.
+A static inline-SVG experiment (HS Physics Unit 1) was scrapped because the
+auto-generated figures were not accurate or high-quality enough, and a
+Manim/video approach conflicts with the self-contained, static, print-friendly,
+dark-mode constraints (and the toolchain — ffmpeg/LaTeX — isn't available).
 
-- **Static only.** Use inline **SVG** (preferred) or pure CSS. No JavaScript-
-  driven or interactive visualizations, no canvas animations, no draggable
-  widgets, no external chart libraries. Rationale: interactive components break
-  in print, in offline use, and across the self-contained-file constraint — and
-  the current priority is breadth, not fragile interactivity.
-- KaTeX math, the existing reveal-on-click quiz, and the language/theme toggles
-  are the **only** scripted behaviours allowed (they are already locked).
-- Keep visuals dark-mode-safe (use `currentColor` / CSS variables, not
-  hardcoded light-only fills) and labelled bilingually like surrounding prose.
+- **Guides are prose + KaTeX only.** Math renders via KaTeX; that, the existing
+  reveal-on-click quiz, and the language/theme toggles are the only scripted/
+  rendered behaviours. **No** embedded `<svg>` figures, no images, no charts,
+  no interactive/JS/canvas widgets.
+- This may be revisited later (hence "for now") — if reintroduced, figures must
+  be correct, static, self-contained, dark-mode-safe (`currentColor`/CSS vars),
+  print-friendly, and bilingually captioned. Until then, omit them.
 
 <acceptance>
 - [ ] Cheat-sheet element present in every section, lift-able in <1 minute
-- [ ] Graph/diagram-worthy topics carry a clear STATIC visual (inline SVG/CSS);
-      no interactive/JS-driven visualizations beyond the locked quiz + toggles
+- [ ] No embedded diagram/graph figures or interactive widgets (prose + KaTeX
+      only; only the locked quiz + theme/lang toggles are scripted)
 - [ ] Going-deeper / proof block present wherever the topic has one
 - [ ] All KaTeX delimiters correct: `$…$` inline, `$$…$$` display.
       No unicode subscripts/superscripts/Greek inside `\text{}`
