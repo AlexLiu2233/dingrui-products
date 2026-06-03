@@ -14,6 +14,26 @@ Audit every HS file and fix what's needed so the whole High School tier
 embedded pictures, just clean, correct, consistent, fully-bilingual guides that
 surface properly on the landing page.
 
+## Use the repo's canonical audit workflow (don't reinvent)
+This sprint runs the existing instrument, not an ad-hoc one:
+- **Instrument:** `rag/study-guide-audit-checklist.md` — score each SG on Sections
+  **A** (formatting/mechanical), **B** (dual-goal contract), **D** (bilingual parity).
+- **Process:** `prompts/improve-existing-product.md` (outer-loop, two-phase, AUDIT.md
+  is source of truth) + `prompts/review-changes.md` (per-file PASS/WARN/FAIL gate) +
+  `prompts/modify-unit.md` (smallest-diff fixes).
+- **HS-STEM adjustments to the checklist (this product):**
+  - **EXCLUDE** the interactive/slider vectors (**E3**, **C1**, "interactive
+    components") — interactivity + in-guide figures were scrapped 2026-06-03;
+    guides are prose + KaTeX only.
+  - **ADD** a "no stray visual/JS" sweep: no `<svg>`, `<img>`, charts, or
+    non-quiz/non-toggle `<script>` (retroactive Visuals policy).
+  - **A1 title** = the HS **no-colon** form (`High School {Subj} — <Topic>`),
+    not the AP/IB colon form — build-index has a dedicated branch for it.
+  - **Section D (bilingual) is ACTIVE here, not gated** — HS is bilingual-from-start,
+    so EN==ZH parity (**D1**) is an exit gate now, verified by the manual
+    `data-lang` span count and `scripts/translation_coverage.py` (brought onto
+    this branch).
+
 ## Audit dimensions (find → fix in-sprint, log findings in each subject AUDIT)
 1. **Content accuracy.** Per the verification rule: every syllabus-map code and
    exam claim traces to a fetched `rag/sources/` extract; formulas/worked

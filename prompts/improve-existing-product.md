@@ -170,7 +170,7 @@ For each audit item in the sprint, follow [`review-changes.md`](review-changes.m
 
    <2–4 sentence body: what changed, why, subtle decisions.>
 
-   Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+   Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
    ```
 7. **Wait for user review** — **never push or merge without explicit approval.**
 8. **Bilingual follow-up (gated, locked 2026-05-21).** Once the user
