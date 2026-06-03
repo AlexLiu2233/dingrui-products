@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High School Computer Science · Control Flow | Dingrui Scholars. Boolean conditions and comparison operators; if/elif/else selection; nested conditionals; while loops; for loops; loop control with break and continue; nested loops. Cites US CSTA 3A-AP-15, AP CSP Big Idea 3 (AAP — selection and iteration); Ontario ICS3U strand A2; BC Computer Programming 11 decision structure and loops; Alberta CSE1120.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>High School Computer Science — Control Flow | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-CS-3  dingrui:doc-type study-guide -->
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB; --bg-card: #FFFFFF; --bg-code: #1E1418;
+  --text: #2C1B1F; --text-secondary: #6B5058;
+  --accent: #7A2E2E; --accent-light: #F2E4E4; --accent-dark: #5A1E1E;
+  --green: #2E6B4F; --green-light: #DFF0E8;
+  --orange: #A65E1A; --orange-light: #FBF0E0;
+  --red: #B03030; --red-light: #FCEAEA;
+  --purple: #5E3D7A; --purple-light: #EDE4F5;
+  --gold: #C4956A; --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px; --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010; --bg-card: #1E1618; --bg-code: #0D0A0B;
+  --text: #E8E0DC; --text-secondary: #A89098;
+  --accent: #C87070; --accent-light: #3A1818; --accent-dark: #E08080;
+  --green: #5CB88A; --green-light: #1A2E24;
+  --orange: #D4944A; --orange-light: #2E2010;
+  --red: #E07070; --red-light: #301515;
+  --purple: #A888C8; --purple-light: #201828;
+  --gold: #D4A870; --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 17px; transition: background 0.3s, color 0.3s; }
+.score-badge { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--green); background: var(--green-light); border: 1px solid var(--green); padding: 3px 10px; border-radius: 20px; white-space: nowrap; transition: all 0.3s; }
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+.sidebar { position: fixed; top: 59px; left: 0; bottom: 0; width: var(--toc-w); background: var(--bg-card); border-right: 1px solid var(--border); overflow-y: auto; scrollbar-width: none; padding: 20px 0; transform: translateX(-100%); transition: transform 0.3s ease, background 0.3s; z-index: 90; }
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title { font-family: var(--font-display); font-size: 0.95rem; padding: 0 20px 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.sidebar a { display: block; padding: 8px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+.main-wrap { max-width: var(--max-w); margin: 80px auto 120px; padding: 0 24px; transition: width 0.3s ease, margin-left 0.3s ease; }
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap { max-width: none; margin-left: calc(var(--toc-w) + 40px); margin-right: 0; padding: 0 48px; }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+.hero { text-align: center; padding: 56px 24px 48px; background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%); border-radius: var(--radius); margin-bottom: 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%); pointer-events: none; }
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; position: relative; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; position: relative; }
+.hero-sub { color: var(--text-secondary); max-width: 650px; margin: 0 auto; position: relative; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; }
+.hero-meta .chip { font-size: 0.85rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HS Math multi-syllabus chrome (locked in Unit 1) */
+.syllabus-map { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg-card) 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px 26px 18px; margin: 28px 0 36px; box-shadow: var(--shadow); }
+.syllabus-map-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.syllabus-map-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1000px) { .syllabus-map-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+@media (max-width: 600px) { .syllabus-map-grid { grid-template-columns: 1fr; gap: 18px; } }
+.syllabus-map .region-header { font-family: var(--font-display); font-size: 1.02rem; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.syllabus-map ul { list-style: none; padding: 0; margin: 0; }
+.syllabus-map ul li { font-size: 0.84rem; line-height: 1.5; padding: 4px 0; color: var(--text-secondary); }
+.syllabus-map ul li code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); background: var(--bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border); }
+
+.region-chip { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--text-secondary); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.4px; vertical-align: middle; margin-left: 8px; }
+
+.syllabus-note { border-left: 4px solid var(--purple); background: var(--purple-light); border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 18px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.syllabus-note strong { color: var(--purple); margin-right: 4px; }
+[data-theme="dark"] .syllabus-note { background: rgba(94, 61, 122, 0.18); }
+
+.honors-flag { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
+
+.feeder-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent); padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.2s; margin: 4px 6px 4px 0; }
+.feeder-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+.feeder-link::before { content: '\2192'; font-weight: 700; }
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.section h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px; line-height: 1.25; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; display: inline-block; }
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+.concept-box { border-left: 5px solid var(--accent); background: var(--bg-card); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 20px 0; box-shadow: var(--shadow); }
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child { display: inline-block; margin-bottom: 8px; font-family: var(--font-mono); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; margin-left: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; background: var(--bg); font-weight: 500; position: relative; }
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry { display: none; margin-top: 12px; padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary { padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem; user-select: none; list-style: none; display: flex; align-items: center; gap: 10px; background: var(--bg); transition: background 0.2s; }
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+.flashcard-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 4px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
+.flashcard-toolbar button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 8px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-left: 6px; }
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin: 24px 0; }
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner { display: grid; grid-template-areas: "card"; min-height: 200px; height: 100%; position: relative; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { grid-area: card; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: var(--shadow); overflow: hidden; word-break: break-word; hyphens: auto; }
+.flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-weight: 600; font-size: clamp(0.92rem, 2.1vw, 1.05rem); line-height: 1.45; padding: 22px 20px 34px; gap: 8px; }
+.flashcard-front::after { content: 'TAP TO FLIP'; position: absolute; bottom: 10px; left: 0; right: 0; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px; }
+.flashcard-back { background: var(--bg); border: 2px solid var(--accent); color: var(--text); transform: rotateY(180deg); font-size: clamp(0.88rem, 2vw, 1rem); line-height: 1.6; padding: 26px 22px; gap: 12px; word-break: normal; hyphens: manual; overflow-wrap: break-word; text-wrap: pretty; }
+.flashcard-back .katex-display { margin: 6px 0 !important; font-size: 1.25em; max-width: 100%; overflow: hidden; }
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) { .flashcard-grid { grid-template-columns: 1fr; } }
+.worked-solution { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+.worked-solution .katex-display { margin: 0.65rem 0; }
+.formula-box { background: var(--bg-card); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 24px 32px; margin: 24px 0; text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto; }
+.formula-box .formula-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.formula-box .katex-display { margin: 14px 0 !important; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; background: var(--bg-card); transition: all 0.2s; display: flex; align-items: center; gap: 12px; user-select: none; }
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.8rem; color: transparent; }
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+.footer-wrap { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 48px; }
+.footer-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+.section-label + h2 { margin-top: 0.2rem; }
+@media (max-width: 600px) { .hero h1 { font-size: 2rem; } .main-wrap { padding: 0 16px; margin-top: 60px; } .formula-box { padding: 16px; } .top-nav { padding: 0 16px; } }
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry, .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz, .syllabus-map, .syllabus-note { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245, 240, 235, 0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; transition: background 0.3s, border 0.3s; }
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge { background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px; }
+.nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; font-family: var(--font-body); font-weight: 600; transition: all 0.2s; }
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
+.cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">CONTROL</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-7-1"><span data-lang="en">Boolean Conditions &amp; Comparison</span><span data-lang="zh">布尔条件与比较</span></a>
+  <a href="#s-7-2"><span data-lang="en">if / elif / else</span><span data-lang="zh">if / elif / else</span></a>
+  <a href="#s-7-3"><span data-lang="en">Nested Conditionals</span><span data-lang="zh">嵌套条件</span></a>
+  <a href="#s-7-4"><span data-lang="en">while Loops</span><span data-lang="zh">while 循环</span></a>
+  <a href="#s-7-5"><span data-lang="en">for Loops</span><span data-lang="zh">for 循环</span></a>
+  <a href="#s-7-6"><span data-lang="en">Loop Control: break &amp; continue</span><span data-lang="zh">循环控制：break 与 continue</span></a>
+  <a href="#s-7-7"><span data-lang="en">Nested Loops</span><span data-lang="zh">嵌套循环</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">High School Computer Science</div>
+  <h1><span data-lang="en">Control Flow</span><span data-lang="zh">控制流程</span></h1>
+  <p class="hero-sub">
+    <span data-lang="en">Control flow is how a program decides which statements to execute and how many times to repeat them. Instead of running every line top-to-bottom exactly once, a program can branch on a boolean condition (<code>if / elif / else</code>), repeat a block while a condition holds (<code>while</code>), or iterate over a fixed sequence (<code>for</code>). This guide builds each construct from scratch: boolean expressions and comparison operators, selection with if/elif/else, nested conditionals, while loops, for loops, loop control with break and continue, and nested loops. Every concept is shown in pseudocode then in Python, with ZH explanations after each code block.</span><span data-lang="zh">控制流程（<code>control flow</code>，控制流程）决定程序执行哪些语句、重复多少次。程序不再从上到下逐行各执行一次，而是可以根据布尔条件（<code>boolean condition</code>，布尔条件）分支（<code>if / elif / else</code>，条件选择），或在条件成立时重复执行代码块（<code>while</code>，当型循环），或遍历固定序列（<code>for</code>，计数循环）。本指南逐一构建每个结构：布尔表达式与比较运算符、if/elif/else 选择、嵌套条件（<code>nested conditionals</code>，嵌套条件）、while 循环（<code>loop</code>，循环）、for 循环、break 与 continue 循环控制，以及嵌套循环（<code>nested loops</code>，嵌套循环）。全部概念均先用伪代码展示，再给出 Python 实现，代码块后附中文说明。</span>
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon"><span data-lang="en">7 sections</span><span data-lang="zh">7 节内容</span></span>
+    <span class="chip chip-green"><span data-lang="en">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">Pseudocode + Python worked examples</span><span data-lang="zh">伪代码 + Python 例题</span></span>
+  </div>
+</section>
+
+<aside class="syllabus-map" id="syllabus-map">
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
+  <div class="syllabus-map-grid">
+    <div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></div>
+      <ul>
+        <li><code>3A-AP-15</code> <span data-lang="en">"Justify the selection of specific control structures when tradeoffs involve implementation, readability, and program performance, and explain the benefits and drawbacks of choices made." (CSTA K-12 CS Standards, Level 3A. Descriptive Statement: "Control structures at this level may include conditional statements, loops, event handlers, and recursion.")</span><span data-lang="zh">"当权衡涉及实现、可读性和程序性能时，论证选择特定控制结构的理由，并说明所做选择的优缺点。"（CSTA K-12 计算机科学标准，3A 级。说明性陈述："此级别的控制结构可包括条件语句、循环、事件处理程序和递归。"）</span></li>
+        <li><span data-lang="en">AP CSP Big Idea 3 (AAP — Algorithms &amp; Programming): Topics 3.5 Boolean Expressions, 3.6 Conditionals, 3.7 Nested Conditionals, 3.8 Iteration. Learning Objectives in the AAP-2.E &hellip; AAP-2.J range (conditionals, nested conditionals, iteration). Skill 2.B "Implement and apply an algorithm."</span><span data-lang="zh">AP CSP 大概念 3（AAP — 算法与编程）：主题 3.5 布尔表达式、3.6 条件语句、3.7 嵌套条件、3.8 迭代。学习目标在 AAP-2.E &hellip; AAP-2.J 范围内（条件语句、嵌套条件、迭代）。技能 2.B"实现和应用算法"。</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario — ICS3U</span><span data-lang="zh">安大略 — ICS3U</span></div>
+      <ul>
+        <li><strong>ICS3U</strong> <span data-lang="en">Strand A (Programming Concepts and Skills), Overall Expectation <code>A2</code>: "demonstrate the ability to use control structures and simple algorithms in computer programs." Specific Expectation <code>A2.2</code>: "use sequence, selection, and repetition control structures to create programming solutions." <code>A2.3</code>: "write algorithms with nested structures (e.g., to count elements in an array, calculate a total, find highest or lowest value, or perform a linear search)."</span><span data-lang="zh">ICS3U A 单元（编程概念与技能），总体期望 <code>A2</code>："展示在计算机程序中使用控制结构和简单算法的能力。"具体期望 <code>A2.2</code>："使用顺序、选择和重复控制结构创建编程解决方案。" <code>A2.3</code>："编写具有嵌套结构的算法（如计算数组元素、求总和、查找最大/最小值或执行线性搜索）。"</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></div>
+      <ul>
+        <li><strong>Computer Studies 10</strong> <span data-lang="en">Content (verbatim): "planning and writing simple programs, including games (using visual problem-solving models; using variables, expressions, and assignment statements to store and manipulate numbers and text; using decision structure for two or more choices; effectively using looping structures; distinguishing between syntax, logic, and run-time errors)"</span><span data-lang="zh">Computer Studies 10 内容（原文）："规划和编写简单程序，包括游戏（使用可视化问题解决模型；使用变量、表达式和赋值语句存储和处理数字和文本；使用判断结构处理两个或多个选择；有效使用循环结构；区分语法、逻辑和运行时错误）"</span></li>
+        <li><strong>Computer Programming 11</strong> <span data-lang="en">Content (verbatim): "programming language constructs to support input/output, logic, decision structure, and loops"</span><span data-lang="zh">Computer Programming 11 内容（原文）："支持输入/输出、逻辑、判断结构和循环的编程语言构造"</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta — CSE1120</span><span data-lang="zh">阿尔伯塔 — CSE1120</span></div>
+      <ul>
+        <li><strong>CSE1120</strong> <span data-lang="en">Structured Programming 2. Description (verbatim): "Students work with structured programming constructs by adding the selection and iteration program control flow mechanisms to their programming repertoire." Outcome 1 (verbatim): "demonstrate basic structured programming skills by writing algorithms to solve problems involving selection (decision making) and iteration (repetition)." Outcome 2.8 (verbatim): "use appropriate selection and iteration structures to avoid unconditional branching … including: 2.8.1 nested conditional blocks; 2.8.2 nested iterative blocks."</span><span data-lang="zh">CSE1120 结构化编程 2。描述（原文）："学生通过将选择和迭代程序控制流机制添加到其编程技能库来使用结构化编程构造。"结果 1（原文）："通过编写解决涉及选择（决策）和迭代（重复）问题的算法，展示基本的结构化编程技能。"结果 2.8（原文）："使用适当的选择和迭代结构以避免无条件分支……包括：2.8.1 嵌套条件块；2.8.2 嵌套迭代块。"</span></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<section class="section" id="how-to-use">
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Control flow is assessed in every curriculum we map to. All four agree on the core constructs: boolean conditions, selection (if/elif/else), and iteration (while, for). Where they diverge is on nesting depth and loop-control keywords: Alberta CSE1120 explicitly names nested conditional and nested iterative blocks; AP CSP limits to what can be expressed in its reference-sheet pseudocode. The table below tells you which sections are core for you. Every section uses pseudocode first, then Python.</span><span data-lang="zh">控制流程在我们对照的所有大纲中均为考核内容。四套大纲对核心构造高度一致：布尔条件（<code>boolean</code>，布尔）、选择（<code>selection</code>，选择）和迭代（<code>iteration</code>，迭代）。它们的分歧在于嵌套深度和循环控制关键字：阿尔伯塔 CSE1120 明确点名嵌套条件块和嵌套迭代块；AP CSP 限于其参考手册伪代码所能表达的内容。下表告诉你哪些节属于你的核心。所有节均先用伪代码，再用 Python。</span></p>
+
+  <div style="overflow-x: auto; margin: 16px 0 18px;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
+    <thead>
+      <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / lighter</span><span data-lang="zh">可推迟 / 减负</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1&ndash;&sect;5 core (booleans, if/elif/else, nested conditionals, while, for). CSTA 3A-AP-15 and AP CSP topics 3.5&ndash;3.8 all map here.</span><span data-lang="zh">&sect;1&ndash;&sect;5 为核心（布尔、if/elif/else、嵌套条件、while、for）。CSTA 3A-AP-15 和 AP CSP 主题 3.5&ndash;3.8 均对应此处。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;6 break/continue — AP CSP pseudocode does not include break/continue keywords; treat as enrichment.</span><span data-lang="zh">&sect;6 break/continue — AP CSP 伪代码不含 break/continue 关键字；作为拓展内容。</span></td>
+        <td style="padding: 8px 10px;"><code>csta_apcsp_extract.md</code> <span data-lang="en">&mdash; CSTA 3A-AP-15; AP CSP Big Idea 3 (AAP) topics 3.5, 3.6, 3.7, 3.8</span><span data-lang="zh">&mdash; CSTA 3A-AP-15；AP CSP 大概念 3 主题 3.5、3.6、3.7、3.8</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 &mdash; ICS3U</span><span data-lang="zh">安大略 11 年级 &mdash; ICS3U</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1&ndash;&sect;7 in full. ICS3U A2.2 (sequence, selection, repetition) and A2.3 (nested structures) map directly to every section.</span><span data-lang="zh">&sect;1&ndash;&sect;7 完整学习。ICS3U A2.2（顺序、选择、重复）和 A2.3（嵌套结构）直接对应每一节。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing to defer — all seven sections are core ICS3U A2 content.</span><span data-lang="zh">无可推迟——全部七节均为 ICS3U A2 核心内容。</span></td>
+        <td style="padding: 8px 10px;"><code>computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; ICS3U Strand A A2, A2.2, A2.3</span><span data-lang="zh">&mdash; ICS3U A 单元 A2、A2.2、A2.3</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC &mdash; CS10 / CP11</span><span data-lang="zh">BC &mdash; CS10 / CP11</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1&ndash;&sect;7. BC CS10 names "decision structure for two or more choices" and "looping structures" verbatim. CP11 names "logic, decision structure, and loops."</span><span data-lang="zh">&sect;1&ndash;&sect;7。BC CS10 原文命名"两个或多个选择的判断结构"和"循环结构"。CP11 命名"逻辑、判断结构和循环"。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">BC has no explicit break/continue standard; &sect;6 is enrichment.</span><span data-lang="zh">BC 无明确的 break/continue 标准；&sect;6 为拓展内容。</span></td>
+        <td style="padding: 8px 10px;"><code>computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; BC CS10 decision/loop Content; CP11 "logic, decision structure, and loops" Content</span><span data-lang="zh">&mdash; BC CS10 判断/循环内容；CP11"逻辑、判断结构和循环"内容</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">AB &mdash; CSE1120</span><span data-lang="zh">阿尔伯塔 &mdash; CSE1120</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1&ndash;&sect;7 in full. CSE1120 outcome 1 names selection and iteration explicitly; outcome 2.8 names nested conditionals and nested iterative blocks.</span><span data-lang="zh">&sect;1&ndash;&sect;7 完整学习。CSE1120 结果 1 明确命名选择和迭代；结果 2.8 命名嵌套条件块和嵌套迭代块。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing to defer — CSE1120 covers all seven topics at the Introductory level.</span><span data-lang="zh">无可推迟——CSE1120 在入门级覆盖全部七个主题。</span></td>
+        <td style="padding: 8px 10px;"><code>computing_science_cse_extract.md</code> <span data-lang="en">&mdash; CSE1120 outcomes 1, 2.6, 2.8, 2.8.1, 2.8.2</span><span data-lang="zh">&mdash; CSE1120 结果 1、2.6、2.8、2.8.1、2.8.2</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise three things: how to write a boolean condition with comparison operators; the if/elif/else template; and the difference between while (condition-controlled) and for (count-controlled). Read every cram-cheat box. Trace the pseudocode examples with a concrete value before moving on.</span><span data-lang="zh">背熟三件事：如何用比较运算符写布尔条件（<code>boolean condition</code>，布尔条件）；if/elif/else 模板；以及 while（条件控制）和 for（计数控制）的区别。读每个速记框。在继续之前用具体值追踪伪代码示例。</span></p>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">For every loop or conditional you write, ask: which construct fits best and why? CSTA 3A-AP-15 requires you to justify your choice of control structure in terms of readability and performance. Trace every loop example with a variable table. Master nested structures (&sect;3 and &sect;7) — they appear on every exam.</span><span data-lang="zh">对于你编写的每个循环（<code>loop</code>，循环）或条件语句，问自己：哪种结构最合适，为什么？CSTA 3A-AP-15 要求你从可读性和性能角度论证控制结构的选择。用变量表追踪每个循环示例。掌握嵌套结构（<code>nested</code>，嵌套）（&sect;3 和 &sect;7）——它们出现在每次考试中。</span></p>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-1">
+  <div class="section-label"><span data-lang="en">Section 1 &middot; Boolean conditions</span><span data-lang="zh">第 1 节 &middot; 布尔条件</span></div>
+  <h2><span data-lang="en">Boolean Conditions &amp; Comparison</span><span data-lang="zh">布尔条件与比较</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Six comparison operators &mdash; memorise these.</span><span data-lang="zh">六个比较运算符 &mdash; 背熟这些。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><code>==</code> <span data-lang="en">equal to &nbsp;&nbsp;</span><span data-lang="zh">等于 &nbsp;&nbsp;</span><code>!=</code> <span data-lang="en">not equal to</span><span data-lang="zh">不等于</span></li>
+      <li><code>&lt;</code> <span data-lang="en">less than &nbsp;&nbsp;</span><span data-lang="zh">小于 &nbsp;&nbsp;</span><code>&gt;</code> <span data-lang="en">greater than</span><span data-lang="zh">大于</span></li>
+      <li><code>&lt;=</code> <span data-lang="en">less than or equal &nbsp;&nbsp;</span><span data-lang="zh">小于等于 &nbsp;&nbsp;</span><code>&gt;=</code> <span data-lang="en">greater than or equal</span><span data-lang="zh">大于等于</span></li>
+    </ul>
+    <span data-lang="en"><strong>Boolean expressions</strong> evaluate to <code>True</code> or <code>False</code>. Combine with <code>and</code>, <code>or</code>, <code>not</code>. Key trap: <code>x = 5</code> assigns; <code>x == 5</code> tests. CSE1120 outcome 2.6 names "relational, Boolean" operators explicitly.</span><span data-lang="zh"><strong>布尔表达式</strong>（<code>boolean expression</code>，布尔表达式）求值为 <code>True</code> 或 <code>False</code>。用 <code>and</code>（与）、<code>or</code>（或）、<code>not</code>（非）组合。关键陷阱：<code>x = 5</code> 是赋值；<code>x == 5</code> 是测试。CSE1120 结果 2.6 明确命名"关系、布尔"运算符。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-blue">B</div><div class="card-title"><span data-lang="en">Worked Example 1 &middot; Boolean expressions in pseudocode and Python</span><span data-lang="zh">例题 1 &middot; 伪代码与 Python 中的布尔表达式</span></div></div>
+  </div>
+  <div class="worked-solution">
+    <pre><code>SET age TO 17
+SET has_ticket TO True
+IF age >= 18 AND has_ticket THEN
+    OUTPUT "Admitted"
+ELSE
+    OUTPUT "Not admitted"
+END IF</code></pre>
+    <p><span data-lang="en">ZH: <code>SET age TO 17</code> 将 age 设为 17（赋值）；<code>age >= 18</code> 测试是否大于等于 18（布尔条件）；<code>AND</code> 要求两个条件同时为真。</span><span data-lang="zh"><code>SET age TO 17</code> 将 age 设为 17（赋值）；<code>age >= 18</code> 测试是否大于等于 18（布尔条件）；<code>AND</code> 要求两个条件同时为真。</span></p>
+    <pre><code>age = 17
+has_ticket = True
+if age >= 18 and has_ticket:
+    print("Admitted")
+else:
+    print("Not admitted")   # outputs: Not admitted</code></pre>
+    <p><span data-lang="en">ZH: Python 布尔关键字小写：<code>and</code>、<code>or</code>、<code>not</code>、<code>True</code>、<code>False</code>。</span><span data-lang="zh">Python 布尔关键字小写：<code>and</code>（与）、<code>or</code>（或）、<code>not</code>（非）、<code>True</code>（真）、<code>False</code>（假）。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which expression evaluates to <code>True</code> when <code>x = 4</code>?</span><span data-lang="zh">当 <code>x = 4</code> 时，哪个表达式的值为 <code>True</code>？</span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>x == 5</code></div>
+      <div class="quiz-opt" data-idx="1"><code>x &gt; 4</code></div>
+      <div class="quiz-opt" data-idx="2"><code>x &gt;= 4</code></div>
+      <div class="quiz-opt" data-idx="3"><code>x != 4</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>x &gt;= 4</code> is True when x equals 4 (4 &ge; 4). The other three: x==5 is False (4&ne;5); x&gt;4 is False (4 is not strictly greater than 4); x!=4 is False (4 equals 4).</span><span data-lang="zh"><code>x &gt;= 4</code> 当 x 等于 4 时为 True（4 &ge; 4）。其余三个：x==5 为 False（4&ne;5）；x&gt;4 为 False（4 不严格大于 4）；x!=4 为 False（4 等于 4）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">With x=4: x==5 is False; x&gt;4 is False (strict greater-than); x!=4 is False; only x&gt;=4 is True.</span><span data-lang="zh">x=4 时：x==5 为 False；x&gt;4 为 False（严格大于）；x!=4 为 False；只有 x&gt;=4 为 True。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>not (x &gt; 3)</code> equal when <code>x = 5</code>?</span><span data-lang="zh">当 <code>x = 5</code> 时，<code>not (x &gt; 3)</code> 等于什么？</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>True</code></div>
+      <div class="quiz-opt" data-idx="1"><code>False</code></div>
+      <div class="quiz-opt" data-idx="2"><code>5</code></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Error</span><span data-lang="zh">错误</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">x&gt;3 is True (5&gt;3). not True = False.</span><span data-lang="zh">x&gt;3 为 True（5&gt;3）。not True = False。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Step 1: x&gt;3 = True. Step 2: not True = False.</span><span data-lang="zh">第 1 步：x&gt;3 = True。第 2 步：not True = False。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-2">
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Selection</span><span data-lang="zh">第 2 节 &middot; 选择</span></div>
+  <h2><span data-lang="en">if / elif / else</span><span data-lang="zh">if / elif / else</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">The template &mdash; memorise the skeleton.</span><span data-lang="zh">模板 &mdash; 背熟骨架。</span></strong>
+    <pre><code>IF condition THEN
+    statements
+ELIF other_condition THEN
+    statements
+ELSE
+    statements
+END IF</code></pre>
+    <span data-lang="en">Only one branch executes. <code>elif</code> (else-if) adds more conditions; <code>else</code> is the catch-all fallback. ICS3U A2.2 calls this "selection control structure." CSE1120 outcome 1 names "selection (decision making)." AP CSP topic 3.6 is Conditionals; 3.7 is Nested Conditionals.</span><span data-lang="zh">只有一个分支（<code>branch</code>，分支）执行。<code>elif</code>（否则如果）增加更多条件（<code>condition</code>，条件）；<code>else</code>（否则）是兜底回退。ICS3U A2.2 称之为"选择控制结构"。CSE1120 结果 1 命名"选择（决策）"。AP CSP 主题 3.6 为条件语句；3.7 为嵌套条件。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 2 &middot; Letter grade classifier</span><span data-lang="zh">例题 2 &middot; 字母等级分类</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: given a numeric score (0&ndash;100), output the letter grade (A, B, C, D, F).</span><span data-lang="zh">问题：给定数字成绩（0&ndash;100），输出字母等级（A、B、C、D、F）。</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>INPUT score
+IF score >= 90 THEN
+    OUTPUT "A"
+ELIF score >= 80 THEN
+    OUTPUT "B"
+ELIF score >= 70 THEN
+    OUTPUT "C"
+ELIF score >= 60 THEN
+    OUTPUT "D"
+ELSE
+    OUTPUT "F"
+END IF</code></pre>
+    <p><span data-lang="en">ZH: 条件从高到低排列；一旦某个 <code>ELIF</code> 为真，其余分支跳过。</span><span data-lang="zh">条件（<code>condition</code>，条件）从高到低排列；一旦某个 <code>ELIF</code>（否则如果）为真，其余分支跳过。</span></p>
+    <pre><code>score = int(input())
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+elif score >= 60:
+    print("D")
+else:
+    print("F")</code></pre>
+    <p><span data-lang="en">ZH: Python 的 <code>elif</code> 是 "else if" 的缩写。冒号 <code>:</code> 结束条件行，缩进标记代码块。</span><span data-lang="zh">Python 的 <code>elif</code> 是 "else if" 的缩写。冒号 <code>:</code> 结束条件行，缩进（<code>indentation</code>，缩进）标记代码块。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">For <code>score = 75</code> in the grade classifier above, which branch executes?</span><span data-lang="zh">在上面的等级分类中，<code>score = 75</code> 时哪个分支执行？</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The <code>if score &gt;= 90</code> branch (outputs A)</span><span data-lang="zh"><code>if score &gt;= 90</code> 分支（输出 A）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The <code>elif score &gt;= 80</code> branch (outputs B)</span><span data-lang="zh"><code>elif score &gt;= 80</code> 分支（输出 B）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The <code>elif score &gt;= 70</code> branch (outputs C)</span><span data-lang="zh"><code>elif score &gt;= 70</code> 分支（输出 C）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The <code>else</code> branch (outputs F)</span><span data-lang="zh"><code>else</code> 分支（输出 F）</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">75&gt;=90? No. 75&gt;=80? No. 75&gt;=70? Yes &rarr; outputs C. Python evaluates conditions top-to-bottom and stops at the first True branch.</span><span data-lang="zh">75&gt;=90？否。75&gt;=80？否。75&gt;=70？是 &rarr; 输出 C。Python 从上到下依次评估条件，在第一个为真的分支停止。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">75&gt;=90 is False; 75&gt;=80 is False; 75&gt;=70 is True &rarr; C branch.</span><span data-lang="zh">75&gt;=90 为 False；75&gt;=80 为 False；75&gt;=70 为 True &rarr; C 分支。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the output of this pseudocode with <code>x = 10</code>?<br><code>IF x &gt; 5 THEN OUTPUT "big" ELSE OUTPUT "small" END IF</code></span><span data-lang="zh">以下伪代码在 <code>x = 10</code> 时的输出是什么？<br><code>IF x &gt; 5 THEN OUTPUT "big" ELSE OUTPUT "small" END IF</code></span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>big</code></div>
+      <div class="quiz-opt" data-idx="1"><code>small</code></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Both "big" and "small"</span><span data-lang="zh">"big" 和 "small" 都输出</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Nothing</span><span data-lang="zh">什么都不输出</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">10 &gt; 5 is True &rarr; the IF branch executes: outputs "big". The ELSE branch is skipped.</span><span data-lang="zh">10 &gt; 5 为 True &rarr; IF 分支执行：输出 "big"。ELSE 分支跳过。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Only one branch executes. 10&gt;5 is True, so "big" runs; "small" is skipped.</span><span data-lang="zh">只有一个分支执行。10&gt;5 为 True，所以 "big" 运行；"small" 被跳过。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-3">
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Nested conditionals</span><span data-lang="zh">第 3 节 &middot; 嵌套条件</span></div>
+  <h2><span data-lang="en">Nested Conditionals</span><span data-lang="zh">嵌套条件</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">A nested conditional is an if/elif/else inside another if/elif/else.</span><span data-lang="zh">嵌套条件（<code>nested conditional</code>，嵌套条件）是一个 if/elif/else 嵌套在另一个 if/elif/else 内部。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><span data-lang="en">The inner block only runs if the outer condition is True.</span><span data-lang="zh">只有外层条件为真时，内层代码块才运行。</span></li>
+      <li><span data-lang="en">Indentation reveals the nesting structure &mdash; each level adds one indent in Python.</span><span data-lang="zh">缩进（<code>indentation</code>，缩进）揭示嵌套结构 &mdash; Python 中每一层多一级缩进。</span></li>
+      <li><span data-lang="en">CSE1120 outcome 2.8.1 names "nested conditional blocks" explicitly. ICS3U A2.3 requires "nested structures."</span><span data-lang="zh">CSE1120 结果 2.8.1 明确命名"嵌套条件块"。ICS3U A2.3 要求"嵌套结构"。</span></li>
+    </ul>
+    <span data-lang="en"><strong>Key trap:</strong> deep nesting makes code hard to read. If you have more than two levels, consider using <code>elif</code> or combining conditions with <code>and</code>/<code>or</code>. CSTA 3A-AP-15 asks you to justify control-structure choices for readability.</span><span data-lang="zh"><strong>关键陷阱：</strong>深层嵌套使代码难以阅读。如果超过两层，考虑使用 <code>elif</code>（否则如果）或用 <code>and</code>/<code>or</code> 合并条件。CSTA 3A-AP-15 要求你从可读性角度论证控制结构选择。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-orange">WE</div><div class="card-title"><span data-lang="en">Worked Example 3 &middot; Theme-park entry check</span><span data-lang="zh">例题 3 &middot; 主题乐园入场检查</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: a rider must be at least 12 years old AND at least 140 cm tall. If under 12, output "Too young." If at least 12 but under 140 cm, output "Too short." Otherwise output "Enjoy the ride!"</span><span data-lang="zh">问题：乘客必须至少 12 岁且身高至少 140 厘米。若未满 12 岁，输出"年龄不足"；若满 12 岁但身高不足 140 厘米，输出"身高不足"；否则输出"请享受！"</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>INPUT age, height
+IF age >= 12 THEN
+    IF height >= 140 THEN
+        OUTPUT "Enjoy the ride!"
+    ELSE
+        OUTPUT "Too short."
+    END IF
+ELSE
+    OUTPUT "Too young."
+END IF</code></pre>
+    <p><span data-lang="en">ZH: 外层 IF 先检查年龄（<code>age</code>）；只有年龄合格，内层 IF 才检查身高（<code>height</code>）。两个 <code>END IF</code> 分别关闭内外两层。</span><span data-lang="zh">外层 IF 先检查年龄（<code>age</code>，年龄）；只有年龄合格，内层 IF 才检查身高（<code>height</code>，身高）。两个 <code>END IF</code> 分别关闭内外两层。</span></p>
+    <pre><code>age = int(input())
+height = int(input())
+if age >= 12:
+    if height >= 140:
+        print("Enjoy the ride!")
+    else:
+        print("Too short.")
+else:
+    print("Too young.")</code></pre>
+    <p><span data-lang="en">ZH: Python 用缩进表示嵌套层级——内层 if/else 多缩进 4 个空格。</span><span data-lang="zh">Python 用缩进（<code>indentation</code>，缩进）表示嵌套层级——内层 if/else 多缩进 4 个空格。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In the theme-park example, what is the output when <code>age = 10</code> and <code>height = 150</code>?</span><span data-lang="zh">在主题乐园例题中，当 <code>age = 10</code>、<code>height = 150</code> 时，输出是什么？</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Enjoy the ride!</span><span data-lang="zh">请享受！</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Too short.</span><span data-lang="zh">身高不足。</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Both messages</span><span data-lang="zh">两条消息都输出</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Too young.</span><span data-lang="zh">年龄不足。</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">age=10 &lt; 12 &rarr; outer IF is False &rarr; ELSE branch: "Too young." The inner height check is never reached.</span><span data-lang="zh">age=10 &lt; 12 &rarr; 外层 IF 为 False &rarr; ELSE 分支："年龄不足。" 内层身高检查不会执行。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">The outer condition (age &gt;= 12) fails first. The inner if never runs.</span><span data-lang="zh">外层条件（age &gt;= 12）先失败。内层 if 不执行。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-4">
+  <div class="section-label"><span data-lang="en">Section 4 &middot; while loops</span><span data-lang="zh">第 4 节 &middot; while 循环</span></div>
+  <h2><span data-lang="en">while Loops</span><span data-lang="zh">while 循环</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">while = repeat while condition is True; stops the moment condition becomes False.</span><span data-lang="zh">while = 在条件为 True 时重复；条件变为 False 时立即停止。</span></strong>
+    <pre><code>WHILE condition:
+    body statements
+END WHILE</code></pre>
+    <span data-lang="en">The condition is checked <em>before</em> each iteration. If it is False on entry, the body never runs. Key trap: you must update a variable inside the body that eventually makes the condition False; otherwise you get an infinite loop. ICS3U A2.2 calls this "repetition control structure." CSE1120 outcome 1 names "iteration (repetition)."</span><span data-lang="zh">条件在每次迭代（<code>iteration</code>，迭代）<em>之前</em>检查。若入口时为 False，循环体一次都不执行。关键陷阱：必须在循环体内更新某个变量，使条件最终变为 False；否则会产生无限循环（<code>infinite loop</code>，无限循环）。ICS3U A2.2 称之为"重复控制结构"；CSE1120 结果 1 命名"迭代（重复）"。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 4 &middot; Countdown with while</span><span data-lang="zh">例题 4 &middot; 用 while 实现倒计时</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Print: 5 4 3 2 1 Blast off!</span><span data-lang="zh">打印：5 4 3 2 1 发射！</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>SET count TO 5
+WHILE count >= 1:
+    OUTPUT count
+    SET count TO count - 1
+OUTPUT "Blast off!"</code></pre>
+    <p><span data-lang="en">ZH: <code>count</code> 开始为 5；每次循环输出 count，然后减 1；当 count 变为 0 时，<code>count >= 1</code> 为 False，循环结束。</span><span data-lang="zh"><code>count</code> 开始为 5；每次循环输出 count，然后减 1；当 count 变为 0 时，<code>count >= 1</code> 为 False，循环（<code>loop</code>，循环）结束。</span></p>
+    <pre><code>count = 5
+while count >= 1:
+    print(count)
+    count -= 1
+print("Blast off!")</code></pre>
+    <p><span data-lang="en">ZH: Python <code>count -= 1</code> 是 <code>count = count - 1</code> 的简写（减法赋值）。</span><span data-lang="zh">Python <code>count -= 1</code> 是 <code>count = count - 1</code> 的简写（减法赋值运算符）。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">How many times does the body of this loop execute?<br><code>SET x TO 1</code><br><code>WHILE x &lt; 4: SET x TO x + 1</code></span><span data-lang="zh">这个循环的循环体执行多少次？<br><code>SET x TO 1</code><br><code>WHILE x &lt; 4: SET x TO x + 1</code></span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">2</div>
+      <div class="quiz-opt" data-idx="1">3</div>
+      <div class="quiz-opt" data-idx="2">4</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Infinite (never stops)</span><span data-lang="zh">无限（永不停止）</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Trace: x=1 (1&lt;4 True, x&rarr;2), x=2 (2&lt;4 True, x&rarr;3), x=3 (3&lt;4 True, x&rarr;4), x=4 (4&lt;4 False, exits). Body ran 3 times.</span><span data-lang="zh">追踪：x=1（1&lt;4 True，x&rarr;2），x=2（2&lt;4 True，x&rarr;3），x=3（3&lt;4 True，x&rarr;4），x=4（4&lt;4 False，退出）。循环体运行 3 次。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">x goes 1, 2, 3, 4. At x=4 the condition 4&lt;4 is False and the loop exits — 3 iterations.</span><span data-lang="zh">x 经历 1、2、3、4。当 x=4 时条件 4&lt;4 为 False，循环退出——3 次迭代。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What happens if a while loop's condition never becomes False?</span><span data-lang="zh">如果 while 循环的条件永远不变为 False，会发生什么？</span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The loop runs exactly once</span><span data-lang="zh">循环恰好运行一次</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">A syntax error is raised</span><span data-lang="zh">引发语法错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">An infinite loop — the program runs forever (or until forced to stop)</span><span data-lang="zh">无限循环——程序永远运行（或直到被强制停止）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The loop skips its body</span><span data-lang="zh">循环跳过其循环体</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">An infinite loop occurs when the condition is always True. The program never exits the loop body. Common cause: forgetting to update the variable that the condition depends on.</span><span data-lang="zh">当条件始终为 True 时会发生无限循环（<code>infinite loop</code>，无限循环）。程序永远不会退出循环体。常见原因：忘记更新条件所依赖的变量。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">If the condition never becomes False, the loop body repeats indefinitely — an infinite loop. This is a logic error, not a syntax error.</span><span data-lang="zh">如果条件永远不变为 False，循环体无限重复——无限循环。这是逻辑错误，不是语法错误。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-5">
+  <div class="section-label"><span data-lang="en">Section 5 &middot; for loops</span><span data-lang="zh">第 5 节 &middot; for 循环</span></div>
+  <h2><span data-lang="en">for Loops</span><span data-lang="zh">for 循环</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">for = iterate over a known sequence (list, range). The loop variable takes each value in turn.</span><span data-lang="zh">for = 遍历已知序列（列表、范围）。循环变量（<code>loop variable</code>，循环变量）依次取每个值。</span></strong>
+    <pre><code>FOR item IN collection:
+    body statements
+END FOR</code></pre>
+    <span data-lang="en">Use <code>for</code> when you know the number of iterations in advance (or are iterating a collection). Use <code>while</code> when you repeat until a condition changes. Python's <code>range(start, stop)</code> generates integers from start up to (but not including) stop. CSTA 3A-AP-15 asks you to justify choosing for vs while for readability.</span><span data-lang="zh">当你提前知道迭代次数（或在遍历集合）时使用 <code>for</code>。当你在条件改变前重复时使用 <code>while</code>。Python 的 <code>range(start, stop)</code> 生成从 start 到（不包含）stop 的整数。CSTA 3A-AP-15 要求你从可读性角度论证选择 for 还是 while。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-purple">WE</div><div class="card-title"><span data-lang="en">Worked Example 5 &middot; Sum of 1 to n with for</span><span data-lang="zh">例题 5 &middot; 用 for 求 1 到 n 的和</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Read n from input. Output the sum 1 + 2 + &hellip; + n.</span><span data-lang="zh">从输入读取 n。输出 1 + 2 + &hellip; + n 的和。</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>INPUT n
+SET total TO 0
+FOR i FROM 1 TO n:
+    SET total TO total + i
+OUTPUT total</code></pre>
+    <p><span data-lang="en">ZH: <code>i</code> 从 1 取到 n（含）；每次将 i 累加到 total；结束后输出 total。</span><span data-lang="zh"><code>i</code> 从 1 取到 n（含 n）；每次将 i 累加到 total；结束后输出 total。</span></p>
+    <pre><code>n = int(input())
+total = 0
+for i in range(1, n + 1):   # range(1, n+1) gives 1, 2, ..., n
+    total += i
+print(total)</code></pre>
+    <p><span data-lang="en">ZH: Python <code>range(1, n+1)</code> 生成 1, 2, &hellip;, n。注意 stop 值不含在内，所以需写 n+1。</span><span data-lang="zh">Python <code>range(1, n+1)</code> 生成 1, 2, &hellip;, n。注意 stop 值不含在内，所以需写 n+1（差一陷阱）。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>for i in range(3, 7)</code> print when you print i each iteration?</span><span data-lang="zh"><code>for i in range(3, 7)</code> 每次迭代打印 i，会打印什么？</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">3 4 5 6 7</div>
+      <div class="quiz-opt" data-idx="1">3 4 5</div>
+      <div class="quiz-opt" data-idx="2">4 5 6 7</div>
+      <div class="quiz-opt" data-idx="3">3 4 5 6</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>range(3, 7)</code> generates 3, 4, 5, 6. Stop value 7 is excluded. This is the standard Python range: [start, stop).</span><span data-lang="zh"><code>range(3, 7)</code> 生成 3, 4, 5, 6。stop 值 7 不包含在内。这是标准的 Python range：[start, stop)。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">range(start, stop) goes from start up to but NOT including stop. range(3,7) = 3,4,5,6.</span><span data-lang="zh">range(start, stop) 从 start 到 stop（不含 stop）。range(3,7) = 3,4,5,6。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which loop type is best when you need to repeat until a user types "quit" (unknown number of iterations)?</span><span data-lang="zh">当你需要重复直到用户输入"quit"（未知迭代次数）时，哪种循环最合适？</span></div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">while loop — condition-controlled, runs until a condition changes</span><span data-lang="zh">while 循环——条件控制，运行直到条件改变</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">for loop — count-controlled, iterates a fixed number of times</span><span data-lang="zh">for 循环——计数控制，迭代固定次数</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">if/elif — selection, not a loop</span><span data-lang="zh">if/elif——选择，不是循环</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Either loop works identically here</span><span data-lang="zh">两种循环在这里完全相同</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">When the number of repetitions is unknown and depends on a condition (user typing "quit"), while is the natural choice. CSTA 3A-AP-15 asks you to justify this kind of choice.</span><span data-lang="zh">当重复次数未知且取决于条件（用户输入"quit"）时，while 是自然选择。CSTA 3A-AP-15 要求你论证这种选择。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">for is best for known-count iterations; while is best when the count depends on a condition. "Until the user types quit" is condition-controlled → while.</span><span data-lang="zh">for 最适合已知次数的迭代；while 最适合次数取决于条件的情况。"直到用户输入 quit"是条件控制 → while。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-6">
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Loop control</span><span data-lang="zh">第 6 节 &middot; 循环控制</span></div>
+  <h2><span data-lang="en">Loop Control: break &amp; continue</span><span data-lang="zh">循环控制：break 与 continue</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Two loop-control keywords &mdash; use sparingly, always comment why.</span><span data-lang="zh">两个循环控制关键字 &mdash; 谨慎使用，始终注释原因。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><code>break</code></strong> <span data-lang="en">&mdash; immediately exits the innermost loop. The program continues after the loop. Use when you have found what you need and further iteration is wasted work.</span><span data-lang="zh">&mdash; 立即退出最内层循环（<code>break</code>，中断）。程序在循环后继续。当你找到所需内容且进一步迭代是浪费时使用。</span></li>
+      <li><strong><code>continue</code></strong> <span data-lang="en">&mdash; skips the rest of the current iteration and jumps back to the loop's condition check. Use to skip items that do not meet a filter.</span><span data-lang="zh">&mdash; 跳过当前迭代的剩余部分，跳回循环条件检查（<code>continue</code>，继续）。用于跳过不满足过滤条件的项目。</span></li>
+    </ul>
+    <span data-lang="en">CSE1120 outcome 2.8 says "use appropriate selection and iteration structures to <strong>avoid unconditional branching</strong> or exiting from the interior of a block" — break/continue should be deliberate and documented. AP CSP pseudocode does not include break/continue; treat this section as enrichment for AP CSP students.</span><span data-lang="zh">CSE1120 结果 2.8 要求"使用适当的选择和迭代结构以<strong>避免无条件分支</strong>或从块内部退出"——break/continue 应谨慎使用并加以注释（<code>comment</code>，注释）。AP CSP 伪代码不包含 break/continue；AP CSP 学生将此节作为拓展内容。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-red">WE</div><div class="card-title"><span data-lang="en">Worked Example 6 &middot; Search with break; skip negatives with continue</span><span data-lang="zh">例题 6 &middot; 用 break 搜索；用 continue 跳过负数</span></div></div>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">break — find first even number.</span><span data-lang="zh">break — 找第一个偶数。</span></strong></p>
+    <pre><code>numbers = [3, 7, 12, 5, 8]
+for n in numbers:
+    if n % 2 == 0:
+        print("First even:", n)
+        break   # stop as soon as found</code></pre>
+    <p><span data-lang="en">ZH: <code>n % 2 == 0</code> 测试 n 是否为偶数；一旦条件为真，打印并 <code>break</code> 退出循环，不再检查后续元素。输出：<code>First even: 12</code>。</span><span data-lang="zh"><code>n % 2 == 0</code> 测试 n 是否为偶数；一旦条件为真，打印并 <code>break</code>（中断）退出循环，不再检查后续元素。输出：<code>First even: 12</code>。</span></p>
+    <p><strong><span data-lang="en">continue — print only positive numbers.</span><span data-lang="zh">continue — 只打印正数。</span></strong></p>
+    <pre><code>scores = [85, -1, 92, -5, 78]
+for s in scores:
+    if s < 0:
+        continue   # skip invalid (negative) scores
+    print(s)</code></pre>
+    <p><span data-lang="en">ZH: 当 s &lt; 0 时，<code>continue</code> 跳过 <code>print(s)</code>，直接进入下一次迭代。输出：85, 92, 78。</span><span data-lang="zh">当 s &lt; 0 时，<code>continue</code>（继续）跳过 <code>print(s)</code>，直接进入下一次迭代（<code>iteration</code>，迭代）。输出：85, 92, 78。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>break</code> do when executed inside a loop?</span><span data-lang="zh"><code>break</code> 在循环内部执行时会做什么？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Exits the innermost loop immediately</span><span data-lang="zh">立即退出最内层循环</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Skips the rest of the current iteration and goes to the next</span><span data-lang="zh">跳过当前迭代的剩余部分，进入下一次迭代</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Restarts the loop from the beginning</span><span data-lang="zh">从头重新开始循环</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Ends the entire program</span><span data-lang="zh">结束整个程序</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>break</code> exits the innermost loop immediately. Execution continues with the first statement after the loop. It does not end the program or restart the loop.</span><span data-lang="zh"><code>break</code>（中断）立即退出最内层循环。执行继续循环后的第一条语句。它不会结束程序或重新开始循环。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">break = exit loop. continue = skip to next iteration. break does not restart or end the program.</span><span data-lang="zh">break = 退出循环。continue = 跳到下一次迭代。break 不会重新开始或结束程序。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>continue</code> do when executed inside a loop?</span><span data-lang="zh"><code>continue</code> 在循环内部执行时会做什么？</span></div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Exits the loop</span><span data-lang="zh">退出循环</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Skips the remaining statements in the current iteration and goes back to the loop condition</span><span data-lang="zh">跳过当前迭代的剩余语句，返回循环条件</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Starts the loop over from the first iteration</span><span data-lang="zh">从第一次迭代重新开始循环</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Prints a blank line</span><span data-lang="zh">打印空行</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>continue</code> skips the remaining body statements and jumps back to the loop's condition check (for while) or next item (for for). It does not exit the loop.</span><span data-lang="zh"><code>continue</code>（继续）跳过剩余的循环体语句，跳回循环条件检查（while 循环）或下一个项目（for 循环）。它不会退出循环。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">continue does not exit — that is break. continue skips the rest of the current pass and moves to the next iteration.</span><span data-lang="zh">continue 不退出——那是 break。continue 跳过当前轮次的剩余部分，移动到下一次迭代。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-7">
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Nested loops</span><span data-lang="zh">第 7 节 &middot; 嵌套循环</span></div>
+  <h2><span data-lang="en">Nested Loops</span><span data-lang="zh">嵌套循环</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">A nested loop is a loop inside another loop. The inner loop runs completely for every single iteration of the outer loop.</span><span data-lang="zh">嵌套循环（<code>nested loop</code>，嵌套循环）是一个循环在另一个循环内部。内层循环在外层循环的每一次迭代中完整运行一遍。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><span data-lang="en">Total iterations = outer count &times; inner count. For outer=3, inner=4: 12 total body executions.</span><span data-lang="zh">总迭代次数 = 外层次数 &times; 内层次数。外层=3，内层=4：共 12 次循环体执行。</span></li>
+      <li><span data-lang="en">Classic use: processing a grid (rows &times; columns), multiplication tables, generating all pairs.</span><span data-lang="zh">经典用途：处理网格（行 &times; 列）、乘法表、生成所有配对。</span></li>
+      <li><span data-lang="en">CSE1120 outcome 2.8.2 names "nested iterative blocks" explicitly. ICS3U A2.3 requires nested structures.</span><span data-lang="zh">CSE1120 结果 2.8.2 明确命名"嵌套迭代块"。ICS3U A2.3 要求嵌套结构。</span></li>
+    </ul>
+    <span data-lang="en"><strong>Key trap:</strong> each loop must have its own distinct counter variable (use <code>i</code> for outer, <code>j</code> for inner). Re-using the same variable in both loops causes a logic error.</span><span data-lang="zh"><strong>关键陷阱：</strong>每个循环必须有各自独立的计数器变量（外层用 <code>i</code>，内层用 <code>j</code>）。在两个循环中重用同一变量会导致逻辑错误（<code>logic error</code>，逻辑错误）。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-purple">WE</div><div class="card-title"><span data-lang="en">Worked Example 7 &middot; 3&times;3 multiplication table</span><span data-lang="zh">例题 7 &middot; 3&times;3 乘法表</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Print a multiplication table for rows 1&ndash;3 and columns 1&ndash;3.</span><span data-lang="zh">打印行 1&ndash;3、列 1&ndash;3 的乘法表。</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>FOR i FROM 1 TO 3:          -- outer loop: rows
+    FOR j FROM 1 TO 3:      -- inner loop: columns
+        OUTPUT i * j
+    END FOR
+END FOR</code></pre>
+    <p><span data-lang="en">ZH: 外层 i 取 1, 2, 3；对于 i 的每个值，内层 j 取 1, 2, 3，输出 i*j。共 9 次输出。</span><span data-lang="zh">外层 i 取 1, 2, 3；对于 i 的每个值，内层 j 取 1, 2, 3，输出 i*j。共 9 次输出。</span></p>
+    <pre><code>for i in range(1, 4):       # outer: rows 1, 2, 3
+    for j in range(1, 4):   # inner: columns 1, 2, 3
+        print(i * j, end=" ")
+    print()                 # newline after each row</code></pre>
+    <p><span data-lang="en">ZH: <code>print(i * j, end=" ")</code> 用空格替代换行；外层循环每次结束时 <code>print()</code> 输出换行，产生表格格式。输出：</span><span data-lang="zh"><code>print(i * j, end=" ")</code> 用空格替代换行；外层循环每次结束时 <code>print()</code> 输出换行，产生表格格式。输出：</span></p>
+    <pre><code>1 2 3
+2 4 6
+3 6 9</code></pre>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">An outer loop runs 4 times and an inner loop runs 5 times. How many times does the inner loop body execute in total?</span><span data-lang="zh">外层循环运行 4 次，内层循环运行 5 次。内层循环体总共执行多少次？</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">9</div>
+      <div class="quiz-opt" data-idx="1">5</div>
+      <div class="quiz-opt" data-idx="2">20</div>
+      <div class="quiz-opt" data-idx="3">4</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Total = outer &times; inner = 4 &times; 5 = 20. For each of the 4 outer iterations, the inner loop body runs 5 times.</span><span data-lang="zh">总次数 = 外层 &times; 内层 = 4 &times; 5 = 20。外层每次迭代，内层循环体运行 5 次。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Nested loops multiply: outer &times; inner = 4 &times; 5 = 20 total inner-body executions.</span><span data-lang="zh">嵌套循环相乘：外层 &times; 内层 = 4 &times; 5 = 20 次内层循环体执行。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Trace the nested loop below. What is the last value printed?<br><code>for i in range(1,3):</code><br><code>&nbsp;&nbsp;for j in range(1,3):</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;print(i + j)</code></span><span data-lang="zh">追踪以下嵌套循环。最后打印的值是什么？<br><code>for i in range(1,3):</code><br><code>&nbsp;&nbsp;for j in range(1,3):</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;print(i + j)</code></span></div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">2</div>
+      <div class="quiz-opt" data-idx="1">3</div>
+      <div class="quiz-opt" data-idx="2">5</div>
+      <div class="quiz-opt" data-idx="3">4</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">range(1,3) gives 1,2. Sequence: i=1,j=1→2; i=1,j=2→3; i=2,j=1→3; i=2,j=2→4. Last printed: 4.</span><span data-lang="zh">range(1,3) 给出 1,2。序列：i=1,j=1→2；i=1,j=2→3；i=2,j=1→3；i=2,j=2→4。最后打印：4。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">range(1,3)=[1,2]. Last pair: i=2,j=2 → 2+2=4.</span><span data-lang="zh">range(1,3)=[1,2]。最后一对：i=2,j=2 → 2+2=4。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="exam-strategy">
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
+  <p><span data-lang="en">Control flow questions appear in every CS exam format: multiple-choice trace, written pseudocode, short-answer justify. The tactics below cover the three most common failure modes.</span><span data-lang="zh">控制流程问题出现在每种 CS 考试形式中：多项选择追踪、书面伪代码、简答论证。以下策略涵盖三种最常见的失分模式。</span></p>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);"><span data-lang="en">Before any control-flow question</span><span data-lang="zh">任何控制流程题之前</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Trace with a concrete value first.</span><span data-lang="zh">先用具体值追踪。</span></strong> <span data-lang="en">Before answering any loop or conditional question, substitute a real number and execute the pseudocode step by step. This catches off-by-one errors and wrong condition directions in 60 seconds.</span><span data-lang="zh">在回答任何循环或条件题之前，代入一个真实数字，逐步执行伪代码。这能在 60 秒内发现差一错误（<code>off-by-one</code>，差一错误）和条件方向错误。</span></li>
+      <li><strong><span data-lang="en">Justify your loop choice (CSTA 3A-AP-15).</span><span data-lang="zh">论证你的循环选择（CSTA 3A-AP-15）。</span></strong> <span data-lang="en">If asked "why for vs while?": for = known count / iterating a collection; while = unknown repetitions, condition-dependent. Two sentences with the reason scores full marks.</span><span data-lang="zh">若被问"为何选 for 而非 while？"：for = 已知次数/遍历集合；while = 未知次数、条件依赖。两句话说明原因即可满分。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box" style="border-left-color: var(--accent);">
+    <strong style="color: var(--accent);"><span data-lang="en">Boolean and selection traps (&sect;1-&sect;3)</span><span data-lang="zh">布尔与选择陷阱（&sect;1-&sect;3）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Assignment vs comparison.</span><span data-lang="zh">赋值与比较。</span></strong> <span data-lang="en"><code>x = 5</code> sets; <code>x == 5</code> tests. In AP CSP pseudocode, assignment uses the arrow (<code>&larr;</code>). Mixing these up is the single most common error.</span><span data-lang="zh"><code>x = 5</code> 赋值；<code>x == 5</code> 测试。在 AP CSP 伪代码中，赋值使用箭头（<code>&larr;</code>）。混淆两者是最常见的错误。</span></li>
+      <li><strong><span data-lang="en">Condition direction in grade classifiers.</span><span data-lang="zh">等级分类器中的条件方向。</span></strong> <span data-lang="en">Conditions must go high-to-low (&ge;90, &ge;80, &ge;70 &hellip;). Low-to-high means every score &ge;60 matches the first branch and you never reach A or B.</span><span data-lang="zh">条件必须从高到低（&ge;90，&ge;80，&ge;70……）。从低到高意味着每个 &ge;60 的成绩都匹配第一个分支，永远不会达到 A 或 B。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);"><span data-lang="en">Loop traps (&sect;4-&sect;7)</span><span data-lang="zh">循环陷阱（&sect;4-&sect;7）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Off-by-one.</span><span data-lang="zh">差一错误。</span></strong> <span data-lang="en">WHILE i &lt; 5 iterates for i=1,2,3,4 (misses 5). WHILE i &lt;= 5 iterates for i=1,2,3,4,5. Always trace the first and last value before submitting.</span><span data-lang="zh">WHILE i &lt; 5 对 i=1,2,3,4 迭代（遗漏 5）。WHILE i &lt;= 5 对 i=1,2,3,4,5 迭代。提交前始终追踪第一个和最后一个值。</span></li>
+      <li><strong><span data-lang="en">range(start, stop) excludes stop.</span><span data-lang="zh">range(start, stop) 不含 stop。</span></strong> <span data-lang="en">range(1, 6) gives 1,2,3,4,5. To include n, write range(1, n+1).</span><span data-lang="zh">range(1, 6) 给出 1,2,3,4,5。要包含 n，写 range(1, n+1)。</span></li>
+      <li><strong><span data-lang="en">Nested-loop total.</span><span data-lang="zh">嵌套循环总数。</span></strong> <span data-lang="en">Always compute outer &times; inner as a sanity check. That product is the answer to "how many times does the body run?"</span><span data-lang="zh">始终计算外层 &times; 内层（<code>nested loop</code>，嵌套循环）作为合理性检查。那个乘积就是"循环体运行多少次？"的答案。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);"><span data-lang="en">Answer hygiene</span><span data-lang="zh">作答规范</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Show your trace table explicitly.</span><span data-lang="zh">明确展示追踪表。</span></strong> <span data-lang="en">Column headers = variable names; rows = steps. A partial trace that reaches the error earns marks. "I calculated it mentally" earns zero.</span><span data-lang="zh">列标题 = 变量名；行 = 步骤。到达错误的部分追踪可得分。"我在脑中计算了"得零分。</span></li>
+      <li><strong><span data-lang="en">Use the correct term: selection vs iteration.</span><span data-lang="zh">使用正确术语：选择与迭代。</span></strong> <span data-lang="en">ICS3U A2.2 uses "sequence, selection, and repetition." CSTA and AP CSP use "conditionals" and "iteration." Match the vocabulary of your curriculum.</span><span data-lang="zh">ICS3U A2.2 使用"顺序、选择（<code>selection</code>，选择）和重复"。CSTA 和 AP CSP 使用"条件语句"和"迭代（<code>iteration</code>，迭代）"。与你的课程词汇匹配。</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="flashcards">
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
+  <div class="flashcard-toolbar">
+    <div id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">0 / 14 已翻</span></div>
+    <div>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">洗牌</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
+    </div>
+  </div>
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Boolean expression</span><span data-lang="zh">布尔表达式</span></div><div class="flashcard-back"><span data-lang="en">An expression that evaluates to True or False. Built from comparison operators (==, !=, &lt;, &gt;, &lt;=, &gt;=) combined with and, or, not.</span><span data-lang="zh">求值为 True 或 False 的表达式。由比较运算符（==, !=, &lt;, &gt;, &lt;=, &gt;=）与 and、or、not 组合构成。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">= vs ==</span><span data-lang="zh">= 与 ==</span></div><div class="flashcard-back"><span data-lang="en">= is assignment (stores a value). == is comparison (tests equality). x = 5 sets x; x == 5 checks if x is 5.</span><span data-lang="zh">= 是赋值（存储值）。== 是比较（测试相等）。x = 5 设置 x；x == 5 检查 x 是否为 5。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">if / elif / else template</span><span data-lang="zh">if / elif / else 模板</span></div><div class="flashcard-back"><span data-lang="en">Only one branch executes. Conditions checked top-to-bottom; first True branch runs; rest skipped. ICS3U A2.2 selection.</span><span data-lang="zh">只有一个分支执行。条件从上到下检查；第一个为 True 的分支运行；其余跳过。ICS3U A2.2 选择。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Nested conditional</span><span data-lang="zh">嵌套条件</span></div><div class="flashcard-back"><span data-lang="en">An if/elif/else inside another if. Inner block only runs if outer condition is True. CSE1120 outcome 2.8.1; ICS3U A2.3.</span><span data-lang="zh">一个 if 嵌套在另一个 if 内部。内层块只在外层条件为 True 时运行。CSE1120 结果 2.8.1；ICS3U A2.3。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">while loop</span><span data-lang="zh">while 循环</span></div><div class="flashcard-back"><span data-lang="en">Repeats while condition is True; condition checked before each iteration. Use when number of iterations is unknown. Danger: infinite loop if condition never becomes False.</span><span data-lang="zh">条件为 True 时重复；每次迭代前检查条件。当迭代次数未知时使用。危险：若条件永不变 False 则无限循环。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">for loop</span><span data-lang="zh">for 循环</span></div><div class="flashcard-back"><span data-lang="en">Iterates over a sequence (list, range). Loop variable takes each value in turn. Use when count is known. Python: range(start, stop) — stop is excluded.</span><span data-lang="zh">遍历序列（列表、范围）。循环变量依次取每个值。已知次数时使用。Python：range(start, stop)——stop 不含在内。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">range(1, n+1)</span><span data-lang="zh">range(1, n+1)</span></div><div class="flashcard-back"><span data-lang="en">Generates 1, 2, …, n. range(start, stop) excludes stop — must write n+1 to include n. Classic off-by-one trap.</span><span data-lang="zh">生成 1, 2, …, n。range(start, stop) 不含 stop——必须写 n+1 以包含 n。经典差一陷阱。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">break</span><span data-lang="zh">break（中断）</span></div><div class="flashcard-back"><span data-lang="en">Exits the innermost loop immediately. Execution continues after the loop. Use to stop as soon as a target is found.</span><span data-lang="zh">立即退出最内层循环。执行在循环后继续。在找到目标时立即停止时使用。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">continue</span><span data-lang="zh">continue（继续）</span></div><div class="flashcard-back"><span data-lang="en">Skips the rest of the current iteration and returns to the loop condition. Does not exit the loop. Use to filter/skip items.</span><span data-lang="zh">跳过当前迭代的剩余部分，返回循环条件。不退出循环。用于过滤/跳过项目。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Nested loop total iterations</span><span data-lang="zh">嵌套循环总迭代次数</span></div><div class="flashcard-back"><span data-lang="en">Total = outer count × inner count. E.g., outer runs 3 times, inner runs 4 times → 12 total body executions. CSE1120 outcome 2.8.2.</span><span data-lang="zh">总次数 = 外层次数 × 内层次数。例如，外层 3 次，内层 4 次 → 共 12 次循环体执行。CSE1120 结果 2.8.2。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Off-by-one error</span><span data-lang="zh">差一错误</span></div><div class="flashcard-back"><span data-lang="en">Loop runs one too many or too few times. WHILE i &lt; 5 misses 5; fix: WHILE i &lt;= 5. Always trace boundary values.</span><span data-lang="zh">循环多一次或少一次。WHILE i &lt; 5 遗漏 5；修复：WHILE i &lt;= 5。始终追踪边界值。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Infinite loop</span><span data-lang="zh">无限循环</span></div><div class="flashcard-back"><span data-lang="en">A while loop whose condition never becomes False. Caused by failing to update the variable the condition depends on. Program runs forever.</span><span data-lang="zh">条件永不变为 False 的 while 循环。由于未更新条件所依赖的变量而导致。程序永远运行。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">CSTA 3A-AP-15</span><span data-lang="zh">CSTA 3A-AP-15</span></div><div class="flashcard-back"><span data-lang="en">"Justify the selection of specific control structures when tradeoffs involve implementation, readability, and program performance." Requires reasoning about for vs while, nesting depth, etc.</span><span data-lang="zh">"当权衡涉及实现、可读性和程序性能时，论证选择特定控制结构的理由。"要求推理 for 与 while 的选择、嵌套深度等。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">ICS3U A2.2 + A2.3</span><span data-lang="zh">ICS3U A2.2 + A2.3</span></div><div class="flashcard-back"><span data-lang="en">A2.2: "use sequence, selection, and repetition control structures." A2.3: "write algorithms with nested structures." Core Ontario control-flow expectations.</span><span data-lang="zh">A2.2："使用顺序、选择和重复控制结构。" A2.3："编写具有嵌套结构的算法。" 安大略核心控制流程期望。</span></div></div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="unit-quiz">
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">综合测验</span></h2>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the output of <code>if 7 &gt;= 7: print("yes") else: print("no")</code>?</span><span data-lang="zh"><code>if 7 &gt;= 7: print("yes") else: print("no")</code> 的输出是什么？</span></div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>no</code></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Both "yes" and "no"</span><span data-lang="zh">"yes" 和 "no" 都输出</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Nothing</span><span data-lang="zh">什么都不输出</span></div>
+      <div class="quiz-opt" data-idx="3"><code>yes</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">7 &gt;= 7 is True (7 equals 7, satisfying &ge;). The if branch runs; else is skipped. Output: yes.</span><span data-lang="zh">7 &gt;= 7 为 True（7 等于 7，满足 &ge;）。if 分支运行；else 跳过。输出：yes。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">7 &gt;= 7 is True — &gt;= includes equality. So the if branch runs, printing "yes".</span><span data-lang="zh">7 &gt;= 7 为 True——&gt;= 包含等于。所以 if 分支运行，打印 "yes"。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Trace: <code>x = 0; while x &lt; 3: x += 1</code>. What is x when the loop ends?</span><span data-lang="zh">追踪：<code>x = 0; while x &lt; 3: x += 1</code>。循环结束时 x 是多少？</span></div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">2</div>
+      <div class="quiz-opt" data-idx="1">3</div>
+      <div class="quiz-opt" data-idx="2">4</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Infinite loop</span><span data-lang="zh">无限循环</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">x: 0&rarr;1 (True), 1&rarr;2 (True), 2&rarr;3 (True), check 3&lt;3 = False, loop exits. x = 3.</span><span data-lang="zh">x：0&rarr;1（True），1&rarr;2（True），2&rarr;3（True），检查 3&lt;3 = False，循环退出。x = 3。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">x increments to 3 before the condition becomes False. Final x = 3.</span><span data-lang="zh">x 增加到 3 后条件变为 False。最终 x = 3。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>for i in range(0, 5): print(i)</code> print?</span><span data-lang="zh"><code>for i in range(0, 5): print(i)</code> 打印什么？</span></div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">0 1 2 3 4 5</div>
+      <div class="quiz-opt" data-idx="1">1 2 3 4 5</div>
+      <div class="quiz-opt" data-idx="2">0 1 2 3 4</div>
+      <div class="quiz-opt" data-idx="3">1 2 3 4</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">range(0, 5) gives 0, 1, 2, 3, 4. Stop value 5 is excluded.</span><span data-lang="zh">range(0, 5) 给出 0, 1, 2, 3, 4。stop 值 5 不含在内。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">range(start, stop) excludes stop. range(0,5) = 0,1,2,3,4.</span><span data-lang="zh">range(start, stop) 不含 stop。range(0,5) = 0,1,2,3,4。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Outer loop runs 5 times, inner loop runs 3 times. How many total inner-body executions?</span><span data-lang="zh">外层循环运行 5 次，内层循环运行 3 次。内层循环体共执行多少次？</span></div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">15</div>
+      <div class="quiz-opt" data-idx="1">8</div>
+      <div class="quiz-opt" data-idx="2">5</div>
+      <div class="quiz-opt" data-idx="3">3</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Total = 5 &times; 3 = 15. For each of the 5 outer iterations, the inner body runs 3 times.</span><span data-lang="zh">总次数 = 5 &times; 3 = 15。外层每次迭代，内层循环体运行 3 次。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Nested loops multiply: outer &times; inner = 5 &times; 3 = 15.</span><span data-lang="zh">嵌套循环相乘：外层 &times; 内层 = 5 &times; 3 = 15。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A loop is supposed to sum 1+2+3+4+5 = 15, but outputs 10. It doesn't crash. What type of error?</span><span data-lang="zh">一个循环本应求 1+2+3+4+5 = 15，但输出 10。它不崩溃。是什么类型的错误？</span></div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Syntax error</span><span data-lang="zh">语法错误</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Runtime error</span><span data-lang="zh">运行时错误</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Logic error (off-by-one: condition should be &lt;= 5)</span><span data-lang="zh">逻辑错误（差一：条件应为 &lt;= 5）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">No error</span><span data-lang="zh">没有错误</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Runs without crash (not syntax/runtime). Wrong answer = logic error. Classic off-by-one: WHILE i &lt; 5 stops before adding 5. Fix: i &lt;= 5.</span><span data-lang="zh">运行不崩溃（不是语法/运行时错误）。答案错误 = 逻辑错误。经典差一：WHILE i &lt; 5 在加 5 前停止。修复：i &lt;= 5。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">No crash = not syntax/runtime. Wrong output = logic error (off-by-one).</span><span data-lang="zh">不崩溃 = 不是语法/运行时。输出错误 = 逻辑错误（差一）。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which CSTA standard (verbatim) asks you to justify your choice of control structure? <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span><span data-lang="zh">哪个 CSTA 标准（原文）要求你论证控制结构的选择？<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span></div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>3A-AP-13</code></div>
+      <div class="quiz-opt" data-idx="1"><code>3A-AP-15</code></div>
+      <div class="quiz-opt" data-idx="2"><code>3B-AP-10</code></div>
+      <div class="quiz-opt" data-idx="3"><code>3A-AP-17</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">CSTA 3A-AP-15 (verbatim): "Justify the selection of specific control structures when tradeoffs involve implementation, readability, and program performance."</span><span data-lang="zh">CSTA 3A-AP-15（原文）："当权衡涉及实现、可读性和程序性能时，论证选择特定控制结构的理由。"</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">3A-AP-15 = control structure justification. 3A-AP-13 = prototypes/algorithms. 3B-AP-10 = classic algorithms. 3A-AP-17 = decomposition.</span><span data-lang="zh">3A-AP-15 = 控制结构论证。3A-AP-13 = 原型/算法。3B-AP-10 = 经典算法。3A-AP-17 = 分解。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Ontario ICS3U expectation A2.3 (verbatim) requires students to write algorithms with what feature? <span class="region-chip">&#x1F1E8;&#x1F1E6; ON</span></span><span data-lang="zh">安大略 ICS3U 期望 A2.3（原文）要求学生编写具有什么特征的算法？<span class="region-chip">&#x1F1E8;&#x1F1E6; ON</span></span></div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Nested structures</span><span data-lang="zh">嵌套结构</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Recursion</span><span data-lang="zh">递归</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Object-oriented classes</span><span data-lang="zh">面向对象类</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">File input/output</span><span data-lang="zh">文件输入/输出</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">ICS3U A2.3 (verbatim): "write algorithms with nested structures (e.g., to count elements in an array, calculate a total, find highest or lowest value, or perform a linear search)."</span><span data-lang="zh">ICS3U A2.3（原文）："编写具有嵌套结构的算法（如计算数组元素、求总和、查找最大/最小值或执行线性搜索）。"</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">A2.3 requires nested structures. Recursion is ICS4U. OOP and file I/O are other ICS4U topics.</span><span data-lang="zh">A2.3 要求嵌套结构。递归是 ICS4U 内容。OOP 和文件 I/O 是其他 ICS4U 主题。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+</section>
+
+<hr class="sep">
+
+<section class="section" id="checklist">
+  <div class="section-label"><span data-lang="en">Self-check</span><span data-lang="zh">自查</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></h2>
+  <p><span data-lang="en">Tick each item when you can do it cold, without notes, on a first attempt.</span><span data-lang="zh">能在无笔记、首次尝试下完成，再勾选每一项。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 11 mastered</span><span data-lang="zh">已掌握 0 / 11</span></div>
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Evaluate any boolean expression with comparison and logical operators (==, !=, &lt;, &gt;, &lt;=, &gt;=, and, or, not) and state whether it is True or False. Distinguish x = 5 (assignment) from x == 5 (comparison). <span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP 3.5 / &#x1F1E8;&#x1F1E6; AB CSE1120</span></span><span data-lang="zh">用比较和逻辑运算符（==、!=、&lt;、&gt;、&lt;=、&gt;=、and、or、not）求值任意布尔表达式，并说明其为 True 还是 False。区分 x = 5（赋值）和 x == 5（比较）。<span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP 3.5 / &#x1F1E8;&#x1F1E6; AB CSE1120</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a complete if/elif/else selection in pseudocode and Python for a problem with at least three branches (e.g., grade classifier). Trace it with a value that hits each branch. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.2 / AP CSP 3.6</span></span><span data-lang="zh">为至少三个分支的问题（如等级分类器）用伪代码和 Python 写出完整的 if/elif/else 选择结构。用触及每个分支的值追踪它。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.2 / AP CSP 3.6</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write and trace a nested conditional (if inside if). Explain why the inner block does not run when the outer condition is False. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 2.8.1 / AP CSP 3.7</span></span><span data-lang="zh">写出并追踪嵌套条件（if 内嵌 if）。解释为何外层条件为 False 时内层块不运行。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 2.8.1 / AP CSP 3.7</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a while loop that counts, accumulates, or searches. Identify what variable must be updated inside the body to prevent an infinite loop. Trace the loop with a variable table. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.2 / AB CSE1120 outcome 1</span></span><span data-lang="zh">写一个用于计数、累加或搜索的 while 循环。找出必须在循环体内更新哪个变量以防止无限循环。用变量表追踪循环。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.2 / AB CSE1120 结果 1</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a for loop using range(). Compute range(1, n+1) and explain why n+1 is needed to include n. State the number of iterations for any given range. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AP CSP 3.8</span></span><span data-lang="zh">用 range() 写 for 循环。计算 range(1, n+1) 并解释为何需要 n+1 才能包含 n。说明任意给定范围的迭代次数。<span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AP CSP 3.8</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Explain the difference between break (exits loop) and continue (skips to next iteration). Write one example of each and trace through one full iteration showing the effect. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 outcome 2.8</span></span><span data-lang="zh">解释 break（退出循环）和 continue（跳到下一次迭代）的区别。各写一个示例，并追踪一次完整迭代以显示效果。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 结果 2.8</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a nested loop (e.g., multiplication table). Compute the total iterations (outer &times; inner). Trace one full outer iteration manually showing all inner iterations. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 2.8.2 / ON ICS3U A2.3</span></span><span data-lang="zh">写一个嵌套循环（如乘法表）。计算总迭代次数（外层 &times; 内层）。手工追踪一次完整的外层迭代，展示所有内层迭代。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1120 2.8.2 / ON ICS3U A2.3</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Justify choosing for vs while for a given problem scenario in one or two sentences, citing readability and/or the known-vs-unknown iteration count. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-15</span></span><span data-lang="zh">用一两句话为给定问题场景论证选择 for 还是 while，引用可读性和/或已知与未知迭代次数。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A-AP-15</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Identify an off-by-one error in a given loop: spot whether &lt; should be &lt;= (or vice versa), state the incorrect output vs the expected output, and write the fix. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AB CSE1120</span></span><span data-lang="zh">识别给定循环中的差一错误：判断 &lt; 是否应改为 &lt;=（或反之），说明错误输出与预期输出，并写出修复。<span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AB CSE1120</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">State verbatim the CSTA standard 3A-AP-15 and the Ontario ICS3U expectation A2.2, and identify which topic of this guide each one maps to. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA / &#x1F1E8;&#x1F1E6; ON</span></span><span data-lang="zh">逐字陈述 CSTA 标准 3A-AP-15 和安大略 ICS3U 期望 A2.2，并找出本指南中各自对应的主题。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA / &#x1F1E8;&#x1F1E6; ON</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a complete program combining if/elif/else inside a for or while loop (e.g., iterate a list, classify each item, accumulate counts). Trace it with two input values. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.3 / AB CSE1120</span></span><span data-lang="zh">写一个完整程序，将 if/elif/else 嵌套在 for 或 while 循环内（如遍历列表、对每项分类、累计计数）。用两个输入值追踪它。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.3 / AB CSE1120</span></span></span></li>
+  </ul>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="feeders">
+  <div class="section-label"><span data-lang="en">Next Steps</span><span data-lang="zh">后续单元</span></div>
+  <h2><span data-lang="en">What This Feeds Into</span><span data-lang="zh">本单元的去向</span></h2>
+  <p><span data-lang="en">Control flow is the engine that makes programs useful. Every subsequent HS CS unit builds on the selection and iteration constructs practiced here: Functions (Unit 4) use conditionals inside function bodies; Data Structures (Unit 5) use for loops to traverse lists; Searching and Sorting (Unit 7) is nested loops and conditionals throughout. Both AP courses also assume control-flow fluency from day one.</span><span data-lang="zh">控制流程是让程序有用的引擎。后续每个 HS CS 单元都建立在这里练习的选择和迭代构造之上：函数（第 4 单元）在函数体内使用条件语句；数据结构（第 5 单元）使用 for 循环遍历列表；搜索与排序（第 7 单元）通篇是嵌套循环（<code>nested loops</code>，嵌套循环）和条件语句。两门 AP 课程也从第一天起就假定控制流程流利度。</span></p>
+
+  <div style="margin: 20px 0;">
+    <p><strong><span data-lang="en">AP feeder link (confirmed in this repo).</span><span data-lang="zh">AP 衔接链接（本仓库中已确认）。</span></strong></p>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;">
+      <a class="feeder-link" href="../../AP CSA/Study Guides/Unit_2_Selection_and_Iteration.html"><span data-lang="en">AP CSA Unit 2 &middot; Selection and Iteration (Java if/else, while, for — the direct AP CSA counterpart of every section in this guide)</span><span data-lang="zh">AP CSA Unit 2 &middot; 选择与迭代（Java if/else、while、for——本指南每节的直接 AP CSA 对应）</span></a>
+    </div>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;"><span data-lang="en">AP CSP Big Idea 3 topics 3.5&ndash;3.8 (Boolean expressions, conditionals, nested conditionals, iteration) map exactly to &sect;1&ndash;&sect;5 of this guide. AP CSA Unit 2 uses the same constructs in Java syntax — the logic and trace-table skills transfer directly. Mastering all seven sections before either AP eliminates the steepest learning-curve spike in the first weeks.</span><span data-lang="zh">AP CSP 大概念 3 主题 3.5&ndash;3.8（布尔表达式、条件语句、嵌套条件、迭代）恰好对应本指南的 &sect;1&ndash;&sect;5。AP CSA 第 2 单元使用相同构造的 Java 语法——逻辑和追踪表（<code>trace table</code>，追踪表）技能可直接迁移。在任一 AP 课程之前掌握全部七节，可消除前几周最陡峭的学习曲线。</span></p>
+  </div>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">DINGRUI SCHOLARS</div>
+  <p><span data-lang="en">High School Computer Science &middot; Control Flow &middot; v1</span><span data-lang="zh">高中计算机科学 &middot; 控制流程 &middot; v1</span></p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+function updateScoreBadge() { const badge = document.getElementById('scoreBadge'); if (!badge) return; if (quizScore.total === 0) { badge.textContent = '0 / 0'; badge.classList.add('zero'); } else { badge.textContent = quizScore.correct + ' / ' + quizScore.total; badge.classList.remove('zero'); } }
+function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.innerHTML = isDark ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>' : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>'; }
+function toggleTheme() { const isDark = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark'); setThemeBtnLabel(!isDark); }
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); setThemeBtnLabel(true); }
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; const pct = h > 0 ? (window.scrollY / h) * 100 : 0; const pf = document.getElementById('progressFill'); if (pf) pf.style.width = pct + '%'; });
+const sections = document.querySelectorAll('.section'); const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(l => l.classList.remove('active')); const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`); if (link) link.classList.add('active'); } }); }, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz => { const answer = parseInt(quiz.dataset.answer); const opts = quiz.querySelectorAll('.quiz-opt'); const expCorrect = quiz.querySelector('.quiz-explain.correct-exp'); const expWrong = quiz.querySelector('.quiz-explain.wrong-exp'); opts.forEach(opt => { opt.addEventListener('click', () => { if(opt.classList.contains('disabled')) return; const idx = parseInt(opt.dataset.idx); opts.forEach(o => o.classList.add('disabled')); quizScore.total++; if (idx === answer) { opt.classList.add('correct'); quizScore.correct++; if (expCorrect) expCorrect.classList.add('show'); } else { opt.classList.add('wrong'); opts[answer].classList.add('correct'); if (expWrong) expWrong.classList.add('show'); const retry = quiz.querySelector('.quiz-retry'); if (retry) retry.classList.add('show'); } updateScoreBadge(); }); }); });
+function retryQuiz(btn) { const quiz = btn.closest('.quiz'); quiz.querySelectorAll('.quiz-opt').forEach(o => { o.classList.remove('disabled', 'correct', 'wrong'); }); quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show')); btn.classList.remove('show'); quizScore.total--; updateScoreBadge(); }
+function flipCard(el) { el.classList.toggle('flipped'); updateFlashcardCount(); }
+function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.innerHTML = '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span><span data-lang="zh">' + flipped + ' / ' + total + ' 已翻</span>'; }
+function resetFlashcards() { document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped')); updateFlashcardCount(); }
+function shuffleFlashcards() { const grid = document.getElementById('flashcardGrid'); if (!grid) return; const cards = [...grid.children]; for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); grid.appendChild(cards[j]); [cards[i], cards[j]] = [cards[j], cards[i]]; } }
+function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>'; }
+function toggleSidebar() { if (window.innerWidth >= 1100) { document.body.classList.toggle('sidebar-collapsed'); } else { const sidebar = document.getElementById('sidebar'); sidebar.classList.toggle('open'); const btn = document.getElementById('tocToggle'); if (btn) btn.classList.toggle('active', sidebar.classList.contains('open')); } }
+document.addEventListener('click', function(e) { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (!sidebar) return; if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (sidebar) sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+updateScoreBadge();
+</script>
+</body>
+</html>

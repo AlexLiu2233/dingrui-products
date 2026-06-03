@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="High School Computer Science · Programming Fundamentals | Dingrui Scholars. Variables and assignment; data types (int, float, string, boolean); input and output; arithmetic and relational operators; type conversion and casting; constants and naming conventions; writing and running your first program. Cites US CSTA 3A-AP-13/3A-AP-14, AP CSP Big Idea 3 (AAP — variables/data); Ontario ICS3U strand A; BC Computer Programming 11; Alberta CSE1110.">
+<meta name="theme-color" content="#7A2E2E">
+<meta name="color-scheme" content="light dark">
+<title>High School Computer Science — Programming Fundamentals | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-CS-2  dingrui:doc-type study-guide -->
+<link rel="icon" type="image/png" href="../LOGO.png">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+<style>
+:root {
+  --bg: #F5F0EB; --bg-card: #FFFFFF; --bg-code: #1E1418;
+  --text: #2C1B1F; --text-secondary: #6B5058;
+  --accent: #7A2E2E; --accent-light: #F2E4E4; --accent-dark: #5A1E1E;
+  --green: #2E6B4F; --green-light: #DFF0E8;
+  --orange: #A65E1A; --orange-light: #FBF0E0;
+  --red: #B03030; --red-light: #FCEAEA;
+  --purple: #5E3D7A; --purple-light: #EDE4F5;
+  --gold: #C4956A; --gold-light: #FDF5EC;
+  --border: #DDD0C8;
+  --shadow: 0 4px 6px -1px rgba(60,20,30,0.06), 0 2px 4px -1px rgba(60,20,30,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(60,20,30,0.10);
+  --radius: 12px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 860px; --toc-w: 260px;
+}
+[data-theme="dark"] {
+  --bg: #151010; --bg-card: #1E1618; --bg-code: #0D0A0B;
+  --text: #E8E0DC; --text-secondary: #A89098;
+  --accent: #C87070; --accent-light: #3A1818; --accent-dark: #E08080;
+  --green: #5CB88A; --green-light: #1A2E24;
+  --orange: #D4944A; --orange-light: #2E2010;
+  --red: #E07070; --red-light: #301515;
+  --purple: #A888C8; --purple-light: #201828;
+  --gold: #D4A870; --gold-light: #2A2018;
+  --border: #352828;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 17px; transition: background 0.3s, color 0.3s; }
+.score-badge { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--green); background: var(--green-light); border: 1px solid var(--green); padding: 3px 10px; border-radius: 20px; white-space: nowrap; transition: all 0.3s; }
+.score-badge.zero { color: var(--text-secondary); background: var(--bg); border-color: var(--border); }
+.progress-track { position: fixed; top: 56px; left: 0; right: 0; height: 3px; background: transparent; z-index: 99; }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
+.sidebar { position: fixed; top: 59px; left: 0; bottom: 0; width: var(--toc-w); background: var(--bg-card); border-right: 1px solid var(--border); overflow-y: auto; scrollbar-width: none; padding: 20px 0; transform: translateX(-100%); transition: transform 0.3s ease, background 0.3s; z-index: 90; }
+.sidebar::-webkit-scrollbar { display: none; }
+.sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+.sidebar-title { font-family: var(--font-display); font-size: 0.95rem; padding: 0 20px 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+.sidebar a { display: block; padding: 8px 20px; color: var(--text-secondary); text-decoration: none; font-size: 0.88rem; border-left: 3px solid transparent; transition: all 0.15s; }
+.sidebar a:hover { color: var(--accent); background: var(--accent-light); }
+.sidebar a.active { color: var(--accent); border-left-color: var(--accent); font-weight: 600; background: linear-gradient(90deg, var(--accent-light), transparent); }
+.main-wrap { max-width: var(--max-w); margin: 80px auto 120px; padding: 0 24px; transition: width 0.3s ease, margin-left 0.3s ease; }
+@media (min-width: 1100px) {
+  .sidebar { transform: translateX(0); box-shadow: none; }
+  .main-wrap { max-width: none; margin-left: calc(var(--toc-w) + 40px); margin-right: 0; padding: 0 48px; }
+  body.sidebar-collapsed .sidebar { transform: translateX(-100%); }
+}
+.hero { text-align: center; padding: 56px 24px 48px; background: linear-gradient(180deg, var(--accent-light) 0%, transparent 100%); border-radius: var(--radius); margin-bottom: 40px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 20%, rgba(122,46,46,0.06) 0%, transparent 70%); pointer-events: none; }
+[data-theme="dark"] .hero { background: linear-gradient(180deg, rgba(58, 32, 32, 0.4) 0%, transparent 100%); }
+[data-theme="dark"] .hero::before { background: radial-gradient(ellipse at 70% 20%, rgba(200,112,112,0.06) 0%, transparent 70%); }
+.hero-overline { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; position: relative; }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 16px; position: relative; }
+.hero-sub { color: var(--text-secondary); max-width: 650px; margin: 0 auto; position: relative; }
+.hero-meta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; }
+.hero-meta .chip { font-size: 0.85rem; font-weight: 600; padding: 6px 16px; border-radius: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.chip-maroon { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); }
+.chip-green { background: var(--bg-card); border: 1px solid var(--green); color: var(--green); }
+.chip-purple { background: var(--bg-card); border: 1px solid var(--purple); color: var(--purple); }
+.chip-gold { background: var(--bg-card); border: 1px solid var(--gold); color: var(--gold); }
+
+/* HS Math multi-syllabus chrome (locked in Unit 1) */
+.syllabus-map { background: linear-gradient(180deg, var(--accent-light) 0%, var(--bg-card) 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 22px 26px 18px; margin: 28px 0 36px; box-shadow: var(--shadow); }
+.syllabus-map-label { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; }
+.syllabus-map-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+@media (max-width: 1000px) { .syllabus-map-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+@media (max-width: 600px) { .syllabus-map-grid { grid-template-columns: 1fr; gap: 18px; } }
+.syllabus-map .region-header { font-family: var(--font-display); font-size: 1.02rem; color: var(--text); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.syllabus-map ul { list-style: none; padding: 0; margin: 0; }
+.syllabus-map ul li { font-size: 0.84rem; line-height: 1.5; padding: 4px 0; color: var(--text-secondary); }
+.syllabus-map ul li code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent); background: var(--bg); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--border); }
+
+.region-chip { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--text-secondary); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.4px; vertical-align: middle; margin-left: 8px; }
+
+.syllabus-note { border-left: 4px solid var(--purple); background: var(--purple-light); border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 18px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text); }
+.syllabus-note strong { color: var(--purple); margin-right: 4px; }
+[data-theme="dark"] .syllabus-note { background: rgba(94, 61, 122, 0.18); }
+
+.honors-flag { display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid var(--gold); padding: 2px 8px; border-radius: 6px; letter-spacing: 0.5px; text-transform: uppercase; vertical-align: middle; margin-left: 8px; }
+
+.feeder-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); background: var(--accent-light); border: 1px solid var(--accent); padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.2s; margin: 4px 6px 4px 0; }
+.feeder-link:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
+.feeder-link::before { content: '\2192'; font-weight: 700; }
+
+.section { margin-bottom: 56px; scroll-margin-top: 80px; }
+.section-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+.section h2 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 16px; line-height: 1.25; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; display: inline-block; }
+.section h3 { font-family: var(--font-display); font-size: 1.3rem; margin: 32px 0 12px; line-height: 1.3; color: var(--text); }
+.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s; }
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+.icon-blue { background: var(--accent-light); color: var(--accent); }
+.icon-green { background: var(--green-light); color: var(--green); }
+.icon-orange { background: var(--orange-light); color: var(--orange); }
+.icon-red { background: var(--red-light); color: var(--red); }
+.icon-purple { background: var(--purple-light); color: var(--purple); }
+.card-title { font-weight: 700; font-size: 1.05rem; }
+.concept-box { border-left: 5px solid var(--accent); background: var(--bg-card); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 20px 0; box-shadow: var(--shadow); }
+.concept-box.green { border-left-color: var(--green); }
+.concept-box.orange { border-left-color: var(--orange); }
+.concept-box.red { border-left-color: var(--red); }
+.concept-box.purple { border-left-color: var(--purple); }
+.concept-box > strong:first-child { display: inline-block; margin-bottom: 8px; font-family: var(--font-mono); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; background: var(--bg-card); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent-light); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--accent-light); }
+.quiz { margin: 24px 0; background: var(--bg-card); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); position: relative; }
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-q { font-weight: 600; font-size: 1.05rem; flex: 1; }
+.quiz-number { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; margin-left: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { padding: 12px 18px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; background: var(--bg); font-weight: 500; position: relative; }
+.quiz-opt:hover:not(.disabled) { border-color: var(--accent); background: var(--accent-light); }
+.quiz-opt.correct { border-color: var(--green); background: var(--green-light); color: var(--green); }
+.quiz-opt.wrong { border-color: var(--red); background: var(--red-light); color: var(--red); }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.8; }
+.quiz-opt.correct::after { content: '\2713'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-opt.wrong::after { content: '\2717'; position: absolute; right: 14px; font-weight: 700; }
+.quiz-explain { margin-top: 16px; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; display: none; line-height: 1.6; }
+.quiz-explain.show { display: block; animation: fadeSlideIn 0.35s ease; }
+.quiz-explain.correct-exp { background: var(--green-light); color: #1a4030; border: 1px solid var(--green); }
+.quiz-explain.wrong-exp { background: var(--red-light); color: #6b1d1d; border: 1px solid var(--red); }
+[data-theme="dark"] .quiz-explain.correct-exp { color: var(--green); }
+[data-theme="dark"] .quiz-explain.wrong-exp { color: var(--red); }
+.quiz-retry { display: none; margin-top: 12px; padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.quiz-retry.show { display: inline-block; animation: fadeSlideIn 0.35s ease; }
+.quiz-retry:hover { background: var(--accent-light); border-color: var(--accent); }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+details { margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; box-shadow: var(--shadow); }
+summary { padding: 16px 20px; cursor: pointer; font-weight: 600; font-size: 0.95rem; user-select: none; list-style: none; display: flex; align-items: center; gap: 10px; background: var(--bg); transition: background 0.2s; }
+summary:hover { background: var(--accent-light); }
+summary::before { content: '\25B8'; transition: transform 0.2s; font-size: 1rem; color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--border); }
+details[open] summary::before { transform: rotate(90deg); }
+details .detail-body { padding: 20px; font-size: 0.95rem; background: var(--bg-card); }
+.flashcard-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 12px 0 4px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); }
+.flashcard-toolbar button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 8px; font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-left: 6px; }
+.flashcard-toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+.flashcard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin: 24px 0; }
+.flashcard { perspective: 1000px; cursor: pointer; display: grid; }
+.flashcard-inner { display: grid; grid-template-areas: "card"; min-height: 200px; height: 100%; position: relative; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { grid-area: card; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: var(--shadow); overflow: hidden; word-break: break-word; hyphens: auto; }
+.flashcard-front { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); font-weight: 600; font-size: clamp(0.92rem, 2.1vw, 1.05rem); line-height: 1.45; padding: 22px 20px 34px; gap: 8px; }
+.flashcard-front::after { content: 'TAP TO FLIP'; position: absolute; bottom: 10px; left: 0; right: 0; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-secondary); opacity: 0.5; letter-spacing: 1.5px; }
+.flashcard-back { background: var(--bg); border: 2px solid var(--accent); color: var(--text); transform: rotateY(180deg); font-size: clamp(0.88rem, 2vw, 1rem); line-height: 1.6; padding: 26px 22px; gap: 12px; word-break: normal; hyphens: manual; overflow-wrap: break-word; text-wrap: pretty; }
+.flashcard-back .katex-display { margin: 6px 0 !important; font-size: 1.25em; max-width: 100%; overflow: hidden; }
+.flashcard-back .katex-display > .katex { max-width: 100%; }
+.flashcard-back .katex { font-size: 1em; }
+.flashcard-back br { content: ""; display: block; margin-bottom: 8px; }
+.flashcard-back > * { max-width: 100%; }
+@media (max-width: 600px) { .flashcard-grid { grid-template-columns: 1fr; } }
+.worked-solution { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-top: 16px; }
+.worked-solution .katex-display { margin: 0.65rem 0; }
+.formula-box { background: var(--bg-card); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 24px 32px; margin: 24px 0; text-align: center; box-shadow: var(--shadow-lg); overflow-x: auto; }
+.formula-box .formula-label { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.formula-box .katex-display { margin: 14px 0 !important; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.formula-box .katex-display:first-of-type { margin-top: 10px !important; }
+.formula-box .katex-display:last-of-type { margin-bottom: 4px !important; }
+.formula-box .katex { font-size: 1.12em; }
+.formula-box p { margin: 10px 0; color: var(--text-secondary); font-size: 0.95rem; }
+.sep { border: none; border-top: 1px solid var(--border); margin: 40px 0; opacity: 0.9; }
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; background: var(--bg-card); transition: all 0.2s; display: flex; align-items: center; gap: 12px; user-select: none; }
+.checklist li:hover { border-color: var(--accent); }
+.checklist li .check-icon { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; font-size: 0.8rem; color: transparent; }
+.checklist li.checked { background: var(--green-light); border-color: var(--green); }
+.checklist li.checked .check-icon { background: var(--green); border-color: var(--green); color: #fff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+.footer-wrap { text-align: center; padding: 40px 24px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 48px; }
+.footer-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--text); margin-bottom: 4px; }
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+.katex-display > .katex { text-align: center; }
+.worked-solution .katex-display { margin: 0.75rem 0 !important; padding: 2px 0; }
+.worked-solution p { margin: 0.55rem 0; }
+.worked-solution p + .katex-display { margin-top: 0.4rem !important; }
+.concept-box .katex-display { margin: 0.6rem 0 !important; }
+.section-label + h2 { margin-top: 0.2rem; }
+@media (max-width: 600px) { .hero h1 { font-size: 2rem; } .main-wrap { padding: 0 16px; margin-top: 60px; } .formula-box { padding: 16px; } .top-nav { padding: 0 16px; } }
+@media print {
+  .flashcard-inner { transform: none !important; }
+  .flashcard-back { transform: none !important; position: relative !important; backface-visibility: visible !important; }
+  .flashcard-front { display: none !important; }
+  .flashcard { height: auto !important; min-height: auto !important; }
+  .top-nav, .progress-track, .sidebar, .quiz-retry, .flashcard-toolbar button, .score-badge { display: none !important; }
+  .main-wrap { margin: 0 auto; max-width: 100%; }
+  body { font-size: 11pt; background: white; color: black; }
+  .card, .formula-box, .concept-box, .quiz, .syllabus-map, .syllabus-note { break-inside: avoid; border: 1px solid #999; box-shadow: none; }
+  details { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245, 240, 235, 0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; transition: background 0.3s, border 0.3s; }
+[data-theme="dark"] .top-nav { background: rgba(21, 16, 16, 0.92); }
+.nav-left { display: flex; align-items: center; gap: 10px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-badge { background: var(--accent); color: #fff; font-family: var(--font-body); font-size: 0.7rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.5px; }
+.nav-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; font-family: var(--font-body); font-weight: 600; transition: all 0.2s; }
+.nav-btn:hover { background: var(--accent-light); border-color: var(--accent); transform: translateY(-1px); }
+.nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); border: 2px dashed var(--gold); border-radius: var(--radius); padding: 20px 26px; margin: 20px 0; position: relative; }
+.cram-cheat::before { content: 'CRAM-MODE CHEAT'; position: absolute; top: -10px; left: 18px; background: var(--gold); color: #fff; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
+[data-theme="dark"] .cram-cheat { background: linear-gradient(180deg, var(--gold-light) 0%, var(--bg-card) 100%); }
+
+/* BILINGUAL TOGGLE (locked Sprint 4) */
+body:not(.lang-zh) [data-lang="zh"] { display: none; }
+body.lang-zh       [data-lang="en"] { display: none; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-badge" style="font-weight:700;">DINGRUI SCHOLARS</span>
+    <span class="nav-badge">PROG FUND</span>
+  </div>
+  <div class="nav-right">
+    <span class="score-badge zero" id="scoreBadge">0 / 0</span>
+    <button class="nav-btn" id="tocToggle" onclick="toggleSidebar()"><span data-lang="en">Contents</span><span data-lang="zh">目录</span></button>
+    <button class="nav-btn" id="langToggle" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+    <button class="nav-btn" id="themeToggle" onclick="toggleTheme()"><span data-lang="en">Dark</span><span data-lang="zh">深色</span></button>
+  </div>
+</nav>
+
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title"><span data-lang="en">Table of Contents</span><span data-lang="zh">目录</span></div>
+  <a href="#hero"><span data-lang="en">Overview</span><span data-lang="zh">概览</span></a>
+  <a href="#syllabus-map"><span data-lang="en">Syllabus Map</span><span data-lang="zh">大纲对照</span></a>
+  <a href="#how-to-use"><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></a>
+  <a href="#s-7-1"><span data-lang="en">Variables and Assignment</span><span data-lang="zh">变量与赋值</span></a>
+  <a href="#s-7-2"><span data-lang="en">Data Types</span><span data-lang="zh">数据类型</span></a>
+  <a href="#s-7-3"><span data-lang="en">Input and Output</span><span data-lang="zh">输入与输出</span></a>
+  <a href="#s-7-4"><span data-lang="en">Operators</span><span data-lang="zh">运算符</span></a>
+  <a href="#s-7-5"><span data-lang="en">Type Conversion and Casting</span><span data-lang="zh">类型转换</span></a>
+  <a href="#s-7-6"><span data-lang="en">Constants and Naming Conventions</span><span data-lang="zh">常量与命名规范</span></a>
+  <a href="#s-7-7"><span data-lang="en">Writing Your First Program</span><span data-lang="zh">编写你的第一个程序</span></a>
+  <a href="#exam-strategy"><span data-lang="en">Exam Strategy</span><span data-lang="zh">考试策略</span></a>
+  <a href="#flashcards"><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></a>
+  <a href="#unit-quiz"><span data-lang="en">Practice Quiz</span><span data-lang="zh">练习测验</span></a>
+  <a href="#checklist"><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></a>
+  <a href="#feeders"><span data-lang="en">What This Feeds Into</span><span data-lang="zh">后续单元</span></a>
+</aside>
+
+<main class="main-wrap">
+
+<section class="hero" id="hero">
+  <div class="hero-overline">High School Computer Science</div>
+  <h1><span data-lang="en">Programming Fundamentals</span><span data-lang="zh">编程基础</span></h1>
+  <p class="hero-sub">
+    <span data-lang="en">Every program is built from a handful of core ideas: storing data in variables, choosing the right data type, reading input from a user and writing output back, combining values with operators, converting between types, and organising code with constants and clear names. This guide builds all seven fundamentals from scratch, with pseudocode and Python side-by-side throughout, so you leave each section able to write, read, and explain real working code. By the end you will have written and run your first complete program — and understood exactly what every line does.</span><span data-lang="zh">每个程序都建立在少数核心概念上：将数据存储在变量（<code>variable</code>，变量）中、选择正确的数据类型（<code>data type</code>，数据类型）、从用户读取输入（<code>input</code>，输入）并写出输出（<code>output</code>，输出）、用运算符（<code>operator</code>，运算符）组合值、在类型之间转换（<code>type conversion</code>，类型转换），以及用常量（<code>constant</code>，常量）和清晰命名组织代码。本指南从零建立全部七个基础，伪代码与 Python 全程并排，让你在每节结束后都能编写、阅读并解释真正可运行的代码。学完后，你将编写并运行第一个完整程序，并准确理解每一行的含义。</span>
+  </p>
+  <div class="hero-meta">
+    <span class="chip chip-maroon"><span data-lang="en">7 sections</span><span data-lang="zh">7 节内容</span></span>
+    <span class="chip chip-green"><span data-lang="en">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span><span data-lang="zh">US CSTA &middot; AP CSP &middot; ON &middot; BC &middot; AB</span></span>
+    <span class="chip chip-purple"><span data-lang="en">Pseudocode + Python worked examples</span><span data-lang="zh">伪代码 + Python 例题</span></span>
+  </div>
+</section>
+
+<aside class="syllabus-map" id="syllabus-map">
+  <div class="syllabus-map-label"><span data-lang="en">Where this lives in your syllabus</span><span data-lang="zh">本单元在各大纲中的位置</span></div>
+  <div class="syllabus-map-grid">
+    <div>
+      <div class="region-header">&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></div>
+      <ul>
+        <li><code>3A-AP-13</code> <span data-lang="en">"Create prototypes that use algorithms to solve computational problems by leveraging prior student knowledge and personal interests." (CSTA K-12 CS Standards, Level 3A)</span><span data-lang="zh">"创建使用算法解决计算问题的原型，借助学生已有知识和个人兴趣。"（CSTA K-12 计算机科学标准，3A 级）</span></li>
+        <li><code>3A-AP-14</code> <span data-lang="en">"Use lists to simplify solutions, generalizing computational problems instead of repeatedly using simple variables." (CSTA Level 3A — the HS-level variable/list standard; variables are introduced at Level 2: <code>2-AP-11</code> "Create clearly named variables that represent different data types and perform operations on their values.")</span><span data-lang="zh">"使用列表简化解决方案，将计算问题泛化而非重复使用简单变量。"（CSTA 3A 级——HS 级变量/列表标准；变量在 Level 2 引入：<code>2-AP-11</code> "创建代表不同数据类型的明确命名变量并对其值执行操作。"）</span></li>
+        <li><span data-lang="en">AP CSP Big Idea 3 (AAP — Algorithms &amp; Programming): Learning Objective <code>AAP-1.A</code> "Represent a value with a variable." <code>AAP-1.B</code> "Determine the value of a variable as a result of an assignment." Topics 3.1 Variables and Assignments, 3.2 Data Abstraction, 3.3 Mathematical Expressions. Skill 3.A: "Generalize data sources through variables."</span><span data-lang="zh">AP CSP 大概念 3（AAP — 算法与编程）：学习目标 <code>AAP-1.A</code>"用变量表示一个值。" <code>AAP-1.B</code>"确定赋值后变量的值。"主题 3.1 变量与赋值，3.2 数据抽象，3.3 数学表达式。技能 3.A："通过变量泛化数据来源。"</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario — ICS3U</span><span data-lang="zh">安大略 — ICS3U</span></div>
+      <ul>
+        <li><strong>ICS3U</strong> <span data-lang="en">Strand A (Programming Concepts and Skills), Overall Expectation <code>A1</code>: "demonstrate the ability to use different data types, including one-dimensional arrays, in computer programs." Specific Expectation <code>A1.1</code>: "use constants and variables, including integers, floating points, strings, and Boolean values, correctly in computer programs."</span><span data-lang="zh">ICS3U A 单元（编程概念与技能），总体期望 <code>A1</code>："展示在计算机程序中使用不同数据类型（含一维数组）的能力。"具体期望 <code>A1.1</code>："在计算机程序中正确使用常量和变量，包括整数、浮点数、字符串和布尔值。"</span></li>
+        <li><strong>ICS3U</strong> <code>A1.3</code> <span data-lang="en">"use assignment statements correctly with both arithmetic and string expressions in computer programs."</span><span data-lang="zh"><code>A1.3</code>："在计算机程序中正确使用包含算术和字符串表达式的赋值语句。"</span></li>
+        <li><strong>ICS3U</strong> <code>A2.1</code> <span data-lang="en">"write programs that incorporate user input, processing, and screen output." (Programming strand A2)</span><span data-lang="zh"><code>A2.1</code>："编写包含用户输入、处理和屏幕输出的程序。"（编程单元 A2）</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia — CP11</span><span data-lang="zh">不列颠哥伦比亚 — CP11</span></div>
+      <ul>
+        <li><strong>Computer Studies 10</strong> <span data-lang="en">Content (verbatim): "introductory computer programming concepts and constructs (classes, objects, data types, constants and variables, expressions and instructions, order of operations, precedence of arithmetic operators, assignment and relational operators, decision and looping structures, Boolean operators, comparison operators, arithmetic operators)"</span><span data-lang="zh">Computer Studies 10 内容（原文）："初步计算机编程概念与构造（类、对象、数据类型、常量与变量、表达式与指令、运算顺序、算术运算符优先级、赋值与关系运算符、判断与循环结构、布尔运算符、比较运算符、算术运算符）"</span></li>
+        <li><strong>Computer Programming 11</strong> <span data-lang="en">Content (verbatim): "programming language constructs to support input/output, logic, decision structure, and loops"; "translation of design specifications into source code"</span><span data-lang="zh">Computer Programming 11 内容（原文）："支持输入/输出、逻辑、判断结构和循环的编程语言构造"；"将设计规格转化为源代码"</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="region-header">&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta — CSE1110</span><span data-lang="zh">阿尔伯塔 — CSE1110</span></div>
+      <ul>
+        <li><strong>CSE1110</strong> <span data-lang="en">Description (verbatim): "Students are introduced to a general programming environment in which they write simple structured algorithms and programs that input, process and output data, use some of the more basic operators and data types, and follow a sequential flow of control."</span><span data-lang="zh">CSE1110 描述（原文）："学生被引入通用编程环境，编写简单的结构化算法和程序，进行数据输入、处理和输出，使用部分基本运算符和数据类型，并遵循顺序控制流。"</span></li>
+        <li><strong>CSE1110</strong> <span data-lang="en">Outcomes (verbatim): "2.4.3 use appropriate data types such as integers, real numbers, characters and strings; 2.4.4 use appropriate variables and constants to hold data; 2.4.5 use literals and input commands … to provide data for processing; 2.4.6 use assignment, arithmetical and concatenation and interpolation operators … to process data; 2.4.7 use output commands … to display processed data."</span><span data-lang="zh">CSE1110 结果（原文）："2.4.3 使用适当的数据类型，如整数、实数、字符和字符串；2.4.4 使用适当的变量和常量保存数据；2.4.5 使用字面量和输入命令……提供待处理数据；2.4.6 使用赋值、算术和拼接与插值运算符……处理数据；2.4.7 使用输出命令……显示已处理数据。"</span></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+
+<section class="section" id="how-to-use">
+  <div class="section-label"><span data-lang="en">Read me first</span><span data-lang="zh">先读这里</span></div>
+  <h2><span data-lang="en">How to use this guide</span><span data-lang="zh">如何使用本指南</span></h2>
+  <p><span data-lang="en">Programming fundamentals are covered in every curriculum we map to. All four frameworks agree on the core building blocks: variables, data types (integer, float, string, boolean), input/output, and basic operators. Where they diverge is on <em>type conversion depth</em>: Ontario ICS4U strand A adds integer division, rounding, and the limitations of finite representation (a Grade-12 topic). Alberta CSE1110 names the full output-operator chain explicitly (outcomes 2.4.3–2.4.7). BC Computer Studies 10 lists all operators verbatim in its intro-constructs bullet. The table tells you which sections are core for you right now; each row cites the curriculum document it was checked against.</span><span data-lang="zh">编程基础在我们对照的所有大纲中均有涵盖。四套框架对核心构建块高度一致：变量（变量）、数据类型（整数、浮点数、字符串、布尔）、输入/输出和基本运算符。它们的分歧在于<em>类型转换深度</em>：安大略 ICS4U A 单元增加了整除、取整和有限表示局限（12 年级内容）。阿尔伯塔 CSE1110 明确列出了完整的输出运算符链（结果 2.4.3–2.4.7）。BC Computer Studies 10 在其初步构造条目中原文列出了所有运算符。下表告诉你当前哪些节属于你的核心；每行均注明所依据的课纲文件。</span></p>
+
+  <div style="overflow-x: auto; margin: 16px 0 18px;">
+  <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px;">
+    <thead>
+      <tr style="background: var(--bg); border-bottom: 2px solid var(--accent);">
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">If you are in&hellip;</span><span data-lang="zh">如果你在&hellip;</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Focus on these sections</span><span data-lang="zh">重点学习</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Defer / lighter</span><span data-lang="zh">可推迟 / 减负</span></th>
+        <th style="text-align: left; padding: 8px 10px;"><span data-lang="en">Source</span><span data-lang="zh">依据</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">US CSTA / AP CSP</span><span data-lang="zh">美国 CSTA / AP CSP</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7 in full. CSTA 3A-AP-14 (variables/lists), AP CSP AAP-1.A (represent a value with a variable), AAP-1.B (determine variable value after assignment), Topics 3.1, 3.2, 3.3 all map to this guide.</span><span data-lang="zh">&sect;1 至 &sect;7 完整学习。CSTA 3A-AP-14（变量/列表）、AP CSP AAP-1.A（用变量表示值）、AAP-1.B（确定赋值后变量值）、主题 3.1、3.2、3.3 均对应本指南。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;5 type conversion depth (casting in inheritance) is AP CSA territory; AP CSP floor needs only primitive-type casting.</span><span data-lang="zh">&sect;5 类型转换深度（继承中的类型转换）属 AP CSA 范畴；AP CSP 基础学生只需掌握基本类型转换。</span></td>
+        <td style="padding: 8px 10px;"><code>csta_apcsp_extract.md</code> <span data-lang="en">&mdash; CSTA 3A-AP-13, 3A-AP-14; AP CSP Big Idea 3 (AAP) AAP-1.A, AAP-1.B; topics 3.1, 3.2, 3.3</span><span data-lang="zh">&mdash; CSTA 3A-AP-13、3A-AP-14；AP CSP 大概念 3（AAP）AAP-1.A、AAP-1.B；主题 3.1、3.2、3.3</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">ON Grade 11 &mdash; ICS3U</span><span data-lang="zh">安大略 11 年级 &mdash; ICS3U</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7 in full. ICS3U Strand A (A1.1, A1.3, A2.1) directly names constants, variables, integers, floats, strings, booleans, assignment statements, and programs with user input/output.</span><span data-lang="zh">&sect;1 至 &sect;7 完整学习。ICS3U A 单元（A1.1、A1.3、A2.1）直接点名常量、变量、整数、浮点数、字符串、布尔值、赋值语句和包含用户输入/输出的程序。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Type conversion depth (&sect;5 going-deeper) is ICS4U A1.2 (Grade 12) &mdash; skip for ICS3U floor students.</span><span data-lang="zh">&sect;5 深入中的类型转换深度属 ICS4U A1.2（12 年级）&mdash;&mdash;ICS3U 基础学生可跳过。</span></td>
+        <td style="padding: 8px 10px;"><code>computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; ICS3U Strand A A1.1, A1.3, A2.1; ICS4U A1.1, A1.2, A1.4</span><span data-lang="zh">&mdash; ICS3U A 单元 A1.1、A1.3、A2.1；ICS4U A1.1、A1.2、A1.4</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">BC &mdash; CS10 / CP11</span><span data-lang="zh">BC &mdash; CS10 / CP11</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7. CS10 Content lists data types, constants and variables, arithmetic/relational/Boolean operators, and assignment operators verbatim. CP11 Content names "programming language constructs to support input/output, logic, decision structure, and loops."</span><span data-lang="zh">&sect;1 至 &sect;7。BC CS10 内容原文列出数据类型、常量与变量、算术/关系/布尔运算符和赋值运算符。CP11 内容点名"支持输入/输出、逻辑、判断结构和循环的编程语言构造"。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">BC has no explicit type-casting standard; &sect;5 going-deeper is enrichment for BC students.</span><span data-lang="zh">BC 无明确类型转换标准；&sect;5 深入对 BC 学生为拓展内容。</span></td>
+        <td style="padding: 8px 10px;"><code>bc/computer_studies_11-12_extract.md</code> <span data-lang="en">&mdash; CS10 intro-constructs Content bullet; CP11 "programming language constructs…" Content bullet</span><span data-lang="zh">&mdash; CS10 初步构造内容条目；CP11"编程语言构造……"内容条目</span></td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px 10px;"><strong>&#x1F1E8;&#x1F1E6; <span data-lang="en">AB &mdash; CSE1110</span><span data-lang="zh">阿尔伯塔 &mdash; CSE1110</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">&sect;1 through &sect;7. CSE1110 outcomes 2.4.3–2.4.7 explicitly name data types (integers, reals, characters, strings), variables, constants, input commands, assignment/arithmetic operators, and output commands — a near-perfect match for this guide.</span><span data-lang="zh">&sect;1 至 &sect;7。CSE1110 结果 2.4.3–2.4.7 明确点名数据类型（整数、实数、字符、字符串）、变量、常量、输入命令、赋值/算术运算符和输出命令——与本指南高度契合。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Advanced type representation (&sect;5 going-deeper) is CSE1120+ territory &mdash; skip for CSE1110 floor students.</span><span data-lang="zh">高级类型表示（&sect;5 深入）属 CSE1120+ 范畴&mdash;&mdash;CSE1110 基础学生可跳过。</span></td>
+        <td style="padding: 8px 10px;"><code>computing_science_cse_extract.md</code> <span data-lang="en">&mdash; CSE1110 outcomes 2.4.3–2.4.7</span><span data-lang="zh">&mdash; CSE1110 结果 2.4.3–2.4.7</span></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 10px;"><strong>&#x1F1FA;&#x1F1F8; <span data-lang="en">AP CSP / AP CSA feeder track</span><span data-lang="zh">AP CSP / AP CSA 衔接轨道</span></strong></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">All seven sections including going-deeper boxes. AP CSP Topics 3.1–3.3 (variables, data abstraction, expressions) and AP CSA (Java: typed variables, casting, I/O) both depend on mastery of this unit.</span><span data-lang="zh">全部 7 节，包含深入框。AP CSP 主题 3.1–3.3（变量、数据抽象、表达式）和 AP CSA（Java：类型化变量、类型转换、I/O）都依赖本单元的掌握。</span></td>
+        <td style="padding: 8px 10px;"><span data-lang="en">Nothing &mdash; this unit is the prerequisite vocabulary that both AP CS courses assume. See the feeder links in "What This Feeds Into."</span><span data-lang="zh">无 &mdash; 本单元是两门 AP CS 课程所假设的前置词汇。见"本单元的去向"中的衔接链接。</span></td>
+        <td style="padding: 8px 10px;"><code>csta_apcsp_extract.md</code> <span data-lang="en">&mdash; AP CSP Big Idea 3 (AAP) topics 3.1 Variables and Assignments, 3.2 Data Abstraction, 3.3 Mathematical Expressions</span><span data-lang="zh">&mdash; AP CSP 大概念 3（AAP）主题 3.1 变量与赋值、3.2 数据抽象、3.3 数学表达式</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="margin-top: 12px;"><span data-lang="en">Once you have located your row, use the two cards below for the speed at which you should work through the recommended sections.</span><span data-lang="zh">找到所在行后，用下面两张卡片决定推进速度。</span></p>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-orange">!</div><div class="card-title"><span data-lang="en">If you are cramming the night before</span><span data-lang="zh">如果你在临阵磨枪</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Memorise four things: what a variable is and how assignment works (<code>x = 5</code> stores 5, <code>x == 5</code> tests equality); the four primitive data types (int, float, string, boolean) and one example of each; how to call <code>input()</code> and <code>print()</code> in Python; and the order-of-operations rule (PEMDAS). Read every cram-cheat box. Skip the going-deeper type-conversion sections.</span><span data-lang="zh">背熟四件事：变量是什么以及赋值如何工作（<code>x = 5</code> 存储 5，<code>x == 5</code> 测试相等）；四种基本数据类型（整数、浮点数、字符串、布尔）及各一个例子；如何在 Python 中调用 <code>input()</code> 和 <code>print()</code>；以及运算优先级规则（PEMDAS）。读每个速记框，跳过深入的类型转换部分。</span></p>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-purple">*</div><div class="card-title"><span data-lang="en">If you are going for the top mark</span><span data-lang="zh">如果你目标顶分</span></div></div>
+      <p style="font-size: 0.95rem;"><span data-lang="en">Always declare your types explicitly and convert deliberately. AP CSP Topics 3.1–3.3 test whether you can predict the value of a variable after a sequence of assignment statements. ON ICS3U A1.1 and AB CSE1110 2.4.3–2.4.7 require you to use the correct data type for each piece of data &mdash; &sect;2 and &sect;5 show you the rules. For AP CSA: Java is statically typed, so &sect;5 type casting is directly assessed from Unit 1 of that course onward.</span><span data-lang="zh">始终显式声明类型并有意识地转换。AP CSP 主题 3.1–3.3 测试你是否能在一系列赋值语句后预测变量的值。ON ICS3U A1.1 和 AB CSE1110 2.4.3–2.4.7 要求你为每条数据使用正确的数据类型——&sect;2 和 &sect;5 展示了相关规则。对于 AP CSA：Java 是静态类型语言，因此从该课程第 1 单元起就直接评估 &sect;5 的类型转换。</span></p>
+    </div>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);"><span data-lang="en">Type conversion note.</span><span data-lang="zh">类型转换说明。</span></strong>
+    <span data-lang="en">Section 5 (Type Conversion and Casting) introduces explicit conversion functions (<code>int()</code>, <code>float()</code>, <code>str()</code>) and the idea that data changes meaning when its type changes. The <span class="honors-flag">Honors</span> chip marks the going-deeper box where integer overflow, floating-point precision limits, and widening/narrowing casts (Java style) are introduced. That box maps to Ontario ICS4U A1.2/A1.4 (Grade 12) and Alberta CSE1120 (Structured Programming 2). For ICS3U / CSE1110 / AP CSP floor students, the three Python conversion functions in the cram box are the assessed level.</span><span data-lang="zh">&sect;5（类型转换）介绍了显式转换函数（<code>int()</code>、<code>float()</code>、<code>str()</code>），以及数据类型改变时含义也随之改变的概念。<span class="honors-flag">Honors</span> 标记深入框，其中引入整数溢出、浮点精度限制和扩宽/收窄转换（Java 风格）。该框对应安大略 ICS4U A1.2/A1.4（12 年级）和阿尔伯塔 CSE1120（结构化编程 2）。对于 ICS3U / CSE1110 / AP CSP 基础学生，速记框中的三个 Python 转换函数是被评估的层次。</span>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-1">
+  <div class="section-label"><span data-lang="en">Section 1 &middot; Variables and assignment</span><span data-lang="zh">第 1 节 &middot; 变量与赋值</span></div>
+  <h2><span data-lang="en">Variables and Assignment</span><span data-lang="zh">变量与赋值</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Three facts &mdash; memorise before anything else.</span><span data-lang="zh">三个要点 &mdash; 最先背会这些。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Variable</span><span data-lang="zh">变量</span></strong> <span data-lang="en">&mdash; a named storage location in memory that holds a value. The name is chosen by the programmer. AP CSP AAP-1.A: "Represent a value with a variable."</span><span data-lang="zh">&mdash; 内存中保存值的具名存储位置。名称由程序员选择。AP CSP AAP-1.A："用变量表示一个值。"</span></li>
+      <li><strong><span data-lang="en">Assignment</span><span data-lang="zh">赋值</span></strong> <span data-lang="en">&mdash; stores a value in a variable. <code>x = 5</code> puts 5 into x. AP CSP AAP-1.B: "Determine the value of a variable as a result of an assignment." ON ICS3U A1.3: "use assignment statements correctly."</span><span data-lang="zh">&mdash; 将值存储在变量中。<code>x = 5</code> 将 5 放入 x。AP CSP AAP-1.B："确定赋值后变量的值。"ON ICS3U A1.3："正确使用赋值语句。"</span></li>
+      <li><strong><span data-lang="en">Assignment &ne; equality test</span><span data-lang="zh">赋值 &ne; 等式测试</span></strong> <span data-lang="en">&mdash; <code>x = 5</code> (single <code>=</code>) writes 5 to x. <code>x == 5</code> (double <code>==</code>) checks if x equals 5. Confusing them is the single most common beginner error.</span><span data-lang="zh">&mdash; <code>x = 5</code>（单个 <code>=</code>）将 5 写入 x。<code>x == 5</code>（双 <code>==</code>）检查 x 是否等于 5。混淆两者是最常见的初学者错误。</span></li>
+    </ul>
+    <span data-lang="en"><strong>Key idea:</strong> after each assignment, the variable holds exactly one value. The right-hand side is evaluated first using the current state of all variables, then the result is stored in the left-hand side. So <code>x = x + 1</code> is valid: read x, add 1, write back. AB CSE1110 outcome 2.4.4: "use appropriate variables and constants to hold data."</span><span data-lang="zh"><strong>核心思路：</strong>每次赋值后，变量恰好保存一个值。右侧首先使用所有变量的当前状态求值，然后将结果存储到左侧。所以 <code>x = x + 1</code> 是合法的：读取 x，加 1，写回。AB CSE1110 结果 2.4.4："使用适当的变量和常量保存数据。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-blue">WE</div><div class="card-title"><span data-lang="en">Worked Example 1 &middot; Swapping two variables</span><span data-lang="zh">例题 1 &middot; 交换两个变量</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Problem: given <code>a = 10</code> and <code>b = 20</code>, swap their values so that after the operation <code>a == 20</code> and <code>b == 10</code>. Write pseudocode and Python.</span><span data-lang="zh">问题：给定 <code>a = 10</code> 和 <code>b = 20</code>，交换它们的值，使操作后 <code>a == 20</code>，<code>b == 10</code>。写出伪代码和 Python。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Pseudocode (using a temporary variable).</span><span data-lang="zh">伪代码（使用临时变量）。</span></strong></p>
+    <pre><code>SET a TO 10
+SET b TO 20
+SET temp TO a      -- save a's value
+SET a TO b         -- a now holds 20
+SET b TO temp      -- b now holds 10
+OUTPUT a, b        -- prints: 20 10</code></pre>
+    <p><span data-lang="en">Without <code>temp</code>, the first assignment <code>SET a TO b</code> would overwrite a's original value before b could capture it.</span><span data-lang="zh">若没有 <code>temp</code>，第一条赋值 <code>SET a TO b</code> 会在 b 捕获 a 的原始值之前将其覆盖。</span></p>
+    <p><strong><span data-lang="en">Python (two ways).</span><span data-lang="zh">Python（两种方式）。</span></strong></p>
+    <pre><code># Classic temp variable
+a = 10
+b = 20
+temp = a
+a = b
+b = temp
+print(a, b)   # 20 10
+
+# Python shortcut (tuple unpacking)
+a, b = b, a
+print(a, b)   # 20 10</code></pre>
+    <p><span data-lang="en">The tuple-unpacking shortcut evaluates both sides before any assignment, so no temp is needed. Both produce identical results.</span><span data-lang="zh">元组解包方式在任何赋值之前就对两侧求值，因此不需要临时变量。两种方式产生相同结果。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">After these lines run, what is the value of <code>y</code>?<br><code>x = 3</code><br><code>y = x + 4</code><br><code>x = 10</code></span><span data-lang="zh">这几行运行后，<code>y</code> 的值是什么？<br><code>x = 3</code><br><code>y = x + 4</code><br><code>x = 10</code></span></div><div class="quiz-number">&sect;1 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">10</div>
+      <div class="quiz-opt" data-idx="1">14</div>
+      <div class="quiz-opt" data-idx="2">7</div>
+      <div class="quiz-opt" data-idx="3">3</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Line 2 sets y = x + 4 = 3 + 4 = 7 using x's value at that moment. Line 3 then changes x to 10, but y has already been set and does not update automatically. y stays 7.</span><span data-lang="zh">第 2 行用 x 此时的值设置 y = x + 4 = 3 + 4 = 7。第 3 行再将 x 改为 10，但 y 已经被设置，不会自动更新。y 保持为 7。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Assignment captures the value at the moment it runs. Changing x afterwards does not retroactively change y. y = 3 + 4 = 7.</span><span data-lang="zh">赋值捕获运行时刻的值。之后更改 x 不会追溯改变 y。y = 3 + 4 = 7。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which line correctly increases the value of <code>score</code> by 10?</span><span data-lang="zh">哪行代码能正确地将 <code>score</code> 的值增加 10？</span></div><div class="quiz-number">&sect;1 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>score == score + 10</code></div>
+      <div class="quiz-opt" data-idx="1"><code>score = score + 10</code></div>
+      <div class="quiz-opt" data-idx="2"><code>score + 10 = score</code></div>
+      <div class="quiz-opt" data-idx="3"><code>10 + score</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>score = score + 10</code> reads the current value of score, adds 10, then writes the result back to score. Single <code>=</code> is assignment. Double <code>==</code> is a comparison that returns True/False but stores nothing.</span><span data-lang="zh"><code>score = score + 10</code> 读取 score 当前值，加 10，然后将结果写回 score。单个 <code>=</code> 是赋值。双 <code>==</code> 是返回 True/False 但不存储任何内容的比较。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Only single <code>=</code> stores a value. The left side must be a variable name. <code>score + 10 = score</code> and <code>10 + score</code> (no assignment) are invalid for this purpose.</span><span data-lang="zh">只有单个 <code>=</code> 才能存储值。左侧必须是变量名。<code>score + 10 = score</code> 和 <code>10 + score</code>（无赋值）不适用于此目的。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; variable names and memory model</span><span data-lang="zh">深入 &mdash; 变量名与内存模型</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">In Python, a variable name is a <em>label</em> that points to an object in memory; the object itself carries the type. When you write <code>x = 5</code>, Python creates an integer object with value 5 and makes the name <code>x</code> point to it. When you write <code>x = "hello"</code> next, <code>x</code> now points to a string object; the integer 5 object is unchanged (and eventually garbage-collected if nothing else references it). This is different from statically-typed languages like Java or C where a variable has a fixed type declared at creation. Understanding this model explains why Python variables can be reassigned to a different type, and why <code>is</code> tests identity (same object) while <code>==</code> tests equality (same value). AP CSP AAP-1.A/1.B treats variables as simple value containers — the Python object model is a going-deeper layer.</span><span data-lang="zh">在 Python 中，变量名是指向内存中对象的<em>标签</em>；对象本身携带类型。当你写 <code>x = 5</code> 时，Python 创建一个值为 5 的整数对象，并让名称 <code>x</code> 指向它。当你接着写 <code>x = "hello"</code> 时，<code>x</code> 现在指向一个字符串对象；整数 5 对象不变（如果没有其他引用，最终会被垃圾回收）。这与 Java 或 C 等静态类型语言不同，在那些语言中变量在创建时声明了固定类型。理解这个模型解释了为什么 Python 变量可以重新赋值为不同类型，以及为什么 <code>is</code> 测试同一性（同一对象）而 <code>==</code> 测试相等性（相同值）。AP CSP AAP-1.A/1.B 将变量视为简单的值容器——Python 对象模型是深入层次的内容。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-2">
+  <div class="section-label"><span data-lang="en">Section 2 &middot; Data types</span><span data-lang="zh">第 2 节 &middot; 数据类型</span></div>
+  <h2><span data-lang="en">Data Types: int, float, string, boolean</span><span data-lang="zh">数据类型：整数、浮点数、字符串、布尔</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Four primitive types &mdash; know each by example.</span><span data-lang="zh">四种基本类型 &mdash; 用例子记住每种。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">int (integer / 整数)</span><span data-lang="zh">int（整数）</span></strong> <span data-lang="en">&mdash; whole numbers, positive or negative. Examples: <code>42</code>, <code>-7</code>, <code>0</code>. Use for counts, indices, ages.</span><span data-lang="zh">&mdash; 正负整数。例：<code>42</code>、<code>-7</code>、<code>0</code>。用于计数、索引、年龄。</span></li>
+      <li><strong><span data-lang="en">float (floating-point / 浮点数)</span><span data-lang="zh">float（浮点数）</span></strong> <span data-lang="en">&mdash; numbers with a decimal point. Examples: <code>3.14</code>, <code>-0.5</code>, <code>2.0</code>. Use for measurements, prices, scientific values.</span><span data-lang="zh">&mdash; 含小数点的数。例：<code>3.14</code>、<code>-0.5</code>、<code>2.0</code>。用于测量值、价格、科学值。</span></li>
+      <li><strong><span data-lang="en">str (string / 字符串)</span><span data-lang="zh">str（字符串）</span></strong> <span data-lang="en">&mdash; a sequence of characters enclosed in quotes. Examples: <code>"hello"</code>, <code>"42"</code>, <code>""</code> (empty string). Use for text, names, messages.</span><span data-lang="zh">&mdash; 用引号括起来的字符序列。例：<code>"hello"</code>、<code>"42"</code>、<code>""</code>（空字符串）。用于文本、姓名、消息。</span></li>
+      <li><strong><span data-lang="en">bool (boolean / 布尔)</span><span data-lang="zh">bool（布尔）</span></strong> <span data-lang="en">&mdash; exactly two values: <code>True</code> or <code>False</code>. Use for conditions, flags, on/off states. ON ICS3U A1.1: "use constants and variables, including integers, floating points, strings, and Boolean values, correctly."</span><span data-lang="zh">&mdash; 只有两个值：<code>True</code>（真）或 <code>False</code>（假）。用于条件、标志、开/关状态。ON ICS3U A1.1："正确使用常量和变量，包括整数、浮点数、字符串和布尔值。"</span></li>
+    </ul>
+    <span data-lang="en"><strong>Critical trap:</strong> <code>"42"</code> (string) and <code>42</code> (integer) are different objects. You cannot add a string and a number: <code>"score" + 5</code> raises a TypeError. Always check the type before combining values. AB CSE1110 outcome 2.4.3: "use appropriate data types such as integers, real numbers, characters and strings."</span><span data-lang="zh"><strong>关键陷阱：</strong><code>"42"</code>（字符串）和 <code>42</code>（整数）是不同的对象。不能把字符串和数字相加：<code>"score" + 5</code> 会引发 TypeError。在组合值之前始终检查类型。AB CSE1110 结果 2.4.3："使用适当的数据类型，如整数、实数、字符和字符串。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 2 &middot; Declaring and inspecting types</span><span data-lang="zh">例题 2 &middot; 声明并检查类型</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Declare one variable of each type and use <code>type()</code> to confirm.</span><span data-lang="zh">声明每种类型的一个变量，并用 <code>type()</code> 确认。</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>age    = 17           # int
+gpa    = 3.85         # float
+name   = "Alex"       # str
+passed = True         # bool
+
+print(type(age))      # &lt;class 'int'&gt;
+print(type(gpa))      # &lt;class 'float'&gt;
+print(type(name))     # &lt;class 'str'&gt;
+print(type(passed))   # &lt;class 'bool'&gt;</code></pre>
+    <p><span data-lang="en">Python infers the type from the literal value written on the right-hand side: integer literal → int, decimal literal → float, quoted text → str, <code>True</code>/<code>False</code> → bool. No explicit type declaration is needed in Python (unlike Java's <code>int age = 17;</code>).</span><span data-lang="zh">Python 从右侧写的字面值推断类型：整数字面值 → int，十进制字面值 → float，引号文本 → str，<code>True</code>/<code>False</code> → bool。Python 不需要显式类型声明（不同于 Java 的 <code>int age = 17;</code>）。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the data type of <code>"3.14"</code> (with quotes) in Python?</span><span data-lang="zh">在 Python 中，<code>"3.14"</code>（带引号）的数据类型是什么？</span></div><div class="quiz-number">&sect;2 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">str (string)</span><span data-lang="zh">str（字符串）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">float</span><span data-lang="zh">float（浮点数）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">int (integer)</span><span data-lang="zh">int（整数）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">bool (boolean)</span><span data-lang="zh">bool（布尔）</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Quotation marks always make a string, regardless of what is inside. <code>"3.14"</code> is a string containing the characters 3, ., 1, 4 — not the floating-point number 3.14. You cannot do arithmetic directly on it.</span><span data-lang="zh">引号总是创建字符串，无论里面是什么。<code>"3.14"</code> 是包含字符 3、.、1、4 的字符串——而不是浮点数 3.14。不能直接对它进行算术运算。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Quotes = string. Without quotes, 3.14 would be a float. The decimal point alone does not determine the type; the presence or absence of quotes does.</span><span data-lang="zh">引号 = 字符串。没有引号，3.14 才是浮点数。小数点本身不决定类型；是否有引号才决定类型。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which data type is best for storing whether a student has submitted their assignment?</span><span data-lang="zh">哪种数据类型最适合存储学生是否已提交作业？</span></div><div class="quiz-number">&sect;2 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">int</span><span data-lang="zh">整数 (int)</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">float</span><span data-lang="zh">浮点数 (float)</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">str</span><span data-lang="zh">字符串 (str)</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">bool</span><span data-lang="zh">布尔 (bool)</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">A boolean (bool) has exactly two values: True or False. "Has the student submitted?" is a yes/no question, so bool is the correct type. Using an integer (0/1) works but is less expressive and more error-prone.</span><span data-lang="zh">布尔（bool）只有两个值：True 或 False。"学生是否已提交？"是一个是/否问题，所以 bool 是正确类型。使用整数（0/1）可行，但表达力较差且更容易出错。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Yes/no conditions use bool. int is for counting; float for decimals; str for text. "submitted = True" reads clearly and cannot be accidentally set to 2 the way an int could.</span><span data-lang="zh">是/否条件使用 bool。int 用于计数；float 用于小数；str 用于文本。"submitted = True" 读起来清晰，且不像 int 那样可能被意外设为 2。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; static vs dynamic typing and Java comparison</span><span data-lang="zh">深入 &mdash; 静态与动态类型及 Java 对比</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">Python is <strong>dynamically typed</strong>: the type is attached to the object, not the variable name, and can change at runtime. Java is <strong>statically typed</strong>: the type is declared with the variable name and cannot change. In Java: <code>int age = 17;</code> locks <code>age</code> to integers forever; writing <code>age = "seventeen"</code> is a compile-time error. In Python: <code>age = 17</code> then <code>age = "seventeen"</code> is legal (though bad practice). AP CSA (Java) requires static type declarations from Unit 1; this guide's Python examples carry over directly because the underlying type concepts are the same — only the declaration syntax differs. ON ICS4U A1.4 adds the idea of <em>finite representation limits</em>: an <code>int</code> in Java holds at most 2,147,483,647 (2³¹ − 1); exceeding it causes integer overflow, a silent logic error. Python integers have no size limit (arbitrary precision), which is why overflow is not a Python beginner concern.</span><span data-lang="zh">Python 是<strong>动态类型</strong>：类型附加在对象上，而不是变量名上，可以在运行时改变。Java 是<strong>静态类型</strong>：类型随变量名声明，不可更改。Java 中：<code>int age = 17;</code> 永久将 <code>age</code> 锁定为整数；写 <code>age = "seventeen"</code> 是编译时错误。Python 中：<code>age = 17</code> 后 <code>age = "seventeen"</code> 是合法的（尽管是不良实践）。AP CSA（Java）从第 1 单元就要求静态类型声明；本指南的 Python 示例可直接迁移，因为底层类型概念相同——只是声明语法不同。ON ICS4U A1.4 增加了<em>有限表示局限</em>的概念：Java 中的 <code>int</code> 最多保存 2,147,483,647（2³¹ − 1）；超出则导致整数溢出，一种无声的逻辑错误。Python 整数没有大小限制（任意精度），这就是为什么溢出不是 Python 初学者需要关心的问题。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-3">
+  <div class="section-label"><span data-lang="en">Section 3 &middot; Input and output</span><span data-lang="zh">第 3 节 &middot; 输入与输出</span></div>
+  <h2><span data-lang="en">Input and Output</span><span data-lang="zh">输入与输出</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Two Python functions to know cold.</span><span data-lang="zh">必须熟记的两个 Python 函数。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en"><code>input(prompt)</code></span><span data-lang="zh"><code>input(提示)</code></span></strong> <span data-lang="en">&mdash; reads a line of text typed by the user and returns it as a <strong>string</strong>, always. If you need a number, convert it immediately: <code>age = int(input("Age: "))</code>. ON ICS3U A2.1: "write programs that incorporate user input, processing, and screen output."</span><span data-lang="zh">&mdash; 读取用户输入的一行文本，始终以<strong>字符串</strong>返回。如果需要数字，立即转换：<code>age = int(input("年龄："))</code>。ON ICS3U A2.1："编写包含用户输入、处理和屏幕输出的程序。"</span></li>
+      <li><strong><span data-lang="en"><code>print(value, ...)</code></span><span data-lang="zh"><code>print(值, ...)</code></span></strong> <span data-lang="en">&mdash; sends output to the screen. Can print multiple values separated by commas: <code>print("Name:", name, "Age:", age)</code>. AB CSE1110 outcome 2.4.7: "use output commands … to display processed data."</span><span data-lang="zh">&mdash; 将输出发送到屏幕。可以用逗号分隔打印多个值：<code>print("姓名：", name, "年龄：", age)</code>。AB CSE1110 结果 2.4.7："使用输出命令……显示已处理数据。"</span></li>
+    </ul>
+    <span data-lang="en"><strong>Critical:</strong> <code>input()</code> ALWAYS returns a string. Forgetting to convert is the most common beginner I/O bug: <code>x = input("Enter number: ")</code> then <code>x + 1</code> raises a TypeError because you are trying to add a string and an int. AB CSE1110 outcome 2.4.5: "use literals and input commands … to provide data for processing."</span><span data-lang="zh"><strong>关键：</strong><code>input()</code> 始终返回字符串。忘记转换是最常见的初学者 I/O 错误：<code>x = input("输入数字：")</code> 然后 <code>x + 1</code> 会引发 TypeError，因为你在尝试将字符串和整数相加。AB CSE1110 结果 2.4.5："使用字面量和输入命令……提供待处理数据。"</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-orange">WE</div><div class="card-title"><span data-lang="en">Worked Example 3 &middot; Area of a rectangle</span><span data-lang="zh">例题 3 &middot; 矩形面积</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Read width and height from the user and print the area.</span><span data-lang="zh">从用户读取宽度和高度，打印面积。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Pseudocode.</span><span data-lang="zh">伪代码。</span></strong></p>
+    <pre><code>INPUT width
+INPUT height
+SET area TO width * height
+OUTPUT area</code></pre>
+    <p><strong><span data-lang="en">Python.</span><span data-lang="zh">Python。</span></strong></p>
+    <pre><code>width  = float(input("Enter width:  "))
+height = float(input("Enter height: "))
+area   = width * height
+print("Area =", area)</code></pre>
+    <p><span data-lang="en">We use <code>float()</code> so the program handles decimal dimensions (e.g., 3.5 metres). If we used <code>int()</code>, entering 3.5 would raise a ValueError. Always choose the conversion that matches what the user might realistically type.</span><span data-lang="zh">使用 <code>float()</code> 是为了让程序处理小数尺寸（如 3.5 米）。如果使用 <code>int()</code>，输入 3.5 会引发 ValueError。始终选择与用户实际可能输入相匹配的转换。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A student writes: <code>n = input("Enter a number: ")</code> then <code>result = n * 2</code>. If the user types 5, what is <code>result</code>?</span><span data-lang="zh">一名学生写道：<code>n = input("输入一个数字：")</code> 然后 <code>result = n * 2</code>。如果用户输入 5，<code>result</code> 是什么？</span></div><div class="quiz-number">&sect;3 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">10</div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">A TypeError (cannot multiply)</span><span data-lang="zh">TypeError（无法相乘）</span></div>
+      <div class="quiz-opt" data-idx="2"><code>"55"</code></div>
+      <div class="quiz-opt" data-idx="3">5</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>input()</code> returns a string. So <code>n = "5"</code> (string). In Python, <code>"5" * 2</code> is string repetition: <code>"55"</code>. To get the integer 10, you need <code>n = int(input(...))</code> first.</span><span data-lang="zh"><code>input()</code> 返回字符串。所以 <code>n = "5"</code>（字符串）。在 Python 中，<code>"5" * 2</code> 是字符串重复：<code>"55"</code>。要得到整数 10，需要先 <code>n = int(input(...))</code>。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en"><code>input()</code> always returns a string. String * integer = repeated string in Python, not arithmetic multiplication. Convert first with <code>int()</code> or <code>float()</code>.</span><span data-lang="zh"><code>input()</code> 总是返回字符串。Python 中字符串 * 整数 = 重复字符串，而不是算术乘法。先用 <code>int()</code> 或 <code>float()</code> 转换。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which line correctly reads an integer from the user into variable <code>age</code>?</span><span data-lang="zh">哪行代码能正确地从用户读取整数到变量 <code>age</code>？</span></div><div class="quiz-number">&sect;3 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>age = input("Age: ")</code></div>
+      <div class="quiz-opt" data-idx="1"><code>age = int(input("Age: "))</code></div>
+      <div class="quiz-opt" data-idx="2"><code>age = print(input("Age: "))</code></div>
+      <div class="quiz-opt" data-idx="3"><code>age = float(input("Age: "))</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>int(input("Age: "))</code> reads the string typed by the user and immediately converts it to an integer. Option A leaves it as a string; option C assigns the return value of print (which is None); option D gives a float (e.g., 17.0, not 17).</span><span data-lang="zh"><code>int(input("年龄："))</code> 读取用户输入的字符串并立即转换为整数。选项 A 将其保留为字符串；选项 C 赋值 print 的返回值（即 None）；选项 D 给出浮点数（如 17.0，而非 17）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">input() always returns a string. To get an int, wrap it: int(input(...)). Never assign print()'s return value — print returns None.</span><span data-lang="zh">input() 总是返回字符串。要得到整数，需要包装：int(input(...))。永远不要赋值 print() 的返回值——print 返回 None。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-4">
+  <div class="section-label"><span data-lang="en">Section 4 &middot; Operators</span><span data-lang="zh">第 4 节 &middot; 运算符</span></div>
+  <h2><span data-lang="en">Operators: Arithmetic and Relational</span><span data-lang="zh">运算符：算术与关系</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Arithmetic operators (work on numbers) and relational operators (return bool).</span><span data-lang="zh">算术运算符（作用于数字）与关系运算符（返回布尔值）。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">Arithmetic:</span><span data-lang="zh">算术运算符：</span></strong> <span data-lang="en"><code>+</code> add, <code>-</code> subtract, <code>*</code> multiply, <code>/</code> true divide (always float), <code>//</code> floor divide (integer result), <code>%</code> remainder, <code>**</code> power. BC CS10 Content (verbatim): "precedence of arithmetic operators." AB CSE1110 outcome 2.4.6: "use assignment, arithmetical … operators … to process data."</span><span data-lang="zh"><code>+</code> 加，<code>-</code> 减，<code>*</code> 乘，<code>/</code> 真除（总是浮点数），<code>//</code> 整除（整数结果），<code>%</code> 余数，<code>**</code> 幂。BC CS10 内容（原文）："算术运算符优先级。" AB CSE1110 结果 2.4.6："使用赋值、算术……运算符……处理数据。"</span></li>
+      <li><strong><span data-lang="en">Relational (comparison):</span><span data-lang="zh">关系（比较）运算符：</span></strong> <span data-lang="en"><code>==</code> equal, <code>!=</code> not equal, <code>&lt;</code> less than, <code>&gt;</code> greater than, <code>&lt;=</code> less-or-equal, <code>&gt;=</code> greater-or-equal. Always return <code>True</code> or <code>False</code>. ON ICS3U A1.4 names all six. BC CS10 Content (verbatim): "assignment and relational operators."</span><span data-lang="zh"><code>==</code> 等于，<code>!=</code> 不等于，<code>&lt;</code> 小于，<code>&gt;</code> 大于，<code>&lt;=</code> 小于等于，<code>&gt;=</code> 大于等于。总是返回 <code>True</code> 或 <code>False</code>。ON ICS3U A1.4 列出所有六种。BC CS10 内容（原文）："赋值与关系运算符。"</span></li>
+      <li><strong><span data-lang="en">PEMDAS / BODMAS order:</span><span data-lang="zh">运算优先级（PEMDAS/BODMAS）：</span></strong> <span data-lang="en">Parentheses → Exponents → Multiply/Divide → Add/Subtract. When in doubt, add parentheses.</span><span data-lang="zh">括号 → 指数 → 乘/除 → 加/减。有疑问时，加括号。</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-green">WE</div><div class="card-title"><span data-lang="en">Worked Example 4 &middot; Operator results table</span><span data-lang="zh">例题 4 &middot; 运算符结果表</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Trace each expression given <code>a = 17</code> and <code>b = 5</code>.</span><span data-lang="zh">给定 <code>a = 17</code>，<code>b = 5</code>，追踪每个表达式。</span></p>
+  </div>
+  <div class="worked-solution">
+    <pre><code>a = 17
+b = 5
+
+print(a + b)   # 22    (addition / 加法)
+print(a - b)   # 12    (subtraction / 减法)
+print(a * b)   # 85    (multiplication / 乘法)
+print(a / b)   # 3.4   (true divide — always float / 真除——始终浮点数)
+print(a // b)  # 3     (floor divide — integer quotient / 整除——整数商)
+print(a % b)   # 2     (remainder: 17 = 3*5 + 2 / 余数：17 = 3*5 + 2)
+print(a ** 2)  # 289   (power: 17² / 幂：17²)
+
+print(a > b)   # True  (relational / 关系)
+print(a == 17) # True
+print(a != b)  # True
+print(b >= 10) # False</code></pre>
+    <p><span data-lang="en">Key distinction: <code>a / b</code> gives <code>3.4</code> (float). <code>a // b</code> gives <code>3</code> (int, rounds toward zero). <code>a % b</code> gives the leftover <code>2</code>. Knowing <code>//</code> and <code>%</code> is essential for problems like "how many whole hours in 200 minutes?" (200 // 60 = 3) and "how many minutes left over?" (200 % 60 = 20).</span><span data-lang="zh">关键区别：<code>a / b</code> 给出 <code>3.4</code>（浮点数）。<code>a // b</code> 给出 <code>3</code>（整数，向零取整）。<code>a % b</code> 给出余数 <code>2</code>。掌握 <code>//</code> 和 <code>%</code> 对解决"200 分钟有几个完整小时？"（200 // 60 = 3）和"剩余几分钟？"（200 % 60 = 20）等问题至关重要。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the value of <code>10 % 3</code> in Python?</span><span data-lang="zh">Python 中 <code>10 % 3</code> 的值是多少？</span></div><div class="quiz-number">&sect;4 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">3</div>
+      <div class="quiz-opt" data-idx="1">3.33</div>
+      <div class="quiz-opt" data-idx="2">1</div>
+      <div class="quiz-opt" data-idx="3">0</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>%</code> is the remainder (modulo) operator. 10 = 3 × 3 + 1, so the remainder is 1. Use <code>%</code> to check divisibility: if <code>n % 2 == 0</code> then n is even.</span><span data-lang="zh"><code>%</code> 是余数（取模）运算符。10 = 3 × 3 + 1，所以余数是 1。使用 <code>%</code> 检查整除性：如果 <code>n % 2 == 0</code>，则 n 是偶数。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">% gives the remainder after integer division. 10 ÷ 3 = 3 remainder 1. So 10 % 3 = 1.</span><span data-lang="zh">% 给出整除后的余数。10 ÷ 3 = 3 余 1。所以 10 % 3 = 1。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which expression evaluates to <code>True</code> if <code>x = 8</code>?</span><span data-lang="zh">当 <code>x = 8</code> 时，哪个表达式结果为 <code>True</code>？</span></div><div class="quiz-number">&sect;4 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>x % 2 == 0</code></div>
+      <div class="quiz-opt" data-idx="1"><code>x &gt; 10</code></div>
+      <div class="quiz-opt" data-idx="2"><code>x == 9</code></div>
+      <div class="quiz-opt" data-idx="3"><code>x != 8</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>8 % 2 == 0</code>: 8 ÷ 2 = 4 remainder 0, so True. This is the standard even-number check. The others: 8 &gt; 10 is False; 8 == 9 is False; 8 != 8 is False.</span><span data-lang="zh"><code>8 % 2 == 0</code>：8 ÷ 2 = 4 余 0，所以为 True。这是标准的偶数检查。其他：8 &gt; 10 为 False；8 == 9 为 False；8 != 8 为 False。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">8 % 2 = 0, so 8 % 2 == 0 is True. All other options are False when x = 8.</span><span data-lang="zh">8 % 2 = 0，所以 8 % 2 == 0 为 True。当 x = 8 时，所有其他选项均为 False。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; operator precedence pitfalls</span><span data-lang="zh">深入 &mdash; 运算符优先级陷阱</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">Python follows standard mathematical precedence (PEMDAS), but several edge cases trip beginners. (1) <code>2 ** 3 ** 2</code> is 2 ** (3 ** 2) = 2 ** 9 = 512, not (2 ** 3) ** 2 = 64 — exponentiation is right-associative. (2) <code>-2 ** 2</code> is -(2 ** 2) = -4, not (-2) ** 2 = 4 — the unary minus has lower precedence than **. (3) <code>7 / 2 * 3</code> is (7 / 2) * 3 = 10.5, evaluated left-to-right at the same level. Always use explicit parentheses in expressions that mix ** with unary minus or where the reader might be confused. BC CS10 Content (verbatim): "order of operations, precedence of arithmetic operators." AB CSE1110 2.4.6 implicitly covers this through the requirement to correctly use arithmetical operators.</span><span data-lang="zh">Python 遵循标准数学优先级（PEMDAS），但有几个边界情况会让初学者犯错。(1) <code>2 ** 3 ** 2</code> 是 2 ** (3 ** 2) = 2 ** 9 = 512，而非 (2 ** 3) ** 2 = 64——指数运算是右结合的。(2) <code>-2 ** 2</code> 是 -(2 ** 2) = -4，而非 (-2) ** 2 = 4——一元负号的优先级低于 **。(3) <code>7 / 2 * 3</code> 是 (7 / 2) * 3 = 10.5，在同一优先级从左到右求值。在混合 ** 和一元负号或读者可能感到困惑的表达式中，始终使用显式括号。BC CS10 内容（原文）："运算顺序，算术运算符优先级。" AB CSE1110 2.4.6 通过正确使用算术运算符的要求隐式涵盖这一点。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-5">
+  <div class="section-label"><span data-lang="en">Section 5 &middot; Type conversion and casting</span><span data-lang="zh">第 5 节 &middot; 类型转换</span></div>
+  <h2><span data-lang="en">Type Conversion and Casting</span><span data-lang="zh">类型转换与强制转换</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Three conversion functions to memorise.</span><span data-lang="zh">三个必记的转换函数。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en"><code>int(x)</code></span><span data-lang="zh"><code>int(x)</code></span></strong> <span data-lang="en">&mdash; converts x to integer. <code>int(3.9)</code> → <code>3</code> (truncates, does NOT round). <code>int("42")</code> → <code>42</code>. <code>int("3.9")</code> → ValueError (cannot parse a decimal string to int directly).</span><span data-lang="zh">&mdash; 将 x 转换为整数。<code>int(3.9)</code> → <code>3</code>（截断，不四舍五入）。<code>int("42")</code> → <code>42</code>。<code>int("3.9")</code> → ValueError（不能直接将小数字符串解析为整数）。</span></li>
+      <li><strong><span data-lang="en"><code>float(x)</code></span><span data-lang="zh"><code>float(x)</code></span></strong> <span data-lang="en">&mdash; converts x to float. <code>float(7)</code> → <code>7.0</code>. <code>float("3.14")</code> → <code>3.14</code>. Safe for any numeric string.</span><span data-lang="zh">&mdash; 将 x 转换为浮点数。<code>float(7)</code> → <code>7.0</code>。<code>float("3.14")</code> → <code>3.14</code>。对任意数字字符串均安全。</span></li>
+      <li><strong><span data-lang="en"><code>str(x)</code></span><span data-lang="zh"><code>str(x)</code></span></strong> <span data-lang="en">&mdash; converts x to string. <code>str(42)</code> → <code>"42"</code>. Needed when you want to concatenate a number into a string: <code>"Score: " + str(score)</code>.</span><span data-lang="zh">&mdash; 将 x 转换为字符串。<code>str(42)</code> → <code>"42"</code>。将数字拼入字符串时需要：<code>"分数：" + str(score)</code>。</span></li>
+    </ul>
+    <span data-lang="en">ON ICS3U A1.3 requires "use assignment statements correctly with both arithmetic and string expressions" — type conversion is the bridge. AB CSE1110 outcome 2.4.3 requires using "appropriate data types."</span><span data-lang="zh">ON ICS3U A1.3 要求"正确使用包含算术和字符串表达式的赋值语句"——类型转换是桥梁。AB CSE1110 结果 2.4.3 要求使用"适当的数据类型"。</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-purple">WE</div><div class="card-title"><span data-lang="en">Worked Example 5 &middot; Conversion errors and fixes</span><span data-lang="zh">例题 5 &middot; 转换错误与修复</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Each buggy snippet below causes a TypeError or ValueError. Identify the bug and the fix.</span><span data-lang="zh">以下每个有错误的代码片段会导致 TypeError 或 ValueError。识别错误并给出修复方案。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Bug 1 — adding string to int.</span><span data-lang="zh">错误 1——将字符串与整数相加。</span></strong></p>
+    <pre><code># BUG: input() returns a string
+age = input("Enter age: ")
+new_age = age + 1   # TypeError: can only concatenate str (not "int") to str
+
+# FIX:
+age = int(input("Enter age: "))
+new_age = age + 1   # works correctly</code></pre>
+    <p><strong><span data-lang="en">Bug 2 — int() on a decimal string.</span><span data-lang="zh">错误 2——对小数字符串使用 int()。</span></strong></p>
+    <pre><code># BUG:
+price = int(input("Enter price: "))  # user types "9.99" → ValueError
+
+# FIX: use float() first, then convert if needed
+price = float(input("Enter price: "))   # works for "9.99"</code></pre>
+    <p><strong><span data-lang="en">Bug 3 — concatenating number into message.</span><span data-lang="zh">错误 3——将数字拼接到消息中。</span></strong></p>
+    <pre><code># BUG:
+score = 95
+message = "Your score is " + score   # TypeError
+
+# FIX:
+message = "Your score is " + str(score)   # works
+# OR use an f-string (simpler):
+message = f"Your score is {score}"        # also works</code></pre>
+    <p><span data-lang="en">The pattern is: whenever you mix types in an expression, Python raises a TypeError unless you explicitly convert. Type errors are among the most common beginner mistakes — and the easiest to fix once you know what the message means.</span><span data-lang="zh">规律是：每当你在表达式中混合类型，除非你显式转换，否则 Python 会引发 TypeError。类型错误是最常见的初学者错误之一——一旦你理解了错误消息的含义，也是最容易修复的。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What does <code>int(7.9)</code> return in Python?</span><span data-lang="zh">Python 中 <code>int(7.9)</code> 返回什么？</span></div><div class="quiz-number">&sect;5 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">8</div>
+      <div class="quiz-opt" data-idx="1">7</div>
+      <div class="quiz-opt" data-idx="2">7.9</div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">ValueError</span><span data-lang="zh">ValueError</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>int()</code> truncates toward zero — it drops the decimal part without rounding. <code>int(7.9)</code> → 7, not 8. <code>int(-7.9)</code> → -7, not -8. Use <code>round()</code> if you need nearest-integer rounding.</span><span data-lang="zh"><code>int()</code> 向零截断——丢掉小数部分，不四舍五入。<code>int(7.9)</code> → 7，不是 8。<code>int(-7.9)</code> → -7，不是 -8。如果需要四舍五入到最近整数，使用 <code>round()</code>。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">int() truncates (drops the decimal), it does NOT round. 7.9 becomes 7, not 8.</span><span data-lang="zh">int() 截断（丢掉小数），不四舍五入。7.9 变为 7，不是 8。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A student writes <code>result = "Total: " + 42</code>. What happens?</span><span data-lang="zh">一名学生写道 <code>result = "总计：" + 42</code>。会发生什么？</span></div><div class="quiz-number">&sect;5 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">result = "Total: 42"</span><span data-lang="zh">result = "总计：42"</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">result = "Total: " (42 is ignored)</span><span data-lang="zh">result = "总计："（42 被忽略）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">result = 42</span><span data-lang="zh">result = 42</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">TypeError — cannot concatenate str and int</span><span data-lang="zh">TypeError——无法拼接字符串和整数</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Python does not automatically convert the integer to a string. Adding a str and an int raises TypeError. Fix: <code>"Total: " + str(42)</code> or <code>f"Total: {42}"</code>.</span><span data-lang="zh">Python 不会自动将整数转换为字符串。将字符串和整数相加会引发 TypeError。修复：<code>"总计：" + str(42)</code> 或 <code>f"总计：{42}"</code>。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Python never silently converts between str and int. You must explicitly call str(42) to concatenate. Otherwise: TypeError.</span><span data-lang="zh">Python 从不在字符串和整数之间悄悄转换。必须显式调用 str(42) 才能拼接。否则：TypeError。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; widening, narrowing, and finite representation <span class="honors-flag">Honors &mdash; ICS4U A1.2 / A1.4</span></span><span data-lang="zh">深入 &mdash; 扩宽、收窄与有限表示 <span class="honors-flag">荣誉 &mdash; ICS4U A1.2 / A1.4</span></span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">In Java and other statically-typed languages, conversion is classified as <strong>widening</strong> (safe, automatic) or <strong>narrowing</strong> (potentially lossy, requires an explicit cast). Widening: <code>int → long → float → double</code> — the destination type can represent every value the source can. Narrowing: <code>double → int</code> — you lose the fractional part and may overflow. Java requires explicit casting syntax: <code>int x = (int) 3.9;</code> → <code>x = 3</code>. ON ICS4U A1.2 (verbatim): "demonstrate an understanding of type conversion (e.g., string-to-integer, character-to-integer, integer-to-character, floating point-to-integer, casting in an inheritance hierarchy)." A1.4 adds: "demonstrate an understanding of the limitations of finite data representations (e.g., integer bounds, precision of floating-point real numbers, rounding errors)." In Python, floating-point precision matters too: <code>0.1 + 0.2</code> gives <code>0.30000000000000004</code> in Python (IEEE 754 representation artifact). Never compare floats with <code>==</code>; use <code>abs(a - b) &lt; 0.0001</code> instead.</span><span data-lang="zh">在 Java 和其他静态类型语言中，转换分为<strong>扩宽</strong>（安全，自动）和<strong>收窄</strong>（可能有损，需要显式转换）。扩宽：<code>int → long → float → double</code>——目标类型可以表示源类型的所有值。收窄：<code>double → int</code>——丢失小数部分，可能溢出。Java 需要显式转换语法：<code>int x = (int) 3.9;</code> → <code>x = 3</code>。ON ICS4U A1.2（原文）："展示对类型转换的理解（如字符串到整数、字符到整数、整数到字符、浮点数到整数、继承层次中的类型转换）。" A1.4 补充："展示对有限数据表示局限的理解（如整数界限、浮点实数精度、舍入误差）。"Python 中浮点精度也很重要：<code>0.1 + 0.2</code> 在 Python 中给出 <code>0.30000000000000004</code>（IEEE 754 表示的副产品）。永远不要用 <code>==</code> 比较浮点数；改用 <code>abs(a - b) &lt; 0.0001</code>。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-6">
+  <div class="section-label"><span data-lang="en">Section 6 &middot; Constants and naming conventions</span><span data-lang="zh">第 6 节 &middot; 常量与命名规范</span></div>
+  <h2><span data-lang="en">Constants and Naming Conventions</span><span data-lang="zh">常量与命名规范</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Good names make code readable. Three rules.</span><span data-lang="zh">好名称使代码可读。三条规则。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">snake_case for variables and functions</span><span data-lang="zh">变量和函数用蛇形命名法（snake_case）</span></strong> <span data-lang="en">&mdash; all lowercase, words joined with underscores: <code>student_name</code>, <code>total_score</code>, <code>calculate_average</code>. Python style guide (PEP 8) mandates this. ON ICS3U A2.2 requires "use appropriate internal and external documentation."</span><span data-lang="zh">&mdash; 全小写，单词用下划线连接：<code>student_name</code>、<code>total_score</code>、<code>calculate_average</code>。Python 风格指南（PEP 8）规定如此。ON ICS3U A2.2 要求"使用适当的内部和外部文档"。</span></li>
+      <li><strong><span data-lang="en">UPPER_SNAKE_CASE for constants</span><span data-lang="zh">常量用全大写蛇形命名法（UPPER_SNAKE_CASE）</span></strong> <span data-lang="en">&mdash; a constant is a value that should never change during the program's run. <code>TAX_RATE = 0.13</code>, <code>MAX_SCORE = 100</code>. Python has no true constant keyword (unlike Java's <code>final</code>), but the convention signals intent. ON ICS3U A1.1: "use constants … correctly in computer programs." AB CSE1110 2.4.4: "use appropriate variables and constants to hold data."</span><span data-lang="zh">&mdash; 常量是程序运行期间不应改变的值。<code>TAX_RATE = 0.13</code>、<code>MAX_SCORE = 100</code>。Python 没有真正的常量关键字（不像 Java 的 <code>final</code>），但该约定传达了意图。ON ICS3U A1.1："在计算机程序中正确使用常量……" AB CSE1110 2.4.4："使用适当的变量和常量保存数据。"</span></li>
+      <li><strong><span data-lang="en">Descriptive over short</span><span data-lang="zh">描述性优先于简短</span></strong> <span data-lang="en">&mdash; <code>width</code> beats <code>w</code>; <code>student_age</code> beats <code>a</code>. The exception: loop counters <code>i</code>, <code>j</code>, <code>k</code> are universally understood. AB CSE1110 outcome 2.4.2: "use appropriate internal and external documentation."</span><span data-lang="zh">&mdash; <code>width</code> 优于 <code>w</code>；<code>student_age</code> 优于 <code>a</code>。例外：循环计数器 <code>i</code>、<code>j</code>、<code>k</code> 是公认的。AB CSE1110 结果 2.4.2："使用适当的内部和外部文档。"</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-orange">WE</div><div class="card-title"><span data-lang="en">Worked Example 6 &middot; Refactoring with constants and clear names</span><span data-lang="zh">例题 6 &middot; 用常量和清晰命名重构代码</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">The first version is hard to read. The second version uses constants and descriptive names to make the intent clear.</span><span data-lang="zh">第一版难以阅读。第二版使用常量和描述性命名使意图清晰。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Version 1 — hard to read ("magic numbers").</span><span data-lang="zh">版本 1——难以阅读（"魔法数字"）。</span></strong></p>
+    <pre><code>p = float(input())
+t = p * 0.13
+f = p + t
+print(f)</code></pre>
+    <p><span data-lang="en">What is 0.13? What is p, t, f? A reader cannot tell without context.</span><span data-lang="zh">0.13 是什么？p、t、f 是什么？读者没有上下文无法判断。</span></p>
+    <p><strong><span data-lang="en">Version 2 — clear names and a named constant.</span><span data-lang="zh">版本 2——清晰命名与具名常量。</span></strong></p>
+    <pre><code>TAX_RATE = 0.13   # Ontario HST rate — a constant
+
+price_before_tax = float(input("Enter price before tax: "))
+tax_amount        = price_before_tax * TAX_RATE
+final_price       = price_before_tax + tax_amount
+print("Final price:", final_price)</code></pre>
+    <p><span data-lang="en">Now the code documents itself. If the tax rate changes to 0.15, you change one line (<code>TAX_RATE = 0.15</code>) and every calculation updates automatically. This is why constants matter more than just style — they prevent "change in one place, miss it in ten" bugs.</span><span data-lang="zh">现在代码自我说明。如果税率变为 0.15，只需更改一行（<code>TAX_RATE = 0.15</code>），所有计算自动更新。这就是常量比样式更重要的原因——它们防止了"改一处、漏十处"的错误。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which variable name follows Python's snake_case convention and is most descriptive?</span><span data-lang="zh">哪个变量名遵循 Python 的蛇形命名规范且最具描述性？</span></div><div class="quiz-number">&sect;6 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>StudentAge</code></div>
+      <div class="quiz-opt" data-idx="1"><code>sa</code></div>
+      <div class="quiz-opt" data-idx="2"><code>student_age</code></div>
+      <div class="quiz-opt" data-idx="3"><code>STUDENT_AGE</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>student_age</code> follows snake_case (all lowercase, underscores) and is self-documenting. <code>StudentAge</code> is PascalCase (used for class names in Python). <code>sa</code> is too short to be clear. <code>STUDENT_AGE</code> is reserved for constants.</span><span data-lang="zh"><code>student_age</code> 遵循蛇形命名法（全小写，下划线），且自我说明。<code>StudentAge</code> 是帕斯卡命名法（Python 中用于类名）。<code>sa</code> 太短不够清晰。<code>STUDENT_AGE</code> 保留给常量。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Python convention: variables/functions → snake_case. Classes → PascalCase. Constants → UPPER_SNAKE_CASE. Cryptic abbreviations should be avoided.</span><span data-lang="zh">Python 约定：变量/函数 → 蛇形命名法。类 → 帕斯卡命名法。常量 → 全大写蛇形命名法。应避免难懂的缩写。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Why is it better to write <code>MAX_STUDENTS = 30</code> than to use the number 30 directly throughout the code?</span><span data-lang="zh">为什么写 <code>MAX_STUDENTS = 30</code> 比在代码中直接使用数字 30 更好？</span></div><div class="quiz-number">&sect;6 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">If the value needs to change, you update it in one place and all uses update automatically</span><span data-lang="zh">如果值需要更改，只在一处更新，所有使用处自动更新</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">It makes the program run faster</span><span data-lang="zh">它使程序运行更快</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Python requires all numbers to be named</span><span data-lang="zh">Python 要求所有数字都必须命名</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">It converts 30 to a different data type</span><span data-lang="zh">它将 30 转换为不同的数据类型</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Using a named constant means you change the value in exactly one place. If you use the literal 30 in 15 places and the class size changes to 32, you have to find and change 15 occurrences — and risk missing one. A named constant also documents what the number means.</span><span data-lang="zh">使用具名常量意味着只在一处更改值。如果你在 15 处使用字面值 30 而班级规模变为 32，你必须找到并更改 15 处——还有漏掉一处的风险。具名常量还能说明数字的含义。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Constants are about maintainability and readability, not speed or type conversion. Python does not require naming numbers — it's a best-practice convention.</span><span data-lang="zh">常量关乎可维护性和可读性，与速度或类型转换无关。Python 不要求为数字命名——这是最佳实践约定。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="s-7-7">
+  <div class="section-label"><span data-lang="en">Section 7 &middot; Writing your first program</span><span data-lang="zh">第 7 节 &middot; 编写第一个程序</span></div>
+  <h2><span data-lang="en">Writing and Running Your First Program</span><span data-lang="zh">编写并运行你的第一个程序</span></h2>
+
+  <div class="cram-cheat">
+    <strong><span data-lang="en">Five steps from blank file to running program.</span><span data-lang="zh">从空白文件到运行程序的五个步骤。</span></strong>
+    <ul style="margin: 8px 0 0 22px; font-size: 0.94rem;">
+      <li><strong><span data-lang="en">1. State the problem in IPO form</span><span data-lang="zh">1. 用 IPO 形式陈述问题</span></strong> <span data-lang="en">&mdash; identify inputs (what does the user supply?), process (what calculation?), output (what do we print?).</span><span data-lang="zh">&mdash; 识别输入（用户提供什么？）、处理（什么计算？）、输出（打印什么？）。</span></li>
+      <li><strong><span data-lang="en">2. Write pseudocode</span><span data-lang="zh">2. 写伪代码</span></strong> <span data-lang="en">&mdash; use plain keywords (INPUT, SET, OUTPUT). No Python syntax yet.</span><span data-lang="zh">&mdash; 使用普通关键字（INPUT、SET、OUTPUT）。还不用 Python 语法。</span></li>
+      <li><strong><span data-lang="en">3. Translate to Python</span><span data-lang="zh">3. 翻译为 Python</span></strong> <span data-lang="en">&mdash; each pseudocode line becomes one or two Python lines. Remember: <code>input()</code> always returns str, so convert immediately.</span><span data-lang="zh">&mdash; 每行伪代码变成一两行 Python。记住：<code>input()</code> 总是返回字符串，立即转换。</span></li>
+      <li><strong><span data-lang="en">4. Run with a known input</span><span data-lang="zh">4. 用已知输入运行</span></strong> <span data-lang="en">&mdash; use a value you can check by hand. Does the output match your IPO expectation?</span><span data-lang="zh">&mdash; 使用你能手工验证的值。输出是否符合 IPO 预期？</span></li>
+      <li><strong><span data-lang="en">5. Test edge cases</span><span data-lang="zh">5. 测试边界情况</span></strong> <span data-lang="en">&mdash; try 0, negative numbers, and non-numeric text to see how the program behaves. AB CSE1110 outcome 2.4.1: "maintain the IPO structure of the algorithm."</span><span data-lang="zh">&mdash; 尝试 0、负数和非数字文本，观察程序如何反应。AB CSE1110 结果 2.4.1："维护算法的 IPO 结构。"</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-icon icon-red">WE</div><div class="card-title"><span data-lang="en">Worked Example 7 &middot; BMI calculator — full pipeline</span><span data-lang="zh">例题 7 &middot; BMI 计算器——完整流程</span></div></div>
+    <p style="font-size: 0.95rem;"><span data-lang="en">Build a Body Mass Index calculator. BMI = weight (kg) / height (m)². Walk through all five steps.</span><span data-lang="zh">构建一个体重指数计算器。BMI = 体重（千克）/ 身高（米）²。逐步完成全部五个步骤。</span></p>
+  </div>
+  <div class="worked-solution">
+    <p><strong><span data-lang="en">Step 1 — IPO.</span><span data-lang="zh">步骤 1——IPO。</span></strong></p>
+    <ul style="margin: 4px 0 10px 20px; font-size: 0.94rem;">
+      <li><span data-lang="en"><strong>Input:</strong> weight in kg (float), height in m (float).</span><span data-lang="zh"><strong>输入：</strong>体重（千克，浮点数），身高（米，浮点数）。</span></li>
+      <li><span data-lang="en"><strong>Process:</strong> BMI = weight / height².</span><span data-lang="zh"><strong>处理：</strong>BMI = 体重 / 身高²。</span></li>
+      <li><span data-lang="en"><strong>Output:</strong> BMI rounded to 1 decimal place.</span><span data-lang="zh"><strong>输出：</strong>BMI 保留 1 位小数。</span></li>
+    </ul>
+    <p><strong><span data-lang="en">Step 2 — Pseudocode.</span><span data-lang="zh">步骤 2——伪代码。</span></strong></p>
+    <pre><code>INPUT weight_kg
+INPUT height_m
+SET bmi TO weight_kg / (height_m * height_m)
+OUTPUT bmi (rounded to 1 decimal)</code></pre>
+    <p><strong><span data-lang="en">Step 3 — Python translation.</span><span data-lang="zh">步骤 3——Python 翻译。</span></strong></p>
+    <pre><code>weight_kg = float(input("Weight in kg:  "))
+height_m  = float(input("Height in m:   "))
+bmi       = weight_kg / (height_m ** 2)
+print(f"BMI = {bmi:.1f}")</code></pre>
+    <p><span data-lang="en">The <code>:.1f</code> format specifier rounds the float to 1 decimal place in the output string.</span><span data-lang="zh"><code>:.1f</code> 格式说明符在输出字符串中将浮点数舍入到 1 位小数。</span></p>
+    <p><strong><span data-lang="en">Step 4 — run with known input.</span><span data-lang="zh">步骤 4——用已知输入运行。</span></strong></p>
+    <pre><code># weight = 70 kg, height = 1.75 m
+# BMI = 70 / (1.75)^2 = 70 / 3.0625 ≈ 22.9
+# Expected output: BMI = 22.9   ✓</code></pre>
+    <p><strong><span data-lang="en">Step 5 — edge case: height = 0.</span><span data-lang="zh">步骤 5——边界情况：身高 = 0。</span></strong></p>
+    <pre><code># height_m = 0 → division by zero → ZeroDivisionError
+# Guard: add an if-check before the calculation (covered in Control Flow guide)</code></pre>
+    <p><span data-lang="en">Spotting the edge case now — before writing any more code — is exactly what AB CSE1110 outcome 2.4.1 ("maintain the IPO structure") and ON ICS3U A2.1 ("incorporate user input, processing, and screen output") require.</span><span data-lang="zh">现在就发现边界情况——在写更多代码之前——正是 AB CSE1110 结果 2.4.1（"维护 IPO 结构"）和 ON ICS3U A2.1（"包含用户输入、处理和屏幕输出"）所要求的。</span></p>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">In the five-step pipeline, what should come immediately after writing pseudocode?</span><span data-lang="zh">在五步流程中，写完伪代码后紧接着应该做什么？</span></div><div class="quiz-number">&sect;7 &middot; Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">Translate each pseudocode line into Python</span><span data-lang="zh">将每行伪代码翻译成 Python</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">Run the program with edge-case inputs</span><span data-lang="zh">用边界情况输入运行程序</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">Choose a programming language</span><span data-lang="zh">选择编程语言</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">Show the program to a classmate</span><span data-lang="zh">将程序展示给同学</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">The five-step pipeline is: (1) IPO, (2) pseudocode, (3) Python translation, (4) run with known input, (5) edge-case testing. After pseudocode comes translation. Running and edge-case testing come later.</span><span data-lang="zh">五步流程是：(1) IPO，(2) 伪代码，(3) Python 翻译，(4) 用已知输入运行，(5) 边界情况测试。伪代码之后是翻译。运行和边界情况测试在之后进行。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Order: IPO → pseudocode → Python translation → run with known input → edge cases. Skipping straight to edge cases before you have working Python code wastes time.</span><span data-lang="zh">顺序：IPO → 伪代码 → Python 翻译 → 用已知输入运行 → 边界情况。在有可运行 Python 代码之前直接进行边界情况测试会浪费时间。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A program asks for the user's age with <code>age = input("Age: ")</code>. The user enters "abc". What happens when the program later executes <code>next_year = age + 1</code>?</span><span data-lang="zh">程序用 <code>age = input("年龄：")</code> 询问用户年龄。用户输入"abc"。当程序随后执行 <code>next_year = age + 1</code> 时会发生什么？</span></div><div class="quiz-number">&sect;7 &middot; Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">next_year = "abc1"</span><span data-lang="zh">next_year = "abc1"</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">next_year = 1</span><span data-lang="zh">next_year = 1</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">TypeError — cannot add str and int</span><span data-lang="zh">TypeError——无法将字符串和整数相加</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">The program skips the line silently</span><span data-lang="zh">程序静默跳过该行</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>age</code> is the string <code>"abc"</code> (input always returns a string). Adding a string and an integer raises a TypeError. The correct code would be <code>age = int(input("Age: "))</code>, but even that would raise ValueError when the user types "abc". Both are edge cases to handle.</span><span data-lang="zh"><code>age</code> 是字符串 <code>"abc"</code>（input 总是返回字符串）。将字符串和整数相加会引发 TypeError。正确代码应为 <code>age = int(input("年龄："))</code>，但当用户输入"abc"时，这也会引发 ValueError。两者都是需要处理的边界情况。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">input() returns a string. Strings and ints cannot be added in Python — TypeError. Python never silently converts or skips type errors.</span><span data-lang="zh">input() 返回字符串。字符串和整数在 Python 中不能相加——TypeError。Python 从不悄悄转换或跳过类型错误。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <details>
+    <summary><span data-lang="en">Going deeper &mdash; f-strings and formatted output</span><span data-lang="zh">深入 &mdash; f 字符串与格式化输出</span></summary>
+    <div class="detail-body">
+      <p><span data-lang="en">Python 3.6+ f-strings (<code>f"..."</code>) are the cleanest way to embed variable values in output text. Inside the curly braces you can put any expression and an optional format specifier after a colon. Key format specifiers: <code>:.2f</code> = 2 decimal places (for currency); <code>:d</code> = integer; <code>:&gt;10</code> = right-align in a field of width 10; <code>:,</code> = thousands separator. Examples: <code>f"Price: ${price:.2f}"</code> → <code>Price: $9.99</code>. <code>f"Count: {count:,}"</code> → <code>Count: 1,234,567</code>. BC CP11 Content (verbatim): "programming language constructs to support input/output" and "translation of design specifications into source code" — formatted output is a core part of that translation. AB CSE1110 2.4.7 requires using "output commands … to display processed data" — f-strings are the most readable way to do this in Python.</span><span data-lang="zh">Python 3.6+ 的 f 字符串（<code>f"..."</code>）是在输出文本中嵌入变量值的最简洁方式。在花括号内可以放任意表达式，以及冒号后的可选格式说明符。关键格式说明符：<code>:.2f</code> = 2 位小数（用于货币）；<code>:d</code> = 整数；<code>:&gt;10</code> = 在宽度为 10 的字段中右对齐；<code>:,</code> = 千位分隔符。示例：<code>f"价格：${price:.2f}"</code> → <code>价格：$9.99</code>。<code>f"数量：{count:,}"</code> → <code>数量：1,234,567</code>。BC CP11 内容（原文）："支持输入/输出的编程语言构造"和"将设计规格转化为源代码"——格式化输出是该翻译的核心部分。AB CSE1110 2.4.7 要求使用"输出命令……显示已处理数据"——f 字符串是 Python 中最具可读性的实现方式。</span></p>
+    </div>
+  </details>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="exam-strategy">
+  <div class="section-label"><span data-lang="en">Exam Tactics</span><span data-lang="zh">考试策略</span></div>
+  <h2><span data-lang="en">Exam Strategy and Common Pitfalls</span><span data-lang="zh">考试策略与常见陷阱</span></h2>
+
+  <div class="concept-box orange">
+    <strong style="color: var(--orange);"><span data-lang="en">Discipline before you write a single line</span><span data-lang="zh">写下第一行之前的纪律</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">IPO first, always.</span><span data-lang="zh">始终先做 IPO。</span></strong> <span data-lang="en">Before touching the keyboard, write down: what are the inputs? what is the calculation? what is the output? ON ICS3U A2.1 and AB CSE1110 2.4.1 both assess whether you maintain the IPO structure from start to finish.</span><span data-lang="zh">在触碰键盘之前，写下：输入是什么？计算是什么？输出是什么？ON ICS3U A2.1 和 AB CSE1110 2.4.1 都评估你是否从始至终维护 IPO 结构。</span></li>
+      <li><strong><span data-lang="en">Declare the type before you use the value.</span><span data-lang="zh">使用值之前声明类型。</span></strong> <span data-lang="en">Ask yourself: is this an int, float, str, or bool? Wrap <code>input()</code> in the correct converter immediately. The single most common beginner mistake is forgetting to convert.</span><span data-lang="zh">问自己：这是整数、浮点数、字符串还是布尔值？立即将 <code>input()</code> 用正确的转换器包装。最常见的初学者错误是忘记转换。</span></li>
+      <li><strong><span data-lang="en">Check your operator.</span><span data-lang="zh">检查你的运算符。</span></strong> <span data-lang="en"><code>=</code> assigns. <code>==</code> compares. <code>/</code> gives a float. <code>//</code> gives an integer. <code>%</code> gives the remainder. Mixing these is the top source of logic errors in this unit.</span><span data-lang="zh"><code>=</code> 赋值。<code>==</code> 比较。<code>/</code> 给出浮点数。<code>//</code> 给出整数。<code>%</code> 给出余数。混淆这些是本单元逻辑错误的主要来源。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box" style="border-left-color: var(--accent);">
+    <strong style="color: var(--accent);"><span data-lang="en">Variables, types, and conversion questions (&sect;1-&sect;5)</span><span data-lang="zh">变量、类型与转换问题（&sect;1-&sect;5）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Trace assignments step by step.</span><span data-lang="zh">逐步追踪赋值。</span></strong> <span data-lang="en">AP CSP AAP-1.B directly asks "what is the value of x after these lines?" — the only safe technique is to trace each line in order. Never try to guess the final value by mental shortcut.</span><span data-lang="zh">AP CSP AAP-1.B 直接问"这几行后 x 的值是什么？"——唯一安全的技术是按顺序追踪每一行。永远不要试图用心理捷径猜最终值。</span></li>
+      <li><strong><span data-lang="en">State the type before the value.</span><span data-lang="zh">先说类型再说值。</span></strong> <span data-lang="en">On a written exam, when asked "what is the result of …", always state the type first: "a string, '42'" or "an integer, 3". Examiners often award the type point separately from the value point.</span><span data-lang="zh">在笔试中，当被问到"……的结果是什么"时，始终先说类型："字符串 '42'"或"整数 3"。考官通常将类型分和值分分开评分。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box purple">
+    <strong style="color: var(--purple);"><span data-lang="en">Constants, naming, and first programs (&sect;6-&sect;7)</span><span data-lang="zh">常量、命名与第一个程序（&sect;6-&sect;7）</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Name the convention.</span><span data-lang="zh">说出命名规范。</span></strong> <span data-lang="en">When asked about naming in Python: variables/functions use snake_case; constants use UPPER_SNAKE_CASE; classes use PascalCase. One mark per convention on many marking schemes.</span><span data-lang="zh">被问到 Python 命名时：变量/函数用蛇形命名法；常量用全大写蛇形命名法；类用帕斯卡命名法。在许多评分方案中，每种规范得一分。</span></li>
+      <li><strong><span data-lang="en">Edge case = test the boundaries.</span><span data-lang="zh">边界情况 = 测试边界。</span></strong> <span data-lang="en">For every program you write, mentally test: what happens if the user enters 0? a negative number? a non-numeric string? Spotting and stating these is worth marks in ON ICS3U A2.1 and AB CSE1110 2.4.1 contexts.</span><span data-lang="zh">对你编写的每个程序，在心里测试：如果用户输入 0 会怎样？负数？非数字字符串？发现并陈述这些在 ON ICS3U A2.1 和 AB CSE1110 2.4.1 背景下值得得分。</span></li>
+    </ul>
+  </div>
+
+  <div class="concept-box green">
+    <strong style="color: var(--green);"><span data-lang="en">Answer hygiene</span><span data-lang="zh">作答规范</span></strong>
+    <ul style="margin-top: 8px; padding-left: 22px;">
+      <li><strong><span data-lang="en">Use AP CSP pseudocode on AP CSP exams.</span><span data-lang="zh">在 AP CSP 考试中使用 AP CSP 伪代码。</span></strong> <span data-lang="en">AP CSP uses its own keyword set: assignment is <code>&larr;</code>, display is <code>DISPLAY()</code>, Boolean values are <code>TRUE</code>/<code>FALSE</code>. Write from the reference sheet, not Python syntax.</span><span data-lang="zh">AP CSP 使用其自己的关键字集：赋值是 <code>&larr;</code>，显示是 <code>DISPLAY()</code>，布尔值是 <code>TRUE</code>/<code>FALSE</code>。从参考手册写，而不是 Python 语法。</span></li>
+      <li><strong><span data-lang="en">Show conversion explicitly.</span><span data-lang="zh">显式展示转换。</span></strong> <span data-lang="en">If your solution requires reading a number, write <code>int(input(...))</code> or <code>float(input(...))</code> in full — never just <code>input()</code>. Leaving out the conversion is a mark-losing error on every curriculum that assesses I/O.</span><span data-lang="zh">如果你的解决方案需要读取数字，完整写出 <code>int(input(...))</code> 或 <code>float(input(...))</code>——永远不要只写 <code>input()</code>。遗漏转换在所有评估 I/O 的课程中都是失分错误。</span></li>
+    </ul>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="flashcards">
+  <div class="section-label"><span data-lang="en">Active Recall</span><span data-lang="zh">主动复习</span></div>
+  <h2><span data-lang="en">Flashcards</span><span data-lang="zh">闪卡</span></h2>
+  <div class="flashcard-toolbar">
+    <div id="fcCount"><span data-lang="en">0 / 14 flipped</span><span data-lang="zh">0 / 14 已翻</span></div>
+    <div>
+      <button onclick="shuffleFlashcards()"><span data-lang="en">Shuffle</span><span data-lang="zh">洗牌</span></button>
+      <button onclick="resetFlashcards()"><span data-lang="en">Reset</span><span data-lang="zh">重置</span></button>
+    </div>
+  </div>
+  <div class="flashcard-grid" id="flashcardGrid">
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What is a variable?</span><span data-lang="zh">什么是变量？</span></div><div class="flashcard-back"><span data-lang="en">A named storage location in memory that holds one value. The name is chosen by the programmer. AP CSP AAP-1.A.</span><span data-lang="zh">内存中保存一个值的具名存储位置。名称由程序员选择。AP CSP AAP-1.A。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Assignment vs equality</span><span data-lang="zh">赋值 vs 等式</span></div><div class="flashcard-back"><span data-lang="en"><code>x = 5</code> stores 5 in x (assignment). <code>x == 5</code> tests if x equals 5 (returns True/False). AP CSP AAP-1.B.</span><span data-lang="zh"><code>x = 5</code> 将 5 存入 x（赋值）。<code>x == 5</code> 测试 x 是否等于 5（返回 True/False）。AP CSP AAP-1.B。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Four primitive data types</span><span data-lang="zh">四种基本数据类型</span></div><div class="flashcard-back"><span data-lang="en">int (整数): whole numbers. float (浮点数): decimals. str (字符串): quoted text. bool (布尔): True or False. ON ICS3U A1.1.</span><span data-lang="zh">int（整数）：整数。float（浮点数）：小数。str（字符串）：带引号的文本。bool（布尔）：True 或 False。ON ICS3U A1.1。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Type of <code>"42"</code>?</span><span data-lang="zh"><code>"42"</code> 的类型？</span></div><div class="flashcard-back"><span data-lang="en">str (string). Quotes always make a string, regardless of content. <code>"42"</code> ≠ <code>42</code> (int). Cannot do arithmetic on <code>"42"</code> directly.</span><span data-lang="zh">str（字符串）。引号总是创建字符串，无论内容是什么。<code>"42"</code> ≠ <code>42</code>（整数）。不能直接对 <code>"42"</code> 进行算术运算。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What does <code>input()</code> return?</span><span data-lang="zh"><code>input()</code> 返回什么？</span></div><div class="flashcard-back"><span data-lang="en">Always a str (string), regardless of what the user types. Convert immediately: <code>int(input(...))</code> or <code>float(input(...))</code>. AB CSE1110 2.4.5.</span><span data-lang="zh">总是字符串（str），无论用户输入什么。立即转换：<code>int(input(...))</code> 或 <code>float(input(...))</code>。AB CSE1110 2.4.5。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Arithmetic operators</span><span data-lang="zh">算术运算符</span></div><div class="flashcard-back"><span data-lang="en"><code>+</code> add · <code>-</code> subtract · <code>*</code> multiply · <code>/</code> true divide (float) · <code>//</code> floor divide (int) · <code>%</code> remainder · <code>**</code> power. BC CS10 Content.</span><span data-lang="zh"><code>+</code> 加 · <code>-</code> 减 · <code>*</code> 乘 · <code>/</code> 真除（浮点数）· <code>//</code> 整除（整数）· <code>%</code> 余数 · <code>**</code> 幂。BC CS10 内容。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What is <code>17 % 5</code>?</span><span data-lang="zh"><code>17 % 5</code> 等于多少？</span></div><div class="flashcard-back"><span data-lang="en">2. 17 = 3 × 5 + 2. <code>%</code> gives the remainder after integer division. Use <code>n % 2 == 0</code> to test if n is even.</span><span data-lang="zh">2。17 = 3 × 5 + 2。<code>%</code> 给出整除后的余数。用 <code>n % 2 == 0</code> 测试 n 是否为偶数。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Three type conversion functions</span><span data-lang="zh">三个类型转换函数</span></div><div class="flashcard-back"><span data-lang="en"><code>int(x)</code> → truncates to integer. <code>float(x)</code> → converts to decimal. <code>str(x)</code> → converts to string. ON ICS3U A1.3; AB CSE1110 2.4.3.</span><span data-lang="zh"><code>int(x)</code> → 截断为整数。<code>float(x)</code> → 转换为小数。<code>str(x)</code> → 转换为字符串。ON ICS3U A1.3；AB CSE1110 2.4.3。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">What does <code>int(7.9)</code> return?</span><span data-lang="zh"><code>int(7.9)</code> 返回什么？</span></div><div class="flashcard-back"><span data-lang="en">7 — not 8. <code>int()</code> truncates toward zero (drops the decimal). Use <code>round(7.9)</code> → 8 if you need rounding.</span><span data-lang="zh">7——不是 8。<code>int()</code> 向零截断（丢掉小数）。如果需要四舍五入，使用 <code>round(7.9)</code> → 8。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Naming: variable vs constant</span><span data-lang="zh">命名：变量 vs 常量</span></div><div class="flashcard-back"><span data-lang="en">Variables: snake_case (<code>student_age</code>). Constants: UPPER_SNAKE_CASE (<code>TAX_RATE</code>). Constants should not change during the program. ON ICS3U A1.1; AB CSE1110 2.4.4.</span><span data-lang="zh">变量：蛇形命名法（<code>student_age</code>）。常量：全大写蛇形命名法（<code>TAX_RATE</code>）。常量在程序运行期间不应改变。ON ICS3U A1.1；AB CSE1110 2.4.4。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Why use named constants?</span><span data-lang="zh">为什么使用具名常量？</span></div><div class="flashcard-back"><span data-lang="en">Change in one place → all uses update. Readable: <code>TAX_RATE</code> explains what 0.13 means. Prevents "magic number" bugs.</span><span data-lang="zh">一处更改 → 所有使用处更新。可读性：<code>TAX_RATE</code> 解释了 0.13 的含义。防止"魔法数字"错误。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Five-step first program pipeline</span><span data-lang="zh">编写第一个程序的五步流程</span></div><div class="flashcard-back"><span data-lang="en">1 IPO → 2 Pseudocode → 3 Python translation → 4 Run with known input → 5 Edge-case testing. AB CSE1110 2.4.1; ON ICS3U A2.1.</span><span data-lang="zh">1 IPO → 2 伪代码 → 3 Python 翻译 → 4 用已知输入运行 → 5 边界情况测试。AB CSE1110 2.4.1；ON ICS3U A2.1。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">Relational operators — what do they return?</span><span data-lang="zh">关系运算符——返回什么？</span></div><div class="flashcard-back"><span data-lang="en">Always bool: True or False. Six operators: <code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code>. BC CS10 Content: "relational operators." ON ICS3U A1.4.</span><span data-lang="zh">总是布尔值：True 或 False。六个运算符：<code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code>。BC CS10 内容："关系运算符。" ON ICS3U A1.4。</span></div></div></div>
+    <div class="flashcard" onclick="flipCard(this)"><div class="flashcard-inner"><div class="flashcard-front"><span data-lang="en">TypeError vs ValueError</span><span data-lang="zh">TypeError vs ValueError</span></div><div class="flashcard-back"><span data-lang="en">TypeError: wrong types combined (<code>"text" + 5</code>). ValueError: right type, bad value (<code>int("abc")</code>). Know which error each mistake causes.</span><span data-lang="zh">TypeError：错误类型组合（<code>"文本" + 5</code>）。ValueError：类型正确但值错误（<code>int("abc")</code>）。了解每种错误对应哪种失误。</span></div></div></div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="unit-quiz">
+  <div class="section-label"><span data-lang="en">Mixed Practice</span><span data-lang="zh">综合练习</span></div>
+  <h2><span data-lang="en">Practice Quiz</span><span data-lang="zh">综合测验</span></h2>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">After running <code>x = 5</code> then <code>x = x * 2</code> then <code>x = x - 3</code>, what is the value of <code>x</code>?</span><span data-lang="zh">运行 <code>x = 5</code>，再 <code>x = x * 2</code>，再 <code>x = x - 3</code> 后，<code>x</code> 的值是什么？</span></div><div class="quiz-number">Q1</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">7</div>
+      <div class="quiz-opt" data-idx="1">10</div>
+      <div class="quiz-opt" data-idx="2">7</div>
+      <div class="quiz-opt" data-idx="3">2</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Trace: x = 5 → x = 5 * 2 = 10 → x = 10 - 3 = 7. Each assignment replaces the old value.</span><span data-lang="zh">追踪：x = 5 → x = 5 * 2 = 10 → x = 10 - 3 = 7。每次赋值替换旧值。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Step 1: x = 5. Step 2: x = 10. Step 3: x = 7. Trace line by line — each assignment uses the current value.</span><span data-lang="zh">步骤 1：x = 5。步骤 2：x = 10。步骤 3：x = 7。逐行追踪——每次赋值使用当前值。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the data type of <code>True</code> in Python?</span><span data-lang="zh">Python 中 <code>True</code> 的数据类型是什么？</span></div><div class="quiz-number">Q2</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">bool (boolean)</span><span data-lang="zh">bool（布尔）</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">str (string)</span><span data-lang="zh">str（字符串）</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">int (integer)</span><span data-lang="zh">int（整数）</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">float</span><span data-lang="zh">float（浮点数）</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>True</code> and <code>False</code> are the two values of the bool type. Note: in Python, bool is a subtype of int (<code>True == 1</code>, <code>False == 0</code>), but <code>type(True)</code> is bool.</span><span data-lang="zh"><code>True</code> 和 <code>False</code> 是 bool 类型的两个值。注意：在 Python 中，bool 是 int 的子类型（<code>True == 1</code>，<code>False == 0</code>），但 <code>type(True)</code> 是 bool。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">True and False are bool. They are not strings ("True" with quotes would be str). ON ICS3U A1.1 lists boolean as a core data type.</span><span data-lang="zh">True 和 False 是 bool。它们不是字符串（带引号的 "True" 才是 str）。ON ICS3U A1.1 将布尔列为核心数据类型。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A user enters "25" when prompted. What is the result of <code>age = int(input("Age: "))</code>?</span><span data-lang="zh">用户在提示时输入"25"。<code>age = int(input("年龄："))</code> 的结果是什么？</span></div><div class="quiz-number">Q3</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">The string "25"</span><span data-lang="zh">字符串 "25"</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">The integer 25</span><span data-lang="zh">整数 25</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">The float 25.0</span><span data-lang="zh">浮点数 25.0</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">ValueError</span><span data-lang="zh">ValueError</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>input()</code> returns <code>"25"</code> (string). <code>int("25")</code> converts it to the integer 25. The combined call <code>int(input(...))</code> stores a proper integer in <code>age</code>.</span><span data-lang="zh"><code>input()</code> 返回 <code>"25"</code>（字符串）。<code>int("25")</code> 将其转换为整数 25。组合调用 <code>int(input(...))</code> 将一个真正的整数存储在 <code>age</code> 中。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">int() converts "25" (string) to 25 (integer). No float, no error — "25" is a valid integer string.</span><span data-lang="zh">int() 将 "25"（字符串）转换为 25（整数）。没有浮点数，没有错误——"25" 是有效的整数字符串。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="3">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">What is the result of <code>22 // 7</code> in Python?</span><span data-lang="zh">Python 中 <code>22 // 7</code> 的结果是什么？</span></div><div class="quiz-number">Q4</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0">3.14</div>
+      <div class="quiz-opt" data-idx="1">3.142857</div>
+      <div class="quiz-opt" data-idx="2">1</div>
+      <div class="quiz-opt" data-idx="3">3</div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en"><code>//</code> is floor division — returns the integer quotient, truncating toward zero. 22 ÷ 7 = 3 remainder 1, so 22 // 7 = 3. Use <code>22 / 7</code> if you want the decimal result (≈3.142857).</span><span data-lang="zh"><code>//</code> 是整除——返回整数商，向零截断。22 ÷ 7 = 3 余 1，所以 22 // 7 = 3。如果需要小数结果（≈3.142857），使用 <code>22 / 7</code>。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">// gives the integer quotient. / gives the float quotient. 22 // 7 = 3 (not 3.14...).</span><span data-lang="zh">// 给出整数商。/ 给出浮点商。22 // 7 = 3（不是 3.14...）。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="0">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">A student writes <code>result = "Score: " + score</code> where <code>score = 88</code>. What happens?</span><span data-lang="zh">学生写道 <code>result = "分数：" + score</code>，其中 <code>score = 88</code>。会发生什么？</span></div><div class="quiz-number">Q5</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><span data-lang="en">TypeError — cannot concatenate str and int</span><span data-lang="zh">TypeError——无法拼接字符串和整数</span></div>
+      <div class="quiz-opt" data-idx="1"><span data-lang="en">result = "Score: 88"</span><span data-lang="zh">result = "分数：88"</span></div>
+      <div class="quiz-opt" data-idx="2"><span data-lang="en">result = 88</span><span data-lang="zh">result = 88</span></div>
+      <div class="quiz-opt" data-idx="3"><span data-lang="en">result = "Score: " (88 dropped)</span><span data-lang="zh">result = "分数："（88 被丢弃）</span></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Python does not auto-convert. Fix: <code>"Score: " + str(score)</code> or <code>f"Score: {score}"</code>. Forgetting str() is one of the top two beginner mistakes in this unit.</span><span data-lang="zh">Python 不会自动转换。修复：<code>"分数：" + str(score)</code> 或 <code>f"分数：{score}"</code>。忘记 str() 是本单元最常见的两大初学者错误之一。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">str + int raises TypeError in Python. You must explicitly call str() on the integer before concatenating.</span><span data-lang="zh">Python 中字符串 + 整数会引发 TypeError。必须在拼接之前显式对整数调用 str()。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="2">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which line follows the correct Python naming convention for a constant holding the speed of light?</span><span data-lang="zh">哪行代码遵循正确的 Python 命名规范来定义保存光速的常量？</span></div><div class="quiz-number">Q6</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>speedOfLight = 299792458</code></div>
+      <div class="quiz-opt" data-idx="1"><code>speed_of_light = 299792458</code></div>
+      <div class="quiz-opt" data-idx="2"><code>SPEED_OF_LIGHT = 299792458</code></div>
+      <div class="quiz-opt" data-idx="3"><code>SpeedOfLight = 299792458</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">Constants use UPPER_SNAKE_CASE in Python. Option A is camelCase (JS style). Option B is snake_case (correct for variables). Option D is PascalCase (for classes).</span><span data-lang="zh">Python 中常量使用全大写蛇形命名法。选项 A 是驼峰命名法（JS 风格）。选项 B 是蛇形命名法（变量的正确格式）。选项 D 是帕斯卡命名法（用于类）。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">Python conventions: UPPER_SNAKE_CASE = constant; snake_case = variable or function; PascalCase = class. ON ICS3U A1.1; AB CSE1110 2.4.4.</span><span data-lang="zh">Python 约定：UPPER_SNAKE_CASE = 常量；snake_case = 变量或函数；PascalCase = 类。ON ICS3U A1.1；AB CSE1110 2.4.4。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+  <div class="quiz" data-answer="1">
+    <div class="quiz-header"><div class="quiz-q"><span data-lang="en">Which CSTA standard at Level 3A specifically addresses variables? <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span><span data-lang="zh">3A 级别哪个 CSTA 标准专门涉及变量？<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA</span></span></div><div class="quiz-number">Q7</div></div>
+    <div class="quiz-options">
+      <div class="quiz-opt" data-idx="0"><code>3A-AP-13</code></div>
+      <div class="quiz-opt" data-idx="1"><code>3A-AP-14</code></div>
+      <div class="quiz-opt" data-idx="2"><code>3A-AP-17</code></div>
+      <div class="quiz-opt" data-idx="3"><code>3A-DA-09</code></div>
+    </div>
+    <div class="quiz-explain correct-exp"><span data-lang="en">CSTA 3A-AP-14 (verbatim): "Use lists to simplify solutions, generalizing computational problems instead of repeatedly using simple variables." This is the HS-level variable/list standard. Variables are introduced at Level 2 (2-AP-11).</span><span data-lang="zh">CSTA 3A-AP-14（原文）："使用列表简化解决方案，将计算问题泛化而非重复使用简单变量。"这是 HS 级别的变量/列表标准。变量在 Level 2（2-AP-11）引入。</span></div>
+    <div class="quiz-explain wrong-exp"><span data-lang="en">3A-AP-13 = prototypes using algorithms. 3A-AP-14 = variables/lists (this unit). 3A-AP-17 = decomposition (Unit 1). 3A-DA-09 = bit representations.</span><span data-lang="zh">3A-AP-13 = 使用算法的原型。3A-AP-14 = 变量/列表（本单元）。3A-AP-17 = 分解（第 1 单元）。3A-DA-09 = 位表示。</span></div>
+    <button class="quiz-retry" onclick="retryQuiz(this)"><span data-lang="en">Retry</span><span data-lang="zh">重试</span></button>
+  </div>
+
+</section>
+
+<hr class="sep">
+
+<section class="section" id="checklist">
+  <div class="section-label"><span data-lang="en">Self-check</span><span data-lang="zh">自查</span></div>
+  <h2><span data-lang="en">Readiness Checklist</span><span data-lang="zh">准备就绪清单</span></h2>
+  <p><span data-lang="en">Tick each item when you can do it cold, without notes, on a first attempt.</span><span data-lang="zh">能在无笔记、首次尝试下完成，再勾选每一项。</span></p>
+  <div id="checkProgress" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); margin-bottom: 16px; font-weight: 600;"><span data-lang="en">0 / 11 mastered</span><span data-lang="zh">已掌握 0 / 11</span></div>
+  <ul class="checklist" id="checklistUl">
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Explain what a variable is, and state the difference between assignment (<code>=</code>) and equality test (<code>==</code>). Give an example of each. <span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP AAP-1.A / AAP-1.B</span></span><span data-lang="zh">解释变量是什么，并说明赋值（<code>=</code>）和等式测试（<code>==</code>）的区别。各举一个例子。<span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP AAP-1.A / AAP-1.B</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Name the four primitive data types (int, float, str, bool), give one example value for each, and state one real-world use case for each type. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.1 / AB CSE1110 2.4.3</span></span><span data-lang="zh">命名四种基本数据类型（整数、浮点数、字符串、布尔），为每种给出一个示例值，并为每种说明一个真实用途。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.1 / AB CSE1110 2.4.3</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Trace a sequence of 5+ assignment statements to determine the final value of each variable. Verify by working step by step, not guessing. <span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP AAP-1.B</span></span><span data-lang="zh">追踪 5 条以上的赋值语句序列，确定每个变量的最终值。通过逐步计算验证，而不是猜测。<span class="region-chip">&#x1F1FA;&#x1F1F8; AP CSP AAP-1.B</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a Python program that reads two numbers from the user and prints their sum, correctly wrapping <code>input()</code> in <code>float()</code>. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.1 / AB CSE1110 2.4.5</span></span><span data-lang="zh">编写一个 Python 程序，从用户读取两个数字并打印它们的和，正确地将 <code>input()</code> 用 <code>float()</code> 包装。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A2.1 / AB CSE1110 2.4.5</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">State what all seven arithmetic operators do (<code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>//</code> <code>%</code> <code>**</code>) and give the result of <code>17 // 5</code>, <code>17 % 5</code>, and <code>2 ** 8</code> without a calculator. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC CS10 / AB CSE1110 2.4.6</span></span><span data-lang="zh">说明所有七个算术运算符的功能（<code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>//</code> <code>%</code> <code>**</code>），并在不用计算器的情况下给出 <code>17 // 5</code>、<code>17 % 5</code> 和 <code>2 ** 8</code> 的结果。<span class="region-chip">&#x1F1E8;&#x1F1E6; BC CS10 / AB CSE1110 2.4.6</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Explain what each of <code>int()</code>, <code>float()</code>, and <code>str()</code> does. State what <code>int(7.9)</code> returns and why it is not 8. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.3 / AB CSE1110 2.4.3</span></span><span data-lang="zh">解释 <code>int()</code>、<code>float()</code> 和 <code>str()</code> 各自做什么。说明 <code>int(7.9)</code> 返回什么以及为什么不是 8。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.3 / AB CSE1110 2.4.3</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">State the Python naming conventions for variables (snake_case) and constants (UPPER_SNAKE_CASE), and explain why using a named constant is better than repeating a "magic number" throughout the code. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.1 / AB CSE1110 2.4.4</span></span><span data-lang="zh">说明 Python 变量（蛇形命名法）和常量（全大写蛇形命名法）的命名规范，并解释为什么使用具名常量优于在代码中重复"魔法数字"。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS3U A1.1 / AB CSE1110 2.4.4</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Write a complete Python program (BMI, temperature conversion, or similar) following the 5-step pipeline: IPO → pseudocode → Python → run with known input → name one edge case. <span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 2.4.1 / ON ICS3U A2.1</span></span><span data-lang="zh">按照五步流程编写一个完整的 Python 程序（BMI、温度转换或类似程序）：IPO → 伪代码 → Python → 用已知输入运行 → 说明一个边界情况。<span class="region-chip">&#x1F1E8;&#x1F1E6; AB CSE1110 2.4.1 / ON ICS3U A2.1</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">Explain what happens when a user types "abc" into a program that does <code>int(input(...))</code>, and name the error type raised. <span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AB CSE1110 2.4.5</span></span><span data-lang="zh">解释当用户在执行 <code>int(input(...))</code> 的程序中输入"abc"时会发生什么，并命名所引发的错误类型。<span class="region-chip">&#x1F1E8;&#x1F1E6; BC CP11 / AB CSE1110 2.4.5</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en">State verbatim (or near-verbatim) CSTA 3A-AP-14 and AP CSP learning objective AAP-1.A, and explain how each relates to variables in programs. <span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A / AP CSP</span></span><span data-lang="zh">逐字（或近逐字）陈述 CSTA 3A-AP-14 和 AP CSP 学习目标 AAP-1.A，并解释每个标准如何与程序中的变量相关。<span class="region-chip">&#x1F1FA;&#x1F1F8; CSTA 3A / AP CSP</span></span></span></li>
+    <li onclick="toggleCheck(this)"><span class="check-icon">&#x2713;</span><span><span data-lang="en"><span class="honors-flag">Honors &mdash; ICS4U A1.2 / A1.4</span> Explain widening vs narrowing type conversion. Give an example of integer overflow (Java context) and explain why <code>0.1 + 0.2 != 0.3</code> in Python. <span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS4U A1.2 / A1.4</span></span><span data-lang="zh"><span class="honors-flag">荣誉 &mdash; ICS4U A1.2 / A1.4</span> 解释扩宽与收窄类型转换。给出整数溢出的例子（Java 背景），并解释为什么 Python 中 <code>0.1 + 0.2 != 0.3</code>。<span class="region-chip">&#x1F1E8;&#x1F1E6; ON ICS4U A1.2 / A1.4</span></span></span></li>
+  </ul>
+</section>
+
+<hr class="sep">
+
+<section class="section" id="feeders">
+  <div class="section-label"><span data-lang="en">Next Steps</span><span data-lang="zh">后续单元</span></div>
+  <h2><span data-lang="en">What This Feeds Into</span><span data-lang="zh">本单元的去向</span></h2>
+  <p><span data-lang="en">Programming fundamentals are the vocabulary every subsequent unit builds on. Variables, types, I/O, operators, conversion, and naming are assumed knowledge in Control Flow, Functions, Data Structures, and OOP. Both downstream AP courses depend on mastery of exactly this material. The link below points to the existing AP CSA guide, which uses statically-typed Java and therefore relies on the data-type and casting concepts taught here.</span><span data-lang="zh">编程基础是后续每个单元所依赖的词汇。变量、类型、输入/输出、运算符、转换和命名是控制流、函数、数据结构和面向对象编程的已知前提。两门下游 AP 课程都依赖本材料的掌握。以下链接指向现有 AP CSA 指南，该指南使用静态类型 Java，因此依赖这里所教授的数据类型和类型转换概念。</span></p>
+
+  <div style="margin: 20px 0;">
+    <p><strong><span data-lang="en">Within High School Computer Science.</span><span data-lang="zh">在 HS Computer Science 内部。</span></strong></p>
+    <p style="color: var(--text-secondary); font-size: 0.95rem;"><span data-lang="en">Unit 3 (Control Flow) takes the variables and assignment you learned here and adds if/else decisions and loops — you will use <code>int</code> and <code>bool</code> variables constantly. Unit 4 (Functions and Modular Design) formalises the five-step pipeline into reusable named blocks with parameters. Unit 5 (Data Structures) stores many values of the same type in lists and arrays — the data-type concepts from this guide apply to every element. Every later unit also uses <code>input()</code>/<code>print()</code> and the operator set taught here.</span><span data-lang="zh">第 3 单元（控制流）将你在这里学到的变量和赋值与 if/else 判断和循环结合——你将大量使用整数（int）和布尔（bool）变量。第 4 单元（函数与模块化设计）将五步流程正式化为带参数的可复用具名代码块。第 5 单元（数据结构）将同类型的多个值存储在列表和数组中——本指南的数据类型概念适用于每个元素。每个后续单元也都使用这里教授的 <code>input()</code>/<code>print()</code> 和运算符集。</span></p>
+  </div>
+
+  <div style="margin: 20px 0;">
+    <p><strong><span data-lang="en">AP feeder links (existing in this repo).</span><span data-lang="zh">AP 衔接链接（本仓库中已有）。</span></strong></p>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px;">
+      <a class="feeder-link" href="../../AP CSA/Study Guides/Unit_1_Using_Objects_and_Methods.html"><span data-lang="en">AP CSA Unit 1 &middot; Using Objects and Methods (Java requires explicit type declarations and casting — the data-type and conversion concepts from this guide are assumed from day one)</span><span data-lang="zh">AP CSA Unit 1 &middot; 使用对象和方法（Java 需要显式类型声明和类型转换——本指南的数据类型和转换概念从第一天起就被假设已知）</span></a>
+    </div>
+    <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 12px;"><span data-lang="en">AP CSP Topics 3.1 (Variables and Assignments), 3.2 (Data Abstraction), and 3.3 (Mathematical Expressions) directly test the material in this guide — they cover roughly 30&ndash;35% of the AP CSP exam through Big Idea 3. AP CSA (Java) enforces static typing from line one: every variable must be declared with a type (<code>int</code>, <code>double</code>, <code>String</code>, <code>boolean</code>). Mastering data types, assignment, operators, and type conversion in Python here means the Java syntax is the only new layer to learn when you reach AP CSA.</span><span data-lang="zh">AP CSP 主题 3.1（变量与赋值）、3.2（数据抽象）和 3.3（数学表达式）直接测试本指南的内容——通过大概念 3，它们约占 AP CSP 考试 30&ndash;35%。AP CSA（Java）从第一行就强制执行静态类型：每个变量必须用类型声明（<code>int</code>、<code>double</code>、<code>String</code>、<code>boolean</code>）。在这里用 Python 掌握数据类型、赋值、运算符和类型转换，意味着当你学到 AP CSA 时，Java 语法是唯一需要学习的新层次。</span></p>
+  </div>
+</section>
+
+<div class="footer-wrap">
+  <div class="footer-brand">DINGRUI SCHOLARS</div>
+  <p><span data-lang="en">High School Computer Science &middot; Programming Fundamentals &middot; v1</span><span data-lang="zh">高中计算机科学 &middot; 编程基础 &middot; v1</span></p>
+</div>
+
+</main>
+<script>
+let quizScore = { correct: 0, attempted: 0, total: 0 };
+function updateScoreBadge() { const badge = document.getElementById('scoreBadge'); if (!badge) return; if (quizScore.total === 0) { badge.textContent = '0 / 0'; badge.classList.add('zero'); } else { badge.textContent = quizScore.correct + ' / ' + quizScore.total; badge.classList.remove('zero'); } }
+function setThemeBtnLabel(isDark) { const tt = document.getElementById('themeToggle'); if (!tt) return; tt.innerHTML = isDark ? '<span data-lang="en">Light</span><span data-lang="zh">浅色</span>' : '<span data-lang="en">Dark</span><span data-lang="zh">深色</span>'; }
+function toggleTheme() { const isDark = document.documentElement.getAttribute('data-theme') === 'dark'; document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark'); setThemeBtnLabel(!isDark); }
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); setThemeBtnLabel(true); }
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; const pct = h > 0 ? (window.scrollY / h) * 100 : 0; const pf = document.getElementById('progressFill'); if (pf) pf.style.width = pct + '%'; });
+const sections = document.querySelectorAll('.section'); const tocLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { tocLinks.forEach(l => l.classList.remove('active')); const link = document.querySelector(`.sidebar a[href="#${e.target.id}"]`); if (link) link.classList.add('active'); } }); }, { rootMargin: '-80px 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+document.querySelectorAll('.quiz').forEach(quiz => { const answer = parseInt(quiz.dataset.answer); const opts = quiz.querySelectorAll('.quiz-opt'); const expCorrect = quiz.querySelector('.quiz-explain.correct-exp'); const expWrong = quiz.querySelector('.quiz-explain.wrong-exp'); opts.forEach(opt => { opt.addEventListener('click', () => { if(opt.classList.contains('disabled')) return; const idx = parseInt(opt.dataset.idx); opts.forEach(o => o.classList.add('disabled')); quizScore.total++; if (idx === answer) { opt.classList.add('correct'); quizScore.correct++; if (expCorrect) expCorrect.classList.add('show'); } else { opt.classList.add('wrong'); opts[answer].classList.add('correct'); if (expWrong) expWrong.classList.add('show'); const retry = quiz.querySelector('.quiz-retry'); if (retry) retry.classList.add('show'); } updateScoreBadge(); }); }); });
+function retryQuiz(btn) { const quiz = btn.closest('.quiz'); quiz.querySelectorAll('.quiz-opt').forEach(o => { o.classList.remove('disabled', 'correct', 'wrong'); }); quiz.querySelectorAll('.quiz-explain').forEach(e => e.classList.remove('show')); btn.classList.remove('show'); quizScore.total--; updateScoreBadge(); }
+function flipCard(el) { el.classList.toggle('flipped'); updateFlashcardCount(); }
+function updateFlashcardCount() { const total = document.querySelectorAll('#flashcardGrid .flashcard').length; const flipped = document.querySelectorAll('#flashcardGrid .flashcard.flipped').length; const el = document.getElementById('fcCount'); if (el) el.innerHTML = '<span data-lang="en">' + flipped + ' / ' + total + ' flipped</span><span data-lang="zh">' + flipped + ' / ' + total + ' 已翻</span>'; }
+function resetFlashcards() { document.querySelectorAll('#flashcardGrid .flashcard').forEach(c => c.classList.remove('flipped')); updateFlashcardCount(); }
+function shuffleFlashcards() { const grid = document.getElementById('flashcardGrid'); if (!grid) return; const cards = [...grid.children]; for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); grid.appendChild(cards[j]); [cards[i], cards[j]] = [cards[j], cards[i]]; } }
+function toggleCheck(li) { li.classList.toggle('checked'); const total = document.querySelectorAll('#checklistUl li').length; const checked = document.querySelectorAll('#checklistUl li.checked').length; const el = document.getElementById('checkProgress'); if (el) el.innerHTML = '<span data-lang="en">' + checked + ' / ' + total + ' mastered</span><span data-lang="zh">已掌握 ' + checked + ' / ' + total + '</span>'; }
+function toggleSidebar() { if (window.innerWidth >= 1100) { document.body.classList.toggle('sidebar-collapsed'); } else { const sidebar = document.getElementById('sidebar'); sidebar.classList.toggle('open'); const btn = document.getElementById('tocToggle'); if (btn) btn.classList.toggle('active', sidebar.classList.contains('open')); } }
+document.addEventListener('click', function(e) { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (!sidebar) return; if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { const sidebar = document.getElementById('sidebar'); const btn = document.getElementById('tocToggle'); if (sidebar) sidebar.classList.remove('open'); if (btn) btn.classList.remove('active'); } });
+updateScoreBadge();
+</script>
+</body>
+</html>
