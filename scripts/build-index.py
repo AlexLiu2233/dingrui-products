@@ -46,6 +46,9 @@ SUBJECTS = [
     ("IB Physics HL",    "IB Physics HL",           "chip-green"),
     ("High School Math", "High School Math",        "chip-maroon"),
     ("High School Physics", "High School Physics",   "chip-green"),
+    ("High School Chemistry", "High School Chemistry", "chip-purple"),
+    ("High School Biology", "High School Biology",   "chip-gold"),
+    ("High School Computer Science", "High School Computer Science", "chip-green"),
 ]
 
 # When a subject mixes prefix words (e.g. IB Chemistry's Structure/Reactivity),
