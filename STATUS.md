@@ -46,18 +46,20 @@ Living doc — update as the product evolves. Last updated: **2026-06-03**.
 4-region syllabus crosswalk US/ON/BC/AB, honors-flag stream, feeder links to AP/IB) — the bottom tier of
 the HS → AP/IB → first-year-uni pipeline.
 
-**Status:** all 66 SGs **drafted** on `hs_stem_complete`. In-guide pictures **scrapped** (2026-06-03 —
-SVG trial was inaccurate; Manim conflicts with static/self-contained/print/dark-mode); guides are
-**prose + KaTeX only**. Not yet audited, not yet on `main`.
+**Status:** all 66 SGs drafted, **audited, fixed, and integrated** on `hs_stem_complete` —
+**DEPLOY-READY** (2026-06-03). In-guide pictures scrapped; prose + KaTeX only. Final gate: 66/66
+validate, 0 EN/ZH imbalances, 0 localStorage, 0 CJK-in-`\text{}`, all 66 toggles defined,
+`index.html` validates, all 39 new cards (Chem/Bio/CS) surface. Not yet on `main`.
 
 **Sequence (where we are → next):**
-1. ⏳ **Deployment-Readiness Audit** (now) — run `rag/study-guide-audit-checklist.md` per subject;
-   findings logged to each `<Subject>/AUDIT.md` for review (audit-only, no SG edits yet).
-2. Fix sprints per subject (review-then-merge).
-3. `build-index.py` + landing wiring for HS Chemistry/Biology/CS (surface all cards EN+ZH).
-4. FF `hs_stem_complete` → `preview` → `main` → deploy.
+1. ✅ **Deployment-Readiness Audit** — ran `rag/study-guide-audit-checklist.md` per subject; findings in each `<Subject>/AUDIT.md`.
+2. ✅ **Fix sprint** — D1 dead-toggle + D4 localStorage normalized (all 66); A6 CJK-in-math cleared (25 files); favicon path; Chem U4/U5 going-deeper. (`1b749f3`…`fcaf19e`)
+3. ✅ **build-index + landing** — HS Chemistry/Biology/CS wired into `build-index.py` + landing subject-groups; 39 cards live EN+ZH. (`dedd2d3`)
+4. ⏳ **FF `hs_stem_complete` → `preview` → `main` → deploy** (awaiting user go).
 5. Post-FF cleanup (delete merged branches/remotes; prune).
 6. **Later sprint:** HS Practice + Solutions (author `create-practice-and-solutions-hs-math.md` playbook first).
+
+**Known carry-over:** AP/IB SGs share the same `../LOGO.png` favicon bug (fixed only for HS) — future cross-subject pass.
 
 ---
 
