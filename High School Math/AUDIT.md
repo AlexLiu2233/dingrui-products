@@ -36,6 +36,48 @@ to Sprint 7.)
 
 ## Active Sprint — what we're working on now
 
+### Sprint — Deployment-Readiness Audit — 2026-06-03 (findings; audit-only)
+
+**✅ RESOLVED 2026-06-03 (fix sprint on `hs_stem_complete`):** D1 dead-toggle + D4 localStorage normalized across all 66 SGs (`1b749f3`); A6 CJK-in-`	ext{}` cleared in all 25 affected SGs (`4ff2b62`, `5a7c0c3`); P2 favicon `../LOGO.png`→`../../LOGO.png` (`e580250`); B3 going-deeper added to Chem U4/U5 (`b644a18`). Findings below retained as the audit record.
+
+
+**Readiness verdict: 11/15 clean; 1 P0 strand (4 files), 1 P1 strand (12 files), 0 P2.**
+Run against `rag/study-guide-audit-checklist.md` with the HS-STEM adjustments
+from `rag/hs-stem-deploy-audit.md` (E3 + C1 + interactivity excluded;
+no-stray-visual/JS check added; Section D ACTIVE, not gated; HS no-colon title
+form is correct). Scope: 15 Study Guides only (Practice/Solutions deferred).
+
+**What's clean across all 15 (no findings):**
+- **A8** `scripts/validate.sh` exits 0 on every file (the odd-`$` WARN is benign).
+- **D1** `data-lang` span parity exact on every file (EN==ZH: 411/411, 393/393,
+  396/396, 382/382, 400/400, 373/373, 372/372, 376/376, 391/391, 386/386,
+  343/343, 379/379, 396/396, 379/379, 386/386).
+- **A1** title = HS no-colon form `High School Math — <Topic> | Dingrui Scholars`.
+- **A6** KaTeX hygiene: no unicode Greek / sub / super / CJK inside `\text{}`.
+- **A10** hero + sidebar + `.footer-wrap` + progress bar present on all 15.
+- **B5** flashcards 13–16 per file (≥8 gate met); readiness checklist present.
+- Dark (`[data-theme="dark"]`), print (`@media print`), mobile (`max-width: 600px`)
+  blocks present on all 15.
+- **No-stray-visual/JS check (added):** 0 `<svg>` / `<img>` / `<canvas>` / chart
+  anywhere; exactly 3 `<script>` per file = 2 KaTeX 0.16.9 CDN + 1 inline locked
+  toggle/quiz/flashcard bundle. No novel CDN (A4 clean). PASS on all 15.
+- **Feeder/cross-file hrefs:** all 33 unique targets (IB Math HL, AP Calc, AP
+  Physics, AP CSA, intra-HS) resolve to existing files. No broken hrefs.
+
+**Findings:**
+
+| ID | File: gap | Tier | Status |
+|---|---|---|---|
+| **D1-1** | Units 2, 3, 4, 5: `langToggle` button (`onclick="toggleLang()"`) present and ZH spans fully balanced, but `function toggleLang()` is **not defined** in the inline script — clicking the toggle throws a ReferenceError and the ZH content is unreachable. Same class of bug Sprint 6 fixed in 7 Solutions files; it slipped through on these 4 SGs (retro-ZH pass added spans + button but not the function). Span-count parity passes; functional bilingual does NOT. | P0 | Open |
+| **D4-1** | Units 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 (12 files): `toggleLang()` both **reads** (`localStorage.getItem('lang')` on load) and **writes** (`localStorage.setItem('lang', …)`) language state, violating the locked rule (D4 / A13, 2026-05-21): every page must default to English on load and `toggleLang()` must not touch `localStorage`. A page can open in ZH if a prior page set it. Content + parity intact; behavioral-default only — logged P1 (checklist nominal tier is P0; demoted because no content/parity/exam-readiness impact). | P1 | Open |
+
+**Fix-sprint note (no edits made here — audit-only):** D1-1 is the deployment
+blocker — add the canonical `function toggleLang()` to Units 2/3/4/5. The
+cleanest resolution folds D4-1 in at the same time: ship ONE canonical
+`toggleLang()` (no `localStorage` read/write, defaults English on load) across
+all 15 SGs so the 4 missing files gain a working toggle AND the 12 existing
+files drop the localStorage violation in a single normalization pass.
+
 ### Sprint 6 — Unit 6 ZH finish + P+S ZH translation — **CLOSED 2026-05-31** (branch `high_school_math_sprint6`, awaiting FF to main; commit `a0d09d0`)
 
 Closed on the ZH-bulk deliverable. The two P0 strands (Unit 6 SG finish + the 36-file P+S ZH pass) shipped; the P1 mark-normalization and P2 polish were explicitly deferred to Sprint 7 to keep this a clean reviewable batch (user decision 2026-05-31).

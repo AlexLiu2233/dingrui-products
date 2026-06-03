@@ -37,6 +37,68 @@ Practice + Solutions and the static-visual upgrade are later waves.)
 
 ## Active Sprint — what we're working on now
 
+### Sprint — Deployment-Readiness Audit — 2026-06-03 (findings; audit-only)
+
+**✅ RESOLVED 2026-06-03 (fix sprint on `hs_stem_complete`):** D1 dead-toggle + D4 localStorage normalized across all 66 SGs (`1b749f3`); A6 CJK-in-`	ext{}` cleared in all 25 affected SGs (`4ff2b62`, `5a7c0c3`); P2 favicon `../LOGO.png`→`../../LOGO.png` (`e580250`); B3 going-deeper added to Chem U4/U5 (`b644a18`). Findings below retained as the audit record.
+
+
+Read-only audit of all 14 Study Guides against
+`rag/study-guide-audit-checklist.md` Sections **A**, **B**, **D** with the
+HS-STEM adjustments (E3/C1/interactive checks EXCLUDED; "no stray visual/JS"
+ADDED; HS no-colon title + 4-column syllabus map + region chips + honors-flag +
+bilingual + IB Chemistry HL feeders treated as correct conventions, not flagged;
+Section D ACTIVE — D1 EN==ZH hard gate). No `.html` edited.
+
+**Mechanical results (all 14 files):**
+- **A8** `scripts/validate.sh` — exit 0 on all 14 (odd-`$` WARN benign). PASS.
+- **D1** `data-lang="en"` == `data-lang="zh"` — parity on all 14 (counts 347-447). PASS.
+- **A1** title — HS no-colon form `High School Chemistry — <Topic> | Dingrui Scholars` on all 14. PASS.
+- **A2/A3** tokens — `--accent` + CJK font fallback (`PingFang SC`) present on all 14. PASS.
+- **A4** external deps — KaTeX 0.16.9 + Google Fonts only; no novel CDN. PASS.
+- **A5/A11/A12** dark-mode / `@media print` / `max-width: 600px` blocks present on all 14. PASS.
+- **A7** TOC anchors — all sidebar `href="#…"` resolve to existing `id=` on all 14. PASS.
+- **A10/A13** hero + footer + progress bar + `id="langToggle"` + `toggleLang()` present on all 14. PASS.
+- **No stray visual/JS** — zero `<svg>`/`<img>`/`<canvas>`; 3 `<script>` per file = 2 KaTeX CDN + 1 inline (quiz/flashcard/toggle only, no chart/visual JS). PASS.
+- **Feeder hrefs** — every `../../IB Chemistry HL/Study Guides/…` target resolves (Structure 1/2, Reactivity 1/2 all exist). PASS.
+- **Syllabus-map codes** — all NGSS codes used (HS-PS1-1…1-8, HS-PS2-6, HS-PS3-1/3-4/3-5) trace to `rag/sources/us/` extracts; ON (SCH3U/SCH4U/SNC2D), BC (Chemistry 11/12), AB (Chemistry 20/30) match real codes. No fabricated codes (AB OCR caveat noted, none surfaced). PASS.
+- **B (dual-goal)** — 10-12 worked examples + 12-14 flashcards (>8 gate) + quiz clusters per file; cheat-sheet/concept boxes present. PASS.
+
+**Findings:**
+
+| ID | File: gap | Tier | Status |
+|---|---|---|---|
+| **A6-1** | Unit_1_Atomic_Structure: 7 CJK chars inside `\text{}` in `$…$` math (e.g. `\text{上}`, `\text{电荷}`) render with fallback glyphs | P0 | Open |
+| **A6-2** | Unit_4_Nomenclature: 1 CJK-in-`\text{}` (`\text{Fe 电荷}`) | P0 | Open |
+| **A6-3** | Unit_5_The_Mole: 21 CJK-in-`\text{}` (e.g. `\text{实际产量}`, `\text{理论产量}`) | P0 | Open |
+| **A6-4** | Unit_7_Gas_Laws: 16 CJK-in-`\text{}` (e.g. `\text{干气体}`, `\text{水蒸气}`) | P0 | Open |
+| **A6-5** | Unit_9_Acids_Bases: 4 CJK-in-`\text{}` (e.g. `n_\text{酸}`, `\text{ 电离}`) | P0 | Open |
+| **A6-6** | Unit_10_Thermochemistry: 90 CJK-in-`\text{}` (e.g. `q_\text{系统}`, `q_\text{环境}`, `E_\text{断}`) — worst offender | P0 | Open |
+| **A6-7** | Unit_11_Reaction_Rates: 1 CJK-in-`\text{}` (`\text{速率比}`) | P0 | Open |
+| **A6-8** | Unit_12_Chemical_Equilibrium: 7 CJK-in-`\text{}` (e.g. `\text{产物}`, `\text{反应物}`, `\text{系数}`) | P0 | Open |
+| **A6-9** | Unit_13_Redox: 10 CJK-in-`\text{}` (e.g. `\text{阴极}`, `\text{阳极}`) | P0 | Open |
+| **D4-1** | ALL 14 files: `toggleLang()` calls `localStorage.setItem('lang', …)` and an on-load `localStorage.getItem('lang')` adds `lang-zh` — page does NOT default to English on load once toggled. Violates locked A13/D4 rule (`toggleLang()` must not read/write `localStorage`; every page defaults to English). | P0 | Open |
+| **Feeder-1** | Unit_7_Gas_Laws: `.feeder-link` CSS defined but no rendered feeder link in body (IB Structure 1 covers mole/gas — a feeder would be consistent with siblings) | P2 | Open |
+| **Feeder-2** | Unit_14_Organic: no rendered feeder link (organic not cleanly covered by shipped IB Structure 1/2 + Reactivity 1/2 — omission defensible) | P2 | Open |
+| **B3-1** | Unit_4_Nomenclature, Unit_5_The_Mole: zero `<details>`/going-deeper blocks (siblings carry 1-3) — top-score-chaser depth gap | P1 | Open |
+
+**Overall verdict — NOT DEPLOYMENT-READY (blocked on P0).** Chrome,
+mechanical hygiene, bilingual parity (D1), source-grounding, dual-goal
+coverage, and the no-stray-visual sweep are all clean across 14 files. Two
+P0 classes block ship: (1) **A6** — CJK characters inside `\text{}` in 9
+files render as KaTeX fallback glyphs / broken math on the ZH side (worst:
+Unit 10 with 90 hits; move Chinese outside math, use `\mathrm{}`/subscript
+labels, or romanise); (2) **D4** — all 14 files persist language to
+`localStorage` and auto-load ZH, violating the locked English-default rule
+(strip the two `localStorage` lines from `toggleLang()` + the on-load block).
+Fix the 9 A6 files and the uniform D4 pattern, re-run D1 parity + validate,
+then this set is clean for FF. P1/P2 items (B3 depth on Units 4-5, missing
+feeders on Units 7/14) are polish, not blockers.
+
+**Counts: P0 = 10 (9× A6 + 1× D4 spanning all 14 files) · P1 = 1 · P2 = 2.**
+
+---
+
+
 ### Sprint 1 — source-grounding + 14 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_chemistry_sg`, awaiting FF to main)
 
 **Shipped:** all 4 curricula source-grounded (NGSS HS-PS1, ON SCH3U/4U,

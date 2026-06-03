@@ -41,6 +41,56 @@ Solutions are the next wave.)
 
 ## Active Sprint — what we're working on now
 
+### Sprint — Deployment-Readiness Audit — 2026-06-03 (findings; audit-only)
+
+**✅ RESOLVED 2026-06-03 (fix sprint on `hs_stem_complete`):** D1 dead-toggle + D4 localStorage normalized across all 66 SGs (`1b749f3`); A6 CJK-in-`	ext{}` cleared in all 25 affected SGs (`4ff2b62`, `5a7c0c3`); P2 favicon `../LOGO.png`→`../../LOGO.png` (`e580250`); B3 going-deeper added to Chem U4/U5 (`b644a18`). Findings below retained as the audit record.
+
+
+Scored all 12 Study Guides against `rag/study-guide-audit-checklist.md`
+Sections **A / B / D** with the HS-STEM adjustments from
+`rag/hs-stem-deploy-audit.md` (E3 + C1 + interactive/slider checks
+EXCLUDED — interactivity + figures scrapped 2026-06-03; "no stray
+visual/JS" sweep ADDED; Section D ACTIVE, D1 a hard gate). **Audit-only —
+no `.html` edited.** Findings to be fixed in a follow-up sprint.
+
+**Mechanical sweep (all 12):**
+- **A8** `validate.sh` exits 0 on all 12 (odd-`$` WARN benign, not logged). **PASS.**
+- **D1** `data-lang` parity EN==ZH on all 12 (351–411 spans/file). **PASS.**
+- **No stray visual/JS:** 0 `<svg>` / `<img>` / `<canvas>` / chart in any
+  file (scrapped-SVG trial confirmed fully removed); only 3 `<script>`
+  per file = 2 KaTeX 0.16.9 CDN + 1 inline (quiz/toggle/scrollspy). **PASS.**
+- **Feeder hrefs:** all `../../` feeders resolve (AP Physics U1–U7, AP
+  Calculus U2, HS Math U7). **PASS (P1 link integrity clean).**
+- **Chrome:** dark-mode block, `@media print`, `max-width: 600px`,
+  `footer-wrap`, sticky sidebar, progress bar, `checklistUl` readiness,
+  14 flashcards, 4-region syllabus map (US NGSS / ON / BC / AB),
+  honors-flag, region/paper chips — present and uniform on all 12. **PASS.**
+- **A1** title = HS no-colon form on all 12. **PASS.** **A2/A3** tokens +
+  DM Serif Display + PingFang SC CJK fallback present. **PASS.**
+- **A7** TOC anchors all resolve (the single flagged `#${e.target.id}` is
+  a JS scrollspy template literal, not a TOC link — false positive). **PASS.**
+- **B1/B2/B6** dual-goal: cheat-sheet markers, 12 worked-example labels/file
+  (visible, not collapsed), 2–7 `<details>` going-deeper blocks/file. **PASS.**
+
+**Findings:**
+
+| Finding | File: gap | Tier | Status |
+|---|---|---|---|
+| **D4-1** | ALL 12 SGs: `toggleLang()` writes `localStorage.setItem('lang', …)` and the page reads `localStorage.getItem('lang')` on load to restore ZH. Violates the locked rule (2026-05-21) that `toggleLang()` must NOT touch localStorage and every page defaults to English on load. | P0 | Open |
+| **A6-1** | `Unit_3_Work_Energy_and_Power`: 13 CJK chars inside `\text{}` in math (e.g. `P_\text{有用输出}`, `P_\text{总输入}`) — ZH spans only; renders with fallback glyphs / breaks subscript layout. Move Chinese outside the math. | P0 | Open |
+| **A6-2** | `Unit_7_Light_and_Geometric_Optics`: 14 CJK chars inside `\text{}` (e.g. `n_{\text{真空}}`, `\lambda_{\text{介质}}`) — ZH spans only. | P0 | Open |
+| **A6-3** | `Unit_11_Thermodynamics_and_Heat`: 13 CJK chars inside `\text{}` (e.g. `\text{水}`, `\text{失}`, `\text{得}`) — ZH spans only. | P0 | Open |
+| **A6-4** | `Unit_12_Modern_and_Nuclear_Physics`: 2 CJK chars inside `\text{}` (`\text{高}`, `\text{低}`) — ZH spans only. | P0 | Open |
+| **A6-5** | `Unit_5_Circular_Motion_and_Gravitation`: 1 CJK char inside `\text{}` (`\text{常数}`) — ZH span only. | P0 | Open |
+
+**Overall verdict:** 12/12 validate clean, EN==ZH parity holds, links/chrome/
+dual-goal/visual-policy all PASS. **Two blockers stand between the corpus and
+deploy:** (1) a systemic **D4** localStorage-lang regression in all 12 files
+(must default to English on load), and (2) **A6** CJK-in-`\text{}` math hygiene
+in 5 files (broken subscript rendering in ZH mode). Both are mechanical,
+small-diff fixes. **NOT deploy-ready until D4-1 + A6-1..5 close;** the other
+seven SGs (U1, U2, U4, U6, U8, U9, U10) are clean apart from the shared D4-1.
+
 ### Sprint 1 — source-grounding + 12 bilingual Study Guides — **CLOSED 2026-06-01** (branch `hs_physics_studyguides`, awaiting FF to main)
 
 **Shipped:** all 4 curricula source-grounded (NGSS HS-PS, ON SPH3U/4U,

@@ -43,6 +43,79 @@ Solutions and the static-visual upgrade are later waves.)
 
 ## Active Sprint — what we're working on now
 
+### Sprint — Deployment-Readiness Audit — 2026-06-03 (findings; audit-only)
+
+**✅ RESOLVED 2026-06-03 (fix sprint on `hs_stem_complete`):** D1 dead-toggle + D4 localStorage normalized across all 66 SGs (`1b749f3`); A6 CJK-in-`	ext{}` cleared in all 25 affected SGs (`4ff2b62`, `5a7c0c3`); P2 favicon `../LOGO.png`→`../../LOGO.png` (`e580250`); B3 going-deeper added to Chem U4/U5 (`b644a18`). Findings below retained as the audit record.
+
+
+Scored all 13 Study Guides against `rag/study-guide-audit-checklist.md`
+Sections **A**, **B**, **D** + the **C5-style code-literal rule**, with the
+HS-STEM adjustments from `rag/hs-stem-deploy-audit.md` (E3/C1/interactivity
+EXCLUDED — figures/sliders scrapped 2026-06-03; "no stray visual/JS" sweep
+ADDED; KaTeX conditional for CS; `<pre><code>` pseudocode/Python EXPECTED;
+Section D ACTIVE as hard gate). **Audit-only — no `.html` edited.**
+
+**Mechanical sweep (all 13 files):**
+
+- **A8** `scripts/validate.sh` exits **0** on every file (odd-`$` WARN is the
+  benign KaTeX/JS/f-string `$`, not a defect).
+- **D1** `data-lang="en"` == `data-lang="zh"` on every file (447/400/441/488/
+  446/405/338/411/444/376/445/387/418 — all balanced).
+- **No stray visual/JS:** `<svg>`/`<img>`/`<canvas>` = **0** everywhere; exactly
+  3 `<script>` per file = 2 KaTeX CDN (`katex@0.16.9` + auto-render) + 1 inline
+  (quiz + `toggleLang()` + scroll-spy). Clean.
+- **A1 title:** all 13 use the HS **no-colon** form
+  `High School Computer Science — <Topic> | Dingrui Scholars`. PASS.
+- **Dark / print / mobile:** `[data-theme="dark"]`, `@media print`,
+  `max-width: 600px` blocks present in every file. PASS.
+- **Feeder hrefs** (`../../AP CSA/Study Guides/...`): all targets resolve
+  (Unit_1_Using_Objects_and_Methods, Unit_2_Selection_and_Iteration,
+  Unit_3_Class_Creation, Unit_4_Data_Collection all exist). PASS.
+
+**Content / pedagogy sweep (all 13 files):**
+
+- **A2/A3/A4/A5** design tokens (`--accent`), `DM Serif Display`, `PingFang SC`
+  CJK fallback, KaTeX-only CDN, dark-mode toggle: PASS all.
+- **A6** KaTeX hygiene — zero unicode subscripts/Greek/CJK inside `\text{}`: PASS.
+  (KaTeX conditional for CS; Unit 12 carries no code/math, valid.)
+- **A7** TOC anchors all resolve (the lone `${e.target.id}` "miss" is the
+  scroll-spy JS template literal, false positive): PASS.
+- **B1** `cram-cheat` cheat-sheet (11/file), **B2/E1** `worked-solution`
+  (11-12/file, **0 collapsed inside `<details>`** — all visible-by-default),
+  **B5** flashcards ≥8 (12-14/file), **B6** intro, **B7** readiness checklist
+  (11-13 items/file), **E2** exam-tip callouts: PASS all.
+- **4-column syllabus map** (US CSTA/CSP · ON ICS3U/4U · BC ADST/Comp Studies ·
+  AB CTS/CSE) + region-chips present in every file: PASS.
+- **C5-style code rule:** **0** `data-lang` spans inside `<pre><code>` blocks —
+  code stays literal, only prose is bilingual. PASS all.
+
+**Findings:**
+
+| Finding | File: gap | Tier | Status |
+|---|---|---|---|
+| **D4-1** | ALL 13 SGs: `toggleLang()` both writes (`localStorage.setItem('lang',…)`) and reads (`localStorage.getItem('lang')==='zh'` on load) — violates the locked rule (checklist A13 / D4, 2026-05-21) that `toggleLang()` must NOT touch `localStorage` and every page must default to **English on load**. A returning ZH visitor lands in ZH, breaking the EN-default contract. | P0 | **Open** |
+| **A1-1** | ALL 13 SGs: favicon `href="../LOGO.png"` resolves to `High School Computer Science/LOGO.png` (missing); `LOGO.png` lives at repo root, so the correct path from `Study Guides/` is `../../LOGO.png`. **Inherited repo-wide pattern** — the already-live HS Math siblings carry the identical broken path, so this is not a CS regression; logged P2 (cosmetic favicon only, non-blocking) for a future cross-subject sweep, not a CS-specific blocker. | P2 | **Open** |
+
+**Per-file verdict:** all 13 SGs are CLEAN on Sections A/B, the code-literal
+rule, the no-stray-visual sweep, and D1 parity. The only substantive finding
+(**D4-1**) is uniform across all 13 — a single shared `toggleLang()`/load
+snippet carries the forbidden `localStorage` behaviour, so it is one fix
+applied 13x, not 13 distinct defects.
+
+**Counts:** P0 = 1 (D4-1, ×13 files, one shared snippet) · P1 = 0 · P2 = 1
+(A1-1 favicon, inherited/repo-wide).
+
+**Overall verdict:** **NOT deployment-ready as-is** solely on the **D4-1 P0**
+`localStorage` regression in `toggleLang()` — page-default-to-English is a
+locked contract. Everything else (validate, EN/ZH parity, chrome parity,
+worked examples, cheat-sheets, flashcards, readiness, feeders, code-literal,
+no stray visuals) is **clean across all 13 files**. Strip the two
+`localStorage` lines from the toggle snippet on every file and the subject is
+green to FF to `main`/`preview`. The A1-1 favicon is a benign cosmetic carry-over
+shared with live siblings; defer to a cross-subject housekeeping pass.
+
+---
+
 ### Sprint 1 — source-grounding + 13 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_cs_sg`, awaiting FF to main)
 
 **Shipped:** all 4 curricula source-grounded (CSTA L3 + AP CSP, ON ICS3U/4U,

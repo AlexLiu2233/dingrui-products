@@ -42,6 +42,77 @@ Solutions and the static-visual upgrade are later waves.)
 
 ---
 
+### Sprint — Deployment-Readiness Audit — 2026-06-03 (findings; audit-only)
+
+**✅ RESOLVED 2026-06-03 (fix sprint on `hs_stem_complete`):** D1 dead-toggle + D4 localStorage normalized across all 66 SGs (`1b749f3`); A6 CJK-in-`	ext{}` cleared in all 25 affected SGs (`4ff2b62`, `5a7c0c3`); P2 favicon `../LOGO.png`→`../../LOGO.png` (`e580250`); B3 going-deeper added to Chem U4/U5 (`b644a18`). Findings below retained as the audit record.
+
+> **Correction:** the Biology Unit 12 "D1 mismatch (374/375)" was a FALSE POSITIVE — the file is balanced **434/434**; no fix needed (its A6 was real and is fixed).
+
+
+Scored against `rag/study-guide-audit-checklist.md` Sections **A**, **B**,
+**D1** with the HS-STEM deploy adjustments (`rag/hs-stem-deploy-audit.md`):
+E3 / C1 / interactivity EXCLUDED (figures + interactivity scrapped
+2026-06-03 — prose + KaTeX only); "no stray visual/JS" sweep ADDED; HS
+no-colon title + 4-column syllabus map + no-feeder-link conventions treated
+as correct (not flagged); Section **D1 (EN==ZH) is an active hard gate**.
+**Audit-only — no `.html` edited.** Scope: all 12 SGs in
+`High School Biology/Study Guides/*.html`.
+
+**Mechanical results (all 12):** `validate.sh` exits 0 on every file
+(A8 PASS; odd-`$` WARN benign per deploy doc). Titles all conform to the HS
+no-colon form `High School Biology — <Topic> | Dingrui Scholars` (A1 PASS).
+Design tokens (`--accent`), CJK font fallback (A3), dark-mode
+(`[data-theme="dark"]`), `@media print`, and `@media (max-width: 600px)`
+blocks present on every file (A2/A5/A11/A12 PASS). Bilingual toggle infra
+(`lang-zh` CSS + `id="langToggle"` + `toggleLang()`) present on every file
+(A13 infra PASS). Required structural sections (hero, sticky sidebar TOC,
+footer, progress bar, 4-column syllabus map US-NGSS/ON/BC/AB) present on all
+12 (A10 PASS). TOC anchors all resolve — the lone "unresolved" hit per file
+is the `${e.target.id}` template literal inside the IntersectionObserver JS,
+a false positive (A7 PASS). **No stray visuals:** 0 `<svg>` / `<img>` /
+`<canvas>` anywhere; each file carries exactly 3 `<script>` tags — 2 KaTeX
+0.16.9 CDN (A4 allowed) + 1 inline quiz/toggle script — no chart/non-quiz JS
+(no-stray-visual/JS sweep PASS). **No feeder `<a>` links** exist (correct —
+no IB/AP Biology product; feeders are prose; not flagged). Worked-example
+density healthy (7–12 per file). Flashcard decks ≥ 8 (B5 PASS).
+
+| Finding | File: gap | Tier | Status |
+|---|---|---|---|
+| **D1-1** | Unit 12 Population Biology: `data-lang` span count mismatch EN=374 / ZH=375 — malformed nesting at lines 596–603 (an `en` span wraps a nested `<ul>` whose `<li>`s each carry their own en/zh pairs, then a separate `zh` span at line 603 duplicates that summary), leaving one unpaired span. Hard-gate D1 failure — blocks deploy. | P0 | Open |
+| **A6-1** | Unit 12 Population Biology: CJK characters inside `\text{}` in the ZH math spans — `\text{出生率}`, `\text{死亡率}` (line 459) and `\text{增长率}` (line 512). KaTeX renders these with fallback glyphs / broken layout; move the Chinese outside the math (e.g. `$r = b - d$` with the gloss in prose). | P0 | Open |
+| **D4-1** | All 12 files: `toggleLang()` both writes (`localStorage.setItem('lang', …)`) and reads (`localStorage.getItem('lang')`) language state (script lines ~945–946), violating the locked 2026-05-21 rule that every page defaults to English on load and `toggleLang()` does not touch `localStorage`. Repo-wide pattern; flag for a single sweep fix. | P1 | Open |
+| **A1-fav** | All 12 files: favicon `<link rel="icon" href="../LOGO.png">` resolves to `High School Biology/LOGO.png`, which does not exist (the asset lives only at repo root `./LOGO.png`; correct relative path is `../../LOGO.png`). Cosmetic broken favicon, not an `<a>` feeder link; identical convention error in HS Math siblings, so repo-wide, not Biology-specific. | P2 | Open |
+
+**Per-file verdict:**
+
+| File | Verdict |
+|---|---|
+| Unit 1 Cell Structure | **Clean** (A1-fav P2 only) |
+| Unit 2 Biochemistry | **Clean** (A1-fav P2 only) |
+| Unit 3 Cellular Energetics | **Clean** (A1-fav P2 only) |
+| Unit 4 Cell Division | **Clean** (A1-fav P2 only) |
+| Unit 5 Mendelian Genetics | **Clean** (A1-fav P2 only) |
+| Unit 6 Molecular Genetics | **Clean** (A1-fav P2 only) |
+| Unit 7 Evolution | **Clean** (A1-fav P2 only) |
+| Unit 8 Biodiversity/Taxonomy | **Clean** (A1-fav P2 only) |
+| Unit 9 Ecology | **Clean** (A1-fav P2 only) |
+| Unit 10 Anatomy & Physiology | **Clean** (A1-fav P2 only) |
+| Unit 11 Homeostasis | **Clean** (A1-fav P2 only) |
+| Unit 12 Population Biology | **FAIL** — D1-1 (P0 span mismatch) + A6-1 (P0 CJK-in-`\text{}`) |
+
+The D4-1 (P1) and A1-fav (P2) findings apply to all 12 uniformly and are
+not unit-specific defects.
+
+**Overall verdict: NOT deploy-ready — 1 file blocks.** 11 of 12 SGs are
+clean and deploy-ready (modulo the two repo-wide P1/P2 sweeps). **Unit 12
+Population Biology fails the deploy gate** on two P0s: the D1 EN/ZH span
+parity mismatch and CJK characters inside `\text{}`. Fix Unit 12's two P0s
+(re-balance the lines 596–603 span nesting; pull Chinese out of the three
+`\text{}` blocks at lines 459/512), then the corpus clears. **Totals: P0 = 2
+(both in Unit 12), P1 = 1 (D4-1, repo-wide), P2 = 1 (A1-fav, repo-wide).**
+
+---
+
 ## Active Sprint — what we're working on now
 
 ### Sprint 1 — source-grounding + 12 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_biology_sg`, awaiting FF to main)
