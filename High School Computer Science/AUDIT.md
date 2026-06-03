@@ -34,16 +34,45 @@ same commit. Practice Questions and AP-feeder cross-references live in
 the [Digital Product Backlog](#digital-product-backlog) until those
 product surfaces spin up.
 
-Last reviewed: **2026-05-31** (subject scaffolded — spec + audit +
-folder structure created. Source-grounding PENDING for all four
-curricula; no Study Guide HTML drafted yet. Sprint 1 open: source
-fetch + Unit 1 SG template lock.)
+Last reviewed: **2026-06-02** (**all 13 Study Guides shipped** —
+bilingual from start, source-grounded, validate PASS, balanced EN/ZH
+spans — on branch `hs_cs_sg`, awaiting review/FF to main. Practice +
+Solutions and the static-visual upgrade are later waves.)
 
 ---
 
 ## Active Sprint — what we're working on now
 
-### Sprint 1 — source-grounding + Unit 1 SG template lock — **OPEN** (branch TBD)
+### Sprint 1 — source-grounding + 13 bilingual Study Guides — **CLOSED 2026-06-02** (branch `hs_cs_sg`, awaiting FF to main)
+
+**Shipped:** all 4 curricula source-grounded (CSTA L3 + AP CSP, ON ICS3U/4U,
+BC ADST Computer Studies, AB CTS CSE — extracts + cached docs in `rag/sources/`),
+Unit 1 Computational Thinking drafted as the bilingual template lock (cloned from
+the Physics SG chrome), then Units 2-13 bulk-drafted via Sonnet copy-then-edit.
+All 13 SGs ~1059-1224 lines, balanced EN/ZH spans, validate PASS. **CODE in
+`<pre><code>`** (pseudocode + Python, un-translated, language-agnostic) rather than
+KaTeX. **Feeders → AP CSA** where topics align (programming/control-flow/OOP/
+data-structures). Divergence syllabus-notes baked in: OOP optional in US/BC
+(honors); databases/SQL only in ON college stream (ICS4C); networks heaviest in
+AP CSP; searching/sorting/efficiency are Grade-12.
+
+| Unit | Topic | Spans | Unit | Topic | Spans |
+|---|---|---|---|---|---|
+| 1 | Computational Thinking (template) | 447 | 8 | OOP (intro) | 387 |
+| 2 | Programming Fundamentals | 405 | 9 | Boolean Logic & Number Systems | 418 |
+| 3 | Control Flow | 338 | 10 | Data, Databases & the Web | 400 |
+| 4 | Functions & Modular Design | 411 | 11 | Networks & the Internet | 441 |
+| 5 | Data Structures | 444 | 12 | Cybersecurity, Ethics & Society | 488 |
+| 6 | Strings & Text Processing | 376 | 13 | Software Development Process | 446 |
+| 7 | Searching & Sorting | 445 | | | |
+
+**This completes the HS STEM Study-Guide goal** (Math 15 + Physics 12 + Chemistry
+14 + Biology 12 + CS 13). **Next:** improvement runs (static visuals + audit)
+across all four new subjects, then build-index + landing integration, then deploy.
+
+#### Original Sprint 1 plan (historical)
+
+### Sprint 1 — source-grounding + Unit 1 SG template lock — (historical)
 
 **Goal.** Fetch the four curriculum source documents, then draft the
 first full HS CS Study Guide for **Unit 1: Computational Thinking and
