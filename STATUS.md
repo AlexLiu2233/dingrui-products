@@ -28,13 +28,14 @@ Living doc — update as the product evolves. Last updated: **2026-06-03** (HS S
 
 ## Branches & deploy state
 
-- **`main`** = `preview` = **`eca6b0e`** — production (auto-deploys to site root). Holds **all 66 HS STEM SGs**
-  (Math 15 + Physics 12 + Chemistry 14 + Biology 12 + CS 13) + all AP/IB. **HS STEM shipped 2026-06-03.**
-- **`hs_stem_complete`** — merged to `main` (FF after rebase) and **deleted**.
-- **`landing_page_refresh`** — LP-1 (EN/ZH pairing checklist + `translation_coverage.py`); paused. KEPT.
+- **`main`** = `preview` — production (auto-deploys to site root). Holds **all 66 HS STEM SGs**
+  (Math 15 + Physics 12 + Chemistry 14 + Biology 12 + CS 13) + all AP/IB. **HS STEM shipped 2026-06-03;
+  landing fixes shipped 2026-06-04** (HS Math accordion default-closed + count 15; cross-page `?lang=zh`
+  continuity across 200 bilingual pages via `scripts/lang_link_continuity.py`).
+- **`hs_stem_complete`** and **`landing_page_refresh`** — merged to `main` (FF) and **deleted**.
+  (landing_page_refresh's LP-1 artifacts `rag/translation-coverage.md` + `scripts/translation_coverage.py` are on `main`.)
 - **3 unmerged branches kept** (genuine open work): `english_to_chinese_translation`,
-  `ib_chem_reactivity2_challenge_practice`, `sprint_3_unit_specs`. All 23 merged + 3 redundant
-  subject-backup branches deleted 2026-06-03. (Stale `origin/*` remotes: prune later, low priority.)
+  `ib_chem_reactivity2_challenge_practice`, `sprint_3_unit_specs`. (Stale `origin/*` remotes: prune later, low priority.)
 
 ---
 
@@ -92,5 +93,8 @@ title, single syllabus, paper-style chips, purple HL flag (IB), retrofitted bili
 ## Known debt / watch-list
 - AP Calculus (8 Practice) + AP Physics (14 P+S) still EN-only (translation tail; see
   `project_translation_coverage` memory).
-- HS Practice+Solutions: 36 HS Math P+S are EN-only; other HS subjects have no P+S yet; no HS P+S playbook.
+- HS Practice+Solutions: 36 HS Math P+S exist (bilingual); other 4 HS subjects have no P+S yet. Playbook
+  authored (`prompts/create-hs-practice-and-solutions.md`); Physics-first sprint planned (HS Physics AUDIT Sprint 3).
+  **P+S-sprint finding:** `High School Math/Practice Questions/Solutions/Unit_4_Rational_and_Radical_Expressions_Solutions.html`
+  has an EN/ZH parity off-by-one (en=310/zh=311) — pre-existing, fix during the Math leg of the P+S sprint.
 - `sources.txt`: AB Math 20-1 standards un-fetched (`[!]`).
