@@ -91,6 +91,63 @@ in 5 files (broken subscript rendering in ZH mode). Both are mechanical,
 small-diff fixes. **NOT deploy-ready until D4-1 + A6-1..5 close;** the other
 seven SGs (U1, U2, U4, U6, U8, U9, U10) are clean apart from the shared D4-1.
 
+### Sprint 3 — Practice + Solutions wave — **PLANNED (not started)** — promotes DP-1
+
+> **Status: QUEUED.** Playbook authored + committed (`prompts/create-hs-practice-and-solutions.md`,
+> `281d8b7` on branch `hs_physics_practice`). **No P+S `.html` built yet** — this is the
+> plan only, awaiting the user's go. Physics is the **first STEM subject taken end-to-end**;
+> it locks the P+S template the other 4 STEM subjects (Chem/Bio/CS/Math-retro) will copy.
+
+**Goal.** 12 bilingual **Practice + Solutions** pairs (24 files), one per shipped Physics
+Study Guide — the exam-prep companion to each SG. Locked HS contract (see playbook): EASY-MED-HARD
+mix (~4:7:4, leans MED), **3 Parts by response type** (I Short Response · II Extended Response+Honors ·
+III Modeling/Applied), **US/ON/BC/AB region chips** with the **AB Diploma** style as the standardized
+hook (Physics 30), gold honors stream, **bilingual EN==ZH from the start** (exit gate), no-colon
+topic-only titles, `v1` / `HS-Phys-<N>` version-pair tags, **copy-then-edit** from the HS Math Unit 1 pair.
+
+**Per-pair spec.** ~10–14 questions, **~80 marks** (Parts I:II:III ≈ 25:30:25); every section of the
+companion SG covered by ≥1 question; **`.insight` block on every solution** (the differentiator from a
+vanilla answer key); **answers verified mathematically — units + numbers — before the Solutions file is
+written.** CS would use `<pre><code>` not KaTeX, but that is a later subject; Physics is all KaTeX `$…$`.
+
+**Work list (12 pairs).** File stem = companion SG stem; pair-key `HS-Phys-<N>`.
+
+| N | Topic (pair-key) | Region-fit + emphasis notes (honor the SG's syllabus crosswalk — do NOT fake region chips) |
+|---|---|---|
+| 1 | Kinematics `HS-Phys-1` | **Template lock.** All 4 regions; AP Phys 1-feeder FRQ + AB Diploma. 1D/2D, graphs, projectiles. |
+| 2 | Forces & Newton's Laws `HS-Phys-2` | All regions; FBD-heavy FRQ; core to every course. |
+| 3 | Work, Energy & Power `HS-Phys-3` | All regions; energy-conservation modeling in Part III. |
+| 4 | Momentum & Collisions `HS-Phys-4` | All regions; 1D/2D collisions; impulse FRQ. |
+| 5 | Circular Motion & Gravitation `HS-Phys-5` | All regions; **honors** depth (Kepler, orbital). |
+| 6 | Waves & Sound `HS-Phys-6` | All regions; superposition, resonance. |
+| 7 | Light & Geometric Optics `HS-Phys-7` | **Thin in NGSS/AB** per SG note → lean ON/BC chips; honors for thin-lens algebra. |
+| 8 | Electrostatics & Electric Fields `HS-Phys-8` | All regions; Coulomb / field FRQ. |
+| 9 | Current Electricity & Circuits `HS-Phys-9` | **DC circuits thin in NGSS/AB** per SG → lean ON/BC; Kirchhoff honors. |
+| 10 | Magnetism & EM Induction `HS-Phys-10` | **AB Phys 30 strong (Diploma hook)**; **honors** for induction/Faraday. |
+| 11 | Thermodynamics & Heat `HS-Phys-11` | **Absent from AB Physics** per SG → drop AB chip; honors for gas-law/PV work. |
+| 12 | Modern & Nuclear Physics `HS-Phys-12` | **AB Phys 30 strong (Diploma hook)**; honors for mass-energy/decay. |
+
+**Sequence (review-then-merge cadence locked — nothing merges without user approval).**
+1. **Lock Unit 1 (Kinematics, `HS-Phys-1`)** as the STEM template — full build, answers verified,
+   per-pair gate green. **User reviews the locked pair.**
+2. **Waves of ~4 Sonnet subagents** (`model: sonnet`), copy-then-edit from the *locked Physics Unit 1*
+   (not Math) once it exists; each agent reads its companion SG + the Unit 1 pair, transforms, runs the
+   per-pair gate. Commit per wave so an API outage costs ≤ one wave: **Wave A** (2,3,4,5) · **Wave B**
+   (6,7,8,9) · **Wave C** (10,11,12).
+3. `python scripts/build-index.py` (surface Practice cards) → review → FF `hs_physics_practice` →
+   `preview` → `main`.
+
+**Per-pair gate (before each commit).** `validate.sh` PASS on both files · EN span count == ZH on both ·
+leftover-grep ≈ 0 (no Math-Unit-1 terms `linear|slope|intercept|斜率|系统`) · per-question marks sum to the
+header pill · `pair-key` + `version` agree across banner / footer chip / `dingrui:` comment · dash sweep
+per `_tone.md` (math operators exempt).
+
+**Exit criteria.** 24 files validate clean; EN==ZH everywhere; all 12 SG section-lists covered; answers
+verified; `build-index.py` regenerated with Practice cards surfacing EN+ZH; AUDIT + `STATUS.md` +
+`project_hs_stem_program` memory updated; then FF to preview → main.
+
+---
+
 ### Sprint 1 — source-grounding + 12 bilingual Study Guides — **CLOSED 2026-06-01** (branch `hs_physics_studyguides`, awaiting FF to main)
 
 **Shipped:** all 4 curricula source-grounded (NGSS HS-PS, ON SPH3U/4U,
@@ -315,7 +372,7 @@ in a richer interactive product or follow-on sprint.
 
 | ID | Item | Why it's not in scope here |
 |---|---|---|
-| DP-1 | Practice Questions + Solutions product per unit (MC + FRQ-style, bilingual, mirroring HS Math's region + paper-style chip taxonomy) | Needs Study Guide content first to anchor question scope. Open after the Unit 1 template locks. |
+| ~~DP-1~~ | ~~Practice Questions + Solutions product per unit~~ | **→ PROMOTED to Sprint 3 (PLANNED 2026-06-03).** SGs shipped; playbook authored. |
 | DP-2 | Per-province exam-prep overlays (BC Provincial, AB Physics 30 Diploma, ON SPH4U) on top of the topic guides | Layer onto existing guides; deferred until Canadian-audience demand is measured. |
 | DP-3 | NGSS three-dimensional learning callouts (SEP + CCC + DCI) per unit | NGSS performance expectations bundle practices + crosscutting concepts; a richer pedagogical overlay than the syllabus-map crosswalk. Scope separately. |
 | DP-4 | Interactive simulations / PhET-style embeds for motion, circuits, waves | Needs an interactive product surface beyond the self-contained HTML SG. |
