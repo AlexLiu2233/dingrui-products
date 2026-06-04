@@ -111,9 +111,12 @@ Building a whole subject's P+S end-to-end (the locked sprint shape):
    from the locked Unit 1 of *this* subject (not Math) once it exists —
    each agent reads the companion SG + Unit 1 pair, transforms, runs the
    per-file gate. Commit per wave so an API outage costs ≤ one wave.
-3. After all pairs land + validate: `python scripts/build-index.py` (so
-   the Practice cards surface), review-then-merge per the locked cadence
-   (`feedback_review_merge_pattern`), FF to `preview` then `main`.
+3. After all pairs land + validate: `python scripts/build-index.py` (so the
+   Practice cards surface) **and `python scripts/lang_link_continuity.py`** (so the
+   new bilingual P+S pages get the `?lang=zh` cross-page continuity snippet — without
+   it a ZH-landing click opens the EN version; STATUS global invariant #6). Then
+   review-then-merge per the locked cadence (`feedback_review_merge_pattern`), FF to
+   `preview` then `main`.
 </execution_at_scale>
 
 <reminders>

@@ -81,6 +81,10 @@ the HS → AP/IB → first-year-uni pipeline.
 3. **Bilingual gate** — `data-lang="en"` count == `data-lang="zh"` count per file.
 4. **Ship gate** — `bash scripts/validate.sh` exits 0.
 5. **Index** — run `python scripts/build-index.py` after any SG add/remove/rename.
+6. **Lang continuity** — run `python scripts/lang_link_continuity.py` after creating ANY new bilingual page
+   (SG or Practice/Solutions) so cross-page `?lang=zh` continuity covers it. Idempotent; parity-neutral
+   (uses `[data-lang=zh]`, no quoted literal). Without it, a ZH-landing click opens the EN version. Direct
+   visits with no `?lang` param still default to English (the D4 rule).
 
 Design system: maroon `#7A2E2E`; DM Serif Display / Source Sans 3 / JetBrains Mono; dark mode +
 language/theme toggles; self-contained single-file HTML (Google Fonts + KaTeX CDN only).
