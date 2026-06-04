@@ -524,11 +524,11 @@ footer {
       <h2 class="tier__title"><span data-lang="en">High School Foundations</span><span data-lang="zh">高中基础课程</span></h2>
       <p class="tier__sub"><span data-lang="en">Provincial and Common Core curricula for British Columbia, Ontario, Alberta, and US schools. Builds the foundation students need before progressing to AP and IB coursework.</span><span data-lang="zh">省级与 Common Core 课程，面向不列颠哥伦比亚、安大略、阿尔伯塔及美国学校，为学生进入 AP 与 IB 课程之前奠定扎实基础。</span></p>
     </header>
-    <details class="subject-group" open>
+    <details class="subject-group">
       <summary class="subject-group__toggle">
         <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>
         <span class="subject-group__title"><span data-lang="en">High School Math</span><span data-lang="zh">高中数学</span></span>
-        <span class="subject-group__count"><span data-lang="en">1 unit</span><span data-lang="zh">1 个单元</span></span>
+        <span class="subject-group__count"><span data-lang="en">15 units</span><span data-lang="zh">15 个单元</span></span>
       </summary>
       <div class="subject-group__body">
         <div class="grid">
@@ -1385,5 +1385,25 @@ function toggleLang() {
   });
 })();
 </script>
+<script>/* dingrui-lang-link: cross-page language continuity via ?lang=zh; no persistence, direct visits default English */
+(function(){
+  try{
+    var q=new URLSearchParams(window.location.search).get('lang');
+    if(q==='zh'&&document.querySelector('[data-lang=zh]'))document.body.classList.add('lang-zh');
+    else if(q==='en')document.body.classList.remove('lang-zh');
+  }catch(e){}
+  document.addEventListener('click',function(ev){
+    if(!document.body.classList.contains('lang-zh'))return;
+    var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href)return;
+    if(/^(https?:)?\/\//i.test(href)||/^(#|mailto:|tel:|javascript:)/i.test(href))return;
+    if(/[?&]lang=/.test(href))return;
+    var hash='',i=href.indexOf('#');
+    if(i>=0){hash=href.slice(i);href=href.slice(0,i);}
+    a.setAttribute('href',href+(href.indexOf('?')>=0?'&':'?')+'lang=zh'+hash);
+  },true);
+})();</script>
 </body>
 </html>
