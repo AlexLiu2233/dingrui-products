@@ -55,7 +55,7 @@ the HS → AP/IB → first-year-uni pipeline.
 3. ✅ **build-index + landing** — HS Chemistry/Biology/CS wired into `build-index.py` + landing subject-groups; 39 cards live EN+ZH. (`dedd2d3`)
 4. ✅ **FF → `main` + `preview` → deploy** — rebased onto main (absorbed cherry-picked deploy-fix), FF'd, pushed; validate exits 0 so the prod gate passes. (`eca6b0e`, 2026-06-03)
 5. ✅ Post-FF cleanup — 23 merged + 3 redundant branches deleted; 3 unmerged + `landing_page_refresh` kept.
-6. ⏭️ **NEXT sprint:** HS Practice + Solutions (author `create-practice-and-solutions-hs-math.md` playbook first; then P+S per SG, bilingual, version+pair-key locked).
+6. 🔨 **IN PROGRESS — HS Practice + Solutions sprint** (branch `hs_physics_practice`). Playbook authored: `prompts/create-hs-practice-and-solutions.md` (HS sibling of the IB one; locks EASY-MED-HARD mix, 3-Part response framing, US/ON/BC/AB region chips, bilingual EN==ZH gate, `v1`/`HS-<Subj>-<N>` tags, copy-then-edit). Scope = **one subject end-to-end first** (HS Physics): lock Unit 1 Kinematics pair as the STEM template → review → waves 2-12. 36 HS Math P+S already exist (EN-only); Physics/Chem/Bio/CS have none yet.
 
 **Known carry-over:** AP/IB SGs share the same `../LOGO.png` favicon bug (fixed only for HS) — future cross-subject pass.
 
