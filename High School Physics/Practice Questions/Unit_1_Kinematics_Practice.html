@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>High School Physics — Kinematics — Practice | Dingrui Scholars</title>
+<!-- dingrui:version v1  dingrui:pair-key HS-Phys-1  dingrui:doc-type practice -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style data-theme="light">
+  :root{
+    --ink:#141414; --muted:#555; --paper:#ffffff; --rule:#111;
+    --maroon:#7A2E2E; --maroon-ink:#ffffff;
+    --easy-bg:#E7F2E3; --easy-ink:#2F6B2F; --easy-rule:#79A977;
+    --med-bg:#FFF3DE;  --med-ink:#8A5A10;  --med-rule:#D9A94A;
+    --hard-bg:#FBE4E4; --hard-ink:#8E2020; --hard-rule:#C85454;
+    --topic-bg:#EFE9E4; --topic-ink:#4A3A2A; --topic-rule:#B5A68F;
+    --marks-bg:#F5F0EB; --marks-ink:#2C1B1F; --marks-rule:#B5A68F;
+    /* ── HS Math chip taxonomy (locked Sprint 1 decision; inherited by every
+          HS Math Practice / Solutions file going forward) ─────────────────
+       Region chip  : neutral / paper-tone background; thin grey border.
+                      Reads as a quiet "which curriculum" flag.
+       Paper chip   : brand-maroon accent on cream; stands out as the
+                      "which paper this question is modeled on" tag.
+       Honors chip  : gold on cream (same tokens as the Study Guide). */
+    --region-bg:#F5F2EE; --region-ink:#3A322B; --region-rule:#B5A68F;
+    --paper-bg:#FBE9E9;  --paper-ink:#7A2E2E;  --paper-rule:#C97A7A;
+    --honors-bg:#FDF5EC; --honors-ink:#7A5618; --honors-rule:#C4956A;
+    --font-body:'Times New Roman', Times, Georgia, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', serif;
+    --font-sans:'Source Sans 3', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  }
+  @page { size: letter; margin: 0.6in 0.65in; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:var(--paper);color:var(--ink);}
+  body{font-family:var(--font-body);font-size:11pt;line-height:1.45;max-width:8.5in;margin:0 auto;padding:clamp(16px, 3.5vw, 0.4in) clamp(14px, 4vw, 0.55in) clamp(20px, 4vw, 0.55in);}
+  .brand{letter-spacing:.55em;font-family:var(--font-sans);font-weight:700;font-size:10pt;color:var(--maroon);text-align:center;margin-bottom:4px;}
+  .chapter-tag{font-family:var(--font-sans);text-transform:uppercase;letter-spacing:.2em;font-size:10.5pt;color:#333;text-align:center;}
+  .chapter-title{font-family:'DM Serif Display',serif;font-size:26pt;line-height:1.1;text-align:center;margin:2px 0 6px;color:var(--ink);}
+  .chapter-sub{font-family:var(--font-sans);font-size:11pt;color:#444;text-align:center;font-style:italic;}
+  .legend{display:flex;gap:8px;justify-content:center;margin:10px 0 6px;flex-wrap:wrap;}
+  .pill{display:inline-flex;align-items:center;font-family:var(--font-sans);font-weight:700;font-size:8.5pt;letter-spacing:.12em;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.15;white-space:nowrap;}
+  .pill.easy{background:var(--easy-bg);color:var(--easy-ink);border-color:var(--easy-rule);}
+  .pill.med {background:var(--med-bg); color:var(--med-ink); border-color:var(--med-rule);}
+  .pill.hard{background:var(--hard-bg);color:var(--hard-ink);border-color:var(--hard-rule);}
+  .pill.topic{background:var(--topic-bg);color:var(--topic-ink);border-color:var(--topic-rule);}
+  .pill.marks{background:var(--marks-bg);color:var(--marks-ink);border-color:var(--marks-rule);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;}
+  .pill.qnum{background:var(--maroon);color:var(--maroon-ink);border-color:var(--maroon);min-width:50px;text-align:center;}
+  /* ── HS Math NEW chip classes ── locked Sprint 1; do not rename. */
+  .pill.region{background:var(--region-bg);color:var(--region-ink);border-color:var(--region-rule);letter-spacing:.08em;}
+  .pill.paper {background:var(--paper-bg); color:var(--paper-ink); border-color:var(--paper-rule);}
+  .pill.honors{background:var(--honors-bg);color:var(--honors-ink);border-color:var(--honors-rule);text-transform:uppercase;}
+  /* ── end HS Math chip taxonomy ── */
+  .syllabus-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 6px;font-family:var(--font-sans);font-size:9.5pt;}
+  .syllabus-strip .col{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:5px;padding:8px 12px;background:#fdfbf8;}
+  .syllabus-strip .col b{display:block;font-size:10pt;margin-bottom:3px;color:var(--maroon);letter-spacing:.05em;}
+  .syllabus-strip .col code{font-family:'JetBrains Mono',monospace;font-size:9pt;color:#4A3A2A;background:#EFE9E4;padding:1px 4px;border-radius:3px;}
+  .syllabus-strip-note{font-family:var(--font-sans);font-size:9pt;color:#555;font-style:italic;text-align:center;margin:4px 0 12px;}
+  @media (max-width: 600px){.syllabus-strip{grid-template-columns:1fr;}}
+  .topics-line{font-family:var(--font-sans);font-size:10pt;color:#444;text-align:center;margin-bottom:12px;}
+  .topics-line b{color:var(--ink);}
+  .topics-line .scope{display:inline-block;background:#EFE9E4;color:#4A3A2A;border:1px solid #B5A68F;border-radius:3px;padding:1px 8px;font-size:9pt;font-weight:700;letter-spacing:.1em;margin-left:6px;vertical-align:1px;}
+  hr.thick{border:none;border-top:2.5px solid var(--rule);margin:8px 0 4px;}
+  hr.thin {border:none;border-top:1px solid #666;margin:2px 0 14px;}
+  .nameline{display:flex;justify-content:space-between;font-family:var(--font-sans);font-size:10.5pt;margin:4px 0 22px;color:#222;}
+  .nameline .blank{display:inline-block;border-bottom:1px solid #555;min-width:240px;margin-left:6px;}
+  .nameline .blank.period{min-width:90px;}
+  .draft-banner{font-family:var(--font-sans);font-size:9.5pt;color:#7A2E2E;font-style:italic;text-align:center;margin:0 0 8px;border:1px dashed #c9a4a4;border-radius:4px;padding:4px 8px;}
+  .part{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-sans);border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:6px 2px;margin:18px 0 8px;}
+  .part .part-label{font-size:14pt;font-weight:700;letter-spacing:.18em;}
+  .part .part-meta{font-size:10pt;color:#444;font-style:italic;}
+  .section-head{font-family:'DM Serif Display',serif;font-size:16pt;margin:6px 0 4px;color:var(--maroon);}
+  .instructions{font-family:var(--font-sans);font-size:10pt;color:#444;font-style:italic;margin-bottom:12px;line-height:1.45;}
+  .q{border:1px solid #c9c4bd;border-left:3px solid var(--maroon);border-radius:6px;padding:12px 18px 14px;margin-bottom:16px;background:#fff;break-inside:avoid;page-break-inside:avoid;}
+  .q.frq{border-left-color:#1E3F75;}
+  .q.app{border-left-color:#C4956A;}
+  .q-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px;font-family:var(--font-sans);}
+  .q-head .title{margin-left:auto;font-size:9.5pt;color:#666;font-style:italic;}
+  .q-body{font-size:11.5pt;line-height:1.5;}
+  .q-body p{margin:6px 0;}
+  .q-body .prompt{margin:6px 0 10px;}
+  .q-body ol.mcq{list-style:none;padding:0;margin:8px 0 4px;font-size:11pt;}
+  .q-body ol.mcq li{margin:3px 0 3px 6px;}
+  .q-body ol.mcq li .lab{font-family:var(--font-sans);font-weight:700;color:var(--maroon);margin-right:8px;}
+  .work{min-height:90px;border-top:1px dashed #c9c4bd;margin-top:8px;}
+  .work.s{min-height:50px;} .work.m{min-height:120px;} .work.l{min-height:170px;} .work.xl{min-height:240px;}
+  .frq-parts{margin-top:6px;}
+  .frq-parts .part-item{margin:6px 0 4px;}
+  .frq-parts .part-item > .tag{font-family:var(--font-sans);font-weight:700;margin-right:6px;}
+  .frq-parts .part-item .marks-inline{font-family:'JetBrains Mono',monospace;font-size:9pt;color:#666;font-weight:700;float:right;letter-spacing:.05em;}
+  .frq-parts .part-item .sub-part{margin:4px 0 4px 18px;}
+  footer.page-foot{margin-top:28px;border-top:1px solid #aaa;padding-top:6px;font-family:var(--font-sans);font-size:9pt;color:#666;display:flex;justify-content:space-between;}
+  footer.page-foot .mark{color:var(--maroon);font-weight:700;letter-spacing:.1em;}
+  .page-break{page-break-after:always;break-after:page;height:0;}
+  /* ── Lang toggle (locked Sprint 4; same tokens as the Study Guide) ── */
+  .lang-bar{display:flex;justify-content:center;margin:6px 0 10px;}
+  .lang-btn{font-family:var(--font-sans);font-weight:700;font-size:9pt;letter-spacing:.1em;padding:4px 14px;border:1px solid var(--maroon);background:#fff;color:var(--maroon);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+  .lang-btn:hover{background:var(--maroon);color:#fff;}
+  body:not(.lang-zh) [data-lang="zh"] { display: none; }
+  body.lang-zh       [data-lang="en"] { display: none; }
+  body.lang-zh{font-family:var(--font-sans);}
+  @media (max-width: 600px){body{font-size:10.5pt;}.nameline{flex-direction:column;align-items:flex-start;gap:6px;}.nameline .blank{min-width:200px;}}
+  @media print{@page { size: letter; margin: 0.6in 0.65in; }html,body{background:#fff;}body{padding:0;max-width:none;font-size:11pt;}.q{box-shadow:none;break-inside:avoid;page-break-inside:avoid;}.draft-banner{display:none;}.lang-bar{display:none;}}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn" onclick="toggleLang()" title="Switch language / 切换语言"><span data-lang="en">中文</span><span data-lang="zh">EN</span></button>
+</div>
+
+<div class="brand">H&nbsp;I&nbsp;G&nbsp;H&nbsp;&nbsp;S&nbsp;C&nbsp;H&nbsp;O&nbsp;O&nbsp;L&nbsp;&nbsp;P&nbsp;H&nbsp;Y&nbsp;S&nbsp;I&nbsp;C&nbsp;S</div>
+<div class="chapter-tag"><span data-lang="en">Practice</span><span data-lang="zh">练习题</span></div>
+<h1 class="chapter-title"><span data-lang="en">Kinematics</span><span data-lang="zh">运动学</span></h1>
+<p class="chapter-sub"><span data-lang="en">Practice Questions &middot; AP-Feeder &middot; ON / BC / AB Provincial &amp; Diploma Styles</span><span data-lang="zh">练习题集 &middot; AP 衔接 &middot; 安 / 卑 / 阿省考与毕业考风格</span></p>
+
+<div class="legend">
+  <span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+  <span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+  <span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+  <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+  <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+  <span class="pill paper"><span data-lang="en">AP-style MCQ</span><span data-lang="zh">AP 风格选择题</span></span>
+  <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+  <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+  <span class="pill paper"><span data-lang="en">AB Diploma-style</span><span data-lang="zh">阿尔伯塔毕业考风格</span></span>
+  <span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+</div>
+
+<!-- Condensed Syllabus Map (full callout lives in the Study Guide). -->
+<div class="syllabus-strip" style="grid-template-columns:repeat(4,1fr);">
+  <div class="col"><b>&#x1F1FA;&#x1F1F8; <span data-lang="en">US NGSS</span><span data-lang="zh">美国 NGSS</span></b><code>HS-PS2-1</code></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Ontario</span><span data-lang="zh">安大略</span></b><code>SPH3U Strand B</code> &middot; <code>B2</code> &middot; <code>B2.3</code> &middot; <code>B3</code></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">British Columbia</span><span data-lang="zh">不列颠哥伦比亚</span></b><span data-lang="en">Physics 11: motion (position, velocity, acceleration, projectile)</span><span data-lang="zh">物理 11：运动（位置、速度、加速度、抛体）</span></div>
+  <div class="col"><b>&#x1F1E8;&#x1F1E6; <span data-lang="en">Alberta</span><span data-lang="zh">阿尔伯塔</span></b><code>Physics 20 Unit A</code> &middot; <code>20–A1.1k</code> &middot; <code>20–A1.2k</code> &middot; <code>20–A1.3k</code> &middot; <code>20–A1.5k</code></div>
+</div>
+<p class="syllabus-strip-note"><span data-lang="en">Full Syllabus Map lives in <code>../Study Guides/Unit_1_Kinematics.html</code>. Note: NGSS assesses 1D motion only; the projectile question (Q9) sits above the NGSS-assessed floor but is core for ON SPH3U / BC Physics 11 / AB Physics 20.</span><span data-lang="zh">完整大纲对照表见 <code>../Study Guides/Unit_1_Kinematics.html</code>。注：NGSS 仅考查一维运动；抛体题（Q9）超出 NGSS 考查范围，但为安大略 SPH3U / 卑诗物理 11 / 阿省物理 20 的核心内容。</span></p>
+
+<hr class="thick"><hr class="thin">
+<div class="nameline"><span><span data-lang="en">Name:</span><span data-lang="zh">姓名：</span><span class="blank"></span></span><span><span data-lang="en">Date:</span><span data-lang="zh">日期：</span><span class="blank period"></span></span></div>
+<p class="draft-banner"><code>v1</code> &middot; <span data-lang="en">12 Qs &middot; ~81 marks &middot; region + paper-style chips on every question &middot; companion: <code>Solutions/Unit_1_Kinematics_Solutions.html</code></span><span data-lang="zh">共 12 题 &middot; 约 81 分 &middot; 每题均标注地区与试卷风格标签 &middot; 配套答案：<code>Solutions/Unit_1_Kinematics_Solutions.html</code></span></p>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART I, Short Response (AP-style MCQ + ON/BC Provincial-style)
+     5 questions, 3-5 marks each, 18 marks total.
+     Mix of AP-style MCQ and ON/BC Provincial-style short answer.
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label"><span data-lang="en">PART I &nbsp;&middot;&nbsp; SHORT RESPONSE</span><span data-lang="zh">第一部分 &nbsp;&middot;&nbsp; 短答题</span></span><span class="part-meta"><span data-lang="en">AP-style MCQ + ON/BC short answer &middot; 18 marks</span><span data-lang="zh">AP 风格选择题 + 安/卑省考短答 &middot; 共 18 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section A &middot; Short Response</span><span data-lang="zh">A 部分 &middot; 短答题</span></h2>
+<p class="instructions"><span data-lang="en">Mix of multiple-choice and short-answer items. For MCQs, circle the letter; show enough work in the margin that a marker could verify. For short-answer items, state units in every answer. Use $g = 9.8\ \text{m/s}^2$ throughout. No calculator on Q1-Q4; calculator permitted on Q5.</span><span data-lang="zh">本节包含选择题与短答题。选择题请圈出字母答案，并在空白处写下足以让阅卷人核对的过程。短答题每道都要写出单位。全卷取 $g = 9.8\ \text{m/s}^2$。Q1-Q4 不可使用计算器；Q5 可用计算器。</span></p>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q1</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-style MCQ</span><span data-lang="zh">AP 风格选择题</span></span>
+    <span class="pill topic">&sect;1 <span data-lang="en">Displacement</span><span data-lang="zh">位移</span> &middot; HS-PS2-1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A hiker walks $40$ m due east, then $30$ m due west along a straight path. What is the magnitude of the hiker's displacement?</span><span data-lang="zh">一名徒步者沿直线先向正东走 $40$ m，再向正西走 $30$ m。该徒步者位移的大小是多少？</span></p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $10\ \text{m}$</li>
+      <li><span class="lab">(B)</span> $70\ \text{m}$</li>
+      <li><span class="lab">(C)</span> $50\ \text{m}$</li>
+      <li><span class="lab">(D)</span> $35\ \text{m}$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q2</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-style MCQ</span><span data-lang="zh">AP 风格选择题</span></span>
+    <span class="pill topic">&sect;2 <span data-lang="en">Average velocity</span><span data-lang="zh">平均速度</span> &middot; HS-PS2-1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A jogger's position along a straight track changes from $+12$ m to $+92$ m in $20$ s. What is the jogger's average velocity?</span><span data-lang="zh">一名慢跑者沿直道的位置在 $20$ s 内从 $+12$ m 变化到 $+92$ m。该慢跑者的平均速度是多少？</span></p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $4\ \text{m/s}$</li>
+      <li><span class="lab">(B)</span> $4.6\ \text{m/s}$</li>
+      <li><span class="lab">(C)</span> $5.2\ \text{m/s}$</li>
+      <li><span class="lab">(D)</span> $0.25\ \text{m/s}$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q3</span><span class="pill easy"><span data-lang="en">EASY</span><span data-lang="zh">易</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill topic">&sect;3 <span data-lang="en">Acceleration</span><span data-lang="zh">加速度</span> &middot; SPH3U B2</span>
+    <span class="pill marks"><span data-lang="en">[4 marks]</span><span data-lang="zh">[4 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A car speeds up uniformly from $12$ m/s to $30$ m/s in $6.0$ s.</span><span data-lang="zh">一辆汽车在 $6.0$ s 内从 $12$ m/s 匀加速至 $30$ m/s。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Compute the acceleration, with units.</span><span data-lang="zh">计算加速度，并写出单位。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Interpret the sign of the acceleration in context.</span><span data-lang="zh">结合情境解释加速度的符号含义。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State one assumption your calculation relies on.</span><span data-lang="zh">写出计算所依赖的一个假设。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q4</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-style MCQ</span><span data-lang="zh">AP 风格选择题</span></span>
+    <span class="pill topic">&sect;5 <span data-lang="en">Motion graphs</span><span data-lang="zh">运动图像</span> &middot; HS-PS2-1</span>
+    <span class="pill marks"><span data-lang="en">[3 marks]</span><span data-lang="zh">[3 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">On a velocity-time graph, an object's motion is a straight line from $(0\ \text{s},\ 4\ \text{m/s})$ to $(8\ \text{s},\ 20\ \text{m/s})$. What is the object's acceleration?</span><span data-lang="zh">在速度-时间图像上，某物体的运动为从 $(0\ \text{s},\ 4\ \text{m/s})$ 到 $(8\ \text{s},\ 20\ \text{m/s})$ 的直线段。该物体的加速度是多少？</span></p>
+    <ol class="mcq">
+      <li><span class="lab">(A)</span> $2\ \text{m/s}^2$</li>
+      <li><span class="lab">(B)</span> $2.5\ \text{m/s}^2$</li>
+      <li><span class="lab">(C)</span> $16\ \text{m/s}^2$</li>
+      <li><span class="lab">(D)</span> $0.5\ \text{m/s}^2$</li>
+    </ol>
+    <div class="work s"></div>
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-head">
+    <span class="pill qnum">Q5</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">SUVAT</span><span data-lang="zh">匀变速方程</span> &middot; Physics 11</span>
+    <span class="pill marks"><span data-lang="en">[5 marks]</span><span data-lang="zh">[5 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A cyclist decelerates uniformly from $12$ m/s to rest over a distance of $48$ m.</span><span data-lang="zh">一名骑行者从 $12$ m/s 匀减速至静止，经过的距离为 $48$ m。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the acceleration.</span><span data-lang="zh">求加速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the time to stop.</span><span data-lang="zh">求减速至停止所需的时间。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the assumption that lets you use the kinematic equations.</span><span data-lang="zh">写出允许使用运动学方程的假设条件。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART II, Extended Response (AP-feeder FRQ + Honors)
+     4 questions, 8-10 marks each, 35 marks total.
+     Multi-part with show-your-work expectations. Q9 is the honors block.
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label"><span data-lang="en">PART II &nbsp;&middot;&nbsp; EXTENDED RESPONSE</span><span data-lang="zh">第二部分 &nbsp;&middot;&nbsp; 简答题</span></span><span class="part-meta"><span data-lang="en">AP-feeder FRQ + honors &middot; 35 marks</span><span data-lang="zh">AP 衔接简答题 + 荣誉级 &middot; 共 35 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section B &middot; Extended Response</span><span data-lang="zh">B 部分 &middot; 简答题</span></h2>
+<p class="instructions"><span data-lang="en">Show every step of reasoning. Identify the kinematic equation used before substituting values. State units in every final answer. Use $g = 9.8\ \text{m/s}^2$. Choose and state your sign convention (positive direction) at the start of each question. Calculator permitted on Q6-Q9.</span><span data-lang="zh">每一步推理都要写出。在代入数值前先注明所用运动学方程。每个最终答案都要写单位。取 $g = 9.8\ \text{m/s}^2$。每题开头请选择并说明正方向约定。Q6-Q9 可用计算器。</span></p>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q6</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">SUVAT (two-phase)</span><span data-lang="zh">匀变速方程（两阶段）</span> &middot; HS-PS2-1</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A car starts from rest and accelerates uniformly at $2.5\ \text{m/s}^2$ for $8.0$ s, then travels at constant velocity for a further $12$ s.</span><span data-lang="zh">一辆汽车从静止出发，以 $2.5\ \text{m/s}^2$ 的匀加速度行驶 $8.0$ s，然后以匀速行驶 $12$ s。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the velocity after $8.0$ s.</span><span data-lang="zh">求 $8.0$ s 后的速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the distance travelled during the first $8.0$ s.</span><span data-lang="zh">求前 $8.0$ s 内行驶的距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the distance travelled during the constant-velocity phase.</span><span data-lang="zh">求匀速阶段行驶的距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the average velocity over the whole $20$ s journey.</span><span data-lang="zh">求整个 $20$ s 行程的平均速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q7</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">ON</span><span data-lang="zh">安</span></span>
+    <span class="pill paper"><span data-lang="en">ON Provincial-style</span><span data-lang="zh">安大略省考风格</span></span>
+    <span class="pill topic">&sect;6 <span data-lang="en">Free fall</span><span data-lang="zh">自由落体</span> &middot; SPH3U B3</span>
+    <span class="pill marks"><span data-lang="en">[8 marks]</span><span data-lang="zh">[8 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A ball is thrown straight up from ground level at $24$ m/s. Take $g = 9.8\ \text{m/s}^2$ and ignore air resistance.</span><span data-lang="zh">一个球从地面竖直向上以 $24$ m/s 抛出。取 $g = 9.8\ \text{m/s}^2$，忽略空气阻力。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the maximum height reached by the ball.</span><span data-lang="zh">求球能达到的最大高度。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the time for the ball to reach its maximum height.</span><span data-lang="zh">求球到达最高点所需的时间。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">State the velocity of the ball when it returns to the launch height.</span><span data-lang="zh">写出球返回到抛出高度时的速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the total time of flight.</span><span data-lang="zh">求总飞行时间。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q8</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">BC</span><span data-lang="zh">卑</span></span>
+    <span class="pill paper"><span data-lang="en">BC Provincial-style</span><span data-lang="zh">卑诗省考风格</span></span>
+    <span class="pill topic">&sect;5 <span data-lang="en">Motion graphs</span><span data-lang="zh">运动图像</span> &middot; Physics 11</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A train's velocity-time graph consists of three straight segments: from $0$ to $10$ s the velocity rises from $0$ to $25$ m/s; from $10$ to $30$ s it stays at $25$ m/s; from $30$ to $40$ s it falls from $25$ m/s to $0$.</span><span data-lang="zh">一列火车的速度-时间图像由三段直线构成：$0$ 到 $10$ s 速度从 $0$ 升至 $25$ m/s；$10$ 到 $30$ s 保持 $25$ m/s；$30$ 到 $40$ s 速度从 $25$ m/s 降至 $0$。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the acceleration in each of the three phases.</span><span data-lang="zh">求三个阶段各自的加速度。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the total displacement over the $40$ s.</span><span data-lang="zh">求 $40$ s 内的总位移。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the average velocity over the $40$ s.</span><span data-lang="zh">求 $40$ s 内的平均速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Describe the motion in words.</span><span data-lang="zh">用文字描述该运动过程。</span> <span class="marks-inline">[1]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q frq">
+  <div class="q-head">
+    <span class="pill qnum">Q9</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span><span class="pill honors"><span data-lang="en">Honors</span><span data-lang="zh">荣誉级</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;7 <span data-lang="en">Projectile</span><span data-lang="zh">抛体运动</span> &middot; HS-PS2-1 <span data-lang="en">(above 1D floor)</span><span data-lang="zh">（超出一维基准）</span></span>
+    <span class="pill marks"><span data-lang="en">[10 marks]</span><span data-lang="zh">[10 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A ball is launched horizontally at $20$ m/s from the top of a cliff $44.1$ m high. Take $g = 9.8\ \text{m/s}^2$.</span><span data-lang="zh">一个球从 $44.1$ m 高的悬崖顶部以 $20$ m/s 的速度水平抛出。取 $g = 9.8\ \text{m/s}^2$。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the time for the ball to land.</span><span data-lang="zh">求球落地所需的时间。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the horizontal range.</span><span data-lang="zh">求水平射程。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the vertical velocity component at the moment of impact.</span><span data-lang="zh">求落地瞬间竖直速度分量。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the speed of the ball at impact.</span><span data-lang="zh">求落地时球的速率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(e)</span> <span data-lang="en">Find the angle of the velocity below the horizontal at the moment of impact.</span><span data-lang="zh">求落地瞬间速度方向与水平方向的夹角（低于水平方向）。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ─────────────────────────────────────────────────────────────────────
+     PART III, Modeling / Applied (AB Diploma + Universal)
+     3 questions, 9-10 marks each, 28 marks total.
+     Real-world kinematics applications. Region tagged
+     per the question's framing convention.
+     ───────────────────────────────────────────────────────────────────── -->
+<div class="part"><span class="part-label"><span data-lang="en">PART III &nbsp;&middot;&nbsp; MODELING / APPLIED</span><span data-lang="zh">第三部分 &nbsp;&middot;&nbsp; 建模与应用</span></span><span class="part-meta"><span data-lang="en">AB Diploma + Universal &middot; 28 marks</span><span data-lang="zh">阿省毕业考 + 通用题型 &middot; 共 28 分</span></span></div>
+<h2 class="section-head"><span data-lang="en">Section C &middot; Modeling and Applications</span><span data-lang="zh">C 部分 &middot; 建模与应用</span></h2>
+<p class="instructions"><span data-lang="en">Define symbols (with units) at the start of each question. State the kinematic equation used before substituting. Use $g = 9.8\ \text{m/s}^2$. Conclude each question with a one-sentence answer in context. Calculator permitted throughout Part III.</span><span data-lang="zh">每题开始时定义符号（含单位）。代入数值前先写出所用运动学方程。取 $g = 9.8\ \text{m/s}^2$。每题以一句结合情境的完整句子作答。第三部分全程可用计算器。</span></p>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q10</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">AB Diploma-style</span><span data-lang="zh">阿尔伯塔毕业考风格</span></span>
+    <span class="pill topic">&sect;4 <span data-lang="en">SUVAT (applied)</span><span data-lang="zh">匀变速方程（应用）</span> &middot; 20–A1.3k</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A car travelling at $30$ m/s on a highway brakes uniformly at $6.0\ \text{m/s}^2$.</span><span data-lang="zh">一辆汽车在公路上以 $30$ m/s 行驶，以 $6.0\ \text{m/s}^2$ 匀减速刹车。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the braking distance.</span><span data-lang="zh">求刹车距离。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the braking time.</span><span data-lang="zh">求刹车时间。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">If the driver has a reaction time of $0.70$ s before braking, find the distance travelled during the reaction time.</span><span data-lang="zh">若司机在刹车前有 $0.70$ s 的反应时间，求反应时间内行驶的距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the total distance from hazard detection to a full stop.</span><span data-lang="zh">求从发现危险到完全停车的总距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q11</span><span class="pill med"><span data-lang="en">MEDIUM</span><span data-lang="zh">中</span></span>
+    <span class="pill region">&#x1F1E8;&#x1F1E6; <span data-lang="en">AB</span><span data-lang="zh">阿</span></span>
+    <span class="pill paper"><span data-lang="en">AB Diploma-style</span><span data-lang="zh">阿尔伯塔毕业考风格</span></span>
+    <span class="pill topic">&sect;6 <span data-lang="en">Free fall (applied)</span><span data-lang="zh">自由落体（应用）</span> &middot; 20–A1.5k</span>
+    <span class="pill marks"><span data-lang="en">[9 marks]</span><span data-lang="zh">[9 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">A stone is dropped from rest off a bridge and takes $2.5$ s to reach the water. Take $g = 9.8\ \text{m/s}^2$.</span><span data-lang="zh">一块石头从桥上由静止落下，经 $2.5$ s 落入水中。取 $g = 9.8\ \text{m/s}^2$。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the height of the bridge above the water.</span><span data-lang="zh">求桥面距水面的高度。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the speed of the stone at impact.</span><span data-lang="zh">求石头落水时的速率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find the speed of the stone $1.5$ s after release.</span><span data-lang="zh">求石头释放后 $1.5$ s 时的速率。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Find the distance fallen in the first $1.5$ s.</span><span data-lang="zh">求前 $1.5$ s 内下落的距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="q app">
+  <div class="q-head">
+    <span class="pill qnum">Q12</span><span class="pill hard"><span data-lang="en">HARD</span><span data-lang="zh">难</span></span>
+    <span class="pill region">&#x1F1FA;&#x1F1F8; <span data-lang="en">US</span><span data-lang="zh">美</span></span>
+    <span class="pill paper"><span data-lang="en">AP-feeder FRQ</span><span data-lang="zh">AP 衔接简答题</span></span>
+    <span class="pill topic">&sect;4 + <span data-lang="en">relative motion</span><span data-lang="zh">相对运动</span> &middot; HS-PS2-1</span>
+    <span class="pill marks"><span data-lang="en">[10 marks]</span><span data-lang="zh">[10 分]</span></span>
+  </div>
+  <div class="q-body">
+    <p class="prompt"><span data-lang="en">Car A passes a checkpoint moving at a constant $25$ m/s. At that same instant, Car B starts from rest at the checkpoint and accelerates uniformly at $4.0\ \text{m/s}^2$ in the same direction.</span><span data-lang="zh">A 车以恒定速度 $25$ m/s 经过检查点。在同一时刻，B 车从检查点由静止出发，以 $4.0\ \text{m/s}^2$ 的匀加速度沿同方向加速。</span></p>
+    <div class="frq-parts">
+      <div class="part-item"><span class="tag">(a)</span> <span data-lang="en">Find the time for Car B to catch Car A.</span><span data-lang="zh">求 B 车追上 A 车所需的时间。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+      <div class="part-item"><span class="tag">(b)</span> <span data-lang="en">Find the distance from the checkpoint when B catches A.</span><span data-lang="zh">求 B 车追上 A 车时距检查点的距离。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(c)</span> <span data-lang="en">Find Car B's velocity at that moment.</span><span data-lang="zh">求该时刻 B 车的速度。</span> <span class="marks-inline">[2]</span><div class="work s"></div></div>
+      <div class="part-item"><span class="tag">(d)</span> <span data-lang="en">Explain why Car B's velocity at the catch-up moment is exactly twice Car A's constant velocity.</span><span data-lang="zh">解释为何 B 车追上 A 车时的速度恰好是 A 车匀速速度的两倍。</span> <span class="marks-inline">[3]</span><div class="work m"></div></div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-foot">
+  <span><span class="mark">DINGRUI&nbsp;SCHOLARS</span> &middot; <span data-lang="en">High School Physics &middot; Practice</span><span data-lang="zh">高中物理 &middot; 练习题</span> &middot; <code style="color:#555;">v1</code></span>
+  <span><span data-lang="en">Unit 1 Kinematics Practice v1 &middot; 12 Qs &middot; ~81 marks &middot; US / ON / BC / AB</span><span data-lang="zh">第一单元 运动学 练习题 v1 &middot; 共 12 题 &middot; 约 81 分 &middot; 美 / 安 / 卑 / 阿</span></span>
+</footer>
+
+<script>
+function toggleLang() { const isZh = document.body.classList.toggle('lang-zh'); try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {} }
+try { if (localStorage.getItem('lang') === 'zh') document.body.classList.add('lang-zh'); } catch (e) {}
+</script>
+
+<script>/* dingrui-lang-link: cross-page language continuity via ?lang=zh; no persistence, direct visits default English */
+(function(){
+  try{
+    var q=new URLSearchParams(window.location.search).get('lang');
+    if(q==='zh'&&document.querySelector('[data-lang=zh]'))document.body.classList.add('lang-zh');
+    else if(q==='en')document.body.classList.remove('lang-zh');
+  }catch(e){}
+  document.addEventListener('click',function(ev){
+    if(!document.body.classList.contains('lang-zh'))return;
+    var a=ev.target&&ev.target.closest?ev.target.closest('a[href]'):null;
+    if(!a)return;
+    var href=a.getAttribute('href');
+    if(!href)return;
+    if(/^(https?:)?\/\//i.test(href)||/^(#|mailto:|tel:|javascript:)/i.test(href))return;
+    if(/[?&]lang=/.test(href))return;
+    var hash='',i=href.indexOf('#');
+    if(i>=0){hash=href.slice(i);href=href.slice(0,i);}
+    a.setAttribute('href',href+(href.indexOf('?')>=0?'&':'?')+'lang=zh'+hash);
+  },true);
+})();</script>
+</body>
+</html>
