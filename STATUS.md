@@ -40,8 +40,9 @@ Living doc — update as the product evolves. Last updated: **2026-06-03** (HS S
   local + remote branches deleted (incl. `hs_stem_complete`, `landing_page_refresh`, `sg_bilingual_hygiene`,
   `hs_physics_practice`, and 8 fully-merged `origin/*`). `english_to_chinese_translation` + `sprint_3_unit_specs`
   deleted (superseded/redundant, 0 unique work vs main).
-- **One branch remains: `ib_chem_reactivity2_challenge_practice`** (LOCAL-ONLY, never pushed) — a genuine
-  unmerged IB Chem Reactivity 2.2 Challenge Set (P+S, ~1008 lines, 2 files) awaiting a merge/keep decision.
+- **Repo fully consolidated: only `main` + `preview` exist** (locally and on origin). The last branch,
+  `ib_chem_reactivity2_challenge_practice` (IB Chem Reactivity 2.2 Challenge P+S, v1.1), was gated, given the
+  `?lang=zh` snippet, merged to main, and deleted (2026-06-05).
 
 ---
 
@@ -109,5 +110,5 @@ title, single syllabus, paper-style chips, purple HL flag (IB), retrofitted bili
   has an EN/ZH parity off-by-one (en=310/zh=311) — pre-existing, fix during the Math leg of the P+S sprint.
 - **CJK-in-EN rule** enforced on HS SGs (2026-06-05) but NOT yet swept across P+S / AP / IB files. Apply
   the same rule (no Chinese in `data-lang="en"` spans; toggle + deliberate examples exempt) when those are next touched.
-- `ib_chem_reactivity2_challenge_practice` branch: local-only IB Chem Reactivity 2.2 Challenge P+S set, unmerged (merge/keep TBD).
+- Two untracked stray drafts in `IB Chemistry HL/Practice Questions/` (`IBCHEMHL_ethanfinalpractice*`) sit in the working tree; not committed, not deployed. Decide keep/remove later.
 - `sources.txt`: AB Math 20-1 standards un-fetched (`[!]`).
