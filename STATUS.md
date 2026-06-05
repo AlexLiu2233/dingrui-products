@@ -29,13 +29,19 @@ Living doc — update as the product evolves. Last updated: **2026-06-03** (HS S
 ## Branches & deploy state
 
 - **`main`** = `preview` — production (auto-deploys to site root). Holds **all 66 HS STEM SGs**
-  (Math 15 + Physics 12 + Chemistry 14 + Biology 12 + CS 13) + all AP/IB. **HS STEM shipped 2026-06-03;
-  landing fixes shipped 2026-06-04** (HS Math accordion default-closed + count 15; cross-page `?lang=zh`
-  continuity across 200 bilingual pages via `scripts/lang_link_continuity.py`).
-- **`hs_stem_complete`** and **`landing_page_refresh`** — merged to `main` (FF) and **deleted**.
-  (landing_page_refresh's LP-1 artifacts `rag/translation-coverage.md` + `scripts/translation_coverage.py` are on `main`.)
-- **3 unmerged branches kept** (genuine open work): `english_to_chinese_translation`,
-  `ib_chem_reactivity2_challenge_practice`, `sprint_3_unit_specs`. (Stale `origin/*` remotes: prune later, low priority.)
+  (Math 15 + Physics 12 + Chemistry 14 + Biology 12 + CS 13) + all AP/IB. Shipped: **HS STEM 2026-06-03**;
+  **landing fixes 2026-06-04** (accordion default-closed, count 15, cross-page `?lang=zh` continuity);
+  **SG bilingual hygiene + HS-Phys Unit 1 Kinematics P+S template 2026-06-05**.
+- **SG bilingual hygiene (2026-06-05):** purged all Chinese from `data-lang="en"` spans across the 66 SGs
+  (488 fixed; kept only the toggle buttons + the CS U9 UTF-8 lesson example); replaced 301 cryptic
+  `*_extract.md` Source citations with readable curriculum names (mapping in `source-extracts` memory).
+  EN-in-ZH is allowed (course examined in English). Not yet applied to P+S / AP / IB files (HS SGs only).
+- **Branches fully consolidated 2026-06-05.** Only `main` + `preview` exist on origin. All stale/merged
+  local + remote branches deleted (incl. `hs_stem_complete`, `landing_page_refresh`, `sg_bilingual_hygiene`,
+  `hs_physics_practice`, and 8 fully-merged `origin/*`). `english_to_chinese_translation` + `sprint_3_unit_specs`
+  deleted (superseded/redundant, 0 unique work vs main).
+- **One branch remains: `ib_chem_reactivity2_challenge_practice`** (LOCAL-ONLY, never pushed) — a genuine
+  unmerged IB Chem Reactivity 2.2 Challenge Set (P+S, ~1008 lines, 2 files) awaiting a merge/keep decision.
 
 ---
 
@@ -56,7 +62,7 @@ the HS → AP/IB → first-year-uni pipeline.
 3. ✅ **build-index + landing** — HS Chemistry/Biology/CS wired into `build-index.py` + landing subject-groups; 39 cards live EN+ZH. (`dedd2d3`)
 4. ✅ **FF → `main` + `preview` → deploy** — rebased onto main (absorbed cherry-picked deploy-fix), FF'd, pushed; validate exits 0 so the prod gate passes. (`eca6b0e`, 2026-06-03)
 5. ✅ Post-FF cleanup — 23 merged + 3 redundant branches deleted; 3 unmerged + `landing_page_refresh` kept.
-6. 🔨 **IN PROGRESS — HS Practice + Solutions sprint** (branch `hs_physics_practice`). Playbook authored: `prompts/create-hs-practice-and-solutions.md` (HS sibling of the IB one; locks EASY-MED-HARD mix, 3-Part response framing, US/ON/BC/AB region chips, bilingual EN==ZH gate, `v1`/`HS-<Subj>-<N>` tags, copy-then-edit). Scope = **one subject end-to-end first** (HS Physics): lock Unit 1 Kinematics pair as the STEM template → review → waves 2-12. 36 HS Math P+S already exist (EN-only); Physics/Chem/Bio/CS have none yet.
+6. 🔨 **IN PROGRESS — HS Practice + Solutions sprint** (HS Physics first). Playbook: `prompts/create-hs-practice-and-solutions.md`. **Unit 1 Kinematics P+S template (`HS-Phys-1`) is LOCKED + on `main`** (12 Qs/81 marks, verified). **Remaining: waves A/B/C for Units 2-12** (re-branch off main; Sonnet copy-then-edit from the locked Unit 1 pair). Then Chem/Bio/CS/Math-retro. Plan detail in `High School Physics/AUDIT.md` Sprint 3.
 
 **Known carry-over:** AP/IB SGs share the same `../LOGO.png` favicon bug (fixed only for HS) — future cross-subject pass.
 
@@ -101,4 +107,7 @@ title, single syllabus, paper-style chips, purple HL flag (IB), retrofitted bili
   authored (`prompts/create-hs-practice-and-solutions.md`); Physics-first sprint planned (HS Physics AUDIT Sprint 3).
   **P+S-sprint finding:** `High School Math/Practice Questions/Solutions/Unit_4_Rational_and_Radical_Expressions_Solutions.html`
   has an EN/ZH parity off-by-one (en=310/zh=311) — pre-existing, fix during the Math leg of the P+S sprint.
+- **CJK-in-EN rule** enforced on HS SGs (2026-06-05) but NOT yet swept across P+S / AP / IB files. Apply
+  the same rule (no Chinese in `data-lang="en"` spans; toggle + deliberate examples exempt) when those are next touched.
+- `ib_chem_reactivity2_challenge_practice` branch: local-only IB Chem Reactivity 2.2 Challenge P+S set, unmerged (merge/keep TBD).
 - `sources.txt`: AB Math 20-1 standards un-fetched (`[!]`).
