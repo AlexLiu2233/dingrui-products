@@ -1,7 +1,7 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-03** (HS STEM shipped to production).
+Living doc — update as the product evolves. Last updated: **2026-06-06** (🎯 **lead-gen P0 shipped**: "Book a free consult" CTA live across all 66 HS SGs + Kinematics P+S + landing; preserved 2 untracked IB P+S pairs; D1–D3 SG solutions-link removal committed).
 
 ---
 
@@ -23,6 +23,15 @@ Living doc — update as the product evolves. Last updated: **2026-06-03** (HS S
 | IB | IB Math AI HL | — | — | — | — | retired |
 
 **HS STEM total: 66 Study Guides** across 5 subjects (the focus of the current program).
+
+**🎯 Lead-gen funnel (business goal = leads for academic consulting):** A bilingual
+"Book a free consult" CTA (EN → `dingruischolars.com/signup`, ZH → `/signup-ch`) is now live
+on every HS notes page + the landing hero/footer (shipped `b9f4321`, 2026-06-06). This is the
+funnel's first conversion surface. **Next ≥P1:** (A) extend CTA to AP/IB pages — IN PROGRESS;
+(B) instrument the funnel (analytics + UTM-tag CTAs for per-page attribution); (C) feeder-links-
+as-pitch + IB Physics HL completion (1→24, the one content hole big enough to lose leads);
+(D) discoverability/SEO + Open Graph. **IB/AP SG completion = P2–P3** (top-of-funnel inventory,
+ranks below converting + measuring existing traffic; only IB Physics HL is urgent).
 
 ---
 
