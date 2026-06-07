@@ -45,7 +45,7 @@ files (`AUDIT.md`, `prompts/`, `rag/`, `scripts/`, `CLAUDE.md`, `.claude/`,
 ## Conventions
 - **File naming**: `Unit_N_Topic_Name.html` (underscores, no spaces in new files)
 - **Self-contained**: Each HTML has all CSS/JS inline. External deps: Google Fonts, KaTeX CDN only.
-- **Design system**: Maroon accent `#7A2E2E`, DM Serif Display headings, Source Sans 3 body, JetBrains Mono code.
+- **Design system**: Black & white base (light `--bg #FAFAFA` / dark `#0F0F0F`) to match dingruischolars.com. Maroon `#7A2E2E` (the logo color) for headings, labels, and brand chrome; blue `#0099FF` (`--pop`, the site link color) for inline links; near-black `--ink` pill for the primary CTA ("Book a free consult"), matching the site's button. DM Serif Display headings, Source Sans 3 body, JetBrains Mono code. Full token list in `rag/style-guide.md`.
 - **Required features**: Dark mode toggle, KaTeX math, interactive quizzes, print styles, mobile responsive.
 
 ## Workflow Commands

@@ -2,20 +2,27 @@
 
 ## Design Tokens (CSS Variables)
 ```css
---bg: #F5F0EB;           /* Page background */
+/* Base is black & white to match dingruischolars.com; maroon = brand, blue = pop. */
+--bg: #FAFAFA;            /* Page background (near-white) */
 --bg-card: #FFFFFF;       /* Card/section background */
---text: #2C1B1F;          /* Primary text */
---text-secondary: #6B5058;/* Muted text */
---accent: #7A2E2E;        /* Maroon brand color */
---accent-light: #F2E4E4;  /* Accent tint */
+--text: #0F0F0F;          /* Primary text (near-black) */
+--text-secondary: #585858;/* Muted text */
+--accent: #7A2E2E;        /* Maroon (logo color): headings, labels, rules, brand chrome */
+--accent-light: #F4E8E8;  /* Accent tint */
+--pop: #0099FF;           /* Site link blue: inline links, the "pop" accent */
+--pop-light: #E8F4FF;     /* Blue tint */
+--ink: #0F0F0F;           /* Near-black CTA pill (matches site's primary button) */
 --green: #2E6B4F;         /* Success/correct */
 --orange: #A65E1A;        /* Warning/tip */
 --red: #B03030;           /* Error/important */
 --purple: #5E3D7A;        /* Highlight/proof */
---gold: #C4956A;          /* Decorative accent */
---border: #DDD0C8;
+--gold: #B07A2E;          /* Decorative accent */
+--border: #E6E6E6;
 --radius: 12px;
 --max-w: 860px;
+/* Dark mode ([data-theme="dark"]) is the neutral inverse: --bg #0F0F0F, --text #FAFAFA,
+   --ink #FAFAFA (CTA pill inverts to near-white). CTA text uses var(--bg-card) so it
+   stays legible in both themes. */
 ```
 
 ## Typography
