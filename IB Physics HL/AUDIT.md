@@ -17,9 +17,10 @@ and *Solutions* products for IB Physics HL. AP Physics has its own
 audit at `AP Physics/AUDIT.md`. Subject spec at
 [`rag/subjects/ib_physics_hl.md`](../rag/subjects/ib_physics_hl.md).
 
-Last reviewed: **2026-05-25** (SUBJECT GENESIS: directory + spec
-scaffolding created on `ib_physics_hl_init`. Sprint 1 scope TBD pending
-user review.
+Last reviewed: **2026-06-07** (A.1 Kinematics SG shipped to `main` (`8513907`); Sprint 2
+bulk-draft of the 23 remaining SGs PLANNED and chosen as the next ≥P1 token budget, blocked
+on A.1-template sign-off + S1-spec grounding. Genesis: directory + spec scaffolding created
+2026-05-25 on `ib_physics_hl_init`.)
 
 ---
 
@@ -60,9 +61,38 @@ template before bulk drafting.
 
 | ID | Item | Tier | Status |
 |---|---|---|---|
-| **S1-spec** | Drop IB Physics 2025 Subject Guide PDF into `rag/sources/IB Physics HL/`; verify super-topic numbering | P0 | **Open** |
-| **S1-A1** | Draft `Unit_A1_Kinematics.html` Study Guide (foundational, most-tested) | P0 | **Open** |
-| **S1-bulk** | Bulk-draft remaining 23 Study Guides in parallel (post-A1 review) | P0 | **Open — blocked on A1 review** |
+| **S1-spec** | Drop IB Physics 2025 Subject Guide PDF into `rag/sources/IB Physics HL/`; verify super-topic numbering | P0 | **Open — `rag/sources/IB Physics HL/` does not exist yet (confirmed 2026-06-07)** |
+| **S1-A1** | Draft `Unit_A1_Kinematics.html` Study Guide (foundational, most-tested) | P0 | ~~Open~~ **Resolved:** `8513907` — A.1 Kinematics SG shipped to `main` (1,119 lines, bilingual). |
+| **S1-bulk** | Bulk-draft remaining 23 Study Guides in parallel (post-A1 review) | P0 | **Open — blocked on (1) user sign-off of A.1 as the locked template + (2) S1-spec grounding** |
+
+---
+
+## Sprint 2 — bulk-draft the 23 remaining Study Guides (PLANNED, 2026-06-07)
+
+**Chosen as the next ≥P1 token budget** (closes the one content hole big enough to lose
+leads; new pages get indexed immediately now that SEO/sitemap/GSC is live). **Token-heavy
+(~23 bilingual SGs) — needs a full-budget session, not a tail end.**
+
+**Two hard blockers before drafting (both require the user):**
+1. **Lock the A.1 template.** A.1 Kinematics is built and on `main`; it must be reviewed
+   and signed off as the canonical template every other SG is cloned from (the IB Math HL
+   pattern). Until locked, bulk-drafting risks propagating template defects ×23.
+2. **Ground the content (S1-spec).** Either drop the IB Physics 2025 Subject Guide PDF into
+   `rag/sources/IB Physics HL/`, OR explicitly accept `rag/subjects/ib_physics_hl.md`
+   (186-line spec) as sufficient grounding. Physics correctness for a "going-for-a-7"
+   product cannot be freehanded.
+
+**Execution plan once unblocked** (proven IB Math HL Sprint 9 parallel pattern):
+- Clone-then-edit from the locked A.1 template; preserve chrome/toggles/CTA/SEO head tags
+  (A.1 predates the SEO sprint — re-run `add_*` scripts after the wave, or clone from a
+  post-SEO copy of A.1 so sitemap/canonical/JSON-LD/meta-desc propagate automatically).
+- Fan out by theme in waves: **A.2–A.5 (4)** · **B.1–B.5 (5)** · **C.1–C.5 (5)** ·
+  **D.1–D.4 (4)** · **E.1–E.5 (5)** = 23. Parallel foreground subagents, one SG each.
+- Per-SG deliverable contract = the Sprint 1 contract above (≥6 sections, dual-goal layering,
+  8+ flashcards, quiz mix, bilingual built-in, HL-flag chips, data-booklet glosses, validate exit 0).
+- After each wave: `validate.sh` exit 0 + bilingual parity + `build-index.py` + `lang_link_continuity.py`,
+  then re-run the SEO injector scripts so new pages carry sitemap/canonical/JSON-LD/meta-desc.
+- Gate per [[review-merge-pattern]]: branch `ib_physics_hl_bulk` → preview → user review → FF to main.
 
 ---
 
@@ -74,7 +104,7 @@ Status legend: `⬜` unbuilt · `✅` shipped
 
 | ID | Super-topic | SL/HL | Study Guide | Practice | Solutions | ZH |
 |---|---|---|---|---|---|---|
-| **A.1** | Kinematics | SL + HL | ⬜ | ⬜ | ⬜ | ⬜ |
+| **A.1** | Kinematics | SL + HL | ✅ (template) | ⬜ | ⬜ | ✅ |
 | **A.2** | Forces and momentum | SL + HL | ⬜ | ⬜ | ⬜ | ⬜ |
 | **A.3** | Work, energy and power | SL + HL | ⬜ | ⬜ | ⬜ | ⬜ |
 | **A.4** | Rigid body mechanics | HL only | ⬜ | ⬜ | ⬜ | ⬜ |
