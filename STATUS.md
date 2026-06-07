@@ -1,7 +1,7 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-06** (🎯 **lead-gen P0 shipped**: "Book a free consult" CTA live across all 66 HS SGs + Kinematics P+S + landing; preserved 2 untracked IB P+S pairs; D1–D3 SG solutions-link removal committed).
+Living doc — update as the product evolves. Last updated: **2026-06-06** (`main`=`preview`=`36feafc`). Big lead-gen day, all shipped to prod: **CTA on every page** (66 HS + 131 AP/IB + landing) → **Sprint B funnel instrumentation** (UTM tags + GA4 `G-SDVTGZ6RJ9`) → **OpenGraph share cards** (230 pages) → **B&W design refresh** matching dingruischolars.com. Plus housekeeping (preserved 2 IB P+S pairs; D1–D3 link removal).
 
 ---
 
@@ -29,11 +29,21 @@ Living doc — update as the product evolves. Last updated: **2026-06-06** (🎯
 **EVERY notes page across the whole site** — 66 HS + 131 AP/IB (49 SGs + 82 P+S) + landing
 hero/footer. Shipped in two waves 2026-06-06: P0 HS+landing (`b9f4321`) and Sprint A AP/IB
 (`a3fd530`). This is the funnel's conversion surface. Injectors: `scripts/add_consult_cta.py`
-(HS) + `scripts/add_consult_cta_apib.py` (AP/IB, 5 template variants). **Next ≥P1:** (B) instrument
-the funnel — analytics + UTM-tag every CTA for per-page/lang attribution (NONE exists yet);
-(C) feeder-links-as-pitch + IB Physics HL completion (1→24, the one content hole big enough to
-lose leads); (D) discoverability/SEO + Open Graph. **IB/AP SG completion = P2–P3** (top-of-funnel
-inventory, ranks below converting + measuring existing traffic; only IB Physics HL is urgent).
+(HS) + `scripts/add_consult_cta_apib.py` (AP/IB, 5 template variants).
+
+**Shipped 2026-06-06 (all on `main`):** ✅ **Sprint B — funnel instrumentation**: UTM tags on all 200
+CTAs (`utm_campaign=<subject>&utm_content=<unit>__<doctype>__<lang>`, `scripts/utm_tag_cta.py`) +
+GA4 `G-SDVTGZ6RJ9` on all 230 pages (`scripts/add_ga_analytics.py`) → notes→click→signup funnel by
+subject/unit/lang. ✅ **OpenGraph/Twitter share cards** on 230 pages (`scripts/add_og_tags.py`;
+og:image=LOGO.png, swap a 1200×630 card → bump to summary_large_image). ✅ **B&W design refresh**
+matching dingruischolars.com (`scripts/restyle_bw.py`; see `reference_design_system` memory).
+
+**Next ≥P1:** (C) feeder-links-as-pitch + IB Physics HL completion (1→24, the one content hole big
+enough to lose leads); (D) Get-Found / SEO — meta descriptions on the ~116 pages lacking them +
+`sitemap.xml` + `robots.txt` + JSON-LD. **IB/AP SG completion = P2–P3** (top-of-funnel inventory,
+ranks below converting + measuring existing traffic; only IB Physics HL is urgent).
+**Open polish:** swap a designed 1200×630 OG card; consent/cookie banner if EU/PIPL needed;
+`IBCHEMHL_ethanfinalpractice` is student-named + EN-only in prod (rename/unlist?).
 
 ---
 
