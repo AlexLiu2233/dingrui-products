@@ -1,7 +1,23 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-06** (`main`=`preview`=`36feafc`). Big lead-gen day, all shipped to prod: **CTA on every page** (66 HS + 131 AP/IB + landing) → **Sprint B funnel instrumentation** (UTM tags + GA4 `G-SDVTGZ6RJ9`) → **OpenGraph share cards** (230 pages) → **B&W design refresh** matching dingruischolars.com. Plus housekeeping (preserved 2 IB P+S pairs; D1–D3 link removal).
+Living doc — update as the product evolves. Last updated: **2026-06-07** (`main`=`36feafc`/`a48df09`,
+`preview`=`cdd812c`). **Sprint D — Get-Found / SEO is ON PREVIEW awaiting review→FF.** Prior day (2026-06-06)
+shipped to prod: **CTA on every page** (66 HS + 131 AP/IB + landing) → **Sprint B funnel instrumentation**
+(UTM tags + GA4 `G-SDVTGZ6RJ9`) → **OpenGraph share cards** (230 pages) → **B&W design refresh** matching
+dingruischolars.com. Plus housekeeping (preserved 2 IB P+S pairs; D1–D3 link removal).
+
+**Sprint D — Get-Found / SEO (2026-06-07, branch `seo_get_found`, on `origin/preview`=`cdd812c`, `main`
+untouched):** the notes site had zero crawl guidance. Added via 4 idempotent stripped-from-deploy scripts:
+**`sitemap.xml`** (228 URLs, abs prod URLs, git-date lastmod; 2 student-named drafts excluded) +
+**`robots.txt`** (Allow /, `Disallow: /preview/` so staging stays unindexed, Sitemap linked) —
+both at repo root so they survive the deploy strip; **`<meta name="description">`** on the 116 pages
+lacking one (dash-free, derived from title + doctype; og/twitter desc re-synced; 114 curated ones left
+intact); **JSON-LD** `LearningResource` on all 230 pages (`EducationalOrganization` on landing) with
+inLanguage/level/provider; **`<link rel="canonical">`** (self-ref absolute, consolidates `?lang=zh` +
+`/preview/` duplicates). Gates: validate.sh exit 0, parity unchanged, sitemap well-formed XML, 230/230
+JSON-LD valid JSON. Scripts: `build_sitemap.py`, `add_meta_description.py`, `add_jsonld.py`, `add_canonical.py`.
+**AWAITING user review of staging → FF `preview`→`main`.**
 
 ---
 
@@ -38,12 +54,13 @@ subject/unit/lang. ✅ **OpenGraph/Twitter share cards** on 230 pages (`scripts/
 og:image=LOGO.png, swap a 1200×630 card → bump to summary_large_image). ✅ **B&W design refresh**
 matching dingruischolars.com (`scripts/restyle_bw.py`; see `reference_design_system` memory).
 
-**Next ≥P1:** (C) feeder-links-as-pitch + IB Physics HL completion (1→24, the one content hole big
-enough to lose leads); (D) Get-Found / SEO — meta descriptions on the ~116 pages lacking them +
-`sitemap.xml` + `robots.txt` + JSON-LD. **IB/AP SG completion = P2–P3** (top-of-funnel inventory,
-ranks below converting + measuring existing traffic; only IB Physics HL is urgent).
+**Next ≥P1:** (D) Get-Found / SEO ✅ DONE — on `preview`, awaiting FF (sitemap+robots+meta desc+JSON-LD+canonical).
+(C) feeder-links-as-pitch + IB Physics HL completion (1→24, the one content hole big enough to lose leads)
+is now the lone remaining ≥P1. **IB/AP SG completion = P2–P3** (top-of-funnel inventory, ranks below
+converting + measuring existing traffic; only IB Physics HL is urgent).
 **Open polish:** swap a designed 1200×630 OG card; consent/cookie banner if EU/PIPL needed;
-`IBCHEMHL_ethanfinalpractice` is student-named + EN-only in prod (rename/unlist?).
+`IBCHEMHL_ethanfinalpractice` is student-named + EN-only in prod (rename/unlist?); the 114 pre-existing
+HS descriptions run long (>155 chars, get truncated in SERPs) — tighten in a future pass if desired.
 
 ---
 
