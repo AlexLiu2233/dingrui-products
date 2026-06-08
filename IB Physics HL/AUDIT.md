@@ -63,15 +63,27 @@ template before bulk drafting.
 |---|---|---|---|
 | **S1-spec** | Drop IB Physics 2025 Subject Guide PDF into `rag/sources/IB Physics HL/`; verify super-topic numbering | P0 | **Open — `rag/sources/IB Physics HL/` does not exist yet (confirmed 2026-06-07)** |
 | **S1-A1** | Draft `Unit_A1_Kinematics.html` Study Guide (foundational, most-tested) | P0 | ~~Open~~ **Resolved:** `8513907` — A.1 Kinematics SG shipped to `main` (1,119 lines, bilingual). |
-| **S1-bulk** | Bulk-draft remaining 23 Study Guides in parallel (post-A1 review) | P0 | **Open — blocked on (1) user sign-off of A.1 as the locked template + (2) S1-spec grounding** |
+| **S1-bulk** | Bulk-draft remaining 23 Study Guides in parallel (post-A1 review) | P0 | ~~Open~~ **Resolved:** all 23 drafted on branch `ib_physics_hl_bulk` (Waves A–E), parity en==zh, validate exit 0; on `preview` awaiting review→FF. |
 
 ---
 
-## Sprint 2 — bulk-draft the 23 remaining Study Guides (PLANNED, 2026-06-07)
+## Sprint 2 — bulk-draft the 23 remaining Study Guides (✅ DRAFTED, on `preview` awaiting review→FF, 2026-06-07)
 
-**Chosen as the next ≥P1 token budget** (closes the one content hole big enough to lose
-leads; new pages get indexed immediately now that SEO/sitemap/GSC is live). **Token-heavy
-(~23 bilingual SGs) — needs a full-budget session, not a tail end.**
+**All 24 IB Physics HL Study Guides now exist** (A.1 prior + 23 this sprint). Drafted via 5 parallel
+subagent waves on branch `ib_physics_hl_bulk`, each SG cloned from the locked A.1 template:
+Wave A (A.2–A.5) `bdb6cd4` · Wave B (B.1–B.5) `9f72922` · Wave C (C.1–C.5) `3644b99` ·
+Wave D (D.1–D.4) `2ed7657` · Wave E (E.1–E.5) `41ae8b8` · finalization (index 24 cards + sitemap 251 URLs) `4bcb607`.
+**Gates green on every file:** bilingual parity en==zh, no `localStorage`, `validate.sh` exit 0, HL-flag chips
+on the 6 HL-only units (A.4, A.5, B.4, D.4, E.2) + HL sub-blocks elsewhere, self-referencing SEO tags
+(canonical/OG/JSON-LD inherited+rekeyed from A.1, 0 A.1-URL leakage), data-booklet `<code>` citations,
+ZH terminology per the forbidden-term watchlist. index.html parity 469/469. **Next: user reviews staging →
+FF `preview`→`main`.** Then Sprint 3 = Practice + Solutions (24 pairs) per the IB Math HL P+S pattern.
+
+_(Snapshot tables below still show per-cell ⬜ for the SG column on most rows — cosmetic lag in the internal
+tracker; the authoritative state is "all 24 SG shipped to preview" per this section.)_
+
+**Original plan (now executed):** Chosen as the ≥P1 token budget (closes the one content hole big enough to
+lose leads; new pages indexed immediately now that SEO/sitemap/GSC is live).
 
 **Two hard blockers before drafting (both require the user):**
 1. **Lock the A.1 template.** A.1 Kinematics is built and on `main`; it must be reviewed
