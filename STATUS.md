@@ -1,9 +1,11 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-07** (`main`=`preview`=`909155e`).
-**Sprint D — Get-Found / SEO ✅ SHIPPED TO PROD** (FF'd to main 2026-06-07 on structural confirmation; user
-verifying on live). Prior day (2026-06-06)
+Living doc — update as the product evolves. Last updated: **2026-06-07** (`main`=`preview`=`9edde7e`).
+**IB Physics HL Sprint 2 ✅ SHIPPED TO PROD — all 24 Study Guides now live** (23 new this session, cloned from
+the locked A.1 template via 5 parallel subagent waves; index regenerated to 24 cards; sitemap 251 URLs;
+landing count corrected 1→24 units EN+ZH). Earlier same day: **Sprint D — Get-Found / SEO ✅ SHIPPED TO PROD**
+(sitemap/robots/meta-desc/JSON-LD/canonical). Prior day (2026-06-06)
 shipped to prod: **CTA on every page** (66 HS + 131 AP/IB + landing) → **Sprint B funnel instrumentation**
 (UTM tags + GA4 `G-SDVTGZ6RJ9`) → **OpenGraph share cards** (230 pages) → **B&W design refresh** matching
 dingruischolars.com. Plus housekeeping (preserved 2 IB P+S pairs; D1–D3 link removal).
@@ -42,7 +44,7 @@ discovery. To get full auto-discovery, add a `Sitemap:` line to an apex `alexliu
 | AP | AP Computer Science A | 4 | 4 | 4 | ✅ EN/ZH | `main` |
 | IB | IB Math AA HL | 23 | 22 | 22 | ✅ EN/ZH | `main` |
 | IB | IB Chemistry HL | 4 | 1 | 1 | ✅ EN/ZH | `main` |
-| IB | IB Physics HL | 1 | — | — | ✅ EN/ZH | `main` (scaffolding) |
+| IB | IB Physics HL | 24 | — | — | ✅ EN/ZH | `main` ✅ SG-complete (P+S next) |
 | IB | IB Math AI HL | — | — | — | — | retired |
 
 **HS STEM total: 66 Study Guides** across 5 subjects (the focus of the current program).
@@ -61,10 +63,12 @@ subject/unit/lang. ✅ **OpenGraph/Twitter share cards** on 230 pages (`scripts/
 og:image=LOGO.png, swap a 1200×630 card → bump to summary_large_image). ✅ **B&W design refresh**
 matching dingruischolars.com (`scripts/restyle_bw.py`; see `reference_design_system` memory).
 
-**Next ≥P1:** (D) Get-Found / SEO ✅ SHIPPED to prod 2026-06-07 (sitemap+robots+meta desc+JSON-LD+canonical).
-(C) feeder-links-as-pitch + IB Physics HL completion (1→24, the one content hole big enough to lose leads)
-is now the lone remaining ≥P1. **IB/AP SG completion = P2–P3** (top-of-funnel inventory, ranks below
-converting + measuring existing traffic; only IB Physics HL is urgent).
+**Next ≥P1:** (D) Get-Found / SEO ✅ SHIPPED 2026-06-07. (C, content half) IB Physics HL SG completion
+✅ SHIPPED 2026-06-07 (24/24 SGs live — the urgent content hole is closed). **Remaining ≥P1: (C, copy half)
+feeder-links-as-pitch** — reframe the existing outbound feeder links as a soft sales pitch (low-token copy/script
+pass). Then **IB Physics HL Sprint 3 = Practice + Solutions (24 pairs)** per the IB Math HL P+S pattern (a large
+fresh-budget sprint; the SGs now have a locked template to pair against). After GA4/GSC accrue ~2wk of data,
+revisit **Convert-Better / landing CRO** (don't optimize the funnel blind). **IB/AP SG completion = P2–P3.**
 **Open polish:** swap a designed 1200×630 OG card; consent/cookie banner if EU/PIPL needed;
 `IBCHEMHL_ethanfinalpractice` is student-named + EN-only in prod (rename/unlist?); the 114 pre-existing
 HS descriptions run long (>155 chars, get truncated in SERPs) — tighten in a future pass if desired.
