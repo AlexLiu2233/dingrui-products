@@ -51,12 +51,18 @@ because plan mode silently blocks subagent writes; ExitPlanMode + fresh re-run f
    `build_type=workflow` (Source=GitHub Actions, per CLAUDE.md). Deploy now green; site restored. See
    `reference_pages_deploy_infra` memory.
 
-**🆕 PLANNED CROSS-REPO SPRINT — "Consult CTA under Read-me-first" on EVERY Study Guide (user direction
-2026-06-09):** the new convention (CTA directly beneath the hero "Read me first" intro, in addition to the
-existing end-of-page CTA) must be retrofitted across all existing SGs (66 HS + 49 AP/IB = 115 SGs; P+S files
-out of scope). Build a script modeled on `scripts/add_consult_cta.py` / `add_consult_cta_apib.py` that inserts
-the intro CTA right after each guide's hero/read-me block, idempotently, bilingual where the file is bilingual.
-University Calculus already complies (engine bakes it in). **Not started; sequence after the UC SG wave.**
+**🆕 IN FLIGHT — "Consult CTA under Read-me-first" retrofit + CONTENT QUALITY AUDIT (2026-06-11):**
+Two workstreams opened together. **(1) Intro-CTA retrofit:** injector `scripts/add_intro_consult_cta.py`
+inserts the consult-CTA under each guide's read-me block (after the `id="how-to-use"` section, else after the
+hero), idempotent, bilingual, distinct `__sg_intro__` UTM. **Scope corrected: 138 SGs, not 115** — the old
+count predated IB Physics HL +24 and IB Math expansion (real non-UC SG total = 66 HS + 72 AP/IB; UC's 32
+already comply). **PILOT DONE** (HS Math U1 + IB Physics A1: validate OK, EN==ZH parity held, placed after
+read-me) — awaiting user placement sign-off before the full 138 sweep. **(2) Content quality audit:** full plan
+in **`rag/CONTENT_QUALITY_AUDIT.md`** (instrument `scripts/sg_quality_sweep.py`, ran over all 170 SGs).
+**Headline:** University Calculus is the depth-deficit tier — EN-word median **3383** vs HS ~7500 / AP-IB
+~5000-5700; breadth is complete but depth is thin (cram-level + breadth done, full-mark depth NOT yet). **P0 =
+UC Depth Expansion sprint** (bring the 31 sub-template guides to the A1 bar). Awaiting user's pick on method
+(sequential waves vs multi-agent) and target depth.
 
 **IB Physics HL Sprint 2 ✅ SHIPPED TO PROD — all 24 Study Guides now live** (23 new this session, cloned from
 the locked A.1 template via 5 parallel subagent waves; index regenerated to 24 cards; sitemap 251 URLs;
