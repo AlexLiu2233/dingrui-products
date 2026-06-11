@@ -31,6 +31,7 @@ SUBJECTS = [
     "High School Math", "High School Physics", "High School Chemistry",
     "High School Biology", "High School Computer Science",
     "AP Calculus", "AP Physics", "AP CSA", "IB Math HL", "IB Chemistry HL", "IB Physics HL",
+    "University Calculus",
 ]
 
 # Student-named / unlisted drafts kept out of the public sitemap (flagged in STATUS).

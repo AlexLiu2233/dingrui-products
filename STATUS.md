@@ -1,7 +1,52 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-07** (`main`=`preview`=`9edde7e`).
+Living doc — update as the product evolves. Last updated: **2026-06-09** (`main`=`preview`=`9edde7e`;
+new work on branch `university_calculus_init`).
+
+**🆕 NEW SUBJECT + NEW TIER OPENED 2026-06-09 — University Calculus (first-year-uni):** opens the top tier of
+the HS → AP/IB → **first-year-uni** pipeline. Goal = lead-gen for *current* NA top-10 STEM undergrads (MIT/GT/
+Princeton-tier) struggling with the calculus sequence; SEO long-tail is the primary acquisition channel.
+**Scope (user-locked):** one subject, 4 course-groups A/B/C/D = Calc I/II/III/IV, **8 SGs each = 32 SGs**;
+Calc IV = Ordinary Differential Equations; English-first (ZH later wave). **Grounding-first (user-requested):**
+a source-of-record folder `rag/sources/University Calculus/` (target-school syllabi MIT 18.01/02/03 + GT MATH
+1551/1552/2551/2552 + Princeton MAT, plus open content sources OCW/OpenStax/Strang/Paul's) + `SOURCES.md`
+manifest is a gated Sprint 0 deliverable so every guide is checkable against a committed source.
+
+**STATE (2026-06-09, branch `university_calculus_init`, NOT yet committed):** Sprints 0 + 1 + 2 ✅ DONE.
+**ALL 32 Study Guides are drafted, validated, and indexed.** A1 Limits & Continuity is the USER-LOCKED
+template (full epsilon-delta proofs; CTA under Read-me-first); A2 + A5 authored by me/an early agent; the
+other 29 (A3-A8, B, C, D) authored by a 29-agent workflow through the `uc_build_unit.py` engine. Landing
+Tier-03 "University" band is live with all 32 cards under 4 course accordions (Calc I/II/III/IV, 8 each);
+all 32 in the sitemap; subject-group label reads "32 units". **Every file passes:** validate exit 0,
+0 dash entities, 0 localStorage, 0 content data-lang, 0 AP leakage; uniform structure (7 sections + unit
+quiz + checklist, 12 flashcards, BOTH consult CTAs, 8 checklist items). Content spot-checked = genuine
+NA-top-10 rigor (real proofs, correct worked examples). **Plan-mode lesson:** the first workflow wave failed
+because plan mode silently blocks subagent writes; ExitPlanMode + fresh re-run fixed it.
+
+**HANDOFF — how to continue Sprint 2 (another chat picks up here):**
+1. Bulk engine: `scripts/uc_build_unit.py` clones A1's verbatim CSS/logo/JS and wraps a per-unit content spec,
+   baking in BOTH consult CTAs. Per-unit recipe (mirrors the deleted `scripts/_unit_A2.py`): write a runner with
+   a `SPEC` dict (uid, slug, topic, overline, h1, sub, chips, readme, toc, sections HTML, flashcards, quiz HTML,
+   checklist) and call `build_and_save(SPEC)`. Author genuine university rigor, grounded in
+   `rag/sources/University Calculus/SOURCES.md`. English-first (no `data-lang`/toggle).
+2. After each unit/wave: `python scripts/build-index.py && python scripts/build_sitemap.py`, bump the
+   `subject-group__count` label in `index.html` (build-index does NOT auto-update it), and
+   `bash scripts/validate.sh "University Calculus/Study Guides/<file>.html"`.
+3. **SG layer is COMPLETE (32/32).** Remaining for the subject: **Sprint 3** = Mandarin ZH wave
+   (`prompts/create-bilingual-translation.md`; the engine writes English-only, so ZH wraps each file's prose in
+   `data-lang` span pairs, adds the toggle button + bilingual CSS/JS); **Sprint 4** = Practice + Solutions
+   (32 pairs, `pair-key` + `dingrui:version` lock). Reusable bulk engine for any future UC SG work:
+   `scripts/uc_build_unit.py`. Cadence: review-then-merge, branch → preview → FF to main. **Nothing committed
+   yet** (awaiting user's go on commit + PR-to-preview).
+
+**🆕 PLANNED CROSS-REPO SPRINT — "Consult CTA under Read-me-first" on EVERY Study Guide (user direction
+2026-06-09):** the new convention (CTA directly beneath the hero "Read me first" intro, in addition to the
+existing end-of-page CTA) must be retrofitted across all existing SGs (66 HS + 49 AP/IB = 115 SGs; P+S files
+out of scope). Build a script modeled on `scripts/add_consult_cta.py` / `add_consult_cta_apib.py` that inserts
+the intro CTA right after each guide's hero/read-me block, idempotently, bilingual where the file is bilingual.
+University Calculus already complies (engine bakes it in). **Not started; sequence after the UC SG wave.**
+
 **IB Physics HL Sprint 2 ✅ SHIPPED TO PROD — all 24 Study Guides now live** (23 new this session, cloned from
 the locked A.1 template via 5 parallel subagent waves; index regenerated to 24 cards; sitemap 251 URLs;
 landing count corrected 1→24 units EN+ZH). Earlier same day: **Sprint D — Get-Found / SEO ✅ SHIPPED TO PROD**
@@ -46,8 +91,10 @@ discovery. To get full auto-discovery, add a `Sitemap:` line to an apex `alexliu
 | IB | IB Chemistry HL | 4 | 1 | 1 | ✅ EN/ZH | `main` |
 | IB | IB Physics HL | 24 | — | — | ✅ EN/ZH | `main` ✅ SG-complete (P+S next) |
 | IB | IB Math AI HL | — | — | — | — | retired |
+| **UNI** | University Calculus | 32/32 | — | — | EN-first | `university_calculus_init` 🆕 **all 32 SGs drafted+validated** (uncommitted); P+S + ZH next |
 
 **HS STEM total: 66 Study Guides** across 5 subjects (the focus of the current program).
+**University Calculus (new first-year-uni tier):** 32 SGs planned (Calc I/II/III/IV × 8); A/B/C/D groups; ODE = Calc IV.
 
 **🎯 Lead-gen funnel (business goal = leads for academic consulting):** A bilingual
 "Book a free consult" CTA (EN → `dingruischolars.com/signup`, ZH → `/signup-ch`) is now live on
@@ -92,6 +139,11 @@ HS descriptions run long (>155 chars, get truncated in SERPs) — tighten in a f
 - **Repo fully consolidated: only `main` + `preview` exist** (locally and on origin). The last branch,
   `ib_chem_reactivity2_challenge_practice` (IB Chem Reactivity 2.2 Challenge P+S, v1.1), was gated, given the
   `?lang=zh` snippet, merged to main, and deleted (2026-06-05).
+- **`university_calculus_init` (opened 2026-06-09):** active branch for the new University Calculus subject/tier.
+  Holds: grounding folder + spec + AUDIT + full pipeline registration + **all 32 Study Guides** (A1 locked
+  template; the rest cloned via `scripts/uc_build_unit.py`) + index/sitemap wired (32 cards, "32 units").
+  Gates green per the global invariants. **Uncommitted** (working tree only). Next: commit + PR → preview for
+  staging review, then Sprint 3 (ZH) + Sprint 4 (P+S). See the STATE/HANDOFF block at the top.
 
 ---
 

@@ -30,6 +30,7 @@ SUBJECT_SLUG = {
     "High School Computer Science": "hs_cs",
     "AP Calculus": "ap_calculus", "AP Physics": "ap_physics", "AP CSA": "ap_csa",
     "IB Math HL": "ib_math_hl", "IB Chemistry HL": "ib_chem_hl", "IB Physics HL": "ib_physics_hl",
+    "University Calculus": "university_calculus",
 }
 
 EN_URL = "https://www.dingruischolars.com/signup"
