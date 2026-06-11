@@ -964,6 +964,35 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>This is an ellipse sitting in the tilted plane, projecting down to the circle of radius $2$.</p>
   </div></div></details>
 
+  <p>The intersection idea generalizes. Whenever a curve is described as the common solution of two surface equations, choose a parameter that makes one surface easy, then read the remaining coordinate off the other surface. The next example shows the same maneuver for a paraboloid cut by a plane, where the resulting curve is genuinely three-dimensional.</p>
+
+  <details><summary>Worked Example 1.3: a curve on a paraboloid</summary><div class="detail-body"><div class="worked-solution">
+    <p>Parametrize the intersection of the paraboloid $z=x^2+y^2$ with the plane $y=x$. On the plane we have $y=x$, so let $x=t$. Then $y=t$ and $z=x^2+y^2=t^2+t^2=2t^2$.</p>
+    $$\mathbf{r}(t)=\langle t,\ t,\ 2t^2\rangle,\qquad t\in\mathbb{R}.$$
+    <p>Check a point: at $t=1$, $\mathbf{r}(1)=\langle 1,1,2\rangle$, and indeed $1^2+1^2=2=z$ and $y=x$. The curve is a parabola opening upward, lying in the vertical plane $y=x$. Notice that nothing forced a trigonometric parametrization here: the constraint $y=x$ is linear, so a polynomial parameter is the natural choice. Matching the parametrization to the algebraic shape of the constraints, circles and ellipses get sines and cosines, lines get a linear parameter, is the single most useful habit in this section.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.4: a limit and a removable discontinuity</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\lim_{t\to 0}\Big\langle \frac{\sin t}{t},\ \frac{e^{t}-1}{t},\ t^2+3\Big\rangle$. Take the limit in each slot:</p>
+    $$\lim_{t\to 0}\frac{\sin t}{t}=1,\qquad \lim_{t\to 0}\frac{e^{t}-1}{t}=1,\qquad \lim_{t\to 0}(t^2+3)=3,$$
+    $$\Rightarrow\quad \lim_{t\to 0}\mathbf{r}(t)=\langle 1,\ 1,\ 3\rangle.$$
+    <p>The first two components are not defined at $t=0$ as written, so $\mathbf{r}$ has a removable discontinuity there. Defining $\mathbf{r}(0)=\langle 1,1,3\rangle$ patches it into a continuous function, exactly as one repairs a removable discontinuity of a scalar function. This is the componentwise limit theorem doing real work.</p>
+  </div></div></details>
+
+  <div class="concept-box green">
+    <strong>Smooth curves and orientation.</strong> A parametrization is <em>smooth</em> on an interval when $\mathbf{r}'$ is continuous and $\mathbf{r}'(t)\neq\mathbf{0}$ there. The nonvanishing condition matters: it guarantees a well-defined tangent direction at every point and rules out cusps, where the curve reverses direction sharply. For instance $\mathbf{r}(t)=\langle t^3,\ t^2\rangle$ has $\mathbf{r}'(0)=\mathbf{0}$, and the curve $y=x^{2/3}$ it traces has a cusp at the origin even though each component is differentiable. A parametrization also carries an <em>orientation</em>, the direction of increasing $t$; replacing $t$ by $-t$ or by $a+b-t$ traverses the same point set the opposite way, which flips the sign of the tangent vector and of any line integral computed along it later.
+  </div>
+
+  <details><summary>Worked Example 1.5: matching a parametrization to a description</summary><div class="detail-body"><div class="worked-solution">
+    <p>Find a smooth parametrization of the line segment from $P=(1,2,3)$ to $Q=(4,0,-1)$, traversed once from $P$ to $Q$. The standard device is to write $\mathbf{r}(t)=(1-t)\,\overrightarrow{OP}+t\,\overrightarrow{OQ}$ for $0\le t\le 1$, which is $P$ at $t=0$ and $Q$ at $t=1$:</p>
+    $$\mathbf{r}(t)=\langle 1+3t,\ 2-2t,\ 3-4t\rangle,\qquad 0\le t\le 1.$$
+    <p>Here $\mathbf{r}'(t)=\langle 3,-2,-4\rangle$ is constant and nonzero, so the parametrization is smooth with the correct orientation from $P$ to $Q$. To reverse direction, use $\mathbf{r}(1-t)$ instead; to traverse the full line rather than the segment, drop the restriction on $t$.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A curve and its parametrization are not the same object. Two different functions can trace the same set of points: $\mathbf{r}_1(t)=\langle\cos t,\sin t,0\rangle$ and $\mathbf{r}_2(t)=\langle\cos 2t,\sin 2t,0\rangle$ both trace the unit circle, but they run at different speeds and cover it a different number of times on $[0,2\pi]$. Quantities that depend only on the point set (the curve itself), such as arc length over a full loop or curvature at a point, are geometric. Quantities like velocity and speed depend on the parametrization. When a problem asks about "the curve," decide first whether the answer should change if you re-time the motion: if it should not, you are looking for a geometric quantity and any convenient parametrization will do.
+  </div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">What is the natural domain of $\mathbf{r}(t)=\big\langle \ln t,\ \sqrt{4-t^2},\ \tfrac{1}{t-1}\big\rangle$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$0\le t\le 2$</div><div class="quiz-opt" data-idx="1">$0<t\le 2$ with $t\neq 1$</div><div class="quiz-opt" data-idx="2">$t>0$</div><div class="quiz-opt" data-idx="3">all real $t$</div></div><div class="quiz-explain correct-exp">Correct. $\ln t$ needs $t>0$, $\sqrt{4-t^2}$ needs $-2\le t\le 2$, and $\tfrac{1}{t-1}$ excludes $t=1$. The intersection is $0<t\le 2$, $t\neq 1$.</div><div class="quiz-explain wrong-exp">Intersect the three component domains: $t>0$ from the log, $|t|\le 2$ from the square root, and $t\neq 1$ from the fraction.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -999,11 +1028,44 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\ell(u)=\langle 0,1,\tfrac{\pi}{2}\rangle+u\langle -1,0,1\rangle=\langle -u,\ 1,\ \tfrac{\pi}{2}+u\rangle.$$
   </div></div></details>
 
+  <details><summary>Worked Example 2.2: differentiating a dot product two ways</summary><div class="detail-body"><div class="worked-solution">
+    <p>Let $\mathbf{u}(t)=\langle t,\ t^2,\ 1\rangle$ and $\mathbf{v}(t)=\langle \cos t,\ 0,\ t\rangle$. We verify the product rule $\tfrac{d}{dt}[\mathbf{u}\cdot\mathbf{v}]=\mathbf{u}'\cdot\mathbf{v}+\mathbf{u}\cdot\mathbf{v}'$ by computing both sides.</p>
+    <p>Direct route: $\mathbf{u}\cdot\mathbf{v}=t\cos t+0+t=t\cos t+t$, so $\tfrac{d}{dt}[\mathbf{u}\cdot\mathbf{v}]=\cos t-t\sin t+1$.</p>
+    <p>Product-rule route: $\mathbf{u}'=\langle 1,\ 2t,\ 0\rangle$, $\mathbf{v}'=\langle -\sin t,\ 0,\ 1\rangle$, so</p>
+    $$\mathbf{u}'\cdot\mathbf{v}=\cos t+0+0=\cos t,\qquad \mathbf{u}\cdot\mathbf{v}'=-t\sin t+0+1.$$
+    <p>Adding gives $\cos t-t\sin t+1$, matching the direct computation. The product rule lets you differentiate $|\mathbf{r}(t)|^2=\mathbf{r}\cdot\mathbf{r}$ without first extracting a square root, which is the trick behind several later derivations.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: an antiderivative with an initial condition</summary><div class="detail-body"><div class="worked-solution">
+    <p>Find $\mathbf{r}(t)$ given $\mathbf{r}'(t)=\langle 2t,\ \cos t,\ e^{t}\rangle$ and $\mathbf{r}(0)=\langle 1,\ 2,\ 0\rangle$. Integrate componentwise:</p>
+    $$\mathbf{r}(t)=\Big\langle t^2,\ \sin t,\ e^{t}\Big\rangle+\mathbf{C}.$$
+    <p>Apply the initial condition. At $t=0$ the antiderivative without the constant is $\langle 0,\ 0,\ 1\rangle$, so $\langle 0,0,1\rangle+\mathbf{C}=\langle 1,2,0\rangle$ forces $\mathbf{C}=\langle 1,\ 2,\ -1\rangle$. Therefore</p>
+    $$\mathbf{r}(t)=\langle t^2+1,\ \sin t+2,\ e^{t}-1\rangle.$$
+    <p>The constant of integration is a single vector with three independent components, so one vector initial condition pins down all three constants at once.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.4: a definite vector integral</summary><div class="detail-body"><div class="worked-solution">
+    <p>Compute $\displaystyle\int_0^{1}\langle 4t^3,\ \tfrac{1}{1+t^2},\ 6t\rangle\,dt$. Integrate each slot over $[0,1]$:</p>
+    $$\int_0^1 4t^3\,dt=\big[t^4\big]_0^1=1,\quad \int_0^1\frac{dt}{1+t^2}=\big[\arctan t\big]_0^1=\frac{\pi}{4},\quad \int_0^1 6t\,dt=\big[3t^2\big]_0^1=3.$$
+    $$\int_0^{1}\mathbf{r}(t)\,dt=\Big\langle 1,\ \frac{\pi}{4},\ 3\Big\rangle.$$
+    <p>A definite vector integral returns a single constant vector, just as a definite scalar integral returns a number. This is the displacement vector when $\mathbf{r}(t)$ is read as a velocity.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.5: a smooth-versus-non-smooth tangent</summary><div class="detail-body"><div class="worked-solution">
+    <p>Compare two parametrizations of the same parabola $y=x^2$. First, $\mathbf{r}_1(t)=\langle t,\ t^2,\ 0\rangle$ gives $\mathbf{r}_1'(t)=\langle 1,\ 2t,\ 0\rangle$, which is never zero, so $\mathbf{r}_1$ is smooth and has a well-defined tangent direction everywhere. Second, $\mathbf{r}_2(t)=\langle t^3,\ t^6,\ 0\rangle$ traces the same parabola but $\mathbf{r}_2'(t)=\langle 3t^2,\ 6t^5,\ 0\rangle$, which is $\mathbf{0}$ at $t=0$.</p>
+    <p>At $t=0$ the unit tangent $\mathbf{T}=\mathbf{r}_2'/|\mathbf{r}_2'|$ is undefined for $\mathbf{r}_2$, even though the underlying curve is perfectly smooth there. The defect is in the parametrization, not the geometry: $\mathbf{r}_2$ instantaneously stops at the origin. This is why "smooth curve" should be read as "admits a smooth parametrization," and why we routinely reparametrize to remove such artificial stalls before computing $\mathbf{T}$, $\mathbf{N}$, or curvature.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The product rule for the cross product is order-sensitive. Writing $\tfrac{d}{dt}[\mathbf{u}\times\mathbf{v}]=\mathbf{v}'\times\mathbf{u}+\mathbf{u}\times\mathbf{v}'$ swaps the factors in the first term and silently negates it, because $\mathbf{u}'\times\mathbf{v}=-\mathbf{v}\times\mathbf{u}'$. The correct statement keeps each factor in its original position: $\tfrac{d}{dt}[\mathbf{u}\times\mathbf{v}]=\mathbf{u}'\times\mathbf{v}+\mathbf{u}\times\mathbf{v}'$. The dot-product rule is safe to write in either order since the dot product commutes, but never reorder a cross product when differentiating.
+  </div>
+
   <details><summary>Going deeper: why a constant-length vector is perpendicular to its derivative</summary><div class="detail-body"><div class="worked-solution">
     <p><strong>Claim.</strong> If $|\mathbf{r}(t)|=c$ is constant, then $\mathbf{r}'(t)\perp\mathbf{r}(t)$ for all $t$.</p>
     <p><strong>Proof.</strong> Constant length means $\mathbf{r}(t)\cdot\mathbf{r}(t)=|\mathbf{r}(t)|^2=c^2$ is constant. Differentiate both sides using the product rule for the dot product:</p>
     $$\frac{d}{dt}\big[\mathbf{r}\cdot\mathbf{r}\big]=\mathbf{r}'\cdot\mathbf{r}+\mathbf{r}\cdot\mathbf{r}'=2\,\mathbf{r}\cdot\mathbf{r}'=0.$$
     <p>Hence $\mathbf{r}\cdot\mathbf{r}'=0$, so the two vectors are orthogonal. This is exactly why the unit tangent $\mathbf{T}$, which has constant length $1$, is always perpendicular to $\mathbf{T}'$, a fact used to build the normal vector in Section 5.</p>
+    <p><strong>Converse and geometry.</strong> The argument is reversible: if $\mathbf{r}\cdot\mathbf{r}'\equiv 0$ then $\tfrac{d}{dt}|\mathbf{r}|^2=0$, so the length is constant. Geometrically, a particle whose velocity is always perpendicular to its position vector moves on a sphere centered at the origin, never approaching or receding. This single lemma is the engine behind the orthogonality of the entire TNB frame.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">If $\mathbf{r}(t)=\langle t^2,\ e^{3t},\ \sin t\rangle$, then $\mathbf{r}'(0)=$</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\langle 0,1,0\rangle$</div><div class="quiz-opt" data-idx="1">$\langle 0,3,1\rangle$ only after evaluating wrongly</div><div class="quiz-opt" data-idx="2">$\langle 0,3,1\rangle$</div><div class="quiz-opt" data-idx="3">$\langle 2,3,1\rangle$</div></div><div class="quiz-explain correct-exp">Correct. $\mathbf{r}'(t)=\langle 2t,\ 3e^{3t},\ \cos t\rangle$, and at $t=0$ this is $\langle 0,\ 3,\ 1\rangle$.</div><div class="quiz-explain wrong-exp">Differentiate each component: $\tfrac{d}{dt}t^2=2t$, $\tfrac{d}{dt}e^{3t}=3e^{3t}$, $\tfrac{d}{dt}\sin t=\cos t$. Evaluate at $t=0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1042,6 +1104,36 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Check: $\mathbf{r}'(s)=\tfrac{1}{\sqrt{2}}\langle -\sin\tfrac{s}{\sqrt{2}},\ \cos\tfrac{s}{\sqrt{2}},\ 1\rangle$, and $|\mathbf{r}'(s)|=\tfrac{1}{\sqrt{2}}\cdot\sqrt{2}=1$, as required.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.3: a length integral that simplifies to a perfect square</summary><div class="detail-body"><div class="worked-solution">
+    <p>Find the length of the curve $\mathbf{r}(t)=\langle \sqrt{2}\,t,\ e^{t},\ e^{-t}\rangle$ on $0\le t\le 1$. Curves like this are designed so the square-root integrand collapses to a perfect square.</p>
+    <p>Differentiate: $\mathbf{r}'(t)=\langle \sqrt{2},\ e^{t},\ -e^{-t}\rangle$. Then</p>
+    $$|\mathbf{r}'(t)|^2=2+e^{2t}+e^{-2t}=e^{2t}+2+e^{-2t}=(e^{t}+e^{-t})^2.$$
+    <p>The constant $2$ is exactly the cross term of the square $(e^{t}+e^{-t})^2=e^{2t}+2+e^{-2t}$, so $|\mathbf{r}'(t)|=e^{t}+e^{-t}$ and</p>
+    $$L=\int_0^1 (e^{t}+e^{-t})\,dt=\big[e^{t}-e^{-t}\big]_0^1=e-e^{-1}.$$
+    <p>The designed-in perfect square is the standard trick that makes a square-root integrand integrable. When a length integral looks hopeless, check whether the radicand factors as $(\text{something})^2$ before reaching for numerical methods.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.4: arc length of a polynomial space curve</summary><div class="detail-body"><div class="worked-solution">
+    <p>Find the length of $\mathbf{r}(t)=\langle 2t,\ t^2,\ \tfrac13 t^3\rangle$ on $0\le t\le 2$. Differentiate: $\mathbf{r}'(t)=\langle 2,\ 2t,\ t^2\rangle$, so</p>
+    $$|\mathbf{r}'(t)|^2=4+4t^2+t^4=(t^2+2)^2,$$
+    <p>since $(t^2+2)^2=t^4+4t^2+4$. Therefore $|\mathbf{r}'(t)|=t^2+2$ (positive for all $t$), and</p>
+    $$L=\int_0^2 (t^2+2)\,dt=\Big[\tfrac{t^3}{3}+2t\Big]_0^2=\tfrac{8}{3}+4=\frac{20}{3}.$$
+    <p>The lesson repeats: a square root integrand is tractable exactly when the radicand is a perfect square in $t$. Spotting the factorization is half the battle in arc-length problems set by hand.</p>
+  </div></div></details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> Arc length is $\int_a^b|\mathbf{r}'(t)|\,dt$, the integral of the <em>magnitude</em> of the velocity, not the magnitude of the integral. Writing $L=\big|\int_a^b\mathbf{r}'(t)\,dt\big|$ computes the straight-line distance between the endpoints, $|\mathbf{r}(b)-\mathbf{r}(a)|$, which undercounts every curve that is not a straight segment. For one full turn of the helix the true length is $2\pi\sqrt2\approx 8.89$, while $|\mathbf{r}(2\pi)-\mathbf{r}(0)|=|\langle 0,0,2\pi\rangle|=2\pi\approx 6.28$. Keep the absolute value inside the integral.
+  </div>
+
+  <details><summary>Going deeper: arc length does not depend on the parametrization</summary><div class="detail-body"><div class="worked-solution">
+    <p><strong>Claim.</strong> If a curve is retraced by a smooth, increasing change of parameter $t=t(\tau)$, the arc length integral gives the same value.</p>
+    <p><strong>Proof.</strong> Let the new parametrization be $\boldsymbol{\rho}(\tau)=\mathbf{r}(t(\tau))$ with $t'(\tau)>0$ and $t(\alpha)=a$, $t(\beta)=b$. By the chain rule $\boldsymbol{\rho}'(\tau)=\mathbf{r}'(t(\tau))\,t'(\tau)$, so taking magnitudes and using $t'(\tau)>0$,</p>
+    $$|\boldsymbol{\rho}'(\tau)|=|\mathbf{r}'(t(\tau))|\,t'(\tau).$$
+    <p>Now compute the new length integral and substitute $u=t(\tau)$, $du=t'(\tau)\,d\tau$:</p>
+    $$\int_\alpha^\beta |\boldsymbol{\rho}'(\tau)|\,d\tau=\int_\alpha^\beta |\mathbf{r}'(t(\tau))|\,t'(\tau)\,d\tau=\int_a^b |\mathbf{r}'(u)|\,du.$$
+    <p>The two integrals agree, so arc length is a genuine property of the curve, not of the schedule used to traverse it. This is precisely why reparametrizing by $s$ in the previous example was legitimate: it relabels points without changing distances. If $t'(\tau)<0$ the curve is traced backward and the limits swap, but the unsigned length is unchanged.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The length of $\mathbf{r}(t)=\langle 3\cos t,\ 3\sin t,\ 4t\rangle$ for $0\le t\le \pi$ is</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$5\pi$</div><div class="quiz-opt" data-idx="1">$7\pi$</div><div class="quiz-opt" data-idx="2">$3\pi$</div><div class="quiz-opt" data-idx="3">$25\pi$</div></div><div class="quiz-explain correct-exp">Correct. $\mathbf{r}'=\langle -3\sin t,\ 3\cos t,\ 4\rangle$, so $|\mathbf{r}'|=\sqrt{9+16}=5$ and $L=\int_0^{\pi}5\,dt=5\pi$.</div><div class="quiz-explain wrong-exp">Compute $|\mathbf{r}'(t)|=\sqrt{9\sin^2 t+9\cos^2 t+16}=\sqrt{25}=5$, then integrate the constant over $[0,\pi]$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1074,6 +1166,31 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\kappa=\frac{a^2}{a^3}=\frac{1}{a}.$$
     <p>A circle has constant curvature equal to the reciprocal of its radius, exactly as intuition demands.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: curvature of a parabola at its vertex</summary><div class="detail-body"><div class="worked-solution">
+    <p>For the plane curve $y=x^2$, use $\kappa=\dfrac{|f''(x)|}{(1+[f'(x)]^2)^{3/2}}$ with $f'(x)=2x$ and $f''(x)=2$:</p>
+    $$\kappa(x)=\frac{2}{(1+4x^2)^{3/2}}.$$
+    <p>At the vertex $x=0$ this gives $\kappa(0)=2$, the maximum curvature, so the radius of curvature there is $\rho=\tfrac12$. As $|x|\to\infty$, $\kappa\to 0$: the parabola flattens out far from the vertex. The osculating circle at the vertex has radius $\tfrac12$ and sits inside the parabola, hugging it more tightly than any other circle.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: curvature of the twisted cubic</summary><div class="detail-body"><div class="worked-solution">
+    <p>Find the curvature of $\mathbf{r}(t)=\langle t,\ t^2,\ t^3\rangle$ at $t=0$ and at general $t$. Compute the derivatives:</p>
+    $$\mathbf{r}'(t)=\langle 1,\ 2t,\ 3t^2\rangle,\qquad \mathbf{r}''(t)=\langle 0,\ 2,\ 6t\rangle.$$
+    $$\mathbf{r}'\times\mathbf{r}''=\langle (2t)(6t)-(3t^2)(2),\ (3t^2)(0)-(1)(6t),\ (1)(2)-(2t)(0)\rangle=\langle 6t^2,\ -6t,\ 2\rangle.$$
+    <p>Then $|\mathbf{r}'\times\mathbf{r}''|=\sqrt{36t^4+36t^2+4}=2\sqrt{9t^4+9t^2+1}$ and $|\mathbf{r}'|=\sqrt{1+4t^2+9t^4}$, so</p>
+    $$\kappa(t)=\frac{2\sqrt{9t^4+9t^2+1}}{(1+4t^2+9t^4)^{3/2}}.$$
+    <p>At $t=0$ everything but the constants drops: $\kappa(0)=\dfrac{2\sqrt{1}}{1^{3/2}}=2$. The twisted cubic is the standard example of a genuinely non-planar curve, and the cross-product formula handles it without ever forming $\mathbf{T}$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.4: the osculating circle of $y=x^2$ at the vertex</summary><div class="detail-body"><div class="worked-solution">
+    <p>The osculating circle at a point shares the curve's position, tangent, and curvature there; its radius is $\rho=1/\kappa$ and its center sits a distance $\rho$ from the point along $\mathbf{N}$. From Worked Example 4.2, $\kappa(0)=2$, so $\rho=\tfrac12$. At the vertex $(0,0)$ the parabola opens upward, so $\mathbf{N}$ points in the $+y$ direction and the center is at $\big(0,\ \tfrac12\big)$. The osculating circle is</p>
+    $$x^2+\Big(y-\tfrac12\Big)^2=\tfrac14.$$
+    <p>This circle matches $y=x^2$ to second order at the origin: same point, same horizontal tangent, same bending. It is the circle a car would trace if, at the vertex, the steering wheel froze at its current angle. Approximating a curve locally by its osculating circle is the geometric meaning of curvature.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The denominator of the curvature formula is $|\mathbf{r}'|^3$, the speed cubed, not $|\mathbf{r}''|$ or $|\mathbf{r}'|$. Forgetting the cube is the most common slip and it makes curvature change under reparametrization, which is impossible since curvature is geometric. A quick sanity check: $\kappa$ must carry units of $1/\text{length}$. In $\kappa=|\mathbf{r}'\times\mathbf{r}''|/|\mathbf{r}'|^3$ the numerator scales like (length/time)(length/time$^2$) and the denominator like (length/time)$^3$, leaving $1/\text{length}$. The plane-curve formula likewise has the $3/2$ power that produces exactly this cancellation; dropping it gives a quantity that wrongly depends on how the axes are scaled.
+  </div>
 
   <details><summary>Going deeper: deriving the cross-product formula</summary><div class="detail-body"><div class="worked-solution">
     <p>Write $\mathbf{r}'=|\mathbf{r}'|\,\mathbf{T}=\dfrac{ds}{dt}\,\mathbf{T}$. Differentiating with the product rule,</p>
@@ -1110,6 +1227,22 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>The normal always points horizontally toward the central axis of the helix.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: the binormal and the osculating plane of a helix</summary><div class="detail-body"><div class="worked-solution">
+    <p>Continue with the helix, where $\mathbf{T}(t)=\tfrac{1}{\sqrt2}\langle -\sin t,\cos t,1\rangle$ and $\mathbf{N}(t)=\langle -\cos t,-\sin t,0\rangle$. The binormal is</p>
+    $$\mathbf{B}=\mathbf{T}\times\mathbf{N}=\frac{1}{\sqrt2}\big\langle (\cos t)(0)-(1)(-\sin t),\ (1)(-\cos t)-(-\sin t)(0),\ (-\sin t)(-\sin t)-(\cos t)(-\cos t)\big\rangle.$$
+    $$\mathbf{B}(t)=\frac{1}{\sqrt2}\langle \sin t,\ -\cos t,\ 1\rangle.$$
+    <p>Check that $|\mathbf{B}|=\tfrac{1}{\sqrt2}\sqrt{\sin^2 t+\cos^2 t+1}=1$, as a binormal must be. At $t=0$ the point is $\langle 1,0,0\rangle$ and $\mathbf{B}(0)=\tfrac{1}{\sqrt2}\langle 0,-1,1\rangle$. The osculating plane there passes through $\langle 1,0,0\rangle$ with normal $\mathbf{B}(0)$, giving $0(x-1)-1(y-0)+1(z-0)=0$, that is $z=y$. The TNB frame is right-handed: $\mathbf{T}\times\mathbf{N}=\mathbf{B}$, $\mathbf{N}\times\mathbf{B}=\mathbf{T}$, $\mathbf{B}\times\mathbf{T}=\mathbf{N}$.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The principal normal $\mathbf{N}=\mathbf{T}'/|\mathbf{T}'|$ is built from the derivative of the <em>unit</em> tangent, not from $\mathbf{r}''$. It is tempting to set $\mathbf{N}$ parallel to $\mathbf{r}''$, but $\mathbf{r}''$ generally has a tangential component $a_T\mathbf{T}$ as well, so $\mathbf{r}''$ is not perpendicular to the curve unless the speed happens to be constant. Always normalize $\mathbf{r}'$ first to get $\mathbf{T}$, then differentiate $\mathbf{T}$. Equivalently, $\mathbf{N}$ is the direction of $\mathbf{r}''$ after subtracting off its projection onto $\mathbf{T}$.
+  </div>
+
+  <details><summary>Going deeper: $\mathbf{N}$ always points toward the concave side</summary><div class="detail-body"><div class="worked-solution">
+    <p><strong>Claim.</strong> The principal normal $\mathbf{N}$ points to the side the curve is turning toward, the concave (inner) side of the bend.</p>
+    <p><strong>Argument.</strong> Parametrize by arc length so $\mathbf{T}=d\mathbf{r}/ds$ is the unit tangent. By the first Frenet equation $d\mathbf{T}/ds=\kappa\mathbf{N}$ with $\kappa\ge 0$, so $\mathbf{N}$ has the same direction as $d\mathbf{T}/ds$, the rate at which the tangent direction rotates. Since $\mathbf{T}$ is a unit vector, its tip moves on the unit sphere, and the velocity of that tip points in the direction the tangent is swinging. That is exactly the direction into the turn. Concretely, on a circle traversed counterclockwise the tangent always rotates toward the center, so $\mathbf{N}$ points radially inward, matching Worked Example 5.1 where $\mathbf{N}=\langle -\cos t,-\sin t,0\rangle$ aims at the axis. Because $\kappa$ is defined to be nonnegative, $\mathbf{N}$ is unambiguous wherever $\kappa>0$; at an inflection point ($\kappa=0$) the normal is momentarily undefined, which is the curve's way of telling you it is, for that instant, going straight.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For any smooth curve, the principal unit normal $\mathbf{N}$ satisfies</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\mathbf{N}$ is parallel to $\mathbf{T}$</div><div class="quiz-opt" data-idx="1">$\mathbf{N}$ is a unit vector orthogonal to $\mathbf{T}$</div><div class="quiz-opt" data-idx="2">$\mathbf{N}=\mathbf{r}''$ always</div><div class="quiz-opt" data-idx="3">$\mathbf{N}$ points in the direction of motion</div></div><div class="quiz-explain correct-exp">Correct. $\mathbf{N}=\mathbf{T}'/|\mathbf{T}'|$ is a unit vector, and since $|\mathbf{T}|=1$ forces $\mathbf{T}'\perp\mathbf{T}$, $\mathbf{N}$ is orthogonal to the tangent.</div><div class="quiz-explain wrong-exp">$\mathbf{N}$ is the unit vector in the direction of $\mathbf{T}'$. Constant length of $\mathbf{T}$ makes $\mathbf{T}'$, hence $\mathbf{N}$, perpendicular to $\mathbf{T}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1144,6 +1277,37 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>This is projectile motion: constant horizontal velocity and a parabolic drop, the vector-calculus version of the familiar kinematic equations.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 6.3: uniform circular motion and centripetal acceleration</summary><div class="detail-body"><div class="worked-solution">
+    <p>A particle moves on a circle of radius $R$ at constant angular rate $\omega$: $\mathbf{r}(t)=\langle R\cos\omega t,\ R\sin\omega t,\ 0\rangle$. Then</p>
+    $$\mathbf{v}=\langle -R\omega\sin\omega t,\ R\omega\cos\omega t,\ 0\rangle,\qquad |\mathbf{v}|=R\omega\ (\text{constant}),$$
+    $$\mathbf{a}=\langle -R\omega^2\cos\omega t,\ -R\omega^2\sin\omega t,\ 0\rangle=-\omega^2\,\mathbf{r}.$$
+    <p>The acceleration points straight back at the center and has magnitude $|\mathbf{a}|=R\omega^2$. Since the speed is constant, $a_T=0$, so all of this acceleration is normal: $a_N=\kappa|\mathbf{v}|^2=\tfrac{1}{R}(R\omega)^2=R\omega^2$, matching $|\mathbf{a}|$ exactly. This is the centripetal acceleration of introductory physics, recovered as the pure normal component.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.4: tangential and normal components on a space curve</summary><div class="detail-body"><div class="worked-solution">
+    <p>For $\mathbf{r}(t)=\langle t,\ t^2,\ \tfrac{2}{3}t^3\rangle$, find $a_T$ and $a_N$ at $t=1$. Compute</p>
+    $$\mathbf{v}=\langle 1,\ 2t,\ 2t^2\rangle,\qquad \mathbf{a}=\langle 0,\ 2,\ 4t\rangle.$$
+    <p>At $t=1$: $\mathbf{v}=\langle 1,2,2\rangle$, $|\mathbf{v}|=3$, $\mathbf{a}=\langle 0,2,4\rangle$. Then</p>
+    $$a_T=\frac{\mathbf{v}\cdot\mathbf{a}}{|\mathbf{v}|}=\frac{0+4+8}{3}=4,$$
+    $$\mathbf{v}\times\mathbf{a}=\langle (2)(4)-(2)(2),\ (2)(0)-(1)(4),\ (1)(2)-(2)(0)\rangle=\langle 4,\ -4,\ 2\rangle,$$
+    $$a_N=\frac{|\mathbf{v}\times\mathbf{a}|}{|\mathbf{v}|}=\frac{\sqrt{16+16+4}}{3}=\frac{6}{3}=2.$$
+    <p>Check: $a_T^2+a_N^2=16+4=20=|\mathbf{a}|^2=0+4+16$. The Pythagorean check ($a_T^2+a_N^2=|\mathbf{a}|^2$) is the fastest way to catch an arithmetic slip, since $\mathbf{T}\perp\mathbf{N}$.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The tangential component is $a_T=\dfrac{d}{dt}|\mathbf{v}|$, the rate of change of <em>speed</em>, not $|\mathbf{a}|$ or $|\mathbf{v}'|$. Speeding up gives $a_T>0$, slowing down gives $a_T<0$, and turning at constant speed gives $a_T=0$ even though $|\mathbf{a}|>0$. Confusing $\tfrac{d}{dt}|\mathbf{v}|$ with $|\tfrac{d}{dt}\mathbf{v}|=|\mathbf{a}|$ is the classic trap: the derivative of the magnitude is almost never the magnitude of the derivative. Use $a_T=\mathbf{v}\cdot\mathbf{a}/|\mathbf{v}|$, which extracts only the component of $\mathbf{a}$ along the direction of motion.
+  </div>
+
+  <details><summary>Going deeper: deriving $\mathbf{a}=a_T\mathbf{T}+a_N\mathbf{N}$ with $a_N=\kappa|\mathbf{v}|^2$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Start from $\mathbf{v}=|\mathbf{v}|\,\mathbf{T}=\dfrac{ds}{dt}\,\mathbf{T}$. Differentiate with the product rule:</p>
+    $$\mathbf{a}=\frac{d\mathbf{v}}{dt}=\frac{d^2s}{dt^2}\,\mathbf{T}+\frac{ds}{dt}\,\frac{d\mathbf{T}}{dt}.$$
+    <p>Now convert $d\mathbf{T}/dt$ to arc length using the chain rule and the first Frenet equation $d\mathbf{T}/ds=\kappa\mathbf{N}$:</p>
+    $$\frac{d\mathbf{T}}{dt}=\frac{d\mathbf{T}}{ds}\frac{ds}{dt}=\kappa\frac{ds}{dt}\,\mathbf{N}.$$
+    <p>Substitute back and write $|\mathbf{v}|=ds/dt$:</p>
+    $$\mathbf{a}=\underbrace{\frac{d^2s}{dt^2}}_{a_T}\,\mathbf{T}+\underbrace{\kappa\Big(\frac{ds}{dt}\Big)^2}_{a_N}\,\mathbf{N}=\frac{d|\mathbf{v}|}{dt}\,\mathbf{T}+\kappa|\mathbf{v}|^2\,\mathbf{N}.$$
+    <p>This proves three facts at once: acceleration has no binormal component (it lives in the osculating plane), the tangential part is the rate of change of speed, and the normal part is $\kappa|\mathbf{v}|^2$. The last identity also gives the practical formula $a_N=|\mathbf{v}\times\mathbf{a}|/|\mathbf{v}|$, since crossing $\mathbf{v}=|\mathbf{v}|\mathbf{T}$ with $\mathbf{a}$ kills the tangential term and leaves $|\mathbf{v}|\,a_N\,(\mathbf{T}\times\mathbf{N})$, whose magnitude is $|\mathbf{v}|\,a_N$.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">If a particle moves so that its speed $|\mathbf{v}|$ is constant, then</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">its acceleration is zero</div><div class="quiz-opt" data-idx="1">its acceleration is parallel to $\mathbf{v}$</div><div class="quiz-opt" data-idx="2">$a_T=0$, so acceleration is purely normal</div><div class="quiz-opt" data-idx="3">its curvature is zero</div></div><div class="quiz-explain correct-exp">Correct. Constant speed means $a_T=\tfrac{d}{dt}|\mathbf{v}|=0$, so $\mathbf{a}=a_N\mathbf{N}$ is entirely normal. The particle can still turn, so acceleration need not vanish.</div><div class="quiz-explain wrong-exp">$a_T=\tfrac{d}{dt}|\mathbf{v}|$. Constant speed kills only the tangential part; the normal part $a_N=\kappa|\mathbf{v}|^2$ can remain nonzero.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1173,6 +1337,29 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Suppose acceleration is always directed along the position vector, $\mathbf{a}=c(t)\,\mathbf{r}$ for some scalar function $c$ (a central force). Consider the vector $\mathbf{r}\times\mathbf{v}$ and differentiate:</p>
     $$\frac{d}{dt}(\mathbf{r}\times\mathbf{v})=\mathbf{v}\times\mathbf{v}+\mathbf{r}\times\mathbf{a}=\mathbf{0}+\mathbf{r}\times(c\,\mathbf{r})=\mathbf{0}.$$
     <p>So $\mathbf{r}\times\mathbf{v}=\mathbf{L}$ is a constant vector. The motion is therefore planar (it stays in the plane through the origin perpendicular to $\mathbf{L}$), and the magnitude $|\mathbf{r}\times\mathbf{v}|$ being constant is exactly Kepler's statement that equal areas are swept in equal times.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.2: confirming a curve is planar via torsion</summary><div class="detail-body"><div class="worked-solution">
+    <p>Show that $\mathbf{r}(t)=\langle t,\ t^2,\ 3t+2t^2\rangle$ lies in a plane. The fast way is the torsion test. Compute</p>
+    $$\mathbf{r}'=\langle 1,\ 2t,\ 3+4t\rangle,\quad \mathbf{r}''=\langle 0,\ 2,\ 4\rangle,\quad \mathbf{r}'''=\langle 0,\ 0,\ 0\rangle.$$
+    <p>Since $\mathbf{r}'''=\mathbf{0}$, the triple product $(\mathbf{r}'\times\mathbf{r}'')\cdot\mathbf{r}'''=0$, so $\tau\equiv 0$ and the curve is planar. To name the plane directly, notice $z=3t+2t^2=3x+2y$ because $x=t$ and $y=t^2$. So every point satisfies $3x+2y-z=0$, a single plane through the origin. The torsion test agreed with the algebra, and it would have worked even if the plane were not obvious by inspection.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: curvature and torsion of a scaled helix</summary><div class="detail-body"><div class="worked-solution">
+    <p>For the general helix $\mathbf{r}(t)=\langle a\cos t,\ a\sin t,\ bt\rangle$ with $a>0$, the standard results are</p>
+    $$\kappa=\frac{a}{a^2+b^2},\qquad \tau=\frac{b}{a^2+b^2}.$$
+    <p>Sketch of the curvature: $\mathbf{r}'=\langle -a\sin t,\ a\cos t,\ b\rangle$ with $|\mathbf{r}'|=\sqrt{a^2+b^2}$, and $\mathbf{r}''=\langle -a\cos t,-a\sin t,0\rangle$, giving $|\mathbf{r}'\times\mathbf{r}''|=a\sqrt{a^2+b^2}$, so $\kappa=a\sqrt{a^2+b^2}/(a^2+b^2)^{3/2}=a/(a^2+b^2)$. Setting $a=b=1$ recovers $\kappa=\tau=\tfrac12$ from Worked Example 7.1. Two limits are instructive: as $b\to 0$ the helix collapses to a circle of radius $a$ and $\kappa\to 1/a$, $\tau\to 0$ (planar); as $b\to\infty$ the helix stretches into a near-straight vertical line and both $\kappa,\tau\to 0$. Curvature and torsion together, both constant here, characterize the helix as the only curve with constant nonzero $\kappa$ and constant nonzero $\tau$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> The torsion formula has $|\mathbf{r}'\times\mathbf{r}''|^2$ in the denominator, the magnitude <em>squared</em>, while the curvature formula uses $|\mathbf{r}'|^3$. Mixing the two denominators is a frequent slip. Also, torsion is a signed quantity: a positive $\tau$ means the curve twists like a right-handed screw out of its osculating plane, a negative $\tau$ a left-handed one. Do not insert absolute-value bars around the triple product in the numerator. The sign of $\tau$ carries real geometric information that $|\kappa|\ge 0$ does not.
+  </div>
+
+  <details><summary>Going deeper: why a vanishing torsion forces planarity</summary><div class="detail-body"><div class="worked-solution">
+    <p><strong>Claim.</strong> If $\tau\equiv 0$ on a curve with $\kappa>0$, the curve lies in a fixed plane.</p>
+    <p><strong>Proof.</strong> Work in arc length. The third Frenet equation reads $d\mathbf{B}/ds=-\tau\mathbf{N}$. If $\tau\equiv 0$ then $d\mathbf{B}/ds=\mathbf{0}$, so the binormal $\mathbf{B}$ is a constant vector $\mathbf{B}_0$. Now examine how the position projects onto $\mathbf{B}_0$. Consider $g(s)=(\mathbf{r}(s)-\mathbf{r}(0))\cdot\mathbf{B}_0$ and differentiate:</p>
+    $$g'(s)=\mathbf{r}'(s)\cdot\mathbf{B}_0=\mathbf{T}(s)\cdot\mathbf{B}_0=0,$$
+    <p>because $\mathbf{T}$ is always orthogonal to $\mathbf{B}$. Since $g'(s)\equiv 0$ and $g(0)=0$, we get $g(s)\equiv 0$, that is $(\mathbf{r}(s)-\mathbf{r}(0))\cdot\mathbf{B}_0=0$ for all $s$. This is the equation of the plane through $\mathbf{r}(0)$ with normal $\mathbf{B}_0$, and the entire curve satisfies it. Hence the curve is planar, and the converse (a planar curve has $\tau\equiv 0$) follows by reversing the argument. This completes the if-and-only-if behind the section quiz.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">A space curve lies entirely in a single plane if and only if</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">its torsion $\tau$ is identically zero</div><div class="quiz-opt" data-idx="1">its curvature $\kappa$ is identically zero</div><div class="quiz-opt" data-idx="2">its speed is constant</div><div class="quiz-opt" data-idx="3">$\mathbf{T}$ is constant</div></div><div class="quiz-explain correct-exp">Correct. Torsion measures twisting out of the osculating plane; $\tau\equiv 0$ means the binormal is constant, so the curve never leaves one fixed plane.</div><div class="quiz-explain wrong-exp">Curvature zero would make the curve a straight line. Planarity is governed by torsion: $\tau\equiv 0$ keeps the osculating plane fixed.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

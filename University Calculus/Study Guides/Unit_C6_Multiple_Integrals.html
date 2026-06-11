@@ -960,10 +960,32 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>So the integral equals $20$. Reversing the order gives the same value, a useful check.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.2: a separable integrand factors</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\iint_{R} x\,e^{y}\,dA$ over $R=[0,3]\times[0,1]$. The integrand separates as a product $g(x)h(y)=x\cdot e^{y}$, and the region is a rectangle, so the double integral factors into a product of one-variable integrals.</p>
+  $$\iint_{R} x\,e^{y}\,dA=\left(\int_{0}^{3} x\,dx\right)\!\left(\int_{0}^{1} e^{y}\,dy\right)=\Big[\tfrac{x^{2}}{2}\Big]_{0}^{3}\cdot\Big[e^{y}\Big]_{0}^{1}=\frac{9}{2}\,(e-1).$$
+  <p>The factoring shortcut works only when both the integrand separates and the limits are constant. The next section shows it fails the moment the region stops being a rectangle.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: average value and a midpoint estimate</summary><div class="detail-body"><div class="worked-solution">
+  <p>The average value of $f$ over $R$ is $\displaystyle f_{\text{avg}}=\frac{1}{\operatorname{area}(R)}\iint_{R} f\,dA$. Take $f(x,y)=x^{2}+y$ on $R=[0,2]\times[0,2]$, area $4$. First the exact integral:</p>
+  $$\int_{0}^{2}\!\!\int_{0}^{2}(x^{2}+y)\,dy\,dx=\int_{0}^{2}\Big[x^{2}y+\tfrac{y^{2}}{2}\Big]_{0}^{2}dx=\int_{0}^{2}(2x^{2}+2)\,dx=\Big[\tfrac{2x^{3}}{3}+2x\Big]_{0}^{2}=\frac{16}{3}+4=\frac{28}{3}.$$
+  $$f_{\text{avg}}=\frac{1}{4}\cdot\frac{28}{3}=\frac{7}{3}\approx 2.33.$$
+  <p>Compare a midpoint Riemann sum with the four subrectangles cut by $x=1$ and $y=1$, each of area $1$, sampling midpoints $(0.5,0.5),(1.5,0.5),(0.5,1.5),(1.5,1.5)$. The values of $x^{2}+y$ are $0.75,\,2.75,\,1.75,\,3.75$, summing to $9$, so the estimate is $9$ for the integral versus the exact $28/3\approx 9.33$. A coarse grid already lands within $4\%$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.4: signed volume when $f$ changes sign</summary><div class="detail-body"><div class="worked-solution">
+  <p>The double integral measures <em>signed</em> volume: where $f<0$ the contribution is negative. Evaluate $\displaystyle\iint_{R}(x-y)\,dA$ over $R=[0,1]\times[0,1]$, where the integrand is positive below the diagonal $y=x$ and negative above it.</p>
+  $$\int_{0}^{1}\!\!\int_{0}^{1}(x-y)\,dy\,dx=\int_{0}^{1}\Big[xy-\tfrac{y^{2}}{2}\Big]_{0}^{1}dx=\int_{0}^{1}\Big(x-\tfrac{1}{2}\Big)dx=\Big[\tfrac{x^{2}}{2}-\tfrac{x}{2}\Big]_{0}^{1}=0.$$
+  <p>The integral is exactly $0$: the positive volume below the diagonal cancels the equal negative volume above it, a consequence of the symmetry $x\leftrightarrow y$ over the square. To get true geometric volume between the surface and the plane you would integrate $|x-y|$ instead, which would give a positive number.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Writing $\iint_{R} f\,dA=\big(\int_a^b\!\int_c^d f\,dy\big)\,dx$ as if the outer $dx$ were detached, or factoring $\iint_R f\,dA=(\int f\,dx)(\int f\,dy)$ when $f$ does not separate. The product rule for integrals applies only to a genuinely separable integrand $f(x,y)=g(x)h(y)$ over a rectangle. For instance $\iint_R (x+y)\,dA$ does not factor, because $x+y$ is a sum, not a product. A related trap is to assume the double integral is always a positive volume; it is a signed quantity, and only $\iint_R |f|\,dA$ measures true geometric volume.</div>
+
   <details><summary>Going deeper: why Fubini's theorem holds</summary><div class="detail-body"><div class="worked-solution">
   <p>Fix a partition. For each column index $i$, group the Riemann sum by the inner variable. For a fixed $x_{i}^{*}$ the partial sum $\sum_{j} f(x_{i}^{*},y_{j}^{*})\,\Delta y$ is a Riemann sum for the single integral $A(x_{i}^{*})=\int_{c}^{d} f(x_{i}^{*},y)\,dy$. Summing the outer index,</p>
   $$\sum_{i}\Big(\sum_{j} f(x_{i}^{*},y_{j}^{*})\,\Delta y\Big)\Delta x\;\longrightarrow\;\int_{a}^{b} A(x)\,dx=\int_{a}^{b}\!\!\int_{c}^{d} f\,dy\,dx.$$
   <p>Continuity on the compact rectangle gives uniform continuity, which makes the cross-section function $A(x)$ continuous and forces both limits to the same value. The same argument with the grouping reversed yields the other order.</p>
+  <p><strong>Where continuity matters.</strong> The continuity hypothesis is not decorative. Fubini's theorem can fail for functions that are merely bounded but badly discontinuous, or for non-integrable functions where the two iterated integrals exist yet disagree. A classical counterexample on the unit square uses $f(x,y)=\dfrac{x^{2}-y^{2}}{(x^{2}+y^{2})^{2}}$ near the origin: one order gives $\int_0^1\!\int_0^1 f\,dy\,dx=\tfrac{\pi}{4}$ while the reversed order gives $-\tfrac{\pi}{4}$. The function is not absolutely integrable, so neither iterated value equals a genuine double integral. For the continuous functions of this unit the hypotheses always hold and the two orders agree, which is exactly why reversing the order is a legitimate computational tool.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which expression correctly applies Fubini's theorem to $\iint_{R} f\,dA$ on $R=[0,1]\times[2,5]$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int_{0}^{1}\!\int_{0}^{1} f\,dy\,dx$</div><div class="quiz-opt" data-idx="1">$\int_{0}^{1}\!\int_{2}^{5} f\,dy\,dx$</div><div class="quiz-opt" data-idx="2">$\int_{2}^{5}\!\int_{2}^{5} f\,dx\,dy$</div><div class="quiz-opt" data-idx="3">$\int_{2}^{5}\!\int_{0}^{1} f\,dy\,dx$</div></div><div class="quiz-explain correct-exp">Correct. The inner limits match the inner variable. With $dy$ inner, the inner bounds are the $y$-range $[2,5]$ and the outer bounds are the $x$-range $[0,1]$.</div><div class="quiz-explain wrong-exp">The inner differential dictates the inner limits. Here the inner integral is in $y$, so it must run from $2$ to $5$, and the outer integral in $x$ runs from $0$ to $1$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -993,6 +1015,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\int_{0}^{1}\!\!\int_{0}^{y} e^{y^{2}}\,dx\,dy=\int_{0}^{1} y\,e^{y^{2}}\,dy=\frac{1}{2}e^{y^{2}}\Big|_{0}^{1}=\frac{1}{2}(e-1).$$
   </div></div></details>
 
+  <details><summary>Worked Example 2.3: a region that is both Type I and Type II</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute $\displaystyle\iint_{D}(x+y)\,dA$ where $D$ is bounded by $y=x$ and $y=x^{2}$ between $x=0$ and $x=1$. On $[0,1]$ the line $y=x$ lies above the parabola $y=x^{2}$, so as a Type I region $0\le x\le 1$ and $x^{2}\le y\le x$.</p>
+  $$\int_{x^{2}}^{x}(x+y)\,dy=\Big[xy+\tfrac{y^{2}}{2}\Big]_{x^{2}}^{x}=\Big(x^{2}+\tfrac{x^{2}}{2}\Big)-\Big(x^{3}+\tfrac{x^{4}}{2}\Big)=\tfrac{3}{2}x^{2}-x^{3}-\tfrac{1}{2}x^{4}.$$
+  $$\int_{0}^{1}\Big(\tfrac{3}{2}x^{2}-x^{3}-\tfrac{1}{2}x^{4}\Big)dx=\Big[\tfrac{1}{2}x^{3}-\tfrac{1}{4}x^{4}-\tfrac{1}{10}x^{5}\Big]_{0}^{1}=\frac{1}{2}-\frac{1}{4}-\frac{1}{10}=\frac{3}{20}.$$
+  <p>As a Type II check, the inverse curves are $x=y$ (lower bound on $x$, since $y\le x$ means $x\ge y$) and $x=\sqrt{y}$ (upper bound, since $y=x^2$ gives $x=\sqrt y\ge y$ on $[0,1]$), so $0\le y\le 1$, $y\le x\le\sqrt{y}$. Carrying out that order returns the same $\tfrac{3}{20}$, confirming the limit translation.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.4: a region needing two pieces in one order</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute the area of the region $D$ bounded by $y=x$, $y=2$, and $x=0$ (a triangle with vertices $(0,0)$, $(2,2)$, $(0,2)$), to show how the order choice affects the count of integrals. As Type II it is a single clean integral: for each height $0\le y\le 2$, $x$ runs from the left edge $x=0$ to the line $x=y$.</p>
+  $$A=\int_{0}^{2}\!\!\int_{0}^{y} dx\,dy=\int_{0}^{2} y\,dy=2.$$
+  <p>As Type I the same region is also a single integral, $0\le x\le 2$, $x\le y\le 2$, giving $\int_0^2(2-x)\,dx=4-2=2$, the same area. The lesson is that for this convex triangle either order is one piece, but had the upper boundary been the broken line made of $y=x$ then $y=2$, the Type I description would have stayed simple while a horizontal-slice description of a nonconvex variant could split. Always pick the order with fewer pieces.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Reversing the order of integration by mechanically swapping the limits, for example turning $\int_0^1\!\int_x^1 e^{y^2}\,dy\,dx$ into $\int_x^1\!\int_0^1 e^{y^2}\,dx\,dy$. After a swap the new outer limits must be constants and the new inner limits must be functions of the new outer variable. Always re-derive the limits from a sketch of the region, never from the old symbols. A reliable check: the area $\iint_D 1\,dA$ must come out the same in either order.</div>
+
+  <details><summary>Going deeper: translating limits when you reverse the order</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose a Type I region is $a\le x\le b$, $g_1(x)\le y\le g_2(x)$, and we want the Type II description. The procedure is mechanical once the region is drawn. First find the full $y$-range by reading off the minimum and maximum heights, giving the new outer limits $c\le y\le d$. Then, for a horizontal line at fixed height $y$, the left and right boundaries are obtained by inverting the curves $y=g_1(x)$ and $y=g_2(x)$ to solve for $x$; those inverse branches become $h_1(y)\le x\le h_2(y)$.</p>
+  <p>The subtlety is that a single Type I region can split into several Type II pieces if a horizontal line crosses the boundary more than twice, and vice versa. For example, the disk $x^2+y^2\le 1$ is $-1\le x\le 1$, $-\sqrt{1-x^2}\le y\le \sqrt{1-x^2}$ as Type I and $-1\le y\le 1$, $-\sqrt{1-y^2}\le x\le \sqrt{1-y^2}$ as Type II, both single pieces because the boundary is convex. A nonconvex region such as an annulus or an L-shape generally requires summing two or three iterated integrals in at least one of the orders. The safe habit is: sketch first, decide the order that gives the fewest pieces and the easiest inner antiderivative, and only then write limits.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For the region bounded by $y=x^{2}$ and $y=4$, written as a Type I region, the inner $y$-limits are:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">from $0$ to $4$</div><div class="quiz-opt" data-idx="1">from $4$ to $x^{2}$</div><div class="quiz-opt" data-idx="2">from $x^{2}$ to $4$</div><div class="quiz-opt" data-idx="3">from $-2$ to $2$</div></div><div class="quiz-explain correct-exp">Correct. Vertical slices run upward from the lower curve $y=x^{2}$ to the upper line $y=4$, with $x$ ranging over $[-2,2]$.</div><div class="quiz-explain wrong-exp">In a Type I region the inner $y$-limits are functions of $x$: the lower boundary $y=x^{2}$ up to the upper boundary $y=4$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1015,10 +1057,36 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$=2\pi\cdot\frac{1}{2}\big(1-e^{-R^{2}}\big)=\pi\big(1-e^{-R^{2}}\big).$$
   </div></div></details>
 
+  <details><summary>Worked Example 3.2: volume under a paraboloid over a disk</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the volume of the solid below $z=9-x^{2}-y^{2}$ and above the disk $x^{2}+y^{2}\le 9$ in the $xy$-plane. The surface meets the plane $z=0$ exactly on the circle $r=3$, so the volume is $\iint_D (9-x^2-y^2)\,dA$ with $D$ the disk of radius $3$. In polar, $9-x^2-y^2=9-r^2$, and $0\le r\le 3$, $0\le\theta\le 2\pi$.</p>
+  $$V=\int_{0}^{2\pi}\!\!\int_{0}^{3}(9-r^{2})\,r\,dr\,d\theta=\int_{0}^{2\pi}d\theta\int_{0}^{3}(9r-r^{3})\,dr.$$
+  $$\int_{0}^{3}(9r-r^{3})\,dr=\Big[\tfrac{9r^{2}}{2}-\tfrac{r^{4}}{4}\Big]_{0}^{3}=\frac{81}{2}-\frac{81}{4}=\frac{81}{4}.$$
+  $$V=2\pi\cdot\frac{81}{4}=\frac{81\pi}{2}.$$
+  <p>Notice the factor $r$ turned the integrand into a polynomial in $r$ that integrates in one line. The same integral in Cartesian form would demand a trigonometric substitution for the disk boundary.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: the Gaussian integral $\int_{-\infty}^{\infty} e^{-x^2}\,dx$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $I=\int_{-\infty}^{\infty} e^{-x^{2}}\,dx$. The antiderivative is non-elementary, but the square is a double integral that polar coordinates evaluate. Because the integrand separates over the whole plane,</p>
+  $$I^{2}=\left(\int_{-\infty}^{\infty} e^{-x^{2}}dx\right)\!\left(\int_{-\infty}^{\infty} e^{-y^{2}}dy\right)=\iint_{\mathbb{R}^{2}} e^{-(x^{2}+y^{2})}\,dA.$$
+  <p>Switching to polar over the entire plane, $0\le r<\infty$, $0\le\theta\le 2\pi$, and using the disk result of Example 3.1 in the limit $R\to\infty$,</p>
+  $$I^{2}=\int_{0}^{2\pi}\!\!\int_{0}^{\infty} e^{-r^{2}}\,r\,dr\,d\theta=2\pi\cdot\frac{1}{2}=\pi.$$
+  <p>Hence $I=\sqrt{\pi}$. This is the cornerstone normalizing constant of the normal distribution, and the polar trick is the standard way to obtain it.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.4: integrate over an annulus with $\theta$-dependent integrand</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\iint_{D}\frac{y}{x^{2}+y^{2}}\,dA$ over the upper half of the annulus $1\le x^{2}+y^{2}\le 4$, $y\ge 0$. In polar, $y=r\sin\theta$ and $x^2+y^2=r^2$, so the integrand becomes $\dfrac{r\sin\theta}{r^{2}}=\dfrac{\sin\theta}{r}$, and the region is $1\le r\le 2$, $0\le\theta\le\pi$.</p>
+  $$\iint_{D}\frac{y}{x^{2}+y^{2}}\,dA=\int_{0}^{\pi}\!\!\int_{1}^{2}\frac{\sin\theta}{r}\cdot r\,dr\,d\theta=\int_{0}^{\pi}\sin\theta\,d\theta\int_{1}^{2} dr.$$
+  <p>The Jacobian $r$ neatly cancels the $1/r$ from the integrand, leaving $\big[-\cos\theta\big]_{0}^{\pi}\cdot(2-1)=2\cdot 1=2$. The cancellation is a recurring benefit: integrands built from $x^2+y^2$ and the polar factor $r$ frequently collapse to something elementary.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Dropping the Jacobian factor $r$ and writing $\iint_D f\,dA=\int\!\int f(r\cos\theta,r\sin\theta)\,dr\,d\theta$. Without the $r$ the answer is dimensionally wrong and numerically off; for instance it would give the area of the unit disk as $\int_0^{2\pi}\!\int_0^1 dr\,d\theta=2\pi$ instead of the correct $\int_0^{2\pi}\!\int_0^1 r\,dr\,d\theta=\pi$. The $r$ is the area of the polar wedge and is never optional.</div>
+
   <details><summary>Going deeper: the area element in polar coordinates</summary><div class="detail-body"><div class="worked-solution">
   <p>A polar grid cell spans angles $[\theta,\theta+d\theta]$ and radii $[r,r+dr]$. Its area is the difference of two circular sectors,</p>
   $$\Delta A=\frac{1}{2}(r+dr)^{2}\,d\theta-\frac{1}{2}r^{2}\,d\theta=\frac{1}{2}\big(2r\,dr+dr^{2}\big)d\theta.$$
-  <p>Dropping the second-order term $dr^{2}$ leaves $\Delta A=r\,dr\,d\theta$. The same factor appears as the absolute value of the Jacobian $\partial(x,y)/\partial(r,\theta)$, which equals $r$.</p>
+  <p>Dropping the second-order term $dr^{2}$ leaves $\Delta A=r\,dr\,d\theta$. The same factor appears as the absolute value of the Jacobian $\partial(x,y)/\partial(r,\theta)$, which equals $r$. Explicitly, with $x=r\cos\theta$, $y=r\sin\theta$,</p>
+  $$\frac{\partial(x,y)}{\partial(r,\theta)}=\begin{vmatrix}\cos\theta & -r\sin\theta\\ \sin\theta & r\cos\theta\end{vmatrix}=r\cos^{2}\theta+r\sin^{2}\theta=r,$$
+  <p>which is nonnegative for $r\ge 0$, so $|\,\partial(x,y)/\partial(r,\theta)\,|=r$. The geometric wedge argument and the determinant agree, and Section 7 shows both are instances of the general change-of-variables formula.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">When converting $\iint_{D} f\,dA$ to polar coordinates, the area element $dA$ becomes:</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$dr\,d\theta$</div><div class="quiz-opt" data-idx="1">$\theta\,dr\,d\theta$</div><div class="quiz-opt" data-idx="2">$r^{2}\,dr\,d\theta$</div><div class="quiz-opt" data-idx="3">$r\,dr\,d\theta$</div></div><div class="quiz-explain correct-exp">Correct. The Jacobian of the polar substitution is $r$, so $dA=r\,dr\,d\theta$.</div><div class="quiz-explain wrong-exp">The Jacobian factor is exactly $r$ (the area of an infinitesimal wedge is $r\,dr\,d\theta$), so $dA=r\,dr\,d\theta$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1044,6 +1112,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The center of mass is $\left(\tfrac{2}{3},\tfrac{1}{3}\right)$, which lies inside the triangle as expected.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: variable density shifts the center of mass</summary><div class="detail-body"><div class="worked-solution">
+  <p>Take the same triangle $0\le x\le 1$, $0\le y\le x$ but now with density $\rho(x,y)=x$, so material is heavier toward the right. Recompute the mass and $\bar x$.</p>
+  $$m=\int_{0}^{1}\!\!\int_{0}^{x} x\,dy\,dx=\int_{0}^{1} x\cdot x\,dx=\int_{0}^{1} x^{2}\,dx=\frac{1}{3}.$$
+  $$M_{y}=\int_{0}^{1}\!\!\int_{0}^{x} x\cdot x\,dy\,dx=\int_{0}^{1} x^{3}\,dx=\frac{1}{4},\qquad \bar{x}=\frac{M_{y}}{m}=\frac{1/4}{1/3}=\frac{3}{4}.$$
+  <p>The centroid had $\bar x=\tfrac23$; weighting by $x$ pulls the balance point right to $\bar x=\tfrac34$, exactly as physical intuition predicts. Density never cancels from $\bar x$ unless it is constant.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: moment of inertia of a quarter disk</summary><div class="detail-body"><div class="worked-solution">
+  <p>The moment of inertia about the origin (the polar moment) of a lamina is $I_0=\iint_D (x^2+y^2)\,\rho\,dA$. Take the quarter disk $x^2+y^2\le a^2$ in the first quadrant with constant density $\rho=1$. Polar coordinates are natural: $0\le r\le a$, $0\le\theta\le\tfrac{\pi}{2}$, and $x^2+y^2=r^2$.</p>
+  $$I_0=\int_{0}^{\pi/2}\!\!\int_{0}^{a} r^{2}\cdot r\,dr\,d\theta=\int_{0}^{\pi/2}d\theta\int_{0}^{a} r^{3}\,dr=\frac{\pi}{2}\cdot\frac{a^{4}}{4}=\frac{\pi a^{4}}{8}.$$
+  <p>The integrand $r^2$ from $x^2+y^2$ combines with the Jacobian $r$ to give $r^3$, the source of the $a^4$ scaling that all rotational-inertia formulas share.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Swapping the two moments: students often write $\bar x=M_x/m$ instead of $\bar x=M_y/m$. The moment $M_y=\iint x\,\rho\,dA$ measures distance from the $y$-axis and therefore controls the horizontal coordinate $\bar x$. The cross naming is deliberate. A second frequent slip is forgetting to divide by the mass: $M_y$ alone has the wrong units and is not a coordinate.</div>
+
+  <details><summary>Going deeper: symmetry shortcuts for the centroid</summary><div class="detail-body"><div class="worked-solution">
+  <p>When density is constant, the center of mass is the centroid, and symmetry can eliminate an integral entirely. The precise statement: if the region $D$ and the density $\rho$ are symmetric under reflection across a line $\ell$, then the center of mass lies on $\ell$. The proof is a substitution. Suppose $D$ is symmetric across the $y$-axis, so $(x,y)\in D\iff(-x,y)\in D$ and $\rho(-x,y)=\rho(x,y)$. In the moment integral substitute $x\mapsto -x$:</p>
+  $$M_{y}=\iint_{D} x\,\rho(x,y)\,dA=\iint_{D}(-x)\,\rho(-x,y)\,dA=-\iint_{D} x\,\rho(x,y)\,dA=-M_{y},$$
+  <p>so $M_y=0$ and $\bar x=0$. The integral is forced to vanish by the odd symmetry of the integrand over a symmetric region. For example a disk centered at the origin with uniform density has its centroid at the origin without any computation. Recognizing such symmetry before integrating is one of the most reliable ways to cut multivariable problems down to a single integral, and it is worth checking the region for an axis of symmetry as a first step.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The mass of a lamina with density $\rho(x,y)$ over a region $D$ is given by:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\iint_{D}\rho(x,y)\,dA$</div><div class="quiz-opt" data-idx="1">$\iint_{D}\rho(x,y)\,r\,dA$</div><div class="quiz-opt" data-idx="2">$\iint_{D} x\,\rho(x,y)\,dA$</div><div class="quiz-opt" data-idx="3">$\dfrac{1}{A}\iint_{D}\rho(x,y)\,dA$</div></div><div class="quiz-explain correct-exp">Correct. Mass is the integral of density over the region, $m=\iint_{D}\rho\,dA$.</div><div class="quiz-explain wrong-exp">Mass sums density times area, so $m=\iint_{D}\rho\,dA$. The expression with an extra $x$ is the moment $M_{y}$, not the mass.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1064,6 +1153,29 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$V=\int_{0}^{1}\!\!\int_{0}^{1-x}\!\!\int_{0}^{1-x-y} dz\,dy\,dx=\int_{0}^{1}\!\!\int_{0}^{1-x}(1-x-y)\,dy\,dx.$$
   <p>The inner integral, with $a=1-x$, is $\int_{0}^{a}(a-y)\,dy=\tfrac{a^{2}}{2}=\tfrac{(1-x)^{2}}{2}$. Then</p>
   $$V=\int_{0}^{1}\frac{(1-x)^{2}}{2}\,dx=\frac{1}{2}\cdot\frac{(1-x)^{3}}{-3}\Big|_{0}^{1}=\frac{1}{6}.$$
+  </div></div></details>
+
+  <details><summary>Worked Example 5.2: mass of a solid with variable density</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the mass of the box $E=[0,1]\times[0,2]\times[0,3]$ with density $\rho(x,y,z)=xyz$. Over a box the triple integral separates and the limits are constant, so it factors into a product of single integrals.</p>
+  $$m=\int_{0}^{1}\!\!\int_{0}^{2}\!\!\int_{0}^{3} xyz\,dz\,dy\,dx=\left(\int_{0}^{1}x\,dx\right)\!\left(\int_{0}^{2}y\,dy\right)\!\left(\int_{0}^{3}z\,dz\right).$$
+  $$=\frac{1}{2}\cdot 2\cdot\frac{9}{2}=\frac{9}{2}.$$
+  <p>As with double integrals, the product shortcut requires both a box-shaped region and a separable integrand. Over a non-box solid the inner limits depend on the outer variables and the factoring fails.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: integrate over a solid under a paraboloid</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\iiint_{E} z\,dV$ where $E$ is bounded below by the $xy$-plane, above by the paraboloid $z=4-x^{2}-y^{2}$, over the disk $x^{2}+y^{2}\le 4$. Set up the inner $z$-integral first, then finish the planar part in polar.</p>
+  $$\int_{0}^{4-x^{2}-y^{2}} z\,dz=\frac{1}{2}\big(4-x^{2}-y^{2}\big)^{2}.$$
+  <p>With $x^2+y^2=r^2$ on the disk $0\le r\le 2$, $0\le\theta\le 2\pi$,</p>
+  $$\iiint_{E} z\,dV=\int_{0}^{2\pi}\!\!\int_{0}^{2}\frac{1}{2}(4-r^{2})^{2}\,r\,dr\,d\theta.$$
+  <p>Let $u=4-r^2$, $du=-2r\,dr$; as $r:0\to2$, $u:4\to0$. The inner integral is $\tfrac12\int_{0}^{4}u^2\cdot\tfrac12\,du=\tfrac14\cdot\tfrac{64}{3}=\tfrac{16}{3}$.</p>
+  $$\iiint_{E} z\,dV=2\pi\cdot\frac{16}{3}=\frac{32\pi}{3}.$$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Letting the innermost limits depend on the wrong variable, for example writing the inner $z$-limits in terms of a variable that has not yet been integrated as an outer variable. The rule of nested integrals is strict: the innermost limits may use every outer variable, the next may use only those outside it, and the outermost limits must be pure constants. An integral that ends with a variable left in the final answer signals a limit placed at the wrong level.</div>
+
+  <details><summary>Going deeper: choosing the order of integration in three dimensions</summary><div class="detail-body"><div class="worked-solution">
+  <p>A solid can be projected onto any of the three coordinate planes, giving six possible orders of integration ($3$ choices of which variable is innermost, then $2$ for the remaining pair). All six give the same value when $f$ is continuous, by the three-dimensional Fubini theorem, but they differ wildly in convenience. The strategy is to pick the projection on which the shadow region is simplest and the bounding surfaces are single-valued in the chosen inner direction.</p>
+  <p>Concretely, integrate first in the direction along which a line enters and exits the solid through exactly two surfaces. For the tetrahedron of Example 5.1, a vertical line enters at $z=0$ and exits at $z=1-x-y$, two clean surfaces, so $dz$ innermost is ideal. If instead the solid were a half-ball sitting on the $xy$-plane, a vertical line still works, but if the solid were a horizontal cylinder a line in the $z$-direction might pierce the curved wall twice and the flat caps, forcing a split; choosing $dx$ or $dy$ innermost avoids that. The practical recipe is the same as in two dimensions: sketch the solid, identify the entering and exiting surfaces for each candidate inner direction, and choose the direction giving two surfaces and the simplest shadow.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The volume of a solid region $E$ is computed by the triple integral:</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\iiint_{E} z\,dV$</div><div class="quiz-opt" data-idx="1">$\iiint_{E} 1\,dV$</div><div class="quiz-opt" data-idx="2">$\iint_{E} 1\,dA$</div><div class="quiz-opt" data-idx="3">$\iiint_{E}(x+y+z)\,dV$</div></div><div class="quiz-explain correct-exp">Correct. Integrating the constant $1$ over the solid accumulates its volume, $V=\iiint_{E} dV$.</div><div class="quiz-explain wrong-exp">Volume is the triple integral of $1$ over the solid, $V=\iiint_{E}1\,dV$. Inserting $z$ or $x+y+z$ would weight by position, not measure volume.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1088,10 +1200,35 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$V=\frac{a^{3}}{3}\cdot 2\cdot 2\pi=\frac{4}{3}\pi a^{3}.$$
   </div></div></details>
 
+  <details><summary>Worked Example 6.2: cylindrical volume of a paraboloid cap</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the volume of the solid bounded below by the paraboloid $z=x^{2}+y^{2}$ and above by the plane $z=4$. The two surfaces meet where $x^2+y^2=4$, a circle of radius $2$, so the shadow is the disk $0\le r\le 2$, and at fixed $(r,\theta)$ the height runs $r^{2}\le z\le 4$.</p>
+  $$V=\int_{0}^{2\pi}\!\!\int_{0}^{2}\!\!\int_{r^{2}}^{4} r\,dz\,dr\,d\theta=\int_{0}^{2\pi}\!\!\int_{0}^{2}(4-r^{2})\,r\,dr\,d\theta.$$
+  $$\int_{0}^{2}(4r-r^{3})\,dr=\Big[2r^{2}-\tfrac{r^{4}}{4}\Big]_{0}^{2}=8-4=4,\qquad V=2\pi\cdot 4=8\pi.$$
+  <p>Cylindrical coordinates were chosen because the solid is rotationally symmetric about the $z$-axis and the bounding surfaces are simple in $r$ and $z$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: spherical integral over an ice-cream-cone region</summary><div class="detail-body"><div class="worked-solution">
+  <p>Integrate $f=1$ (find the volume) over the region $E$ inside the sphere $\rho\le 1$ and above the cone $\phi\le\tfrac{\pi}{3}$. In spherical the description is a rectangle: $0\le\rho\le 1$, $0\le\phi\le\tfrac{\pi}{3}$, $0\le\theta\le 2\pi$.</p>
+  $$V=\int_{0}^{2\pi}\!\!\int_{0}^{\pi/3}\!\!\int_{0}^{1}\rho^{2}\sin\phi\,d\rho\,d\phi\,d\theta.$$
+  <p>The factors separate: $\int_{0}^{1}\rho^{2}\,d\rho=\tfrac13$, $\int_{0}^{\pi/3}\sin\phi\,d\phi=\big[-\cos\phi\big]_{0}^{\pi/3}=1-\tfrac12=\tfrac12$, $\int_{0}^{2\pi}d\theta=2\pi$.</p>
+  $$V=\frac{1}{3}\cdot\frac{1}{2}\cdot 2\pi=\frac{\pi}{3}.$$
+  <p>The cone $\phi\le\tfrac{\pi}{3}$ becomes a constant limit on $\phi$, which is exactly why spherical coordinates are the natural choice for cone-and-sphere regions.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.4: mass of a cone with height-proportional density</summary><div class="detail-body"><div class="worked-solution">
+  <p>A solid cone has base radius $1$ and height $1$, described by $0\le r\le z$, $0\le z\le 1$ in cylindrical coordinates (the surface $r=z$ is the cone $z=\sqrt{x^2+y^2}$). Its density grows with height as $\rho=z$. Find the mass, integrating $r$ first within each disk-slice at height $z$.</p>
+  $$m=\int_{0}^{2\pi}\!\!\int_{0}^{1}\!\!\int_{0}^{z} z\cdot r\,dr\,dz\,d\theta=\int_{0}^{2\pi}\!\!\int_{0}^{1} z\cdot\frac{z^{2}}{2}\,dz\,d\theta.$$
+  $$=\int_{0}^{2\pi}d\theta\int_{0}^{1}\frac{z^{3}}{2}\,dz=2\pi\cdot\frac{1}{8}=\frac{\pi}{4}.$$
+  <p>The cylindrical factor $r$ produced the $\tfrac{z^2}{2}$ from the inner integral, and the density $z$ then made the $z$-integral a simple power. Cylindrical coordinates suit the cone because its slope appears as the single linear limit $r=z$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Mixing up the spherical roles of $\phi$ and $\theta$, or writing $dV=\rho^2\cos\phi\,d\rho\,d\phi\,d\theta$. In the convention here $\phi$ is measured from the positive $z$-axis and runs in $[0,\pi]$, and the volume element carries $\sin\phi$, not $\cos\phi$. A quick sanity check: at the equator $\phi=\tfrac{\pi}{2}$ the factor $\sin\phi=1$ is largest, matching the fact that a spherical shell has the most area near its equator; $\cos\phi$ would wrongly vanish there. Note that physics texts often swap the names of $\phi$ and $\theta$, so always confirm which angle is polar before reading off limits.</div>
+
   <details><summary>Going deeper: deriving the spherical volume element</summary><div class="detail-body"><div class="worked-solution">
   <p>The Jacobian of the map $(\rho,\phi,\theta)\mapsto(x,y,z)$ is the determinant</p>
   $$\frac{\partial(x,y,z)}{\partial(\rho,\phi,\theta)}=\begin{vmatrix}\sin\phi\cos\theta & \rho\cos\phi\cos\theta & -\rho\sin\phi\sin\theta\\ \sin\phi\sin\theta & \rho\cos\phi\sin\theta & \rho\sin\phi\cos\theta\\ \cos\phi & -\rho\sin\phi & 0\end{vmatrix}=\rho^{2}\sin\phi.$$
   <p>Since $\phi\in[0,\pi]$ makes $\sin\phi\ge 0$, the absolute value is $\rho^{2}\sin\phi$, so $dV=\rho^{2}\sin\phi\,d\rho\,d\phi\,d\theta$. The cylindrical case is the analogous computation with Jacobian $r$.</p>
+  <p><strong>Expanding the determinant.</strong> Cofactoring along the bottom row, the $\cos\phi$ entry multiplies the $2\times2$ minor $\rho\cos\phi\cos\theta\cdot\rho\sin\phi\cos\theta-(-\rho\sin\phi\sin\theta)\cdot\rho\cos\phi\sin\theta=\rho^2\sin\phi\cos\phi$. The $-\rho\sin\phi$ entry multiplies (with the cofactor sign) the minor $\sin\phi\cos\theta\cdot\rho\sin\phi\cos\theta-(-\rho\sin\phi\sin\theta)\cdot\sin\phi\sin\theta=\rho\sin^2\phi$. Collecting, $\cos\phi\cdot\rho^2\sin\phi\cos\phi+\rho\sin\phi\cdot\rho\sin^2\phi=\rho^2\sin\phi(\cos^2\phi+\sin^2\phi)=\rho^2\sin\phi$. The Pythagorean identity is what collapses the determinant to a single clean factor, mirroring how $\cos^2\theta+\sin^2\theta=1$ produced the bare $r$ in the polar case.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The volume element in spherical coordinates is:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\rho\sin\phi\,d\rho\,d\phi\,d\theta$</div><div class="quiz-opt" data-idx="1">$r\,dz\,dr\,d\theta$</div><div class="quiz-opt" data-idx="2">$\rho^{2}\sin\phi\,d\rho\,d\phi\,d\theta$</div><div class="quiz-opt" data-idx="3">$\rho^{2}\cos\phi\,d\rho\,d\phi\,d\theta$</div></div><div class="quiz-explain correct-exp">Correct. The spherical Jacobian is $\rho^{2}\sin\phi$, so $dV=\rho^{2}\sin\phi\,d\rho\,d\phi\,d\theta$.</div><div class="quiz-explain wrong-exp">The spherical volume element is $\rho^{2}\sin\phi\,d\rho\,d\phi\,d\theta$. The $r\,dz\,dr\,d\theta$ form is cylindrical, and the $\sin\phi$ factor (not $\cos\phi$) is correct because $\phi$ is measured from the $z$-axis.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1120,6 +1257,31 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The Jacobian is</p>
   $$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix}1/2 & 1/2\\ -1/2 & 1/2\end{vmatrix}=\frac{1}{4}+\frac{1}{4}=\frac{1}{2}.$$
   $$\iint_{D}(x+y)\,dA=\int_{-1}^{1}\!\!\int_{0}^{2} v\cdot\frac{1}{2}\,dv\,du=\frac{1}{2}\int_{-1}^{1}\!\Big[\frac{v^{2}}{2}\Big]_{0}^{2}\,du=\frac{1}{2}\int_{-1}^{1} 2\,du=2.$$
+  </div></div></details>
+
+  <details><summary>Worked Example 7.2: the inverse-Jacobian shortcut</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\iint_{D} xy\,dA$ over the region in the first quadrant bounded by the hyperbolas $xy=1$, $xy=4$ and the lines $y=x$, $y=4x$. The boundaries beg for $u=xy$ and $v=y/x$, so the region becomes the rectangle $1\le u\le 4$, $1\le v\le 4$. Rather than solve for $x,y$, compute the easy forward Jacobian and reciprocate.</p>
+  $$\frac{\partial(u,v)}{\partial(x,y)}=\begin{vmatrix} y & x\\ -y/x^{2} & 1/x\end{vmatrix}=\frac{y}{x}-\Big(-\frac{x\,y}{x^{2}}\Big)=\frac{y}{x}+\frac{y}{x}=\frac{2y}{x}=2v.$$
+  <p>Therefore $\left|\dfrac{\partial(x,y)}{\partial(u,v)}\right|=\dfrac{1}{|2v|}=\dfrac{1}{2v}$ on the region (where $v>0$), and the integrand is $xy=u$. Hence</p>
+  $$\iint_{D} xy\,dA=\int_{1}^{4}\!\!\int_{1}^{4} u\cdot\frac{1}{2v}\,du\,dv=\frac{1}{2}\left(\int_{1}^{4}u\,du\right)\!\left(\int_{1}^{4}\frac{dv}{v}\right)=\frac{1}{2}\cdot\frac{15}{2}\cdot\ln 4=\frac{15}{4}\ln 4.$$
+  <p>Computing $\partial(u,v)/\partial(x,y)$ and taking its reciprocal avoided ever solving the messy system for $x$ and $y$ explicitly.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: an ellipse mapped to a disk</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the area of the ellipse $\dfrac{x^{2}}{a^{2}}+\dfrac{y^{2}}{b^{2}}\le 1$. Use $x=a\,u$, $y=b\,v$, which maps the unit disk $u^2+v^2\le1$ onto the ellipse. The Jacobian is constant:</p>
+  $$\frac{\partial(x,y)}{\partial(u,v)}=\begin{vmatrix} a & 0\\ 0 & b\end{vmatrix}=ab.$$
+  $$\operatorname{area}=\iint_{\text{ellipse}} dA=\iint_{u^2+v^2\le1} ab\,du\,dv=ab\cdot(\text{area of unit disk})=ab\cdot\pi=\pi ab.$$
+  <p>The familiar $\pi ab$ falls out as the unit-disk area scaled by the constant Jacobian $ab$, recovering $\pi r^2$ when $a=b=r$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Using the reciprocal Jacobian with the wrong variables, or omitting the absolute value and getting a negative area. Two safeguards: first, $\dfrac{\partial(x,y)}{\partial(u,v)}=1\big/\dfrac{\partial(u,v)}{\partial(x,y)}$ only when you express the result in the correct variables, so after reciprocating $\partial(u,v)/\partial(x,y)$ you must still write the factor in terms of $u,v$. Second, the scaling factor is always $\left|\,\partial(x,y)/\partial(u,v)\,\right|$ with absolute value, because area and volume are nonnegative; a transformation that reverses orientation has a negative determinant whose magnitude is the correct scale.</div>
+
+  <details><summary>Going deeper: why the Jacobian is the local area scale</summary><div class="detail-body"><div class="worked-solution">
+  <p>The change-of-variables theorem says the local area-stretch factor of a smooth map $T(u,v)=(x(u,v),y(u,v))$ is $\big|\det DT\big|$, the absolute Jacobian. Here is the geometric derivation. Consider a small rectangle in the $uv$-plane with corner $(u_0,v_0)$ and sides $\Delta u$, $\Delta v$ along the axes. Its image under $T$ is, to first order, a parallelogram. The two edges map approximately to the tangent vectors</p>
+  $$\mathbf{a}=T(u_0+\Delta u,v_0)-T(u_0,v_0)\approx(x_u,\,y_u)\,\Delta u,\qquad \mathbf{b}=T(u_0,v_0+\Delta v)-T(u_0,v_0)\approx(x_v,\,y_v)\,\Delta v.$$
+  <p>The area of the parallelogram spanned by $\mathbf a$ and $\mathbf b$ is the magnitude of their cross product, which for planar vectors is the absolute value of the $2\times2$ determinant:</p>
+  $$\text{area}=\big|\,x_u y_v-x_v y_u\,\big|\,\Delta u\,\Delta v=\left|\frac{\partial(x,y)}{\partial(u,v)}\right|\Delta u\,\Delta v.$$
+  <p>Summing these local area distortions over a fine grid and passing to the limit turns the Riemann sum $\sum f\,\Delta A_{xy}$ into $\iint f\,\big|\partial(x,y)/\partial(u,v)\big|\,du\,dv$. The polar factor $r$, the cylindrical factor $r$, and the spherical factor $\rho^2\sin\phi$ are all just this same determinant computed for the respective maps, which is why the entire chapter rests on one theorem. The rigorous proof replaces the first-order approximation with a careful estimate and shows the error vanishes faster than the cell area, but the parallelogram picture captures exactly why the determinant, and nothing else, is the right factor.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Under the change of variables $x=x(u,v)$, $y=y(u,v)$, the element $dA=dx\,dy$ is replaced by:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$du\,dv$</div><div class="quiz-opt" data-idx="1">$\dfrac{\partial(x,y)}{\partial(u,v)}\,du\,dv$ without absolute value</div><div class="quiz-opt" data-idx="2">$\dfrac{\partial(u,v)}{\partial(x,y)}\,du\,dv$</div><div class="quiz-opt" data-idx="3">$\left|\dfrac{\partial(x,y)}{\partial(u,v)}\right|du\,dv$</div></div><div class="quiz-explain correct-exp">Correct. The element scales by the absolute value of the Jacobian of $(x,y)$ with respect to $(u,v)$.</div><div class="quiz-explain wrong-exp">Area is nonnegative, so the scaling factor is the absolute value of $\partial(x,y)/\partial(u,v)$. The reciprocal Jacobian and the unsigned versions are incorrect here.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

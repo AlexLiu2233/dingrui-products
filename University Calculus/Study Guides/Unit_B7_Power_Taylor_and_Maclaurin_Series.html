@@ -953,6 +953,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> The ratio test settles the open interval $|x-a|<R$ but says nothing at the two endpoints $x=a\pm R$, where $|x-a|=R$. Each endpoint must be tested separately by substituting it in and applying a convergence test for numerical series. The interval of convergence is the open interval together with whichever endpoints survive.</p>
 
+  <p><strong>The root-test alternative.</strong> The ratio formula is the everyday tool, but it can fail to exist when the coefficients are irregular, for instance when even and odd coefficients follow different patterns. In that case the root test is the reliable backstop, and in fact it always works. Writing the radius through the root test gives the Cauchy and Hadamard formula, $\frac{1}{R}=\limsup_{n\to\infty}|c_n|^{1/n}$, which uses the limit superior precisely so that it is defined for every power series, not only the well-behaved ones. Whenever the ordinary ratio limit exists, the two formulas agree, so you may use whichever is easier for the coefficients in front of you. A practical habit: reach for the ratio test first, and switch to the root test only when factorials, $n$th powers, or coefficient patterns make the ratio limit awkward or nonexistent.</p>
+
   <details><summary>Worked Example 1.1: a finite radius with endpoint testing</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the interval of convergence of $\displaystyle\sum_{n=1}^{\infty}\frac{(x-2)^n}{n}$.</p>
   <p>Apply the ratio test to the full term $a_n=(x-2)^n/n$:</p>
@@ -966,6 +968,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>With $c_n=1/n!$,</p>
   $$\frac{1}{R}=\lim_{n\to\infty}\left|\frac{c_{n+1}}{c_n}\right|=\lim_{n\to\infty}\frac{n!}{(n+1)!}=\lim_{n\to\infty}\frac{1}{n+1}=0.$$
   <p>Since $1/R=0$ we have $R=\infty$: the series converges for every real $x$. This series is the exponential function, as Section 5 confirms.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a series with gaps in the powers</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the interval of convergence of $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^n x^{2n}}{4^n\, n}$. Here only even powers appear, so many of the formal coefficients $c_n$ are zero and the formula $1/R=\lim|c_{n+1}/c_n|$ does not apply directly. Apply the ratio test to the whole term instead.</p>
+  <p>Let $a_n=(-1)^n x^{2n}/(4^n n)$. Then</p>
+  $$\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_n}\right|=\lim_{n\to\infty}\left|\frac{x^{2n+2}}{4^{n+1}(n+1)}\cdot\frac{4^n n}{x^{2n}}\right|=\frac{x^2}{4}\lim_{n\to\infty}\frac{n}{n+1}=\frac{x^2}{4}.$$
+  <p>Convergence requires $x^2/4<1$, that is $|x|<2$, so $R=2$. At $x=\pm 2$ we have $x^{2n}=4^n$, and the series collapses to $\sum (-1)^n/n$, the alternating harmonic series, which converges. Both endpoints survive, so the interval of convergence is the closed interval $[-2,2]$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often stop at the open interval $|x-a|&lt;R$ and report it as the interval of convergence, forgetting the endpoints entirely. The ratio test gives a limit of exactly $1$ at $x=a\pm R$, so it is silent there: it can neither include nor exclude an endpoint. You must substitute each endpoint and run a separate numerical-series test. The two endpoints can behave differently, as Worked Example 1.1 shows, where $x=3$ diverges but $x=1$ converges.</div>
+
+  <details><summary>Going deeper: why convergence sets are intervals (Abel&rsquo;s lemma)</summary><div class="detail-body"><div class="worked-solution">
+  <p>The "three cases" theorem rests on one comparison fact. <strong>Abel&rsquo;s lemma:</strong> if $\sum c_n (x_0-a)^n$ converges at some point $x_0\neq a$, then $\sum c_n (x-a)^n$ converges absolutely for every $x$ with $|x-a|&lt;|x_0-a|$.</p>
+  <p><em>Proof.</em> Convergence at $x_0$ forces the terms $c_n (x_0-a)^n\to 0$, so they are bounded: there is $M$ with $|c_n (x_0-a)^n|\le M$ for all $n$. Now fix $x$ with $r:=|x-a|/|x_0-a|&lt;1$. Then</p>
+  $$|c_n (x-a)^n|=|c_n (x_0-a)^n|\cdot\left|\frac{x-a}{x_0-a}\right|^n\le M\,r^n.$$
+  <p>Since $\sum M r^n$ is a convergent geometric series ($0\le r&lt;1$), the comparison test gives absolute convergence of $\sum c_n (x-a)^n$. $\blacksquare$</p>
+  <p>The lemma says: convergence at one point propagates inward to every closer point. So the set of convergence points has no holes; it is an interval about $a$. Taking $R$ to be the supremum of $|x_0-a|$ over all convergence points $x_0$ produces exactly the three cases, with divergence guaranteed beyond $R$ by the same boundedness argument run in reverse.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The radius of convergence of $\displaystyle\sum_{n=0}^{\infty} n!\,x^n$ is</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\infty$</div><div class="quiz-opt" data-idx="1">$1$</div><div class="quiz-opt" data-idx="2">$0$</div><div class="quiz-opt" data-idx="3">$e$</div></div><div class="quiz-explain correct-exp">Correct. Here $|c_{n+1}/c_n|=(n+1)!/n!=n+1\to\infty$, so $1/R=\infty$ and $R=0$. The series converges only at $x=0$.</div><div class="quiz-explain wrong-exp">The coefficient ratio $(n+1)!/n!=n+1$ tends to infinity, so $1/R=\infty$, giving $R=0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -986,6 +1005,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>To represent a given function, rewrite it so that something playing the role of $u$ appears, then substitute. The condition $|u|<1$ becomes the interval of convergence.</p>
 
+  <p>The art is entirely in the algebra that exposes a $\frac{1}{1-u}$. Three reshaping moves cover almost every case. If the denominator is $1$ plus or minus something, you read off $u$ directly, as in $\frac{1}{1+x^2}$ where $u=-x^2$. If the denominator has a leading constant other than $1$, you factor that constant out front so the bracket becomes $1-u$, as in $\frac{1}{3-x}$. If the function is a ratio of polynomials with a factorable denominator, you split it by partial fractions first and expand each simple piece, as in Worked Example 2.3. A useful geometric fact ties these together: the radius of the resulting series is always the distance from the center to the nearest point where the function blows up. That single principle predicts the answer before you compute, and it is worth checking your interval against it every time.</p>
+
   <details><summary>Worked Example 2.1: substitution into the geometric series</summary><div class="detail-body"><div class="worked-solution">
   <p>Represent $f(x)=\dfrac{1}{1+x^2}$ as a power series and give its radius.</p>
   <p>Write $1+x^2 = 1-(-x^2)$, so with $u=-x^2$,</p>
@@ -998,6 +1019,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Factor a $3$ out of the denominator so the leading term is $1$:</p>
   $$\frac{1}{3-x}=\frac{1}{3}\cdot\frac{1}{1-\frac{x}{3}}=\frac{1}{3}\sum_{n=0}^{\infty}\left(\frac{x}{3}\right)^n=\sum_{n=0}^{\infty}\frac{x^n}{3^{n+1}}.$$
   <p>The condition $\left|\frac{x}{3}\right|<1$ gives $|x|<3$, so $R=3$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: partial fractions before expanding</summary><div class="detail-body"><div class="worked-solution">
+  <p>Represent $f(x)=\dfrac{x}{x^2-x-2}$ as a power series centered at $0$ and state the radius.</p>
+  <p>Factor the denominator: $x^2-x-2=(x-2)(x+1)$. Decompose into partial fractions, $\dfrac{x}{(x-2)(x+1)}=\dfrac{A}{x-2}+\dfrac{B}{x+1}$. Clearing denominators gives $x=A(x+1)+B(x-2)$. Setting $x=2$ yields $2=3A$, so $A=\tfrac23$; setting $x=-1$ yields $-1=-3B$, so $B=\tfrac13$.</p>
+  <p>Now expand each piece around $0$ in geometric form. For the first, factor out $-2$ so the leading constant is $1$:</p>
+  $$\frac{2/3}{x-2}=\frac{2}{3}\cdot\frac{1}{x-2}=-\frac{1}{3}\cdot\frac{1}{1-\frac{x}{2}}=-\frac{1}{3}\sum_{n=0}^{\infty}\frac{x^n}{2^n},\qquad |x|&lt;2.$$
+  <p>For the second piece, $\dfrac{1/3}{x+1}=\dfrac13\cdot\dfrac{1}{1-(-x)}=\dfrac13\sum_{n=0}^{\infty}(-1)^n x^n$, valid for $|x|&lt;1$. Adding the two series term by term,</p>
+  $$\frac{x}{x^2-x-2}=\sum_{n=0}^{\infty}\left(\frac{(-1)^n}{3}-\frac{1}{3\cdot 2^n}\right)x^n.$$
+  <p>The combined series converges where both pieces do, namely on the smaller interval $|x|&lt;1$, so $R=1$. The radius equals the distance from the center $0$ to the nearest singularity, here $x=-1$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When you factor a constant out of the denominator, it is easy to forget that the constant multiplies <em>every</em> term of the resulting series, not just the first. In Worked Example 2.2 the factor $\tfrac13$ in front gives $x^n/3^{n+1}$, not $x^n/3^n$. A second frequent slip is reading off the radius as $3$ in Worked Example 2.3 because $x=2$ is a singularity; the true radius is governed by the <em>nearest</em> singularity to the center, which is $x=-1$ at distance $1$.</div>
+
+  <details><summary>Going deeper: a power series representation is unique</summary><div class="detail-body"><div class="worked-solution">
+  <p>Could the same function have two different power series about the same center? No. Suppose $\sum c_n (x-a)^n$ and $\sum d_n (x-a)^n$ both converge to $f(x)$ on some interval $|x-a|&lt;\rho$ with $\rho&gt;0$. Their difference $\sum (c_n-d_n)(x-a)^n$ converges to $0$ there.</p>
+  <p>Set $x=a$: every term past the constant vanishes, forcing $c_0-d_0=0$. By Section 3 the zero series may be differentiated term by term; differentiating once and setting $x=a$ forces $c_1-d_1=0$. Differentiating $n$ times and evaluating at $a$ leaves only the $n$th term, giving $n!(c_n-d_n)=0$, hence $c_n=d_n$ for every $n$. So whichever route you use to build a series (substitution, factoring, partial fractions, or the coefficient formula of Section 4), you arrive at the <em>same</em> series. That is why the answer styles in the examples above can be freely interchanged.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The power series for $\dfrac{1}{1-2x}$ centered at $0$ is</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sum_{n=0}^{\infty} 2^n x^n$, valid for $|x|<\tfrac12$</div><div class="quiz-opt" data-idx="1">$\sum_{n=0}^{\infty} 2^n x^n$, valid for $|x|<2$</div><div class="quiz-opt" data-idx="2">$\sum_{n=0}^{\infty} x^n/2^n$, valid for $|x|<2$</div><div class="quiz-opt" data-idx="3">$\sum_{n=0}^{\infty} (-2)^n x^n$, valid for $|x|<\tfrac12$</div></div><div class="quiz-explain correct-exp">Correct. With $u=2x$, $\frac{1}{1-2x}=\sum (2x)^n=\sum 2^n x^n$, convergent when $|2x|<1$, that is $|x|<\tfrac12$.</div><div class="quiz-explain wrong-exp">Set $u=2x$ in the geometric series: the terms are $2^n x^n$ and convergence needs $|2x|<1$, so $|x|<\frac12$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1018,6 +1056,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> This is the standard route to series for $\arctan x$, $\ln(1+x)$, and many others: start from a geometric series, then integrate. Because integration introduces a constant, evaluate at a convenient point (usually $x=0$) to pin down $C$.</p>
 
+  <p>The theorem deserves a moment of respect, because it is not obvious. A power series is an infinite sum, and differentiation and integration are limit operations, so term by term calculus is really an exchange of two limits, the partial-sum limit and the difference-quotient or integral limit. Exchanging limits is exactly the kind of step that fails for general infinite sums of functions. What rescues power series is that they converge not merely pointwise but <em>uniformly</em> on every closed interval strictly inside the radius, and uniform convergence is precisely the hypothesis that licenses swapping a limit with a derivative or an integral. So the theorem is a genuine result about the special structure of power series, not a free pass that any infinite sum enjoys. The practical upshot is the one stated: inside the open interval of convergence you may treat the series as a polynomial of infinite degree.</p>
+
   <details><summary>Worked Example 3.1: integrating to get $\arctan x$</summary><div class="detail-body"><div class="worked-solution">
   <p>Derive the power series for $\arctan x$.</p>
   <p>From Example 2.1, $\dfrac{1}{1+t^2}=\sum_{n=0}^{\infty}(-1)^n t^{2n}$ for $|t|<1$. Since $\arctan x=\int_0^x \dfrac{dt}{1+t^2}$, integrate term by term:</p>
@@ -1030,6 +1070,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Differentiate both sides term by term on $|x|<1$:</p>
   $$\frac{d}{dx}\frac{1}{1-x}=\frac{1}{(1-x)^2},\qquad \frac{d}{dx}\sum_{n=0}^{\infty}x^n=\sum_{n=1}^{\infty}n x^{n-1}.$$
   <p>Therefore $\displaystyle\sum_{n=1}^{\infty} n x^{n-1}=\frac{1}{(1-x)^2}$ for $|x|<1$. Multiplying by $x$ gives $\sum n x^n = x/(1-x)^2$, a useful closed form.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: integrating to get $\ln(1+x)$, then summing a number series</summary><div class="detail-body"><div class="worked-solution">
+  <p>Derive the series for $\ln(1+x)$, then use it to evaluate $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}$.</p>
+  <p>Start from $\dfrac{1}{1+t}=\sum_{n=0}^{\infty}(-1)^n t^n$ for $|t|&lt;1$ (substitute $-t$ into the geometric series). Since $\ln(1+x)=\int_0^x \dfrac{dt}{1+t}$, integrate term by term:</p>
+  $$\ln(1+x)=\int_0^x\sum_{n=0}^{\infty}(-1)^n t^n\,dt=\sum_{n=0}^{\infty}(-1)^n\frac{x^{n+1}}{n+1}=x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots,$$
+  <p>with constant of integration zero since $\ln 1=0$. The radius is $1$. Now examine the endpoint $x=1$. The numerical series $\sum_{n=1}^{\infty}(-1)^{n-1}/n$ converges by the alternating series test, and Abel&rsquo;s theorem guarantees the power series is continuous up to a convergent endpoint, so its value there is $\lim_{x\to 1^-}\ln(1+x)=\ln 2$. Therefore</p>
+  $$\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots=\ln 2.$$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Term by term integration changes the constant. Writing $\int \sum c_n x^n\,dx=\sum \frac{c_n}{n+1}x^{n+1}$ with no $+C$ silently asserts that the antiderivative vanishes at $x=0$, which is only correct for the <em>definite</em> integral $\int_0^x$. When you want a specific function such as $\arctan x$ or $\ln(1+x)$, integrate from $0$ to $x$ (or pin $C$ by plugging in a known value), so $\arctan 0=0$ and $\ln 1=0$ fix the constant. Skipping this step is the most common reason a derived series is off by an additive constant.</div>
+
+  <details><summary>Going deeper: a radius is preserved but an endpoint can be gained</summary><div class="detail-body"><div class="worked-solution">
+  <p>Why does integration leave $R$ unchanged yet possibly widen the interval at an endpoint? Differentiation multiplies the $n$th coefficient by $n$ and integration divides it by $n+1$. Either way the factor behaves like a fixed power of $n$, and $\lim_{n\to\infty} n^{1/n}=1$, so the root-test value $\limsup |c_n|^{1/n}$, hence $R=1/\limsup|c_n|^{1/n}$, is untouched. Endpoints are a different matter, because there $|x-a|=R$ and convergence is decided by the size of the coefficients, not by $R$.</p>
+  <p><em>Concrete illustration.</em> The geometric series $\sum x^n$ has $R=1$ and diverges at both endpoints. Integrating gives $\sum x^{n+1}/(n+1)$, the series for $-\ln(1-x)$, still $R=1$, but now at $x=-1$ it becomes $\sum (-1)^{n+1}/(n+1)$, which <em>converges</em>. Integration shrank the coefficients by a factor of $1/(n+1)$, enough to rescue one endpoint. Differentiation runs the other way and can lose an endpoint that was previously convergent.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Integrating $\dfrac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^n x^n$ term by term gives the series for</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\arctan x$</div><div class="quiz-opt" data-idx="1">$e^x$</div><div class="quiz-opt" data-idx="2">$\dfrac{1}{(1+x)^2}$</div><div class="quiz-opt" data-idx="3">$\ln(1+x)$</div></div><div class="quiz-explain correct-exp">Correct. Integrating from $0$ to $x$ gives $\sum (-1)^n x^{n+1}/(n+1)=x-\tfrac{x^2}{2}+\tfrac{x^3}{3}-\cdots=\ln(1+x)$.</div><div class="quiz-explain wrong-exp">The antiderivative of $1/(1+x)$ is $\ln(1+x)$, and term by term integration reproduces its series.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1050,11 +1105,22 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> Having a Taylor series is not the same as equaling it. The series is built from the derivatives at one point, and it might converge to a different value (or only at $a$). Section 6 gives the remainder condition under which $f$ truly equals its Taylor series.</p>
 
+  <p><strong>Why center somewhere other than zero.</strong> The Maclaurin series at $a=0$ is the default because it is simplest, but two situations demand a general center $a$. First, the function may not even be defined at $0$: $\ln x$ has no Maclaurin series, which is why Worked Example 4.1 expands it about $a=1$. Second, you may want fast convergence near a specific point of interest; a Taylor polynomial centered at $a$ is most accurate near $a$ and degrades as you move away, so to approximate $f$ near $x=10$ you center there rather than at $0$. The coefficient formula $c_n=f^{(n)}(a)/n!$ is identical in form regardless of the center; only the evaluation point of the derivatives changes. Everything proved for Maclaurin series carries over verbatim with $x$ replaced by $x-a$.</p>
+
   <details><summary>Worked Example 4.1: a Taylor series centered at $a=1$</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the Taylor series of $f(x)=\ln x$ centered at $a=1$.</p>
   <p>Compute derivatives: $f(x)=\ln x$, $f'(x)=x^{-1}$, $f''(x)=-x^{-2}$, $f'''(x)=2x^{-3}$, and in general $f^{(n)}(x)=(-1)^{n-1}(n-1)!\,x^{-n}$ for $n\ge 1$. At $a=1$, $f(1)=0$ and $f^{(n)}(1)=(-1)^{n-1}(n-1)!$.</p>
   $$\ln x=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}(n-1)!}{n!}(x-1)^n=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}(x-1)^n=(x-1)-\frac{(x-1)^2}{2}+\cdots.$$
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: a Maclaurin series straight from the derivatives</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the Maclaurin series of $f(x)=\dfrac{1}{(1-x)^2}$ directly from the coefficient formula, then check it against differentiation of the geometric series.</p>
+  <p>Compute derivatives at $0$. We have $f(x)=(1-x)^{-2}$, so by the chain rule $f'(x)=2(1-x)^{-3}$, $f''(x)=2\cdot 3(1-x)^{-4}$, and in general $f^{(n)}(x)=(n+1)!\,(1-x)^{-(n+2)}$. At $x=0$ this gives $f^{(n)}(0)=(n+1)!$. The Maclaurin coefficient is therefore</p>
+  $$c_n=\frac{f^{(n)}(0)}{n!}=\frac{(n+1)!}{n!}=n+1,$$
+  <p>so $\dfrac{1}{(1-x)^2}=\sum_{n=0}^{\infty}(n+1)x^n=1+2x+3x^2+4x^3+\cdots$, valid for $|x|&lt;1$. This matches Worked Example 3.2, where the same series arose by differentiating $\sum x^n$ term by term: a reassuring confirmation that the derivative route and the coefficient formula give one and the same series.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A subtle but real trap, due to Cauchy: a function can be infinitely differentiable yet <em>fail</em> to equal its Taylor series. The standard example is $f(x)=e^{-1/x^2}$ for $x\neq 0$ and $f(0)=0$. Every derivative at $0$ is zero, so its Maclaurin series is identically $0$, which equals $f$ only at the single point $x=0$. The moral: writing down the Taylor series of $f$ does not prove $f$ equals it. You must verify the remainder $R_n(x)\to 0$, the subject of Section 6. Treating "has a Taylor series" as "equals its Taylor series" is the most consequential conceptual error in the unit.</div>
 
   <details><summary>Going deeper: why the coefficients must be $f^{(n)}(a)/n!$</summary><div class="detail-body"><div class="worked-solution">
   <p>Suppose $f(x)=\sum_{k=0}^{\infty} c_k (x-a)^k$ on an interval around $a$. Evaluate at $x=a$: every term with $k\ge 1$ vanishes, so $f(a)=c_0$. Differentiate term by term (legitimate inside the radius, by Section 3):</p>
@@ -1090,6 +1156,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> When $k$ is a nonnegative integer the binomial series terminates and is the ordinary binomial theorem. For other $k$ (such as $-1$ or $\tfrac12$) it is a genuine infinite series.</p>
 
+  <p><strong>How to use the catalogue.</strong> The reason these few series are worth memorizing is that almost every series you will need is a short edit of one of them. There are four moves, and they compose freely. <em>Substitution</em> replaces $x$ by a small expression, as in $e^{-x^2}$ or $\cos(3x)$. <em>Multiplication</em> by a power of $x$ shifts the exponents, as in $x\sin x$ or $x^2 e^x$. <em>Differentiation and integration</em> trade one catalogue entry for a neighbour, as Section 3 showed when integrating the geometric series produced $\arctan x$ and $\ln(1+x)$. <em>Combination</em> adds, subtracts, or multiplies two series, as in Worked Example 5.3. Because the representation is unique (Section 2), it does not matter which route you take: any correct manipulation lands on the one true series. Computing twenty derivatives by hand is almost never the intended path on an exam, and an examiner reading a from-scratch derivative grind where a one-line substitution was available will mark it as a missed insight.</p>
+
   <details><summary>Worked Example 5.1: building a new series by substitution</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the Maclaurin series for $e^{-x^2}$.</p>
   <p>Substitute $-x^2$ for $x$ in the series for $e^x$:</p>
@@ -1101,6 +1169,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Expand $\sqrt{1+x}=(1+x)^{1/2}$ through the cubic term.</p>
   <p>With $k=\tfrac12$, compute the binomial coefficients: $\binom{1/2}{0}=1$, $\binom{1/2}{1}=\tfrac12$, $\binom{1/2}{2}=\tfrac{(1/2)(-1/2)}{2}=-\tfrac18$, $\binom{1/2}{3}=\tfrac{(1/2)(-1/2)(-3/2)}{6}=\tfrac{1}{16}$. Hence</p>
   $$\sqrt{1+x}=1+\frac{x}{2}-\frac{x^2}{8}+\frac{x^3}{16}-\cdots,\qquad |x|<1.$$
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: multiplying two series (the Cauchy product)</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the Maclaurin series of $f(x)=e^x\cos x$ through the $x^4$ term.</p>
+  <p>Multiply the two known series and collect like powers. Using $e^x=1+x+\tfrac{x^2}{2}+\tfrac{x^3}{6}+\tfrac{x^4}{24}+\cdots$ and $\cos x=1-\tfrac{x^2}{2}+\tfrac{x^4}{24}-\cdots$, the coefficient of $x^m$ in the product is the convolution $\sum_{j=0}^{m} a_j b_{m-j}$ of the two coefficient sequences. Term by term:</p>
+  $$[x^0]:\;1,\quad [x^1]:\;1,\quad [x^2]:\;\tfrac12-\tfrac12=0,\quad [x^3]:\;\tfrac16-\tfrac12=-\tfrac13,\quad [x^4]:\;\tfrac{1}{24}-\tfrac14+\tfrac{1}{24}=-\tfrac16.$$
+  <p>Hence $e^x\cos x=1+x-\dfrac{x^3}{3}-\dfrac{x^4}{6}+\cdots$. Both factors converge for all $x$, so the product does too.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Two slips recur with this catalogue. First, dropping the factorials: $\sin x=x-\tfrac{x^3}{6}+\tfrac{x^5}{120}-\cdots$, not $x-x^3+x^5-\cdots$, since the denominators are $3!,5!,7!,\dots$. Second, mishandling substitution scale. To get the series for $\cos(2x)$, replace $x$ by $2x$ <em>everywhere</em>, giving $1-\tfrac{(2x)^2}{2!}+\tfrac{(2x)^4}{4!}-\cdots=1-2x^2+\tfrac{2}{3}x^4-\cdots$; forgetting to raise the $2$ to the matching power is a frequent mistake. The catalogue is only as reliable as the bookkeeping you do when you adapt it.</div>
+
+  <details><summary>Going deeper: deriving the cosine series and proving it converges to $\cos x$</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $f(x)=\cos x$ the derivatives cycle: $f'(x)=-\sin x$, $f''(x)=-\cos x$, $f'''(x)=\sin x$, $f^{(4)}(x)=\cos x$, period four. At $x=0$ this gives $f(0)=1$, $f'(0)=0$, $f''(0)=-1$, $f'''(0)=0$, and so on, so the odd coefficients vanish and the even ones alternate in sign:</p>
+  $$\cos x=\sum_{n=0}^{\infty}\frac{f^{(2n)}(0)}{(2n)!}x^{2n}=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}.$$
+  <p>To prove this equals $\cos x$ rather than merely being its formal series, bound the Lagrange remainder. Every derivative of cosine is $\pm\sin$ or $\pm\cos$, so $|f^{(n+1)}(c)|\le 1$ for all $c$ and all $n$. Hence</p>
+  $$|R_n(x)|=\frac{|f^{(n+1)}(c)|}{(n+1)!}|x|^{n+1}\le\frac{|x|^{n+1}}{(n+1)!}\xrightarrow[n\to\infty]{}0$$
+  <p>for every fixed $x$, because the factorial outgrows any fixed power. Therefore $R_n(x)\to 0$ and the series equals $\cos x$ on all of $\mathbb{R}$. The identical argument, with the same uniform bound $1$, validates the sine series everywhere.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The Maclaurin series of $\cos x$ begins</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$x-\dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots$</div><div class="quiz-opt" data-idx="1">$1+x+\dfrac{x^2}{2!}+\cdots$</div><div class="quiz-opt" data-idx="2">$1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}-\cdots$</div><div class="quiz-opt" data-idx="3">$1-x^2+x^4-\cdots$</div></div><div class="quiz-explain correct-exp">Correct. Cosine is even, with only even powers and alternating signs: $1-\tfrac{x^2}{2!}+\tfrac{x^4}{4!}-\cdots$.</div><div class="quiz-explain wrong-exp">The first listing is $\sin x$ (odd powers). Cosine uses even powers with factorials: $1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1125,12 +1210,24 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> A clean way to force $R_n\to 0$ is a uniform bound on the derivatives. If $|f^{(n+1)}(t)|\le M$ for all $t$ between $a$ and $x$ and all $n$, then $|R_n(x)|\le M\,|x-a|^{n+1}/(n+1)!$, and the factorial in the denominator drives this to zero for every fixed $x$.</p>
 
+  <p><strong>Two error bounds, two purposes.</strong> Most exam problems offer a choice between the Lagrange bound and, when the series alternates with decreasing terms, the simpler alternating-series bound. They answer different questions. The Lagrange bound is universal: it applies to any sufficiently smooth function, alternating or not, and it is what proves a function equals its series. The alternating-series bound is sharper and easier to state, error after a partial sum is at most the first omitted term, but it applies only when the tail genuinely alternates with terms decreasing to zero. A good instinct is to check first whether the series at your point of interest alternates; if it does, the alternating bound usually settles the problem in one line, and the Lagrange bound is held in reserve for the non-alternating cases and for the general convergence proof.</p>
+
   <details><summary>Worked Example 6.1: bounding the error of a Taylor polynomial</summary><div class="detail-body"><div class="worked-solution">
   <p>Estimate the error in approximating $e^{0.1}$ by its degree $2$ Taylor polynomial $T_2(x)=1+x+\tfrac{x^2}{2}$ at $a=0$.</p>
   <p>For $f(x)=e^x$ all derivatives equal $e^x$. On $[0,0.1]$ we have $f'''(c)=e^c\le e^{0.1}<1.2$. The Lagrange remainder with $n=2$ is</p>
   $$|R_2(0.1)|=\frac{e^c}{3!}(0.1)^3\le \frac{1.2}{6}(0.001)=2\times 10^{-4}.$$
   <p>So $T_2(0.1)=1.105$ approximates $e^{0.1}\approx 1.10517$ to within $0.0002$, consistent with the bound.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: choosing the degree to hit a target accuracy</summary><div class="detail-body"><div class="worked-solution">
+  <p>How many terms of the Maclaurin series for $\sin x$ are needed to compute $\sin(0.5)$ with error below $10^{-6}$?</p>
+  <p>Two valid bounds are available, and it is instructive to use both. <em>Lagrange bound:</em> every derivative of sine is bounded by $1$, so the degree $n$ remainder satisfies $|R_n(0.5)|\le \dfrac{(0.5)^{n+1}}{(n+1)!}$. <em>Alternating-series bound:</em> the series $\sin x=x-\tfrac{x^3}{3!}+\tfrac{x^5}{5!}-\cdots$ alternates with decreasing terms at $x=0.5$, so the error after any partial sum is at most the first omitted term.</p>
+  <p>Test successive omitted terms at $x=0.5$:</p>
+  $$\frac{(0.5)^5}{5!}=\frac{0.03125}{120}\approx 2.6\times10^{-4},\qquad \frac{(0.5)^7}{7!}=\frac{0.0078125}{5040}\approx 1.55\times10^{-6},\qquad \frac{(0.5)^9}{9!}\approx 4.3\times10^{-9}.$$
+  <p>The first omitted term below $10^{-6}$ is the $x^9$ term, so keeping through the $x^7$ term, that is $\sin(0.5)\approx 0.5-\tfrac{(0.5)^3}{6}+\tfrac{(0.5)^5}{120}-\tfrac{(0.5)^7}{5040}$, guarantees the target. This gives $0.4794255$, against the true value $0.4794255386\ldots$, well within $10^{-6}$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The unknown point $c$ in the Lagrange remainder is not a number you solve for; it is an existence claim. The correct move is to <em>bound</em> $|f^{(n+1)}(c)|$ over the whole interval between $a$ and $x$, replacing it by its maximum $M$ there. Writing "let $c=x$" or "let $c=0$" to get a definite value is wrong and usually understates the error. A related slip is using $(x-a)^{n+1}$ with the wrong $n$: the degree $n$ polynomial $T_n$ has remainder of order $n+1$, so a quadratic approximation ($n=2$) carries an $(x-a)^3$ remainder, not $(x-a)^2$.</div>
 
   <details><summary>Going deeper: proving $e^x$ equals its Maclaurin series for all $x$</summary><div class="detail-body"><div class="worked-solution">
   <p>Fix any real $x$. For $f(t)=e^t$, every derivative is $e^t$, so on the interval between $0$ and $x$ we have $|f^{(n+1)}(c)|=e^c\le e^{|x|}=:M$, a constant independent of $n$. The Lagrange remainder at $a=0$ then satisfies</p>
@@ -1148,7 +1245,7 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Limits.</strong> Replacing each function by its Maclaurin series often reveals the leading behavior of an indeterminate form at a glance, an alternative to repeated use of L&rsquo;Hopital&rsquo;s rule.</p>
 
-  <p><strong>Nonelementary integrals.</strong> Functions such as $e^{-x^2}$, $\frac{\sin x}{x}$, and $\frac{1}{\sqrt{1+x^4}}$ have no antiderivative in closed form, but their series integrate term by term to give a convergent series for the integral.</p>
+  <p><strong>Nonelementary integrals.</strong> Functions such as $e^{-x^2}$, $\frac{\sin x}{x}$, and $\frac{1}{\sqrt{1+x^4}}$ have no antiderivative in closed form, but their series integrate term by term to give a convergent series for the integral. This is not a workaround for a missing technique; a theorem of Liouville guarantees that no elementary antiderivative exists for $e^{-x^2}$ at all. The series is therefore the genuine answer, and because the resulting series usually alternates, the truncation error is controlled by the first omitted term, so a definite integral can be pinned to any prescribed number of decimals. The Gaussian integral $\int_0^x e^{-t^2}\,dt$ at the heart of probability and statistics is computed in exactly this way.</p>
 
   <div class="formula-box"><div class="formula-label">Series for a nonelementary definite integral</div>
   $$\int_0^x e^{-t^2}\,dt=\sum_{n=0}^{\infty}\frac{(-1)^n x^{2n+1}}{n!\,(2n+1)}=x-\frac{x^3}{3}+\frac{x^5}{10}-\cdots.$$
@@ -1166,6 +1263,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>From $\sin x=\sum (-1)^n x^{2n+1}/(2n+1)!$ we get $\dfrac{\sin x}{x}=\sum (-1)^n x^{2n}/(2n+1)!$. Integrating term by term from $0$ to $1$,</p>
   $$\int_0^1\frac{\sin x}{x}\,dx=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!\,(2n+1)}=1-\frac{1}{18}+\frac{1}{600}-\frac{1}{35280}+\cdots.$$
   <p>This alternates, so the truncation error is at most the first omitted term. Summing through $1/600$ gives $0.94611$, and the next term $1/35280\approx 0.0000283$ confirms the value is $0.946$ to three places.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: solving a differential equation by matching coefficients</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve the initial value problem $y'=y$, $y(0)=1$, by assuming a power series solution.</p>
+  <p>Write $y=\sum_{n=0}^{\infty} a_n x^n$. Then $y'=\sum_{n=1}^{\infty} n a_n x^{n-1}=\sum_{n=0}^{\infty}(n+1)a_{n+1}x^n$ after reindexing. The equation $y'=y$ forces the coefficient of $x^n$ on each side to agree:</p>
+  $$(n+1)a_{n+1}=a_n\quad\Longrightarrow\quad a_{n+1}=\frac{a_n}{n+1}.$$
+  <p>The initial condition gives $a_0=y(0)=1$. Iterating the recursion: $a_1=1$, $a_2=\tfrac12$, $a_3=\tfrac{1}{6}$, and in general $a_n=\tfrac{1}{n!}$. Therefore</p>
+  $$y=\sum_{n=0}^{\infty}\frac{x^n}{n!}=e^x,$$
+  <p>recovering the known solution. The power series method, matching coefficients through a recursion, is the gateway to series solutions of equations with no elementary closed form, the central technique of a later differential equations course.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When you replace a function by its series inside a limit, you must keep <em>enough</em> terms to survive the cancellation. In $\dfrac{\sin x-x}{x^3}$, truncating $\sin x$ at $x$ leaves $0/x^3$ and falsely suggests the limit is $0$; you need the $x^3$ term to see the true value $-\tfrac16$. The rule of thumb: expand each piece to one order beyond the lowest power that survives in the denominator. Dropping a needed term is the most common way a series-based limit goes wrong.</div>
+
+  <details><summary>Going deeper: why series multiply the power of analysis, with $\pi$ as an example</summary><div class="detail-body"><div class="worked-solution">
+  <p>The four applications above share a structure: an analytic operation on a function (limit, integral, root-finding, differential equation) becomes an algebraic operation on coefficients (cancellation, term by term integration, recursion). One historical payoff is the computation of $\pi$. From Worked Example 3.1, $\arctan x=x-\tfrac{x^3}{3}+\tfrac{x^5}{5}-\cdots$ for $|x|\le 1$. Setting $x=1$ gives the Leibniz formula</p>
+  $$\frac{\pi}{4}=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots.$$
+  <p>This converges, but agonizingly slowly: the error after $N$ terms is about $1/(2N)$, so four-decimal accuracy needs thousands of terms. The fix is to evaluate $\arctan$ at a small argument, where the series races to convergence. Machin&rsquo;s identity $\tfrac{\pi}{4}=4\arctan\tfrac15-\arctan\tfrac{1}{239}$ feeds the series tiny inputs, and a handful of terms then pins $\pi$ to many digits. The lesson generalizes: a series is a tool, and choosing <em>where</em> to evaluate it is half the craft.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Using $\cos x=1-\dfrac{x^2}{2}+\dfrac{x^4}{24}-\cdots$, the limit $\displaystyle\lim_{x\to 0}\frac{1-\cos x}{x^2}$ equals</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$0$</div><div class="quiz-opt" data-idx="1">$\dfrac12$</div><div class="quiz-opt" data-idx="2">$1$</div><div class="quiz-opt" data-idx="3">$2$</div></div><div class="quiz-explain correct-exp">Correct. $1-\cos x=\tfrac{x^2}{2}-\tfrac{x^4}{24}+\cdots$, so $(1-\cos x)/x^2=\tfrac12-\tfrac{x^2}{24}+\cdots\to\tfrac12$.</div><div class="quiz-explain wrong-exp">Subtract the cosine series from $1$: the leading term is $x^2/2$, so dividing by $x^2$ gives $\frac12$ in the limit.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

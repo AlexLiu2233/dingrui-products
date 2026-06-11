@@ -965,6 +965,28 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>This is an ellipse with semi-axes $3$ and $2$, traced once counterclockwise starting at $(3,0)$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.3: restricted range hides part of the curve</summary><div class="detail-body"><div class="worked-solution">
+  <p>Describe the curve $x=\sin t$, $y=\sin^2 t+1$ for $0\le t\le 2\pi$, and contrast it with the full parabola $y=x^2+1$.</p>
+  <p>Since $x=\sin t$, substituting gives $y=x^2+1$, so every point of the curve lies on that parabola. But $\sin t$ only takes values in $[-1,1]$, so $x$ never leaves $[-1,1]$. The curve is just the arc of the parabola for $-1\le x\le 1$, not the whole thing.</p>
+  <p>Moreover the point retraces. As $t$ runs $0\to\pi/2$, $x$ climbs from $0$ to $1$; as $t$ runs $\pi/2\to 3\pi/2$, $x$ falls back through $0$ to $-1$; then $x$ returns to $0$. So the arc is swept several times. The lesson: eliminating the parameter recovers the supporting equation, but the parameter interval determines which portion is actually drawn and how often.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.4: a line segment and its orientation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Parametrize the segment from $A=(1,2)$ to $B=(4,-1)$ so that $t\in[0,1]$ traces it once from $A$ to $B$, and find the parameter value at the midpoint.</p>
+  <p>The standard convex-combination parametrization is</p>
+  $$x=1+(4-1)t=1+3t,\qquad y=2+(-1-2)t=2-3t,\qquad 0\le t\le 1.$$
+  <p>At $t=0$ we get $A$ and at $t=1$ we get $B$, with the point moving in a straight line at constant speed. The midpoint corresponds to $t=\tfrac12$, giving $\bigl(1+\tfrac32,\,2-\tfrac32\bigr)=\bigl(\tfrac52,\tfrac12\bigr)$, exactly the average of $A$ and $B$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Eliminating the parameter and then forgetting the range. A student writes $x=\sin t$, $y=\sin^2 t+1$, simplifies to $y=x^2+1$, and reports "a parabola," full stop. The supporting equation is $y=x^2+1$, but the actual curve is only the arc $-1\le x\le 1$ because $\sin t$ is bounded. Always carry the implied restriction on $x$ and $y$ forward from the ranges of $f(t)$ and $g(t)$.</div>
+
+  <details><summary>Going deeper: the cycloid as a generated curve</summary><div class="detail-body"><div class="worked-solution">
+  <p>Parametric form earns its keep on curves that have no clean Cartesian equation. The classic example is the cycloid, the path traced by a point on the rim of a wheel of radius $a$ rolling without slipping along the $x$-axis. Let $t$ be the angle through which the wheel has turned.</p>
+  <p>After turning by $t$, the center of the wheel has moved forward by the arc length it rolled, namely $at$, and sits at height $a$. So the center is at $(at,a)$. The marked rim point starts at the bottom; relative to the center it has rotated clockwise by $t$, placing it at offset $(-a\sin t,-a\cos t)$ from the center. Adding,</p>
+  $$x=at-a\sin t=a(t-\sin t),\qquad y=a-a\cos t=a(1-\cos t).$$
+  <p>There is no elementary function $y=F(x)$ for this curve, because near each cusp ($t=2\pi k$) the curve has a vertical tangent and is not locally a graph. Yet the parametric description is effortless, and the calculus of the earlier sections applies directly: this is the same cycloid whose slope we found in Worked Example 2.1 and whose arch length we found in Worked Example 3.2.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The parametric curve $x=\cos t$, $y=\cos^2 t$ for $0\le t\le \pi$ lies on which graph?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$y=x$</div><div class="quiz-opt" data-idx="1">$y=x^2$</div><div class="quiz-opt" data-idx="2">$x^2+y^2=1$</div><div class="quiz-opt" data-idx="3">$y=\sqrt{x}$</div></div><div class="quiz-explain correct-exp">Correct. Since $x=\cos t$, we have $y=\cos^2 t=x^2$, so the points lie on the parabola $y=x^2$ (over the segment $-1\le x\le 1$).</div><div class="quiz-explain wrong-exp">Substitute $x=\cos t$ into $y=\cos^2 t$ to get $y=x^2$ directly.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1003,6 +1025,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Since $t^2+1>0$, the sign matches that of $t^3$, so the curve is concave up for $t>0$ and concave down for $t<0$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 2.3: horizontal and vertical tangents of a loop</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $x=t^2-2t$, $y=t^3-3t$, locate all points with horizontal and vertical tangent lines.</p>
+  <p>Compute the velocities: $dx/dt=2t-2=2(t-1)$ and $dy/dt=3t^2-3=3(t-1)(t+1)$.</p>
+  <p><strong>Horizontal tangents</strong> need $dy/dt=0$ with $dx/dt\neq 0$. Now $dy/dt=0$ at $t=1$ and $t=-1$. At $t=1$ the denominator $dx/dt=0$ too, so that value is suspect and not a clean horizontal tangent; at $t=-1$ we have $dx/dt=2(-2)=-4\neq 0$, giving a genuine horizontal tangent at $(x,y)=(3,2)$.</p>
+  <p><strong>Vertical tangents</strong> need $dx/dt=0$ with $dy/dt\neq 0$. Now $dx/dt=0$ only at $t=1$, where $dy/dt=3(0)(2)=0$ as well. So $t=1$ makes both velocities vanish; the slope is the indeterminate $0/0$ and the point $(x,y)=(-1,-2)$ is a candidate cusp or self-crossing, not a plain vertical tangent. The honest conclusion: one horizontal tangent at $(3,2)$, and a singular point at $(-1,-2)$ that needs a limit of $dy/dx$ to resolve.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the second-derivative formula</summary><div class="detail-body"><div class="worked-solution">
+  <p>The slope $y'=dy/dx$ is itself a function along the curve, so it has its own $t$-derivative. To get $d^2y/dx^2$ we want the rate of change of the slope with respect to $x$, not with respect to $t$. Apply the same chain-rule idea that produced the first derivative, but to $y'$ in place of $y$:</p>
+  $$\frac{d^2y}{dx^2}=\frac{d}{dx}\!\left(\frac{dy}{dx}\right)=\frac{\dfrac{d}{dt}\!\left(\dfrac{dy}{dx}\right)}{\dfrac{dx}{dt}}.$$
+  <p>This makes the structure transparent: every $x$-derivative along the curve is a $t$-derivative divided by $dx/dt$. Writing $\dot x=dx/dt$, $\dot y=dy/dt$ and so on, one differentiation of the quotient $\dot y/\dot x$ gives the explicit form</p>
+  $$\frac{d^2y}{dx^2}=\frac{\dot x\,\ddot y-\dot y\,\ddot x}{\dot x^{\,3}}.$$
+  <p>The numerator $\dot x\ddot y-\dot y\ddot x$ is the same cross product that appears in curvature, and the cube of $\dot x$ in the denominator is exactly why a sign change in $\dot x$ flips concavity. This is why Worked Example 2.2 had $t^3$ in the denominator.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Computing the second derivative as $\dfrac{d^2y/dt^2}{d^2x/dt^2}$. This is not the concavity. The correct rule differentiates the <em>slope</em> $dy/dx$ with respect to $t$ and then divides once more by $dx/dt$. For $x=t^2$, $y=t^3$ the wrong recipe gives $6t/2=3t$, while the right one gives $\dfrac{3(t^2+1)/(\dots)}{\dots}$ form with a $t^3$ in the denominator. The two never agree, and only the second tracks concavity correctly.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For $x=t^2$, $y=t^3$, the slope $dy/dx$ at the parameter value $t=2$ is</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{2}{3}$</div><div class="quiz-opt" data-idx="1">$2$</div><div class="quiz-opt" data-idx="2">$3$</div><div class="quiz-opt" data-idx="3">$6$</div></div><div class="quiz-explain correct-exp">Correct. Here $dy/dt=3t^2$ and $dx/dt=2t$, so $dy/dx=3t/2$. At $t=2$ this is $3$.</div><div class="quiz-explain wrong-exp">Use $dy/dx=(3t^2)/(2t)=3t/2$; at $t=2$ the value is $3$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">A parametric curve has a vertical tangent line where</div><span class="quiz-number">2.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$dx/dt=0$ and $dy/dt\neq 0$</div><div class="quiz-opt" data-idx="1">$dy/dt=0$ and $dx/dt\neq 0$</div><div class="quiz-opt" data-idx="2">$dx/dt=dy/dt$</div><div class="quiz-opt" data-idx="3">$d^2y/dx^2=0$</div></div><div class="quiz-explain correct-exp">Correct. A vertical tangent means the slope $dy/dx=(dy/dt)/(dx/dt)$ is undefined, which happens when $dx/dt=0$ while $dy/dt\neq 0$.</div><div class="quiz-explain wrong-exp">The slope is undefined when the denominator $dx/dt$ vanishes while the numerator $dy/dt$ does not.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1035,6 +1074,30 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$L_n=\sum_{i=1}^n\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}=\sum_{i=1}^n\sqrt{\left(\frac{\Delta x_i}{\Delta t_i}\right)^2+\left(\frac{\Delta y_i}{\Delta t_i}\right)^2}\,\Delta t_i.$$
   <p>By the Mean Value Theorem applied to $f$ and $g$ on each subinterval, there are points $t_i^\ast$ and $t_i^{\ast\ast}$ with $\Delta x_i/\Delta t_i=f'(t_i^\ast)$ and $\Delta y_i/\Delta t_i=g'(t_i^{\ast\ast})$. As the mesh tends to zero these sample points coalesce, and continuity of $f'$ and $g'$ makes the sum a Riemann sum for $\sqrt{(f')^2+(g')^2}$. Hence $L_n\to\int_\alpha^\beta\sqrt{(f')^2+(g')^2}\,dt$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 3.2: length of one arch of a cycloid</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the length of one arch of the cycloid $x=t-\sin t$, $y=1-\cos t$ for $0\le t\le 2\pi$.</p>
+  <p>The velocities are $dx/dt=1-\cos t$ and $dy/dt=\sin t$, so the squared speed is</p>
+  $$(1-\cos t)^2+\sin^2 t=1-2\cos t+\cos^2 t+\sin^2 t=2-2\cos t=2(1-\cos t).$$
+  <p>Use the half-angle identity $1-\cos t=2\sin^2(t/2)$, so the squared speed is $4\sin^2(t/2)$ and the speed is $2\bigl|\sin(t/2)\bigr|$. On $[0,2\pi]$ we have $t/2\in[0,\pi]$, where $\sin(t/2)\ge 0$, so the absolute value drops:</p>
+  $$L=\int_0^{2\pi}2\sin\!\frac{t}{2}\,dt=\Bigl[-4\cos\frac{t}{2}\Bigr]_0^{2\pi}=-4\cos\pi+4\cos 0=4+4=8.$$
+  <p>One arch has length exactly $8$, a clean result first found by Christopher Wren. Note how essential the absolute value was: dropping it carelessly on a wider interval would let positive and negative pieces cancel.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: surface area of a revolved arc</summary><div class="detail-body"><div class="worked-solution">
+  <p>The arc $x=t$, $y=t^2$ for $0\le t\le 1$ is revolved about the $x$-axis. Set up the surface-area integral and reduce it to a single substitution.</p>
+  <p>For a parametric arc revolved about the $x$-axis the surface element is $2\pi y\,ds$, where $ds=\sqrt{(dx/dt)^2+(dy/dt)^2}\,dt$. Here $dx/dt=1$, $dy/dt=2t$, so $ds=\sqrt{1+4t^2}\,dt$, and $y=t^2$. Thus</p>
+  $$S=\int_0^1 2\pi\,t^2\sqrt{1+4t^2}\,dt.$$
+  <p>The integrand is the textbook form $y\,ds$, with $y$ contributing the radius of revolution and $ds$ the slant length. The key point of method: build the integrand as (circumference)$\times$(arc element), $2\pi y\cdot ds$, exactly as in the Cartesian case, but read $ds$ off the parametric speed.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.4: a curve that retraces, distance versus length</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $x=\cos t$, $y=\sin t$ on $0\le t\le 4\pi$, what does the arc length integral compute, and what is the geometric length of the curve?</p>
+  <p>The speed is $\sqrt{\sin^2 t+\cos^2 t}=1$, so the integral is $\int_0^{4\pi}1\,dt=4\pi$. But the image is the unit circle, whose geometric length is $2\pi$. The parameter interval traces the circle twice, and the integral faithfully reports the total distance traveled, $4\pi$, not the length of the geometric set.</p>
+  <p>This is the crucial caveat behind every arc-length problem: the formula integrates speed and therefore measures distance traveled. It equals the geometric length only when the curve is traced exactly once with no backtracking. Always confirm the interval traces the curve a single time before quoting the answer as a length.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Dropping the absolute value when a square root of a square appears. The speed is $\sqrt{2(1-\cos t)}=2\bigl|\sin(t/2)\bigr|$, not $2\sin(t/2)$ in general. On an interval where $\sin(t/2)$ stays nonnegative the bars are harmless, but over a longer range they prevent the integrand from going negative, which would otherwise undercount length. Length is the integral of a nonnegative speed, so the integrand must never be negative.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The length of $x=t^2$, $y=t^2$ for $0\le t\le 1$ equals</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$1$</div><div class="quiz-opt" data-idx="1">$2$</div><div class="quiz-opt" data-idx="2">$\dfrac{2}{3}$</div><div class="quiz-opt" data-idx="3">$\sqrt{2}$</div></div><div class="quiz-explain correct-exp">Correct. Here $dx/dt=dy/dt=2t$, so the speed is $\sqrt{4t^2+4t^2}=2\sqrt{2}\,t$ and $L=\int_0^1 2\sqrt2\,t\,dt=\sqrt2$. (The curve is the segment from $(0,0)$ to $(1,1)$, length $\sqrt2$.)</div><div class="quiz-explain wrong-exp">The speed is $2\sqrt2\,t$, so $L=\int_0^1 2\sqrt2\,t\,dt=\sqrt2$. The image is the diagonal segment of length $\sqrt2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1069,6 +1132,38 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Write the Cartesian point $(-1,1)$ in polar coordinates with $r>0$ and $0\le\theta<2\pi$.</p>
   <p>The radius is $r=\sqrt{(-1)^2+1^2}=\sqrt2$. The point lies in the second quadrant ($x<0$, $y>0$), where $\tan\theta=y/x=-1$ gives $\theta=3\pi/4$. Hence the polar coordinates are</p>
   $$\left(\sqrt2,\ \tfrac{3\pi}{4}\right).$$
+  <p>The naive arctangent $\arctan(-1)=-\pi/4$ would place the point in the fourth quadrant, which is wrong. Adding $\pi$ to land in the correct second quadrant gives $3\pi/4$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: slope of a polar curve</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the slope of the tangent line to the cardioid $r=1+\sin\theta$ at $\theta=0$.</p>
+  <p>A polar curve is the parametric curve $x=r\cos\theta$, $y=r\sin\theta$ with parameter $\theta$. The slope is</p>
+  $$\frac{dy}{dx}=\frac{dy/d\theta}{dx/d\theta}=\frac{\dfrac{dr}{d\theta}\sin\theta+r\cos\theta}{\dfrac{dr}{d\theta}\cos\theta-r\sin\theta}.$$
+  <p>Here $dr/d\theta=\cos\theta$. At $\theta=0$: $r=1$, $\cos\theta=1$, $\sin\theta=0$. The numerator is $1\cdot 0+1\cdot 1=1$; the denominator is $1\cdot 1-1\cdot 0=1$. So the slope is $1$. The lesson: never differentiate $r$ alone for a slope. You must convert to $x$ and $y$ first, because the tangent direction mixes radial and angular motion.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.4: a line and a vertical line in polar form</summary><div class="detail-body"><div class="worked-solution">
+  <p>Convert the Cartesian line $x=3$ to polar form, and identify the curve $\theta=\pi/4$.</p>
+  <p>Since $x=r\cos\theta$, the vertical line $x=3$ becomes $r\cos\theta=3$, that is $r=3\sec\theta$. As $\theta$ ranges over $(-\pi/2,\pi/2)$ the radius sweeps the whole vertical line.</p>
+  <p>The equation $\theta=\pi/4$ fixes the angle and lets $r$ be any real number. Allowing negative $r$, this is the entire straight line through the origin at $45^\circ$, namely $y=x$. If $r$ were restricted to $r\ge 0$, it would be only the ray into the first quadrant.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Reading $\theta$ straight off $\theta=\arctan(y/x)$ without checking the quadrant. The arctangent returns values only in $(-\pi/2,\pi/2)$, so for any point with $x<0$ it lands you in the wrong half-plane. For $(-1,1)$ the calculator gives $-\pi/4$, but the true angle is $3\pi/4$. Fix: inspect the signs of $x$ and $y$, and add $\pi$ when $x<0$.</div>
+
+  <h3>Reading polar graphs</h3>
+  <p>The catalogue of standard polar curves is worth memorizing because their shapes are instantly recognizable from the form of $r=f(\theta)$. Circles through the origin take the form $r=a\cos\theta$ or $r=a\sin\theta$, with diameter $|a|$. Limacons $r=a\pm b\cos\theta$ have an inner loop when $a<b$, a dimple when $b<a<2b$, and a cardioid when $a=b$. Roses $r=a\cos n\theta$ have $n$ petals when $n$ is odd and $2n$ petals when $n$ is even, each petal of length $|a|$. Spirals such as $r=\theta$ (Archimedean) or $r=e^{\theta}$ (logarithmic) wind outward as the angle grows.</p>
+
+  <details><summary>Worked Example 4.5: a four-petaled rose</summary><div class="detail-body"><div class="worked-solution">
+  <p>How many petals does $r=\cos 2\theta$ have, and what is the length of each petal?</p>
+  <p>The coefficient is $n=2$, which is even, so the rose has $2n=4$ petals. Each petal reaches its tip where $|\cos 2\theta|=1$, that is at $r=\pm 1$, so every petal has length $1$. A single petal lies between consecutive zeros of $r$: $\cos 2\theta=0$ at $2\theta=\pm\pi/2$, giving $\theta\in[-\pi/4,\pi/4]$ for the petal pointing along the positive $x$-axis. The other three petals follow by the symmetry of $\cos 2\theta$, spaced $90^\circ$ apart.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: tangent lines at the pole</summary><div class="detail-body"><div class="worked-solution">
+  <p>A useful shortcut governs the tangent direction when a polar curve passes through the origin. Suppose $r(\theta_0)=0$ for some angle $\theta_0$ and $r'(\theta_0)\neq 0$. Evaluate the general polar slope at this angle:</p>
+  $$\frac{dy}{dx}=\frac{r'\sin\theta+r\cos\theta}{r'\cos\theta-r\sin\theta}.$$
+  <p>At $\theta_0$ the terms containing $r$ vanish because $r=0$, leaving</p>
+  $$\frac{dy}{dx}\bigg|_{\theta_0}=\frac{r'(\theta_0)\sin\theta_0}{r'(\theta_0)\cos\theta_0}=\tan\theta_0.$$
+  <p>So the tangent line at the pole is simply the ray $\theta=\theta_0$ itself. This is why a rose $r=\cos 2\theta$, which hits the origin at $\theta=\pi/4,3\pi/4,\dots$, has petals separated by tangent lines along exactly those angles. The rule turns the hard-looking question "in what direction does the curve leave the origin?" into "at what angle is $r=0$?".</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The polar equation $r=4\sin\theta$ describes</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">a circle of radius $4$ centered at the origin</div><div class="quiz-opt" data-idx="1">a circle of radius $2$ centered at $(0,2)$</div><div class="quiz-opt" data-idx="2">a line through the origin</div><div class="quiz-opt" data-idx="3">a spiral</div></div><div class="quiz-explain correct-exp">Correct. Multiplying by $r$ gives $r^2=4r\sin\theta$, that is $x^2+y^2=4y$, or $x^2+(y-2)^2=4$: a circle of radius $2$ centered at $(0,2)$.</div><div class="quiz-explain wrong-exp">Multiply by $r$ to get $x^2+y^2=4y$, then complete the square: $x^2+(y-2)^2=4$, a circle of radius $2$ centered at $(0,2)$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1108,6 +1203,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$A=\frac{1}{2}\Bigl[\theta-\sin 2\theta\Bigr]_{\pi/6}^{5\pi/6}=\frac{1}{2}\left(\frac{2\pi}{3}-\bigl(\sin\tfrac{5\pi}{3}-\sin\tfrac{\pi}{3}\bigr)\right)=\frac{1}{2}\left(\frac{2\pi}{3}+\sqrt3\right)=\frac{\pi}{3}+\frac{\sqrt3}{2}.$$
   </div></div></details>
 
+  <details><summary>Worked Example 5.3: area inside a cardioid</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the area enclosed by the cardioid $r=1+\cos\theta$.</p>
+  <p>The whole cardioid is traced once as $\theta$ runs from $0$ to $2\pi$, and $r\ge 0$ throughout, so</p>
+  $$A=\frac{1}{2}\int_0^{2\pi}(1+\cos\theta)^2\,d\theta=\frac{1}{2}\int_0^{2\pi}\bigl(1+2\cos\theta+\cos^2\theta\bigr)\,d\theta.$$
+  <p>Replace $\cos^2\theta=\tfrac12(1+\cos 2\theta)$, so the integrand becomes $\tfrac32+2\cos\theta+\tfrac12\cos 2\theta$. Over a full period $\int_0^{2\pi}\cos\theta\,d\theta=0$ and $\int_0^{2\pi}\cos 2\theta\,d\theta=0$, leaving only the constant:</p>
+  $$A=\frac{1}{2}\int_0^{2\pi}\frac{3}{2}\,d\theta=\frac{1}{2}\cdot\frac{3}{2}\cdot 2\pi=\frac{3\pi}{2}.$$
+  </div></div></details>
+
+  <details><summary>Going deeper: why the area element is $\tfrac12 r^2\,d\theta$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Partition $[\alpha,\beta]$ into subintervals $[\theta_{i-1},\theta_i]$ of width $\Delta\theta_i$. On the $i$th piece pick a sample angle $\theta_i^\ast$ and approximate the swept region by a true circular sector of radius $f(\theta_i^\ast)$ subtending angle $\Delta\theta_i$. A sector is the fraction $\Delta\theta_i/(2\pi)$ of a full disk of radius $f(\theta_i^\ast)$, so its area is</p>
+  $$\frac{\Delta\theta_i}{2\pi}\cdot\pi\bigl(f(\theta_i^\ast)\bigr)^2=\frac{1}{2}\bigl(f(\theta_i^\ast)\bigr)^2\,\Delta\theta_i.$$
+  <p>Summing over all pieces gives $\sum \tfrac12 f(\theta_i^\ast)^2\,\Delta\theta_i$, a Riemann sum for the continuous function $\tfrac12 f(\theta)^2$. Because $f$ is continuous, as the mesh tends to zero this converges to the integral, establishing</p>
+  $$A=\frac{1}{2}\int_\alpha^\beta f(\theta)^2\,d\theta.$$
+  <p>The contrast with Cartesian area is the geometry of the element: there the building block is a thin rectangle of area (height)$\times dx$; here it is a thin wedge whose area grows like $r^2$, not $r$, which is exactly why $r$ is squared.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Forgetting that area scales as $r^2$ and writing the element as $r\,d\theta$ (which is actually an arc-length piece) instead of $\tfrac12 r^2\,d\theta$. A second frequent mistake is integrating a full loop of a rose over $[0,2\pi]$, which sweeps every petal and overlaps, instead of finding the $r=0$ crossings that bound a single petal. Always locate where $r=0$ to set the limits for one loop.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The area enclosed by the circle $r=2$ computed with the polar area formula is</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$2\pi$</div><div class="quiz-opt" data-idx="1">$8\pi$</div><div class="quiz-opt" data-idx="2">$4\pi$</div><div class="quiz-opt" data-idx="3">$\pi$</div></div><div class="quiz-explain correct-exp">Correct. $A=\tfrac12\int_0^{2\pi} 2^2\,d\theta=\tfrac12\cdot 4\cdot 2\pi=4\pi$, matching $\pi r^2=\pi(2)^2$.</div><div class="quiz-explain wrong-exp">Apply $A=\tfrac12\int_0^{2\pi} r^2\,d\theta$ with $r=2$: the value is $4\pi=\pi(2)^2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1135,6 +1248,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Here $dr/d\theta=e^{\theta}=r$, so $r^2+(dr/d\theta)^2=e^{2\theta}+e^{2\theta}=2e^{2\theta}$. Then</p>
   $$L=\int_0^{2\pi}\sqrt{2e^{2\theta}}\,d\theta=\sqrt2\int_0^{2\pi}e^{\theta}\,d\theta=\sqrt2\,\bigl(e^{2\pi}-1\bigr).$$
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: perimeter of a cardioid</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the total length of the cardioid $r=1+\cos\theta$.</p>
+  <p>Here $dr/d\theta=-\sin\theta$, so</p>
+  $$r^2+\left(\frac{dr}{d\theta}\right)^2=(1+\cos\theta)^2+\sin^2\theta=1+2\cos\theta+\cos^2\theta+\sin^2\theta=2+2\cos\theta=2(1+\cos\theta).$$
+  <p>Apply the half-angle identity $1+\cos\theta=2\cos^2(\theta/2)$, so the quantity under the root is $4\cos^2(\theta/2)$ and the integrand is $2\bigl|\cos(\theta/2)\bigr|$. On $[0,\pi]$, $\theta/2\in[0,\pi/2]$ where $\cos(\theta/2)\ge 0$. By symmetry the upper half ($0$ to $\pi$) is half the perimeter, so</p>
+  $$L=2\int_0^{\pi}2\cos\frac{\theta}{2}\,d\theta=2\Bigl[4\sin\frac{\theta}{2}\Bigr]_0^{\pi}=2\cdot 4=8.$$
+  <p>The cardioid has perimeter $8$. Working over $[0,\pi]$ and doubling sidesteps the sign change of $\cos(\theta/2)$ that occurs past $\theta=\pi$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: arc length of an Archimedean spiral</summary><div class="detail-body"><div class="worked-solution">
+  <p>Set up the length of the Archimedean spiral $r=\theta$ from $\theta=0$ to $\theta=\pi$, and evaluate it.</p>
+  <p>Here $dr/d\theta=1$, so $r^2+(dr/d\theta)^2=\theta^2+1$ and</p>
+  $$L=\int_0^{\pi}\sqrt{\theta^2+1}\,d\theta.$$
+  <p>This is a standard $\sqrt{u^2+1}$ integral with antiderivative $\tfrac12\bigl(\theta\sqrt{\theta^2+1}+\ln(\theta+\sqrt{\theta^2+1})\bigr)$. Evaluating from $0$ to $\pi$,</p>
+  $$L=\frac{1}{2}\Bigl(\pi\sqrt{\pi^2+1}+\ln\bigl(\pi+\sqrt{\pi^2+1}\bigr)\Bigr).$$
+  <p>The point of method is that the $r^2$ term, here $\theta^2$, dominates the integrand for large $\theta$, which matches the geometric fact that a spiral's outer turns are much longer than its inner ones.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Using the Cartesian-graph integrand $\sqrt{1+(dr/d\theta)^2}$ for a polar curve. That formula is for $y=f(x)$ where $dx$ is the base variable. In polar coordinates the radius itself rotates, so the correct integrand carries an $r^2$ term: $\sqrt{r^2+(dr/d\theta)^2}$. A quick check is the circle $r=a$: the polar formula gives $\int_0^{2\pi}\sqrt{a^2}\,d\theta=2\pi a$, while the wrong $\sqrt{1+0}$ would absurdly give $2\pi$.</div>
 
   <details><summary>Going deeper: where $r^2+(dr/d\theta)^2$ comes from</summary><div class="detail-body"><div class="worked-solution">
   <p>Start from the velocity components above and form the sum of their squares. Abbreviate $r'=dr/d\theta$:</p>
@@ -1178,6 +1311,34 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Find the focus of the parabola $y^2=12x$.</p>
   <p>Compare with the standard form $y^2=4px$: matching gives $4p=12$, so $p=3$. For $y^2=4px$ the focus lies at $(p,0)$, hence the focus is at $(3,0)$ and the directrix is the line $x=-3$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.3: eccentricity of an ellipse from its axes</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the foci and eccentricity of $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$.</p>
+  <p>Here $a^2=25$ and $b^2=9$, so $a=5$ and $b=3$ with the major axis along $x$. For an ellipse the focal distance satisfies $c^2=a^2-b^2=25-9=16$, so $c=4$ and the foci are $(\pm 4,0)$. The eccentricity is</p>
+  $$e=\frac{c}{a}=\frac{4}{5}.$$
+  <p>Since $0<e<1$, this is indeed an ellipse. As $e\to 0$ the foci merge at the center and the ellipse rounds toward a circle; as $e\to 1$ it elongates toward a parabola.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the polar equation $r=\dfrac{ed}{1+e\cos\theta}$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Place a focus at the origin and the directrix as the vertical line $x=d$ to the right. The focus-directrix definition of a conic says every point $P$ satisfies</p>
+  $$\frac{\text{distance to focus}}{\text{distance to directrix}}=e,$$
+  <p>a constant, the eccentricity. In polar coordinates the distance from $P=(r,\theta)$ to the focus at the origin is simply $r$. Its $x$-coordinate is $r\cos\theta$, so its horizontal distance to the directrix $x=d$ is $d-r\cos\theta$. The definition reads</p>
+  $$\frac{r}{\,d-r\cos\theta\,}=e\quad\Longrightarrow\quad r=e\,(d-r\cos\theta)=ed-er\cos\theta.$$
+  <p>Collect the $r$ terms: $r+er\cos\theta=ed$, that is $r(1+e\cos\theta)=ed$, hence</p>
+  $$r=\frac{ed}{1+e\cos\theta}.$$
+  <p>The single parameter $e$ controls the shape. When $e=0$ the equation is $r=$ constant, a circle. When $0<e<1$ the denominator never vanishes, so $r$ stays finite and the curve closes into an ellipse. When $e=1$ the denominator hits $0$ at $\theta=\pi$, sending $r\to\infty$ along one direction, the open parabola. When $e>1$ the denominator changes sign, producing the two branches of a hyperbola. Putting the directrix on a different side or using $\sin\theta$ merely rotates this picture.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.4: completing the square to identify a conic</summary><div class="detail-body"><div class="worked-solution">
+  <p>Identify the curve $4x^2+9y^2-16x+18y-11=0$.</p>
+  <p>Group and complete the square in each variable. For $x$: $4(x^2-4x)=4(x-2)^2-16$. For $y$: $9(y^2+2y)=9(y+1)^2-9$. Substitute:</p>
+  $$4(x-2)^2-16+9(y+1)^2-9-11=0\ \Longrightarrow\ 4(x-2)^2+9(y+1)^2=36.$$
+  <p>Divide by $36$ to reach standard form:</p>
+  $$\frac{(x-2)^2}{9}+\frac{(y+1)^2}{4}=1.$$
+  <p>This is an ellipse centered at $(2,-1)$ with $a=3$ along $x$ and $b=2$ along $y$. Because both squared terms are positive with different coefficients, the equation is an ellipse; equal coefficients would give a circle, and opposite signs a hyperbola.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Reading the eccentricity off $r=\dfrac{ed}{1+e\cos\theta}$ before normalizing the constant term in the denominator to $1$. For $r=\dfrac{6}{2+\cos\theta}$ a student may declare $e=1$ from the bare $\cos\theta$ coefficient. Divide top and bottom by $2$ first to reach $r=\dfrac{3}{1+\tfrac12\cos\theta}$, which correctly gives $e=\tfrac12$, an ellipse, not a parabola.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">A conic with eccentricity $e=1$ is a</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">circle</div><div class="quiz-opt" data-idx="1">ellipse</div><div class="quiz-opt" data-idx="2">hyperbola</div><div class="quiz-opt" data-idx="3">parabola</div></div><div class="quiz-explain correct-exp">Correct. Eccentricity exactly $1$ is the boundary case between bounded and unbounded conics, namely the parabola.</div><div class="quiz-explain wrong-exp">By the eccentricity classification, $e=1$ is a parabola; $0<e<1$ is an ellipse and $e>1$ a hyperbola.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

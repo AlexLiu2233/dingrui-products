@@ -975,6 +975,30 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 1.2: a critical point along a line</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find all critical points of $f(x,y)=x^2-2xy+y^2+2x$.</p>
+      <p>The partials are</p>
+      $$f_x=2x-2y+2,\qquad f_y=-2x+2y.$$
+      <p>Setting $f_y=0$ gives $x=y$. Substituting into $f_x=0$ gives $2x-2x+2=2\ne 0$, a contradiction. The system is therefore inconsistent, so $f$ has <strong>no critical points at all</strong>. This is honest behaviour: the quadratic part $x^2-2xy+y^2=(x-y)^2$ is degenerate (a ridge, not a bowl), and the linear term $2x$ tilts the ridge so it never flattens. A function need not have any critical point.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 1.3: a non-differentiable critical point</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Locate and describe the extremum of $f(x,y)=\sqrt{x^2+y^2}$, the distance from the origin.</p>
+      <p>Away from the origin the partials are</p>
+      $$f_x=\frac{x}{\sqrt{x^2+y^2}},\qquad f_y=\frac{y}{\sqrt{x^2+y^2}},$$
+      <p>which never both vanish, since $f_x^2+f_y^2=1$ wherever they are defined. So there is no point where $\nabla f=\mathbf{0}$. Yet $f$ has an obvious global minimum of $0$ at the origin. The resolution is that $f$ is <strong>not differentiable</strong> at $(0,0)$: the cone has a sharp tip there. The full definition of a critical point includes points where a partial derivative fails to exist, and this is exactly such a point.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Students often solve $f_x=0$ and $f_y=0$ <em>separately</em> and pair up the roots independently, reporting every combination as a critical point. The equations must be solved as a <em>simultaneous</em> system: a point is critical only if it satisfies both at once. In Worked Example 1.1, $f_x=0$ gives $y=x^2$ and that relation must be carried into $f_y=0$; treating $x$ from one equation and $y$ from the other would invent points that are not on the surface's flat spots. Always back-substitute and verify $\nabla f=\mathbf{0}$ at each candidate.
+  </div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which condition is necessary for $f(x,y)$ to have a local extremum at an interior point where it is differentiable?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">The Hessian determinant is positive.</div><div class="quiz-opt" data-idx="1">$\nabla f=\mathbf{0}$ at the point.</div><div class="quiz-opt" data-idx="2">$f_{xx}>0$ at the point.</div><div class="quiz-opt" data-idx="3">$f$ is bounded on its domain.</div></div><div class="quiz-explain correct-exp">Correct. At an interior differentiable extremum the gradient must vanish; this is the multivariable Fermat theorem.</div><div class="quiz-explain wrong-exp">A vanishing gradient is the necessary first-order condition. The Hessian and second partials classify a critical point but are not necessary for an extremum to exist, and boundedness is unrelated.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1026,6 +1050,31 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 2.2: a function with several critical points</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find and classify all critical points of $f(x,y)=x^4+y^4-4xy+1$.</p>
+      <p>The partials are $f_x=4x^3-4y$ and $f_y=4y^3-4x$. Setting both to zero gives $y=x^3$ and $x=y^3$. Substituting, $x=(x^3)^3=x^9$, so $x^9-x=0$, that is $x(x^8-1)=0$. The real roots are $x=0,\ x=1,\ x=-1$, giving the critical points</p>
+      $$(0,0),\qquad (1,1),\qquad (-1,-1).$$
+      <p>The second partials are $f_{xx}=12x^2$, $f_{yy}=12y^2$, $f_{xy}=-4$, so $D=144x^2y^2-16$.</p>
+      <p>At $(0,0)$: $D=0-16=-16<0$, a <strong>saddle</strong>. At $(1,1)$ and $(-1,-1)$: $D=144-16=128>0$ with $f_{xx}=12>0$, so both are <strong>local minima</strong>, each with value $f=1+1-4+1=-1$. This is a classic two-well surface with a saddle ridge separating the wells.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 2.3: a local maximum</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Classify the critical point of $f(x,y)=4+2x+2y-x^2-y^2$.</p>
+      <p>Setting $f_x=2-2x=0$ and $f_y=2-2y=0$ gives the single critical point $(1,1)$. The second partials are $f_{xx}=-2$, $f_{yy}=-2$, $f_{xy}=0$, so</p>
+      $$D=(-2)(-2)-0^2=4>0,\qquad f_{xx}=-2<0.$$
+      <p>Therefore $(1,1)$ is a <strong>local maximum</strong>, with value $f(1,1)=4+2+2-1-1=6$. Completing the square confirms it: $f=6-(x-1)^2-(y-1)^2\le 6$, so the maximum is global as well.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A widespread mistake is to conclude "saddle" or "no extremum" whenever $f_{xx}<0$ but $f_{yy}>0$ (or vice versa). The discriminant, not the individual second partials, decides. It is the cross term $f_{xy}$ that can rescue or ruin the classification. Equally common is reading $D>0$ alone as "minimum"; you must then check the sign of $f_{xx}$ to tell a max from a min. And $D=0$ never means "saddle": it means the test says nothing, and you must analyse $f$ directly along curves through the point.
+  </div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">At a critical point, $f_{xx}=2$, $f_{yy}=8$, and $f_{xy}=5$. What is the classification?</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Local minimum.</div><div class="quiz-opt" data-idx="1">Local maximum.</div><div class="quiz-opt" data-idx="2">Inconclusive.</div><div class="quiz-opt" data-idx="3">Saddle point.</div></div><div class="quiz-explain correct-exp">Correct. $D=(2)(8)-5^2=16-25=-9<0$, so the point is a saddle.</div><div class="quiz-explain wrong-exp">Compute $D=f_{xx}f_{yy}-f_{xy}^2=16-25=-9$. Since $D<0$ the point is a saddle regardless of the sign of $f_{xx}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1063,6 +1112,41 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p><strong>Compare.</strong> The candidate values are $-\tfrac12$, $-\tfrac14$, and $0$. The absolute minimum is $-\tfrac12$ at $(\tfrac12,\tfrac12)$ and the absolute maximum is $0$ at the corners.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 3.2: extrema on a triangular region</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find the absolute extrema of $f(x,y)=1+4x-5y$ on the closed triangle $T$ with vertices $(0,0)$, $(2,0)$, and $(0,3)$.</p>
+      <p><strong>Interior.</strong> Since $f_x=4$ and $f_y=-5$ never vanish, there are no interior critical points. A linear function on a polygon attains its extrema only on the boundary, in fact at the vertices.</p>
+      <p><strong>Edges.</strong> We still check each edge to be systematic. On $y=0$, $0\le x\le 2$: $f=1+4x$ runs from $1$ to $9$. On $x=0$, $0\le y\le 3$: $f=1-5y$ runs from $1$ down to $-14$. On the hypotenuse from $(2,0)$ to $(0,3)$, parametrize $x=2-2t$, $y=3t$, $t\in[0,1]$: $f=1+4(2-2t)-15t=9-23t$, decreasing from $9$ to $-14$.</p>
+      <p><strong>Compare.</strong> The vertex values are $f(0,0)=1$, $f(2,0)=9$, $f(0,3)=-14$. The absolute maximum is $9$ at $(2,0)$ and the absolute minimum is $-14$ at $(0,3)$.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 3.3: a curved boundary handled with substitution</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find the absolute extrema of $f(x,y)=x^2+2y^2-x$ on the closed disk $x^2+y^2\le 1$.</p>
+      <p><strong>Interior.</strong> $f_x=2x-1=0$ and $f_y=4y=0$ give the single critical point $(\tfrac12,0)$, which lies inside the disk. There $f=\tfrac14-\tfrac12=-\tfrac14$.</p>
+      <p><strong>Boundary.</strong> On $x^2+y^2=1$ replace $y^2=1-x^2$, with $-1\le x\le 1$. Then</p>
+      $$f=x^2+2(1-x^2)-x=-x^2-x+2.$$
+      <p>This single-variable function has $\tfrac{d}{dx}(-x^2-x+2)=-2x-1=0$ at $x=-\tfrac12$, giving $f=-\tfrac14+\tfrac12+2=\tfrac94$. Check the interval endpoints $x=\pm 1$ (where $y=0$): $f(1,0)=0$ and $f(-1,0)=2$.</p>
+      <p><strong>Compare.</strong> Candidates are $-\tfrac14$, $\tfrac94$, $0$, $2$. The absolute minimum is $-\tfrac14$ at $(\tfrac12,0)$ and the absolute maximum is $\tfrac94$ at $\left(-\tfrac12,\pm\tfrac{\sqrt3}{2}\right)$.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Going deeper: why a closed bounded region guarantees extrema</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>The extreme value theorem in two variables rests on two topological facts. First, a closed and bounded subset of $\mathbb{R}^2$ is <em>compact</em> (the Heine-Borel theorem). Second, a continuous function maps a compact set to a compact set, and a compact subset of $\mathbb{R}$ is closed and bounded, hence contains its supremum and infimum.</p>
+      <p>To see why both hypotheses are needed, drop one at a time. On the <em>open</em> disk $x^2+y^2<1$ the function $f=x$ has supremum $1$ but never attains it, because the boundary where $x=1$ is excluded. On the <em>unbounded</em> strip $0\le x$, $0\le y\le 1$ the function $f=x$ is continuous but has no maximum. Closedness supplies the boundary; boundedness keeps the values from escaping to infinity. Remove either and the guarantee fails.</p>
+      <p>This is exactly why the closed-region procedure must scan the entire boundary, not just interior critical points: the theorem promises the extremum exists somewhere on the compact set, and the boundary is precisely where it hides when no interior critical point wins.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The most frequent slip on closed-region problems is forgetting the <em>endpoints of each boundary edge</em>. Reducing an edge to a one-variable function and finding its interior critical point is only half the job: the corners where edges meet are candidates too, and on a curved boundary the parameter interval endpoints must be evaluated. A close second is parametrizing the boundary but then dropping the constraint that the parameter stays in its interval, which can produce a fake extreme value lying outside the region.
+  </div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">When finding the absolute extrema of a continuous $f$ on a closed bounded region, which set of candidates must be compared?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Interior critical points and boundary extreme points (including corners).</div><div class="quiz-opt" data-idx="1">Only interior critical points.</div><div class="quiz-opt" data-idx="2">Only the four corners of the region.</div><div class="quiz-opt" data-idx="3">Points where the Hessian determinant is zero.</div></div><div class="quiz-explain correct-exp">Correct. Global extrema occur at interior critical points or on the boundary, so both sets of candidates must be evaluated and compared.</div><div class="quiz-explain wrong-exp">A global extremum can sit on the boundary even when no interior critical point is extreme, so interior points alone are not enough, and boundaries are more than just corners.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1102,6 +1186,33 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p>With $y=x$: $2x^2=8$, so $x=\pm 2$ and $f=4$. With $y=-x$: $f=-4$. The maximum is $4$ and the minimum is $-4$.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 4.2: maximize a product under a sum constraint</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Maximize $f(x,y,z)=xyz$ subject to $x+y+z=12$ with $x,y,z>0$.</p>
+      <p>Here $\nabla f=(yz,xz,xy)$ and $\nabla g=(1,1,1)$. The Lagrange system is</p>
+      $$yz=\lambda,\qquad xz=\lambda,\qquad xy=\lambda,\qquad x+y+z=12.$$
+      <p>From $yz=xz$ and $z>0$ we get $x=y$. From $xz=xy$ and $x>0$ we get $y=z$. Hence $x=y=z$, and the constraint gives $3x=12$, so $x=y=z=4$. The maximum is</p>
+      $$f(4,4,4)=64.$$
+      <p>This is the three-variable AM-GM inequality in disguise: among positive numbers with a fixed sum, the product is largest when they are equal.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 4.3: an inequality proved by Lagrange</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find the extreme values of $f(x,y)=2x+y$ on the ellipse $x^2+4y^2=1$, and read off the resulting inequality.</p>
+      <p>With $g=x^2+4y^2$, $\nabla f=(2,1)$ and $\nabla g=(2x,8y)$. The system is</p>
+      $$2=2\lambda x,\qquad 1=8\lambda y,\qquad x^2+4y^2=1.$$
+      <p>So $x=\tfrac{1}{\lambda}$ and $y=\tfrac{1}{8\lambda}$. Substituting into the constraint, $\tfrac{1}{\lambda^2}+4\cdot\tfrac{1}{64\lambda^2}=1$, that is $\tfrac{1}{\lambda^2}\left(1+\tfrac{1}{16}\right)=1$, so $\lambda^2=\tfrac{17}{16}$ and $\lambda=\pm\tfrac{\sqrt{17}}{4}$.</p>
+      <p>Then $f=2x+y=\tfrac{2}{\lambda}+\tfrac{1}{8\lambda}=\tfrac{17}{8\lambda}=\pm\tfrac{17}{8}\cdot\tfrac{4}{\sqrt{17}}=\pm\tfrac{\sqrt{17}}{2}$. So the maximum is $\tfrac{\sqrt{17}}{2}$ and the minimum is $-\tfrac{\sqrt{17}}{2}$. Equivalently $|2x+y|\le \tfrac{\sqrt{17}}{2}$ for every point on the ellipse, a sharp bound attained at the two tangency points.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A frequent mistake is to <em>cancel a variable</em> when manipulating the Lagrange equations without recording the case where that variable is zero. From $yz=xz$ one divides by $z$ to get $x=y$, but $z=0$ is a separate branch that must be examined (it may satisfy or violate the constraint and can hide an extremum). A second error is solving for $\lambda$ and stopping: $\lambda$ is only an auxiliary unknown. You must return to find the actual points $(x,y)$ and evaluate $f$ there, then compare, because Lagrange produces candidates, not a labelled max and min.
+  </div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The Lagrange condition for extremizing $f$ subject to $g=k$ states that at a solution:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\nabla f=\mathbf{0}$ and $g=k$.</div><div class="quiz-opt" data-idx="1">$\nabla f$ is orthogonal to $\nabla g$.</div><div class="quiz-opt" data-idx="2">$\nabla f=\lambda\,\nabla g$ for some scalar $\lambda$, with $g=k$.</div><div class="quiz-opt" data-idx="3">$f=g$ at the optimal point.</div></div><div class="quiz-explain correct-exp">Correct. The gradients are parallel at a constrained extremum, expressed as $\nabla f=\lambda\nabla g$, together with the constraint equation.</div><div class="quiz-explain wrong-exp">At a constrained extremum the gradient of $f$ need not vanish; instead it is parallel (not orthogonal) to $\nabla g$, which is the relation $\nabla f=\lambda\nabla g$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1144,6 +1255,32 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 5.3: nearest point on a line in space</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find the point on the line of intersection of the planes $x+y+z=1$ and $x-y+2z=2$ that is closest to the origin.</p>
+      <p>Minimize $f=x^2+y^2+z^2$ subject to $g=x+y+z=1$ and $h=x-y+2z=2$. With $\nabla f=(2x,2y,2z)$, $\nabla g=(1,1,1)$, $\nabla h=(1,-1,2)$, the condition $\nabla f=\lambda\nabla g+\mu\nabla h$ gives</p>
+      $$2x=\lambda+\mu,\qquad 2y=\lambda-\mu,\qquad 2z=\lambda+2\mu.$$
+      <p>So $x=\tfrac{\lambda+\mu}{2}$, $y=\tfrac{\lambda-\mu}{2}$, $z=\tfrac{\lambda+2\mu}{2}$. Impose the two constraints. The sum $x+y+z=1$ gives $\tfrac{3\lambda+2\mu}{2}=1$, that is $3\lambda+2\mu=2$. For the second, $x-y=\mu$ and $2z=\lambda+2\mu$, so $x-y+2z=\mu+(\lambda+2\mu)=\lambda+3\mu=2$.</p>
+      <p>Solve the linear system $3\lambda+2\mu=2$, $\lambda+3\mu=2$. From the second, $\lambda=2-3\mu$; substituting into the first, $3(2-3\mu)+2\mu=2$, so $6-7\mu=2$ and $\mu=\tfrac{4}{7}$. Then $\lambda=2-3\cdot\tfrac{4}{7}=\tfrac{2}{7}$. The closest point is</p>
+      $$x=\tfrac{\lambda+\mu}{2}=\tfrac{3}{7},\quad y=\tfrac{\lambda-\mu}{2}=-\tfrac{1}{7},\quad z=\tfrac{\lambda+2\mu}{2}=\tfrac{5}{7}.$$
+      <p>A quick check: both $x+y+z=\tfrac{3-1+5}{7}=1$ and $x-y+2z=\tfrac{3+1+10}{7}=2$ hold, confirming the solution sits on the line.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Going deeper: why the gradient lies in the span of the constraint gradients</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Suppose $g$ and $h$ are smooth with $\nabla g$ and $\nabla h$ linearly independent at a point $\mathbf{x}_0$ on the intersection curve $C=\{g=k_1,\ h=k_2\}$. By the implicit function theorem $C$ is a smooth curve near $\mathbf{x}_0$, and its tangent direction is $\mathbf{T}=\nabla g\times\nabla h$, since $\mathbf{T}$ is orthogonal to both surface normals.</p>
+      <p>Parametrize $C$ as $\mathbf{r}(t)$ with $\mathbf{r}(t_0)=\mathbf{x}_0$, and set $\phi(t)=f(\mathbf{r}(t))$. At a constrained extremum, $\phi'(t_0)=\nabla f\cdot\mathbf{r}'(t_0)=0$, so $\nabla f\perp\mathbf{T}$.</p>
+      <p>Now $\{\nabla g,\nabla h,\mathbf{T}\}$ is an orthogonal-style spanning set for $\mathbb{R}^3$: $\mathbf{T}$ is perpendicular to the plane spanned by $\nabla g$ and $\nabla h$. Any vector perpendicular to $\mathbf{T}$ must therefore lie in that plane. Since $\nabla f\perp\mathbf{T}$, we conclude $\nabla f=\lambda\nabla g+\mu\nabla h$ for some scalars. The independence of $\nabla g,\nabla h$ is exactly what guarantees the plane is two-dimensional and the multipliers are determined.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> With two constraints students sometimes write a single multiplier, $\nabla f=\lambda\nabla g$, ignoring $h$ entirely, or they impose the impossible $\nabla f\perp\nabla g$ and $\nabla f\perp\nabla h$. Two constraints require <em>two</em> multipliers and the relation $\nabla f=\lambda\nabla g+\mu\nabla h$. A subtler error is applying the method where $\nabla g$ and $\nabla h$ are <em>parallel</em> (linearly dependent): there the intersection is not a smooth curve and the multiplier representation can fail, so such points must be inspected on their own.
+  </div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For extremizing $f$ subject to two constraints $g=k_1$ and $h=k_2$ in $\mathbb{R}^3$, the optimality condition is:</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\nabla f=\lambda\,\nabla g$ and $\nabla h=\mathbf{0}$.</div><div class="quiz-opt" data-idx="1">$\nabla f=\lambda\,\nabla g+\mu\,\nabla h$ with both constraints satisfied.</div><div class="quiz-opt" data-idx="2">$\nabla g=\nabla h$ at the optimal point.</div><div class="quiz-opt" data-idx="3">$\nabla f$ is orthogonal to both $\nabla g$ and $\nabla h$.</div></div><div class="quiz-explain correct-exp">Correct. With two constraints the gradient of $f$ must be a linear combination of the two constraint gradients, plus both constraint equations must hold.</div><div class="quiz-explain wrong-exp">Two constraints require two multipliers: $\nabla f=\lambda\nabla g+\mu\nabla h$. The gradient of $f$ lies in the span of the constraint gradients, not orthogonal to them.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1182,6 +1319,45 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 6.3: maximum-volume box with fixed surface area</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>An open-top rectangular box (no lid) is to be built from $12$ square metres of material. Find the dimensions that maximize the volume.</p>
+      <p>Let the base be $x$ by $y$ and the height $z$. The volume is $V=xyz$. An open-top box has base area $xy$ and four sides of total area $2xz+2yz$, so the surface constraint is</p>
+      $$g=xy+2xz+2yz=12.$$
+      <p>The system $\nabla V=\lambda\nabla g$ is $yz=\lambda(y+2z)$, $xz=\lambda(x+2z)$, $xy=\lambda(2x+2y)$. Subtracting the first two, $z(y-x)=\lambda(y-x)$, so $x=y$ (the other branch $z=\lambda$ leads back to the same place). With $x=y$ the equations reduce, and one finds $x=y=2z$. Substituting into the constraint, $4z^2+4z^2+4z^2=12$, that is $12z^2=12$, so $z=1$, $x=y=2$.</p>
+      <p>The maximal volume is $V=2\cdot 2\cdot 1=4$ cubic metres. Note the base is square and twice the height, the standard shape for an open box.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 6.4: maximize utility on a budget (economics)</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>A consumer maximizes the Cobb-Douglas utility $U(x,y)=x^{1/2}y^{1/2}$ subject to the budget $p_x x+p_y y=I$, with prices $p_x=2$, $p_y=4$ and income $I=80$.</p>
+      <p>The condition $\nabla U=\lambda\nabla g$ with $g=2x+4y$ gives</p>
+      $$\tfrac12 x^{-1/2}y^{1/2}=2\lambda,\qquad \tfrac12 x^{1/2}y^{-1/2}=4\lambda.$$
+      <p>Dividing the first by the second eliminates $\lambda$: $\dfrac{y}{x}=\dfrac{2}{4}=\dfrac12$, so $x=2y$. The budget $2(2y)+4y=80$ gives $8y=80$, so $y=10$ and $x=20$. The optimal bundle is $(20,10)$ with utility $U=\sqrt{200}=10\sqrt2$.</p>
+      <p>The multiplier here is the <em>marginal utility of income</em>: from the second equation $\lambda=\tfrac{1}{8}x^{1/2}y^{-1/2}=\tfrac{1}{8}\sqrt{20/10}=\tfrac{\sqrt2}{8}$, the rate at which the maximal utility rises per extra dollar of income.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Going deeper: deriving the shadow-price interpretation of $\lambda$</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Let $\mathbf{x}^{*}(k)$ be the optimizer of $f$ subject to $g(\mathbf{x})=k$, and let $f^{*}(k)=f(\mathbf{x}^{*}(k))$ be the optimal value as the constraint level $k$ varies. Differentiate $f^{*}$ using the chain rule:</p>
+      $$\frac{df^{*}}{dk}=\nabla f(\mathbf{x}^{*})\cdot\frac{d\mathbf{x}^{*}}{dk}.$$
+      <p>At the optimizer the Lagrange condition gives $\nabla f=\lambda\nabla g$, so</p>
+      $$\frac{df^{*}}{dk}=\lambda\,\nabla g(\mathbf{x}^{*})\cdot\frac{d\mathbf{x}^{*}}{dk}.$$
+      <p>Now differentiate the constraint identity $g(\mathbf{x}^{*}(k))=k$ with respect to $k$: the left side is $\nabla g\cdot\tfrac{d\mathbf{x}^{*}}{dk}$ and the right side is $1$. Substituting,</p>
+      $$\frac{df^{*}}{dk}=\lambda\cdot 1=\lambda.$$
+      <p>So the multiplier is exactly the sensitivity of the optimal value to a unit relaxation of the constraint, the shadow price. In Worked Example 6.4 this is the marginal utility of income; in a production problem it is the marginal value of one more unit of a scarce resource.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> In applied problems the usual failure is setting up the wrong objective or constraint, for example using the closed-box surface area $2(xy+yz+zx)$ when the problem says open-top, or maximizing what should be minimized. Read carefully which quantity is fixed and which is optimized. A second pitfall is dropping the physical domain restrictions ($x,y,z>0$): a Lagrange candidate with a negative dimension is not a valid box, and ignoring the positivity can let a spurious critical point masquerade as the answer.
+  </div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In a constrained optimization $f^{*}(k)$ with constraint $g=k$, the Lagrange multiplier $\lambda$ equals:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">The optimal value $f^{*}(k)$ itself.</div><div class="quiz-opt" data-idx="1">The constraint level $k$.</div><div class="quiz-opt" data-idx="2">The rate of change $\dfrac{d f^{*}}{dk}$ of the optimum with respect to $k$.</div><div class="quiz-opt" data-idx="3">Always zero at an interior optimum.</div></div><div class="quiz-explain correct-exp">Correct. The multiplier is the shadow price: it measures how the optimal value changes per unit change in the constraint level.</div><div class="quiz-explain wrong-exp">The multiplier is a sensitivity, the derivative of the optimal value with respect to the constraint level, not the optimal value or the constraint level itself.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1218,6 +1394,29 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p>Yet the curve has a cusp at the origin and $x\ge 0$ along it (since $x^3=y^2\ge 0$), so $x=0$ is the constrained minimum, attained at the very point where $\nabla g=\mathbf{0}$. This shows the Lagrange method can miss extrema where the constraint gradient degenerates, so such points must be checked separately.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 7.2: resolving a degenerate test by path analysis</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>The origin is a critical point of $f(x,y)=x^2+y^4$ and also of $h(x,y)=x^2-y^4$. Both have $D=0$ there, since $f_{yy}=12y^2=0$ and $h_{yy}=-12y^2=0$ at the origin. The discriminant cannot tell them apart, so analyse each directly.</p>
+      <p>For $f=x^2+y^4$: every term is nonnegative and $f(0,0)=0$, so $f\ge 0$ with equality only at the origin. The origin is a strict <strong>local (indeed global) minimum</strong>.</p>
+      <p>For $h=x^2-y^4$: along the $x$-axis $h=x^2\ge 0$, but along the $y$-axis $h=-y^4\le 0$. The function takes both signs in every neighbourhood of the origin, so the origin is a <strong>saddle</strong>. Identical second-order data, opposite conclusions: this is the precise sense in which $D=0$ carries no information.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 7.3: confirming a constrained max with the bordered Hessian</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Maximize $f(x,y)=xy$ subject to $g=x+y=10$, and verify the candidate is a maximum using the bordered Hessian.</p>
+      <p>Lagrange: $\nabla f=(y,x)$, $\nabla g=(1,1)$, so $y=\lambda$, $x=\lambda$, and $x+y=10$ gives $x=y=5$, $\lambda=5$, with $f=25$. Now build the bordered Hessian. Here $g$ is linear so $g_{xx}=g_{yy}=g_{xy}=0$, and $f_{xx}=0$, $f_{yy}=0$, $f_{xy}=1$. With $g_x=g_y=1$,</p>
+      $$\bar H=\det\begin{pmatrix}0&1&1\\ 1&0&1\\ 1&1&0\end{pmatrix}.$$
+      <p>Expanding along the first row: $\bar H=0\cdot(0-1)-1\cdot(0-1)+1\cdot(1-0)=0+1+1=2>0$. By the sign convention ($\bar H>0$ means a constrained local maximum), $(5,5)$ is a maximum, confirming the obvious result that the product of two numbers with fixed sum is largest when they are equal.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Two traps recur in the degenerate cases. First, reading the unconstrained sign convention into the bordered Hessian: there $\bar H>0$ signals a <em>maximum</em> and $\bar H<0$ a minimum, the reverse of the ordinary $D$-test, because the bordering row encodes the tangency. Second, trusting Lagrange blindly at points where $\nabla g=\mathbf{0}$: as Worked Example 7.1 shows, the method silently skips such points, so any place where the constraint gradient vanishes (a cusp, a self-intersection) must be added to the candidate list by hand.
+  </div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">If the second derivatives test gives $D=0$ at a critical point, the correct conclusion is:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">The test is inconclusive; analyze $f$ along curves through the point.</div><div class="quiz-opt" data-idx="1">The point is automatically a saddle.</div><div class="quiz-opt" data-idx="2">The point is automatically a local minimum.</div><div class="quiz-opt" data-idx="3">The point cannot be a critical point.</div></div><div class="quiz-explain correct-exp">Correct. A zero discriminant gives no information; the behavior must be probed directly along paths through the point.</div><div class="quiz-explain wrong-exp">When $D=0$ the quadratic terms are degenerate, so the point may be a max, a min, or a saddle. Direct path analysis is required.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

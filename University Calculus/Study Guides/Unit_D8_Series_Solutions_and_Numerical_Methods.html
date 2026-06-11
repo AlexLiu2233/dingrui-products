@@ -958,6 +958,30 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Renaming the dummy index $k$ back to $n$, both $y''$ and $y$ are now series in $x^n$, so their sum has coefficient $(n+2)(n+1)a_{n+2} + a_n$ on $x^n$.</p>
   </div></div></details>
 
+  <p>Two further properties are used constantly when matching a series against a forcing term or a coefficient that itself is a polynomial. First, multiplying a power series by $x^m$ simply raises every exponent by $m$, so $x^m \sum a_n x^n = \sum a_n x^{n+m}$, and one re-indexes to recover a clean $\sum (\cdots) x^k$. Second, the <em>identity theorem</em> for power series states that if $\sum a_n (x-x_0)^n = \sum b_n (x-x_0)^n$ on an interval of positive length, then $a_n = b_n$ for every $n$. This is the engine of the whole method: setting the coefficient of each power to zero is legitimate precisely because a power series that vanishes on an interval must have all coefficients zero.</p>
+
+  <div class="formula-box"><div class="formula-label">Cauchy product (multiplying two series)</div>
+  $$ \left(\sum_{n=0}^{\infty} a_n x^n\right)\!\left(\sum_{n=0}^{\infty} b_n x^n\right) = \sum_{n=0}^{\infty} c_n x^n, \qquad c_n = \sum_{k=0}^{n} a_k\, b_{n-k}. $$ </div>
+
+  <details><summary>Worked Example 1.2: combining two derivative series into one</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose we must collect $y'' - 2x\,y'$ as a single series in $x^n$, where $y = \sum_{n=0}^{\infty} a_n x^n$. The two pieces start at different powers, so the bookkeeping matters.</p>
+  <p>From Example 1.1, $y'' = \sum_{n=0}^{\infty} (n+2)(n+1)a_{n+2}\, x^n$. For the second piece, $y' = \sum_{n=1}^{\infty} n\, a_n x^{n-1}$, so</p>
+  $$ -2x\,y' = -2\sum_{n=1}^{\infty} n\, a_n x^{n} = \sum_{n=0}^{\infty} (-2n\, a_n)\, x^n, $$
+  <p>where the lower limit may be written $n=0$ because the $n=0$ term contributes nothing. Adding,</p>
+  $$ y'' - 2x\,y' = \sum_{n=0}^{\infty} \big[ (n+2)(n+1)a_{n+2} - 2n\, a_n \big] x^n. $$
+  <p>The coefficient of $x^n$ is now in a single bracket, ready to be set equal to whatever appears on the right side of the equation. This is exactly the form needed for the Hermite-type equation $y'' - 2x y' + \lambda y = 0$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: finding a radius of convergence two ways</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the radius of convergence of $\sum_{n=0}^{\infty} \dfrac{x^n}{3^n (n+1)}$.</p>
+  <p><strong>Ratio test.</strong> With $a_n = 1/[3^n(n+1)]$,</p>
+  $$ \left| \frac{a_{n+1}}{a_n} \right| = \frac{3^n (n+1)}{3^{n+1}(n+2)} = \frac{1}{3}\cdot\frac{n+1}{n+2} \longrightarrow \frac{1}{3}, $$
+  <p>so $1/R = 1/3$ and $R = 3$. The series converges for $|x| < 3$.</p>
+  <p><strong>Sanity check by comparison.</strong> For $|x| < 3$ the factor $(x/3)^n$ decays geometrically and $1/(n+1) \le 1$, so the terms are dominated by a convergent geometric series; for $|x| > 3$ the geometric factor grows and the terms cannot tend to zero. Both routes agree on $R = 3$, which is the distance from the center $0$ to the singularity of the closed form $-\tfrac{3}{x}\ln(1 - x/3)$ at $x = 3$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Forgetting that the lower index of a differentiated series moves up. Writing $y' = \sum_{n=0}^{\infty} n\, a_n x^{n-1}$ and then shifting as though the sum started at $n=0$ injects a phantom $n=0$ term with a negative power $x^{-1}$. The fix is to note that the $n=0$ term of $y'$ is zero (it carries the factor $n=0$), so the differentiated sum genuinely starts at $n=1$; only then is the shift $k=n-1$ valid and the result $\sum_{k=0}^\infty (k+1)a_{k+1}x^k$ free of any negative power.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">After the substitution $k=n-1$, the series $\sum_{n=1}^{\infty} n\, a_n x^{n-1}$ equals which of the following?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sum_{k=0}^{\infty} k\, a_k x^{k}$</div><div class="quiz-opt" data-idx="1">$\sum_{k=0}^{\infty} (k+1)\, a_{k+1} x^{k}$</div><div class="quiz-opt" data-idx="2">$\sum_{k=1}^{\infty} (k+1)\, a_{k+1} x^{k+1}$</div><div class="quiz-opt" data-idx="3">$\sum_{k=0}^{\infty} (k-1)\, a_{k-1} x^{k}$</div></div><div class="quiz-explain correct-exp">Correct. With $n=k+1$, the coefficient $n\,a_n$ becomes $(k+1)a_{k+1}$, the power $x^{n-1}$ becomes $x^{k}$, and $n=1$ maps to $k=0$.</div><div class="quiz-explain wrong-exp">Substitute $n=k+1$ everywhere: $n\,a_n x^{n-1} = (k+1)a_{k+1}x^{k}$, and the lower limit $n=1$ becomes $k=0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -982,6 +1006,31 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>With $a_0, a_1$ free, the even coefficients reproduce $\cos x$ and the odd ones $\sin x$:</p>
   $$ y = a_0 \Big(1 - \tfrac{x^2}{2!} + \tfrac{x^4}{4!} - \cdots\Big) + a_1 \Big(x - \tfrac{x^3}{3!} + \cdots\Big) = a_0 \cos x + a_1 \sin x. $$
   </div></div></details>
+
+  <details><summary>Worked Example 2.2: Airy's equation $y'' - x y = 0$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Airy's equation has no elementary solution, so the series is the answer rather than a detour. Take $x_0 = 0$, an ordinary point since the coefficients $p=0$, $q=-x$ are entire. Put $y = \sum_{n=0}^{\infty} a_n x^n$. Then</p>
+  $$ y'' = \sum_{n=0}^{\infty} (n+2)(n+1)a_{n+2}\,x^n, \qquad x y = \sum_{n=1}^{\infty} a_{n-1} x^{n}. $$
+  <p>Collecting, the constant term gives $2\cdot 1\cdot a_2 = 0$, so $a_2 = 0$. For $n \ge 1$,</p>
+  $$ (n+2)(n+1)a_{n+2} - a_{n-1} = 0 \quad\Longrightarrow\quad a_{n+2} = \frac{a_{n-1}}{(n+2)(n+1)}. $$
+  <p>This is a three-step recurrence, so the coefficients split into three chains by remainder of the index modulo $3$. Starting from $a_0$ (free) and $a_1$ (free), with $a_2 = 0$ forcing the entire $a_{2}, a_5, a_8, \dots$ chain to vanish:</p>
+  $$ a_3 = \frac{a_0}{3\cdot 2} = \frac{a_0}{6}, \quad a_4 = \frac{a_1}{4\cdot 3} = \frac{a_1}{12}, \quad a_6 = \frac{a_3}{6\cdot 5} = \frac{a_0}{180}. $$
+  <p>Hence the general solution is</p>
+  $$ y = a_0\Big(1 + \tfrac{x^3}{6} + \tfrac{x^6}{180} + \cdots\Big) + a_1\Big(x + \tfrac{x^4}{12} + \cdots\Big), $$
+  <p>the two independent series being the Airy functions. Because the coefficients are entire, the radius of convergence is infinite.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: a series about a shifted point $x_0 = 1$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y'' - x y' - y = 0$ as a series about $x_0 = 1$, finding the recurrence. Substitute $t = x - 1$, so $x = t + 1$ and derivatives in $t$ equal derivatives in $x$. The equation becomes</p>
+  $$ y'' - (t+1) y' - y = 0, $$
+  <p>where primes are now $d/dt$. Put $y = \sum a_n t^n$. Then $y'' = \sum (n+2)(n+1)a_{n+2} t^n$, while</p>
+  $$ -(t+1)y' = -\sum_{n} n\, a_n t^{n} - \sum_{n}(n+1)a_{n+1} t^{n}, \qquad -y = -\sum a_n t^n. $$
+  <p>Collecting the coefficient of $t^n$ and setting it to zero,</p>
+  $$ (n+2)(n+1)a_{n+2} - n\, a_n - (n+1)a_{n+1} - a_n = 0, $$
+  $$ a_{n+2} = \frac{(n+1)a_{n+1} + (n+1)a_n}{(n+2)(n+1)} = \frac{a_{n+1} + a_n}{n+2}. $$
+  <p>With $a_0 = y(1)$ and $a_1 = y'(1)$ free, every later coefficient follows. The lesson is procedural: shifting the center to $x_0$ is identical to expanding the variable coefficients in powers of $t = x - x_0$ before collecting.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Setting the coefficient of $x^n$ to zero <em>before</em> all series share the same starting index. In $y'' - xy = 0$ the $y''$ series starts at $n=0$ but the $xy$ series starts at $n=1$. If you blindly equate brackets for all $n \ge 0$ you will mishandle $n=0$, which has no $xy$ contribution and forces $a_2 = 0$. Always isolate the lowest powers by hand, fix those coefficients, and only then write the general recurrence for $n$ above the common floor.</div>
 
   <details><summary>Going deeper: why the recurrence determines a two-parameter family</summary><div class="detail-body"><div class="worked-solution">
   <p>A two-term recurrence of the form $a_{n+2} = c_n\, a_n$ splits the coefficients into two independent chains: the even chain $a_0, a_2, a_4, \dots$ and the odd chain $a_1, a_3, a_5, \dots$. The even chain is fixed entirely once $a_0$ is chosen, and the odd chain once $a_1$ is chosen. Hence the solution space is spanned by the two series obtained from $(a_0,a_1)=(1,0)$ and $(0,1)$. These are linearly independent because at $x_0$ one has value $1$ and derivative $0$ while the other has value $0$ and derivative $1$, so their Wronskian at $x_0$ equals $1 \neq 0$. This matches the general theory: a second-order linear ODE has a two-dimensional solution space.</p>
@@ -1015,6 +1064,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y = (c_1 + c_2 \ln x)\, x^2. $$
   </div></div></details>
 
+  <details><summary>Worked Example 3.2: complex roots and an initial value problem</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $x^2 y'' + x y' + 4y = 0$ for $x > 0$ with $y(1) = 0$, $y'(1) = 2$.</p>
+  <p>Here $\alpha = 1$, $\beta = 4$, so the indicial equation is $r(r-1) + r + 4 = r^2 + 4 = 0$, giving $r = \pm 2i$, that is $\lambda = 0$, $\mu = 2$. The general solution is</p>
+  $$ y = c_1 \cos(2\ln x) + c_2 \sin(2\ln x). $$
+  <p>Apply the data at $x = 1$, where $\ln 1 = 0$: $y(1) = c_1 = 0$. Differentiating, $y' = -2c_1 \tfrac{\sin(2\ln x)}{x} + 2c_2 \tfrac{\cos(2\ln x)}{x}$, so $y'(1) = 2c_2 = 2$, giving $c_2 = 1$. Hence</p>
+  $$ y = \sin(2\ln x). $$
+  <p>The solution oscillates with respect to $\ln x$, so its zeros at $x = e^{k\pi/2}$ crowd together as $x \to 0^+$ and spread out as $x$ grows, the signature behavior of an Euler equation with complex exponents.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: distinct real roots, including a negative exponent</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $2x^2 y'' + 3x y' - y = 0$ for $x > 0$. Divide by $2$ to match the standard form $x^2 y'' + \tfrac{3}{2} x y' - \tfrac{1}{2} y = 0$, so $\alpha = \tfrac{3}{2}$, $\beta = -\tfrac{1}{2}$. The indicial equation is</p>
+  $$ r(r-1) + \tfrac{3}{2} r - \tfrac{1}{2} = r^2 + \tfrac{1}{2} r - \tfrac{1}{2} = 0 \;\Longrightarrow\; 2r^2 + r - 1 = (2r - 1)(r + 1) = 0, $$
+  <p>with roots $r_1 = \tfrac{1}{2}$ and $r_2 = -1$. The general solution is</p>
+  $$ y = c_1 \sqrt{x} + c_2 x^{-1}. $$
+  <p>The branch $x^{-1}$ blows up as $x \to 0^+$, so any solution bounded at the origin must have $c_2 = 0$. This is how Euler equations encode a boundary condition at a singular endpoint: only one of the two exponents is admissible there.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Reading $\alpha$ and $\beta$ off the equation without first dividing through to the standard form $x^2 y'' + \alpha x y' + \beta y = 0$. In $2x^2 y'' + 3x y' - y = 0$ a student who writes the indicial equation as $r(r-1) + 3r - 1 = 0$ has used the raw coefficients $3$ and $-1$ instead of $\tfrac{3}{2}$ and $-\tfrac{1}{2}$, and gets the wrong roots entirely. The leading coefficient of $x^2 y''$ must be $1$ before the indicial reading $r(r-1) + \alpha r + \beta$ applies.</div>
+
   <details><summary>Going deeper: Euler equations as constant-coefficient equations in disguise</summary><div class="detail-body"><div class="worked-solution">
   <p>The substitution $t = \ln x$ (for $x>0$) turns an Euler equation into a constant-coefficient ODE. By the chain rule $\frac{dy}{dx} = \frac{1}{x}\frac{dy}{dt}$ and $\frac{d^2y}{dx^2} = \frac{1}{x^2}\big(\frac{d^2y}{dt^2} - \frac{dy}{dt}\big)$. Substituting into $x^2 y'' + \alpha x y' + \beta y = 0$ clears every power of $x$:</p>
   $$ \frac{d^2 y}{dt^2} + (\alpha - 1)\frac{dy}{dt} + \beta y = 0. $$
@@ -1043,6 +1111,30 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y_2 = 1.1 + 0.1\,(1.2) = 1.22, \qquad x_2 = 0.2. $$
   <p>So $y(0.2) \approx 1.22$. The exact solution is $y = 2e^x - x - 1$, giving $y(0.2) = 2e^{0.2} - 1.2 \approx 1.2428$, so the two-step estimate is low by about $0.023$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: halving the step and watching the error halve</summary><div class="detail-body"><div class="worked-solution">
+  <p>Redo $y' = x + y$, $y(0) = 1$, this time reaching $x = 0.2$ in four steps of $h = 0.05$, and compare the error to the two-step run above.</p>
+  <div class="table-wrap"><table>
+  <thead><tr><th>$n$</th><th>$x_n$</th><th>$y_n$</th><th>slope $f = x_n + y_n$</th><th>$y_{n+1} = y_n + 0.05 f$</th></tr></thead>
+  <tbody>
+  <tr><td>0</td><td>0.00</td><td>1.000000</td><td>1.000000</td><td>1.050000</td></tr>
+  <tr><td>1</td><td>0.05</td><td>1.050000</td><td>1.100000</td><td>1.105000</td></tr>
+  <tr><td>2</td><td>0.10</td><td>1.105000</td><td>1.205000</td><td>1.165250</td></tr>
+  <tr><td>3</td><td>0.15</td><td>1.165250</td><td>1.315250</td><td>1.231013</td></tr>
+  </tbody>
+  </table></div>
+  <p>So $y(0.2) \approx 1.23101$. The exact value is $1.24281$, an error of about $0.0118$. The two-step run ($h=0.1$) had error $0.0228$. Halving $h$ cut the error from $0.0228$ to $0.0118$, almost exactly the factor of two predicted for a first-order method, confirming the $O(h)$ scaling of Section 6.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: improved (Heun) Euler, one step</summary><div class="detail-body"><div class="worked-solution">
+  <p>The plain method uses only the slope at the left endpoint. Heun's method (the improved Euler, a second-order Runge-Kutta) averages the left slope with the slope at the Euler-predicted right endpoint:</p>
+  $$ \tilde y_{n+1} = y_n + h f(x_n, y_n), \qquad y_{n+1} = y_n + \tfrac{h}{2}\big[f(x_n,y_n) + f(x_{n+1}, \tilde y_{n+1})\big]. $$
+  <p>For $y' = x + y$, $y(0)=1$, $h = 0.2$: the left slope is $f(0,1) = 1$, the predictor is $\tilde y_1 = 1 + 0.2(1) = 1.2$, and the right slope is $f(0.2, 1.2) = 0.2 + 1.2 = 1.4$. Averaging,</p>
+  $$ y_1 = 1 + \tfrac{0.2}{2}(1 + 1.4) = 1 + 0.1(2.4) = 1.24. $$
+  <p>Against the exact $1.24281$ this single Heun step has error $0.0028$, an order of magnitude better than one plain Euler step of the same size. The extra slope evaluation buys an extra order of accuracy.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Updating $y$ with the slope evaluated at the <em>new</em> point. Forward Euler must use $f(x_n, y_n)$, the slope at the point you are leaving, not $f(x_{n+1}, y_{n+1})$. Using the new point turns the explicit recipe into the implicit backward Euler equation $y_{n+1} = y_n + h f(x_{n+1}, y_{n+1})$, which cannot be evaluated directly because $y_{n+1}$ sits on both sides. Keep the subscripts straight: explicit means every quantity on the right is already known.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">For $y' = 2y$, $y(0)=1$, one Euler step with $h=0.5$ gives $y_1 = $</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e \approx 2.718$</div><div class="quiz-opt" data-idx="1">$1.5$</div><div class="quiz-opt" data-idx="2">$3$</div><div class="quiz-opt" data-idx="3">$2$</div></div><div class="quiz-explain correct-exp">Correct. $y_1 = y_0 + h f(x_0,y_0) = 1 + 0.5\,(2 \cdot 1) = 1 + 1 = 2$. The true value $e^{1}\approx 2.718$ shows the error of one large step.</div><div class="quiz-explain wrong-exp">Apply $y_1 = y_0 + h f$ with $f = 2y_0 = 2$: $1 + 0.5(2) = 2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1074,6 +1166,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>This matches the exact $y(0.2)=1.24281\ldots$ to four decimals in a single step, far better than the two Euler steps of Example 4.1.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: midpoint (RK2) step, and why curvature matters</summary><div class="detail-body"><div class="worked-solution">
+  <p>The second-order midpoint method is</p>
+  $$ k_1 = f(x_n, y_n), \qquad k_2 = f\!\left(x_n + \tfrac{h}{2}, \, y_n + \tfrac{h}{2}k_1\right), \qquad y_{n+1} = y_n + h\, k_2. $$
+  <p>Apply it to $y' = -2xy^2$, $y(0) = 1$, with $h = 0.2$, whose exact solution is $y = 1/(1+x^2)$. The left slope is $k_1 = -2(0)(1)^2 = 0$. The half-step predictor is $y_n + \tfrac{h}{2}k_1 = 1 + 0.1(0) = 1$ at $x = 0.1$, so</p>
+  $$ k_2 = -2(0.1)(1)^2 = -0.2, \qquad y_1 = 1 + 0.2(-0.2) = 0.96. $$
+  <p>The exact value is $1/(1 + 0.04) = 0.96154$, so the error is about $0.0015$. Plain Euler here would give $y_1 = 1 + 0.2(0) = 1$, missing the decrease entirely because the left slope is zero. The midpoint sample detects the curvature that Euler is blind to.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: RK4 versus Euler at equal cost</summary><div class="detail-body"><div class="worked-solution">
+  <p>RK4 costs four slope evaluations per step. A fair comparison gives plain Euler the same budget: four Euler steps for one RK4 step. Take $y' = y$, $y(0) = 1$, target $y(0.4)$, exact value $e^{0.4} = 1.49182$.</p>
+  <p><strong>One RK4 step, $h = 0.4$.</strong> With $f = y$: $k_1 = 1$, $k_2 = 1 + 0.2(1) = 1.2$, $k_3 = 1 + 0.2(1.2) = 1.24$, $k_4 = 1 + 0.4(1.24) = 1.496$. Then</p>
+  $$ y_1 = 1 + \tfrac{0.4}{6}\big(1 + 2(1.2) + 2(1.24) + 1.496\big) = 1 + \tfrac{0.4}{6}(7.376) = 1.49173. $$
+  <p><strong>Four Euler steps, $h = 0.1$.</strong> Each step multiplies by $(1 + 0.1) = 1.1$, so $y_4 = 1.1^4 = 1.4641$.</p>
+  <p>RK4 errs by $0.00009$; Euler at equal cost errs by $0.0277$, roughly three hundred times worse. The weighted four-slope average is not just incrementally better, it is in a different accuracy class.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Building each RK4 stage on the original $y_n$ instead of on the previous stage's increment. The correct chaining is $k_3 = f(x_n + \tfrac{h}{2}, y_n + \tfrac{h}{2}k_2)$, using $k_2$, not $k_1$. A frequent slip writes every inner $y$-argument as $y_n + \tfrac{h}{2}k_1$, which collapses RK4 toward a second-order method and silently destroys the fourth-order accuracy. Track which $k$ feeds the next: $k_1 \to k_2 \to k_3 \to k_4$.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">In RK4 the four slopes are combined with weights proportional to</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$1:1:1:1$</div><div class="quiz-opt" data-idx="1">$1:2:2:1$</div><div class="quiz-opt" data-idx="2">$1:3:3:1$</div><div class="quiz-opt" data-idx="3">$2:1:1:2$</div></div><div class="quiz-explain correct-exp">Correct. RK4 uses $y_{n+1} = y_n + \tfrac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)$, so the weights are $1:2:2:1$ and sum to $6$.</div><div class="quiz-explain wrong-exp">The midpoint slopes $k_2,k_3$ get double weight: the combination is $\tfrac{h}{6}(k_1+2k_2+2k_3+k_4)$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1096,6 +1206,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \text{new error} \approx 0.02 \times \frac{0.025}{0.1} = 0.02 \times \tfrac{1}{4} = 0.005. $$
   <p>For an RK4 run, the same factor-of-$4$ reduction would multiply the error by $(1/4)^4 = 1/256$, illustrating the payoff of higher order.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: estimating order from two runs</summary><div class="detail-body"><div class="worked-solution">
+  <p>You run an unknown method twice at the same endpoint and record errors $E(h) = 4.0\times 10^{-3}$ at $h = 0.1$ and $E(h/2) = 5.0\times 10^{-4}$ at $h = 0.05$. What is the order $p$?</p>
+  <p>If $E(h) \approx K h^p$, then the ratio of errors over a halving is</p>
+  $$ \frac{E(h)}{E(h/2)} \approx \frac{K h^p}{K (h/2)^p} = 2^p \quad\Longrightarrow\quad p = \log_2\!\frac{E(h)}{E(h/2)}. $$
+  <p>Here the ratio is $4.0\times10^{-3} / 5.0\times10^{-4} = 8$, so $p = \log_2 8 = 3$. The method is third order. This log-ratio estimate of $p$ is the standard experimental check that a solver is implemented correctly: the measured order should match the theoretical one.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: choosing a step size for a target tolerance</summary><div class="detail-body"><div class="worked-solution">
+  <p>An RK4 integration over $[0,1]$ gives endpoint error $1.6\times 10^{-5}$ at $h = 0.1$. What step size $h^\star$ should reach a tolerance of $10^{-8}$?</p>
+  <p>For a fourth-order method $E \approx K h^4$, so $K \approx 1.6\times10^{-5} / (0.1)^4 = 0.16$. Solving $0.16 (h^\star)^4 = 10^{-8}$,</p>
+  $$ (h^\star)^4 = \frac{10^{-8}}{0.16} = 6.25\times10^{-8}, \qquad h^\star = (6.25\times10^{-8})^{1/4} \approx 0.0158. $$
+  <p>So roughly $h^\star \approx 0.016$, meaning about $1/0.016 \approx 63$ steps instead of $10$. Notice the strong leverage of high order: improving accuracy by a factor of $1600$ required shrinking $h$ by only about $6.3$, because $6.3^4 \approx 1600$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Confusing local order with global order. Euler's <em>local</em> truncation error is $O(h^2)$, but its <em>global</em> error is only $O(h^1)$ because about $1/h$ local errors accumulate. Quoting the per-step exponent as the method's order overstates the convergence rate by one. The order that governs how a full integration improves under step refinement is always the global one: $p = 1$ for Euler, $p = 4$ for RK4.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">If a numerical method is fourth order, halving the step size $h$ multiplies the global error by approximately</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\tfrac{1}{2}$</div><div class="quiz-opt" data-idx="1">$\tfrac{1}{4}$</div><div class="quiz-opt" data-idx="2">$\tfrac{1}{16}$</div><div class="quiz-opt" data-idx="3">$\tfrac{1}{256}$</div></div><div class="quiz-explain correct-exp">Correct. Global error scales like $h^4$, so halving $h$ gives a factor $(1/2)^4 = 1/16$.</div><div class="quiz-explain wrong-exp">Fourth order means error $\sim h^4$; with $h \to h/2$ the factor is $(1/2)^4 = 1/16$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1127,6 +1253,36 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ |x| < 2. $$
   <p>No computation of coefficients is needed for this guarantee; the radius is read directly from the location of the singular points.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: a Frobenius solution and its indicial equation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Consider $2x y'' + y' + y = 0$, with a regular singular point at $x = 0$. Try the Frobenius series $y = \sum_{n=0}^{\infty} a_n x^{n+r}$, $a_0 \neq 0$. Then</p>
+  $$ y' = \sum (n+r) a_n x^{n+r-1}, \qquad y'' = \sum (n+r)(n+r-1) a_n x^{n+r-2}. $$
+  <p>Substituting, the lowest power $x^{r-1}$ comes only from $2xy''$ and $y'$:</p>
+  $$ \big[2r(r-1) + r\big] a_0\, x^{r-1} = r(2r - 1) a_0\, x^{r-1}. $$
+  <p>Since $a_0 \neq 0$, the indicial equation is $r(2r-1) = 0$, with roots $r = 0$ and $r = \tfrac{1}{2}$. The general coefficient relation, from the coefficient of $x^{n+r-1}$, is</p>
+  $$ \big[2(n+r)(n+r-1) + (n+r)\big] a_n + a_{n-1} = 0 \;\Longrightarrow\; a_n = \frac{-a_{n-1}}{(n+r)(2n+2r-1)}. $$
+  <p>The larger root $r = \tfrac{1}{2}$ always yields a genuine Frobenius solution; the smaller root $r = 0$ gives the second independent solution here because the roots do not differ by an integer. The Euler equation of Section 3 is the degenerate case where this recurrence forces $a_n = 0$ for $n \ge 1$, leaving the single term $x^r$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: the stability bound for forward Euler</summary><div class="detail-body"><div class="worked-solution">
+  <p>Apply forward Euler to the test equation $y' = \lambda y$ with $\lambda < 0$, whose exact solution $e^{\lambda x}$ decays to zero. One step gives</p>
+  $$ y_{n+1} = y_n + h \lambda y_n = (1 + h\lambda) y_n \;\Longrightarrow\; y_n = (1 + h\lambda)^n y_0. $$
+  <p>The numerical solution decays only when the amplification factor satisfies $|1 + h\lambda| < 1$, that is</p>
+  $$ -2 < h\lambda < 0 \;\Longrightarrow\; h < \frac{2}{|\lambda|}. $$
+  <p>If $\lambda = -100$ (a fast-decaying component), forward Euler is forced to use $h < 0.02$ even though the true solution is nearly zero almost immediately. This is the essence of stiffness: stability, not accuracy, dictates a punishingly small step. Backward Euler gives $y_n = (1 - h\lambda)^{-n} y_0$, whose factor has magnitude below $1$ for every $h > 0$ when $\lambda < 0$, so it stays stable at any step size.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: from local order $h^{p+1}$ to global order $h^{p}$</summary><div class="detail-body"><div class="worked-solution">
+  <p>The order-drop seen for Euler is general, and the reason is the accumulation of local errors under a Lipschitz bound. Suppose a one-step method has local truncation error bounded by $\tau \le C h^{p+1}$, and that $f$ satisfies a Lipschitz condition $|f(x,u) - f(x,v)| \le L |u - v|$. Let $e_n = y(x_n) - y_n$ be the global error after $n$ steps. Subtracting the numerical update from the exact-solution update introduces one fresh local error and propagates the existing one through the method, giving the recursive bound</p>
+  $$ |e_{n+1}| \le (1 + hL)\,|e_n| + C h^{p+1}. $$
+  <p>Iterating this linear inequality from $e_0 = 0$ yields a geometric sum,</p>
+  $$ |e_n| \le C h^{p+1} \sum_{j=0}^{n-1}(1 + hL)^{j} = C h^{p+1}\,\frac{(1+hL)^n - 1}{hL}. $$
+  <p>Over a fixed interval of length $X = nh$ we have $(1 + hL)^n \le e^{nhL} = e^{LX}$, so</p>
+  $$ |e_n| \le \frac{C\,h^{p}}{L}\big(e^{LX} - 1\big) = O(h^{p}). $$
+  <p>One power of $h$ is lost to the factor $1/(hL)$ produced by summing about $1/h$ steps. This is why a method whose single-step error is $O(h^{p+1})$ converges globally at the rate $O(h^p)$, and why the constant grows with the interval length and the Lipschitz constant of $f$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Treating a regular singular point as if it were ordinary and writing a plain $\sum a_n x^n$ about it. For $2xy'' + y' + y = 0$ the point $x=0$ is singular ($p = 1/(2x)$ is not analytic there), so a plain power series misses the $x^{1/2}$ behavior entirely and the recurrence breaks at the lowest order. The correct response is the Frobenius ansatz $y = x^r \sum a_n x^n$, whose exponent $r$ is fixed by the indicial equation before any coefficients are computed.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">For a stiff initial value problem, which approach typically remains stable at a large step size $h$?</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">An implicit method such as backward Euler</div><div class="quiz-opt" data-idx="1">Explicit (forward) Euler with the same $h$</div><div class="quiz-opt" data-idx="2">A power series about an ordinary point</div><div class="quiz-opt" data-idx="3">Reducing the order of the method</div></div><div class="quiz-explain correct-exp">Correct. Implicit methods like backward Euler have much larger stability regions, so they tolerate step sizes that make explicit methods diverge on stiff problems.</div><div class="quiz-explain wrong-exp">Stiff problems force tiny steps for explicit methods; implicit methods (backward Euler) stay stable at large $h$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

@@ -966,11 +966,31 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \mathcal{L}\{e^{at}\} = \int_{0}^{\infty} e^{-(s-a)t}\, dt = \frac{1}{s-a}, \qquad s > a. $$
   </div></div></details>
 
+  <details><summary>Worked Example 1.2: transform of $t$ from first principles</summary><div class="detail-body"><div class="worked-solution">
+    <p>We compute $\mathcal{L}\{t\}$ directly from the definition rather than quoting the table, valid for $s > 0$. Integrate by parts with $u = t$ and $dv = e^{-st}\,dt$, so $du = dt$ and $v = -\tfrac{1}{s}e^{-st}$:</p>
+    $$ \mathcal{L}\{t\} = \int_{0}^{\infty} t\, e^{-st}\, dt = \left[ -\frac{t}{s} e^{-st} \right]_{0}^{\infty} + \frac{1}{s}\int_{0}^{\infty} e^{-st}\, dt. $$
+    <p>For $s > 0$ the boundary term vanishes at both ends: at $t = 0$ the factor $t$ is zero, and as $t \to \infty$ the exponential $e^{-st}$ dominates the linear growth, so $t\,e^{-st} \to 0$. The remaining integral is $\mathcal{L}\{1\} = 1/s$, giving</p>
+    $$ \mathcal{L}\{t\} = \frac{1}{s}\cdot\frac{1}{s} = \frac{1}{s^{2}}. $$
+    <p>This matches $n!/s^{n+1}$ with $n = 1$, and the same integration-by-parts step repeated $n$ times produces the full power rule $\mathcal{L}\{t^{n}\} = n!/s^{n+1}$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a function that is not of exponential order</summary><div class="detail-body"><div class="worked-solution">
+    <p>The existence theorem gives a sufficient condition, not a necessary one, so it is worth seeing where it fails. Consider $f(t) = e^{t^{2}}$. For any fixed constant $a$, the ratio</p>
+    $$ \frac{e^{t^{2}}}{e^{at}} = e^{t^{2} - at} \to \infty \quad\text{as } t \to \infty, $$
+    <p>since $t^{2} - at \to \infty$. No choice of $M$ and $a$ can satisfy $|f(t)| \le M e^{at}$ for all large $t$, so $f$ is not of exponential order. Indeed the integral $\int_{0}^{\infty} e^{-st} e^{t^{2}}\, dt$ diverges for every $s$ because the integrand $e^{t^{2}-st} \to \infty$. By contrast $f(t) = t^{100}$ is of exponential order, because any polynomial is eventually dominated by $e^{t}$, so its transform exists for $s > 0$.</p>
+  </div></div></details>
+
   <details><summary>Going deeper: why bounded transforms satisfy $F(s) \to 0$ as $s \to \infty$</summary><div class="detail-body"><div class="worked-solution">
     <p>Suppose $|f(t)| \le M e^{at}$. For $s > a$ we bound the transform by pulling the absolute value inside the integral:</p>
     $$ |F(s)| \le \int_{0}^{\infty} e^{-st} |f(t)|\, dt \le M \int_{0}^{\infty} e^{-(s-a)t}\, dt = \frac{M}{s-a}. $$
     <p>As $s \to \infty$ the right side tends to $0$, so every transform of an exponential-order function decays to $0$. A consequence: a rational function with numerator degree at least the denominator degree (for instance a constant or a polynomial in $s$) cannot be the Laplace transform of such a function.</p>
   </div></div></details>
+
+  <p>One more structural remark sets up everything that follows. The transform is an integral against a parameter $s$, so it inherits the good behaviour of integrals: it is linear, it respects limits under the mild hypothesis of exponential order, and it is injective on continuous functions. Injectivity is what lets us speak of <em>the</em> inverse transform later, and exponential order is the recurring admission ticket. Almost every theorem in this unit carries the silent assumption that the functions involved are piecewise continuous and of exponential order, which is exactly the class of inputs that arise from constant-coefficient ODEs with reasonable forcing.</p>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Students often write $\mathcal{L}\{e^{at}\} = 1/(s-a)$ with no restriction on $s$, or worse plug in $s = a$ to "evaluate" it. The formula is only valid on the half line $s > a$, exactly the region where the defining integral converges. At $s = a$ the integrand is $e^{0} = 1$ and the integral $\int_0^\infty 1\,dt$ diverges. Always carry the region of convergence, because it tells you, for instance, that two different functions can never share a transform on overlapping half lines (uniqueness), and it flags when an answer cannot possibly be a Laplace transform.
+  </div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For which values of $s$ does $\mathcal{L}\{e^{3t}\} = \dfrac{1}{s-3}$ hold?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">All real $s$</div><div class="quiz-opt" data-idx="1">$s > 3$</div><div class="quiz-opt" data-idx="2">$s < 3$</div><div class="quiz-opt" data-idx="3">$s > 0$</div></div><div class="quiz-explain correct-exp">Correct. The defining integral $\int_0^\infty e^{-(s-3)t}\,dt$ converges precisely when $s - 3 > 0$, that is $s > 3$.</div><div class="quiz-explain wrong-exp">The integral $\int_0^\infty e^{-(s-3)t}\,dt$ converges only when the exponent is negative for large $t$, requiring $s - 3 > 0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1017,6 +1037,27 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \mathcal{L}\{t\cos 3t\} = \frac{s^{2}-9}{(s^{2}+9)^{2}}. $$
   </div></div></details>
 
+  <details><summary>Worked Example 2.3: transform of $e^{-t}(t^{2} + \cos 2t)$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Linearity lets us split the bracket, then the first shift theorem with $a = -1$ acts on each piece by sending $s \mapsto s + 1$. Start from the unshifted transforms $\mathcal{L}\{t^{2}\} = 2/s^{3}$ and $\mathcal{L}\{\cos 2t\} = s/(s^{2}+4)$. Replacing $s$ by $s+1$ in each:</p>
+    $$ \mathcal{L}\{e^{-t} t^{2}\} = \frac{2}{(s+1)^{3}}, \qquad \mathcal{L}\{e^{-t}\cos 2t\} = \frac{s+1}{(s+1)^{2}+4}. $$
+    <p>Adding the two results gives the full transform:</p>
+    $$ \mathcal{L}\{e^{-t}(t^{2} + \cos 2t)\} = \frac{2}{(s+1)^{3}} + \frac{s+1}{(s+1)^{2}+4}. $$
+    <p>Notice the order of operations: apply linearity first to break the sum apart, then apply the shift to each transform separately. The shift acts on the whole transform of each summand, including the numerator, which is why the cosine numerator becomes $s+1$ rather than staying $s$.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the sine and cosine transforms together</summary><div class="detail-body"><div class="worked-solution">
+    <p>Rather than two separate integration-by-parts marathons, compute both at once through the complex exponential. For $s > 0$,</p>
+    $$ \mathcal{L}\{e^{ibt}\} = \int_{0}^{\infty} e^{-st} e^{ibt}\, dt = \int_{0}^{\infty} e^{-(s-ib)t}\, dt = \frac{1}{s-ib}, $$
+    <p>valid because $|e^{-(s-ib)t}| = e^{-st} \to 0$. Rationalize by multiplying top and bottom by the conjugate $s + ib$:</p>
+    $$ \frac{1}{s-ib} = \frac{s+ib}{s^{2}+b^{2}} = \frac{s}{s^{2}+b^{2}} + i\,\frac{b}{s^{2}+b^{2}}. $$
+    <p>Since $e^{ibt} = \cos bt + i\sin bt$ and the transform is linear, the real part is $\mathcal{L}\{\cos bt\}$ and the imaginary part is $\mathcal{L}\{\sin bt\}$. Reading off the two parts gives both table entries simultaneously:</p>
+    $$ \mathcal{L}\{\cos bt\} = \frac{s}{s^{2}+b^{2}}, \qquad \mathcal{L}\{\sin bt\} = \frac{b}{s^{2}+b^{2}}. $$
+  </div></div></details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> When applying the first shift theorem to $e^{at}\cos bt$, a frequent slip is to shift only the denominator and leave the numerator as $s$, writing $\dfrac{s}{(s-a)^{2}+b^{2}}$. The rule $\mathcal{L}\{e^{at}f(t)\} = F(s-a)$ replaces <em>every</em> $s$ in $F(s)$, including the numerator, so the correct transform is $\dfrac{s-a}{(s-a)^{2}+b^{2}}$. A clean way to avoid the mistake is to write $F(s)$ as a single expression, then substitute the symbol $s-a$ for $s$ literally before simplifying.
+  </div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">What is $\mathcal{L}\{t^{3}\}$?</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{6}{s^{4}}$</div><div class="quiz-opt" data-idx="1">$\dfrac{3}{s^{4}}$</div><div class="quiz-opt" data-idx="2">$\dfrac{6}{s^{3}}$</div><div class="quiz-opt" data-idx="3">$\dfrac{1}{s^{4}}$</div></div><div class="quiz-explain correct-exp">Correct. With $n = 3$, $\mathcal{L}\{t^{n}\} = n!/s^{n+1} = 3!/s^{4} = 6/s^{4}$.</div><div class="quiz-explain wrong-exp">Use $\mathcal{L}\{t^{n}\} = n!/s^{n+1}$. For $n = 3$ this is $3!/s^{4} = 6/s^{4}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Using the first shift theorem, $\mathcal{L}\{e^{-t}\cos 4t\}$ equals which expression?</div><span class="quiz-number">2.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{s}{s^{2}+16}$</div><div class="quiz-opt" data-idx="1">$\dfrac{s-1}{(s-1)^{2}+16}$</div><div class="quiz-opt" data-idx="2">$\dfrac{4}{(s+1)^{2}+16}$</div><div class="quiz-opt" data-idx="3">$\dfrac{s+1}{(s+1)^{2}+16}$</div></div><div class="quiz-explain correct-exp">Correct. Replace $s$ by $s - a = s - (-1) = s+1$ in $\mathcal{L}\{\cos 4t\} = s/(s^{2}+16)$.</div><div class="quiz-explain wrong-exp">The shift is $s \mapsto s - a$ with $a = -1$, so $s \mapsto s+1$ throughout the cosine transform $s/(s^{2}+16)$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1037,6 +1078,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>Uniqueness justifies the phrase "the" inverse: if $f$ and $g$ are continuous on $[0,\infty)$ and have the same transform, then $f = g$ (Lerch's theorem). Repeated and complex linear factors call for two standard patterns.</p>
 
+  <p>Strategy for any rational $F(s) = P(s)/Q(s)$ runs in a fixed order. First confirm the degree of $P$ is strictly less than the degree of $Q$; if not, do polynomial division first, since a proper rational part is what the table can match. Next factor $Q$ completely over the reals into linear and irreducible-quadratic factors. Then allocate partial-fraction terms: one term per power of each repeated linear factor, and a linear numerator $\frac{As+B}{\cdots}$ over each irreducible quadratic. Finally match each piece to a table entry, completing the square whenever a quadratic is shifted. The cover-up method, evaluating both sides at the root of a factor, is the fastest way to pin down the constants over distinct linear factors.</p>
+
   <div class="formula-box">
     <div class="formula-label">Two patterns worth memorizing</div>
     $$ \mathcal{L}^{-1}\left\{ \frac{1}{(s-a)^{2}} \right\} = t\, e^{at}, \qquad \mathcal{L}^{-1}\left\{ \frac{1}{(s-a)^{2}+b^{2}} \right\} = \frac{1}{b}\, e^{at}\sin bt. $$
@@ -1053,6 +1096,27 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Write $\dfrac{s+7}{(s-1)(s+2)} = \dfrac{A}{s-1} + \dfrac{B}{s+2}$. Clearing denominators gives $s+7 = A(s+2) + B(s-1)$. Set $s = 1$: $8 = 3A$, so $A = \tfrac{8}{3}$. Set $s = -2$: $5 = -3B$, so $B = -\tfrac{5}{3}$. Therefore</p>
     $$ \mathcal{L}^{-1}\left\{ \frac{s+7}{(s-1)(s+2)} \right\} = \frac{8}{3} e^{t} - \frac{5}{3} e^{-2t}. $$
   </div></div></details>
+
+  <details><summary>Worked Example 3.3: a repeated linear factor, $\dfrac{s}{(s+1)^{2}(s-2)}$</summary><div class="detail-body"><div class="worked-solution">
+    <p>A repeated factor $(s+1)^{2}$ needs <em>two</em> terms in the decomposition, one for each power up to the multiplicity:</p>
+    $$ \frac{s}{(s+1)^{2}(s-2)} = \frac{A}{s+1} + \frac{B}{(s+1)^{2}} + \frac{C}{s-2}. $$
+    <p>Clear denominators: $s = A(s+1)(s-2) + B(s-2) + C(s+1)^{2}$. Set $s = -1$: $-1 = B(-3)$, so $B = \tfrac{1}{3}$. Set $s = 2$: $2 = C(9)$, so $C = \tfrac{2}{9}$. To find $A$, compare $s^{2}$ coefficients: $0 = A + C$, so $A = -\tfrac{2}{9}$. Now invert term by term, using $\mathcal{L}^{-1}\{1/(s-a)\} = e^{at}$ and $\mathcal{L}^{-1}\{1/(s-a)^{2}\} = t e^{at}$:</p>
+    $$ \mathcal{L}^{-1}\left\{ \frac{s}{(s+1)^{2}(s-2)} \right\} = -\frac{2}{9} e^{-t} + \frac{1}{3} t e^{-t} + \frac{2}{9} e^{2t}. $$
+  </div></div></details>
+
+  <details><summary>Going deeper: completing the square to invert an irreducible quadratic</summary><div class="detail-body"><div class="worked-solution">
+    <p>When a denominator is an irreducible quadratic such as $s^{2} + 2s + 5$, do not force real partial fractions. Complete the square to expose a shifted sine or cosine. Take</p>
+    $$ \frac{s+3}{s^{2}+2s+5} = \frac{s+3}{(s+1)^{2}+4}. $$
+    <p>Match the shift $a = -1$ and frequency $b = 2$. Rewrite the numerator in terms of $(s+1)$ so the cosine and sine patterns appear cleanly:</p>
+    $$ \frac{s+3}{(s+1)^{2}+4} = \frac{(s+1)}{(s+1)^{2}+4} + \frac{2}{(s+1)^{2}+4}. $$
+    <p>The first piece inverts to $e^{-t}\cos 2t$ and the second, with the constant $2 = b$, to $e^{-t}\sin 2t$. Hence</p>
+    $$ \mathcal{L}^{-1}\left\{ \frac{s+3}{s^{2}+2s+5} \right\} = e^{-t}\cos 2t + e^{-t}\sin 2t. $$
+    <p>The general moral: an irreducible quadratic always pairs with the shifted sine and cosine family, and completing the square is the bridge from the algebra to the table.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A repeated factor $(s-a)^{2}$ is frequently given just a single term $\dfrac{A}{(s-a)^{2}}$. That decomposition is incomplete and the algebra will be inconsistent: a factor of multiplicity $m$ requires a separate term for <em>every</em> power $\dfrac{A_1}{s-a} + \dfrac{A_2}{(s-a)^{2}} + \cdots + \dfrac{A_m}{(s-a)^{m}}$. Omitting the lower-power terms is the single most common cause of a partial-fraction setup that has no solution. Count the multiplicity, then allow that many constants.
+  </div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">What is $\mathcal{L}^{-1}\left\{ \dfrac{1}{(s-4)^{2}} \right\}$?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e^{4t}$</div><div class="quiz-opt" data-idx="1">$t\, e^{-4t}$</div><div class="quiz-opt" data-idx="2">$t\, e^{4t}$</div><div class="quiz-opt" data-idx="3">$\tfrac{1}{2} t^{2} e^{4t}$</div></div><div class="quiz-explain correct-exp">Correct. The pattern $1/(s-a)^{2}$ inverts to $t e^{at}$, here with $a = 4$.</div><div class="quiz-explain wrong-exp">A repeated linear factor $1/(s-a)^{2}$ inverts to $t e^{at}$; with $a = 4$ this is $t e^{4t}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1081,11 +1145,33 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ Y(s) = \frac{2s}{s^{2}+4}, \qquad y(t) = 2\cos 2t. $$
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: a nonhomogeneous IVP, $y'' - 3y' + 2y = e^{3t}$, $y(0)=1$, $y'(0)=0$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Transform every term. Use $\mathcal{L}\{y''\} = s^{2}Y - s y(0) - y'(0)$, $\mathcal{L}\{y'\} = sY - y(0)$, and $\mathcal{L}\{e^{3t}\} = 1/(s-3)$:</p>
+    $$ \big(s^{2}Y - s - 0\big) - 3\big(sY - 1\big) + 2Y = \frac{1}{s-3}. $$
+    <p>Collect the $Y$ terms and the constants. The characteristic polynomial factors as $s^{2}-3s+2 = (s-1)(s-2)$:</p>
+    $$ (s-1)(s-2)\,Y = s - 3 + \frac{1}{s-3} = \frac{(s-3)^{2}+1}{s-3} = \frac{s^{2}-6s+10}{s-3}. $$
+    <p>Hence $Y(s) = \dfrac{s^{2}-6s+10}{(s-1)(s-2)(s-3)}$. Decompose: $\dfrac{A}{s-1}+\dfrac{B}{s-2}+\dfrac{C}{s-3}$. Cover-up at $s=1$: $\dfrac{1-6+10}{(-1)(-2)} = \dfrac{5}{2}=A$. At $s=2$: $\dfrac{4-12+10}{(1)(-1)} = \dfrac{2}{-1}=-2=B$. At $s=3$: $\dfrac{9-18+10}{(2)(1)} = \dfrac{1}{2}=C$. Inverting,</p>
+    $$ y(t) = \frac{5}{2} e^{t} - 2 e^{2t} + \frac{1}{2} e^{3t}. $$
+    <p>The terms $e^{t}$ and $e^{2t}$ are the homogeneous part fixed by the initial data, and $\tfrac{1}{2}e^{3t}$ is the particular response to the forcing, all produced in one pass.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: a first-order IVP, $y' + 2y = 6$, $y(0) = 1$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Transform: $sY - y(0) + 2Y = 6/s$, that is $(s+2)Y = 1 + 6/s = (s+6)/s$. So</p>
+    $$ Y(s) = \frac{s+6}{s(s+2)} = \frac{A}{s} + \frac{B}{s+2}. $$
+    <p>Cover-up at $s = 0$: $A = 6/2 = 3$. At $s = -2$: $B = 4/(-2) = -2$. Therefore</p>
+    $$ y(t) = 3 - 2 e^{-2t}. $$
+    <p>As a check, $y(0) = 3 - 2 = 1$ and as $t \to \infty$ the solution settles to the steady state $y = 3$, the value where $y' = 0$ forces $2y = 6$.</p>
+  </div></div></details>
+
   <details><summary>Going deeper: derivation of $\mathcal{L}\{y'\} = sY(s) - y(0)$</summary><div class="detail-body"><div class="worked-solution">
     <p>Apply the definition and integrate by parts with $u = e^{-st}$, $dv = y'(t)\,dt$:</p>
     $$ \mathcal{L}\{y'\} = \int_{0}^{\infty} e^{-st} y'(t)\, dt = \Big[ e^{-st} y(t) \Big]_{0}^{\infty} + s\int_{0}^{\infty} e^{-st} y(t)\, dt. $$
-    <p>If $y$ is of exponential order then $e^{-st}y(t) \to 0$ as $t \to \infty$ for large $s$, so the boundary term is $0 - y(0) = -y(0)$. The remaining integral is $sY(s)$, giving $\mathcal{L}\{y'\} = sY(s) - y(0)$. Iterating the rule produces the second derivative formula.</p>
+    <p>If $y$ is of exponential order then $e^{-st}y(t) \to 0$ as $t \to \infty$ for large $s$, so the boundary term is $0 - y(0) = -y(0)$. The remaining integral is $sY(s)$, giving $\mathcal{L}\{y'\} = sY(s) - y(0)$. Iterating the rule on $y''=(y')'$ and substituting the first-derivative formula produces $\mathcal{L}\{y''\} = s^{2}Y - s\,y(0) - y'(0)$, and induction gives $\mathcal{L}\{y^{(n)}\} = s^{n}Y - s^{n-1}y(0) - \cdots - y^{(n-1)}(0)$.</p>
   </div></div></details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> When transforming $y''$, students often forget the $y'(0)$ term or attach the initial values to the wrong power of $s$, writing $s^{2}Y - y(0) - s\,y'(0)$. The correct pattern is $\mathcal{L}\{y''\} = s^{2}Y - s\,y(0) - y'(0)$: the higher power of $s$ multiplies the lower-order initial value $y(0)$, and the bare constant is $y'(0)$. A reliable mnemonic is that the exponents on $s$ count down from $n-1$ while the derivative order of the initial data counts up from $0$.
+  </div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">After transforming $y'' + y = 0$ with $y(0) = 0$ and $y'(0) = 5$, what is $Y(s)$?</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{5s}{s^{2}+1}$</div><div class="quiz-opt" data-idx="1">$\dfrac{s}{s^{2}+1}$</div><div class="quiz-opt" data-idx="2">$\dfrac{1}{s^{2}+1}$</div><div class="quiz-opt" data-idx="3">$\dfrac{5}{s^{2}+1}$</div></div><div class="quiz-explain correct-exp">Correct. We get $s^{2}Y - s(0) - 5 + Y = 0$, so $(s^{2}+1)Y = 5$ and $Y = 5/(s^{2}+1)$, giving $y = 5\sin t$.</div><div class="quiz-explain wrong-exp">Substituting $y(0)=0$, $y'(0)=5$ gives $s^{2}Y - 5 + Y = 0$, so $Y = 5/(s^{2}+1)$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1122,6 +1208,25 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \mathcal{L}^{-1}\left\{ \frac{e^{-3s}}{s^{2}+1} \right\} = u_{3}(t)\sin(t-3). $$
   </div></div></details>
 
+  <details><summary>Worked Example 5.3: transform of $u_{1}(t)\, t^{2}$ (argument not yet in $t-c$ form)</summary><div class="detail-body"><div class="worked-solution">
+    <p>The second shift theorem needs the function written as $f(t-c)$, but here the factor is $t^{2}$, not $(t-1)^{2}$. Rewrite $t = (t-1)+1$ and expand so every appearance of $t$ becomes a power of $t-1$:</p>
+    $$ t^{2} = \big((t-1)+1\big)^{2} = (t-1)^{2} + 2(t-1) + 1. $$
+    <p>Now the gated function is $u_{1}(t)\big[(t-1)^{2} + 2(t-1) + 1\big]$, a sum of three terms each in clean $t-1$ form. With $c = 1$ and the table entries $\mathcal{L}\{t^{2}\}=2/s^{3}$, $\mathcal{L}\{t\}=1/s^{2}$, $\mathcal{L}\{1\}=1/s$, the second shift theorem multiplies each by $e^{-s}$:</p>
+    $$ \mathcal{L}\{u_{1}(t)\, t^{2}\} = e^{-s}\left( \frac{2}{s^{3}} + \frac{2}{s^{2}} + \frac{1}{s} \right). $$
+  </div></div></details>
+
+  <details><summary>Going deeper: the second form $\mathcal{L}\{u_c(t) g(t)\} = e^{-cs}\mathcal{L}\{g(t+c)\}$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Rewriting by hand, as in Example 5.3, is the algebra behind a compact rule. Start from the definition, where the step $u_c$ cuts the lower limit to $c$:</p>
+    $$ \mathcal{L}\{u_c(t) g(t)\} = \int_{c}^{\infty} e^{-st} g(t)\, dt. $$
+    <p>Substitute $\tau = t - c$, so $t = \tau + c$ and $dt = d\tau$, and the limits become $\tau \in [0,\infty)$:</p>
+    $$ = \int_{0}^{\infty} e^{-s(\tau+c)} g(\tau + c)\, d\tau = e^{-cs}\int_{0}^{\infty} e^{-s\tau} g(\tau + c)\, d\tau = e^{-cs}\,\mathcal{L}\{g(t+c)\}. $$
+    <p>This packages the rewrite automatically: to transform $u_c(t) g(t)$, shift the <em>argument forward</em> to $g(t+c)$, transform, and multiply by $e^{-cs}$. Applying it to $g(t)=t^2$, $c=1$ reproduces Example 5.3 since $g(t+1)=(t+1)^2 = t^2+2t+1$.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The most common mistake with the second shift theorem is to read $\mathcal{L}\{u_c(t) g(t)\} = e^{-cs} G(s)$ where $G$ is the transform of $g$ as written. That is wrong unless $g$ is already a function of $t-c$. The correct rule is $\mathcal{L}\{u_c(t) f(t-c)\} = e^{-cs} F(s)$, so the argument <em>must</em> read $t-c$ before you transform. If it reads $t$, first rewrite it in powers of $t-c$ (or use the second form above). Skipping this step silently drops the cross terms and gives the wrong transform.
+  </div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">What is $\mathcal{L}\{u_{5}(t)\}$?</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{1}{s}$</div><div class="quiz-opt" data-idx="1">$\dfrac{e^{-5s}}{s}$</div><div class="quiz-opt" data-idx="2">$\dfrac{e^{5s}}{s}$</div><div class="quiz-opt" data-idx="3">$e^{-5s}$</div></div><div class="quiz-explain correct-exp">Correct. The step turning on at $c = 5$ has transform $e^{-cs}/s = e^{-5s}/s$.</div><div class="quiz-explain wrong-exp">The Heaviside step $u_{c}(t)$ transforms to $e^{-cs}/s$, so with $c = 5$ the answer is $e^{-5s}/s$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">$\mathcal{L}^{-1}\left\{ \dfrac{e^{-2s}}{s} \right\}$ equals which function?</div><span class="quiz-number">5.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sin(t-2)$</div><div class="quiz-opt" data-idx="1">$e^{-2t}$</div><div class="quiz-opt" data-idx="2">$u_{2}(t)$</div><div class="quiz-opt" data-idx="3">$u_{2}(t)(t-2)$</div></div><div class="quiz-explain correct-exp">Correct. Since $\mathcal{L}^{-1}\{1/s\} = 1$, the factor $e^{-2s}$ delays it to the step $u_{2}(t)$.</div><div class="quiz-explain wrong-exp">Here $F(s) = 1/s$ inverts to the constant $1$; the $e^{-2s}$ gates it on at $t = 2$, giving $u_{2}(t)$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1156,6 +1261,18 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>As $\varepsilon \to 0^{+}$, the factor $(1 - e^{-\varepsilon s})/(\varepsilon s) \to 1$ (its first order Taylor expansion is $1 - \tfrac{\varepsilon s}{2} + \cdots$). Hence $\mathcal{L}\{d_{\varepsilon}(t-c)\} \to e^{-cs}$, which we adopt as the definition $\mathcal{L}\{\delta(t-c)\} = e^{-cs}$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 6.2: an impulse into a damped system, $y'' + 2y' + y = 3\delta(t-1)$, rest data</summary><div class="detail-body"><div class="worked-solution">
+    <p>With $y(0)=y'(0)=0$ and $\mathcal{L}\{\delta(t-1)\} = e^{-s}$, transform both sides:</p>
+    $$ (s^{2}+2s+1)Y = 3 e^{-s} \;\Longrightarrow\; Y(s) = \frac{3 e^{-s}}{(s+1)^{2}}. $$
+    <p>The factor $1/(s+1)^{2}$ inverts to $t e^{-t}$ (repeated factor at $a=-1$). The $e^{-s}$ is a delay of $c=1$, so by the inverse second shift theorem we replace $t$ by $t-1$ and gate with the step:</p>
+    $$ y(t) = 3\, u_{1}(t)\,(t-1)\, e^{-(t-1)}. $$
+    <p>Before $t=1$ the system sits at rest. The unit impulse at $t=1$ injects momentum, and the critically damped response $(t-1)e^{-(t-1)}$ rises then decays back to zero. The impulse produces a jump in $y'$, not in $y$ itself, which is why $y$ stays continuous through $t=1$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> The delta and the step have transforms that look similar but differ by a crucial factor of $s$: $\mathcal{L}\{\delta(t-c)\} = e^{-cs}$ while $\mathcal{L}\{u_c(t)\} = e^{-cs}/s$. Writing $\mathcal{L}\{\delta(t-c)\} = e^{-cs}/s$ is the most frequent slip in this section. The clean way to remember it: the delta is the derivative of the step, so its transform is $s$ times the step's transform, $s\cdot e^{-cs}/s = e^{-cs}$, and the $1/s$ cancels.
+  </div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">What is $\mathcal{L}\{\delta(t-4)\}$?</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e^{-4s}$</div><div class="quiz-opt" data-idx="1">$\dfrac{e^{-4s}}{s}$</div><div class="quiz-opt" data-idx="2">$\dfrac{1}{s}$</div><div class="quiz-opt" data-idx="3">$4 e^{-s}$</div></div><div class="quiz-explain correct-exp">Correct. The impulse at $c = 4$ transforms to $e^{-cs} = e^{-4s}$, with no $1/s$ factor.</div><div class="quiz-explain wrong-exp">Unlike the step, the delta transforms to $e^{-cs}$ with no division by $s$, so $\mathcal{L}\{\delta(t-4)\} = e^{-4s}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Evaluate $\displaystyle\int_{-\infty}^{\infty} \delta(t-2)\, e^{t}\, dt$.</div><span class="quiz-number">6.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$0$</div><div class="quiz-opt" data-idx="1">$1$</div><div class="quiz-opt" data-idx="2">$e^{t}$</div><div class="quiz-opt" data-idx="3">$e^{2}$</div></div><div class="quiz-explain correct-exp">Correct. The sifting property evaluates the integrand at the spike location $t = 2$, giving $e^{2}$.</div><div class="quiz-explain wrong-exp">By the sifting property, $\int \delta(t-c) g(t)\,dt = g(c)$; with $g(t) = e^{t}$ and $c = 2$ the value is $e^{2}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1176,6 +1293,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>Equivalently $\mathcal{L}^{-1}\{F(s)G(s)\} = (f*g)(t)$. The operation is commutative, $f*g = g*f$, which is often used to put the simpler factor inside the shifted slot. It also lets us invert products that resist partial fractions.</p>
 
+  <p>Convolution is more than a trick for inverting products; it is the natural language of linear time-invariant systems. If a system has impulse response $h(t)$, meaning its output when forced by $\delta(t)$, then its output for any input $g(t)$ is the convolution $h * g$. In transform language the system multiplies by the transfer function $H(s) = \mathcal{L}\{h\}$, so $Y(s) = H(s) G(s)$ and the time-domain output is the convolution of the impulse response with the input. This is why Example 7.2 produced a single formula valid for every forcing: $1/(s^{2}+1)$ is the transfer function of the undamped oscillator, and $\sin t$ is its impulse response. The convolution beside the transform product is the same statement read in two domains.</p>
+
   <details><summary>Worked Example 7.1: invert $\dfrac{1}{s^{2}(s^{2}+1)}$ by convolution</summary><div class="detail-body"><div class="worked-solution">
     <p>Write the product as $F(s)G(s)$ with $F = 1/s^{2}$ and $G = 1/(s^{2}+1)$, so $f(t) = t$ and $g(t) = \sin t$. Then</p>
     $$ \mathcal{L}^{-1}\left\{ \frac{1}{s^{2}(s^{2}+1)} \right\} = \int_{0}^{t} \tau\, \sin(t-\tau)\, d\tau. $$
@@ -1190,6 +1309,26 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ y(t) = \int_{0}^{t} \sin(t-\tau)\, g(\tau)\, d\tau, $$
     <p>a single formula valid for any forcing $g$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.3: evaluate $(e^{t} * 1)(t)$ directly and check by transform</summary><div class="detail-body"><div class="worked-solution">
+    <p>Take $f(t) = e^{t}$ and $g(t) = 1$. From the definition,</p>
+    $$ (e^{t} * 1)(t) = \int_{0}^{t} e^{\tau}\cdot 1\, d\tau = \big[ e^{\tau} \big]_{0}^{t} = e^{t} - 1. $$
+    <p>Check against the convolution theorem. Here $F(s) = 1/(s-1)$ and $G(s) = 1/s$, so the product is</p>
+    $$ F(s)G(s) = \frac{1}{s(s-1)} = \frac{-1}{s} + \frac{1}{s-1} = \mathcal{L}\{-1 + e^{t}\}, $$
+    <p>using partial fractions. Inverting gives $e^{t} - 1$, matching the direct integral. The two routes agreeing is the convolution theorem in action: a product of transforms is the transform of a convolution.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: proof of the convolution theorem $\mathcal{L}\{f*g\} = F(s)G(s)$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Write out the transform of the convolution as a double integral over the triangular region $0 \le \tau \le t < \infty$:</p>
+    $$ \mathcal{L}\{f*g\} = \int_{0}^{\infty} e^{-st} \left( \int_{0}^{t} f(\tau) g(t-\tau)\, d\tau \right) dt = \iint_{0 \le \tau \le t} e^{-st} f(\tau) g(t-\tau)\, d\tau\, dt. $$
+    <p>Both functions are of exponential order, so the double integral converges absolutely for large $s$ and Fubini's theorem permits swapping the order of integration. Fix $\tau$ and let $t$ range over $[\tau, \infty)$. Substitute $\sigma = t - \tau$, so $t = \sigma + \tau$, $dt = d\sigma$, and $\sigma \in [0, \infty)$:</p>
+    $$ = \int_{0}^{\infty} f(\tau) \left( \int_{0}^{\infty} e^{-s(\sigma+\tau)} g(\sigma)\, d\sigma \right) d\tau = \int_{0}^{\infty} e^{-s\tau} f(\tau)\, d\tau \cdot \int_{0}^{\infty} e^{-s\sigma} g(\sigma)\, d\sigma. $$
+    <p>The integrals separate because $e^{-s(\sigma+\tau)} = e^{-s\tau} e^{-s\sigma}$, and the two factors are exactly $F(s)$ and $G(s)$. Hence $\mathcal{L}\{f*g\} = F(s) G(s)$. The same change of variables, applied to the inner integral alone, also proves commutativity $f*g = g*f$.</p>
+  </div></div></details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The single biggest trap is to assume $\mathcal{L}^{-1}\{F(s)G(s)\} = f(t)\,g(t)$, treating the inverse transform as multiplicative. It is not. The inverse of a product is the convolution $\int_0^t f(\tau)g(t-\tau)\,d\tau$, which in general differs from the pointwise product. For instance $\mathcal{L}^{-1}\{(1/s)(1/s)\} = t$, not $1\cdot 1 = 1$. Whenever you face a product of transforms with no clean partial-fraction split, reach for convolution rather than multiplying inverses.
+  </div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">According to the convolution theorem, $\mathcal{L}^{-1}\{F(s)G(s)\}$ equals which expression?</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f(t)\, g(t)$</div><div class="quiz-opt" data-idx="1">$f(t) + g(t)$</div><div class="quiz-opt" data-idx="2">$\displaystyle\int_{0}^{t} f(\tau)\, g(t-\tau)\, d\tau$</div><div class="quiz-opt" data-idx="3">$\displaystyle\int_{0}^{\infty} f(\tau)\, g(\tau)\, d\tau$</div></div><div class="quiz-explain correct-exp">Correct. A product of transforms inverts to the convolution $\int_{0}^{t} f(\tau) g(t-\tau)\, d\tau$, not to a pointwise product.</div><div class="quiz-explain wrong-exp">The inverse of a product is the convolution integral $\int_{0}^{t} f(\tau) g(t-\tau)\,d\tau$, with limits from $0$ to $t$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 

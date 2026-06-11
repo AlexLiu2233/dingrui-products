@@ -940,9 +940,14 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int f\bigl(g(x)\bigr)\,g'(x)\,dx \;=\; \int f(u)\,du, \qquad u=g(x),\; du=g'(x)\,dx.$$
   </div>
   <p>The method works when the integrand decomposes as an outer function evaluated at an inner function, multiplied by the inner derivative up to a constant. In practice one chooses $u$ to be the inner function, computes $du$, and checks that the remaining factors are accounted for by $du$ (constants may be absorbed freely, since $\int c\,h\,dx = c\int h\,dx$).</p>
+  <p>Three signals reliably point to a substitution. First, a composition: an integrand of the form $f(g(x))$ where $g$ is more than a bare $x$, such as $e^{x^2}$, $\sin(3x+1)$, or $\sqrt{1-x^2}$. Second, a visible derivative: a factor that is, up to a constant, $g'(x)$ for that same inner function. Third, the $u'/u$ shape, an integrand that is a fraction whose numerator is the derivative of its denominator, which always integrates to a logarithm. When you spot one of these, name the inner function $u$, differentiate to get $du$, and rewrite every piece of the integrand in terms of $u$ and $du$ before integrating. The discipline of converting the integral completely, leaving no stray $x$, is what separates a clean substitution from a stalled one.</p>
   <div class="formula-box"><div class="formula-label">Standard antiderivatives reached by substitution</div>
     $$\int \tan x\,dx=-\ln|\cos x|+C,\qquad \int \sec x\,dx=\ln|\sec x+\tan x|+C.$$
   </div>
+  <p>Both of these are worth memorizing as the output of a substitution rather than as isolated facts. For $\int\tan x\,dx=\int \frac{\sin x}{\cos x}\,dx$, the choice $u=\cos x$ gives $du=-\sin x\,dx$, so the integral becomes $-\int du/u=-\ln|u|+C$. The $\sec x$ result comes from the standard trick of multiplying numerator and denominator by $\sec x+\tan x$, after which the numerator is exactly the derivative of the denominator. Recognizing an integrand as $u'/u$ is one of the most productive patterns in all of integration: it always produces a logarithm of the absolute value of the denominator.</p>
+  <h3>Mechanics of the substitution and the role of constants</h3>
+  <p>The phrase "up to a constant multiple" deserves emphasis. If the integrand contains $g'(x)$ scaled by some constant $c$, that constant simply factors out: $\int f(g(x))\,c\,g'(x)\,dx=c\int f(u)\,du$. What substitution cannot do is repair a factor that is a non-constant function of $x$ left over after $du$ is accounted for. If, after writing $du=g'(x)\,dx$, some stray $x$ remains that cannot be rewritten in terms of $u$, the substitution has failed and a different $u$, or a different method entirely, is needed.</p>
+  <div class="concept-box red"><strong>Common error.</strong> Treating $dx$ and $du$ as interchangeable without solving for the differential. A frequent mistake on $\int x\,e^{x^2}\,dx$ is to set $u=x^2$ and then write $\int x\,e^{u}\,dx$, leaving both an $x$ and a $dx$ in the integral. The fix is to compute $du=2x\,dx$ first, solve it for the exact piece appearing in the integrand ($x\,dx=\tfrac12\,du$), and substitute that block as a unit. Every $x$ and every $dx$ must be converted; a leftover $x$ means the substitution is incomplete.</div>
   <details><summary>Worked Example 1.1: a linear inner function</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int x\,e^{x^2}\,dx$. Let $u=x^2$, so $du=2x\,dx$ and $x\,dx=\tfrac12\,du$.</p>
     $$\int x\,e^{x^2}\,dx=\frac12\int e^{u}\,du=\frac12 e^{u}+C=\frac12 e^{x^2}+C.$$
@@ -951,11 +956,30 @@ body.lang-zh [data-lang="en"] { display: none; }
   <details><summary>Worked Example 1.2: rational integrand</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int \frac{\ln x}{x}\,dx$. Let $u=\ln x$, so $du=\tfrac{1}{x}\,dx$.</p>
     $$\int \frac{\ln x}{x}\,dx=\int u\,du=\frac{u^2}{2}+C=\frac{(\ln x)^2}{2}+C.$$
+    <p>The deciding observation is that the factor $\tfrac{1}{x}$ is precisely $\tfrac{d}{dx}\ln x$. The whole integrand is therefore $u\,du$ in disguise, and the answer is a power of $u$. Differentiating $\tfrac12(\ln x)^2$ by the chain rule returns $(\ln x)\cdot\tfrac1x$, confirming the result.</p>
+  </div></div></details>
+  <details><summary>Worked Example 1.3: a root in the inner function</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int \frac{x}{\sqrt{4-x^2}}\,dx$. Let $u=4-x^2$, so $du=-2x\,dx$, which gives $x\,dx=-\tfrac12\,du$. The integrand's $\sqrt{4-x^2}$ becomes $\sqrt{u}=u^{1/2}$:</p>
+    $$\int \frac{x}{\sqrt{4-x^2}}\,dx=-\frac12\int u^{-1/2}\,du=-\frac12\cdot 2u^{1/2}+C=-\sqrt{4-x^2}+C.$$
+    <p>Differentiating $-\sqrt{4-x^2}$ returns $\tfrac{x}{\sqrt{4-x^2}}$, which checks. Note that the bare $x$ in the numerator is essential: without it, the integral $\int \tfrac{dx}{\sqrt{4-x^2}}=\arcsin(x/2)+C$ is a different problem entirely, solved by a trigonometric substitution rather than this algebraic one.</p>
+  </div></div></details>
+  <details><summary>Worked Example 1.4: rewriting before substituting</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int \tan^{2}x\,\sec^{2}x\,dx$. The factor $\sec^2 x$ is the derivative of $\tan x$, which signals $u=\tan x$, $du=\sec^2 x\,dx$:</p>
+    $$\int \tan^{2}x\,\sec^{2}x\,dx=\int u^{2}\,du=\frac{u^3}{3}+C=\frac{\tan^{3}x}{3}+C.$$
+    <p>The art is in reading the integrand for a function paired with its own derivative. Here $\tan x$ and $\sec^2 x$ form exactly such a pair, so the integral collapses to a power rule in $u$.</p>
+  </div></div></details>
+  <details><summary>Worked Example 1.5: a definite integral with converted limits</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int_0^{2} x\,e^{x^2}\,dx$ using the change-of-variables rule for definite integrals. Let $u=x^2$, $du=2x\,dx$, so $x\,dx=\tfrac12\,du$. Convert the limits: when $x=0$, $u=0$; when $x=2$, $u=4$. The entire problem is then carried out in $u$:</p>
+    $$\int_0^{2} x\,e^{x^2}\,dx=\frac12\int_0^{4} e^{u}\,du=\frac12\bigl[e^{u}\bigr]_0^{4}=\frac{e^{4}-1}{2}.$$
+    <p>Because the limits were converted to $u$-values, there is no back-substitution to $x$. The alternative, finding the indefinite antiderivative $\tfrac12 e^{x^2}$ and evaluating at $x=2$ and $x=0$, gives the same $\tfrac12(e^4-1)$, but converting the limits is cleaner and removes a step where errors creep in.</p>
   </div></div></details>
   <details><summary>Going deeper: why substitution is exactly the chain rule reversed</summary><div class="detail-body"><div class="worked-solution">
     <p>Let $F$ be an antiderivative of $f$, so $F'=f$. By the chain rule,</p>
     $$\frac{d}{dx}\,F\bigl(g(x)\bigr)=F'\bigl(g(x)\bigr)\,g'(x)=f\bigl(g(x)\bigr)\,g'(x).$$
     <p>Integrating both sides recovers $\int f(g(x))g'(x)\,dx=F(g(x))+C=\int f(u)\,du$ with $u=g(x)$. Thus the substitution rule is not a separate axiom; it is the antiderivative form of the chain rule.</p>
+    <p>For a definite integral the same identity, combined with the fundamental theorem of calculus, gives the change-of-variables rule with transformed limits. If $g$ is continuously differentiable on $[a,b]$ and $f$ is continuous on the range of $g$, then</p>
+    $$\int_a^b f\bigl(g(x)\bigr)\,g'(x)\,dx=\int_{g(a)}^{g(b)} f(u)\,du.$$
+    <p>The proof is one line: let $F'=f$, so by the chain rule $F\circ g$ is an antiderivative of $(f\circ g)\,g'$, and the fundamental theorem gives $\bigl[F(g(x))\bigr]_a^b=F(g(b))-F(g(a))=\bigl[F(u)\bigr]_{g(a)}^{g(b)}$. The practical payoff is that once the limits are converted to $u$-values there is no need to revert to $x$ at the end.</p>
   </div></div></details>
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which substitution best evaluates $\displaystyle\int \frac{x}{1+x^2}\,dx$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$u=x$</div><div class="quiz-opt" data-idx="1">$u=1+x^2$</div><div class="quiz-opt" data-idx="2">$u=\sqrt{1+x^2}$</div><div class="quiz-opt" data-idx="3">$u=\arctan x$</div></div><div class="quiz-explain correct-exp">Correct. With $u=1+x^2$, $du=2x\,dx$, so the integral becomes $\tfrac12\int du/u=\tfrac12\ln(1+x^2)+C$.</div><div class="quiz-explain wrong-exp">Choose the inner function whose derivative supplies the leftover factor $x$. That is $u=1+x^2$, giving $du=2x\,dx$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -968,6 +992,8 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int u\,dv \;=\; uv-\int v\,du.$$
   </div>
   <p>To apply the formula one splits the integrand into a part $u$ to be differentiated and a part $dv$ to be integrated, computes $du$ and $v$, and writes down $uv-\int v\,du$. The split is well chosen when $\int v\,du$ is easier than the original. The mnemonic <strong>LIATE</strong> (Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential) ranks candidates for $u$: the function earlier in the list is usually the better choice for $u$.</p>
+  <p>The logic behind LIATE is worth internalizing rather than memorizing blindly. A good $u$ becomes simpler when differentiated, and a good $dv$ stays manageable when integrated. Logarithms and inverse trig functions have no elementary antiderivative that is simpler than themselves, so they make poor choices for $dv$ and are placed first as preferred $u$. Exponentials and the basic trig functions integrate to something of the same size, so they are happy as $dv$ and sit last. Polynomials shrink in degree under differentiation, so they belong in the middle as natural $u$ candidates whenever the other factor integrates cleanly. When two orderings both look plausible, the test is simply which one makes $\int v\,du$ easier than the integral you started with.</p>
+  <p>Notice also that $v$ is any one antiderivative of $dv$, and the constant of integration in $v$ may be chosen freely. Usually the simplest choice ($+0$) is best, but occasionally a clever shift of the constant in $v$ cancels an awkward boundary term, a trick that streamlines several standard integrals.</p>
   <details><summary>Worked Example 2.1: polynomial times exponential</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int x\,e^{x}\,dx$. Take $u=x$ (algebraic, differentiates to a constant) and $dv=e^{x}\,dx$, so $du=dx$ and $v=e^{x}$.</p>
     $$\int x\,e^{x}\,dx=x e^{x}-\int e^{x}\,dx=x e^{x}-e^{x}+C=(x-1)e^{x}+C.$$
@@ -975,7 +1001,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   <details><summary>Worked Example 2.2: the logarithm trick</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int \ln x\,dx$. There is no obvious product, so take $u=\ln x$ and $dv=dx$, giving $du=\tfrac{1}{x}\,dx$ and $v=x$.</p>
     $$\int \ln x\,dx=x\ln x-\int x\cdot\frac{1}{x}\,dx=x\ln x-\int 1\,dx=x\ln x-x+C.$$
+    <p>The same idea handles every isolated function whose derivative is simpler than itself. The hidden $dv=dx$ supplies $v=x$, and the integrand $v\,du$ becomes elementary.</p>
   </div></div></details>
+  <details><summary>Worked Example 2.3: inverse trig by parts</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int \arctan x\,dx$. As with $\ln x$, take $u=\arctan x$ and $dv=dx$, so $du=\tfrac{1}{1+x^2}\,dx$ and $v=x$:</p>
+    $$\int \arctan x\,dx=x\arctan x-\int \frac{x}{1+x^2}\,dx.$$
+    <p>The residual integral is a substitution, $w=1+x^2$, $dw=2x\,dx$, giving $\int\tfrac{x}{1+x^2}\,dx=\tfrac12\ln(1+x^2)$. Therefore</p>
+    $$\int \arctan x\,dx=x\arctan x-\frac12\ln(1+x^2)+C.$$
+    <p>This is the canonical example of an integral that needs parts to start and substitution to finish. The Inverse-trig "I" in LIATE outranks everything else, which is exactly why $\arctan x$ becomes $u$.</p>
+  </div></div></details>
+  <details><summary>Worked Example 2.4: a polynomial times a sine</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int x\sin x\,dx$. By LIATE the algebraic factor $x$ becomes $u$ and $dv=\sin x\,dx$, so $du=dx$ and $v=-\cos x$:</p>
+    $$\int x\sin x\,dx=-x\cos x-\int(-\cos x)\,dx=-x\cos x+\int\cos x\,dx=-x\cos x+\sin x+C.$$
+    <p>The sign bookkeeping is where most slips occur: $v=-\cos x$ carries a minus that then meets the minus in $-\int v\,du$, producing the $+\int\cos x\,dx$. Differentiating $-x\cos x+\sin x$ returns $-\cos x+x\sin x+\cos x=x\sin x$, which confirms the answer.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Choosing $u$ and $dv$ the wrong way around and making the integral worse. For $\int x e^{x}\,dx$ the choice $u=e^{x}$, $dv=x\,dx$ gives $v=\tfrac{x^2}{2}$ and a new integral $\int \tfrac{x^2}{2}e^{x}\,dx$ with a higher power of $x$ than before. The integral is not wrong, just unproductive: parts is only useful when $\int v\,du$ is simpler than $\int u\,dv$. The fix is to let the polynomial be $u$ so that differentiation lowers its degree, exactly as LIATE prescribes.</div>
   <details><summary>Going deeper: deriving the formula from the product rule</summary><div class="detail-body"><div class="worked-solution">
     <p>Let $u(x)$ and $v(x)$ be differentiable. The product rule gives</p>
     $$\frac{d}{dx}\bigl(u v\bigr)=u\,\frac{dv}{dx}+v\,\frac{du}{dx}.$$
@@ -993,6 +1033,8 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$I=\int e^{ax}\cos(bx)\,dx \;\Longrightarrow\; I=\frac{e^{ax}\bigl(a\cos bx+b\sin bx\bigr)}{a^2+b^2}+C.$$
   </div>
   <p>In the cyclic case two applications of parts return a multiple of the original integral $I$ on the right side. Collecting the $I$ terms and dividing solves for $I$ without ever reducing it to an elementary antiderivative directly.</p>
+  <p>The two patterns are distinguished by what happens to the polynomial-or-non-polynomial factor under repeated differentiation. If you are differentiating a polynomial, each pass lowers its degree by one, so a degree-$n$ polynomial terminates after exactly $n+1$ rows. If instead both factors merely cycle under differentiation and integration (as $e^{ax}$ and $\sin bx$ do), the integral never terminates by attrition; it must be closed algebraically when the original integral reappears. Recognizing which pattern you are in before you start saves a great deal of wasted work.</p>
+  <div class="concept-box orange"><strong>Common error.</strong> In the cyclic case, switching the roles of $u$ and $dv$ between the first and second application. If the first step differentiates $e^{x}$ and integrates the trig factor, the second step must do the same (differentiate the exponential, integrate the trig factor). Swapping roles midstream, say differentiating the trig factor on the second pass, simply undoes the first step and returns you to the original integral with no progress. Keep the assignment of $u$ and $dv$ consistent across both passes so that $I$ genuinely reappears.</div>
   <details><summary>Worked Example 3.1: degree-two polynomial</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int x^2 e^{x}\,dx$. First take $u=x^2$, $dv=e^{x}\,dx$:</p>
     $$\int x^2 e^{x}\,dx=x^2 e^{x}-2\int x e^{x}\,dx.$$
@@ -1006,6 +1048,23 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int e^{x}\cos x\,dx=e^{x}\sin x-\int e^{x}\sin x\,dx=e^{x}\sin x-I.$$
     <p>Substitute and solve: $I=-e^{x}\cos x+e^{x}\sin x-I$, so $2I=e^{x}(\sin x-\cos x)$ and</p>
     $$I=\frac{e^{x}(\sin x-\cos x)}{2}+C.$$
+    <p>The constant $C$ is reinstated only at the very end. While solving algebraically for $I$ we treat $I$ as a single unknown quantity and the bare antiderivatives without their constants; the family of antiderivatives is recovered by appending $+C$ once $I$ is isolated.</p>
+  </div></div></details>
+  <details><summary>Worked Example 3.3: the general $e^{ax}\cos(bx)$ pattern</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle I=\int e^{2x}\cos(3x)\,dx$, an instance of the boxed formula with $a=2$, $b=3$. Take $u=e^{2x}$, $dv=\cos(3x)\,dx$, so $v=\tfrac13\sin(3x)$:</p>
+    $$I=\frac{1}{3}e^{2x}\sin(3x)-\frac{2}{3}\int e^{2x}\sin(3x)\,dx.$$
+    <p>Apply parts again to the new integral with $u=e^{2x}$, $dv=\sin(3x)\,dx$, $v=-\tfrac13\cos(3x)$:</p>
+    $$\int e^{2x}\sin(3x)\,dx=-\frac{1}{3}e^{2x}\cos(3x)+\frac{2}{3}\int e^{2x}\cos(3x)\,dx=-\frac{1}{3}e^{2x}\cos(3x)+\frac{2}{3}I.$$
+    <p>Substitute back: $I=\tfrac13 e^{2x}\sin(3x)-\tfrac23\bigl(-\tfrac13 e^{2x}\cos(3x)+\tfrac23 I\bigr)$, which is $I=\tfrac13 e^{2x}\sin(3x)+\tfrac29 e^{2x}\cos(3x)-\tfrac49 I$. Collecting, $\tfrac{13}{9}I=\tfrac19 e^{2x}\bigl(3\sin(3x)+2\cos(3x)\bigr)$, so</p>
+    $$I=\frac{e^{2x}\bigl(2\cos(3x)+3\sin(3x)\bigr)}{13}+C,$$
+    <p>which matches the closed form $\tfrac{e^{ax}(a\cos bx+b\sin bx)}{a^2+b^2}$ with $a^2+b^2=4+9=13$. Memorizing the closed form is convenient, but reconstructing it by two passes of parts is a reliable fallback when the formula slips.</p>
+  </div></div></details>
+  <details><summary>Worked Example 3.4: a degree-two polynomial against a cosine</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int x^2 \cos x\,dx$. This is the polynomial-attrition pattern, not the cyclic one: each pass lowers the degree of $x^2$. Take $u=x^2$, $dv=\cos x\,dx$, $v=\sin x$:</p>
+    $$\int x^2\cos x\,dx=x^2\sin x-2\int x\sin x\,dx.$$
+    <p>From Worked Example 2.4, $\int x\sin x\,dx=-x\cos x+\sin x$. Substitute:</p>
+    $$\int x^2\cos x\,dx=x^2\sin x-2\bigl(-x\cos x+\sin x\bigr)+C=x^2\sin x+2x\cos x-2\sin x+C.$$
+    <p>Two applications suffice because the degree dropped from $2$ to $1$ to $0$. A differentiation check returns $2x\sin x+x^2\cos x+2\cos x-2x\sin x-2\cos x=x^2\cos x$, as required. Contrast this with Worked Example 3.2, where neither factor was a polynomial and the integral instead had to be closed algebraically.</p>
   </div></div></details>
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">How many times must integration by parts be applied to reduce $\displaystyle\int x^3 e^{x}\,dx$ to an integral with no polynomial factor?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Once</div><div class="quiz-opt" data-idx="1">Twice</div><div class="quiz-opt" data-idx="2">Three times</div><div class="quiz-opt" data-idx="3">It never terminates</div></div><div class="quiz-explain correct-exp">Correct. Each application drops the degree by one, so a degree-three polynomial requires three applications to reach $\int e^{x}\,dx$.</div><div class="quiz-explain wrong-exp">Each pass with $u$ taken as the polynomial lowers its degree by one. From degree three that is three applications.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1018,6 +1077,7 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int p(x)\,g(x)\,dx=p\,G_1-p'\,G_2+p''\,G_3-\cdots,$$
   </div>
   <p>where the first column lists $p$ and its successive derivatives (differentiate down to $0$) and the second column lists successive antiderivatives $G_1,G_2,\dots$ of $g$. Multiply along the diagonals and alternate the signs $+,-,+,-,\dots$ The method is exactly repeated parts; the table merely automates the choice $u=$ polynomial at every step.</p>
+  <p>Two reading rules keep the table honest. First, the signs alternate starting with $+$ on the top diagonal, so the $k$-th term carries the sign $(-1)^{k}$ if the first term is counted as $k=0$. Second, each diagonal product pairs an entry of the derivative column with the antiderivative one row below it; the very last derivative entry (the $0$) has no partner and contributes nothing. When the derivative column truly reaches $0$, the table is complete and no leftover integral remains. When it does not reach $0$, you stop at a convenient row and append the integral of the product of the last row's entries, with the running sign, as a residual.</p>
   <details><summary>Worked Example 4.1: tabular method on a cubic</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int x^3 \sin x\,dx$. Differentiate $x^3$ in the left column and integrate $\sin x$ in the right column:</p>
     $$\begin{array}{c|cc}\text{sign}&D\;(x^3)&I\;(\sin x)\\\hline +&x^3&-\cos x\\ -&3x^2&-\sin x\\ +&6x&\cos x\\ -&6&\sin x\\ +&0&\end{array}$$
@@ -1027,7 +1087,16 @@ body.lang-zh [data-lang="en"] { display: none; }
   <details><summary>Worked Example 4.2: when tabular still helps without a vanishing column</summary><div class="detail-body"><div class="worked-solution">
     <p>For $\displaystyle\int x^2 e^{2x}\,dx$ the left column terminates at $0$ after two derivatives, and antiderivatives of $e^{2x}$ are $\tfrac12 e^{2x},\tfrac14 e^{2x},\tfrac18 e^{2x}$. Diagonals give</p>
     $$\int x^2 e^{2x}\,dx=\frac{x^2}{2}e^{2x}-\frac{2x}{4}e^{2x}+\frac{2}{8}e^{2x}+C=\frac{e^{2x}}{4}\bigl(2x^2-2x+1\bigr)+C.$$
+    <p>The care point here is that each step down the right column integrates the previous antiderivative, not the original $e^{2x}$. Because $\int e^{2x}\,dx=\tfrac12 e^{2x}$, every descent multiplies in another $\tfrac12$, producing $\tfrac12,\tfrac14,\tfrac18$. A common slip is to write $e^{2x},e^{2x},e^{2x}$ down the column, forgetting that integrating $e^{2x}$ repeatedly accumulates factors of $\tfrac12$.</p>
   </div></div></details>
+  <details><summary>Worked Example 4.3: a residual integral that does not vanish</summary><div class="detail-body"><div class="worked-solution">
+    <p>Tabular integration also handles cases where the derivative column never reaches $0$, provided you stop and pick up a residual integral. Consider $\displaystyle\int x\,\sec^2 x\,dx$. Differentiate $x$ (reaching $0$ after one step) and integrate $\sec^2 x$ to $\tan x$:</p>
+    $$\begin{array}{c|cc}\text{sign}&D\;(x)&I\;(\sec^2 x)\\\hline +&x&\tan x\\ -&1&\ldots\end{array}$$
+    <p>The first diagonal gives $+x\tan x$. The next row pairs the derivative $1$ with the antiderivative $\tan x$ under the running sign $-$, leaving the residual $-\int 1\cdot\tan x\,dx$. Since $\int\tan x\,dx=-\ln|\cos x|$, we obtain</p>
+    $$\int x\sec^2 x\,dx=x\tan x-\int \tan x\,dx=x\tan x+\ln|\cos x|+C.$$
+    <p>Here the polynomial $x$ does terminate, so a single diagonal plus one residual integral finishes the job. The lesson is that tabular bookkeeping is valid even when the second column does not integrate to itself.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Getting the alternating signs wrong by attaching them to the wrong diagonal. The signs run $+,-,+,-,\dots$ down the diagonals beginning with $+$, and each sign multiplies a product of the derivative entry with the antiderivative one row down, not the entries in the same row. Students often line the signs up with the rows of the differentiation column instead, which shifts every sign by one and flips the answer. Write the sign column explicitly, as in the tables above, to avoid the slip.</div>
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Tabular integration is most directly applicable when one factor is</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">a logarithm</div><div class="quiz-opt" data-idx="1">an inverse trig function</div><div class="quiz-opt" data-idx="2">a quotient of polynomials</div><div class="quiz-opt" data-idx="3">a polynomial that differentiates to zero</div></div><div class="quiz-explain correct-exp">Correct. A polynomial differentiates to $0$ after finitely many steps, terminating the table cleanly.</div><div class="quiz-explain wrong-exp">The table terminates only when the differentiated column reaches $0$, which happens for a polynomial.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1039,6 +1108,8 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int_a^b u\,dv=\Bigl[uv\Bigr]_a^b-\int_a^b v\,du=u(b)v(b)-u(a)v(a)-\int_a^b v\,du.$$
   </div>
   <p>The same LIATE guidance applies to the choice of $u$ and $dv$. Evaluate the boundary term as a number and then handle the residual definite integral, applying parts again or substitution as needed.</p>
+  <p>A subtle point arises when the residual integral itself requires a substitution. If you change variables inside $\int_a^b v\,du$, you must either convert the limits to the new variable or revert to the original variable before substituting the original limits. The boundary term $[uv]_a^b$, by contrast, is always evaluated in the original variable $x$ at the original endpoints, because $u$ and $v$ are functions of $x$. Mixing the two conventions is the most common source of error in definite-integral problems that combine parts with substitution.</p>
+  <div class="concept-box orange"><strong>Common error.</strong> Forgetting to evaluate the boundary term $[uv]_a^b$ and instead leaving it as an indefinite expression $uv$. In a definite integral the boundary term is a number obtained by plugging in $b$ and $a$ and subtracting; only the residual $\int_a^b v\,du$ remains as an integral. Writing $\int_a^b u\,dv=uv-\int_a^b v\,du$ with an un-evaluated $uv$ is incomplete and usually leads to an answer that still contains the variable of integration. Always reduce $[uv]_a^b$ to $u(b)v(b)-u(a)v(a)$ before reporting the value.</div>
   <details><summary>Worked Example 5.1: a definite parts integral</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int_0^{1} x e^{x}\,dx$. With $u=x$, $dv=e^{x}\,dx$, $du=dx$, $v=e^{x}$:</p>
     $$\int_0^{1} x e^{x}\,dx=\Bigl[x e^{x}\Bigr]_0^{1}-\int_0^{1} e^{x}\,dx=\bigl(1\cdot e\bigr)-\Bigl[e^{x}\Bigr]_0^{1}=e-(e-1)=1.$$
@@ -1046,6 +1117,14 @@ body.lang-zh [data-lang="en"] { display: none; }
   <details><summary>Worked Example 5.2: logarithm on an interval</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int_1^{e} \ln x\,dx$. Using $\int\ln x\,dx=x\ln x-x$ from Worked Example 2.2:</p>
     $$\int_1^{e}\ln x\,dx=\Bigl[x\ln x-x\Bigr]_1^{e}=\bigl(e\cdot 1-e\bigr)-\bigl(1\cdot 0-1\bigr)=0-(-1)=1.$$
+    <p>At the upper limit $x=e$ we used $\ln e=1$, and at the lower limit $x=1$ we used $\ln 1=0$. The area under $\ln x$ from $1$ to $e$ is therefore exactly one square unit, a clean result that is easy to sanity-check against the graph: $\ln x$ rises from $0$ to $1$ across an interval of width $e-1\approx 1.718$, so an area near $1$ is plausible.</p>
+  </div></div></details>
+  <details><summary>Worked Example 5.3: parts combined with a substitution and converted limits</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int_0^{1} \arctan x\,dx$. Take $u=\arctan x$, $dv=dx$, so $du=\tfrac{1}{1+x^2}\,dx$, $v=x$:</p>
+    $$\int_0^{1}\arctan x\,dx=\Bigl[x\arctan x\Bigr]_0^{1}-\int_0^{1}\frac{x}{1+x^2}\,dx.$$
+    <p>The boundary term is $1\cdot\arctan 1-0=\tfrac{\pi}{4}$. For the residual, substitute $w=1+x^2$, $dw=2x\,dx$; the limits become $w(0)=1$ and $w(1)=2$:</p>
+    $$\int_0^{1}\frac{x}{1+x^2}\,dx=\frac12\int_1^{2}\frac{dw}{w}=\frac12\bigl[\ln w\bigr]_1^{2}=\frac12\ln 2.$$
+    <p>Therefore $\displaystyle\int_0^{1}\arctan x\,dx=\frac{\pi}{4}-\frac12\ln 2\approx 0.4388$. The boundary term stayed in $x$ at the original endpoints, while the residual integral switched cleanly to $w$ with its own limits $1$ and $2$. This is the disciplined way to combine the two methods.</p>
   </div></div></details>
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">What is $\displaystyle\int_0^{\pi} x\sin x\,dx$?</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$0$</div><div class="quiz-opt" data-idx="1">$\pi$</div><div class="quiz-opt" data-idx="2">$2\pi$</div><div class="quiz-opt" data-idx="3">$\pi^2$</div></div><div class="quiz-explain correct-exp">Correct. With $u=x$, $dv=\sin x\,dx$, $v=-\cos x$: $[-x\cos x]_0^{\pi}+\int_0^{\pi}\cos x\,dx=\pi+0=\pi$.</div><div class="quiz-explain wrong-exp">Take $u=x$, $v=-\cos x$. The boundary term is $-\pi\cos\pi=\pi$ and the residual $\int_0^{\pi}\cos x\,dx=0$, giving $\pi$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1058,6 +1137,8 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\underbrace{\int f(g(x))\,g'(x)\,dx}_{\text{substitution}},\qquad \underbrace{\int (\text{poly})(\text{exp/trig})\,dx,\;\int\ln x\,dx,\;\int\arctan x\,dx}_{\text{parts}}.$$
   </div>
   <p>A practical test: differentiate part of the integrand and look for the rest. If a chunk is the derivative of another chunk, substitution wins. If no such pairing exists but the integrand is a product of functions from different LIATE classes, parts wins. Some integrals need both, applied in sequence.</p>
+  <p>It also pays to scan for a few preliminary moves that are neither substitution nor parts but that turn an intractable integrand into a routine one. Algebraic simplification (cancelling a common factor, splitting a fraction into partial pieces, or completing a square), a trigonometric identity (such as $\sin^2 x=\tfrac{1-\cos 2x}{2}$), or simply rewriting a root as a fractional power can all reveal the structure that substitution or parts then exploits. The strategic order is: simplify first, look for a substitution second, and reach for parts when the integrand is an irreducible product of unlike functions.</p>
+  <div class="concept-box orange"><strong>Common error.</strong> Reaching for integration by parts on an integral that is really a substitution, and grinding through an endless chain that never closes. The integrand $\int \tfrac{x}{1+x^2}\,dx$ tempts some students to split off $u=x$ and integrate $\tfrac{1}{1+x^2}$, producing $x\arctan x-\int\arctan x\,dx$, a harder integral than the original. The signature you missed is that the numerator $x$ is half the derivative of the denominator $1+x^2$: this is a one-line substitution giving $\tfrac12\ln(1+x^2)+C$. Always test for the $u'/u$ pattern before committing to parts.</div>
   <details><summary>Worked Example 6.1: substitution then parts</summary><div class="detail-body"><div class="worked-solution">
     <p>Evaluate $\displaystyle\int \cos(\sqrt{x})\,dx$. Substitute $t=\sqrt{x}$, so $x=t^2$ and $dx=2t\,dt$:</p>
     $$\int\cos(\sqrt{x})\,dx=\int \cos t\,(2t)\,dt=2\int t\cos t\,dt.$$
@@ -1068,6 +1149,16 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Evaluate $\displaystyle\int x^3\,e^{x^2}\,dx$. This looks like parts, but write $x^3=x^2\cdot x$ and substitute $u=x^2$, $du=2x\,dx$:</p>
     $$\int x^3 e^{x^2}\,dx=\frac12\int u\,e^{u}\,du=\frac12\bigl(u-1\bigr)e^{u}+C=\frac12\bigl(x^2-1\bigr)e^{x^2}+C,$$
     <p>where the inner $\int u e^{u}\,du$ is finished by parts. Substitution first removed the awkward $x^2$ in the exponent.</p>
+  </div></div></details>
+  <details><summary>Worked Example 6.3: simplify first, then integrate</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int \frac{x^2}{x^2+1}\,dx$. Neither substitution nor parts attacks this directly, but algebraic division does: $\tfrac{x^2}{x^2+1}=1-\tfrac{1}{x^2+1}$. Now each piece is standard:</p>
+    $$\int \frac{x^2}{x^2+1}\,dx=\int 1\,dx-\int \frac{1}{x^2+1}\,dx=x-\arctan x+C.$$
+    <p>The lesson generalizes: when the degree of the numerator is at least the degree of the denominator, divide first. The leftover proper fraction is then a substitution, a partial-fraction problem, or a recognizable arctangent form.</p>
+  </div></div></details>
+  <details><summary>Worked Example 6.4: a trig identity unlocks the integral</summary><div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\displaystyle\int \sin^2 x\,dx$. Parts cycles back on itself here, but the power-reduction identity $\sin^2 x=\tfrac{1-\cos 2x}{2}$ flattens the problem:</p>
+    $$\int \sin^2 x\,dx=\int \frac{1-\cos 2x}{2}\,dx=\frac{x}{2}-\frac{\sin 2x}{4}+C.$$
+    <p>The $\int\cos 2x\,dx=\tfrac12\sin 2x$ is itself a linear substitution. Recognizing that an identity, not a technique, was the right first move is exactly the judgment this section is meant to build.</p>
   </div></div></details>
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Which integral is solved most directly by substitution rather than parts?</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\displaystyle\int \frac{e^{x}}{1+e^{x}}\,dx$</div><div class="quiz-opt" data-idx="1">$\displaystyle\int x\cos x\,dx$</div><div class="quiz-opt" data-idx="2">$\displaystyle\int \ln x\,dx$</div><div class="quiz-opt" data-idx="3">$\displaystyle\int \arctan x\,dx$</div></div><div class="quiz-explain correct-exp">Correct. With $u=1+e^{x}$, $du=e^{x}\,dx$, the integral is $\int du/u=\ln(1+e^{x})+C$, a textbook substitution.</div><div class="quiz-explain wrong-exp">The first integrand has an inner function $1+e^{x}$ whose derivative $e^{x}$ sits in the numerator, the signature of substitution. The others are parts integrals.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1080,6 +1171,24 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$\int \sin^{n}x\,dx=-\frac{\sin^{n-1}x\,\cos x}{n}+\frac{n-1}{n}\int \sin^{n-2}x\,dx,\qquad n\ge 2.$$
   </div>
   <p>A reduction formula lets a high-power integral be computed by descending in steps of two (or one) until a base case is reached. Such formulas are derived by a single, carefully arranged application of integration by parts.</p>
+  <p>The value of a reduction formula is that it converts an unbounded family of integrals, one for each power $n$, into a single recursive rule plus a base case. Once derived, it is applied mechanically: substitute the current $n$, peel off the boundary term, and recurse on the smaller integral. This is the same logic that powers tabular integration and Taylor's theorem, both of which are repeated parts organized so the bookkeeping is automatic. The three examples below, the $\sin^n$ recursion, the $x^n e^x$ recursion, and the integral-remainder form of Taylor's theorem, are three faces of one idea: integration by parts, iterated with foresight, is a structural tool for generating exact identities, not just a method for grinding out a single antiderivative.</p>
+  <details><summary>Worked Example 7.1: applying the reduction formula to $\sin^4 x$</summary><div class="detail-body"><div class="worked-solution">
+    <p>Use the boxed reduction formula to evaluate $\displaystyle\int \sin^4 x\,dx$. With $n=4$:</p>
+    $$\int \sin^4 x\,dx=-\frac{\sin^3 x\cos x}{4}+\frac{3}{4}\int \sin^2 x\,dx.$$
+    <p>Now apply it again with $n=2$, using $\int \sin^0 x\,dx=\int 1\,dx=x$:</p>
+    $$\int \sin^2 x\,dx=-\frac{\sin x\cos x}{2}+\frac{1}{2}x.$$
+    <p>Substitute back to assemble the final answer:</p>
+    $$\int \sin^4 x\,dx=-\frac{\sin^3 x\cos x}{4}-\frac{3\sin x\cos x}{8}+\frac{3x}{8}+C.$$
+    <p>The reduction formula turned a fourth-power integral into a finite descent: $n=4\to n=2\to n=0$, two applications and a trivial base case. Without it, one would face several nested rounds of parts or a sequence of double-angle identities.</p>
+  </div></div></details>
+  <details><summary>Worked Example 7.2: the $x^n e^{x}$ reduction formula</summary><div class="detail-body"><div class="worked-solution">
+    <p>Reduction formulas are not limited to trigonometric powers. A single application of parts to $\int x^n e^{x}\,dx$ with $u=x^n$, $dv=e^{x}\,dx$ gives</p>
+    $$\int x^n e^{x}\,dx=x^n e^{x}-n\int x^{n-1}e^{x}\,dx.$$
+    <p>The recursion drops the exponent by one each time, terminating at $\int x^0 e^{x}\,dx=e^{x}$. Apply it to $\int x^3 e^{x}\,dx$: with $n=3$, then $n=2$, then $n=1$,</p>
+    $$\int x^3 e^{x}\,dx=x^3 e^{x}-3\Bigl(x^2 e^{x}-2\bigl(x e^{x}-e^{x}\bigr)\Bigr)+C=\bigl(x^3-3x^2+6x-6\bigr)e^{x}+C.$$
+    <p>This is the same answer the tabular method of Section 4 produces, which is no coincidence: tabular integration is precisely this reduction recursion written as a table. The reduction formula makes the underlying recursion explicit and easy to prove by induction.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Stopping a reduction one step too early or mishandling the base case. For $\int\sin^n x\,dx$ the recursion descends to either $\int\sin^1 x\,dx=-\cos x$ (when $n$ is odd) or $\int\sin^0 x\,dx=x$ (when $n$ is even). Plugging $n=2$ into the formula and then forgetting that $\int\sin^0 x\,dx$ is $x$, not $1$, is a frequent slip that drops an entire term. Track the parity of $n$ and write the correct base case explicitly before back-substituting.</div>
   <details><summary>Going deeper: deriving the $\sin^n$ reduction formula</summary><div class="detail-body"><div class="worked-solution">
     <p>Write $\sin^n x=\sin^{n-1}x\cdot\sin x$ and apply parts with $u=\sin^{n-1}x$, $dv=\sin x\,dx$, so $du=(n-1)\sin^{n-2}x\cos x\,dx$ and $v=-\cos x$:</p>
     $$\int\sin^n x\,dx=-\sin^{n-1}x\cos x+(n-1)\int \sin^{n-2}x\cos^2 x\,dx.$$
@@ -1091,6 +1200,9 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Starting from the fundamental theorem $f(x)=f(a)+\int_a^{x} f'(t)\,dt$ and applying parts repeatedly with $dv=dt$ (choosing the antiderivative $v=-(x-t)$ so the boundary terms telescope) produces</p>
     $$f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^k+\frac{1}{n!}\int_a^{x}(x-t)^{n}f^{(n+1)}(t)\,dt.$$
     <p>The integral on the right is the exact remainder. Thus repeated integration by parts is the engine behind Taylor's theorem with the integral form of the remainder.</p>
+    <p>It is worth seeing the first step in full, because it shows where the unusual antiderivative $v=-(x-t)$ comes from. In $\int_a^{x} f'(t)\,dt$ regard $t$ as the variable of integration with $x$ fixed, and apply parts with $u=f'(t)$ and $dv=dt$. The clever move is to take $v=-(x-t)$ rather than the obvious $v=t$; both are antiderivatives of $dt$ in $t$ (since $\tfrac{d}{dt}[-(x-t)]=1$), but the shifted choice makes the boundary term vanish at the upper limit. Then $du=f''(t)\,dt$ and</p>
+    $$\int_a^{x} f'(t)\,dt=\Bigl[-(x-t)f'(t)\Bigr]_a^{x}+\int_a^{x}(x-t)f''(t)\,dt=(x-a)f'(a)+\int_a^{x}(x-t)f''(t)\,dt,$$
+    <p>because the boundary term is $0$ at $t=x$ and $(x-a)f'(a)$ at $t=a$. This recovers the degree-one Taylor polynomial plus a remainder of the same shape with one higher derivative. Choosing $v=-\tfrac{(x-t)^2}{2}$ on the next pass yields the quadratic term, and in general $v=-\tfrac{(x-t)^{k}}{k}$ at the $k$-th step. Each application advances the polynomial by one term and raises the power of $(x-t)$ and the order of the derivative inside the remainder by one, giving the boxed formula by induction. The factorial $\tfrac{1}{n!}$ accumulates from the constants generated at each step.</p>
   </div></div></details>
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">A reduction formula for $\int\sin^n x\,dx$ expresses it in terms of</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int\sin^{n+2}x\,dx$</div><div class="quiz-opt" data-idx="1">$\int\sin^{n+1}x\,dx$</div><div class="quiz-opt" data-idx="2">$\int\sin^{n-2}x\,dx$</div><div class="quiz-opt" data-idx="3">$\int\cos^{n}x\,dx$</div></div><div class="quiz-explain correct-exp">Correct. The formula lowers the power by two each step, recursing on $\int\sin^{n-2}x\,dx$ until a base case.</div><div class="quiz-explain wrong-exp">A reduction formula descends in the exponent. This one steps from $n$ down to $n-2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

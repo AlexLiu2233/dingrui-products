@@ -948,7 +948,7 @@ $$\sin^2 x + \cos^2 x = 1, \qquad \sin^2 x = \frac{1-\cos 2x}{2}, \qquad \cos^2 
 $$\text{$n$ odd: } u=\sin x,\quad \text{$m$ odd: } u=\cos x,\quad \text{both even: } \text{use half-angle.}$$
 </div>
 
-<p>A parallel set of substitutions governs $\int \tan^m x \sec^n x\,dx$, where the identity $\sec^2 x = 1 + \tan^2 x$ replaces the Pythagorean identity, and the pairing $\tfrac{d}{dx}\tan x = \sec^2 x$, $\tfrac{d}{dx}\sec x = \sec x \tan x$ supplies the differential.</p>
+<p>A parallel set of substitutions governs $\int \tan^m x \sec^n x\,dx$, where the identity $\sec^2 x = 1 + \tan^2 x$ replaces the Pythagorean identity, and the pairing $\tfrac{d}{dx}\tan x = \sec^2 x$, $\tfrac{d}{dx}\sec x = \sec x \tan x$ supplies the differential. The logic is identical in both families: one factor is set aside to become $du$, and the even remainder is rewritten in the new variable using the relevant Pythagorean identity.</p>
 
 <div class="formula-box"><div class="formula-label">Reduction strategy for $\int \tan^m x \sec^n x\,dx$</div>
 $$\text{$n$ even: } u=\tan x,\quad \text{$m$ odd: } u=\sec x.$$
@@ -974,6 +974,23 @@ $$\int \tan^2 x \sec^2 x \,(\sec x \tan x)\,dx = \int (\sec^2 x - 1)\sec^2 x\,(\
 <p>Let $u = \sec x$, $du = \sec x \tan x\,dx$:</p>
 $$\int (u^2-1)u^2\,du = \frac{u^5}{5} - \frac{u^3}{3} + C = \frac{\sec^5 x}{5} - \frac{\sec^3 x}{3} + C.$$
 </div></div></details>
+
+<details><summary>Worked Example 1.4: both powers odd, the economical choice</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\int \sin^3 x \cos^3 x\,dx$. Both powers are odd, so either substitution works and the labour is the same. Reserve a factor of $\cos x$ and let $u = \sin x$, $du = \cos x\,dx$, converting $\cos^2 x = 1 - \sin^2 x$.</p>
+$$\int \sin^3 x \,(1-\sin^2 x)\,\cos x\,dx = \int u^3(1-u^2)\,du = \int (u^3 - u^5)\,du.$$
+$$= \frac{u^4}{4} - \frac{u^6}{6} + C = \frac{\sin^4 x}{4} - \frac{\sin^6 x}{6} + C.$$
+<p>Reserving $\sin x$ instead and letting $u=\cos x$ would give $\tfrac{\cos^6 x}{6} - \tfrac{\cos^4 x}{4} + C$. The two answers differ only by a constant, because $\sin^2 x + \cos^2 x = 1$ ties them together; both are correct antiderivatives.</p>
+</div></div></details>
+
+<details><summary>Worked Example 1.5: an even secant power, no odd factor available</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\int \sec^4 x\,dx$. The secant power is even, so reserve one $\sec^2 x$ for the differential of $\tan x$ and convert the remaining $\sec^2 x = 1 + \tan^2 x$.</p>
+$$\int \sec^2 x \,\sec^2 x\,dx = \int (1 + \tan^2 x)\,\sec^2 x\,dx.$$
+<p>Let $u = \tan x$, $du = \sec^2 x\,dx$:</p>
+$$\int (1 + u^2)\,du = u + \frac{u^3}{3} + C = \tan x + \frac{\tan^3 x}{3} + C.$$
+<p>The harder relatives $\int \sec x\,dx = \ln|\sec x + \tan x| + C$ and $\int \sec^3 x\,dx = \tfrac12\big(\sec x \tan x + \ln|\sec x + \tan x|\big) + C$ are the base cases reached by the secant reduction formula when no parity trick applies.</p>
+</div></div></details>
+
+<div class="concept-box red"><strong>Common error.</strong> A frequent slip is dropping the sign on $du$. For $\int \sin^3 x\cos^2 x\,dx$, choosing $u=\cos x$ forces $du = -\sin x\,dx$; omitting the minus flips the sign of the whole result. A second classic mistake is trying $u=\tan x$ on $\int \tan^2 x\,dx$ directly, when there is no spare $\sec^2 x$ to become $du$. Instead use $\tan^2 x = \sec^2 x - 1$ to get $\int(\sec^2 x - 1)\,dx = \tan x - x + C$. Commit a factor to the differential only after confirming its derivative is actually present in the integrand.</div>
 
 <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">To evaluate $\int \sin^5 x\,dx$, which substitution is most natural?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$u = \sin x$, since sine appears</div><div class="quiz-opt" data-idx="1">$u = \cos x$, after reserving one factor of $\sin x$</div><div class="quiz-opt" data-idx="2">Half-angle, since the power is large</div><div class="quiz-opt" data-idx="3">$u = \tan x$</div></div><div class="quiz-explain correct-exp">Correct. With an odd power of sine, peel off one $\sin x$ for $du = -\sin x\,dx$ and convert the even remainder $\sin^4 x = (1-\cos^2 x)^2$ into $\cos x$.</div><div class="quiz-explain wrong-exp">Reserve one factor of $\sin x$ for the differential and let $u=\cos x$; the remaining even power converts cleanly via $\sin^2 x = 1-\cos^2 x$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1004,8 +1021,28 @@ $$\int \frac{2\sec^2\theta\,d\theta}{4\tan^2\theta\cdot 2\sec\theta} = \frac14 \
 $$\int \frac{dx}{x^2\sqrt{x^2+4}} = -\frac{\sqrt{x^2+4}}{4x} + C.$$
 </div></div></details>
 
+<details><summary>Worked Example 2.3: a sine substitution producing an area</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \sqrt{a^2 - x^2}\,dx$, the integral behind the area of a circle. Let $x = a\sin\theta$, $dx = a\cos\theta\,d\theta$, and $\sqrt{a^2 - x^2} = a\cos\theta$ on $-\tfrac{\pi}{2}\le\theta\le\tfrac{\pi}{2}$ where $\cos\theta\ge 0$.</p>
+$$\int a\cos\theta \cdot a\cos\theta\,d\theta = a^2\int \cos^2\theta\,d\theta = a^2\left(\frac{\theta}{2} + \frac{\sin 2\theta}{4}\right) + C.$$
+<p>Now $\sin 2\theta = 2\sin\theta\cos\theta = 2\cdot\tfrac{x}{a}\cdot\tfrac{\sqrt{a^2-x^2}}{a}$, and $\theta = \arcsin(x/a)$, so</p>
+$$\int \sqrt{a^2 - x^2}\,dx = \frac{a^2}{2}\arcsin\frac{x}{a} + \frac{x\sqrt{a^2 - x^2}}{2} + C.$$
+<p>Evaluated from $-a$ to $a$ this gives $\tfrac{a^2}{2}\cdot\pi = \tfrac{\pi a^2}{2}$, the area of the upper half disk of radius $a$, a good sanity check.</p>
+</div></div></details>
+
+<details><summary>Worked Example 2.4: a secant substitution</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{\sqrt{x^2 - 9}}{x}\,dx$ for $x > 3$. Let $x = 3\sec\theta$, $dx = 3\sec\theta\tan\theta\,d\theta$, and $\sqrt{x^2 - 9} = 3\tan\theta$ on $0 \le \theta < \tfrac{\pi}{2}$.</p>
+$$\int \frac{3\tan\theta}{3\sec\theta}\,3\sec\theta\tan\theta\,d\theta = 3\int \tan^2\theta\,d\theta = 3\int (\sec^2\theta - 1)\,d\theta = 3(\tan\theta - \theta) + C.$$
+<p>From the triangle, $\tan\theta = \tfrac{\sqrt{x^2-9}}{3}$ and $\theta = \operatorname{arcsec}(x/3) = \arccos(3/x)$, giving</p>
+$$\int \frac{\sqrt{x^2-9}}{x}\,dx = \sqrt{x^2 - 9} - 3\arccos\frac{3}{x} + C.$$
+</div></div></details>
+
+<div class="concept-box red"><strong>Common error.</strong> The radical simplifies to a trig function only up to sign. Writing $\sqrt{a^2 - a^2\sin^2\theta} = a|\cos\theta|$ is exact; the absolute value is dropped only because the standard range $-\tfrac{\pi}{2}\le\theta\le\tfrac{\pi}{2}$ keeps $\cos\theta\ge 0$. For the secant case $\sqrt{x^2 - a^2} = a|\tan\theta|$, and the sign depends on whether $x>a$ or $x<-a$; mishandling this is the usual source of a wrong sign in the final answer. A second error is forgetting to convert $\theta$ back to $x$ through the reference triangle, leaving the answer trapped in $\theta$. Always finish by reading every trig function of $\theta$ off the triangle.</div>
+
 <details><summary>Going deeper: completing the square first</summary><div class="detail-body"><div class="worked-solution">
 <p>A radical like $\sqrt{x^2 + 2x + 5}$ has no obvious $a^2 \pm u^2$ form until you complete the square: $x^2 + 2x + 5 = (x+1)^2 + 4$. With $u = x+1$ this becomes $\sqrt{u^2 + 4}$, a tangent substitution. In general $ax^2 + bx + c$ is rewritten as $a\big[(x + \tfrac{b}{2a})^2 + \tfrac{4ac - b^2}{4a^2}\big]$, and the sign of $4ac - b^2$ decides which of the three trig substitutions applies. Completing the square is the universal preprocessing step that maps any quadratic radical onto one of the three templates.</p>
+<p>To see it through, evaluate $\displaystyle\int \frac{dx}{\sqrt{x^2 + 2x + 5}}$. After $u = x+1$ the integral is $\int \frac{du}{\sqrt{u^2 + 4}}$, a tangent substitution $u = 2\tan\theta$, $du = 2\sec^2\theta\,d\theta$, $\sqrt{u^2+4} = 2\sec\theta$:</p>
+$$\int \frac{2\sec^2\theta}{2\sec\theta}\,d\theta = \int \sec\theta\,d\theta = \ln|\sec\theta + \tan\theta| + C.$$
+<p>Reading the triangle gives $\sec\theta = \tfrac{\sqrt{u^2+4}}{2}$, $\tan\theta = \tfrac{u}{2}$, so the answer is $\ln\big|\sqrt{u^2+4} + u\big| + C'$, that is $\ln\big(\sqrt{x^2+2x+5} + x + 1\big) + C'$, where the additive constant $-\ln 2$ has been absorbed into $C'$. This is exactly the inverse hyperbolic sine $\operatorname{arcsinh}\big(\tfrac{x+1}{2}\big)$ up to a constant, which explains why these integrals are sometimes tabulated with $\operatorname{arcsinh}$ and $\operatorname{arccosh}$ instead of logarithms.</p>
 </div></div></details>
 
 <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">Which substitution suits $\int \sqrt{x^2 - 9}\,dx$?</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$x = 3\sin\theta$</div><div class="quiz-opt" data-idx="1">$x = 3\tan\theta$</div><div class="quiz-opt" data-idx="2">$x = 3\sec\theta$</div><div class="quiz-opt" data-idx="3">$x = 9\sin\theta$</div></div><div class="quiz-explain correct-exp">Correct. The form $\sqrt{x^2 - a^2}$ with $a=3$ calls for $x = 3\sec\theta$, since $\sec^2\theta - 1 = \tan^2\theta$ removes the radical.</div><div class="quiz-explain wrong-exp">The pattern is $\sqrt{x^2 - a^2}$ with $a=3$, which matches the secant substitution $x = a\sec\theta$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1042,6 +1079,22 @@ $$\frac{2}{(x-1)(x+1)} = \frac{1}{x-1} - \frac{1}{x+1}.$$
 $$\int \left(1 + \frac{1}{x-1} - \frac{1}{x+1}\right)dx = x + \ln|x-1| - \ln|x+1| + C.$$
 </div></div></details>
 
+<details><summary>Worked Example 3.3: three distinct factors by cover-up</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{x^2 + 1}{x(x-1)(x+2)}\,dx$. The fraction is proper (degree 2 over degree 3), so set</p>
+$$\frac{x^2+1}{x(x-1)(x+2)} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{x+2}.$$
+<p>Cover-up at each root. At $x=0$: $A = \dfrac{0+1}{(0-1)(0+2)} = \dfrac{1}{-2} = -\tfrac12$. At $x=1$: $B = \dfrac{1+1}{(1)(1+2)} = \dfrac{2}{3}$. At $x=-2$: $C = \dfrac{4+1}{(-2)(-2-1)} = \dfrac{5}{6}$.</p>
+$$\int \left(\frac{-1/2}{x} + \frac{2/3}{x-1} + \frac{5/6}{x+2}\right)dx = -\frac12\ln|x| + \frac23\ln|x-1| + \frac56\ln|x+2| + C.$$
+</div></div></details>
+
+<details><summary>Worked Example 3.4: a definite integral with logarithms</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int_3^4 \frac{dx}{x^2 - 4}$. Factor $x^2 - 4 = (x-2)(x+2)$ and decompose $\dfrac{1}{(x-2)(x+2)} = \dfrac{1/4}{x-2} - \dfrac{1/4}{x+2}$.</p>
+$$\int_3^4 \frac{dx}{x^2-4} = \frac14\Big[\ln|x-2| - \ln|x+2|\Big]_3^4 = \frac14\ln\frac{x-2}{x+2}\bigg|_3^4.$$
+$$= \frac14\left(\ln\frac{2}{6} - \ln\frac{1}{5}\right) = \frac14\ln\frac{2/6}{1/5} = \frac14\ln\frac{5}{3}.$$
+<p>Because the interval $[3,4]$ avoids the poles at $\pm 2$, the integrand stays continuous and the answer is a genuine number, here $\tfrac14\ln\tfrac53 \approx 0.1277$.</p>
+</div></div></details>
+
+<div class="concept-box orange"><strong>Common error.</strong> Partial fractions apply only to a proper rational function. Trying to decompose $\dfrac{x^2+1}{x^2-1}$ directly as $\tfrac{A}{x-1}+\tfrac{B}{x+1}$ fails, because the degrees are equal; you must divide first to peel off the polynomial part $1$. A second error is mismatching the template: a linear denominator factor takes a constant numerator, never a linear one. Writing $\tfrac{Ax+B}{x-2}$ for a simple linear factor over-counts the unknowns and gives an inconsistent system. Count the factors, give each its correct numerator shape, and only then solve.</div>
+
 <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">In $\dfrac{3x+1}{(x-1)(x+2)} = \dfrac{A}{x-1} + \dfrac{B}{x+2}$, the cover-up method gives $A$ equal to:</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$-\tfrac{5}{3}$</div><div class="quiz-opt" data-idx="1">$1$</div><div class="quiz-opt" data-idx="2">$3$</div><div class="quiz-opt" data-idx="3">$\tfrac{4}{3}$</div></div><div class="quiz-explain correct-exp">Correct. Cover $(x-1)$ and set $x=1$: $A = \dfrac{3(1)+1}{1+2} = \dfrac{4}{3}$.</div><div class="quiz-explain wrong-exp">Multiply by $(x-1)$ and evaluate at $x=1$: $A = \dfrac{3+1}{1+2} = \dfrac{4}{3}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1070,10 +1123,30 @@ $$\int \frac{x}{(x+1)^2}\,dx = \int \left(\frac{1}{x+1} - \frac{1}{(x+1)^2}\righ
 $$\int \frac{2x}{x^2+4}\,dx + \int \frac{3}{x^2+4}\,dx = \ln(x^2+4) + \frac{3}{2}\arctan\frac{x}{2} + C.$$
 </div></div></details>
 
+<details><summary>Worked Example 4.3: a mixed linear and quadratic decomposition</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{x^2 + 2x + 4}{(x-1)(x^2+1)}\,dx$. The denominator has one linear factor and one irreducible quadratic, so</p>
+$$\frac{x^2+2x+4}{(x-1)(x^2+1)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+1}, \quad x^2+2x+4 = A(x^2+1) + (Bx+C)(x-1).$$
+<p>At $x=1$: $7 = 2A$, so $A = \tfrac72$. Match $x^2$ coefficients: $1 = A + B$, so $B = 1 - \tfrac72 = -\tfrac52$. Match constants: $4 = A - C$, so $C = A - 4 = -\tfrac12$. Thus</p>
+$$\int \left(\frac{7/2}{x-1} + \frac{-\tfrac52 x - \tfrac12}{x^2+1}\right)dx = \frac72\ln|x-1| - \frac54\ln(x^2+1) - \frac12\arctan x + C.$$
+<p>The quadratic term split as $-\tfrac52\int\tfrac{x}{x^2+1}\,dx - \tfrac12\int\tfrac{dx}{x^2+1}$, the first piece giving a logarithm and the second an arctangent, exactly the two outputs an irreducible quadratic always produces.</p>
+</div></div></details>
+
+<details><summary>Worked Example 4.4: completing the square inside a quadratic factor</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{dx}{x^2 + 2x + 5}$. The denominator is irreducible (discriminant $4 - 20 < 0$). Complete the square: $x^2 + 2x + 5 = (x+1)^2 + 4$. With $u = x+1$,</p>
+$$\int \frac{du}{u^2 + 4} = \frac12\arctan\frac{u}{2} + C = \frac12\arctan\frac{x+1}{2} + C.$$
+<p>If the numerator had been linear, say $\int\tfrac{x}{x^2+2x+5}\,dx$, you would first write $x = \tfrac12(2x+2) - 1$ to align part of the numerator with the derivative $2x+2$ of the denominator, producing a logarithm plus this arctangent.</p>
+</div></div></details>
+
+<div class="concept-box red"><strong>Common error.</strong> A repeated factor needs a term for every power, not just the highest. For $\dfrac{x}{(x+1)^2}$ the correct template is $\dfrac{A}{x+1} + \dfrac{B}{(x+1)^2}$; writing only $\dfrac{B}{(x+1)^2}$ cannot represent the general numerator and the system has no solution. Likewise, an irreducible quadratic always carries a full linear numerator $Bx + C$, even when you expect $C=0$. Omitting the $Bx$ term, or trying to factor an irreducible quadratic over the reals, are the two failures that derail these problems.</div>
+
 <details><summary>Going deeper: why every proper rational function integrates in closed form</summary><div class="detail-body"><div class="worked-solution">
 <p>By the fundamental theorem of algebra, any real polynomial factors over the reals into linear factors $(x-r)$ and irreducible quadratics $x^2 + px + q$. The partial fraction theorem then guarantees that a proper rational function is a finite sum of terms of exactly four shapes:</p>
 $$\frac{A}{(x-r)^k}, \qquad \frac{Bx + C}{(x^2+px+q)^k}.$$
-<p>Each shape integrates in closed form: powers of linear factors give powers and logarithms; the linear quadratic numerator splits into a logarithm of the denominator plus an arctangent (after completing the square in $x^2 + px + q$). Higher powers of the quadratic are reached by a reduction formula. Hence every rational function has an elementary antiderivative, a result with no analogue for general elementary integrands.</p>
+<p>Each shape integrates in closed form. Powers of linear factors give powers and logarithms: $\int (x-r)^{-1}\,dx = \ln|x-r|$ and $\int (x-r)^{-k}\,dx = \tfrac{(x-r)^{1-k}}{1-k}$ for $k>1$. For the quadratic term, complete the square so that $x^2 + px + q = (x + \tfrac{p}{2})^2 + a^2$ with $a^2 = q - \tfrac{p^2}{4} > 0$, and split the numerator into a multiple of the derivative $2x + p$ plus a constant:</p>
+$$\int \frac{Bx + C}{x^2 + px + q}\,dx = \frac{B}{2}\ln(x^2+px+q) + \left(C - \frac{Bp}{2}\right)\cdot\frac{1}{a}\arctan\frac{x + p/2}{a} + \text{const}.$$
+<p>The first piece is a logarithm because the numerator was engineered to be the denominator's derivative; the leftover constant numerator over $(x+\tfrac{p}{2})^2 + a^2$ is precisely the arctangent template. Higher powers $\int \tfrac{dx}{(u^2+a^2)^k}$ are handled by the reduction formula</p>
+$$\int \frac{du}{(u^2+a^2)^k} = \frac{u}{2a^2(k-1)(u^2+a^2)^{k-1}} + \frac{2k-3}{2a^2(k-1)}\int \frac{du}{(u^2+a^2)^{k-1}},$$
+<p>which steps every multiplicity down to the base arctangent. Hence every proper rational function has an elementary antiderivative, a result with no analogue for general elementary integrands.</p>
 </div></div></details>
 
 <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The correct partial fraction form for $\dfrac{1}{(x-1)(x^2+1)}$ is:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{A}{x-1} + \dfrac{B}{x^2+1}$</div><div class="quiz-opt" data-idx="1">$\dfrac{A}{x-1} + \dfrac{B}{x+1} + \dfrac{C}{x^2}$</div><div class="quiz-opt" data-idx="2">$\dfrac{A}{x-1} + \dfrac{Bx + C}{x^2+1}$</div><div class="quiz-opt" data-idx="3">$\dfrac{Ax+B}{x-1} + \dfrac{C}{x^2+1}$</div></div><div class="quiz-explain correct-exp">Correct. The linear factor gets a constant numerator; the irreducible quadratic $x^2+1$ gets a linear numerator $Bx + C$.</div><div class="quiz-explain wrong-exp">An irreducible quadratic factor must carry a linear numerator $Bx+C$, while the linear factor carries a constant $A$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1107,6 +1180,23 @@ $$\int \frac{\frac{2}{1+t^2}\,dt}{1 + \frac{2t}{1+t^2}} = \int \frac{2\,dt}{1 + 
 $$= -\frac{2}{1 + \tan(x/2)} + C.$$
 </div></div></details>
 
+<details><summary>Worked Example 5.3: a higher-index root</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{dx}{\sqrt{x} + \sqrt[3]{x}}$. The two roots share the least common index $6$, so set $u = x^{1/6}$, giving $x = u^6$, $dx = 6u^5\,du$, $\sqrt{x} = u^3$, $\sqrt[3]{x} = u^2$.</p>
+$$\int \frac{6u^5}{u^3 + u^2}\,du = 6\int \frac{u^5}{u^2(u+1)}\,du = 6\int \frac{u^3}{u+1}\,du.$$
+<p>Polynomial-divide $\dfrac{u^3}{u+1} = u^2 - u + 1 - \dfrac{1}{u+1}$:</p>
+$$6\int \left(u^2 - u + 1 - \frac{1}{u+1}\right)du = 6\left(\frac{u^3}{3} - \frac{u^2}{2} + u - \ln|u+1|\right) + C.$$
+$$= 2\sqrt{x} - 3\sqrt[3]{x} + 6\sqrt[6]{x} - 6\ln\big(\sqrt[6]{x} + 1\big) + C.$$
+</div></div></details>
+
+<details><summary>Worked Example 5.4: Weierstrass on a cosine integrand</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{dx}{2 + \cos x}$. With $t = \tan(x/2)$, $\cos x = \tfrac{1-t^2}{1+t^2}$ and $dx = \tfrac{2}{1+t^2}\,dt$:</p>
+$$\int \frac{\frac{2}{1+t^2}}{2 + \frac{1-t^2}{1+t^2}}\,dt = \int \frac{2\,dt}{2(1+t^2) + (1-t^2)} = \int \frac{2\,dt}{t^2 + 3}.$$
+$$= \frac{2}{\sqrt3}\arctan\frac{t}{\sqrt3} + C = \frac{2}{\sqrt3}\arctan\!\left(\frac{\tan(x/2)}{\sqrt3}\right) + C.$$
+<p>The Weierstrass substitution converts any rational function of $\sin x$ and $\cos x$ into a rational function of $t$, which then falls to partial fractions, so it is the universal fallback for trigonometric rational integrands.</p>
+</div></div></details>
+
+<div class="concept-box orange"><strong>Common error.</strong> The Weierstrass substitution is valid on intervals where $\tan(x/2)$ is defined, so it silently excludes the odd multiples of $\pi$. On a definite integral that straddles $x = \pi$, applying it blindly can give a discontinuous antiderivative and a wrong value; split the interval or use a different method there. A separate slip with root substitutions is forgetting to rewrite $dx$: setting $u = \sqrt[n]{ax+b}$ also changes the differential to $\tfrac{n u^{n-1}}{a}\,du$, and omitting this factor corrupts the whole integral.</div>
+
 <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Under $t = \tan(x/2)$, the factor $dx$ becomes:</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{2}{1+t^2}\,dt$</div><div class="quiz-opt" data-idx="1">$\dfrac{1}{1+t^2}\,dt$</div><div class="quiz-opt" data-idx="2">$(1+t^2)\,dt$</div><div class="quiz-opt" data-idx="3">$2t\,dt$</div></div><div class="quiz-explain correct-exp">Correct. From $x = 2\arctan t$ we get $dx = \dfrac{2}{1+t^2}\,dt$.</div><div class="quiz-explain wrong-exp">Since $x = 2\arctan t$, differentiating gives $dx = \dfrac{2}{1+t^2}\,dt$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1134,6 +1224,23 @@ $$\int \frac{x^2 \cdot x}{\sqrt{x^2+1}}\,dx = \frac12\int \frac{u-1}{\sqrt{u}}\,
 $$= \frac12\left(\frac{2}{3}u^{3/2} - 2u^{1/2}\right) + C = \frac13(x^2+1)^{3/2} - (x^2+1)^{1/2} + C.$$
 </div></div></details>
 
+<details><summary>Worked Example 6.3: an integrand that needs rewriting first</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int \frac{dx}{1 + e^x}$. No standard pattern fits until you rewrite. Multiply top and bottom by $e^{-x}$:</p>
+$$\int \frac{e^{-x}}{e^{-x} + 1}\,dx.$$
+<p>Now the numerator is, up to sign, the derivative of the denominator. Let $u = e^{-x} + 1$, $du = -e^{-x}\,dx$:</p>
+$$-\int \frac{du}{u} = -\ln|u| + C = -\ln(e^{-x} + 1) + C = x - \ln(e^x + 1) + C,$$
+<p>using $-\ln(e^{-x}+1) = -\ln\big(e^{-x}(1 + e^x)\big) = x - \ln(1+e^x)$. The lesson of the strategy section is exactly this: many integrals only reveal a usable substitution after an algebraic rewrite.</p>
+</div></div></details>
+
+<details><summary>Worked Example 6.4: parts versus substitution</summary><div class="detail-body"><div class="worked-solution">
+<p>Evaluate $\displaystyle\int x\arctan x\,dx$. A product of a polynomial with an inverse trig function points to integration by parts, with $u = \arctan x$, $dv = x\,dx$, so $du = \tfrac{dx}{1+x^2}$, $v = \tfrac{x^2}{2}$:</p>
+$$\frac{x^2}{2}\arctan x - \frac12\int \frac{x^2}{1 + x^2}\,dx = \frac{x^2}{2}\arctan x - \frac12\int \left(1 - \frac{1}{1+x^2}\right)dx.$$
+$$= \frac{x^2}{2}\arctan x - \frac{x}{2} + \frac12\arctan x + C.$$
+<p>The leftover $\int \tfrac{x^2}{1+x^2}\,dx$ was improper as a rational function, so the strategy looped back to the divide-first rule of Section 3 before finishing with an arctangent.</p>
+</div></div></details>
+
+<div class="concept-box orange"><strong>Common error.</strong> The most common strategic mistake is reaching for a heavy tool before checking for a cheap substitution. Faced with $\int \tfrac{x}{\sqrt{1-x^2}}\,dx$, students often launch a trig substitution $x = \sin\theta$, which works but is slower than spotting that $x\,dx$ is half of $d(1-x^2)$. The discipline is to simplify, then test a plain $u$-substitution, and only then classify and apply parts, trig substitution, or partial fractions. Skipping the cheap check wastes effort and invites algebra errors.</div>
+
 <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For $\displaystyle\int x\,e^{x^2}\,dx$, the first technique to try is:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Integration by parts</div><div class="quiz-opt" data-idx="1">The substitution $u = x^2$</div><div class="quiz-opt" data-idx="2">Partial fractions</div><div class="quiz-opt" data-idx="3">Trigonometric substitution</div></div><div class="quiz-explain correct-exp">Correct. Since $x$ is a constant multiple of the derivative of $x^2$, the substitution $u = x^2$ gives $\tfrac12 e^{x^2} + C$ immediately, with no need for parts.</div><div class="quiz-explain wrong-exp">Always test for a $u$-substitution first: here $u=x^2$ makes $x\,dx = \tfrac12\,du$ and the integral becomes $\tfrac12\int e^u\,du$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1157,10 +1264,21 @@ $$= \cos^{n-1}x \sin x + (n-1)\int \cos^{n-2}x\,dx - (n-1)\int \cos^n x\,dx.$$
 <p>The term $\int \cos^n x\,dx$ reappears on the right. Collecting it on the left gives $n\int \cos^n x\,dx = \cos^{n-1}x \sin x + (n-1)\int \cos^{n-2}x\,dx$, which is the stated formula after dividing by $n$.</p>
 </div></div></details>
 
+<details><summary>Going deeper: the tangent reduction formula, derived</summary><div class="detail-body"><div class="worked-solution">
+<p>The tangent reduction needs no integration by parts, only the Pythagorean identity. Split off two factors and substitute $\tan^2 x = \sec^2 x - 1$:</p>
+$$\int \tan^n x\,dx = \int \tan^{n-2}x\,(\sec^2 x - 1)\,dx = \int \tan^{n-2}x\,\sec^2 x\,dx - \int \tan^{n-2}x\,dx.$$
+<p>In the first integral let $u = \tan x$, $du = \sec^2 x\,dx$, so it equals $\tfrac{\tan^{n-1}x}{n-1}$. Therefore</p>
+$$\int \tan^n x\,dx = \frac{\tan^{n-1}x}{n-1} - \int \tan^{n-2}x\,dx,$$
+<p>which steps the power down by two each time until it reaches $\int \tan x\,dx = \ln|\sec x| + C$ (odd $n$) or $\int dx = x + C$ (even $n$). For example, $\int \tan^3 x\,dx = \tfrac{\tan^2 x}{2} - \int \tan x\,dx = \tfrac{\tan^2 x}{2} - \ln|\sec x| + C$. Every reduction formula in this unit works the same way: an identity exposes a self-similar copy of the original integral, which is then solved algebraically.</p>
+</div></div></details>
+
+<div class="concept-box purple"><strong>Common error.</strong> A reduction formula is a recurrence, not a closed form. Quoting $\int \cos^n x\,dx = \tfrac{\cos^{n-1}x\sin x}{n} + \tfrac{n-1}{n}\int\cos^{n-2}x\,dx$ as if the integral on the right were the answer leaves the problem half done; you must apply it repeatedly down to the base case. A second trap is using it for $n=1$ or $n=0$, where the derivation divides by $n$ or assumes a spare factor that is not there. Treat $\int\cos x\,dx$ and $\int dx$ as the explicit base cases and stop the recursion there.</div>
+
 <details><summary>Going deeper: nonelementary integrals and Liouville's theorem</summary><div class="detail-body"><div class="worked-solution">
 <p>Every technique here produces an elementary antiderivative, a function built from polynomials, roots, exponentials, logarithms, and trig functions and their inverses. It is tempting to assume every continuous function has such an antiderivative, but this is false. Liouville's theorem, made effective by the Risch algorithm, shows that</p>
 $$\int e^{-x^2}\,dx, \qquad \int \frac{\sin x}{x}\,dx, \qquad \int \frac{dx}{\ln x}$$
 <p>have no elementary closed form. These integrals are perfectly well defined (they name genuine functions, such as the error function and the logarithmic integral), but no finite combination of elementary operations expresses them. The methods of this unit therefore solve a large but proper subset of integration problems, and recognizing when an integral falls outside that subset is itself a mark of fluency.</p>
+<p>The distinction is between an indefinite and a definite integral. Although $\int e^{-x^2}\,dx$ has no elementary antiderivative, the definite integral over the whole line is exactly computable by a multivariable trick: squaring $I = \int_{-\infty}^{\infty} e^{-x^2}\,dx$ and switching to polar coordinates gives $I^2 = \int_0^{2\pi}\int_0^\infty e^{-r^2}r\,dr\,d\theta = \pi$, so $I = \sqrt\pi$. The reduction and parity methods of this unit also power the Wallis formulas, the closed forms for $\int_0^{\pi/2}\sin^n x\,dx$, which are the workhorse of probability and Fourier analysis. So even where a single antiderivative is out of reach, the techniques here remain the right starting point for the definite integrals that occur in practice.</p>
 </div></div></details>
 
 <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Which integral has no elementary antiderivative?</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int \dfrac{dx}{x^2+1}$</div><div class="quiz-opt" data-idx="1">$\int x\ln x\,dx$</div><div class="quiz-opt" data-idx="2">$\int \dfrac{x}{\sqrt{x^2+1}}\,dx$</div><div class="quiz-opt" data-idx="3">$\int e^{-x^2}\,dx$</div></div><div class="quiz-explain correct-exp">Correct. By Liouville's theorem, $e^{-x^2}$ has no elementary antiderivative; the other three integrate to arctangent, a parts result, and a root respectively.</div><div class="quiz-explain wrong-exp">The first three are elementary (arctangent, integration by parts, and a $u$-substitution). The Gaussian $e^{-x^2}$ is the standard nonelementary example.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

@@ -951,6 +951,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> When the two curves cross inside $[a,b]$, the role of top and bottom switches. Split the interval at each intersection point and integrate the absolute difference, that is $A=\int_a^b |f(x)-g(x)|\,dx$, handled piecewise.</p>
 
+  <p>It pays to think of $f(x)-g(x)$ as the <em>height of a vertical slice</em> and $dx$ as its width: the integral accumulates the areas $(\text{height})\,dx$ of infinitely many thin rectangles. This slice picture is the single idea that powers every formula in this unit. When you set up an area, draw one representative slice, label its height as top minus bottom and its width as $dx$ (or, for a horizontal slice, right minus left and $dy$), and the integrand writes itself. The choice between an $x$-slice and a $y$-slice is purely a matter of which one gives a single clean height across the whole region; if a vertical slice would change its bottom curve partway across, a horizontal slice often avoids the split, and vice versa.</p>
+
   <details><summary>Worked Example 1.1: area between a parabola and a line</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the area enclosed by $y=x^2$ and $y=x+2$.</p>
   <p>First locate the intersections by setting $x^2=x+2$, so $x^2-x-2=(x-2)(x+1)=0$, giving $x=-1$ and $x=2$. On $(-1,2)$ test $x=0$: the line gives $2$ and the parabola gives $0$, so the line is on top.</p>
@@ -964,6 +966,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Intersections: $y^2=y+2$ gives $y^2-y-2=(y-2)(y+1)=0$, so $y=-1$ and $y=2$. For $-1<y<2$ the line $x=y+2$ lies to the right of $x=y^2$ (test $y=0$: right boundary $2$, left boundary $0$).</p>
   $$A=\int_{-1}^{2}\bigl((y+2)-y^2\bigr)\,dy=\frac{9}{2},$$
   <p>by the same antiderivative as Example 1.1. Slicing in $y$ avoids splitting the region that a vertical slice would require, since the left boundary of the region would otherwise be the two branches of the sideways parabola.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: curves that cross, splitting the interval</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the geometric area between $y=\sin x$ and $y=\cos x$ on $[0,\pi/2]$.</p>
+  <p>These curves cross where $\sin x=\cos x$, that is at $x=\pi/4$. On $[0,\pi/4)$ we have $\cos x>\sin x$ (test $x=0$: $1>0$); on $(\pi/4,\pi/2]$ the order reverses (test $x=\pi/2$: $1>0$ for $\sin$). Because the top curve changes, a single integrand $(\cos x-\sin x)$ over the whole interval would record a signed area in which the second piece subtracts. Split at the crossing and take top minus bottom on each piece:</p>
+  $$A=\int_0^{\pi/4}(\cos x-\sin x)\,dx+\int_{\pi/4}^{\pi/2}(\sin x-\cos x)\,dx.$$
+  <p>The first integral is $[\sin x+\cos x]_0^{\pi/4}=\bigl(\tfrac{\sqrt2}{2}+\tfrac{\sqrt2}{2}\bigr)-(0+1)=\sqrt2-1$. The second is $[-\cos x-\sin x]_{\pi/4}^{\pi/2}=(0-1)-\bigl(-\tfrac{\sqrt2}{2}-\tfrac{\sqrt2}{2}\bigr)=\sqrt2-1$. By symmetry the two pieces are equal, so</p>
+  $$A=2(\sqrt2-1)=2\sqrt2-2\approx 0.828.$$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often integrate the raw difference $\int_a^b (f-g)\,dx$ across an intersection without splitting, then report the result as the area. That number is the <em>net signed</em> area, in which the region where $g$ is on top counts negatively. In Example 1.3 the unsplit integral $\int_0^{\pi/2}(\cos x-\sin x)\,dx$ equals exactly $0$, which is plainly not the geometric area. Always locate every intersection in the interior, split there, and take (top minus bottom) on each subinterval so each integrand is nonnegative.</div>
+
+  <details><summary>Going deeper: why (top minus bottom) is the right integrand</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose first that both curves lie above the $x$-axis, $f(x)\ge g(x)\ge 0$. The region between them is the region under $f$ with the region under $g$ removed. By the area-under-a-curve interpretation of the definite integral,</p>
+  $$A=\int_a^b f(x)\,dx-\int_a^b g(x)\,dx=\int_a^b \bigl(f(x)-g(x)\bigr)\,dx,$$
+  <p>using linearity of the integral. Now drop the sign assumption. Choose a constant $C$ large enough that $g(x)+C\ge 0$ on $[a,b]$ (possible since $g$ is continuous on a closed interval, hence bounded below). Shifting both curves up by $C$ is a vertical translation that preserves the enclosed area, and the shifted curves satisfy the nonnegative hypothesis, so</p>
+  $$A=\int_a^b\bigl((f+C)-(g+C)\bigr)\,dx=\int_a^b\bigl(f(x)-g(x)\bigr)\,dx.$$
+  <p>The constant cancels, which is why the formula needs no positivity assumption: only the ordering $f\ge g$ matters, and that is what forces the integrand to be the gap, top minus bottom.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The region bounded by $y=\sqrt{x}$ and $y=x$ for $0\le x\le 1$ has area equal to which integral?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int_0^1 (x-\sqrt{x})\,dx$</div><div class="quiz-opt" data-idx="1">$\int_0^1 (\sqrt{x}-x)\,dx$</div><div class="quiz-opt" data-idx="2">$\int_0^1 (\sqrt{x}+x)\,dx$</div><div class="quiz-opt" data-idx="3">$\int_0^1 (x^2-x)\,dx$</div></div><div class="quiz-explain correct-exp">Correct. On $(0,1)$ we have $\sqrt{x}\ge x$ (test $x=\tfrac14$: $\tfrac12$ versus $\tfrac14$), so the integrand is top minus bottom, $\sqrt{x}-x$.</div><div class="quiz-explain wrong-exp">On $(0,1)$ the curve $y=\sqrt{x}$ lies above $y=x$, so the integrand must be $\sqrt{x}-x$, which is nonnegative there.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -994,6 +1014,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> Radii are distances from the axis of rotation. If you revolve about the line $y=k$ rather than $y=0$, replace each radius by its distance to that line, for example $R(x)=|f(x)-k|$.</p>
 
+  <p>A reliable habit is to decide first whether the slice is a disk or a washer by asking whether the region touches the axis. If the region runs all the way to the axis, the slice is a solid disk and there is no inner radius; if a gap separates the region from the axis, that gap is the inner radius and the slice is a washer. Then read the outer radius as the distance from the axis to the far boundary. Because the slices in this method are perpendicular to the axis, the variable of integration is the same coordinate as the axis: revolve about a horizontal axis and integrate in $x$; revolve about a vertical axis and integrate in $y$, which usually means first solving the boundary curves for $x$ in terms of $y$.</p>
+
   <details><summary>Worked Example 2.1: a solid sphere by disks</summary><div class="detail-body"><div class="worked-solution">
   <p>Rotate the region under $y=\sqrt{r^2-x^2}$, $-r\le x\le r$, about the $x$-axis to recover the volume of a sphere of radius $r$.</p>
   $$V=\pi\int_{-r}^{r}\bigl(\sqrt{r^2-x^2}\bigr)^2\,dx=\pi\int_{-r}^{r}(r^2-x^2)\,dx.$$
@@ -1005,6 +1027,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>On $(0,1)$ the line $y=x$ is the outer boundary and $y=x^2$ the inner, so $R(x)=x$ and $r(x)=x^2$.</p>
   $$V=\pi\int_0^1\bigl(x^2-x^4\bigr)\,dx=\pi\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1=\pi\left(\frac13-\frac15\right)=\frac{2\pi}{15}.$$
   </div></div></details>
+
+  <details><summary>Worked Example 2.3: revolving about a line that is not the axis</summary><div class="detail-body"><div class="worked-solution">
+  <p>The region bounded by $y=x^2$ and $y=1$ is revolved about the horizontal line $y=2$. Find the volume.</p>
+  <p>The region runs over $-1\le x\le 1$, with $y$ between the parabola $y=x^2$ (bottom) and the line $y=1$ (top). Revolving about $y=2$ produces a washer at each $x$. A radius is the distance from the axis $y=2$ down to a boundary curve. The point on the region closest to the axis is the top edge $y=1$, at distance $2-1=1$: that is the inner radius. The farthest is the parabola $y=x^2$, at distance $2-x^2$: that is the outer radius.</p>
+  $$r(x)=2-1=1,\qquad R(x)=2-x^2.$$
+  $$V=\pi\int_{-1}^{1}\Bigl((2-x^2)^2-1^2\Bigr)\,dx=\pi\int_{-1}^{1}\bigl(4-4x^2+x^4-1\bigr)\,dx=\pi\int_{-1}^{1}\bigl(3-4x^2+x^4\bigr)\,dx.$$
+  <p>The integrand is even, so integrate on $[0,1]$ and double:</p>
+  $$V=2\pi\left[3x-\frac{4x^3}{3}+\frac{x^5}{5}\right]_0^1=2\pi\left(3-\frac43+\frac15\right)=2\pi\cdot\frac{45-20+3}{15}=\frac{56\pi}{15}.$$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When revolving about a line $y=k$ that is not the $x$-axis, do not use $f(x)$ itself as the radius; use the <em>distance</em> $|f(x)-k|$. A second, subtler slip is to write $\pi\int (R-r)^2\,dx$. The washer area is $\pi(R^2-r^2)$, the difference of two squares, never the square of the difference. In Example 2.3, $\pi\int(R-r)^2\,dx$ would give a different and wrong number because $(R^2-r^2)\ne (R-r)^2$ unless $r=0$.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The region under $y=\sqrt{x}$ on $[0,4]$ is revolved about the $x$-axis. The volume is</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$4\pi$</div><div class="quiz-opt" data-idx="1">$6\pi$</div><div class="quiz-opt" data-idx="2">$8\pi$</div><div class="quiz-opt" data-idx="3">$16\pi$</div></div><div class="quiz-explain correct-exp">Correct. $V=\pi\int_0^4 (\sqrt{x})^2\,dx=\pi\int_0^4 x\,dx=\pi\cdot\tfrac{16}{2}=8\pi$.</div><div class="quiz-explain wrong-exp">Use the disk method: $V=\pi\int_0^4 x\,dx=\pi[x^2/2]_0^4=8\pi$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1021,6 +1054,8 @@ body.lang-zh [data-lang="en"] { display: none; }
   </div>
 
   <p>In general the integrand is (shell radius)(shell height). When revolving about a vertical line $x=k$ to the left of the region, the radius becomes $x-k$; about a line to the right, it is $k-x$.</p>
+
+  <p>The shell method shines whenever the natural strip runs parallel to the axis. Revolving about a vertical axis, a vertical strip stays a single curve tall over its whole width, so its height $f(x)$ is one clean formula and the integral stays in $x$. The price of the disk method in the same situation, integrating in $y$, would be inverting the boundary curve. So a good rule of thumb is: vertical strip about a vertical axis means shells in $x$; horizontal strip about a horizontal axis means shells in $y$. Memorizing the slogan (radius)(height) and drawing the representative strip is far safer than memorizing four separate formulas.</p>
 
   <div class="formula-box"><div class="formula-label">Shell method, general axis</div>
   $$V=2\pi\int_a^b (\text{radius})(\text{height})\,dx.$$
@@ -1039,6 +1074,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Divide by $dx$ and let $dx\to 0$. The term $(dx)^2$ is second order and vanishes, leaving the density $dV/dx=2\pi x h$. Equivalently, unroll the shell into a thin rectangular sheet of length $2\pi x$ (the circumference), height $h$, and thickness $dx$; its volume is $2\pi x\cdot h\cdot dx$. Summing over all strips gives the shell integral.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.2: shells about a vertical line off the axis</summary><div class="detail-body"><div class="worked-solution">
+  <p>The region under $y=x^2$ on $[0,1]$ is revolved about the line $x=2$. Find the volume by shells.</p>
+  <p>A vertical strip sits at position $x$ with height $x^2$. Revolving about $x=2$, the strip is a distance $2-x$ from the axis (the region lies to the left of the line, so the radius is $2-x$, which is positive on $[0,1]$). The shell height is still $f(x)=x^2$.</p>
+  $$V=2\pi\int_0^1 (2-x)\,x^2\,dx=2\pi\int_0^1\bigl(2x^2-x^3\bigr)\,dx=2\pi\left[\frac{2x^3}{3}-\frac{x^4}{4}\right]_0^1.$$
+  $$=2\pi\left(\frac23-\frac14\right)=2\pi\cdot\frac{8-3}{12}=2\pi\cdot\frac{5}{12}=\frac{5\pi}{6}.$$
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: a shell that needs no inverse</summary><div class="detail-body"><div class="worked-solution">
+  <p>Revolve the region bounded by $y=x^3$, $y=0$, and $x=2$ about the $y$-axis.</p>
+  <p>A strip at $x$ has radius $x$ and runs from the $x$-axis up to $y=x^3$, so its height is $x^3$.</p>
+  $$V=2\pi\int_0^2 x\cdot x^3\,dx=2\pi\int_0^2 x^4\,dx=2\pi\left[\frac{x^5}{5}\right]_0^2=2\pi\cdot\frac{32}{5}=\frac{64\pi}{5}.$$
+  <p>Washers in $y$ would require the inverse $x=y^{1/3}$ and an outer radius of $2$, a workable but longer computation; shells read directly off the original equation.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The shell radius is the distance from the strip to the axis, not the coordinate of the strip. When the axis is $x=2$ and the region sits at $x<2$, the radius is $2-x$, not $x$ and not $x-2$ (which would be negative). Sign matters: always write the radius so it is positive throughout the region, and confirm the height is measured along the same direction as the strip. Mixing up radius and height is the most common shell mistake.</div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The region under $y=x^2$ on $[0,3]$ is revolved about the $y$-axis. By shells the volume is</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{81\pi}{2}$</div><div class="quiz-opt" data-idx="1">$\dfrac{27\pi}{2}$</div><div class="quiz-opt" data-idx="2">$27\pi$</div><div class="quiz-opt" data-idx="3">$\dfrac{243\pi}{5}$</div></div><div class="quiz-explain correct-exp">Correct. $V=2\pi\int_0^3 x\cdot x^2\,dx=2\pi\int_0^3 x^3\,dx=2\pi\cdot\tfrac{81}{4}=\tfrac{81\pi}{2}$.</div><div class="quiz-explain wrong-exp">Shell radius is $x$, height $x^2$: $V=2\pi\int_0^3 x^3\,dx=2\pi\cdot\frac{3^4}{4}=\frac{81\pi}{2}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1055,6 +1106,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> If using washers would force you to invert $y=f(x)$ to solve for $x$, shells in $x$ often avoid the algebra. Conversely, if a strip parallel to the axis would have a height given by two different formulas, switch to the perpendicular slice.</p>
 
+  <p>There is one more decision rule worth internalizing. Look at the axis of revolution and the strip you would naturally draw to describe the region. If your strip is perpendicular to the axis, that strip is a disk or washer and you are integrating in the axis variable. If your strip is parallel to the axis, that strip is a shell and you integrate in the other variable. The two methods are not rivals: they are the same volume computed by slicing two different ways, and a strong habit is to do the easy one and, when time allows, recompute by the other as a check. Whenever your two setups disagree, the bug is almost always a wrong limit, a radius measured from the wrong line, or a $(R-r)^2$ written where $R^2-r^2$ was meant.</p>
+
   <details><summary>Worked Example 4.1: same solid, both methods agree</summary><div class="detail-body"><div class="worked-solution">
   <p>Revolve the region under $y=x^2$ on $[0,3]$ about the $y$-axis. We found $V=\tfrac{81\pi}{2}$ by shells in Section 3. Confirm by washers in $y$.</p>
   <p>Slicing perpendicular to the $y$-axis, at height $y$ the solid runs from the curve $x=\sqrt{y}$ out to the line $x=3$, so a washer has outer radius $3$ and inner radius $\sqrt{y}$, for $0\le y\le 9$.</p>
@@ -1069,6 +1122,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$V=2\pi\int_0^\pi x\sin x\,dx.$$
   <p>Integrate by parts with $u=x$, $dv=\sin x\,dx$: $\int x\sin x\,dx=-x\cos x+\sin x$. Evaluating from $0$ to $\pi$ gives $-\pi\cos\pi+\sin\pi-0=\pi$. Hence $V=2\pi\cdot\pi=2\pi^2$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 4.3: both methods on one region, cross-checked</summary><div class="detail-body"><div class="worked-solution">
+  <p>Revolve the region bounded by $y=\sqrt{x}$, $y=0$, and $x=4$ about the $x$-axis. Compute by disks, then verify by shells.</p>
+  <p><strong>Disks (slices perpendicular to the $x$-axis).</strong> At $x$ the radius is $\sqrt{x}$:</p>
+  $$V=\pi\int_0^4 (\sqrt{x})^2\,dx=\pi\int_0^4 x\,dx=\pi\cdot 8=8\pi.$$
+  <p><strong>Shells (slices parallel to the $x$-axis, i.e. horizontal strips in $y$).</strong> A horizontal strip at height $y$ runs in $x$ from the curve $x=y^2$ to the line $x=4$, so its length is $4-y^2$, and its distance to the $x$-axis is $y$, for $0\le y\le 2$:</p>
+  $$V=2\pi\int_0^2 y\,(4-y^2)\,dy=2\pi\int_0^2\bigl(4y-y^3\bigr)\,dy=2\pi\left[2y^2-\frac{y^4}{4}\right]_0^2=2\pi(8-4)=8\pi.$$
+  <p>The methods agree at $8\pi$, which is the cross-check you want before trusting a single setup.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent mismatch comes from forgetting that when you switch methods you also switch the variable of integration <em>and</em> the limits. In Example 4.3 the disk integral runs over $x\in[0,4]$, but the shell integral runs over $y\in[0,2]$, and the shell height is the horizontal extent $4-y^2$, not $\sqrt{x}$. Carrying the old limits or the old height into the new setup is the typical source of a wrong second answer that then makes the two methods falsely disagree.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">To revolve the region bounded by $y=e^{x^2}$, $x=0$, $x=1$, $y=0$ about the $y$-axis, which method avoids needing an inverse of $e^{x^2}$?</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Washers in $y$, since the inner radius is clean</div><div class="quiz-opt" data-idx="1">Disks in $y$, since there is no hole</div><div class="quiz-opt" data-idx="2">Either method is equally simple</div><div class="quiz-opt" data-idx="3">Shells in $x$, giving $2\pi\int_0^1 x e^{x^2}\,dx$</div></div><div class="quiz-explain correct-exp">Correct. Shells keep the integrand in $x$, and $2\pi\int_0^1 x e^{x^2}\,dx$ even has the elementary antiderivative $\pi e^{x^2}$. Washers would force inverting $y=e^{x^2}$.</div><div class="quiz-explain wrong-exp">Inverting $y=e^{x^2}$ to get $x=\sqrt{\ln y}$ is awkward; shells in $x$ keep the integral as $2\pi\int_0^1 x e^{x^2}\,dx$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1092,6 +1156,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> Arc length integrals are notoriously hard to evaluate in closed form because of the square root. Textbook problems are engineered so that $1+(f')^2$ becomes a perfect square. Otherwise the integral is set up exactly and evaluated numerically.</p>
 
+  <p>The differential form is worth memorizing because it unifies arc length with the surface-area integral of the next section. Write $ds=\sqrt{1+(f'(x))^2}\,dx$, the length of an infinitesimal piece of the curve. Equivalently $ds=\sqrt{(dx)^2+(dy)^2}$, the Pythagorean length of a tiny step whose horizontal part is $dx$ and vertical part is $dy$. Then arc length is simply $L=\int ds$, the accumulation of all those tiny pieces, and once you can write $ds$ in whichever variable is convenient, both $L=\int_a^b\sqrt{1+(f')^2}\,dx$ and $L=\int_c^d\sqrt{1+(g')^2}\,dy$ are the same statement seen from two sides.</p>
+
   <details><summary>Worked Example 5.1: a designed perfect square</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the length of $y=\tfrac{x^3}{6}+\tfrac{1}{2x}$ on $[1,2]$.</p>
   <p>Differentiate: $f'(x)=\tfrac{x^2}{2}-\tfrac{1}{2x^2}$. Then</p>
@@ -1100,11 +1166,31 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$L=\int_1^2\left(\frac{x^2}{2}+\frac{1}{2x^2}\right)dx=\left[\frac{x^3}{6}-\frac{1}{2x}\right]_1^2=\left(\frac{8}{6}-\frac14\right)-\left(\frac16-\frac12\right)=\frac{17}{12}.$$
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: a length integrated in $y$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the length of the curve $x=\tfrac{1}{3}(y^2+2)^{3/2}$ from $y=0$ to $y=3$.</p>
+  <p>This curve is naturally a function of $y$, so use $L=\int_c^d\sqrt{1+(g'(y))^2}\,dy$. Differentiate:</p>
+  $$g'(y)=\frac13\cdot\frac32(y^2+2)^{1/2}\cdot 2y=y(y^2+2)^{1/2}.$$
+  <p>Then $(g')^2=y^2(y^2+2)=y^4+2y^2$, so</p>
+  $$1+(g')^2=y^4+2y^2+1=(y^2+1)^2,$$
+  <p>a perfect square as designed. The integrand is $\sqrt{(y^2+1)^2}=y^2+1$ (nonnegative on $[0,3]$), giving</p>
+  $$L=\int_0^3 (y^2+1)\,dy=\left[\frac{y^3}{3}+y\right]_0^3=(9+3)=12.$$
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: a length that is only set up, then estimated</summary><div class="detail-body"><div class="worked-solution">
+  <p>Set up the length of $y=x^2$ from $x=0$ to $x=1$.</p>
+  <p>Here $f'(x)=2x$, so $1+(f')^2=1+4x^2$, which is not a perfect square. The exact length is</p>
+  $$L=\int_0^1\sqrt{1+4x^2}\,dx.$$
+  <p>This does have a closed form via the substitution $2x=\tan\theta$ or the standard reduction, namely $\tfrac{1}{4}\bigl[2x\sqrt{1+4x^2}+\sinh^{-1}(2x)\bigr]_0^1=\tfrac{1}{4}\bigl(2\sqrt5+\sinh^{-1}2\bigr)\approx 1.479$. The lesson is procedural: most arc length integrands have no elementary perfect-square form, so on an exam you typically <em>stop at the correct setup</em> unless the problem is engineered, then evaluate numerically only if asked.</p>
+  </div></div></details>
+
   <details><summary>Going deeper: deriving the arc length formula</summary><div class="detail-body"><div class="worked-solution">
   <p>Partition $[a,b]$ as $a=x_0<x_1<\dots<x_n=b$. The polygonal approximation joins the points $(x_i,f(x_i))$. Its total length is</p>
   $$L_n=\sum_{i=1}^n \sqrt{(\Delta x_i)^2+(\Delta y_i)^2}=\sum_{i=1}^n \sqrt{1+\left(\frac{\Delta y_i}{\Delta x_i}\right)^2}\,\Delta x_i.$$
   <p>Because $f$ is differentiable, the Mean Value Theorem gives a point $x_i^*$ in each subinterval with $\Delta y_i/\Delta x_i=f'(x_i^*)$. Thus $L_n=\sum_i \sqrt{1+f'(x_i^*)^2}\,\Delta x_i$, a Riemann sum for $\sqrt{1+(f')^2}$. As the mesh tends to zero this converges to $\int_a^b\sqrt{1+(f')^2}\,dx$, provided $f'$ is continuous so the integrand is integrable.</p>
+  <p>One subtlety justifies calling $L$ the length: the polygonal lengths $L_n$ increase as the partition is refined (adding a vertex can only lengthen the path, by the triangle inequality), and the arc length is <em>defined</em> as the supremum of all polygonal lengths. The Riemann-sum limit above realizes that supremum when $f'$ is continuous, so the integral and the geometric definition coincide.</p>
   </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Two slips dominate. First, writing the integrand as $\sqrt{1+f'(x)}$ instead of $\sqrt{1+(f'(x))^2}$: the derivative must be squared. Second, simplifying $\sqrt{(y^2+1)^2}$ to $y^2+1$ without checking sign. Here it is correct because $y^2+1>0$, but in general $\sqrt{u^2}=|u|$, and on an interval where the bracket can be negative you must keep the absolute value or split the interval. Dropping the square or dropping the absolute value are the two classic arc-length errors.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The arc length of $y=\tfrac{2}{3}x^{3/2}$ from $x=0$ to $x=3$ is</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{8}{3}$</div><div class="quiz-opt" data-idx="1">$\dfrac{14}{3}$</div><div class="quiz-opt" data-idx="2">$6$</div><div class="quiz-opt" data-idx="3">$\dfrac{16}{3}$</div></div><div class="quiz-explain correct-exp">Correct. $f'=x^{1/2}$, so $1+(f')^2=1+x$ and $L=\int_0^3\sqrt{1+x}\,dx=\tfrac23(1+x)^{3/2}\big|_0^3=\tfrac23(8-1)=\tfrac{14}{3}$.</div><div class="quiz-explain wrong-exp">Here $f'=x^{1/2}$ gives $1+(f')^2=1+x$; then $L=\frac23\bigl((1+x)^{3/2}\bigr)\big|_0^3=\frac23(8-1)=\frac{14}{3}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1128,6 +1214,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> The radius is the distance from the traced point to the axis, exactly as in the shell method. The factor that distinguishes surface area from volume is that here we multiply the circumference by the slant element $ds$, not by a flat thickness $dx$.</p>
 
+  <p>A useful sanity check for any surface-of-revolution setup is the units-of-measurement picture: surface area is (length around)(length along), so the integrand must be a circumference $2\pi r$ times a length element $ds$, both lengths, giving an area. If you ever find yourself multiplying a circumference by a plain $dx$, the $dx$ is the shadow of the slant element, not the slant element itself, and the answer will be too small. The clean way to remember the whole family is: volumes pair an area with a thickness, lengths accumulate $ds$, and surfaces pair a circumference with $ds$. Each is an integral of one geometric element, and the only question is which element the problem hands you.</p>
+
   <details><summary>Worked Example 6.1: surface area of a paraboloid band</summary><div class="detail-body"><div class="worked-solution">
   <p>Revolve $y=\sqrt{x}$ on $[0,1]$ about the $x$-axis and find the surface area.</p>
   <p>Here $f(x)=x^{1/2}$, $f'(x)=\tfrac{1}{2}x^{-1/2}$, so $1+(f')^2=1+\tfrac{1}{4x}=\tfrac{4x+1}{4x}$. Then</p>
@@ -1141,6 +1229,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$S=\int_0^h 2\pi\frac{r}{h}x\cdot\frac{\sqrt{h^2+r^2}}{h}\,dx=\frac{2\pi r\sqrt{h^2+r^2}}{h^2}\cdot\frac{h^2}{2}=\pi r\ell,$$
   <p>the familiar formula $\pi r\ell$ for the lateral area of a cone.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.3: the surface area of a sphere</summary><div class="detail-body"><div class="worked-solution">
+  <p>Revolve the upper semicircle $y=\sqrt{r^2-x^2}$, $-r\le x\le r$, about the $x$-axis to recover the surface area of a sphere of radius $r$.</p>
+  <p>Differentiate: $f'(x)=\dfrac{-x}{\sqrt{r^2-x^2}}$, so $(f')^2=\dfrac{x^2}{r^2-x^2}$ and</p>
+  $$1+(f')^2=\frac{r^2-x^2+x^2}{r^2-x^2}=\frac{r^2}{r^2-x^2}.$$
+  <p>Now the radius $f(x)=\sqrt{r^2-x^2}$ multiplies the slant element, and a beautiful cancellation occurs:</p>
+  $$S=\int_{-r}^{r}2\pi\sqrt{r^2-x^2}\cdot\frac{r}{\sqrt{r^2-x^2}}\,dx=\int_{-r}^{r}2\pi r\,dx=2\pi r\,(2r)=4\pi r^2.$$
+  <p>The integrand collapses to the constant $2\pi r$, which is Archimedes' striking observation that equal slabs of a sphere carry equal surface area.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the frustum and the slant factor $ds$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Over a subinterval the curve is approximated by a straight chord, and revolving that chord sweeps a frustum (a cone with the tip cut off), not a flat ring. A frustum with smaller radius $r_1$, larger radius $r_2$, and slant height $\ell$ has lateral area</p>
+  $$\Delta S=\pi(r_1+r_2)\,\ell=2\pi\cdot\frac{r_1+r_2}{2}\cdot \ell.$$
+  <p>The factor $\tfrac{r_1+r_2}{2}$ is the average radius, which in the limit becomes $f(x_i^*)$ at a sample point, and the slant height of the chord is $\ell=\sqrt{(\Delta x)^2+(\Delta y)^2}=\sqrt{1+(f')^2}\,\Delta x$. Therefore each frustum contributes $2\pi f(x_i^*)\sqrt{1+(f'(x_i^*))^2}\,\Delta x$, and summing then taking the limit gives the surface area integral. This is exactly why the integrand uses the slant element $ds$ and not the flat width $dx$: a tilted band has more surface than its horizontal shadow.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The most common mistake is using $dx$ in place of the slant element $ds=\sqrt{1+(f')^2}\,dx$, that is writing $S=\int 2\pi f(x)\,dx$. That formula has no geometric meaning; it underestimates the band because it ignores the tilt of the curve. A related slip is confusing surface area with the shell volume integrand $2\pi x f(x)$: shells multiply circumference by a flat thickness $dx$ to get volume, while surface area multiplies circumference by the slant $ds$ to get area. Always carry the square-root factor in surface integrals.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For $y=f(x)$ revolved about the $x$-axis, the surface area integrand is</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\pi f(x)^2$</div><div class="quiz-opt" data-idx="1">$2\pi x\,f(x)$</div><div class="quiz-opt" data-idx="2">$2\pi f(x)\sqrt{1+(f'(x))^2}$</div><div class="quiz-opt" data-idx="3">$\sqrt{1+(f'(x))^2}$</div></div><div class="quiz-explain correct-exp">Correct. The band has circumference $2\pi f(x)$ (radius $f(x)$) and slant width $ds=\sqrt{1+(f')^2}\,dx$, so the integrand is their product.</div><div class="quiz-explain wrong-exp">Surface area multiplies circumference $2\pi f(x)$ by the slant element $\sqrt{1+(f')^2}\,dx$, not by $dx$ alone or by the radius squared.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1158,6 +1263,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>where $A$ is the area of a plane region and $\bar{r}$ is the distance from its centroid to the axis of revolution (which must not cross the region). This recovers the shell and washer answers instantly when the centroid is known.</p>
 
+  <p>Stepping back, the whole unit is a single idea applied six ways. In every case we (1) draw one representative element, (2) write the amount that one element contributes as a differential, (3) express that differential in a single variable, and (4) integrate over the range of that variable. Area sums slice areas $(\text{height})\,dx$; volume sums slab volumes $A(x)\,dx$ or shell volumes $2\pi r h\,dx$; arc length sums chord lengths $ds$; surface area sums band areas $2\pi r\,ds$. Once you see the element, the integral is mechanical. The two theorems of Pappus are the capstone: they replace an integral with a single product whenever the centroid of the region or curve is already known, turning a calculus problem into arithmetic. The general cross-section formula $V=\int A(x)\,dx$ is the broadest of all, since it never even mentions rotation and contains disks and washers as the special cases where $A(x)$ happens to be a circle or an annulus.</p>
+
   <details><summary>Worked Example 7.1: a solid with square cross sections</summary><div class="detail-body"><div class="worked-solution">
   <p>A solid has base the disk $x^2+y^2\le 1$ and cross sections perpendicular to the $x$-axis that are squares. Find its volume.</p>
   <p>At position $x$ the base chord runs from $y=-\sqrt{1-x^2}$ to $y=\sqrt{1-x^2}$, a length $s(x)=2\sqrt{1-x^2}$. The square cross section has area $A(x)=s(x)^2=4(1-x^2)$.</p>
@@ -1169,6 +1276,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$V=2\pi\int_D x\,dA=2\pi\left(\frac{\int_D x\,dA}{\int_D dA}\right)\left(\int_D dA\right)=2\pi\,\bar{x}\,A.$$
   <p>The middle factor is by definition the centroidal coordinate $\bar{x}$ and the last is the area $A$. Hence $V=2\pi\bar{x}A$, which is Pappus's theorem: the volume equals the area times the distance the centroid travels, $2\pi\bar{x}$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: equilateral-triangle cross sections</summary><div class="detail-body"><div class="worked-solution">
+  <p>A solid has base the region bounded by $y=x$, $y=0$, and $x=1$. Cross sections perpendicular to the $x$-axis are equilateral triangles standing on the base. Find the volume.</p>
+  <p>At position $x$ the base region runs in $y$ from $0$ to $x$, so the side of the triangle is $s(x)=x$. An equilateral triangle of side $s$ has area $\tfrac{\sqrt3}{4}s^2$, so $A(x)=\tfrac{\sqrt3}{4}x^2$.</p>
+  $$V=\int_0^1 \frac{\sqrt3}{4}x^2\,dx=\frac{\sqrt3}{4}\cdot\frac{x^3}{3}\Big|_0^1=\frac{\sqrt3}{12}.$$
+  <p>No revolution enters; the only ingredient is a correct area formula for the cross section as a function of $x$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: Pappus for surface area (a torus)</summary><div class="detail-body"><div class="worked-solution">
+  <p>Pappus's second theorem states that the surface area generated by revolving a plane <em>curve</em> about an external axis is $S=2\pi\bar{r}\,L$, where $L$ is the curve length and $\bar{r}$ the distance from the curve's centroid to the axis. Apply it to the circle of radius $1$ centered at $(3,0)$ revolved about the $y$-axis, which generates a torus.</p>
+  <p>The generating curve is the circle itself, of length $L=2\pi(1)=2\pi$, and its centroid is the center $(3,0)$, so $\bar{r}=3$. Then</p>
+  $$S=2\pi\bar{r}\,L=2\pi(3)(2\pi)=12\pi^2.$$
+  <p>Compare with the volume of the same torus, $V=2\pi\bar{r}A=2\pi(3)(\pi)=6\pi^2$, from the unit quiz. The two Pappus theorems handle volume (using the region's area) and surface area (using the boundary curve's length) by the same centroid-travel idea.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Pappus requires that the axis of revolution <em>not pass through</em> the region (for volume) or the curve (for surface area). If the axis cuts the figure, part of it sweeps to one side and part to the other, the swept regions overlap, and $2\pi\bar{r}A$ no longer equals the volume. A second slip is using Pappus's two theorems interchangeably: the volume theorem multiplies the centroid travel by the <em>area</em> of the plane region, while the surface theorem multiplies it by the <em>length</em> of the generating curve. They use different geometric measures and must not be swapped.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">A circle of radius $1$ centered at $(3,0)$ is revolved about the $y$-axis, forming a torus. By Pappus its volume is</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$6\pi^2$</div><div class="quiz-opt" data-idx="1">$3\pi^2$</div><div class="quiz-opt" data-idx="2">$2\pi^2$</div><div class="quiz-opt" data-idx="3">$9\pi^2$</div></div><div class="quiz-explain correct-exp">Correct. The region has area $A=\pi(1)^2=\pi$ and centroid distance $\bar{r}=3$, so $V=2\pi\bar{r}A=2\pi(3)(\pi)=6\pi^2$.</div><div class="quiz-explain wrong-exp">Pappus gives $V=2\pi\bar{r}A$ with $\bar{r}=3$ and $A=\pi$, so $V=2\pi(3)(\pi)=6\pi^2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

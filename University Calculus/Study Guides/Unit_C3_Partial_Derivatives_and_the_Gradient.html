@@ -955,6 +955,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>a circle of radius $\sqrt{9-k^2}$. The graph is the upper hemisphere of radius $3$; its contour map is a family of concentric circles that shrink to a point as $k \to 3$.</p>
   </div></div></details>
 
+  <h3>Reading the shape of a surface from its contours</h3>
+  <p>Contour maps are not just bookkeeping. The spacing of level curves encodes the steepness of the surface, and their shape encodes its qualitative geometry. A saddle, a bowl, and a ridge each leave a distinctive contour signature, which is why geologists and meteorologists read topographic and pressure maps the way a calculus student reads a graph. The next two examples sharpen the skill of moving between the algebraic rule for $f$ and the geometry of its contours.</p>
+
+  <details><summary>Worked Example 1.2: contours of a saddle and a paraboloid</summary><div class="detail-body"><div class="worked-solution">
+  <p>Describe the level curves of $g(x,y) = x^2 - y^2$ and of $p(x,y) = x^2 + y^2$, and say what the surfaces look like.</p>
+  <p><strong>Saddle.</strong> Setting $g=k$ gives $x^2 - y^2 = k$. For $k>0$ these are hyperbolas opening along the $x$-axis; for $k<0$ they open along the $y$-axis; for $k=0$ the level set degenerates to the two lines $y = \pm x$. The surface $z = x^2 - y^2$ is the standard saddle: it rises along the $x$-axis and falls along the $y$-axis, so the origin is neither a max nor a min.</p>
+  <p><strong>Paraboloid.</strong> Setting $p=k$ gives $x^2 + y^2 = k$, a circle of radius $\sqrt{k}$ for $k>0$ and the single point $(0,0)$ for $k=0$; there is no level curve for $k<0$ because $p \ge 0$ always. Equally spaced values of $k$ produce circles whose radii grow like $\sqrt{k}$, so the circles crowd together as you move outward. That crowding is the contour map telling you the bowl gets steeper away from the origin.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a function of three variables and its level surfaces</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the domain of $F(x,y,z) = \dfrac{1}{\sqrt{x^2+y^2+z^2-1}}$ and describe its level surfaces.</p>
+  <p>The square root requires $x^2+y^2+z^2 - 1 > 0$ (strictly positive, since it also sits in a denominator). So the domain is the exterior of the unit sphere, $\{(x,y,z): x^2+y^2+z^2 > 1\}$, with the sphere itself excluded.</p>
+  <p>A level surface sets $F = k$ for some $k>0$:</p>
+  $$ \frac{1}{\sqrt{x^2+y^2+z^2-1}} = k \implies x^2+y^2+z^2 - 1 = \frac{1}{k^2} \implies x^2+y^2+z^2 = 1 + \frac{1}{k^2}. $$
+  <p>Each level surface is a sphere centered at the origin with radius $\sqrt{1 + 1/k^2} > 1$. Large $k$ (large output) corresponds to a radius just above $1$, that is, points hugging the excluded sphere; small $k$ corresponds to large spheres far out. The level surfaces are nested spheres filling the entire exterior region.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often write the domain of $f(x,y)=\ln(x+y)$ as $x+y \ge 0$ or even all of $\mathbb{R}^2$. The logarithm demands a <em>strictly positive</em> argument, so the correct domain is the open half-plane $x+y>0$; the boundary line $x+y=0$ is excluded. The general rule: track every constraint separately (radicands $\ge 0$, log arguments $>0$, denominators $\ne 0$) and intersect them. Forgetting that a single point or curve is excluded is the most common domain mistake.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">What is the domain of $f(x,y) = \dfrac{\ln(x+y)}{x-y}$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">All of $\mathbb{R}^2$</div><div class="quiz-opt" data-idx="1">$\{(x,y): x+y>0 \text{ and } x\ne y\}$</div><div class="quiz-opt" data-idx="2">$\{(x,y): x+y\ge 0\}$</div><div class="quiz-opt" data-idx="3">$\{(x,y): x>y\}$</div></div><div class="quiz-explain correct-exp">Correct. The logarithm requires $x+y>0$ and the denominator requires $x-y\ne 0$, that is $x\ne y$.</div><div class="quiz-explain wrong-exp">The logarithm needs a strictly positive argument ($x+y>0$, not $\ge 0$) and the denominator must be nonzero ($x\ne y$).</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -988,6 +1007,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The bound is independent of $\theta$, so the limit is $0$ regardless of direction. The squeeze on $r$ is what makes the argument airtight.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 2.2: an epsilon-delta proof of a two-variable limit</summary><div class="detail-body"><div class="worked-solution">
+  <p>Prove directly from the definition that $\displaystyle \lim_{(x,y)\to(0,0)} \frac{3x^2 y}{x^2+y^2} = 0$.</p>
+  <p>Fix $\varepsilon>0$. We must produce $\delta>0$ so that $0 < \sqrt{x^2+y^2} < \delta$ forces $\left|\frac{3x^2 y}{x^2+y^2} - 0\right| < \varepsilon$. The key estimate uses $x^2 \le x^2 + y^2$:</p>
+  $$ \left| \frac{3x^2 y}{x^2+y^2} \right| = 3\,\frac{x^2}{x^2+y^2}\,|y| \le 3\cdot 1 \cdot |y| = 3|y| \le 3\sqrt{x^2+y^2}. $$
+  <p>So if we choose $\delta = \varepsilon/3$, then $\sqrt{x^2+y^2} < \delta$ gives</p>
+  $$ \left| \frac{3x^2 y}{x^2+y^2} \right| \le 3\sqrt{x^2+y^2} < 3\delta = \varepsilon. $$
+  <p>This holds for every $\varepsilon>0$, so the limit is $0$. Notice the structure: bound the messy fraction by a constant times the distance $\sqrt{x^2+y^2}$, then read off $\delta$ by solving the resulting inequality. The factor $\frac{x^2}{x^2+y^2} \le 1$ is the workhorse, and it is exactly the kind of bound that path-testing cannot supply.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Checking two or three straight lines and finding the same value does <em>not</em> prove a limit exists. The function $\frac{x^2 y}{x^4+y^2}$ gives $0$ along every line through the origin yet has limit $\tfrac12$ along the parabola $y=x^2$, so its limit does not exist. Path-testing can only <em>disprove</em> a limit (two paths disagreeing). To <em>prove</em> a limit equals $L$, you need a bound that holds for all approach directions at once, via polar coordinates, the squeeze theorem, or an epsilon-delta estimate.</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Evaluate $\displaystyle \lim_{(x,y)\to(0,0)} \frac{x^2-y^2}{x^2+y^2}$ along $y=0$ and along $x=0$. What do you conclude?</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Both give $0$; the limit is $0$</div><div class="quiz-opt" data-idx="1">Both give $1$; the limit is $1$</div><div class="quiz-opt" data-idx="2">The limit is $\tfrac12$</div><div class="quiz-opt" data-idx="3">Paths give $1$ and $-1$; the limit does not exist</div></div><div class="quiz-explain correct-exp">Correct. Along $y=0$ the value is $\frac{x^2}{x^2}=1$; along $x=0$ it is $\frac{-y^2}{y^2}=-1$. Different path limits mean the limit does not exist.</div><div class="quiz-explain wrong-exp">Substitute each path: $y=0$ gives $\frac{x^2}{x^2}=1$, while $x=0$ gives $\frac{-y^2}{y^2}=-1$. Two values, so no limit.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1011,6 +1041,36 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ f_y = 2x^3 y + x\cos(xy). $$
   <p>The chain rule supplies the inner factor ($y$ in $f_x$, $x$ in $f_y$) on the $\sin(xy)$ term.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 3.2: a partial derivative straight from the limit definition</summary><div class="detail-body"><div class="worked-solution">
+  <p>Use the limit definition to compute $f_x(1,2)$ for $f(x,y) = x^2 y + 3y$.</p>
+  <p>Hold $y=2$ fixed and form the difference quotient in $x$:</p>
+  $$ f_x(1,2) = \lim_{h\to 0} \frac{f(1+h,2) - f(1,2)}{h}. $$
+  <p>Compute the two values. Since $f(x,2) = 2x^2 + 6$, we have $f(1+h,2) = 2(1+h)^2 + 6 = 2 + 4h + 2h^2 + 6$ and $f(1,2) = 2 + 6 = 8$. Then</p>
+  $$ \frac{f(1+h,2)-f(1,2)}{h} = \frac{(8 + 4h + 2h^2) - 8}{h} = \frac{4h + 2h^2}{h} = 4 + 2h. $$
+  <p>Letting $h\to 0$ gives $f_x(1,2) = 4$. As a check, the rule $f_x = 2xy$ gives $f_x(1,2) = 2\cdot 1\cdot 2 = 4$. The definition and the shortcut agree, which is the point of the shortcut.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: quotient and exponential partials in three variables</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $g(x,y,z) = \dfrac{x\,e^{z}}{y}$. Find all three first partials at $(2,1,0)$.</p>
+  <p>Treat the other two variables as constants each time. With respect to $x$, the factor $e^z/y$ is constant:</p>
+  $$ g_x = \frac{e^z}{y}. $$
+  <p>With respect to $y$, write $g = x e^z\cdot y^{-1}$, so</p>
+  $$ g_y = -\frac{x e^z}{y^2}. $$
+  <p>With respect to $z$, the factor $x/y$ is constant and $\frac{\partial}{\partial z}e^z = e^z$:</p>
+  $$ g_z = \frac{x e^z}{y}. $$
+  <p>Evaluate at $(2,1,0)$, where $e^0 = 1$: $\,g_x = 1,\ g_y = -2,\ g_z = 2$. Notice $g_z$ equals $g$ itself at this point, a consequence of the exponential being its own derivative.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: a partial derivative is an ordinary derivative of a slice</summary><div class="detail-body"><div class="worked-solution">
+  <p>The cleanest way to think about $f_x(a,b)$ is to freeze $y=b$ first and study the one-variable function</p>
+  $$ \phi(x) = f(x,b). $$
+  <p>This $\phi$ is the slice of the surface cut by the vertical plane $y=b$. Then by the single-variable definition,</p>
+  $$ \phi'(a) = \lim_{h\to 0}\frac{\phi(a+h)-\phi(a)}{h} = \lim_{h\to 0}\frac{f(a+h,b)-f(a,b)}{h} = f_x(a,b). $$
+  <p>So $f_x(a,b)$ is literally the ordinary derivative of the slice $\phi$ at $x=a$, which is why every single-variable rule (product, quotient, chain) transfers verbatim once you decide which variable is "the" variable. Geometrically, $\phi'(a)$ is the slope of the tangent line to the slice curve, and that tangent line lies in the plane $y=b$. The pair of tangent lines from $f_x$ and $f_y$ spans the tangent plane studied in Section 7.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When computing $f_x$, students sometimes differentiate the held-fixed variable as if it carried its own derivative, for example writing $\frac{\partial}{\partial x}(x^2 y) = 2xy + x^2 y'$. There is no $y'$ in a partial derivative: $y$ is a constant, so $\frac{\partial}{\partial x}(x^2 y) = 2xy$ and nothing more. The phantom $y'$ term belongs to the chain rule (Section 5), where $y$ genuinely depends on another variable. Keep the two situations apart.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">If $f(x,y) = e^{xy}$, what is $f_y$?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e^{xy}$</div><div class="quiz-opt" data-idx="1">$y\,e^{xy}$</div><div class="quiz-opt" data-idx="2">$x\,e^{xy}$</div><div class="quiz-opt" data-idx="3">$xy\,e^{xy}$</div></div><div class="quiz-explain correct-exp">Correct. Holding $x$ fixed, $\frac{\partial}{\partial y} e^{xy} = e^{xy}\cdot \frac{\partial}{\partial y}(xy) = x\,e^{xy}$.</div><div class="quiz-explain wrong-exp">Treat $x$ as constant: the inner derivative $\frac{\partial}{\partial y}(xy)=x$, so $f_y = x\,e^{xy}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1036,6 +1096,30 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ f_{yx} = \frac{\partial}{\partial x}\big(3x^2 y^2 + e^x\big) = 6xy^2 + e^x. $$
   <p>They match, as Clairaut's theorem guarantees for this smooth function.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: a function satisfying Laplace's equation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that $u(x,y) = e^{x}\cos y$ is <em>harmonic</em>, meaning it satisfies Laplace's equation $u_{xx} + u_{yy} = 0$.</p>
+  <p>Differentiate twice in each variable. First in $x$:</p>
+  $$ u_x = e^{x}\cos y, \qquad u_{xx} = e^{x}\cos y. $$
+  <p>Now in $y$:</p>
+  $$ u_y = -e^{x}\sin y, \qquad u_{yy} = -e^{x}\cos y. $$
+  <p>Add them:</p>
+  $$ u_{xx} + u_{yy} = e^{x}\cos y - e^{x}\cos y = 0. $$
+  <p>So $u$ is harmonic. Functions obeying Laplace's equation describe steady-state temperature, electrostatic potential, and incompressible flow, which is why the second-order partials of this section are the gateway to partial differential equations. As a side check, the mixed partials $u_{xy} = -e^{x}\sin y = u_{yx}$ agree, exactly as Clairaut promises.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: the full set of second partials of a product</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $f(x,y) = x^3 y - 2xy^2$, compute all four second-order partials and verify the mixed ones agree.</p>
+  <p>First partials:</p>
+  $$ f_x = 3x^2 y - 2y^2, \qquad f_y = x^3 - 4xy. $$
+  <p>Pure second partials:</p>
+  $$ f_{xx} = 6xy, \qquad f_{yy} = -4x. $$
+  <p>Mixed partials, computed both ways:</p>
+  $$ f_{xy} = \frac{\partial}{\partial y}\big(3x^2 y - 2y^2\big) = 3x^2 - 4y, \qquad f_{yx} = \frac{\partial}{\partial x}\big(x^3 - 4xy\big) = 3x^2 - 4y. $$
+  <p>The two mixed partials are identical, so Clairaut is confirmed. Note that $f_{xx}$ and $f_{yy}$ are generally different from each other; only the <em>mixed</em> pair is forced to agree.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The subscript order in $f_{xy}$ trips many students. The convention $f_{xy} = (f_x)_y$ means differentiate first with respect to $x$, then with respect to $y$, reading left to right. In Leibniz notation the order reverses: $f_{xy} = \dfrac{\partial^2 f}{\partial y\,\partial x}$, with the inner $\partial x$ written closest to $f$. For functions with continuous mixed partials the order does not matter by Clairaut, so the ambiguity is harmless in practice, but you should still read each notation correctly when a problem deliberately uses a non-smooth function.</div>
 
   <details><summary>Going deeper: why continuity is required for Clairaut's theorem</summary><div class="detail-body"><div class="worked-solution">
   <p>The hypothesis of continuity is not cosmetic. The classic counterexample is</p>
@@ -1071,6 +1155,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Substituting $x=\cos t,\ y=\sin t$ gives the answer entirely in $t$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: two independent variables via a tree diagram</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $z = f(x,y)$ with $x = s^2 - t^2$ and $y = 2st$. Express $\partial z/\partial s$ and $\partial z/\partial t$ in terms of $f_x, f_y, s, t$.</p>
+  <p>There are two paths from $s$ up to $z$: through $x$ and through $y$. Sum the product of partials along each path:</p>
+  $$ \frac{\partial z}{\partial s} = f_x\,\frac{\partial x}{\partial s} + f_y\,\frac{\partial y}{\partial s} = f_x(2s) + f_y(2t) = 2s\,f_x + 2t\,f_y. $$
+  <p>Likewise for $t$, using $\partial x/\partial t = -2t$ and $\partial y/\partial t = 2s$:</p>
+  $$ \frac{\partial z}{\partial t} = f_x(-2t) + f_y(2s) = -2t\,f_x + 2s\,f_y. $$
+  <p>The substitution $x = s^2 - t^2,\ y = 2st$ is the real and imaginary part of $(s+it)^2$, so this is exactly how a chain rule converts derivatives under a complex-square change of variables. Even without that observation, the tree diagram makes the bookkeeping mechanical: one term per path, partials multiplied along the path, results summed.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: converting a Laplacian-type derivative to polar coordinates</summary><div class="detail-body"><div class="worked-solution">
+  <p>If $z = f(x,y)$ with $x = r\cos\theta$ and $y = r\sin\theta$, find $\partial z/\partial r$ and $\partial z/\partial\theta$.</p>
+  <p>The parameter derivatives are</p>
+  $$ \frac{\partial x}{\partial r} = \cos\theta, \quad \frac{\partial y}{\partial r} = \sin\theta, \quad \frac{\partial x}{\partial\theta} = -r\sin\theta, \quad \frac{\partial y}{\partial\theta} = r\cos\theta. $$
+  <p>Apply the chain rule along both paths:</p>
+  $$ \frac{\partial z}{\partial r} = f_x\cos\theta + f_y\sin\theta, \qquad \frac{\partial z}{\partial\theta} = -r\,f_x\sin\theta + r\,f_y\cos\theta. $$
+  <p>These two formulas are the starting point for rewriting the Laplacian $f_{xx}+f_{yy}$ in polar coordinates, a calculation every physics and engineering student eventually needs. The first equation also says $\partial z/\partial r = \nabla f \cdot \langle\cos\theta,\sin\theta\rangle$, the directional derivative of $f$ in the radial direction, a preview of Section 6.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> A frequent slip is dropping a path. With $z=f(x,y)$, $x=x(s,t)$, $y=y(s,t)$, the derivative $\partial z/\partial s$ must include <em>both</em> the $x$-route and the $y$-route: $\partial z/\partial s = f_x\,x_s + f_y\,y_s$. Writing only $f_x\,x_s$ silently assumes $y$ does not depend on $s$, which is usually false. Draw the tree, list every path from the bottom variable to $z$, and you will never miss a term. The number of terms equals the number of intermediate variables.</div>
+
   <details><summary>Going deeper: deriving the chain rule from the increment formula</summary><div class="detail-body"><div class="worked-solution">
   <p>Suppose $f$ is differentiable at $(x,y)$. Differentiability means the increment satisfies</p>
   $$ \Delta z = f_x\,\Delta x + f_y\,\Delta y + \varepsilon_1\,\Delta x + \varepsilon_2\,\Delta y, $$
@@ -1103,10 +1207,35 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The maximum rate of increase is $|\nabla f(1,1)| = \sqrt{2^2 + 6^2} = \sqrt{40} = 2\sqrt{10}$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 6.2: the gradient as a normal vector to a level surface</summary><div class="detail-body"><div class="worked-solution">
+  <p>The surface $x^2 + y^2 - z^2 = 1$ is a level surface of $F(x,y,z) = x^2 + y^2 - z^2$ at level $k=1$. Find a vector normal to the surface at the point $(1,1,1)$.</p>
+  <p>By the orthogonality property, $\nabla F$ is normal to the level surface. Compute:</p>
+  $$ \nabla F = \langle 2x,\ 2y,\ -2z\rangle, \qquad \nabla F(1,1,1) = \langle 2,\ 2,\ -2\rangle. $$
+  <p>Any nonzero scalar multiple is also normal, so $\langle 1,1,-1\rangle$ serves as a tidy normal vector. This is the engine behind tangent planes: in Unit C4 the plane tangent to the surface at $(1,1,1)$ is $2(x-1) + 2(y-1) - 2(z-1) = 0$, whose coefficients are precisely the components of $\nabla F$. The gradient of the defining function hands you the normal for free.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: steepest descent and a level-set tangent direction</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $f(x,y) = x^2 + xy + y^2$ at the point $(1,2)$, find the direction of steepest <em>decrease</em> and a direction in which $f$ does not change to first order.</p>
+  <p>The gradient is</p>
+  $$ \nabla f = \langle 2x + y,\ x + 2y\rangle, \qquad \nabla f(1,2) = \langle 4,\ 5\rangle. $$
+  <p>Steepest <em>increase</em> is along $\langle 4,5\rangle$, so steepest <em>decrease</em> is along the opposite vector $-\nabla f = \langle -4,-5\rangle$. The rate of fastest decrease is $-|\nabla f| = -\sqrt{16+25} = -\sqrt{41}$.</p>
+  <p>A direction of zero first-order change is one perpendicular to the gradient, since the directional derivative $\nabla f\cdot\mathbf u$ vanishes there. Rotating $\langle 4,5\rangle$ by ninety degrees gives $\langle -5,4\rangle$ (or its negative). Moving along $\langle -5,4\rangle$ keeps you tangent to the level curve through $(1,2)$, so to first order $f$ stays constant, confirming the orthogonality of $\nabla f$ to level sets.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The maximum rate of increase of $f$ is the <em>magnitude</em> $|\nabla f|$, a single number, not the gradient vector itself and not the unit direction. A related slip is reporting the steepest-ascent direction as $\nabla f$ when a problem asks for a <em>unit</em> vector: you must divide by $|\nabla f|$. Keep the three outputs distinct: the direction of steepest ascent is the unit vector $\nabla f/|\nabla f|$, the maximum rate is the scalar $|\nabla f|$, and $\nabla f$ packages both at once.</div>
+
   <details><summary>Going deeper: why the gradient is orthogonal to level curves</summary><div class="detail-body"><div class="worked-solution">
   <p>Let $\mathbf{r}(t) = \langle x(t), y(t)\rangle$ be a curve lying inside a single level curve, so $f(x(t),y(t)) = k$ is constant. Differentiate both sides with respect to $t$ using the chain rule:</p>
   $$ \frac{d}{dt} f(x(t),y(t)) = f_x\,x'(t) + f_y\,y'(t) = \nabla f \cdot \mathbf{r}'(t) = 0. $$
   <p>The right side is $0$ because $k$ is constant. Thus $\nabla f$ is orthogonal to the tangent vector $\mathbf{r}'(t)$ of every curve through the point that stays on the level set. Since $\mathbf{r}'(t)$ spans the tangent direction of the level curve, $\nabla f$ is normal to the level curve. The same argument in three variables shows $\nabla f$ is normal to the level surface, which is exactly what gives tangent planes their normal vectors in Unit C4.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why steepest ascent points along the gradient</summary><div class="detail-body"><div class="worked-solution">
+  <p>Assume $f$ is differentiable, so the rate of change of $f$ at a point in a unit direction $\mathbf u$ is the directional derivative $D_{\mathbf u}f = \nabla f\cdot\mathbf u$. We maximize this over all unit vectors $\mathbf u$. By the dot-product form,</p>
+  $$ \nabla f\cdot\mathbf u = |\nabla f|\,|\mathbf u|\cos\alpha = |\nabla f|\cos\alpha, $$
+  <p>where $\alpha$ is the angle between $\nabla f$ and $\mathbf u$ and $|\mathbf u| = 1$. Since $\cos\alpha$ ranges over $[-1,1]$, the expression is largest when $\cos\alpha = 1$, that is, when $\mathbf u$ points the same way as $\nabla f$. At that maximum,</p>
+  $$ \max_{|\mathbf u|=1} D_{\mathbf u}f = |\nabla f|. $$
+  <p>This proves both gradient properties at once: the direction of steepest increase is $\nabla f/|\nabla f|$, and the maximum rate of increase is exactly $|\nabla f|$. The minimum, $\cos\alpha = -1$, gives steepest descent along $-\nabla f$ with rate $-|\nabla f|$, and the zero-change directions, $\cos\alpha = 0$, are precisely those perpendicular to $\nabla f$, that is, tangent to the level set. Every qualitative claim about the gradient is a corollary of the Cauchy-Schwarz bound $|\nabla f\cdot\mathbf u| \le |\nabla f|$.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For $f(x,y) = x^2 - y^2$, the gradient at $(3,1)$ is $\langle 6, -2\rangle$. What is the maximum rate of increase of $f$ at that point?</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$4$</div><div class="quiz-opt" data-idx="1">$8$</div><div class="quiz-opt" data-idx="2">$2\sqrt{10}$</div><div class="quiz-opt" data-idx="3">$0$</div></div><div class="quiz-explain correct-exp">Correct. The maximum rate of increase is the magnitude of the gradient: $|\langle 6,-2\rangle| = \sqrt{36+4} = \sqrt{40} = 2\sqrt{10}$.</div><div class="quiz-explain wrong-exp">The maximum rate of increase equals $|\nabla f| = \sqrt{6^2 + (-2)^2} = \sqrt{40} = 2\sqrt{10}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1133,6 +1262,28 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>From the limit definition, $f_x(0,0) = \lim_{h\to 0}\frac{f(h,0)-0}{h} = \lim_{h\to 0}\frac{0}{h} = 0$, and likewise $f_y(0,0)=0$. Both partials exist at the origin.</p>
   <p>Yet $f$ is not continuous at the origin: along $y=x$ the value is $\frac{x^2}{2x^2}=\tfrac12 \ne 0 = f(0,0)$. So a function can have all first partials at a point and still fail to be continuous there. Differentiability is strictly stronger than the existence of partials.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: verifying differentiability from the definition</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that $f(x,y) = x^2 + y^2$ is differentiable at $(1,1)$ directly from the linear-approximation criterion.</p>
+  <p>Here $f(1,1) = 2$, $f_x = 2x$ so $f_x(1,1) = 2$, and $f_y = 2y$ so $f_y(1,1) = 2$. The proposed linear approximation is $L(\Delta x,\Delta y) = 2 + 2\Delta x + 2\Delta y$. Compute the exact increment:</p>
+  $$ f(1+\Delta x, 1+\Delta y) = (1+\Delta x)^2 + (1+\Delta y)^2 = 2 + 2\Delta x + 2\Delta y + \Delta x^2 + \Delta y^2. $$
+  <p>Subtract the linear part to isolate the remainder:</p>
+  $$ f(1+\Delta x,1+\Delta y) - L = \Delta x^2 + \Delta y^2. $$
+  <p>For differentiability we need this remainder to be small compared with the step length $\rho = \sqrt{\Delta x^2 + \Delta y^2}$. Indeed</p>
+  $$ \frac{\Delta x^2 + \Delta y^2}{\rho} = \frac{\rho^2}{\rho} = \rho \to 0 \quad \text{as } (\Delta x,\Delta y)\to(0,0). $$
+  <p>The error vanishes faster than first order, so the tangent plane $z = 2 + 2(x-1) + 2(y-1)$ genuinely approximates the surface, and $f$ is differentiable at $(1,1)$. This is the positive counterpart to Worked Example 7.1: there the partials existed but the function was not even continuous; here the remainder test passes cleanly.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the chain of implications, and where it breaks</summary><div class="detail-body"><div class="worked-solution">
+  <p>For functions of several variables the logical hierarchy is strictly one-directional:</p>
+  $$ \text{continuous partials} \implies \text{differentiable} \implies \begin{cases} \text{continuous} \\ \text{all partials exist} \end{cases} $$
+  <p>Each arrow is a theorem, and none of them reverses. Reading the diagram:</p>
+  <p><strong>Differentiable implies continuous.</strong> If the increment $\Delta z = f_x\Delta x + f_y\Delta y + \varepsilon_1\Delta x + \varepsilon_2\Delta y$ holds with $\varepsilon_i\to 0$, then as $(\Delta x,\Delta y)\to(0,0)$ every term on the right tends to $0$, so $\Delta z\to 0$, which is exactly continuity at the point.</p>
+  <p><strong>Differentiable implies partials exist.</strong> Set $\Delta y = 0$ in the increment formula and divide by $\Delta x$; the limit is $f_x$. So differentiability automatically produces both partials.</p>
+  <p><strong>The converses fail.</strong> Worked Example 7.1 has both partials at the origin yet is discontinuous, so "partials exist" does not give differentiability. And the single-variable function $|x|$ shows continuity does not give differentiability even in one dimension. The only reliable one-way ticket up the chain is the top hypothesis, continuity of the partials, which is why every practical theorem assumes it. Memorize the direction of the arrows: existence of partials is the weakest condition, continuous partials the strongest.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The most common multivariable misconception is "if $f_x$ and $f_y$ exist at a point, then $f$ is differentiable there." This is false, as Worked Example 7.1 shows: partials can exist at a point where $f$ is not even continuous. Existence of partials only probes two special directions, the axes; differentiability demands a single linear map that approximates $f$ in <em>all</em> directions simultaneously. When in doubt, check the remainder test from Worked Example 7.2 or invoke the sufficient condition that the partials are continuous.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Which condition is sufficient to guarantee that $f$ is differentiable at $(a,b)$?</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f_x(a,b)$ and $f_y(a,b)$ merely exist</div><div class="quiz-opt" data-idx="1">$f$ is continuous at $(a,b)$</div><div class="quiz-opt" data-idx="2">The limit of $f$ exists at $(a,b)$</div><div class="quiz-opt" data-idx="3">$f_x$ and $f_y$ exist and are continuous near $(a,b)$</div></div><div class="quiz-explain correct-exp">Correct. Continuity of the first partials on an open disk around the point is the standard sufficient condition for differentiability.</div><div class="quiz-explain wrong-exp">Mere existence of partials, or continuity of $f$ alone, is not enough. The sufficient condition is that $f_x$ and $f_y$ exist and are continuous near the point.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

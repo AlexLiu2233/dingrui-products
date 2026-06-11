@@ -969,6 +969,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Both outer sequences converge to $0$, so by the squeeze theorem the middle sequence converges to $0$ as well.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.3: an indeterminate power via the logarithm</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find $\lim_{n\to\infty} n^{1/n}$.</p>
+  <p>A power with both the base and the exponent moving is best handled by taking logarithms. Set $a_n=n^{1/n}$, so $\ln a_n=\dfrac{\ln n}{n}$. By Worked Example 1.1 that quotient tends to $0$. Since $\ln$ is continuous, the limit passes through it:</p>
+  $$\lim_{n\to\infty}\ln a_n=0\ \Longrightarrow\ \lim_{n\to\infty}a_n=e^{0}=1.$$
+  <p>So $\lim_{n\to\infty} n^{1/n}=1$. This standard limit reappears in Section 7, where it makes the root test of a $p$-series return exactly $L=1$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.4: monotone and bounded, so convergent</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $a_1=\sqrt 2$ and $a_{n+1}=\sqrt{2+a_n}$. Show the sequence converges and find its limit.</p>
+  <p><strong>Bounded above by $2$.</strong> By induction: $a_1=\sqrt2<2$, and if $a_n<2$ then $a_{n+1}=\sqrt{2+a_n}<\sqrt{2+2}=2$. <strong>Increasing.</strong> Note $a_{n+1}^2-a_n^2=2+a_n-a_n^2=-(a_n-2)(a_n+1)>0$ whenever $0<a_n<2$, so $a_{n+1}>a_n$. The sequence is increasing and bounded above, hence convergent by the Monotone Convergence Theorem. Call the limit $L$. Taking limits in the recursion (valid because both sides converge) gives $L=\sqrt{2+L}$, so $L^2=2+L$, that is $L^2-L-2=(L-2)(L+1)=0$. Since terms are positive, $L=2$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.5: a factorial-over-power limit</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find $\lim_{n\to\infty}\dfrac{n!}{n^{\,n}}$.</p>
+  <p>Write the quotient as a product of $n$ factors and bound it. Each factor $\dfrac{k}{n}\le1$, and the first factor is $\dfrac1n$:</p>
+  $$0<\frac{n!}{n^{\,n}}=\frac{1}{n}\cdot\frac{2}{n}\cdot\frac{3}{n}\cdots\frac{n}{n}\le\frac{1}{n}\cdot1\cdot1\cdots1=\frac1n.$$
+  <p>The right side tends to $0$, so by the squeeze theorem $\dfrac{n!}{n^{\,n}}\to0$. The terms of $\sum n!/n^n$ therefore pass the necessary $a_n\to0$ check, and the ratio test of Worked Example 7.3 confirms the full series converges.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Solving the fixed-point equation $L=\sqrt{2+L}$ without first proving the sequence converges. The algebra $L=2$ is meaningless unless a limit is known to exist; a divergent recursion can satisfy the same fixed-point equation formally. Always establish convergence (here, monotone and bounded) before substituting $L$ on both sides.</div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">What is $\displaystyle\lim_{n\to\infty}\frac{3n^2+5}{2n^2-n}$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\tfrac32$</div><div class="quiz-opt" data-idx="1">$0$</div><div class="quiz-opt" data-idx="2">$3$</div><div class="quiz-opt" data-idx="3">does not exist</div></div><div class="quiz-explain correct-exp">Correct. Divide numerator and denominator by $n^2$: the limit is the ratio of leading coefficients, $3/2$.</div><div class="quiz-explain wrong-exp">For a ratio of polynomials of equal degree, the limit is the ratio of leading coefficients, here $3/2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">Which statement guarantees convergence of $\{a_n\}$?</div><span class="quiz-number">1.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\{a_n\}$ is bounded</div><div class="quiz-opt" data-idx="1">$\{a_n\}$ is monotone</div><div class="quiz-opt" data-idx="2">$\{a_n\}$ is monotone and bounded</div><div class="quiz-opt" data-idx="3">$a_n>0$ for all $n$</div></div><div class="quiz-explain correct-exp">Correct. The Monotone Convergence Theorem requires both monotonicity and boundedness; either alone is insufficient.</div><div class="quiz-explain wrong-exp">Boundedness alone (consider $(-1)^n$) or monotonicity alone (consider $n$) does not force convergence. Both together do.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1001,6 +1022,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\lim_{n\to\infty}\frac{n}{2n+1}=\frac12\ne 0.$$
   <p>By the $n$th-term test the series diverges. The partial sums increase by roughly $\tfrac12$ each step and therefore grow without bound.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 2.2: splitting a series with the algebra laws</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\sum_{n=1}^{\infty}\frac{3^{\,n}+2^{\,n}}{6^{\,n}}$.</p>
+  <p>The summand separates into two geometric pieces. Because each piece converges on its own, the algebra of series lets us add the sums term by term:</p>
+  $$\sum_{n=1}^{\infty}\frac{3^{\,n}+2^{\,n}}{6^{\,n}}=\sum_{n=1}^{\infty}\left(\frac12\right)^{n}+\sum_{n=1}^{\infty}\left(\frac13\right)^{n}=\frac{1/2}{1-1/2}+\frac{1/3}{1-1/3}=1+\frac12=\frac32.$$
+  <p>The step is legitimate only because both component series converge. Splitting a series whose pieces diverge is the most common way to manufacture a wrong answer here.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: a partial sum read directly from a formula</summary><div class="detail-body"><div class="worked-solution">
+  <p>The partial sums of a series are $s_n=\dfrac{2n}{n+3}$. Decide whether $\sum a_n$ converges, and find $a_1$ and $a_3$.</p>
+  <p>By definition the series converges exactly when $\{s_n\}$ converges: $s_n=\dfrac{2n}{n+3}\to 2$, so $\sum a_n=2$. Individual terms come from differencing the partial sums, $a_n=s_n-s_{n-1}$ (with $a_1=s_1$):</p>
+  $$a_1=s_1=\frac{2}{4}=\frac12,\qquad a_3=s_3-s_2=\frac{6}{6}-\frac{4}{5}=1-\frac45=\frac15.$$
+  <p>This is the working definition in reverse: the terms are recovered from the partial sums by first differences.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.4: adding a convergent and a divergent series</summary><div class="detail-body"><div class="worked-solution">
+  <p>What can you say about $\displaystyle\sum_{n=1}^{\infty}\left(\frac{1}{2^{\,n}}+\frac1n\right)$?</p>
+  <p>The algebra-of-series laws run in one direction only: they combine two convergent series. Here $\sum 1/2^n$ converges but $\sum 1/n$ diverges, so the laws do not apply, and in fact the sum diverges. To see it cleanly, suppose the combined series converged; subtracting the convergent geometric series $\sum 1/2^n$ would then force $\sum 1/n$ to converge, a contradiction. A convergent series plus a divergent series is always divergent.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Reading $a_n\to 0$ as a proof of convergence. The $n$th-term test is a one-way street: a nonzero limit forces divergence, but a zero limit decides nothing. The harmonic series $\sum 1/n$ has $a_n\to 0$ and still diverges. When you see $a_n\to 0$, the test is exhausted and you must reach for the integral, comparison, ratio, root, or alternating-series test instead.</div>
 
   <details><summary>Going deeper: why $a_n\to 0$ is necessary</summary><div class="detail-body"><div class="worked-solution">
   <p>Suppose $\sum a_n$ converges to $S$, so $s_n\to S$ and also $s_{n-1}\to S$. The $n$th term is the difference of consecutive partial sums:</p>
@@ -1044,6 +1086,35 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>As $n\to\infty$, $s_n\to 1$, so the series converges to $1$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.3: a repeating decimal as a geometric series</summary><div class="detail-body"><div class="worked-solution">
+  <p>Write the repeating decimal $0.\overline{27}=0.272727\ldots$ as a fraction.</p>
+  <p>Group the digits in pairs: the decimal is $\dfrac{27}{100}+\dfrac{27}{100^2}+\dfrac{27}{100^3}+\cdots$, a geometric series with first term $a=\tfrac{27}{100}$ and ratio $r=\tfrac{1}{100}$. Since $|r|<1$,</p>
+  $$0.\overline{27}=\frac{a}{1-r}=\frac{27/100}{1-1/100}=\frac{27/100}{99/100}=\frac{27}{99}=\frac{3}{11}.$$
+  <p>Every repeating decimal is a geometric series, which is why every such decimal is rational.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.4: a geometric series that starts late</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\sum_{n=3}^{\infty}\frac{5}{2^{\,n}}$.</p>
+  <p>The closed form $\dfrac{a}{1-r}$ assumes the sum begins at the first written term, so identify that term directly rather than forcing $n=0$. The $n=3$ term is $a=\dfrac{5}{2^{3}}=\dfrac58$, and the ratio is $r=\tfrac12$:</p>
+  $$\sum_{n=3}^{\infty}\frac{5}{2^{\,n}}=\frac{5/8}{1-1/2}=\frac{5/8}{1/2}=\frac54.$$
+  <p>Alternatively, sum from $n=0$ to get $\dfrac{5}{1-1/2}=10$, then subtract the missing $n=0,1,2$ terms $5+\tfrac52+\tfrac54=\tfrac{35}{4}$, leaving $10-\tfrac{35}{4}=\tfrac54$. Both routes agree.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Plugging into $\dfrac{a}{1-r}$ with $a$ set to the coefficient instead of the actual first term of the sum. For $\sum_{n=3}^{\infty}5/2^n$ the first term is $5/2^3=5/8$, not $5$. Read off $a$ as the value of the very first term you are adding, and $r$ as the constant multiplier from one term to the next.</div>
+
+  <details><summary>Worked Example 3.5: a telescoping sum after partial fractions</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\sum_{n=1}^{\infty}\frac{2}{(2n-1)(2n+1)}$.</p>
+  <p>Split by partial fractions: $\dfrac{2}{(2n-1)(2n+1)}=\dfrac{1}{2n-1}-\dfrac{1}{2n+1}$, which is $b_n-b_{n+1}$ with $b_n=\dfrac{1}{2n-1}$. The partial sum collapses:</p>
+  $$s_n=\left(1-\tfrac13\right)+\left(\tfrac13-\tfrac15\right)+\cdots+\left(\tfrac{1}{2n-1}-\tfrac{1}{2n+1}\right)=1-\frac{1}{2n+1}.$$
+  <p>As $n\to\infty$ the survivor $\dfrac{1}{2n+1}\to0$, so the series converges to $1$. The art is recognizing the partial-fraction split as a difference of consecutive $b_n$.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the geometric partial-sum identity</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $s_n=a+ar+ar^2+\cdots+ar^{n-1}$ with $r\ne 1$. Multiply by $r$ and subtract:</p>
+  $$s_n-rs_n=\bigl(a+ar+\cdots+ar^{n-1}\bigr)-\bigl(ar+ar^2+\cdots+ar^{n}\bigr)=a-ar^{n}.$$
+  <p>The interior terms cancel in pairs, leaving $s_n(1-r)=a(1-r^{n})$, so $s_n=a\dfrac{1-r^{n}}{1-r}$. When $|r|<1$, $r^{n}\to 0$ and $s_n\to\dfrac{a}{1-r}$. When $|r|\ge 1$, $r^{n}$ does not go to zero, so the partial sums fail to settle and the series diverges. This single cancellation is the engine behind both geometric and telescoping series.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">$\displaystyle\sum_{n=0}^{\infty}\left(\frac{4}{5}\right)^n$ equals</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\tfrac45$</div><div class="quiz-opt" data-idx="1">$5$</div><div class="quiz-opt" data-idx="2">$\tfrac54$</div><div class="quiz-opt" data-idx="3">diverges</div></div><div class="quiz-explain correct-exp">Correct. Here $a=1$ and $r=\tfrac45$, so the sum is $\dfrac{1}{1-4/5}=\dfrac{1}{1/5}=5$.</div><div class="quiz-explain wrong-exp">With $a=1$ and $r=4/5<1$, the sum is $1/(1-4/5)=5$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1078,6 +1149,37 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Apply the integral test to $f(x)=x^{-p}$ with $p>0$. For $p\ne 1$,</p>
   $$\int_1^{\infty}x^{-p}\,dx=\lim_{t\to\infty}\left[\frac{x^{1-p}}{1-p}\right]_1^{t}=\lim_{t\to\infty}\frac{t^{\,1-p}-1}{1-p}.$$
   <p>If $p>1$ then $1-p<0$, so $t^{1-p}\to 0$ and the integral equals $\dfrac{1}{p-1}$, a finite value: convergence. If $0<p<1$ then $1-p>0$, so $t^{1-p}\to\infty$: divergence. For $p=1$, $\int_1^{\infty}\tfrac{dx}{x}=\lim_{t\to\infty}\ln t=\infty$: divergence. This proves the $p$-series rule.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.2: a convergent series by the integral test</summary><div class="detail-body"><div class="worked-solution">
+  <p>Does $\displaystyle\sum_{n=1}^{\infty}\frac{n}{e^{\,n}}$ converge?</p>
+  <p>Take $f(x)=xe^{-x}$. It is positive on $[1,\infty)$, and $f'(x)=e^{-x}(1-x)<0$ for $x>1$, so $f$ is decreasing there and the integral test applies. Integrate by parts with $u=x$, $dv=e^{-x}\,dx$:</p>
+  $$\int_1^{\infty}xe^{-x}\,dx=\Bigl[-xe^{-x}\Bigr]_1^{\infty}+\int_1^{\infty}e^{-x}\,dx=\frac1e+\Bigl[-e^{-x}\Bigr]_1^{\infty}=\frac1e+\frac1e=\frac2e.$$
+  <p>The improper integral is finite, so the series converges. (The exact value $2/e$ is the integral's value, not the series sum; the test reports only finiteness.)</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: testing $\sum 1/(n\ln^2 n)$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Does $\displaystyle\sum_{n=2}^{\infty}\frac{1}{n(\ln n)^2}$ converge? Compare with the divergent $\sum 1/(n\ln n)$ of Worked Example 4.1, where the extra log factor is decisive.</p>
+  <p>Let $f(x)=\dfrac{1}{x(\ln x)^2}$, positive and decreasing for $x\ge2$. Substitute $u=\ln x$, $du=dx/x$:</p>
+  $$\int_2^{\infty}\frac{dx}{x(\ln x)^2}=\int_{\ln 2}^{\infty}\frac{du}{u^2}=\left[-\frac1u\right]_{\ln 2}^{\infty}=\frac{1}{\ln 2}<\infty.$$
+  <p>The integral is finite, so the series converges. The single change from exponent $1$ to exponent $2$ on the logarithm flips divergence to convergence, mirroring the $p$-series boundary at $p=1$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.4: a $p$-series with a shifted index</summary><div class="detail-body"><div class="worked-solution">
+  <p>Does $\displaystyle\sum_{n=1}^{\infty}\frac{1}{(2n+1)^{3/2}}$ converge?</p>
+  <p>Convergence is unaffected by the linear shift inside the power, because the term still behaves like a $p$-series with $p=\tfrac32$. Confirm with $f(x)=(2x+1)^{-3/2}$, substituting $u=2x+1$, $du=2\,dx$:</p>
+  $$\int_1^{\infty}\frac{dx}{(2x+1)^{3/2}}=\frac12\int_3^{\infty}u^{-3/2}\,du=\frac12\Bigl[-2u^{-1/2}\Bigr]_3^{\infty}=\frac{1}{\sqrt3}<\infty.$$
+  <p>The integral is finite, so the series converges. As a faster route, limit comparison against $1/n^{3/2}$ gives the finite positive limit $\lim n^{3/2}/(2n+1)^{3/2}=(1/2)^{3/2}$, the same conclusion in one line.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Reporting the value of the integral as the sum of the series. The integral test certifies only that the series is finite or infinite; it does not evaluate it. In Worked Example 4.2 the integral equals $2/e$, but the series $\sum n/e^n$ sums to $e/(e-1)^2$, a different number. The integral test answers "converges or diverges," never "to what."</div>
+
+  <details><summary>Going deeper: the integral test from a picture, with a remainder bound</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $f$ be positive and decreasing with $a_n=f(n)$. Draw rectangles of width $1$ and height $a_n$. Right endpoints sit under the curve and left endpoints sit above it, giving the two-sided trap</p>
+  $$\int_1^{N+1}f(x)\,dx\ \le\ \sum_{n=1}^{N}a_n\ \le\ a_1+\int_1^{N}f(x)\,dx.$$
+  <p>If the improper integral converges, the right inequality bounds the partial sums above by a fixed number, so the increasing partial sums converge. If the integral diverges, the left inequality pushes the partial sums to infinity. The same picture bounds the tail remainder $R_N=\sum_{n>N}a_n$ after $N$ terms:</p>
+  $$\int_{N+1}^{\infty}f(x)\,dx\ \le\ R_N\ \le\ \int_{N}^{\infty}f(x)\,dx.$$
+  <p>For $\sum 1/n^2$ this gives $R_N\le\int_N^{\infty}x^{-2}\,dx=1/N$, a concrete accuracy estimate the integral test hands you for free.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">Which $p$-series converges?</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sum 1/n$</div><div class="quiz-opt" data-idx="1">$\sum 1/\sqrt{n}$</div><div class="quiz-opt" data-idx="2">$\sum 1/n^{3/2}$</div><div class="quiz-opt" data-idx="3">$\sum 1/n^{0.9}$</div></div><div class="quiz-explain correct-exp">Correct. A $p$-series converges exactly when $p>1$; here $p=3/2>1$. The others have $p=1$, $p=1/2$, and $p=0.9$, all at most $1$.</div><div class="quiz-explain wrong-exp">Convergence requires $p>1$. Only $p=3/2$ exceeds $1$; the rest have $p\le 1$ and diverge.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1118,6 +1220,35 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The limit $2$ is finite and positive, and $\sum 1/n^2$ converges, so the given series converges.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.3: limit comparison giving divergence</summary><div class="detail-body"><div class="worked-solution">
+  <p>Decide whether $\displaystyle\sum_{n=1}^{\infty}\frac{1}{\sqrt{n^2+1}}$ converges.</p>
+  <p>For large $n$, $\sqrt{n^2+1}\approx n$, so the term behaves like $1/n$. Compare with the harmonic series $b_n=1/n$:</p>
+  $$\lim_{n\to\infty}\frac{1/\sqrt{n^2+1}}{1/n}=\lim_{n\to\infty}\frac{n}{\sqrt{n^2+1}}=\lim_{n\to\infty}\frac{1}{\sqrt{1+1/n^2}}=1.$$
+  <p>The limit $1$ is finite and positive. Since $\sum 1/n$ diverges, so does the given series. Direct comparison would be clumsy here because the inequality runs the wrong way ($1/\sqrt{n^2+1}<1/n$, which proves nothing against a divergent series); the limit form sidesteps that.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.4: comparison with a geometric series</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that $\displaystyle\sum_{n=1}^{\infty}\frac{1}{2^{\,n}+n}$ converges.</p>
+  <p>The added $n$ only makes the denominator larger, so the terms are smaller than a convergent geometric series:</p>
+  $$0<\frac{1}{2^{\,n}+n}\le\frac{1}{2^{\,n}}=\left(\frac12\right)^{n}.$$
+  <p>The dominating series $\sum(1/2)^n$ is geometric with $|r|=\tfrac12<1$, hence convergent. By direct comparison the given series converges. Here the inequality is easy, so direct comparison is the cleaner tool.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.5: limit comparison with a logarithm</summary><div class="detail-body"><div class="worked-solution">
+  <p>Decide whether $\displaystyle\sum_{n=2}^{\infty}\frac{\ln n}{n^{2}}$ converges.</p>
+  <p>The numerator $\ln n$ grows slower than any positive power, so the term is just barely smaller than a borderline $p$-series. Compare with $b_n=1/n^{3/2}$, chosen between the failing $1/n^2$ and a safely convergent exponent:</p>
+  $$\lim_{n\to\infty}\frac{(\ln n)/n^{2}}{1/n^{3/2}}=\lim_{n\to\infty}\frac{\ln n}{n^{1/2}}=0.$$
+  <p>The limit is $0$ rather than a positive number, so the basic limit comparison is inconclusive; but the zero-limit form still applies: when $\lim a_n/b_n=0$ and $\sum b_n$ converges, $\sum a_n$ converges too. Since $\sum 1/n^{3/2}$ converges ($p=\tfrac32>1$), the given series converges.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Pointing the direct-comparison inequality the wrong way. To prove convergence you need your terms below a convergent series ($a_n\le b_n$ with $\sum b_n$ convergent); to prove divergence you need your terms above a divergent series ($a_n\ge b_n$ with $\sum b_n$ divergent). Showing $a_n\le b_n$ where $\sum b_n$ diverges, or $a_n\ge b_n$ where $\sum b_n$ converges, establishes nothing. When the direction fights you, switch to limit comparison.</div>
+
+  <details><summary>Going deeper: why direct comparison works</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $0\le a_n\le b_n$ and $\sum b_n$ converges to $B$. Let $A_N=\sum_{n=1}^{N}a_n$. Because every $a_n\ge0$, the partial sums $A_N$ are nondecreasing, and termwise comparison gives</p>
+  $$A_N=\sum_{n=1}^{N}a_n\ \le\ \sum_{n=1}^{N}b_n\ \le\ B.$$
+  <p>So $\{A_N\}$ is nondecreasing and bounded above by $B$. By the Monotone Convergence Theorem of Section 1 it converges, hence $\sum a_n$ converges (and $\sum a_n\le B$). The divergence half is the contrapositive: if $\sum a_n$ diverged, its partial sums would be unbounded, forcing the larger partial sums of $\sum b_n$ to be unbounded too. The whole comparison machinery is monotone convergence in disguise.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For limit comparison of $\sum a_n$ with $\sum b_n$ ($a_n,b_n>0$), a limit $\lim a_n/b_n=L$ with $0<L<\infty$ tells you that</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sum a_n$ always converges</div><div class="quiz-opt" data-idx="1">$\sum a_n$ and $\sum b_n$ behave alike</div><div class="quiz-opt" data-idx="2">$\sum a_n$ always diverges</div><div class="quiz-opt" data-idx="3">the test is inconclusive</div></div><div class="quiz-explain correct-exp">Correct. A finite positive limit makes the two series converge together or diverge together.</div><div class="quiz-explain wrong-exp">A finite positive limit ties the two series together: they share the same convergence behavior.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1156,6 +1287,31 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>So summing the first $9$ terms approximates the total to within $0.01$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 6.3: absolutely convergent, so reorder-safe</summary><div class="detail-body"><div class="worked-solution">
+  <p>Classify $\displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n^2}$.</p>
+  <p>Test the absolute series first, since absolute convergence is the stronger property and, once secured, settles ordinary convergence automatically. Here $\sum\left|\dfrac{(-1)^{n-1}}{n^2}\right|=\sum\dfrac{1}{n^2}$, a convergent $p$-series ($p=2>1$). So the series is absolutely convergent, hence convergent. Unlike the alternating harmonic series, this one may be rearranged at will without changing its sum.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.4: when the alternating test does not apply</summary><div class="detail-body"><div class="worked-solution">
+  <p>Examine $\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\frac{n}{n+1}$.</p>
+  <p>It is tempting to invoke the alternating series test, but its hypotheses fail at the very first gate: $b_n=\dfrac{n}{n+1}\to 1\ne 0$. The terms of the full series therefore do not tend to $0$ (they oscillate near $\pm1$), so the $n$th-term test of Section 2 forces divergence. The alternating sign is irrelevant once the terms fail to shrink.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.5: a conditionally convergent series</summary><div class="detail-body"><div class="worked-solution">
+  <p>Classify $\displaystyle\sum_{n=2}^{\infty}\frac{(-1)^{n}}{\sqrt n}$.</p>
+  <p>Set $b_n=1/\sqrt n$. It is positive, decreasing, and tends to $0$, so the alternating series test gives convergence. For absolute convergence, test $\sum 1/\sqrt n$, a $p$-series with $p=\tfrac12\le1$, which diverges. So the series converges but not absolutely: it is conditionally convergent. By the remainder bound, truncating after $N$ terms leaves an error at most $1/\sqrt{N+1}$, which shrinks slowly, a hallmark of conditional convergence.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Applying the alternating series test without checking both hypotheses, namely that $b_n>0$ is eventually decreasing and that $b_n\to 0$. The test only certifies convergence; it can never prove divergence. When $b_n\not\to0$ (as in Worked Example 6.4), the right tool is the $n$th-term test. And when the test does give convergence, do not call it absolute: confirm absolute convergence separately by testing $\sum|a_n|$.</div>
+
+  <details><summary>Going deeper: proof of the alternating series test and its error bound</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $b_n>0$ be decreasing with $b_n\to0$, and $s_n$ the partial sums of $\sum(-1)^{n-1}b_n$. Group the even partial sums in nonnegative pairs:</p>
+  $$s_{2n}=(b_1-b_2)+(b_3-b_4)+\cdots+(b_{2n-1}-b_{2n}),$$
+  <p>every bracket is $\ge0$, so $\{s_{2n}\}$ is nondecreasing. Regrouping the other way, $s_{2n}=b_1-(b_2-b_3)-\cdots-b_{2n}\le b_1$, so it is bounded above. By monotone convergence $s_{2n}\to S$ for some $S$. Since $s_{2n+1}=s_{2n}+b_{2n+1}$ and $b_{2n+1}\to0$, the odd sums converge to the same $S$, so $s_n\to S$. For the error bound, $S$ lies between any two consecutive partial sums (the sums oscillate inward toward $S$), so the remainder satisfies</p>
+  $$|S-s_n|\le|s_{n+1}-s_n|=b_{n+1}.$$
+  <p>That is exactly the remainder estimate used in Worked Example 6.2: the truncation error is no larger than the first omitted term.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The series $\sum (-1)^{n-1}/n$ is best described as</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">absolutely convergent</div><div class="quiz-opt" data-idx="1">divergent</div><div class="quiz-opt" data-idx="2">geometric</div><div class="quiz-opt" data-idx="3">conditionally convergent</div></div><div class="quiz-explain correct-exp">Correct. It converges by the alternating series test, but $\sum 1/n$ diverges, so the convergence is conditional, not absolute.</div><div class="quiz-explain wrong-exp">It converges (alternating series test) but not absolutely (the absolute series is the harmonic series), so it is conditionally convergent.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">If $\sum|a_n|$ converges, then $\sum a_n$</div><span class="quiz-number">6.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">converges</div><div class="quiz-opt" data-idx="1">diverges</div><div class="quiz-opt" data-idx="2">may diverge</div><div class="quiz-opt" data-idx="3">equals $\sum|a_n|$</div></div><div class="quiz-explain correct-exp">Correct. Absolute convergence implies convergence; the sum need not equal $\sum|a_n|$, but it is finite.</div><div class="quiz-explain wrong-exp">Absolute convergence always implies ordinary convergence. The two sums need not be equal, but $\sum a_n$ converges.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1192,6 +1348,44 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The term is a perfect $n$th power, so the root test is natural:</p>
   $$\sqrt[n]{|a_n|}=\frac{3n+1}{4n+5}\xrightarrow[n\to\infty]{}\frac{3}{4}.$$
   <p>Since $L=\tfrac34<1$, the series converges absolutely.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: ratio test with $n^n$ and a factorial</summary><div class="detail-body"><div class="worked-solution">
+  <p>Test $\displaystyle\sum_{n=1}^{\infty}\frac{n!}{n^{\,n}}$.</p>
+  <p>Form the ratio of consecutive terms, simplifying the factorials and the powers separately:</p>
+  $$\left|\frac{a_{n+1}}{a_n}\right|=\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{\,n}}{n!}=\frac{(n+1)\,n^{\,n}}{(n+1)^{n+1}}=\frac{n^{\,n}}{(n+1)^{n}}=\left(\frac{n}{n+1}\right)^{n}.$$
+  <p>That last expression is $\left(1+\tfrac1n\right)^{-n}\to e^{-1}$. So $L=1/e\approx0.368<1$ and the series converges absolutely. The cancellation that turns the messy ratio into the standard limit $\left(1+\tfrac1n\right)^n\to e$ is the whole trick.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.4: root test on a mixed power</summary><div class="detail-body"><div class="worked-solution">
+  <p>Test $\displaystyle\sum_{n=1}^{\infty}\frac{2^{\,n}}{n^{\,n}}$.</p>
+  <p>Because the whole term is essentially an $n$th power, the root test is the efficient choice. Using $n^{1/n}\to1$ from Worked Example 1.3 is not even needed here:</p>
+  $$\sqrt[n]{|a_n|}=\sqrt[n]{\frac{2^{\,n}}{n^{\,n}}}=\frac{2}{n}\xrightarrow[n\to\infty]{}0.$$
+  <p>Since $L=0<1$, the series converges absolutely. The ratio test would also work, but it would require simplifying $\left(\tfrac{n}{n+1}\right)^n$ again; the root test reads the answer off in one line.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.6: ratio test on a power-times-factorial term</summary><div class="detail-body"><div class="worked-solution">
+  <p>For which $x>0$ does $\displaystyle\sum_{n=1}^{\infty}\frac{x^{\,n}}{n!}$ converge?</p>
+  <p>This is the series that defines $e^{x}$, and the ratio test settles it for every $x$. Form the ratio:</p>
+  $$\left|\frac{a_{n+1}}{a_n}\right|=\frac{x^{\,n+1}}{(n+1)!}\cdot\frac{n!}{x^{\,n}}=\frac{x}{n+1}\xrightarrow[n\to\infty]{}0.$$
+  <p>The limit is $L=0<1$ regardless of how large $x$ is, so the series converges absolutely for all $x$. The factorial denominator dominates any fixed-base power, which is exactly why the exponential series converges everywhere, a fact carried forward into the power-series unit.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Treating $L=1$ as a verdict. When the ratio or root limit equals $1$, the test is genuinely inconclusive: $\sum 1/n$ (divergent) and $\sum 1/n^2$ (convergent) both produce $L=1$, so the limit alone cannot tell them apart. Do not declare convergence or divergence from $L=1$; switch to the integral, comparison, or $p$-series tools. A second frequent slip is forgetting the absolute values: the ratio and root tests are run on $|a_{n+1}/a_n|$ and $\sqrt[n]{|a_n|}$, so they detect absolute convergence.</div>
+
+  <div class="concept-box purple"><strong>Test-selection strategy.</strong> With seven tests in hand, the order of attack matters. First check the $n$th-term test: if $a_n\not\to0$, you are done (divergence). For positive terms, match the shape: factorials or $n$th powers point to the ratio or root test; a recognizable algebraic size points to comparison or the $p$-series rule; a term that is itself $f(n)$ for an integrable $f$ points to the integral test. For alternating signs, test absolute convergence first, then fall back on the alternating series test for the conditional case. Reserve the integral and comparison tests for the $L=1$ boundary where the ratio and root tests go silent.</div>
+
+  <details><summary>Worked Example 7.5: a $p$-series boundary that defeats the root test</summary><div class="detail-body"><div class="worked-solution">
+  <p>Apply the root test to $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^{\,3}}$, then resolve it.</p>
+  <p>The $n$th root of the term uses the standard limit $n^{1/n}\to1$ from Worked Example 1.3:</p>
+  $$\sqrt[n]{\frac{1}{n^{3}}}=\frac{1}{\bigl(n^{1/n}\bigr)^{3}}\xrightarrow[n\to\infty]{}\frac{1}{1^{3}}=1.$$
+  <p>So $L=1$ and the root test is inconclusive, exactly as warned. The series is a $p$-series with $p=3>1$, so it converges by the $p$-series rule of Section 4. This is the prototype of why $L=1$ cannot be read as a verdict.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why the ratio test works</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $L=\lim|a_{n+1}/a_n|<1$. Pick any $r$ with $L<r<1$. By the definition of the limit there is an index $N$ beyond which $|a_{n+1}/a_n|<r$, that is $|a_{n+1}|<r\,|a_n|$. Iterating from $N$,</p>
+  $$|a_{N+k}|<r^{\,k}\,|a_N|\quad\text{for all }k\ge0.$$
+  <p>So the tail $\sum_{k\ge0}|a_{N+k}|$ is dominated by the convergent geometric series $|a_N|\sum_{k\ge0} r^{k}=\dfrac{|a_N|}{1-r}$. By direct comparison $\sum|a_n|$ converges, hence $\sum a_n$ converges absolutely. If instead $L>1$, then eventually $|a_{n+1}|>|a_n|$, so the terms grow and cannot tend to $0$; the $n$th-term test forces divergence. The ratio test is comparison against a geometric series whose ratio is squeezed just above $L$.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">Applying the ratio test to $\sum 1/n^2$ gives $L=1$. This means</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">the series diverges</div><div class="quiz-opt" data-idx="1">the series converges by the ratio test</div><div class="quiz-opt" data-idx="2">the ratio test is inconclusive here</div><div class="quiz-opt" data-idx="3">$L$ was computed incorrectly</div></div><div class="quiz-explain correct-exp">Correct. When $L=1$ the ratio test gives no information; $\sum 1/n^2$ actually converges, but that must be shown another way (it is a $p$-series with $p=2$).</div><div class="quiz-explain wrong-exp">$L=1$ is the inconclusive case of the ratio test. The series does converge, but you need the $p$-series rule to know that.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

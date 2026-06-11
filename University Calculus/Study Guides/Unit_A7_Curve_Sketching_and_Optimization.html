@@ -963,6 +963,20 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>This is never zero, but it fails to exist at $x = 0$, where $f$ is still defined. Hence $x = 0$ is a critical point. Inspecting $f$ shows it has an absolute minimum there: this candidate would be invisible to anyone who only solved $f'(x) = 0$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.3: a transcendental candidate list</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the critical points of $f(x) = x - 2\sin x$ on the interval $[0, 2\pi]$.</p>
+  <p>The function is differentiable everywhere, so every critical point comes from $f'(x) = 0$.</p>
+  $$ f'(x) = 1 - 2\cos x = 0 \implies \cos x = \tfrac{1}{2}. $$
+  <p>On $[0,2\pi]$ the equation $\cos x = \tfrac12$ has the two solutions $x = \tfrac{\pi}{3}$ and $x = \tfrac{5\pi}{3}$. These are the only interior critical points. When the problem is later treated as an extremum question on the closed interval, the full candidate list will be $\{0,\ \tfrac{\pi}{3},\ \tfrac{5\pi}{3},\ 2\pi\}$: the two critical points plus the two endpoints. The lesson is that solving the trigonometric equation must respect the stated domain, since $\cos x = \tfrac12$ has infinitely many solutions on the whole line.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.4: the Extreme Value Theorem can fail on an open interval</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that $f(x) = x$ on the open interval $(0,1)$ has neither an absolute maximum nor an absolute minimum, even though $f$ is continuous and bounded.</p>
+  <p>Suppose, for contradiction, that $f$ attained a maximum at some $c \in (0,1)$. Then $f(c) = c$, yet the number $\tfrac{c+1}{2}$ also lies in $(0,1)$ and satisfies $\tfrac{c+1}{2} > c$, so $f\big(\tfrac{c+1}{2}\big) > f(c)$, contradicting maximality. The symmetric argument with $\tfrac{c}{2}$ rules out a minimum. The values approach $1$ and $0$ but are never reached. This is exactly why the Extreme Value Theorem insists on a closed interval: the supremum and infimum exist as numbers, but without the endpoints there is no point at which they are attained.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Many students equate "critical point" with "$f'(x) = 0$" and stop there. The definition has two clauses: $f'(c) = 0$ <em>or</em> $f'(c)$ fails to exist. Functions with corners, cusps, or vertical tangents (such as $|x|$, $x^{2/3}$, and $x^{1/3}$) hide extrema precisely at the points where the derivative blows up or jumps. A second frequent slip is to call a point critical when it is not in the domain at all: for $f(x)=1/x$ the value $x=0$ is not a critical point, because a critical point must belong to the domain of $f$. Always confirm membership in the domain before adding a candidate to the list.</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Which statement about the critical points of $f(x) = |x|$ is correct?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f$ has no critical point because $f'(0)$ is undefined</div><div class="quiz-opt" data-idx="1">$x=0$ is a critical point because $f'(0) = 0$</div><div class="quiz-opt" data-idx="2">$f$ has a critical point at every integer</div><div class="quiz-opt" data-idx="3">$x=0$ is a critical point because $f'(0)$ does not exist</div></div><div class="quiz-explain correct-exp">Correct. $f'(x) = -1$ for $x<0$ and $+1$ for $x>0$, so $f'(0)$ fails to exist while $0$ is in the domain. That makes $0$ a critical point, and indeed the absolute minimum.</div><div class="quiz-explain wrong-exp">A critical point occurs where $f'$ is zero or undefined. Here $f'(0)$ does not exist, so the correct option is the one citing the undefined derivative.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -997,6 +1011,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>This is precisely the Mean Value Theorem, so the general theorem reduces to the special case $f(a)=f(b)$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 2.2: a bound from the Mean Value Theorem</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $f$ is differentiable on $\mathbb{R}$ with $f(0) = 3$ and $|f'(x)| \le 2$ for every $x$. How large can $f(5)$ possibly be?</p>
+  <p>Apply the Mean Value Theorem on $[0,5]$: there is a $c \in (0,5)$ with</p>
+  $$ f(5) - f(0) = f'(c)\,(5 - 0) = 5\,f'(c). $$
+  <p>Therefore $|f(5) - 3| = 5\,|f'(c)| \le 5 \cdot 2 = 10$, which gives $-7 \le f(5) \le 13$. The largest possible value is $f(5) = 13$, attained when $f'(c) = 2$ throughout, that is when $f(x) = 2x + 3$. This is the model argument for turning a derivative bound into a bound on the function itself, and it underlies error estimates throughout calculus.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: proving an inequality with the Mean Value Theorem</summary><div class="detail-body"><div class="worked-solution">
+  <p>Prove that $\sin b - \sin a \le b - a$ for all $a \le b$.</p>
+  <p>If $a = b$ both sides are zero. For $a < b$, apply the Mean Value Theorem to $f(x) = \sin x$ on $[a,b]$: there is a $c \in (a,b)$ with</p>
+  $$ \frac{\sin b - \sin a}{b - a} = \cos c. $$
+  <p>Since $\cos c \le 1$ and $b - a > 0$, multiplying gives $\sin b - \sin a \le b - a$. The same argument with $|\cos c| \le 1$ yields the sharper statement $|\sin b - \sin a| \le |b - a|$, which says that sine is a nonexpansive (Lipschitz) function with constant $1$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The Mean Value Theorem is an <em>existence</em> statement: it guarantees that at least one such $c$ exists, but it never tells you which one without further work, and there may be several. Students often misread the conclusion as "$f'(c)$ equals the average for every $c$", or they apply the theorem when a hypothesis fails. Continuity on the closed $[a,b]$ <em>and</em> differentiability on the open $(a,b)$ are both required; dropping either one breaks the guarantee, as $f(x)=|x|$ on $[-1,1]$ shows. Verify both hypotheses before invoking the conclusion.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The Mean Value Theorem fails to apply to $f(x) = |x|$ on $[-1,1]$ because</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f$ is not continuous on $[-1,1]$</div><div class="quiz-opt" data-idx="1">$f(-1) \ne f(1)$</div><div class="quiz-opt" data-idx="2">$f$ is not differentiable at $0 \in (-1,1)$</div><div class="quiz-opt" data-idx="3">the interval is not closed</div></div><div class="quiz-explain correct-exp">Correct. $f$ is continuous on $[-1,1]$, but differentiability on the open interval is required and fails at $0$. The hypothesis is violated, so the theorem gives no guarantee.</div><div class="quiz-explain wrong-exp">$f(x)=|x|$ is continuous everywhere and $f(-1)=f(1)=1$. The breakdown is the missing derivative at the corner $x=0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1020,6 +1050,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ f'(-2) = 3(-5)(-1) > 0, \quad f'(0) = 3(-3)(1) < 0, \quad f'(4) = 3(1)(5) > 0. $$
   <p>So $f$ increases on $(-\infty,-1)$, decreases on $(-1,3)$, and increases on $(3,\infty)$. The sign goes $(+)\to(-)$ at $x=-1$, giving a local maximum, and $(-)\to(+)$ at $x=3$, giving a local minimum.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 3.2: a critical point where $f'$ is undefined</summary><div class="detail-body"><div class="worked-solution">
+  <p>Classify the critical points of $f(x) = x^{2/3}(x - 5)$ and find the intervals of increase and decrease.</p>
+  <p>Write $f(x) = x^{5/3} - 5x^{2/3}$ and differentiate.</p>
+  $$ f'(x) = \tfrac{5}{3}x^{2/3} - \tfrac{10}{3}x^{-1/3} = \frac{5}{3}\,\frac{x - 2}{x^{1/3}}. $$
+  <p>The derivative is zero at $x = 2$ and undefined at $x = 0$ (which is in the domain), so the critical points are $x = 0$ and $x = 2$. Test the sign of $f'$ on the three intervals, watching the sign of both the numerator $x-2$ and the denominator $x^{1/3}$:</p>
+  $$ f'(-1) = \tfrac{5}{3}\cdot\tfrac{-3}{-1} > 0, \quad f'(1) = \tfrac{5}{3}\cdot\tfrac{-1}{1} < 0, \quad f'(8) = \tfrac{5}{3}\cdot\tfrac{6}{2} > 0. $$
+  <p>So $f$ increases on $(-\infty,0)$, decreases on $(0,2)$, and increases on $(2,\infty)$. The sign change $(+)\to(-)$ at $x=0$ gives a local maximum (a cusp, since $f'$ is undefined there), and $(-)\to(+)$ at $x=2$ gives a local minimum. This shows why the sign chart must include points where $f'$ is undefined, not only its roots.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: increase and decrease for a product with an exponential</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find where $f(x) = x e^{-x}$ is increasing or decreasing, and classify any local extremum.</p>
+  <p>By the product rule,</p>
+  $$ f'(x) = e^{-x} - x e^{-x} = (1 - x)e^{-x}. $$
+  <p>Because $e^{-x} > 0$ for every $x$, the sign of $f'$ matches the sign of $1 - x$. Hence $f' > 0$ on $(-\infty,1)$ and $f' < 0$ on $(1,\infty)$: the function increases then decreases. The sign change $(+)\to(-)$ at $x = 1$ gives a local maximum, with value $f(1) = e^{-1} \approx 0.368$. Since this is the only critical point and the function rises to it then falls forever after, it is in fact the absolute maximum on the whole line.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The First Derivative Test classifies a critical point by the <em>change</em> of sign of $f'$, not by the value of $f'$ at the point (which is zero or undefined). A repeated even factor such as $(x-2)^2$ does not change sign, so the point is neither a max nor a min even though $f'=0$ there. A related mistake is to forget the points where $f'$ is undefined when building the sign chart: those split the domain just as roots of $f'$ do, and skipping them can miss a genuine extremum like the cusp in Example 3.2.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">If $f'(x) = (x-2)^{2}(x+1)$, what happens at $x = 2$?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Local minimum, since $f'(2) = 0$</div><div class="quiz-opt" data-idx="1">Neither, because $f'$ does not change sign at $x=2$</div><div class="quiz-opt" data-idx="2">Local maximum, since the factor is squared</div><div class="quiz-opt" data-idx="3">It cannot be a critical point</div></div><div class="quiz-explain correct-exp">Correct. The factor $(x-2)^{2}$ is nonnegative, so near $x=2$ the sign of $f'$ is governed by $(x+1) > 0$ on both sides. With no sign change, the First Derivative Test gives neither a max nor a min.</div><div class="quiz-explain wrong-exp">A repeated even factor does not change sign across its root. Since $f'$ stays positive on both sides of $x=2$, the point is neither a local max nor a local min.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1051,6 +1099,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Suppose $f'' > 0$ on an interval $I$. By the Increasing/Decreasing Test applied to the function $f'$, the fact that $(f')' = f'' > 0$ forces $f'$ to be increasing on $I$. By definition, an increasing first derivative is exactly what concave up means: as $x$ grows, the tangent slope grows, so the curve turns upward and lies above each of its tangent lines on $I$. The concave down case is identical with inequalities reversed.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: a vanishing second derivative that is not an inflection</summary><div class="detail-body"><div class="worked-solution">
+  <p>Examine $f(x) = x^4$ at the origin. Compute $f'(x) = 4x^3$ and $f''(x) = 12x^2$. Then $f''(0) = 0$, so one might suspect an inflection point. But $f''(x) = 12x^2 \ge 0$ for <em>all</em> $x$, so the concavity is up on both sides of $0$ and never reverses. There is no inflection point; the origin is in fact the absolute minimum. The lesson is that $f''(c) = 0$ is necessary but not sufficient for an inflection: the second derivative must actually change sign as $x$ crosses $c$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: the Second Derivative Test on a transcendental function</summary><div class="detail-body"><div class="worked-solution">
+  <p>Classify the critical points of $f(x) = 2\cos x + \cos 2x$ on $(0, 2\pi)$ using the Second Derivative Test, and locate the inflection points.</p>
+  <p>Differentiate twice.</p>
+  $$ f'(x) = -2\sin x - 2\sin 2x = -2\sin x(1 + 2\cos x), \qquad f''(x) = -2\cos x - 4\cos 2x. $$
+  <p>Setting $f'(x) = 0$ gives $\sin x = 0$ or $\cos x = -\tfrac12$. On $(0,2\pi)$ this yields $x = \pi$ (from $\sin x = 0$) and $x = \tfrac{2\pi}{3},\ \tfrac{4\pi}{3}$ (from $\cos x = -\tfrac12$). Evaluate $f''$:</p>
+  $$ f''\!\left(\tfrac{2\pi}{3}\right) = -2(-\tfrac12) - 4(-\tfrac12) = 1 + 2 = 3 > 0 \ \text{(local min)}, $$
+  $$ f''(\pi) = -2(-1) - 4(1) = 2 - 4 = -2 < 0 \ \text{(local max)}, $$
+  $$ f''\!\left(\tfrac{4\pi}{3}\right) = 3 > 0 \ \text{(local min, by symmetry)}. $$
+  <p>So the test cleanly classifies all three critical points, illustrating how much faster the Second Derivative Test can be than a full sign chart when $f''$ is easy to evaluate.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A point with $f''(c) = 0$ is only a <em>candidate</em> inflection point; you must verify that $f''$ changes sign there. Treating every root of $f''$ as an inflection point is wrong, as $x^4$ shows. The opposite error also appears: an inflection point can occur where $f''$ is undefined (for example $f(x)=x^{1/3}$ at the origin), so checking only the zeros of $f''$ can miss one. Build the concavity sign chart from both the zeros and the undefined points of $f''$, exactly as you do for $f'$.</div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">At a critical point $c$ where $f'(c)=0$ and $f''(c)=0$, the Second Derivative Test</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">is inconclusive and another method is needed</div><div class="quiz-opt" data-idx="1">guarantees an inflection point at $c$</div><div class="quiz-opt" data-idx="2">guarantees a local maximum</div><div class="quiz-opt" data-idx="3">guarantees a local minimum</div></div><div class="quiz-explain correct-exp">Correct. When $f''(c)=0$ the test gives no conclusion; $x^4$, $-x^4$, and $x^3$ all satisfy $f'(0)=f''(0)=0$ yet behave differently. Fall back on the First Derivative Test.</div><div class="quiz-explain wrong-exp">A vanishing second derivative does not by itself signal a max, a min, or even an inflection point. The test is simply inconclusive.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1079,6 +1144,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>The denominator is positive, so $f' > 0$ for $x < 0$ and $f' < 0$ for $x > 0$ (excluding the asymptotes). Thus $f$ increases on $(-\infty,-1)$ and $(-1,0)$ and decreases on $(0,1)$ and $(1,\infty)$, with a local maximum at the origin where $f(0)=0$. Combining these facts produces the characteristic three-branch graph hugging $y = 1$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: a slant asymptote</summary><div class="detail-body"><div class="worked-solution">
+  <p>Sketch $f(x) = \dfrac{x^{2} + 1}{x}$ and identify all asymptotes.</p>
+  <p><em>Domain and symmetry.</em> Defined for $x \ne 0$. Since $f(-x) = -f(x)$, the graph is odd and symmetric about the origin.</p>
+  <p><em>Asymptotes.</em> Long division gives $f(x) = x + \dfrac{1}{x}$. As $x \to 0$ the term $1/x$ dominates, so $x = 0$ is a vertical asymptote. As $x \to \pm\infty$ the term $1/x \to 0$, so the graph approaches the line $y = x$. This line is a <em>slant (oblique) asymptote</em>, which appears whenever the degree of the numerator is exactly one more than that of the denominator.</p>
+  <p><em>Monotonicity and shape.</em> From $f'(x) = 1 - \dfrac{1}{x^{2}} = \dfrac{x^{2}-1}{x^{2}}$, the critical points are $x = \pm 1$. The derivative is positive for $|x| > 1$ and negative for $0 < |x| < 1$, so $x = -1$ is a local maximum with $f(-1) = -2$ and $x = 1$ is a local minimum with $f(1) = 2$. Notice the local minimum value $2$ exceeds the local maximum value $-2$; this is possible only because a vertical asymptote separates the two branches.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: a full sketch combining $f'$ and $f''$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Assemble the graph of $f(x) = x^{3} - 3x^{2} - 9x + 5$, the function studied throughout this unit.</p>
+  <p>Collecting the earlier results: $f$ increases on $(-\infty,-1)$, decreases on $(-1,3)$, and increases on $(3,\infty)$, with a local maximum at $(-1, 10)$ and a local minimum at $(3, -22)$. The concavity is down on $(-\infty,1)$ and up on $(1,\infty)$, with an inflection point at $(1,-6)$. The end behavior is $f \to -\infty$ as $x \to -\infty$ and $f \to +\infty$ as $x \to +\infty$, with no asymptotes since $f$ is a polynomial.</p>
+  <p>Plotting these features in order, rising to the crest at $(-1,10)$ while concave down, bending through the inflection at $(1,-6)$, sinking to the trough at $(3,-22)$ while concave up, then rising again, reproduces the standard cubic with one hump and one valley. The independent pieces, monotonicity from $f'$ and bending from $f''$, lock together into a single unambiguous shape.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When the numerator and denominator of a rational function have the same degree, the horizontal asymptote is the ratio of leading coefficients, not $y = 0$. Reflexively writing $y = 0$ is the most common asymptote mistake. Two further pitfalls: a graph may cross its horizontal asymptote (the asymptote describes end behavior, not a barrier), and a slant asymptote appears, in place of a horizontal one, exactly when the numerator degree is one higher than the denominator degree. Always compare degrees before declaring the asymptote.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For $f(x) = \dfrac{3x^{2}+1}{x^{2}+4}$, the horizontal asymptote is</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$y = 0$</div><div class="quiz-opt" data-idx="1">$y = 1/4$</div><div class="quiz-opt" data-idx="2">$y = 3$</div><div class="quiz-opt" data-idx="3">there is none</div></div><div class="quiz-explain correct-exp">Correct. The numerator and denominator have equal degree, so the limit at infinity is the ratio of leading coefficients, $3/1 = 3$. Hence $y = 3$ is the horizontal asymptote.</div><div class="quiz-explain wrong-exp">When the top and bottom have the same degree, divide the leading coefficients. Here $3/1 = 3$, so the asymptote is $y=3$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1101,6 +1181,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ f(0) = 1, \qquad f(1) = 1 - 3 + 1 = -1, \qquad f(3) = 27 - 9 + 1 = 19. $$
   <p>The absolute maximum is $19$, attained at $x = 3$ (an endpoint), and the absolute minimum is $-1$, attained at the interior critical point $x = 1$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: a critical point with an undefined derivative</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the absolute extrema of $f(x) = x^{2/3}(5 - x)$ on $[-1, 4]$.</p>
+  <p>Write $f(x) = 5x^{2/3} - x^{5/3}$, so $f'(x) = \tfrac{10}{3}x^{-1/3} - \tfrac{5}{3}x^{2/3} = \dfrac{5}{3}\cdot\dfrac{2 - x}{x^{1/3}}$, which is zero at $x = 2$ and undefined at $x = 0$. Both lie in $(-1,4)$, so the candidate list is $\{-1,\ 0,\ 2,\ 4\}$: two endpoints and two critical points.</p>
+  $$ f(-1) = 1\cdot 6 = 6, \quad f(0) = 0, \quad f(2) = 2^{2/3}(3) \approx 4.76, \quad f(4) = 4^{2/3}(1) \approx 2.52. $$
+  <p>The absolute maximum is $6$ at the endpoint $x = -1$, and the absolute minimum is $0$ at the interior critical point $x = 0$ where the derivative is undefined. Had we tested only the zeros of $f'$, the true minimum would have been missed.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: a trigonometric extremum on a closed interval</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the absolute extrema of $f(x) = x - 2\sin x$ on $[0, 2\pi]$, continuing Example 1.3.</p>
+  <p>The interior critical points are $x = \tfrac{\pi}{3}$ and $x = \tfrac{5\pi}{3}$, so the candidate list is $\{0,\ \tfrac{\pi}{3},\ \tfrac{5\pi}{3},\ 2\pi\}$. Evaluate, using $\sin\tfrac{\pi}{3} = \tfrac{\sqrt3}{2}$ and $\sin\tfrac{5\pi}{3} = -\tfrac{\sqrt3}{2}$:</p>
+  $$ f(0) = 0, \quad f\!\left(\tfrac{\pi}{3}\right) = \tfrac{\pi}{3} - \sqrt3 \approx -0.68, \quad f\!\left(\tfrac{5\pi}{3}\right) = \tfrac{5\pi}{3} + \sqrt3 \approx 6.97, \quad f(2\pi) = 2\pi \approx 6.28. $$
+  <p>The absolute maximum is $\tfrac{5\pi}{3} + \sqrt3$ at the interior critical point $x = \tfrac{5\pi}{3}$, and the absolute minimum is $\tfrac{\pi}{3} - \sqrt3$ at $x = \tfrac{\pi}{3}$. Note the maximum is interior and exceeds both endpoint values, which is why endpoints alone never suffice.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The Closed Interval Method asks for the largest and smallest <em>function values</em>, so report $f(c)$, not the location $c$. A second slip is to discard critical points that fall outside $(a,b)$ but then forget to include the endpoints, or to keep a critical point that the problem's domain excludes. Finally, the method requires $f$ to be continuous on $[a,b]$: a discontinuity inside the interval can produce a supremum that is never attained, and then comparing a finite candidate list is not valid.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">In the Closed Interval Method on $[a,b]$, which set of points must be tested?</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Only the points where $f'(x)=0$</div><div class="quiz-opt" data-idx="1">Only the endpoints $a$ and $b$</div><div class="quiz-opt" data-idx="2">Only the points where $f''(x)=0$</div><div class="quiz-opt" data-idx="3">All critical points in $(a,b)$ together with the endpoints $a$ and $b$</div></div><div class="quiz-explain correct-exp">Correct. The absolute extrema occur either at an interior critical point or at an endpoint, so the full candidate list is the critical points in $(a,b)$ plus $a$ and $b$.</div><div class="quiz-explain wrong-exp">Endpoints can host the extreme values too, and critical points include those where $f'$ is undefined, not only where $f'=0$. Test all critical points in $(a,b)$ plus both endpoints.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1131,6 +1227,37 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ S'(r) = 4\pi r - \frac{2V}{r^{2}} = 0 \implies 4\pi r^{3} = 2V \implies r^{3} = \frac{V}{2\pi}. $$
   <p>Since $S''(r) = 4\pi + 4V/r^{3} > 0$ for all $r > 0$, this critical point is the absolute minimum. Substituting back, $h = V/(\pi r^{2}) = 2r$: the most economical can has height equal to its diameter.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: shortest distance from a point to a parabola</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the point on the parabola $y = x^{2}$ closest to the point $(0, \tfrac{3}{2})$.</p>
+  <p>A point on the curve is $(x, x^{2})$. Rather than minimize the distance, minimize the squared distance, which has the same minimizer and avoids the square root.</p>
+  $$ D(x) = x^{2} + \left(x^{2} - \tfrac{3}{2}\right)^{2}, \qquad x \in \mathbb{R}. $$
+  <p>Differentiate and simplify.</p>
+  $$ D'(x) = 2x + 2\left(x^{2} - \tfrac{3}{2}\right)(2x) = 2x\left(1 + 2x^{2} - 3\right) = 2x\,(2x^{2} - 2) = 4x(x^{2} - 1). $$
+  <p>The critical points are $x = 0$ and $x = \pm 1$. Since $D''(x) = 12x^2 - 4$, we have $D''(0) = -4 < 0$ (a local max of squared distance) and $D''(\pm 1) = 8 > 0$ (local minima). Comparing $D(0) = \tfrac{9}{4}$ with $D(\pm 1) = 1 + \tfrac14 = \tfrac54$, the minimum distance occurs at $x = \pm 1$. The two closest points are $(1,1)$ and $(-1,1)$, each at distance $\sqrt{5}/2$. Minimizing the square is a standard device worth remembering.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: maximizing the volume of an open box</summary><div class="detail-body"><div class="worked-solution">
+  <p>An open-top box is made from a $12 \times 12$ square sheet by cutting a square of side $x$ from each corner and folding up the sides. Find $x$ that maximizes the volume.</p>
+  <p>After folding, the base measures $(12 - 2x)$ by $(12 - 2x)$ and the height is $x$, so</p>
+  $$ V(x) = x(12 - 2x)^{2}, \qquad x \in [0, 6]. $$
+  <p>The physical domain is $[0,6]$ because the cut cannot exceed half the side. Differentiate using the product rule.</p>
+  $$ V'(x) = (12 - 2x)^{2} + x\cdot 2(12 - 2x)(-2) = (12 - 2x)\big[(12 - 2x) - 4x\big] = (12 - 2x)(12 - 6x). $$
+  <p>Setting $V'(x) = 0$ gives $x = 6$ or $x = 2$. The endpoints $x = 0$ and $x = 6$ both yield $V = 0$ (a flat sheet or a sealed-up box of zero base), so compare the interior candidate: $V(2) = 2(8)^{2} = 128$. The maximum volume is $128$ cubic units at $x = 2$. The boundary check is essential, since the algebra alone offers $x = 6$ as a spurious critical value sitting at the useless endpoint.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the optimal angle in Snell's law of refraction</summary><div class="detail-body"><div class="worked-solution">
+  <p>A classic application of optimization is to derive the law that governs how light bends. Suppose light travels from a point $A$ in one medium to a point $B$ in another, crossing a flat boundary, and that its speed is $v_1$ above the boundary and $v_2$ below. Fermat's principle of least time says the actual path is the one that <em>minimizes travel time</em>.</p>
+  <p>Place the boundary on the $x$-axis. Let the horizontal distance between $A$ and $B$ be $d$, with the crossing point at horizontal position $x$ measured from the foot of $A$. If $A$ is at height $a$ and $B$ at depth $b$, the total time is</p>
+  $$ T(x) = \frac{\sqrt{a^{2} + x^{2}}}{v_1} + \frac{\sqrt{b^{2} + (d - x)^{2}}}{v_2}. $$
+  <p>Differentiate and set $T'(x) = 0$:</p>
+  $$ T'(x) = \frac{x}{v_1\sqrt{a^{2}+x^{2}}} - \frac{d - x}{v_2\sqrt{b^{2}+(d-x)^{2}}} = 0. $$
+  <p>Now recognize the two fractions as sines of the angles each ray makes with the vertical (the normal to the boundary): if $\theta_1$ and $\theta_2$ are those angles of incidence and refraction, then $\sin\theta_1 = \dfrac{x}{\sqrt{a^{2}+x^{2}}}$ and $\sin\theta_2 = \dfrac{d-x}{\sqrt{b^{2}+(d-x)^{2}}}$. The stationarity condition becomes</p>
+  $$ \frac{\sin\theta_1}{v_1} = \frac{\sin\theta_2}{v_2}, $$
+  <p>which is exactly Snell's law. Because $T(x) \to \infty$ as $x \to \pm\infty$ and $T$ is smooth with a single critical point, that critical point is the global minimum. A purely geometric law of physics falls out of a one-variable minimization, a striking illustration of why optimization is a centerpiece of first-year calculus.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The most damaging mistake in applied optimization is skipping the boundary and domain analysis. Finding $f'(x) = 0$ locates only interior critical points; if the feasible domain is a closed interval, the endpoints must be compared too, and a critical point outside the physical domain must be discarded. A second common slip is forgetting to use the constraint to reduce to a <em>single</em> variable before differentiating. Finally, always answer the question that was asked: if the problem wants the dimensions, do not stop at the critical value of the intermediate variable.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">A rectangular pen against a wall uses fencing on three sides only, with total fencing $L$. To maximize area, the side parallel to the wall should equal</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$L/4$</div><div class="quiz-opt" data-idx="1">$L/2$</div><div class="quiz-opt" data-idx="2">$L/3$</div><div class="quiz-opt" data-idx="3">$2L/3$</div></div><div class="quiz-explain correct-exp">Correct. With parallel side $y$ and two perpendicular sides $x$, the constraint is $2x + y = L$, so area $A = x(L-2x)$. Then $A'=L-4x=0$ gives $x=L/4$ and $y=L-2x=L/2$. The wall-parallel side is $L/2$.</div><div class="quiz-explain wrong-exp">Model it as $2x + y = L$ with area $x y = x(L-2x)$. Maximizing gives $x = L/4$, hence the parallel side $y = L - 2x = L/2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
