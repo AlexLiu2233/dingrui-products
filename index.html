@@ -1705,7 +1705,6 @@ function applyDocLang() {
   document.title = isZh ? DOC_TITLE_ZH : DOC_TITLE_EN;
   var desc = document.querySelector('meta[name="description"]');
   if (desc) desc.setAttribute('content', isZh ? DOC_DESC_ZH : DOC_DESC_EN);
-  try { localStorage.setItem('lang', isZh ? 'zh' : 'en'); } catch (e) {}
 }
 
 function toggleLang() {
@@ -1714,8 +1713,13 @@ function toggleLang() {
 }
 
 (function () {
+  // Language is URL-param driven (?lang=zh), NOT persisted: a direct visit
+  // defaults to English, consistent with every notes page (D4 rule). This
+  // stops a stale localStorage value from overriding the link you clicked
+  // (e.g. an "English Notes" link must always open English).
   try {
-    if (localStorage.getItem('lang') === 'zh') {
+    var q = new URLSearchParams(window.location.search).get('lang');
+    if (q === 'zh' && document.querySelector('[data-lang=zh]')) {
       document.body.classList.add('lang-zh');
     }
   } catch (e) {}
