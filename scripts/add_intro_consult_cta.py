@@ -38,6 +38,11 @@ END_CTA_RE = re.compile(
     r"utm_campaign=([a-z0-9_]+)&utm_content=([a-z0-9_]+)__sg__en", re.I)
 HOWTO_RE = re.compile(r'<section[^>]*id="how-to-use"[^>]*>.*?</section>', re.S | re.I)
 HERO_RE = re.compile(r'<section[^>]*class="hero"[^>]*>.*?</section>', re.S | re.I)
+# Fallback for templates whose hero is a <div> (some AP Physics units): drop the
+# CTA right before the first content <section>. Only reached when neither a
+# how-to-use section nor a <section class="hero"> exists, so this <section> is
+# guaranteed to be the first content block, not the hero.
+FIRST_SEC_RE = re.compile(r'<section\b', re.I)
 
 BASE = "https://www.dingruischolars.com/signup"
 
@@ -83,10 +88,16 @@ def process(path: pathlib.Path) -> str:
     if not anchor:
         anchor = HERO_RE.search(t)
         where = "after-hero"
-    if not anchor:
-        return "SKIP-no-anchor"
+    if anchor:
+        t = t[: anchor.end()] + "\n" + html + t[anchor.end():]
+    else:
+        # div-hero fallback: insert before the first content <section>
+        anchor = FIRST_SEC_RE.search(t)
+        if not anchor:
+            return "SKIP-no-anchor"
+        t = t[: anchor.start()] + html + "\n" + t[anchor.start():]
+        where = "before-section"
 
-    t = t[: anchor.end()] + "\n" + html + t[anchor.end():]
     path.write_text(t, encoding="utf-8")
     return where
 
