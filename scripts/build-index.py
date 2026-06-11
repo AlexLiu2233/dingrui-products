@@ -49,6 +49,7 @@ SUBJECTS = [
     ("High School Chemistry", "High School Chemistry", "chip-purple"),
     ("High School Biology", "High School Biology",   "chip-gold"),
     ("High School Computer Science", "High School Computer Science", "chip-green"),
+    ("University Calculus", "University Calculus",   "chip-maroon"),
 ]
 
 # When a subject mixes prefix words (e.g. IB Chemistry's Structure/Reactivity),
@@ -67,7 +68,20 @@ GROUP_BY_LETTER = {
         "D": ("Statistics & Probability",   "统计与概率"),
         "E": ("Calculus",                   "微积分"),
     },
+    "University Calculus": {
+        "A": ("Calculus I: Differential Calculus",   "微积分一 · 微分"),
+        "B": ("Calculus II: Integral Calculus & Series", "微积分二 · 积分与级数"),
+        "C": ("Calculus III: Multivariable & Vector", "微积分三 · 多元与向量"),
+        "D": ("Calculus IV: Differential Equations", "微积分四 · 微分方程"),
+    },
 }
+
+# Subjects whose letter-groups render as TOP-LEVEL `<details class="subject-group">`
+# dropdowns (siblings under the tier) instead of `super-topic` accordions nested
+# inside one parent subject-group. University Calculus uses this so each of the
+# four courses (Calc I/II/III/IV) is its own dropdown — there is no single
+# "University Calculus" group; the four courses implicitly constitute it.
+GROUP_AS_SUBJECT = {"University Calculus"}
 
 TITLE_RE = re.compile(r"<title>([^<]+)</title>", re.IGNORECASE)
 # Two ZH hero patterns in the codebase:
@@ -318,7 +332,56 @@ def gen_cards_grouped(subject_dir: str) -> str:
     return "\n".join(out)
 
 
+def gen_cards_subject_groups(subject_dir: str) -> str:
+    """Emit one TOP-LEVEL <details class="subject-group"> per leading-letter group.
+    Used for University Calculus: Calc I/II/III/IV become four sibling dropdowns
+    directly under the tier, with no single parent 'University Calculus' wrapper."""
+    items = gather_items(subject_dir)
+    groups = GROUP_BY_LETTER[subject_dir]
+    buckets = {letter: [] for letter in groups}
+    misc = []
+    for entry in items:
+        _, prefix, *_ = entry
+        letter = super_topic_letter(prefix)
+        (buckets[letter] if letter in buckets else misc).append(entry)
+    out = []
+    for letter, (name_en, name_zh) in groups.items():
+        bucket = buckets[letter]
+        if not bucket:
+            continue
+        count = len(bucket)
+        out.append(
+            f'  <details class="subject-group">\n'
+            f'    <summary class="subject-group__toggle">\n'
+            f'      <span class="subject-group__chevron" aria-hidden="true">&rsaquo;</span>\n'
+            f'      <span class="subject-group__title">'
+            f'<span data-lang="en">{escape(name_en)}</span>'
+            f'<span data-lang="zh">{escape(name_zh)}</span>'
+            f'</span>\n'
+            f'      <span class="subject-group__count">'
+            f'<span data-lang="en">{count} unit{"s" if count != 1 else ""}</span>'
+            f'<span data-lang="zh">{count} 个单元</span>'
+            f'</span>\n'
+            f'    </summary>\n'
+            f'    <div class="subject-group__body">\n'
+            f'      <div class="grid">\n'
+            + "\n".join(render_card(p, te, tz, h, z) for _, p, te, tz, h, z in bucket)
+            + "\n      </div>\n"
+            f'    </div>\n'
+            f'  </details>'
+        )
+    if misc:
+        out.append(
+            f'  <div class="grid">\n'
+            + "\n".join(render_card(p, te, tz, h, z) for _, p, te, tz, h, z in misc)
+            + "\n  </div>"
+        )
+    return "\n".join(out)
+
+
 def gen_cards(subject_dir: str) -> str:
+    if subject_dir in GROUP_AS_SUBJECT:
+        return gen_cards_subject_groups(subject_dir)
     if subject_dir in GROUP_BY_LETTER:
         return gen_cards_grouped(subject_dir)
     return gen_cards_flat(subject_dir)
