@@ -75,7 +75,7 @@ def metric(html: str):
         "chk": low.count("checklist-item") or low.count("checklist__item"),
         # number of consult-cta asides: 2 = intro(under read-me)+end (UC-compliant),
         # 1 = end only (needs the intro-CTA retrofit), 0 = none.
-        "cta": len(re.findall(r'<aside class="consult-cta"', html)),
+        "cta": len(re.findall(r'<aside class="consult-cta', html)),
     }
 
 
