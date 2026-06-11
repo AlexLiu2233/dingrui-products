@@ -1,8 +1,12 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-09** (`main`=`preview`=`9edde7e`;
-new work on branch `university_calculus_init`).
+Living doc — update as the product evolves. Last updated: **2026-06-11** — **University Calculus (32 SGs)
+SHIPPED TO PRODUCTION** (`main`=`72f3a35`, content = `preview`=`3e33e35` + merge/CNAME no-ops). Also shipped
+this session: landing split into 4 University Calculus course dropdowns (Calc I/II/III/IV, no parent wrapper)
+and a landing **language-entry fix** (URL-param driven, no localStorage stickiness — fixes flipped EN/ZH notes
+links). **Deploy infra restored** (Pages was 404; `preview` env branch policy + `build_type=workflow`; CNAME UI
+ops keep reverting build_type — see `reference_pages_deploy_infra` memory).
 
 **🆕 NEW SUBJECT + NEW TIER OPENED 2026-06-09 — University Calculus (first-year-uni):** opens the top tier of
 the HS → AP/IB → **first-year-uni** pipeline. Goal = lead-gen for *current* NA top-10 STEM undergrads (MIT/GT/
@@ -98,7 +102,7 @@ discovery. To get full auto-discovery, add a `Sitemap:` line to an apex `alexliu
 | IB | IB Chemistry HL | 4 | 1 | 1 | ✅ EN/ZH | `main` |
 | IB | IB Physics HL | 24 | — | — | ✅ EN/ZH | `main` ✅ SG-complete (P+S next) |
 | IB | IB Math AI HL | — | — | — | — | retired |
-| **UNI** | University Calculus | 32/32 | — | — | EN-first | `university_calculus_init` 🆕 **all 32 SGs drafted+validated** (uncommitted); P+S + ZH next |
+| **UNI** | University Calculus | 32/32 | — | — | EN-first | `main` ✅ **SHIPPED to prod 2026-06-11** (32 SGs live; 4 course dropdowns on landing); P+S + ZH next |
 
 **HS STEM total: 66 Study Guides** across 5 subjects (the focus of the current program).
 **University Calculus (new first-year-uni tier):** 32 SGs planned (Calc I/II/III/IV × 8); A/B/C/D groups; ODE = Calc IV.
