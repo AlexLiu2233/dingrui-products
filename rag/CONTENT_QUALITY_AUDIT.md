@@ -82,8 +82,16 @@ shipped, and audited. No systemic depth problem outside UC + the four outliers a
 - **Gate:** validate exit 0, EN==ZH parity unchanged, run `lang_link_continuity.py`.
 - **Pilot first:** 1 HS + 1 AP/IB for placement sign-off, then sweep all 138.
 
-### Workstream 2 (content, the real quality lift): **UC Depth Expansion sprint** — P0
-The headline finding. Bring the 31 sub-template UC guides up to the A1 depth bar.
+### Workstream 2 (content, the real quality lift): **UC Depth Expansion sprint** — ✅ DONE 2026-06-11
+The headline finding. Bring the 31 sub-template UC guides up to (and above) the A1 depth bar.
+**SHIPPED to branch `uc_depth_expansion` (`af7b187`), awaiting user review → PR to preview.**
+Method chosen: multi-agent workflow (Option b), target "higher than A1". A 62-agent
+`expand -> adversarial verify` pipeline (Opus) deepened all 31 guides in place. Result:
+UC EN-word **median 3383 -> 5979** (min now 2801 = the untouched A1, max 7661); every
+expanded guide clears the old A1 number. Verify caught 4 isolated arithmetic errors in
+new examples (B3, C1, C5, D8) — all hand-fixed and re-checked; all 32 UC SGs validate
+exit 0. **Note:** A1 (2801, user-locked) is now the *thinnest* UC guide — open question
+for the user whether to expand it too or keep it locked.
 - **Target:** ~5000–6000 EN words/guide (A1 standard), achieved by **adding depth, not
   padding**: a 2nd/3rd worked example per major subtopic, common-error/"why this is
   wrong" notes, and fuller "going deeper" proofs. Breadth already exists — do not add
@@ -112,3 +120,8 @@ AP Calc U9, IB Chem HL ×4, IB Math B1. Depth-expand to their tier median. Low u
 - 2026-06-11: audit opened; UC depth deficit established. Awaiting user's pick on
   Workstream-2 method (sequential waves vs multi-agent workflow) and on whether the
   full-mark target is "match A1 (~5–6k words)" or higher.
+- 2026-06-11: user picked **multi-agent workflow** + **higher than A1**. Ran a 62-agent
+  expand+verify workflow over the 31 guides (`af7b187` on `uc_depth_expansion`); UC median
+  3383 -> 5979 words; 4 verify-flagged math errors fixed; all validate exit 0. Workstream 2
+  closed. Discovered A1's real count is 2801 (not the 5035 first reported — that was D4),
+  so A1 is now the thinnest UC guide; flagged to user. WS1 intro-CTA already on preview (PR #8).

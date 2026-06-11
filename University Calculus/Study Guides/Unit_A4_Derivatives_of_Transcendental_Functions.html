@@ -947,6 +947,11 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \frac{d}{dx}\sin x = \cos x, \qquad \frac{d}{dx}\cos x = -\sin x $$
   </div>
   <p>The first limit is established by a squeeze between the areas of a triangle, a circular sector, and a larger triangle. The second follows from the first after multiplying by the conjugate $1+\cos x$. With both limits in hand, the derivative formulas drop out of the angle-addition identities.</p>
+  <p>One consequence is worth holding onto from the start, because it reappears throughout differential equations. Differentiation cycles sine and cosine with period four: each derivative advances the phase by a quarter turn. Differentiating $\sin x$ four times returns $\sin x$, so $\frac{d}{dx}\sin x=\cos x$, the second derivative is $-\sin x$, the third is $-\cos x$, and the fourth is $\sin x$ again. The same cycle, started one place over, governs cosine. This is precisely why $\sin x$ and $\cos x$ solve the oscillator equation $y''=-y$: applying $\frac{d}{dx}$ twice flips the sign and returns the function.</p>
+  <div class="formula-box">
+    <div class="formula-label">The four-step derivative cycle</div>
+    $$ \sin x \;\xrightarrow{\,d/dx\,}\; \cos x \;\xrightarrow{\,d/dx\,}\; -\sin x \;\xrightarrow{\,d/dx\,}\; -\cos x \;\xrightarrow{\,d/dx\,}\; \sin x $$
+  </div>
   <details>
     <summary>Going deeper: deriving $\frac{d}{dx}\sin x=\cos x$ from the definition</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -958,6 +963,18 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
   <details>
+    <summary>Going deeper: the squeeze proof that $\lim_{x\to 0^+}\frac{\sin x}{x}=1$</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>This single limit is the foundation of every formula in this section, so it deserves a complete argument rather than an appeal to a picture. Fix a small angle $x$ with $0<x<\tfrac{\pi}{2}$, measured in radians, and place it at the center of a unit circle. Comparing three nested regions, the area of the inner triangle, the area of the circular sector, and the area of the outer triangle, gives</p>
+    $$ \underbrace{\tfrac12\sin x}_{\text{inner triangle}} \;\le\; \underbrace{\tfrac12 x}_{\text{sector}} \;\le\; \underbrace{\tfrac12\tan x}_{\text{outer triangle}}. $$
+    <p>The sector area is $\tfrac12 r^2 x=\tfrac12 x$ precisely because $r=1$ and $x$ is in radians; this is the step that fails in degrees. Multiply through by $\dfrac{2}{\sin x}>0$:</p>
+    $$ 1 \;\le\; \frac{x}{\sin x} \;\le\; \frac{1}{\cos x}. $$
+    <p>Take reciprocals, which reverses the inequalities:</p>
+    $$ \cos x \;\le\; \frac{\sin x}{x} \;\le\; 1. $$
+    <p>As $x\to 0^+$ we have $\cos x\to 1$, so the squeeze theorem forces $\frac{\sin x}{x}\to 1$. Because $\frac{\sin x}{x}$ is even, the same limit holds as $x\to 0^-$, hence as $x\to 0$. The companion limit follows by the conjugate trick: $\frac{1-\cos x}{x}=\frac{1-\cos^2 x}{x(1+\cos x)}=\frac{\sin x}{x}\cdot\frac{\sin x}{1+\cos x}\to 1\cdot\frac{0}{2}=0$.</p>
+    </div></div>
+  </details>
+  <details>
     <summary>Worked Example 1.1: a combined rate</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Differentiate $g(x) = 3\sin x - 5\cos x$.</p>
@@ -965,6 +982,28 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>The constants ride through unchanged by linearity, and each term follows its own rule.</p>
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 1.2: a product that needs the chain rule inside</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x)=x^2\cos(3x)$. This is a product, and the second factor is a composition, so both the product rule and the chain rule appear. By the product rule,</p>
+    $$ f'(x) = \frac{d}{dx}\big(x^2\big)\cdot\cos(3x) + x^2\cdot\frac{d}{dx}\cos(3x). $$
+    <p>The first derivative is $2x$. For the second, the outer function is cosine and the inner is $3x$ with inner derivative $3$, so $\frac{d}{dx}\cos(3x)=-\sin(3x)\cdot 3=-3\sin(3x)$. Assembling,</p>
+    $$ f'(x) = 2x\cos(3x) - 3x^2\sin(3x). $$
+    <p>Notice the inner derivative $3$ is not optional: dropping it is the single most common error on composite trig derivatives.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 1.3: evaluating a derivative and reading a slope</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find the slope of the tangent line to $y=\sin x$ at $x=\tfrac{\pi}{3}$, and confirm where the curve is momentarily flat on $[0,2\pi]$.</p>
+    <p>The derivative is $y'=\cos x$, so the slope at $x=\tfrac{\pi}{3}$ is $\cos\tfrac{\pi}{3}=\tfrac12$. The tangent rises at a moderate rate, consistent with the graph still climbing toward its peak at $\tfrac{\pi}{2}$.</p>
+    <p>The curve is flat where $y'=0$, that is where $\cos x=0$. On $[0,2\pi]$ that happens at $x=\tfrac{\pi}{2}$ and $x=\tfrac{3\pi}{2}$, exactly the maximum and the minimum of the sine wave. The derivative formula thus locates the turning points without any further work.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Students often forget that the clean formulas require radians and silently differentiate a degree-measured sine. If $S(\theta)=\sin(\theta^\circ)$ with $\theta$ in degrees, then $\theta^\circ=\frac{\pi}{180}\theta$ in radians, so $S'(\theta)=\frac{\pi}{180}\cos(\theta^\circ)$, not $\cos(\theta^\circ)$. The extra factor $\frac{\pi}{180}$ is exactly the slope $\frac{\pi}{180}\approx 0.0175$ you would measure for $\frac{\sin\theta}{\theta}$ near $0$ in degrees. Always convert to radians before differentiating.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">What is $\dfrac{d}{dx}\big(\cos x\big)$?</div><span class="quiz-number">1.1</span></div>
     <div class="quiz-options">
@@ -1003,7 +1042,7 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \frac{d}{dx}\tan x = \sec^2 x, \qquad \frac{d}{dx}\cot x = -\csc^2 x $$
     $$ \frac{d}{dx}\sec x = \sec x\tan x, \qquad \frac{d}{dx}\csc x = -\csc x\cot x $$
   </div>
-  <p>A memory aid: every cofunction derivative (cosine, cotangent, cosecant) carries a leading minus sign, mirroring its non-cofunction partner.</p>
+  <p>A memory aid: every cofunction derivative (cosine, cotangent, cosecant) carries a leading minus sign, mirroring its non-cofunction partner. There is a deeper structural reason. A cofunction is the original function evaluated at the complementary angle, for instance $\cot x=\tan\!\big(\tfrac{\pi}{2}-x\big)$. The inner derivative of $\tfrac{\pi}{2}-x$ is $-1$, and that $-1$ is precisely the minus sign that decorates every cofunction derivative. So the sign is not an arbitrary convention to memorize; it is the chain rule applied to the complementary-angle shift.</p>
   <details>
     <summary>Going deeper: deriving $\frac{d}{dx}\tan x=\sec^2 x$</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1014,12 +1053,42 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
   <details>
+    <summary>Going deeper: deriving $\frac{d}{dx}\sec x=\sec x\tan x$</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Write $\sec x=(\cos x)^{-1}$ and use the chain rule on the power. With outer function $u^{-1}$ and inner $u=\cos x$, $u'=-\sin x$,</p>
+    $$ \frac{d}{dx}\sec x = -1\cdot(\cos x)^{-2}\cdot(-\sin x) = \frac{\sin x}{\cos^2 x}. $$
+    <p>Now split the single fraction into a product that exposes the standard form:</p>
+    $$ \frac{\sin x}{\cos^2 x} = \frac{1}{\cos x}\cdot\frac{\sin x}{\cos x} = \sec x\tan x. $$
+    <p>The same method on $\csc x=(\sin x)^{-1}$ gives $\frac{d}{dx}\csc x=-\csc x\cot x$, and on $\cot x=(\tan x)^{-1}$, or directly as $\frac{\cos x}{\sin x}$ by the quotient rule, gives $\frac{d}{dx}\cot x=-\csc^2 x$.</p>
+    </div></div>
+  </details>
+  <details>
     <summary>Worked Example 2.1: differentiating a secant expression</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Differentiate $h(x) = x\sec x$ using the product rule.</p>
     $$ h'(x) = (1)\sec x + x\cdot\sec x\tan x = \sec x\,(1 + x\tan x). $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 2.2: a quotient with tangent</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x)=\dfrac{\tan x}{x}$. By the quotient rule with top $\tan x$ and bottom $x$,</p>
+    $$ f'(x) = \frac{\sec^2 x\cdot x - \tan x\cdot 1}{x^2} = \frac{x\sec^2 x - \tan x}{x^2}. $$
+    <p>There is no further cancellation, so this is the final simplified form. Resist the temptation to cancel an $x$ against the $x^2$, since the second term in the numerator has no factor of $x$ to cancel.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 2.3: a power of secant via the chain rule</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $g(x)=\sec^3 x$, which means $(\sec x)^3$. The outer operation is the cube, so the general power rule applies with inner function $\sec x$:</p>
+    $$ g'(x) = 3(\sec x)^2\cdot\frac{d}{dx}\sec x = 3\sec^2 x\cdot\sec x\tan x = 3\sec^3 x\tan x. $$
+    <p>The chain rule supplies the inner derivative $\sec x\tan x$, which then merges with the $\sec^2 x$ from the power rule to give $\sec^3 x$.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A frequent slip is reading $\sec^2 x$ as the derivative of secant. It is not: $\sec^2 x$ is the derivative of tangent, while the derivative of secant is $\sec x\tan x$. The two are easy to confuse because both involve secant. Keep them straight by source: $\sec^2 x$ comes from the quotient rule on $\sin x/\cos x$, whereas $\sec x\tan x$ comes from differentiating the reciprocal $(\cos x)^{-1}$.
+  </div>
   <div class="quiz" data-answer="0">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\tan x$ equals:</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1049,7 +1118,7 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">With an inner function (chain rule)</div>
     $$ \frac{d}{dx}e^{u(x)} = e^{u(x)}\,u'(x) $$
   </div>
-  <p>Because $a=e^{\ln a}$, we have $a^x=e^{x\ln a}$, and the chain rule on this composition produces the factor $\ln a$. When $a=e$ that factor is $\ln e=1$ and the formula reduces to $e^x$.</p>
+  <p>Because $a=e^{\ln a}$, we have $a^x=e^{x\ln a}$, and the chain rule on this composition produces the factor $\ln a$. When $a=e$ that factor is $\ln e=1$ and the formula reduces to $e^x$. This rewrite, $a^x=e^{x\ln a}$, is the single most useful identity in the section: any exponential with a constant base can be converted to base $e$ before differentiating, which means you never have to memorize the $\ln a$ factor as a separate rule. It is also the only honest way to handle expressions like $x^x$ where both base and exponent vary, the subject of the next section.</p>
   <details>
     <summary>Going deeper: why $\frac{d}{dx}e^x=e^x$</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1059,12 +1128,42 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
   <details>
+    <summary>Going deeper: identifying the constant $L(a)$ as $\ln a$</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>The proof above left $L(a)=\lim_{h\to 0}\frac{a^h-1}{h}$ as an unidentified constant. Here is why it equals $\ln a$, using only the base-$e$ rule. Write $a^x=e^{x\ln a}$, a genuine identity since $a=e^{\ln a}$. Differentiate the right side with the chain rule, outer function $e^u$ and inner $u=x\ln a$ with $u'=\ln a$:</p>
+    $$ \frac{d}{dx}a^x = \frac{d}{dx}e^{x\ln a} = e^{x\ln a}\cdot\ln a = a^x\ln a. $$
+    <p>Comparing this with the difference-quotient form $\frac{d}{dx}a^x=a^x\,L(a)$ and matching coefficients of $a^x$ forces $L(a)=\ln a$. As a sanity check, $L(e)=\ln e=1$, recovering the defining property of $e$, and for a base less than $1$, say $a=\tfrac12$, $L(a)=\ln\tfrac12<0$, correctly making $(\tfrac12)^x$ a decreasing function.</p>
+    </div></div>
+  </details>
+  <details>
     <summary>Worked Example 3.1: chain rule on an exponential</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Differentiate $f(x) = e^{3x^2}$. Here $u=3x^2$, so $u'=6x$:</p>
     $$ f'(x) = e^{3x^2}\cdot 6x = 6x\,e^{3x^2}. $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 3.2: a product and quotient with exponentials</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x)=\dfrac{e^{x}}{x^2+1}$. By the quotient rule, with top $e^x$ (derivative $e^x$) and bottom $x^2+1$ (derivative $2x$),</p>
+    $$ f'(x) = \frac{e^x(x^2+1) - e^x(2x)}{(x^2+1)^2} = \frac{e^x\big(x^2 - 2x + 1\big)}{(x^2+1)^2}. $$
+    <p>The numerator factors as a perfect square, $x^2-2x+1=(x-1)^2$, so</p>
+    $$ f'(x) = \frac{e^x(x-1)^2}{(x^2+1)^2}. $$
+    <p>Because $(x-1)^2\ge 0$ and $e^x>0$, the derivative is never negative: $f$ is increasing everywhere, with a momentary flat spot at $x=1$ where the tangent is horizontal.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 3.3: a general base needing the conversion identity</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y=5^{\,\sin x}$. The base is a constant and the exponent is a function, so rewrite in base $e$: $5^{\sin x}=e^{(\sin x)\ln 5}$. Now the chain rule applies cleanly with inner function $(\sin x)\ln 5$ and inner derivative $(\cos x)\ln 5$:</p>
+    $$ y' = e^{(\sin x)\ln 5}\cdot(\cos x)\ln 5 = 5^{\sin x}\,(\ln 5)\cos x. $$
+    <p>Equivalently, apply $\frac{d}{dx}a^{u}=a^{u}(\ln a)\,u'$ directly with $a=5$ and $u=\sin x$. Both routes agree, which is the point of the conversion identity.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Do not apply the power rule to an exponential. The power rule $\frac{d}{dx}x^n=nx^{n-1}$ requires a constant exponent and a variable base; an exponential like $2^x$ has the opposite arrangement. Writing $\frac{d}{dx}2^x=x\,2^{x-1}$ is wrong. The correct rule is $\frac{d}{dx}2^x=2^x\ln 2$. The quick diagnostic: if the variable is in the exponent, it is an exponential and you need $\ln a$; if the variable is in the base, it is a power and you bring down the exponent.
+  </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\big(2^x\big)$ equals:</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1107,12 +1206,27 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ y = f(x) \;\Longrightarrow\; \ln|y| = \ln|f(x)| \;\Longrightarrow\; \frac{y'}{y} = \frac{d}{dx}\ln|f(x)| $$
   </div>
   <p>Taking the logarithm first replaces a product by a sum of logs and a variable exponent by a coefficient. After differentiating, multiply through by $y$ to recover $y'$.</p>
+  <p>One subtlety deserves emphasis because it widens the domain of the formula. The function $\ln x$ is defined only for $x>0$, but $\ln|x|$ is defined for all $x\neq 0$, and remarkably it has the same derivative $\frac1x$ on both sides. For $x<0$ write $|x|=-x$, so $\frac{d}{dx}\ln(-x)=\frac{1}{-x}\cdot(-1)=\frac1x$ by the chain rule. This is why logarithmic differentiation uses $\ln|y|$ rather than $\ln y$: the absolute value lets the technique run even when $f(x)$ is negative, and the absolute value never affects the answer because its contribution cancels.</p>
+  <div class="formula-box">
+    <div class="formula-label">The absolute-value extension</div>
+    $$ \frac{d}{dx}\ln|x| = \frac{1}{x} \quad (x\neq 0) $$
+  </div>
   <details>
     <summary>Going deeper: $\frac{d}{dx}\ln x=\frac1x$ from the inverse relationship</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Let $y=\ln x$, so $e^{y}=x$. Differentiate both sides with respect to $x$, using the chain rule on the left:</p>
     $$ e^{y}\,\frac{dy}{dx} = 1 \;\Longrightarrow\; \frac{dy}{dx} = \frac{1}{e^{y}} = \frac{1}{x}. $$
     <p>The substitution $e^{y}=x$ closes the argument and gives the reciprocal formula.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Going deeper: the general base formula $\frac{d}{dx}\log_a x=\frac{1}{x\ln a}$</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>The natural logarithm is special because its derivative has no leftover constant. Every other base inherits a factor of $\frac{1}{\ln a}$ through the change-of-base identity. Start from</p>
+    $$ \log_a x = \frac{\ln x}{\ln a}, $$
+    <p>which is valid because $\ln a$ is just a constant. Differentiate, treating $\frac{1}{\ln a}$ as a constant multiple:</p>
+    $$ \frac{d}{dx}\log_a x = \frac{1}{\ln a}\cdot\frac{d}{dx}\ln x = \frac{1}{\ln a}\cdot\frac1x = \frac{1}{x\ln a}. $$
+    <p>This also explains why calculus uses base $e$ almost exclusively: it is the one base for which the constant $\frac{1}{\ln a}$ equals $1$, leaving the cleanest possible derivative.</p>
     </div></div>
   </details>
   <details>
@@ -1126,6 +1240,33 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ y' = x^{x}\,(\ln x + 1). $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 4.2: a messy product tamed by logs</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y=\dfrac{(x^2+1)^3\sqrt{x-4}}{(2x+3)^5}$ for $x>4$. The product and quotient rules would be brutal here. Take the natural log and use its algebra to break the expression into a sum:</p>
+    $$ \ln y = 3\ln(x^2+1) + \tfrac12\ln(x-4) - 5\ln(2x+3). $$
+    <p>Now differentiate term by term, each by the chain rule on $\ln$:</p>
+    $$ \frac{y'}{y} = 3\cdot\frac{2x}{x^2+1} + \tfrac12\cdot\frac{1}{x-4} - 5\cdot\frac{2}{2x+3} = \frac{6x}{x^2+1} + \frac{1}{2(x-4)} - \frac{10}{2x+3}. $$
+    <p>Multiply by $y$ to finish:</p>
+    $$ y' = \frac{(x^2+1)^3\sqrt{x-4}}{(2x+3)^5}\left(\frac{6x}{x^2+1} + \frac{1}{2(x-4)} - \frac{10}{2x+3}\right). $$
+    <p>The bracket is the logarithmic derivative; leaving the answer in this factored form is standard and preferred, since expanding it gains nothing.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 4.3: a variable base and a variable exponent together</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y=(\sin x)^{x}$ on an interval where $\sin x>0$, say $0<x<\pi$. Both base and exponent contain $x$, so logarithmic differentiation is the only direct route. Take logs:</p>
+    $$ \ln y = x\ln(\sin x). $$
+    <p>Differentiate the right side by the product rule, and the inner $\ln(\sin x)$ by the chain rule:</p>
+    $$ \frac{y'}{y} = (1)\ln(\sin x) + x\cdot\frac{\cos x}{\sin x} = \ln(\sin x) + x\cot x. $$
+    <p>Multiply by $y=(\sin x)^x$:</p>
+    $$ y' = (\sin x)^{x}\big(\ln(\sin x) + x\cot x\big). $$
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A widespread mistake is splitting $\ln$ across a sum, writing $\ln(x^2+1)=\ln(x^2)+\ln(1)$ or $\frac{d}{dx}\ln(x^2+1)=\frac{1}{x^2+1}$ with the inner derivative forgotten. The logarithm laws apply to products and quotients, never to sums: $\ln(A+B)$ does not simplify. And on a composite $\ln(g(x))$ the chain rule is mandatory, giving $\frac{g'(x)}{g(x)}$. The correct derivative here is $\frac{2x}{x^2+1}$, not $\frac{1}{x^2+1}$.
+  </div>
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\ln(5x)$ equals:</div><span class="quiz-number">4.1</span></div>
     <div class="quiz-options">
@@ -1151,6 +1292,7 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">The principal three</div>
     $$ \frac{d}{dx}\arcsin x = \frac{1}{\sqrt{1-x^2}}, \qquad \frac{d}{dx}\arccos x = \frac{-1}{\sqrt{1-x^2}}, \qquad \frac{d}{dx}\arctan x = \frac{1}{1+x^2} $$
   </div>
+  <p>A clean pattern organizes these results. The arc-sine and arc-cosine share the radical $\sqrt{1-x^2}$ and differ only in sign, and their derivatives sum to zero: $\frac{d}{dx}(\arcsin x+\arccos x)=0$, which is the calculus shadow of the identity $\arcsin x+\arccos x=\tfrac{\pi}{2}$. The arc-tangent and arc-cotangent share the rational $1+x^2$ in the same way. The radical forms have a restricted domain $(-1,1)$ because the radial functions $\sin$ and $\cos$ only reach inputs in $[-1,1]$, while the arc-tangent is differentiable on all of $\mathbb{R}$, mirroring tangent's unbounded range.</p>
   <details>
     <summary>Going deeper: deriving $\frac{d}{dx}\arcsin x$</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1161,12 +1303,44 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
   <details>
+    <summary>Going deeper: deriving $\frac{d}{dx}\arctan x$ and the choice of branch sign</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Let $y=\arctan x$, so $\tan y=x$ with $-\tfrac{\pi}{2}<y<\tfrac{\pi}{2}$. Differentiate implicitly, using $\frac{d}{dx}\tan y=\sec^2 y\cdot y'$:</p>
+    $$ \sec^2 y\,\frac{dy}{dx} = 1 \;\Longrightarrow\; \frac{dy}{dx} = \frac{1}{\sec^2 y}. $$
+    <p>Now convert the leftover trig to algebra with the identity $\sec^2 y=1+\tan^2 y=1+x^2$:</p>
+    $$ \frac{d}{dx}\arctan x = \frac{1}{1+x^2}. $$
+    <p>Here no sign ambiguity arises because $\sec^2 y$ is always positive, which is why arctangent has no branch-sign subtlety. Contrast this with $\arcsin$, where choosing $\cos y=+\sqrt{1-x^2}$ rather than the negative root depended on the principal branch lying in $[-\tfrac{\pi}{2},\tfrac{\pi}{2}]$, where cosine is nonnegative. Choosing the wrong root there flips the sign of the entire derivative, the most common error in this section.</p>
+    </div></div>
+  </details>
+  <details>
     <summary>Worked Example 5.1: chain rule with arctangent</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Differentiate $f(x) = \arctan(x^2)$. With $u=x^2$ and $u'=2x$:</p>
     $$ f'(x) = \frac{1}{1+(x^2)^2}\cdot 2x = \frac{2x}{1+x^4}. $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 5.2: arcsine of a scaled variable</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $g(x)=\arcsin(3x)$. The outer function is $\arcsin u$ with $u=3x$ and $u'=3$:</p>
+    $$ g'(x) = \frac{1}{\sqrt{1-(3x)^2}}\cdot 3 = \frac{3}{\sqrt{1-9x^2}}. $$
+    <p>The domain shrinks accordingly: the radicand $1-9x^2$ stays positive only for $|x|<\tfrac13$, exactly where $3x$ lands inside $(-1,1)$.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 5.3: a product of inverse-trig and algebraic factors</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $h(x)=x\arctan x - \tfrac12\ln(1+x^2)$, a function that appears as an antiderivative in integration. Differentiate term by term. For the first term use the product rule:</p>
+    $$ \frac{d}{dx}\big(x\arctan x\big) = (1)\arctan x + x\cdot\frac{1}{1+x^2} = \arctan x + \frac{x}{1+x^2}. $$
+    <p>For the second, the chain rule on $\ln(1+x^2)$ gives $\frac{2x}{1+x^2}$, so $\frac{d}{dx}\big(-\tfrac12\ln(1+x^2)\big)=-\tfrac12\cdot\frac{2x}{1+x^2}=-\frac{x}{1+x^2}$. Adding the pieces, the two rational terms cancel:</p>
+    $$ h'(x) = \arctan x + \frac{x}{1+x^2} - \frac{x}{1+x^2} = \arctan x. $$
+    <p>The clean cancellation is the reason $h$ is the standard antiderivative of $\arctan x$.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A standard mistake is confusing the derivative of $\arctan x$, which is $\frac{1}{1+x^2}$, with the derivative of $\arcsin x$, which is $\frac{1}{\sqrt{1-x^2}}$. The radical belongs to arcsine and arccosine; the rational $1+x^2$ belongs to arctangent. A second common slip is dropping the minus sign on $\arccos$, $\operatorname{arccot}$, and $\operatorname{arccsc}$, whose derivatives are the negatives of their non-cofunction partners.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\arctan x$ equals:</div><span class="quiz-number">5.1</span></div>
     <div class="quiz-options">
@@ -1192,6 +1366,11 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Basic hyperbolic derivatives</div>
     $$ \frac{d}{dx}\sinh x = \cosh x, \qquad \frac{d}{dx}\cosh x = \sinh x, \qquad \frac{d}{dx}\tanh x = \operatorname{sech}^2 x $$
   </div>
+  <p>The parallel with circular trigonometry is exact except for signs, and the reason is a single observation: differentiating $e^{-x}$ produces a $-1$ that flips the parity of the exponential combination. In the circular case the corresponding factor is the imaginary unit, which is why $\cos$ and $\cosh$ are siblings under the substitution $x\mapsto ix$. For a first-year course the practical takeaway is simpler. The hyperbolic derivative table looks like the circular one with the minus sign on $\frac{d}{dx}\cosh x$ deleted, and the secant-style identity reads $\frac{d}{dx}\tanh x=\operatorname{sech}^2 x$ in perfect analogy with $\frac{d}{dx}\tan x=\sec^2 x$.</p>
+  <div class="formula-box">
+    <div class="formula-label">Reciprocal hyperbolic derivatives</div>
+    $$ \frac{d}{dx}\operatorname{sech} x = -\operatorname{sech} x\tanh x, \qquad \frac{d}{dx}\coth x = -\operatorname{csch}^2 x $$
+  </div>
   <details>
     <summary>Going deeper: $\frac{d}{dx}\cosh x=\sinh x$ from the definition</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1201,12 +1380,41 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
   <details>
+    <summary>Going deeper: $\frac{d}{dx}\tanh x=\operatorname{sech}^2 x$ and the hyperbolic identity</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Write $\tanh x=\dfrac{\sinh x}{\cosh x}$ and apply the quotient rule, using $\frac{d}{dx}\sinh x=\cosh x$ and $\frac{d}{dx}\cosh x=\sinh x$:</p>
+    $$ \frac{d}{dx}\tanh x = \frac{\cosh x\cdot\cosh x - \sinh x\cdot\sinh x}{\cosh^2 x} = \frac{\cosh^2 x - \sinh^2 x}{\cosh^2 x}. $$
+    <p>The numerator is the hyperbolic Pythagorean identity $\cosh^2 x-\sinh^2 x=1$, which itself follows from the definitions since $\big(\tfrac{e^x+e^{-x}}{2}\big)^2-\big(\tfrac{e^x-e^{-x}}{2}\big)^2=\tfrac14\big[(e^{2x}+2+e^{-2x})-(e^{2x}-2+e^{-2x})\big]=1$. Therefore</p>
+    $$ \frac{d}{dx}\tanh x = \frac{1}{\cosh^2 x} = \operatorname{sech}^2 x. $$
+    <p>Note the sign of the numerator: in the circular case the quotient rule produced $\cos^2 x+\sin^2 x$, a sum, whereas here the minus signs in the hyperbolic derivatives produce a difference. Both collapse to $1$ by their respective identities.</p>
+    </div></div>
+  </details>
+  <details>
     <summary>Worked Example 6.1: chain rule with $\cosh$</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>Differentiate $f(x) = \cosh(2x)$. With $u=2x$ and $u'=2$:</p>
     $$ f'(x) = \sinh(2x)\cdot 2 = 2\sinh(2x). $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 6.2: the catenary and its slope</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>A hanging cable, the catenary, has shape $y=a\cosh\!\big(\tfrac{x}{a}\big)$ for a positive constant $a$. Find its slope. The outer function is $a\cosh u$ with $u=\tfrac{x}{a}$ and $u'=\tfrac1a$:</p>
+    $$ y' = a\sinh\!\Big(\tfrac{x}{a}\Big)\cdot\tfrac1a = \sinh\!\Big(\tfrac{x}{a}\Big). $$
+    <p>The constant $a$ cancels, so the slope at the lowest point $x=0$ is $\sinh 0=0$, confirming the cable hangs horizontally at its bottom. The arc length element $\sqrt{1+(y')^2}=\sqrt{1+\sinh^2(x/a)}=\cosh(x/a)$ then simplifies beautifully, which is exactly why the catenary is the standard textbook arc-length example.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 6.3: a hyperbolic composition</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $g(x)=\tanh(x^2+1)$. The outer function is $\tanh u$ with derivative $\operatorname{sech}^2 u$, and the inner is $u=x^2+1$ with $u'=2x$:</p>
+    $$ g'(x) = \operatorname{sech}^2(x^2+1)\cdot 2x = 2x\,\operatorname{sech}^2(x^2+1). $$
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Students who have just memorized the circular table often carry the minus sign into the hyperbolic one and write $\frac{d}{dx}\cosh x=-\sinh x$. That is wrong: the hyperbolic cosine differentiates to $+\sinh x$. The sign discipline is the reverse of the circular case, where the minus lives on $\frac{d}{dx}\cos x=-\sin x$. A reliable check is the definition: $\cosh x$ is increasing for $x>0$, so its derivative must be positive there, which $+\sinh x$ provides and $-\sinh x$ does not.
+  </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\cosh x$ equals:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1232,6 +1440,17 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Master reference table</div>
     $$ \begin{array}{llll} \dfrac{d}{dx}\sin x=\cos x & \dfrac{d}{dx}\cos x=-\sin x & \dfrac{d}{dx}\tan x=\sec^2 x & \dfrac{d}{dx}\sec x=\sec x\tan x \\[6pt] \dfrac{d}{dx}e^x=e^x & \dfrac{d}{dx}a^x=a^x\ln a & \dfrac{d}{dx}\ln x=\dfrac{1}{x} & \dfrac{d}{dx}\log_a x=\dfrac{1}{x\ln a} \\[6pt] \dfrac{d}{dx}\arcsin x=\dfrac{1}{\sqrt{1-x^2}} & \dfrac{d}{dx}\arctan x=\dfrac{1}{1+x^2} & \dfrac{d}{dx}\sinh x=\cosh x & \dfrac{d}{dx}\cosh x=\sinh x \end{array} $$
   </div>
+  <p>The discipline that prevents almost every error in this unit is to identify the outermost operation first, differentiate it while leaving its argument intact, and then multiply by the derivative of that argument. Repeating this peels a composition one layer at a time, keeping a running product of inner derivatives. A nested function like $\ln\!\big(\cos(e^{x})\big)$ has three layers: log of cosine of exponential. Working outward in, the derivative is $\frac{1}{\cos(e^x)}$ times $-\sin(e^x)$ times $e^x$, with no layer skipped. The transcendental rules of this unit supply the per-layer derivatives; the chain, product, and quotient rules of Unit A3 supply the bookkeeping.</p>
+  <details>
+    <summary>Going deeper: why the chain rule never loses a layer</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>It is worth seeing once why the running product is the whole story for a deep composition. Suppose $F=f_1\circ f_2\circ\cdots\circ f_n$, so $F(x)=f_1\big(f_2(\cdots f_n(x))\big)$. Let $u_n=f_n(x)$, $u_{n-1}=f_{n-1}(u_n)$, and so on. Applying the two-function chain rule once peels the outermost layer:</p>
+    $$ F'(x) = f_1'\big(u_2\big)\cdot\frac{d}{dx}\big(f_2\circ\cdots\circ f_n\big)(x). $$
+    <p>The trailing factor is again a composition, one layer shorter, so the same rule applies to it. Repeating until nothing is left gives the telescoping product</p>
+    $$ F'(x) = f_1'(u_2)\,f_2'(u_3)\,\cdots\,f_{n-1}'(u_n)\,f_n'(x), $$
+    <p>which is exactly the running product of inner derivatives, each evaluated at the appropriate intermediate value. Forgetting one of these factors is forgetting one application of the chain rule, which is why the layer-by-layer habit is not optional.</p>
+    </div></div>
+  </details>
   <details>
     <summary>Worked Example 7.1: a fully layered derivative</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1247,6 +1466,27 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ g'(x) = \frac{1}{\tan x}\cdot\sec^2 x = \frac{\sec^2 x}{\tan x} = \frac{1}{\sin x\cos x} = \frac{2}{\sin(2x)}. $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 7.3: a three-layer composition</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x)=\arctan\!\big(e^{\sin x}\big)$. Three operations are stacked: arctangent on the outside, exponential in the middle, sine on the inside. Differentiate outward in, keeping the running product.</p>
+    <p>Outer layer, arctangent, gives $\dfrac{1}{1+\big(e^{\sin x}\big)^2}=\dfrac{1}{1+e^{2\sin x}}$, with its argument left untouched. Middle layer, the exponential, contributes $e^{\sin x}$. Inner layer, sine, contributes $\cos x$. Multiply the three factors:</p>
+    $$ f'(x) = \frac{1}{1+e^{2\sin x}}\cdot e^{\sin x}\cdot\cos x = \frac{e^{\sin x}\cos x}{1+e^{2\sin x}}. $$
+    <p>Each factor is the derivative of one named layer, and none is skipped. That is the entire technique.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 7.4: a quotient of transcendental factors</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y=\dfrac{\sin x}{e^{x}}$, which is cleaner to read as $y=e^{-x}\sin x$. Using the product rule on the rewritten form, with $\frac{d}{dx}e^{-x}=-e^{-x}$,</p>
+    $$ y' = -e^{-x}\sin x + e^{-x}\cos x = e^{-x}\big(\cos x - \sin x\big). $$
+    <p>This $e^{-x}\sin x$ is the prototype of a damped oscillation, and the factored derivative $e^{-x}(\cos x-\sin x)$ vanishes exactly when $\cos x=\sin x$, that is at $x=\tfrac{\pi}{4}+k\pi$, locating the peaks and troughs of the decaying wave.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    On a deep composition the usual failure is to peel only the outer layer and stop, for instance writing $\frac{d}{dx}\sin(e^{2x})=\cos(e^{2x})$ and forgetting the inner derivatives $e^{2x}\cdot 2$. The correct result is $2e^{2x}\cos(e^{2x})$. The fix is mechanical: never write the answer until every layer named on the way in has contributed a factor on the way out. Counting layers before differentiating, then counting factors after, catches the dropped term every time.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\,\sin(e^{x})$ equals:</div><span class="quiz-number">7.1</span></div>
     <div class="quiz-options">

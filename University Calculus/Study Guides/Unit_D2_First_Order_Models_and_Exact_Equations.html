@@ -960,6 +960,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>As $t \to \infty$ the exponential decays and $T \to T_a$: the body approaches ambient temperature, exactly as physical intuition demands.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.2: a falling body with linear air resistance</summary><div class="detail-body"><div class="worked-solution">
+  <p>A mass $m$ falls under gravity $g$ with air resistance proportional to velocity, $F_{\text{drag}} = -bv$ with $b &gt; 0$. Model the velocity $v(t)$, solve, and interpret the long-run behavior.</p>
+  <p>Newton's second law $m v' = mg - bv$ gives the first-order linear equation</p>
+  $$ v' + \frac{b}{m}\,v = g, \qquad v(0) = v_0. $$
+  <p>Separate variables, or notice the constant-coefficient form. With $k = b/m$, the integrating factor is $e^{kt}$ and $(e^{kt}v)' = g\,e^{kt}$, so $e^{kt}v = \tfrac{g}{k}e^{kt} + C$. Solving for $v$ and applying $v(0) = v_0$,</p>
+  $$ v(t) = \frac{mg}{b} + \left(v_0 - \frac{mg}{b}\right)e^{-bt/m}. $$
+  <p>As $t \to \infty$ the exponential vanishes and $v \to mg/b$, the <em>terminal velocity</em>. This is exactly the equilibrium where drag balances gravity, $bv = mg$, so the body stops accelerating.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: reading a direction field</summary><div class="detail-body"><div class="worked-solution">
+  <p>Without solving, describe the solutions of $y' = y - t$ that pass through the line $y = t$.</p>
+  <p>The slope at any point is $f(t,y) = y - t$. On the line $y = t$ the slope is $0$, so every solution crossing that line does so with a horizontal tangent. Above the line, $y &gt; t$ gives $y' &gt; 0$ (solutions rise); below it, $y &lt; t$ gives $y' &lt; 0$ (solutions fall).</p>
+  <p>The line $y = t + 1$ is itself a solution, since substituting $y = t+1$ gives $y' = 1$ and $y - t = 1$, an identity. Solutions above this line curve upward and away from it, while those below are funneled toward it for a while before bending away. Reading slopes alone reveals the linear solution $y = t+1$ acts as a separatrix, all visible before any integration.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students translate "the population grows at $5\%$ per year" into $P' = 0.05$ instead of $P' = 0.05\,P$. A constant rate $P' = k$ produces straight-line growth; <em>proportional</em> growth, the phrase actually used, means the rate scales with the present amount, $P' = kP$, giving exponential growth. Always ask whether the verbal rate is absolute (units per time) or relative (per unit of the quantity, per time).</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which IVP models a population growing at a rate proportional to its current size, starting at $P_0$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$P' = kt,\ P(0) = P_0$</div><div class="quiz-opt" data-idx="1">$P' = kP,\ P(0) = P_0$</div><div class="quiz-opt" data-idx="2">$P' = k,\ P(0) = P_0$</div><div class="quiz-opt" data-idx="3">$P'' = kP,\ P(0) = P_0$</div></div><div class="quiz-explain correct-exp">Correct. Proportional to current size means the rate equals $k$ times $P$ itself: $P' = kP$.</div><div class="quiz-explain wrong-exp">Proportional to current size means the rate is $k$ times $P$, not $t$ or a constant, and it is first order: $P' = kP$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -987,6 +1004,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ A(t) = 200\left(1 - e^{-t/20}\right). $$
   <p>As $t \to \infty$, $A \to 200$ grams, which is the steady state where inflow concentration $2$ g/L fills the entire $100$ L tank.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 2.2: a tank whose volume changes</summary><div class="detail-body"><div class="worked-solution">
+  <p>A tank starts with $200$ L of brine containing $10$ kg of salt. Pure water flows in at $4$ L/min and the well-stirred mixture flows out at $6$ L/min. Find the salt $A(t)$ while the tank still holds liquid.</p>
+  <p>Now inflow and outflow differ, so the volume drains: $V(t) = 200 + (4 - 6)t = 200 - 2t$, valid for $0 \le t &lt; 100$. The inflow is pure water, so the rate in is $0$. The rate out is the concentration $A/V$ times the outflow rate $6$:</p>
+  $$ A' = 0 - \frac{A}{200 - 2t}\cdot 6 = -\frac{6A}{200 - 2t} = -\frac{3A}{100 - t}. $$
+  <p>This is linear and separable. Separate: $\dfrac{dA}{A} = -\dfrac{3}{100 - t}\,dt$. Integrate, using $\int \frac{dt}{100 - t} = -\ln|100 - t|$:</p>
+  $$ \ln|A| = 3\ln|100 - t| + C_1 \implies A = C(100 - t)^3. $$
+  <p>Apply $A(0) = 10$: $10 = C(100)^3$, so $C = 10/10^6 = 10^{-5}$. Hence</p>
+  $$ A(t) = 10^{-5}(100 - t)^3, \qquad 0 \le t &lt; 100. $$
+  <p>The salt falls to $0$ as the tank empties at $t = 100$, which is correct: with pure water in and brine out, all the salt is eventually flushed.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: steady-state concentration directly</summary><div class="detail-body"><div class="worked-solution">
+  <p>A $500$ L tank of pure water receives brine at $0.4$ kg/L flowing in at $10$ L/min, with equal outflow. Without solving the full IVP, find the eventual salt content, then confirm it is the equilibrium.</p>
+  <p>The model is $A' + \tfrac{10}{500}A = (0.4)(10) = 4$, that is $A' + 0.02A = 4$. The steady state is the constant solution where $A' = 0$:</p>
+  $$ 0 = 4 - 0.02A^{*} \implies A^{*} = 200 \text{ kg}. $$
+  <p>The full solution is $A(t) = 200 + Ce^{-0.02t}$; whatever the start, the transient $Ce^{-0.02t}$ decays and $A \to 200$. The steady concentration is $200/500 = 0.4$ kg/L, equal to the inflow concentration, exactly as conservation predicts when the tank is fully replaced by inflowing brine.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When inflow and outflow rates differ, students keep $V$ constant and write $A' = c_{\text{in}}r_{\text{in}} - \tfrac{A}{V_0}r_{\text{out}}$ with the <em>initial</em> volume. The concentration must use the <em>current</em> volume $V(t) = V_0 + (r_{\text{in}} - r_{\text{out}})t$. Freezing $V$ at $V_0$ silently changes the physics and produces a wrong, often constant-coefficient, answer. Always write $V(t)$ first, then form $A/V(t)$.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In a stirred tank with equal inflow and outflow rates $r$ and volume $V$, the outflow rate of solute is:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$A\,V$</div><div class="quiz-opt" data-idx="1">$r/V$</div><div class="quiz-opt" data-idx="2">$\dfrac{A}{V}\,r$</div><div class="quiz-opt" data-idx="3">$A\,r$</div></div><div class="quiz-explain correct-exp">Correct. The outflow concentration is $A/V$, carried out at volume rate $r$, giving $(A/V)r$.</div><div class="quiz-explain wrong-exp">Concentration is amount over volume, $A/V$, and it leaves at volume rate $r$, so the solute outflow is $(A/V)r$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1020,6 +1057,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ F(x,y) = x^2 y + 3x - y = C. $$
   <p>This implicit relation is the general solution; an initial condition fixes $C$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 3.2: an exact IVP, integrating $N$ in $y$ first</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $(3x^2 y + 2xy + y^3)\,dx + (x^3 + x^2 + 3xy^2)\,dy = 0$ with $y(0) = 1$.</p>
+  <p>Set $M = 3x^2 y + 2xy + y^3$ and $N = x^3 + x^2 + 3xy^2$. Test exactness:</p>
+  $$ M_y = 3x^2 + 2x + 3y^2, \qquad N_x = 3x^2 + 2x + 3y^2. $$
+  <p>They agree, so the equation is exact. This time integrate $N$ in $y$ (holding $x$ fixed), which is the cleaner route here:</p>
+  $$ F = \int N\,dy = x^3 y + x^2 y + xy^3 + h(x). $$
+  <p>Now match $F_x = M$: differentiating gives $F_x = 3x^2 y + 2xy + y^3 + h'(x)$, which must equal $M = 3x^2 y + 2xy + y^3$. Hence $h'(x) = 0$ and $h$ is a constant absorbed into $C$:</p>
+  $$ F(x,y) = x^3 y + x^2 y + xy^3 = C. $$
+  <p>Apply $y(0) = 1$: every term has a factor of $x$, so $F(0,1) = 0 = C$. The particular solution is the implicit relation $x^3 y + x^2 y + xy^3 = 0$, equivalently $x\big(x^2 y + xy + y^3\big) = 0$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: recognizing a non-exact equation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Decide whether $(3xy + y^2)\,dx + (x^2 + xy)\,dy = 0$ is exact.</p>
+  <p>With $M = 3xy + y^2$, $N = x^2 + xy$: $M_y = 3x + 2y$ while $N_x = 2x + y$. Since $3x + 2y \ne 2x + y$ in general, the equation is <em>not</em> exact, and the level-curve method does not apply as written.</p>
+  <p>The remedy belongs to Section 4: test $(M_y - N_x)/N = (x + y)/(x^2 + xy) = (x+y)/\big(x(x+y)\big) = 1/x$, a function of $x$ alone, so the integrating factor $\mu = e^{\int (1/x)\,dx} = x$ restores exactness. The lesson is that failing the test is not a dead end, it is the signal to look for an integrating factor.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> After integrating $M$ in $x$ to get $F = \int M\,dx + g(y)$, students write the constant of integration as a plain constant rather than $g(y)$. Because $y$ was held fixed during the $x$-integration, the most general "constant" is any function of $y$. Dropping the $g(y)$ throws away the entire $y$-only part of the potential and gives a wrong $F$. The $g(y)$ is recovered precisely by matching $F_y = N$.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The equation $M\,dx + N\,dy = 0$ is exact on a simply connected region if and only if:</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$M = N$</div><div class="quiz-opt" data-idx="1">$M_x = N_y$</div><div class="quiz-opt" data-idx="2">$M_x = N_x$</div><div class="quiz-opt" data-idx="3">$M_y = N_x$</div></div><div class="quiz-explain correct-exp">Correct. Exactness is equivalent to the mixed-partial condition $M_y = N_x$.</div><div class="quiz-explain wrong-exp">A potential $F$ with $F_x = M$, $F_y = N$ forces $M_y = F_{xy} = F_{yx} = N_x$. The condition is $M_y = N_x$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1057,6 +1113,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Integrate: $x^2 y = \tfrac{1}{6}x^6 + C$, so</p>
   $$ y(x) = \frac{x^4}{6} + \frac{C}{x^2}. $$
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: a linear IVP with a trigonometric forcing</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y' + y = \cos x$ with $y(0) = 0$.</p>
+  <p>Here $p = 1$, so $\mu = e^{\int 1\,dx} = e^{x}$. Multiply through: $(e^{x}y)' = e^{x}\cos x$. Integrate the right side by parts twice (a standard cycle):</p>
+  $$ \int e^{x}\cos x\,dx = \frac{e^{x}(\cos x + \sin x)}{2} + C. $$
+  <p>Therefore $e^{x}y = \tfrac{1}{2}e^{x}(\cos x + \sin x) + C$, and dividing by $e^{x}$,</p>
+  $$ y(x) = \frac{\cos x + \sin x}{2} + C e^{-x}. $$
+  <p>Apply $y(0) = 0$: $0 = \tfrac{1}{2}(1 + 0) + C$, so $C = -\tfrac12$. The solution is $y = \tfrac12(\cos x + \sin x) - \tfrac12 e^{-x}$. The transient $-\tfrac12 e^{-x}$ decays, leaving the steady oscillation $\tfrac12(\cos x + \sin x)$, the periodic response to periodic forcing.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: an integrating factor in $x$ for a non-exact equation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $(x^2 + y^2 + x)\,dx + xy\,dy = 0$.</p>
+  <p>With $M = x^2 + y^2 + x$, $N = xy$: $M_y = 2y$, $N_x = y$, so the equation is not exact. Test for an $x$-only factor:</p>
+  $$ \frac{M_y - N_x}{N} = \frac{2y - y}{xy} = \frac{1}{x}, $$
+  <p>a function of $x$ alone, so $\mu = e^{\int (1/x)\,dx} = x$. Multiply through by $x$:</p>
+  $$ (x^3 + xy^2 + x^2)\,dx + x^2 y\,dy = 0. $$
+  <p>Now $\tilde M_y = 2xy = \tilde N_x$, exact. Integrate $\tilde N = x^2 y$ in $y$: $F = \tfrac12 x^2 y^2 + h(x)$. Match $F_x = xy^2 + h'(x) = x^3 + xy^2 + x^2$, so $h'(x) = x^3 + x^2$ and $h = \tfrac14 x^4 + \tfrac13 x^3$. The solution is</p>
+  $$ F(x,y) = \tfrac12 x^2 y^2 + \tfrac14 x^4 + \tfrac13 x^3 = C. $$
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent slip is to forget that the integrating factor multiplies the <em>entire</em> equation, including the right side $q(x)$. After forming $(\mu y)' = \mu q$, students integrate only $\mu$ or only $q$, not the product $\mu q$. A second slip is dropping the constant $C$ before dividing by $\mu$: the $C/\mu$ term is the homogeneous part of the solution and must survive. Write $(\mu y)' = \mu q$, integrate to $\mu y = \int \mu q\,dx + C$, and only then divide by $\mu$.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The integrating factor for the linear equation $y' + p(x)y = q(x)$ is:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e^{\int p\,dx}$</div><div class="quiz-opt" data-idx="1">$e^{\int q\,dx}$</div><div class="quiz-opt" data-idx="2">$e^{-\int p\,dx}$</div><div class="quiz-opt" data-idx="3">$\int p\,dx$</div></div><div class="quiz-explain correct-exp">Correct. $\mu = e^{\int p\,dx}$ satisfies $\mu' = p\mu$, making the left side $(\mu y)'$.</div><div class="quiz-explain wrong-exp">The factor must satisfy $\mu' = p\mu$, whose solution is $\mu = e^{\int p\,dx}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1096,6 +1173,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y = \frac{1}{v} = \frac{1}{1 + C e^{x}}. $$
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: a Bernoulli IVP with $n = 3$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y' + \dfrac{1}{x}y = x\,y^3$ for $x &gt; 0$, with $y(1) = 1$.</p>
+  <p>Here $p = 1/x$, $q = x$, $n = 3$. Set $v = y^{1-3} = y^{-2}$. The reduced linear equation is $v' + (1-n)p\,v = (1-n)q$, that is</p>
+  $$ v' + (1 - 3)\frac{1}{x}v = (1 - 3)x \implies v' - \frac{2}{x}v = -2x. $$
+  <p>The integrating factor is $\mu = e^{\int (-2/x)\,dx} = e^{-2\ln x} = x^{-2}$. Multiply through: $(x^{-2}v)' = -2x \cdot x^{-2} = -2/x$. Integrate:</p>
+  $$ x^{-2}v = -2\ln x + C \implies v = x^2(C - 2\ln x). $$
+  <p>Revert with $v = y^{-2}$, so $y^2 = 1/v$ and</p>
+  $$ y(x) = \frac{1}{x\sqrt{C - 2\ln x}}. $$
+  <p>Apply $y(1) = 1$: $1 = 1/\sqrt{C - 0}$, so $C = 1$, giving $y = 1/\big(x\sqrt{1 - 2\ln x}\,\big)$, valid while $1 - 2\ln x &gt; 0$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: a homogeneous equation by $v = y/x$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y' = \dfrac{x^2 + y^2}{xy}$ for $x &gt; 0$.</p>
+  <p>Divide numerator and denominator by $x^2$ to expose the ratio $v = y/x$: $y' = \dfrac{1 + (y/x)^2}{y/x} = \dfrac{1 + v^2}{v}$. With $y = vx$ and $y' = v + xv'$,</p>
+  $$ v + x\frac{dv}{dx} = \frac{1 + v^2}{v} \implies x\frac{dv}{dx} = \frac{1 + v^2}{v} - v = \frac{1}{v}. $$
+  <p>This is separable: $v\,dv = \dfrac{dx}{x}$. Integrate: $\tfrac12 v^2 = \ln x + C_1$, so $v^2 = 2\ln x + C$. Revert $v = y/x$:</p>
+  $$ \frac{y^2}{x^2} = 2\ln x + C \implies y^2 = x^2(2\ln x + C). $$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When applying $v = y^{1-n}$, students often forget the factor $(1-n)$ that the chain rule introduces, writing $v' + p v = q$ instead of $v' + (1-n)p\,v = (1-n)q$. Because $v' = (1-n)y^{-n}y'$, both the coefficient and the right side pick up the $(1-n)$ multiplier. Forgetting it (especially its sign, which is negative when $n &gt; 1$) is the single most common Bernoulli mistake. A second slip is failing to revert: after solving for $v$, you must undo the substitution back to $y$.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which substitution linearizes the Bernoulli equation $y' + p(x)y = q(x)y^n$?</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$v = y/x$</div><div class="quiz-opt" data-idx="1">$v = y^{1-n}$</div><div class="quiz-opt" data-idx="2">$v = y^n$</div><div class="quiz-opt" data-idx="3">$v = \ln y$</div></div><div class="quiz-explain correct-exp">Correct. With $v = y^{1-n}$ the equation becomes linear in $v$.</div><div class="quiz-explain wrong-exp">Dividing by $y^n$ and setting $v = y^{1-n}$ produces a linear equation, since $v' = (1-n)y^{-n}y'$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1120,6 +1218,33 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>At $y^{*} = 0$: $f'(0) = k > 0$, so the extinction state is unstable. At $y^{*} = K$: $f'(K) = k(1 - 2) = -k < 0$, so the carrying capacity is stable.</p>
   <p>Hence any positive initial population is drawn toward $K$, the conclusion every ecologist expects from the logistic model.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: solving the logistic equation explicitly by partial fractions</summary><div class="detail-body"><div class="worked-solution">
+  <p>The phase line gave the qualitative answer; here is the exact solution of $y' = ky(1 - y/K)$, $y(0) = y_0$, which confirms it. Separate variables:</p>
+  $$ \frac{dy}{y(1 - y/K)} = k\,dt. $$
+  <p>Decompose by partial fractions. Writing $\dfrac{1}{y(1 - y/K)} = \dfrac{1}{y} + \dfrac{1/K}{1 - y/K}$, integration gives</p>
+  $$ \ln|y| - \ln\left|1 - \frac{y}{K}\right| = kt + C_1 \implies \frac{y}{1 - y/K} = A e^{kt}. $$
+  <p>Solve for $y$ and fix $A$ from $y(0) = y_0$, namely $A = \dfrac{y_0}{1 - y_0/K}$. After simplifying,</p>
+  $$ y(t) = \frac{K\,y_0}{y_0 + (K - y_0)e^{-kt}}. $$
+  <p>As $t \to \infty$ the exponential vanishes and $y \to K$, confirming the stable equilibrium found from $f'(K) = -k &lt; 0$. The qualitative phase-line prediction and the exact formula agree.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: classifying a cubic with three equilibria</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find and classify the equilibria of $y' = f(y) = y(1 - y)(y - 3)$.</p>
+  <p>Set $f(y) = 0$: the equilibria are $y^{*} = 0,\ 1,\ 3$. Read the sign of $f$ on each interval, or differentiate. Expanding, $f(y) = -y^3 + 4y^2 - 3y$, so $f'(y) = -3y^2 + 8y - 3$.</p>
+  $$ f'(0) = -3 &lt; 0\ (\text{stable}), \quad f'(1) = -3 + 8 - 3 = 2 &gt; 0\ (\text{unstable}), \quad f'(3) = -27 + 24 - 3 = -6 &lt; 0\ (\text{stable}). $$
+  <p>So $0$ and $3$ are sinks and $1$ is a source. A solution starting in $(1,3)$ rises to $3$; one starting in $(0,1)$ falls to $0$. The unstable equilibrium $y = 1$ is the threshold (a separatrix) dividing the two basins of attraction.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why the sign of $f'(y^{*})$ governs stability</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $y^{*}$ be an equilibrium of $y' = f(y)$, so $f(y^{*}) = 0$. Study a small perturbation $u(t) = y(t) - y^{*}$. Differentiating, $u' = y' = f(y^{*} + u)$. Taylor-expand $f$ about $y^{*}$, using $f(y^{*}) = 0$:</p>
+  $$ f(y^{*} + u) = f(y^{*}) + f'(y^{*})\,u + O(u^2) = f'(y^{*})\,u + O(u^2). $$
+  <p>For small $u$ the higher-order terms are negligible and the perturbation obeys the linear equation $u' \approx f'(y^{*})\,u$, whose solution is $u(t) \approx u(0)\,e^{f'(y^{*})\,t}$. Therefore:</p>
+  $$ f'(y^{*}) &lt; 0 \implies u \to 0 \ (\text{stable}), \qquad f'(y^{*}) &gt; 0 \implies |u| \to \infty \ (\text{unstable}). $$
+  <p>The borderline case $f'(y^{*}) = 0$ is inconclusive at this order: the $O(u^2)$ term decides, and the equilibrium may be semi-stable (attracting from one side, repelling from the other). This is exactly the eigenvalue criterion of linear stability theory in one dimension.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Students treat the inconclusive case $f'(y^{*}) = 0$ as automatically stable or apply the linear test where it does not apply. For $y' = y^2$ the only equilibrium is $y^{*} = 0$ with $f'(0) = 0$; the equilibrium is actually <em>semi-stable</em>, since $f = y^2 \ge 0$ means solutions below $0$ rise toward it while solutions above $0$ flee. When $f'(y^{*}) = 0$, fall back to the sign of $f$ on each side rather than trusting the derivative test.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For the autonomous equation $y' = f(y)$, an equilibrium $y^{*}$ with $f(y^{*}) = 0$ is stable when:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f'(y^{*}) = 0$</div><div class="quiz-opt" data-idx="1">$f'(y^{*}) > 0$</div><div class="quiz-opt" data-idx="2">$f'(y^{*}) < 0$</div><div class="quiz-opt" data-idx="3">$f(y^{*}) > 0$</div></div><div class="quiz-explain correct-exp">Correct. A negative slope of $f$ at the equilibrium pushes nearby solutions back toward it: a stable sink.</div><div class="quiz-explain wrong-exp">Near $y^{*}$, $y' \approx f'(y^{*})(y - y^{*})$; the perturbation decays when $f'(y^{*}) < 0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1154,6 +1279,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Integrate $\tilde M$ in $x$: $F = xy^2 + g(y)$. Match $F_y = 2xy + g'(y) = 2xy - y^2 e^{y}$, so $g'(y) = -y^2 e^{y}$. Integrate by parts: $g(y) = -(y^2 - 2y + 2)e^{y}$.</p>
   $$ F(x,y) = xy^2 - (y^2 - 2y + 2)e^{y} = C. $$
   </div></div></details>
+
+  <details><summary>Going deeper: Picard iteration constructs the solution</summary><div class="detail-body"><div class="worked-solution">
+  <p>The existence half of the theorem is not magic; it is a constructive fixed-point argument. Integrate the IVP $y' = f(t,y)$, $y(t_0) = y_0$ from $t_0$ to $t$ to convert it into the equivalent integral equation</p>
+  $$ y(t) = y_0 + \int_{t_0}^{t} f\big(s, y(s)\big)\,ds. $$
+  <p>Define the Picard iterates $y_0(t) = y_0$ and $y_{n+1}(t) = y_0 + \int_{t_0}^{t} f(s, y_n(s))\,ds$. The Lipschitz condition on $f$ in $y$ makes this map a contraction on a small time interval, so the iterates converge to a unique fixed point, which is the solution.</p>
+  <p>Concretely, for $y' = y$, $y(0) = 1$: the iterates are $y_1 = 1 + \int_0^t 1\,ds = 1 + t$, then $y_2 = 1 + \int_0^t (1 + s)\,ds = 1 + t + \tfrac{t^2}{2}$, then $y_3 = 1 + t + \tfrac{t^2}{2} + \tfrac{t^3}{6}$. The pattern is the partial sums of $e^{t}$, and $y_n \to e^{t}$, the known solution. The contraction guarantees both existence and uniqueness in one stroke.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.2: a Bernoulli equation that is also exact after a factor</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $2xy\,dx + (y^2 - x^2)\,dy = 0$, illustrating that one equation can be attacked by several methods.</p>
+  <p>Test exactness: $M = 2xy$, $N = y^2 - x^2$, $M_y = 2x$, $N_x = -2x$, not exact. Seek a $y$-only factor: $(N_x - M_y)/M = (-2x - 2x)/(2xy) = -2/y$, a function of $y$ alone, so $\mu = e^{\int (-2/y)\,dy} = y^{-2}$. Multiply through:</p>
+  $$ \frac{2x}{y}\,dx + \frac{y^2 - x^2}{y^2}\,dy = 0. $$
+  <p>Now $\tilde M = 2x/y$, $\tilde N = 1 - x^2/y^2$, and $\tilde M_y = -2x/y^2 = \tilde N_x$, exact. Integrate $\tilde M$ in $x$: $F = x^2/y + h(y)$. Match $F_y = -x^2/y^2 + h'(y) = 1 - x^2/y^2$, so $h'(y) = 1$ and $h = y$. The solution is</p>
+  $$ F(x,y) = \frac{x^2}{y} + y = C \implies x^2 + y^2 = Cy, $$
+  <p>a family of circles, recognizable as the homogeneous-equation answer too. The same curve emerges no matter which method you choose, a reassuring consistency check.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students read the existence-uniqueness theorem as a global guarantee, expecting one solution for all $t$. It is purely <em>local</em>: it promises a unique solution only on some interval around $t_0$. The IVP $y' = y^2$, $y(0) = 1$ has the unique solution $y = 1/(1 - t)$, which blows up at $t = 1$ even though $f = y^2$ is perfectly smooth everywhere. Smoothness of $f$ does not prevent finite-time blow-up; it only guarantees a unique solution while the solution exists.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The IVP $y' = \sqrt{|y|},\ y(0) = 0$ fails to have a unique solution because:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\partial f/\partial y$ is not continuous at $y = 0$</div><div class="quiz-opt" data-idx="1">$f$ is not continuous</div><div class="quiz-opt" data-idx="2">the equation is not first order</div><div class="quiz-opt" data-idx="3">no solution exists</div></div><div class="quiz-explain correct-exp">Correct. $f$ is continuous, but $\partial f/\partial y = 1/(2\sqrt{y})$ blows up at $0$, breaking the Lipschitz hypothesis.</div><div class="quiz-explain wrong-exp">Solutions exist ($y \equiv 0$ and $y = t^2/4$); the failure is that $\partial f/\partial y$ is unbounded at $y = 0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

@@ -954,6 +954,23 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>For $0 < y < 1$ we have $y' > 0$, so solutions increase toward $y=1$. For $y > 1$ we have $y' < 0$, so they decrease toward $y=1$. Thus $y=1$ is stable and $y=0$ is unstable. The field predicts the logistic S-curve before any integration.</p>
   </div></div></details>
 
+  <p>Reading stability off the sign of $f$ is the heart of the qualitative theory. For an autonomous equation $y'=f(y)$, plot $f$ against $y$ on a number line and mark its zeros. On each interval between consecutive zeros the sign of $f$ is constant, so it tells you whether trajectories rise or fall. An equilibrium $y=c$ is <em>stable</em> when $f$ changes from positive to negative as $y$ increases through $c$ (arrows point inward) and <em>unstable</em> when the sign change runs the other way. This is the phase-line picture, and it works even when no closed-form solution exists.</p>
+
+  <div class="concept-box green"><strong>Stability test.</strong> For $y'=f(y)$ with $f(c)=0$: if $f'(c) < 0$ the equilibrium $y=c$ is stable, and if $f'(c) > 0$ it is unstable. This is the linearization criterion: near $c$, $f(y)\approx f'(c)(y-c)$, so small deviations decay when $f'(c)<0$ and grow when $f'(c)>0$.</div>
+
+  <details><summary>Worked Example 1.2: classifying every equilibrium</summary><div class="detail-body"><div class="worked-solution">
+    <p>Classify the equilibria of $y' = (y-1)(y-3)^2$. The zeros of $f(y)=(y-1)(y-3)^2$ are $y=1$ and $y=3$. Test the sign of $f$ on each interval. For $y<1$, take $y=0$: $f=(-1)(9)=-9<0$. For $1<y<3$, take $y=2$: $f=(1)(1)=1>0$. For $y>3$, take $y=4$: $f=(3)(1)=3>0$.</p>
+    $$ \underbrace{(-\infty,1)}_{f<0}\ \big|\ y=1\ \big|\ \underbrace{(1,3)}_{f>0}\ \big|\ y=3\ \big|\ \underbrace{(3,\infty)}_{f>0}. $$
+    <p>At $y=1$ the sign goes from negative to positive, so arrows point away on both sides: $y=1$ is unstable. At $y=3$ the sign stays positive on both sides, so trajectories approach from below but leave from above: $y=3$ is <em>semistable</em>. The squared factor is exactly why $y=3$ is one-sided rather than fully stable, a subtlety the sign chart exposes that the linearization $f'(3)=0$ alone cannot.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: verifying a proposed solution</summary><div class="detail-body"><div class="worked-solution">
+    <p>Verify that $y = \tan(x + C)$ solves $y' = 1 + y^2$, and find the interval of definition through $(0,0)$. Differentiate: $y' = \sec^2(x+C)$. The Pythagorean identity gives $\sec^2\theta = 1 + \tan^2\theta$, so $y' = 1 + \tan^2(x+C) = 1 + y^2$, which confirms the equation.</p>
+    <p>The data $y(0)=0$ forces $\tan(C)=0$, so $C=0$ and $y=\tan x$. Tangent is differentiable only between consecutive vertical asymptotes, so the solution through the origin lives on $\left(-\tfrac{\pi}{2}, \tfrac{\pi}{2}\right)$. The same formula $\tan(x+C)$ describes a different solution on a different interval for each value of $C$, which is the point of the earlier remark that the interval of definition is part of the answer.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often call any constant $y\equiv c$ an equilibrium. A constant is an equilibrium only when it makes the right-hand side vanish, that is $f(x,c)=0$ for all $x$ in play. For a non-autonomous equation like $y' = x - y$, the line $y=x$ is <em>not</em> a solution and there is no horizontal equilibrium at all, even though $f$ is zero along that line, because $y=x$ has slope $1$, not $0$. Only horizontal lines on which $f$ stays zero are equilibria.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which statement about the autonomous equation $y' = (y-2)(y+3)$ is correct?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">It has no equilibrium solutions</div><div class="quiz-opt" data-idx="1">$y \equiv 2$ and $y \equiv -3$ are equilibrium solutions</div><div class="quiz-opt" data-idx="2">$y \equiv 0$ is the only equilibrium</div><div class="quiz-opt" data-idx="3">The slope depends on $x$</div></div><div class="quiz-explain correct-exp">Correct. Equilibria are the roots of $f(y)=0$, namely $y=2$ and $y=-3$. Because $f$ has no $x$ dependence the field is horizontally constant.</div><div class="quiz-explain wrong-exp">Set $f(y)=(y-2)(y+3)=0$. The constant solutions are exactly the roots $y=2$ and $y=-3$, and the slope is independent of $x$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -980,6 +997,22 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \frac{d}{dx}\,H(y(x)) = H'(y)\,y' = \frac{1}{h(y)}\,g(x)\,h(y) = g(x) = G'(x). $$
     <p>Two functions with equal derivatives on an interval differ by a constant, so $H(y(x)) = G(x) + C$. This is precisely the implicit relation produced by separating and integrating, which proves the method rather than merely justifying the formal symbol pushing.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 2.2: an implicit solution and a singular solution</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' = \dfrac{x(y^2-1)}{1}$, that is $y' = x(y^2-1)$, with $y(0)=2$. The right side factors, so separate for $y\neq\pm 1$:</p>
+    $$ \frac{dy}{y^2-1} = x\,dx. $$
+    <p>Partial fractions give $\dfrac{1}{y^2-1} = \dfrac{1}{2}\left(\dfrac{1}{y-1} - \dfrac{1}{y+1}\right)$, so integrating both sides,</p>
+    $$ \frac{1}{2}\ln\left|\frac{y-1}{y+1}\right| = \frac{x^2}{2} + C_1 \;\Longrightarrow\; \frac{y-1}{y+1} = A\,e^{x^2}. $$
+    <p>Apply $y(0)=2$: $\dfrac{1}{3}=A$, so $\dfrac{y-1}{y+1} = \dfrac{1}{3}e^{x^2}$. Solving for $y$ gives $y = \dfrac{3+e^{x^2}}{3-e^{x^2}}$. The division by $y^2-1$ discarded the constants $y\equiv 1$ and $y\equiv -1$; these are singular solutions of the ODE but neither meets the data, so they are recorded and set aside.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: separable but not obviously so</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $\dfrac{dy}{dx} = e^{x-y}$. The exponent splits as $e^{x-y}=e^x e^{-y}$, which is exactly the product form $g(x)h(y)$ with $g(x)=e^x$ and $h(y)=e^{-y}$. Separate:</p>
+    $$ e^{y}\,dy = e^{x}\,dx \;\Longrightarrow\; e^{y} = e^{x} + C. $$
+    <p>Hence $y = \ln(e^{x} + C)$, valid wherever $e^x + C > 0$. If $C \ge 0$ the solution exists for all $x$; if $C < 0$ it exists only for $x > \ln(-C)$, where the logarithm's argument is positive. Recognizing the hidden product structure is the whole difficulty, since nothing about $e^{x-y}$ looks separable until the exponent is split.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> A frequent mistake is to forget the absolute value when integrating $\int dy/y = \ln|y|$, and an even more common one is to drop the singular solutions lost in the division by $h(y)$. When you divide by $h(y)$ you assume $h(y)\neq 0$; every root $y_0$ of $h$ gives a constant solution $y\equiv y_0$ that the general formula may miss. Always list those constants and check whether the initial data selects one of them. A second error is writing $\ln|y| = \tfrac{x^2}{2}+C$ and then exponentiating to $y = e^{x^2/2}+e^{C}$ instead of $y = e^{C}e^{x^2/2}$; the constant multiplies, it does not add.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The general solution of $y' = \dfrac{2x}{y}$ (for $y \neq 0$) is</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$y = x^2 + C$</div><div class="quiz-opt" data-idx="1">$y = e^{x^2}+C$</div><div class="quiz-opt" data-idx="2">$y^2 = 2x^2 + C$</div><div class="quiz-opt" data-idx="3">$y = 2x^2 + C$</div></div><div class="quiz-explain correct-exp">Correct. Separating gives $y\,dy = 2x\,dx$, so $\tfrac{1}{2}y^2 = x^2 + c$, that is $y^2 = 2x^2 + C$.</div><div class="quiz-explain wrong-exp">Write $y\,dy = 2x\,dx$ and integrate both sides: $\tfrac12 y^2 = x^2 + c$, hence $y^2 = 2x^2 + C$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
@@ -1010,6 +1043,23 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Any nonzero constant multiple of this $\mu$ works, so we take the simplest representative. Multiplying the original equation by $\mu$ and integrating $(\mu y)' = \mu q$ gives the boxed formula, which shows the method is forced rather than guessed.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.2: a trigonometric coefficient</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' + (\tan x)\,y = \sec x$ on $\left(-\tfrac{\pi}{2}, \tfrac{\pi}{2}\right)$. Here $p = \tan x$, so</p>
+    $$ \int \tan x\,dx = -\ln|\cos x| = \ln|\sec x|, \qquad \mu = e^{\ln|\sec x|} = \sec x. $$
+    <p>Multiply through by $\sec x$. The left side collapses to a derivative and the right side becomes $\sec^2 x$:</p>
+    $$ (\,y\sec x\,)' = \sec^2 x \;\Longrightarrow\; y\sec x = \tan x + C \;\Longrightarrow\; y = \sin x + C\cos x. $$
+    <p>The integrating factor turns a messy coefficient into a clean single integration. Note that $\mu=\sec x$ is positive on the chosen interval, so no absolute value survives into the final answer.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: a piecewise forcing term</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' + y = q(x)$, $y(0)=0$, where $q(x)=1$ for $0\le x \le 1$ and $q(x)=0$ for $x>1$. The integrating factor is $\mu = e^{x}$ throughout, since $p=1$. On $[0,1]$, $(e^x y)' = e^x$, so $e^x y = e^x - 1$ using $y(0)=0$, giving $y = 1 - e^{-x}$.</p>
+    <p>At $x=1$ this reaches $y(1) = 1 - e^{-1}$. For $x>1$ the forcing is zero, so $(e^x y)' = 0$ and $e^x y = K$. Continuity at $x=1$ requires $e\cdot(1-e^{-1}) = K$, so $K = e - 1$ and $y = (e-1)e^{-x}$ for $x>1$.</p>
+    $$ y(x) = \begin{cases} 1 - e^{-x}, & 0 \le x \le 1,\\[4pt] (e-1)e^{-x}, & x > 1.\end{cases} $$
+    <p>The solution is continuous but its derivative jumps at $x=1$ because $q$ is discontinuous there. Solving on each piece and matching values at the breakpoint is the standard recipe for piecewise forcing, and it previews the step-function machinery of the Laplace transform.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The integrating factor formula applies only after the equation is in <em>standard form</em> $y' + p(x)y = q(x)$, with coefficient $1$ on $y'$. If you start from $x y' + 2y = x^3$ and read off $p=2$, you get the wrong factor. Divide by $x$ first to reach $y' + \tfrac{2}{x}y = x^2$, so $p = 2/x$ and $\mu = e^{\int 2\,dx/x} = e^{2\ln|x|} = x^2$. Forgetting to normalize the leading coefficient is the single most common linear-ODE mistake; always isolate $y'$ before computing $\mu$.</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The integrating factor for $y' + 3y = e^{2x}$ is</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$e^{2x}$</div><div class="quiz-opt" data-idx="1">$e^{-3x}$</div><div class="quiz-opt" data-idx="2">$3x$</div><div class="quiz-opt" data-idx="3">$e^{3x}$</div></div><div class="quiz-explain correct-exp">Correct. With $p=3$ constant, $\mu = e^{\int 3\,dx} = e^{3x}$.</div><div class="quiz-explain wrong-exp">The integrating factor is $e^{\int p\,dx}$ with $p=3$, giving $\mu = e^{3x}$, not the forcing term $e^{2x}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1030,6 +1080,26 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ e^{2x}y = \int 4x e^{2x}\,dx = 2x e^{2x} - e^{2x} + C. $$
     <p>Thus $y = 2x - 1 + Ce^{-2x}$. The data $y(0)=1$ gives $1 = -1 + C$, so $C = 2$ and $y = 2x - 1 + 2e^{-2x}$, valid for all real $x$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: a separable IVP with a finite interval</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' = \dfrac{x}{y}$, $y(1)=2$, and state the interval of definition. Separate and integrate:</p>
+    $$ y\,dy = x\,dx \;\Longrightarrow\; \frac{y^2}{2} = \frac{x^2}{2} + C \;\Longrightarrow\; y^2 = x^2 + K. $$
+    <p>Apply $y(1)=2$: $4 = 1 + K$, so $K=3$ and $y^2 = x^2 + 3$. The initial value is positive, so take the positive root: $y = \sqrt{x^2+3}$. The radicand $x^2+3$ is always positive, so this solution is differentiable for all real $x$. Choosing the correct branch of the square root is the step students miss; the sign of $y_0$ dictates it.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: definite-integral form when the antiderivative is not elementary</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' + 2xy = 1$, $y(0)=0$. The integrating factor is $\mu = e^{\int 2x\,dx} = e^{x^2}$, so $(e^{x^2}y)' = e^{x^2}$. The antiderivative of $e^{x^2}$ is not elementary, so write the answer with a definite integral anchored at the initial point:</p>
+    $$ e^{x^2}y - e^{0}\cdot 0 = \int_0^{x} e^{t^2}\,dt \;\Longrightarrow\; y = e^{-x^2}\int_0^{x} e^{t^2}\,dt. $$
+    <p>This is a perfectly valid closed-form solution; the definite integral from $x_0=0$ automatically encodes the initial condition, since at $x=0$ the integral is zero and so is $y$. When the integrating-factor integral has no elementary antiderivative, the definite-integral form is the answer, not a failure to solve.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why a linear IVP has exactly one solution on the whole coefficient interval</summary><div class="detail-body"><div class="worked-solution">
+    <p>For the linear problem $y' + p(x)y = q(x)$, $y(x_0)=y_0$, suppose $p$ and $q$ are continuous on an open interval $I$ containing $x_0$. The integrating factor $\mu(x) = \exp\!\left(\int_{x_0}^{x} p(s)\,ds\right)$ is defined, positive, and differentiable on all of $I$. Multiplying and integrating from $x_0$ to $x$ gives</p>
+    $$ y(x) = \frac{1}{\mu(x)}\left( y_0 + \int_{x_0}^{x} \mu(t)\,q(t)\,dt \right). $$
+    <p>Existence is immediate: this formula defines a differentiable function on the entire interval $I$ and satisfies both the equation and the data. Uniqueness follows because any solution $z$ must satisfy $(\mu z)' = \mu q$, so $\mu z$ is determined up to its value at $x_0$, which the data fixes. Therefore $\mu z$ equals $\mu y$, and dividing by the nonzero $\mu$ gives $z = y$. Unlike the nonlinear case, where existence is only local, a linear IVP is solvable on the full interval where $p$ and $q$ are continuous; no finite-time blow-up can occur inside that interval.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When a separable IVP leads to a relation like $y^2 = x^2 + 3$, students often write $y = \pm\sqrt{x^2+3}$ and stop. The implicit relation describes two solution curves, but the initial condition selects exactly one branch. With $y(1)=2>0$ you must take the positive root for all $x$ in the interval; switching branches at any point would create a corner where $y$ is not differentiable, which is illegal for a solution. One IVP, one branch.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Given the general solution $y = Ce^{x} - 1$, the solution of the IVP with $y(0) = 4$ is</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$y = 4e^{x} - 1$</div><div class="quiz-opt" data-idx="1">$y = 5e^{x} - 1$</div><div class="quiz-opt" data-idx="2">$y = 3e^{x} - 1$</div><div class="quiz-opt" data-idx="3">$y = 4e^{x}$</div></div><div class="quiz-explain correct-exp">Correct. At $x=0$, $y = C - 1 = 4$, so $C = 5$ and $y = 5e^{x} - 1$.</div><div class="quiz-explain wrong-exp">Substitute $x=0$: $C\cdot 1 - 1 = 4$ forces $C = 5$, giving $y = 5e^{x} - 1$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1058,6 +1128,20 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>The solution exists only on $(-\infty, 1)$ and diverges as $x \to 1^-$. This shows the interval of existence is genuinely local: smoothness of $f$ does not extend the solution past the singularity, illustrating why the theorem only claims existence on some interval.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 5.2: how many solutions pass through a point</summary><div class="detail-body"><div class="worked-solution">
+    <p>For $y' = 2\sqrt{|y|}$, count the solutions through $(0,0)$. Here $f = 2\sqrt{|y|}$ is continuous, but $\partial f/\partial y = 1/\sqrt{|y|}$ (for $y>0$) is unbounded as $y\to 0$, so Picard's hypothesis fails at the origin and uniqueness is in doubt. The constant $y\equiv 0$ is one solution. Separating for $y>0$ gives $\sqrt{y}=x+c$, so $y=(x+c)^2$ for $x\ge -c$.</p>
+    <p>For any $a\ge 0$ we can glue: $y=0$ on $(-\infty,a]$ and $y=(x-a)^2$ on $[a,\infty)$ is differentiable everywhere, including at $x=a$ where both pieces have value and slope zero, and it solves the IVP. Since $a$ is arbitrary, there are <em>infinitely many</em> solutions through the origin. This is the dramatic failure mode the Lipschitz condition rules out.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: Picard iteration constructs the solution</summary><div class="detail-body"><div class="worked-solution">
+    <p>The existence half of the theorem is not magic; it is a fixed-point construction. Integrating $y'=f(x,y)$ from $x_0$ to $x$ turns the IVP into the equivalent integral equation</p>
+    $$ y(x) = y_0 + \int_{x_0}^{x} f\big(t, y(t)\big)\,dt. $$
+    <p>Define the Picard iterates by $y_0(x)=y_0$ and $y_{n+1}(x) = y_0 + \int_{x_0}^{x} f(t,y_n(t))\,dt$. When $f$ is continuous and Lipschitz in $y$ with constant $L$ on a rectangle, one shows by induction that the successive differences satisfy $|y_{n+1}(x)-y_n(x)| \le \dfrac{M L^{n}|x-x_0|^{n+1}}{(n+1)!}$, where $M$ bounds $|f|$. Because $\sum \dfrac{L^n h^{n+1}}{(n+1)!}$ converges (it is dominated by $\tfrac{1}{L}e^{Lh}$), the iterates form a uniformly Cauchy sequence and converge to a limit $y$ that satisfies the integral equation, hence the IVP.</p>
+    <p>Concretely, take $y'=y$, $y(0)=1$. Then $y_0=1$, $y_1 = 1+\int_0^x 1\,dt = 1+x$, $y_2 = 1+\int_0^x(1+t)\,dt = 1+x+\tfrac{x^2}{2}$, and in general $y_n = \sum_{k=0}^{n}\tfrac{x^k}{k!}$. The iterates are exactly the partial sums of $e^x$, so Picard iteration reproduces the known solution and shows where the exponential series comes from. The Lipschitz constant controls the rate, which is why continuity of $\partial f/\partial y$ (a Lipschitz supply) is the precise hypothesis that buys uniqueness.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> A widespread misreading is that failure of Picard's hypotheses <em>implies</em> non-uniqueness. The theorem is one-directional: continuity of $f$ and $\partial f/\partial y$ is <em>sufficient</em> for uniqueness, not necessary. Plenty of IVPs with a non-Lipschitz right side still have a unique solution. Failure of the hypothesis only means the theorem is silent; you must then check by hand whether multiple solutions actually exist, as in the $y'=y^{1/3}$ and $y'=2\sqrt{|y|}$ examples. Absence of a guarantee is not a guarantee of absence.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For the IVP $y' = \sqrt{y},\ y(0)=0$, uniqueness fails because</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$f=\sqrt{y}$ is discontinuous at the origin</div><div class="quiz-opt" data-idx="1">the equation is nonlinear</div><div class="quiz-opt" data-idx="2">$\partial f/\partial y = \tfrac{1}{2\sqrt{y}}$ is not continuous at $y=0$</div><div class="quiz-opt" data-idx="3">there is no solution at all</div></div><div class="quiz-explain correct-exp">Correct. $f$ is continuous, but $\partial f/\partial y$ blows up at $y=0$, so the Lipschitz hypothesis fails and both $y\equiv 0$ and $y = x^2/4$ solve the IVP.</div><div class="quiz-explain wrong-exp">$f=\sqrt{y}$ is continuous; what fails is continuity of $\partial f/\partial y = 1/(2\sqrt y)$ at $y=0$, which is exactly the uniqueness hypothesis.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1078,6 +1162,23 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \frac{dA}{dt} = (2)(3) - \left(\frac{A}{100}\right)(3) = 6 - \frac{3A}{100}. $$
     <p>This is linear: $A' + 0.03A = 6$, with $\mu = e^{0.03t}$. The general solution is $A = 200 + Ce^{-0.03t}$. Using $A(0)=5$ gives $C = -195$, so $A(t) = 200 - 195e^{-0.03t}$, approaching the steady state $200$ kg.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 6.2: Newton's law of cooling</summary><div class="detail-body"><div class="worked-solution">
+    <p>A cup of coffee at $90^\circ\mathrm{C}$ sits in a $20^\circ\mathrm{C}$ room. After $5$ minutes it has cooled to $60^\circ\mathrm{C}$. Find its temperature after $15$ minutes. With $T_{\text{env}}=20$, the law is $T' = -k(T-20)$. Let $u = T-20$, so $u' = -ku$ and $u = u_0 e^{-kt}$. Here $u_0 = 90-20 = 70$, giving $T = 20 + 70e^{-kt}$.</p>
+    <p>Use the $5$-minute data: $60 = 20 + 70e^{-5k}$, so $e^{-5k} = \tfrac{40}{70} = \tfrac47$ and $k = \tfrac15\ln\tfrac74$. Then</p>
+    $$ T(15) = 20 + 70\,e^{-15k} = 20 + 70\left(e^{-5k}\right)^3 = 20 + 70\left(\tfrac47\right)^3 \approx 20 + 70(0.1866) \approx 33.1^\circ\mathrm{C}. $$
+    <p>Substituting $u=T-T_{\text{env}}$ to reduce the cooling law to pure exponential decay is the move that makes the arithmetic clean. Notice we never needed the numerical value of $k$ on its own; the ratio $e^{-5k}=\tfrac47$ raised to the third power did all the work.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: logistic population growth</summary><div class="detail-body"><div class="worked-solution">
+    <p>A population grows by $P' = 0.5\,P\!\left(1 - \dfrac{P}{1000}\right)$ with $P(0)=100$. This is separable. Using partial fractions on $\dfrac{1}{P(1-P/1000)}$,</p>
+    $$ \int \frac{dP}{P(1-P/1000)} = \int 0.5\,dt \;\Longrightarrow\; \ln\left|\frac{P}{1000-P}\right| = 0.5t + C_1. $$
+    <p>Exponentiating, $\dfrac{P}{1000-P} = A e^{0.5t}$. The data $P(0)=100$ gives $\dfrac{100}{900} = A$, so $A=\tfrac19$. Solving for $P$,</p>
+    $$ P(t) = \frac{1000}{1 + 9e^{-0.5t}}. $$
+    <p>As $t\to\infty$, $P\to 1000$, the carrying capacity, matching the stable equilibrium found from the phase line in Section 1. The S-shaped curve rises fastest when $P=500$, exactly half the capacity, which is where $P'$ is maximal.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> In a mixing problem, the outflow concentration is the <em>current</em> amount divided by the <em>current</em> volume, not the inflow concentration. Writing the salt leaving as a fixed number, or using the inflow concentration $2$ kg/L for the outflow, is the classic blunder. The outflow rate is $\left(\dfrac{A(t)}{V(t)}\right)\times(\text{flow out})$. When inflow and outflow rates differ, the volume $V(t)=V_0 + (\text{rate in}-\text{rate out})\,t$ changes with time and must be tracked, which makes the coefficient of $A$ time-dependent rather than constant.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">A sample decays by $y' = -ky$ with half-life $T$. The constant $k$ equals</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\dfrac{\ln 2}{T}$</div><div class="quiz-opt" data-idx="1">$\dfrac{T}{\ln 2}$</div><div class="quiz-opt" data-idx="2">$\dfrac{1}{2T}$</div><div class="quiz-opt" data-idx="3">$\ln(2T)$</div></div><div class="quiz-explain correct-exp">Correct. From $y = y_0 e^{-kt}$, the half-life satisfies $\tfrac12 = e^{-kT}$, so $kT = \ln 2$ and $k = (\ln 2)/T$.</div><div class="quiz-explain wrong-exp">Solve $y_0/2 = y_0 e^{-kT}$: taking logs gives $-\ln 2 = -kT$, hence $k = (\ln 2)/T$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1105,6 +1206,22 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ v + x\frac{dv}{dx} = F(v) \;\Longrightarrow\; \frac{dv}{F(v) - v} = \frac{dx}{x}, $$
     <p>which is separable. For example $y' = (x+y)/x = 1 + y/x$ gives $F(v) = 1 + v$, so $F(v)-v = 1$ and $dv = dx/x$, hence $v = \ln|x| + C$ and $y = x\ln|x| + Cx$. The substitution converts the ratio structure into pure separation.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: a Bernoulli equation with an initial condition</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' + \dfrac{2}{x}\,y = \dfrac{y^3}{x^2}$ for $x>0$, with $y(1)=1$. This is Bernoulli with $n=3$, $p=2/x$, $q=1/x^2$. Let $v = y^{1-3} = y^{-2}$, so $v' = -2y^{-3}y'$. Dividing the equation by $y^3$ and multiplying by $-2$,</p>
+    $$ -2y^{-3}y' - \frac{4}{x}y^{-2} = -\frac{2}{x^2} \;\Longrightarrow\; v' - \frac{4}{x}v = -\frac{2}{x^2}. $$
+    <p>This is linear with $\mu = e^{\int -4\,dx/x} = e^{-4\ln x} = x^{-4}$. Then $(x^{-4}v)' = -2x^{-6}$, so $x^{-4}v = \tfrac{2}{5}x^{-5} + C$, giving $v = \tfrac{2}{5x} + Cx^4$. Since $v=y^{-2}$, the data $y(1)=1$ gives $v(1)=1 = \tfrac25 + C$, so $C=\tfrac35$ and</p>
+    $$ y^{-2} = \frac{2}{5x} + \frac{3}{5}x^4 \;\Longrightarrow\; y = \left(\frac{2}{5x} + \frac{3x^4}{5}\right)^{-1/2}. $$
+    <p>The branch is positive because $y(1)=1>0$. The Bernoulli substitution converts a nonlinear equation into the routine linear machinery of Section 3.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: a fully homogeneous equation</summary><div class="detail-body"><div class="worked-solution">
+    <p>Solve $y' = \dfrac{x^2 + y^2}{xy}$ for $x>0$. The right side is constant along rays through the origin: dividing top and bottom by $x^2$ gives $y' = \dfrac{1 + (y/x)^2}{y/x} = F(v)$ with $v=y/x$. Using $y' = v + xv'$,</p>
+    $$ v + x v' = \frac{1+v^2}{v} = \frac{1}{v} + v \;\Longrightarrow\; x v' = \frac{1}{v} \;\Longrightarrow\; v\,dv = \frac{dx}{x}. $$
+    <p>Integrating, $\tfrac12 v^2 = \ln|x| + C_1$, so $v^2 = 2\ln x + C$. Returning to $v = y/x$ gives $\dfrac{y^2}{x^2} = 2\ln x + C$, that is $y^2 = x^2(2\ln x + C)$. The cancellation $\tfrac{1+v^2}{v}-v = \tfrac1v$ is the small algebra step that makes the equation separable; without it the substitution would look stuck.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> After the substitution $v = y/x$ you must replace $y'$ with $v + xv'$, not with $v'$ alone. Because $y = vx$ is a product, the product rule gives $\dfrac{dy}{dx} = v + x\dfrac{dv}{dx}$. Dropping the $v$ term is the most common homogeneous-equation mistake and produces a wrong, non-separable equation. The analogous trap in Bernoulli problems is forgetting the factor $(1-n)$ that appears when you differentiate $v = y^{1-n}$; track it carefully or the linear equation you build will have the wrong coefficient.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">To linearize the Bernoulli equation $y' + p(x)y = q(x)y^3$, the correct substitution is</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$v = y^3$</div><div class="quiz-opt" data-idx="1">$v = y$</div><div class="quiz-opt" data-idx="2">$v = y/x$</div><div class="quiz-opt" data-idx="3">$v = y^{-2}$</div></div><div class="quiz-explain correct-exp">Correct. With $n=3$, $v = y^{1-n} = y^{-2}$ converts the equation to a linear one in $v$.</div><div class="quiz-explain wrong-exp">For a Bernoulli equation with exponent $n$, use $v = y^{1-n}$. Here $n=3$, so $v = y^{-2}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

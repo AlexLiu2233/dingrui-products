@@ -942,7 +942,27 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Two equivalent definitions</div>
     $$ f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} $$
   </div>
-  <p>Both forms are difference quotients that evaluate to the indeterminate form $0/0$ at the point itself. That is exactly why Unit A1 mattered: the derivative is a limit that the function value alone cannot supply.</p>
+  <p>Both forms are difference quotients that evaluate to the indeterminate form $0/0$ at the point itself. That is exactly why Unit A1 mattered: the derivative is a limit that the function value alone cannot supply. The numerator $f(a+h)-f(a)$ measures how much the output moves; the denominator $h$ measures how far the input moved; their ratio is the average rate of change across the interval $[a, a+h]$. The derivative is what that average rate converges to as the window collapses, so $f'(a)$ exists precisely when the secant slopes settle on a single finite number from both sides.</p>
+  <p>The two forms are genuinely the same limit under the substitution $x = a + h$. As $x \to a$ we have $h = x - a \to 0$, so the $x$-form is convenient when you already have a formula in terms of $x$, while the $h$-form is convenient when you want to expand $f(a+h)$ algebraically. A subtle point: the limit must be two-sided. If only the right-hand quotient (with $h \to 0^+$) converges, you have a one-sided derivative $f'_+(a)$, not a full derivative. We return to this distinction in Section 4.</p>
+  <div class="formula-box">
+    <div class="formula-label">One-sided derivatives</div>
+    $$ f'_-(a) = \lim_{h \to 0^-} \frac{f(a+h)-f(a)}{h}, \qquad f'_+(a) = \lim_{h \to 0^+} \frac{f(a+h)-f(a)}{h} $$
+  </div>
+  <p>The full derivative $f'(a)$ exists if and only if $f'_-(a)$ and $f'_+(a)$ both exist and are equal, exactly as a two-sided limit requires matching one-sided limits in Unit A1.</p>
+  <p>It helps to watch the secant slopes converge numerically. For $f(x) = x^2$ near $a = 2$, the secant slope over $[2, 2+h]$ is $\frac{(2+h)^2 - 4}{h} = 4 + h$. As $h$ shrinks the slope marches steadily toward $4$, and the symmetric values from the left ($h &lt; 0$) approach the same number, confirming a two-sided limit.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>$h$</th><th>secant slope $4+h$</th></tr></thead>
+      <tbody>
+        <tr><td>$0.5$</td><td>$4.5$</td></tr>
+        <tr><td>$0.1$</td><td>$4.1$</td></tr>
+        <tr><td>$0.01$</td><td>$4.01$</td></tr>
+        <tr><td>$-0.01$</td><td>$3.99$</td></tr>
+        <tr><td>$-0.1$</td><td>$3.9$</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The table is evidence, not proof: only the algebraic limit $\lim_{h\to 0}(4+h) = 4$ settles the value rigorously. But the numerical picture is the right mental model for what "instantaneous rate" means, a limit of honest average rates over ever shorter intervals.</p>
   <details>
     <summary>Worked Example 1.1: derivative from the definition</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -951,6 +971,28 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>The tangent line at $(2,4)$ has slope $4$.</p>
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 1.2: a difference quotient that needs algebra</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find $g'(3)$ for $g(x) = \dfrac{1}{x}$ from the definition. The difference quotient is a compound fraction, so clear it before taking the limit:</p>
+    $$ \frac{g(3+h) - g(3)}{h} = \frac{\frac{1}{3+h} - \frac{1}{3}}{h} = \frac{1}{h}\cdot\frac{3 - (3+h)}{3(3+h)} = \frac{1}{h}\cdot\frac{-h}{3(3+h)} = \frac{-1}{3(3+h)}. $$
+    <p>Now the offending factor of $h$ has cancelled, so the limit is routine:</p>
+    $$ g'(3) = \lim_{h \to 0} \frac{-1}{3(3+h)} = \frac{-1}{9}. $$
+    <p>The tangent to $y = 1/x$ at $(3, \tfrac13)$ has slope $-\tfrac19$, which is negative because the curve is decreasing there. This matches the general result $g'(x) = -1/x^2$ that the power rule will give once we extend it to negative exponents.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 1.3: using the $x \to a$ form on a quadratic</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find $p'(a)$ for $p(x) = x^2 - 5x$ using the second definition, factoring rather than expanding. Since $p(x) - p(a) = (x^2 - a^2) - 5(x - a)$, factor out $(x-a)$:</p>
+    $$ \frac{p(x) - p(a)}{x - a} = \frac{(x-a)(x+a) - 5(x-a)}{x-a} = (x + a) - 5. $$
+    <p>Taking $x \to a$ gives $p'(a) = 2a - 5$. The factoring route avoids expanding $(a+h)^2$ and is often cleaner when the point $a$ is left symbolic. Notice $p'(a) = 0$ at $a = \tfrac52$, the vertex of the parabola, where the tangent is horizontal.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Students often substitute $h = 0$ into $\frac{f(a+h)-f(a)}{h}$, get the form $0/0$, and conclude the derivative does not exist. Substituting before simplifying is the mistake. The whole point is to simplify the quotient algebraically (factor, rationalize, or combine fractions) so the $h$ in the denominator cancels, and only then let $h \to 0$. The $0/0$ form signals that work is required, not that the answer is undefined.
+  </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">$f'(a)$ is the limit of which quantity?</div><span class="quiz-number">1.1</span></div>
     <div class="quiz-options">
@@ -976,6 +1018,8 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Derivative function and notation</div>
     $$ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}, \qquad f'(x) = \frac{dy}{dx} = \frac{d}{dx}\,f(x) = Df(x) $$
   </div>
+  <p>The four notations say the same thing but emphasize different aspects. Lagrange's $f'(x)$ is compact and good for stating rules. Leibniz's $\frac{dy}{dx}$ keeps the input and output variables visible, which is indispensable once the chain rule and related rates arrive, and it carries the right units automatically: if $y$ is in metres and $x$ in seconds, $dy/dx$ reads as metres per second. The operator $\frac{d}{dx}$ stresses that differentiation is a machine that eats a function and returns a function, and $Df$ is the operator form used in differential equations. To evaluate a derivative function at a point we write $\left.\frac{dy}{dx}\right|_{x=a}$ or $f'(a)$; the vertical-bar notation reminds you to differentiate first and substitute second.</p>
+  <p>Crucially, the domain of $f'$ can be smaller than the domain of $f$. The function $\sqrt{x}$ is defined and continuous on $[0,\infty)$, but its derivative exists only on $(0,\infty)$ because the tangent at the origin is vertical. Whenever you report a derivative function, report the set of points where the defining limit actually exists.</p>
   <details>
     <summary>Worked Example 2.1: the derivative of a root</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -984,6 +1028,35 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Taking $h \to 0$ gives $f'(x) = \dfrac{1}{2\sqrt{x}}$ for $x &gt; 0$.</p>
     </div></div>
   </details>
+  <p>A practical aside used by calculators and numerical software: the <em>symmetric difference quotient</em> $\frac{f(x+h) - f(x-h)}{2h}$ also tends to $f'(x)$, and it usually converges faster because the leading error terms cancel. It is only an approximation tool, not a definition, since it can return a finite value even where $f'(x)$ does not exist (try it on $|x|$ at $0$, where it gives $0$ for every $h$ yet no derivative exists). Treat it as a numerical convenience and keep the one-sided agreement as the real test for differentiability.</p>
+  <details>
+    <summary>Worked Example 2.2: differentiating a linear and a constant function</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>For a line $f(x) = mx + b$, the difference quotient is constant before the limit even starts:</p>
+    $$ \frac{f(x+h) - f(x)}{h} = \frac{\big(m(x+h)+b\big) - (mx + b)}{h} = \frac{mh}{h} = m. $$
+    <p>So $f'(x) = m$ everywhere: a line has constant slope, which is geometrically obvious and a useful sanity check. The special case $m = 0$ gives a constant function $f(x) = b$ with $f'(x) = 0$, since the difference quotient is $0/h = 0$ for every $h \ne 0$. A constant has no rate of change, so its derivative is zero, not undefined.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 2.3: a piecewise derivative function</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x) = x|x|$. Writing it piecewise, $f(x) = x^2$ for $x \ge 0$ and $f(x) = -x^2$ for $x &lt; 0$. Away from the origin the power rule (derived in Section 5) gives $f'(x) = 2x$ for $x &gt; 0$ and $f'(x) = -2x$ for $x &lt; 0$, that is $f'(x) = 2|x|$. At $x = 0$ check the definition directly:</p>
+    $$ f'(0) = \lim_{h \to 0} \frac{h|h| - 0}{h} = \lim_{h \to 0} |h| = 0. $$
+    <p>Both one-sided limits agree, so $f'(0) = 0$ and the derivative function is $f'(x) = 2|x|$, continuous everywhere. This is a clean example where $f$ is built from $|x|$ yet is still differentiable: the corner of $|x|$ is smoothed out by the extra factor of $x$.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 2.4: the derivative function from first principles, kept general</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x) = x^2 + 3x$ as a function, not at one point. Form the difference quotient and simplify before taking the limit:</p>
+    $$ \frac{f(x+h) - f(x)}{h} = \frac{\big((x+h)^2 + 3(x+h)\big) - (x^2 + 3x)}{h} = \frac{2xh + h^2 + 3h}{h} = 2x + h + 3. $$
+    <p>Now $\lim_{h \to 0}(2x + h + 3) = 2x + 3$, valid for every real $x$, so $f'(x) = 2x + 3$. Carrying $x$ symbolically through the whole computation is the difference between the derivative <em>at a point</em> (Section 1) and the derivative <em>as a function</em> (this section): we do the algebra once and read off the slope at any $x$ we like, for instance $f'(0) = 3$ and $f'(-2) = -1$.</p>
+    </div></div>
+  </details>
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    A frequent slip is to treat $\frac{dy}{dx}$ as a fraction that can be split apart at will, for example cancelling the $d$'s or reading $\frac{d}{dx}$ as "$d$ divided by $dx$". At this stage $\frac{dy}{dx}$ is a single symbol for one limit, not a quotient of two numbers. The differential interpretation that lets you manipulate $dy$ and $dx$ separately is introduced carefully in Unit A6; until then, keep it as one indivisible piece of notation.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">If $f(x)=\sqrt{x}$, then $f'(4)$ equals:</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1009,6 +1082,7 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Tangent line at $x = a$</div>
     $$ y = f(a) + f'(a)\,(x - a) $$
   </div>
+  <p>Three readings of the one number $f'(a)$ are worth keeping side by side. Geometrically it is the slope of the tangent, the best straight-line fit to the graph at the point. Physically, for motion $s(t)$, it is instantaneous velocity, the speedometer reading rather than the trip average. Analytically it is a sensitivity: $f'(a)$ tells you that a small input change $\Delta x$ produces an output change of about $f'(a)\,\Delta x$. That last reading is the engine of the linear approximation in Unit A6.</p>
   <details>
     <summary>Worked Example 3.1: equation of a tangent line</summary>
     <div class="detail-body"><div class="worked-solution">
@@ -1016,6 +1090,36 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ y = 9 + 6(x - 3) = 6x - 9. $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 3.2: average versus instantaneous velocity</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>A ball is dropped so its height is $s(t) = 100 - 4.9 t^2$ metres after $t$ seconds. The average velocity over $[1, 1+h]$ is</p>
+    $$ \frac{s(1+h) - s(1)}{h} = \frac{\big(100 - 4.9(1+h)^2\big) - (100 - 4.9)}{h} = \frac{-4.9(2h + h^2)}{h} = -9.8 - 4.9h. $$
+    <p>Letting $h \to 0$ gives the instantaneous velocity $s'(1) = -9.8$ m/s. The sign is negative because the ball is falling, and the magnitude is exactly the average velocity with the $-4.9h$ correction term removed. In general $s'(t) = -9.8t$, so the speed grows linearly in time, the signature of constant gravitational acceleration $s''(t) = -9.8$ m/s$^2$.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 3.3: reading a derivative as a rate with units</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Suppose $C(q)$ is the cost in dollars of producing $q$ kilograms of a chemical, and at $q = 200$ the cost is $C(200) = 4500$ dollars with $C'(200) = 12$. The derivative is the marginal cost: producing the next kilogram costs about 12 dollars, since $C'$ carries units of dollars per kilogram. To estimate the cost of $203$ kg, use the tangent line as a local model:</p>
+    $$ C(203) \approx C(200) + C'(200)\,(203 - 200) = 4500 + 12\cdot 3 = 4536 \text{ dollars}. $$
+    <p>This is the first appearance of linear approximation: the tangent line is the function's best linear stand-in near the point, and a derivative with units lets you turn a rate into a concrete prediction.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 3.4: tangent and normal lines</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find both the tangent and the normal line to $f(x) = \sqrt{x}$ at $x = 4$. From Section 2, $f'(x) = \frac{1}{2\sqrt{x}}$, so $f(4) = 2$ and $f'(4) = \frac{1}{4}$. The tangent has slope $\frac14$:</p>
+    $$ y = 2 + \tfrac14 (x - 4) = \tfrac14 x + 1. $$
+    <p>The normal line is perpendicular to the tangent, so its slope is the negative reciprocal $-4$:</p>
+    $$ y = 2 - 4(x - 4) = -4x + 18. $$
+    <p>Perpendicular slopes multiply to $-1$ here, $\frac14 \cdot (-4) = -1$, which is the geometric check. The normal line is the direction a marble would roll if released at rest on the curve at that point.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A tangent line is not the same as a line that meets the curve at exactly one point, and it need not stay on one side of the curve. The tangent to $y = x^3$ at the origin is the $x$-axis, yet that line crosses through the curve there. Define the tangent by its slope $f'(a)$, the limit of secant slopes, not by any "touches once" picture. Conversely, a secant through two nearby points only approximates the tangent until you take the limit.
+  </div>
   <div class="quiz" data-answer="0">
     <div class="quiz-header"><div class="quiz-q">If $s(t)$ is position in metres and $t$ in seconds, $s'(t)$ has units of:</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1048,8 +1152,32 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ f(x) - f(a) = \frac{f(x) - f(a)}{x - a}\,(x - a). $$
     <p>Taking $x \to a$, the first factor tends to $f'(a)$ and the second to $0$, so the product tends to $0$. Hence $\lim_{x\to a} f(x) = f(a)$, which is continuity at $a$.</p>
     <p>The converse fails: $f(x) = |x|$ is continuous at $0$ but the left and right difference quotients give slopes $-1$ and $+1$, so no derivative exists there.</p>
+    <p><strong>Contrapositive, the useful form.</strong> Reading the theorem backwards: if $f$ is discontinuous at $a$, then $f'(a)$ cannot exist. So a jump, a removable hole, or an infinite discontinuity automatically rules out differentiability there. This is often the fastest way to disqualify a point: check continuity first, and if it fails you are done.</p>
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 4.1: a corner from one-sided derivatives</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Let $f(x) = |x|$. Compute the one-sided derivatives at $0$ from the definition. For $h &gt; 0$, $|0+h| = h$, so</p>
+    $$ f'_+(0) = \lim_{h \to 0^+} \frac{|h| - 0}{h} = \lim_{h \to 0^+} \frac{h}{h} = 1. $$
+    <p>For $h &lt; 0$, $|0+h| = -h$, so</p>
+    $$ f'_-(0) = \lim_{h \to 0^-} \frac{|h| - 0}{h} = \lim_{h \to 0^-} \frac{-h}{h} = -1. $$
+    <p>Since $1 \ne -1$, the two-sided limit does not exist and $f'(0)$ is undefined, even though $f$ is continuous at $0$. The graph has a corner: a sudden change of slope with no single tangent.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 4.2: a vertical tangent and an infinite difference quotient</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Let $f(x) = x^{1/3}$. At $x = 0$ the difference quotient is</p>
+    $$ \frac{f(0+h) - f(0)}{h} = \frac{h^{1/3}}{h} = h^{-2/3} = \frac{1}{h^{2/3}}. $$
+    <p>As $h \to 0$ from either side, $h^{2/3} \to 0^+$, so the quotient tends to $+\infty$. The limit is not a finite number, so $f'(0)$ does not exist; geometrically the tangent is vertical. Notice $f$ is continuous at $0$ (indeed $\lim_{x\to 0} x^{1/3} = 0 = f(0)$), so this is a second way continuity can hold while differentiability fails, distinct from the corner case.</p>
+    </div></div>
+  </details>
+  <p>There is a deeper way to read differentiability that pays off in later units: $f$ is differentiable at $a$ exactly when it is <em>locally linear</em> there, meaning $f(x) \approx f(a) + f'(a)(x-a)$ with an error that shrinks faster than $|x-a|$ itself. Precisely, $f(x) = f(a) + f'(a)(x-a) + \varepsilon(x)(x-a)$ where $\varepsilon(x) \to 0$ as $x \to a$. Continuity only asks that $f(x) \to f(a)$; differentiability asks the stronger thing, that the graph straightens out into a definite line under magnification. A corner never straightens (it always shows two slopes), a vertical tangent straightens into a vertical line (infinite slope), and a jump does not even close up. This local-linearity view is the foundation of the linear approximation and differentials in Unit A6, and of tangent planes in multivariable calculus.</p>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The theorem runs one way only. Many students invert it and claim "continuous, therefore differentiable". That is false: $|x|$, $x^{2/3}$, and $x^{1/3}$ are all continuous everywhere yet fail to be differentiable at the origin. Continuity is necessary for differentiability but not sufficient. The correct one-line summary is "differentiable $\implies$ continuous, and the arrow does not reverse".
+  </div>
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">Which is true at a corner point such as $x=0$ for $f(x)=|x|$?</div><span class="quiz-number">4.1</span></div>
     <div class="quiz-options">
@@ -1079,11 +1207,55 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Subtract $x^n$, divide by $h$, and every surviving term except the first still carries a factor of $h$:</p>
     $$ \frac{(x+h)^n - x^n}{h} = n x^{n-1} + \binom{n}{2} x^{n-2} h + \cdots + h^{n-1}. $$
     <p>As $h \to 0$ all the trailing terms vanish, leaving $f'(x) = n x^{n-1}$.</p>
+    <p><strong>Why this is rigorous.</strong> The expansion has finitely many terms (exactly $n+1$ of them), so the limit of the sum is the sum of the limits with no convergence worries. Every term past the first contains a positive power of $h$, hence tends to $0$, and the first term $n x^{n-1}$ has no $h$ in it. This is a genuine proof, not a heuristic, for every positive integer $n$.</p>
     </div></div>
   </details>
+  <details>
+    <summary>Going deeper: an alternative proof via the factoring identity</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>The $x \to a$ form gives a second, arguably cleaner, proof of the power rule. Use the algebraic identity</p>
+    $$ x^n - a^n = (x - a)\big(x^{n-1} + x^{n-2}a + x^{n-3}a^2 + \cdots + a^{n-1}\big), $$
+    <p>where the second factor is a sum of exactly $n$ terms. Dividing by $x - a$ removes the singularity:</p>
+    $$ \frac{x^n - a^n}{x - a} = x^{n-1} + x^{n-2}a + \cdots + a^{n-1}. $$
+    <p>Now let $x \to a$. Each of the $n$ terms tends to $a^{n-1}$, so the sum tends to $n\,a^{n-1}$. Hence $f'(a) = n a^{n-1}$. This route avoids binomial coefficients entirely and generalizes to the proof that $\frac{d}{dx}x^{m/n}$ obeys the same rule once roots are in play.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 5.1: combining the power, constant, and sum rules</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x) = 4x^3 - 7x^2 + 2x - 9$ term by term. The sum and constant-multiple rules let you handle each monomial separately:</p>
+    $$ f'(x) = 4\cdot 3x^2 - 7\cdot 2x + 2\cdot 1 - 0 = 12x^2 - 14x + 2. $$
+    <p>The constant $-9$ contributes $0$, and the linear term $2x$ contributes its slope $2$. Every polynomial is differentiable everywhere, and its derivative is again a polynomial of one lower degree.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 5.2: the rule extends to negative and fractional powers</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Rewrite roots and reciprocals as powers before differentiating. For $f(x) = \dfrac{1}{x^2} + \sqrt[3]{x}$, write $f(x) = x^{-2} + x^{1/3}$ and apply the power rule with $n = -2$ and $n = \tfrac13$:</p>
+    $$ f'(x) = -2x^{-3} + \tfrac13 x^{-2/3} = \frac{-2}{x^3} + \frac{1}{3\,x^{2/3}}. $$
+    <p>The power rule $\frac{d}{dx}x^n = nx^{n-1}$ in fact holds for every real exponent $n$, a fact proved in full generality in Unit A4 using logarithmic differentiation. Here we simply note that the negative-power case agrees with Worked Example 1.2, where $\frac{d}{dx}\frac1x = -x^{-2}$.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 5.3: deriving the cube case by hand</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>To see the general proof in miniature, compute $\frac{d}{dx}x^3$ from the definition. Expand $(x+h)^3 = x^3 + 3x^2 h + 3x h^2 + h^3$, subtract $x^3$, and divide by $h$:</p>
+    $$ \frac{(x+h)^3 - x^3}{h} = \frac{3x^2 h + 3x h^2 + h^3}{h} = 3x^2 + 3xh + h^2. $$
+    <p>Every term except $3x^2$ still carries a factor of $h$, so as $h \to 0$ they vanish and $\frac{d}{dx}x^3 = 3x^2$. Compare this with the general binomial argument: the surviving term is always the one whose binomial coefficient is $\binom{n}{1} = n$, here $\binom{3}{1} = 3$, giving the $nx^{n-1}$ pattern.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The power rule applies to a variable raised to a constant, not a constant raised to a variable. So $\frac{d}{dx}x^n = nx^{n-1}$, but $\frac{d}{dx}2^x \ne x\,2^{x-1}$. Exponential functions like $2^x$ and $e^x$ have their own rule (Unit A4): $\frac{d}{dx}e^x = e^x$. Equally, do not "bring the exponent down" on a constant: $\frac{d}{dx}\pi^3 = 0$ because $\pi^3$ is just a number. Check which slot the variable sits in, base or exponent, before choosing a rule.
+  </div>
+  <p>The sum and constant-multiple rules are not separate magic; they fall straight out of the limit's own linearity. Since the limit of a sum is the sum of the limits (Unit A1), the difference quotient of $f + g$ splits into the difference quotients of $f$ and of $g$, giving $(f+g)' = f' + g'$. Likewise a constant $c$ pulls through the quotient, so $(cf)' = c f'$. These two facts plus the power rule already differentiate every polynomial. The product, quotient, and chain rules of Unit A3 handle the cases where functions are multiplied, divided, or composed, where naive term-by-term differentiation fails.</p>
   <div class="formula-box">
     <div class="formula-label">Power rule, constants, and sums</div>
     $$ \frac{d}{dx} x^n = n x^{n-1}, \qquad \frac{d}{dx}\,c = 0, \qquad (f \pm g)' = f' \pm g' $$
+  </div>
+  <div class="concept-box green">
+    <strong>Sanity check.</strong>
+    A fast way to catch errors is to confirm the derivative of a degree-$n$ polynomial is degree $n-1$, and that the units and signs make sense. If you differentiate $3x^2$ and get anything other than $6x$ (for instance $3x$ from forgetting to multiply by the exponent, or $6x^2$ from forgetting to lower it), the degree check flags it immediately.
   </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">$\dfrac{d}{dx}\big(x^5\big)$ equals:</div><span class="quiz-number">5.1</span></div>
@@ -1110,12 +1282,34 @@ body.lang-zh [data-lang="en"] { display: none; }
     <div class="formula-label">Notation</div>
     $$ f''(x) = \frac{d^2 y}{dx^2}, \qquad f^{(n)}(x) = \frac{d^n y}{dx^n} $$
   </div>
+  <p>Each derivative answers a question about the one below it. If $s(t)$ is position, $s'$ is velocity (how position changes) and $s''$ is acceleration (how velocity changes). For a graph $y = f(x)$, the sign of $f'$ tells you whether the curve rises or falls, while the sign of $f''$ tells you whether it bends upward (concave up, $f'' &gt; 0$) or downward (concave down, $f'' &lt; 0$). These second-derivative readings drive the curve sketching of Unit A7.</p>
   <details>
     <summary>Worked Example 6.1: repeated differentiation</summary>
     <div class="detail-body"><div class="worked-solution">
     <p>For $f(x) = x^3$: $f'(x) = 3x^2$, $f''(x) = 6x$, $f'''(x) = 6$, and $f^{(4)}(x) = 0$.</p>
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 6.2: a polynomial of degree $n$ dies after $n+1$ steps</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Take $f(x) = 2x^4 - x^2$. Differentiating repeatedly:</p>
+    $$ f'(x) = 8x^3 - 2x, \quad f''(x) = 24x^2 - 2, \quad f'''(x) = 48x, \quad f^{(4)}(x) = 48, \quad f^{(5)}(x) = 0. $$
+    <p>Each derivative lowers the degree by one, so a degree-$n$ polynomial has $f^{(n)}$ a nonzero constant and $f^{(n+1)} = 0$ identically. Here $n = 4$, and indeed $f^{(4)} = 48 = 2\cdot 4!$ (the leading coefficient $2$ times $4!$), after which everything is zero.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 6.3: a pattern that never terminates</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>For $f(x) = \dfrac{1}{x} = x^{-1}$, the power rule gives a sign-alternating, factorial-growing pattern:</p>
+    $$ f'(x) = -x^{-2}, \quad f''(x) = 2x^{-3}, \quad f'''(x) = -6x^{-4}, \quad f^{(4)}(x) = 24x^{-5}. $$
+    <p>The pattern is $f^{(n)}(x) = (-1)^n \, n! \, x^{-(n+1)}$. Unlike a polynomial, this never becomes zero, because $1/x$ is not a polynomial. Spotting such a closed form for $f^{(n)}$ is exactly what makes Taylor series (Unit B7) computable.</p>
+    </div></div>
+  </details>
+  <p>The Leibniz symbol for the second derivative, $\frac{d^2 y}{dx^2}$, deserves a word on where the $2$'s sit. It comes from applying the operator $\frac{d}{dx}$ twice: $\frac{d}{dx}\left(\frac{d y}{d x}\right)$, so the superscript $2$ on $d$ counts <em>operations</em> while the $2$ on $dx$ counts the input differential squared. The placement is a historical convention, not algebra, but it pays off in dimensional analysis: if $y$ is metres and $x$ is seconds, $\frac{d^2 y}{dx^2}$ has units metres per second squared, exactly acceleration.</p>
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    The notation $f^{(n)}$ for the $n$th derivative is not a power: $f^{(2)}(x)$ means $f''(x)$, not $\big(f(x)\big)^2$. The parentheses on the exponent are the whole point of the notation, distinguishing $f^{(2)}$ (second derivative) from $f^2$ (the square). Likewise $\frac{d^2y}{dx^2}$ is a single symbol for "differentiate twice", not the algebraic fraction $\frac{d^2 y}{(dx)^2}$.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">If $f(x)=x^3$, then $f''(x)$ equals:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1138,6 +1332,32 @@ body.lang-zh [data-lang="en"] { display: none; }
     A derivative fails to exist at corners (one-sided slopes disagree), cusps (slopes diverge to $+\infty$ and $-\infty$), vertical tangents (slope is infinite), and any discontinuity. Recognizing these protects you from blindly applying rules.
   </div>
   <p>Examples: $f(x) = |x|$ has a corner at $0$; $f(x) = x^{2/3}$ has a cusp at $0$; $f(x) = x^{1/3}$ has a vertical tangent at $0$. In each case $f$ is continuous, yet $f'(0)$ does not exist.</p>
+  <div class="formula-box">
+    <div class="formula-label">Four ways differentiability fails at $a$</div>
+    $$ \text{corner } (f'_- \ne f'_+), \quad \text{cusp } (f'_\pm \to \pm\infty), \quad \text{vertical tangent } (f' \to \pm\infty), \quad \text{discontinuity}. $$
+  </div>
+  <details>
+    <summary>Worked Example 7.1: telling a cusp from a vertical tangent</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Both $x^{2/3}$ and $x^{1/3}$ have a vertical feature at the origin, but they differ. For $f(x) = x^{2/3}$ the difference quotient is</p>
+    $$ \frac{h^{2/3}}{h} = h^{-1/3} = \frac{1}{h^{1/3}}, $$
+    <p>which tends to $+\infty$ as $h \to 0^+$ and to $-\infty$ as $h \to 0^-$. The two sides run to opposite infinities, so the graph comes to a sharp point: a cusp. For $g(x) = x^{1/3}$ the difference quotient $h^{-2/3} = 1/h^{2/3}$ tends to $+\infty$ from both sides, so the graph rises smoothly through a vertical tangent without a point. A cusp has one-sided slopes of opposite sign; a vertical tangent has the same sign on both sides.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 7.2: a derivative that exists but is not continuous</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Consider $f$ defined by $f(x) = x^2 \sin(1/x)$ for $x \ne 0$ and $f(0) = 0$. This $f$ is differentiable everywhere, including at $0$, where</p>
+    $$ f'(0) = \lim_{h \to 0} \frac{h^2 \sin(1/h)}{h} = \lim_{h \to 0} h\sin(1/h) = 0 $$
+    <p>by the squeeze theorem, since $|h\sin(1/h)| \le |h|$. Yet for $x \ne 0$ the derivative is $f'(x) = 2x\sin(1/x) - \cos(1/x)$, which has no limit as $x \to 0$ because the $\cos(1/x)$ term oscillates. So $f'$ exists everywhere but is itself discontinuous at $0$. The lesson: a derivative need not be continuous, which is why the class of continuously differentiable functions ($C^1$) is a genuine restriction beyond merely differentiable.</p>
+    </div></div>
+  </details>
+  <p>How badly can differentiability fail? In 1872 Weierstrass exhibited a function that is continuous at every point of the real line yet differentiable at <em>no</em> point: a curve made entirely of corners, with a tangent nowhere. It is built as an infinite sum $\sum_{n=0}^{\infty} a^n \cos(b^n \pi x)$ with $0 &lt; a &lt; 1$ and $ab &gt; 1 + \tfrac{3}{2}\pi$. You will not meet such functions in a first calculus course, but they settle a deep question: continuity is genuinely weaker than differentiability, not just occasionally but in the most extreme possible way. Every function you actually differentiate in this unit is far tamer, smooth except at a handful of isolated bad points.</p>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Students sometimes assume that if $f'(a)$ exists then $f'$ must be continuous at $a$, and try to compute $f'(a)$ by taking $\lim_{x \to a} f'(x)$. Worked Example 7.2 shows this can fail: the derivative existed at $0$ yet $\lim_{x\to 0} f'(x)$ did not. The safe rule is to compute a boundary or suspicious value from the limit definition directly, rather than by plugging into a formula for $f'$ that was derived only for nearby points.
+  </div>
+  <p>Step back and take stock. From a single limit, the difference quotient, this unit has produced the slope of a tangent, instantaneous velocity, marginal cost, a test for smoothness, the power rule, and a whole tower of higher derivatives. Everything that follows in single-variable calculus is built on this one idea. The differentiation rules of Unit A3 are bookkeeping shortcuts for the same limit; the applications of Units A5 through A7 (related rates, optimization, curve sketching) are interpretations of $f'$ and $f''$; and integration in Unit A8 runs the whole machine in reverse. If the limit definition feels solid, the rest of the course has firm ground to stand on.</p>
   <details>
     <summary>Going deeper: the bridge to the differentiation rules</summary>
     <div class="detail-body"><div class="worked-solution">

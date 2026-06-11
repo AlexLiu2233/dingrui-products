@@ -987,6 +987,67 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 1.2: a coupled system that is not from one scalar equation</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Reduction runs only one way for a single scalar equation, but many genuine systems arise directly from
+      modelling. Consider two tanks. Tank 1 holds salt amount $x_1(t)$, tank 2 holds $x_2(t)$, brine is pumped
+      between them, and the mixing rates give</p>
+      $$ x_1' = -2x_1 + x_2, \qquad x_2' = 2x_1 - 3x_2. $$
+      <p>In matrix form this is $\mathbf{x}' = A\mathbf{x}$ with
+      $A = \begin{pmatrix} -2 & 1 \\ 2 & -3 \end{pmatrix}$. There is no single second-order equation that we
+      reduced; the system is the primary object. Note both column sums are not equal, so total salt is not
+      conserved, which is physically correct here because each tank also drains to the outside.</p>
+      <p>We can still eliminate to a scalar equation if we wish. Differentiate the first equation and substitute
+      the second: $x_1'' = -2x_1' + x_2' = -2x_1' + (2x_1 - 3x_2)$. From the first equation $x_2 = x_1' + 2x_1$,
+      so $x_1'' = -2x_1' + 2x_1 - 3(x_1' + 2x_1) = -5x_1' - 4x_1$, giving $x_1'' + 5x_1' + 4x_1 = 0$. The roots
+      $-1$ and $-4$ are exactly the eigenvalues of $A$, confirming the two viewpoints agree.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 1.3: a nonhomogeneous third-order reduction</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Reduce $y''' + 2y'' - y' + 4y = \sin t$ to a first-order system.</p>
+      <p>Set $x_1 = y$, $x_2 = y'$, $x_3 = y''$. Then $x_1' = x_2$, $x_2' = x_3$, and solving the equation for the
+      top derivative gives $x_3' = y''' = -2y'' + y' - 4y + \sin t = -4x_1 + x_2 - 2x_3 + \sin t$.</p>
+      $$ \mathbf{x}' = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -4 & 1 & -2 \end{pmatrix}\mathbf{x}
+         + \begin{pmatrix} 0 \\ 0 \\ \sin t \end{pmatrix}. $$
+      <p>The forcing enters only the last component, the same row that carried the top derivative. This is the
+      general pattern: a scalar forcing $g(t)$ becomes the vector $\mathbf{g} = (0,\dots,0,g(t))^{\mathsf T}$, and
+      the matrix is always the companion matrix of the homogeneous part.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A frequent slip is to write the last row of the companion matrix with the
+    coefficients in the wrong sign or wrong order. For $y^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_0 y = 0$, the
+    bottom row is $(-a_0,\, -a_1,\, \dots,\, -a_{n-1})$: every coefficient is moved to the other side and so
+    flips sign, and they appear in increasing derivative order left to right because $x_1=y$ sits leftmost. Always
+    re-derive it by solving the original equation for $y^{(n)}$ rather than copying a memorized template, and
+    sanity-check by confirming the matrix's characteristic polynomial equals the original characteristic polynomial.
+  </div>
+
+  <details>
+    <summary>Going deeper: the companion matrix and its characteristic polynomial</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Claim: the companion matrix $C$ of $p(\lambda) = \lambda^n + a_{n-1}\lambda^{n-1} + \cdots + a_0$ has
+      characteristic polynomial $\det(\lambda I - C) = p(\lambda)$. We prove it by induction on $n$ using cofactor
+      expansion along the first column.</p>
+      <p>Write $C$ with superdiagonal ones and bottom row $(-a_0, -a_1, \dots, -a_{n-1})$. Expanding
+      $\det(\lambda I - C)$ down its first column, only two entries are nonzero: the top-left $\lambda$ and the
+      bottom-left $a_0$. The $\lambda$ minor is the same determinant for the order $n-1$ companion matrix of
+      $\lambda^{n-1} + a_{n-1}\lambda^{n-2} + \cdots + a_1$, which by induction equals
+      $\lambda^{n-1} + a_{n-1}\lambda^{n-2} + \cdots + a_1$. The bottom-left cofactor, after tracking the sign
+      $(-1)^{n+1}$ and the upper-triangular minor of all $-1$ entries, contributes exactly $a_0$.</p>
+      $$ \det(\lambda I - C) = \lambda\big(\lambda^{n-1} + a_{n-1}\lambda^{n-2} + \cdots + a_1\big) + a_0
+         = \lambda^n + a_{n-1}\lambda^{n-1} + \cdots + a_1\lambda + a_0. $$
+      <p>So the eigenvalues of the system matrix are precisely the characteristic roots of the scalar equation.
+      This is why reducing to a system loses no information: the spectral data is identical. The base case $n=1$ is
+      $\det(\lambda - (-a_0)) = \lambda + a_0$, which matches.</p>
+    </div></div>
+  </details>
+
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">Reducing $y''' - 2y'' + y = 0$ with $x_1=y,\;x_2=y',\;x_3=y''$, what is $x_3'$?</div><span class="quiz-number">1.1</span></div>
     <div class="quiz-options">
@@ -1063,6 +1124,45 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 2.2: solving an IVP through the fundamental matrix</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Continuing the previous system $\mathbf{x}' = \begin{pmatrix} 1 & 1 \\ 4 & 1 \end{pmatrix}\mathbf{x}$,
+      solve the initial value problem with $\mathbf{x}(0) = \binom{2}{0}$.</p>
+      <p>A fundamental matrix is $\Psi(t) = \begin{pmatrix} e^{3t} & e^{-t} \\ 2e^{3t} & -2e^{-t} \end{pmatrix}$.
+      At $t=0$, $\Psi(0) = \begin{pmatrix} 1 & 1 \\ 2 & -2 \end{pmatrix}$ with determinant $-4$, so</p>
+      $$ \Psi(0)^{-1} = \frac{1}{-4}\begin{pmatrix} -2 & -1 \\ -2 & 1 \end{pmatrix}
+         = \begin{pmatrix} 1/2 & 1/4 \\ 1/2 & -1/4 \end{pmatrix}. $$
+      <p>The constants are $\mathbf{c} = \Psi(0)^{-1}\mathbf{x}_0 = \begin{pmatrix} 1/2 & 1/4 \\ 1/2 & -1/4 \end{pmatrix}\binom{2}{0} = \binom{1}{1}$. Hence</p>
+      $$ \mathbf{x}(t) = \Psi(t)\binom{1}{1} = e^{3t}\binom{1}{2} + e^{-t}\binom{1}{-2}. $$
+      <p>Check at $t=0$: $\binom{1}{2} + \binom{1}{-2} = \binom{2}{0}$, the required initial data. The formula
+      $\mathbf{x}(t) = \Psi(t)\Psi(t_0)^{-1}\mathbf{x}_0$ packages exactly this computation.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 2.3: a Wronskian that is identically zero</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Suppose someone proposes $\mathbf{x}^{(1)} = e^{3t}\binom{1}{2}$ and
+      $\mathbf{x}^{(2)} = 5e^{3t}\binom{1}{2}$ as a candidate fundamental set. Their Wronskian is</p>
+      $$ W = \det\begin{pmatrix} e^{3t} & 5e^{3t} \\ 2e^{3t} & 10e^{3t} \end{pmatrix}
+           = 10e^{6t} - 10e^{6t} = 0 \quad\text{for all } t. $$
+      <p>Abel's theorem then guarantees $W \equiv 0$, which is consistent: the second solution is a scalar multiple
+      of the first, so the pair spans only a one-dimensional subspace, not the full two-dimensional solution space.
+      A fundamental set requires the columns to be linearly independent, which the nonvanishing of $W$ at a single
+      point already certifies for solutions of the same linear system.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The Wronskian dichotomy (everywhere zero or nowhere zero) holds only for
+    functions that are genuine solutions of the same linear system $\mathbf{x}' = A(t)\mathbf{x}$. For arbitrary
+    vector functions it can fail: one can write down two vector functions whose Wronskian vanishes at isolated
+    points yet which are linearly independent, and others that are linearly dependent on subintervals only. Never
+    conclude independence from $W \neq 0$ unless you have first confirmed each column actually solves the system,
+    and never conclude dependence from $W = 0$ at a single $t$ without Abel's theorem in hand.
+  </div>
+
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">Two solutions of a $2\times 2$ system have Wronskian $W(0) = 5$. By Abel's theorem with $\operatorname{tr} A = -2$ (constant), what is $W(t)$?</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1129,6 +1229,54 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 3.2: a stable node with an initial condition</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} -2 & 1 \\ 1 & -2 \end{pmatrix}\mathbf{x}$ with
+      $\mathbf{x}(0) = \binom{3}{1}$.</p>
+      <p>Characteristic equation: $(-2-\lambda)^2 - 1 = \lambda^2 + 4\lambda + 3 = 0$, so $\lambda = -1, -3$.</p>
+      <p>For $\lambda = -1$: $(A+I)\mathbf{v} = \begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}\mathbf{v} = 0$ gives
+      $\mathbf{v}_1 = \binom{1}{1}$. For $\lambda = -3$:
+      $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}\mathbf{v} = 0$ gives $\mathbf{v}_2 = \binom{1}{-1}$.</p>
+      <p>General solution $\mathbf{x} = c_1 e^{-t}\binom{1}{1} + c_2 e^{-3t}\binom{1}{-1}$. Apply the initial data:
+      $c_1\binom{1}{1} + c_2\binom{1}{-1} = \binom{3}{1}$ gives $c_1 + c_2 = 3$ and $c_1 - c_2 = 1$, so
+      $c_1 = 2$, $c_2 = 1$.</p>
+      $$ \mathbf{x}(t) = 2e^{-t}\binom{1}{1} + e^{-3t}\binom{1}{-1}. $$
+      <p>Both eigenvalues are negative, so the origin is a stable node. As $t\to\infty$ the faster mode $e^{-3t}$
+      dies first, and trajectories approach the origin tangent to the slow eigendirection $\binom{1}{1}$.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 3.3: a $3\times 3$ system with three real eigenvalues</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 2 & 0 \\ 1 & 0 & 3 \end{pmatrix}\mathbf{x}$.</p>
+      <p>The matrix is lower triangular, so the eigenvalues are the diagonal entries $\lambda = 1, 2, 3$, all real
+      and distinct.</p>
+      <p>For $\lambda = 1$: $(A - I)\mathbf{v} = \begin{pmatrix} 0 & 0 & 0 \\ 1 & 1 & 0 \\ 1 & 0 & 2 \end{pmatrix}\mathbf{v} = 0$.
+      From rows two and three, $v_2 = -v_1$ and $v_3 = -v_1/2$. Taking $v_1 = 2$ gives $\mathbf{v}_1 = (2,-2,-1)^{\mathsf T}$.</p>
+      <p>For $\lambda = 2$: $\begin{pmatrix} -1 & 0 & 0 \\ 1 & 0 & 0 \\ 1 & 0 & 1 \end{pmatrix}\mathbf{v} = 0$ forces
+      $v_1 = 0$ and $v_3 = 0$ with $v_2$ free, so $\mathbf{v}_2 = (0,1,0)^{\mathsf T}$.</p>
+      <p>For $\lambda = 3$: $\begin{pmatrix} -2 & 0 & 0 \\ 1 & -1 & 0 \\ 1 & 0 & 0 \end{pmatrix}\mathbf{v} = 0$ forces
+      $v_1 = 0$ and $v_2 = 0$ with $v_3$ free, so $\mathbf{v}_3 = (0,0,1)^{\mathsf T}$.</p>
+      $$ \mathbf{x}(t) = c_1 e^{t}\!\begin{pmatrix} 2 \\ -2 \\ -1 \end{pmatrix}
+         + c_2 e^{2t}\!\begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}
+         + c_3 e^{3t}\!\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}. $$
+      <p>All eigenvalues are positive, so the origin is a three-dimensional unstable node. Triangular matrices make
+      the spectrum readable at a glance, a useful shortcut to remember on exams.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Students often forget that an eigenvector is only determined up to a nonzero
+    scalar, and then panic when their textbook lists $\binom{1}{2}$ but their own row reduction produced
+    $\binom{2}{4}$ or $\binom{-1}{-2}$. These are the same eigendirection and give the same general solution; the
+    arbitrary constants $c_i$ absorb the scaling. A more serious error is dividing the differential equation by
+    $e^{\lambda t}$ and then treating $A\mathbf{v} = \lambda\mathbf{v}$ as if any nonzero $\lambda$ works: $\lambda$
+    must be a root of $\det(A - \lambda I) = 0$, otherwise the only solution of $(A - \lambda I)\mathbf{v} = 0$ is
+    $\mathbf{v} = \mathbf{0}$, which gives the trivial solution and no information.
+  </div>
+
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">The eigenvalues of $A$ are $\lambda = 2$ and $\lambda = 5$. The equilibrium at the origin is:</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1177,6 +1325,52 @@ body.lang-zh [data-lang="en"] { display: none; }
       $$ \mathbf{x}(t) = e^{-t}\!\left[ c_1\!\begin{pmatrix}\cos 2t \\ \sin 2t\end{pmatrix}
          + c_2\!\begin{pmatrix}\sin 2t \\ -\cos 2t\end{pmatrix} \right]. $$
       <p>Since $\alpha = -1 < 0$, trajectories spiral inward to the origin: a stable spiral (spiral sink).</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 4.2: a center with closed orbits</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} 0 & 2 \\ -2 & 0 \end{pmatrix}\mathbf{x}$ with $\mathbf{x}(0) = \binom{1}{0}$.</p>
+      <p>$\det(A - \lambda I) = \lambda^2 + 4 = 0$, so $\lambda = \pm 2i$; here $\alpha = 0$, $\beta = 2$.</p>
+      <p>For $\lambda = 2i$: $(A - 2iI)\mathbf{v} = \begin{pmatrix} -2i & 2 \\ -2 & -2i \end{pmatrix}\mathbf{v} = 0$.
+      The top row gives $-2i\,v_1 + 2v_2 = 0$, so $v_2 = i v_1$; take $\mathbf{v} = \binom{1}{i} = \binom{1}{0} + i\binom{0}{1}$,
+      hence $\mathbf{a} = \binom{1}{0}$, $\mathbf{b} = \binom{0}{1}$.</p>
+      <p>The two real solutions are $\mathbf{x}_1 = \mathbf{a}\cos 2t - \mathbf{b}\sin 2t = \binom{\cos 2t}{-\sin 2t}$
+      and $\mathbf{x}_2 = \mathbf{a}\sin 2t + \mathbf{b}\cos 2t = \binom{\sin 2t}{\cos 2t}$, so</p>
+      $$ \mathbf{x}(t) = c_1\binom{\cos 2t}{-\sin 2t} + c_2\binom{\sin 2t}{\cos 2t}. $$
+      <p>Initial data $\binom{1}{0}$ forces $c_1 = 1$, $c_2 = 0$, giving $\mathbf{x}(t) = \binom{\cos 2t}{-\sin 2t}$.
+      This traces the unit circle clockwise with period $\pi$: a closed orbit, confirming the center. Since
+      $x_1^2 + x_2^2 = 1$ for all $t$, the trajectory is bounded but never approaches the origin, the signature of
+      neutral stability.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> When forming the two real solutions, it is tempting to also use the conjugate
+    eigenpair $\bar\lambda = \alpha - i\beta$ and write four solutions for a $2\times 2$ system. That doubles
+    nothing: the conjugate solution $e^{\bar\lambda t}\bar{\mathbf{v}}$ is the complex conjugate of the first, so its
+    real part equals $\mathbf{x}_1$ and its imaginary part equals $-\mathbf{x}_2$. One complex eigenpair yields
+    exactly two real, independent solutions. A second frequent slip is dropping the $e^{\alpha t}$ envelope when
+    $\alpha \neq 0$; without it you would describe a center instead of the correct spiral.
+  </div>
+
+  <details>
+    <summary>Going deeper: why the real and imaginary parts are independent solutions</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Let $\mathbf{z}(t) = e^{\lambda t}\mathbf{v}$ be a complex solution of $\mathbf{x}' = A\mathbf{x}$ with $A$
+      real and $\lambda = \alpha + i\beta$, $\beta \neq 0$. Write $\mathbf{z} = \mathbf{u} + i\mathbf{w}$ with
+      $\mathbf{u} = \operatorname{Re}\mathbf{z}$ and $\mathbf{w} = \operatorname{Im}\mathbf{z}$ both real.</p>
+      <p>Since $A$ is real, $\mathbf{z}' = A\mathbf{z}$ separates into real and imaginary parts:
+      $\mathbf{u}' + i\mathbf{w}' = A\mathbf{u} + iA\mathbf{w}$. Matching real and imaginary parts gives
+      $\mathbf{u}' = A\mathbf{u}$ and $\mathbf{w}' = A\mathbf{w}$ separately, so each part is itself a real solution.</p>
+      <p>Independence: suppose $c_1\mathbf{u} + c_2\mathbf{w} = \mathbf{0}$ for all $t$ with real constants. Then
+      $c_1\mathbf{u} + c_2\mathbf{w} = \operatorname{Re}\!\big((c_1 - i c_2)\mathbf{z}\big) = \mathbf{0}$. Evaluating
+      at $t=0$ gives $\operatorname{Re}\!\big((c_1 - ic_2)\mathbf{v}\big) = \mathbf{0}$ and differentiating once and
+      evaluating at $0$ gives $\operatorname{Re}\!\big((c_1 - ic_2)\lambda\mathbf{v}\big) = \mathbf{0}$. Because
+      $\beta \neq 0$, the scalar $\lambda$ is non-real, and these two conditions force $c_1 - ic_2 = 0$, hence
+      $c_1 = c_2 = 0$. The real and imaginary parts are therefore linearly independent and span the real solution
+      space of the conjugate pair.</p>
     </div></div>
   </details>
 
@@ -1243,6 +1437,71 @@ body.lang-zh [data-lang="en"] { display: none; }
       $\begin{pmatrix} 2 & -4 \\ 1 & -2 \end{pmatrix}\mathbf{w} = \binom{2}{1}$. Taking $\mathbf{w} = \binom{1}{0}$ works.</p>
       $$ \mathbf{x}(t) = c_1 e^{t}\binom{2}{1} + c_2 e^{t}\!\left[ t\binom{2}{1} + \binom{1}{0} \right]. $$
       <p>Because $\lambda = 1 > 0$, this is an unstable improper (degenerate) node.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 5.2: the complete (non-defective) repeated case</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} -3 & 0 \\ 0 & -3 \end{pmatrix}\mathbf{x}$.</p>
+      <p>$\det(A - \lambda I) = (\lambda + 3)^2$, so $\lambda = -3$ is a double root. But here
+      $A - \lambda I = A + 3I = \mathbf{0}$, so every nonzero vector is an eigenvector and the eigenspace is the
+      whole plane. The matrix is a scalar multiple of the identity, the model complete case.</p>
+      <p>We may choose the standard basis $\mathbf{v}_1 = \binom{1}{0}$, $\mathbf{v}_2 = \binom{0}{1}$:</p>
+      $$ \mathbf{x}(t) = c_1 e^{-3t}\binom{1}{0} + c_2 e^{-3t}\binom{0}{1} = e^{-3t}\binom{c_1}{c_2}. $$
+      <p>No $t$ factor appears because the eigenspace is two-dimensional. Every trajectory is a straight ray into the
+      origin along whatever direction $\binom{c_1}{c_2}$ the initial data picks, so this is a stable star
+      (proper) node. Contrast Worked Example 5.1, where a one-dimensional eigenspace forced the $t$-multiplied
+      second solution.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 5.3: a stable defective node with initial data</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} -1 & 1 \\ 0 & -1 \end{pmatrix}\mathbf{x}$ with $\mathbf{x}(0) = \binom{1}{2}$.</p>
+      <p>$\det(A - \lambda I) = (\lambda + 1)^2$, so $\lambda = -1$ is a double root. Eigenvectors solve
+      $(A + I)\mathbf{v} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\mathbf{v} = 0$, forcing $v_2 = 0$, so the
+      eigenspace is one-dimensional, spanned by $\mathbf{v} = \binom{1}{0}$. The matrix is defective.</p>
+      <p>Generalized eigenvector: solve $(A + I)\mathbf{w} = \mathbf{v}$, that is
+      $\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\mathbf{w} = \binom{1}{0}$, which gives $w_2 = 1$ with $w_1$ free;
+      take $\mathbf{w} = \binom{0}{1}$.</p>
+      $$ \mathbf{x}(t) = c_1 e^{-t}\binom{1}{0} + c_2 e^{-t}\!\left[ t\binom{1}{0} + \binom{0}{1} \right]. $$
+      <p>At $t=0$: $c_1\binom{1}{0} + c_2\binom{0}{1} = \binom{1}{2}$, so $c_1 = 1$, $c_2 = 2$. Therefore
+      $\mathbf{x}(t) = e^{-t}\binom{1 + 2t}{2}$. Even though the polynomial factor $1 + 2t$ grows, the dominant
+      $e^{-t}$ decay wins and $\mathbf{x}(t) \to \mathbf{0}$: a stable improper node.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Two mistakes recur in the defective case. First, students guess the second
+    solution as $e^{\lambda t} t\,\mathbf{v}$ alone, dropping the $+\mathbf{w}$ term; substituting shows
+    $e^{\lambda t} t\mathbf{v}$ is not a solution by itself because the product rule generates an extra
+    $e^{\lambda t}\mathbf{v}$ that only $(A - \lambda I)\mathbf{w} = \mathbf{v}$ can cancel. Second, they conclude a
+    repeated eigenvalue is automatically defective. It is not: if the algebraic multiplicity equals the geometric
+    multiplicity (as in Worked Example 5.2) there are enough eigenvectors and no $t$ factor appears. Always count the
+    dimension of $\ker(A - \lambda I)$ before assuming you need a generalized eigenvector.
+  </div>
+
+  <details>
+    <summary>Going deeper: deriving the $t$-multiplied second solution</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Let $\lambda$ be a double eigenvalue with a one-dimensional eigenspace spanned by $\mathbf{v}$. We look for a
+      second solution of the form $\mathbf{x}_2(t) = e^{\lambda t}\big(t\,\mathbf{v} + \mathbf{w}\big)$ and determine
+      what $\mathbf{w}$ must satisfy. Differentiate using the product rule:</p>
+      $$ \mathbf{x}_2' = \lambda e^{\lambda t}(t\mathbf{v} + \mathbf{w}) + e^{\lambda t}\mathbf{v}
+         = e^{\lambda t}\big(\lambda t\,\mathbf{v} + \lambda\mathbf{w} + \mathbf{v}\big). $$
+      <p>We require $\mathbf{x}_2' = A\mathbf{x}_2 = e^{\lambda t}\big(t\,A\mathbf{v} + A\mathbf{w}\big)$. Cancel
+      $e^{\lambda t}$ and match the coefficient of $t$ and the constant term separately.</p>
+      <p>Coefficient of $t$: $\lambda\mathbf{v} = A\mathbf{v}$, which holds because $\mathbf{v}$ is an eigenvector.
+      Constant term: $\lambda\mathbf{w} + \mathbf{v} = A\mathbf{w}$, that is $(A - \lambda I)\mathbf{w} = \mathbf{v}$.
+      This is exactly the generalized eigenvector equation. It is solvable because $\mathbf{v}$ lies in the range of
+      $(A - \lambda I)$ whenever the eigenvalue is defective with algebraic multiplicity two, a fact guaranteed by
+      the structure of the Jordan block for $\lambda$.</p>
+      <p>Finally $\mathbf{x}_1 = e^{\lambda t}\mathbf{v}$ and $\mathbf{x}_2$ are independent: at $t=0$ their values are
+      $\mathbf{v}$ and $\mathbf{w}$, and $\mathbf{w} \notin \operatorname{span}\{\mathbf{v}\}$ since otherwise
+      $(A-\lambda I)\mathbf{w}$ would be a multiple of $(A - \lambda I)\mathbf{v} = \mathbf{0}$, contradicting
+      $(A - \lambda I)\mathbf{w} = \mathbf{v} \neq \mathbf{0}$.</p>
     </div></div>
   </details>
 
@@ -1313,6 +1572,48 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 6.2: reading the full trace-determinant chart</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Classify the origin for each matrix using only $(p, q)$ and the discriminant $\Delta = p^2 - 4q$.</p>
+      <p>(a) $A = \begin{pmatrix} -1 & 4 \\ -1 & -1 \end{pmatrix}$: $p = -2$, $q = 1 + 4 = 5$,
+      $\Delta = 4 - 20 = -16 < 0$. Complex eigenvalues with $p<0$: a stable spiral.</p>
+      <p>(b) $A = \begin{pmatrix} 4 & 1 \\ 1 & 4 \end{pmatrix}$: $p = 8$, $q = 16 - 1 = 15$,
+      $\Delta = 64 - 60 = 4 > 0$. Real same-sign eigenvalues with $p > 0$: an unstable node.</p>
+      <p>(c) $A = \begin{pmatrix} 1 & 5 \\ 1 & -1 \end{pmatrix}$: $p = 0$, $q = -1 - 5 = -6 < 0$. Negative
+      determinant: real opposite-sign eigenvalues, a saddle. The trace being zero is irrelevant here because a
+      saddle is decided by $q < 0$ alone.</p>
+      <p>(d) $A = \begin{pmatrix} 0 & -3 \\ 3 & 0 \end{pmatrix}$: $p = 0$, $q = 9 > 0$, $\Delta = -36 < 0$. Purely
+      imaginary eigenvalues: a center, neutrally stable.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 6.3: the parabola boundary between nodes and spirals</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>On the curve $\Delta = p^2 - 4q = 0$ the eigenvalues are real and equal, the repeated-root case of
+      Section 5. Consider the one-parameter family $A_q = \begin{pmatrix} -2 & 1 \\ -q & 0 \end{pmatrix}$, which has
+      $p = -2$ and $\det A_q = q$.</p>
+      <p>For $q < 1$ the discriminant $\Delta = 4 - 4q > 0$, so the eigenvalues are real and distinct: a stable
+      node (since $p<0$, $q>0$ when $0<q<1$). For $q > 1$, $\Delta < 0$ and the origin becomes a stable spiral.
+      Exactly at $q = 1$, $\Delta = 0$ and $\lambda = -1$ is a double root, the borderline degenerate node. The
+      qualitative picture changes from straight-line approach to rotational approach as $q$ crosses the parabola
+      $q = p^2/4 = 1$.</p>
+      <p>This is why the trace-determinant plane is the standard summary chart: the line $q = 0$ separates saddles
+      from nodes, the line $p = 0$ (with $q>0$) holds the centers, and the parabola $q = p^2/4$ separates nodes from
+      spirals.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> A stable spiral and a stable node are easy to confuse because both have all
+    trajectories tending to the origin. The deciding quantity is the discriminant $\Delta = p^2 - 4q$, not the sign
+    of the trace: $\Delta > 0$ gives real eigenvalues (a node), $\Delta < 0$ gives complex eigenvalues (a spiral).
+    A second pitfall is reading stability off $\det A$ alone. A positive determinant is necessary but not
+    sufficient for stability; you also need $\operatorname{tr} A < 0$. For instance $\operatorname{tr} A = 2$,
+    $\det A = 5$ has $q > 0$ yet is an unstable spiral because the trace is positive.
+  </div>
+
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">For $A$ with $\operatorname{tr} A = -2$ and $\det A = -8$, the origin is:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1368,6 +1669,77 @@ body.lang-zh [data-lang="en"] { display: none; }
          = \int_0^t \binom{t-s}{1}\,ds = \binom{t^2/2}{t}. $$
       <p>This matches the elementary solution: the second component integrates the forcing to $t$, and the first
       integrates that to $t^2/2$.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 7.2: computing $e^{At}$ by diagonalization</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Compute the matrix exponential for $A = \begin{pmatrix} 1 & 1 \\ 4 & 1 \end{pmatrix}$, the saddle from
+      Section 3.</p>
+      <p>We found eigenvalues $\lambda = 3, -1$ with eigenvectors $\binom{1}{2}$ and $\binom{1}{-2}$. Set</p>
+      $$ P = \begin{pmatrix} 1 & 1 \\ 2 & -2 \end{pmatrix}, \quad
+         D = \begin{pmatrix} 3 & 0 \\ 0 & -1 \end{pmatrix}, \quad
+         P^{-1} = \frac{1}{-4}\begin{pmatrix} -2 & -1 \\ -2 & 1 \end{pmatrix}
+         = \begin{pmatrix} 1/2 & 1/4 \\ 1/2 & -1/4 \end{pmatrix}. $$
+      <p>Then $e^{At} = P\,e^{Dt}\,P^{-1}$ with $e^{Dt} = \operatorname{diag}(e^{3t}, e^{-t})$. Multiplying,</p>
+      $$ e^{At} = \begin{pmatrix} 1 & 1 \\ 2 & -2 \end{pmatrix}
+         \begin{pmatrix} e^{3t} & 0 \\ 0 & e^{-t} \end{pmatrix}
+         \begin{pmatrix} 1/2 & 1/4 \\ 1/2 & -1/4 \end{pmatrix}
+         = \begin{pmatrix} \tfrac12(e^{3t}+e^{-t}) & \tfrac14(e^{3t}-e^{-t}) \\[4pt]
+           e^{3t}-e^{-t} & \tfrac12(e^{3t}+e^{-t}) \end{pmatrix}. $$
+      <p>Check: at $t=0$ this is $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I$, as required of any matrix
+      exponential. Applying it to $\mathbf{x}_0 = \binom{2}{0}$ reproduces $e^{3t}\binom{1}{2} + e^{-t}\binom{1}{-2}$
+      from Worked Example 2.2.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 7.3: a forced system with a constant input</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Solve $\mathbf{x}' = \begin{pmatrix} -2 & 0 \\ 0 & -3 \end{pmatrix}\mathbf{x} + \binom{4}{6}$ with
+      $\mathbf{x}(0) = \mathbf{0}$.</p>
+      <p>Because $A$ is diagonal, the system decouples: $x_1' = -2x_1 + 4$ and $x_2' = -3x_2 + 6$. Each is a scalar
+      linear ODE. The equilibrium (particular) solution is found by setting derivatives to zero:
+      $x_1^* = 2$, $x_2^* = 2$.</p>
+      <p>Using variation of parameters with $e^{At} = \operatorname{diag}(e^{-2t}, e^{-3t})$,</p>
+      $$ \mathbf{x}(t) = \int_0^t e^{A(t-s)}\binom{4}{6}\,ds
+         = \binom{4\int_0^t e^{-2(t-s)}\,ds}{6\int_0^t e^{-3(t-s)}\,ds}
+         = \binom{2(1 - e^{-2t})}{2(1 - e^{-3t})}. $$
+      <p>As $t\to\infty$ the transient $e^{-2t}, e^{-3t}$ decay and $\mathbf{x}(t) \to \binom{2}{2}$, the
+      equilibrium. This decomposition into a decaying homogeneous transient plus a steady particular state is the
+      structural meaning of the variation of parameters formula.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The identity $e^{(A+B)t} = e^{At}e^{Bt}$ holds only when $A$ and $B$ commute,
+    that is $AB = BA$. For general matrices it is false, and students who split a matrix into a sum and exponentiate
+    each piece independently get a wrong answer. A safe route is always $e^{At} = P\,e^{Dt}\,P^{-1}$ for
+    diagonalizable $A$, or the defining power series otherwise. A related slip is writing $\frac{d}{dt}e^{At} =
+    e^{At}A$ and then, in the variation of parameters integral, pulling $A$ to the wrong side; since
+    $A e^{At} = e^{At}A$ (a matrix commutes with its own exponential) this particular case is harmless, but the
+    habit of assuming commutation causes real errors elsewhere.
+  </div>
+
+  <details>
+    <summary>Going deeper: the matrix exponential solves the system</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>We verify directly from the series that $\Phi(t) = e^{At}$ satisfies $\Phi' = A\Phi$ and $\Phi(0) = I$,
+      so that $\mathbf{x}(t) = e^{At}\mathbf{x}_0$ solves the IVP.</p>
+      <p>First, $\Phi(0) = \sum_{k\ge 0}\frac{(A\cdot 0)^k}{k!} = I$ since only the $k=0$ term survives.
+      The series $\sum_k \frac{(At)^k}{k!}$ converges absolutely for every $t$ because, in any submultiplicative
+      matrix norm, $\big\|\frac{(At)^k}{k!}\big\| \le \frac{(\|A\|\,|t|)^k}{k!}$, whose sum is $e^{\|A\|\,|t|}$.
+      Absolute convergence licenses term-by-term differentiation.</p>
+      $$ \frac{d}{dt}e^{At} = \frac{d}{dt}\sum_{k=0}^\infty \frac{A^k t^k}{k!}
+         = \sum_{k=1}^\infty \frac{A^k t^{k-1}}{(k-1)!}
+         = A\sum_{j=0}^\infty \frac{A^j t^j}{j!} = A\,e^{At}, $$
+      <p>where we shifted the index $j = k-1$ and factored one $A$ out the front. Therefore with
+      $\mathbf{x}(t) = e^{At}\mathbf{x}_0$ we get $\mathbf{x}' = A e^{At}\mathbf{x}_0 = A\mathbf{x}$ and
+      $\mathbf{x}(0) = \mathbf{x}_0$. By the uniqueness theorem of Section 1 this is the only solution. Finally, for
+      the forced equation, differentiating $\mathbf{x}(t) = e^{At}\mathbf{x}_0 + \int_0^t e^{A(t-s)}\mathbf{g}(s)\,ds$
+      with the Leibniz rule gives $\mathbf{x}' = A e^{At}\mathbf{x}_0 + e^{A\cdot 0}\mathbf{g}(t) + \int_0^t A e^{A(t-s)}\mathbf{g}(s)\,ds = A\mathbf{x} + \mathbf{g}(t)$,
+      confirming the variation of parameters formula.</p>
     </div></div>
   </details>
 

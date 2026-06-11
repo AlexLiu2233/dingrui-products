@@ -976,6 +976,33 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 1.3: A trigonometric estimate, $\sin(0.1)$ and $\cos(31^\circ)$</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>First the easy base point. With $f(x) = \sin x$ at $a = 0$ we have $f(0) = 0$ and $f'(0) = \cos 0 = 1$, so $L(x) = x$ and</p>
+      $$ \sin(0.1) \approx 0.1, \qquad \text{true value } 0.0998334\ldots $$
+      <p>The error is only about $1.7 \times 10^{-4}$, again governed by the discarded cubic term $-x^3/6 = -1.67\times 10^{-4}$.</p>
+      <p>Now a case where the right base point matters. To estimate $\cos(31^\circ)$, work in radians and choose $a = \pi/6 = 30^\circ$, where the cosine is known exactly. Here $f(x) = \cos x$, $f(\pi/6) = \tfrac{\sqrt{3}}{2}$, and $f'(x) = -\sin x$, so $f'(\pi/6) = -\tfrac12$. The increment is $x - a = 1^\circ = \pi/180 \approx 0.01745$ rad:</p>
+      $$ \cos(31^\circ) \approx \tfrac{\sqrt3}{2} - \tfrac12(0.01745) = 0.86603 - 0.00873 = 0.85730. $$
+      <p>The true value is $0.85717\ldots$, accurate to four decimals. Notice the radian conversion is essential: $f'(x) = -\sin x$ is the derivative only when $x$ is measured in radians.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Students often forget that linear approximation is only accurate <em>near the base point</em> and pick a base point $a$ that is convenient algebraically rather than close to the target. Estimating $\sqrt{4.1}$ from $a = 1$ instead of $a = 4$ gives $L(4.1) = 1 + \tfrac12(3.1) = 2.55$, badly off, because $4.1$ is far from $1$ and the tangent line has long since diverged from the curve. The fix: choose the nearest point where $f$ and $f'$ are exactly computable, so $|x - a|$ stays small. A second frequent slip is mixing degrees and radians: $\frac{d}{dx}\sin x = \cos x$ holds only when the angle is in radians.
+  </div>
+
+  <details>
+    <summary>Going deeper: proving the tangent line is the unique best linear fit</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>We prove the theorem stated above: among all linear functions $\ell(x) = c_0 + c_1(x-a)$, the linearization $L(x) = f(a) + f'(a)(x-a)$ is the unique one whose error is $o(x-a)$ as $x \to a$.</p>
+      <p><strong>Step 1: $L$ works.</strong> Write the error $E(x) = f(x) - L(x) = f(x) - f(a) - f'(a)(x-a)$. For $x \neq a$,</p>
+      $$ \frac{E(x)}{x - a} = \frac{f(x) - f(a)}{x - a} - f'(a) \ \longrightarrow\ f'(a) - f'(a) = 0 $$
+      <p>by the definition of the derivative. Hence $E(x) = o(x-a)$.</p>
+      <p><strong>Step 2: uniqueness.</strong> Suppose some $\ell(x) = c_0 + c_1(x-a)$ also has $f(x) - \ell(x) = o(x-a)$. Subtracting the two error statements, $L(x) - \ell(x) = o(x-a)$. But $L(x) - \ell(x) = (f(a) - c_0) + (f'(a) - c_1)(x-a)$ is itself linear. Letting $x \to a$ in $L(x) - \ell(x) \to 0$ forces $c_0 = f(a)$. With that constant gone, $\frac{(f'(a)-c_1)(x-a)}{x-a} = f'(a) - c_1 \to 0$ forces $c_1 = f'(a)$. Thus $\ell = L$. The simultaneous matching of value <em>and</em> slope is exactly what makes the tangent line special.</p>
+    </div></div>
+  </details>
+
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">Using the linearization of $f(x) = \sqrt{x}$ at $a = 100$, what is the estimate for $\sqrt{101}$?</div><span class="quiz-number">1.1</span></div>
     <div class="quiz-options">
@@ -1036,6 +1063,31 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 2.2: Percentage error through a power law</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>The period of a simple pendulum is $T = 2\pi\sqrt{L/g}$. If the length $L$ is known to within $1.5\%$, what is the resulting uncertainty in $T$? Write $T = 2\pi g^{-1/2} L^{1/2}$ and take the differential:</p>
+      $$ dT = 2\pi g^{-1/2} \cdot \tfrac12 L^{-1/2}\,dL = \frac{1}{2}\,\frac{2\pi\sqrt{L/g}}{L}\,dL = \frac{T}{2}\cdot\frac{dL}{L}. $$
+      <p>Dividing by $T$ gives the clean relative relation</p>
+      $$ \frac{dT}{T} = \frac{1}{2}\,\frac{dL}{L} = \frac12 (0.015) = 0.0075, $$
+      <p>so the period is uncertain by about $0.75\%$, half the relative error in the length. The general rule for a power law $y = k x^p$ is $\dfrac{dy}{y} = p\,\dfrac{dx}{x}$: relative errors scale by the exponent, which is why the disk area in Example 2.1 doubled the radius error and this pendulum halves the length error.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 2.3: Differential versus exact change</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Let $y = f(x) = x^3$ at $x = 2$ with $dx = \Delta x = 0.1$. Compare the differential with the true change.</p>
+      $$ dy = 3x^2\,dx = 3(4)(0.1) = 1.2, $$
+      $$ \Delta y = f(2.1) - f(2) = 9.261 - 8 = 1.261. $$
+      <p>The differential captures $1.2$ of the actual $1.261$; the leftover $0.061$ is the higher-order part. Indeed the exact expansion is $\Delta y = 3x^2\,dx + 3x\,(dx)^2 + (dx)^3 = 1.2 + 0.06 + 0.001 = 1.261$, and the discarded terms $3x(dx)^2 + (dx)^3 = 0.061$ are precisely the $o(dx)$ remainder from Section 1. As $dx$ shrinks, that remainder vanishes faster than $dy$ itself.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> A differential estimates the <em>change</em> $\Delta y$, not the value $y$ itself. Writing $f(x+dx) \approx dy$ is wrong; the correct statement is $f(x+dx) \approx f(x) + dy$. Equally common is to confuse absolute and relative error: $dV = 30$ cm$^3$ is an absolute error, while $dV/V = 30/1000 = 3\%$ is the relative error, and a problem asking for "the percentage error" wants the latter. Always read which one is requested, and remember to convert a percentage uncertainty into a decimal $dx/x$ before substituting.
+  </div>
+
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">The edge of a cube is measured as $10$ cm with possible error $0.1$ cm. Using differentials, the estimated error in the volume $V = s^3$ is about:</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1094,6 +1146,30 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 3.2: Solving a transcendental equation</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Find the root of $f(x) = \cos x - x$, which has no closed form. Here $f'(x) = -\sin x - 1$, so the iteration is</p>
+      $$ x_{n+1} = x_n - \frac{\cos x_n - x_n}{-\sin x_n - 1} = x_n + \frac{\cos x_n - x_n}{\sin x_n + 1}. $$
+      <p>Start from $x_0 = 1$ (a reasonable guess since $\cos 1 = 0.5403 < 1$, so the root lies below $1$):</p>
+      $$ x_1 = 1 + \frac{0.5403 - 1}{0.8415 + 1} = 0.7504, \quad x_2 = 0.7391, \quad x_3 = 0.7390851, \quad x_4 = 0.7390851. $$
+      <p>By the third step the iterate is stable to seven decimals at the Dottie number $0.7390851\ldots$, the unique real solution of $\cos x = x$. The fast stabilization is quadratic convergence in action.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 3.3: When Newton's method fails</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Newton's method is not guaranteed to converge from every start. Two classic failures:</p>
+      <p><strong>Cycling.</strong> For $f(x) = x^3 - 2x + 2$ starting at $x_0 = 0$: $f(0) = 2$, $f'(0) = -2$, so $x_1 = 0 - 2/(-2) = 1$. Then $f(1) = 1$, $f'(1) = 1$, so $x_2 = 1 - 1/1 = 0$. The iteration bounces $0 \to 1 \to 0 \to 1$ forever, never approaching the real root near $x = -1.77$.</p>
+      <p><strong>Flat derivative.</strong> If some iterate lands where $f'(x_n) \approx 0$, the update $-f(x_n)/f'(x_n)$ is enormous and the next guess is flung far away. For $f(x) = x^3 - x$ near $x = 1/\sqrt3$ (an inflection-flanked critical region), a poorly chosen start can diverge. The remedy is a good initial guess, often from a sketch or a bisection step, and a check that $f'$ is not small along the way.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> A frequent mistake is to write the update with the wrong sign or to invert the fraction, using $x_{n+1} = x_n - \frac{f'(x_n)}{f(x_n)}$. The derivative belongs in the denominator: $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$. A second pitfall is to assume convergence is automatic; it is only guaranteed for a start sufficiently close to a simple root. At a <em>double</em> root, where $f'(r) = 0$, convergence drops from quadratic to merely linear, so the digit-doubling intuition no longer holds.
+  </div>
+
   <div class="quiz" data-answer="0">
     <div class="quiz-header"><div class="quiz-q">Apply one step of Newton's method to $f(x) = x^2 - 5$ starting from $x_0 = 2$. What is $x_1$?</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1133,6 +1209,30 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p>The numerator and denominator both tend to $0$ in every case, but their relative rates differ, and only the rates determine the limit.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 4.2: Resolving a $\tfrac{0}{0}$ form by algebra alone</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Not every indeterminate form needs calculus. The limit</p>
+      $$ \lim_{x \to 3} \frac{x^2 - 9}{x - 3} $$
+      <p>is $\tfrac{0}{0}$ on substitution, but factoring the numerator removes the trouble:</p>
+      $$ \frac{x^2 - 9}{x - 3} = \frac{(x-3)(x+3)}{x-3} = x + 3 \ \longrightarrow\ 6. $$
+      <p>The form was indeterminate, but the cancellation reveals the answer is forced once the shared factor $(x-3)$ is removed. This is worth remembering: factoring, rationalizing, and using known limits such as $\lim_{x\to0}\frac{\sin x}{x}=1$ often beat L'Hopital and avoid messy derivatives.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 4.3: A determinate look-alike</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Consider $\displaystyle \lim_{x \to 0^+} \frac{1}{x} \cdot e^{-1/x}$. Substituting suggests $\infty \cdot 0$, which looks indeterminate. But substitute $t = 1/x \to +\infty$:</p>
+      $$ \frac{1}{x} e^{-1/x} = t\,e^{-t} = \frac{t}{e^t} \ \longrightarrow\ 0, $$
+      <p>since the exponential dominates any power. The point is that the <em>form</em> $0 \cdot \infty$ flagged that work was needed, but once rewritten the rate comparison settles it decisively. Form names tell you where to look, not what the answer is.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> Treating a determinate form as indeterminate (or vice versa) wastes effort or produces nonsense. The expression $\tfrac{c}{0}$ with $c \neq 0$ is <em>not</em> indeterminate; it has infinite magnitude, and you must instead examine one-sided signs to decide $+\infty$, $-\infty$, or a two-sided nonexistence. Likewise $\infty + \infty = \infty$ and $0^{\infty} = 0$ are determinate, so applying L'Hopital to them is meaningless. Always classify the form first; only the seven listed forms warrant the machinery of this unit.
+  </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">Which of the following is <em>not</em> an indeterminate form?</div><span class="quiz-number">4.1</span></div>
@@ -1193,6 +1293,30 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p>As $x \to a$, the intermediate point $c$ is squeezed to $a$ as well. If $f'(x)/g'(x) \to L$, then $f'(c)/g'(c) \to L$, and therefore $f(x)/g(x) \to L$. This is the rule.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 5.2: An $\tfrac{\infty}{\infty}$ form with a power and an exponential</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Evaluate $\displaystyle \lim_{x \to \infty} \frac{x^2}{e^x}$, an $\tfrac{\infty}{\infty}$ form. Differentiating top and bottom:</p>
+      $$ \lim_{x \to \infty} \frac{x^2}{e^x} = \lim_{x \to \infty} \frac{2x}{e^x}, $$
+      <p>still $\tfrac{\infty}{\infty}$, so apply the rule again:</p>
+      $$ = \lim_{x \to \infty} \frac{2}{e^x} = 0. $$
+      <p>Each pass lowers the power of $x$ by one while the exponential is untouched; after two passes the numerator is constant and the limit collapses to $0$. The same argument shows $\lim_{x\to\infty} x^n/e^x = 0$ for every fixed $n$: exponentials outgrow all polynomials.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 5.3: A one-sided limit done carefully</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Evaluate $\displaystyle \lim_{x \to 0^+} \frac{\sin x - x}{x^3}$. The form is $\tfrac{0}{0}$. Apply L'Hopital, re-checking the form at every step:</p>
+      $$ \lim_{x\to0^+}\frac{\sin x - x}{x^3} = \lim_{x\to0^+}\frac{\cos x - 1}{3x^2} \quad (\tfrac00) = \lim_{x\to0^+}\frac{-\sin x}{6x} \quad (\tfrac00) = \lim_{x\to0^+}\frac{-\cos x}{6} = -\frac16. $$
+      <p>Three applications were each justified by the $\tfrac00$ form persisting; the moment the form resolves (the last quotient is $\tfrac{-1}{6}$, not indeterminate) we stop and read off the value $-\tfrac16$. This matches the Taylor result $\sin x - x = -x^3/6 + \cdots$ from Section 7.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> The single most common mistake is applying L'Hopital without first confirming the $\tfrac00$ or $\tfrac{\infty}{\infty}$ form. For $\displaystyle\lim_{x\to0}\frac{\cos x}{x}$ substitution gives $\tfrac{1}{0}$, which is determinate (it diverges), yet a careless student differentiates to get $\lim \frac{-\sin x}{1} = 0$, a wrong answer. A second error is using the quotient rule: L'Hopital says differentiate numerator and denominator <em>separately</em>, $\frac{f'}{g'}$, never $\left(\frac{f}{g}\right)'$. Check the form, then differentiate top and bottom independently.
+  </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">Evaluate $\displaystyle \lim_{x \to 0} \frac{\ln(1 + x)}{x}$.</div><span class="quiz-number">5.1</span></div>
@@ -1261,6 +1385,30 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 6.3: A difference $\infty - \infty$</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Evaluate $\displaystyle \lim_{x \to 0^+} \left( \frac{1}{x} - \frac{1}{\sin x} \right)$, an $\infty - \infty$ form. Combine over a common denominator to make a single quotient:</p>
+      $$ \frac{1}{x} - \frac{1}{\sin x} = \frac{\sin x - x}{x \sin x} \quad (\text{form } \tfrac00). $$
+      <p>Now apply L'Hopital twice, or use $\sin x = x - x^3/6 + \cdots$ and $x\sin x = x^2 + \cdots$:</p>
+      $$ \frac{\sin x - x}{x \sin x} = \frac{-x^3/6 + \cdots}{x^2 + \cdots} = \frac{-x/6 + \cdots}{1 + \cdots} \ \longrightarrow\ 0. $$
+      <p>The difference of two blow-ups is finite, in fact zero, because the singular parts $1/x$ cancel and only a vanishing remainder survives.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 6.4: The form $\infty^0$</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Evaluate $\displaystyle \lim_{x \to \infty} x^{1/x}$, an $\infty^0$ form. Set $y = x^{1/x}$ and take logarithms:</p>
+      $$ \ln y = \frac{\ln x}{x} \quad (\text{form } \tfrac{\infty}{\infty}). $$
+      <p>By L'Hopital, $\displaystyle \lim_{x\to\infty}\frac{\ln x}{x} = \lim_{x\to\infty}\frac{1/x}{1} = 0$, so $\ln y \to 0$ and therefore $y \to e^0 = 1$. A base growing to infinity raised to a power shrinking to zero can balance exactly to $1$; the logarithm makes the competition explicit.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong> For the power forms $0^0$, $\infty^0$, $1^\infty$, students often guess the answer from the form, declaring $0^0 = 1$ or $1^\infty = 1$ outright. These are indeterminate precisely because the answer depends on the rates; only the logarithm computation settles it. A second slip is forgetting the final exponentiation: after finding $\lim \ln y = L$, the original limit is $e^{L}$, not $L$. In Example 6.2, $\ln y \to 1$ gives $y \to e$, not $1$. Take the log, evaluate, then undo the log.
+  </div>
+
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">To evaluate $\displaystyle \lim_{x \to 0^+} x^x$ (form $0^0$), the correct first step is to study:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1317,6 +1465,31 @@ body.lang-zh [data-lang="en"] { display: none; }
       <p>since $\sin x / x \to 0$. The lesson: a failed L'Hopital attempt is not a proof that the limit fails to exist. Always have algebraic methods in reserve.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 7.2: Quadratic approximation sharpens a linear estimate</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Return to $\sqrt{4.1}$ from Section 1, now with the second-order term. With $f(x) = \sqrt x$ at $a = 4$, $f'(x) = \tfrac12 x^{-1/2}$ and $f''(x) = -\tfrac14 x^{-3/2}$, so $f''(4) = -\tfrac14 \cdot \tfrac18 = -\tfrac{1}{32}$. The quadratic model is</p>
+      $$ f(x) \approx 2 + \tfrac14(x-4) + \tfrac{1}{2}\!\left(-\tfrac{1}{32}\right)(x-4)^2. $$
+      <p>At $x = 4.1$, $(x-4)^2 = 0.01$:</p>
+      $$ \sqrt{4.1} \approx 2 + 0.025 - \tfrac{1}{64}(0.01) = 2.025 - 0.00015625 = 2.0248438. $$
+      <p>Compared with the true $2.0248457\ldots$, the quadratic estimate is correct to seven decimals, versus four for the linear one. The negative $f''$ correctly pulls the overestimate back down, confirming the sign analysis: concave-down curves sit below their tangent lines.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 7.3: Choosing Taylor over repeated L'Hopital</summary>
+    <div class="detail-body"><div class="worked-solution">
+      <p>Evaluate $\displaystyle \lim_{x \to 0} \frac{e^x - 1 - x - \tfrac{x^2}{2}}{x^3}$. Repeated L'Hopital would require three differentiations of a growing expression; the series is immediate. Using $e^x = 1 + x + \tfrac{x^2}{2} + \tfrac{x^3}{6} + \cdots$,</p>
+      $$ e^x - 1 - x - \tfrac{x^2}{2} = \frac{x^3}{6} + \frac{x^4}{24} + \cdots, $$
+      $$ \frac{e^x - 1 - x - \tfrac{x^2}{2}}{x^3} = \frac16 + \frac{x}{24} + \cdots \ \longrightarrow\ \frac16. $$
+      <p>The lesson generalizes: when a limit is built from standard functions near $0$, expanding numerator and denominator to the first surviving power is usually faster and less error-prone than iterating L'Hopital, and it exposes <em>why</em> the answer is what it is.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong> A subtle trap is stopping a Taylor expansion too early. To find $\lim_{x\to0}\frac{x-\sin x}{x^3}$, using only $\sin x \approx x$ gives $\frac{x-x}{x^3} = 0$, which is wrong; the numerator's leading behavior lives in the cubic term, so you must expand $\sin x$ to order $x^3$. Always keep terms in the numerator down to the order of the denominator. A related mistake is applying L'Hopital to $\frac{x-\sin x}{x^3}$ and quitting after one step, when the form is still $\tfrac00$ and two more steps are needed.
+  </div>
 
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">The second-order term in the Taylor approximation of $f$ at $a$ tells you that, where $f''(a) > 0$, the linear approximation $L(x)$ near $a$ tends to:</div><span class="quiz-number">7.1</span></div>

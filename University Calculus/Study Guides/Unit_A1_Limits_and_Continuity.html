@@ -945,7 +945,9 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ \lim_{x \to a} f(x) = L \quad\Longleftrightarrow\quad \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = L $$
   </div>
 
-  <p>A limit can fail to exist in three standard ways: the one-sided limits disagree (a jump), the values grow without bound (an infinite limit), or the values oscillate and never settle (for example $\sin(1/x)$ as $x \to 0$).</p>
+  <p>A limit can fail to exist in three standard ways: the one-sided limits disagree (a jump), the values grow without bound (an infinite limit), or the values oscillate and never settle (for example $\sin(1/x)$ as $x \to 0$). Each failure mode has a distinct signature, and a large part of learning limits is learning to recognize which one you are looking at before you reach for algebra. The first two are detected by computing the one-sided limits separately; the third is detected by noticing that no matter how close $x$ comes to $a$, the values keep sweeping across a fixed range.</p>
+
+  <p>It is worth fixing the language precisely. The phrase "as $x$ gets close to $a$" never means $x = a$. We sample the function at inputs near $a$, watch the outputs, and ask whether those outputs are converging on a single target. A useful mental model is a numerical table: list values of $f$ at $x = a \pm 0.1,\ a \pm 0.01,\ a \pm 0.001$ and see whether the outputs stabilize. A table can build conviction, but it can never prove a limit, since a table samples only finitely many points and a limit is a claim about all nearby points at once. That gap is exactly what Section 5 closes with the epsilon-delta definition.</p>
 
   <details>
     <summary>Worked Example 1.1: a removable hole</summary>
@@ -958,6 +960,31 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Note $f(3)$ is undefined, yet the limit is $6$. The graph has a hole at $(3, 6)$.</p>
     </div></div>
   </details>
+
+  <details>
+    <summary>Worked Example 1.2: one-sided limits of a jump</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Let $f(x) = \dfrac{|x|}{x}$ and decide whether $\lim_{x \to 0} f(x)$ exists.</p>
+    <p>For $x &gt; 0$ we have $|x| = x$, so $f(x) = x/x = 1$. For $x &lt; 0$ we have $|x| = -x$, so $f(x) = -x/x = -1$. The two sides therefore approach different targets:</p>
+    $$ \lim_{x \to 0^+} f(x) = 1, \qquad \lim_{x \to 0^-} f(x) = -1. $$
+    <p>Because the one-sided limits disagree, the two-sided limit does not exist. This is the prototype of a jump discontinuity: each side is perfectly well behaved on its own, yet they refuse to meet. Note that $f(0)$ is also undefined here, but that is irrelevant; even if we forced a value at $0$, the limit would still fail because the sides disagree.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 1.3: oscillation with no limit</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Examine $\lim_{x \to 0} \sin\!\big(\tfrac{1}{x}\big)$.</p>
+    <p>As $x \to 0$, the input $\tfrac{1}{x}$ runs off to $\pm\infty$, so $\sin(\tfrac1x)$ cycles through its full range $[-1,1]$ infinitely often. Concretely, take two sequences approaching $0$:</p>
+    $$ x_n = \frac{1}{2\pi n} \ \Rightarrow\ \sin\!\Big(\tfrac{1}{x_n}\Big) = \sin(2\pi n) = 0, \qquad y_n = \frac{1}{2\pi n + \pi/2} \ \Rightarrow\ \sin\!\Big(\tfrac{1}{y_n}\Big) = 1. $$
+    <p>Both $x_n \to 0$ and $y_n \to 0$, yet the outputs sit at $0$ and at $1$ respectively. A single limit value $L$ would have to absorb both, which is impossible, so the limit does not exist. Contrast this with $\lim_{x\to 0} x\sin(\tfrac1x)$, which does equal $0$: there the wild oscillation is multiplied by $x \to 0$ and the Squeeze Theorem of Section 3 forces convergence.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A frequent mistake is concluding that $\lim_{x\to a} f(x) = f(a)$ simply by plugging in $a$. That is valid only when $f$ is continuous at $a$, which is a property to be checked, not assumed. In Worked Example 1.1 the substitution gives $0/0$, a meaningless symbol, not the answer. Treat direct substitution as a first probe: if it yields a finite number and the function is built from continuous pieces, that number is the limit; if it yields $0/0$ or $\infty - \infty$ or a similar indeterminate form, the substitution has told you only that more work is required.
+  </div>
 
   <details>
     <summary>Going deeper: why "$x \neq a$" is in the definition</summary>
@@ -1008,6 +1035,47 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 2.2: a compound fraction</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\lim_{x \to 0} \dfrac{\frac{1}{x+2} - \frac{1}{2}}{x}$.</p>
+    <p>Substitution gives $0/0$ again. The cure for a complex fraction is to combine the numerator over a common denominator first:</p>
+    $$ \frac{1}{x+2} - \frac{1}{2} = \frac{2 - (x+2)}{2(x+2)} = \frac{-x}{2(x+2)}. $$
+    <p>Now divide this by $x$, which is the same as multiplying by $\tfrac1x$:</p>
+    $$ \frac{1}{x}\cdot\frac{-x}{2(x+2)} = \frac{-1}{2(x+2)}. $$
+    <p>The troublesome $x$ has cancelled, so substitute:</p>
+    $$ \lim_{x \to 0} \frac{-1}{2(x+2)} = \frac{-1}{2\cdot 2} = -\frac{1}{4}. $$
+    <p>This is in fact the derivative of $1/x$ at $x = 2$ in disguise, which is why the same technique reappears throughout Unit A2.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 2.3: a one-sided limit forced by a square root</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Evaluate $\lim_{x \to 3^+} \dfrac{x - 3}{\sqrt{x - 3}}$.</p>
+    <p>The expression is defined only for $x &gt; 3$, since $\sqrt{x-3}$ needs a nonnegative argument, so a one-sided limit from the right is the only sensible question. For $x &gt; 3$ write $x - 3 = \big(\sqrt{x-3}\big)^2$:</p>
+    $$ \frac{x - 3}{\sqrt{x - 3}} = \frac{\big(\sqrt{x-3}\big)^2}{\sqrt{x-3}} = \sqrt{x - 3}. $$
+    <p>Therefore $\lim_{x \to 3^+} \sqrt{x - 3} = 0$. The lesson is that the domain itself can dictate that only a one-sided limit exists; asking for the two-sided limit here would be meaningless because the function is not defined to the left of $3$.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Going deeper: proving the Sum Law from the limit definition</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>The limit laws are not axioms; they are theorems that follow from the epsilon-delta definition of Section 5. Here is the proof of the Sum Law, which is the template for the rest. Suppose $\lim_{x\to a} f(x) = L$ and $\lim_{x\to a} g(x) = M$. We claim $\lim_{x\to a}\big(f(x) + g(x)\big) = L + M$.</p>
+    <p>Let $\varepsilon &gt; 0$. The target is $\big|(f(x)+g(x)) - (L+M)\big| &lt; \varepsilon$. By the triangle inequality,</p>
+    $$ \big|(f+g) - (L+M)\big| = \big|(f - L) + (g - M)\big| \le |f - L| + |g - M|. $$
+    <p>The strategy is to make each piece smaller than $\varepsilon/2$. Since $\lim f = L$, there is a $\delta_1 &gt; 0$ with $|f(x) - L| &lt; \varepsilon/2$ whenever $0 &lt; |x - a| &lt; \delta_1$. Since $\lim g = M$, there is a $\delta_2 &gt; 0$ with $|g(x) - M| &lt; \varepsilon/2$ whenever $0 &lt; |x - a| &lt; \delta_2$. Take $\delta = \min\{\delta_1, \delta_2\}$. Then for $0 &lt; |x - a| &lt; \delta$ both bounds hold at once, so</p>
+    $$ \big|(f+g) - (L+M)\big| \le |f - L| + |g - M| &lt; \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon. $$
+    <p>Since $\varepsilon$ was arbitrary, the Sum Law holds. Splitting the tolerance in half so the pieces recombine to $\varepsilon$ is the recurring trick; you will see it again in the proof of the Product Law and in many later arguments.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    The limit laws apply only when the individual limits exist as finite numbers. Splitting $\lim_{x\to 0}\big(\frac1x - \frac1x\big)$ into $\lim \frac1x - \lim \frac1x$ is illegal, because neither piece exists; the original expression is simply $\lim_{x\to 0} 0 = 0$. Likewise you may not apply the Quotient Law when the denominator's limit is $0$. Always confirm that each limit you are about to separate actually exists before you separate it.
+  </div>
+
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">$\displaystyle \lim_{x \to 2} \frac{x^2 - x - 2}{x - 2}$ equals:</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1048,6 +1116,35 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 3.1: a direct squeeze</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Show $\lim_{x \to 0} x^2 \sin\!\big(\tfrac{1}{x}\big) = 0$.</p>
+    <p>The factor $\sin(\tfrac1x)$ has no limit at $0$ (Worked Example 1.3), so the Product Law is useless here. Instead bound the bad factor. For every $x \neq 0$,</p>
+    $$ -1 \le \sin\!\Big(\tfrac{1}{x}\Big) \le 1. $$
+    <p>Multiply through by $x^2 \ge 0$, which preserves the inequalities:</p>
+    $$ -x^2 \le x^2 \sin\!\Big(\tfrac{1}{x}\Big) \le x^2. $$
+    <p>Both outer functions tend to $0$ as $x \to 0$, so the Squeeze Theorem forces the middle to $0$ as well. The oscillation never goes away, but the shrinking envelope $\pm x^2$ crushes it to zero.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 3.2: the $1 - \cos x$ limit derived</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Derive $\lim_{x \to 0} \dfrac{1 - \cos x}{x} = 0$ from the $\frac{\sin x}{x}$ limit.</p>
+    <p>Multiply numerator and denominator by the conjugate $1 + \cos x$ to convert the cosine into a sine via $1 - \cos^2 x = \sin^2 x$:</p>
+    $$ \frac{1 - \cos x}{x}\cdot\frac{1 + \cos x}{1 + \cos x} = \frac{1 - \cos^2 x}{x(1 + \cos x)} = \frac{\sin^2 x}{x(1 + \cos x)}. $$
+    <p>Now regroup into a known piece times a piece that substitutes cleanly:</p>
+    $$ \frac{\sin^2 x}{x(1 + \cos x)} = \frac{\sin x}{x}\cdot\frac{\sin x}{1 + \cos x}. $$
+    <p>As $x \to 0$ the first factor tends to $1$ and the second tends to $\dfrac{0}{1 + 1} = 0$, so the product tends to $1 \cdot 0 = 0$. The same conjugate trick gives $\lim_{x\to 0}\dfrac{1 - \cos x}{x^2} = \tfrac12$, a result you will reuse when computing the second derivative of cosine.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The Squeeze Theorem requires both bounding functions to share the <em>same</em> limit. If $g(x) \le f(x) \le h(x)$ but $\lim g = 0$ while $\lim h = 1$, the theorem says nothing; $f$ could converge to anything in between or fail to converge at all. A second pitfall is forgetting that multiplying an inequality by a negative quantity reverses it. In Worked Example 3.1 the multiplier $x^2$ is nonnegative, so the direction is safe; if you ever multiply a bound by a factor that could be negative, split into cases or bound by absolute values instead.
+  </div>
+
   <div class="quiz" data-answer="0">
     <div class="quiz-header"><div class="quiz-q">$\displaystyle \lim_{x \to 0} \frac{\sin 5x}{x}$ equals:</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1084,6 +1181,37 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>So $y = \tfrac32$ is a horizontal asymptote. Equal degrees give the ratio of leading coefficients.</p>
     </div></div>
   </details>
+
+  <p>The symbol $\infty$ is not a number, and writing $\lim_{x\to a} f(x) = \infty$ does not mean the limit exists in the ordinary sense. It is shorthand for a precise statement: $f(x)$ exceeds every bound as $x$ approaches $a$. When we say a limit "is $\infty$" we are describing a specific way the ordinary limit fails, not asserting convergence. The same caution applies to $x \to \infty$, which means $x$ increases past every bound, not that $x$ reaches some final value.</p>
+
+  <details>
+    <summary>Worked Example 4.2: a vertical asymptote and its sign</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Analyze $\lim_{x \to 2} \dfrac{1}{(x - 2)^2}$ and the two one-sided limits of $\lim_{x \to 2} \dfrac{1}{x - 2}$.</p>
+    <p>For the first, $(x-2)^2 &gt; 0$ for all $x \neq 2$ and shrinks to $0$, so the reciprocal grows without bound from both sides:</p>
+    $$ \lim_{x \to 2} \frac{1}{(x - 2)^2} = +\infty. $$
+    <p>For the second, the sign of $x - 2$ matters. From the right, $x - 2 \to 0^+$, so the reciprocal tends to $+\infty$; from the left, $x - 2 \to 0^-$, so it tends to $-\infty$:</p>
+    $$ \lim_{x \to 2^+} \frac{1}{x - 2} = +\infty, \qquad \lim_{x \to 2^-} \frac{1}{x - 2} = -\infty. $$
+    <p>Because the two sides disagree even in their infinite behavior, the two-sided limit does not exist (not even as $+\infty$). The line $x = 2$ is a vertical asymptote in both cases; the difference is whether the function dives the same way or opposite ways on the two sides.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 4.3: end behavior with a radical</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find $\lim_{x \to \infty} \dfrac{\sqrt{9x^2 + 1}}{x + 5}$.</p>
+    <p>The highest power inside the root is $x^2$, whose square root is $|x|$. For $x \to \infty$ we have $x &gt; 0$, so $|x| = x$. Factor $x^2$ out of the radical:</p>
+    $$ \sqrt{9x^2 + 1} = \sqrt{x^2\Big(9 + \tfrac{1}{x^2}\Big)} = |x|\sqrt{9 + \tfrac{1}{x^2}} = x\sqrt{9 + \tfrac{1}{x^2}} \quad (x &gt; 0). $$
+    <p>Divide numerator and denominator by $x$:</p>
+    $$ \frac{x\sqrt{9 + 1/x^2}}{x(1 + 5/x)} = \frac{\sqrt{9 + 1/x^2}}{1 + 5/x} \xrightarrow{\ x\to\infty\ } \frac{\sqrt{9}}{1} = 3. $$
+    <p>The horizontal asymptote is $y = 3$. Had the question asked for $x \to -\infty$, the step $|x| = x$ would have become $|x| = -x$, and the limit would have been $-3$; sign care with $\sqrt{x^2} = |x|$ is the whole subtlety here.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Treating $\infty$ as a number invites false arithmetic such as $\infty - \infty = 0$ or $\frac{\infty}{\infty} = 1$. Both are indeterminate. For instance $\lim_{x\to\infty}\big(\sqrt{x^2 + x} - x\big)$ is the indeterminate form $\infty - \infty$, and rationalizing reveals the true value $\tfrac12$, not $0$. Whenever an expression produces $\infty - \infty$, $\tfrac{\infty}{\infty}$, $0\cdot\infty$, or $\tfrac00$, stop and transform the expression algebraically before drawing any conclusion.
+  </div>
 
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">$\displaystyle \lim_{x \to \infty} \frac{4x + 1}{2x^2 - 7}$ equals:</div><span class="quiz-number">4.1</span></div>
@@ -1133,6 +1261,38 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 5.2: a reciprocal, where $\delta$ must guard the denominator</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Prove $\lim_{x \to 3} \dfrac{1}{x} = \dfrac{1}{3}$.</p>
+    <p><em>Scratch work.</em> We need to control</p>
+    $$ \left|\frac{1}{x} - \frac{1}{3}\right| = \left|\frac{3 - x}{3x}\right| = \frac{|x - 3|}{3\,|x|}. $$
+    <p>The factor $\tfrac{1}{|x|}$ blows up if $x$ is allowed near $0$, so first keep $x$ away from $0$. Require $\delta \le \tfrac32$, so $|x - 3| &lt; \tfrac32$ gives $\tfrac32 &lt; x &lt; \tfrac92$, hence $|x| &gt; \tfrac32$ and $\tfrac{1}{|x|} &lt; \tfrac23$. Then</p>
+    $$ \frac{|x - 3|}{3\,|x|} &lt; \frac{|x - 3|}{3}\cdot\frac{2}{3} = \frac{2}{9}\,|x - 3|. $$
+    <p>To push this below $\varepsilon$, also require $|x - 3| &lt; \tfrac{9}{2}\varepsilon$.</p>
+    <p><em>Proof.</em> Let $\varepsilon &gt; 0$ and set $\delta = \min\big\{\tfrac32,\ \tfrac92\varepsilon\big\}$. If $0 &lt; |x - 3| &lt; \delta$, then $|x| &gt; \tfrac32$ from the first bound, and</p>
+    $$ \left|\frac{1}{x} - \frac{1}{3}\right| = \frac{|x - 3|}{3\,|x|} &lt; \frac{2}{9}\,|x - 3| &lt; \frac{2}{9}\cdot\frac{9}{2}\varepsilon = \varepsilon. $$
+    <p>Since $\varepsilon$ was arbitrary, the limit is $\tfrac13$. The new idea beyond the quadratic case is that here $\delta$ does double duty: it bounds the slack factor <em>and</em> keeps $x$ inside the domain where $\tfrac1x$ is well behaved.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Going deeper: the negation, and disproving a limit</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>To show a limit does <em>not</em> equal a proposed value, negate the definition. The statement $\lim_{x\to a} f(x) = L$ fails when</p>
+    $$ \exists\, \varepsilon &gt; 0 \ \text{ such that } \ \forall\, \delta &gt; 0,\ \exists\, x \text{ with } 0 &lt; |x - a| &lt; \delta \text{ and } |f(x) - L| \ge \varepsilon. $$
+    <p>In words: there is one stubborn tolerance $\varepsilon$ that no $\delta$ can satisfy, because inside every punctured neighborhood of $a$ some point is thrown at least $\varepsilon$ away from $L$.</p>
+    <p>Apply this to disprove $\lim_{x\to 0}\dfrac{|x|}{x} = 1$. Take $\varepsilon = 1$. For any $\delta &gt; 0$, pick a point on the left, say $x = -\tfrac{\delta}{2}$, which satisfies $0 &lt; |x| &lt; \delta$. There $f(x) = -1$, so</p>
+    $$ |f(x) - 1| = |-1 - 1| = 2 \ge 1 = \varepsilon. $$
+    <p>Since this works for every $\delta$, the limit is not $1$. The same argument rules out every candidate $L$, which is the rigorous version of "the one-sided limits disagree, so no limit exists."</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    The quantifier order is not negotiable: $\varepsilon$ comes first and $\delta$ may depend on it. Choosing $\delta$ before seeing $\varepsilon$, or letting $\delta$ depend on $x$, breaks the proof. The whole point is that $\delta$ is a function of $\varepsilon$ alone, valid uniformly for all $x$ in the punctured neighborhood. A related slip is writing $\delta = \varepsilon$ for a limit like $\lim_{x\to 4}(3x - 5) = 7$; here the slope $3$ scales the error, so $\delta = \varepsilon/3$ is required, as Worked Example 5.1 shows.
+  </div>
+
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">To prove $\lim_{x\to 1}(5x - 2) = 3$ directly, which $\delta$ works for a given $\varepsilon &gt; 0$?</div><span class="quiz-number">5.1</span></div>
     <div class="quiz-options">
@@ -1177,6 +1337,33 @@ body.lang-zh [data-lang="en"] { display: none; }
     </div></div>
   </details>
 
+  <details>
+    <summary>Worked Example 6.2: making a piecewise function continuous</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find the value of $k$ that makes</p>
+    $$ f(x) = \begin{cases} \dfrac{x^2 - 9}{x - 3}, & x \neq 3 \\[6pt] k, & x = 3 \end{cases} $$
+    <p>continuous at $x = 3$.</p>
+    <p>Continuity requires $\lim_{x\to 3} f(x) = f(3) = k$. The limit was computed in Worked Example 1.1: cancelling the factor $x - 3$ gives $\lim_{x\to 3}(x + 3) = 6$. So we must set</p>
+    $$ k = 6. $$
+    <p>With $k = 6$ the removable hole is filled and $f$ becomes continuous everywhere. This is the precise meaning of "removable": there exists a single value we could assign at the point to repair the break. If the limit had failed to exist, as in a jump, no choice of $k$ could make $f$ continuous there.</p>
+    </div></div>
+  </details>
+
+  <details>
+    <summary>Worked Example 6.3: the IVT applied to a fixed point</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Show that $\cos x = x$ has a solution in $\big(0, \tfrac{\pi}{2}\big)$.</p>
+    <p>Direct algebra cannot solve this transcendental equation, so reframe it as a root problem. Let $g(x) = \cos x - x$, which is continuous on $\big[0, \tfrac{\pi}{2}\big]$ as a difference of continuous functions. Evaluate the endpoints:</p>
+    $$ g(0) = \cos 0 - 0 = 1 &gt; 0, \qquad g\!\Big(\tfrac{\pi}{2}\Big) = \cos\tfrac{\pi}{2} - \tfrac{\pi}{2} = -\tfrac{\pi}{2} &lt; 0. $$
+    <p>Since $0$ lies between $g(0)$ and $g(\tfrac{\pi}{2})$, the IVT gives a $c \in \big(0, \tfrac{\pi}{2}\big)$ with $g(c) = 0$, that is $\cos c = c$. This is the standard proof that the equation $\cos x = x$ has a fixed point; numerically $c \approx 0.739$, but the IVT delivers existence with no computation at all.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The IVT requires continuity on the <em>entire</em> closed interval. Applying it across a vertical asymptote produces nonsense. For example $f(x) = \tfrac1x$ has $f(-1) = -1$ and $f(1) = 1$, yet there is no $c \in (-1, 1)$ with $f(c) = 0$, because $f$ is discontinuous at $0$. Always confirm the function is continuous on all of $[a, b]$ before invoking the theorem. A second subtlety: the IVT guarantees at least one $c$, not exactly one; a wiggly function can cross the level $N$ many times.
+  </div>
+
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">$f(x) = \dfrac{x^2 - 1}{x - 1}$ has, at $x = 1$, a discontinuity that is:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1206,6 +1393,31 @@ body.lang-zh [data-lang="en"] { display: none; }
   </div>
 
   <p>Both hypotheses are needed. On the open interval $(0,1)$ the continuous function $f(x) = 1/x$ has no maximum. On $[0,1]$ a function with a single jump can skip its supremum and attain no maximum. The EVT is the theorem that makes the closed-interval optimization method of Unit A7 valid: a continuous function on $[a,b]$ must take its extreme values, and they can only occur at critical points or endpoints.</p>
+
+  <details>
+    <summary>Worked Example 7.1: why each EVT hypothesis is necessary</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Each hypothesis of the EVT is doing real work, which the following counterexamples make concrete.</p>
+    <p><em>Dropping closedness.</em> On $(0, 1]$ the function $f(x) = 1/x$ is continuous, but as $x \to 0^+$ it grows without bound, so it has no maximum. The supremum is $+\infty$ and is never attained. The closed left endpoint is exactly what the EVT needs and the open interval denies.</p>
+    <p><em>Dropping boundedness.</em> On the unbounded interval $[0, \infty)$ the continuous function $f(x) = x$ has no maximum. A finite interval is essential.</p>
+    <p><em>Dropping continuity.</em> On the closed interval $[0, 1]$ define $f(x) = x$ for $x &lt; 1$ and $f(1) = 0$. The values approach $1$ but never reach it, since the only point that could supply the value $1$ has been redefined to $0$. The supremum $1$ is not attained, so no maximum exists. A single discontinuity is enough to break the conclusion.</p>
+    <p>The three counterexamples show that continuity, closedness, and boundedness are jointly, not redundantly, responsible for the guarantee.</p>
+    </div></div>
+  </details>
+
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    The EVT guarantees that a maximum and a minimum <em>exist</em>; it does not say where they are, and it gives no formula. Students sometimes conclude that the extreme values must occur at the endpoints. They need not: for $f(x) = -x^2$ on $[-1, 1]$ the maximum is at the interior point $x = 0$. The correct procedure, developed in Unit A7, is to test all critical points and both endpoints, then compare. The EVT is what guarantees this finite checklist actually contains the answer.
+  </div>
+
+  <details>
+    <summary>Going deeper: why continuity forces boundedness</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>The EVT has two halves: a continuous function on $[a,b]$ is <em>bounded</em>, and it actually <em>attains</em> its bounds. The boundedness half already reveals why the closed interval is indispensable.</p>
+    <p>Suppose, for contradiction, that $f$ is continuous on $[a,b]$ but unbounded above. Then for each $n$ there is a point $x_n \in [a,b]$ with $f(x_n) &gt; n$. The sequence $(x_n)$ lives in the closed bounded interval $[a,b]$, so by the Bolzano-Weierstrass property it has a subsequence $x_{n_k}$ converging to some limit $c \in [a,b]$. Here the closedness matters: the limit $c$ cannot escape the interval. By continuity, $f(x_{n_k}) \to f(c)$, a finite number. But by construction $f(x_{n_k}) &gt; n_k \to \infty$, so $f(x_{n_k})$ is unbounded. A sequence cannot converge to a finite value and diverge to infinity at once, a contradiction. Hence $f$ is bounded above; the same argument bounds it below.</p>
+    <p>Once $f$ is known to be bounded, let $M = \sup_{[a,b]} f$. A second argument, again using a convergent subsequence and continuity, produces a point where $f$ equals $M$, which completes the EVT. The point to retain is that the closed bounded interval is precisely what keeps the limit point $c$ inside the domain, which is why both hypotheses, dropped in Worked Example 7.1, were fatal.</p>
+    </div></div>
+  </details>
 
   <details>
     <summary>Going deeper: the bridge to the derivative</summary>

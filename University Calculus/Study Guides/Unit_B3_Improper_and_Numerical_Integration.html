@@ -960,6 +960,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\int_{0}^{\infty} e^{-x}\,dx=\lim_{t\to\infty}\big[-e^{-x}\big]_{0}^{t}=\lim_{t\to\infty}\big(1-e^{-t}\big)=1.$$
   <p>Exponential decay always wins: $\int_{0}^{\infty}e^{-kx}\,dx=1/k$ for any $k>0$.</p>
   </div></div></details>
+  <details><summary>Worked Example 1.3: a doubly infinite integral, done correctly</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\int_{-\infty}^{\infty}\dfrac{dx}{1+x^{2}}$. Split at the convenient point $c=0$ and require each half to converge on its own:</p>
+  $$\int_{0}^{\infty}\frac{dx}{1+x^{2}}=\lim_{t\to\infty}\big[\arctan x\big]_{0}^{t}=\lim_{t\to\infty}\arctan t=\frac{\pi}{2}.$$
+  <p>By the evenness of the integrand the left half contributes the same amount,</p>
+  $$\int_{-\infty}^{0}\frac{dx}{1+x^{2}}=\lim_{t\to-\infty}\big[\arctan x\big]_{t}^{0}=0-\Big(-\frac{\pi}{2}\Big)=\frac{\pi}{2}.$$
+  <p>Both halves are finite, so the doubly infinite integral converges to $\tfrac{\pi}{2}+\tfrac{\pi}{2}=\pi$. The key discipline is that we evaluated two independent one-sided limits rather than a single symmetric limit.</p>
+  </div></div></details>
+  <details><summary>Worked Example 1.4: a tail that decays yet still diverges</summary><div class="detail-body"><div class="worked-solution">
+  <p>Test $\int_{2}^{\infty}\dfrac{dx}{x\ln x}$. The integrand tends to $0$, yet the substitution $u=\ln x$, $du=dx/x$ exposes the truth:</p>
+  $$\int_{2}^{\infty}\frac{dx}{x\ln x}=\lim_{t\to\infty}\int_{\ln 2}^{\ln t}\frac{du}{u}=\lim_{t\to\infty}\big[\ln u\big]_{\ln 2}^{\ln t}=\lim_{t\to\infty}\big(\ln\ln t-\ln\ln 2\big)=\infty.$$
+  <p>The integral diverges. The lesson of Example 1.1 generalizes: an integrand vanishing at infinity is necessary but never sufficient for convergence. Here the decay is slower than every $1/x^{p}$ with $p>1$, so the area still accumulates without bound.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Students often "evaluate" $\int_{-\infty}^{\infty} x\,dx$ as $0$, reasoning that the integrand is odd. But $\int_{0}^{\infty} x\,dx=\lim_{t\to\infty}\tfrac{t^{2}}{2}=\infty$ diverges, so by the splitting rule the whole integral diverges and has no value. The symmetric limit $\lim_{t\to\infty}\int_{-t}^{t} x\,dx=0$ is the Cauchy principal value, a different and weaker notion. The correct procedure is always to split and demand each piece converge separately.</div>
+  <details><summary>Going deeper: a clean proof of the $p$ test at infinity</summary><div class="detail-body"><div class="worked-solution">
+  <p>We prove that $\int_{1}^{\infty} x^{-p}\,dx$ converges if and only if $p>1$. For $p\ne 1$, the antiderivative of $x^{-p}$ is $\dfrac{x^{1-p}}{1-p}$, so</p>
+  $$\int_{1}^{t} x^{-p}\,dx=\frac{x^{1-p}}{1-p}\Big|_{1}^{t}=\frac{1}{1-p}\big(t^{1-p}-1\big).$$
+  <p>As $t\to\infty$, the term $t^{1-p}$ tends to $0$ when the exponent $1-p<0$, that is $p>1$, and tends to $\infty$ when $1-p>0$, that is $p<1$. Hence</p>
+  $$\int_{1}^{\infty} x^{-p}\,dx=\frac{1}{p-1}\quad(p>1),\qquad \text{and diverges for }p<1.$$
+  <p>The remaining case $p=1$ is exactly Example 1.1: the antiderivative is $\ln t$, which diverges. So convergence holds precisely for $p>1$, and the boundary case $p=1$ falls on the divergent side. The mirror test at $0$ in the next section is proved the same way, with the limit taken as $t\to 0^{+}$ instead, which is why the inequality flips.</p>
+  </div></div></details>
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">For which values of $p$ does $\int_{1}^{\infty} x^{-p}\,dx$ converge?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$p>1$</div><div class="quiz-opt" data-idx="1">$p<1$</div><div class="quiz-opt" data-idx="2">$p\ge 1$</div><div class="quiz-opt" data-idx="3">all $p$</div></div><div class="quiz-explain correct-exp">Correct. The antiderivative is $x^{1-p}/(1-p)$ for $p\ne 1$, whose limit at infinity is finite exactly when $1-p<0$, that is $p>1$. At $p=1$ the antiderivative is $\ln x$, which diverges.</div><div class="quiz-explain wrong-exp">Recall the antiderivative $x^{1-p}/(1-p)$. Its limit as $x\to\infty$ is finite only when the exponent $1-p$ is negative, so $p>1$. The case $p=1$ gives $\ln x$, which diverges.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -987,6 +1007,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\int_{0}^{1}x^{-2}\,dx=\lim_{t\to 0^{+}}\Big[-\frac{1}{x}\Big]_{t}^{1}=\lim_{t\to 0^{+}}\Big(-1+\frac{1}{t}\Big)=\infty.$$
   <p>The integral diverges. Naively applying the power rule across $x=0$ gives the absurd answer $-2$; this is exactly the trap that the split is designed to expose.</p>
   </div></div></details>
+  <details><summary>Worked Example 2.3: a borderline logarithmic singularity</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\int_{0}^{1}\ln x\,dx$. The integrand is unbounded as $x\to 0^{+}$ (it tends to $-\infty$), so this is improper at the left endpoint. Integrate by parts with $u=\ln x$, $dv=dx$:</p>
+  $$\int_{t}^{1}\ln x\,dx=\big[x\ln x-x\big]_{t}^{1}=(0-1)-(t\ln t-t)=-1-t\ln t+t.$$
+  <p>As $t\to 0^{+}$ the product $t\ln t\to 0$ (the linear factor beats the logarithm), so</p>
+  $$\int_{0}^{1}\ln x\,dx=\lim_{t\to 0^{+}}\big(-1-t\ln t+t\big)=-1.$$
+  <p>The integral converges even though the integrand is unbounded, because the singularity is only logarithmic, far milder than any power $x^{-p}$ with $p\ge 1$.</p>
+  </div></div></details>
+  <details><summary>Worked Example 2.4: singular and infinite at once</summary><div class="detail-body"><div class="worked-solution">
+  <p>Some integrals are improper for both reasons. Consider $\int_{0}^{\infty}\dfrac{dx}{\sqrt{x}\,(1+x)}$, unbounded at $x=0$ and over an infinite interval. Split at $x=1$ to isolate the two defects:</p>
+  $$\int_{0}^{\infty}\frac{dx}{\sqrt{x}\,(1+x)}=\int_{0}^{1}\frac{dx}{\sqrt{x}\,(1+x)}+\int_{1}^{\infty}\frac{dx}{\sqrt{x}\,(1+x)}.$$
+  <p>Near $0$ the integrand behaves like $x^{-1/2}$, an integrable singularity ($p=\tfrac12<1$); near infinity it behaves like $x^{-3/2}$, a convergent tail ($p=\tfrac32>1$). Both pieces converge, so the whole does. The substitution $x=u^{2}$, $dx=2u\,du$ even gives the exact value:</p>
+  $$\int_{0}^{\infty}\frac{2u\,du}{u\,(1+u^{2})}=2\int_{0}^{\infty}\frac{du}{1+u^{2}}=2\cdot\frac{\pi}{2}=\pi.$$
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Applying the Fundamental Theorem of Calculus across an interior singularity gives nonsense. For $\int_{-1}^{1} x^{-2}\,dx$, writing $[-x^{-1}]_{-1}^{1}=-1-1=-2$ ignores that the antiderivative is undefined at $x=0$; the integral in fact diverges. Always scan the interval for points where the integrand is unbounded before you antidifferentiate, and split there.</div>
+  <details><summary>Going deeper: the $p$ test at $0$, and why the inequality flips</summary><div class="detail-body"><div class="worked-solution">
+  <p>We show $\int_{0}^{1} x^{-p}\,dx$ converges if and only if $p<1$. For $p\ne 1$,</p>
+  $$\int_{t}^{1} x^{-p}\,dx=\frac{x^{1-p}}{1-p}\Big|_{t}^{1}=\frac{1}{1-p}\big(1-t^{1-p}\big).$$
+  <p>Now let $t\to 0^{+}$. The term $t^{1-p}$ tends to $0$ when the exponent $1-p>0$, that is $p<1$, and blows up when $1-p<0$, that is $p>1$. Therefore</p>
+  $$\int_{0}^{1} x^{-p}\,dx=\frac{1}{1-p}\quad(p<1),\qquad\text{and diverges for }p>1.$$
+  <p>The case $p=1$ gives $[\ln x]_{t}^{1}=-\ln t\to\infty$, divergent. Compare with the test at infinity: there we needed $t^{1-p}\to 0$ as $t\to\infty$, which forced $1-p<0$. Near $0$ we need $t^{1-p}\to 0$ as $t\to 0^{+}$, which forces $1-p>0$. The same algebra, evaluated at opposite ends of the real line, flips the inequality. This duality is worth memorizing: small $p$ tames a singularity at $0$, large $p$ tames a tail at infinity.</p>
+  </div></div></details>
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The integral $\displaystyle\int_{-1}^{1}\frac{dx}{x^{2}}$:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">equals $-2$</div><div class="quiz-opt" data-idx="1">equals $2$</div><div class="quiz-opt" data-idx="2">equals $0$ by symmetry</div><div class="quiz-opt" data-idx="3">diverges</div></div><div class="quiz-explain correct-exp">Correct. The integrand is unbounded at the interior point $x=0$. Splitting there, each half is a $p=2$ integral at $0$ and diverges, so the whole integral diverges. Applying the power rule blindly gives the false value $-2$.</div><div class="quiz-explain wrong-exp">The integrand has a singularity at the interior point $x=0$, so you must split the interval there before integrating. Each piece is a $p=2$ improper integral at $0$, which diverges, so the full integral diverges.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1012,6 +1053,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\lim_{x\to\infty}\frac{x/\sqrt{x^{4}-1}}{1/x}=\lim_{x\to\infty}\frac{x^{2}}{\sqrt{x^{4}-1}}=\lim_{x\to\infty}\frac{1}{\sqrt{1-x^{-4}}}=1.$$
   <p>The limit is finite and positive, so the given integral behaves like $\int_2^{\infty}dx/x$, which diverges. Hence the given integral diverges.</p>
   </div></div></details>
+  <details><summary>Worked Example 3.3: a trigonometric numerator bounded by comparison</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that $\int_{1}^{\infty}\dfrac{2+\sin x}{x^{2}}\,dx$ converges. The numerator oscillates but stays bounded: $1\le 2+\sin x\le 3$ for all $x$. Hence</p>
+  $$0<\frac{2+\sin x}{x^{2}}\le \frac{3}{x^{2}}.$$
+  <p>Since $\int_{1}^{\infty} 3x^{-2}\,dx=3$ converges, the direct comparison test forces the smaller integral to converge as well. Notice the integrand is not monotone and has no elementary antiderivative, yet comparison settles convergence cleanly without any evaluation.</p>
+  </div></div></details>
+  <details><summary>Worked Example 3.4: comparison at a singular endpoint</summary><div class="detail-body"><div class="worked-solution">
+  <p>The comparison test works equally well for integrands singular at a finite endpoint. Decide whether $\int_{0}^{1}\dfrac{dx}{\sqrt{x+x^{3}}}$ converges. Near $x=0$ the cube term is negligible, so the integrand behaves like $x^{-1/2}$. Use limit comparison with $g(x)=x^{-1/2}$:</p>
+  $$\lim_{x\to 0^{+}}\frac{1/\sqrt{x+x^{3}}}{1/\sqrt{x}}=\lim_{x\to 0^{+}}\sqrt{\frac{x}{x+x^{3}}}=\lim_{x\to 0^{+}}\frac{1}{\sqrt{1+x^{2}}}=1.$$
+  <p>The limit is finite and positive, and $\int_{0}^{1} x^{-1/2}\,dx$ converges ($p=\tfrac12<1$), so the given integral converges too. The limit comparison test reads off convergence from leading behavior at the trouble spot, whether that spot is $\infty$ or a finite singularity.</p>
+  </div></div></details>
+  <div class="concept-box orange"><strong>Common error.</strong> The comparison test for integrals requires the integrand to be nonnegative (or eventually of one sign). Applying direct comparison to a sign-changing integrand such as $\frac{\sin x}{x}$ is invalid: $\big|\frac{\sin x}{x}\big|\le\frac1x$ does not prove convergence because $\int_1^{\infty}\frac{dx}{x}$ diverges, and in fact $\int_1^{\infty}\frac{\sin x}{x}\,dx$ converges only conditionally. For signed integrands, test absolute convergence or use a sharper tool; a one-sided bound alone decides nothing.</div>
+  <details><summary>Going deeper: proof of the direct comparison test</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $0\le f(x)\le g(x)$ for $x\ge a$ and $\int_a^{\infty} g$ converges. Define the tail-area function $F(t)=\int_a^{t} f(x)\,dx$. Because $f\ge 0$, $F$ is nondecreasing in $t$. Because $f\le g$,</p>
+  $$F(t)=\int_a^{t} f\le \int_a^{t} g\le \int_a^{\infty} g=:M<\infty.$$
+  <p>So $F$ is nondecreasing and bounded above by $M$. A monotone function bounded above has a finite limit (the monotone convergence property of the real numbers), hence $\lim_{t\to\infty} F(t)$ exists and is at most $M$. That limit is exactly $\int_a^{\infty} f$, which therefore converges. The divergence half is the contrapositive: if $\int_a^{\infty} f$ diverged while $f\le g$, then $\int_a^{\infty} g$ would have to diverge as well. The argument is the integral twin of the comparison test for series, with "bounded monotone partial sums" replaced by "bounded monotone partial areas."</p>
+  </div></div></details>
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">To test $\displaystyle\int_{1}^{\infty}\frac{dx}{x^{3}+x}$ by limit comparison, the natural comparison function is:</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$1/x$</div><div class="quiz-opt" data-idx="1">$1/x^{3}$</div><div class="quiz-opt" data-idx="2">$1/x^{2}$</div><div class="quiz-opt" data-idx="3">$e^{-x}$</div></div><div class="quiz-explain correct-exp">Correct. For large $x$ the dominant term in the denominator is $x^{3}$, so the integrand behaves like $1/x^{3}$. The limit of the ratio is $1$, and since $\int_1^{\infty}x^{-3}\,dx$ converges ($p=3$), so does the original.</div><div class="quiz-explain wrong-exp">Match the leading behavior of the denominator for large $x$. Here $x^{3}+x\approx x^{3}$, so the integrand is asymptotic to $1/x^{3}$, which is the right yardstick.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1027,8 +1084,28 @@ body.lang-zh [data-lang="en"] { display: none; }
   <details><summary>Worked Example 4.1: estimating $\int_0^1 e^{-x^2}\,dx$ with $n=4$</summary><div class="detail-body"><div class="worked-solution">
   <p>This integrand has no elementary antiderivative, so numerical methods are essential. With $n=4$, $h=0.25$ and nodes $0,0.25,0.5,0.75,1$:</p>
   $$f(0)=1,\ f(0.25)=0.9394,\ f(0.5)=0.7788,\ f(0.75)=0.5698,\ f(1)=0.3679.$$
-  $$T_4=\frac{0.25}{2}\big[1+2(0.9394)+2(0.7788)+2(0.5698)+0.3679\big]=0.125\,(6.1439)=0.7430.$$
+  $$T_4=\frac{0.25}{2}\big[1+2(0.9394)+2(0.7788)+2(0.5698)+0.3679\big]=0.125\,(5.9439)=0.7430.$$
   <p>The true value is about $0.7468$, so the error is roughly $0.0038$. Doubling $n$ would cut the error by about a factor of four.</p>
+  </div></div></details>
+  <details><summary>Worked Example 4.2: trapezoidal rule from a table of data</summary><div class="detail-body"><div class="worked-solution">
+  <p>Numerical rules shine when $f$ is known only at sample points. A sensor reports a flow rate $f(t)$ (in liters per second) at five equally spaced times over $[0,4]$ seconds, $h=1$:</p>
+  $$f(0)=0,\ f(1)=3,\ f(2)=5,\ f(3)=4,\ f(4)=2.$$
+  <p>The total volume is $\int_0^4 f\,dt$, estimated by</p>
+  $$T_4=\frac{1}{2}\big[f(0)+2f(1)+2f(2)+2f(3)+f(4)\big]=\frac12\big[0+6+10+8+2\big]=\frac12(26)=13\ \text{liters}.$$
+  <p>No formula for $f$ is needed; the trapezoidal rule only consumes the sampled values, which is why it is the workhorse of experimental data reduction.</p>
+  </div></div></details>
+  <details><summary>Worked Example 4.3: over- or under-estimate from concavity</summary><div class="detail-body"><div class="worked-solution">
+  <p>Estimate $\int_0^1 e^{x}\,dx$ with $n=2$, $h=0.5$, and decide whether the estimate is high or low. Nodes $0,0.5,1$ give $f=1,\ e^{0.5}\approx1.6487,\ e\approx2.7183$:</p>
+  $$T_2=\frac{0.5}{2}\big[1+2(1.6487)+2.7183\big]=0.25\,(7.0157)=1.7539.$$
+  <p>The exact value is $e-1\approx1.7183$, so $T_2$ overestimates. That is expected: $e^{x}$ is concave up, so each chord lies above the curve and every trapezoid overshoots. For a concave-up integrand the trapezoidal rule always overestimates, and for concave-down it always underestimates, a fact worth using as a sanity check.</p>
+  </div></div></details>
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent slip is to multiply by $h/2$ but forget to double the interior values, computing $\frac{h}{2}[f(x_0)+f(x_1)+\cdots+f(x_n)]$. That formula is wrong: only the two endpoints carry weight $1$, while every interior node, shared by two trapezoids, carries weight $2$. A quick check is that the weights must sum to $2n$ before the $h/2$ factor, since $\frac{h}{2}\cdot 2n=nh=b-a$ reproduces the area of a constant function $f\equiv 1$.</div>
+  <details><summary>Going deeper: deriving the rule by summing trapezoid areas</summary><div class="detail-body"><div class="worked-solution">
+  <p>On the subinterval $[x_{i-1},x_i]$, replace $f$ by the chord joining $(x_{i-1},f(x_{i-1}))$ and $(x_i,f(x_i))$. The region under that chord is a trapezoid of parallel sides $f(x_{i-1})$ and $f(x_i)$ and width $h$, so its area is $\tfrac{h}{2}\big(f(x_{i-1})+f(x_i)\big)$. Summing over all $n$ subintervals,</p>
+  $$T_n=\sum_{i=1}^{n}\frac{h}{2}\big(f(x_{i-1})+f(x_i)\big)=\frac{h}{2}\sum_{i=1}^{n}\big(f(x_{i-1})+f(x_i)\big).$$
+  <p>In this telescoped sum, $f(x_0)$ and $f(x_n)$ each appear once (only one trapezoid touches each endpoint), whereas every interior $f(x_k)$ appears twice (it is the right end of one trapezoid and the left end of the next). Collecting like terms,</p>
+  $$T_n=\frac{h}{2}\Big[f(x_0)+2f(x_1)+\cdots+2f(x_{n-1})+f(x_n)\Big],$$
+  <p>which is precisely the boxed formula. The $1,2,2,\dots,2,1$ weight pattern is not a convention to memorize; it is forced by how many trapezoids share each node.</p>
   </div></div></details>
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In the trapezoidal rule, the interior nodes carry weight:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$1$</div><div class="quiz-opt" data-idx="1">$4$</div><div class="quiz-opt" data-idx="2">$2$</div><div class="quiz-opt" data-idx="3">alternating $1$ and $2$</div></div><div class="quiz-explain correct-exp">Correct. Each interior node is shared by two adjacent trapezoids, so its contributions add to weight $2$. Only the two endpoints, belonging to a single trapezoid each, carry weight $1$.</div><div class="quiz-explain wrong-exp">Interior nodes are shared by two adjacent trapezoids, so their weights add to $2$. The alternating $1,4,2,4$ pattern belongs to Simpson's rule, not the trapezoidal rule.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1052,6 +1129,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>On $[-h,h]$ Simpson's rule reads $\tfrac{h}{3}\big(f(-h)+4f(0)+f(h)\big)$. Test it on $f(x)=x^3$. The exact integral is $\int_{-h}^{h}x^3\,dx=0$ by oddness. The rule gives</p>
   $$\frac{h}{3}\big((-h)^3+4\cdot 0+h^3\big)=\frac{h}{3}(0)=0,$$
   <p>which is exact. More generally the rule is built to be exact on quadratics (three nodes determine a parabola), and the cubic term integrates to zero on the symmetric interval and is also reproduced exactly. This extra degree of exactness is why Simpson's error scales like $h^4$ rather than $h^2$.</p>
+  </div></div></details>
+  <details><summary>Worked Example 5.2: Simpson with $n=2$ on $\int_1^3 \tfrac1x\,dx$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Approximate $\int_1^3\dfrac{dx}{x}$, whose exact value is $\ln 3\approx1.0986$. With $n=2$, $h=1$, nodes $1,2,3$ and $f=1,\tfrac12,\tfrac13$:</p>
+  $$S_2=\frac{1}{3}\Big[f(1)+4f(2)+f(3)\Big]=\frac13\Big[1+4\cdot\tfrac12+\tfrac13\Big]=\frac13\Big[1+2+\tfrac13\Big]=\frac13\cdot\frac{10}{3}=\frac{10}{9}\approx1.1111.$$
+  <p>Even with a single parabola the estimate is within about $0.013$ of $\ln 3$. The trapezoidal rule at the same two nodes would give $\tfrac12[1+2\cdot\tfrac12+\tfrac13]\cdot\dots$ a coarser $1.1667$, so Simpson's curvature correction already buys an order of magnitude.</p>
+  </div></div></details>
+  <details><summary>Worked Example 5.3: Simpson's rule is exact on a quadratic</summary><div class="detail-body"><div class="worked-solution">
+  <p>Apply Simpson's rule to $\int_0^2 x^{2}\,dx$ with $n=2$, $h=1$. Nodes $0,1,2$ give $f=0,1,4$:</p>
+  $$S_2=\frac{1}{3}\big[0+4(1)+4\big]=\frac{1}{3}(8)=\frac{8}{3}.$$
+  <p>The exact value is $\int_0^2 x^2\,dx=\tfrac{8}{3}$, so Simpson's rule is exact, as it must be: the rule integrates the interpolating parabola exactly, and for a quadratic integrand the parabola is the function itself. This is the qualitative content of the error bound to come, whose $f^{(4)}$ factor vanishes for any cubic.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> A common mistake is to apply Simpson's rule with an odd number of subintervals, or to scramble the weight pattern. The weights run $1,4,2,4,2,\dots,4,1$: a $4$ on every odd-indexed node and a $2$ on every even-indexed interior node, with $h/3$ (not $h/2$) out front. If $n$ is odd the parabolas cannot pair up the subintervals, and the formula simply does not apply; use $n$ even, or pair Simpson on the first $n-1$ pieces with a separate rule on the last one.</div>
+  <details><summary>Going deeper: deriving the $1,4,1$ weights from a parabola</summary><div class="detail-body"><div class="worked-solution">
+  <p>Fit a parabola $p(x)=Ax^{2}+Bx+C$ through three equally spaced nodes, taken as $-h,0,h$ for convenience. Then $p(-h)=Ah^{2}-Bh+C$, $p(0)=C$, $p(h)=Ah^{2}+Bh+C$. Integrate the parabola exactly:</p>
+  $$\int_{-h}^{h} p(x)\,dx=\Big[\frac{A}{3}x^{3}+\frac{B}{2}x^{2}+Cx\Big]_{-h}^{h}=\frac{2A}{3}h^{3}+2Ch.$$
+  <p>Now express this in terms of the three sampled values. A short computation gives</p>
+  $$\frac{h}{3}\big[p(-h)+4p(0)+p(h)\big]=\frac{h}{3}\big[(Ah^{2}-Bh+C)+4C+(Ah^{2}+Bh+C)\big]=\frac{h}{3}\big[2Ah^{2}+6C\big]=\frac{2A}{3}h^{3}+2Ch.$$
+  <p>The two expressions agree exactly, so $\tfrac{h}{3}(1,4,1)$ reproduces the integral of any parabola through the three nodes. Patching one such formula over each consecutive pair of subintervals and adding, the shared interior nodes (counted once on each side) acquire weight $2$, while the strictly interior odd nodes keep weight $4$. That assembly produces the global pattern $1,4,2,4,2,\dots,4,1$.</p>
   </div></div></details>
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Simpson's rule requires that the number of subintervals $n$ be:</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">even</div><div class="quiz-opt" data-idx="1">odd</div><div class="quiz-opt" data-idx="2">a multiple of $3$</div><div class="quiz-opt" data-idx="3">prime</div></div><div class="quiz-explain correct-exp">Correct. Each parabola spans two adjacent subintervals, so the subintervals must pair up evenly. An odd $n$ would leave one subinterval without a partner, breaking the construction.</div><div class="quiz-explain wrong-exp">Each parabolic arc covers two subintervals at once, so they must pair up. That forces $n$ to be even; an odd $n$ would leave a leftover subinterval.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1078,6 +1173,28 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$E_T=-\frac{h^3}{12}\sum_{i=1}^{n} f''(\xi_i)=-\frac{h^2}{12}\,(b-a)\,\overline{f''},$$
   <p>where $\overline{f''}$ is an average of second derivatives. Bounding $|\overline{f''}|\le K_2$ and writing $h=(b-a)/n$ gives the stated bound with its $1/12$ and $1/n^2$. The same Taylor bookkeeping, carried to fourth order with the cubic terms cancelling, produces Simpson's $1/180$ and $1/n^4$.</p>
   </div></div></details>
+  <details><summary>Worked Example 6.2: a guaranteed Simpson error bound</summary><div class="detail-body"><div class="worked-solution">
+  <p>Bound the error of Simpson's rule with $n=4$ for $\int_0^1 e^{x}\,dx$. Here $f(x)=e^{x}$ so $f^{(4)}(x)=e^{x}$, and on $[0,1]$ the maximum is $K_4=e^{1}=e\approx2.7183$. With $b-a=1$,</p>
+  $$|E_S|\le\frac{K_4\,(b-a)^{5}}{180\,n^{4}}=\frac{e\cdot 1}{180\cdot 4^{4}}=\frac{2.7183}{180\cdot 256}=\frac{2.7183}{46080}\approx 5.9\times 10^{-5}.$$
+  <p>So Simpson's rule with just four subintervals is guaranteed accurate to within about $0.00006$. The actual error is even smaller; the bound is a worst-case guarantee, not the realized error.</p>
+  </div></div></details>
+  <details><summary>Worked Example 6.3: comparing the two rules at fixed cost</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $\int_0^{\pi} \sin x\,dx=2$, compare the worst-case errors of the two rules with $n=10$. Here $|f''|\le 1$ and $|f^{(4)}|\le 1$, with $b-a=\pi$. The trapezoidal bound is</p>
+  $$|E_T|\le\frac{1\cdot\pi^{3}}{12\cdot 10^{2}}=\frac{\pi^{3}}{1200}\approx 0.0258,$$
+  <p>while Simpson's bound is</p>
+  $$|E_S|\le\frac{1\cdot\pi^{5}}{180\cdot 10^{4}}=\frac{\pi^{5}}{1.8\times 10^{6}}\approx 1.70\times 10^{-4}.$$
+  <p>At identical cost (eleven function evaluations) Simpson's bound is roughly $150$ times smaller. The gap widens as $n$ grows, because the bounds scale like $1/n^{2}$ versus $1/n^{4}$.</p>
+  </div></div></details>
+  <div class="concept-box orange"><strong>Common error.</strong> The constant $K_2$ (or $K_4$) is the maximum of $|f''|$ (or $|f^{(4)}|$) over the whole interval, not its value at one endpoint or at the midpoint. Plugging in a single point can drastically understate the bound. Find the extreme value of the relevant derivative across all of $[a,b]$; if the derivative is monotone, that maximum sits at an endpoint, but in general you must check critical points too.</div>
+  <details><summary>Going deeper: a local trapezoidal error term by Taylor expansion</summary><div class="detail-body"><div class="worked-solution">
+  <p>On one subinterval $[0,h]$, compare the exact integral with one trapezoid. Write the antiderivative $F$ with $F'=f$ and Taylor-expand about $0$. The exact integral is $\int_0^h f=F(h)-F(0)$. Expanding $F(h)=F(0)+hf(0)+\tfrac{h^{2}}{2}f'(0)+\tfrac{h^{3}}{6}f''(0)+O(h^{4})$ gives</p>
+  $$\int_0^h f=hf(0)+\frac{h^{2}}{2}f'(0)+\frac{h^{3}}{6}f''(0)+O(h^{4}).$$
+  <p>The trapezoid uses $\tfrac{h}{2}\big(f(0)+f(h)\big)$; expanding $f(h)=f(0)+hf'(0)+\tfrac{h^{2}}{2}f''(0)+O(h^{3})$,</p>
+  $$\frac{h}{2}\big(f(0)+f(h)\big)=hf(0)+\frac{h^{2}}{2}f'(0)+\frac{h^{3}}{4}f''(0)+O(h^{4}).$$
+  <p>Subtracting, the $f(0)$ and $f'(0)$ terms cancel and the local error is</p>
+  $$\int_0^h f-\frac{h}{2}\big(f(0)+f(h)\big)=\Big(\frac16-\frac14\Big)h^{3}f''(0)+O(h^{4})=-\frac{h^{3}}{12}f''(0)+O(h^{4}).$$
+  <p>So each subinterval contributes a local error of size $\tfrac{h^{3}}{12}|f''|$. Summing $n$ of these and using $nh=b-a$ converts the local $h^{3}$ into the global $\tfrac{(b-a)^{3}}{12n^{2}}K_2$ of the boxed bound. The factor $\tfrac16-\tfrac14=-\tfrac{1}{12}$ is the origin of the mysterious $1/12$.</p>
+  </div></div></details>
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">If you double $n$ in Simpson's rule, the error bound is reduced by approximately a factor of:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$2$</div><div class="quiz-opt" data-idx="1">$4$</div><div class="quiz-opt" data-idx="2">$8$</div><div class="quiz-opt" data-idx="3">$16$</div></div><div class="quiz-explain correct-exp">Correct. Simpson's error bound scales like $1/n^4$. Replacing $n$ by $2n$ multiplies the bound by $1/2^4=1/16$, so the error drops by about a factor of $16$.</div><div class="quiz-explain wrong-exp">Simpson's bound carries $n^4$ in the denominator. Doubling $n$ multiplies the denominator by $2^4=16$, so the error falls by roughly that factor. The factor of $4$ is the trapezoidal rule, whose bound goes like $1/n^2$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1099,6 +1216,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Consider $\int_{0}^{1}\dfrac{\ln x}{\sqrt{x}}\,dx$. The integrand is singular at $0$ and negative there, so a crude comparison is awkward. Substitute $x=t^2$, $dx=2t\,dt$:</p>
   $$\int_{0}^{1}\frac{\ln x}{\sqrt{x}}\,dx=\int_{0}^{1}\frac{2\ln t}{t}\,(2t)\,dt=4\int_{0}^{1}\ln t\,dt.$$
   <p>Now $\int_0^1 \ln t\,dt=\big[t\ln t-t\big]_0^1=-1$ (the boundary term $t\ln t\to 0$ as $t\to 0^+$), so the original integral equals $-4$. The substitution converted a singular integrand into one with a removable boundary term, after which an elementary antiderivative finished the job.</p>
+  </div></div></details>
+  <details><summary>Worked Example 7.2: a Laplace transform as an improper integral</summary><div class="detail-body"><div class="worked-solution">
+  <p>Many transforms used in engineering are improper integrals. Compute the Laplace transform of $f(t)=1$, namely $\int_0^{\infty} e^{-st}\,dt$ for $s>0$:</p>
+  $$\int_0^{\infty} e^{-st}\,dt=\lim_{b\to\infty}\Big[-\frac{1}{s}e^{-st}\Big]_0^{b}=\lim_{b\to\infty}\frac{1}{s}\big(1-e^{-sb}\big)=\frac{1}{s}.$$
+  <p>The integral converges precisely because $s>0$ makes the exponential decay; for $s\le 0$ it diverges. The convergence condition $s>0$ is exactly the region of definition of the transform, a recurring theme: an improper integral is a function of its parameters, defined only where it converges.</p>
+  </div></div></details>
+  <details><summary>Worked Example 7.3: substitution tames an infinite interval before quadrature</summary><div class="detail-body"><div class="worked-solution">
+  <p>To evaluate $\int_1^{\infty}\dfrac{dx}{x^{2}\sqrt{1+x}}$ numerically, the infinite interval is inconvenient. The substitution $x=1/u$, $dx=-u^{-2}\,du$ maps $[1,\infty)$ to the finite interval $(0,1]$:</p>
+  $$\int_1^{\infty}\frac{dx}{x^{2}\sqrt{1+x}}=\int_{1}^{0}\frac{-u^{-2}\,du}{u^{-2}\sqrt{1+1/u}}=\int_0^{1}\frac{du}{\sqrt{1+1/u}}=\int_0^{1}\frac{\sqrt{u}\,du}{\sqrt{u+1}}.$$
+  <p>The transformed integrand is bounded and smooth on $[0,1]$, so Simpson's rule converges rapidly on it. This is the standard recipe for numerical work with improper integrals: change variables so the infinite tail or the singularity becomes a tame finite interval, then apply a quadrature rule whose error bounds you can trust.</p>
+  </div></div></details>
+  <div class="concept-box red"><strong>Common error.</strong> Do not hand a textbook error bound to a numerical rule applied directly to an improper integral. The trapezoidal and Simpson bounds assume $f$ (and its derivatives up to fourth order) are bounded on $[a,b]$. If the integrand is unbounded at an endpoint, or the interval is infinite, those derivatives are unbounded and the bounds are vacuous. First convert the improper integral into a proper one by a limit, a split, or a substitution; only then is numerical integration with its error estimates legitimate.</div>
+  <details><summary>Going deeper: the integral test, linking series and improper integrals</summary><div class="detail-body"><div class="worked-solution">
+  <p>The same machinery decides convergence of series. Let $f$ be positive, continuous, and decreasing on $[1,\infty)$ with $a_n=f(n)$. Because $f$ decreases, on each subinterval $[n,n+1]$ we have $f(n+1)\le f(x)\le f(n)$, so integrating across $[n,n+1]$ traps the term:</p>
+  $$f(n+1)\le\int_n^{n+1} f(x)\,dx\le f(n).$$
+  <p>Summing the right inequality from $n=1$ to $N-1$ and the left from $n=1$ to $N-1$ gives</p>
+  $$\sum_{n=2}^{N} a_n\le\int_1^{N} f(x)\,dx\le\sum_{n=1}^{N-1} a_n.$$
+  <p>Letting $N\to\infty$, the partial sums and the improper integral are squeezed together: $\sum a_n$ converges if and only if $\int_1^{\infty} f$ converges. Applied to $f(x)=x^{-p}$ this recovers the $p$ series test from the $p$ integral test, the cleanest possible bridge between the two halves of this unit. The harmonic series $\sum 1/n$ diverges for exactly the reason $\int_1^{\infty}dx/x$ does.</p>
   </div></div></details>
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The integral $\displaystyle\int_{0}^{\infty} e^{-x^{2}}\,dx$ converges because, for large $x$, the integrand is dominated by:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$1/x^{2}$</div><div class="quiz-opt" data-idx="1">$e^{-x}$</div><div class="quiz-opt" data-idx="2">$1/x$</div><div class="quiz-opt" data-idx="3">a constant</div></div><div class="quiz-explain correct-exp">Correct. For $x\ge 1$ we have $x^2\ge x$, so $e^{-x^2}\le e^{-x}$. Since $\int_1^{\infty} e^{-x}\,dx$ converges, the direct comparison test gives convergence of the Gaussian integral.</div><div class="quiz-explain wrong-exp">For $x\ge 1$, $x^2\ge x$ forces $e^{-x^2}\le e^{-x}$, and $\int_1^{\infty}e^{-x}\,dx$ converges. That exponential bound, not a power of $x$, is what controls the tail.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

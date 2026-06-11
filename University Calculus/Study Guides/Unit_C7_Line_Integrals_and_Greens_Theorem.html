@@ -952,6 +952,10 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p><strong>Remark.</strong> Sketching a field by hand means evaluating $\mathbf{F}$ at a grid of points and drawing the resulting arrows. Long arrows mark fast flow or strong force; the arrows are tangent to the trajectories that a particle carried by the field would follow.</p>
 
+  <p>Two families of fields recur so often that they deserve names. A <em>central</em> or radial field has the form $\mathbf{F} = g(r)\,\langle x, y\rangle$, where $r = \sqrt{x^2+y^2}$; every arrow points along the line through the origin. A <em>rotational</em> field has the form $\mathbf{F} = h(r)\,\langle -y, x\rangle$; every arrow is perpendicular to that line. Gravitational and electrostatic fields are central with $g(r) = c/r^3$, so their magnitude $|\mathbf{F}| = c/r^2$ follows the inverse-square law. The velocity field of a rotating disk is rotational with $h(r)$ constant.</p>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often confuse a vector field $\mathbf{F}(x,y) = \langle P, Q\rangle$ with the scalar function $f(x,y)$ whose graph is a surface. A vector field has no graph as a surface: it is a rule that plants an arrow at each point of the plane. In particular $\nabla f$ is a vector field, but $f$ itself is a scalar function. Writing $\nabla f$ as a single number, or drawing $\mathbf{F}$ as a height, are both category mistakes that cause sign and dimension errors downstream.</div>
+
   <details><summary>Worked Example 1.1: sketching a radial field</summary><div class="detail-body"><div class="worked-solution">
   <p>Describe $\mathbf{F}(x,y) = \langle x, y\rangle$.</p>
   <p>At the point $(x,y)$ the vector is $\langle x,y\rangle$, which is the position vector itself. So every arrow points directly away from the origin, and its length is $\sqrt{x^2+y^2}$, the distance from the origin.</p>
@@ -963,6 +967,15 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Describe $\mathbf{F}(x,y) = \langle -y, x\rangle$.</p>
   <p>The vector $\langle -y, x\rangle$ is perpendicular to the position vector $\langle x, y\rangle$, since their dot product is $(-y)(x) + (x)(y) = 0$. Its length is again $\sqrt{x^2+y^2}$.</p>
   <p>So the arrows circle the origin counterclockwise with speed proportional to the radius. This is the model velocity field of a rigid rotation. As we will see in Section 6, this field is not a gradient field.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a gravitational field and its potential</summary><div class="detail-body"><div class="worked-solution">
+  <p>Show that the inverse-square field $\mathbf{F} = -\dfrac{\langle x, y, z\rangle}{(x^2+y^2+z^2)^{3/2}}$ is the gradient of $f = \dfrac{1}{\sqrt{x^2+y^2+z^2}}$ away from the origin.</p>
+  <p>Write $r = \sqrt{x^2+y^2+z^2}$, so $f = r^{-1}$. Differentiate using $\dfrac{\partial r}{\partial x} = \dfrac{x}{r}$:</p>
+  $$ \frac{\partial f}{\partial x} = -r^{-2}\cdot\frac{\partial r}{\partial x} = -r^{-2}\cdot\frac{x}{r} = -\frac{x}{r^3}. $$
+  <p>By symmetry the $y$ and $z$ partials are $-y/r^3$ and $-z/r^3$, so</p>
+  $$ \nabla f = -\frac{\langle x, y, z\rangle}{r^3} = \mathbf{F}. $$
+  <p>This is exactly the Newtonian gravitational and Coulomb electrostatic field. Because it is a gradient field, the work it does between two points depends only on the radial distances of those points, a fact we exploit in Sections 4 and 5.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which vector field is the gradient of $f(x,y) = x^2 y$?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\langle 2xy,\, x^2 y\rangle$</div><div class="quiz-opt" data-idx="1">$\langle 2xy,\, x^2\rangle$</div><div class="quiz-opt" data-idx="2">$\langle x^2,\, 2xy\rangle$</div><div class="quiz-opt" data-idx="3">$\langle 2x,\, x^2\rangle$</div></div><div class="quiz-explain correct-exp">Correct. $\partial f/\partial x = 2xy$ and $\partial f/\partial y = x^2$, so $\nabla f = \langle 2xy,\, x^2\rangle$.</div><div class="quiz-explain wrong-exp">Differentiate $f = x^2 y$ with respect to $x$ (treating $y$ constant) and then with respect to $y$. The result is $\langle 2xy,\, x^2\rangle$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -992,6 +1005,35 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \int_C 2x\,ds = \int_0^1 2t\,\sqrt{1+4t^2}\,dt. $$
   <p>Let $u = 1 + 4t^2$, so $du = 8t\,dt$ and $2t\,dt = \tfrac14\,du$. As $t$ runs $0 \to 1$, $u$ runs $1 \to 5$.</p>
   $$ \int_0^1 2t\sqrt{1+4t^2}\,dt = \frac14\int_1^5 \sqrt{u}\,du = \frac14\cdot\frac{2}{3}\,u^{3/2}\Big|_1^5 = \frac{1}{6}\left(5^{3/2} - 1\right). $$
+  </div></div></details>
+
+  <details><summary>Worked Example 2.2: mass of a wire on a helix</summary><div class="detail-body"><div class="worked-solution">
+  <p>A wire follows the helix $\mathbf{r}(t) = \langle \cos t,\ \sin t,\ t\rangle$, $0 \le t \le 2\pi$, with linear density $\rho(x,y,z) = z$. Find its mass.</p>
+  <p>The velocity is $\mathbf{r}'(t) = \langle -\sin t,\ \cos t,\ 1\rangle$, so the speed is constant:</p>
+  $$ |\mathbf{r}'(t)| = \sqrt{\sin^2 t + \cos^2 t + 1} = \sqrt{2}. $$
+  <p>On the curve $z = t$, so $\rho = t$ and</p>
+  $$ \text{mass} = \int_C z\,ds = \int_0^{2\pi} t\,\sqrt{2}\,dt = \sqrt{2}\cdot\frac{t^2}{2}\Big|_0^{2\pi} = \sqrt{2}\,\frac{(2\pi)^2}{2} = 2\sqrt{2}\,\pi^2. $$
+  <p>The constant speed of a helix is what makes its arc-length integrals so clean: $ds = \sqrt{2}\,dt$ throughout.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: a piecewise path</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int_C x\,ds$ where $C$ goes from $(0,0)$ to $(1,0)$ along the $x$-axis, then from $(1,0)$ to $(1,1)$ straight up.</p>
+  <p>A line integral over a piecewise curve is the sum of the integrals over each smooth piece. On $C_1$ use $\mathbf{r}(t) = \langle t, 0\rangle$, $0 \le t \le 1$, so $ds = dt$ and the integrand is $x = t$:</p>
+  $$ \int_{C_1} x\,ds = \int_0^1 t\,dt = \tfrac12. $$
+  <p>On $C_2$ use $\mathbf{r}(t) = \langle 1, t\rangle$, $0 \le t \le 1$, so again $ds = dt$ but now $x = 1$ throughout:</p>
+  $$ \int_{C_2} x\,ds = \int_0^1 1\,dt = 1. $$
+  <p>Adding the pieces gives $\int_C x\,ds = \tfrac12 + 1 = \tfrac32$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> A frequent slip is replacing $ds = |\mathbf{r}'(t)|\,dt$ with simply $dt$, or with $dx$. The factor $|\mathbf{r}'(t)|$ is the speed and it is rarely $1$. Only when the curve is parametrized by arc length, so that $|\mathbf{r}'(t)| = 1$, does $ds = dt$ hold. Dropping the speed factor turns a true arc-length integral into a coordinate integral and gives the wrong length, mass, or average value. Always compute $|\mathbf{r}'(t)| = \sqrt{x'(t)^2 + y'(t)^2}$ before integrating.</div>
+
+  <details><summary>Going deeper: why the scalar line integral is parametrization independent</summary><div class="detail-body"><div class="worked-solution">
+  <p>Claim: $\int_C f\,ds$ does not depend on how $C$ is parametrized. Suppose $\mathbf{r}(t)$, $a \le t \le b$, and a second parametrization $\mathbf{R}(\tau) = \mathbf{r}(\phi(\tau))$, $\alpha \le \tau \le \beta$, where $\phi$ is a smooth increasing change of variable with $\phi(\alpha) = a$ and $\phi(\beta) = b$.</p>
+  <p>By the chain rule $\mathbf{R}'(\tau) = \mathbf{r}'(\phi(\tau))\,\phi'(\tau)$, and since $\phi' > 0$ we have $|\mathbf{R}'(\tau)| = |\mathbf{r}'(\phi(\tau))|\,\phi'(\tau)$. Substitute into the second integral:</p>
+  $$ \int_\alpha^\beta f\big(\mathbf{R}(\tau)\big)\,|\mathbf{R}'(\tau)|\,d\tau = \int_\alpha^\beta f\big(\mathbf{r}(\phi(\tau))\big)\,|\mathbf{r}'(\phi(\tau))|\,\phi'(\tau)\,d\tau. $$
+  <p>Now set $t = \phi(\tau)$, so $dt = \phi'(\tau)\,d\tau$, and the limits become $a$ to $b$:</p>
+  $$ = \int_a^b f\big(\mathbf{r}(t)\big)\,|\mathbf{r}'(t)|\,dt. $$
+  <p>The two integrals are equal, so the value belongs to the curve, not the parametrization. The same substitution with a decreasing $\phi$ (a reversal) introduces $|\phi'| = -\phi'$ and swaps the limits, and the two sign changes cancel, which is why reversing direction also leaves $\int_C f\,ds$ unchanged.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For the line integral $\int_C f\,ds$, the arc-length element along $\mathbf{r}(t)$ equals:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\mathbf{r}'(t)\,dt$</div><div class="quiz-opt" data-idx="1">$\mathbf{r}(t)\,dt$</div><div class="quiz-opt" data-idx="2">$|\mathbf{r}'(t)|\,dt$</div><div class="quiz-opt" data-idx="3">$|\mathbf{r}(t)|\,dt$</div></div><div class="quiz-explain correct-exp">Correct. $ds = |\mathbf{r}'(t)|\,dt$ is the speed times $dt$, the scalar length of the displacement.</div><div class="quiz-explain wrong-exp">Arc length accumulates the magnitude of the velocity: $ds = |\mathbf{r}'(t)|\,dt$, a scalar.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1031,6 +1073,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Traversing the same arc backward, from $(-1,0)$ to $(1,0)$, gives $-\pi$. The magnitude is fixed by the path; the sign is fixed by the orientation.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.3: the integral can depend on the path</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute $\displaystyle\int_C y\,dx$ for $\mathbf{F} = \langle y, 0\rangle$ along two different routes from $(0,0)$ to $(1,1)$.</p>
+  <p><strong>Route 1, the straight segment.</strong> Use $\mathbf{r}(t) = \langle t, t\rangle$, $0 \le t \le 1$, so $dx = dt$ and $y = t$:</p>
+  $$ \int_{C_1} y\,dx = \int_0^1 t\,dt = \tfrac12. $$
+  <p><strong>Route 2, along the parabola</strong> $y = x^2$. Use $\mathbf{r}(t) = \langle t, t^2\rangle$, so $dx = dt$ and $y = t^2$:</p>
+  $$ \int_{C_2} y\,dx = \int_0^1 t^2\,dt = \tfrac13. $$
+  <p>The two answers differ, $\tfrac12 \ne \tfrac13$, so the work done by $\mathbf{F} = \langle y, 0\rangle$ depends on the path, not just the endpoints. This field is therefore <em>not</em> conservative, a point Section 5 makes precise: indeed $P_y = 1 \ne 0 = Q_x$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Do not evaluate $\mathbf{F}$ at the parameter, $\mathbf{F}(t)$, and forget to substitute the curve into the field. You must plug $\mathbf{r}(t)$ into $\mathbf{F}$ to get $\mathbf{F}(\mathbf{r}(t))$ before dotting with $\mathbf{r}'(t)$. A second frequent mistake is to dot the field with the position $\mathbf{r}(t)$ instead of the velocity $\mathbf{r}'(t)$. The work integrand is $\mathbf{F}(\mathbf{r}(t)) \cdot \mathbf{r}'(t)$, the field along the curve dotted with the velocity.</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">If $\int_C \mathbf{F}\cdot d\mathbf{r} = 7$, what is $\int_{-C} \mathbf{F}\cdot d\mathbf{r}$, where $-C$ is $C$ traversed in the opposite direction?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$7$</div><div class="quiz-opt" data-idx="1">$0$</div><div class="quiz-opt" data-idx="2">$14$</div><div class="quiz-opt" data-idx="3">$-7$</div></div><div class="quiz-explain correct-exp">Correct. Reversing orientation negates $\mathbf{r}'(t)$, so the work integral changes sign: $-7$.</div><div class="quiz-explain wrong-exp">The vector line integral is orientation-dependent: reversing the path negates the integral, giving $-7$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">In differential form, $\int_C \mathbf{F}\cdot d\mathbf{r}$ for $\mathbf{F} = \langle P, Q\rangle$ equals:</div><span class="quiz-number">3.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int_C P\,dx + Q\,dy$</div><div class="quiz-opt" data-idx="1">$\int_C P\,dy + Q\,dx$</div><div class="quiz-opt" data-idx="2">$\int_C P\,dx - Q\,dy$</div><div class="quiz-opt" data-idx="3">$\int_C Q\,dx + P\,dy$</div></div><div class="quiz-explain correct-exp">Correct. $\mathbf{F}\cdot d\mathbf{r} = \langle P,Q\rangle\cdot\langle dx, dy\rangle = P\,dx + Q\,dy$.</div><div class="quiz-explain wrong-exp">The dot product pairs $P$ with $dx$ and $Q$ with $dy$: $\int_C P\,dx + Q\,dy$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1067,6 +1120,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \int_C \mathbf{F}\cdot d\mathbf{r} = f(3,1) - f(0,0) = (9)(1) - 0 = 9. $$
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: path independence checked two ways</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $\mathbf{F} = \langle 2xy, x^2\rangle$ with potential $f = x^2 y$, verify the answer of Worked Example 4.1 by integrating directly along the straight segment from $(0,0)$ to $(3,1)$.</p>
+  <p>Parametrize $\mathbf{r}(t) = \langle 3t, t\rangle$, $0 \le t \le 1$, so $\mathbf{r}'(t) = \langle 3, 1\rangle$. On the path $\mathbf{F} = \langle 2(3t)(t),\ (3t)^2\rangle = \langle 6t^2,\ 9t^2\rangle$.</p>
+  $$ \mathbf{F}\cdot\mathbf{r}'(t) = (6t^2)(3) + (9t^2)(1) = 27t^2. $$
+  $$ \int_C \mathbf{F}\cdot d\mathbf{r} = \int_0^1 27t^2\,dt = 27\cdot\frac{t^3}{3}\Big|_0^1 = 9. $$
+  <p>The direct computation agrees with the potential method. The Fundamental Theorem saves the parametrization work entirely once a potential is in hand, which is why recognizing a gradient field is so valuable.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: a three-dimensional potential</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute $\displaystyle\int_C \mathbf{F}\cdot d\mathbf{r}$ for $\mathbf{F} = \langle yz,\ xz,\ xy\rangle$ from $(1,1,1)$ to $(2,3,4)$.</p>
+  <p>Look for $f$ with $f_x = yz$. Integrating in $x$ gives $f = xyz + h(y,z)$. Then $f_y = xz + h_y = xz$ forces $h_y = 0$, and $f_z = xy + h_z = xy$ forces $h_z = 0$, so $h$ is constant and $f = xyz$.</p>
+  $$ \int_C \mathbf{F}\cdot d\mathbf{r} = f(2,3,4) - f(1,1,1) = (2)(3)(4) - (1)(1)(1) = 24 - 1 = 23. $$
+  <p>No path was specified, and none is needed: the field is a gradient, so the answer is fixed by the endpoints.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The Fundamental Theorem applies only when $\mathbf{F}$ is actually a gradient field. Plugging endpoints into a potential for a non-conservative field gives a wrong answer, because no potential exists. Always confirm $\mathbf{F} = \nabla f$ first, either by exhibiting $f$ or by passing the component test of Section 5. A related slip is to compute $f(A) - f(B)$ with the endpoints reversed; the theorem is $f(\text{end}) - f(\text{start})$, matching the orientation of $C$.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">If $\mathbf{F} = \nabla f$, then $\oint_C \mathbf{F}\cdot d\mathbf{r}$ around any closed curve $C$ equals:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">the length of $C$</div><div class="quiz-opt" data-idx="1">$0$</div><div class="quiz-opt" data-idx="2">$f$ at the start point</div><div class="quiz-opt" data-idx="3">always positive</div></div><div class="quiz-explain correct-exp">Correct. The start and end points coincide on a closed curve, so $f(B) - f(A) = 0$.</div><div class="quiz-explain wrong-exp">On a closed loop $A = B$, so the net change in potential is $f(B) - f(A) = 0$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1092,6 +1162,22 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Integrate $P$ in $x$: $f = 3x + x^2 y + h(y)$. Then $f_y = x^2 + h'(y)$ must equal $Q = x^2 - 3y^2$, so $h'(y) = -3y^2$ and $h(y) = -y^3$.</p>
   $$ f(x,y) = 3x + x^2 y - y^3 + \text{constant}. $$
   </div></div></details>
+
+  <details><summary>Worked Example 5.2: a field that fails the test</summary><div class="detail-body"><div class="worked-solution">
+  <p>Is $\mathbf{F} = \langle x^2 y,\ xy^2\rangle$ conservative on the plane?</p>
+  <p>Compute the mixed partials. With $P = x^2 y$ we get $P_y = x^2$. With $Q = xy^2$ we get $Q_x = y^2$.</p>
+  $$ P_y = x^2, \qquad Q_x = y^2. $$
+  <p>These are not equal as functions (they agree only on the lines $y = \pm x$), so $P_y \ne Q_x$ and $\mathbf{F}$ is not conservative. No potential exists, and the work it does will in general depend on the path. There is nothing to integrate to find $f$, so we stop as soon as the test fails.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: using a potential to evaluate a loop-free integral</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int_C \mathbf{F}\cdot d\mathbf{r}$ for $\mathbf{F} = \langle e^y,\ x e^y\rangle$ from $(0,0)$ to $(2,\ln 3)$.</p>
+  <p>Test first: $P = e^y$ gives $P_y = e^y$; $Q = x e^y$ gives $Q_x = e^y$. They agree on the whole plane, which is simply connected, so $\mathbf{F}$ is conservative.</p>
+  <p>Find $f$: integrate $P = e^y$ in $x$ to get $f = x e^y + h(y)$. Then $f_y = x e^y + h'(y)$ must equal $Q = x e^y$, so $h'(y) = 0$ and $f = x e^y$.</p>
+  $$ \int_C \mathbf{F}\cdot d\mathbf{r} = f(2, \ln 3) - f(0,0) = 2e^{\ln 3} - 0 = 2\cdot 3 = 6. $$
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The component test $P_y = Q_x$ is only conclusive on a <em>simply connected</em> domain. On a region with a hole, passing the test does not prove the field is conservative, as the vortex field below shows. A second pitfall is to test the wrong pair: the planar condition compares $\partial P/\partial y$ with $\partial Q/\partial x$, not $P_x$ with $Q_y$. Mixing up which partial goes with which component is the single most common reason a correct conservative field is wrongly rejected.</div>
 
   <details><summary>Going deeper: why simple connectedness is needed</summary><div class="detail-body"><div class="worked-solution">
   <p>Consider the vortex field on the plane minus the origin:</p>
@@ -1140,6 +1226,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \text{Area} = \frac12\int_0^{2\pi} ab\,dt = \frac12\,ab\,(2\pi) = \pi ab. $$
   </div></div></details>
 
+  <details><summary>Worked Example 6.3: a hard loop integral made easy</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\oint_C (x^4 - y)\,dx + (x + y^4)\,dy$, where $C$ is the boundary of the square $0 \le x \le 1$, $0 \le y \le 1$, counterclockwise.</p>
+  <p>Direct parametrization would mean four separate segment integrals. Green's Theorem replaces all of them with one double integral. Here $P = x^4 - y$ and $Q = x + y^4$, so</p>
+  $$ Q_x - P_y = (1) - (-1) = 2. $$
+  <p>The integrand is the constant $2$, so the loop integral is just $2$ times the area of the square:</p>
+  $$ \oint_C P\,dx + Q\,dy = \iint_D 2\,dA = 2\cdot\text{Area}(D) = 2\cdot 1 = 2. $$
+  <p>The high powers $x^4$ and $y^4$ never matter, because they sit in the components whose relevant partials cancel. Recognizing this in advance is the whole art of applying Green's Theorem.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.4: a non-constant integrand in polar coordinates</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\oint_C (-y^3)\,dx + (x^3)\,dy$, where $C$ is the circle $x^2 + y^2 = 4$, counterclockwise.</p>
+  <p>With $P = -y^3$ and $Q = x^3$ we get $Q_x - P_y = 3x^2 - (-3y^2) = 3(x^2+y^2)$. Green's Theorem turns the loop into</p>
+  $$ \oint_C P\,dx + Q\,dy = \iint_D 3(x^2+y^2)\,dA. $$
+  <p>The disk of radius $2$ calls for polar coordinates, $x^2+y^2 = r^2$ and $dA = r\,dr\,d\theta$:</p>
+  $$ \iint_D 3r^2\,dA = \int_0^{2\pi}\!\!\int_0^2 3r^2\cdot r\,dr\,d\theta = \int_0^{2\pi}\!\!\int_0^2 3r^3\,dr\,d\theta = \int_0^{2\pi} \frac{3r^4}{4}\Big|_0^2 d\theta = \int_0^{2\pi} 12\,d\theta = 24\pi. $$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Green's Theorem applies only to a <em>closed</em> curve and only with the correct orientation. If $C$ is not closed, the theorem does not apply directly; you may need to close it with an auxiliary segment and subtract that segment's contribution. If $C$ is traversed clockwise, the boundary orientation is reversed and the result picks up a minus sign: $\oint_{\text{cw}} = -\iint_D (Q_x - P_y)\,dA$. A third trap is using the theorem when $P$ or $Q$ fails to have continuous partials inside $D$, as with the vortex field, whose singularity at the origin voids the hypotheses.</div>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Green's Theorem rewrites $\oint_C P\,dx + Q\,dy$ (counterclockwise) as:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\iint_D (Q_x - P_y)\,dA$</div><div class="quiz-opt" data-idx="1">$\iint_D (P_x - Q_y)\,dA$</div><div class="quiz-opt" data-idx="2">$\iint_D (P_y - Q_x)\,dA$</div><div class="quiz-opt" data-idx="3">$\iint_D (P_x + Q_y)\,dA$</div></div><div class="quiz-explain correct-exp">Correct. The circulation form integrates $Q_x - P_y$ over the enclosed region $D$.</div><div class="quiz-explain wrong-exp">The integrand is $\partial Q/\partial x - \partial P/\partial y$, that is $Q_x - P_y$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1173,6 +1278,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \text{curl} = Q_x - P_y = (1) - (-1) = 2, \qquad \text{div} = P_x + Q_y = (2x) + (2y) = 2x + 2y. $$
   <p>The curl is constant, so the field has uniform swirl. The divergence varies with position: it is positive in the first quadrant (a source) and negative in the third (a sink).</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: outward flux across a circle</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the outward flux of $\mathbf{F} = \langle x, y\rangle$ across the circle $x^2 + y^2 = 9$ using the flux form of Green's Theorem.</p>
+  <p>The divergence is $P_x + Q_y = 1 + 1 = 2$, a constant. The flux form converts the boundary integral into a double integral of the divergence over the enclosed disk $D$:</p>
+  $$ \oint_C \mathbf{F}\cdot\mathbf{n}\,ds = \iint_D (P_x + Q_y)\,dA = \iint_D 2\,dA = 2\cdot\text{Area}(D). $$
+  <p>The disk has radius $3$, so its area is $9\pi$ and the flux is $18\pi$. This matches intuition: the radial field $\langle x, y\rangle$ flows uniformly outward, so its net outflow grows with the enclosed area.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the area corollary and handling a hole</summary><div class="detail-body"><div class="worked-solution">
+  <p><strong>The area formula.</strong> Apply Green's Theorem with $P = -\tfrac{y}{2}$ and $Q = \tfrac{x}{2}$. Then</p>
+  $$ Q_x - P_y = \frac12 - \left(-\frac12\right) = 1, $$
+  <p>so the double integral collapses to the area itself:</p>
+  $$ \frac12\oint_C x\,dy - y\,dx = \iint_D 1\,dA = \text{Area}(D). $$
+  <p>Any choice with $Q_x - P_y = 1$ works; the symmetric choice above is simply the most memorable.</p>
+  <p><strong>A region with a hole.</strong> Green's Theorem extends to a region $D$ between two curves, an outer boundary $C_{\text{out}}$ counterclockwise and an inner boundary $C_{\text{in}}$ clockwise, by cutting $D$ along a bridge and observing the bridge is traversed twice in opposite directions, so it cancels. The result is</p>
+  $$ \oint_{C_{\text{out}}} P\,dx + Q\,dy \;-\; \oint_{C_{\text{in}}} P\,dx + Q\,dy = \iint_D (Q_x - P_y)\,dA, $$
+  <p>with both boundaries oriented counterclockwise. For the vortex field of Section 5, $Q_x - P_y = 0$ on the annulus that avoids the origin, so the two loop integrals must be <em>equal</em>. That is why every loop encircling the origin once gives the same value $2\pi$: the integral cannot be deformed across the puncture, but it is unchanged by any deformation that does not cross it. This is the seed of the homotopy invariance that runs through the rest of vector calculus.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> Curl and divergence are different quantities and must not be swapped. The scalar curl is $Q_x - P_y$ and measures rotation; the divergence is $P_x + Q_y$ and measures spreading. Mixing the signs or the pairings, for instance writing divergence as $Q_x - P_y$, inverts the physical meaning. Memory aid: divergence adds the matched partials $P_x + Q_y$ with a plus, while curl crosses the components and subtracts, $Q_x - P_y$.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">The divergence of $\mathbf{F} = \langle P, Q\rangle$ in the plane is:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$Q_x - P_y$</div><div class="quiz-opt" data-idx="1">$P_y - Q_x$</div><div class="quiz-opt" data-idx="2">$P_x - Q_y$</div><div class="quiz-opt" data-idx="3">$P_x + Q_y$</div></div><div class="quiz-explain correct-exp">Correct. Divergence sums the rate of spreading in each coordinate: $P_x + Q_y$.</div><div class="quiz-explain wrong-exp">Divergence is $\partial P/\partial x + \partial Q/\partial y$. The expression $Q_x - P_y$ is the scalar curl instead.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

@@ -948,6 +948,10 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>Two identities are used constantly. First, the curl of a gradient is zero: $\nabla \times (\nabla f) = \mathbf{0}$, because mixed partials commute. Hence a field with nonzero curl cannot be conservative. Second, the divergence of a curl is zero: $\nabla \cdot (\nabla \times \mathbf{F}) = 0$. Both follow from equality of mixed second partials.</p>
 
+  <p>It is worth keeping the geometric meaning in view while you compute. The divergence at a point is the rate at which an infinitesimal amount of fluid is being created (positive divergence) or destroyed (negative divergence) there, measured per unit volume; a divergence-free field is incompressible. The curl points along the axis about which the field swirls fastest, and its length is twice the local angular velocity of a tiny paddle wheel placed in the flow. A constant field such as $\mathbf{F} = \langle 1, 0, 0 \rangle$ has zero divergence and zero curl: nothing is created and nothing rotates. A rigid rotation $\mathbf{F} = \langle -y, x, 0 \rangle$ has zero divergence but constant curl $\langle 0, 0, 2 \rangle$, which is exactly twice the angular velocity of the rotation.</p>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students frequently treat $\nabla \cdot \mathbf{F}$ and $\nabla \times \mathbf{F}$ as if both produce the same kind of object, then try to take the divergence of a divergence or report the curl as a single number. Keep the types straight: $\nabla \cdot \mathbf{F}$ is a scalar, so $\nabla \times (\nabla \cdot \mathbf{F})$ is meaningless because curl needs a vector input. Conversely $\nabla \times \mathbf{F}$ is a vector with three components. A second frequent slip is sign error in the middle component of the curl: the determinant expansion makes it $P_z - R_x$, not $R_x - P_z$. Write the symbolic determinant every time rather than recalling the three components from memory.</div>
+
   <details><summary>Worked Example 1.1: curl and divergence of a field</summary><div class="detail-body"><div class="worked-solution">
   <p>Let $\mathbf{F} = \langle xz,\; xyz,\; -y^2 \rangle$. Compute the curl and the divergence.</p>
   <p>For the curl, use the determinant formula with $P = xz$, $Q = xyz$, $R = -y^2$:</p>
@@ -956,10 +960,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \nabla \cdot \mathbf{F} = \frac{\partial}{\partial x}(xz) + \frac{\partial}{\partial y}(xyz) + \frac{\partial}{\partial z}(-y^2) = z + xz + 0 = z(1 + x). $$
   </div></div></details>
 
+  <details><summary>Worked Example 1.2: testing a field for a potential</summary><div class="detail-body"><div class="worked-solution">
+  <p>Decide whether $\mathbf{F} = \langle 2xy + z^2,\; x^2,\; 2xz \rangle$ can be conservative, and if so find a potential.</p>
+  <p>Because the curl of a gradient is zero, a necessary condition for $\mathbf{F} = \nabla f$ is $\nabla \times \mathbf{F} = \mathbf{0}$. Compute with $P = 2xy + z^2$, $Q = x^2$, $R = 2xz$:</p>
+  $$ \nabla \times \mathbf{F} = \langle R_y - Q_z,\; P_z - R_x,\; Q_x - P_y \rangle = \langle 0 - 0,\; 2z - 2z,\; 2x - 2x \rangle = \mathbf{0}. $$
+  <p>The curl vanishes, and the domain is all of space, which is simply connected, so $\mathbf{F}$ is conservative. To recover $f$, integrate $P$ in $x$: $f = x^2 y + xz^2 + h(y, z)$. Then $f_y = x^2 + h_y$ must equal $Q = x^2$, so $h_y = 0$ and $h = k(z)$. Finally $f_z = 2xz + k'(z)$ must equal $R = 2xz$, so $k'(z) = 0$. A potential is $f(x,y,z) = x^2 y + x z^2$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a field that swirls but does not spread</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $\mathbf{F} = \langle -y,\; x,\; 0 \rangle$, compute both operators and interpret them.</p>
+  <p>Divergence: $\nabla \cdot \mathbf{F} = \partial_x(-y) + \partial_y(x) + \partial_z(0) = 0$. The field neither creates nor destroys fluid; the flow is incompressible. Curl: with $P = -y$, $Q = x$, $R = 0$,</p>
+  $$ \nabla \times \mathbf{F} = \langle 0 - 0,\; 0 - 0,\; 1 - (-1) \rangle = \langle 0, 0, 2 \rangle. $$
+  <p>The curl is a constant vector pointing along the positive $z$-axis with length $2$. A paddle wheel dropped anywhere in this field spins about the $z$-axis with angular velocity $1$, since the curl is twice the angular velocity. This is the prototype rotational field, and its nonzero curl confirms at a glance that it cannot be a gradient.</p>
+  </div></div></details>
+
   <details><summary>Going deeper: why the curl of a gradient vanishes</summary><div class="detail-body"><div class="worked-solution">
   <p>Let $f$ have continuous second partials. The third component of $\nabla \times (\nabla f)$ is</p>
   $$ \frac{\partial}{\partial x}\!\left(\frac{\partial f}{\partial y}\right) - \frac{\partial}{\partial y}\!\left(\frac{\partial f}{\partial x}\right) = f_{yx} - f_{xy}. $$
   <p>By Clairaut's Theorem the mixed partials are equal, so this component is zero. The same cancellation occurs in the other two components, giving $\nabla \times (\nabla f) = \mathbf{0}$. This is the differential form of the statement that conservative fields are irrotational.</p>
+  <p>The companion identity $\nabla \cdot (\nabla \times \mathbf{F}) = 0$ is proved the same way. Write $\nabla \times \mathbf{F} = \langle R_y - Q_z,\; P_z - R_x,\; Q_x - P_y \rangle$ and take its divergence:</p>
+  $$ \nabla \cdot (\nabla \times \mathbf{F}) = (R_y - Q_z)_x + (P_z - R_x)_y + (Q_x - P_y)_z. $$
+  <p>Expanding gives six second-order terms, $R_{yx} - Q_{zx} + P_{zy} - R_{xy} + Q_{xz} - P_{yz}$. Provided $\mathbf{F}$ has continuous second partials, Clairaut pairs them: $R_{yx} = R_{xy}$, $Q_{zx} = Q_{xz}$, and $P_{zy} = P_{yz}$. Every term cancels against its mate, so the sum is identically zero. Geometrically this says a curl field is always source-free, which is why the curl flux of a field through a closed surface is automatically zero, a fact we will see again in the Divergence Theorem.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which statement about a vector field $\mathbf{F}$ with continuous second partials is always true?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\nabla \cdot (\nabla \times \mathbf{F})$ equals the divergence of $\mathbf{F}$</div><div class="quiz-opt" data-idx="1">$\nabla \cdot (\nabla \times \mathbf{F}) = 0$</div><div class="quiz-opt" data-idx="2">$\nabla \times (\nabla \times \mathbf{F}) = \mathbf{0}$</div><div class="quiz-opt" data-idx="3">$\nabla \times \mathbf{F}$ is always a scalar</div></div><div class="quiz-explain correct-exp">Correct. The divergence of any curl vanishes identically, since the expression $R_{yx} - Q_{zx} + P_{zy} - R_{xy} + Q_{xz} - P_{yz}$ cancels in pairs by Clairaut's Theorem.</div><div class="quiz-explain wrong-exp">Recall the identity $\nabla \cdot (\nabla \times \mathbf{F}) = 0$, which holds for every field with continuous second partials. The curl is a vector, not a scalar.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -981,12 +1002,37 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ dS = \sqrt{1 + g_x^2 + g_y^2}\; dA. $$
   </div>
 
+  <p>Two parametrizations recur so often they are worth memorizing. The sphere of radius $a$ uses spherical angles, $\mathbf{r}(\phi, \theta) = \langle a \sin\phi \cos\theta,\; a\sin\phi\sin\theta,\; a\cos\phi \rangle$ with $0 \le \phi \le \pi$ and $0 \le \theta \le 2\pi$, and there $\left|\mathbf{r}_\phi \times \mathbf{r}_\theta\right| = a^2 \sin\phi$, so $dS = a^2 \sin\phi\, d\phi\, d\theta$. The cylinder of radius $a$ uses $\mathbf{r}(\theta, z) = \langle a\cos\theta,\; a\sin\theta,\; z\rangle$, for which $\left|\mathbf{r}_\theta \times \mathbf{r}_z\right| = a$, giving $dS = a\, d\theta\, dz$. Recognizing the right parameters at the start turns most surface integrals into routine double integrals.</p>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A very common mistake is to forget the $1$ inside the root for a graph and write $dS = \sqrt{g_x^2 + g_y^2}\, dA$. That quantity is the slope magnitude, not the area scaling; for a flat horizontal surface $g_x = g_y = 0$ it would give $dS = 0$, which is absurd. The correct element $\sqrt{1 + g_x^2 + g_y^2}\, dA$ reduces to $dA$ when the surface is flat, as it must. A related slip is to integrate the area element over the surface itself rather than over its shadow $D$ in the parameter plane; surface integrals are always pulled back to the flat parameter region before integrating.</div>
+
   <details><summary>Worked Example 2.1: area of a portion of a paraboloid</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the area of the part of the paraboloid $z = x^2 + y^2$ lying below the plane $z = 4$.</p>
   <p>With $g(x,y) = x^2 + y^2$ we have $g_x = 2x$, $g_y = 2y$, so</p>
   $$ A = \iint_D \sqrt{1 + 4x^2 + 4y^2}\; dA. $$
   <p>The region $D$ is the disk $x^2 + y^2 \le 4$. In polar coordinates the integrand becomes $\sqrt{1 + 4r^2}$ and $dA = r\, dr\, d\theta$:</p>
   $$ A = \int_0^{2\pi}\!\!\int_0^2 \sqrt{1 + 4r^2}\; r\, dr\, d\theta = 2\pi \cdot \frac{1}{12}\Big[(1 + 4r^2)^{3/2}\Big]_0^2 = \frac{\pi}{6}\left(17^{3/2} - 1\right). $$
+  </div></div></details>
+
+  <details><summary>Worked Example 2.2: surface area of a sphere from its parametrization</summary><div class="detail-body"><div class="worked-solution">
+  <p>Recover the classical area $4\pi a^2$ of a sphere of radius $a$ from the parametrization $\mathbf{r}(\phi,\theta) = \langle a\sin\phi\cos\theta,\; a\sin\phi\sin\theta,\; a\cos\phi\rangle$.</p>
+  <p>The two tangent vectors are</p>
+  $$ \mathbf{r}_\phi = \langle a\cos\phi\cos\theta,\; a\cos\phi\sin\theta,\; -a\sin\phi\rangle, \qquad \mathbf{r}_\theta = \langle -a\sin\phi\sin\theta,\; a\sin\phi\cos\theta,\; 0\rangle. $$
+  <p>Their cross product has length $\left|\mathbf{r}_\phi \times \mathbf{r}_\theta\right| = a^2 \sin\phi$ (a standard computation; the $z$-component is $a^2\sin\phi\cos\phi$ and the horizontal part contributes $a^2\sin^2\phi$, summing under the root to $a^2\sin\phi$ since $\sin\phi \ge 0$ on $[0,\pi]$). Therefore</p>
+  $$ A = \int_0^{2\pi}\!\!\int_0^{\pi} a^2 \sin\phi\, d\phi\, d\theta = a^2 (2\pi)\big[-\cos\phi\big]_0^{\pi} = a^2 (2\pi)(2) = 4\pi a^2. $$
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: area of a cylinder cut by a plane</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the area of the part of the cylinder $x^2 + y^2 = 1$ between $z = 0$ and the slanted plane $z = 2 + x$.</p>
+  <p>Parametrize by $\mathbf{r}(\theta, z) = \langle \cos\theta, \sin\theta, z\rangle$, so $dS = d\theta\, dz$. On the cylinder $x = \cos\theta$, so the surface runs from $z = 0$ up to $z = 2 + \cos\theta$, which is positive for every $\theta$. Hence</p>
+  $$ A = \int_0^{2\pi}\!\!\int_0^{2 + \cos\theta} dz\, d\theta = \int_0^{2\pi} (2 + \cos\theta)\, d\theta = 2(2\pi) + 0 = 4\pi. $$
+  <p>The $\cos\theta$ term integrates to zero over a full revolution, so the slanted top contributes the same area as a flat cut at the average height $z = 2$.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the graph area element from the cross product</summary><div class="detail-body"><div class="worked-solution">
+  <p>For the graph parametrization $\mathbf{r}(x,y) = \langle x, y, g(x,y)\rangle$, the tangent vectors are $\mathbf{r}_x = \langle 1, 0, g_x\rangle$ and $\mathbf{r}_y = \langle 0, 1, g_y\rangle$. Their cross product is</p>
+  $$ \mathbf{r}_x \times \mathbf{r}_y = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 1 & 0 & g_x \\ 0 & 1 & g_y \end{vmatrix} = \langle -g_x,\; -g_y,\; 1\rangle. $$
+  <p>Its length is $\sqrt{g_x^2 + g_y^2 + 1}$, which is exactly the area-scaling factor. The geometric content is that a unit square in the $xy$-plane is tilted into a parallelogram on the surface whose area exceeds the flat square by precisely the secant of the tilt angle. Since the surface normal makes angle $\gamma$ with the vertical and $\cos\gamma = 1/\sqrt{1 + g_x^2 + g_y^2}$, the area element is $dA / \cos\gamma = \sqrt{1 + g_x^2 + g_y^2}\, dA$, confirming the formula from pure geometry.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For a surface graph $z = g(x,y)$, the area element $dS$ equals</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\sqrt{1 + g_x^2 + g_y^2}\; dz$</div><div class="quiz-opt" data-idx="1">$(1 + g_x^2 + g_y^2)\; dA$</div><div class="quiz-opt" data-idx="2">$\sqrt{1 + g_x^2 + g_y^2}\; dA$</div><div class="quiz-opt" data-idx="3">$\sqrt{g_x^2 + g_y^2}\; dA$</div></div><div class="quiz-explain correct-exp">Correct. With $\mathbf{r} = \langle x, y, g \rangle$ the normal is $\langle -g_x, -g_y, 1 \rangle$, whose length is $\sqrt{1 + g_x^2 + g_y^2}$, and $dA$ is the planar area element.</div><div class="quiz-explain wrong-exp">The element is $\left| \mathbf{r}_x \times \mathbf{r}_y \right| dA = \sqrt{1 + g_x^2 + g_y^2}\; dA$. The factor under the root keeps the $1$, and the differential is $dA$, not $dz$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1002,12 +1048,34 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ \iint_S f\, dS = \iint_D f\big(\mathbf{r}(u,v)\big)\, \left| \mathbf{r}_u \times \mathbf{r}_v \right|\, dA. $$
   </div>
 
-  <p>For a graph $z = g(x,y)$ this reads $\iint_S f\, dS = \iint_D f(x, y, g(x,y))\, \sqrt{1 + g_x^2 + g_y^2}\, dA$. The orientation of $S$ is irrelevant here, because $dS$ is a positive scalar element of area.</p>
+  <p>For a graph $z = g(x,y)$ this reads $\iint_S f\, dS = \iint_D f(x, y, g(x,y))\, \sqrt{1 + g_x^2 + g_y^2}\, dA$. The orientation of $S$ is irrelevant here, because $dS$ is a positive scalar element of area. Beyond mass, scalar surface integrals deliver the centroid of a shell, its moment of inertia, and the average value of any quantity over the surface, in every case by inserting the appropriate weight $f$ and dividing by the area when an average is wanted.</p>
+
+  <div class="concept-box red"><strong>Common error.</strong> The single most common mistake is to substitute the constraint $z = g(x,y)$ into the integrand but forget to carry the area factor $\sqrt{1 + g_x^2 + g_y^2}$, effectively computing $\iint_D f\, dA$ instead of $\iint_S f\, dS$. That answers a planar double integral, not a surface integral, and is wrong by exactly the stretching factor. A second error is to leave $z$ in the integrand after restricting to the surface; once you are on $S$, every appearance of $z$ must be replaced by $g(x,y)$ so the integrand is a function of the two parameters alone before you integrate.</div>
 
   <details><summary>Worked Example 3.1: mass of a conical shell</summary><div class="detail-body"><div class="worked-solution">
   <p>A thin shell is the cone $z = \sqrt{x^2 + y^2}$ for $0 \le z \le 1$, with surface density $\rho(x,y,z) = z$. Find its mass $m = \iint_S z\, dS$.</p>
   <p>With $g = \sqrt{x^2 + y^2}$ we get $g_x = x/\sqrt{x^2+y^2}$ and $g_y = y/\sqrt{x^2+y^2}$, so $g_x^2 + g_y^2 = 1$ and $\sqrt{1 + g_x^2 + g_y^2} = \sqrt{2}$. On the cone $z = \sqrt{x^2 + y^2} = r$ in polar coordinates, and $D$ is the disk $r \le 1$:</p>
   $$ m = \iint_D \sqrt{x^2 + y^2}\, \sqrt{2}\; dA = \sqrt{2}\int_0^{2\pi}\!\!\int_0^1 r \cdot r\, dr\, d\theta = \sqrt{2}\,(2\pi)\,\frac{1}{3} = \frac{2\sqrt{2}\,\pi}{3}. $$
+  </div></div></details>
+
+  <details><summary>Worked Example 3.2: integrating over a sphere</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\iint_S z^2\, dS$ where $S$ is the unit sphere $x^2 + y^2 + z^2 = 1$.</p>
+  <p>Use the spherical parametrization, on which $z = \cos\phi$ and $dS = \sin\phi\, d\phi\, d\theta$ since $a = 1$. Then</p>
+  $$ \iint_S z^2\, dS = \int_0^{2\pi}\!\!\int_0^{\pi} \cos^2\phi \, \sin\phi\, d\phi\, d\theta = 2\pi \left[-\frac{\cos^3\phi}{3}\right]_0^{\pi} = 2\pi \cdot \frac{2}{3} = \frac{4\pi}{3}. $$
+  <p>As a sanity check, by symmetry $\iint_S x^2\, dS = \iint_S y^2\, dS = \iint_S z^2\, dS$, and their sum is $\iint_S (x^2 + y^2 + z^2)\, dS = \iint_S 1\, dS = 4\pi$. Dividing by three gives $4\pi/3$, matching the direct computation.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: average height of a hemispherical dome</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the average value of the height $z$ over the upper unit hemisphere $S$.</p>
+  <p>The average is $\bar z = \dfrac{1}{A(S)} \iint_S z\, dS$. The hemisphere has area $A(S) = 2\pi$. With the spherical parametrization restricted to $0 \le \phi \le \pi/2$, $z = \cos\phi$ and $dS = \sin\phi\, d\phi\, d\theta$:</p>
+  $$ \iint_S z\, dS = \int_0^{2\pi}\!\!\int_0^{\pi/2} \cos\phi \sin\phi\, d\phi\, d\theta = 2\pi \left[\frac{\sin^2\phi}{2}\right]_0^{\pi/2} = 2\pi \cdot \frac{1}{2} = \pi. $$
+  <p>Therefore $\bar z = \pi / (2\pi) = \tfrac{1}{2}$. The average height of a unit dome is exactly half its radius, a clean result that students can quote as a check on harder problems.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why the scalar integral is independent of the parametrization</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $\tilde{\mathbf{r}}(s,t) = \mathbf{r}(u(s,t), v(s,t))$ is a smooth reparametrization with nonzero Jacobian $J = \partial(u,v)/\partial(s,t)$. By the chain rule the tangent vectors transform so that $\tilde{\mathbf{r}}_s \times \tilde{\mathbf{r}}_t = J\,(\mathbf{r}_u \times \mathbf{r}_v)$, hence $\left|\tilde{\mathbf{r}}_s \times \tilde{\mathbf{r}}_t\right| = |J|\,\left|\mathbf{r}_u \times \mathbf{r}_v\right|$. Substituting into the integral and applying the change-of-variables theorem for double integrals, the factor $|J|$ is exactly absorbed by $ds\, dt = dA / |J|$ relative to $du\, dv$. The two integrals are equal:</p>
+  $$ \iint_{\tilde D} f\,\left|\tilde{\mathbf{r}}_s \times \tilde{\mathbf{r}}_t\right|\, ds\, dt = \iint_D f\,\left|\mathbf{r}_u \times \mathbf{r}_v\right|\, du\, dv. $$
+  <p>So $\iint_S f\, dS$ is a genuine property of the surface and the function, not of how we happened to chart it. The absolute value is essential here, and it is precisely why scalar surface integrals are blind to orientation, in contrast to the flux integrals of the next section.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The scalar surface integral $\iint_S 1\, dS$ computes</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">the surface area of $S$</div><div class="quiz-opt" data-idx="1">the flux of a unit field through $S$</div><div class="quiz-opt" data-idx="2">the volume enclosed by $S$</div><div class="quiz-opt" data-idx="3">the circulation around the boundary of $S$</div></div><div class="quiz-explain correct-exp">Correct. Integrating the constant $1$ against the area element $dS$ adds up all the area, giving $A(S)$.</div><div class="quiz-explain wrong-exp">A scalar surface integral with $f = 1$ is $\iint_D \left| \mathbf{r}_u \times \mathbf{r}_v \right| dA = A(S)$, the surface area. Flux and circulation are different integrals.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1025,10 +1093,26 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>The vector $\mathbf{r}_u \times \mathbf{r}_v$ already carries both the direction of the normal and the area scaling, so no separate normalization is needed. For a graph oriented upward, $d\mathbf{S} = \langle -g_x, -g_y, 1 \rangle\, dA$. For a closed surface the convention is the outward normal.</p>
 
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent error is to normalize $\mathbf{r}_u \times \mathbf{r}_v$ to a unit vector $\mathbf{n}$ and then still multiply by $\left|\mathbf{r}_u \times \mathbf{r}_v\right|\, dA$, double counting the area scaling, or to divide by the length and forget to put it back. The clean rule is to dot $\mathbf{F}$ against the raw vector element $d\mathbf{S} = (\mathbf{r}_u \times \mathbf{r}_v)\, dA$ and never normalize at all. A second pitfall is orientation: after computing $\mathbf{r}_u \times \mathbf{r}_v$, check that it points the way the problem asks (upward, or outward for a closed surface). If the cross product points the wrong way, negate it; otherwise your flux carries the wrong sign.</div>
+
   <details><summary>Worked Example 4.1: flux through a hemisphere</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the upward flux of $\mathbf{F} = \langle 0, 0, z \rangle$ through the upper unit hemisphere $z = \sqrt{1 - x^2 - y^2}$.</p>
   <p>Here $g = \sqrt{1 - x^2 - y^2}$, $g_x = -x/g$, $g_y = -y/g$, so the upward normal element is $d\mathbf{S} = \langle x/g,\; y/g,\; 1 \rangle\, dA$. On the surface $\mathbf{F} = \langle 0, 0, g \rangle$, hence $\mathbf{F} \cdot d\mathbf{S} = g\, dA$ over the unit disk:</p>
   $$ \iint_S \mathbf{F}\cdot d\mathbf{S} = \iint_{r \le 1} \sqrt{1 - r^2}\; r\, dr\, d\theta = 2\pi \int_0^1 r\sqrt{1 - r^2}\, dr = 2\pi \cdot \frac{1}{3} = \frac{2\pi}{3}. $$
+  </div></div></details>
+
+  <details><summary>Worked Example 4.2: flux of a radial field through a plane patch</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the upward flux of $\mathbf{F} = \langle x, y, z\rangle$ through the part of the plane $z = 1 - x - y$ lying over the triangle $D$ with vertices $(0,0)$, $(1,0)$, $(0,1)$.</p>
+  <p>With $g = 1 - x - y$ we have $g_x = g_y = -1$, so the upward element is $d\mathbf{S} = \langle 1, 1, 1\rangle\, dA$. On the surface $z = 1 - x - y$, so</p>
+  $$ \mathbf{F}\cdot d\mathbf{S} = \big(x + y + (1 - x - y)\big)\, dA = 1\, dA. $$
+  <p>The integrand collapses to the constant $1$, so the flux is just the area of the triangle $D$, which is $\tfrac{1}{2}$. Therefore $\iint_S \mathbf{F}\cdot d\mathbf{S} = \tfrac{1}{2}$. Recognizing such collapses saves a great deal of integration.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: flux through a closed cylinder, surface by surface</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the outward flux of $\mathbf{F} = \langle x, y, 0\rangle$ through the closed cylinder $x^2 + y^2 = 1$, $0 \le z \le 2$, including its top and bottom disks.</p>
+  <p>The closed surface has three pieces. On the top ($z = 2$) and bottom ($z = 0$) the outward normals are $\pm\langle 0, 0, 1\rangle$, but $\mathbf{F}$ has no $z$-component, so $\mathbf{F}\cdot\mathbf{n} = 0$ and both caps contribute zero flux. On the curved side, parametrize by $\mathbf{r}(\theta,z) = \langle\cos\theta,\sin\theta,z\rangle$; the outward normal element is $\mathbf{r}_\theta \times \mathbf{r}_z = \langle\cos\theta,\sin\theta,0\rangle\, d\theta\, dz$, and on the surface $\mathbf{F} = \langle\cos\theta,\sin\theta,0\rangle$, so $\mathbf{F}\cdot d\mathbf{S} = (\cos^2\theta + \sin^2\theta)\, d\theta\, dz = d\theta\, dz$. Hence</p>
+  $$ \iint_S \mathbf{F}\cdot d\mathbf{S} = \int_0^2\!\!\int_0^{2\pi} d\theta\, dz = 2\pi \cdot 2 = 4\pi. $$
+  <p>As a check, $\nabla\cdot\mathbf{F} = 2$ and the solid has volume $2\pi$, so the Divergence Theorem predicts $2 \cdot 2\pi = 4\pi$, in agreement.</p>
   </div></div></details>
 
   <details><summary>Going deeper: flux is independent of the parametrization but not the orientation</summary><div class="detail-body"><div class="worked-solution">
@@ -1050,6 +1134,8 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>A powerful consequence is that the surface flux of a curl depends only on the boundary curve, not on the surface filling it. So if two surfaces share the same boundary, the curl flux through them is equal. This often lets you replace a complicated surface by a flat disk.</p>
 
+  <div class="concept-box red"><strong>Common error.</strong> The orientation of the boundary and the choice of normal are coupled by the right-hand rule, and getting them out of step flips the sign of the whole equation. If you choose the upward normal on a surface, you must traverse the boundary counterclockwise as seen from above; reversing one without the other gives the negative of the correct answer. A second mistake is applying Stokes' Theorem to $\iint_S \mathbf{F}\cdot d\mathbf{S}$ directly. Stokes converts a boundary circulation into the flux of the curl $\nabla\times\mathbf{F}$, not the flux of $\mathbf{F}$ itself; the integrand on the surface side must be the curl.</div>
+
   <details><summary>Worked Example 5.1: verifying Stokes on a disk</summary><div class="detail-body"><div class="worked-solution">
   <p>Let $\mathbf{F} = \langle -y, x, z \rangle$ and let $S$ be the disk $x^2 + y^2 \le 1$ in the plane $z = 0$, oriented upward, with boundary the unit circle $C$ traversed counterclockwise.</p>
   <p>Circulation side: parametrize $C$ by $\mathbf{r}(t) = \langle \cos t, \sin t, 0 \rangle$, so $\mathbf{r}'(t) = \langle -\sin t, \cos t, 0 \rangle$ and $\mathbf{F} = \langle -\sin t, \cos t, 0 \rangle$. Then</p>
@@ -1057,6 +1143,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Flux side: $\nabla \times \mathbf{F} = \langle 0, 0, 2 \rangle$, and the upward normal element on the flat disk is $d\mathbf{S} = \langle 0, 0, 1\rangle\, dA$, so</p>
   $$ \iint_S (\nabla \times \mathbf{F})\cdot d\mathbf{S} = \iint_{r \le 1} 2\, dA = 2 \cdot \pi = 2\pi. $$
   <p>The two sides agree, as Stokes' Theorem requires.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.2: replacing a hard surface by an easy one</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute $\iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S}$ for $\mathbf{F} = \langle -y, x, xyz\rangle$, where $S$ is the upper hemisphere $x^2 + y^2 + z^2 = 1$, $z \ge 0$, oriented upward.</p>
+  <p>Computing the curl flux directly over the curved hemisphere is unpleasant. But $S$ has the same boundary as the flat disk $D: x^2 + y^2 \le 1$ in the plane $z = 0$, namely the unit circle $C$ traversed counterclockwise. By Stokes, both curl fluxes equal $\oint_C \mathbf{F}\cdot d\mathbf{r}$, so we may integrate over the disk instead. On $z = 0$ the field reduces to $\langle -y, x, 0\rangle$, and with $\mathbf{r}(t) = \langle\cos t, \sin t, 0\rangle$,</p>
+  $$ \oint_C \mathbf{F}\cdot d\mathbf{r} = \int_0^{2\pi} \big(\sin^2 t + \cos^2 t\big)\, dt = 2\pi. $$
+  <p>So the hemisphere curl flux is $2\pi$, obtained without ever parametrizing the hemisphere. The $xyz$ term in $\mathbf{F}$ vanishes on the boundary and therefore never enters the answer.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: Stokes on a triangle in a slanted plane</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $\mathbf{F} = \langle z, x, y\rangle$ and let $C$ be the triangle with vertices $(1,0,0)$, $(0,1,0)$, $(0,0,1)$, oriented counterclockwise as seen from the first octant. Find $\oint_C \mathbf{F}\cdot d\mathbf{r}$.</p>
+  <p>Rather than parametrize three line segments, use Stokes with $S$ the flat triangle in the plane $x + y + z = 1$. The curl is $\nabla\times\mathbf{F} = \langle 1 - 0,\; 1 - 0,\; 1 - 0\rangle = \langle 1, 1, 1\rangle$. The plane has upward unit normal $\mathbf{n} = \tfrac{1}{\sqrt 3}\langle 1, 1, 1\rangle$, so $(\nabla\times\mathbf{F})\cdot\mathbf{n} = 3/\sqrt 3 = \sqrt 3$, a constant. Therefore</p>
+  $$ \oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S} = \sqrt 3 \cdot A(S). $$
+  <p>The triangle has side length $\sqrt 2$ and is equilateral, so its area is $A(S) = \tfrac{\sqrt 3}{4}(\sqrt 2)^2 = \tfrac{\sqrt 3}{2}$. Hence the circulation is $\sqrt 3 \cdot \tfrac{\sqrt 3}{2} = \tfrac{3}{2}$.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: why Stokes' Theorem holds, via Green's Theorem</summary><div class="detail-body"><div class="worked-solution">
+  <p>The proof reduces the spatial statement to the planar Green's Theorem. Take a surface that is a graph $z = g(x,y)$ over a region $D$, oriented upward, with boundary curve $C$ projecting to the boundary $\partial D$. Parametrize the circulation by pushing the planar boundary up onto the surface. Writing $\mathbf{F} = \langle P, Q, R\rangle$ and substituting $z = g(x,y)$, the line integral $\oint_C \mathbf{F}\cdot d\mathbf{r}$ becomes a planar line integral over $\partial D$ with integrand involving $P$, $Q$, and the chain-rule terms $R\, g_x$ and $R\, g_y$.</p>
+  <p>Applying Green's Theorem to that planar integral converts it to a double integral over $D$ of a combination of partial derivatives. Collecting terms, that combination is exactly $(\nabla\times\mathbf{F})\cdot\langle -g_x, -g_y, 1\rangle$, which is the integrand of the curl flux through the graph. Hence $\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S}$ for a graph. A general orientable surface is cut into graph-like patches whose internal boundaries cancel in pairs, leaving only the outer boundary, which extends the result to the surfaces met in practice.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Stokes' Theorem equates the boundary circulation $\oint_{\partial S}\mathbf{F}\cdot d\mathbf{r}$ to</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\iint_S \mathbf{F}\cdot d\mathbf{S}$</div><div class="quiz-opt" data-idx="1">$\iint_S (\nabla \times \mathbf{F})\cdot d\mathbf{S}$</div><div class="quiz-opt" data-idx="2">$\iiint_E (\nabla \cdot \mathbf{F})\, dV$</div><div class="quiz-opt" data-idx="3">$\iint_S (\nabla \cdot \mathbf{F})\, dS$</div></div><div class="quiz-explain correct-exp">Correct. Stokes' Theorem says the circulation around $\partial S$ equals the flux of the curl $\nabla \times \mathbf{F}$ through $S$.</div><div class="quiz-explain wrong-exp">The boundary circulation equals the flux of the curl through any surface bounded by the curve, that is $\iint_S (\nabla \times \mathbf{F})\cdot d\mathbf{S}$. The divergence and the volume integral belong to the Divergence Theorem.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1074,10 +1179,26 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>Intuitively, the divergence is the local source strength of the field. Summing these sources over the solid gives the net amount of the field leaving through the bounding surface, the total flux. Interior flux cancels between adjacent cells, leaving only the boundary contribution.</p>
 
+  <div class="concept-box red"><strong>Common error.</strong> The Divergence Theorem requires a closed surface. Applying it to an open surface, such as a single hemisphere or a paraboloid cap, is invalid; you must first close the region by adding the missing cap or disk, compute the flux through the closed surface, then subtract the flux through the added piece. A second mistake is sign of orientation: the theorem uses the outward normal. If a problem hands you an inward-oriented surface, the divergence integral gives the negative of the stated flux, so flip the sign at the end.</div>
+
   <details><summary>Worked Example 6.1: flux out of a sphere by divergence</summary><div class="detail-body"><div class="worked-solution">
   <p>Find the outward flux of $\mathbf{F} = \langle x, y, z \rangle$ through the sphere $x^2 + y^2 + z^2 = a^2$.</p>
   <p>Computing flux directly is tedious, but the divergence is simple: $\nabla \cdot \mathbf{F} = 1 + 1 + 1 = 3$. Let $E$ be the solid ball of radius $a$. Then</p>
   $$ \iint_{\partial E} \mathbf{F}\cdot d\mathbf{S} = \iiint_E 3\, dV = 3 \cdot \operatorname{Vol}(E) = 3 \cdot \frac{4}{3}\pi a^3 = 4\pi a^3. $$
+  </div></div></details>
+
+  <details><summary>Worked Example 6.2: a non-constant divergence over a box</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the outward flux of $\mathbf{F} = \langle x^2,\; y^2,\; z^2\rangle$ through the surface of the cube $0 \le x, y, z \le 1$.</p>
+  <p>Six face integrals would work, but the divergence makes it one triple integral. Here $\nabla\cdot\mathbf{F} = 2x + 2y + 2z$, so</p>
+  $$ \iint_{\partial E} \mathbf{F}\cdot d\mathbf{S} = \iiint_E (2x + 2y + 2z)\, dV = \int_0^1\!\!\int_0^1\!\!\int_0^1 (2x + 2y + 2z)\, dx\, dy\, dz. $$
+  <p>By symmetry each of the three terms integrates to the same value. For the first, $\int_0^1 2x\, dx = 1$ and the other two integrations over the unit cube contribute factors of $1$, giving $1$; the three terms sum to $1 + 1 + 1 = 3$. The total outward flux is $3$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.3: closing an open surface to apply the theorem</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the upward flux of $\mathbf{F} = \langle 0, 0, z\rangle$ through the open paraboloid $S: z = x^2 + y^2$, $0 \le z \le 1$, oriented with an upward component.</p>
+  <p>$S$ is open, so the Divergence Theorem does not apply directly. Close the solid bowl $E$ by adding the top disk $T: z = 1$, $x^2 + y^2 \le 1$, oriented upward. On the closed surface $\partial E = S_{\text{down}} \cup T$, where the paraboloid must be oriented outward (downward, away from the solid) to match the outward convention. With $\nabla\cdot\mathbf{F} = 1$,</p>
+  $$ \iint_{\partial E} \mathbf{F}\cdot d\mathbf{S} = \iiint_E 1\, dV = \operatorname{Vol}(E) = \int_0^{2\pi}\!\!\int_0^1\!\!\int_{r^2}^1 r\, dz\, dr\, d\theta = 2\pi\int_0^1 (r - r^3)\, dr = 2\pi\cdot\tfrac{1}{4} = \tfrac{\pi}{2}. $$
+  <p>The flux through the top disk is $\iint_T \langle 0,0,1\rangle\cdot\langle 0,0,1\rangle\, dA = \pi$. The closed-surface flux equals the outward paraboloid flux plus the top flux: $\tfrac{\pi}{2} = \Phi_{\text{out}} + \pi$, so the outward (downward) paraboloid flux is $-\tfrac{\pi}{2}$. The problem wants the upward orientation, which is the negative, giving $+\tfrac{\pi}{2}$.</p>
   </div></div></details>
 
   <details><summary>Going deeper: the divergence as flux density</summary><div class="detail-body"><div class="worked-solution">
@@ -1104,11 +1225,33 @@ body.lang-zh [data-lang="en"] { display: none; }
 
   <p>Reading these as a dimensional ladder: the Fundamental Theorem connects a curve to its two endpoints, Green's and Stokes' connect a surface to its bounding curve, and the Divergence Theorem connects a solid to its bounding surface. In each case integrating the derivative inside reproduces the boundary data outside.</p>
 
+  <div class="concept-box orange"><strong>Common error.</strong> The fastest way to lose marks on a mixed exam problem is to reach for the wrong theorem. Diagnose by the geometry of what you are integrating. A circulation around a closed curve in space signals Stokes; a flux through a closed surface signals the Divergence Theorem; a flux through a single open surface is usually a direct surface integral unless you can close it cheaply. A second trap is forgetting the hypotheses: Stokes and the Divergence Theorem need the field to be smooth throughout the region. If $\mathbf{F}$ has a singularity inside, such as the inverse-square field at the origin, the theorems fail there and you must excise the singular point first.</div>
+
   <details><summary>Worked Example 7.1: choosing the right theorem</summary><div class="detail-body"><div class="worked-solution">
   <p>You must evaluate the outward flux of $\mathbf{F} = \langle x^3, y^3, z^3 \rangle$ through the closed unit sphere. Which theorem applies, and what is the value?</p>
   <p>The surface is closed and bounds a solid, so the Divergence Theorem is the right tool. Compute $\nabla\cdot\mathbf{F} = 3x^2 + 3y^2 + 3z^2 = 3\rho^2$ in spherical coordinates. Then</p>
   $$ \iiint_E 3\rho^2\, dV = \int_0^{2\pi}\!\!\int_0^\pi\!\!\int_0^1 3\rho^2 \cdot \rho^2 \sin\phi\, d\rho\, d\phi\, d\theta = 3 \cdot \frac{1}{5} \cdot 2 \cdot 2\pi = \frac{12\pi}{5}. $$
   <p>If instead the problem asked for circulation around a single closed curve, Stokes' Theorem would be the tool; for an endpoint difference, the Fundamental Theorem.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.2: the inverse-square field and a hidden singularity</summary><div class="detail-body"><div class="worked-solution">
+  <p>Consider $\mathbf{F} = \dfrac{\langle x, y, z\rangle}{(x^2 + y^2 + z^2)^{3/2}}$, the inverse-square field. Show that $\nabla\cdot\mathbf{F} = 0$ away from the origin, yet the outward flux through any sphere centered at the origin is $4\pi$, not $0$.</p>
+  <p>A direct computation gives $\nabla\cdot\mathbf{F} = 0$ everywhere except the origin, where $\mathbf{F}$ is undefined. On the sphere of radius $a$, the outward unit normal is $\mathbf{n} = \langle x, y, z\rangle / a$, so on the surface $\mathbf{F}\cdot\mathbf{n} = \dfrac{x^2+y^2+z^2}{a \cdot a^3} = \dfrac{a^2}{a^4} = \dfrac{1}{a^2}$, a constant. Then</p>
+  $$ \iint_S \mathbf{F}\cdot d\mathbf{S} = \frac{1}{a^2}\cdot A(S) = \frac{1}{a^2}\cdot 4\pi a^2 = 4\pi. $$
+  <p>The flux is independent of radius and nonzero, even though the divergence vanishes throughout the shell. The resolution is that the Divergence Theorem fails here because the origin, where $\mathbf{F}$ blows up, lies inside. This is the mathematics behind Gauss' law in electrostatics: the flux measures the enclosed charge, which the smooth divergence away from it cannot see.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: combining two theorems in one problem</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $\mathbf{F} = \langle y, -x, z^3\rangle$ and let $S$ be the closed boundary of the solid cylinder $x^2 + y^2 \le 1$, $0 \le z \le 2$. Find the outward flux through $S$, and separately the circulation of $\mathbf{F}$ around the top rim $C$ (the circle $x^2 + y^2 = 1$, $z = 2$, counterclockwise from above).</p>
+  <p>For the flux, the surface is closed, so use the Divergence Theorem. $\nabla\cdot\mathbf{F} = 0 + 0 + 3z^2 = 3z^2$, hence</p>
+  $$ \iint_S \mathbf{F}\cdot d\mathbf{S} = \iiint_E 3z^2\, dV = \int_0^{2\pi}\!\!\int_0^1\!\!\int_0^2 3z^2\, r\, dz\, dr\, d\theta = (2\pi)\left(\tfrac{1}{2}\right)\big[z^3\big]_0^2 = (2\pi)\left(\tfrac{1}{2}\right)(8) = 8\pi. $$
+  <p>For the circulation, use Stokes on the flat top disk $D$. The curl is $\nabla\times\mathbf{F} = \langle 0, 0, -2\rangle$, and the upward normal on $D$ is $\langle 0, 0, 1\rangle$, so $(\nabla\times\mathbf{F})\cdot\mathbf{n} = -2$. Thus $\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_D (-2)\, dA = -2\pi$. The two theorems answer two different questions about the same field on the same solid.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the four theorems as one generalized Stokes statement</summary><div class="detail-body"><div class="worked-solution">
+  <p>The repeating pattern is not a coincidence. In the language of differential forms, every one of these results is a special case of a single identity, the generalized Stokes' Theorem,</p>
+  $$ \int_{\Omega} d\omega = \int_{\partial \Omega} \omega, $$
+  <p>where $\omega$ is a differential form, $d$ is the exterior derivative, $\Omega$ is an oriented region, and $\partial\Omega$ is its boundary. Choosing $\omega$ to be a $0$-form (a function) recovers the Fundamental Theorem for line integrals; a $1$-form on a planar region recovers Green's Theorem; a $1$-form on a surface recovers the classical Stokes' Theorem; and a $2$-form on a solid recovers the Divergence Theorem. The gradient, curl, and divergence are the three faces of the single operator $d$ acting in dimension three. This is why all four theorems share the form "integral of a derivative over a region equals integral over the boundary," and learning to see them as one statement is what separates a memorized list from genuine understanding.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">To compute the circulation of a field around a closed curve $C$ that bounds a surface in space, the natural tool is</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Stokes' Theorem</div><div class="quiz-opt" data-idx="1">the Divergence Theorem</div><div class="quiz-opt" data-idx="2">the scalar surface integral</div><div class="quiz-opt" data-idx="3">arc length of $C$</div></div><div class="quiz-explain correct-exp">Correct. Circulation around a closed boundary curve in space is handled by Stokes' Theorem, which rewrites it as the flux of the curl through a bounding surface.</div><div class="quiz-explain wrong-exp">A closed curve bounding a surface signals Stokes' Theorem. The Divergence Theorem applies to closed surfaces bounding solids, not to curves.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>

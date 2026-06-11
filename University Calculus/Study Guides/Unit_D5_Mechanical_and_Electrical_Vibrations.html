@@ -960,6 +960,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Thus $\omega_0 = \sqrt{20} \approx 4.47\ \text{rad/s}$ and $\beta = \tfrac{1}{2}$.</p>
   </div></div></details>
 
+  <p>The normalized form is worth dwelling on, because almost every textbook result is stated in terms of $\omega_0$ and $\beta$ rather than $m$, $c$, $k$. A useful single number combining the two is the <em>damping ratio</em> $\zeta = \beta/\omega_0 = c/(2\sqrt{mk})$. It is dimensionless, so it captures the qualitative behaviour of the system independently of the choice of units: $\zeta < 1$ is underdamped, $\zeta = 1$ is critically damped, and $\zeta > 1$ is overdamped. We will meet these three regimes in full in Section 3, but it is worth seeing now that they are already encoded in a single ratio of the physical constants.</p>
+
+  <details><summary>Worked Example 1.2: a vertical spring and the cancellation of gravity</summary><div class="detail-body"><div class="worked-solution">
+  <p>A $0.25\ \text{kg}$ mass hangs from a spring and stretches it $0.05\ \text{m}$ at rest. There is no damping. Measuring $y$ downward from the natural (unstretched) length, Newton's law reads $m y'' = mg - k y$. Show that measuring $x$ from the equilibrium position removes the gravity term, and write the resulting equation. Take $g = 9.8\ \text{m/s}^2$.</p>
+  <p>At equilibrium the spring force balances gravity: $k\,y_0 = mg$, so $k = \dfrac{(0.25)(9.8)}{0.05} = 49\ \text{N/m}$. Now substitute $y = y_0 + x$, where $x$ is the displacement from equilibrium. Since $y_0$ is constant, $y'' = x''$, and</p>
+  $$ m x'' = mg - k(y_0 + x) = (mg - k y_0) - kx = 0 - kx = -kx. $$
+  <p>The constant gravitational offset is absorbed exactly by the new equilibrium, leaving $m x'' + k x = 0$. Numerically $0.25\,x'' + 49\,x = 0$, so $\omega_0 = \sqrt{49/0.25} = \sqrt{196} = 14\ \text{rad/s}$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: reading off the parameters from an equation</summary><div class="detail-body"><div class="worked-solution">
+  <p>Given $3x'' + 12x' + 75x = 6\cos 4t$, identify $m$, $c$, $k$, $\omega_0$, $\beta$, the damping ratio $\zeta$, and the driving frequency.</p>
+  <p>Read coefficients directly: $m = 3$, $c = 12$, $k = 75$. Then</p>
+  $$ \omega_0 = \sqrt{\tfrac{k}{m}} = \sqrt{\tfrac{75}{3}} = \sqrt{25} = 5, \qquad \beta = \tfrac{c}{2m} = \tfrac{12}{6} = 2. $$
+  <p>The damping ratio is $\zeta = \beta/\omega_0 = 2/5 = 0.4 < 1$, so the free system is underdamped. The drive $6\cos 4t$ has driving frequency $\omega = 4$, which is below $\omega_0 = 5$. Dividing through by $m=3$ puts it in standard form: $x'' + 4x' + 25x = 2\cos 4t$.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often forget to divide every term by $m$ before reading off $\omega_0$ and $\beta$. From $3x'' + 12x' + 75x = 0$ it is wrong to say $\omega_0^2 = 75$ or $2\beta = 12$. The natural frequency is $\omega_0 = \sqrt{k/m} = \sqrt{75/3} = 5$, not $\sqrt{75}$, and $\beta = c/(2m) = 12/6 = 2$, not $6$. Always normalize so the coefficient of $x''$ is $1$ first.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In $mx'' + cx' + kx = F(t)$, which term is the restoring force predicted by Hooke's law?</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$mx''$</div><div class="quiz-opt" data-idx="1">$cx'$</div><div class="quiz-opt" data-idx="2">$kx$</div><div class="quiz-opt" data-idx="3">$F(t)$</div></div><div class="quiz-explain correct-exp">Correct. Hooke's law gives a force $-kx$ proportional to displacement and directed back toward equilibrium; moved to the left side it appears as $+kx$.</div><div class="quiz-explain wrong-exp">$mx''$ is inertia (Newton's law), $cx'$ is viscous damping, and $F(t)$ is the external drive. The spring's restoring force is $kx$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -987,6 +1005,15 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>From $x(0)=3$: $c_1 = 3$. From $x'(t) = -4c_1\sin 4t + 4c_2\cos 4t$ and $x'(0)=-8$: $4c_2 = -8$, so $c_2 = -2$.</p>
   $$ x(t) = 3\cos 4t - 2\sin 4t, \qquad A = \sqrt{9+4} = \sqrt{13}, \quad T = \frac{2\pi}{4} = \frac{\pi}{2}. $$
   </div></div></details>
+
+  <details><summary>Worked Example 2.2: converting to amplitude-phase form</summary><div class="detail-body"><div class="worked-solution">
+  <p>Write $x(t) = 3\cos 4t - 2\sin 4t$ from the previous example in the single-cosine form $A\cos(\omega_0 t - \phi)$.</p>
+  <p>Match $A\cos(\omega_0 t - \phi) = A\cos\phi\,\cos\omega_0 t + A\sin\phi\,\sin\omega_0 t$ against $3\cos 4t - 2\sin 4t$. So $A\cos\phi = 3$ and $A\sin\phi = -2$, giving</p>
+  $$ A = \sqrt{3^2 + (-2)^2} = \sqrt{13}, \qquad \tan\phi = \frac{-2}{3}. $$
+  <p>Because $\cos\phi > 0$ and $\sin\phi < 0$, the phase $\phi$ lies in the fourth quadrant: $\phi = \arctan(-2/3) \approx -0.588$ radians. Hence $x(t) = \sqrt{13}\,\cos(4t + 0.588)$. The amplitude $\sqrt{13}$ matches the value computed from $\sqrt{c_1^2 + c_2^2}$, a useful self-check.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When solving for the phase, do not blindly write $\phi = \arctan(c_2/c_1)$. The arctangent only returns values in $(-\pi/2, \pi/2)$, so it cannot distinguish the quadrant. For $x = -3\cos\omega_0 t + 4\sin\omega_0 t$ you have $c_1 = -3 < 0$, which forces $\cos\phi < 0$ and places $\phi$ in the second or third quadrant; the raw $\arctan(4/-3)$ gives the wrong quadrant. Always check the signs of $c_1 = A\cos\phi$ and $c_2 = A\sin\phi$ and adjust $\phi$ by $\pi$ when $c_1 < 0$.</div>
 
   <details><summary>Going deeper: energy is conserved when undamped</summary><div class="detail-body"><div class="worked-solution">
   <p>Define the total energy $E = \tfrac12 m (x')^2 + \tfrac12 k x^2$, the sum of kinetic and elastic potential energy. Differentiate along a solution of $mx'' + kx = 0$:</p>
@@ -1034,6 +1061,25 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ x(t) = e^{-t}(c_1\cos 2t + c_2\sin 2t). $$
   <p>From $x(0)=4$: $c_1 = 4$. Then $x'(0) = -c_1 + 2c_2 = 0$ gives $c_2 = 2$.</p>
   $$ x(t) = e^{-t}(4\cos 2t + 2\sin 2t). $$
+  <p>The envelope has amplitude $e^{-t}\sqrt{4^2 + 2^2} = e^{-t}\sqrt{20} = 2\sqrt5\,e^{-t}$, and the quasi-frequency is $\omega_1 = 2$, slightly below the natural frequency $\omega_0 = \sqrt5 \approx 2.236$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: the critically damped case</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $x'' + 6x' + 9x = 0$ with $x(0) = 2$, $x'(0) = -3$, and describe the motion.</p>
+  <p>Characteristic equation: $r^2 + 6r + 9 = (r+3)^2 = 0$, a repeated root $r = -3$. The discriminant $c^2 - 4mk = 36 - 36 = 0$ confirms critical damping. The general solution carries the telltale factor of $t$:</p>
+  $$ x(t) = (c_1 + c_2 t)\,e^{-3t}. $$
+  <p>From $x(0) = 2$: $c_1 = 2$. Differentiate using the product rule, $x'(t) = c_2 e^{-3t} - 3(c_1 + c_2 t)e^{-3t}$, so $x'(0) = c_2 - 3c_1 = c_2 - 6 = -3$, giving $c_2 = 3$.</p>
+  $$ x(t) = (2 + 3t)\,e^{-3t}. $$
+  <p>Because $2 + 3t > 0$ for all $t \ge 0$, the mass never crosses equilibrium: it eases back to rest without a single oscillation. This is the fastest possible non-oscillatory return, which is exactly why shock absorbers and door closers are tuned near critical damping.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> For the repeated root $r = -3$, the second independent solution is $t\,e^{-3t}$, not $e^{-3t}$ a second time. Writing $x = c_1 e^{-3t} + c_2 e^{-3t}$ collapses to a single constant $(c_1+c_2)e^{-3t}$ and cannot satisfy two independent initial conditions. The extra factor of $t$ is forced precisely because the characteristic polynomial has a double root.</div>
+
+  <details><summary>Going deeper: why critical damping returns to equilibrium fastest</summary><div class="detail-body"><div class="worked-solution">
+  <p>Fix $\omega_0$ and ask which damping rate $\beta$ makes the free response decay to zero quickest. The slowest-decaying piece of the solution sets the long-run rate, because as $t \to \infty$ that term dominates.</p>
+  <p><strong>Overdamped ($\beta > \omega_0$).</strong> The roots are $r_\pm = -\beta \pm \sqrt{\beta^2 - \omega_0^2}$, both negative. The slower one is $r_+ = -\beta + \sqrt{\beta^2 - \omega_0^2}$. Write $s = \sqrt{\beta^2 - \omega_0^2} > 0$; then $r_+ = -\beta + s$. Since $s = \sqrt{\beta^2 - \omega_0^2} > \sqrt{\beta^2 - \omega_0^2 - \text{(anything)}}$, as $\beta$ increases past $\omega_0$ the quantity $\beta - s = \beta - \sqrt{\beta^2 - \omega_0^2} = \dfrac{\omega_0^2}{\beta + \sqrt{\beta^2-\omega_0^2}}$ decreases toward $0$. So heavier damping makes $|r_+|$ smaller, meaning the dominant term decays slower, not faster.</p>
+  <p><strong>Underdamped ($\beta < \omega_0$).</strong> The envelope is $e^{-\beta t}$, whose rate is exactly $\beta < \omega_0$.</p>
+  <p><strong>Critical ($\beta = \omega_0$).</strong> The decay rate is $\beta = \omega_0$, the largest value reachable before the overdamped branch starts slowing down. The factor $t$ in $(c_1 + c_2 t)e^{-\omega_0 t}$ is subdominant to the exponential, so the effective rate is still $\omega_0$. Therefore the decay rate is maximized exactly at $\beta = \omega_0$, the critical case.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The system $x'' + 4x' + 4x = 0$ is</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">underdamped</div><div class="quiz-opt" data-idx="1">critically damped</div><div class="quiz-opt" data-idx="2">overdamped</div><div class="quiz-opt" data-idx="3">undamped</div></div><div class="quiz-explain correct-exp">Correct. The discriminant $c^2 - 4mk = 16 - 16 = 0$, so $r = -2$ is a repeated root: critical damping.</div><div class="quiz-explain wrong-exp">Compute the discriminant $c^2-4mk = 4^2 - 4(1)(4) = 0$. A zero discriminant means a repeated real root, which is critical damping.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1073,6 +1119,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Matching to $\tfrac{F_0}{m}\cos\omega_0 t$ gives $a = 0$ and $b = \tfrac{F_0}{2m\omega_0}$, hence $x_p = \tfrac{F_0}{2m\omega_0}\,t\sin\omega_0 t$. The $t$ in front is what drives the amplitude to infinity.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: full solution with transient and steady state</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $x'' + 2x' + 10x = 4\cos 3t$ with $x(0) = 0$, $x'(0) = 0$, and identify the transient and steady-state parts.</p>
+  <p>The steady state was found in Example 4.1: $x_p = \tfrac{4}{37}\cos 3t + \tfrac{24}{37}\sin 3t$. For the homogeneous part, $r^2 + 2r + 10 = 0$ gives $r = -1 \pm 3i$, so</p>
+  $$ x_h = e^{-t}(c_1\cos 3t + c_2\sin 3t), \qquad x = x_h + x_p. $$
+  <p>Apply $x(0) = 0$: $c_1 + \tfrac{4}{37} = 0$, so $c_1 = -\tfrac{4}{37}$. Differentiate the full solution and set $t=0$. Using $x'(0) = 0$ and $x_p'(0) = \tfrac{72}{37}$, while $x_h'(0) = -c_1 + 3c_2$,</p>
+  $$ -c_1 + 3c_2 + \tfrac{72}{37} = 0 \ \Longrightarrow\ 3c_2 = -\tfrac{4}{37} - \tfrac{72}{37} = -\tfrac{76}{37} \ \Longrightarrow\ c_2 = -\tfrac{76}{111}. $$
+  <p>So $x(t) = e^{-t}\!\left(-\tfrac{4}{37}\cos 3t - \tfrac{76}{111}\sin 3t\right) + \tfrac{4}{37}\cos 3t + \tfrac{24}{37}\sin 3t$. The first group decays (the transient); the second group is the persistent steady state.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When the drive frequency $\omega$ does <em>not</em> coincide with the natural frequency, do not insert a spurious factor of $t$ in the trial solution. The factor $t$ appears only in the resonant (and undamped) case where $\cos\omega t$ already solves the homogeneous equation. For a damped system the homogeneous solutions all carry $e^{-\beta t}$, so $\cos\omega t$ is never a homogeneous solution and the plain trial $a\cos\omega t + b\sin\omega t$ always works.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In a damped driven oscillator, what happens to the homogeneous part $x_h(t)$ as $t \to \infty$?</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">It dominates the steady state</div><div class="quiz-opt" data-idx="1">It grows linearly</div><div class="quiz-opt" data-idx="2">It decays to zero (the transient)</div><div class="quiz-opt" data-idx="3">It oscillates at frequency $\omega$</div></div><div class="quiz-explain correct-exp">Correct. With $\beta>0$ every homogeneous solution carries a decaying exponential, so $x_h$ is the transient and only $x_p$ survives.</div><div class="quiz-explain wrong-exp">For positive damping the homogeneous solutions all contain $e^{-\beta t}$, so $x_h \to 0$; it is called the transient.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1101,6 +1158,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>From $Q(0)=2$: $c_1 = 2$. Then $Q'(t) = (c_2 - 2c_1 - 2c_2 t)e^{-2t}$, so $Q'(0) = c_2 - 4 = 0$, giving $c_2 = 4$.</p>
   $$ Q(t) = (2 + 4t)\,e^{-2t}. $$
   </div></div></details>
+
+  <details><summary>Worked Example 5.2: an underdamped LC-circuit and its natural frequency</summary><div class="detail-body"><div class="worked-solution">
+  <p>A series circuit has $L = 0.5\ \text{H}$, $R = 6\ \Omega$, and $C = 0.02\ \text{F}$, with no source. Classify the circuit and find its quasi-frequency.</p>
+  <p>Here $1/C = 50$, so the equation in the charge is $0.5\,Q'' + 6\,Q' + 50\,Q = 0$, or in standard form $Q'' + 12\,Q' + 100\,Q = 0$. Then $\omega_0 = \sqrt{1/(LC)} = \sqrt{1/(0.5 \cdot 0.02)} = \sqrt{100} = 10$ and $\beta = R/(2L) = 6/1 = 6$.</p>
+  <p>Classify by comparing $R^2 = 36$ with $4L/C = 4(0.5)(50) = 100$. Since $R^2 < 4L/C$, the circuit is underdamped. The quasi-frequency is</p>
+  $$ \omega_1 = \sqrt{\omega_0^2 - \beta^2} = \sqrt{100 - 36} = \sqrt{64} = 8\ \text{rad/s}. $$
+  <p>The charge therefore oscillates as $Q(t) = A\,e^{-6t}\cos(8t - \phi)$, an electrical analogue of the underdamped spring of Example 3.2.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: deriving the RLC equation from Kirchhoff's voltage law</summary><div class="detail-body"><div class="worked-solution">
+  <p>Kirchhoff's voltage law states that around a closed loop the source voltage equals the sum of the voltage drops. For a series circuit the three passive elements contribute, in terms of the current $I$ and the charge $Q$:</p>
+  $$ V_L = L\,\frac{dI}{dt}, \qquad V_R = R\,I, \qquad V_C = \frac{Q}{C}. $$
+  <p>The inductor law $V_L = L\,dI/dt$ comes from Faraday's law; the resistor law $V_R = RI$ is Ohm's law; and the capacitor stores charge so its voltage is $Q/C$. Summing and equating to the source $E(t)$,</p>
+  $$ L\,\frac{dI}{dt} + R\,I + \frac{Q}{C} = E(t). $$
+  <p>Now use $I = dQ/dt$, so $dI/dt = d^2Q/dt^2 = Q''$. Substituting turns the loop equation into a second-order ODE in $Q$ alone:</p>
+  $$ L\,Q'' + R\,Q' + \frac{1}{C}\,Q = E(t). $$
+  <p>Term by term this is identical in form to $m x'' + c x' + k x = F(t)$. The correspondence is not a coincidence of notation: inductance opposes change in current the way mass opposes change in velocity, resistance dissipates energy the way friction does, and the capacitor stores energy the way a stretched spring does.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When classifying an RLC circuit, compare $R^2$ with $4L/C$, not with $4LC$ or with $1/(LC)$. The discriminant of $L r^2 + R r + 1/C = 0$ is $R^2 - 4L/C$. Equivalently, in standard form $\beta = R/(2L)$ and $\omega_0^2 = 1/(LC)$, and the boundary $\beta = \omega_0$ rearranges to exactly $R^2 = 4L/C$. Mixing up $4L/C$ and $4LC$ flips the classification.</div>
 
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">Under the mechanical-electrical analogy, the spring constant $k$ corresponds to</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">inductance $L$</div><div class="quiz-opt" data-idx="1">resistance $R$</div><div class="quiz-opt" data-idx="2">capacitance $C$</div><div class="quiz-opt" data-idx="3">reciprocal capacitance $1/C$</div></div><div class="quiz-explain correct-exp">Correct. The restoring term $kx$ matches $\tfrac1C Q$, so $k \leftrightarrow 1/C$. Resistance plays the role of damping and inductance the role of mass.</div><div class="quiz-explain wrong-exp">Match $LQ'' + RQ' + \tfrac1C Q$ to $mx'' + cx' + kx$. The coefficient of $Q$ is $1/C$, so $k \leftrightarrow 1/C$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1136,6 +1213,16 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Setting $g'(\omega)=0$ with $\omega>0$ gives $\omega^2 = \omega_0^2 - 2\beta^2$, hence $\omega_{\text{res}} = \sqrt{\omega_0^2 - 2\beta^2}$ whenever the radicand is positive.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 6.2: beats from rest</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $x'' + 4x = \cos 1.8t$ with $x(0) = 0$, $x'(0) = 0$, and exhibit the beat envelope.</p>
+  <p>The natural frequency is $\omega_0 = 2$ and the drive frequency is $\omega = 1.8$, close but not equal, so expect beats. The particular solution is $x_p = \dfrac{1}{\omega_0^2 - \omega^2}\cos\omega t = \dfrac{1}{4 - 3.24}\cos 1.8t = \dfrac{1}{0.76}\cos 1.8t$. The homogeneous part is $c_1\cos 2t + c_2\sin 2t$.</p>
+  <p>From $x(0)=0$: $c_1 + \tfrac{1}{0.76} = 0$, so $c_1 = -\tfrac{1}{0.76}$. From $x'(0)=0$: $2c_2 = 0$, so $c_2 = 0$. Hence</p>
+  $$ x(t) = \frac{1}{0.76}\bigl(\cos 1.8t - \cos 2t\bigr) = \frac{2}{0.76}\,\sin\!\Big(\tfrac{0.2}{2}t\Big)\sin\!\Big(\tfrac{3.8}{2}t\Big). $$
+  <p>That is $x(t) = \dfrac{2}{0.76}\,\sin(0.1t)\,\sin(1.9t)$: a fast carrier at $1.9\ \text{rad/s}$ inside a slow envelope $\sin(0.1t)$. The envelope period is $2\pi/0.1 \approx 62.8\ \text{s}$ between zeros, so the amplitude swells and fades slowly while the mass vibrates rapidly inside it.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The audible beat frequency is the <em>difference</em> $|\omega_0 - \omega|$, not the half-difference $\tfrac12|\omega_0 - \omega|$ that appears inside the envelope factor $\sin\big(\tfrac{\omega_0-\omega}{2}t\big)$. The envelope $|\sin(\tfrac{\omega_0-\omega}{2}t)|$ reaches a maximum twice per period of $\sin$, so the loudness peaks occur at the full difference rate. Reporting half the beat rate is a common slip.</div>
+
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Beats appear when an undamped oscillator is driven at a frequency $\omega$ that is</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">exactly equal to $\omega_0$</div><div class="quiz-opt" data-idx="1">close to but not equal to $\omega_0$</div><div class="quiz-opt" data-idx="2">much larger than $\omega_0$</div><div class="quiz-opt" data-idx="3">zero</div></div><div class="quiz-explain correct-exp">Correct. When $\omega \approx \omega_0$ but $\omega \ne \omega_0$, the half-difference frequency is small, producing a slow envelope: beats. At exactly $\omega_0$ you get pure resonance instead.</div><div class="quiz-explain wrong-exp">Beats need $\omega$ near $\omega_0$ but not equal. At $\omega = \omega_0$ the response is pure resonance with a $t$ factor, not beats.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1159,6 +1246,26 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ z = \frac{3}{4 + 2i} = \frac{3(4 - 2i)}{20} = \frac{12 - 6i}{20}, \qquad C = |z| = \frac{3}{\sqrt{20}} = \frac{3}{2\sqrt5}. $$
   <p>The phase lag is $\delta = \arg(4 + 2i) = \arctan(2/4) = \arctan(0.5) \approx 0.4636$ radians.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: phase crossover at resonance</summary><div class="detail-body"><div class="worked-solution">
+  <p>For a lightly damped oscillator $x'' + 0.2x' + 9x = \cos\omega t$, compute the phase lag $\delta$ when the drive is tuned exactly to $\omega = \omega_0 = 3$, and confirm it is $90$ degrees.</p>
+  <p>Here $\omega_0^2 = 9$ and $2\beta = 0.2$. At $\omega = 3$ the complex denominator is</p>
+  $$ (\omega_0^2 - \omega^2) + 2i\beta\omega = (9 - 9) + i(0.2)(3) = 0 + 0.6\,i. $$
+  <p>So $z = \dfrac{1}{0.6\,i} = -\dfrac{i}{0.6}$, a purely imaginary number pointing along the negative imaginary axis. Its argument is $-\pi/2$, so the phase lag is</p>
+  $$ \delta = -\arg z = \frac{\pi}{2} = 90^\circ. $$
+  <p>At the natural frequency the response always lags the drive by exactly a quarter cycle, regardless of how small the damping is. The amplitude there is $C = |z| = 1/0.6 \approx 1.667$, the resonant peak.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: recovering the real amplitude and phase from $z$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Claim: if $x_p = \operatorname{Re}\!\big(z\,e^{i\omega t}\big)$ with $z = |z|\,e^{-i\delta}$, then $x_p = |z|\cos(\omega t - \delta)$, so $C = |z|$ and the lag is $\delta = -\arg z$. The derivation makes the complex shortcut honest.</p>
+  <p>Substitute $x_p = z\,e^{i\omega t}$ into the operator $L[x] = x'' + 2\beta x' + \omega_0^2 x$. Each derivative of $e^{i\omega t}$ brings down a factor $i\omega$:</p>
+  $$ L\big[z e^{i\omega t}\big] = z\big((i\omega)^2 + 2\beta(i\omega) + \omega_0^2\big)e^{i\omega t} = z\big((\omega_0^2 - \omega^2) + 2i\beta\omega\big)e^{i\omega t}. $$
+  <p>Setting this equal to the complexified drive $\tfrac{F_0}{m}e^{i\omega t}$ and cancelling $e^{i\omega t}$ gives $z = \dfrac{F_0/m}{(\omega_0^2 - \omega^2) + 2i\beta\omega}$. Writing $z = |z|e^{-i\delta}$ in polar form,</p>
+  $$ x_p = \operatorname{Re}\!\big(|z|e^{-i\delta}e^{i\omega t}\big) = \operatorname{Re}\!\big(|z|e^{i(\omega t - \delta)}\big) = |z|\cos(\omega t - \delta). $$
+  <p>Taking the modulus of $z$ reproduces $C = \dfrac{F_0/m}{\sqrt{(\omega_0^2-\omega^2)^2 + 4\beta^2\omega^2}}$, exactly the steady-state amplitude derived by real methods in Section 4. The two approaches agree, but the complex one replaces a coefficient-matching system with a single division.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The phase lag is $\delta = -\arg z$, equivalently $\delta = \arg\big((\omega_0^2 - \omega^2) + 2i\beta\omega\big)$, the argument of the <em>denominator</em>. A frequent mistake is to take $\arg z$ itself (the argument of the numerator-over-denominator), which has the wrong sign, or to forget that for $\omega > \omega_0$ the real part $\omega_0^2 - \omega^2$ turns negative so the lag exceeds $90$ degrees. Track the sign of $\omega_0^2 - \omega^2$ to place $\delta$ in the correct range $0 < \delta < \pi$.</div>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In the complex method, the steady-state amplitude $C$ equals</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\arg z$</div><div class="quiz-opt" data-idx="1">$\operatorname{Re} z$</div><div class="quiz-opt" data-idx="2">$|z|$</div><div class="quiz-opt" data-idx="3">$\operatorname{Im} z$</div></div><div class="quiz-explain correct-exp">Correct. Writing $x_p = \operatorname{Re}(z e^{i\omega t})$ with $z = |z|e^{-i\delta}$, the amplitude is the modulus $|z|$ and the phase lag is $-\arg z$.</div><div class="quiz-explain wrong-exp">With $x_p = \operatorname{Re}(z e^{i\omega t})$, the amplitude is the modulus $|z|$ and the phase lag is $-\arg z$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

@@ -960,6 +960,38 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Each piece converges as $h \to 0$, so the limit of the sum is the sum of the limits, giving $(f+g)'(x) = f'(x) + g'(x)$. The constant multiple rule follows the same way, factoring $c$ out of the difference quotient.</p>
     </div></div>
   </details>
+  <p>Linearity is the single fact that turns differentiation into a mechanical, term-by-term process. Once you accept that a constant rides through unchanged and that a sum splits, you never again differentiate a polynomial as a whole object: you differentiate each power and reassemble. The same principle handles negative and fractional powers, since the power rule $\frac{d}{dx}x^n = n x^{n-1}$ holds for every real $n$. A term written as a root or a reciprocal should first be rewritten as a power so the rule applies cleanly.</p>
+  <details>
+    <summary>Worked Example 1.2: mixed powers, roots, and reciprocals</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $g(x) = 4\sqrt{x} + \dfrac{3}{x^2} - \dfrac{x}{2} + 6$.</p>
+    <p>Rewrite every term as a constant times a power of $x$ before differentiating: $4\sqrt{x} = 4x^{1/2}$, $\dfrac{3}{x^2} = 3x^{-2}$, and $\dfrac{x}{2} = \tfrac12 x$. The constant $6$ contributes nothing.</p>
+    $$ g'(x) = 4\cdot\tfrac12 x^{-1/2} + 3\cdot(-2)x^{-3} - \tfrac12 = 2x^{-1/2} - 6x^{-3} - \tfrac12. $$
+    <p>Returning to root and reciprocal notation, $g'(x) = \dfrac{2}{\sqrt{x}} - \dfrac{6}{x^3} - \dfrac12$. The rewrite step is what makes the power rule legal here, since differentiating $\sqrt{x}$ or $1/x^2$ directly is where most slips occur.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 1.3: linearity with an unknown constant</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>A curve is $y = ax^4 - 5x + a^2$, where $a$ is a fixed constant. Find $y'$ and the slope at $x = 1$.</p>
+    <p>Treat $a$ and $a^2$ as constants. Only $x$ is the variable, so $a^2$ differentiates to $0$ just like any number.</p>
+    $$ y' = 4ax^3 - 5. $$
+    <p>At $x = 1$ the slope is $y'(1) = 4a - 5$. Recognizing which symbols are constants is half the battle in later units, where parameters appear constantly alongside the variable.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 1.4: from derivative to tangent line</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Find the equation of the tangent line to $f(x) = x^3 - 4x$ at $x = 1$.</p>
+    <p>Differentiate by linearity and the power rule: $f'(x) = 3x^2 - 4$. The slope at $x = 1$ is $f'(1) = 3 - 4 = -1$, and the point is $\big(1, f(1)\big) = (1, -3)$. The point-slope form gives</p>
+    $$ y - (-3) = -1(x - 1) \quad\Longrightarrow\quad y = -x - 2. $$
+    <p>This is the central use of the derivative: it converts an algebraic formula into the slope of the curve at a chosen point, and the differentiation rules of this unit are what make that slope cheap to compute.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    A frequent mistake is to write $\dfrac{d}{dx}\big(c\,f(x)\big) = c'\,f(x) + c\,f'(x)$, treating the constant $c$ as if it needed the product rule. The product rule is technically valid but wasteful here, and it tempts you to carry a stray $c' = 0$ term that some then mishandle. A constant multiple simply scales the derivative: $\dfrac{d}{dx}\big(c\,f\big) = c\,f'$. Reserve the product rule for genuine products of two functions that each depend on $x$.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">If $f(x) = 4x^5 + 3$, then $f'(x)$ equals:</div><span class="quiz-number">1.1</span></div>
     <div class="quiz-options">
@@ -1003,6 +1035,38 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>As $h \to 0$, the factor $u(x+h) \to u(x)$ because $u$ is differentiable hence continuous, and the two difference quotients tend to $v'(x)$ and $u'(x)$. The limit is $u(x)v'(x) + v(x)u'(x)$.</p>
     </div></div>
   </details>
+  <p>The cross-term trick in that derivation is worth remembering because the same add-and-subtract device reappears when proving the quotient and chain rules. Notice also what the rule does not require: $u$ and $v$ need not be polynomials. As soon as both factors are differentiable at $x$, the product is differentiable there and the formula applies, whether the factors are powers, trigonometric functions, or exponentials.</p>
+  <details>
+    <summary>Worked Example 2.2: a three-factor product</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = x\,(x+2)\,(x-3)$ using the three-factor product rule.</p>
+    <p>With $u = x$, $v = x+2$, $w = x-3$ and $u' = v' = w' = 1$, the rule $(uvw)' = u'vw + uv'w + uvw'$ gives</p>
+    $$ y' = (x+2)(x-3) + x(x-3) + x(x+2). $$
+    <p>Expanding, $y' = (x^2 - x - 6) + (x^2 - 3x) + (x^2 + 2x) = 3x^2 - 2x - 6$. Multiplying the original out to $x^3 - x^2 - 6x$ and differentiating directly gives the same $3x^2 - 2x - 6$, confirming the three-factor pattern.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 2.3: product rule with a square-root factor</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \sqrt{x}\,(x^2 - 4)$ and simplify.</p>
+    <p>Let $u = x^{1/2}$ so $u' = \tfrac12 x^{-1/2}$, and $v = x^2 - 4$ so $v' = 2x$. Then</p>
+    $$ y' = \tfrac12 x^{-1/2}(x^2 - 4) + x^{1/2}(2x) = \frac{x^2 - 4}{2\sqrt{x}} + 2x\sqrt{x}. $$
+    <p>Put both terms over $2\sqrt{x}$: $y' = \dfrac{x^2 - 4 + 4x^2}{2\sqrt{x}} = \dfrac{5x^2 - 4}{2\sqrt{x}}$. Combining over a common denominator is the standard final step when one factor is a root.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 2.4: product rule from a table of values</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Suppose $u$ and $v$ are differentiable with $u(2) = 3$, $u'(2) = -1$, $v(2) = 5$, and $v'(2) = 4$. Find $(uv)'(2)$.</p>
+    <p>The product rule needs no formula for $u$ or $v$, only their values and derivatives at the point. Substitute directly:</p>
+    $$ (uv)'(2) = u'(2)\,v(2) + u(2)\,v'(2) = (-1)(5) + (3)(4) = -5 + 12 = 7. $$
+    <p>This is exactly the form the rule takes on exams that give a table instead of formulas, and it underlines that the product rule is about the functions and their slopes at a point, not about any particular algebraic expression.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The single most common derivative mistake in the course is writing $(uv)' = u'v'$. For $y = x^2 e^x$ that would give $2x e^x$, which is wrong. The correct derivative carries two terms, $u'v + uv' = 2x e^x + x^2 e^x$. Whenever you see two expressions multiplied and each contains the variable, stop and write both terms before simplifying. If you can expand the product into a sum first, do so as an independent check.
+  </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">For $y = x^2 e^x$, the derivative $y'$ is:</div><span class="quiz-number">2.1</span></div>
     <div class="quiz-options">
@@ -1037,6 +1101,40 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ f'(x) = \frac{(1)(x^2+1) - (x)(2x)}{(x^2+1)^2} = \frac{x^2 + 1 - 2x^2}{(x^2+1)^2} = \frac{1 - x^2}{(x^2+1)^2}. $$
     </div></div>
   </details>
+  <details>
+    <summary>Worked Example 3.2: a quotient with a nontrivial denominator</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x) = \dfrac{2x - 1}{x^2 + x}$.</p>
+    <p>Take $u = 2x - 1$ with $u' = 2$, and $v = x^2 + x$ with $v' = 2x + 1$. The quotient rule gives</p>
+    $$ f'(x) = \frac{2(x^2 + x) - (2x - 1)(2x + 1)}{(x^2 + x)^2}. $$
+    <p>Expand the numerator carefully: $2x^2 + 2x - (4x^2 - 1) = 2x^2 + 2x - 4x^2 + 1 = -2x^2 + 2x + 1$. So</p>
+    $$ f'(x) = \frac{-2x^2 + 2x + 1}{(x^2 + x)^2}, \qquad x \neq 0,\ x \neq -1. $$
+    <p>The minus sign in the quotient rule distributes over the whole product $(2x-1)(2x+1)$, which is exactly where sign errors creep in.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 3.3: the reciprocal rule in action</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $f(x) = \dfrac{1}{x^2 + 3x + 5}$ using the reciprocal rule.</p>
+    <p>The reciprocal rule $\dfrac{d}{dx}\dfrac{1}{v} = -\dfrac{v'}{v^2}$ avoids the full quotient rule whenever the numerator is constant. Here $v = x^2 + 3x + 5$ with $v' = 2x + 3$, so</p>
+    $$ f'(x) = -\frac{2x + 3}{(x^2 + 3x + 5)^2}. $$
+    <p>The full quotient rule with $u = 1$, $u' = 0$ reproduces the same thing, but the reciprocal form is faster and less error-prone when the top is just a number.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Going deeper: deriving the quotient rule from the product rule</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>You do not have to take the quotient rule on faith. Write $f = u/v$ as the product $f = u\cdot v^{-1}$ and differentiate with the product rule, using the chain rule on $v^{-1}$.</p>
+    $$ f' = u'\,v^{-1} + u\cdot(-1)v^{-2}v' = \frac{u'}{v} - \frac{u\,v'}{v^2}. $$
+    <p>Put both terms over the common denominator $v^2$:</p>
+    $$ f' = \frac{u'v}{v^2} - \frac{u\,v'}{v^2} = \frac{u'v - u\,v'}{v^2}. $$
+    <p>This is the quotient rule, and the derivation also explains the structure: the squared denominator comes from the $v^{-2}$ in the chain step, and the minus sign comes from the derivative of $v^{-1}$. Seeing it this way means you only ever need to memorize the product and chain rules.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    Two errors dominate the quotient rule. The first is reversing the numerator to $u\,v' - u'v$, which flips the sign of the whole derivative. Keep "low d-high minus high d-low": the kept-denominator term comes first. The second is writing $\left(\dfrac{u}{v}\right)' = \dfrac{u'}{v'}$, the analogue of the product-rule blunder. For $f = x/(x^2+1)$ that false rule gives $1/(2x)$, nothing like the correct $\dfrac{1-x^2}{(x^2+1)^2}$.
+  </div>
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">For $f(x) = \dfrac{1}{x^2}$, the reciprocal rule gives $f'(x) =$</div><span class="quiz-number">3.1</span></div>
     <div class="quiz-options">
@@ -1079,6 +1177,38 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>Each application of the chain rule contributes one factor: the square root layer, the sine layer, and finally the derivative of $x^2$.</p>
     </div></div>
   </details>
+  <p>The chain rule is the workhorse of differentiation: almost every nontrivial derivative you compute later, from $e^{kx}$ to $\ln(\sec x)$, is an application of it. The mental model that prevents errors is to read the expression from the outside in, asking which operation is performed last. That outermost function gets differentiated first, evaluated at the unchanged inside, and then you multiply by the derivative of the inside. The inside may itself be composite, in which case you repeat.</p>
+  <details>
+    <summary>Worked Example 4.2: a rational power of a polynomial</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \sqrt{4x^2 + 9} = (4x^2 + 9)^{1/2}$.</p>
+    <p>The outer function is $u^{1/2}$ with derivative $\tfrac12 u^{-1/2}$, and the inner function is $u = 4x^2 + 9$ with $u' = 8x$. The general power rule gives</p>
+    $$ y' = \tfrac12 (4x^2 + 9)^{-1/2}\cdot 8x = \frac{4x}{\sqrt{4x^2 + 9}}. $$
+    <p>Square roots are just the exponent $1/2$; rewriting them that way makes the chain rule entirely routine.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 4.3: chain rule replacing the quotient rule</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \dfrac{1}{(x^3 + 1)^2}$ by writing it as a negative power.</p>
+    <p>Rewrite $y = (x^3 + 1)^{-2}$. The outer function is $u^{-2}$ with derivative $-2u^{-3}$, and the inner is $u = x^3 + 1$ with $u' = 3x^2$. The general power rule gives</p>
+    $$ y' = -2(x^3 + 1)^{-3}\cdot 3x^2 = -\frac{6x^2}{(x^3 + 1)^3}. $$
+    <p>Recasting a reciprocal as a negative power often turns a quotient-rule problem into a one-line chain-rule problem. Recognizing when to rewrite is a skill worth practicing deliberately.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Going deeper: why the chain rule holds, and the subtlety it hides</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Set $y = f(g(x))$ and $u = g(x)$. The naive argument multiplies and divides by $\Delta u = g(x+h) - g(x)$:</p>
+    $$ \frac{f(g(x+h)) - f(g(x))}{h} = \frac{f(u + \Delta u) - f(u)}{\Delta u}\cdot\frac{\Delta u}{h}. $$
+    <p>As $h \to 0$, continuity of $g$ forces $\Delta u \to 0$, so the first factor tends to $f'(u)$ and the second to $g'(x)$, giving $f'(g(x))\,g'(x)$.</p>
+    <p>The subtlety is that $\Delta u$ can equal $0$ for $h$ near $0$, making the division illegal. The honest fix defines an auxiliary function $E(\Delta u)$ equal to $\dfrac{f(u+\Delta u) - f(u)}{\Delta u} - f'(u)$ when $\Delta u \neq 0$ and equal to $0$ when $\Delta u = 0$. Then $E$ is continuous at $0$ with $E(0) = 0$, and $f(u+\Delta u) - f(u) = \big(f'(u) + E(\Delta u)\big)\Delta u$ holds for every $\Delta u$. Dividing by $h$ and letting $h \to 0$ gives $f'(u)\,g'(x)$ cleanly. This is the standard rigorous proof and the reason careful texts introduce that error term.</p>
+    </div></div>
+  </details>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The signature chain-rule mistake is forgetting the inner derivative: writing $\dfrac{d}{dx}(3x^2+1)^4 = 4(3x^2+1)^3$ and stopping, instead of multiplying by $g'(x) = 6x$. The missing factor $g'(x)$ is the whole point of the rule. A quick self-check: if the inside is anything other than plain $x$, you owe one more factor. Differentiating the inside as if it were $x$ alone, so that $g'(x)$ silently becomes $1$, is the same error in disguise.
+  </div>
   <div class="quiz" data-answer="0">
     <div class="quiz-header"><div class="quiz-q">If $y = (x^3 + 2)^5$, then $y'$ equals:</div><span class="quiz-number">4.1</span></div>
     <div class="quiz-options">
@@ -1113,6 +1243,33 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ y' = 2x\,(2x+1)^3 + x^2\cdot 6(2x+1)^2 = 2x(2x+1)^2\big[(2x+1) + 3x\big] = 2x(2x+1)^2(5x + 1). $$
     </div></div>
   </details>
+  <p>The factoring step at the end of that example is not optional polish; it is how you keep later work tractable. When you differentiate a product of powers, both terms share a common factor (here $2x(2x+1)^2$), and pulling it out turns a messy expression into a compact one that is far easier to set equal to zero when you hunt for critical points in Unit A7. Train yourself to factor before declaring the answer finished.</p>
+  <details>
+    <summary>Worked Example 5.2: a product inside a quotient</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \dfrac{x(x+1)}{x - 2}$.</p>
+    <p>The last operation is division, so the quotient rule is outermost with $u = x(x+1) = x^2 + x$ and $v = x - 2$. Here $u' = 2x + 1$ after expanding, so no nested product rule is needed, and $v' = 1$.</p>
+    $$ y' = \frac{(2x+1)(x-2) - (x^2 + x)(1)}{(x-2)^2}. $$
+    <p>Expand the numerator: $(2x^2 - 3x - 2) - (x^2 + x) = x^2 - 4x - 2$. Therefore</p>
+    $$ y' = \frac{x^2 - 4x - 2}{(x-2)^2}, \qquad x \neq 2. $$
+    <p>Expanding $u$ first sidestepped a nested product rule. Choosing whether to expand or to keep factors is a judgment call: expand when the algebra is short, keep factored form when it is not.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 5.3: a triple nesting</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \big(x^2 + (2x+1)^3\big)^5$.</p>
+    <p>Outermost is the fifth power, so $y' = 5\big(x^2 + (2x+1)^3\big)^4\cdot\dfrac{d}{dx}\big(x^2 + (2x+1)^3\big)$. The inside is a sum; its derivative uses linearity and a second chain rule:</p>
+    $$ \frac{d}{dx}\big(x^2 + (2x+1)^3\big) = 2x + 3(2x+1)^2\cdot 2 = 2x + 6(2x+1)^2. $$
+    <p>Assembling,</p>
+    $$ y' = 5\big(x^2 + (2x+1)^3\big)^4\big(2x + 6(2x+1)^2\big). $$
+    <p>Each layer was handled by exactly one rule, applied from the outside in. The discipline of writing the unfinished derivative with a placeholder before filling the inside keeps long chains organized.</p>
+    </div></div>
+  </details>
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    When two rules combine, students often apply the outer rule and then forget that an inner factor needs its own rule. In $x^2(2x+1)^3$, applying the product rule but differentiating $(2x+1)^3$ as $3(2x+1)^2$ without the chain-rule factor of $2$ drops a coefficient. Always finish each inner derivative completely before moving on. Naming the outermost operation first, then recursing, is the habit that prevents these silent omissions.
+  </div>
   <div class="quiz" data-answer="1">
     <div class="quiz-header"><div class="quiz-q">To differentiate $\dfrac{(x+1)^2}{x-3}$, which rule applies first?</div><span class="quiz-number">5.1</span></div>
     <div class="quiz-options">
@@ -1147,6 +1304,30 @@ body.lang-zh [data-lang="en"] { display: none; }
     $$ R'(x) = \frac{2x(x+2) - (x^2 - 1)(1)}{(x+2)^2} = \frac{2x^2 + 4x - x^2 + 1}{(x+2)^2} = \frac{x^2 + 4x + 1}{(x+2)^2}, \quad x \neq -2. $$
     </div></div>
   </details>
+  <p>Because differentiation lowers each exponent by one, you can differentiate a polynomial repeatedly until you reach zero. A degree-$n$ polynomial has a nonzero $n$-th derivative, namely a constant, and an identically zero $(n+1)$-th derivative. This finite ladder is special to polynomials and is what makes them so convenient for Taylor approximation later in the sequence.</p>
+  <p>The same finiteness explains a fact you will use constantly when sketching curves: the sign of $p'$ controls where a polynomial rises and falls, and the sign of $p''$ controls its concavity. Because each derivative is again a polynomial, you can always solve $p'(x) = 0$ and $p''(x) = 0$ exactly when the degrees are small, which is why polynomial examples dominate the first pass through curve sketching.</p>
+  <details>
+    <summary>Worked Example 6.2: higher derivatives of a polynomial</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>For $p(x) = 2x^4 - x^3 + 5x$, find the first three derivatives.</p>
+    <p>Differentiate term by term each time:</p>
+    $$ p'(x) = 8x^3 - 3x^2 + 5, \qquad p''(x) = 24x^2 - 6x, \qquad p'''(x) = 48x - 6. $$
+    <p>The degree drops by one at every step, from $4$ to $3$ to $2$ to $1$. One more derivative gives the constant $p^{(4)}(x) = 48$, and the next is $p^{(5)}(x) = 0$.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 6.3: simplifying a rational derivative by factoring</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $R(x) = \dfrac{x^2}{x - 1}$ and locate where the slope is zero.</p>
+    <p>With $P = x^2$ so $P' = 2x$, and $Q = x - 1$ so $Q' = 1$,</p>
+    $$ R'(x) = \frac{2x(x-1) - x^2(1)}{(x-1)^2} = \frac{2x^2 - 2x - x^2}{(x-1)^2} = \frac{x^2 - 2x}{(x-1)^2} = \frac{x(x-2)}{(x-1)^2}. $$
+    <p>The numerator vanishes at $x = 0$ and $x = 2$, so the tangent is horizontal there. The point $x = 1$ is a genuine vertical asymptote, not a zero of $R'$. Factoring the numerator is what exposes the critical points cleanly.</p>
+    </div></div>
+  </details>
+  <div class="concept-box orange">
+    <strong>Common error.</strong>
+    A rational function is only differentiable where its denominator is nonzero, yet students routinely report a derivative without stating the excluded points. For $R = (x^2-1)/(x+2)$ the answer is incomplete unless you note $x \neq -2$. Equally, do not cancel a denominator factor against the numerator before differentiating unless it genuinely divides; $\dfrac{x^2}{x-1}$ does not simplify, and pretending it does changes the function.
+  </div>
   <div class="quiz" data-answer="2">
     <div class="quiz-header"><div class="quiz-q">The derivative of a degree-$n$ polynomial is a polynomial of degree:</div><span class="quiz-number">6.1</span></div>
     <div class="quiz-options">
@@ -1182,6 +1363,32 @@ body.lang-zh [data-lang="en"] { display: none; }
     <p>The corrected answer carries the factor $5$ that the inner derivative supplies.</p>
     </div></div>
   </details>
+  <p>The throughline of this unit is that differentiation errors are almost never arithmetic; they are structural. You picked the wrong rule, or you applied the right rule but dropped a piece of it. The remedy is a fixed routine: name the outermost operation, write the matching rule with placeholders, then fill each placeholder by recursing. Doing this on paper, even when the problem looks easy, is what separates reliable work from the kind that loses a factor on every third problem.</p>
+  <details>
+    <summary>Worked Example 7.2: diagnosing a wrong quotient derivative</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>A student claims $\dfrac{d}{dx}\dfrac{x^2}{x+1} = \dfrac{2x}{1} = 2x$. Find and fix the error.</p>
+    <p>The student differentiated numerator and denominator separately, the false rule $\left(\tfrac{u}{v}\right)' = \tfrac{u'}{v'}$. The correct quotient rule with $u = x^2$ and $v = x+1$ gives</p>
+    $$ \frac{d}{dx}\frac{x^2}{x+1} = \frac{2x(x+1) - x^2(1)}{(x+1)^2} = \frac{x^2 + 2x}{(x+1)^2}. $$
+    <p>The two answers disagree even at a single test point: at $x = 1$ the wrong rule gives $2$, while the correct derivative gives $3/4$. Plugging in one number is a fast way to catch a structural error before it propagates.</p>
+    </div></div>
+  </details>
+  <details>
+    <summary>Worked Example 7.3: a single expression that needs all three rules</summary>
+    <div class="detail-body"><div class="worked-solution">
+    <p>Differentiate $y = \dfrac{(x^2 + 1)^3}{x - 4}$, which combines the quotient, chain, and power rules.</p>
+    <p>Outermost is division, so the quotient rule applies with $u = (x^2+1)^3$ and $v = x - 4$. The numerator derivative needs the chain rule: $u' = 3(x^2+1)^2\cdot 2x = 6x(x^2+1)^2$, and $v' = 1$. Then</p>
+    $$ y' = \frac{6x(x^2+1)^2(x-4) - (x^2+1)^3(1)}{(x-4)^2}. $$
+    <p>Factor $(x^2+1)^2$ from the numerator:</p>
+    $$ y' = \frac{(x^2+1)^2\big[6x(x-4) - (x^2+1)\big]}{(x-4)^2} = \frac{(x^2+1)^2(5x^2 - 24x - 1)}{(x-4)^2}, \quad x \neq 4. $$
+    <p>Three rules, applied outside in, with a common factor pulled out at the end. This is the template for every hard derivative in the next several units.</p>
+    </div></div>
+  </details>
+  <p>Everything in Unit A4 builds directly on this machinery. Once you know $\dfrac{d}{dx}\sin x = \cos x$, $\dfrac{d}{dx}e^x = e^x$, and $\dfrac{d}{dx}\ln x = 1/x$, you differentiate $e^{3x}\sin(x^2)$ or $\dfrac{\ln x}{x^2 + 1}$ purely by feeding those new derivatives into the same product, quotient, and chain rules practiced here. The rules do not change; only the library of basic derivatives grows. Mastering the bookkeeping now pays off every single time afterward.</p>
+  <div class="concept-box red">
+    <strong>Common error.</strong>
+    The deepest trap is choosing the rule by surface appearance rather than by the last operation. An expression like $(x^2+1)^3/(x-4)$ looks like a single power, so some reach for the chain rule first, when the outermost operation is actually division. Evaluate the expression mentally at a number and watch which operation you perform last; that operation names the rule you start with. Misidentifying it cascades into a wrong answer no matter how careful the later algebra is.
+  </div>
   <div class="quiz" data-answer="3">
     <div class="quiz-header"><div class="quiz-q">Which statement is correct?</div><span class="quiz-number">7.1</span></div>
     <div class="quiz-options">

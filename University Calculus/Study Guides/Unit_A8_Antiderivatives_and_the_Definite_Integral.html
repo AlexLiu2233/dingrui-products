@@ -956,7 +956,28 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Imposing $v(0) = 4$ gives $C_{1} = 4$, so $v(t) = 3t^{2} + 4$. The position is an antiderivative of velocity:</p>
   $$s(t) = \int (3t^{2} + 4)\,dt = t^{3} + 4t + C_{2}.$$
   <p>Imposing $s(0) = 1$ gives $C_{2} = 1$, so $s(t) = t^{3} + 4t + 1$.</p>
+  <p>Notice the structure: each antidifferentiation introduced a fresh constant, and each initial condition consumed exactly one of them. Reversing a second-order rate of change therefore requires two pieces of initial data, which is why a falling-body problem needs both an initial height and an initial velocity.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 1.2: rewriting before antidifferentiating</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find $\displaystyle\int \frac{x^{2} + 3\sqrt{x} - 1}{x}\,dx$.</p>
+  <p>The power rule applies only to a sum of powers of $x$, so first split the quotient term by term and convert every root to a fractional exponent:</p>
+  $$\frac{x^{2} + 3\sqrt{x} - 1}{x} = x + 3x^{-1/2} - x^{-1}.$$
+  <p>Now antidifferentiate each piece. The middle term uses the power rule with $n = -\tfrac12$, and the last term uses the logarithm rule because its exponent is $-1$:</p>
+  $$\int \big(x + 3x^{-1/2} - x^{-1}\big)\,dx = \frac{x^{2}}{2} + 3\cdot\frac{x^{1/2}}{1/2} - \ln|x| + C = \frac{x^{2}}{2} + 6\sqrt{x} - \ln|x| + C.$$
+  <p>A quick differentiation check returns each original term, confirming the answer.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: a family of curves through a fixed point</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the curve $y = F(x)$ whose slope at every point is $F'(x) = 3x^{2} - 2x$ and which passes through $(1, 4)$.</p>
+  <p>The general antiderivative is the whole family of solution curves:</p>
+  $$F(x) = \int (3x^{2} - 2x)\,dx = x^{3} - x^{2} + C.$$
+  <p>The point condition selects one member. Substituting $x = 1$, $y = 4$ gives $4 = 1 - 1 + C$, so $C = 4$ and</p>
+  $$F(x) = x^{3} - x^{2} + 4.$$
+  <p>Geometrically the constant $C$ slides the entire curve vertically, and the single point pins down which vertical translate to keep.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students apply the power rule to $\int x^{-1}\,dx$ and write $\frac{x^{0}}{0}$, which is undefined. The rule $\int x^{n}\,dx = \frac{x^{n+1}}{n+1}+C$ explicitly excludes $n = -1$, precisely the case that would divide by zero. The correct antiderivative is $\int x^{-1}\,dx = \ln|x| + C$. A second frequent slip is dropping the constant $C$ on an indefinite integral; without it the answer names a single function rather than the family that actually solves $F' = f$.</div>
 
   <details><summary>Going deeper: why two antiderivatives differ by a constant</summary><div class="detail-body"><div class="worked-solution">
   <p>Suppose $F$ and $G$ are both antiderivatives of $f$ on an interval $I$. Let $H = F - G$. Then for every $x$ in $I$,</p>
@@ -991,6 +1012,36 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Expanding, $R_{n} = \dfrac{(n+1)(2n+1)}{6n^{2}} = \dfrac{2n^{2} + 3n + 1}{6n^{2}}$, which tends to $\dfrac{2}{6} = \dfrac{1}{3}$ as $n \to \infty$. The exact area is $\tfrac{1}{3}$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 2.2: a general interval needs the full partition formula</summary><div class="detail-body"><div class="worked-solution">
+  <p>Compute $\displaystyle\int_{1}^{3} x^{2}\,dx$ as a limit of right Riemann sums.</p>
+  <p>Now the left endpoint is $a = 1$, so $\Delta x = \dfrac{3-1}{n} = \dfrac{2}{n}$ and the right endpoints are $x_{i} = 1 + i\,\Delta x = 1 + \dfrac{2i}{n}$. Squaring,</p>
+  $$f(x_{i}) = \left(1 + \frac{2i}{n}\right)^{2} = 1 + \frac{4i}{n} + \frac{4i^{2}}{n^{2}}.$$
+  <p>Multiply by $\Delta x = 2/n$ and sum, using $\sum 1 = n$, $\sum i = \tfrac{n(n+1)}{2}$, and $\sum i^{2} = \tfrac{n(n+1)(2n+1)}{6}$:</p>
+  $$R_{n} = \frac{2}{n}\sum_{i=1}^{n}\left(1 + \frac{4i}{n} + \frac{4i^{2}}{n^{2}}\right) = \frac{2}{n}\left(n + \frac{4}{n}\cdot\frac{n(n+1)}{2} + \frac{4}{n^{2}}\cdot\frac{n(n+1)(2n+1)}{6}\right).$$
+  <p>Simplify the three pieces to $2 + \dfrac{4(n+1)}{n} + \dfrac{4(n+1)(2n+1)}{3n^{2}}$. As $n \to \infty$ these tend to $2 + 4 + \dfrac{8}{3} = \dfrac{26}{3}$. The FTC check agrees: $\big[\tfrac{x^{3}}{3}\big]_{1}^{3} = 9 - \tfrac13 = \tfrac{26}{3}$.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 2.3: bracketing the area with left and right sums</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $f(x) = x^{2}$ on $[0,1]$ with $n = 4$ equal strips, find $L_{4}$ and $R_{4}$ and state what they tell you about the true area.</p>
+  <p>Here $\Delta x = \tfrac14$ and the partition points are $0, \tfrac14, \tfrac12, \tfrac34, 1$. The left sum samples the left endpoints:</p>
+  $$L_{4} = \tfrac14\Big(0^{2} + \big(\tfrac14\big)^{2} + \big(\tfrac12\big)^{2} + \big(\tfrac34\big)^{2}\Big) = \tfrac14\cdot\tfrac{14}{16} = \tfrac{7}{32} \approx 0.219.$$
+  <p>The right sum samples the right endpoints:</p>
+  $$R_{4} = \tfrac14\Big(\big(\tfrac14\big)^{2} + \big(\tfrac12\big)^{2} + \big(\tfrac34\big)^{2} + 1^{2}\Big) = \tfrac14\cdot\tfrac{30}{16} = \tfrac{15}{32} \approx 0.469.$$
+  <p>Because $f$ is increasing, $L_{4} \le \text{area} \le R_{4}$, so the exact value $\tfrac13 \approx 0.333$ is trapped between them. The gap $R_{4} - L_{4} = \tfrac14\big(1^{2} - 0^{2}\big) = \tfrac14$ shrinks like $\tfrac{1}{n}$, which is why refining the partition forces both sums to the same limit.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent mistake is to forget the $\Delta x$ factor and write $R_n = \sum f(x_i^{*})$ rather than $\sum f(x_i^{*})\,\Delta x$. Without $\Delta x$ the sum grows without bound as $n$ increases and has the wrong units (height, not area). A related slip is using $\Delta x = \tfrac{b}{n}$ instead of $\tfrac{b-a}{n}$ when $a \neq 0$; on $[1,3]$ the width of each strip is $\tfrac{2}{n}$, not $\tfrac{3}{n}$. Always build the sample points from $x_i = a + i\,\Delta x$.</div>
+
+  <details><summary>Going deeper: deriving the sum of squares identity</summary><div class="detail-body"><div class="worked-solution">
+  <p>The closed form $\sum_{i=1}^{n} i^{2} = \tfrac{n(n+1)(2n+1)}{6}$ is the engine behind the $\int x^2$ computations, and it follows from a telescoping trick. Start from the algebraic identity</p>
+  $$(i+1)^{3} - i^{3} = 3i^{2} + 3i + 1.$$
+  <p>Sum both sides from $i = 1$ to $n$. The left side telescopes, since each $i^3$ cancels against the next term, leaving only the endpoints:</p>
+  $$\sum_{i=1}^{n}\big[(i+1)^{3} - i^{3}\big] = (n+1)^{3} - 1.$$
+  <p>The right side splits using known sums, $\sum i = \tfrac{n(n+1)}{2}$ and $\sum 1 = n$:</p>
+  $$(n+1)^{3} - 1 = 3\sum_{i=1}^{n} i^{2} + 3\cdot\frac{n(n+1)}{2} + n.$$
+  <p>Solve for $\sum i^{2}$. Expanding $(n+1)^3 - 1 = n^3 + 3n^2 + 3n$ and isolating the unknown sum gives, after combining terms, $\sum_{i=1}^{n} i^{2} = \tfrac{n(n+1)(2n+1)}{6}$. The same telescoping idea with the fourth power yields the formula for $\sum i^3$.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For the right Riemann sum of $f(x) = x^{2}$ on $[0,2]$ with $n$ equal strips, the sample point $x_{i}^{*}$ equals:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\frac{i}{n}$</div><div class="quiz-opt" data-idx="1">$\frac{i-1}{n}$</div><div class="quiz-opt" data-idx="2">$\frac{2i}{n}$</div><div class="quiz-opt" data-idx="3">$\frac{2i-1}{n}$</div></div><div class="quiz-explain correct-exp">Correct. With $\Delta x = 2/n$ and $x_{i} = 0 + i\,\Delta x = 2i/n$, the right endpoint of the $i$-th subinterval is $x_{i} = 2i/n$.</div><div class="quiz-explain wrong-exp">The right endpoint is $x_{i} = a + i\,\Delta x$. Here $a = 0$ and $\Delta x = (2-0)/n = 2/n$, so $x_{i} = 2i/n$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1017,6 +1068,32 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>This matches the antiderivative computation $\big[x^{2}\big]_{-1}^{2} = 4 - 1 = 3$.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 3.2: signed area can vanish by symmetry</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int_{-2}^{2} x^{3}\,dx$ and contrast it with the geometric area between the curve and the axis.</p>
+  <p>The integrand is odd: $f(-x) = -f(x)$. On $[-2,0]$ the curve lies below the axis and on $[0,2]$ it lies above, and the two regions are mirror images. Their signed contributions cancel exactly, so</p>
+  $$\int_{-2}^{2} x^{3}\,dx = \Big[\frac{x^{4}}{4}\Big]_{-2}^{2} = \frac{16}{4} - \frac{16}{4} = 0.$$
+  <p>This is the signed area. The geometric (unsigned) area between the curve and the axis is not zero; it equals $2\int_{0}^{2} x^{3}\,dx = 2\cdot 4 = 8$. The lesson is that a definite integral reports the net of positive and negative pieces, and an odd integrand over a symmetric interval always nets to zero.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: combining properties before evaluating</summary><div class="detail-body"><div class="worked-solution">
+  <p>Given $\displaystyle\int_{0}^{4} f = 10$ and $\displaystyle\int_{0}^{4} g = -3$, find $\displaystyle\int_{4}^{0}\big(2f - 5g\big)\,dx$.</p>
+  <p>First use linearity on the forward interval $[0,4]$:</p>
+  $$\int_{0}^{4}\big(2f - 5g\big)\,dx = 2\int_{0}^{4} f - 5\int_{0}^{4} g = 2(10) - 5(-3) = 20 + 15 = 35.$$
+  <p>The requested integral runs from $4$ to $0$, which reverses orientation and flips the sign:</p>
+  $$\int_{4}^{0}\big(2f - 5g\big)\,dx = -\int_{0}^{4}\big(2f - 5g\big)\,dx = -35.$$
+  <p>No formula for $f$ or $g$ was needed; the algebra of integrals did all the work.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Treating the definite integral as ordinary (unsigned) area leads students to report $\int_{-2}^{2} x^3\,dx$ as $8$ instead of $0$. The integral measures <em>signed</em> area: regions below the axis subtract. If a problem genuinely asks for the geometric area, integrate $|f|$, which means splitting the interval at every zero of $f$ and adding the absolute values of the pieces. A second slip is forgetting that reversing the limits flips the sign, so $\int_b^a f = -\int_a^b f$, never the same value.</div>
+
+  <details><summary>Going deeper: the comparison and bounding properties</summary><div class="detail-body"><div class="worked-solution">
+  <p>Two order properties follow directly from the fact that a limit of sums preserves inequalities. If $f(x) \le g(x)$ for all $x$ in $[a,b]$, then every Riemann sum of $f$ is term-by-term no larger than the matching sum of $g$, since $f(x_i^{*})\,\Delta x \le g(x_i^{*})\,\Delta x$. Passing to the limit preserves the inequality:</p>
+  $$f \le g \text{ on } [a,b] \;\Longrightarrow\; \int_{a}^{b} f\,dx \le \int_{a}^{b} g\,dx.$$
+  <p>Specializing to constant bounds $m \le f(x) \le M$ gives the estimate</p>
+  $$m(b-a) \le \int_{a}^{b} f(x)\,dx \le M(b-a),$$
+  <p>because $\int_a^b m\,dx = m(b-a)$. For example, on $[0,1]$ the function $f(x) = \tfrac{1}{1+x^{2}}$ satisfies $\tfrac12 \le f(x) \le 1$, so its integral lies between $\tfrac12$ and $1$ without computing it (the exact value is $\tfrac{\pi}{4} \approx 0.785$, comfortably inside). These bounds are the workhorse behind convergence and error estimates throughout Calculus II.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Given $\int_{0}^{3} f = 7$ and $\int_{0}^{5} f = 4$, what is $\int_{3}^{5} f$?</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$-3$</div><div class="quiz-opt" data-idx="1">$3$</div><div class="quiz-opt" data-idx="2">$11$</div><div class="quiz-opt" data-idx="3">$-11$</div></div><div class="quiz-explain correct-exp">Correct. By additivity, $\int_{0}^{5} f = \int_{0}^{3} f + \int_{3}^{5} f$, so $\int_{3}^{5} f = 4 - 7 = -3$.</div><div class="quiz-explain wrong-exp">Use $\int_{0}^{3} f + \int_{3}^{5} f = \int_{0}^{5} f$. Solve for the unknown: $\int_{3}^{5} f = 4 - 7 = -3$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1039,6 +1116,23 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>With $f(t) = \sqrt{1 + t^{3}}$ and upper limit $u(x) = x^{2}$, the chain rule variant gives</p>
   $$g'(x) = f\big(x^{2}\big)\cdot \frac{d}{dx}\big(x^{2}\big) = \sqrt{1 + (x^{2})^{3}}\cdot 2x = 2x\sqrt{1 + x^{6}}.$$
   </div></div></details>
+
+  <details><summary>Worked Example 4.2: both limits variable</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $\displaystyle h(x) = \int_{x}^{x^{2}} \sin(t^{2})\,dt$. Find $h'(x)$.</p>
+  <p>When both limits move, first split the integral at any fixed constant $c$ to isolate two accumulation functions, using additivity and the sign flip on the lower piece:</p>
+  $$h(x) = \int_{x}^{c} \sin(t^{2})\,dt + \int_{c}^{x^{2}} \sin(t^{2})\,dt = -\int_{c}^{x} \sin(t^{2})\,dt + \int_{c}^{x^{2}} \sin(t^{2})\,dt.$$
+  <p>Differentiate each with the chain-rule variant of FTC Part 1:</p>
+  $$h'(x) = -\sin(x^{2}) + \sin\big((x^{2})^{2}\big)\cdot 2x = 2x\sin(x^{4}) - \sin(x^{2}).$$
+  <p>The general pattern is $\dfrac{d}{dx}\int_{a(x)}^{b(x)} f = f(b(x))b'(x) - f(a(x))a'(x)$: top limit minus bottom limit, each weighted by its own derivative.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 4.3: locating critical points of an accumulation function</summary><div class="detail-body"><div class="worked-solution">
+  <p>Let $\displaystyle g(x) = \int_{0}^{x} (t^{2} - 4)\,dt$. Without evaluating the integral, find where $g$ has a local maximum or minimum on $[0,4]$.</p>
+  <p>By FTC Part 1, $g'(x) = x^{2} - 4$, which is zero at $x = 2$ (the value $x = -2$ is outside the interval). Since $g'$ changes from negative to positive there, $g'(x) < 0$ on $(0,2)$ and $g'(x) > 0$ on $(2,4)$, the accumulation function decreases then increases, so $x = 2$ is a local minimum.</p>
+  <p>This is the power of Part 1: the sign of the integrand controls the monotonicity of the area-so-far function, so you can analyze $g$ entirely from $f = g'$ without ever computing $g$ in closed form.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A very common mistake is to antidifferentiate the integrand when FTC Part 1 only asks for a substitution. For $g(x) = \int_1^x \cos(t^2)\,dt$ the derivative is simply $g'(x) = \cos(x^2)$, not an antiderivative of $\cos(t^2)$ (which has no elementary form anyway). A second slip is forgetting the $u'(x)$ factor when the upper limit is a function: $\frac{d}{dx}\int_a^{x^2} f(t)\,dt = f(x^2)\cdot 2x$, and the $2x$ is not optional.</div>
 
   <details><summary>Going deeper: proof of FTC Part 1</summary><div class="detail-body"><div class="worked-solution">
   <p>Fix $x$ and form the difference quotient of $g(x) = \int_{a}^{x} f(t)\,dt$:</p>
@@ -1069,6 +1163,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>At the upper limit $-\cos(\pi/2) + (\pi/2)^{3} = 0 + \pi^{3}/8$. At the lower limit $-\cos 0 + 0 = -1$. The difference is</p>
   $$\frac{\pi^{3}}{8} - (-1) = \frac{\pi^{3}}{8} + 1.$$
   </div></div></details>
+
+  <details><summary>Worked Example 5.2: net change from a rate</summary><div class="detail-body"><div class="worked-solution">
+  <p>Water flows into a tank at a rate $r(t) = 12 - 3t$ liters per minute for $0 \le t \le 4$. Find the net change in volume over this interval.</p>
+  <p>Volume is the antiderivative of flow rate, so the net change is the integral of the rate (the net change theorem). Using FTC Part 2 with $V(t) = 12t - \tfrac{3}{2}t^{2}$,</p>
+  $$\Delta V = \int_{0}^{4}(12 - 3t)\,dt = \Big[12t - \tfrac{3}{2}t^{2}\Big]_{0}^{4} = \big(48 - 24\big) - 0 = 24 \text{ liters}.$$
+  <p>The rate is positive on $[0,4)$ and reaches zero at $t = 4$, so the tank is filling throughout and the net change equals the actual volume added. Had the rate gone negative, the integral would have reported inflow minus outflow.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 5.3: an antiderivative that must be valid across the whole interval</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int_{1}^{e} \frac{2 + \ln x}{x}\,dx$.</p>
+  <p>Split the integrand: $\dfrac{2}{x} + \dfrac{\ln x}{x}$. The first term antidifferentiates to $2\ln x$. For the second, recognize $\dfrac{\ln x}{x}$ as $u\,du$ with $u = \ln x$, whose antiderivative is $\tfrac12(\ln x)^{2}$. So an antiderivative is $F(x) = 2\ln x + \tfrac12(\ln x)^{2}$, valid on all of $[1,e]$ since $x > 0$ there. Then</p>
+  $$\int_{1}^{e} \frac{2 + \ln x}{x}\,dx = \Big[2\ln x + \tfrac12(\ln x)^{2}\Big]_{1}^{e} = \big(2 + \tfrac12\big) - \big(0 + 0\big) = \frac{5}{2}.$$
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> FTC Part 2 requires an antiderivative that is continuous on the entire interval. Applying it blindly across a discontinuity gives nonsense: writing $\int_{-1}^{1} \frac{1}{x^{2}}\,dx = \big[-\frac{1}{x}\big]_{-1}^{1} = -1 - 1 = -2$ produces a negative number for a positive integrand. The antiderivative $-1/x$ blows up at $x = 0$ inside the interval, so the hypothesis fails and the integral is in fact divergent (an improper integral, treated in Calculus II). Always confirm the integrand is continuous on $[a,b]$ before subtracting endpoint values.</div>
 
   <details><summary>Going deeper: deriving Part 2 from Part 1</summary><div class="detail-body"><div class="worked-solution">
   <p>Let $F$ be any antiderivative of the continuous function $f$, and let $g(x) = \int_{a}^{x} f(t)\,dt$. By FTC Part 1, $g' = f = F'$, so $g$ and $F$ differ by a constant: $g(x) = F(x) + C$. Evaluating at $x = a$ gives $g(a) = \int_{a}^{a} f = 0$, hence $C = -F(a)$. Now evaluate at $x = b$:</p>
@@ -1106,6 +1215,32 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$\int_{0}^{1} x\,e^{x^{2}}\,dx = \frac{1}{2}\int_{0}^{1} e^{u}\,du = \frac{1}{2}\big[e^{u}\big]_{0}^{1} = \frac{1}{2}(e - 1).$$
   </div></div></details>
 
+  <details><summary>Worked Example 6.3: when a leftover $x$ must be solved for</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int x\sqrt{x + 1}\,dx$.</p>
+  <p>Set $u = x + 1$, so $du = dx$ and $x = u - 1$. Here the substitution does not absorb the stray $x$ outright, so solve for it and rewrite the whole integrand in $u$:</p>
+  $$\int x\sqrt{x+1}\,dx = \int (u - 1)\sqrt{u}\,du = \int \big(u^{3/2} - u^{1/2}\big)\,du.$$
+  <p>Now the power rule finishes it:</p>
+  $$= \frac{2}{5}u^{5/2} - \frac{2}{3}u^{3/2} + C = \frac{2}{5}(x+1)^{5/2} - \frac{2}{3}(x+1)^{3/2} + C.$$
+  <p>This back-substitution technique handles many integrands where the derivative of the inner function is not already present as a factor.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 6.4: a trigonometric substitution candidate</summary><div class="detail-body"><div class="worked-solution">
+  <p>Evaluate $\displaystyle\int_{0}^{\pi/4} \tan x\,\sec^{2} x\,dx$.</p>
+  <p>The factor $\sec^{2} x$ is exactly the derivative of $\tan x$, so let $u = \tan x$, giving $du = \sec^{2} x\,dx$. Convert the limits: $x = 0 \Rightarrow u = 0$ and $x = \pi/4 \Rightarrow u = 1$. Then</p>
+  $$\int_{0}^{\pi/4} \tan x\,\sec^{2} x\,dx = \int_{0}^{1} u\,du = \Big[\frac{u^{2}}{2}\Big]_{0}^{1} = \frac{1}{2}.$$
+  <p>Recognizing a function paired with its own derivative is the single most useful pattern-matching skill for substitution.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The two classic substitution mistakes both come from sloppy bookkeeping. First, students forget the $\frac{1}{2}$ when $du = 2x\,dx$ but the integrand only supplies $x\,dx$; the factor must be tracked so that $x\,dx = \tfrac12\,du$. Second, on a definite integral they substitute the $u$-integrand but keep the original $x$ limits, writing $\int_0^1 e^u\,du$ when the limits should have become $u(0)$ and $u(1)$. In this case they happen to coincide, but for $u = x^2+1$ on $[0,2]$ the limits change from $0,2$ to $1,5$. Either convert the limits or back-substitute to $x$ before plugging in, never mix the two.</div>
+
+  <details><summary>Going deeper: why substitution works</summary><div class="detail-body"><div class="worked-solution">
+  <p>Substitution is the chain rule integrated. Suppose $F$ is an antiderivative of $f$, so $F' = f$. By the chain rule,</p>
+  $$\frac{d}{dx}\,F\big(g(x)\big) = F'\big(g(x)\big)\,g'(x) = f\big(g(x)\big)\,g'(x).$$
+  <p>Reading this equation as an antiderivative statement says exactly</p>
+  $$\int f\big(g(x)\big)\,g'(x)\,dx = F\big(g(x)\big) + C = \int f(u)\,du \Big|_{u = g(x)}.$$
+  <p>For the definite version, apply FTC Part 2 to $F(g(x))$ on $[a,b]$: the result is $F(g(b)) - F(g(a))$, which is precisely $\int_{g(a)}^{g(b)} f(u)\,du$. This is why the limits travel through $g$. The informal manipulation $du = g'(x)\,dx$ is a faithful shorthand for this chain-rule bookkeeping, not a separate rule.</p>
+  </div></div></details>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">For $\int_{0}^{2} x\sqrt{x^{2}+1}\,dx$, the substitution $u = x^{2}+1$ transforms it into:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$\int_{0}^{2} \sqrt{u}\,du$</div><div class="quiz-opt" data-idx="1">$2\int_{1}^{5} \sqrt{u}\,du$</div><div class="quiz-opt" data-idx="2">$\frac{1}{2}\int_{1}^{5} \sqrt{u}\,du$</div><div class="quiz-opt" data-idx="3">$\frac{1}{2}\int_{0}^{2} \sqrt{u}\,du$</div></div><div class="quiz-explain correct-exp">Correct. With $u = x^{2}+1$, $du = 2x\,dx$ so $x\,dx = \tfrac{1}{2}du$, and the limits become $u(0)=1$, $u(2)=5$, giving $\tfrac{1}{2}\int_{1}^{5}\sqrt{u}\,du$.</div><div class="quiz-explain wrong-exp">Compute $du = 2x\,dx$, so $x\,dx = \tfrac{1}{2}\,du$, and push the limits through $u = x^{2}+1$: $x=0 \to u=1$ and $x=2 \to u=5$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1130,6 +1265,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$f_{\text{avg}} = \frac{1}{3 - 0}\int_{0}^{3} x^{2}\,dx = \frac{1}{3}\left[\frac{x^{3}}{3}\right]_{0}^{3} = \frac{1}{3}\cdot\frac{27}{3} = 3.$$
   <p>The Mean Value Theorem for integrals guarantees a point $c$ in $[0,3]$ with $f(c) = 3$, namely $c = \sqrt{3}$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: setting up an area by slicing</summary><div class="detail-body"><div class="worked-solution">
+  <p>Find the area of the region between $y = x$ and $y = x^{2}$ on $[0,1]$, the prototype of every Calculus II application.</p>
+  <p>On $[0,1]$ the line lies above the parabola, since $x \ge x^{2}$ there. A thin vertical strip at position $x$ has height $x - x^{2}$ and width $dx$, so its area is $(x - x^{2})\,dx$. Summing the strips and taking the limit is the integral</p>
+  $$A = \int_{0}^{1}\big(x - x^{2}\big)\,dx = \Big[\frac{x^{2}}{2} - \frac{x^{3}}{3}\Big]_{0}^{1} = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}.$$
+  <p>The recipe slice, approximate, sum, take the limit is identical to the Riemann-sum construction of Section 2; only the height of the strip changes from problem to problem. Volumes, arc length, and work all follow this same template.</p>
+  </div></div></details>
+
+  <details><summary>Going deeper: the Mean Value Theorem for integrals</summary><div class="detail-body"><div class="worked-solution">
+  <p>The average value formula is more than a definition; for continuous $f$ the average is actually attained. <strong>Claim.</strong> If $f$ is continuous on $[a,b]$, there exists $c$ in $[a,b]$ with</p>
+  $$f(c) = \frac{1}{b-a}\int_{a}^{b} f(x)\,dx.$$
+  <p><strong>Proof.</strong> By the Extreme Value Theorem, $f$ attains a minimum $m$ and a maximum $M$ on $[a,b]$. The bounding property from Section 3 gives $m(b-a) \le \int_a^b f \le M(b-a)$, so the average value $A = \tfrac{1}{b-a}\int_a^b f$ satisfies $m \le A \le M$. Since $f$ is continuous and takes both the values $m$ and $M$, the Intermediate Value Theorem guarantees some $c$ in $[a,b]$ with $f(c) = A$. This $c$ is exactly the point where a rectangle of height $f(c)$ over $[a,b]$ has the same area as the region under $f$.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> The average value of a function is not the average of its endpoint values. For $f(x) = x^2$ on $[0,3]$ the endpoint average $\tfrac{f(0)+f(3)}{2} = \tfrac{0+9}{2} = 4.5$, but the true average is $\tfrac{1}{3}\int_0^3 x^2\,dx = 3$. The formula $f_{\text{avg}} = \frac{1}{b-a}\int_a^b f$ weights every point of the interval, not just the two ends, and only agrees with the endpoint average when $f$ is linear.</div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">The average value of $f(x) = 4x$ on $[1,3]$ is:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$8$</div><div class="quiz-opt" data-idx="1">$16$</div><div class="quiz-opt" data-idx="2">$4$</div><div class="quiz-opt" data-idx="3">$6$</div></div><div class="quiz-explain correct-exp">Correct. $\int_{1}^{3} 4x\,dx = \big[2x^{2}\big]_{1}^{3} = 18 - 2 = 16$, and dividing by the width $3 - 1 = 2$ gives $8$.</div><div class="quiz-explain wrong-exp">Use $f_{\text{avg}} = \frac{1}{b-a}\int_{a}^{b} f$. Here $\int_{1}^{3} 4x\,dx = 16$ and $b - a = 2$, so the average is $16/2 = 8$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>

@@ -959,11 +959,33 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Check: $y_p'' = 0$ and $-y_p = -t + \tfrac12$, so $y_p'' - y_p = -t + \tfrac12$, matching the right side.</p>
   </div></div></details>
 
+  <details><summary>Worked Example 1.2: applying initial data to the full solution</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve the initial value problem $y'' - y = -t + \tfrac12$ with $y(0) = 2$, $y'(0) = 0$, using the structure from Worked Example 1.1.</p>
+  <p>The general solution is $y(t) = C_1 e^{t} + C_2 e^{-t} + t - \tfrac12$. Differentiate: $y'(t) = C_1 e^{t} - C_2 e^{-t} + 1$. Now impose the data on the full solution, not on $y_h$.</p>
+  $$ y(0) = C_1 + C_2 - \tfrac12 = 2 \;\Rightarrow\; C_1 + C_2 = \tfrac52, $$
+  $$ y'(0) = C_1 - C_2 + 1 = 0 \;\Rightarrow\; C_1 - C_2 = -1. $$
+  <p>Adding and subtracting gives $C_1 = \tfrac34$ and $C_2 = \tfrac74$. The solution of the initial value problem is</p>
+  $$ y(t) = \tfrac34 e^{t} + \tfrac74 e^{-t} + t - \tfrac12. $$
+  <p>The particular part $t - \tfrac12$ contributes $-\tfrac12$ to $y(0)$ and $+1$ to $y'(0)$, which is exactly why the constants differ from what the bare homogeneous problem would give.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 1.3: recovering the equation from a known solution</summary><div class="detail-body"><div class="worked-solution">
+  <p>Suppose $y_p = \tfrac12 t^2$ is claimed to be a particular solution of $y'' + 4y = g(t)$ for some forcing $g$. Identify $g$ and write the general solution.</p>
+  <p>Apply the operator directly. Here $y_p' = t$ and $y_p'' = 1$, so</p>
+  $$ g(t) = y_p'' + 4 y_p = 1 + 4\cdot\tfrac12 t^2 = 1 + 2 t^2. $$
+  <p>The homogeneous equation $y'' + 4y = 0$ has characteristic roots $r = \pm 2i$, so $y_h = C_1\cos 2t + C_2\sin 2t$. The general solution of $y'' + 4y = 1 + 2t^2$ is therefore</p>
+  $$ y(t) = C_1\cos 2t + C_2\sin 2t + \tfrac12 t^2. $$
+  <p>This reverse reading is a useful check: applying $L$ to any candidate $y_p$ must reproduce the forcing exactly, or the candidate is wrong.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> Students often apply the initial conditions $y(0), y'(0)$ to the complementary part $y_h$ before adding $y_p$, then tack on $y_p$ afterward. This is wrong: the particular solution generally contributes nonzero values to $y(0)$ and $y'(0)$, so the constants $C_1, C_2$ must be solved from the <em>full</em> expression $y_h + y_p$. The fix is to assemble $y = y_h + y_p$ first, differentiate that whole sum, and only then substitute the data.</div>
+
   <details><summary>Going deeper: why a linear operator forces the sum structure</summary><div class="detail-body"><div class="worked-solution">
   <p>Define $L[y] = a y'' + b y' + c y$. Linearity means $L[\alpha u + \beta v] = \alpha L[u] + \beta L[v]$ for constants $\alpha, \beta$, which follows because differentiation is linear and multiplication by the coefficients $a, b, c$ is linear.</p>
   <p>Suppose $L[y_p] = g$. Let $y$ be any other solution, so $L[y] = g$. Then</p>
   $$ L[y - y_p] = L[y] - L[y_p] = g - g = 0, $$
   <p>so $w = y - y_p$ solves the homogeneous equation, meaning $w = y_h$ for suitable constants. Therefore $y = y_h + y_p$. Conversely, for any homogeneous $y_h$, $L[y_h + y_p] = 0 + g = g$, so every such sum is a solution. The solution set is the single particular solution shifted by the two-dimensional space of homogeneous solutions.</p>
+  <p>In linear-algebra terms, the solution set of $L[y] = g$ is an <em>affine subspace</em>: a fixed translate $y_p$ of $\ker L$. The kernel $\ker L = \{y : L[y] = 0\}$ is the two-dimensional space of homogeneous solutions (existence and uniqueness pins the dimension at exactly two). Choosing a different particular solution $\tilde y_p$ only re-labels constants, since $\tilde y_p - y_p \in \ker L$ is absorbed into $C_1 y_1 + C_2 y_2$. That is why we may take the simplest $y_p$ we can find.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">The general solution of $a y'' + b y' + c y = g(t)$ with $g \ne 0$ is:</div><span class="quiz-number">1.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$y_p$ alone</div><div class="quiz-opt" data-idx="1">$y_h$ alone</div><div class="quiz-opt" data-idx="2">$y_h + y_p$</div><div class="quiz-opt" data-idx="3">$y_h \cdot y_p$</div></div><div class="quiz-explain correct-exp">Correct. The general solution is the complementary solution plus any particular solution.</div><div class="quiz-explain wrong-exp">By linearity, every solution is a homogeneous solution plus a fixed particular solution: $y_h + y_p$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1014,6 +1036,21 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y_p = 2t - \tfrac13\cos 2t. $$
   </div></div></details>
 
+  <details><summary>Worked Example 2.3: product forcing $e^{\alpha t}\cos\beta t$</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y'' + 4y' + 5y = e^{-t}\cos 2t$.</p>
+  <p>Homogeneous: $r^2 + 4r + 5 = 0$ gives $r = -2 \pm i$, so $y_h = e^{-2t}(C_1\cos t + C_2\sin t)$. The forcing $e^{-t}\cos 2t$ does not appear in $y_h$, so there is no resonance. Use the product trial $y_p = e^{-t}(A\cos 2t + B\sin 2t)$. Write $u = A\cos 2t + B\sin 2t$ so $y_p = e^{-t}u$. Then</p>
+  $$ y_p' = e^{-t}(u' - u), \qquad y_p'' = e^{-t}(u'' - 2u' + u). $$
+  <p>Substitute into $y'' + 4y' + 5y$:</p>
+  $$ e^{-t}\big[(u'' - 2u' + u) + 4(u' - u) + 5u\big] = e^{-t}\big[u'' + 2u' + 2u\big]. $$
+  <p>With $u = A\cos 2t + B\sin 2t$: $u'' = -4u$ and $u' = -2A\sin 2t + 2B\cos 2t$. So $u'' + 2u' + 2u = -2u + 2u' = -2(A\cos 2t + B\sin 2t) + 2(-2A\sin 2t + 2B\cos 2t)$, which equals $(-2A + 4B)\cos 2t + (-2B - 4A)\sin 2t$. Setting this equal to $\cos 2t$:</p>
+  $$ -2A + 4B = 1, \qquad -4A - 2B = 0. $$
+  <p>The second gives $B = -2A$; substituting, $-2A - 8A = 1$, so $A = -\tfrac{1}{10}$ and $B = \tfrac15$. Hence</p>
+  $$ y_p = e^{-t}\!\left(-\tfrac{1}{10}\cos 2t + \tfrac15\sin 2t\right). $$
+  <p>The key technique is factoring out $e^{-t}$ and shifting the operator onto $u$, which turns a messy product into a plain trigonometric match.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> For a sine-only or cosine-only forcing such as $g = \cos 2t$, students frequently try $y_p = A\cos 2t$ alone, dropping the $\sin$ term. The operator $L$ couples $\cos$ and $\sin$ through the first-derivative term, so the substitution produces a $\sin$ component that cannot be matched, and the system has no solution. Always include <em>both</em> $A\cos\beta t$ and $B\sin\beta t$ (one of the coefficients may legitimately come out zero, as in Worked Example 2.2, but you must let the algebra decide).</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">For $y'' + 4y = 5e^{t}$ (where $1$ is not a characteristic root), the correct trial particular solution is:</div><span class="quiz-number">2.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$A t e^{t}$</div><div class="quiz-opt" data-idx="1">$A\cos t + B\sin t$</div><div class="quiz-opt" data-idx="2">$A t + B$</div><div class="quiz-opt" data-idx="3">$A e^{t}$</div></div><div class="quiz-explain correct-exp">Correct. An exponential forcing with no resonance calls for $y_p = A e^{t}$.</div><div class="quiz-explain wrong-exp">The forcing is a plain exponential and $1$ is not a root, so the trial is $A e^{t}$ with no extra factor of $t$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">For a degree-2 polynomial forcing $g(t) = t^2$, the trial $y_p$ should be:</div><span class="quiz-number">2.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$A t^2 + B t + C$</div><div class="quiz-opt" data-idx="1">$A t^2$</div><div class="quiz-opt" data-idx="2">$A t^2 + B$</div><div class="quiz-opt" data-idx="3">$A e^{t}$</div></div><div class="quiz-explain correct-exp">Correct. A polynomial trial must include every lower-degree term, since differentiation mixes them.</div><div class="quiz-explain wrong-exp">Use the full polynomial $A t^2 + B t + C$; dropping lower terms leaves the system unsolvable.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1052,6 +1089,27 @@ body.lang-zh [data-lang="en"] { display: none; }
   <p>Matching, $2B\omega = 1$ and $-2A\omega = 0$, so $A = 0$ and $B = \dfrac{1}{2\omega}$. Hence</p>
   $$ y_p = \frac{t}{2\omega}\sin\omega t. $$
   <p>The amplitude $t/(2\omega)$ grows linearly in time: the hallmark of resonance.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 3.3: resonance with a double root</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y'' - 2y' + y = e^{t}$. The characteristic equation $r^2 - 2r + 1 = (r-1)^2 = 0$ has the <em>double</em> root $r = 1$, so $y_h = (C_1 + C_2 t)e^{t}$.</p>
+  <p>The forcing $e^{t}$ matches the double root. Both $e^{t}$ and $t e^{t}$ already live in $y_h$, so the smallest clean modification multiplies the base trial $A e^{t}$ by $t^2$: take $y_p = A t^2 e^{t}$.</p>
+  <p>Differentiate using the product rule. With $y_p = A t^2 e^{t}$,</p>
+  $$ y_p' = A(t^2 + 2t)e^{t}, \qquad y_p'' = A(t^2 + 4t + 2)e^{t}. $$
+  <p>Substitute:</p>
+  $$ y_p'' - 2y_p' + y_p = A\big[(t^2 + 4t + 2) - 2(t^2 + 2t) + t^2\big]e^{t} = A\cdot 2\,e^{t}. $$
+  <p>The $t^2$ and $t$ terms cancel exactly (they must, since $(r-1)^2$ annihilates $e^{t}$ and $te^{t}$), leaving $2A e^{t} = e^{t}$, so $A = \tfrac12$. Hence</p>
+  $$ y = (C_1 + C_2 t)e^{t} + \tfrac12 t^2 e^{t}. $$
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When the base trial has several terms, students sometimes multiply only the offending term by $t$ rather than the whole trial. For $g = e^{2t}$ with $r = 2$ a simple root, the correct modified trial is $A t e^{2t}$, not a mixed $A e^{2t} + B t e^{2t}$, since the unmodified $A e^{2t}$ piece lies in $y_h$ and contributes nothing. Likewise the power of $t$ equals the <em>multiplicity</em> of the matched root, so a double root needs $t^2$, never $t^3$. Multiply the entire base trial by the smallest power $t^s$ that clears all overlap, and no more.</div>
+
+  <details><summary>Going deeper: why multiplying by $t^s$ is exactly right</summary><div class="detail-body"><div class="worked-solution">
+  <p>Write the operator in factored form using its characteristic roots: $L = a(D - r_1)(D - r_2)$, where $D = d/dt$. Suppose the forcing is $e^{\alpha t}$ and $\alpha = r_1$ is a simple root, while $r_2 \ne \alpha$.</p>
+  <p>The operator $(D - \alpha)$ has the shift property $(D - \alpha)\big(e^{\alpha t} h(t)\big) = e^{\alpha t} h'(t)$, which follows from the product rule since the $\alpha e^{\alpha t} h$ terms cancel. Apply $L$ to the candidate $y_p = t^s e^{\alpha t}$ (constant absorbed):</p>
+  $$ (D - r_2)(D - \alpha)\big(t^s e^{\alpha t}\big) = (D - r_2)\big(e^{\alpha t}\,s\,t^{s-1}\big). $$
+  <p>For this to produce a nonzero multiple of $e^{\alpha t}$ (matching the forcing $e^{\alpha t}$, which is $t^0 e^{\alpha t}$), we need $s\,t^{s-1}$ to contain a constant term, i.e. $s = 1$. With $s = 1$ the inner result is $e^{\alpha t}$, and applying $(D - r_2)$ gives $(\alpha - r_2)e^{\alpha t}$, a nonzero constant times $e^{\alpha t}$ because $\alpha \ne r_2$. So $s = 1$ works and $s = 0$ fails (it gets annihilated by $(D-\alpha)$).</p>
+  <p>If instead $\alpha$ is a double root, $L = a(D - \alpha)^2$, and $(D - \alpha)^2(t^s e^{\alpha t}) = e^{\alpha t}\,\dfrac{d^2}{dt^2}t^s = e^{\alpha t}\,s(s-1)t^{s-2}$. A constant term appears only when $s = 2$. This is precisely the modification rule: $s$ equals the multiplicity of the matched root, the smallest power that survives all the annihilating factors.</p>
   </div></div></details>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">For $y'' - 3y' + 2y = e^{2t}$ with $y_h = C_1 e^{t} + C_2 e^{2t}$, the correct trial is:</div><span class="quiz-number">3.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$A e^{2t}$</div><div class="quiz-opt" data-idx="1">$A t e^{2t}$</div><div class="quiz-opt" data-idx="2">$A t^2 e^{2t}$</div><div class="quiz-opt" data-idx="3">$A\cos 2t + B\sin 2t$</div></div><div class="quiz-explain correct-exp">Correct. The forcing $e^{2t}$ matches the simple root $r = 2$, so multiply the base trial by $t$: $A t e^{2t}$.</div><div class="quiz-explain wrong-exp">Since $2$ is a simple characteristic root, the plain trial fails. Multiply by $t$ once: $A t e^{2t}$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1104,6 +1162,20 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y = C_1\cos t + C_2\sin t + \cos t\,\ln|\cos t| + t\,\sin t. $$
   </div></div></details>
 
+  <details><summary>Worked Example 4.2: standard form with a non-unit leading coefficient</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $4y'' - 4y' + y = e^{t/2}\sqrt{1 - t^2}$ on $(-1, 1)$. The forcing has no finite trial form, so use variation of parameters, but first put the equation in standard form.</p>
+  <p>Divide by the leading coefficient $4$:</p>
+  $$ y'' - y' + \tfrac14 y = \tfrac14 e^{t/2}\sqrt{1 - t^2}, \qquad f = \tfrac14 e^{t/2}\sqrt{1 - t^2}. $$
+  <p>The characteristic equation $4r^2 - 4r + 1 = (2r - 1)^2 = 0$ has the double root $r = \tfrac12$, so $y_1 = e^{t/2}$ and $y_2 = t\,e^{t/2}$. Compute the Wronskian:</p>
+  $$ W = y_1 y_2' - y_2 y_1' = e^{t/2}\big(e^{t/2} + \tfrac12 t e^{t/2}\big) - t e^{t/2}\cdot\tfrac12 e^{t/2} = e^{t}. $$
+  <p>Then</p>
+  $$ u_1' = \frac{-y_2 f}{W} = \frac{-t e^{t/2}\cdot \tfrac14 e^{t/2}\sqrt{1-t^2}}{e^{t}} = -\tfrac14 t\sqrt{1 - t^2}, $$
+  $$ u_2' = \frac{y_1 f}{W} = \frac{e^{t/2}\cdot \tfrac14 e^{t/2}\sqrt{1-t^2}}{e^{t}} = \tfrac14\sqrt{1 - t^2}. $$
+  <p>Integrate: $u_1 = \tfrac{1}{12}(1 - t^2)^{3/2}$ (using $\int t\sqrt{1-t^2}\,dt = -\tfrac13(1-t^2)^{3/2}$), and $u_2 = \tfrac14\!\left(\tfrac{t}{2}\sqrt{1-t^2} + \tfrac12\arcsin t\right)$. Then $y_p = u_1 y_1 + u_2 y_2$. The point is structural: had we forgotten to divide by $4$ and used $f = e^{t/2}\sqrt{1-t^2}$, every coefficient would have been four times too large.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> The single most common mistake in variation of parameters is using the raw forcing $g$ in place of $f = g/a$ when the leading coefficient $a \ne 1$. The formulas $u_1' = -y_2 f / W$ and $u_2' = y_1 f / W$ are derived for the standard form $y'' + p y' + q y = f$; if you skip the division by $a$, the particular solution comes out scaled by a factor of $a$ and fails the substitution check. Always normalize to a unit $y''$ coefficient before reading off $f$, $p$, and $q$.</div>
+
   <div class="quiz" data-answer="2"><div class="quiz-header"><div class="quiz-q">In variation of parameters, the determinant $W = y_1 y_2' - y_2 y_1'$ is called the:</div><span class="quiz-number">4.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">Jacobian</div><div class="quiz-opt" data-idx="1">Laplacian</div><div class="quiz-opt" data-idx="2">Wronskian</div><div class="quiz-opt" data-idx="3">Hessian</div></div><div class="quiz-explain correct-exp">Correct. $W$ is the Wronskian of $y_1$ and $y_2$; it is nonzero precisely when the solutions are independent.</div><div class="quiz-explain wrong-exp">The determinant of solutions and their first derivatives is the Wronskian $W$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 
   <div class="quiz" data-answer="0"><div class="quiz-header"><div class="quiz-q">Before applying the formulas $u_1' = -y_2 f / W$ and $u_2' = y_1 f / W$, the equation must be written so that:</div><span class="quiz-number">4.2</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">the coefficient of $y''$ is $1$</div><div class="quiz-opt" data-idx="1">the forcing is a polynomial</div><div class="quiz-opt" data-idx="2">the Wronskian equals $1$</div><div class="quiz-opt" data-idx="3">$y_1 = y_2$</div></div><div class="quiz-explain correct-exp">Correct. The formula requires standard form $y'' + p y' + q y = f$, so divide by the leading coefficient first; then $f = g/a$.</div><div class="quiz-explain wrong-exp">The derivation assumes a unit leading coefficient. Divide through by $a$ so the equation reads $y'' + p y' + q y = f$.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
@@ -1137,6 +1209,18 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y_p = e^{t}\cdot\tfrac12 e^{t} + e^{-t}\cdot\big(-\tfrac16 e^{3t}\big) = \tfrac12 e^{2t} - \tfrac16 e^{2t} = \tfrac13 e^{2t}. $$
   <p>Both methods give the same $y_p = \tfrac13 e^{2t}$, as they must.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 5.2: a resonant case, both methods</summary><div class="detail-body"><div class="worked-solution">
+  <p>Solve $y'' - y = e^{t}$. Homogeneous: $r^2 - 1 = 0$, so $y_1 = e^{t}$, $y_2 = e^{-t}$, $y_h = C_1 e^{t} + C_2 e^{-t}$. The forcing $e^{t}$ matches the simple root $r = 1$: this is resonant.</p>
+  <p><strong>Undetermined coefficients.</strong> The modification rule (Section 3) forces $y_p = A t e^{t}$. Then $y_p' = A(1+t)e^{t}$, $y_p'' = A(2+t)e^{t}$, so $y_p'' - y_p = A(2 + t - t)e^{t} = 2A e^{t} = e^{t}$, giving $A = \tfrac12$ and $y_p = \tfrac12 t e^{t}$.</p>
+  <p><strong>Variation of parameters.</strong> No special case is needed. The Wronskian is $W = e^{t}(-e^{-t}) - e^{-t}(e^{t}) = -2$, and $f = e^{t}$.</p>
+  $$ u_1' = \frac{-e^{-t} e^{t}}{-2} = \tfrac12, \qquad u_2' = \frac{e^{t} e^{t}}{-2} = -\tfrac12 e^{2t}. $$
+  <p>Integrate: $u_1 = \tfrac12 t$ and $u_2 = -\tfrac14 e^{2t}$. Then</p>
+  $$ y_p = e^{t}\cdot\tfrac12 t + e^{-t}\cdot\big(-\tfrac14 e^{2t}\big) = \tfrac12 t e^{t} - \tfrac14 e^{t}. $$
+  <p>The extra $-\tfrac14 e^{t}$ is a homogeneous solution, so it merges into $C_1 e^{t}$. After absorbing it, the particular solution is again $\tfrac12 t e^{t}$. Notice the factor of $t$ appeared <em>automatically</em> from $\int u_1' = \int \tfrac12\,dt$, with no modification rule invoked.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> When checking that two methods agree, students sometimes conclude the answers "disagree" because variation of parameters produced an extra term like $-\tfrac14 e^{t}$ above. That term is a homogeneous solution and is absorbed by the arbitrary constants, so the two general solutions are identical even though the bare $y_p$ expressions differ by an element of $\ker L$. A particular solution is unique only up to a homogeneous solution; never demand that the two $y_p$ formulas match term for term.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">Which forcing requires variation of parameters because undetermined coefficients does not apply?</div><span class="quiz-number">5.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">$g(t) = t^2 e^{t}$</div><div class="quiz-opt" data-idx="1">$g(t) = \tan t$</div><div class="quiz-opt" data-idx="2">$g(t) = 3\cos 5t$</div><div class="quiz-opt" data-idx="3">$g(t) = 7$</div></div><div class="quiz-explain correct-exp">Correct. $\tan t$ is not a polynomial, exponential, or sinusoid, so it has no finite trial form; use variation of parameters.</div><div class="quiz-explain wrong-exp">The other three forcings have standard trial forms. Only $\tan t$ falls outside the undetermined-coefficients families.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
@@ -1176,6 +1260,17 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ q_p = -3\cos t + \sin t. $$
   </div></div></details>
 
+  <details><summary>Worked Example 6.3: steady-state amplitude and phase</summary><div class="detail-body"><div class="worked-solution">
+  <p>For the steady state $y_p = \cos t + 2\sin t$ found in Worked Example 6.1, express it as a single shifted cosine $R\cos(t - \phi)$.</p>
+  <p>The amplitude and phase come from $R = \sqrt{A^2 + B^2}$ and $\tan\phi = B/A$ for $y_p = A\cos t + B\sin t = R\cos(t - \phi)$:</p>
+  $$ R = \sqrt{1^2 + 2^2} = \sqrt{5}, \qquad \tan\phi = \frac{2}{1} = 2,\;\; \phi = \arctan 2 \approx 1.107\ \text{rad}. $$
+  <p>So the steady-state oscillation has amplitude $\sqrt5 \approx 2.236$ and lags the drive by about $63.4^\circ$. Cross-check against the amplitude formula with $m = 1$, $c = 2$, $k = 2$, $F_0 = 5$, $\omega = 1$:</p>
+  $$ A(\omega) = \frac{F_0}{\sqrt{(k - m\omega^2)^2 + (c\omega)^2}} = \frac{5}{\sqrt{(2 - 1)^2 + 2^2}} = \frac{5}{\sqrt5} = \sqrt5. $$
+  <p>The amplitude formula and the direct coefficient computation agree, which is a reliable way to catch arithmetic slips.</p>
+  </div></div></details>
+
+  <div class="concept-box red"><strong>Common error.</strong> When a question asks only for the steady-state response, students sometimes solve the full initial value problem and report $y_h + y_p$ with the constants. With damping ($c > 0$) the transient $y_h$ decays to zero, so the steady state is $y_p$ alone, independent of the initial data. Conversely, if the system is <em>undamped</em> ($c = 0$) there is no transient decay and no genuine steady state, so the phrase "steady state" does not apply. Check the sign of the damping before deciding which part to report.</div>
+
   <div class="quiz" data-answer="3"><div class="quiz-header"><div class="quiz-q">In a damped driven oscillator $m y'' + c y' + k y = F(t)$ with $c > 0$, the complementary solution $y_h$ is called the:</div><span class="quiz-number">6.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">steady state</div><div class="quiz-opt" data-idx="1">resonance</div><div class="quiz-opt" data-idx="2">forcing</div><div class="quiz-opt" data-idx="3">transient</div></div><div class="quiz-explain correct-exp">Correct. With damping, $y_h$ decays to zero over time, so it is the transient response.</div><div class="quiz-explain wrong-exp">Damping makes the homogeneous part die out: it is the transient. The persisting $y_p$ is the steady state.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
 
@@ -1211,6 +1306,24 @@ body.lang-zh [data-lang="en"] { display: none; }
   $$ y_p(t) = \int_{t_0}^{t} \sin(t - \tau)\,f(\tau)\,d\tau, $$
   <p>a single clean integral that solves the equation for any continuous $f$.</p>
   </div></div></details>
+
+  <details><summary>Worked Example 7.2: Green's function applied to a step forcing</summary><div class="detail-body"><div class="worked-solution">
+  <p>Use the kernel $G(t,\tau) = \sin(t - \tau)$ from Worked Example 7.1 to solve $y'' + y = 1$ with $y(0) = 0$, $y'(0) = 0$, taking $t_0 = 0$.</p>
+  <p>The Green's-function form gives the solution that already satisfies the zero initial data:</p>
+  $$ y(t) = \int_0^t \sin(t - \tau)\cdot 1\,d\tau. $$
+  <p>Substitute $s = t - \tau$, so $ds = -d\tau$ and the limits run from $s = t$ down to $s = 0$:</p>
+  $$ y(t) = \int_0^t \sin s\,ds = \big[-\cos s\big]_0^t = 1 - \cos t. $$
+  <p>Check directly: $y = 1 - \cos t$ gives $y'' = \cos t$, so $y'' + y = \cos t + 1 - \cos t = 1$, and $y(0) = 0$, $y'(0) = \sin 0 = 0$. The Green's function delivers the full solution of the initial value problem in one integral, with the homogeneous part already tuned to the zero initial conditions.</p>
+  </div></div></details>
+
+  <details><summary>Worked Example 7.3: a sharp resonance peak</summary><div class="detail-body"><div class="worked-solution">
+  <p>For $y'' + 0.1\,y' + y = \cos\omega t$ (so $m = 1$, $c = 0.1$, $k = 1$, $F_0 = 1$), estimate the peak steady-state amplitude and the frequency where it occurs.</p>
+  <p>From the resonance result, $\omega_{\text{res}}^2 = \dfrac{k}{m} - \dfrac{c^2}{2m^2} = 1 - \dfrac{0.01}{2} = 0.995$, so $\omega_{\text{res}} \approx 0.9975$. The peak amplitude is</p>
+  $$ A(\omega_{\text{res}}) = \frac{F_0}{\sqrt{(k - m\omega_{\text{res}}^2)^2 + (c\,\omega_{\text{res}})^2}} = \frac{1}{\sqrt{(0.005)^2 + (0.0998)^2}} \approx \frac{1}{0.0999} \approx 10.0. $$
+  <p>With light damping the peak amplitude is roughly $F_0/(c\,\omega_{\text{res}}) \approx 1/(0.1\cdot 1) = 10$, ten times the static deflection $F_0/k = 1$. This factor, the <em>quality factor</em> $Q$, measures how sharply the system resonates: small $c$ produces a tall narrow peak.</p>
+  </div></div></details>
+
+  <div class="concept-box orange"><strong>Common error.</strong> A frequent mistake is to identify the resonant frequency of a damped system with the undamped natural frequency $\sqrt{k/m}$. The true amplitude peak sits at $\omega_{\text{res}}^2 = k/m - c^2/(2m^2)$, which is strictly below $\sqrt{k/m}$ whenever $c > 0$, and disappears entirely once $c^2 \ge 2mk$. Use the corrected formula; only in the small-damping limit do the two frequencies nearly coincide.</div>
 
   <div class="quiz" data-answer="1"><div class="quiz-header"><div class="quiz-q">The Green's function $G(t, \tau)$ for a second-order linear equation represents the system's response to:</div><span class="quiz-number">7.1</span></div><div class="quiz-options"><div class="quiz-opt" data-idx="0">a constant forcing</div><div class="quiz-opt" data-idx="1">a unit impulse at time $\tau$</div><div class="quiz-opt" data-idx="2">the homogeneous initial data</div><div class="quiz-opt" data-idx="3">a sinusoidal drive</div></div><div class="quiz-explain correct-exp">Correct. $G(t, \tau)$ is the impulse response: the output at time $t$ from a unit impulse delivered at $\tau$.</div><div class="quiz-explain wrong-exp">The Green's function is the impulse response; integrating it against $f$ superposes the responses to each small impulse.</div><button class="quiz-retry" onclick="retryQuiz(this)">Try again</button></div>
 </section>
