@@ -37,10 +37,15 @@ because plan mode silently blocks subagent writes; ExitPlanMode + fresh re-run f
    (`prompts/create-bilingual-translation.md`; the engine writes English-only, so ZH wraps each file's prose in
    `data-lang` span pairs, adds the toggle button + bilingual CSS/JS); **Sprint 4** = Practice + Solutions
    (32 pairs, `pair-key` + `dingrui:version` lock). Reusable bulk engine for any future UC SG work:
-   `scripts/uc_build_unit.py`. Cadence: review-then-merge, branch → preview → FF to main. **✅ COMMITTED
-   2026-06-10** (`e830328` on `university_calculus_init`, 56 files) **+ PR #4 → `preview`** opened — CI redeploys
-   `/preview/`; awaiting user's staging review, then FF `preview`→`main`. **Next sprint (user-chosen):**
-   Consult-CTA-under-Read-me-first retrofit across the 115 existing SGs.
+   `scripts/uc_build_unit.py`. Cadence: review-then-merge, branch → preview → FF to main. **✅ COMMITTED +
+   MERGED TO `preview` + LIVE ON STAGING 2026-06-10** (`e830328`→PR #4→`preview` tip `d41229a`). Review at
+   `…/dingrui-products/preview/University%20Calculus/Study%20Guides/Unit_A1_Limits_and_Continuity.html`. UC is
+   on `preview` ONLY (prod still 404 for UC — correct); awaiting user's staging review → FF `preview`→`main`.
+   **Next sprint (user-chosen):** Consult-CTA-under-Read-me-first retrofit across the 115 existing SGs.
+   **⚠️ INFRA FIX same day:** the entire Pages site was 404 (prod+preview). Root causes fixed via `gh api`:
+   (1) `preview` was missing from the `github-pages` env branch policy; (2) Pages was disabled — re-enabled with
+   `build_type=workflow` (Source=GitHub Actions, per CLAUDE.md). Deploy now green; site restored. See
+   `reference_pages_deploy_infra` memory.
 
 **🆕 PLANNED CROSS-REPO SPRINT — "Consult CTA under Read-me-first" on EVERY Study Guide (user direction
 2026-06-09):** the new convention (CTA directly beneath the hero "Read me first" intro, in addition to the
