@@ -37,8 +37,10 @@ because plan mode silently blocks subagent writes; ExitPlanMode + fresh re-run f
    (`prompts/create-bilingual-translation.md`; the engine writes English-only, so ZH wraps each file's prose in
    `data-lang` span pairs, adds the toggle button + bilingual CSS/JS); **Sprint 4** = Practice + Solutions
    (32 pairs, `pair-key` + `dingrui:version` lock). Reusable bulk engine for any future UC SG work:
-   `scripts/uc_build_unit.py`. Cadence: review-then-merge, branch → preview → FF to main. **Nothing committed
-   yet** (awaiting user's go on commit + PR-to-preview).
+   `scripts/uc_build_unit.py`. Cadence: review-then-merge, branch → preview → FF to main. **✅ COMMITTED
+   2026-06-10** (`e830328` on `university_calculus_init`, 56 files) **+ PR #4 → `preview`** opened — CI redeploys
+   `/preview/`; awaiting user's staging review, then FF `preview`→`main`. **Next sprint (user-chosen):**
+   Consult-CTA-under-Read-me-first retrofit across the 115 existing SGs.
 
 **🆕 PLANNED CROSS-REPO SPRINT — "Consult CTA under Read-me-first" on EVERY Study Guide (user direction
 2026-06-09):** the new convention (CTA directly beneath the hero "Read me first" intro, in addition to the
@@ -142,8 +144,9 @@ HS descriptions run long (>155 chars, get truncated in SERPs) — tighten in a f
 - **`university_calculus_init` (opened 2026-06-09):** active branch for the new University Calculus subject/tier.
   Holds: grounding folder + spec + AUDIT + full pipeline registration + **all 32 Study Guides** (A1 locked
   template; the rest cloned via `scripts/uc_build_unit.py`) + index/sitemap wired (32 cards, "32 units").
-  Gates green per the global invariants. **Uncommitted** (working tree only). Next: commit + PR → preview for
-  staging review, then Sprint 3 (ZH) + Sprint 4 (P+S). See the STATE/HANDOFF block at the top.
+  Gates green per the global invariants. **✅ Committed `e830328` (2026-06-10) + PR #4 → `preview`** (awaiting
+  staging review → FF to main). Next: Consult-CTA-under-Read-me-first retrofit (115 SGs), then Sprint 3 (ZH) +
+  Sprint 4 (P+S). See the STATE/HANDOFF block at the top.
 
 ---
 
