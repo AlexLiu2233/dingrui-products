@@ -56,13 +56,21 @@ Two workstreams opened together. **(1) Intro-CTA retrofit:** injector `scripts/a
 inserts the consult-CTA under each guide's read-me block (after the `id="how-to-use"` section, else after the
 hero), idempotent, bilingual, distinct `__sg_intro__` UTM. **Scope corrected: 138 SGs, not 115** — the old
 count predated IB Physics HL +24 and IB Math expansion (real non-UC SG total = 66 HS + 72 AP/IB; UC's 32
-already comply). **PILOT DONE** (HS Math U1 + IB Physics A1: validate OK, EN==ZH parity held, placed after
-read-me) — awaiting user placement sign-off before the full 138 sweep. **(2) Content quality audit:** full plan
-in **`rag/CONTENT_QUALITY_AUDIT.md`** (instrument `scripts/sg_quality_sweep.py`, ran over all 170 SGs).
-**Headline:** University Calculus is the depth-deficit tier — EN-word median **3383** vs HS ~7500 / AP-IB
-~5000-5700; breadth is complete but depth is thin (cram-level + breadth done, full-mark depth NOT yet). **P0 =
-UC Depth Expansion sprint** (bring the 31 sub-template guides to the A1 bar). Awaiting user's pick on method
-(sequential waves vs multi-agent) and target depth.
+already comply). **(1) Intro-CTA retrofit ✅ SHIPPED to staging** — full 138-SG sweep merged to `preview` via **PR #8**
+(`ce5fad8`); sits 4 commits ahead of `main`, awaiting user staging review → FF `preview`→`main`.
+**(2) Content quality audit:** full plan in **`rag/CONTENT_QUALITY_AUDIT.md`** (instrument
+`scripts/sg_quality_sweep.py`, ran over all 170 SGs). **Headline:** University Calculus was the depth-deficit
+tier — EN-word median **3383** vs HS ~7500 / AP-IB ~5000-5700; breadth complete but depth thin.
+
+**🆕 UC DEPTH EXPANSION ✅ DONE 2026-06-11 (branch `uc_depth_expansion`, `af7b187`, awaiting user review →
+PR to preview):** user picked **multi-agent workflow + "higher than A1"**. A **62-agent expand+adversarial-verify
+pipeline (Opus)** deepened all **31 sub-template UC guides** in place (A1 left as the user-locked template):
+2-3 worked examples per subtopic, per-section common-error notes, fuller going-deeper proofs, grounded in
+`SOURCES.md`. **UC EN-word median 3383 → 5979** (max 7661); all 31 now clear the old A1 bar; all 32 validate
+exit 0. Verify caught 4 isolated arithmetic slips in new examples (B3/C1/C5/D8) — all hand-fixed + re-checked.
+**Correction:** A1's true word count is **2801** (the audit's "5035" was actually D4); A1 is now the *thinnest*
+UC guide — **open question: expand A1 too, or keep it locked?** Remaining UC sprints unchanged: ZH translation,
+Practice+Solutions (32 pairs).
 
 **IB Physics HL Sprint 2 ✅ SHIPPED TO PROD — all 24 Study Guides now live** (23 new this session, cloned from
 the locked A.1 template via 5 parallel subagent waves; index regenerated to 24 cards; sitemap 251 URLs;
