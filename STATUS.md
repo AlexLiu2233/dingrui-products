@@ -1,7 +1,10 @@
 # Dingrui Scholars — Repo Status
 
 **Internal status dashboard** (stripped from deploy via `.github/workflows/deploy.yml`).
-Living doc — update as the product evolves. Last updated: **2026-06-11** — **University Calculus (32 SGs)
+Living doc — update as the product evolves. Last updated: **2026-06-11** — **UC DEPTH EXPANSION + INTRO-CTA
+RETROFIT SHIPPED TO PROD** (`main`=`preview`=`d00cb09`, PRs #8 + #9): all 32 UC guides deepened to full-mark
+rigor (median 3383→5982, A1 included), and the consult-CTA now sits under the read-me block on all 138 HS+AP/IB
+guides. First-3-topics-per-course are now the uniform gold-grade free-tier set. Earlier — **University Calculus (32 SGs)
 SHIPPED TO PRODUCTION** (`main`=`72f3a35`, content = `preview`=`3e33e35` + merge/CNAME no-ops). Also shipped
 this session: landing split into 4 University Calculus course dropdowns (Calc I/II/III/IV, no parent wrapper)
 and a landing **language-entry fix** (URL-param driven, no localStorage stickiness — fixes flipped EN/ZH notes
@@ -56,21 +59,23 @@ Two workstreams opened together. **(1) Intro-CTA retrofit:** injector `scripts/a
 inserts the consult-CTA under each guide's read-me block (after the `id="how-to-use"` section, else after the
 hero), idempotent, bilingual, distinct `__sg_intro__` UTM. **Scope corrected: 138 SGs, not 115** — the old
 count predated IB Physics HL +24 and IB Math expansion (real non-UC SG total = 66 HS + 72 AP/IB; UC's 32
-already comply). **(1) Intro-CTA retrofit ✅ SHIPPED to staging** — full 138-SG sweep merged to `preview` via **PR #8**
-(`ce5fad8`); sits 4 commits ahead of `main`, awaiting user staging review → FF `preview`→`main`.
+already comply). **(1) Intro-CTA retrofit ✅ SHIPPED TO PROD** — full 138-SG sweep (PR #8) rode the
+2026-06-11 FF `preview`→`main` (`main`=`preview`=`d00cb09`); consult-CTA now under the read-me block on all 138.
 **(2) Content quality audit:** full plan in **`rag/CONTENT_QUALITY_AUDIT.md`** (instrument
 `scripts/sg_quality_sweep.py`, ran over all 170 SGs). **Headline:** University Calculus was the depth-deficit
 tier — EN-word median **3383** vs HS ~7500 / AP-IB ~5000-5700; breadth complete but depth thin.
 
-**🆕 UC DEPTH EXPANSION ✅ DONE 2026-06-11 (branch `uc_depth_expansion`, `af7b187`, awaiting user review →
-PR to preview):** user picked **multi-agent workflow + "higher than A1"**. A **62-agent expand+adversarial-verify
-pipeline (Opus)** deepened all **31 sub-template UC guides** in place (A1 left as the user-locked template):
-2-3 worked examples per subtopic, per-section common-error notes, fuller going-deeper proofs, grounded in
-`SOURCES.md`. **UC EN-word median 3383 → 5979** (max 7661); all 31 now clear the old A1 bar; all 32 validate
-exit 0. Verify caught 4 isolated arithmetic slips in new examples (B3/C1/C5/D8) — all hand-fixed + re-checked.
-**Correction:** A1's true word count is **2801** (the audit's "5035" was actually D4); A1 is now the *thinnest*
-UC guide — **open question: expand A1 too, or keep it locked?** Remaining UC sprints unchanged: ZH translation,
-Practice+Solutions (32 pairs).
+**🆕 UC DEPTH EXPANSION ✅ SHIPPED TO PROD 2026-06-11 (`main`=`preview`=`d00cb09`, via PR #9):** user picked
+**multi-agent workflow + "higher than A1"**. A **62-agent expand+adversarial-verify pipeline (Opus)** deepened
+all **31 sub-template UC guides** in place; then A1 (the locked template, the lone thin intro outlier at 2801)
+was expanded to **5982** via the same recipe + an adversarial fix pass (`f7d4753`). Each subtopic gained a
+2nd/3rd worked example, a per-section common-error note, and fuller going-deeper proofs, grounded in `SOURCES.md`.
+**UC EN-word median 3383 → 5982** (range 5516-7661); all 32 validate exit 0. Verify caught 4 isolated arithmetic
+slips in new examples (B3/C1/C5/D8) — all hand-fixed + re-checked. **🎯 Each course's first 3 topics
+(A1-3/B1-3/C1-3/D1-3 = 12 guides) are now a uniform gold-grade set = the intended access-restricted FREE TIER**
+(see `project_uc_template_free_tier` memory). **Correction:** A1's true count was 2801 (the audit's "5035" was
+D4). Remaining UC sprints: ZH translation (32), Practice+Solutions (32 pairs). **Next strategic thread:
+access-restriction infra** — static GH Pages has no server auth, so gating the free tier needs a design call.
 
 **IB Physics HL Sprint 2 ✅ SHIPPED TO PROD — all 24 Study Guides now live** (23 new this session, cloned from
 the locked A.1 template via 5 parallel subagent waves; index regenerated to 24 cards; sitemap 251 URLs;
