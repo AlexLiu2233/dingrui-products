@@ -49,6 +49,7 @@ SUBJECTS = [
     ("High School Chemistry", "High School Chemistry", "chip-purple"),
     ("High School Biology", "High School Biology",   "chip-gold"),
     ("High School Computer Science", "High School Computer Science", "chip-green"),
+    ("University Calculus", "University Calculus",   "chip-maroon"),
 ]
 
 # When a subject mixes prefix words (e.g. IB Chemistry's Structure/Reactivity),
@@ -66,6 +67,12 @@ GROUP_BY_LETTER = {
         "C": ("Geometry & Trigonometry",    "几何与三角"),
         "D": ("Statistics & Probability",   "统计与概率"),
         "E": ("Calculus",                   "微积分"),
+    },
+    "University Calculus": {
+        "A": ("Calculus I: Differential Calculus",   "微积分一 · 微分"),
+        "B": ("Calculus II: Integral Calculus & Series", "微积分二 · 积分与级数"),
+        "C": ("Calculus III: Multivariable & Vector", "微积分三 · 多元与向量"),
+        "D": ("Calculus IV: Differential Equations", "微积分四 · 微分方程"),
     },
 }
 

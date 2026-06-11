@@ -31,6 +31,7 @@ SUBJECTS = [
     "High School Math", "High School Physics", "High School Chemistry",
     "High School Biology", "High School Computer Science",
     "AP Calculus", "AP Physics", "AP CSA", "IB Math HL", "IB Chemistry HL", "IB Physics HL",
+    "University Calculus",
 ]
 
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
@@ -44,6 +45,8 @@ def level(relpath: str) -> str:
         return "AP"
     if relpath.startswith("IB"):
         return "IB"
+    if relpath.startswith("University"):
+        return "University"
     return "Mixed"
 
 

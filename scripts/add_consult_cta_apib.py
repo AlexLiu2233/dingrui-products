@@ -25,7 +25,7 @@ import pathlib
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SUBJECTS = ["AP Calculus", "AP Physics", "AP CSA", "IB Math HL", "IB Chemistry HL", "IB Physics HL"]
+SUBJECTS = ["AP Calculus", "AP Physics", "AP CSA", "IB Math HL", "IB Chemistry HL", "IB Physics HL", "University Calculus"]
 
 # ---- Study Guide assets (--accent system) -------------------------------------
 SG_CSS = """
